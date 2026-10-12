@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml</id>
-  <updated>2026-09-30T16:29:01Z</updated>
+  <updated>2026-10-08T19:07:27Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Tobacco Centers of Regulatory Science (TCORS) (Clinical Trial Optional)</title>
@@ -85,10 +85,30 @@
     <title>Fiscal Year 2027 Regional Nutrition Hubs</title>
     <link href="https://www.grants.gov/search-results-detail/363392"/>
     <id>urn:funding-finder:grants-gov:363392</id>
-    <updated>2026-10-01T00:00:00Z</updated>
+    <updated>2026-10-15T00:00:00Z</updated>
     <author><name>Health Resources and Services Administration</name></author>
     <category term="Agriculture and food"/>
-    <summary>Health Resources and Services Administration | Estimated Application 2026-12-01 | Fiscal Year (FY) 2027 Regional Nutrition Hubs (RNH) will support region-specific technical assistance (TA) on expanding high-quality nutrition services to the Health Resources and Services Administration's (HRSA) Health Center Program (H80) award recipients and look-alikes (health centers). Nutrition services prevent, manage, and treat diseases and conditions through nutritional and food-based int…</summary>
+    <summary>Health Resources and Services Administration | Estimated Application 2026-12-15 | Fiscal Year (FY) 2027 Regional Nutrition Hubs (RNH) will support region-specific technical assistance (TA) on expanding high-quality nutrition services to the Health Resources and Services Administration's (HRSA) Health Center Program (H80) award recipients and look-alikes (health centers). Nutrition services prevent, manage, and treat diseases and conditions through nutritional and food-based int…</summary>
+  </entry>
+  <entry>
+    <title>Small Business Innovation Research and Small Business Technology Transfer Programs Phase II</title>
+    <link href="https://www.grants.gov/search-results-detail/364020"/>
+    <id>urn:funding-finder:grants-gov:364020</id>
+    <updated>2026-10-01T00:00:00Z</updated>
+    <author><name>National Institute of Food and Agriculture</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Technology development"/>
+    <summary>National Institute of Food and Agriculture | Application 2026-11-17 | The USDA SBIR/STTR programs, Assistance Listing number 10.212, support scientific excellence and technological innovation through investment of Federal research funds to build a strong national economy by stimulating technological innovation in the private sector; strengthening the role of small business in meeting Federal research and development needs; and increasing the commercial application o…</summary>
+  </entry>
+  <entry>
+    <title>Dairy Business Innovation Initiatives Program (DBI) Fiscal Year 2026</title>
+    <link href="https://www.grants.gov/search-results-detail/364006"/>
+    <id>urn:funding-finder:grants-gov:364006</id>
+    <updated>2026-09-30T00:00:00Z</updated>
+    <author><name>Agricultural Marketing Service</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Technology development"/>
+    <summary>Agricultural Marketing Service | Application 2026-12-01 | The U.S. Department of Agriculture (USDA), Agricultural Marketing Service (AMS), requests applications for fiscal year (FY) 2026 from existing initiatives of the Dairy Business Innovation (DBI) Initiatives Program: the California State University Fresno Foundation, the University of Tennessee, the Vermont Agency of Agriculture, Food and Markets, and the University of Wisconsin. These initiatives s…</summary>
   </entry>
   <entry>
     <title>Easement Restoration and Stewardship</title>
@@ -213,19 +233,6 @@
     <summary>National Institute of Food and Agriculture | Application 2026-11-10 | The NLGCA Program, under assistance listing number 10.326, will assist NLGCA institutions in maintaining and expanding their capacity to conduct education, research, outreach, and integrated activities relating to agriculture, renewable resources, and other similar disciplines. NLGCA institutions may use the funds to maintain and expand capacity: 1. to successfully compete for funds from Federal g…</summary>
   </entry>
   <entry>
-    <title>Tribal Colleges Education Equity Grants Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363700"/>
-    <id>urn:funding-finder:grants-gov:363700</id>
-    <updated>2026-08-24T00:00:00Z</updated>
-    <author><name>National Institute of Food and Agriculture</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>National Institute of Food and Agriculture | Application 2026-10-07 | The TCEG program (assistance listing 10.221) is designed to help build Tribal education capacity in the food and agricultural sciences for Native Alaskan/American Indian students. This NOFO will begin a new four-year continuation funding cycle. The six legislatively mandated priorities are: • Curricula design and materials development.• Faculty development and teacher preparation.• Student experie…</summary>
-  </entry>
-  <entry>
     <title>Assisting Specialty Crop Exports: Low Oxygen Storage and Packaging Systems for U.S. Tree Nuts with Phytosanitary Traceability</title>
     <link href="https://www.grants.gov/search-results-detail/363690"/>
     <id>urn:funding-finder:grants-gov:363690</id>
@@ -248,17 +255,6 @@
     <category term="Environmental science"/>
     <category term="Transportation"/>
     <summary>AmeriCorps | Application 2026-10-20 | AmeriCorps improves lives, strengthens communities, and fosters civic engagement through service and volunteering. AmeriCorps brings people together to tackle some of the country’s most pressing challenges through national service and volunteerism. AmeriCorps members and AmeriCorps Seniors volunteers serve with organizations dedicated to the improvement of communities and those serving. AmeriCorps…</summary>
-  </entry>
-  <entry>
-    <title>Cold Chain Grants for Emergency Food Assistance</title>
-    <link href="https://www.grants.gov/search-results-detail/363631"/>
-    <id>urn:funding-finder:grants-gov:363631</id>
-    <updated>2026-08-17T00:00:00Z</updated>
-    <author><name>Agricultural Marketing Service</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Manufacturing"/>
-    <category term="Energy"/>
-    <summary>Agricultural Marketing Service | Application 2026-10-01 | AMS will award these funds competitively to at least one eligible organization that meets program requirements and whose expertise is consistent with the purpose of the grant program. The selected grant recipient(s) will provide management, oversight, consultation and expertise necessary to advance the purpose and activities of the program, primarily through a subaward program to support cold stor…</summary>
   </entry>
   <entry>
     <title>Food and Agricultural Sciences National Needs Graduate and Postgraduate Fellowships</title>
@@ -290,25 +286,6 @@
     <category term="Agriculture and food"/>
     <category term="Education and workforce"/>
     <summary>National Institute of Food and Agriculture | Application 2026-10-15 | The purpose of HEC, under assistance listing 10.217, is to strengthen institutional capacities, including curriculum, faculty, scientific instrumentation, and student recruitment and retention. The HEC program is focused on developing and improving formal master’s or doctorate degree-level food and agricultural sciences education and first professional degree-level education in veterinary medicine…</summary>
-  </entry>
-  <entry>
-    <title>International Programs &amp; Trade, Invasive Species Program Funding Opportunity</title>
-    <link href="https://www.grants.gov/search-results-detail/363287"/>
-    <id>urn:funding-finder:grants-gov:363287</id>
-    <updated>2026-08-03T00:00:00Z</updated>
-    <author><name>Forest Service</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Environmental science"/>
-    <summary>Forest Service | Application 2026-09-30 | Through this NOFO, IPT’s Invasive Species program aims to support projects that advance tangible improvements in invasive species prevention by utilizing existing research knowledge on invasive species risks and pathways to produce actionable outcomes that protect American agriculture from invasive species. For example, past and current research has built important pre-invasion knowledge of proble…</summary>
-  </entry>
-  <entry>
-    <title>Sheep Production and Marketing Grant Program FY 2026</title>
-    <link href="https://www.grants.gov/search-results-detail/363376"/>
-    <id>urn:funding-finder:grants-gov:363376</id>
-    <updated>2026-07-29T00:00:00Z</updated>
-    <author><name>Agricultural Marketing Service</name></author>
-    <category term="Agriculture and food"/>
-    <summary>Agricultural Marketing Service | Application 2026-10-02 | The purpose of SPMGP is to support projects that strengthen and enhance the production and marketing of sheep and sheep products in the United States. This includes improving infrastructure, business, and resource development, and the development of innovative approaches to solve long-term needs. The SPMGP seeks to develop solutions for practical problems across the United States and address the n…</summary>
   </entry>
   <entry>
     <title>Plant Protection Act Section 7721 Fiscal Year 2027 National Clean Plant Network (NCPN)</title>
@@ -358,27 +335,6 @@
     <category term="Environmental science"/>
     <category term="Water"/>
     <summary>Bureau of Reclamation | Application 2027-09-08 | The objective of the WaterSMART Enhancing Water Resources Projects funding opportunity is to invite eligible entities to apply for funding to implement projects per the authorizing language referenced above that benefit water resource management for multiple uses, including water conservation and efficiency projects, water infrastructure improvements, and river and watershed restoration. Projects …</summary>
-  </entry>
-  <entry>
-    <title>DoW Amyotrophic Lateral Sclerosis Research Program, Pilot Clinical Trial Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362195"/>
-    <id>urn:funding-finder:grants-gov:362195</id>
-    <updated>2026-05-04T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Transportation"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA | Application 2026-09-30 | verify prerequisite | Summary: The fiscal year 2026 (FY26) Amyotrophic Lateral Sclerosis Research Program (ALSRP) Pilot Clinical Trial Award (PCTA) supports the rapid implementation of clinical trials with the potential to have a significant impact on the treatment or management of amyotrophic lateral sclerosis (ALS). Projects may range from phase 1 to small-scale phase 2 trials. Applications must address one of the fo…</summary>
-  </entry>
-  <entry>
-    <title>DoW Amyotrophic Lateral Sclerosis Research Program, Therapeutic Development Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362196"/>
-    <id>urn:funding-finder:grants-gov:362196</id>
-    <updated>2026-05-04T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Biology and biotechnology"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA | Application 2026-09-30 | verify prerequisite | Summary: The fiscal year 2026 (FY26) Amyotrophic Lateral Sclerosis Research Program (ALSRP) Therapeutic Development Award (TDA) supports research ranging from preclinical validation of therapeutic leads through U.S. Food and Drug Administration (FDA) Investigational New Drug (IND)-enabling studies. The proposed studies are expected to be empirical in nature and product-driven. Applicants with limi…</summary>
   </entry>
   <entry>
     <title>Amyotrophic Lateral Sclerosis (ALS) Intermediate Patient Population Expanded Access (U01 Clinical Trial Required)</title>
@@ -495,15 +451,6 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <summary>Engineer Research and Development Center | Application 2027-01-01 | The U.S. Army Corps of Engineers (USACE) Engineer Research and Development Center (ERDC) is issuing this announcement for various research and development topic areas. The ERDC consists of the Coastal and Hydraulics Laboratory (CHL), the Geotechnical and Structures Laboratory (GSL), the Environmental Laboratory (EL) and the Information Technology Laboratory (ITL) in Vicksburg, Mississippi, the Col…</summary>
   </entry>
   <entry>
-    <title>Advancing Research on the Application of Digital Health Technology to the Management of Type 2 Diabetes (R01- Clinical Trail Required)</title>
-    <link href="https://www.grants.gov/search-results-detail/359252"/>
-    <id>urn:funding-finder:grants-gov:359252</id>
-    <updated>2025-09-17T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Agriculture and food"/>
-    <summary>National Institutes of Health | Application 2026-10-06 | This notice of funding opportunity (NOFO) invites applications designed to examine the efficacy and clinical effectiveness of multimodality digital health technology approaches to the remote management of diabetes.</summary>
-  </entry>
-  <entry>
     <title>Stephen I. Katz Early Stage Investigator Research Project Grant (R01 Clinical Trial Not Allowed)</title>
     <link href="https://www.grants.gov/search-results-detail/358879"/>
     <id>urn:funding-finder:grants-gov:358879</id>
@@ -571,7 +518,7 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <summary>Food and Drug Administration | Application 2027-05-18 | The purpose of this Notice of Funding Opportunity (NOFO) is to fund clinical trials of products evaluating efficacy and/or safety in support of a new indication or change in labeling to address unmet needs in rare diseases or conditions. Additionally, through the funding of collaborative, efficient, and/or innovative clinical trials, FDA expects to increase the number of approved treatments for ra…</summary>
   </entry>
   <entry>
-    <title>National Science Foundation Translation to Practice</title>
+    <title>National Science Foundation Translation to Practice (NSF TTP)</title>
     <link href="https://www.grants.gov/search-results-detail/359966"/>
     <id>urn:funding-finder:grants-gov:359966</id>
     <updated>2025-07-09T00:00:00Z</updated>
@@ -689,5 +636,60 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Separations and membranes"/>
     <category term="Water"/>
     <summary>Food and Drug Administration | Letter Of Intent 2026-12-14 | This cooperative agreement is intended to enhance the capacity and capabilities of state human and animal food testing laboratories in support of an integrated food safety system (IFSS). This is achieved through prioritized sample testing and food defense preparedness in the areas of microbiology, chemistry, and radiochemistry, as well as method development and capacity/capability development proj…</summary>
+  </entry>
+  <entry>
+    <title>Intervention Research to Improve Native American Health (R01 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/358375"/>
+    <id>urn:funding-finder:grants-gov:358375</id>
+    <updated>2025-01-22T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <summary>National Institutes of Health | Application 2027-01-07 | Not available</summary>
+  </entry>
+  <entry>
+    <title>Limited Competition: Small Grant Program for NIDDK K01/K08/K23/K25 Recipients (R03 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/358116"/>
+    <id>urn:funding-finder:grants-gov:358116</id>
+    <updated>2025-01-10T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Transportation"/>
+    <summary>National Institutes of Health | Application 2026-10-16 | The National Institute of Diabetes and Digestive and Kidney Diseases (NIDDK) announces a program that provides NIDDK-supported K01, K08, K23, and K25 recipients the opportunity to apply for Small Grant (R03) support at some point during the latter years of their award period of their K award. Through the use of this mechanism, the NIDDK is seeking to enhance the capability of its K01, K08, K23, an…</summary>
+  </entry>
+  <entry>
+    <title>Priority HIV/AIDS Research within the Mission of NIDDK (R01 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/358086"/>
+    <id>urn:funding-finder:grants-gov:358086</id>
+    <updated>2025-01-08T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Agriculture and food"/>
+    <summary>National Institutes of Health | Application 2027-11-05 | This Notice of Funding Opportunity (NOFO) seeks to stimulate HIV/AIDS research within the mission of the National Institute of Diabetes and Digestive and Kidney Diseases (NIDDK) that align with the HIV/AIDS research priorities outlined by the NIH Office of AIDS Research (OAR). These priorities were most recently described in NOT-OD-20-018 UPDATE: NIH HIV/AIDS Research Priorities and Guidelines for…</summary>
+  </entry>
+  <entry>
+    <title>Pilot Studies of Biological, Behavioral and Social Mechanisms Contributing to HIV Pathogenesis Within the Mission of NIDDK (R21 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/358082"/>
+    <id>urn:funding-finder:grants-gov:358082</id>
+    <updated>2025-01-08T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Health equity"/>
+    <category term="Infectious disease"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>National Institutes of Health | Application 2027-11-16 | This Notice of Funding Opportunity (NOFO) invites applications for innovative basic and translational pilot research projects within the mission of the NIDDK that are aligned with NIH HIV/AIDS research priorities. These priorities were most recently outlined by the NIH Office of AIDS Research (OAR) in NOT-20-018, UPDATE: NIH HIV/AIDS Research Priorities and Guidelines for Determining HIV/AIDS Fund…</summary>
+  </entry>
+  <entry>
+    <title>Ruth L. Kirschstein National Research Service Award (NRSA) Short-Term Institutional Research Training Grant (Parent T35)</title>
+    <link href="https://www.grants.gov/search-results-detail/357996"/>
+    <id>urn:funding-finder:grants-gov:357996</id>
+    <updated>2025-01-02T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>National Institutes of Health | Application 2028-05-07 | The National Institutes of Health (NIH) will award Ruth L. Kirschstein National Research Service Award (NRSA) Short-Term Institutional Research Training Grants (T35) to eligible, domestic institutions to develop and/or enhance research training opportunities for predoctoral students interested in careers within biomedical, behavioral, or clinical research workforce. Many NIH Institutes and Centers…</summary>
   </entry>
 </feed>

@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/infectious-disease.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/infectious-disease.xml</id>
-  <updated>2026-09-30T16:29:01Z</updated>
+  <updated>2026-10-08T19:07:27Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Partnerships for Advancing Development of Diagnostics for Infectious Diseases</title>
@@ -72,6 +72,17 @@
     <category term="Infectious disease"/>
     <category term="Public health"/>
     <summary>Centers for Disease Control - NCHHSTP | Estimated Application 2027-06-01 | In alignment with CDC's viral hepatitis strategic goals and current epidemiology, this Notice of Funding Opportunity (NOFO) will address the need for increasing awareness of viral hepatitis prevention, testing, and treatment options among populations disproportionately affected by hepatitis B and/or hepatitis C virus infections. The priority populations' needs will also be addressed by increasing …</summary>
+  </entry>
+  <entry>
+    <title>Centers for Research on Neglected Infectious Diseases</title>
+    <link href="https://www.grants.gov/search-results-detail/364027"/>
+    <id>urn:funding-finder:grants-gov:364027</id>
+    <updated>2027-03-25T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Education and workforce"/>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health | Estimated Application 2027-06-15 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting multidisciplinary research through the Centers for Research on Neglected Infectious Diseases (CReNIDs). Neglected infectious diseases (NIDs) comprise a diverse and understudied group of communicable viral, bacterial, parasitic, and fungal infections that cause substantial morbidity, mortali…</summary>
   </entry>
   <entry>
     <title>Strengthening Services to Prevent the Infectious Disease Consequences of Drug Use</title>
@@ -265,6 +276,25 @@
     <summary>National Institutes of Health | Estimated Application 2027-01-29 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission through the continued support of the Collaborative Network for Clinical Research on Immune Tolerance. The purpose of this program is to enhance understanding of the underlying mechanisms of the induction, maintenance, and loss of immune tolerance in humans; and to develop improved tolerogenic interventio…</summary>
   </entry>
   <entry>
+    <title>Centers for Structural Biology of HIV and Other Infectious Diseases (U54 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/361050"/>
+    <id>urn:funding-finder:grants-gov:361050</id>
+    <updated>2026-10-02T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Infectious disease"/>
+    <summary>National Institutes of Health | Application 2027-05-28 | The purpose of this notice of funding opportunity (NOFO) is to support multidisciplinary consortia of structural biologists, microbiologists, and associated experts to solve complex biological structures related to the prevention, treatment, and cure of HIV and other infectious diseases. Centers are expected to facilitate new collaborations, leverage shared resources, offer services and resources …</summary>
+  </entry>
+  <entry>
+    <title>Mechanistic Evaluation of Therapeutic Targets derived from Treatable Traits to Improve CNS Outcomes in People with HIV (R21/R33 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/359657"/>
+    <id>urn:funding-finder:grants-gov:359657</id>
+    <updated>2026-09-30T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Infectious disease"/>
+    <summary>National Institutes of Health | Application 2027-10-28 | The purpose of this notice of funding opportunity (NOFO) is to identify modifiable mechanisms and therapeutic targets to address central nervous system (CNS) complications associated with human immunodeficiency virus (HIV). The initiative supports a phased research approach beginning with the identification of patient phenotypes characterized by convergent pathophysiological features, followed by …</summary>
+  </entry>
+  <entry>
     <title>Deployed Warfighter Protection FY27</title>
     <link href="https://www.grants.gov/search-results-detail/363946"/>
     <id>urn:funding-finder:grants-gov:363946</id>
@@ -325,17 +355,6 @@
     <summary>National Institutes of Health | Estimated Application 2027-01-22 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance the National Institutes of Health (NIH) mission by supporting four Clinical Trials Networks (CTNs) each comprised of a Leadership and Operations Center, Statistical and Data Management Center (SDMC), and Laboratory Center (LC) working with Clinical Trials Units (CTUs), to advance prevention, treatment, and implement…</summary>
   </entry>
   <entry>
-    <title>Centers for Structural Biology of HIV and other Infectious Diseases</title>
-    <link href="https://www.grants.gov/search-results-detail/361050"/>
-    <id>urn:funding-finder:grants-gov:361050</id>
-    <updated>2026-08-18T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <summary>National Institutes of Health | Estimated Application 2026-12-18 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting the Centers for Structural Biology of HIV and other Infectious Diseases. This solicitation will support multidisciplinary groups of scientists to determine the 3-dimensional structures of molecules and molecular complexes involved in priority infectious diseases. The effort focuses on explo…</summary>
-  </entry>
-  <entry>
     <title>Strengthening Ghana Health Service laboratory services, diagnostic networks, and systems for a more effective, efficient, and sustainable response to HIV, TB, and other priority health threats</title>
     <link href="https://www.grants.gov/search-results-detail/360759"/>
     <id>urn:funding-finder:grants-gov:360759</id>
@@ -370,73 +389,6 @@
 supports basic science, ideally with potential translational applications. Examples of current research areas we support include
 immunology, microbiome, structural biology, cellular physiology, cancer biology, genetics, genomics, microbiology and infectious diseases, stem cell biology, and neuroscience. Research areas
 we will not consider for support include Covid-19 relat…</summary>
-  </entry>
-  <entry>
-    <title>Illuminating AD/ADRD Genome to Enable Precision Genomic Medicine</title>
-    <link href="https://www.grants.gov/search-results-detail/360906"/>
-    <id>urn:funding-finder:grants-gov:360906</id>
-    <updated>2026-08-06T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Infectious disease"/>
-    <category term="Neuroscience"/>
-    <summary>National Institutes of Health | Estimated Application 2026-10-06 | The National Institute on Aging (NIA) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications that propose a program that supports integrative, cross-disciplinary projects aimed at scaling up mechanistic studies to understand the genomic underpinnings of the pathogenesis and progression AD/ADRD.The proposed research projects will employ interdisciplinary approaches that i…</summary>
-  </entry>
-  <entry>
-    <title>Expanding Global Health Security through local partnerships in Senegal</title>
-    <link href="https://www.grants.gov/search-results-detail/360334"/>
-    <id>urn:funding-finder:grants-gov:360334</id>
-    <updated>2026-08-03T00:00:00Z</updated>
-    <author><name>Centers for Disease Control-GHC</name></author>
-    <category term="Education and workforce"/>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <summary>Centers for Disease Control-GHC | Application 2026-10-02 | This NOFO aims to enhance Senegal's public health infrastructure to prevent, detect, and respond to infectious disease threats through implementing partners. The initiative focuses on strengthening public health surveillance systems, including community-based surveillance, improving laboratory networks, and enhancing workforce training. The goal is to build sustainable, resilient health security i…</summary>
-  </entry>
-  <entry>
-    <title>Improving global health security in Côte d'Ivoire to stop the spread of infectious disease</title>
-    <link href="https://www.grants.gov/search-results-detail/360324"/>
-    <id>urn:funding-finder:grants-gov:360324</id>
-    <updated>2026-08-03T00:00:00Z</updated>
-    <author><name>Centers for Disease Control-GHC</name></author>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <summary>Centers for Disease Control-GHC | Application 2026-10-02 | This Notice of Funding Opportunity (NOFO) seeks to build upon activities funded by CDC to support Global Health Security (GHS) in the Cote d"Ivore through implementation of programs and activities that focus on protecting and improving health globally through partnerships with Ministries of Health and other governmental institutions. The main outcomes of this NOFO are the following: (1) Improve pr…</summary>
-  </entry>
-  <entry>
-    <title>Protecting and Improving Global Health Security by Engaging Local Partners: Strengthening and Sustaining Public Health Systems in Ghana</title>
-    <link href="https://www.grants.gov/search-results-detail/360455"/>
-    <id>urn:funding-finder:grants-gov:360455</id>
-    <updated>2026-08-03T00:00:00Z</updated>
-    <author><name>Centers for Disease Control-GHC</name></author>
-    <category term="Education and workforce"/>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <summary>Centers for Disease Control-GHC | Application 2026-10-02 | This NOFO seeks to build and sustain a more resilient public health system in Ghana capable of identifying, responding to and mitigating public health threats. CDC, through this NOFO, will continue to leverage and complement the strengths and resources of multi-sectoral and multilateral partners in Ghana to build and improve country capacity and leadership in the prevention, early detection and re…</summary>
-  </entry>
-  <entry>
-    <title>Strengthening global health security in India to contain public health threats and accelerate outbreak response</title>
-    <link href="https://www.grants.gov/search-results-detail/360336"/>
-    <id>urn:funding-finder:grants-gov:360336</id>
-    <updated>2026-08-03T00:00:00Z</updated>
-    <author><name>Centers for Disease Control-GHC</name></author>
-    <category term="Education and workforce"/>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <category term="Transportation"/>
-    <summary>Centers for Disease Control-GHC | Application 2026-10-02 | This NOFO"s purpose is to support district, state and national public health systems in India to advance GHSA priorities to prevent, detect and respond to infectious disease threats. CDC will work with the Government of India (GoI) to strengthen capacity to control disease outbreaks at their source and neutralize public health threats. This NOFO will augment and increasingly transition CDC-support…</summary>
-  </entry>
-  <entry>
-    <title>Strengthening Global Health Security through local partnerships in Sierra Leone</title>
-    <link href="https://www.grants.gov/search-results-detail/360335"/>
-    <id>urn:funding-finder:grants-gov:360335</id>
-    <updated>2026-08-03T00:00:00Z</updated>
-    <author><name>Centers for Disease Control-GHC</name></author>
-    <category term="Education and workforce"/>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <summary>Centers for Disease Control-GHC | Application 2026-10-02 | The purpose of this NOFO is to build and sustain a more resilient public health system in Sierra Leone in an effort to identify, respond and mitigate health threats. CDC, through this NOFO, will continue to leverage and complement the strengths and resources of multisectoral and multilateral partners in Sierra Leone to build and improve country capacity and leadership in the prevention, early dete…</summary>
   </entry>
   <entry>
     <title>Emerging Infections Network - Research for Preventing, Detecting, and Managing Travel-associated Infectious Diseases</title>
@@ -527,16 +479,6 @@ we will not consider for support include Covid-19 relat…</summary>
     <category term="Technology development"/>
     <summary>U.S. National Science Foundation | Posted | The Energy, Water, and Resource Engineering (EWRE) program supports fundamental research to advance energy, water, and resource management and to safeguard health. Better use of domestic resources will make U.S. manufacturing, energy and water systems more efficient and secure.
 EWRE supports research that creates domestic sources of energy, advances water management, and recovers resources using c…</summary>
-  </entry>
-  <entry>
-    <title>NIDCD Clinical Research Center Grant (P50 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/358863"/>
-    <id>urn:funding-finder:grants-gov:358863</id>
-    <updated>2025-09-15T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <summary>National Institutes of Health | Application 2026-10-03 | The National Institute on Deafness and Other Communication Disorders (NIDCD) invites applications for Clinical Research Center Grants designed to advance the diagnosis, prevention, treatment, and amelioration of human sensory and communication disorders. For this announcement, Clinical Research is defined as research involving individuals with a sensory and/or communication disorder, or data/tissu…</summary>
   </entry>
   <entry>
     <title>NARMS Cooperative Agreement Program to Strengthen Antibiotic Resistance Surveillance in Retail Food Specimens</title>

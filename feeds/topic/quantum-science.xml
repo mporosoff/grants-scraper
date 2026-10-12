@@ -4,8 +4,24 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/quantum-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/quantum-science.xml</id>
-  <updated>2026-09-30T16:29:01Z</updated>
+  <updated>2026-10-08T19:07:27Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>FY 2027 Continuation of Solicitation for the Office of Science Financial Assistance Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363993"/>
+    <id>urn:funding-finder:grants-gov:363993</id>
+    <updated>2026-09-30T00:00:00Z</updated>
+    <author><name>Office of Science</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Materials science"/>
+    <category term="Separations and membranes"/>
+    <category term="Carbon management"/>
+    <category term="Quantum science"/>
+    <summary>Office of Science | Application 2027-09-30 | SC hereby announces its continuing interest in receiving applications for support of work in the following program areas: · Advanced Scientific Computing Research· Basic Energy Sciences· Biological and Environmental Research· Fusion Energy Sciences· High Energy and Nuclear Physics· Isotope R&amp;D and Production. On September 3, 1992, DOE published in the Federal Register the Office of Energy Research…</summary>
+  </entry>
   <entry>
     <title>Fiscal Year (FY) 2027 Department of War (DoW) Multidisciplinary Research Program of the University Research Initiative (MURI)</title>
     <link href="https://www.grants.gov/search-results-detail/363899"/>
@@ -79,7 +95,7 @@
     <category term="Materials science"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
-    <summary>Advanced Research Projects Agency for Health (ARPA-H) | Preapplication 2026-10-30 | Current ARPA-H program. UNIQUE | ARPA-H (function(w, d, s, l, i){w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&amp;l='+l:''; j.async=true; j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j, f); })(window, document,'script','dataLayer','GTM-W5GM3DT9'); wind…</summary>
+    <summary>Advanced Research Projects Agency for Health (ARPA-H) | Preapplication 2026-10-29 | Current ARPA-H program. UNIQUE | ARPA-H (function(w, d, s, l, i){w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&amp;l='+l:''; j.async=true; j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j, f); })(window, document,'script','dataLayer','GTM-W5GM3DT9'); wind…</summary>
   </entry>
   <entry>
     <title>Air Force Fiscal Year 2027 Young Investigator Program (YIP)</title>
@@ -126,7 +142,7 @@
     <category term="Quantum science"/>
     <category term="Data science"/>
     <category term="Artificial intelligence and machine learning"/>
-    <summary>U.S. National Science Foundation | Application 2027-02-11 | verify prerequisite | The Emerging Frontiers in Research and Innovation (EFRI) program serves a critical role in helping the NSF Directorate for Engineering focus on important emerging areas in a timely way. The EFRI program invests in potentially transformative ideas that offer the opportunity for significant shifts in foundational engineering knowledge. EFRI-funded research must have strong potential for long-term im…</summary>
+    <summary>U.S. National Science Foundation | Concept Paper 2026-11-19 | The Emerging Frontiers in Research and Innovation (EFRI) program serves a critical role in helping the NSF Directorate for Engineering focus on important emerging areas in a timely way. The EFRI program invests in potentially transformative ideas that offer the opportunity for significant shifts in foundational engineering knowledge. EFRI-funded research must have strong potential for long-term im…</summary>
   </entry>
   <entry>
     <title>Engineering (ENG): Electrical, Communications, and Computing Systems (ECCS)</title>
@@ -137,6 +153,7 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Energy"/>
     <category term="Quantum science"/>
+    <category term="Data science"/>
     <category term="Materials science"/>
     <category term="Manufacturing"/>
     <summary>U.S. National Science Foundation | Posted | The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational research for electrical, communications and computing systems through the following programs: The Electronic, Photonic, Magnetic, and Quantum Devices (EPMQD) program supports foundational engineering research on novel classical and quantum devices, exploring matter’s electronic, photonic, and magnetic …</summary>
@@ -182,19 +199,6 @@
     <category term="Materials science"/>
     <category term="Manufacturing"/>
     <summary>U.S. National Science Foundation | Posted | The U.S. National Science Foundation Directorate for Mathematical and Physical Sciences (NSF MPS) supports multiple research programs at the frontiers of discovery in physics. Physics research supported by NSF MPS enables understanding of the fundamental aspects of nature at all scales, from the quantum effects inside atoms to the mysterious dark energy spanning the entire universe. The core resea…</summary>
-  </entry>
-  <entry>
-    <title>Simons Foundation’s Mathematics and Physical Sciences (MPS) Targeted Grants to Institutes</title>
-    <link href="https://www.simonsfoundation.org/grant/targeted-grants-to-institutes/"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-f068b41ca38718f9</id>
-    <updated>2026-08-14T00:00:00Z</updated>
-    <author><name>Simons Foundation</name></author>
-    <category term="Quantum science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Materials science"/>
-    <category term="Manufacturing"/>
-    <summary>Simons Foundation | Application 2026-09-30 | The Simons Foundation’s Mathematics and Physical Sciences (MPS) division invites applications for the Targeted Grants to Institutes program.</summary>
   </entry>
   <entry>
     <title>Research Interests of the Air Force Office of Scientific Research</title>
@@ -280,24 +284,7 @@
     <updated>2025-11-17T00:00:00Z</updated>
     <author><name>Defense Advanced Research Projects Agency (DARPA)</name></author>
     <category term="Quantum science"/>
-    <category term="Technology development"/>
-    <summary>Defense Advanced Research Projects Agency (DARPA) | Application 2026-12-30 | DARPA is issuing a Quantum Benchmarking Initiative topic (QBIT) inviting submissions of innovative infrastructure, equipment, and expertise available to provide independent verification and validation. | See Program QBI goals In the simplest terms, the Quantum Benchmarking Initiative (QBI) seeks to determine whether it’s possible to build an industrially-useful computer by 2033. Specifically, QBI …</summary>
-  </entry>
-  <entry>
-    <title>FY 2026 Continuation of Solicitation for the Office of Science Financial Assistance Program</title>
-    <link href="https://www.grants.gov/search-results-detail/360678"/>
-    <id>urn:funding-finder:grants-gov:360678</id>
-    <updated>2025-09-30T00:00:00Z</updated>
-    <author><name>Office of Science</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Catalysis and reaction engineering"/>
-    <category term="Materials science"/>
-    <category term="Separations and membranes"/>
-    <category term="Carbon management"/>
-    <category term="Quantum science"/>
-    <summary>Office of Science | Application 2026-09-30 | The Office of Science (SC) of the Department of Energy (DOE) hereby announces its continuing interest in receiving applications for support of work in the following program areas: Advanced Scientific Computing Research, Basic Energy Sciences, Biological and Environmental Research, Fusion Energy Sciences, High Energy Physics, Nuclear Physics, and Isotope R&amp;D and Production. On September 3, 1992, DO…</summary>
+    <summary>Defense Advanced Research Projects Agency (DARPA) | Application 2026-12-30 | DARPA is issuing a Quantum Benchmarking Initiative topic (QBIT) inviting submissions of innovative infrastructure, equipment, and expertise available to provide independent verification and validation. | See Program Summary In the simplest terms, the Quantum Benchmarking Initiative (QBI) seeks to determine whether it’s possible to build an industrially-useful computer by 2033. Specifically, QBI is…</summary>
   </entry>
   <entry>
     <title>Computer and Information Science and Engineering (CISE): Future Computing Research (Future CoRe)</title>
@@ -313,7 +300,7 @@
     <summary>U.S. National Science Foundation | Application 2027-02-04 | The NSF CISE Directorate supports research and education projects that develop new knowledge in all aspects of computing, communications, and information science and engineering through the following Future Computing Research (Future CoRe) programs: Algorithmic Foundations (AF) program; Communications and Information Foundations (CIF) program; Computer Systems Research (CSR) program; Computing Edu…</summary>
   </entry>
   <entry>
-    <title>Security, Privacy, and Trust in Cyberspace (SaTC 2.0)</title>
+    <title>Security, Privacy, and Trust in Cyberspace (NSF SaTC)</title>
     <link href="https://www.grants.gov/search-results-detail/357554"/>
     <id>urn:funding-finder:grants-gov:357554</id>
     <updated>2024-12-06T00:00:00Z</updated>
@@ -329,7 +316,7 @@
     <summary>U.S. National Science Foundation | Application 2027-01-25 | Our world is at a pivotal moment where the boundaries dividing the physical and social worlds from the cyber world have become blurred. Cyberspace has evolved from an interconnected digital environment into a complex and interdependent cyber ecosystem that involves hardware, software, networks, data, people, organizations, countries, and the physical world. Critical functions of everyday life are …</summary>
   </entry>
   <entry>
-    <title>NSF Scholarships in Science, Technology, Engineering, and Mathematics Program</title>
+    <title>NSF Scholarships in Science, Technology, Engineering, and Mathematics (S-STEM)</title>
     <link href="https://www.grants.gov/search-results-detail/357498"/>
     <id>urn:funding-finder:grants-gov:357498</id>
     <updated>2024-12-03T00:00:00Z</updated>
@@ -361,17 +348,17 @@
     <summary>Office of Naval Research | Application 2026-12-31 | verify prerequisite | ONR, ONRG, and MCWL are interested in receiving proposals for Long-Range S&amp;T Projects that offer potential for advancement and improvement of Navy and Marine Corps operations. Readers should note that this is an announcement to declare ONR, ONRG and MCWL’s broad role in competitive funding of meritorious research across a spectrum of science and engineering disciplines. All responsible sources fro…</summary>
   </entry>
   <entry>
-    <title>NSF National Quantum Virtual Laboratory - Quantum Testbeds</title>
+    <title>NSF National Quantum Virtual Laboratory (NQVL)</title>
     <link href="https://www.grants.gov/search-results-detail/355196"/>
     <id>urn:funding-finder:grants-gov:355196</id>
     <updated>2024-06-28T00:00:00Z</updated>
     <author><name>U.S. National Science Foundation</name></author>
     <category term="Education and workforce"/>
     <category term="Quantum science"/>
-    <summary>U.S. National Science Foundation | Application 2027-04-06 | The National Quantum Initiative (NQI) Act1aims to ensure the continuing leadership of the United States (U.S.) in quantum information science and technology. In conformance with the NQI goals, an argument2-5was set forth for a renewed emphasis on identifying and fostering early adoption of quantum technologies to transform the field of Quantum Information Science and Engineering (QISE) and to acce…</summary>
+    <summary>U.S. National Science Foundation | Application 2027-04-06 | The National Quantum Initiative (NQI) Act1 aims to ensure the continuing leadership of the United States (U.S.) in quantum information science and technology. In conformance with the NQI goals, an argument2-5 was set forth for a renewed emphasis on identifying and fostering early adoption of quantum technologies to transform the field of Quantum Information Science and Engineering (QISE) and to ac…</summary>
   </entry>
   <entry>
-    <title>Advanced Technological Education</title>
+    <title>Advanced Technological Education (ATE)</title>
     <link href="https://www.grants.gov/search-results-detail/355100"/>
     <id>urn:funding-finder:grants-gov:355100</id>
     <updated>2024-06-25T00:00:00Z</updated>
@@ -384,7 +371,7 @@
     <category term="Data science"/>
     <category term="Materials science"/>
     <category term="Cybersecurity"/>
-    <summary>U.S. National Science Foundation | Application 2026-10-01 | With a focus on two-year Institutions of Higher Education (IHEs), the Advanced Technological Education (ATE) program supports the education of technicians for the high-technology fields that drive our nation's economy. The program involves partnerships between academic institutions (grades 7-12, IHEs), industry, and economic development agencies to promote improvement in the education of science a…</summary>
+    <summary>U.S. National Science Foundation | Application 2027-10-07 | With a focus on two-year Institutions of Higher Education (IHEs), the Advanced Technological Education (ATE) program supports the education of technicians for the high-technology fields that drive our nation's economy. The program involves partnerships between academic institutions (grades 7-12, IHEs), industry, and economic development agencies to promote improvement in the education of science a…</summary>
   </entry>
   <entry>
     <title>IUSE / Professional Formation of Engineers: Revolutionizing Engineering Departments (IUSE/PFE: RED)</title>
@@ -414,7 +401,7 @@
     <category term="Materials science"/>
     <category term="Manufacturing"/>
     <category term="Cybersecurity"/>
-    <summary>U.S. National Science Foundation | Application 2026-12-04 | verify prerequisite | CREST Center awards provide support to enhance the research capabilities of Minority-serving institutions (MSIs) through the establishment of centers that effectively integrate education and research. CREST Center awards promote the development of new knowledge, enhancements of the research productivity of individual faculty, and an expanded presence of students historically underrepresented in sc…</summary>
+    <summary>U.S. National Science Foundation | Application 2026-12-04 | invitation required | CREST Center awards provide support to enhance the research capabilities of Minority-serving institutions (MSIs) through the establishment of centers that effectively integrate education and research. CREST Center awards promote the development of new knowledge, enhancements of the research productivity of individual faculty, and an expanded presence of students historically underrepresented in sc…</summary>
   </entry>
   <entry>
     <title>DEVCOM ARMY RESEARCH LABORATORY BROAD AGENCY ANNOUNCEMENT FOR FOUNDATIONAL RESEARCH</title>
@@ -440,8 +427,21 @@
     <author><name>U.S. National Science Foundation</name></author>
     <category term="Quantum science"/>
     <summary>U.S. National Science Foundation | Application 2026-11-03 | Research supported by the Topology program includes the areas listed below. This is not a comprehensive list. Proposals on other relevant topics will also be considered. Contact the program if you have questions.
-Target submission date: Proposals should be submitted to MPS Mathematical Sciences Research Programs solicitation. Target date for submissions is the First Tuesday of November.
-While prop…</summary>
+•
+algebraic topology,
+•
+contact and symplectic structures,
+•
+differential topology,
+•
+geometric topology,
+•
+low-dimensional topology,
+•
+quantum topology, and
+•
+topological data analysis.
+…</summary>
   </entry>
   <entry>
     <title>Tribal Colleges and Universities Program (TCUP)</title>
