@@ -366,7 +366,19 @@ def clean_text(value):
 
 
 def safe_http_url(value):
-    text = clean_text(value)
+    if value is None:
+        return None
+    # URL punctuation is routing data, not prose. Preserve the input cleanup
+    # used for source markup without clean_text's sentence/heading repairs.
+    text = re.sub(
+        r"<\s*(?:br|/p|/div|/li|/h[1-6])\s*/?\s*>",
+        "\n", str(value), flags=re.I,
+    )
+    text = re.sub(r"<[^>]+>", " ", text)
+    text = unescape(unescape(text)).replace("\xa0", " ")
+    lines = [re.sub(r"[ \t]+", " ", line).strip()
+             for line in text.replace("\r", "\n").split("\n")]
+    text = "\n".join(line for line in lines if line).strip()
     if not text:
         return None
     if text.casefold().startswith("www."):

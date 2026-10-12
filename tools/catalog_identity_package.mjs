@@ -24,6 +24,52 @@ const require = (ok, reason) => { if (!ok) throw Error('catalog_identity_package
 export const corpusHash = rows => digest(rows.map(row => `${row.passage_id}\0${row.parent_id}\0${row.text}\n`).join(''));
 const same = (left, right) => JSON.stringify(left) === JSON.stringify(right);
 const POLICY = new URL('../evaluation/catalog_identity_correction_20261012.json', import.meta.url);
+const URL_POLICY = new URL('../evaluation/catalog_url_correction_20261012.json', import.meta.url);
+const URL_PARENT = '051d6844ea23709628b9c9209f4a947e309d2427928b0dc19e8ffb8eb8f3cfc4';
+const URL_MANIFEST_SHA = 'f11c8bed90de162868348b262d6b200e2f36bb13c2601b73fbb423c5de4162c1';
+const SOURCE_CACHE = 'data/source_records.json';
+export function projectionProfile(kind = 'identity') {
+  require(['identity', 'url'].includes(kind), 'fixed_projection_kind');
+  return kind === 'url'
+    ? {kind, parent:URL_PARENT, manifest:URL_MANIFEST_SHA, policy:URL_POLICY, version:'catalog-url-package-20261012-v1'}
+    : {kind, parent:PARENT_CANDIDATE, manifest:PARENT_MANIFEST_SHA, policy:POLICY, version:VERSION};
+}
+
+export function verifyUrlPayload(name, before, after, policy) {
+  const replacements = policy.url_replacements;
+  require(Object.keys(replacements).length > 0 && Object.entries(replacements).every(([old, value]) =>
+    /^https:\/\/portal\.nyserda\.ny\.gov\/CORE_Solicitation_Detail_Page\? SolicitationId=[A-Za-z0-9]{18}$/.test(old)
+    && value === old.replace('? ', '?')), 'exact_url_normalization');
+  const expected = structuredClone(before);
+  const rows = name === CATALOG ? expected.opportunities : name === SOURCE_CACHE ? expected.sources.nyserda.records
+    : name === 'feeds/changes.json' ? expected.events : null;
+  require(Array.isArray(rows), 'url_payload_name');
+  const changed = {};
+  const ids = new Set();
+  for (const row of rows) {
+    const event = name === 'feeds/changes.json';
+    const id = String(event ? row.id : row.opportunity_id);
+    require(!ids.has(id), 'unique_payload_membership'); ids.add(id);
+    const record = event ? row.record : row;
+    let count = 0;
+    const update = (item, key) => {
+      if (item && typeof item[key] === 'string' && Object.hasOwn(replacements, item[key])) {
+        item[key] = replacements[item[key]]; count += 1;
+      }
+    };
+    update(record, 'detail_page'); update(record, 'funding_opportunity_url');
+    for (const key of ['deadlines', 'contacts']) for (const item of record[key] || []) update(item, 'source_url');
+    update(record.next_submission?.event, 'source_url');
+    if (count) {
+      require(String(record.opportunity_id || row.opportunity_id).startsWith('nyserda:'), 'nyserda_scope');
+      changed[id] = count;
+    }
+  }
+  const admitted = Object.fromEntries(Object.entries(policy.payloads[name].affected_items).map(([id, value]) => [id, value.url_leaf_count]));
+  require(same(Object.entries(changed).sort(), Object.entries(admitted).sort()), 'exact_url_inventory');
+  require(same(after, expected), 'exact_url_only_payload');
+}
+
 
 export function verifyCatalog(before, after, corrections) {
   require(corrections.length === 2 && same(corrections.map(row => row.opportunity_id).sort(), ['363829', '364039']), 'fixed_corrections');
@@ -88,13 +134,14 @@ function within(root, path) {
 }
 
 /** The parent orchestrator owns source evidence, catalog edits and publication. */
-export async function prepareProjection(parent, root) {
+export async function prepareProjection(parent, root, kind = 'identity') {
+  const profile = projectionProfile(kind);
   parent = resolve(parent); root = resolve(root);
   require(!within(parent, root) && !within(root, parent), 'separate_materialized_root');
   const rawCandidate = await readFile(join(parent, '..', 'candidate.json'));
-  require(digest(rawCandidate) === PARENT_MANIFEST_SHA, 'pinned_parent_manifest');
+  require(digest(rawCandidate) === profile.manifest, 'pinned_parent_manifest');
   const candidate = JSON.parse(rawCandidate);
-  require(candidate.candidate_id === PARENT_CANDIDATE, 'pinned_parent_candidate');
+  require(candidate.candidate_id === profile.parent, 'pinned_parent_candidate');
   const originals = {};
   // Authenticate the full immutable parent, not only the selected vector rows.
   for (const [name, hash] of Object.entries(candidate.files)) {
@@ -104,7 +151,7 @@ export async function prepareProjection(parent, root) {
   }
   const unchanged = [...new Set([...RUNTIME, SUBTOPICS, CANARIES, BUILD_RECEIPT,
     MANIFEST, BINARY, ALLOWLIST, ...Object.keys(candidate.generation_files)
-      .filter(name => /^(data|config|evaluation)\//.test(name) && ![CATALOG, 'data/catalog-metadata.js'].includes(name))])];
+      .filter(name => /^(data|config|evaluation)\//.test(name) && ![CATALOG, 'data/catalog-metadata.js', ...(kind === 'url' ? [SOURCE_CACHE] : [])].includes(name))])];
   for (const name of unchanged)
     require((await readFile(checked(root, name))).equals(originals[name]), 'unchanged_projection_input');
   require((await readFile(checked(root, RELEASE))).equals(originals[RELEASE]), 'original_package_destination');
@@ -113,9 +160,14 @@ export async function prepareProjection(parent, root) {
   require(same(afterCatalog.opportunities.map(row => row.opportunity_id),
     beforeCatalog.opportunities.map(row => row.opportunity_id)), 'unchanged_catalog_membership');
   require(beforeCatalog.generated_at === afterCatalog.generated_at, 'original_generation_clock');
-  const policy = JSON.parse(await readFile(POLICY, 'utf8'));
-  require(policy.candidate_id === PARENT_CANDIDATE && policy.candidate_manifest_sha256 === PARENT_MANIFEST_SHA, 'fixed_policy');
-  verifyCatalog(beforeCatalog, afterCatalog, policy.corrections);
+  const policy = JSON.parse(await readFile(profile.policy, 'utf8'));
+  require(policy.candidate_id === profile.parent && policy.candidate_manifest_sha256 === profile.manifest, 'fixed_policy');
+  if (kind === 'url') {
+    require(policy.kind === 'url', 'fixed_policy');
+    verifyUrlPayload(CATALOG, beforeCatalog, afterCatalog, policy);
+    for (const name of [SOURCE_CACHE, 'feeds/changes.json'])
+      verifyUrlPayload(name, JSON.parse(originals[name]), JSON.parse(await readFile(checked(root, name), 'utf8')), policy);
+  } else verifyCatalog(beforeCatalog, afterCatalog, policy.corrections);
   const subtopics = assignment(originals[SUBTOPICS]);
   const originalCorpus = makeCorpus(beforeCatalog, subtopics, originals);
   const corpus = makeCorpus(afterCatalog, subtopics, originals);
@@ -139,7 +191,7 @@ export async function prepareProjection(parent, root) {
     && accounting.estimated_cost_at_published_paid_pricing_usd === 0.006010
     && accounting.reuse_reason === 'homogeneous_unstable_identity' && accounting.reuse_permitted === false,
     'original_generation_accounting');
-  const proof = {version:VERSION, parent_candidate_id:PARENT_CANDIDATE, parent_manifest_sha256:PARENT_MANIFEST_SHA,
+  const proof = {version:profile.version, parent_candidate_id:profile.parent, parent_manifest_sha256:profile.manifest,
     corpus_sha256:manifest.corpus_sha256, vector_sha256:manifest.vector_sha256,
     retained_passage_count:corpus.length, reuse_permitted:false,
     model_space_fingerprint:manifest.model_space_fingerprint,
@@ -156,24 +208,26 @@ export async function prepareProjection(parent, root) {
 
 async function main() {
   const args = process.argv.slice(2), options = {};
-  require(args.length === 6, 'arguments');
+  require(args.length === 6 || args.length === 8, 'arguments');
   for (let index = 0; index < args.length; index += 2) {
-    require(['--parent', '--root', '--receipt'].includes(args[index]) && !options[args[index]] && args[index + 1], 'arguments');
-    options[args[index]] = resolve(args[index + 1]);
+    require(['--parent', '--root', '--receipt', '--kind'].includes(args[index]) && !options[args[index]] && args[index + 1], 'arguments');
+    options[args[index]] = args[index] === '--kind' ? args[index + 1] : resolve(args[index + 1]);
   }
   const parent = options['--parent'], root = options['--root'], receipt = options['--receipt'];
   require(parent && root && receipt, 'arguments');
+  const kind = options['--kind'] || 'identity';
+  projectionProfile(kind);
   require(!within(parent, receipt) && !within(root, receipt), 'external_receipt_destination');
   try { await access(receipt); throw Error('catalog_identity_package_existing_receipt'); }
   catch (error) { if (error.code !== 'ENOENT') throw error; }
   await withBuildLock(pathToFileURL(root + '/'), async () => {
-    const {output, proof} = await prepareProjection(parent, root);
+    const {output, proof} = await prepareProjection(parent, root, kind);
     await mkdir(dirname(receipt), {recursive:true});
     const entries = [...output].map(([name, raw]) => [pathToFileURL(checked(root, name)), raw]);
     entries.push([pathToFileURL(receipt), bytes(proof)]);
     await writeCoherentFiles(entries);
     for (const [name, raw] of output) require((await readFile(checked(root, name))).equals(raw), 'written_output_hash');
-    console.log(JSON.stringify({version:VERSION, modified_paths:[...output.keys()], retained_passages:proof.retained_passage_count,
+    console.log(JSON.stringify({version:proof.version, modified_paths:[...output.keys()], retained_passages:proof.retained_passage_count,
       corpus_sha256:proof.corpus_sha256, vector_sha256:proof.vector_sha256, new_provider_requests:0}));
   });
 }

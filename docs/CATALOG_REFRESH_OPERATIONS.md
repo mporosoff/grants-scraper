@@ -136,3 +136,36 @@ the refresh workflow stays enabled. After publication, the child's original
 generation identity retires this owner through the ordinary daily generation
 floor. Verify same-day no-op and next-window generation using authenticated
 publication/live evidence; a policy prediction is not proof of future cron delivery.
+
+
+## Retained October 12 NYSERDA navigation correction
+
+Publication review of the persisted identity-corrected candidate
+`051d6844ea23709628b9c9209f4a947e309d2427928b0dc19e8ffb8eb8f3cfc4`
+(run `38280685194`, attempt 1) found malformed NYSERDA links containing
+`? SolicitationId=`. Shared URL validation had applied prose sentence spacing
+to correct official URLs, inserting the space. A current public HTTP check confirmed that the encoded
+space redirects to a login page, whereas `?SolicitationId=` opens the intended
+OSWPON26-1 notice. The affected family contains 41 current catalog records.
+URL validation now preserves query punctuation without applying prose sentence
+formatting. Existing HTML/entity cleanup and HTTP(S) validation remain. Focused
+adapter-to-catalog checks cover the notice, deadline and contact paths; old
+malformed-URL link-health results cannot match the corrected address.
+
+The protected manual `catalog-url-correction` selector accepts only that exact
+parent and run. It authenticates the complete parent candidate and prior identity
+receipt, reauthenticates the original generation's spending state/reservation,
+and applies a pinned URL-only projection. It corrects navigation fields in the
+catalog, source cache and retained feed snapshots without creating new events or
+changing event times. Historical document acquisition evidence, signatures and
+link-health observations retain their original bytes; they are not relabeled as
+successful fetches of corrected URLs. The next normal acquisition can measure
+those URLs independently.
+
+The child preserves the alias correction receipt separately, the original
+source clock, all 1,476 scientific passages and vectors, scientific teams and all
+spending. No provider credentials or replacement allowance enter this stage.
+Exact-byte gates, review, protected publication and live verification remain
+required. The rejected parent's owner is held until an authenticated protected
+URL child completes publication; only its exact failed attempt and artifact
+identity may then retire. Keep the normal workflow enabled throughout.
