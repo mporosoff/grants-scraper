@@ -106,7 +106,102 @@ def next_submission(record, as_of=None, *, application_class='new'):
     return result
 
 
-def project(record, as_of):
+def _invitation_evidence(record):
+    title = record.get('title')
+    quote = title[:500] if isinstance(title, str) else ''
+    evidence = {'source_field': 'title', 'quote': quote,
+        'source_url': record.get('detail_page') or record.get('funding_opportunity_url')
+                      or record.get('primary_document_url')}
+    if re.search(r'\bInvited\s+to\s+Apply\b', quote, re.I):
+        return evidence
+    if not re.search(r'\bSingle[ -]Source\b', quote, re.I):
+        return None
+    # A single-source title alone names restricted eligibility, not an invitation.
+    # These source clauses explicitly identify the same single-source notice.
+    pattern = re.compile(
+        r'\bsingle[ -]source(?:\s+(?:competition|NOFO))?\s+that\s+will\s+invite\s+'
+        r'(?:an?\s+)?applications?(?:\(s\))?\s+from\s+(?:(?:an?|the)\s+)?'
+        r'eligible\s+organizations?(?:\(s\))?\s+to\s+apply\b|'
+        r'\bNotice\s+of\s+Funding\s+Opportunity\s+\(NOFO\)\s+invites\s+a\s+'
+        r'Single[ -]Source\s+application\s+for\s+the\s+eligible\s+organization\b', re.I)
+    for field in ('description', 'eligibility_text'):
+        value = record.get(field)
+        match = pattern.search(value[:12000]) if isinstance(value, str) else None
+        if match and len(match.group()) <= 500:
+            evidence['restriction'] = {'source_field': field, 'quote': match.group()}
+            return evidence
+    return None
+
+
+def project_invitation_access(record):
+    """Project explicit notice-wide invitation evidence onto full submissions.
+
+    Invitations mentioned by an ordinary open or staged call establish no global
+    restriction. A single-source classification also requires its explicit clause.
+    """
     result = deepcopy(record)
-    result['next_submission'] = next_submission(record, as_of)
+    evidence = _invitation_evidence(record)
+    if evidence is None:
+        return result
+    declared = (result.get('deadlines') or []) + (result.get('submission_requirements') or [])
+    # Preserve collection ownership and let the existing selector materialize
+    # its close-date fallback before adding the access qualification.
+    for event in events(result):
+        if event not in declared:
+            result['deadlines'] = (result.get('deadlines') or []) + [event]
+    for field in ('deadlines', 'submission_requirements'):
+        for event in result.get(field) or []:
+            if isinstance(event, dict) and event.get('kind') in FULL:
+                event.update(invitation_required=True, prerequisite='invitation',
+                             invitation_evidence=deepcopy(evidence))
+    return result
+
+
+def project_two_step_prerequisite(record):
+    """Retain one explicitly required, dated Step-1 before a matching Step-2.
+
+    This source-owned pair does not infer numbered stages from document headings
+    or apply an unrelated preliminary date to a full submission.
+    """
+    result = deepcopy(record)
+    text = record.get('description')
+    if not isinstance(text, str):
+        return result
+    text = text[:12000]
+    obligations = list(re.finditer(r'\bonly proposers that submit a Step[ -]1 proposal '
+        r'will be eligible to submit a Step[ -]2 proposal\b', text, re.I))
+    if len(obligations) != 1:
+        return result
+    from scripts.extract_document_evidence import DATE_RE, parse_document_date
+    pairs = list(re.finditer(r'\bStep[ -]1 proposals are due (?P<first>' + DATE_RE.pattern
+        + r'),? and Step[ -]2 proposals are due (?P<second>' + DATE_RE.pattern + r')', text, re.I))
+    labels = re.findall(r'\bStep[ -][12] proposals? (?:are|is) due\b', text, re.I)
+    if len(pairs) != 1 or len(labels) != 2:
+        return result
+    pair = pairs[0]
+    first, second = parse_document_date(pair['first']), parse_document_date(pair['second'])
+    if not first or not second or first >= second or second != record.get('close_date'):
+        return result
+    full = [event for event in events(result) if event.get('kind') in FULL]
+    if len(full) != 1 or full[0].get('date') != second:
+        return result
+    source_url = record.get('detail_page') or record.get('funding_opportunity_url') or record.get('primary_document_url')
+    event = {'kind': 'preproposal', 'stage': 'preproposal', 'date': first, 'required': True,
+        'source': str(record.get('source') or 'Official source') + ' synopsis',
+        'source_url': source_url, 'source_field': 'description', 'confidence': 'source_listed',
+        'citation': {'source_field': 'description', 'quote': pair.group(), 'source_url': source_url},
+        'requirement_citation': {'source_field': 'description', 'quote': obligations[0].group(), 'source_url': source_url}}
+    event.update({key: full[0][key] for key in ('application_class', 'cycle', 'track') if key in full[0]})
+    preliminary = [item for item in events(result) if item.get('kind') in PRELIMINARY]
+    if any(item != event for item in preliminary):
+        return result  # Conflicting or differently owned stages need source review.
+    if not preliminary:
+        result['deadlines'] = (result.get('deadlines') or []) + [event]
+    result.update(has_preliminary_stage=True, preliminary_required=True, preliminary_stage_type='preproposal')
+    return result
+
+
+def project(record, as_of):
+    result = project_two_step_prerequisite(project_invitation_access(record))
+    result['next_submission'] = next_submission(result, as_of)
     return result

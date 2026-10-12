@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "candidate_id": "ac68ff0aef1e4aff66c06971c1500673a46bd0c7a40f2cc0cd71c9559ea402a8",
+  "candidate_manifest_sha256": "4112e0b47acba26977340d31c56244e5514ae1e36c5a160e187d7ec014fc752a",
+  "original_artifact": {
+    "id": "11579731383",
+    "sha256": "750a446a3692f98093e56ec98fa751b26067fc3afa0d018c5e77d975a587f42e"
+  },
+  "record_hash_encoding": "sha256 of UTF-8 JSON, sort_keys=True, separators=(comma,colon), ensure_ascii=False",
+  "record_count": 1261,
+  "original_generated_at": "2026-10-08T19:03:50.931739Z",
+  "input_hashes": {
+    "data/opportunities.js": "43f51fad5bfda95ec8ee3d00f367f500822a6306a9529f3666f125ebf57e85a4",
+    "data/source_records.json": "b0a08425ee602bc91d3704294053ccc306eb44cdacd015537c7b7913c6d2b2f3",
+    "feeds/changes.json": "baf877941e99a2266e7784e914b903f7b772497cad9accd5c9fde19d97371e91"
+  },
+  "corrections": [
+    {
+      "opportunity_id": "360458",
+      "record_sha256": "e1e67d909de87d6ed95eb6a128cfefd0bb2a53b643be477f7178fd7ea8e723d2",
+      "expected_access": "invitation_required",
+      "evidence": [
+        {
+          "source_field": "title",
+          "quote": "Single Source for the Continuation of the Caring for OutPatiEnts after Acute Kidney Injury (COPE-AKI) Scientific and Data Research Center (U01 Clinical Trial Required)",
+          "source_url": "https://www.grants.gov/search-results-detail/360458"
+        },
+        {
+          "source_field": "description",
+          "quote": "This Notice of Funding Opportunity (NOFO) invites a Single Source application for the eligible organization, the Scientific and Data Research Center (SDRC) already involved in the Caring for OutPatiEnts after Acute Kidney Injury (COPE-AKI) Consortium.",
+          "source_url": "https://www.grants.gov/search-results-detail/360458"
+        }
+      ]
+    },
+    {
+      "opportunity_id": "361213",
+      "record_sha256": "3bd03ce11f1720ada18e337e317e4700161ea74a5c2ba484c080de405b6d211f",
+      "expected_access": "invitation_required",
+      "evidence": [
+        {
+          "source_field": "title",
+          "quote": "Single Source for the Continuation of the Epidemiology of Diabetes Interventions and Complications (EDIC) Study Research Center (Collaborative U01 Clinical Trial Not Allowed)",
+          "source_url": "https://www.grants.gov/search-results-detail/361213"
+        },
+        {
+          "source_field": "description",
+          "quote": "This is a Notice of Funding Opportunity (NOFO) for a Single Source that will invite an application from the eligible organization to apply.",
+          "source_url": "https://www.grants.gov/search-results-detail/361213"
+        }
+      ]
+    },
+    {
+      "opportunity_id": "361606",
+      "record_sha256": "4e0cdd9667d336e2c938d999ec6f350d2f928a631392af0ae6554a54cd6500dd",
+      "expected_access": "invitation_required",
+      "evidence": [
+        {
+          "source_field": "title",
+          "quote": "Single Source: Coordinating Center (CC) for the Small Cell Lung Cancer (SCLC) Consortium (U24 Clinical Trial Not Allowed)",
+          "source_url": "https://www.grants.gov/search-results-detail/361606"
+        },
+        {
+          "source_field": "description",
+          "quote": "This is a Forecast for a single source that will invite application(s) from eligible organization(s) to apply.",
+          "source_url": "https://www.grants.gov/search-results-detail/361606"
+        }
+      ]
+    },
+    {
+      "opportunity_id": "362574",
+      "record_sha256": "a7db13857b657fe12fc810ca7d58b8e5c5dd3bad3a889c3de9a401d753faa9ef",
+      "expected_access": "invitation_required",
+      "evidence": [
+        {
+          "source_field": "title",
+          "quote": "Single Source: Institutional Development Award (IDeA) Clinical Research Resource Center (I-CRRC)",
+          "source_url": "https://www.grants.gov/search-results-detail/362574"
+        },
+        {
+          "source_field": "description",
+          "quote": "This is a Forecast for a Single Source that will invite an application from an eligible organization to apply.",
+          "source_url": "https://www.grants.gov/search-results-detail/362574"
+        }
+      ]
+    },
+    {
+      "opportunity_id": "362575",
+      "record_sha256": "dcf631e40151cf9abc162a8a20954e9ffac66ca103f83b5c42abd625d9d893f9",
+      "expected_access": "invitation_required",
+      "evidence": [
+        {
+          "source_field": "title",
+          "quote": "Single Source: Resource Center for the Support for Research Excellence (SuRE) Program",
+          "source_url": "https://www.grants.gov/search-results-detail/362575"
+        },
+        {
+          "source_field": "description",
+          "quote": "This is a Forecast for a Single Source that will invite an application from an eligible organization to apply.",
+          "source_url": "https://www.grants.gov/search-results-detail/362575"
+        }
+      ]
+    },
+    {
+      "opportunity_id": "362990",
+      "record_sha256": "10aaa829f2676b1279eb65f034c9581d9fdea56429f92290139b24913ea96036",
+      "expected_access": "invitation_required",
+      "evidence": [
+        {
+          "source_field": "title",
+          "quote": "DOJ FY 2026 Invited to Apply - National Integrated Ballistic Information (NIBIN) Modernization Program",
+          "source_url": "https://www.grants.gov/search-results-detail/362990"
+        },
+        {
+          "source_field": "description",
+          "quote": "This is an invitation to apply notice of funding opportunity (NOFO) for the FY 2026 National Integrated Ballistic Information Network (NIBIN) Modernization Program.",
+          "source_url": "https://www.grants.gov/search-results-detail/362990"
+        }
+      ]
+    },
+    {
+      "opportunity_id": "363454",
+      "record_sha256": "8def84945c3f9233f534a1858941a3e4e24b9fe10734680d709f766f122b7c5c",
+      "expected_access": "invitation_required",
+      "evidence": [
+        {
+          "source_field": "title",
+          "quote": "Single Source Competition for Continuation of Understanding and Targeting the Pathophysiology of Youth-Onset Type 2 Diabetes Clinical Centers (U01 Clinical Trial Not Allowed)",
+          "source_url": "https://www.grants.gov/search-results-detail/363454"
+        },
+        {
+          "source_field": "eligibility_text",
+          "quote": "This is a Single Source competition that will invite application(s) from eligible organization(s) to apply.",
+          "source_url": "https://www.grants.gov/search-results-detail/363454"
+        }
+      ]
+    },
+    {
+      "opportunity_id": "363734",
+      "record_sha256": "16be8d184e004c0fb4c5eeef70a5b26a034bacd4ff105feb64916ba41bba632f",
+      "expected_access": "prerequisite_closed",
+      "evidence": [
+        {
+          "source_field": "description",
+          "quote": "Step-1 proposals are due September 29, 2026, and Step-2 proposals are due December 4, 2026",
+          "source_url": "https://www.grants.gov/search-results-detail/363734"
+        },
+        {
+          "source_field": "description",
+          "quote": "only proposers that submit a Step-1 proposal will be eligible to submit a Step-2 proposal",
+          "source_url": "https://www.grants.gov/search-results-detail/363734"
+        }
+      ],
+      "stage_fields": {
+        "has_preliminary_stage": true,
+        "preliminary_required": true,
+        "preliminary_stage_type": "preproposal"
+      },
+      "additional_submission_events": {
+        "deadlines": [
+          {
+            "kind": "preproposal",
+            "stage": "preproposal",
+            "date": "2026-09-29",
+            "required": true,
+            "source": "Grants.gov synopsis",
+            "source_url": "https://www.grants.gov/search-results-detail/363734",
+            "source_field": "description",
+            "confidence": "source_listed",
+            "citation": {
+              "source_field": "description",
+              "quote": "Step-1 proposals are due September 29, 2026, and Step-2 proposals are due December 4, 2026",
+              "source_url": "https://www.grants.gov/search-results-detail/363734"
+            },
+            "requirement_citation": {
+              "source_field": "description",
+              "quote": "only proposers that submit a Step-1 proposal will be eligible to submit a Step-2 proposal",
+              "source_url": "https://www.grants.gov/search-results-detail/363734"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "opportunity_id": "363874",
+      "record_sha256": "bd3d6a900b6a59f7450258f5692f8ce50acb70f61088d67075bba08b4e57313f",
+      "expected_access": "invitation_required",
+      "evidence": [
+        {
+          "source_field": "title",
+          "quote": "Single Source: Scalable and Systematic Neurobiology of Psychiatric and Neurodevelopmental Disorder Risk Genes: Data Resource and Administrative Coordination Center (U24 Clinical Trial Not Allowed)",
+          "source_url": "https://www.grants.gov/search-results-detail/363874"
+        },
+        {
+          "source_field": "description",
+          "quote": "This is a forecast for a single source NOFO that will invite application(s) from eligible organization(s) to apply.",
+          "source_url": "https://www.grants.gov/search-results-detail/363874"
+        }
+      ]
+    }
+  ],
+  "affected_event_hashes": {
+    "d1f35860942ff20fd39d": "60ef8dbb2b61a0ad716da3602e1417adb1b94a8b3507e61663c44ca9099a4fff",
+    "bdfb184b2e69e72b4287": "849ca4e52c243a0309ab5480e65e076c3b9b11999aa32fa5c28cdcae8ddbb5d5",
+    "ffd67f5bd596bfa6ce62": "4b81e1bf185b990574c698d24b6d0e8ec73c1f865a5c88246be1bfb5bd19db5c",
+    "4ddc4084521976c6a667": "c3b475589b1d5fe07de77718c471f0fb5dd5b93c749431e54c0833886e129397",
+    "d723c669ff310aa2ea4a": "9733ecaeb2715b1e9cda7220dff3df83a738ef717b3b058a43c38eb1b472e2f8",
+    "c0a234abee57aefcc580": "596413ffb95ad061acf17727a039554d2b407fb0109a27fe7d05f628e946087a",
+    "0cb76a8b7384a2f6147e": "298d021205cb1a05d44a7be2e31259acfc8f728b30c83f75a400f3de3d514166",
+    "1af0a2053b0d46822ea1": "c7187087d172121354b0c1cbbc0ef986d17b5f4858cc4767029aad99a904cbd3"
+  },
+  "event_corrections": [
+    {
+      "event_id": "d1f35860942ff20fd39d",
+      "action": "suppress_closing_soon"
+    },
+    {
+      "event_id": "bdfb184b2e69e72b4287",
+      "action": "correct_current_new_snapshot"
+    }
+  ]
+}

@@ -349,14 +349,22 @@ class ScheduledHistory(unittest.TestCase):
         self.assertIn('no complete candidate', str(raised.exception))
 
     def test_started_correction_without_evidence_cannot_be_ignored(self):
-        for conclusion in ('success', 'failure', 'cancelled', None):
-            with self.subTest(conclusion=conclusion):
-                self.jobs['200'] = [{'name': name, 'conclusion': 'skipped'} for name in ('generate', 'assemble')]
-                self.jobs['200'].append({'name': 'program-area-revalidation', 'conclusion': conclusion})
-                with self.assertRaises(scheduled.Hold):
-                    self.discover()
-        self.jobs['200'][-1]['conclusion'] = 'skipped'
+        for name in ('program-area-revalidation', 'catalog-source-recovery', 'catalog-access-correction'):
+            for conclusion in ('success', 'failure', 'cancelled', None):
+                with self.subTest(producer=name, conclusion=conclusion):
+                    self.jobs['200'] = [{'name': job, 'conclusion': 'skipped'} for job in ('generate', 'assemble')]
+                    self.jobs['200'].append({'name': name, 'conclusion': conclusion})
+                    with self.assertRaises(scheduled.Hold):
+                        self.discover()
+                    self.assertEqual(self.guard_push()['stage'], 'noop')
+            self.jobs['200'][-1]['conclusion'] = 'skipped'
+            self.assertIsNone(self.discover())
+
+    def test_all_three_skipped_correction_jobs_preserve_no_owner_planning(self):
+        self.jobs['200'].extend({'name': name, 'conclusion': 'skipped'} for name in
+            ('program-area-revalidation', 'catalog-source-recovery', 'catalog-access-correction'))
         self.assertIsNone(self.discover())
+        self.assertEqual(self.guard_push()['stage'], 'generate')
 
     def test_prior_rerun_missing_earlier_attempt_evidence_holds(self):
         self.runs[0]['run_attempt'] = 2
@@ -394,6 +402,112 @@ class ScheduledHistory(unittest.TestCase):
         with patch.object(scheduled, 'MAX_PAGES', 2), self.assertRaisesRegex(scheduled.Hold, 'bounded recovery'):
             self.discover()
         self.assertEqual(self.api.call_count, 2)
+
+
+class AccessParentSupersession(unittest.TestCase):
+    def setUp(self):
+        from tools import catalog_access_correction as access
+        self.access = access
+        self.run = {'id': access.RUN, 'run_attempt': access.ATTEMPT, 'head_sha': access.EVENT_SHA,
+                    'head_branch': 'main', 'path': scheduled.WORKFLOW, 'event': 'workflow_dispatch',
+                    'status': 'completed', 'conclusion': 'failure'}
+        self.artifacts = [{'id': ident, 'name': name, 'digest': 'sha256:' + digest, 'expired': False}
+                          for ident, name, digest in access.ARTIFACTS.values()]
+        self.child = {'generation_run_id': '36896442720', 'derived_from_candidate': access.PARENT,
+                      'source_recovery': {'affected_generation': {'generation_run_id': str(access.RUN),
+                          'generation_run_attempt': str(access.ATTEMPT), 'generation_sha': access.EVENT_SHA}},
+                      'access_correction': {'version': access.VERSION, 'parent_candidate': access.PARENT,
+                          'parent_run': access.RUN, 'parent_manifest_sha256': access.MANIFEST_SHA,
+                          'affected_generation': {'generation_run_id': '40000000000'}}}
+        self.seal()
+        self.git = patch.object(c, 'git', side_effect=self.git_read).start()
+        self.addCleanup(patch.stopall)
+
+    def seal(self):
+        self.child.pop('candidate_id', None)
+        self.child['candidate_id'] = c.digest(c.encoded(self.child))
+        self.pointer = {'candidate_id': self.child['candidate_id'], 'artifact_run': '40000000000'}
+
+    def git_read(self, root, *args):
+        if args[0] == 'log':
+            return 'published-revision'
+        return json.dumps(self.pointer if args[-1].endswith('candidate-source.json') else self.child)
+
+    def superseded(self):
+        return scheduled._published_access_supersedes(Path('unused'), self.run, self.artifacts)
+
+    def test_exact_published_child_retires_only_its_unchanged_parent(self):
+        self.assertTrue(self.superseded())
+        self.run['id'] += 1
+        self.assertFalse(self.superseded())
+
+    def test_runtime_descendant_does_not_hide_the_published_immediate_correction(self):
+        from copy import deepcopy
+        descendant = deepcopy(self.child)
+        descendant['derived_from_candidate'] = self.child['candidate_id']
+        descendant.pop('candidate_id')
+        descendant['candidate_id'] = c.digest(c.encoded(descendant))
+        def read(root, *args):
+            if args[0] == 'log':
+                return 'runtime-revision\npublished-revision'
+            if args[-1].startswith('runtime-revision:'):
+                return json.dumps({'artifact_run': '40500000000', 'candidate_id': descendant['candidate_id']}
+                    if args[-1].endswith('candidate-source.json') else descendant)
+            return self.git_read(root, *args)
+        self.git.side_effect = read
+        self.assertTrue(self.superseded())
+
+    def test_absent_publication_and_unrelated_child_do_not_retire_parent(self):
+        self.git.side_effect = lambda root, *args: '' if args[0] == 'log' else '{}'
+        self.assertFalse(self.superseded())
+        self.git.side_effect = self.git_read
+        self.child['access_correction']['parent_candidate'] = 'c' * 64
+        self.seal()
+        self.assertFalse(self.superseded())
+
+    def test_later_attempt_active_run_or_changed_origin_keep_recovery_owner(self):
+        for key, value in [('run_attempt', 2), ('run_attempt', '1'), ('status', 'in_progress'),
+                           ('head_sha', 'f' * 40), ('event', 'push'), ('conclusion', 'success')]:
+            original = self.run[key]
+            self.run[key] = value
+            self.assertFalse(self.superseded(), key)
+            self.run[key] = original
+
+    def test_artifact_replacement_expiry_missing_receipt_and_new_reservation_fail_closed(self):
+        for key, value in [('id', 1), ('digest', 'sha256:' + '0' * 64), ('expired', True)]:
+            original = self.artifacts[0][key]
+            self.artifacts[0][key] = value
+            self.assertFalse(self.superseded(), key)
+            self.artifacts[0][key] = original
+        receipt = self.artifacts.pop()
+        self.assertFalse(self.superseded())
+        self.artifacts.append(receipt)
+        self.artifacts.append({'name': 'generation-spend-reservation-' + str(self.access.RUN) + '-1'})
+        self.assertFalse(self.superseded())
+        self.artifacts[-1] = {'name': 'candidate-' + 'e' * 64}
+        self.assertFalse(self.superseded())
+
+    def test_invalid_published_identity_or_receipt_is_not_supersession(self):
+        self.child['generation_run_id'] = 'bad'
+        with self.assertRaises(scheduled.Hold):
+            self.superseded()
+        self.child['generation_run_id'] = '36896442720'
+        self.child['access_correction']['parent_manifest_sha256'] = 'f' * 64
+        self.seal()
+        with self.assertRaises(scheduled.Hold):
+            self.superseded()
+
+    def test_prior_generation_skips_only_authenticated_superseded_candidate(self):
+        boundary = {'id': 36896442720}
+        batches = {'actions/workflows/refresh-opportunities.yml/runs?branch=main': [self.run, boundary],
+                   'actions/runs/' + str(self.access.RUN) + '/artifacts': self.artifacts}
+        with patch.object(scheduled, '_published', return_value={(self.pointer['artifact_run'], self.pointer['candidate_id'])}), \
+             patch.object(scheduled, '_pages', side_effect=lambda repository, path, key: iter([batches[path]])):
+            environment = ENV | {'GITHUB_RUN_ID': '41000000000'}
+            self.assertIsNone(scheduled.prior_generation(Path('unused'), environment, {'generation_run_id': '36896442720'}))
+            self.run['run_attempt'] = 2
+            self.assertEqual(scheduled.prior_generation(Path('unused'), environment, {'generation_run_id': '36896442720'}),
+                             (str(self.access.RUN), self.access.PARENT))
 
 
 if __name__ == '__main__':
