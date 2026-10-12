@@ -35,6 +35,36 @@ const canonicalValue = value => Array.isArray(value) ? value.map(canonicalValue)
     ? Object.fromEntries(Object.keys(value).sort().map(key => [key, canonicalValue(value[key])])) : value;
 const valueHash = value => digest(JSON.stringify(canonicalValue(value)));
 
+function evidenceMetrics(records) {
+  const current = records.filter(record => record.document_evidence_status === 'current');
+  const facts = current.flatMap(record => record.document_evidence?.facts || []);
+  return {
+    document_current_count: current.length,
+    document_pending_count: records.filter(record => record.document_evidence_status === 'pending').length,
+    document_failed_count: records.filter(record => record.document_evidence_status === 'failed').length,
+    citation_fact_count: facts.length,
+    document_deadline_count: facts.filter(fact => fact.type === 'deadline').length,
+    limited_submission_review_count: facts.filter(fact => fact.type === 'limited_submission').length,
+    review_queue_count: current.reduce((total, record) => total + (record.document_evidence?.review_queue || []).length, 0),
+    changed_document_count: current.filter(record => Boolean(record.document_evidence?.document?.changed_since_previous)).length,
+  };
+}
+
+function correctEvidenceDiagnostics(before, expected, pins) {
+  require(pins && same(Object.keys(pins).sort(), ['after', 'before']), 'fixed_evidence_diagnostics');
+  const original = evidenceMetrics(before.opportunities), corrected = evidenceMetrics(expected.opportunities);
+  require(same(canonicalValue(pins.before), canonicalValue(original))
+    && same(canonicalValue(pins.after), canonicalValue(corrected)), 'evidence_diagnostic_pins');
+  const diagnostics = expected.diagnostics?.document_evidence;
+  require(diagnostics && Object.entries(original).every(([key, count]) => diagnostics[key] === count),
+    'original_evidence_diagnostics');
+  for (const [key, count] of Object.entries(corrected)) {
+    if (count === original[key]) continue;
+    require(['document_current_count', 'review_queue_count'].includes(key), 'bounded_evidence_diagnostics');
+    diagnostics[key] = count;
+  }
+}
+
 function invalidatePublicEvidence(record, pin) {
   require(pin && same(Object.keys(pin).sort(), ['after_sha256', 'before_sha256', 'changed_fields'])
     && [pin.before_sha256, pin.after_sha256].every(value => /^[a-f0-9]{64}$/.test(value))
@@ -102,8 +132,10 @@ export function verifyUrlPayload(name, before, after, policy) {
   }
   const admitted = Object.fromEntries(Object.entries(policy.payloads[name].affected_items).map(([id, value]) => [id, value.url_leaf_count]));
   require(same(Object.entries(changed).sort(), Object.entries(admitted).sort()), 'exact_url_inventory');
-  if (name === CATALOG)
+  if (name === CATALOG) {
     require(same(invalidated.sort(), Object.keys(invalidations).sort()), 'exact_evidence_inventory');
+    correctEvidenceDiagnostics(before, expected, policy.evidence_diagnostics);
+  }
   require(same(after, expected), 'exact_url_only_payload');
 }
 

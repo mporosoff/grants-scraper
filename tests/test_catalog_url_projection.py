@@ -36,10 +36,20 @@ class UrlProjectionTests(unittest.TestCase):
                          'changed_at': self.stamp, 'record': record(url)},
                         {'id': 'other-event', 'type': 'amended', 'changed_at': self.stamp, 'record': deepcopy(other)}]}}
         self.before, self.after = data(self.old), data(self.new)
+        counts = dict.fromkeys(a.EVIDENCE_COUNTS, 0)
+        self.historical_metrics = {'refreshed_count': 33, 'not_modified_count': 2, 'failed_request_count': 10,
+            'failures': [{'opportunity_id': 'other', 'error': 'HTTPError'}], 'remaining_update_count': 586,
+            'archived_cache_count': 0, 'parser_recovery': {'source_requests': 45, 'reparsed_from_structure': 7,
+                'pending_records': 473, 'withheld_facts': 39, 'structure_cache': {'hits': 8, 'writes': 33}},
+            'subtopics': {'subtopic_record_count': 401, 'classifier_run': {'api_requests': 0}},
+            'processing': {'status': 'complete', 'deferred_count': 0}}
+        for values in (self.before, self.after):
+            values[a.PAYLOADS[0]]['diagnostics']['document_evidence'] = counts | deepcopy(self.historical_metrics)
         self.evidence = {'schema_version': 1, 'kind': 'url', 'candidate_id': a.PARENT_ID,
                          'candidate_manifest_sha256': a.MANIFEST_SHA, 'original_generated_at': self.stamp,
                          'record_count': 2, 'url_replacements': {self.old: self.new}, 'evidence_invalidations': {},
-                         'preserved_input_hashes': {name: 'a' * 64 for name in a.PRESERVED}, 'payloads': {}}
+                         'preserved_input_hashes': {name: 'a' * 64 for name in a.PRESERVED}, 'payloads': {},
+                         'evidence_diagnostics': {'before': dict(counts), 'after': dict(counts)}}
         for name in a.PAYLOADS:
             if name == a.PAYLOADS[0]: old, new, ident = self.before[name]['opportunities'][0], self.after[name]['opportunities'][0], 'nyserda:OSWPON26-1'
             elif name == a.PAYLOADS[1]: old, new, ident = self.before[name]['sources']['nyserda']['records'][0], self.after[name]['sources']['nyserda']['records'][0], 'nyserda:OSWPON26-1'
@@ -91,7 +101,8 @@ class UrlProjectionTests(unittest.TestCase):
         url_corrected = project(self.after[a.PAYLOADS[0]]['opportunities'][0], date(2026, 10, 12))
         for row in (old, url_corrected):
             row.update(document_evidence_status='current', document_evidence_checked_at=self.stamp,
-                       document_evidence={'facts': [], 'document': {'url': 'https://portal.nyserda.ny.gov/PortalLoginPage',
+                       document_evidence={'facts': [], 'review_queue': [{'type': 'parser_pending'}, {'type': 'parser_pending'}],
+                                          'document': {'url': 'https://portal.nyserda.ny.gov/PortalLoginPage',
                                                                     'sha256': 'b' * 64}},
                        document_search_text=None, submission_requirements=[], document_status_signals=[])
         expected = deepcopy(url_corrected)
@@ -99,6 +110,8 @@ class UrlProjectionTests(unittest.TestCase):
         expected['document_evidence'] = None
         for key in ('document_evidence_checked_at', 'submission_requirements', 'document_status_signals'):
             expected.pop(key)
+        self.before[a.PAYLOADS[0]]['diagnostics']['document_evidence'].update(document_current_count=1, review_queue_count=2)
+        self.evidence['evidence_diagnostics']['before'].update(document_current_count=1, review_queue_count=2)
         self.before[a.PAYLOADS[0]]['opportunities'][0] = old
         self.after[a.PAYLOADS[0]]['opportunities'][0] = expected
         pin = {'before_sha256': a.value_hash(url_corrected), 'after_sha256': a.value_hash(expected),
@@ -180,6 +193,41 @@ class UrlProjectionTests(unittest.TestCase):
         pin['before_sha256'] = a.value_hash(changed)
         with self.assertRaisesRegex(ValueError, 'exact_evidence_invalidation'):
             a.invalidate_public_evidence(changed, cache['records'][identifier], pin, self.evidence['url_replacements'])
+
+    def test_all_current_summary_counts_match_records_without_rewriting_run_history(self):
+        _, _, cache = self.evidence_case()
+        before = deepcopy(self.before[a.PAYLOADS[0]])
+        actual, _ = a.corrected_payload(a.PAYLOADS[0], before, self.evidence, cache=cache)
+        metrics = actual['diagnostics']['document_evidence']
+        self.assertEqual({key: metrics[key] for key in a.EVIDENCE_COUNTS}, dict.fromkeys(a.EVIDENCE_COUNTS, 0))
+        self.assertEqual({key: value for key, value in metrics.items() if key not in a.EVIDENCE_COUNTS}, self.historical_metrics)
+        self.assertEqual({key for key in metrics if metrics[key] != before['diagnostics']['document_evidence'][key]},
+                         {'document_current_count', 'review_queue_count'})
+        self.assertEqual(actual['generated_at'], before['generated_at'])
+        self.assertEqual(actual['diagnostics']['source_checked_at'], self.stamp)
+        self.assertEqual(before, self.before[a.PAYLOADS[0]])
+
+    def test_stale_original_summary_and_wrong_recount_pins_fail_closed(self):
+        _, _, cache = self.evidence_case()
+        for key in ('document_current_count', 'review_queue_count', 'citation_fact_count'):
+            before = deepcopy(self.before[a.PAYLOADS[0]])
+            before['diagnostics']['document_evidence'][key] += 1
+            evidence = deepcopy(self.evidence)
+            evidence['payloads'][a.PAYLOADS[0]]['before_sha256'] = a.value_hash(before)
+            with self.assertRaisesRegex(ValueError, 'exact_evidence_diagnostics'):
+                a.corrected_payload(a.PAYLOADS[0], before, evidence, cache=cache)
+        for phase in ('before', 'after'):
+            evidence = deepcopy(self.evidence); evidence['evidence_diagnostics'][phase]['document_failed_count'] = 1
+            with self.assertRaisesRegex(ValueError, 'exact_evidence_diagnostics'):
+                a.corrected_payload(a.PAYLOADS[0], self.before[a.PAYLOADS[0]], evidence, cache=cache)
+
+    def test_summary_policy_requires_complete_eight_current_counters_only(self):
+        for mutate in (lambda value: value.pop('changed_document_count'),
+                       lambda value: value.update(refreshed_count=0),
+                       lambda value: value.update(document_current_count=True)):
+            evidence = deepcopy(self.evidence); mutate(evidence['evidence_diagnostics']['after'])
+            with self.assertRaisesRegex(ValueError, 'fixed_evidence_diagnostics'):
+                a.corrected_payload(a.PAYLOADS[0], self.before[a.PAYLOADS[0]], evidence)
 
     def fixture(self, directory):
         parent = Path(directory) / 'files'

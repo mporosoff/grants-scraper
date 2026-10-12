@@ -16,6 +16,9 @@ PAYLOADS = ('data/opportunities.js', 'data/source_records.json', 'feeds/changes.
 PRESERVED = ('data/document_evidence.json', 'data/link_health.json')
 INVALIDATED_FIELDS = ('document_evidence', 'document_evidence_checked_at', 'document_evidence_status',
                       'document_status_signals', 'submission_requirements')
+EVIDENCE_COUNTS = ('document_current_count', 'document_pending_count', 'document_failed_count',
+                   'citation_fact_count', 'document_deadline_count', 'limited_submission_review_count',
+                   'review_queue_count', 'changed_document_count')
 BROKEN = re.compile(r'https://portal\.nyserda\.ny\.gov/CORE_Solicitation_Detail_Page\? SolicitationId=[A-Za-z0-9]{18}')
 
 
@@ -35,6 +38,11 @@ def fixed_policy(evidence):
         identifier.startswith('nyserda:') and item.get('changed_fields') == list(INVALIDATED_FIELDS)
         and all(re.fullmatch(r'[0-9a-f]{64}', item.get(key, '')) for key in ('before_sha256', 'after_sha256'))
         for identifier, item in invalidations.items()), 'fixed_evidence_invalidations')
+    diagnostics = evidence.get('evidence_diagnostics')
+    require(isinstance(diagnostics, dict) and set(diagnostics) == {'before', 'after'}
+            and all(isinstance(values, dict) and set(values) == set(EVIDENCE_COUNTS)
+                    and all(type(value) is int and value >= 0 for value in values.values())
+                    for values in diagnostics.values()), 'fixed_evidence_diagnostics')
     replacements = evidence['url_replacements']
     require(bool(replacements) and all(BROKEN.fullmatch(old)
             and new == old.replace('? ', '?', 1) for old, new in replacements.items()), 'exact_url_normalization')
@@ -144,6 +152,22 @@ def corrected_payload(name, before, evidence, *, cache=None):
             proof[identifier]['after_sha256'] = value_hash(record)
             pending.remove(identifier)
         require(not pending, 'complete_evidence_invalidations')
+        # These eight values describe the public records, unlike acquisition,
+        # retry and parser metrics, which attest the retained original run.
+        from scripts.extract_document_evidence import document_metrics
+        counts = lambda rows: {key: value for key, value in document_metrics(rows, {}, 0, 0, []).items()
+                               if key in EVIDENCE_COUNTS}
+        prior_counts, current_counts = counts(before['opportunities']), counts(after['opportunities'])
+        diagnostics = before['diagnostics']['document_evidence']
+        pinned = evidence['evidence_diagnostics']
+        require(prior_counts == pinned['before']
+                and {key: diagnostics.get(key) for key in EVIDENCE_COUNTS} == prior_counts
+                and current_counts == pinned['after'], 'exact_evidence_diagnostics')
+        require({key for key in EVIDENCE_COUNTS if prior_counts[key] != current_counts[key]}
+                <= {'document_current_count', 'review_queue_count'}, 'bounded_evidence_diagnostic_changes')
+        for key in EVIDENCE_COUNTS:
+            if prior_counts[key] != current_counts[key]:
+                after['diagnostics']['document_evidence'][key] = current_counts[key]
     require(value_hash(after) == item['after_sha256'] and proof == item['affected_items'], 'exact_url_only_projection')
     return after, proof
 
@@ -192,5 +216,6 @@ def projection(parent_root, audit_at):
                      'payloads': proofs, 'retained_record_count': len(catalog['opportunities']),
                      'preserved_acquisition_hashes': evidence['preserved_input_hashes'],
                      'evidence_invalidations': evidence['evidence_invalidations'],
+                     'evidence_diagnostics': evidence['evidence_diagnostics'],
                      'output_hashes': {name: c.digest(raw) for name, raw in sorted(outputs.items())},
                      'source_requests': 0, 'provider_requests': 0}

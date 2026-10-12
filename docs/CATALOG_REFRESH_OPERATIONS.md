@@ -195,3 +195,11 @@ retire; an unpublished or unrelated sibling, changed attempt, missing/expired
 artifact, or new spend reservation retains the hold. The normal refresh workflow
 stays enabled. Rehearse the existing no-fetch notice projection and full corpus
 checks before requesting the next protected validation run.
+
+The public evidence summary is projected from the corrected published records as
+part of the same batch. All eight record-derived counters are checked against
+the original and corrected records: current evidence changes from 705 to 666 and
+review-queue items from 1,414 to 1,364; the other six counters stay exact. The
+historical acquisition, failure, parser, subtopic, remaining-work and processing
+metrics are not recomputed from a zero-fetch replay. In particular, two retained
+failed acquisitions remain represented as failed in the published records.

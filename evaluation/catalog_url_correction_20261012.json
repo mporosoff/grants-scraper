@@ -63,7 +63,7 @@
   "payloads": {
     "data/opportunities.js": {
       "before_sha256": "df590200564cbf1e97660bd1f269675dd547d9970e5583ce08883205a3af3f1a",
-      "after_sha256": "c3e5c5d620c3bb3a39d91fcb6441003e18ecda036e80cd0d49bf59493ce56102",
+      "after_sha256": "2330c52f2f4d4805880d0bfbaef6c2ce16af5e2760f3dee41185debdb99ffb64",
       "affected_items": {
         "nyserda:PON6201": {
           "before_sha256": "8a321bcf083350c6b454b1b4675502dd380681b3bdbedbdcbe86795f8b6a82b1",
@@ -1016,6 +1016,28 @@
         "document_status_signals",
         "submission_requirements"
       ]
+    }
+  },
+  "evidence_diagnostics": {
+    "before": {
+      "document_current_count": 705,
+      "document_pending_count": 528,
+      "document_failed_count": 39,
+      "citation_fact_count": 3173,
+      "document_deadline_count": 1004,
+      "limited_submission_review_count": 23,
+      "review_queue_count": 1414,
+      "changed_document_count": 299
+    },
+    "after": {
+      "document_current_count": 666,
+      "document_pending_count": 528,
+      "document_failed_count": 39,
+      "citation_fact_count": 3173,
+      "document_deadline_count": 1004,
+      "limited_submission_review_count": 23,
+      "review_queue_count": 1364,
+      "changed_document_count": 299
     }
   }
 }
