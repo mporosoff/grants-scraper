@@ -179,6 +179,7 @@ jobs:
         id: additional-sources
         continue-on-error: true
         env:
+          SAM_API_KEY: ${{ secrets.SAM_API_KEY }}
           VPR_IMAP_HOST: imap.gmail.com
           VPR_IMAP_USER: ${{ secrets.VPR_IMAP_USER }}
           VPR_IMAP_PASS: ${{ secrets.VPR_IMAP_PASS }}
