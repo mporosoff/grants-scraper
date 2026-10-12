@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml</id>
-  <updated>2026-09-30T16:29:01Z</updated>
+  <updated>2026-10-08T19:07:27Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Technology Development Program</title>
@@ -59,6 +59,15 @@
     <category term="Public health"/>
     <category term="Technology development"/>
     <summary>National Institutes of Health | Estimated Application 2027-10-14 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting partnerships between academic (or small business) investigators and one or more industrial partner(s) for translational development of a diagnostic test that has demonstrated proof-of-concept. Novel diagnostics are needed to implement treatment strategies, evaluate vaccines and identify inf…</summary>
+  </entry>
+  <entry>
+    <title>HIV Prevention and Alcohol (R61/R33 Clinical Trials Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/364013"/>
+    <id>urn:funding-finder:grants-gov:364013</id>
+    <updated>2027-07-07T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Technology development"/>
+    <summary>National Institutes of Health | Estimated Application 2027-09-07 | This Notice of Funding Opportunity (NOFO) uses a R61/R33 Phased Innovation Award to support milestone-driven research that advances innovative HIV prevention interventions from development and feasibility testing to larger-scale efficacy, effectiveness, implementation, and dissemination studies. The R61 phase will support the development, refinement, adaptation, and pilot testing of novel or enhan…</summary>
   </entry>
   <entry>
     <title>Somatic Mosaicism across Human Tissues (SMaHT) Program: Experimental and Computational Technology Development (RM1 Clinical Trial Not Allowed)</title>
@@ -286,6 +295,65 @@
     <summary>Administration for Community Living | Estimated Application 2026-12-14 | The purpose of the Field Initiated Projects program is to generate new knowledge through research or to develop methods, products, procedures, or technologies -- to maximize the full inclusion and integration into society, employment, independent living, family/caregiver support, and economic and self-sufficiency of people with disabilities, especially people with disabilities who have the greates…</summary>
   </entry>
   <entry>
+    <title>Genesis Mission Graduate Fellowship Pilot</title>
+    <link href="https://www.grants.gov/search-results-detail/364033"/>
+    <id>urn:funding-finder:grants-gov:364033</id>
+    <updated>2026-10-08T00:00:00Z</updated>
+    <author><name>Office of Science</name></author>
+    <category term="Education and workforce"/>
+    <category term="Technology development"/>
+    <summary>Office of Science | Application 2027-01-12 | American scientists and engineers will power the super intelligence (SI) revolution in science and innovation through the Genesis Mission. DOE SC hereby invites applications from United States (U.S.) Institutions of Higher Education and domestic doctoral-granting institutions to develop and demonstrate the effectiveness of novel four-year doctoral training pilots with dual competency in SI and ano…</summary>
+  </entry>
+  <entry>
+    <title>HEAL Initiative: Integrative Management of chronic Pain and OUD for Whole Recovery (IMPOWR) - Building Engagement, Assistance, Capacity, Outreach, and Networks (BEACON) Center (U2C Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/360366"/>
+    <id>urn:funding-finder:grants-gov:360366</id>
+    <updated>2026-10-06T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Education and workforce"/>
+    <category term="Public health"/>
+    <category term="Technology development"/>
+    <summary>National Institutes of Health | Application 2027-01-26 | The National Institutes of Health (NIH) intends to renew the Integrative Management of chronic Pain and OUD for Whole Recovery (IMPOWR) research network. This renewal consists of individual research projects, which will be supported by a single Coordination Center. This network is intended to test new innovations that integrate evidence based treatments for chronic pain (CP) and opioid use disorde…</summary>
+  </entry>
+  <entry>
+    <title>Small Business Innovation Research and Small Business Technology Transfer Programs Phase II</title>
+    <link href="https://www.grants.gov/search-results-detail/364020"/>
+    <id>urn:funding-finder:grants-gov:364020</id>
+    <updated>2026-10-01T00:00:00Z</updated>
+    <author><name>National Institute of Food and Agriculture</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Technology development"/>
+    <summary>National Institute of Food and Agriculture | Application 2026-11-17 | The USDA SBIR/STTR programs, Assistance Listing number 10.212, support scientific excellence and technological innovation through investment of Federal research funds to build a strong national economy by stimulating technological innovation in the private sector; strengthening the role of small business in meeting Federal research and development needs; and increasing the commercial application o…</summary>
+  </entry>
+  <entry>
+    <title>Small Business Innovation Research / Small Business Technology Transfer Phase I, Phase II, Fast-Track Programs SBIR/STTR: Developing Deep Technologies that Advance U.S. Competitiveness and Security</title>
+    <link href="https://www.nsf.gov/funding/opportunities/small-business-innovation-research-small-business-technology/nsf26-510"/>
+    <id>urn:funding-finder:national-science-foundation:nsf-funding%3Ahttps%3A%2F%2Fwww.nsf.gov%2Ffunding%2Fopportunities%2Fsmall-business-innovation-research-small-business-technology%2Fnsf26-510</id>
+    <updated>2026-09-30T00:00:00Z</updated>
+    <author><name>National Science Foundation</name></author>
+    <category term="Technology development"/>
+    <summary>National Science Foundation | Application 2026-11-04 | Full Proposal Deadline Date: November 4, 2026 Program Guidelines: NSF 26-510 NSF invests in scientific discoveries, technological breakthroughs, and transformative innovations that strengthen economic growth, enhance security, and improve the lives of Americans and people around the world. In support of this mission, NSF is relaunching its ... More at https://www.nsf.gov/funding/opportunities This…</summary>
+  </entry>
+  <entry>
+    <title>Dairy Business Innovation Initiatives Program (DBI) Fiscal Year 2026</title>
+    <link href="https://www.grants.gov/search-results-detail/364006"/>
+    <id>urn:funding-finder:grants-gov:364006</id>
+    <updated>2026-09-30T00:00:00Z</updated>
+    <author><name>Agricultural Marketing Service</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Technology development"/>
+    <summary>Agricultural Marketing Service | Application 2026-12-01 | The U.S. Department of Agriculture (USDA), Agricultural Marketing Service (AMS), requests applications for fiscal year (FY) 2026 from existing initiatives of the Dairy Business Innovation (DBI) Initiatives Program: the California State University Fresno Foundation, the University of Tennessee, the Vermont Agency of Agriculture, Food and Markets, and the University of Wisconsin. These initiatives s…</summary>
+  </entry>
+  <entry>
+    <title>Simulation-augmented, real-time Platform Adaptive Seamless Trials (SURPASS)</title>
+    <link href="https://arpa-h.gov/explore-funding/programs/surpass"/>
+    <id>urn:funding-finder:arpa-h:arpa-h%3Asurpass</id>
+    <updated>2026-09-30T00:00:00Z</updated>
+    <author><name>Advanced Research Projects Agency for Health (ARPA-H)</name></author>
+    <category term="Technology development"/>
+    <summary>Advanced Research Projects Agency for Health (ARPA-H) | Posted | Current ARPA-H program. SURPASS | ARPA-H (function(w, d, s, l, i){w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&amp;l='+l:''; j.async=true; j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j, f); })(window, document,'script','dataLayer','GTM-W5GM3DT9'); win…</summary>
+  </entry>
+  <entry>
     <title>Limited Competition: NIH Research Evaluation and Commercialization Hubs (REACH) (SB0 Clinical Trial Optional)</title>
     <link href="https://www.grants.gov/search-results-detail/362965"/>
     <id>urn:funding-finder:grants-gov:362965</id>
@@ -330,17 +398,6 @@
     <summary>Office of Science | Application 2026-10-19 | The Department of Energy (DOE) recently announced the establishment of the Quantum Genesis initiative to develop and deploy the world’s first fault-tolerant, scientifically relevant quantum computing (SRQC) capability for research and development. The Department seeks to realize this bold ambition through the Quantum Genesis Q Competition (herein, the Q Competition), a first of its kind effort to …</summary>
   </entry>
   <entry>
-    <title>Comprehensive Organ System Modeling in Outer Space (COSMOS)</title>
-    <link href="https://arpa-h.gov/explore-funding/initiatives-and-sprints/cosmos"/>
-    <id>urn:funding-finder:arpa-h:arpa-h%3Acosmos</id>
-    <updated>2026-09-11T00:00:00Z</updated>
-    <author><name>Advanced Research Projects Agency for Health (ARPA-H)</name></author>
-    <category term="Technology development"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Advanced Research Projects Agency for Health (ARPA-H) | Application 2026-10-07 | Current ARPA-H initiative. COSMOS | ARPA-H (function(w, d, s, l, i){w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&amp;l='+l:''; j.async=true; j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j, f); })(window, document,'script','dataLayer','GTM-W5GM3DT9'); w…</summary>
-  </entry>
-  <entry>
     <title>Restorative &amp; health-Enhancing Sleep Time (REST)</title>
     <link href="https://arpa-h.gov/explore-funding/programs/rest"/>
     <id>urn:funding-finder:arpa-h:arpa-h%3Arest</id>
@@ -364,7 +421,7 @@
     <category term="Materials science"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
-    <summary>Advanced Research Projects Agency for Health (ARPA-H) | Preapplication 2026-10-30 | Current ARPA-H program. UNIQUE | ARPA-H (function(w, d, s, l, i){w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&amp;l='+l:''; j.async=true; j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j, f); })(window, document,'script','dataLayer','GTM-W5GM3DT9'); wind…</summary>
+    <summary>Advanced Research Projects Agency for Health (ARPA-H) | Preapplication 2026-10-29 | Current ARPA-H program. UNIQUE | ARPA-H (function(w, d, s, l, i){w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&amp;l='+l:''; j.async=true; j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j, f); })(window, document,'script','dataLayer','GTM-W5GM3DT9'); wind…</summary>
   </entry>
   <entry>
     <title>Emerging Health Innovators (EHI)</title>
@@ -395,30 +452,6 @@
     <category term="Agriculture and food"/>
     <category term="Technology development"/>
     <summary>Rural Business-Cooperative Service | Application 2027-01-31 | The primary objective of the program is to provide grants to Agriculture Innovation Centers that will provide technical assistance to agricultural producers to market value-added agricultural products.</summary>
-  </entry>
-  <entry>
-    <title>Small Business Innovation Research / Small Business Technology Transfer Phase I, Phase II, Fast-Track Programs SBIR/STTR: Developing Deep Technologies that Advance U.S. Competitiveness and Security | NSF 26-510</title>
-    <link href="https://www.nsf.gov/funding/opportunities/small-business-innovation-research-small-business-technology"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3ANSF26-510</id>
-    <updated>2026-09-07T00:00:00Z</updated>
-    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <category term="Technology development"/>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Application 2026-11-04 | NSF seeks SBIR/STTR proposals that represent success in three criteria: Intellectual Merit, Broader Impacts, and Commercial Potential. **
-STTR proposals require that the startup issue a subaward to a not-for-profit research institution (RI) a minimum of 30% and can receive a maximum of 60% of the total project budget</summary>
-  </entry>
-  <entry>
-    <title>NSF Integrated Data Systems &amp; Services (IDSS) | NSF 25-544</title>
-    <link href="https://www.nsf.gov/funding/opportunities/idss-integrated-data-systems-services"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3ANSF25-544</id>
-    <updated>2026-09-07T00:00:00Z</updated>
-    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <category term="Technology development"/>
-    <category term="Transportation"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Application 2027-07-27 | Through this solicitation, the IDSS program is accepting proposals for three categories of projects: Category I. Development, deployment, and operation of novel national-scale integrated data systems and services, which may include interfacing
-with or leveraging other existing capabilities, systems and services, as appropriate to the project; Category II.  Transition of established smaller
-scale, …</summary>
   </entry>
   <entry>
     <title>1890 Institution Teaching, Research, and Extension Capacity Building Grants Program</title>
@@ -498,7 +531,7 @@ scale, …</summary>
     <category term="Quantum science"/>
     <category term="Data science"/>
     <category term="Artificial intelligence and machine learning"/>
-    <summary>U.S. National Science Foundation | Application 2027-02-11 | verify prerequisite | The Emerging Frontiers in Research and Innovation (EFRI) program serves a critical role in helping the NSF Directorate for Engineering focus on important emerging areas in a timely way. The EFRI program invests in potentially transformative ideas that offer the opportunity for significant shifts in foundational engineering knowledge. EFRI-funded research must have strong potential for long-term im…</summary>
+    <summary>U.S. National Science Foundation | Concept Paper 2026-11-19 | The Emerging Frontiers in Research and Innovation (EFRI) program serves a critical role in helping the NSF Directorate for Engineering focus on important emerging areas in a timely way. The EFRI program invests in potentially transformative ideas that offer the opportunity for significant shifts in foundational engineering knowledge. EFRI-funded research must have strong potential for long-term im…</summary>
   </entry>
   <entry>
     <title>Expeditions in Computing (Expeditions)</title>
@@ -523,6 +556,8 @@ scale, …</summary>
     <category term="Materials science"/>
     <category term="Technology development"/>
     <category term="Energy"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
     <summary>U.S. National Science Foundation | Posted | The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational research projects for civil, mechanical, and manufacturing innovation through the following programs: The Advanced Manufacturing, Design, and Operations (AMDO) program supports foundational research on advanced manufacturing, materials and service processes; their integration into facilities, supply ch…</summary>
   </entry>
   <entry>
@@ -534,15 +569,6 @@ scale, …</summary>
     <category term="Energy"/>
     <category term="Technology development"/>
     <summary>U.S. National Science Foundation | Posted | The U.S. National Science Foundation Directorate for Mathematical and Physical Sciences (NSF MPS) supports multiple research programs in the astronomical sciences. NSF MPS funds foundational astronomical sciences research and instrumentation focused on exploring space and advancing fundamental understanding of the universe. The programs covered by this funding opportunity are: Astronomical Science…</summary>
-  </entry>
-  <entry>
-    <title>2026 SBIR/STTR topics</title>
-    <link href="https://arpa-h.gov/explore-funding/sbir"/>
-    <id>urn:funding-finder:arpa-h:arpa-h%3Asbir</id>
-    <updated>2026-08-15T00:00:00Z</updated>
-    <author><name>Advanced Research Projects Agency for Health (ARPA-H)</name></author>
-    <category term="Technology development"/>
-    <summary>Advanced Research Projects Agency for Health (ARPA-H) | Application 2026-10-01 | verify prerequisite | Current ARPA-H small business. For Small Businesses | ARPA-H (function(w, d, s, l, i){w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&amp;l='+l:''; j.async=true; j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j, f); })(window, document,'script','dataLayer',…</summary>
   </entry>
   <entry>
     <title>ASCENT-IBO</title>
@@ -594,28 +620,6 @@ we will not consider for support include Covid-19 relat…</summary>
 a high level of innovation and creativity. The goal is to support the best young physician-scientists doing work aimed at improving the practice of cancer medicine. The Clinical Investigator Award program is specifically intended to provide outstanding…</summary>
   </entry>
   <entry>
-    <title>Innovation Grants to Nurture Initial Translational Efforts (IGNITE): Assay Development and Therapeutic Agent Identification</title>
-    <link href="https://www.grants.gov/search-results-detail/361369"/>
-    <id>urn:funding-finder:grants-gov:361369</id>
-    <updated>2026-07-30T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Neuroscience"/>
-    <category term="Technology development"/>
-    <summary>National Institutes of Health | Estimated Application 2026-09-30 | The National Institute of Neurological Disorders and Stroke, National Institute of Aging, the NIH Helping to End Addiction Long Term (HEAL) initiative, and other participating NIH Institutes/Centers (ICs) seek to support applications to develop in vitro, ex vivo or in vivo assays and conduct screening efforts with the goal of identifying and characterizing potential therapeutic agents for disorder…</summary>
-  </entry>
-  <entry>
-    <title>Innovation Grants to Nurture Initial Translational Efforts (IGNITE): Therapeutic Agent Characterization and Preclinical Efficacy Studies</title>
-    <link href="https://www.grants.gov/search-results-detail/361370"/>
-    <id>urn:funding-finder:grants-gov:361370</id>
-    <updated>2026-07-30T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Neuroscience"/>
-    <category term="Technology development"/>
-    <summary>National Institutes of Health | Estimated Application 2026-09-30 | The National Institute of Neurological Disorders and Stroke, National Institute of Aging, the NIH Helping to End Addiction Long Term (HEAL) initiative, and other participating ICs seek to support applications to conduct pharmacodynamic, pharmacokinetic, and efficacy studies to demonstrate that the proposed therapeutic agent(s) have sufficient biological activity to warrant further development as t…</summary>
-  </entry>
-  <entry>
     <title>Unlocking Dataset Value for AI-Enabled Scientific Discovery (AI Datasets)</title>
     <link href="https://www.grants.gov/search-results-detail/363268"/>
     <id>urn:funding-finder:grants-gov:363268</id>
@@ -623,20 +627,8 @@ a high level of innovation and creativity. The goal is to support the best young
     <author><name>U.S. National Science Foundation</name></author>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Technology development"/>
+    <category term="Data science"/>
     <summary>U.S. National Science Foundation | Application 2026-11-04 | This program will advance scientific community datasets to enable scientific discovery and innovation using artificial intelligence (AI) and other methods. Its goal is to increase the value that can be derived from existing scientific datasets by leveraging novel methods and artificial intelligence (AI). This will unlock new AI-driven insights. It can enable interdisciplinary research. It also ena…</summary>
-  </entry>
-  <entry>
-    <title>Middle East Regional Cooperation (MERC)</title>
-    <link href="https://www.grants.gov/search-results-detail/363070"/>
-    <id>urn:funding-finder:grants-gov:363070</id>
-    <updated>2026-07-06T00:00:00Z</updated>
-    <author><name>Assistance Coordination</name></author>
-    <category term="Technology development"/>
-    <category term="Energy"/>
-    <category term="Manufacturing"/>
-    <category term="Cybersecurity"/>
-    <category term="Water"/>
-    <summary>Assistance Coordination | Application 2026-09-30 | The Middle East Regional Cooperation (MERC) Program supports joint scientific research and innovation partnerships between the United States, Israel, and countries across the Middle East and North Africa (MENA). The program funds applied research projects that address shared regional challenges while advancing U.S. economic, technological, and strategic interests. MERC is designed to bring togethe…</summary>
   </entry>
   <entry>
     <title>Model-to-Clinic (M2C) for Precision Medicine with AI: Integrating Imaging with Multimodal Data (PRIMED-AI) (UG3/UH3, Clinical Trial Optional)</title>
@@ -650,13 +642,13 @@ a high level of innovation and creativity. The goal is to support the best young
     <summary>National Institutes of Health | Application 2026-10-19 | The overarching goal of this notice of funding opportunity (NOFO) and its companion opportunities is to establish the Precision Medicine with AI: Integrating Imaging with Multimodal Data (PRIMED-AI) Program to support development of innovative, reliable, cost-effective, and sustainable multimodal AI-based clinical decision support (CDS) tools. PRIMED-AI CDS tools are based on the integration of cl…</summary>
   </entry>
   <entry>
-    <title>Limited Competition: Growing Great Ideas: Research Education Course in Entrepreneurship and Product Development for Researchers Studying Drug Use, Drug Misuse, and Drug Addiction (UE5 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/360561"/>
-    <id>urn:funding-finder:grants-gov:360561</id>
-    <updated>2026-06-23T00:00:00Z</updated>
+    <title>GREGoRi Data Coordination and Outreach Center (U01, Clinical Trials Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/359279"/>
+    <id>urn:funding-finder:grants-gov:359279</id>
+    <updated>2026-06-18T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
-    <category term="Education and workforce"/>
+    <category term="Biology and biotechnology"/>
     <category term="Technology development"/>
-    <summary>National Institutes of Health | Application 2026-10-01 | This notice of funding opportunity (NOFO) seeks to establish a course to equip researchers studying drug use, drug misuse, and drug addiction with the skills, knowledge, and practical tools needed to translate their scientific discoveries into impactful real world solutions. The course is envisioned to focus on building capacity in product development, entrepreneurship, and innovation pathways so …</summary>
+    <summary>National Institutes of Health | Application 2026-10-30 | The Genomics Research to Elucidate the Genetics of Rare Diseases: innovation (GREGoRi) initiative seeks to accelerate a paradigm shift in rare disease diagnosis by reimagining the tools, molecular technologies and analytical approaches used to identify the causal gene(s) and/or variant(s) underlying rare genetic disorders. The purpose of this Notice of Funding Opportunity is to establish the GREGo…</summary>
   </entry>
 </feed>

@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/all.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/all.xml</id>
-  <updated>2026-09-30T16:29:01Z</updated>
+  <updated>2026-10-08T19:07:27Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -156,7 +156,7 @@
     <updated>2027-07-28T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <category term="Education and workforce"/>
-    <summary>National Institutes of Health | Estimated Application 2027-09-28 | The Institutional Development Award (IDeA) program supports biomedical research capacity building in states that have historically received low levels of NIH funding. One such program, the IDeA Clinical &amp; Translational Research (CTR) award, supports clinical and translational (C&amp;T) research capacity building to enable research on diseases and health challenges prevalent in IDeA states. Significant…</summary>
+    <summary>National Institutes of Health | Estimated Application 2027-09-28 | invitation required | The Institutional Development Award (IDeA) program supports biomedical research capacity building in states that have historically received low levels of NIH funding. One such program, the IDeA Clinical &amp; Translational Research (CTR) award, supports clinical and translational (C&amp;T) research capacity building to enable research on diseases and health challenges prevalent in IDeA states. Significant…</summary>
   </entry>
   <entry>
     <title>Small Instruments and Modern Equipment for Shared-use Biomedical Research Facilities and Resources (S15 Clinical Trial Not Allowed)</title>
@@ -165,6 +165,16 @@
     <updated>2027-07-27T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <summary>National Institutes of Health | Estimated Application 2027-09-27 | This Notice of Funding Opportunity (NOFO) invites eligible shared biomedical research facilities to buy new small instruments or scientific equipment. These facilities may include core facilities, biorepositories, model resource facilities, and other research spaces or resources that are shared by multiple researchers. The goal is to help these facilities improve, update, and operate more efficien…</summary>
+  </entry>
+  <entry>
+    <title>Collaborative Initiative on Fetal Alcohol Spectrum Disorders (CIFASD), Research Program (U19 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/364028"/>
+    <id>urn:funding-finder:grants-gov:364028</id>
+    <updated>2027-07-25T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Neuroscience"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>National Institutes of Health | Estimated Application 2027-09-25 | The National Institute on Alcohol Abuse and Alcoholism (NIAAA) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to continue the Collaborative Initiative on Fetal Alcohol Spectrum Disorders (CIFASD). CIFASD is a multidisciplinary research consortium supporting coordinated basic, clinical, translational, diagnostic, intervention, and prevention research on fetal alco…</summary>
   </entry>
   <entry>
     <title>Elucidation and Validation of the role of Transporters in the Placenta, Lactating Mammary Gland, Developing Gut, and Blood Brain Barrier</title>
@@ -245,6 +255,15 @@
     <updated>2027-07-13T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <summary>National Institutes of Health | Estimated Application 2027-10-12 | The Mentored Research Scientist Career Development Award provides support for a sustained period of protected time (up to five years) for intensive research career development under the guidance of an experienced mentor. The award is expected to prepare candidates with research doctoral degrees for future research independence.</summary>
+  </entry>
+  <entry>
+    <title>HIV Prevention and Alcohol (R61/R33 Clinical Trials Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/364013"/>
+    <id>urn:funding-finder:grants-gov:364013</id>
+    <updated>2027-07-07T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Technology development"/>
+    <summary>National Institutes of Health | Estimated Application 2027-09-07 | This Notice of Funding Opportunity (NOFO) uses a R61/R33 Phased Innovation Award to support milestone-driven research that advances innovative HIV prevention interventions from development and feasibility testing to larger-scale efficacy, effectiveness, implementation, and dissemination studies. The R61 phase will support the development, refinement, adaptation, and pilot testing of novel or enhan…</summary>
   </entry>
   <entry>
     <title>Limited Competition: Resources and Workforce Development for the Regional Biocontainment Laboratories</title>
@@ -513,7 +532,7 @@
     <updated>2027-03-25T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <category term="Education and workforce"/>
-    <summary>National Institutes of Health | Estimated Application 2027-05-25 | The Support for Research Excellence (SuRE) program aims to develop and sustain research excellence at resource-limited institutions, many of which disproportionately serve regions of the U.S. that have not historically participated in substantial NIH research, by supporting investigator-initiated research with strong student participation. A SuRE Resource Center has been established to enhance the…</summary>
+    <summary>National Institutes of Health | Estimated Application 2027-05-25 | invitation required | The Support for Research Excellence (SuRE) program aims to develop and sustain research excellence at resource-limited institutions, many of which disproportionately serve regions of the U.S. that have not historically participated in substantial NIH research, by supporting investigator-initiated research with strong student participation. A SuRE Resource Center has been established to enhance the…</summary>
   </entry>
   <entry>
     <title>Undiagnosed Diseases Network (UDN) Clinical and Data Coordinating Center</title>
@@ -546,6 +565,17 @@
     <category term="Biology and biotechnology"/>
     <category term="Technology development"/>
     <summary>National Institutes of Health | Estimated Application 2027-05-25 | NINDS intends to support a Diagnostic Research Innovation Center (DRIC) for the next phase of the Undiagnosed Diseases Network (UDN). The new Network is expected to include a Clinical and Data Coordinating Center (CDCC), geographically distributed clinical Networks of Diagnostic Excellence (NODEs), the NIH Undiagnosed Diseases Program (UDP), a DRIC, the UDN Foundation, patient advocacy organizatio…</summary>
+  </entry>
+  <entry>
+    <title>Centers for Research on Neglected Infectious Diseases</title>
+    <link href="https://www.grants.gov/search-results-detail/364027"/>
+    <id>urn:funding-finder:grants-gov:364027</id>
+    <updated>2027-03-25T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Education and workforce"/>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health | Estimated Application 2027-06-15 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting multidisciplinary research through the Centers for Research on Neglected Infectious Diseases (CReNIDs). Neglected infectious diseases (NIDs) comprise a diverse and understudied group of communicable viral, bacterial, parasitic, and fungal infections that cause substantial morbidity, mortali…</summary>
   </entry>
   <entry>
     <title>Strengthening Services to Prevent the Infectious Disease Consequences of Drug Use</title>
@@ -712,7 +742,7 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Biology and biotechnology"/>
     <category term="Neuroscience"/>
-    <summary>National Institutes of Health | Estimated Application 2027-06-01 | The National Institute of Mental Health (NIMH) intends to issue a single-source cooperative agreement award to the University of California, Santa Cruz. The award will renew the Data Resource and Administrative Coordination Center (DRACC), a component of the Scalable and Systematic Neurobiology of Psychiatric and Neurodevelopmental Disorder Risk Genes (SSPsyGene) Consortium. The long-term goal of …</summary>
+    <summary>National Institutes of Health | Estimated Application 2027-06-01 | invitation required | The National Institute of Mental Health (NIMH) intends to issue a single-source cooperative agreement award to the University of California, Santa Cruz. The award will renew the Data Resource and Administrative Coordination Center (DRACC), a component of the Scalable and Systematic Neurobiology of Psychiatric and Neurodevelopmental Disorder Risk Genes (SSPsyGene) Consortium. The long-term goal of …</summary>
   </entry>
   <entry>
     <title>Immune Drivers of Autoimmune Disease</title>
@@ -876,7 +906,7 @@
     <updated>2027-02-02T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <category term="Biology and biotechnology"/>
-    <summary>National Institutes of Health | Estimated Application 2027-03-10 | The DISCOVERY of Risk Factors for Type 2 Diabetes in Youth Study is a multi-center longitudinal consortium conducted across 19 clinical sites to identify risk factors and biological mechanisms driving progression to youth-onset type 2 diabetes. The study is actively recruiting and following early pubertal youth at high risk for the disease with longitudinal follow-up currently underway. The curren…</summary>
+    <summary>National Institutes of Health | Estimated Application 2027-03-10 | invitation required | The DISCOVERY of Risk Factors for Type 2 Diabetes in Youth Study is a multi-center longitudinal consortium conducted across 19 clinical sites to identify risk factors and biological mechanisms driving progression to youth-onset type 2 diabetes. The study is actively recruiting and following early pubertal youth at high risk for the disease with longitudinal follow-up currently underway. The curren…</summary>
   </entry>
   <entry>
     <title>Telehealth Nutrition Services Network Grant Program</title>
@@ -935,34 +965,5 @@
     <category term="Public health"/>
     <category term="Social and behavioral sciences"/>
     <summary>Indian Health Service | Estimated Application 2027-04-01 | The primary purpose of this program is to reduce substance abuse among American Indian and Alaska Native (AI/AN) populations by improving care coordination, expanding culturally appropriate behavioral health services, and implementing early intervention strategies for at-risk AI/AN youth. The program supports Tribal, community-driven prevention, treatment, and recovery efforts that promote cross-s…</summary>
-  </entry>
-  <entry>
-    <title>Suicide Prevention, Intervention, and Postvention</title>
-    <link href="https://www.grants.gov/search-results-detail/363496"/>
-    <id>urn:funding-finder:grants-gov:363496</id>
-    <updated>2027-02-01T00:00:00Z</updated>
-    <author><name>Indian Health Service</name></author>
-    <category term="Arts and culture"/>
-    <category term="Public health"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>Indian Health Service | Estimated Application 2027-04-01 | The primary purpose of this program is to reduce suicide among American Indian and Alaska Native (AI/AN) populations by improving care coordination, expanding culturally appropriate behavioral health services, and implementing early intervention strategies for at-risk AI/AN youth. The program supports Tribal, community-driven suicide prevention, intervention, and postvention efforts that promote c…</summary>
-  </entry>
-  <entry>
-    <title>Traumatic Brain Injury Model Systems Centers</title>
-    <link href="https://www.grants.gov/search-results-detail/363970"/>
-    <id>urn:funding-finder:grants-gov:363970</id>
-    <updated>2027-02-01T00:00:00Z</updated>
-    <author><name>Administration for Community Living</name></author>
-    <category term="Neuroscience"/>
-    <summary>Administration for Community Living | Estimated Application 2027-04-01 | The TBI Model Systems Centers conduct research that contributes to the development of and access to evidence-based TBI rehabilitation. The TBIMS Centers must generate new knowledge that can be used to improve outcomes of individuals with TBI in one or more domains identified in NIDILRR's Long Range Plan: health and function, community living and participation, and employment. TBIMS Center grants m…</summary>
-  </entry>
-  <entry>
-    <title>Tribal Epidemiology Centers</title>
-    <link href="https://www.grants.gov/search-results-detail/363492"/>
-    <id>urn:funding-finder:grants-gov:363492</id>
-    <updated>2027-02-01T00:00:00Z</updated>
-    <author><name>Indian Health Service</name></author>
-    <category term="Public health"/>
-    <summary>Indian Health Service | Estimated Application 2027-04-01 | Second cohort of TEC sites for any currently unserved Areas.</summary>
   </entry>
 </feed>
