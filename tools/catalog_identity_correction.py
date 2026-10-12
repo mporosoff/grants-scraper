@@ -181,8 +181,8 @@ def dependency_scope(root, original):
     c.verify_files(root, original['runtime_baseline'])
 
 
-def derive(parent_bundle, audit_at):
-    from tools.catalog_identity_projection import projection
+def derive_metadata(parent_bundle, audit_at, projection, *, package_kind=None):
+    """Shared deterministic rendering; each caller supplies a fixed, authenticated policy."""
     from scripts.update_catalog_docs import load_catalog, render_docs, catalog_stats, update_catalog_asset_reference
     parent = Path(parent_bundle)/'files'
     outputs, proof = projection(parent, audit_at)
@@ -202,11 +202,17 @@ def derive(parent_bundle, audit_at):
         for name, raw in outputs.items():
             path = c.checked_path(target, name); path.parent.mkdir(parents=True, exist_ok=True); path.write_bytes(raw)
         subprocess.run([shutil.which('node') or 'node', str(c.ROOT/'tools/catalog_identity_package.mjs'),
-            '--parent', str(parent), '--root', str(target), '--receipt', str(vector_receipt)],
+            '--parent', str(parent), '--root', str(target), '--receipt', str(vector_receipt)]
+            + (['--kind', package_kind] if package_kind else []),
             check=True, timeout=120, capture_output=True)
         outputs[PACKAGE_OUTPUT] = (target/PACKAGE_OUTPUT).read_bytes()
         vector = c.read_json(vector_receipt)
     return outputs, {'record_projection': proof, 'package_projection': vector}
+
+
+def derive(parent_bundle, audit_at):
+    from tools.catalog_identity_projection import projection
+    return derive_metadata(parent_bundle, audit_at, projection)
 
 
 def receipt_for(original, spending, outputs, proof, audit_at):

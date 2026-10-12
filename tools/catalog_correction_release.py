@@ -669,7 +669,10 @@ def mode(bundle):
 
 def plan():
     requested = os.environ.get('REQUESTED_STAGE', '')
-    if requested == 'catalog-identity-correction':
+    if requested == 'catalog-url-correction':
+        from tools.catalog_url_correction import plan as url_correction_plan
+        value = url_correction_plan(ROOT, dict(os.environ))
+    elif requested == 'catalog-identity-correction':
         from tools.catalog_identity_correction import plan as identity_correction_plan
         value = identity_correction_plan(ROOT, dict(os.environ))
     elif requested == 'catalog-access-correction':

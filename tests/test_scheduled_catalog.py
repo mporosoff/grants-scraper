@@ -370,7 +370,7 @@ class ScheduledHistory(unittest.TestCase):
         self.assertIn('no complete candidate', str(raised.exception))
 
     def test_started_correction_without_evidence_cannot_be_ignored(self):
-        for name in ('program-area-revalidation', 'catalog-source-recovery', 'catalog-access-correction', 'catalog-identity-correction'):
+        for name in ('program-area-revalidation', 'catalog-source-recovery', 'catalog-access-correction', 'catalog-identity-correction', 'catalog-url-correction'):
             for conclusion in ('success', 'failure', 'cancelled', None):
                 with self.subTest(producer=name, conclusion=conclusion):
                     self.jobs['200'] = [{'name': job, 'conclusion': 'skipped'} for job in ('generate', 'assemble')]
@@ -381,9 +381,9 @@ class ScheduledHistory(unittest.TestCase):
             self.jobs['200'][-1]['conclusion'] = 'skipped'
             self.assertIsNone(self.discover())
 
-    def test_all_four_skipped_correction_jobs_preserve_no_owner_planning(self):
+    def test_all_five_skipped_correction_jobs_preserve_no_owner_planning(self):
         self.jobs['200'].extend({'name': name, 'conclusion': 'skipped'} for name in
-            ('program-area-revalidation', 'catalog-source-recovery', 'catalog-access-correction', 'catalog-identity-correction'))
+            ('program-area-revalidation', 'catalog-source-recovery', 'catalog-access-correction', 'catalog-identity-correction', 'catalog-url-correction'))
         self.assertIsNone(self.discover())
         self.assertEqual(self.guard_push()['stage'], 'generate')
 
@@ -529,6 +529,146 @@ class AccessParentSupersession(unittest.TestCase):
             self.run['run_attempt'] = 2
             self.assertEqual(scheduled.prior_generation(Path('unused'), environment, {'generation_run_id': '36896442720'}),
                              (str(self.access.RUN), self.access.PARENT))
+
+
+class UrlParentSupersession(unittest.TestCase):
+    def setUp(self):
+        from tools import catalog_url_correction as url
+        self.url = url
+        self.run = {'id': url.RUN, 'run_attempt': url.ATTEMPT, 'head_sha': url.EVENT_SHA,
+                    'head_branch': 'main', 'path': scheduled.WORKFLOW, 'event': 'workflow_dispatch',
+                    'status': 'completed', 'conclusion': 'failure'}
+        self.artifacts = [{'id': ident, 'name': name, 'digest': 'sha256:' + digest, 'expired': False}
+                          for ident, name, digest in url.ARTIFACTS.values()]
+        self.child = {'generation_run_id': '38275115281', 'derived_from_candidate': url.PARENT,
+                      'identity_correction': {'affected_generation': {'generation_run_id': str(url.RUN),
+                          'generation_run_attempt': str(url.ATTEMPT), 'generation_sha': url.EVENT_SHA}},
+                      'url_correction': {'version': url.VERSION, 'parent_candidate': url.PARENT,
+                          'parent_run': url.RUN, 'parent_manifest_sha256': url.MANIFEST_SHA,
+                          'affected_generation': {'generation_run_id': '40000000000'}}}
+        self.seal()
+        self.git = patch.object(c, 'git', side_effect=self.git_read).start()
+        self.addCleanup(patch.stopall)
+
+    def seal(self):
+        self.child.pop('candidate_id', None)
+        self.child['candidate_id'] = c.digest(c.encoded(self.child))
+        self.pointer = {'candidate_id': self.child['candidate_id'], 'artifact_run': '40000000000'}
+
+    def git_read(self, root, *args):
+        if args[0] == 'log':
+            return 'published-revision'
+        return json.dumps(self.pointer if args[-1].endswith('candidate-source.json') else self.child)
+
+    def superseded(self):
+        return scheduled._published_url_supersedes(Path('unused'), self.run, self.artifacts)
+
+    def test_exact_published_child_retires_only_its_unchanged_parent(self):
+        self.assertTrue(self.superseded())
+        self.run['id'] += 1
+        self.assertFalse(self.superseded())
+
+    def test_runtime_descendant_does_not_hide_the_published_immediate_correction(self):
+        from copy import deepcopy
+        descendant = deepcopy(self.child)
+        descendant['derived_from_candidate'] = self.child['candidate_id']
+        descendant.pop('candidate_id')
+        descendant['candidate_id'] = c.digest(c.encoded(descendant))
+        def read(root, *args):
+            if args[0] == 'log':
+                return 'runtime-revision\npublished-revision'
+            if args[-1].startswith('runtime-revision:'):
+                return json.dumps({'artifact_run': '40500000000', 'candidate_id': descendant['candidate_id']}
+                    if args[-1].endswith('candidate-source.json') else descendant)
+            return self.git_read(root, *args)
+        self.git.side_effect = read
+        self.assertTrue(self.superseded())
+
+    def test_absent_publication_and_unrelated_child_do_not_retire_parent(self):
+        self.git.side_effect = lambda root, *args: '' if args[0] == 'log' else '{}'
+        self.assertFalse(self.superseded())
+        self.git.side_effect = self.git_read
+        self.child['url_correction']['parent_candidate'] = 'c' * 64
+        self.seal()
+        self.assertFalse(self.superseded())
+
+    def test_later_attempt_active_run_or_changed_origin_keep_recovery_owner(self):
+        for key, value in [('run_attempt', 2), ('run_attempt', '1'), ('status', 'in_progress'),
+                           ('head_sha', 'f' * 40), ('event', 'push'), ('conclusion', 'success')]:
+            original = self.run[key]
+            self.run[key] = value
+            self.assertFalse(self.superseded(), key)
+            self.run[key] = original
+
+    def test_artifact_replacement_expiry_missing_receipt_and_new_reservation_fail_closed(self):
+        for key, value in [('id', 1), ('digest', 'sha256:' + '0' * 64), ('expired', True)]:
+            original = self.artifacts[0][key]
+            self.artifacts[0][key] = value
+            self.assertFalse(self.superseded(), key)
+            self.artifacts[0][key] = original
+        receipt = self.artifacts.pop()
+        self.assertFalse(self.superseded())
+        self.artifacts.append(receipt)
+        self.artifacts.append({'name': 'generation-spend-reservation-' + str(self.url.RUN) + '-1'})
+        self.assertFalse(self.superseded())
+        self.artifacts[-1] = {'name': 'candidate-' + 'e' * 64}
+        self.assertFalse(self.superseded())
+
+    def test_invalid_published_identity_or_receipt_is_not_supersession(self):
+        self.child['generation_run_id'] = 'bad'
+        with self.assertRaises(scheduled.Hold):
+            self.superseded()
+        self.child['generation_run_id'] = '38275115281'
+        self.child['url_correction']['parent_manifest_sha256'] = 'f' * 64
+        self.seal()
+        with self.assertRaises(scheduled.Hold):
+            self.superseded()
+
+    def test_prior_generation_skips_only_authenticated_superseded_candidate(self):
+        boundary = {'id': 38275115281}
+        batches = {'actions/workflows/refresh-opportunities.yml/runs?branch=main': [self.run, boundary],
+                   'actions/runs/' + str(self.url.RUN) + '/artifacts': self.artifacts}
+        with patch.object(scheduled, '_published', return_value={(self.pointer['artifact_run'], self.pointer['candidate_id'])}), \
+             patch.object(scheduled, '_pages', side_effect=lambda repository, path, key: iter([batches[path]])):
+            environment = ENV | {'GITHUB_RUN_ID': '41000000000'}
+            self.assertIsNone(scheduled.prior_generation(Path('unused'), environment, {'generation_run_id': '38275115281'}))
+            self.run['run_attempt'] = 2
+            self.assertEqual(scheduled.prior_generation(Path('unused'), environment, {'generation_run_id': '38275115281'}),
+                             (str(self.url.RUN), self.url.PARENT))
+
+
+    def test_prepublication_parent_holds_automatic_push_until_exact_child_is_published(self):
+        boundary = {'id': 38275115281}
+        batches = {'actions/workflows/refresh-opportunities.yml/runs?branch=main': [self.run, boundary],
+                   'actions/runs/' + str(self.url.RUN) + '/artifacts': self.artifacts}
+        manifest = {'generation_run_id': '38275115281'}
+        manifest['candidate_id'] = c.digest(c.encoded(manifest))
+        environment = ENV | {'GITHUB_RUN_ID': '41000000000'}
+        base = {'stage': 'generate', 'reason': 'source changes require generation'}
+        with patch.object(scheduled, '_published', return_value=set()), \
+             patch.object(scheduled, '_pages', side_effect=lambda repository, path, key: iter([batches[path]])), \
+             patch.object(c, 'read_json', return_value=manifest):
+            self.git.side_effect = lambda root, *args: '' if args[0] == 'log' else '{}'
+            held = scheduled.hold_competing_generation(Path('unused'), environment, base)
+            self.assertEqual((held['stage'], held['held_stage'], held['recovery_run']),
+                             ('noop', 'generate', str(self.url.RUN)))
+            self.git.side_effect = self.git_read
+            self.assertEqual(scheduled.hold_competing_generation(Path('unused'), environment, base), base)
+
+    def test_published_child_requires_original_generation_and_exact_identity_parent_producer(self):
+        for field, value in [('generation_run_id', '38275115281'),
+                             ('generation_run_attempt', '2'), ('generation_sha', 'f' * 40)]:
+            producer = self.child['identity_correction']['affected_generation']
+            original = producer[field]
+            producer[field] = value
+            self.seal()
+            with self.subTest(field=field), self.assertRaises(scheduled.Hold):
+                self.superseded()
+            producer[field] = original
+        self.child['generation_run_id'] = str(self.url.RUN)
+        self.seal()
+        with self.assertRaises(scheduled.Hold):
+            self.superseded()
 
 
 if __name__ == '__main__':

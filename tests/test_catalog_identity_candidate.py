@@ -61,7 +61,12 @@ class IdentityCandidateTests(unittest.TestCase):
         self.helper = ModuleType('tools.catalog_identity_correction')
         self.helper.verify_inputs = Mock(side_effect=self.verified_inputs)
         self.helper.reject_quarantined = Mock()
-        self.modules = patch.dict(sys.modules, {'tools.catalog_identity_correction': self.helper})
+        # The later URL guard has its own tests; keep this fixture's identity
+        # verifier stub independent of that sibling module's full imports.
+        url_helper = ModuleType('tools.catalog_url_correction')
+        url_helper.reject_quarantined = Mock()
+        self.modules = patch.dict(sys.modules, {'tools.catalog_identity_correction': self.helper,
+                                               'tools.catalog_url_correction': url_helper})
         self.modules.start()
         self.addCleanup(self.modules.stop)
 
