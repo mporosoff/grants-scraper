@@ -108,6 +108,7 @@ def cmd_merge(args):
     summary = integrate(
         catalog_path=Path(args.catalog),
         cache_path=Path(args.cache),
+        previous_catalog_path=Path(args.previous_catalog) if args.previous_catalog else None,
         adapters=adapters,
         include_disabled=args.include_disabled,
         write=args.write,
@@ -161,6 +162,7 @@ def main(argv=None):
                        help="path to the generated opportunities.js")
     merge.add_argument("--cache", default=str(DEFAULT_CACHE),
                        help="path to the source snapshot cache (last-known-good)")
+    merge.add_argument("--previous-catalog", help="accepted prior catalog for identity-only alias preservation")
     merge.add_argument("--adapter", help="only run this adapter slug")
     merge.add_argument("--include-disabled", action="store_true")
     merge.add_argument("--write", action="store_true",

@@ -131,9 +131,10 @@ class AccessCandidateTests(unittest.TestCase):
                    {'parent': self.fixture.bundle, 'source_correction': {}},
                    {'parent': self.fixture.bundle, 'source_export': self.receipt},
                    {'parent': self.fixture.bundle, 'source_recovery': self.receipt},
+                   {'parent': self.fixture.bundle, 'identity_correction': self.receipt},
                    {'parent': self.fixture.bundle, 'program_area_revalidation': self.receipt}]
         for index, kwargs in enumerate(options):
-            with self.subTest(options=kwargs), self.assertRaisesRegex(ValueError, 'Access correction requires its exact parent'):
+            with self.subTest(options=kwargs), self.assertRaisesRegex(ValueError, '(?:Access|Identity) correction requires its exact parent'):
                 c.create(self.root, Path(self.fixture.temp.name) / f'invalid-{index}',
                          access_correction=self.receipt, **kwargs)
         self.helper.verify_inputs.assert_not_called()

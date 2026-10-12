@@ -101,3 +101,38 @@ incomplete response is never accepted as a complete snapshot. NSF digest identit
 requires exact official edition links or a current-day program-guidelines receipt
 within the existing shared 20-GET identity budget; supplied conflicting editions
 are withheld, not silently rewritten.
+
+
+## Retained October 12 identity correction
+
+Normal refresh `38275115281`, attempt 1, completed candidate
+`75e383c2a4fe48ece7ca2e1afc4fc0a0470dfe9f3133654da9b306aefa8c41ff`.
+Its publication review found that NASA solicitation `NNH25ZDA001N-SSF`
+changed from a native NASA ID to Grants.gov `364039` without retaining the
+previous ID. The resulting new/removed events were false. The same temporal
+identity audit found one lost, previously proven VPR alias on Grants.gov `363829`.
+
+Normal source merge now receives the accepted previous catalog as identity-only
+input. It carries aliases through a unique sponsor/full-solicitation transition
+or the unchanged canonical Grants record, validates existing official identity
+proof, and rejects conflicting owners or ambiguous scopes. It never copies
+historical science, deadlines, source observations or document evidence. The
+next refresh retains these aliases even after the old adapter snapshot is empty.
+
+The protected manual `catalog-identity-correction` selector accepts only the
+exact run and candidate above. It authenticates that candidate, its original
+spending state and reservation, and the previously published `309e3932...`
+candidate against pinned GitHub artifact digests. Only the two reviewed alias
+additions and two false-event removals are allowed. All 1,274 records retain their
+source timestamps; all 1,476 scientific search passages and vector bytes, team
+outputs, and the original six-request/$0.006010 estimated vector receipt remain
+unchanged. Document-AI spending remains zero of the existing $2/300 allowance.
+The correction receives no provider credentials and creates no new allowance.
+
+The rejected parent is quarantined. Persist the corrected child, then use normal
+exact-byte validation, exact-head review, protected publication and live checks.
+The existing unfinished-owner safeguard holds competing automatic generation;
+the refresh workflow stays enabled. After publication, the child's original
+generation identity retires this owner through the ordinary daily generation
+floor. Verify same-day no-op and next-window generation using authenticated
+publication/live evidence; a policy prediction is not proof of future cron delivery.

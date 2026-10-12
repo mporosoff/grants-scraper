@@ -165,7 +165,7 @@ class CloseoutRetry(unittest.TestCase):
     def run_script(self, failed=None, stage='catalog-correction', *, requested=None, jobs=None, env=None,
                    event='workflow_dispatch', issues=None):
         needs = {name: {'result': 'skipped', 'outputs': {}} for name in
-            ('plan', 'generate', 'assemble', 'catalog-correction', 'program-area-revalidation', 'catalog-source-recovery', 'catalog-access-correction', 'candidate', 'validate', 'publish', 'pages', 'verify-live')}
+            ('plan', 'generate', 'assemble', 'catalog-correction', 'program-area-revalidation', 'catalog-source-recovery', 'catalog-access-correction', 'catalog-identity-correction', 'candidate', 'validate', 'publish', 'pages', 'verify-live')}
         needs['plan'] = {'result': 'success', 'outputs': {'stage': stage} if stage else {}}
         for name, values in (jobs or {}).items(): needs[name].update(deepcopy(values))
         if event == 'schedule':
@@ -203,7 +203,8 @@ class CloseoutRetry(unittest.TestCase):
                                 ('assemble', 'backfill'), ('catalog-correction', 'catalog-correction'),
                                 ('program-area-revalidation', 'program-area-revalidation'),
                                 ('catalog-source-recovery', 'catalog-source-recovery'),
-                                ('catalog-access-correction', 'catalog-access-correction')):
+                                ('catalog-access-correction', 'catalog-access-correction'),
+                                ('catalog-identity-correction', 'catalog-identity-correction')):
             with self.subTest(producer=producer, stage=stage):
                 result = self.run_script(producer, stage, jobs={producer: {'outputs': {'candidate_id': 'unuploaded'}}})
                 self.assert_route(result, stage)
@@ -211,12 +212,12 @@ class CloseoutRetry(unittest.TestCase):
                 self.assertIn('Resume the same workflow', result['body']); self.assertEqual(len(result['writes']), 1)
 
     def test_plan_failure_preserves_requested_stage_and_unknown_uses_auto(self):
-        for requested in ('catalog-correction', 'program-area-revalidation', 'catalog-source-recovery', 'catalog-access-correction', 'reuse', 'teams', 'backfill', 'publish', 'verify', '', 'unsupported'):
+        for requested in ('catalog-correction', 'program-area-revalidation', 'catalog-source-recovery', 'catalog-access-correction', 'catalog-identity-correction', 'reuse', 'teams', 'backfill', 'publish', 'verify', '', 'unsupported'):
             with self.subTest(requested=requested):
                 self.assert_route(self.run_script('plan', None, requested=requested), requested if requested and requested != 'unsupported' else 'auto')
 
     def test_candidate_selection_failure_recovers_only_successful_producer_pair(self):
-        for producer in ('generate', 'assemble', 'catalog-correction', 'program-area-revalidation', 'catalog-source-recovery', 'catalog-access-correction'):
+        for producer in ('generate', 'assemble', 'catalog-correction', 'program-area-revalidation', 'catalog-source-recovery', 'catalog-access-correction', 'catalog-identity-correction'):
             with self.subTest(producer=producer):
                 result = self.run_script('candidate', jobs={producer: {'result': 'success', 'outputs': {'candidate_id': 'persisted-id'}}})
                 self.assert_route(result, 'validate'); self.assertIn('Candidate: persisted-id\nArtifact run: 700\n', result['body'])
