@@ -1,9 +1,10 @@
 # SAM.gov catalog import preparation
 
-SAM access was verified on 2026-10-01 with one successful public opportunities
-request. The adapter is staged in the normal source registry, but production
-imports remain disabled in `config/sam_gov.json` until the pilot evidence below
-is reviewed. Saving `SAM_API_KEY` alone does not activate imports.
+`config/sam_gov.json` enables one reviewed BARDA notice, verified on 2026-10-12
+with approval through 2026-11-11. Every other SAM notice remains outside the
+allowlist. Configuration admission is separate from catalog publication: the
+normal protected refresh must still collect, validate, and publish the record.
+Saving `SAM_API_KEY` alone does not approve any notice.
 
 ## What is connected
 
@@ -28,6 +29,51 @@ number, and organization hierarchy. A record also needs an active solicitation,
 a current response deadline, an R&D classification, and no restrictive set-aside.
 A BAA title or classification alone cannot admit a record. Unreviewed discoveries
 remain in the preview, outside publication.
+
+## Current reviewed pilot
+
+The approved identity is **BARDA BAA-23-100-SOL-00004**, SAM notice
+[`8170c4735df64714adb2d1f8ce8671b1`](https://sam.gov/workspace/contract/opp/8170c4735df64714adb2d1f8ce8671b1/view),
+under the API organization hierarchy stored verbatim in the admission config.
+
+The [2026-10-12 live preview](https://github.com/mporosoff/grants-scraper/actions/runs/38273049220)
+returned one complete 65-row listing and made one selected BARDA description
+request: **two SAM requests total**. BARDA was an active Solicitation, with
+classification AN13, NAICS 541714, no listed set-aside, and response deadline
+**2028-09-25 at 16:30, UTC-04:00 (Eastern)**. Its API posting date remained
+2026-03-20, matching the previously observed Amendment 7 attachment date. This
+agreement does not establish that attachments were downloaded or reverified on
+October 12. The sanitized API description produced no excerpts and explicitly
+left eligibility unverified.
+
+Academic eligibility instead comes from **BARDA FY23 Modernized BAA Solicitation,
+Amendment 7, page 6**, retrieved on 2026-10-01 and reviewed again on 2026-10-12.
+Its exact passage admitting academic institutions is retained in the config.
+The reviewed PDF SHA-256 is
+`72aeb8532f7c48e8e4c17c8f50e17f4a9f125cf52a33b4551c0c7e31dcf002d6`.
+The [official BARDA page](https://www.medicalcountermeasures.gov/barda/barda-baa)
+links this SAM notice. API metadata confirmation and review of this saved PDF are
+the evidence basis; a new attachment download is not claimed.
+
+Stage 2 assessment using a Quad Chart, Market Research Abstract and Rough Order
+of Magnitude is recommended. It is **not a mandatory prerequisite**: page 24
+states that an unfavorable assessment does not preclude a proposal, and page 26
+expressly permits proposals without a Stage 1 call or Stage 2 submission.
+Page 9 gives both Stage 2 and Stage 3 the September 25, 2028, 16:30 Eastern umbrella
+deadline unless an Area of Interest (AOI) says otherwise; invitation letters may
+specify additional dates. The existing open application event is therefore
+appropriate, with no universal invitation flag. Applicants must follow the
+current AOI, readiness, BDR Portal, SAM registration, unclassified-submission and
+proposal-validity requirements.
+
+**MEAS-6 rationale revised for this pilot:** the measured benefit is filling a
+current catalog gap with authoritative contract-notice information, not proving
+SAM-exclusive publication. The 1,261-record catalog had no exact solicitation or
+BARDA title match. Two current Grants.gov keyword comparisons on 2026-10-12
+returned 45 results for the full number and one for BARDA, with no exact-number
+match. Keyword-index absence is not proof of absence from Grants.gov; the BAA
+itself describes availability there. This explicit catalog-coverage rationale
+supersedes the historical SAM-only prerequisite for this one-notice pilot.
 
 ## Run the bounded preview
 
@@ -77,7 +123,8 @@ BAA can be open for years while accepting proposals only under individual calls.
 Check exact SAM notice links and full sponsor/solicitation identities against the
 catalog, other adapters, and Grants.gov. Absence from our catalog does not prove
 SAM-only availability. The earlier MEAS-6 requirement to name a relevant SAM-only
-notice, or explicitly revise that rationale, remains an activation gate.
+notice, or explicitly revise that rationale, is addressed for the current
+BARDA pilot above; later scope expansions need their own evidence.
 
 Review the config change through the normal protected PR process, run a preview
 with approved entries, and verify the resulting canonical IDs, deadlines,

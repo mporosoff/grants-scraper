@@ -1,5 +1,16 @@
 {
   "schema_version": 1,
-  "enabled": false,
-  "approved_notices": []
+  "enabled": true,
+  "approved_notices": [
+    {
+      "notice_id": "8170c4735df64714adb2d1f8ce8671b1",
+      "solicitation_number": "BAA-23-100-SOL-00004",
+      "organization_path": "HEALTH AND HUMAN SERVICES, DEPARTMENT OF.OFFICE OF ASSISTANT SECRETARY FOR PREPAREDNESS AND RESPONSE.BARDA - ASPR / DAAPPO / BARDA DCMA",
+      "sponsor": "Biomedical Advanced Research and Development Authority (BARDA)",
+      "evidence_url": "https://sam.gov/workspace/contract/opp/8170c4735df64714adb2d1f8ce8671b1/view",
+      "academic_eligibility_quote": "This BAA is open to ALL responsible sources. Offerors may include single entities or teams from private sector organizations, Government laboratories, and academic institutions and must be registered in the System for Award Management (SAM) at SAM.gov prior to submitting a proposal in accordance with FAR 4.1102.",
+      "verified_on": "2026-10-12",
+      "review_after": "2026-11-11"
+    }
+  ]
 }

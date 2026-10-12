@@ -2495,11 +2495,16 @@ print([r['opportunity_number'] for r in c['opportunities'] if p.match(r['opportu
 
 ### 7.5 SAM.gov adapter notes
 
-**2026-10-01 implementation update:** Credentials now work. The staged, disabled
-adapter and bounded preview are described in [SAM imports](SAM_IMPORTS.md). That
-operational policy supersedes the historical quota and cache assumptions below.
-MEAS-6 relevance and SAM-only verification remains open before activation; the
-access test alone does not satisfy it.
+**2026-10-12 implementation update:** The bounded adapter now approves one
+academically eligible BARDA notice, `8170c4735df64714adb2d1f8ce8671b1`
+(`BAA-23-100-SOL-00004`), through 2026-11-11; publication still follows the normal
+protected refresh. [SAM imports](SAM_IMPORTS.md) records the complete 65-row
+listing, two-request preview, exact API identity/deadline, saved Amendment 7
+eligibility and submission terms, and duplicate-check limits. For this pilot,
+MEAS-6's earlier SAM-only prerequisite is explicitly replaced by a measured
+current-catalog gap and authoritative contract-notice coverage; no SAM-exclusivity
+claim is made. This current policy supersedes the historical quota, cache and
+SAM-only assumptions below; the historical investigation remains unchanged.
 
 The API's shape drives the implementation:
 
