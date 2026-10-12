@@ -171,8 +171,100 @@ class SamImportPreviewTests(unittest.TestCase):
         self.assertNotIn('UNREPORTED_RAW_TAIL', json.dumps(report))
         self.assertRegex(report['description_inspections'][0]['text_sha256'], r'^[a-f0-9]{64}$')
 
+    def test_short_descriptions_are_not_retained_even_when_every_word_is_relevant(self):
+        for body in ('University proposals are eligible for this unique short notice.',
+                     'Research contact privacy-short@example.gov or (202) 555-0134.',
+                     'proposal ' * 110):
+            with self.subTest(body=body[:50]):
+                self.description.return_value = (body, {'http_status': 200})
+                report = self.run_preview((IDS[0],))
+                inspection = report['description_inspections'][0]
+                self.assertEqual(inspection['excerpts'], [])
+                self.assertEqual(inspection['status'], 'review_required')
+                self.assertFalse(inspection['eligibility_verified'])
+                self.assertRegex(inspection['text_sha256'], r'^[a-f0-9]{64}$')
+                self.assertNotIn(body, json.dumps(report))
+
+    def test_excerpt_union_cannot_reconstruct_a_keyword_dense_description(self):
+        # The old overlapping windows covered this entire response collectively.
+        body = ''.join(f'research block {index:02d} ' + chr(65 + index) * 83 + ' '
+                       for index in range(15)).strip()
+        self.description.return_value = (body, {'http_status': 200})
+        report = self.run_preview((IDS[0],))
+        values = report['description_inspections'][0]['excerpts']
+        self.assertTrue(values)
+        covered, prior_end = set(), 0
+        for value in values:
+            start = body.index(value)
+            end = start + len(value)
+            self.assertGreaterEqual(start, prior_end)
+            self.assertLessEqual(len(value), 400)
+            covered.update(range(start, end))
+            prior_end = end
+        self.assertLessEqual(sum(map(len, values)), len(body) // 2)
+        self.assertLess(len(covered), len(body))
+        self.assertNotIn(body, json.dumps(report))
+
+    def test_contacts_and_encoded_html_routes_are_scrubbed_before_window_selection(self):
+        contacts = (
+            ('private.contact@example.gov', 'private.contact'),
+            ('private%2Econtact%40example.gov', 'private.contact'),
+            ('private.contact&#64;example.gov', 'private.contact'),
+            ('(202) 555-0134 ext. 29', '555-0134'),
+            ('202.555.0134', '555.0134'),
+            ('2025550134', '2025550134'),
+            ('+44 (20) 7946 0958', '7946'),
+            ('555-0134', '555-0134'),
+            ('mailto:private.contact@example.gov?subject=Research', 'private.contact'),
+            ('tel:%2B1-202-555-0134', '555-0134'),
+            ('<a href="mailto:private.contact@example.gov">Write to us</a>', 'private.contact'),
+            ('&lt;a href="tel:+1-202-555-0134"&gt;Call us&lt;/a&gt;', '555-0134'),
+        )
+        for contact, fragment in contacts:
+            with self.subTest(contact=contact):
+                # Contact text crosses the old first window's ending boundary.
+                body = 'research ' + 'x' * 270 + ' ' + contact + ' proposal. ' + 'z' * 1500
+                self.description.return_value = (body, {'http_status': 200})
+                report = self.run_preview((IDS[0],))
+                encoded = json.dumps(report)
+                self.assertTrue(report['description_inspections'][0]['excerpts'])
+                self.assertNotIn(contact, encoded)
+                self.assertNotIn(fragment, encoded)
+                self.assertNotIn('mailto:', encoded)
+                self.assertNotIn('tel:', encoded)
+                self.assertNotIn('<a ', encoded)
+
+    def test_contact_scrubbing_keeps_submission_dates_and_scientific_context(self):
+        body = ('Research proposals from academic institutions close September 25, 2028 at 16:30 Eastern. '
+                'The ISO date is 2028-09-25; submit the BAA-23-100-SOL-00004 abstract. '
+                'Contact private-science@example.gov at +1 (202) 555-0199. ' + 'x' * 2000)
+        self.description.return_value = (body, {'http_status': 200})
+        report = self.run_preview((IDS[0],))
+        excerpts = ' '.join(report['description_inspections'][0]['excerpts'])
+        for retained in ('academic institutions', 'September 25, 2028', '16:30 Eastern',
+                         '2028-09-25', 'BAA-23-100-SOL-00004'):
+            self.assertIn(retained, excerpts)
+        self.assertIn('[contact omitted]', excerpts)
+        self.assertNotIn('private-science', json.dumps(report))
+        self.assertNotIn('555-0199', json.dumps(report))
+
+    def test_description_exception_body_never_enters_report_or_logs(self):
+        error = sam.SamError('network_error', {'request_count': 1, 'http_status': None,
+                                              'outcome': 'network_error', 'rate_limit': {}})
+        error.args = ('RAW DESCRIPTION: research private-error@example.gov (202) 555-0192',)
+        self.description.side_effect = error
+        report = self.run_preview((IDS[0],))
+        inspection = report['description_inspections'][0]
+        self.assertEqual(inspection['status'], 'description_unavailable')
+        self.assertEqual(inspection['excerpts'], [])
+        self.assertEqual(report['request_count'], 2)
+        self.assertNotIn('text_sha256', inspection)
+        for forbidden in ('RAW DESCRIPTION', 'private-error', '555-0192'):
+            self.assertNotIn(forbidden, json.dumps(report))
+
     def test_raw_and_encoded_secret_echoes_are_redacted_before_excerpt_truncation(self):
-        for echo in (KEY, quote(KEY, safe=''), quote_plus(KEY, safe='')):
+        for echo in (KEY, quote(KEY, safe=''), quote_plus(KEY, safe=''),
+                     quote(KEY, safe='').replace('%2F', '%2f').replace('%2B', '%2b')):
             with self.subTest(echo=echo):
                 self.listing.reset_mock()
                 self.description.reset_mock()
@@ -181,6 +273,20 @@ class SamImportPreviewTests(unittest.TestCase):
                 self.assert_no_secret(report)
                 self.assertNotIn(echo[:25], json.dumps(report))
                 self.assertIn('[redacted]', json.dumps(report))
+
+    def test_decoded_credentials_are_redacted_before_a_window_can_split_them(self):
+        echoes = (quote(quote(KEY, safe=''), safe=''),
+                  KEY.replace('+', '&#43;').replace('/', '&#47;'))
+        for echo in echoes:
+            with self.subTest(echo=echo):
+                body = 'x' * 100 + 'research ' + 'y' * 270 + echo + ' ' + 'z' * 1600
+                self.description.return_value = (body, {'http_status': 200})
+                report = self.run_preview((IDS[0],))
+                self.assert_no_secret(report)
+                encoded = json.dumps(report)
+                self.assertNotIn('synthetic-SAM-secret', encoded)
+                self.assertNotIn(echo, encoded)
+                self.assertIn('[redacted]', encoded)
 
     def test_candidate_metadata_and_transport_secret_echoes_are_redacted(self):
         self.rows[0]['title'] += ' ' + KEY

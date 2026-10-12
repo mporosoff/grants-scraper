@@ -8,16 +8,17 @@ from __future__ import annotations
 import argparse
 from datetime import datetime, timezone
 import hashlib
+from html import unescape
 import json
 import os
 from pathlib import Path
 import re
+from urllib.parse import unquote
 
 from scripts.solicitation_identity import normalized_number
-from scripts.sources.sam_api import SamError, fetch_description, fetch_listing
+from scripts.sources.sam_api import SamError, fetch_description, fetch_listing, redacted
 from scripts.sources.adapters.sam_gov import SamGovAdapter, discovery_candidates, load_config
 from scripts.sources.merge import integrate, load_catalog
-from tools.sam_access_probe import redacted
 
 ROOT = Path(__file__).resolve().parents[1]
 NOTICE_ID = re.compile(r'[0-9a-f]{32}')
@@ -41,17 +42,37 @@ def description_ids(value):
     return values
 
 
-def excerpts(text):
-    """Keep bounded review quotations, never the complete description."""
+def excerpts(text, *, api_key=''):
+    """Retain disjoint, contact-scrubbed samples totaling at most half the text."""
+    # The transport already strips HTML. Normalize encoded contact routes too,
+    # before choosing windows, so truncation cannot expose part of an address.
+    text = redacted(unquote(unescape(text)), api_key)
+    text = re.sub(r'<[^>]*>', ' ', text)
+    text = re.sub(r'\b(?:mailto|tel|sms|callto)\s*:\s*[^\s<>"\x27]+',
+                  '[contact omitted]', text, flags=re.I)
+    text = re.sub(r'[a-z0-9.!#$%&*+/=?^_\x60{|}~\x27-]+@[a-z0-9-]+(?:\.[a-z0-9-]+)+',
+                  '[contact omitted]', text, flags=re.I)
+    text = re.sub(
+        r'(?<!\w)(?:\+\d(?:[ .()-]*\d){6,14}|'
+        r'(?:1[ .-]?)?\(?\d{3}\)?[ .-]?\d{3}[ .-]?\d{4}|\d{3}[ .-]\d{4})'
+        r'(?:\s*(?:ext(?:ension)?\.?|x)\s*\d{1,6})?(?!\w)',
+        '[contact omitted]', text, flags=re.I)
     text = re.sub(r'\s+', ' ', text).strip()
-    selected, end = [], -1
+    if len(text) < 1000:
+        return []
+    budget = min(2000, len(text) // 2)
+    selected, previous_end, used = [], -40, 0
     for match in EXCERPT_TERMS.finditer(text):
-        if match.start() < end:
-            continue
         start = max(0, match.start() - 100)
-        end = min(len(text), match.end() + 300)
+        if start < previous_end + 40:
+            continue
+        end = min(len(text), match.end() + 300, start + 400, start + budget - used)
+        if end <= match.end():
+            break
         selected.append(text[start:end])
-        if len(selected) == 5:
+        used += end - start
+        previous_end = end
+        if len(selected) == 5 or used == budget:
             break
     return selected
 
@@ -98,7 +119,7 @@ def preview(api_key, selected_ids=(), *, root=ROOT, today=None, listing=fetch_li
             try:
                 text, detail = description(api_key, notice_id, route=row['description_route'])
                 text = redacted(text, api_key.strip())
-                inspection.update(status='review_required', excerpts=excerpts(text),
+                inspection.update(status='review_required', excerpts=excerpts(text, api_key=api_key.strip()),
                                   text_sha256=hashlib.sha256(text.encode()).hexdigest(),
                                   transport=detail)
             except SamError as error:

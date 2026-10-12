@@ -39,9 +39,14 @@ exact listed notices. They do not follow links, download attachments, or retry.
 
 The artifact contains safe listing metadata, possible catalog identity matches,
 the real canonical merge preview, and short description excerpts for review.
-Full descriptions, raw responses, contacts, credential-bearing URLs, and secrets
-are not retained. Description excerpts are evidence to inspect, not automatic
-eligibility decisions. Missing text is reported as a gap, not inferred eligibility.
+Full descriptions, raw responses, credential-bearing URLs, and secrets are not
+retained. Detected contact email addresses, telephone numbers, and contact links
+are removed before excerpt selection; this does not attempt to identify people's
+names. Short descriptions produce no excerpts. Longer descriptions produce at most
+five separate excerpts of 400 characters each, totaling no more than half the
+sanitized description and never more than 2,000 characters. An empty excerpt list
+is an evidence gap, not an eligibility decision. The description hash can identify
+the response for review without retaining its full text.
 The preview uses the fetched listing once and never writes the catalog/cache.
 
 Local development with an already configured private `SAM_API_KEY` uses:
