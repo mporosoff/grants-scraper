@@ -28,10 +28,37 @@ const URL_POLICY = new URL('../evaluation/catalog_url_correction_20261012.json',
 const URL_PARENT = '051d6844ea23709628b9c9209f4a947e309d2427928b0dc19e8ffb8eb8f3cfc4';
 const URL_MANIFEST_SHA = 'f11c8bed90de162868348b262d6b200e2f36bb13c2601b73fbb423c5de4162c1';
 const SOURCE_CACHE = 'data/source_records.json';
+const INVALIDATED_FIELDS = ['document_evidence', 'document_evidence_checked_at', 'document_evidence_status',
+  'document_status_signals', 'submission_requirements'];
+const canonicalValue = value => Array.isArray(value) ? value.map(canonicalValue)
+  : value && typeof value === 'object'
+    ? Object.fromEntries(Object.keys(value).sort().map(key => [key, canonicalValue(value[key])])) : value;
+const valueHash = value => digest(JSON.stringify(canonicalValue(value)));
+
+function invalidatePublicEvidence(record, pin) {
+  require(pin && same(Object.keys(pin).sort(), ['after_sha256', 'before_sha256', 'changed_fields'])
+    && [pin.before_sha256, pin.after_sha256].every(value => /^[a-f0-9]{64}$/.test(value))
+    && same(pin.changed_fields, INVALIDATED_FIELDS), 'fixed_evidence_invalidation');
+  require(valueHash(record) === pin.before_sha256, 'evidence_before_pin');
+  require(record.document_evidence_status === 'current' && record.document_evidence
+    && Array.isArray(record.document_evidence.facts) && record.document_evidence.facts.length === 0
+    && record.document_search_text == null && !(record.document_program_areas || []).length
+    && typeof record.document_evidence_checked_at === 'string'
+    && Array.isArray(record.submission_requirements) && record.submission_requirements.length === 0
+    && Array.isArray(record.document_status_signals) && record.document_status_signals.length === 0,
+    'empty_public_evidence_only');
+  record.document_evidence = null;
+  record.document_evidence_status = 'source_changed';
+  delete record.document_evidence_checked_at;
+  delete record.document_status_signals;
+  delete record.submission_requirements;
+  require(valueHash(record) === pin.after_sha256, 'evidence_after_pin');
+}
+
 export function projectionProfile(kind = 'identity') {
   require(['identity', 'url'].includes(kind), 'fixed_projection_kind');
   return kind === 'url'
-    ? {kind, parent:URL_PARENT, manifest:URL_MANIFEST_SHA, policy:URL_POLICY, version:'catalog-url-package-20261012-v1'}
+    ? {kind, parent:URL_PARENT, manifest:URL_MANIFEST_SHA, policy:URL_POLICY, version:'catalog-url-package-20261012-v2'}
     : {kind, parent:PARENT_CANDIDATE, manifest:PARENT_MANIFEST_SHA, policy:POLICY, version:VERSION};
 }
 
@@ -46,6 +73,9 @@ export function verifyUrlPayload(name, before, after, policy) {
   require(Array.isArray(rows), 'url_payload_name');
   const changed = {};
   const ids = new Set();
+  const invalidations = policy.evidence_invalidations;
+  require(invalidations && typeof invalidations === 'object' && !Array.isArray(invalidations), 'fixed_evidence_invalidation');
+  const invalidated = [];
   for (const row of rows) {
     const event = name === 'feeds/changes.json';
     const id = String(event ? row.id : row.opportunity_id);
@@ -64,9 +94,16 @@ export function verifyUrlPayload(name, before, after, policy) {
       require(String(record.opportunity_id || row.opportunity_id).startsWith('nyserda:'), 'nyserda_scope');
       changed[id] = count;
     }
+    if (name === CATALOG && Object.hasOwn(invalidations, id)) {
+      require(count > 0 && id.startsWith('nyserda:'), 'evidence_invalidation_scope');
+      invalidatePublicEvidence(record, invalidations[id]);
+      invalidated.push(id);
+    }
   }
   const admitted = Object.fromEntries(Object.entries(policy.payloads[name].affected_items).map(([id, value]) => [id, value.url_leaf_count]));
   require(same(Object.entries(changed).sort(), Object.entries(admitted).sort()), 'exact_url_inventory');
+  if (name === CATALOG)
+    require(same(invalidated.sort(), Object.keys(invalidations).sort()), 'exact_evidence_inventory');
   require(same(after, expected), 'exact_url_only_payload');
 }
 
@@ -163,7 +200,7 @@ export async function prepareProjection(parent, root, kind = 'identity') {
   const policy = JSON.parse(await readFile(profile.policy, 'utf8'));
   require(policy.candidate_id === profile.parent && policy.candidate_manifest_sha256 === profile.manifest, 'fixed_policy');
   if (kind === 'url') {
-    require(policy.kind === 'url', 'fixed_policy');
+    require(policy.kind === 'url' && Object.keys(policy.evidence_invalidations || {}).length === 39, 'fixed_policy');
     verifyUrlPayload(CATALOG, beforeCatalog, afterCatalog, policy);
     for (const name of [SOURCE_CACHE, 'feeds/changes.json'])
       verifyUrlPayload(name, JSON.parse(originals[name]), JSON.parse(await readFile(checked(root, name), 'utf8')), policy);

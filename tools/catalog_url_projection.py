@@ -1,6 +1,6 @@
 """Pinned NYSERDA navigation metadata repair; historical acquisitions stay exact."""
 from copy import deepcopy
-from datetime import datetime
+from datetime import date, datetime
 import json
 from pathlib import Path
 import re
@@ -14,6 +14,8 @@ PARENT_ID = '051d6844ea23709628b9c9209f4a947e309d2427928b0dc19e8ffb8eb8f3cfc4'
 MANIFEST_SHA = 'f11c8bed90de162868348b262d6b200e2f36bb13c2601b73fbb423c5de4162c1'
 PAYLOADS = ('data/opportunities.js', 'data/source_records.json', 'feeds/changes.json')
 PRESERVED = ('data/document_evidence.json', 'data/link_health.json')
+INVALIDATED_FIELDS = ('document_evidence', 'document_evidence_checked_at', 'document_evidence_status',
+                      'document_status_signals', 'submission_requirements')
 BROKEN = re.compile(r'https://portal\.nyserda\.ny\.gov/CORE_Solicitation_Detail_Page\? SolicitationId=[A-Za-z0-9]{18}')
 
 
@@ -28,6 +30,11 @@ def fixed_policy(evidence):
             and evidence.get('candidate_manifest_sha256') == MANIFEST_SHA
             and set(evidence.get('payloads', {})) == set(PAYLOADS)
             and set(evidence.get('preserved_input_hashes', {})) == set(PRESERVED), 'fixed_policy')
+    invalidations = evidence.get('evidence_invalidations')
+    require(isinstance(invalidations, dict) and all(
+        identifier.startswith('nyserda:') and item.get('changed_fields') == list(INVALIDATED_FIELDS)
+        and all(re.fullmatch(r'[0-9a-f]{64}', item.get(key, '')) for key in ('before_sha256', 'after_sha256'))
+        for identifier, item in invalidations.items()), 'fixed_evidence_invalidations')
     replacements = evidence['url_replacements']
     require(bool(replacements) and all(BROKEN.fullmatch(old)
             and new == old.replace('? ', '?', 1) for old, new in replacements.items()), 'exact_url_normalization')
@@ -90,11 +97,53 @@ def payload_projection(name, before, replacements):
     return after, proof
 
 
-def corrected_payload(name, before, evidence):
+def invalidate_public_evidence(record, entry, pin, replacements):
+    """Project a changed source without relabeling its historical acquisition."""
+    from scripts.extract_document_evidence import merge_document_entry, source_for_record
+    from scripts.submission_schedule import project
+    require(value_hash(record) == pin['before_sha256'], 'exact_evidence_record')
+    source = source_for_record(record)
+    prior_url = (entry or {}).get('source_url')
+    require(source and prior_url in replacements and replacements[prior_url] == source['url']
+            and entry.get('status') == 'current' and not entry.get('facts')
+            and not entry.get('program_areas') and not entry.get('subtopics'), 'changed_empty_acquisition')
+    require(record.get('document_evidence_status') == 'current'
+            and isinstance(record.get('document_evidence'), dict)
+            and not record['document_evidence'].get('facts')
+            and not record.get('document_search_text') and not record.get('document_program_areas')
+            and record.get('submission_requirements') == [] and record.get('document_status_signals') == []
+            and record.get('document_evidence_checked_at'), 'empty_public_evidence')
+    changed_entry = deepcopy(entry)
+    changed_entry['status'] = 'source_changed'
+    after = project(merge_document_entry(record, changed_entry), date.fromisoformat(record['next_submission']['as_of']))
+    expected = deepcopy(record)
+    expected['document_evidence_status'] = 'source_changed'
+    expected['document_evidence'] = None
+    for key in ('document_evidence_checked_at', 'document_status_signals', 'submission_requirements'):
+        expected.pop(key)
+    require(after == expected and pin['changed_fields'] == list(INVALIDATED_FIELDS)
+            and value_hash(after) == pin['after_sha256'], 'exact_evidence_invalidation')
+    return after
+
+
+def corrected_payload(name, before, evidence, *, cache=None):
     fixed_policy(evidence)
     item = evidence['payloads'][name]
     require(value_hash(before) == item['before_sha256'], 'exact_payload')
     after, proof = payload_projection(name, before, evidence['url_replacements'])
+    if name == PAYLOADS[0]:
+        pending = set(evidence['evidence_invalidations'])
+        for index, record in enumerate(after['opportunities']):
+            identifier = str(record['opportunity_id'])
+            if identifier not in pending:
+                continue
+            require(identifier in proof, 'invalidation_requires_url_change')
+            record = invalidate_public_evidence(record, ((cache or {}).get('records') or {}).get(identifier),
+                evidence['evidence_invalidations'][identifier], evidence['url_replacements'])
+            after['opportunities'][index] = record
+            proof[identifier]['after_sha256'] = value_hash(record)
+            pending.remove(identifier)
+        require(not pending, 'complete_evidence_invalidations')
     require(value_hash(after) == item['after_sha256'] and proof == item['affected_items'], 'exact_url_only_projection')
     return after, proof
 
@@ -120,9 +169,10 @@ def projection(parent_root, audit_at):
     require(before['generated_at'] == evidence['original_generated_at']
             and len(before['opportunities']) == evidence['record_count'], 'original_frame')
     corrected, proofs = {}, {}
+    cache = c.read_json(parent / 'data/document_evidence.json')
     for name in PAYLOADS:
         value = before if name == PAYLOADS[0] else c.read_json(parent / name)
-        corrected[name], proofs[name] = corrected_payload(name, value, evidence)
+        corrected[name], proofs[name] = corrected_payload(name, value, evidence, cache=cache)
     catalog = corrected[PAYLOADS[0]]
     changes = corrected[PAYLOADS[2]]
     outputs = {PAYLOADS[0]: catalog_javascript_bytes(catalog),
@@ -141,5 +191,6 @@ def projection(parent_root, audit_at):
                      'original_generated_at': before['generated_at'], 'audited_at': audit_at,
                      'payloads': proofs, 'retained_record_count': len(catalog['opportunities']),
                      'preserved_acquisition_hashes': evidence['preserved_input_hashes'],
+                     'evidence_invalidations': evidence['evidence_invalidations'],
                      'output_hashes': {name: c.digest(raw) for name, raw in sorted(outputs.items())},
                      'source_requests': 0, 'provider_requests': 0}

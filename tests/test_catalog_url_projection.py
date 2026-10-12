@@ -1,4 +1,5 @@
 from copy import deepcopy
+from datetime import date
 import json
 from pathlib import Path
 import tempfile
@@ -37,7 +38,7 @@ class UrlProjectionTests(unittest.TestCase):
         self.before, self.after = data(self.old), data(self.new)
         self.evidence = {'schema_version': 1, 'kind': 'url', 'candidate_id': a.PARENT_ID,
                          'candidate_manifest_sha256': a.MANIFEST_SHA, 'original_generated_at': self.stamp,
-                         'record_count': 2, 'url_replacements': {self.old: self.new},
+                         'record_count': 2, 'url_replacements': {self.old: self.new}, 'evidence_invalidations': {},
                          'preserved_input_hashes': {name: 'a' * 64 for name in a.PRESERVED}, 'payloads': {}}
         for name in a.PAYLOADS:
             if name == a.PAYLOADS[0]: old, new, ident = self.before[name]['opportunities'][0], self.after[name]['opportunities'][0], 'nyserda:OSWPON26-1'
@@ -82,6 +83,103 @@ class UrlProjectionTests(unittest.TestCase):
         before = deepcopy(self.before[a.PAYLOADS[0]]); before['opportunities'].append(before['opportunities'][0])
         with self.assertRaisesRegex(ValueError, 'unique_payload_membership'):
             a.payload_projection(a.PAYLOADS[0], before, self.evidence['url_replacements'])
+
+    def evidence_case(self):
+        from scripts.submission_schedule import project
+        identifier = 'nyserda:OSWPON26-1'
+        old = project(self.before[a.PAYLOADS[0]]['opportunities'][0], date(2026, 10, 12))
+        url_corrected = project(self.after[a.PAYLOADS[0]]['opportunities'][0], date(2026, 10, 12))
+        for row in (old, url_corrected):
+            row.update(document_evidence_status='current', document_evidence_checked_at=self.stamp,
+                       document_evidence={'facts': [], 'document': {'url': 'https://portal.nyserda.ny.gov/PortalLoginPage',
+                                                                    'sha256': 'b' * 64}},
+                       document_search_text=None, submission_requirements=[], document_status_signals=[])
+        expected = deepcopy(url_corrected)
+        expected['document_evidence_status'] = 'source_changed'
+        expected['document_evidence'] = None
+        for key in ('document_evidence_checked_at', 'submission_requirements', 'document_status_signals'):
+            expected.pop(key)
+        self.before[a.PAYLOADS[0]]['opportunities'][0] = old
+        self.after[a.PAYLOADS[0]]['opportunities'][0] = expected
+        pin = {'before_sha256': a.value_hash(url_corrected), 'after_sha256': a.value_hash(expected),
+               'changed_fields': list(a.INVALIDATED_FIELDS)}
+        self.evidence['evidence_invalidations'] = {identifier: pin}
+        self.evidence['payloads'][a.PAYLOADS[0]].update(before_sha256=a.value_hash(self.before[a.PAYLOADS[0]]),
+            after_sha256=a.value_hash(self.after[a.PAYLOADS[0]]), affected_items={identifier: {
+                'before_sha256': a.value_hash(old), 'after_sha256': a.value_hash(expected), 'url_leaf_count': 5}})
+        cache = {'records': {identifier: {'source_url': self.old, 'source_signature': self.old + '|||||',
+            'status': 'current', 'checked_at': self.stamp, 'facts': [], 'program_areas': [], 'subtopics': []}}}
+        return identifier, url_corrected, cache
+
+    def test_changed_source_withholds_only_pinned_public_evidence_and_preserves_store(self):
+        identifier, url_corrected, cache = self.evidence_case()
+        retained = deepcopy(cache)
+        actual, _ = a.corrected_payload(a.PAYLOADS[0], self.before[a.PAYLOADS[0]], self.evidence, cache=cache)
+        self.assertEqual(actual, self.after[a.PAYLOADS[0]])
+        self.assertEqual(cache, retained)
+        self.assertEqual(actual['generated_at'], self.stamp)
+        self.assertEqual(actual['opportunities'][1], self.before[a.PAYLOADS[0]]['opportunities'][1])
+        self.assertEqual(actual['opportunities'][0]['next_submission'], url_corrected['next_submission'])
+        self.assertEqual(cache['records'][identifier]['status'], 'current')
+        self.assertEqual(cache['records'][identifier]['source_signature'], self.old + '|||||')
+        for name in a.PAYLOADS[1:]:
+            value, _ = a.corrected_payload(name, self.before[name], self.evidence, cache=cache)
+            self.assertEqual(value, self.after[name])
+
+    def test_invalidation_requires_exact_changed_empty_acquisition(self):
+        identifier, row, cache = self.evidence_case()
+        entry = cache['records'][identifier]
+        mutations = [lambda v: v.update(source_url=self.new), lambda v: v.update(source_url='https://example.org/old'),
+                     lambda v: v.update(status='failed'), lambda v: v.update(facts=[{'id': 'real-fact'}]),
+                     lambda v: v.update(program_areas=['Real program']), lambda v: v.update(subtopics=[{'id': 'science'}])]
+        for mutate in mutations:
+            changed = deepcopy(entry); mutate(changed)
+            with self.assertRaisesRegex(ValueError, 'changed_empty_acquisition'):
+                a.invalidate_public_evidence(row, changed, self.evidence['evidence_invalidations'][identifier],
+                                             self.evidence['url_replacements'])
+        with self.assertRaisesRegex(ValueError, 'changed_empty_acquisition'):
+            a.corrected_payload(a.PAYLOADS[0], self.before[a.PAYLOADS[0]], self.evidence)
+
+    def test_unpinned_record_or_hidden_scientific_derived_data_cannot_be_withheld(self):
+        identifier, row, cache = self.evidence_case()
+        pin = self.evidence['evidence_invalidations'][identifier]
+        changed = deepcopy(row); changed['title'] += ' changed'
+        with self.assertRaisesRegex(ValueError, 'exact_evidence_record'):
+            a.invalidate_public_evidence(changed, cache['records'][identifier], pin, self.evidence['url_replacements'])
+        for key, value in [('document_search_text', 'Real science'), ('document_program_areas', ['Real area']),
+                           ('submission_requirements', [{'kind': 'required'}]), ('document_status_signals', ['closed']),
+                           ('document_evidence_status', 'failed')]:
+            changed = deepcopy(row); changed[key] = value
+            adjusted = dict(pin, before_sha256=a.value_hash(changed))
+            with self.assertRaisesRegex(ValueError, 'empty_public_evidence'):
+                a.invalidate_public_evidence(changed, cache['records'][identifier], adjusted, self.evidence['url_replacements'])
+
+    def test_wrong_invalidation_pin_missing_membership_or_extra_field_scope_fails(self):
+        identifier, row, cache = self.evidence_case()
+        evidence = deepcopy(self.evidence)
+        evidence['evidence_invalidations'][identifier]['after_sha256'] = '0' * 64
+        with self.assertRaisesRegex(ValueError, 'exact_evidence_invalidation'):
+            a.corrected_payload(a.PAYLOADS[0], self.before[a.PAYLOADS[0]], evidence, cache=cache)
+        evidence = deepcopy(self.evidence)
+        evidence['evidence_invalidations']['nyserda:missing'] = evidence['evidence_invalidations'].pop(identifier)
+        with self.assertRaisesRegex(ValueError, 'complete_evidence_invalidations'):
+            a.corrected_payload(a.PAYLOADS[0], self.before[a.PAYLOADS[0]], evidence, cache=cache)
+        evidence = deepcopy(self.evidence)
+        evidence['evidence_invalidations'][identifier]['changed_fields'].append('description')
+        with self.assertRaisesRegex(ValueError, 'fixed_evidence_invalidations'):
+            a.corrected_payload(a.PAYLOADS[0], self.before[a.PAYLOADS[0]], evidence, cache=cache)
+
+    def test_normal_projection_cannot_restore_unrelated_source_fields_or_advance_clock(self):
+        identifier, row, cache = self.evidence_case()
+        changed = deepcopy(row)
+        changed['document_evidence']['source_fields'] = {'topic_areas': {'present': True, 'value': ['Changed science']}}
+        pin = dict(self.evidence['evidence_invalidations'][identifier], before_sha256=a.value_hash(changed))
+        with self.assertRaisesRegex(ValueError, 'exact_evidence_invalidation'):
+            a.invalidate_public_evidence(changed, cache['records'][identifier], pin, self.evidence['url_replacements'])
+        changed = deepcopy(row); changed['next_submission']['as_of'] = '2028-01-01'
+        pin['before_sha256'] = a.value_hash(changed)
+        with self.assertRaisesRegex(ValueError, 'exact_evidence_invalidation'):
+            a.invalidate_public_evidence(changed, cache['records'][identifier], pin, self.evidence['url_replacements'])
 
     def fixture(self, directory):
         parent = Path(directory) / 'files'

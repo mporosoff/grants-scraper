@@ -671,5 +671,131 @@ class UrlParentSupersession(unittest.TestCase):
             self.superseded()
 
 
+class UrlSiblingSupersession(unittest.TestCase):
+    # Reuse only the synthetic fixture helpers, not the parent's test suite.
+    seal = UrlParentSupersession.seal
+    git_read = UrlParentSupersession.git_read
+    superseded = UrlParentSupersession.superseded
+
+    def setUp(self):
+        from copy import deepcopy
+        UrlParentSupersession.setUp(self)
+        self.parent_run, self.parent_artifacts = self.run, self.artifacts
+        self.proof = deepcopy(self.url.SUPERSEDED_URL_CORRECTION)
+        owner = self.proof['producer']
+        self.run = self.run | {'id': owner['run_id'], 'run_attempt': owner['run_attempt'],
+                              'head_sha': owner['event_sha']}
+        names = {'candidate': 'candidate-' + self.proof['candidate_id'],
+                 'receipt': f"url-correction-{owner['run_id']}-{owner['run_attempt']}"}
+        self.artifacts = [{'id': item['id'], 'name': names[role],
+                           'digest': 'sha256:' + item['sha256'], 'expired': False}
+                          for role, item in self.proof['artifacts'].items()]
+        self.child['url_correction']['superseded_url_correction'] = deepcopy(self.proof)
+        self.seal()
+
+    def test_only_exact_published_v2_sibling_retires_the_failed_owner(self):
+        self.assertTrue(self.superseded())
+        self.run['id'] += 1
+        self.assertFalse(self.superseded())
+        self.run['id'] -= 1
+        self.git.side_effect = lambda root, *args: '' if args[0] == 'log' else '{}'
+        self.assertFalse(self.superseded())
+        self.git.side_effect = self.git_read
+        self.child['derived_from_candidate'] = self.proof['candidate_id']
+        self.seal()
+        self.assertFalse(self.superseded(), 'Only the fixed direct051d v2 sibling is supported')
+
+    def test_missing_changed_extra_and_mistyped_supersession_proof_do_not_retire(self):
+        from copy import deepcopy
+        receipt = self.child['url_correction']
+        for path, value in [(('candidate_id',), 'f' * 64), (('manifest_sha256',), 'f' * 64),
+                            (('receipt_sha256',), 'f' * 64), (('producer', 'run_id'), self.url.RUN),
+                            (('producer', 'run_attempt'), True), (('producer', 'event_sha'), 'f' * 40),
+                            (('artifacts', 'candidate', 'id'), 1), (('artifacts', 'receipt', 'sha256'), 'f' * 64),
+                            (('unrecognized',), 'extra')]:
+            proof = deepcopy(self.proof)
+            target = proof
+            for key in path[:-1]: target = target[key]
+            target[path[-1]] = value
+            receipt['superseded_url_correction'] = proof
+            self.seal()
+            with self.subTest(path=path): self.assertFalse(self.superseded())
+        for proof in (None, {}, self.proof['candidate_id']):
+            receipt['superseded_url_correction'] = proof
+            self.seal()
+            self.assertFalse(self.superseded())
+        receipt.pop('superseded_url_correction')
+        self.seal()
+        self.assertFalse(self.superseded())
+
+    def test_v1_receipt_or_wrong_published_pointer_cannot_retire_sibling(self):
+        self.child['url_correction']['version'] = 'catalog-url-correction-20261012-v1'
+        self.seal()
+        with self.assertRaises(scheduled.Hold): self.superseded()
+        self.child['url_correction']['version'] = self.url.VERSION
+        self.seal()
+        self.pointer['artifact_run'] = '40000000001'
+        with self.assertRaises(scheduled.Hold): self.superseded()
+        self.seal()
+        self.child['identity_correction']['affected_generation']['generation_run_id'] = str(self.run['id'])
+        self.seal()
+        with self.assertRaises(scheduled.Hold): self.superseded()
+
+    def test_later_attempt_active_run_changed_event_or_origin_remains_an_owner(self):
+        for key, value in [('run_attempt', 2), ('run_attempt', '1'), ('status', 'in_progress'),
+                           ('head_sha', 'f' * 40), ('head_branch', 'other'), ('event', 'push'),
+                           ('path', 'other.yml'), ('conclusion', 'success')]:
+            original = self.run[key]
+            self.run[key] = value
+            with self.subTest(key=key): self.assertFalse(self.superseded())
+            self.run[key] = original
+
+    def test_exact_artifacts_and_no_reservations_are_required(self):
+        for index in (0, 1):
+            for key, value in [('id', 1), ('name', 'replaced'), ('digest', 'sha256:' + 'f' * 64), ('expired', True)]:
+                original = self.artifacts[index][key]
+                self.artifacts[index][key] = value
+                with self.subTest(index=index, key=key): self.assertFalse(self.superseded())
+                self.artifacts[index][key] = original
+        receipt = self.artifacts.pop()
+        self.assertFalse(self.superseded())
+        self.artifacts.append(receipt)
+        for name in ('generation-spend-reservation-' + str(self.run['id']) + '-1',
+                     'program-area-vectors-' + 'a' * 64 + '-reservation-' + str(self.run['id']) + '-1',
+                     'candidate-' + 'e' * 64):
+            self.artifacts.append({'name': name})
+            self.assertFalse(self.superseded())
+            self.artifacts.pop()
+
+    def test_both_failed_owners_hold_before_publication_and_retire_only_after_v2(self):
+        boundary = {'id': 38275115281}
+        batches = {'actions/workflows/refresh-opportunities.yml/runs?branch=main':
+                       [self.run, self.parent_run, boundary],
+                   f"actions/runs/{self.run['id']}/artifacts": self.artifacts,
+                   f"actions/runs/{self.parent_run['id']}/artifacts": self.parent_artifacts}
+        environment = ENV | {'GITHUB_RUN_ID': '41000000000'}
+        manifest = {'generation_run_id': str(boundary['id'])}
+        manifest['candidate_id'] = c.digest(c.encoded(manifest))
+        base = {'stage': 'generate', 'reason': 'current source inputs changed'}
+        with patch.object(scheduled, '_published', return_value=set()), \
+             patch.object(scheduled, '_pages', side_effect=lambda repository, path, key: iter([batches[path]])), \
+             patch.object(c, 'read_json', return_value=manifest):
+            self.git.side_effect = lambda root, *args: '' if args[0] == 'log' else '{}'
+            held = scheduled.hold_competing_generation(Path('unused'), environment, base)
+            self.assertEqual((held['stage'], held['held_stage']), ('noop', 'generate'))
+            self.assertIn(str(self.run['id']), held['reason'])
+            self.assertIn(str(self.parent_run['id']), held['reason'])
+            self.git.side_effect = self.git_read
+            self.assertIsNone(scheduled.prior_generation(Path('unused'), environment, manifest))
+            self.assertEqual(scheduled.hold_competing_generation(Path('unused'), environment, base), base)
+            self.run['run_attempt'] = 2
+            self.assertEqual(scheduled.prior_generation(Path('unused'), environment, manifest),
+                             (str(self.run['id']), self.proof['candidate_id']))
+            self.run['run_attempt'] = 1
+            self.artifacts.append({'name': 'candidate-' + 'f' * 64, 'expired': False})
+            with self.assertRaisesRegex(scheduled.Hold, 'Multiple candidate identities'):
+                scheduled.prior_generation(Path('unused'), environment, manifest)
+
+
 if __name__ == '__main__':
     unittest.main()

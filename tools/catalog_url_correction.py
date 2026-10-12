@@ -1,5 +1,6 @@
 """Authenticated URL-only descendant of the preserved October 12 identity repair."""
 from __future__ import annotations
+from copy import deepcopy
 import argparse
 from datetime import datetime, timezone
 import os
@@ -12,7 +13,7 @@ from tools import catalog_identity_correction as identity
 from tools import catalog_smoke_receipt as auth
 from tools import release_candidate as c
 
-VERSION = 'catalog-url-correction-20261012-v1'
+VERSION = 'catalog-url-correction-20261012-v2'
 PARENT = '051d6844ea23709628b9c9209f4a947e309d2427928b0dc19e8ffb8eb8f3cfc4'
 RUN = 38280685194
 ATTEMPT = 1
@@ -30,6 +31,20 @@ ARTIFACTS = {
         '5e8ce46113b26d2714039d77793a7886ae25c5fa5d62ded5b0a9bb5ca3706f17'),
 }
 IDENTITY_RECEIPT_SHA = '792f7c054059eb0d7d79a5ba8f3c2c0dc4beea2694b9041e17e280937fa235a8'
+SUPERSEDED_URL_CORRECTION = {
+    'candidate_id': '3912542572b1e8d85fd5165940597a830f2f9dc122c1887fb760019b0034892a',
+    'manifest_sha256': 'efcba2ef870b80d4506a81b52ad5289f2eec5c5407bb22156c3628cd1ffc1568',
+    'producer': {'run_id': 38286330702, 'run_attempt': 1,
+        'event_sha': '92e940c802e1caec72e2d652cc30be85a2752ff7'},
+    'receipt_sha256': '6054ab775ea50da2377823bee319991ae3631cb8447ae4c6ce4adedbbd7be564',
+    'artifacts': {
+        'candidate': {'id': 11763337425,
+            'sha256': '9416cee9be29a5b87c152fbb3d8bb251eb1ba43c1fe4816412d06a4a2eb6263b'},
+        'receipt': {'id': 11763716011,
+            'sha256': '8e16e21c9a9244af617bcf57155bc38dfad3b24393238f36f940b37a840e7b19'},
+    },
+}
+
 
 
 def require(ok, reason):
@@ -38,7 +53,8 @@ def require(ok, reason):
 
 
 def reject_quarantined(manifest):
-    require(manifest.get('candidate_id') != PARENT, 'rejected_candidate_requires_exact_url_correction')
+    require(manifest.get('candidate_id') not in {PARENT, SUPERSEDED_URL_CORRECTION['candidate_id']},
+        'rejected_candidate_requires_exact_url_correction')
 
 
 def plan(root, environment):
@@ -52,6 +68,47 @@ def plan(root, environment):
     return {'stage': STAGE, 'release_sha': c.git(root, 'rev-parse', 'HEAD'),
         'candidate_id': PARENT, 'candidate_run': str(RUN), 'openai': 'false', 'anthropic': 'false',
         'team_mode': 'maintenance', 'reason': 'Authenticated NYSERDA navigation correction; identical science and vectors; no new allowance'}
+
+
+def authenticate_superseded(original, *, api):
+    """Bind retirement to the complete failed sibling, never a new allowance."""
+    proof = SUPERSEDED_URL_CORRECTION
+    producer = proof['producer']
+    run = identity.original_run(producer['run_id'], producer['event_sha'], 'failure', api=api)
+    latest = auth.json_value(api(f"actions/runs/{producer['run_id']}"))
+    require(all(latest.get(k) == run.get(k) for k in (
+        'id', 'run_attempt', 'head_sha', 'head_branch', 'path', 'event', 'status', 'conclusion')),
+        'superseded_latest_attempt')
+    names = {'candidate': 'candidate-' + proof['candidate_id'],
+        'receipt': f"url-correction-{producer['run_id']}-{producer['run_attempt']}"}
+    packets = {}
+    for role, pin in proof['artifacts'].items():
+        raw, _ = auth.authenticated_zip(pin['id'], names[role], run, 'sha256:' + pin['sha256'], api=api)
+        packets[role] = identity.archive_files(raw)
+    packet = packets['candidate']
+    manifest = auth.json_value(packet['candidate.json'])
+    require(c.digest(packet['candidate.json']) == proof['manifest_sha256']
+        and manifest.get('candidate_id') == proof['candidate_id']
+        and c.digest(c.encoded({k:v for k,v in manifest.items() if k != 'candidate_id'})) == proof['candidate_id'],
+        'superseded_manifest')
+    require(set(packet) == {'candidate.json'} | {'files/' + n for n in manifest['files']}
+        and all(c.digest(packet['files/' + n]) == h for n,h in manifest['files'].items()),
+        'complete_superseded')
+    require(set(packets['receipt']) == {'receipt.json'}
+        and c.digest(packets['receipt']['receipt.json']) == proof['receipt_sha256'], 'superseded_receipt_pin')
+    prior = auth.json_value(packets['receipt']['receipt.json'])
+    require(prior['version'] == 'catalog-url-correction-20261012-v1'
+        and prior['parent_candidate'] == PARENT and prior['parent_manifest_sha256'] == MANIFEST_SHA
+        and prior['parent_run'] == RUN and manifest['derived_from_candidate'] == PARENT
+        and manifest['assembly_sha'] == producer['event_sha']
+        and all(manifest['url_correction'].get(k) == v for k,v in prior.items()), 'superseded_lineage')
+    require(all(manifest['url_correction']['affected_generation'].get(k) == v for k,v in {
+        'generation_sha': producer['event_sha'], 'generation_run_id': str(producer['run_id']),
+        'generation_run_attempt': str(producer['run_attempt'])}.items()), 'superseded_producer')
+    require(all(manifest[k] == original[k] for k in ('generation_sha', 'generation_run_id',
+        'generation_run_attempt', 'generation_timestamp', 'original_generation', 'identity_correction',
+        'team_identity', 'semantic_identity')), 'superseded_origin')
+    return deepcopy(proof)
 
 
 def authenticate(parent_bundle, *, api=auth.existing.api):
@@ -91,6 +148,7 @@ def authenticate(parent_bundle, *, api=auth.existing.api):
         'retained_science_origin')
     require(original['original_generation'] == {k: generated[k] for k in original['original_generation']},
         'original_generation_receipt')
+    authenticate_superseded(original, api=api)
     return original, dict(spending) | {'identity_parent': {'candidate_id': PARENT,
         'manifest_sha256': MANIFEST_SHA, 'run_id': RUN, 'receipt_sha256': IDENTITY_RECEIPT_SHA,
         'artifacts': {role: {'id': item[0], 'name': item[1], 'sha256': item[2]}
@@ -125,6 +183,7 @@ def derive(parent_bundle, audit_at):
 def receipt_for(original, spending, outputs, proof, audit_at):
     return {'version': VERSION, 'parent_candidate': PARENT, 'parent_manifest_sha256': MANIFEST_SHA,
         'parent_run': RUN, 'audit_at': audit_at, 'spending': spending, 'projection': proof,
+        'superseded_url_correction': deepcopy(SUPERSEDED_URL_CORRECTION),
         'output_hashes': {n: c.digest(raw) for n, raw in sorted(outputs.items())},
         'retained_hashes': {n: h for n, h in original['files'].items() if n not in outputs
             and not c.FACET_FEED_NAME.fullmatch(n)}}

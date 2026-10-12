@@ -57,6 +57,36 @@ class URLFixture(AuthenticationFixture):
         for name,value in [('PARENT',self.child['candidate_id']),('MANIFEST_SHA',c.digest(self.child_raw)),
                            ('IDENTITY_RECEIPT_SHA',c.digest(c.encoded(self.receipt))),('ARTIFACTS',self.url_pins)]:
             self.stack.enter_context(patch.object(u,name,value))
+        self.superseded_receipt={'version':'catalog-url-correction-20261012-v1',
+            'parent_candidate':u.PARENT,'parent_manifest_sha256':u.MANIFEST_SHA,'parent_run':u.RUN}
+        self.superseded=deepcopy(self.child)
+        self.superseded.update(derived_from_candidate=u.PARENT,assembly_sha='9'*40,
+            url_correction=self.superseded_receipt | {'affected_generation':{
+                'generation_sha':'9'*40,'generation_run_id':'800','generation_run_attempt':'1',
+                'generation_timestamp':'2026-10-12T17:48:18+00:00'}})
+        self.superseded.pop('candidate_id')
+        self.superseded['candidate_id']=c.digest(c.encoded(self.superseded))
+        self.superseded_entries={'candidate':[('candidate.json',c.encoded(self.superseded))]+
+            [('files/'+n,b) for n,b in self.payloads.items()],
+            'receipt':[('receipt.json',c.encoded(self.superseded_receipt))]}
+        self.superseded_run=dict(self.run,id=800,head_sha='9'*40)
+        self.superseded_latest=deepcopy(self.superseded_run)
+        self.superseded_proof={'candidate_id':self.superseded['candidate_id'],
+            'manifest_sha256':c.digest(c.encoded(self.superseded)),
+            'producer':{'run_id':800,'run_attempt':1,'event_sha':'9'*40},
+            'receipt_sha256':c.digest(c.encoded(self.superseded_receipt)),
+            'artifacts':{'candidate':{'id':801},'receipt':{'id':802}}}
+        self.refresh_superseded_archives()
+        self.stack.enter_context(patch.object(u,'SUPERSEDED_URL_CORRECTION',self.superseded_proof))
+
+    def refresh_superseded_archives(self):
+        self.superseded_archives={role:archive(entries) for role,entries in self.superseded_entries.items()}
+        self.superseded_metadata={}
+        for role,pin in self.superseded_proof['artifacts'].items():
+            digest=c.digest(self.superseded_archives[role]);pin['sha256']=digest
+            name='candidate-'+self.superseded['candidate_id'] if role=='candidate' else 'url-correction-800-1'
+            self.superseded_metadata[role]={'id':pin['id'],'name':name,'expired':False,
+                'digest':'sha256:'+digest,'workflow_run':{'id':800,'head_sha':'9'*40}}
 
     def refresh_url_archives(self):
         self.url_archives={role:archive(entries) for role,entries in self.url_entries.items()}
@@ -67,6 +97,11 @@ class URLFixture(AuthenticationFixture):
                                     'workflow_run':{'id':u.RUN,'head_sha':u.EVENT_SHA}}
 
     def read_url_api(self,path):
+        if path=='actions/runs/800/attempts/1':return c.encoded(self.superseded_run)
+        if path=='actions/runs/800':return c.encoded(self.superseded_latest)
+        for role,pin in self.superseded_proof['artifacts'].items():
+            if path==f"actions/artifacts/{pin['id']}":return c.encoded(self.superseded_metadata[role])
+            if path==f"actions/artifacts/{pin['id']}/zip":return self.superseded_archives[role]
         if path==f'actions/runs/{u.RUN}/attempts/1':return c.encoded(self.url_run)
         for role,(identifier,_,_) in self.url_pins.items():
             if path==f'actions/artifacts/{identifier}':return c.encoded(self.url_metadata[role])
@@ -110,6 +145,38 @@ class URLAuthentication(unittest.TestCase):
         self.f.url_entries['receipt'][0]=('receipt.json',c.encoded(self.f.receipt)+b' ')
         self.f.refresh_url_archives()
         with self.assertRaisesRegex(ValueError,'identity_receipt_pin'):self.f.authenticate_url()
+
+    def test_superseded_run_must_remain_exact_terminal_attempt(self):
+        for key,value in [('status','in_progress'),('head_sha','0'*40),('run_attempt',2),('conclusion','success')]:
+            with self.subTest(key=key):
+                saved=self.f.superseded_latest[key];self.f.superseded_latest[key]=value
+                with self.assertRaisesRegex(ValueError,'superseded_latest_attempt'):self.f.authenticate_url()
+                self.f.superseded_latest[key]=saved
+
+    def test_superseded_artifacts_and_complete_manifest_remain_authenticated(self):
+        self.f.superseded_metadata['receipt']['expired']=True
+        with self.assertRaisesRegex(ConfigurationFailure,'artifact_metadata'):self.f.authenticate_url()
+        self.f.superseded_metadata['receipt']['expired']=False
+        self.f.superseded_archives['candidate']+=b'tampered'
+        with self.assertRaisesRegex(ConfigurationFailure,'raw_artifact_digest'):self.f.authenticate_url()
+        self.f.refresh_superseded_archives()
+        self.f.superseded_entries['candidate'].append(('files/extra.txt',b'unreviewed'))
+        self.f.refresh_superseded_archives()
+        with self.assertRaisesRegex(ValueError,'complete_superseded'):self.f.authenticate_url()
+
+    def test_superseded_receipt_and_manifest_pins_cannot_be_relabelled(self):
+        self.f.superseded_entries['receipt'][0]=('receipt.json',c.encoded(self.f.superseded_receipt)+b' ')
+        self.f.refresh_superseded_archives()
+        with self.assertRaisesRegex(ValueError,'superseded_receipt_pin'):self.f.authenticate_url()
+        self.f.superseded_entries['receipt'][0]=('receipt.json',c.encoded(self.f.superseded_receipt))
+        self.f.refresh_superseded_archives()
+        self.f.superseded_proof['manifest_sha256']='0'*64
+        with self.assertRaisesRegex(ValueError,'superseded_manifest'):self.f.authenticate_url()
+
+    def test_both_rejected_candidates_are_quarantined(self):
+        for identifier in (u.PARENT,u.SUPERSEDED_URL_CORRECTION['candidate_id']):
+            with self.assertRaisesRegex(ValueError,'rejected_candidate'):u.reject_quarantined({'candidate_id':identifier})
+        u.reject_quarantined({'candidate_id':'a'*64})
 
     def test_original_allowance_cannot_be_replaced_after_parent_authentication(self):
         state=self.f.state['ledger.json']
