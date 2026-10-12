@@ -21,6 +21,8 @@ GENERATION_SHA = identity.GENERATION_SHA
 MANIFEST_SHA = 'f11c8bed90de162868348b262d6b200e2f36bb13c2601b73fbb423c5de4162c1'
 STAGE = 'catalog-url-correction'
 SOURCE_REPAIR_FILES = {'scripts/build_catalog.py'}
+PARSER_BEFORE = '7fe9508cc8d12663392b4132a2b8426761a7e791710b68ea2f50fcdcad4af475'
+PARSER_AFTER = 'b4473b337770e250a8217cfcf6ba55c1552163efbd3efa79a4267a541f4f529f'
 ARTIFACTS = {
     'candidate': (11761850155, 'candidate-' + PARENT,
         '840ed6e75e6090ffa16c47071b82c031c133031de1324654200e3a26cb788123'),
@@ -97,9 +99,16 @@ def authenticate(parent_bundle, *, api=auth.existing.api):
 
 def verify_source_scope(root, original):
     from tools.release_dependencies import snapshot, changed_groups
-    changes = changed_groups(original['dependency_groups'], snapshot(root))
+    current = snapshot(root)
+    changes = changed_groups(original['dependency_groups'], current)
     require(set(changes.get('source', [])) <= SOURCE_REPAIR_FILES
         and not changes.get('teams') and not changes.get('semantic'), 'bounded_dependency_changes')
+    # An ancestor and changed filename cannot bind a future manual dispatch to
+    # the reviewed parser. Require this semantic transition even if no paths
+    # differ, so an unchanged/reverted parser cannot bless the retained data.
+    require(original['dependency_groups']['source']['files'].get('scripts/build_catalog.py') == PARSER_BEFORE
+        and current['source']['files'].get('scripts/build_catalog.py') == PARSER_AFTER,
+        'exact_parser_transition')
 
 
 def dependency_scope(root, original):

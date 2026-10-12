@@ -153,7 +153,9 @@ adapter-to-catalog checks cover the notice, deadline and contact paths; old
 malformed-URL link-health results cannot match the corrected address.
 
 The protected manual `catalog-url-correction` selector accepts only that exact
-parent and run. It authenticates the complete parent candidate and prior identity
+parent and run, and unconditionally pins the exact before/after semantic parser
+fingerprints. A later parser change, unchanged parser, or reversion cannot reuse
+this correction selector to claim new generation. It authenticates the complete parent candidate and prior identity
 receipt, reauthenticates the original generation's spending state/reservation,
 and applies a pinned URL-only projection. It corrects navigation fields in the
 catalog, source cache and retained feed snapshots without creating new events or

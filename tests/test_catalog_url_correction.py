@@ -14,9 +14,17 @@ from tests.test_catalog_identity_correction import AuthenticationFixture
 from tests.test_catalog_source_recovery import archive, groups, changed_group
 
 
+def parser_groups(parser_hash):
+    value=groups()
+    value['source']['files']['scripts/build_catalog.py']=parser_hash
+    value['source']['fingerprint']=c.digest(c.encoded(value['source']['files']))
+    return value
+
+
 class URLFixture(AuthenticationFixture):
     def __init__(self):
         super().__init__()
+        self.manifest['dependency_groups']=parser_groups(u.PARSER_BEFORE)
         self.manifest.update(generation_timestamp='2026-10-12T16:13:28+00:00',
                              team_identity={'generation_id':'unchanged'},semantic_identity={'corpus_sha256':'a'*64})
         self.manifest.pop('candidate_id')
@@ -111,13 +119,30 @@ class URLAuthentication(unittest.TestCase):
 
 
 class URLReplay(unittest.TestCase):
-    def test_nyserda_only_dependency_boundary(self):
-        original={'dependency_groups':groups(),'runtime_baseline':{}}
-        with patch.object(d,'snapshot',return_value=changed_group(original['dependency_groups'],'source','scripts/build_catalog.py')),patch.object(c,'git',return_value=''):
-            u.dependency_scope(Path('.'),original)
+    def test_exact_parser_pair_and_validation_only_changes_pass(self):
+        original={'dependency_groups':parser_groups(u.PARSER_BEFORE),'runtime_baseline':{}}
+        after=parser_groups(u.PARSER_AFTER)
+        for snapshot in (after,changed_group(after,'validation','tests/test_source_urls.py')):
+            with patch.object(d,'snapshot',return_value=snapshot),patch.object(c,'git',return_value=''):
+                u.dependency_scope(Path('.'),original)
+
+    def test_only_reviewed_parser_transition_can_bless_retained_generation(self):
+        original={'dependency_groups':parser_groups(u.PARSER_BEFORE),'runtime_baseline':{}}
+        for after in (parser_groups('f'*64),parser_groups(u.PARSER_BEFORE),groups()):
+            with self.subTest(after=after),patch.object(d,'snapshot',return_value=after):
+                with self.assertRaisesRegex(ValueError,'exact_parser_transition'):
+                    u.verify_source_scope(Path('.'),original)
+        for before in (parser_groups('f'*64),parser_groups(u.PARSER_AFTER),groups()):
+            with self.subTest(before=before),patch.object(d,'snapshot',return_value=parser_groups(u.PARSER_AFTER)):
+                with self.assertRaisesRegex(ValueError,'exact_parser_transition'):
+                    u.verify_source_scope(Path('.'),{'dependency_groups':before})
+
+    def test_other_generation_changes_remain_blocked(self):
+        original={'dependency_groups':parser_groups(u.PARSER_BEFORE),'runtime_baseline':{}}
+        after=parser_groups(u.PARSER_AFTER)
         for group,name in [('source','scripts/sources/merge.py'),('source','@generation_invocations'),
                            ('teams','config/offline_ai.json'),('semantic','assets/search-hybrid.js')]:
-            with self.subTest(group=group,name=name),patch.object(d,'snapshot',return_value=changed_group(original['dependency_groups'],group,name)):
+            with self.subTest(group=group,name=name),patch.object(d,'snapshot',return_value=changed_group(after,group,name)):
                 with self.assertRaisesRegex(ValueError,'bounded_dependency_changes'):u.verify_source_scope(Path('.'),original)
 
     def test_exact_protected_selector_only(self):
@@ -142,7 +167,7 @@ class URLReplay(unittest.TestCase):
         for name,raw in f.payloads.items():
             p=root/name;p.parent.mkdir(parents=True,exist_ok=True);p.write_bytes(outputs.get(name,raw))
         c.write_json(receipt_path,receipt)
-        with patch.object(u,'authenticate',return_value=(original,spending)),patch.object(u,'derive',return_value=(outputs,proof)),patch.object(d,'snapshot',return_value=original['dependency_groups']):
+        with patch.object(u,'authenticate',return_value=(original,spending)),patch.object(u,'derive',return_value=(outputs,proof)),patch.object(d,'snapshot',return_value=parser_groups(u.PARSER_AFTER)):
             retained=u.verify_inputs(root,original,f.url_bundle,receipt_path)
             self.assertIn('config/opportunity_team_model.json',retained)
             path=root/'config/opportunity_team_model.json';path.write_bytes(b'changed science')
