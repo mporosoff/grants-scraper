@@ -260,13 +260,29 @@ class ProposedTeamTests(unittest.TestCase):
         self.assertEqual(invalidate_stale_sources(model, source_fingerprints(model, current([child]))),
                          ["parent:two"])
 
-    def test_published_curated_catalog_has_explicit_current_source_baselines(self):
+    def test_retained_curated_catalog_has_explicit_historical_source_baselines(self):
         model = json.loads(Path("config/opportunity_team_model.json").read_text(encoding="utf-8"))
-        fingerprints = source_fingerprints(model, scopes())
         curated = [row for row in model["opportunities"] if not row.get("generator_version")]
         self.assertTrue(curated)
         for row in curated:
             self.assertRegex(row.get("source_fingerprint", ""), r"^[a-f0-9]{64}$")
+
+    def test_reviewed_curated_baselines_reproduce_from_frozen_source_inputs(self):
+        # Retained scientific history survives a notice's closure or removal.
+        # Reproduce the reviewed baseline at its original date, not against a
+        # later catalog; current-source invalidation is checked independently.
+        from scripts.currentness import record_is_current
+        from scripts.researcher_registry import content_hash
+        fixture = json.loads(Path("tests/fixtures/curated_team_source_baselines.json").read_bytes())
+        as_of = date.fromisoformat(fixture["provenance"]["as_of"])
+        for scope in fixture["candidates"]:
+            self.assertEqual(scope["source_fingerprint"],
+                             content_hash({k: v for k, v in scope.items() if k != "source_fingerprint"}))
+        with patch("scripts.build_opportunity_teams._load_catalog", return_value=fixture["parents"]), patch(
+                "scripts.build_opportunity_teams.record_is_current",
+                side_effect=lambda row: record_is_current(row, as_of)):
+            fingerprints = source_fingerprints(fixture, fixture["candidates"])
+        for row in fixture["opportunities"]:
             if row.get("review_state") != "needs_revalidation":
                 self.assertEqual(row["source_fingerprint"], fingerprints.get(row["id"]))
 

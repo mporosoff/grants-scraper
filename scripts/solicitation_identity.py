@@ -65,6 +65,12 @@ def sponsor_identity(record):
 
 
 def solicitation_key(record):
+    from scripts.sources.nsf_identity import record_identity as nsf_identity
+    state, proof_number = nsf_identity(record)
+    if state == 'resolved':
+        return 'nsf', proof_number
+    if state in {'unresolved', 'conflict'}:
+        return None
     sponsor = sponsor_identity(record)
     number = normalized_number(record.get('opportunity_number'))
     if sponsor == 'nsf':

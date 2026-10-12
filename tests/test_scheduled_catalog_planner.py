@@ -7,7 +7,7 @@ from tempfile import TemporaryDirectory
 import unittest
 from unittest.mock import patch
 
-from tools import plan_release as planner
+from tools import plan_release as planner, scheduled_catalog as scheduled
 
 
 class ScheduledCatalogPlanner(unittest.TestCase):
@@ -20,6 +20,9 @@ class ScheduledCatalogPlanner(unittest.TestCase):
                      'candidate_id': self.candidate, 'candidate_run': '100'}
         planner.c.write_json(self.root / 'release/candidate-source.json',
                              {'candidate_id': self.candidate, 'artifact_run': '100'})
+        self.manifest = {'generation_run_id': '100'}
+        self.manifest['candidate_id'] = planner.c.digest(planner.c.encoded(self.manifest))
+        planner.c.write_json(self.root / 'release/candidate.json', self.manifest)
         self.environment = {
             'GITHUB_EVENT_NAME': 'schedule', 'REQUESTED_STAGE': 'auto',
             'GITHUB_REPOSITORY': 'owner/repo', 'GITHUB_RUN_ID': '300',
@@ -35,7 +38,7 @@ class ScheduledCatalogPlanner(unittest.TestCase):
                       'daily_status': 'due', 'recovery_run': ''}
 
     def invoke(self, *, environment=None, pending=None, resumed=None, planned=None,
-               resolution=None, automatic_paid_hold=False):
+               resolution=None, automatic_paid_hold=False, owner=None, owner_error=None):
         env = self.environment | (environment or {})
         for name in ('output', 'summary'):
             (self.root / name).write_text('', encoding='utf-8')
@@ -54,6 +57,7 @@ class ScheduledCatalogPlanner(unittest.TestCase):
                 patch.object(planner, 'latest_report', side_effect=latest) as reports, \
                 patch.object(planner, 'plan', return_value=dict(planned or self.base)) as plan_call, \
                 patch('tools.scheduled_catalog.resolve', side_effect=resolve) as daily_call, \
+                patch.object(scheduled, 'prior_generation', return_value=owner, side_effect=owner_error) as history, \
                 patch('tools.team_provider.provider_names', return_value=('anthropic',)) as providers, \
                 patch('sys.stdout', new=io.StringIO()):
             planner.main(automatic_paid_hold=automatic_paid_hold)
@@ -63,7 +67,7 @@ class ScheduledCatalogPlanner(unittest.TestCase):
             'outputs': (self.root / 'output').read_text(encoding='utf-8').splitlines(),
             'summary': (self.root / 'summary').read_text(encoding='utf-8'),
             'pending': pending_call, 'resume': resume_call, 'reports': reports,
-            'plan': plan_call, 'daily': daily_call, 'providers': providers,
+            'plan': plan_call, 'daily': daily_call, 'providers': providers, 'history': history,
         }
 
     def test_automatic_schedule_resolves_after_base_plan_and_keeps_recovery_receipt(self):
@@ -132,6 +136,80 @@ class ScheduledCatalogPlanner(unittest.TestCase):
                     run['daily'].assert_not_called()
                     self.assertEqual(run['result']['stage'], 'generate')
                     self.assertNotIn('daily_status', run['result'])
+                    self.assertEqual(run['history'].call_count, int(event == 'push' and requested == 'auto'))
+
+    def test_push_paid_stages_hold_the_existing_owner_before_provider_outputs(self):
+        for stage in ('generate', 'teams', 'backfill'):
+            for requested in ('', 'auto'):
+                with self.subTest(stage=stage, requested=requested):
+                    run = self.invoke(environment={'GITHUB_EVENT_NAME': 'push', 'REQUESTED_STAGE': requested},
+                                      planned=self.base | {'stage': stage}, owner=('200', 'c' * 64))
+                    result = run['result']
+                    self.assertEqual((result['stage'], result['held_stage'], result['recovery_run']),
+                                     ('noop', stage, '200'))
+                    self.assertEqual((result['candidate_run'], result['candidate_id']), ('100', self.candidate))
+                    self.assertIn('Original run: 200', result['reason'])
+                    self.assertNotIn('daily_status', result)
+                    self.assertNotIn('daily_window_start', result)
+                    self.assertEqual((result['openai'], result['anthropic']), ('false', 'false'))
+                    self.assertIn('stage=noop', run['outputs'])
+                    self.assertIn('recovery_run=200', run['outputs'])
+                    run['history'].assert_called_once_with(self.root, self.environment | {
+                        'GITHUB_EVENT_NAME': 'push', 'REQUESTED_STAGE': requested}, self.manifest)
+                    run['daily'].assert_not_called()
+                    run['providers'].assert_not_called()
+
+    def test_push_accounting_or_history_failure_cannot_start_replacement_generation(self):
+        for error in (scheduled.Hold('Allowance reserved without a candidate', '200'),
+                      scheduled.Hold('Multiple unfinished generation runs'), ValueError('Invalid release history')):
+            with self.subTest(error=str(error)):
+                run = self.invoke(environment={'GITHUB_EVENT_NAME': 'push'}, owner_error=error)
+                self.assertEqual((run['result']['stage'], run['result']['recovery_run']),
+                                 ('noop', getattr(error, 'run', '')))
+                self.assertIn(str(error), run['result']['reason'])
+                run['providers'].assert_not_called()
+
+    def test_push_without_prior_owner_keeps_generation_and_original_run_identity(self):
+        for attempt in ('1', '4'):
+            with self.subTest(attempt=attempt):
+                run = self.invoke(environment={'GITHUB_EVENT_NAME': 'push', 'GITHUB_RUN_ATTEMPT': attempt})
+                self.assertEqual(run['result']['stage'], 'generate')
+                self.assertNotIn('held_stage', run['result'])
+                self.assertNotIn('recovery_run', run['result'])
+                self.assertEqual(run['history'].call_args.args[1]['GITHUB_RUN_ID'], '300')
+                self.assertEqual(run['history'].call_args.args[1]['GITHUB_RUN_ATTEMPT'], attempt)
+                self.assertEqual(run['result']['anthropic'], 'true')
+
+    def test_push_reuse_publication_and_same_run_candidate_resume_skip_paid_owner_guard(self):
+        for stage in ('reuse', 'validate', 'publish', 'verify', 'noop'):
+            with self.subTest(stage=stage):
+                run = self.invoke(environment={'GITHUB_EVENT_NAME': 'push'},
+                                  planned=self.base | {'stage': stage}, owner=('200', 'c' * 64))
+                self.assertEqual(run['result']['stage'], stage)
+                run['history'].assert_not_called()
+        pending = {'REQUESTED_STAGE': 'publish', 'CANDIDATE_RUN': '200', 'CANDIDATE_ID': 'c' * 64}
+        run = self.invoke(environment={'GITHUB_EVENT_NAME': 'push'}, pending=pending,
+                          planned=self.base | {'stage': 'publish', 'candidate_run': '200', 'candidate_id': 'c' * 64})
+        self.assertEqual(run['result']['candidate_run'], '200')
+        run['history'].assert_not_called()
+        run = self.invoke(environment={'GITHUB_EVENT_NAME': 'push', 'GITHUB_RUN_ATTEMPT': '4'},
+                          resumed={'candidate_id': 'd' * 64},
+                          planned=self.base | {'stage': 'publish', 'candidate_run': '300', 'candidate_id': 'd' * 64})
+        self.assertEqual(run['result']['candidate_run'], '300')
+        run['history'].assert_not_called()
+
+    def test_manual_named_recovery_and_finite_paid_hold_keep_their_existing_scope(self):
+        named = {'GITHUB_EVENT_NAME': 'workflow_dispatch', 'REQUESTED_STAGE': 'publish',
+                 'CANDIDATE_RUN': '200', 'CANDIDATE_ID': 'c' * 64}
+        run = self.invoke(environment=named, owner=('250', 'd' * 64),
+                          planned=self.base | {'stage': 'publish', 'candidate_run': '200', 'candidate_id': 'c' * 64})
+        self.assertEqual(run['result']['stage'], 'publish')
+        self.assertEqual(run['result']['candidate_run'], '200')
+        run['history'].assert_not_called()
+        run = self.invoke(environment={'GITHUB_EVENT_NAME': 'push'}, automatic_paid_hold=True)
+        self.assertEqual((run['result']['stage'], run['result']['held_stage']), ('noop', 'generate'))
+        run['history'].assert_not_called()
+        run['providers'].assert_not_called()
 
     def test_named_scheduled_checkpoint_does_not_invoke_automatic_resolver(self):
         for selection in (

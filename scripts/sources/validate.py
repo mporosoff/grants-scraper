@@ -41,13 +41,17 @@ def _official_url(record: dict) -> str | None:
     )
 
 
-def record_is_publishable(record: dict, as_of: date) -> tuple[bool, str]:
+def record_is_publishable(record: dict, as_of: date, *, check_identity=True) -> tuple[bool, str]:
     """Return ``(ok, reason)`` for a single external record."""
     if not record.get("title"):
         return False, "missing_title"
     if (str(record.get('opportunity_id') or '').startswith('vpr-email:')
             and is_application_instruction(record['title'])):
         return False, "application_instruction_not_opportunity"
+    from .nsf_identity import record_identity as nsf_identity
+    state, _ = nsf_identity(record, as_of)
+    if check_identity and state in {'unresolved', 'conflict'}:
+        return False, 'nsf_identity_' + state
     if not _official_url(record):
         return False, "missing_official_url"
     if record.get("source_review_after"):
