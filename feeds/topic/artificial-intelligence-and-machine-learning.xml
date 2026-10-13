@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml</id>
-  <updated>2026-10-12T16:10:13Z</updated>
+  <updated>2026-10-13T16:11:25Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Single Source: Scalable and Systematic Neurobiology of Psychiatric and Neurodevelopmental Disorder Risk Genes: Data Resource and Administrative Coordination Center (U24 Clinical Trial Not Allowed)</title>
@@ -111,6 +111,17 @@
     <author><name>Centers for Disease Control and Prevention - ERA</name></author>
     <category term="Artificial intelligence and machine learning"/>
     <summary>Centers for Disease Control and Prevention - ERA | Estimated Application 2026-12-01 | The Centers for Disease Control and Prevention's (CDC) National Center for Injury Prevention and Control (NCIPC) is soliciting investigator-initiated gold standard research proposals to rigorously evaluate programs and policies for their impact on primary prevention of child sexual abuse (CSA) or problematic sexual behavior (PSB) among youth. For the purposes of this NOFO: CSA is defined as sexual…</summary>
+  </entry>
+  <entry>
+    <title>NGA - Boosting Innovative GEOINT - Science &amp; Technology Broad Agency Announcement (BIG-ST BAA): Topic # 07 - Lidar Analysis for Surface &amp; Environmental Reconnaissance (LASER)</title>
+    <link href="https://sam.gov/opp/84cb4b33be0641c1b54c4de34b542ed5/view"/>
+    <id>urn:funding-finder:sam-gov:sam-gov%3A84cb4b33be0641c1b54c4de34b542ed5</id>
+    <updated>2026-10-01T00:00:00Z</updated>
+    <author><name>National Geospatial-Intelligence Agency</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Environmental science"/>
+    <category term="Space and aeronautics"/>
+    <summary>National Geospatial-Intelligence Agency | Preproposal 2026-10-23 | Develop AI/ML methods to extract and classify 3D surface/subsurface objects using NASA ICESat-2 and GEDI lidar, including navigation safety applications. Topic7 LASER only, not BIG-ST parent or closed topics. Parent exists in catalog but specific Topic7 solicitation is distinct. CUI safeguards; foreign nationals need prior written CO/COR approval; HSPD-12 favorable adjudication if access to NGA fa…</summary>
   </entry>
   <entry>
     <title>Grid Modernization Utility Challenge - National Grid</title>
@@ -725,18 +736,6 @@ Successful candidates for a Fellowship generally have a strong record of signifi
     <title>F25AS00332 Highlands Conservation Act - Competitive Funding Round</title>
     <link href="https://www.grants.gov/search-results-detail/362484"/>
     <id>urn:funding-finder:grants-gov:362484</id>
-    <updated>2026-05-19T00:00:00Z</updated>
-    <author><name>Fish and Wildlife Service</name></author>
-    <category term="Environmental science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Water"/>
-    <summary>Fish and Wildlife Service | Application 2026-10-31 | The Highlands Conservation Act Program (HCA) is administered by the US Fish and Wildlife Service (Service) to assist Connecticut, New Jersey, New York, and Pennsylvania in the protection of land and natural resources in the Highlands Region. HCA grants support land conservation projects in which a State, County, or Municipal entity acquires land or an interest in land from a willing seller to cons…</summary>
-  </entry>
-  <entry>
-    <title>F25AS00379 Highlands Conservation Act - Base Funding Round</title>
-    <link href="https://www.grants.gov/search-results-detail/362480"/>
-    <id>urn:funding-finder:grants-gov:362480</id>
     <updated>2026-05-19T00:00:00Z</updated>
     <author><name>Fish and Wildlife Service</name></author>
     <category term="Environmental science"/>

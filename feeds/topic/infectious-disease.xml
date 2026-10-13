@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/infectious-disease.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/infectious-disease.xml</id>
-  <updated>2026-10-12T16:10:13Z</updated>
+  <updated>2026-10-13T16:11:25Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Partnerships for Advancing Development of Diagnostics for Infectious Diseases</title>
@@ -276,6 +276,16 @@
     <summary>National Institutes of Health | Estimated Application 2027-01-29 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission through the continued support of the Collaborative Network for Clinical Research on Immune Tolerance. The purpose of this program is to enhance understanding of the underlying mechanisms of the induction, maintenance, and loss of immune tolerance in humans; and to develop improved tolerogenic interventio…</summary>
   </entry>
   <entry>
+    <title>2027 NIAID DMID Omnibus Broad Agency Announcement: Development of Medical Interventions for Infectious Diseases</title>
+    <link href="https://sam.gov/opp/5f75330f42ee4145990fe6a51a3dc84e/view"/>
+    <id>urn:funding-finder:sam-gov:sam-gov%3A5f75330f42ee4145990fe6a51a3dc84e</id>
+    <updated>2026-10-09T00:00:00Z</updated>
+    <author><name>National Institutes of Health - National Institute of Allergy and Infectious Diseases (NIAID)</name></author>
+    <category term="Education and workforce"/>
+    <category term="Infectious disease"/>
+    <summary>National Institutes of Health - National Institute of Allergy and Infectious Diseases (NIAID) | Full Application 2026-12-08 | Development of infectious-disease vaccine candidates, therapeutic candidates, and in-vitro diagnostics, including stage-appropriate preclinical work and early clinical trials. Cost-reimbursement completion contracts require an adequate accounting system. Educational institutions subject to stated ROTC and military recruiting access restrictions (pp33-34). Clinical research and stage-appropriate pr…</summary>
+  </entry>
+  <entry>
     <title>Pilot Projects to Enhance the Human Virome Program (R03 Clinical Trials Not Allowed)</title>
     <link href="https://www.grants.gov/search-results-detail/361431"/>
     <id>urn:funding-finder:grants-gov:361431</id>
@@ -477,6 +487,16 @@ we will not consider for support include Covid-19 relat…</summary>
     <category term="Technology development"/>
     <summary>U.S. National Science Foundation | Posted | The Energy, Water, and Resource Engineering (EWRE) program supports fundamental research to advance energy, water, and resource management and to safeguard health. Better use of domestic resources will make U.S. manufacturing, energy and water systems more efficient and secure.
 EWRE supports research that creates domestic sources of energy, advances water management, and recovers resources using c…</summary>
+  </entry>
+  <entry>
+    <title>Biomedical Advanced Research and Development Authority (BARDA) Broad Agency Announcement (BAA)</title>
+    <link href="https://sam.gov/opp/8170c4735df64714adb2d1f8ce8671b1/view"/>
+    <id>urn:funding-finder:sam-gov:sam-gov%3A8170c4735df64714adb2d1f8ce8671b1</id>
+    <updated>2026-03-20T00:00:00Z</updated>
+    <author><name>Biomedical Advanced Research and Development Authority (BARDA)</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Infectious disease"/>
+    <summary>Biomedical Advanced Research and Development Authority (BARDA) | Full Application 2028-09-25 | Advanced development of medical countermeasures against chemical, biological, radiological and nuclear threats, pandemic influenza, and emerging infectious diseases. Follow the currently open areas of interest and their maturity requirements. AOI-specific deadlines override the umbrella date. Preliminary assessment is recommended; direct proposals are permitted. Submit unclassified material and ma…</summary>
   </entry>
   <entry>
     <title>NARMS Cooperative Agreement Program to Strengthen Antibiotic Resistance Surveillance in Retail Food Specimens</title>

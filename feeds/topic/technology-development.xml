@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml</id>
-  <updated>2026-10-12T16:10:13Z</updated>
+  <updated>2026-10-13T16:11:25Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Technology Development Program</title>
@@ -398,6 +398,17 @@
     <summary>Office of Science | Application 2026-10-19 | The Department of Energy (DOE) recently announced the establishment of the Quantum Genesis initiative to develop and deploy the world’s first fault-tolerant, scientifically relevant quantum computing (SRQC) capability for research and development. The Department seeks to realize this bold ambition through the Quantum Genesis Q Competition (herein, the Q Competition), a first of its kind effort to …</summary>
   </entry>
   <entry>
+    <title>ManTech special Broad Agency Announcement (sBAA): Accelerating Maritime Modernization: Innovation in Naval Manufacturing, Sustainment, and Industrial Base Capability</title>
+    <link href="https://sam.gov/opp/d2bb23d781124b8690158100ce7d5f1e/view"/>
+    <id>urn:funding-finder:sam-gov:sam-gov%3Ad2bb23d781124b8690158100ce7d5f1e</id>
+    <updated>2026-09-17T00:00:00Z</updated>
+    <author><name>Office of Naval Research (ONR)</name></author>
+    <category term="Manufacturing"/>
+    <category term="Technology development"/>
+    <category term="Transportation"/>
+    <summary>Office of Naval Research (ONR) | White Paper 2027-07-16 | Applied research and technology development in advanced manufacturing and sustainment. Applied research and advanced technology development for naval manufacturing and sustainment, with transition value. Phase II selections depend on funding and current technical focus. FFRDCs and military universities cannot be prime offerors; no mandatory industry partner invented.</summary>
+  </entry>
+  <entry>
     <title>Restorative &amp; health-Enhancing Sleep Time (REST)</title>
     <link href="https://arpa-h.gov/explore-funding/programs/rest"/>
     <id>urn:funding-finder:arpa-h:arpa-h%3Arest</id>
@@ -451,6 +462,16 @@
     <category term="Agriculture and food"/>
     <category term="Technology development"/>
     <summary>Rural Business-Cooperative Service | Application 2027-01-31 | The primary objective of the program is to provide grants to Agriculture Innovation Centers that will provide technical assistance to agricultural producers to market value-added agricultural products.</summary>
+  </entry>
+  <entry>
+    <title>FTA Broad Agency Announcement (FY26) -- “Research Initiatives in Support of Safety, Accessibility, and Mobility in Public Transportation</title>
+    <link href="https://sam.gov/opp/9fac6a86bf4f4561bd8bd464284d6297/view"/>
+    <id>urn:funding-finder:sam-gov:sam-gov%3A9fac6a86bf4f4561bd8bd464284d6297</id>
+    <updated>2026-09-04T00:00:00Z</updated>
+    <author><name>U.S. Department of Transportation - Federal Transit Administration (FTA)</name></author>
+    <category term="Technology development"/>
+    <category term="Transportation"/>
+    <summary>U.S. Department of Transportation - Federal Transit Administration (FTA) | Concept Paper 2026-10-19 | Applied public transit research, technology development and demonstration to improve transit safety, efficiency and deployment readiness, generally TRL3-6. Cost sharing may be mandated under49USC5312(g); FTA determines applicability during concept review and communicates it in writing. Federal-government-owned businesses not eligible as direct recipients; teaming allowed. SAM registration before a…</summary>
   </entry>
   <entry>
     <title>1890 Institution Teaching, Research, and Extension Capacity Building Grants Program</title>
@@ -628,26 +649,5 @@ a high level of innovation and creativity. The goal is to support the best young
     <category term="Technology development"/>
     <category term="Data science"/>
     <summary>U.S. National Science Foundation | Application 2026-11-04 | This program will advance scientific community datasets to enable scientific discovery and innovation using artificial intelligence (AI) and other methods. Its goal is to increase the value that can be derived from existing scientific datasets by leveraging novel methods and artificial intelligence (AI). This will unlock new AI-driven insights. It can enable interdisciplinary research. It also ena…</summary>
-  </entry>
-  <entry>
-    <title>Model-to-Clinic (M2C) for Precision Medicine with AI: Integrating Imaging with Multimodal Data (PRIMED-AI) (UG3/UH3, Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/359666"/>
-    <id>urn:funding-finder:grants-gov:359666</id>
-    <updated>2026-06-30T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Education and workforce"/>
-    <category term="Technology development"/>
-    <summary>National Institutes of Health | Application 2026-10-19 | The overarching goal of this notice of funding opportunity (NOFO) and its companion opportunities is to establish the Precision Medicine with AI: Integrating Imaging with Multimodal Data (PRIMED-AI) Program to support development of innovative, reliable, cost-effective, and sustainable multimodal AI-based clinical decision support (CDS) tools. PRIMED-AI CDS tools are based on the integration of cl…</summary>
-  </entry>
-  <entry>
-    <title>GREGoRi Data Coordination and Outreach Center (U01, Clinical Trials Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/359279"/>
-    <id>urn:funding-finder:grants-gov:359279</id>
-    <updated>2026-06-18T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Technology development"/>
-    <summary>National Institutes of Health | Application 2026-10-30 | The Genomics Research to Elucidate the Genetics of Rare Diseases: innovation (GREGoRi) initiative seeks to accelerate a paradigm shift in rare disease diagnosis by reimagining the tools, molecular technologies and analytical approaches used to identify the causal gene(s) and/or variant(s) underlying rare genetic disorders. The purpose of this Notice of Funding Opportunity is to establish the GREGo…</summary>
   </entry>
 </feed>

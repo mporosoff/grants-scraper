@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/catalysis-and-reaction-engineering.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/catalysis-and-reaction-engineering.xml</id>
-  <updated>2026-10-12T16:10:13Z</updated>
+  <updated>2026-10-13T16:11:25Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>FY 2027 Continuation of Solicitation for the Office of Science Financial Assistance Program</title>
@@ -81,6 +81,16 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Energy"/>
     <summary>Office of Naval Research | Application 2027-04-09 | Established in 1985, the Department of War Multidisciplinary University Research Initiative (MURI) program funds U.S. academic research teams to conduct high-impact basic research that addresses future challenges faced by the Department of War. The MURI program specifically supports U.S. university teams investigating complex, DoW-relevant problem sets at the intersection of multiple scientific di…</summary>
+  </entry>
+  <entry>
+    <title>Energy-Focused Air Quality and Health Effects Research</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr00001H35P3AAJ"/>
+    <id>urn:funding-finder:nyserda:nyserda%3APON6220</id>
+    <updated>2026-09-07T00:00:00Z</updated>
+    <author><name>NYSERDA</name></author>
+    <category term="Energy"/>
+    <category term="Catalysis and reaction engineering"/>
+    <summary>NYSERDA | Application 2026-10-28 | Supporting research to improve the scientific and technical foundation for addressing key policy-relevant questions related to air quality and health effects research, Program Opportunity Notice (PON) 6220, Energy-Related Air Quality and Health Effects Research, is available through NYSERDA.rnPON 6220 focuses on: 1) pollutant trends analysis, source apportionment, and accountability studies; 2) po…</summary>
   </entry>
   <entry>
     <title>Simons Foundation: Utilizing the Full Power of Empire AI (2026 RFA)</title>

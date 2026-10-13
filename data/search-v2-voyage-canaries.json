@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-12T16:13:25.224Z",
+  "generated_at": "2026-10-13T16:14:07.240Z",
   "canary_set_version": 1,
   "model_alias": "voyage-4-lite",
   "response_model": "voyage-4-lite",
@@ -39,23 +39,29 @@
     },
     {
       "exact_match": false,
-      "minimum_cosine": 1,
-      "mean_cosine": 1,
+      "minimum_cosine": 0.99996,
+      "mean_cosine": 0.999969,
+      "gross_discontinuity": false
+    },
+    {
+      "exact_match": false,
+      "minimum_cosine": 0.999967,
+      "mean_cosine": 0.999973,
       "gross_discontinuity": false
     }
   ],
   "comparison_to_prior_generation": {
-    "prior_fingerprint": "b1d2963c96923d5b1317e9ca240e73f785364dda94d466589a43500ed26f3991",
-    "drift_detected": true,
-    "minimum_cosine": 0.999959,
-    "mean_cosine": 0.99997,
+    "prior_fingerprint": "f60bce25862886594a00dabbc8527a044dca1f05e684936d269b13039e3af4af",
+    "drift_detected": false,
+    "minimum_cosine": 1,
+    "mean_cosine": 1,
     "per_canary_cosine": {
-      "carbon-catalysis": 0.999959,
-      "critical-minerals": 0.999959,
-      "rural-health": 0.999976,
-      "quantum-sensing": 0.999967,
-      "maritime-autonomy": 0.999978,
-      "ecosystem-resilience": 0.999978
+      "carbon-catalysis": 1,
+      "critical-minerals": 1,
+      "rural-health": 1,
+      "quantum-sensing": 1,
+      "maritime-autonomy": 1,
+      "ecosystem-resilience": 1
     },
     "minimum_cosine_gate": 0.95,
     "mean_cosine_gate": 0.98,

@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/environmental-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/environmental-science.xml</id>
-  <updated>2026-10-12T16:10:13Z</updated>
+  <updated>2026-10-13T16:11:25Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Limited Competition: Biomedical Research Environment &amp; Sponsored Programs Administration Development (BRE-SPAD) Program</title>
@@ -392,6 +392,17 @@
     <summary>Centers for Disease Control and Prevention - ERA | Estimated Application 2026-12-01 | CDC/ATSDR is inviting research proposals to study risk factors for Amyotrophic Lateral Sclerosis (ALS). Studies on military service, contact sports, traumatic brain injury, neuroinflammation, and infections agents and exposures are encouraged. Funding will be for four funding options: Option A - Support research with strong existing evidence such as studies on known environmental or genetic risk f…</summary>
   </entry>
   <entry>
+    <title>NGA - Boosting Innovative GEOINT - Science &amp; Technology Broad Agency Announcement (BIG-ST BAA): Topic # 07 - Lidar Analysis for Surface &amp; Environmental Reconnaissance (LASER)</title>
+    <link href="https://sam.gov/opp/84cb4b33be0641c1b54c4de34b542ed5/view"/>
+    <id>urn:funding-finder:sam-gov:sam-gov%3A84cb4b33be0641c1b54c4de34b542ed5</id>
+    <updated>2026-10-01T00:00:00Z</updated>
+    <author><name>National Geospatial-Intelligence Agency</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Environmental science"/>
+    <category term="Space and aeronautics"/>
+    <summary>National Geospatial-Intelligence Agency | Preproposal 2026-10-23 | Develop AI/ML methods to extract and classify 3D surface/subsurface objects using NASA ICESat-2 and GEDI lidar, including navigation safety applications. Topic7 LASER only, not BIG-ST parent or closed topics. Parent exists in catalog but specific Topic7 solicitation is distinct. CUI safeguards; foreign nationals need prior written CO/COR approval; HSPD-12 favorable adjudication if access to NGA fa…</summary>
+  </entry>
+  <entry>
     <title>Technical Assistance and Training Grant Program</title>
     <link href="https://www.grants.gov/search-results-detail/364019"/>
     <id>urn:funding-finder:grants-gov:364019</id>
@@ -485,15 +496,6 @@
     <summary>Fish and Wildlife Service | Application 2026-11-20 | First awarded in fiscal year (FY) 2001, Recovery Land Acquisition grants promote State and Federal cooperation in listed species conservation by leveraging funds to acquire specific parcels of land, through fee simple or conservation easement, in support of U.S. Fish and Wildlife Service (FWS)-approved recovery plans and outlines. The Endangered Species Act (ESA) conveys the importance of recovery…</summary>
   </entry>
   <entry>
-    <title>Aquatic Fauna Response to Ecosystem Restoration in Southwest Florida</title>
-    <link href="https://www.grants.gov/search-results-detail/363854"/>
-    <id>urn:funding-finder:grants-gov:363854</id>
-    <updated>2026-09-11T00:00:00Z</updated>
-    <author><name>Fort Worth District</name></author>
-    <category term="Environmental science"/>
-    <summary>Fort Worth District | Application 2026-10-12 | Note: A full study proposal and proposed budget are NOT requested at this time. Project Title: Aquatic Fauna Response to Ecosystem Restoration in Southwest FloridaBrief Description of Anticipated Work: See attached SOO for this information. Period of Performance: The base period of the agreement will extend 12 months from date of award. There may be up to four 12-month Follow-On Periods based on a…</summary>
-  </entry>
-  <entry>
     <title>Climate Program Office (CPO) FY2026 Earth System Science and Services Partnership</title>
     <link href="https://www.grants.gov/search-results-detail/363852"/>
     <id>urn:funding-finder:grants-gov:363852</id>
@@ -520,6 +522,7 @@
     <author><name>NYSERDA</name></author>
     <category term="Environmental science"/>
     <category term="Manufacturing"/>
+    <category term="Energy"/>
     <summary>NYSERDA | Application 2030-12-30 | The New York School Bus Incentive Program (NYSBIP) is a voucher incentive program to accelerate the deployment of zero-emission school buses and associated charging infrastructure throughout New York State using funds allocated by the 2022 Clean Water, Clean Air, and Green Jobs Environmental Bond Act (Bond Act). More information about how fleets, dealers, and manufacturers can participate in NYSBI…</summary>
   </entry>
   <entry>

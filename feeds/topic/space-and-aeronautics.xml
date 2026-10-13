@@ -4,8 +4,20 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/space-and-aeronautics.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/space-and-aeronautics.xml</id>
-  <updated>2026-10-12T16:10:13Z</updated>
+  <updated>2026-10-13T16:11:25Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>Lunar Enabling Infrastructure Accelerator (LEIA) -Broad Agency Announcement (BAA) NextSTEP-3 Appendix A - Final Solicitation</title>
+    <link href="https://sam.gov/opp/812c81b0f0b84943be12a5f29615d3c8/view"/>
+    <id>urn:funding-finder:sam-gov:sam-gov%3A812c81b0f0b84943be12a5f29615d3c8</id>
+    <updated>2026-10-09T00:00:00Z</updated>
+    <author><name>NASA Glenn Research Center</name></author>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Materials science"/>
+    <category term="Space and aeronautics"/>
+    <summary>NASA Glenn Research Center | Full Application 2026-10-15 | Lunar infrastructure technology maturation: vertical solar arrays, oxygen extraction from regolith, radioisotope Stirling generators, in-space advanced manufacturing, and nanomaterials; generally TRL 5-6 demonstrations. US organizations as prime; foreign organizations may team but NASA funds cannot support their R&amp;D; non-US persons employed/studying at US organizations may receive funding. NASA/JP…</summary>
+  </entry>
   <entry>
     <title>ROSES 2025: B.8 Heliophysics Spaceflight Science Foundations</title>
     <link href="https://www.grants.gov/search-results-detail/364039"/>
@@ -59,6 +71,26 @@
     <category term="Space and aeronautics"/>
     <category term="Water"/>
     <summary>Geological Survey | Application 2026-10-30 | Invasive climbing plants, or vines, are spreading rapidly throughout the southeastern United States and the U.S. Caribbean, smothering local vegetation, altering forest structure, increasing infrastructure maintenance costs, and complicating management efforts for natural and working landscapes. Their expansion is influenced by disturbances such as hurricanes, flooding, uprooted trees, landslides,…</summary>
+  </entry>
+  <entry>
+    <title>NGA - Boosting Innovative GEOINT - Science &amp; Technology Broad Agency Announcement (BIG-ST BAA): Topic # 07 - Lidar Analysis for Surface &amp; Environmental Reconnaissance (LASER)</title>
+    <link href="https://sam.gov/opp/84cb4b33be0641c1b54c4de34b542ed5/view"/>
+    <id>urn:funding-finder:sam-gov:sam-gov%3A84cb4b33be0641c1b54c4de34b542ed5</id>
+    <updated>2026-10-01T00:00:00Z</updated>
+    <author><name>National Geospatial-Intelligence Agency</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Environmental science"/>
+    <category term="Space and aeronautics"/>
+    <summary>National Geospatial-Intelligence Agency | Preproposal 2026-10-23 | Develop AI/ML methods to extract and classify 3D surface/subsurface objects using NASA ICESat-2 and GEDI lidar, including navigation safety applications. Topic7 LASER only, not BIG-ST parent or closed topics. Parent exists in catalog but specific Topic7 solicitation is distinct. CUI safeguards; foreign nationals need prior written CO/COR approval; HSPD-12 favorable adjudication if access to NGA fa…</summary>
+  </entry>
+  <entry>
+    <title>Broad Agency Announcement (BAA) for Naval Warfare and Weapons at NAWCWD, China Lake, CA.</title>
+    <link href="https://sam.gov/opp/38b71a2fd903432ca02100ea9177b738/view"/>
+    <id>urn:funding-finder:sam-gov:sam-gov%3A38b71a2fd903432ca02100ea9177b738</id>
+    <updated>2026-10-01T00:00:00Z</updated>
+    <author><name>Naval Air Warfare Center Weapons Division (NAWCWD)</name></author>
+    <category term="Space and aeronautics"/>
+    <summary>Naval Air Warfare Center Weapons Division (NAWCWD) | Full Application 2027-09-30 | Basic and applied science/engineering for aerospace, naval warfare and weapons. Academic, industry and research sources may apply; federal laboratories and military universities cannot receive awards directly; UARC participation depends on its sponsoring contract. Consult the official unclassified submission instructions.</summary>
   </entry>
   <entry>
     <title>ROSES25: D.3F NuSTAR GO Cycle 13</title>
@@ -136,6 +168,16 @@
     <author><name>NASA Headquarters</name></author>
     <category term="Space and aeronautics"/>
     <summary>NASA Headquarters | Application 2026-10-14 | NASA ROSES-2025 program element D.9, appendix division D. Published status: dated; due dates as printed: N/A | 10/14/2026. Source: ROSES Table 3 (SOLICITED RESEARCH PROGRAMS).</summary>
+  </entry>
+  <entry>
+    <title>Strategic Materials Research &amp; Development (R&amp;D) Program</title>
+    <link href="https://sam.gov/opp/3510fb2e9dbd4c89bd826b06dd2ea284/view"/>
+    <id>urn:funding-finder:sam-gov:sam-gov%3A3510fb2e9dbd4c89bd826b06dd2ea284</id>
+    <updated>2026-08-17T00:00:00Z</updated>
+    <author><name>Defense Logistics Agency (DLA)</name></author>
+    <category term="Education and workforce"/>
+    <category term="Space and aeronautics"/>
+    <summary>Defense Logistics Agency (DLA) | White Paper 2030-01-14 | Strategic/criticalmaterials, production/process substitution, energetic/power/aerospace/armor materials and supply-chain resilience. Open non-IDIQ white paper entry; technical/cost proposals follow a government request. Educational organizations may be prime offerors, subject to financial, accounting and other FAR responsibility standards. No small-business set-aside. Use only the current BAA area…</summary>
   </entry>
   <entry>
     <title>ROSES25: D.8 Habitable Worlds Observatory Precursor Science Investigation</title>
