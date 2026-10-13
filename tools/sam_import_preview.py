@@ -1,11 +1,13 @@
 """Preview the staged SAM pilot without writing the catalog or calling providers.
 
-One listing request and at most two explicitly selected description requests.
-Descriptions remain ephemeral; only short review excerpts enter the report.
+Version 1 uses one listing and at most two explicitly selected descriptions.
+Version 2 uses two anonymous public reads per reviewed notice, reusing snapshots
+in the real merge. No catalog or cache writes occur in either mode.
 """
 from __future__ import annotations
 
 import argparse
+from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone
 import hashlib
 from html import unescape
@@ -17,6 +19,8 @@ from urllib.parse import unquote
 
 from scripts.solicitation_identity import normalized_number
 from scripts.sources.sam_api import SamError, fetch_description, fetch_listing, redacted
+from scripts.sources.sam_public import fetch_notice
+from scripts.sources.sam_reviewed import make_record
 from scripts.sources.adapters.sam_gov import SamGovAdapter, discovery_candidates, load_config
 from scripts.sources.merge import integrate, load_catalog
 
@@ -91,13 +95,82 @@ def existing_matches(row, records):
     return {'same_sam_notice': same_notice, 'same_number_requires_sponsor_check': same_number}
 
 
-def preview(api_key, selected_ids=(), *, root=ROOT, today=None, listing=fetch_listing, description=fetch_description):
+def merge_preview(adapter, catalog_path, cache_path, today):
+    # Disable unrelated public identity enrichment; this preview owns only the
+    # explicitly selected SAM request inventory.
+    old_enrich = os.environ.get('VPR_ENRICH_LINKS')
+    os.environ['VPR_ENRICH_LINKS'] = 'false'
+    try:
+        return integrate(catalog_path=catalog_path, cache_path=cache_path, adapters=[adapter],
+                         include_disabled=True, write=False, as_of=today)
+    finally:
+        if old_enrich is None:
+            os.environ.pop('VPR_ENRICH_LINKS', None)
+        else:
+            os.environ['VPR_ENRICH_LINKS'] = old_enrich
+
+
+def reviewed_preview(config, *, root, today, public_notice):
+    """Fetch the bounded approved inventory once; never read credentials."""
+    def fetch(approval):
+        try:
+            notice, detail = public_notice(approval['notice_id'])
+            return notice, detail, False
+        except SamError as error:
+            return None, error.diagnostics, True
+
+    approvals = config['approved_notices']
+    with ThreadPoolExecutor(max_workers=4) as executor:
+        fetched = list(executor.map(fetch, approvals))
+    request_count = sum(detail.get('request_count', 0) for _, detail, _ in fetched)
+    failures = [{'notice_id': approval['notice_id'], 'http_status': detail.get('http_status')}
+                for approval, (_, detail, failed) in zip(approvals, fetched) if failed]
+    if failures:
+        raise SamError('reviewed_notice_fetch_failed', {
+            'request_count': request_count, 'outcome': 'public_notice_unavailable',
+            'failures': failures})
+    snapshots = {approval['notice_id']: (notice, detail)
+                 for approval, (notice, detail, _) in zip(approvals, fetched)}
+    catalog_path = root / 'data/opportunities.js'
+    cache_path = root / 'data/source_records.json'
+    records = load_catalog(catalog_path).get('opportunities', [])
+    candidates = []
+    for approval in approvals:
+        notice, _ = snapshots[approval['notice_id']]
+        _, reasons = make_record(notice, approval, today)
+        row = {'noticeId': notice['notice_id'], 'solicitationNumber': notice['solicitation_number']}
+        candidates.append(dict(notice, catalog_matches=existing_matches(row, records),
+                               admission_reasons=reasons))
+    # The real adapter must consume the exact snapshots just inspected. A
+    # missing/unapproved ID fails locally rather than making a surprise request.
+    adapter = SamGovAdapter(config_path=root / 'config/sam_gov.json',
+                            reviewed_client=lambda notice_id: snapshots[notice_id])
+    summary = merge_preview(adapter, catalog_path, cache_path, today)
+    return {'schema_version': 2, 'checked_at': datetime.now(timezone.utc).isoformat(),
+            'outcome': 'preview_completed', 'request_count': request_count,
+            'request_mode': 'anonymous_public_reviewed_notices', 'credentialed_requests': 0,
+            'production_enabled': config['enabled'], 'approved_notices': len(approvals),
+            'catalog_changed': False, 'candidates': candidates,
+            'comparison_scope': 'Current catalog only; absence here does not establish absence from Grants.gov',
+            'description_inspections': [], 'reviewed_notices_match': all(
+                not row['admission_reasons'] for row in candidates),
+            'merge_preview': summary,
+            'readiness': 'Exact reviewed notices and application stages checked against current public snapshots'}
+
+
+def preview(api_key=None, selected_ids=(), *, root=ROOT, today=None, listing=fetch_listing,
+            description=fetch_description, public_notice=fetch_notice):
     today = today or datetime.now(timezone.utc).date()
     if len(selected_ids) > 2 or len(set(selected_ids)) != len(selected_ids) or any(not NOTICE_ID.fullmatch(i) for i in selected_ids):
         raise ValueError('Select at most two distinct notice IDs')
     root = Path(root)
     config_path = root / 'config/sam_gov.json'
     config = load_config(config_path)
+    if config.get('schema_version') == 2:
+        if selected_ids:
+            raise ValueError('Reviewed public previews do not fetch legacy descriptions')
+        return reviewed_preview(config, root=root, today=today, public_notice=public_notice)
+    api_key = os.environ.get('SAM_API_KEY', '') if api_key is None else api_key
     rows, diagnostics = listing(api_key, today=today)
     catalog_path = root / 'data/opportunities.js'
     cache_path = root / 'data/source_records.json'
@@ -130,16 +203,7 @@ def preview(api_key, selected_ids=(), *, root=ROOT, today=None, listing=fetch_li
     # Reuse the single listing in the real canonical merge preview. Disable
     # unrelated public identity enrichment, which otherwise has its own budget.
     adapter = SamGovAdapter(config_path=config_path, client=lambda *_args, **_kwargs: (rows, diagnostics))
-    old_enrich = os.environ.get('VPR_ENRICH_LINKS')
-    os.environ['VPR_ENRICH_LINKS'] = 'false'
-    try:
-        summary = integrate(catalog_path=catalog_path, cache_path=cache_path, adapters=[adapter],
-                            include_disabled=True, write=False, as_of=today)
-    finally:
-        if old_enrich is None:
-            os.environ.pop('VPR_ENRICH_LINKS', None)
-        else:
-            os.environ['VPR_ENRICH_LINKS'] = old_enrich
+    summary = merge_preview(adapter, catalog_path, cache_path, today)
     report = {'schema_version': 1, 'checked_at': datetime.now(timezone.utc).isoformat(),
               'outcome': 'preview_completed', 'request_count': request_count,
               'production_enabled': config['enabled'], 'approved_notices': len(config['approved_notices']),
@@ -160,9 +224,9 @@ def main():
         if not context_allowed(os.environ):
             raise ValueError('Manual main workflow required')
         selected = description_ids(args.description_notice_ids)
-        report = preview(os.environ.get('SAM_API_KEY', ''), selected)
+        report = preview(None, selected)
         passed = report['merge_preview']['validation']['ok'] and all(
-            source['status'] == 'refreshed' for source in report['merge_preview']['sources'])
+            source['status'] == 'refreshed' for source in report['merge_preview']['sources']) and report.get('reviewed_notices_match', True)
     except SamError as error:
         report = {'schema_version': 1, 'outcome': 'preview_failed', 'catalog_changed': False,
                   'listing': error.diagnostics, 'request_count': error.diagnostics.get('request_count', 0)}

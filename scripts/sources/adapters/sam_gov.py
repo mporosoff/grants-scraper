@@ -14,6 +14,7 @@ from scripts.solicitation_identity import normalized_number, sponsor_identity
 from ..base import CanonicalOpportunity, SourceAdapter, to_iso_date
 from ..registry import register
 from ..sam_api import NOTICE_ID, SamError, fetch_listing
+from .. import sam_reviewed
 
 CONFIG_PATH = Path(__file__).resolve().parents[3] / 'config/sam_gov.json'
 APPROVAL_FIELDS = {'notice_id', 'solicitation_number', 'organization_path', 'sponsor',
@@ -52,10 +53,12 @@ def load_config(path=CONFIG_PATH):
     """Validate a small, explicit human-reviewed allowlist; never fetch evidence."""
     try:
         with Path(path).open('rb') as handle:
-            raw = handle.read(65537)
-        if len(raw) > 65536:
+            raw = handle.read(1048577)
+        if len(raw) > 1048576:
             raise ValueError('Too large')
         config = json.loads(raw)
+        if isinstance(config, dict) and config.get('schema_version') == 2:
+            return sam_reviewed.validate_config(config)
         if (not isinstance(config, dict) or set(config) != {'schema_version', 'enabled', 'approved_notices'}
                 or type(config['schema_version']) is not int or config['schema_version'] != 1
                 or type(config['enabled']) is not bool or not isinstance(config['approved_notices'], list)
@@ -178,10 +181,11 @@ class SamGovAdapter(SourceAdapter):
     retain_on_failure = False
     disabled_reason = 'SAM pilot awaits reviewed academic eligibility and explicit enablement'
 
-    def __init__(self, config_path=CONFIG_PATH, client=None):
+    def __init__(self, config_path=CONFIG_PATH, client=None, reviewed_client=None):
         super().__init__()
         self.config_path = Path(config_path)
         self.client = client or fetch_listing
+        self.reviewed_client = reviewed_client
 
     @property
     def enabled(self):
@@ -234,6 +238,11 @@ class SamGovAdapter(SourceAdapter):
             as_of = self.context.get('as_of') or datetime.now(timezone.utc).date()
             if not isinstance(as_of, date):
                 as_of = _iso_date(as_of)
+            if config['schema_version'] == 2:
+                records, self.diagnostics = sam_reviewed.collect(
+                    config, as_of, self.context.get('source_snapshots', {}),
+                    client=self.reviewed_client)
+                return records
             if not config['enabled'] and not config['approved_notices']:
                 rows = []
                 self.diagnostics['outcome'] = 'disabled'
