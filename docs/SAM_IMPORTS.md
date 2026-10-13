@@ -11,10 +11,16 @@ was verified; it does not claim the opportunity exists exclusively on SAM.
 
 Every enabled refresh checks each approved exact notice ID using SAM's anonymous
 public notice and attachment-manifest routes, the same public information served
-by the SAM website. It makes two bounded GET requests per notice, at most four
-notices concurrently. Each request has a 30-second timeout and an 8 MiB response
-cap, without redirects or retries. No API key, cookie, attachment body, contact
-information, or raw notice description is included in the resulting snapshot.
+by the SAM website. It reads two endpoints per notice, at most four notices
+concurrently. Each endpoint allows at most two 15-second attempts and one second
+of retry delay for temporary HTTP 403/429/5xx or network failures. Successful
+endpoints are not fetched again. A longer server-requested wait ends this bounded
+attempt instead of retrying early. Responses have an 8 MiB cap; redirects,
+malformed responses, and other HTTP errors are not retried. Every attempt is
+counted, and terminal errors retain a sanitized failure classification. The
+100-notice limit has a nominal transport bound of 25 minutes 50 seconds. No API
+key, cookie, attachment body, contact information, or raw notice description is
+included in the resulting snapshot.
 The current manifest is checked; attachment bodies are downloaded during source
 review, not every refresh. A response fingerprint is not a claim to have read a
 document again.
@@ -34,7 +40,16 @@ most 30 days. The source lifecycle also caps retained freshness at seven days an
 never beyond that approval. Expiry requires another evidence review; it is not
 automatically extended by a successful HTTP response. Removed approvals revoke
 retained records. Transport/schema failures are reported as source degradation,
-without publishing unverified SAM fallback records.
+without publishing unverified SAM fallback records. The generation workflow
+requires a complete, healthy reviewed SAM scan before document-AI work or
+candidate persistence. If a request remains unavailable after bounded retries,
+or current evidence cannot be parsed, that generation stops and the previously
+published catalog remains in service. It preserves source diagnostics and the
+existing spend checkpoint and emits a failure alert. A successful scan that
+proves closures, changed evidence, or revoked approvals may remove those calls;
+an unavailable scan cannot publish an apparent withdrawal of the SAM inventory.
+The guard is included in generation dependencies, so a candidate created before
+this protection cannot be silently reused under the new contract.
 
 Legacy schema version 1 remains supported for existing contracts and offline
 regressions. Its credentialed one-page search for the literal title phrase

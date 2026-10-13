@@ -136,6 +136,21 @@ class Response:
 
 
 class PublicNoticeTests(unittest.TestCase):
+    def test_interrupted_response_body_retries_only_the_failed_endpoint(self):
+        from http.client import IncompleteRead
+        broken = Response(b'')
+        broken.read = Mock(side_effect=IncompleteRead(b'PRIVATE partial body'))
+        opener = Mock()
+        opener.open.side_effect = [Response(payload()), broken, Response(resources())]
+        with patch.object(sam_public, 'sleep') as sleep:
+            result, diagnostics = sam_public.fetch_notice(NOTICE, opener=opener)
+        self.assertEqual(result['notice_id'], NOTICE)
+        self.assertEqual(diagnostics['request_count'], 3)
+        sleep.assert_called_once_with(1)
+        self.assertEqual(opener.open.call_args_list[1].args[0].full_url,
+                         opener.open.call_args_list[2].args[0].full_url)
+        self.assertTrue(broken.closed)
+
     def test_empty_hal_manifest_requires_exact_notice_and_collection_links(self):
         href = f'https://sam.gov/opps/v3/opportunities/{NOTICE}/resources?withScanResult=false&excludeDeleted=true'
         empty = {'_links': {'self': {'href': href}, 'opportunity:publish:latest': {'href': href}}}
@@ -159,7 +174,7 @@ class PublicNoticeTests(unittest.TestCase):
             request = call.args[0]
             self.assertEqual(urlsplit(request.full_url).netloc, 'sam.gov')
             self.assertEqual(request.get_method(), 'GET')
-            self.assertEqual(call.kwargs, {'timeout': 30})
+            self.assertEqual(call.kwargs, {'timeout': 15})
             headers = {k.lower(): v for k, v in request.header_items()}
             self.assertEqual(headers['accept'], '*/*')
             self.assertNotIn('authorization', headers)
@@ -195,26 +210,152 @@ class PublicNoticeTests(unittest.TestCase):
             self.assertIsInstance(call.args[0], NoRedirect)
             self.assertIsNone(call.args[0].redirect_request(None, None, 302, '', {}, 'https://evil.test'))
 
-    def test_transport_errors_are_sanitized_and_never_retried(self):
-        errors = [HTTPError('https://sam.gov/' + PRIVATE, 403, PRIVATE, {}, io.BytesIO(PRIVATE.encode())),
-                  RuntimeError(PRIVATE)]
-        for error in errors:
-            with self.subTest(error=type(error).__name__):
+    def test_temporary_http_failures_retry_only_failed_endpoint_with_exact_counts(self):
+        for status in (403, 429, 500, 502, 503, 504, 599):
+            for endpoint in ('notice', 'resources'):
+                with self.subTest(status=status, endpoint=endpoint):
+                    error = HTTPError('https://sam.gov/' + PRIVATE, status, PRIVATE,
+                                      {}, io.BytesIO(PRIVATE.encode()))
+                    replies = ([error, Response(payload()), Response(resources())] if endpoint == 'notice'
+                               else [Response(payload()), error, Response(resources())])
+                    opener = Mock(); opener.open.side_effect = replies
+                    with patch.object(sam_public, 'sleep') as delay:
+                        result, diagnostics = sam_public.fetch_notice(NOTICE, opener=opener)
+                    self.assertEqual(diagnostics['request_count'], 3)
+                    delay.assert_called_once_with(1)
+                    self.assertTrue(error.closed)
+                    routes = [call.args[0].full_url for call in opener.open.call_args_list]
+                    notice_url = f'https://sam.gov/api/prod/opps/v2/opportunities/{NOTICE}'
+                    resource_url = (f'https://sam.gov/api/prod/opps/v3/opportunities/{NOTICE}'
+                                    '/resources?excludeDeleted=true&withScanResult=false')
+                    self.assertEqual(routes, [notice_url, notice_url, resource_url] if endpoint == 'notice'
+                                     else [notice_url, resource_url, resource_url])
+                    self.assertEqual(sum('/resources?' not in route for route in routes),
+                                     2 if endpoint == 'notice' else 1)
+                    headers = [call.args[0].header_items() for call in opener.open.call_args_list]
+                    self.assertTrue(all(value == headers[0] for value in headers))
+                    self.assertNotIn(PRIVATE, json.dumps((result, diagnostics)))
+
+    def test_retry_limit_is_per_endpoint_and_counts_every_failed_open(self):
+        opener = Mock()
+        opener.open.side_effect = [HTTPError('', 503, PRIVATE, {}, io.BytesIO()), Response(payload()),
+                                   HTTPError('', 429, PRIVATE, {}, io.BytesIO()), Response(resources())]
+        with patch.object(sam_public, 'sleep') as delay:
+            _, diagnostics = sam_public.fetch_notice(NOTICE, opener=opener)
+        self.assertEqual(diagnostics['request_count'], 4)
+        self.assertEqual(delay.call_count, 2)
+        self.assertEqual([call.args[0] for call in delay.call_args_list], [1, 1])
+        self.assertEqual(sam_public.MAX_ATTEMPTS, 2)
+        self.assertEqual(sam_public.REQUEST_TIMEOUT, 15)
+        self.assertEqual(sam_public.RETRY_DELAY, 1)
+        self.assertLess(25 * 2 * (2 * sam_public.REQUEST_TIMEOUT + sam_public.RETRY_DELAY), 30 * 60)
+
+    def test_exhausted_http_failure_has_typed_sanitized_diagnostics(self):
+        for endpoint in ('notice', 'resources'):
+            with self.subTest(endpoint=endpoint):
+                errors = [HTTPError('https://sam.gov/' + PRIVATE, 503, PRIVATE,
+                                    {}, io.BytesIO(PRIVATE.encode())) for _ in range(2)]
                 opener = Mock()
-                opener.open.side_effect = error
-                with self.assertRaises(SamError) as raised:
+                opener.open.side_effect = ([Response(payload())] if endpoint == 'resources' else []) + errors
+                with patch.object(sam_public, 'sleep') as delay, self.assertRaises(SamError) as raised:
+                    sam_public.fetch_notice(NOTICE, opener=opener)
+                expected = 3 if endpoint == 'resources' else 2
+                self.assertEqual(opener.open.call_count, expected)
+                self.assertEqual(raised.exception.diagnostics['request_count'], expected)
+                self.assertEqual(raised.exception.diagnostics['failure_class'], 'transient_transport')
+                self.assertEqual(raised.exception.diagnostics['endpoint'], endpoint)
+                self.assertEqual(raised.exception.diagnostics['http_status'], 503)
+                self.assertTrue(all(error.closed for error in errors))
+                delay.assert_called_once_with(1)
+                self.assertNotIn(PRIVATE, str(raised.exception) + json.dumps(raised.exception.diagnostics))
+
+    def test_network_timeout_retries_but_unexpected_client_error_does_not(self):
+        from urllib.error import URLError
+        for error in (URLError(PRIVATE), TimeoutError(PRIVATE), ConnectionResetError(PRIVATE)):
+            with self.subTest(error=type(error).__name__):
+                opener = Mock(); opener.open.side_effect = [error, Response(payload()), Response(resources())]
+                with patch.object(sam_public, 'sleep') as delay:
+                    _, diagnostics = sam_public.fetch_notice(NOTICE, opener=opener)
+                self.assertEqual(diagnostics['request_count'], 3)
+                delay.assert_called_once_with(1)
+        for error in (TimeoutError(PRIVATE), RuntimeError(PRIVATE)):
+            opener = Mock(); opener.open.side_effect = error
+            with patch.object(sam_public, 'sleep'), self.assertRaises(SamError) as raised:
+                sam_public.fetch_notice(NOTICE, opener=opener)
+            retryable = isinstance(error, TimeoutError)
+            self.assertEqual(opener.open.call_count, 2 if retryable else 1)
+            self.assertEqual(raised.exception.diagnostics['request_count'], 2 if retryable else 1)
+            self.assertEqual(raised.exception.diagnostics['failure_class'],
+                             'transient_transport' if retryable else 'invalid_client')
+            self.assertNotIn(PRIVATE, str(raised.exception) + json.dumps(raised.exception.diagnostics))
+
+    def test_read_timeout_after_http_success_is_still_a_network_failure(self):
+        first = Response(payload())
+        first.read = Mock(side_effect=TimeoutError(PRIVATE))
+        opener = Mock(); opener.open.side_effect = [first, Response(payload()), Response(resources())]
+        with patch.object(sam_public, 'sleep') as delay:
+            _, diagnostics = sam_public.fetch_notice(NOTICE, opener=opener)
+        self.assertEqual(diagnostics['request_count'], 3)
+        self.assertTrue(first.closed)
+        delay.assert_called_once_with(1)
+
+    def test_nonretry_http_and_redirects_are_not_retried(self):
+        for status in (301, 302, 307, 400, 401, 404, 410, 422):
+            with self.subTest(status=status):
+                opener = Mock()
+                opener.open.side_effect = HTTPError('https://sam.gov/' + PRIVATE, status, PRIVATE,
+                                                    {'Location': 'https://evil.test/' + PRIVATE}, io.BytesIO())
+                with patch.object(sam_public, 'sleep') as delay, self.assertRaises(SamError) as raised:
                     sam_public.fetch_notice(NOTICE, opener=opener)
                 self.assertEqual(opener.open.call_count, 1)
-                self.assertEqual(raised.exception.diagnostics['request_count'], 1)
-                self.assertNotIn(PRIVATE, str(raised.exception) + json.dumps(raised.exception.diagnostics))
+                self.assertEqual(raised.exception.diagnostics['failure_class'], 'nonretry_http')
+                delay.assert_not_called()
+                self.assertNotIn(PRIVATE, json.dumps(raised.exception.diagnostics))
+
+    def test_long_or_unparseable_retry_after_stops_within_budget(self):
+        for retry_after in ('2', '120', 'Wed, 14 Oct 2026 00:00:00 GMT', PRIVATE):
+            with self.subTest(retry_after=retry_after):
+                opener = Mock()
+                opener.open.side_effect = HTTPError('', 429, PRIVATE,
+                                                    {'Retry-After': retry_after}, io.BytesIO())
+                with patch.object(sam_public, 'sleep') as delay, self.assertRaises(SamError) as raised:
+                    sam_public.fetch_notice(NOTICE, opener=opener)
+                self.assertEqual(opener.open.call_count, 1)
+                self.assertEqual(raised.exception.diagnostics['failure_class'], 'transient_transport')
+                delay.assert_not_called()
+                self.assertNotIn(PRIVATE, json.dumps(raised.exception.diagnostics))
+
+    def test_http_error_response_objects_follow_same_bounded_status_policy(self):
+        error = Response(PRIVATE.encode(), 503)
+        opener = Mock(); opener.open.side_effect = [Response(payload()), error, Response(resources())]
+        with patch.object(sam_public, 'sleep') as delay:
+            _, diagnostics = sam_public.fetch_notice(NOTICE, opener=opener)
+        self.assertEqual(diagnostics['request_count'], 3)
+        self.assertEqual(error.sizes, [])
+        self.assertTrue(error.closed)
+        delay.assert_called_once_with(1)
+
+    def test_structurally_invalid_snapshot_is_not_a_transient_failure(self):
+        broken = resources()
+        broken['_embedded']['opportunityAttachmentList'][0]['opportunityId'] = OTHER
+        opener = Mock(); opener.open.side_effect = [Response(payload()), Response(broken)]
+        with patch.object(sam_public, 'sleep') as delay, self.assertRaises(SamError) as raised:
+            sam_public.fetch_notice(NOTICE, opener=opener)
+        self.assertEqual(opener.open.call_count, 2)
+        self.assertEqual(raised.exception.diagnostics['request_count'], 2)
+        self.assertEqual(raised.exception.diagnostics['failure_class'], 'response_schema')
+        delay.assert_not_called()
 
     def test_oversized_or_non_json_body_fails_before_second_request(self):
         for body in (b'x' * (sam_public.MAX_BYTES + 1), b'<html>private error</html>'):
             opener = Mock()
             opener.open.return_value = Response(body)
-            with self.assertRaises(SamError):
+            with patch.object(sam_public, 'sleep') as delay, self.assertRaises(SamError) as raised:
                 sam_public.fetch_notice(NOTICE, opener=opener)
             self.assertEqual(opener.open.call_count, 1)
+            self.assertEqual(raised.exception.diagnostics['request_count'], 1)
+            self.assertEqual(raised.exception.diagnostics['failure_class'], 'response_schema')
+            delay.assert_not_called()
 
     def test_fingerprint_binds_description_deadline_and_resource_manifest(self):
         original = sam_public.snapshot(payload(), resources(), NOTICE)['review_sha256']
@@ -358,13 +499,13 @@ class ReviewedAdmissionTests(unittest.TestCase):
         other.update(notice_id=OTHER,solicitation_number='DARPA-TEST-26-02')
         cfg=configuration(self.approval);cfg['approved_notices'].append(other)
         def fetch(identifier):
-            if identifier==OTHER:raise SamError('public_http_error',{'request_count':1,'http_status':503})
+            if identifier==OTHER:raise SamError('public_http_error',{'request_count':1,'http_status':503,'failure_class':'transient_transport'})
             return self.notice,{'request_count':2}
         with self.assertRaises(SamError) as raised:
             sam_reviewed.collect(cfg,TODAY,{},client=fetch)
         self.assertEqual(raised.exception.diagnostics['request_count'],3)
         self.assertEqual(raised.exception.diagnostics['failures'],[
-            {'notice_id':OTHER,'reason':'public_notice_unavailable','http_status':503}])
+            {'notice_id':OTHER,'reason':'public_notice_unavailable','http_status':503,'failure_class':'transient_transport'}])
 
     def test_config_rejects_unsafe_urls_ambiguous_cycles_and_impossible_stages(self):
         changes=[]

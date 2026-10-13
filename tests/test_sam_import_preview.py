@@ -524,7 +524,7 @@ class SamReviewedPreviewTests(unittest.TestCase):
         self.assertEqual(before, self.files())
         self.assertEqual(self.public_notice.call_count, 2)
         self.assertEqual(caught.exception.diagnostics['request_count'], 3)
-        self.assertEqual(caught.exception.diagnostics['failures'], [{'notice_id': IDS[0], 'http_status': 503}])
+        self.assertEqual(caught.exception.diagnostics['failures'], [{'notice_id': IDS[0], 'http_status': 503, 'failure_class': 'invalid_client'}])
         encoded = json.dumps(caught.exception.diagnostics) + str(caught.exception)
         for forbidden in ('PRIVATE', 'RAW EXCEPTION', KEY):
             self.assertNotIn(forbidden, encoded)

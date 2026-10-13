@@ -123,7 +123,8 @@ def reviewed_preview(config, *, root, today, public_notice):
     with ThreadPoolExecutor(max_workers=4) as executor:
         fetched = list(executor.map(fetch, approvals))
     request_count = sum(detail.get('request_count', 0) for _, detail, _ in fetched)
-    failures = [{'notice_id': approval['notice_id'], 'http_status': detail.get('http_status')}
+    failures = [{'notice_id': approval['notice_id'], 'http_status': detail.get('http_status'),
+                 'failure_class': detail.get('failure_class', 'invalid_client')}
                 for approval, (_, detail, failed) in zip(approvals, fetched) if failed]
     if failures:
         raise SamError('reviewed_notice_fetch_failed', {

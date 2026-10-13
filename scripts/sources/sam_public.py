@@ -6,15 +6,20 @@ API key, cookie, private contact, or attachment body enters the returned snapsho
 from __future__ import annotations
 
 import hashlib
+from http.client import IncompleteRead
 import json
 import re
-from urllib.error import HTTPError
+from time import sleep
+from urllib.error import HTTPError, URLError
 from urllib.parse import parse_qsl, urlsplit
 from urllib.request import Request, build_opener
 
 from .sam_api import NOTICE_ID, NoRedirect, SamError
 
 MAX_BYTES = 8 * 1024 * 1024
+REQUEST_TIMEOUT = 15
+MAX_ATTEMPTS = 2
+RETRY_DELAY = 1
 ATTACHMENT_FIELDS = ('attachmentId', 'resourceId', 'name', 'type', 'postedDate',
                      'accessLevel', 'exportControlled', 'explicitAccess', 'mimeType',
                      'size', 'deletedDate', 'deletedFlag', 'fileExists', 'accessStatus')
@@ -152,40 +157,68 @@ def snapshot(payload, resources, notice_id):
         raise SamError('invalid_public_notice') from None
 
 
-def _get_json(url, opener):
+def _get_json(url, opener, diagnostics, endpoint):
     client = opener if opener is not None else build_opener(NoRedirect())
     # Both routes may serve HAL JSON; JSON-only negotiation returns HTTP 406.
     request = Request(url, headers={'Accept': '*/*',
                       'User-Agent': 'Funding-Finder-SAM-Research/1.0'}, method='GET')
-    try:
-        with client.open(request, timeout=30) as response:
-            status = response.status
-            raw = response.read(MAX_BYTES + 1)
-        if status != 200 or len(raw) > MAX_BYTES:
-            raise SamError('public_http_error', {'http_status': status})
-        return json.loads(raw)
-    except HTTPError as error:
-        status = error.code
-        error.close()
-        raise SamError('public_http_error', {'http_status': status}) from None
-    except SamError:
-        raise
-    except Exception:
-        raise SamError('public_transport_or_schema_error') from None
+    for attempt in range(MAX_ATTEMPTS):
+        status, retry_after = None, None
+        diagnostics['request_count'] += 1
+        try:
+            with client.open(request, timeout=REQUEST_TIMEOUT) as response:
+                status = response.status
+                retry_after = getattr(response, 'headers', {}).get('Retry-After')
+                # Error bodies can contain contacts or infrastructure details;
+                # their contents are irrelevant to this bounded retry decision.
+                raw = response.read(MAX_BYTES + 1) if status == 200 else b''
+        except HTTPError as error:
+            status = error.code
+            retry_after = (error.headers or {}).get('Retry-After')
+            error.close()
+        except (URLError, OSError, IncompleteRead):
+            status = None
+        except Exception:
+            raise SamError('invalid_public_transport', {
+                'failure_class': 'invalid_client', 'endpoint': endpoint}) from None
+        else:
+            if status == 200:
+                if len(raw) > MAX_BYTES:
+                    raise SamError('public_response_schema_error', {
+                        'failure_class': 'response_schema', 'endpoint': endpoint})
+                try:
+                    return json.loads(raw)
+                except (ValueError, UnicodeError, TypeError):
+                    raise SamError('public_response_schema_error', {
+                        'failure_class': 'response_schema', 'endpoint': endpoint}) from None
+        temporary = status is None or status in {403, 429} or 500 <= status <= 599
+        # Never shorten a server-specified wait. A longer or unparseable value
+        # exhausts this request's retry budget rather than delaying the whole
+        # inventory or retrying earlier than SAM requested.
+        permitted_wait = retry_after is None or str(retry_after).strip() in {'0', '1'}
+        if not temporary or attempt + 1 == MAX_ATTEMPTS or not permitted_wait:
+            raise SamError('public_http_error' if status is not None else 'public_network_error', {
+                'http_status': status, 'endpoint': endpoint,
+                'failure_class': 'transient_transport' if temporary else 'nonretry_http'})
+        sleep(RETRY_DELAY)
 
 
 def fetch_notice(notice_id, *, opener=None):
-    """Exactly two bounded public reads, no redirect/retry or credential access."""
+    """Two public endpoints, each with at most two bounded same-route attempts."""
     diagnostics = {'request_count': 0, 'outcome': 'pending'}
     if not isinstance(notice_id, str) or not NOTICE_ID.fullmatch(notice_id):
-        raise SamError('invalid_notice_id', diagnostics)
+        raise SamError('invalid_notice_id', diagnostics | {'failure_class': 'response_schema'})
     try:
-        diagnostics['request_count'] += 1
-        notice = _get_json(f'https://sam.gov/api/prod/opps/v2/opportunities/{notice_id}', opener)
-        diagnostics['request_count'] += 1
+        notice = _get_json(f'https://sam.gov/api/prod/opps/v2/opportunities/{notice_id}',
+                           opener, diagnostics, 'notice')
         resources = _get_json(f'https://sam.gov/api/prod/opps/v3/opportunities/{notice_id}'
-                              '/resources?excludeDeleted=true&withScanResult=false', opener)
-        result = snapshot(notice, resources, notice_id)
+                              '/resources?excludeDeleted=true&withScanResult=false',
+                              opener, diagnostics, 'resources')
+        try:
+            result = snapshot(notice, resources, notice_id)
+        except SamError:
+            raise SamError('invalid_public_snapshot', {
+                'failure_class': 'response_schema', 'endpoint': 'snapshot'}) from None
         return result, diagnostics | {'outcome': 'ok', 'http_status': 200}
     except SamError as error:
         raise SamError('public_notice_unavailable', diagnostics | error.diagnostics) from None

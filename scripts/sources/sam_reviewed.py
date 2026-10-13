@@ -222,7 +222,8 @@ def collect(config, as_of, snapshots, *, client=None):
         diagnostics['request_count'] += detail.get('request_count', 0)
         if failure:
             failures.append({'notice_id': approval['notice_id'], 'reason': failure,
-                             'http_status': detail.get('http_status')})
+                             'http_status': detail.get('http_status'),
+                             'failure_class': detail.get('failure_class', 'invalid_client')})
             continue
         record, reasons = make_record(notice, approval, as_of)
         records.append(record)
@@ -232,7 +233,10 @@ def collect(config, as_of, snapshots, *, client=None):
         for reason in reasons:
             diagnostics['exclusion_reasons'][reason] = diagnostics['exclusion_reasons'].get(reason, 0) + 1
     if failures:
-        raise SamError('reviewed_notice_fetch_failed', diagnostics | {'failures': failures})
+        raise SamError('reviewed_notice_fetch_failed', diagnostics | {'failures': failures,
+            'failure_class': 'request_network' if all(
+                item['failure_class'] == 'transient_transport' for item in failures) else 'validation_failure',
+            'failure_reason': 'One or more reviewed SAM notices could not be verified'})
     for cached in snapshots.get('sam-gov', []) if isinstance(snapshots, dict) else []:
         record_id = str(cached.get('opportunity_id') or '')
         if record_id.startswith('sam-gov:') and record_id.removeprefix('sam-gov:') not in seen:
