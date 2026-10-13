@@ -24,7 +24,8 @@
     "assets/match-explain.js",
     "assets/team-hybrid.js",
     "assets/team-matcher.js",
-    "assets/team-researchers.js"
+    "assets/team-researchers.js",
+    "tools/require_sam_refresh.py"
   ],
   "generation_excluded": [
     "scripts/verify_researcher_publication.py",
@@ -123,7 +124,8 @@
         "config/sam_gov.json",
         "requirements.txt",
         "tools/run_budgeted_documents.py",
-        "tools/offline_spend.py"
+        "tools/offline_spend.py",
+        "tools/require_sam_refresh.py"
       ],
       "excluded": [
         "scripts/build_opportunity_teams.py",

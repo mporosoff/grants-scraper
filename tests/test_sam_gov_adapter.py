@@ -461,7 +461,7 @@ class AdapterTests(unittest.TestCase):
 
 
 class BardaPilotTests(unittest.TestCase):
-    """The observed BARDA row exercises the maintained admission configuration."""
+    """The observed BARDA row preserves the original v1 pilot admission contract."""
     def setUp(self):
         self.root = Path(__file__).resolve().parents[1]
         fixture = json.loads((self.root / 'tests/fixtures/sam_barda_listing_20261012.json').read_text(encoding='utf8'))
@@ -471,7 +471,7 @@ class BardaPilotTests(unittest.TestCase):
     def observe(self, *, as_of=None):
         client = Mock(return_value=([deepcopy(self.row), notice()],
                                     {'request_count': 0, 'outcome': 'offline_fixture'}))
-        adapter = SamGovAdapter(config_path=self.root / 'config/sam_gov.json', client=client)
+        adapter = SamGovAdapter(config_path=self.root / 'tests/fixtures/sam_barda_approval_v1_20261012.json', client=client)
         with patch.dict(os.environ, {'SAM_API_KEY': KEY}, clear=True), \
                 patch('urllib.request.OpenerDirector.open', side_effect=AssertionError('Live SAM call')), \
                 patch('requests.Session.request', side_effect=AssertionError('Provider call')):
@@ -482,7 +482,7 @@ class BardaPilotTests(unittest.TestCase):
 
     def test_one_actual_approval_admits_the_observed_open_application_with_source_clock(self):
         from scripts.submission_schedule import project
-        config = load_config(self.root / 'config/sam_gov.json')
+        config = load_config(self.root / 'tests/fixtures/sam_barda_approval_v1_20261012.json')
         self.assertTrue(config['enabled'])
         self.assertEqual([entry['notice_id'] for entry in config['approved_notices']],
                          ['8170c4735df64714adb2d1f8ce8671b1'])

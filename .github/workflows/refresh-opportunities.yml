@@ -195,6 +195,20 @@ jobs:
           --write
           --summary-output "${{ runner.temp }}/source-refresh-summary.json"
           --fail-on-degraded
+      - name: Require a complete reviewed SAM refresh before generation continues
+        id: sam-health
+        if: steps.restore.outputs.candidate_id == ''
+        run: >-
+          python -m tools.require_sam_refresh
+          --summary "${{ runner.temp }}/source-refresh-summary.json"
+      - name: Preserve source refresh diagnostics after any outcome
+        if: always() && steps.restore.outputs.candidate_id == ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: source-refresh-summary-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/source-refresh-summary.json
+          if-no-files-found: warn
+          retention-days: 90
       - name: Restore private normalized notice structure
         if: steps.restore.outputs.candidate_id == ''
         uses: actions/cache/restore@v4
@@ -370,6 +384,7 @@ jobs:
           steps.restore.outputs.candidate_id == '' &&
           always() &&
           (steps.additional-sources.outcome == 'failure' ||
+          steps.sam-health.outcome == 'failure' ||
           steps.document_evidence.outcome == 'failure')
         uses: actions/github-script@v8
         with:
@@ -380,7 +395,8 @@ jobs:
               `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}` +
               `/actions/runs/${context.runId}`;
             const externalDegraded =
-              "${{ steps.additional-sources.outcome }}" === "failure";
+              "${{ steps.additional-sources.outcome }}" === "failure" ||
+              "${{ steps.sam-health.outcome }}" === "failure";
             const documentEvidenceDegraded =
               "${{ steps.document_evidence.outcome }}" === "failure";
             const affected = [
@@ -422,12 +438,17 @@ jobs:
             } catch (error) {
               core.warning(`Could not read structured source summary: ${error.message}`);
             }
+            const samBlocked = "${{ steps.sam-health.outcome }}" === "failure";
+            const publicationEvidence = samBlocked
+              ? "SAM verification failed, so generation stopped before paid continuation or candidate persistence. The previously published catalog remains in service. "
+              : "The attempt retained only records permitted by each source policy. ";
             const body =
               `The degraded refresh layer(s) were: ${affected}. ` +
               `This occurred on ${new Date().toISOString()}.\n\n` +
-              `Healthy sources were still refreshed. Sources configured to retain ` +
+              publicationEvidence +
+              `Healthy sources were refreshed within this attempt. Sources configured to retain ` +
               `last-known-good data kept only publishable records; fail-closed sources ` +
-              `published zero. Document-evidence or classifier degradation cannot ` +
+              `contributed zero to the attempted merge. Document-evidence or classifier degradation cannot ` +
               `publish unchecked generic children.\n\nSource health evidence:\n${sourceEvidence}` +
               `\n\nInspect the run summary: ${runUrl}`;
             const { data: issues } = await github.rest.issues.listForRepo({

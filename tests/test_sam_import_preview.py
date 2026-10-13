@@ -363,6 +363,214 @@ class SamImportPreviewTests(unittest.TestCase):
                                  for path in self.root.rglob('*') if path.is_file()})
 
 
+class SamReviewedPreviewTests(unittest.TestCase):
+    """Use the real adapter and canonical merge with offline public snapshots."""
+
+    def setUp(self):
+        from scripts.build_catalog import build_catalog
+        from scripts.sources.base import CanonicalOpportunity
+        from scripts.sources.merge import save_catalog
+
+        self.folder = tempfile.TemporaryDirectory()
+        self.addCleanup(self.folder.cleanup)
+        self.root = Path(self.folder.name)
+        (self.root / 'data').mkdir()
+        (self.root / 'config').mkdir()
+        seed = CanonicalOpportunity(title='Synthetic seed research grant', external_id='100001',
+            opportunity_number='TEST-2026', agency='National Science Foundation',
+            url='https://www.grants.gov/search-results-detail/100001',
+            close_date='2026-12-31').to_record(slug='test', source='Grants.gov', source_type='Federal')
+        save_catalog(build_catalog([seed], datetime(2026, 10, 1, tzinfo=timezone.utc), 'synthetic.xml', 0),
+                     self.root / 'data/opportunities.js')
+        (self.root / 'data/source_records.json').write_text(json.dumps({'schema_version': 1, 'sources': {}}))
+        self.config = {'schema_version': 2, 'enabled': False, 'approved_notices': []}
+        self.snapshots = {}
+        for index, notice_id in enumerate(IDS[:2]):
+            number = f'NASA-RESEARCH-2026-{index + 1}'
+            source_url = f'https://sam.gov/opp/{notice_id}/view'
+            entry = {'kind': 'concept_paper', 'date': '2026-11-30', 'time': '17:00',
+                     'timezone': 'America/New_York', 'required': True, 'invitation_required': False,
+                     'note': 'Submit the required concept paper through the official portal.',
+                     'source_url': source_url, 'quote': 'Concept papers are required by November 30, 2026.'}
+            full = dict(entry, kind='full_application', date=None, time=None, timezone=None,
+                        required=False, invitation_required=True,
+                        note='Full proposals follow invitation; the invitation supplies the due date.',
+                        quote='Only invited applicants may submit a full proposal.')
+            approval = {'notice_id': notice_id, 'solicitation_number': number, 'organization_id': '12345',
+                        'sponsor': 'National Aeronautics and Space Administration', 'evidence_url': source_url,
+                        'academic_eligibility_quote': 'Universities are eligible to submit research proposals.',
+                        'verified_on': '2026-10-01', 'review_after': '2026-10-31',
+                        'review_sha256': str(index + 1) * 64,
+                        'summary': 'Research into propulsion and materials science.', 'scope_note': '',
+                        'cycles': [{'name': 'Current research cycle', 'entry': entry, 'full': full}]}
+            snapshot = {'notice_id': notice_id, 'latest_notice_id': notice_id, 'latest': True,
+                        'status': 'published', 'archived': False, 'cancelled': False, 'deleted': False,
+                        'title': f'Synthetic NASA research call {index + 1}',
+                        'solicitation_number': number, 'organization_id': '12345', 'notice_type': 'o',
+                        'classification_code': 'AD11', 'naics_codes': ['541715'], 'set_asides': [],
+                        'posted_at': '2026-09-30', 'modified_at': '2026-09-30',
+                        'response_deadline': '2026-11-30T17:00:00', 'response_timezone': 'America/New_York',
+                        'archive_date': '2026-12-30', 'description_sha256': 'd' * 64,
+                        'resources_sha256': 'e' * 64, 'review_sha256': approval['review_sha256']}
+            self.config['approved_notices'].append(approval)
+            self.snapshots[notice_id] = snapshot
+        self.save_config()
+        self.public_notice = Mock(side_effect=lambda notice_id: (
+            deepcopy(self.snapshots[notice_id]), {'request_count': 2, 'http_status': 200, 'outcome': 'ok'}))
+        self.listing = Mock(side_effect=AssertionError('Legacy credentialed listing is forbidden'))
+        self.description = Mock(side_effect=AssertionError('Legacy descriptions are forbidden'))
+
+    def save_config(self):
+        (self.root / 'config/sam_gov.json').write_text(json.dumps(self.config), encoding='utf8')
+
+    def files(self):
+        return {str(path.relative_to(self.root)): path.read_bytes()
+                for path in self.root.rglob('*') if path.is_file()}
+
+    def run_preview(self):
+        before = self.files()
+        original_get = os.environ.get
+
+        def no_key_read(name, *args):
+            if name == 'SAM_API_KEY':
+                raise AssertionError('Reviewed public mode must not read the API key')
+            return original_get(name, *args)
+
+        with patch.dict(os.environ, {'SAM_API_KEY': KEY, 'VPR_ENRICH_LINKS': 'preserve-me'}, clear=True), \
+                patch.object(os.environ, 'get', side_effect=no_key_read), \
+                patch('urllib.request.OpenerDirector.open', side_effect=AssertionError('Unexpected network call')), \
+                patch('requests.Session.request', side_effect=AssertionError('Unexpected provider call')), \
+                redirect_stdout(io.StringIO()) as stdout:
+            report = sam.preview(root=self.root, today=TODAY, public_notice=self.public_notice,
+                                 listing=self.listing, description=self.description)
+            self.assertEqual(os.environ['VPR_ENRICH_LINKS'], 'preserve-me')
+        self.assertEqual(before, self.files())
+        self.assertEqual(stdout.getvalue(), '')
+        self.listing.assert_not_called()
+        self.description.assert_not_called()
+        self.assertNotIn(KEY, json.dumps(report))
+        self.assertFalse(report['catalog_changed'])
+        return report
+
+    def test_real_merge_reuses_each_reviewed_snapshot_once_without_key_or_writes(self):
+        report = self.run_preview()
+        self.assertCountEqual([call.args for call in self.public_notice.call_args_list], [(i,) for i in IDS[:2]])
+        self.assertEqual(self.public_notice.call_count, 2)
+        self.assertEqual(report['schema_version'], 2)
+        self.assertEqual(report['request_count'], 4)
+        self.assertEqual(report['credentialed_requests'], 0)
+        self.assertEqual(report['request_mode'], 'anonymous_public_reviewed_notices')
+        self.assertEqual(report['description_inspections'], [])
+        self.assertTrue(report['reviewed_notices_match'])
+        self.assertFalse(report['production_enabled'])
+        self.assertFalse(report['merge_preview']['written'])
+        self.assertTrue(report['merge_preview']['validation']['ok'])
+        self.assertEqual(report['merge_preview']['stats']['external_added'], 2)
+        self.assertEqual([item['status'] for item in report['merge_preview']['sources']], ['refreshed'])
+        for candidate in report['candidates']:
+            self.assertEqual(candidate['catalog_matches'],
+                             {'same_sam_notice': [], 'same_number_requires_sponsor_check': []})
+        self.assertEqual(report['comparison_scope'],
+                         'Current catalog only; absence here does not establish absence from Grants.gov')
+
+    def test_v2_rejects_legacy_description_selection_before_any_request(self):
+        with self.assertRaises(ValueError):
+            sam.preview(root=self.root, today=TODAY, selected_ids=[IDS[0]],
+                        public_notice=self.public_notice, listing=self.listing, description=self.description)
+        self.public_notice.assert_not_called()
+        self.listing.assert_not_called()
+        self.description.assert_not_called()
+
+    def test_invalid_or_oversized_reviewed_config_is_rejected_before_public_calls(self):
+        self.config['approved_notices'] = self.config['approved_notices'][:1] * 101
+        self.save_config()
+        with self.assertRaises(sam.SamError):
+            sam.preview(root=self.root, today=TODAY, public_notice=self.public_notice,
+                        listing=self.listing, description=self.description)
+        self.public_notice.assert_not_called()
+        self.listing.assert_not_called()
+        self.description.assert_not_called()
+
+    def test_public_inventory_fetch_has_four_workers_and_no_unapproved_ids(self):
+        from concurrent.futures import ThreadPoolExecutor
+        with patch.object(sam, 'ThreadPoolExecutor', wraps=ThreadPoolExecutor) as executor:
+            self.run_preview()
+        executor.assert_called_once_with(max_workers=4)
+        self.assertEqual({call.args[0] for call in self.public_notice.call_args_list}, set(IDS[:2]))
+
+    def test_changed_snapshot_marks_preview_unmatched_without_silently_readmitting(self):
+        self.snapshots[IDS[0]]['review_sha256'] = 'f' * 64
+        report = self.run_preview()
+        self.assertFalse(report['reviewed_notices_match'])
+        candidates = {item['notice_id']: item for item in report['candidates']}
+        self.assertEqual(candidates[IDS[0]]['admission_reasons'], ['reviewed_evidence_changed'])
+        self.assertEqual(candidates[IDS[1]]['admission_reasons'], [])
+        self.assertEqual(self.public_notice.call_count, 2)
+
+    def test_public_failure_is_not_retried_or_merged_and_omits_error_text(self):
+        def public(notice_id):
+            if notice_id == IDS[0]:
+                error = sam.SamError('public_notice_unavailable',
+                    {'request_count': 1, 'http_status': 503, 'raw_body': 'PRIVATE ' + KEY})
+                error.args = ('RAW EXCEPTION ' + KEY,)
+                raise error
+            return deepcopy(self.snapshots[notice_id]), {'request_count': 2, 'http_status': 200}
+        self.public_notice.side_effect = public
+        before = self.files()
+        with patch.object(sam, 'integrate') as integrate, self.assertRaises(sam.SamError) as caught:
+            sam.preview(root=self.root, today=TODAY, public_notice=self.public_notice,
+                        listing=self.listing, description=self.description)
+        integrate.assert_not_called()
+        self.assertEqual(before, self.files())
+        self.assertEqual(self.public_notice.call_count, 2)
+        self.assertEqual(caught.exception.diagnostics['request_count'], 3)
+        self.assertEqual(caught.exception.diagnostics['failures'], [{'notice_id': IDS[0], 'http_status': 503, 'failure_class': 'invalid_client'}])
+        encoded = json.dumps(caught.exception.diagnostics) + str(caught.exception)
+        for forbidden in ('PRIVATE', 'RAW EXCEPTION', KEY):
+            self.assertNotIn(forbidden, encoded)
+
+    def test_public_snapshot_keeps_only_hashes_of_private_body_and_contact_fields(self):
+        from scripts.sources.sam_public import snapshot
+        notice_id = IDS[0]
+        payload = {'opportunityId': notice_id, 'id': notice_id,
+                   'latest': True, 'archived': False, 'cancelled': False, 'deleted': False,
+                   'status': {'code': 'published'},
+                   '_links': {'opportunity:publish:latest': {'href': f'/opps/v2/opportunities/{notice_id}'}},
+                   'postedDate': '2026-09-30', 'modifiedDate': '2026-09-30',
+                   'description': [{'opportunityId': notice_id, 'descriptionId': 'synthetic',
+                                    'body': 'RAW BODY private@example.gov (202) 555-0199 ' + KEY}],
+                   'pointOfContact': [{'email': 'private@example.gov'}],
+                   'data2': {'title': 'Synthetic NASA research call',
+                             'solicitationNumber': self.config['approved_notices'][0]['solicitation_number'],
+                             'organizationId': '12345', 'type': 'o', 'naics': [],
+                             'solicitation': {'deadlines': {'response': '2026-11-30T17:00:00'}}}}
+        resources = {'_embedded': {'opportunityAttachmentList': [
+            {'opportunityId': notice_id, 'attachments': [{'attachmentId': 'a', 'resourceId': 'b',
+                'name': 'Reviewed call.pdf', 'accessLevel': 'public', 'createdBy': 'private@example.gov'}]}]}}
+        self.snapshots[notice_id] = snapshot(payload, resources, notice_id)
+        self.config['approved_notices'][0]['review_sha256'] = self.snapshots[notice_id]['review_sha256']
+        self.save_config()
+        report = self.run_preview()
+        encoded = json.dumps(report)
+        for forbidden in ('RAW BODY', 'private@example.gov', '555-0199', KEY, 'pointOfContact', 'createdBy'):
+            self.assertNotIn(forbidden, encoded)
+        self.assertRegex(report['candidates'][0]['description_sha256'], r'^[a-f0-9]{64}$')
+        self.assertRegex(report['candidates'][0]['resources_sha256'], r'^[a-f0-9]{64}$')
+
+    def test_cli_fails_when_reviewed_evidence_changed_even_if_merge_validation_passed(self):
+        report = {'schema_version': 2, 'outcome': 'preview_completed', 'request_count': 2,
+                  'reviewed_notices_match': False, 'catalog_changed': False,
+                  'merge_preview': {'validation': {'ok': True}, 'sources': [{'status': 'refreshed'}]}}
+        target = self.root / 'report.json'
+        with patch.dict(os.environ, CONTEXT, clear=True), \
+                patch('sys.argv', ['sam_import_preview', '--report', str(target)]), \
+                patch.object(sam, 'preview', return_value=report) as preview, \
+                redirect_stdout(io.StringIO()):
+            self.assertEqual(sam.main(), 1)
+        preview.assert_called_once_with(None, [])
+        self.assertFalse(json.loads(target.read_text())['reviewed_notices_match'])
+
+
 class SamPreviewWorkflowTests(unittest.TestCase):
     def test_catalog_refresh_scopes_sam_secret_to_additional_sources_only(self):
         workflow = yaml.safe_load((sam.ROOT / '.github/workflows/refresh-opportunities.yml').read_text(encoding='utf8'))
@@ -390,7 +598,9 @@ class SamPreviewWorkflowTests(unittest.TestCase):
         self.assertEqual(set(workflow['jobs']), {'preview'})
         job = workflow['jobs']['preview']
         self.assertEqual(job['if'], "github.repository == 'mporosoff/grants-scraper' && github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch'")
-        self.assertLessEqual(job['timeout-minutes'], 5)
+        # Up to 100 reviewed notices, two 30-second reads each, four workers:
+        # 25 minutes of bounded transport plus installation/report overhead.
+        self.assertEqual(job['timeout-minutes'], 30)
         self.assertNotIn('env', job)
         secret_steps = [step for step in job['steps'] if 'secrets.' in json.dumps(step)]
         self.assertEqual(len(secret_steps), 1)
