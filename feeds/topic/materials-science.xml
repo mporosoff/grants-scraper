@@ -4,8 +4,20 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml</id>
-  <updated>2026-10-12T16:10:13Z</updated>
+  <updated>2026-10-13T16:11:25Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>Lunar Enabling Infrastructure Accelerator (LEIA) -Broad Agency Announcement (BAA) NextSTEP-3 Appendix A - Final Solicitation</title>
+    <link href="https://sam.gov/opp/812c81b0f0b84943be12a5f29615d3c8/view"/>
+    <id>urn:funding-finder:sam-gov:sam-gov%3A812c81b0f0b84943be12a5f29615d3c8</id>
+    <updated>2026-10-09T00:00:00Z</updated>
+    <author><name>NASA Glenn Research Center</name></author>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Materials science"/>
+    <category term="Space and aeronautics"/>
+    <summary>NASA Glenn Research Center | Full Application 2026-10-15 | Lunar infrastructure technology maturation: vertical solar arrays, oxygen extraction from regolith, radioisotope Stirling generators, in-space advanced manufacturing, and nanomaterials; generally TRL 5-6 demonstrations. US organizations as prime; foreign organizations may team but NASA funds cannot support their R&amp;D; non-US persons employed/studying at US organizations may receive funding. NASA/JP…</summary>
+  </entry>
   <entry>
     <title>Microplastics Research and Resource Coordination Center (U24 - Clinical Trial Not Allowed)</title>
     <link href="https://www.grants.gov/search-results-detail/362996"/>

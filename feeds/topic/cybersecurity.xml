@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml</id>
-  <updated>2026-10-12T16:10:13Z</updated>
+  <updated>2026-10-13T16:11:25Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>F26AS00023 FY2026 Prescott Marine Mammal Rescue and Response Grant Program</title>
@@ -234,6 +234,16 @@
     <category term="Materials science"/>
     <category term="Cybersecurity"/>
     <summary>U.S. National Science Foundation | Application 2027-10-07 | With a focus on two-year Institutions of Higher Education (IHEs), the Advanced Technological Education (ATE) program supports the education of technicians for the high-technology fields that drive our nation's economy. The program involves partnerships between academic institutions (grades 7-12, IHEs), industry, and economic development agencies to promote improvement in the education of science a…</summary>
+  </entry>
+  <entry>
+    <title>Strategic Distribution and Disposition SDD</title>
+    <link href="https://sam.gov/opp/3dc0d137a9404adab1b8623c4e279f31/view"/>
+    <id>urn:funding-finder:sam-gov:sam-gov%3A3dc0d137a9404adab1b8623c4e279f31</id>
+    <updated>2024-03-21T00:00:00Z</updated>
+    <author><name>Defense Logistics Agency (DLA)</name></author>
+    <category term="Cybersecurity"/>
+    <category term="Education and workforce"/>
+    <summary>Defense Logistics Agency (DLA) | White Paper 2028-02-07 | Industry4.0 warehouse technologies, robotics, modeling, IoT, cybersecurity and predictive analytics. Open non-IDIQ white paper entry; technical/cost proposals follow a government request. Educational organizations may be prime offerors, subject to financial, accounting and other FAR responsibility standards. No small-business set-aside. Use only the current BAA areas of interest and official submi…</summary>
   </entry>
   <entry>
     <title>Centers of Research Excellence in Science and Technology (CREST)</title>

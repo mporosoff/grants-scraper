@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/social-and-behavioral-sciences.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/social-and-behavioral-sciences.xml</id>
-  <updated>2026-10-12T16:10:13Z</updated>
+  <updated>2026-10-13T16:11:25Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -397,16 +397,6 @@
     <summary>National Institutes of Health | Estimated Application 2026-11-15 | The Fogarty International Center, with NINDS, NIMH, NIA, NIEHS, NICHD, NEI, NIDCD, and NCCIH, intends to continue support of neuro-health research through the Global Brain and Nervous System Disorders Research Across the Lifespan program. Awards will catalyze and strengthen collaborative research on the brain and nervous system that leverages the unique scientific contexts of low- and middle-incom…</summary>
   </entry>
   <entry>
-    <title>NIH Blueprint Initiative: Tools for Germline Gene Editing in the Nervous System</title>
-    <link href="https://www.grants.gov/search-results-detail/362313"/>
-    <id>urn:funding-finder:grants-gov:362313</id>
-    <updated>2026-08-10T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Neuroscience"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health | Estimated Application 2026-10-12 | The NIH Blueprint (a consortium of NIH Institutes that support neuroscience research) seeks to advance its mission by supporting the development, optimization, validation, and application of germline and somatic transgenic and gene-editing approaches in experimental systems modeling key features of human brain anatomy, circuitry, cognition, behavior, and lifespan. This initiative will build on the…</summary>
-  </entry>
-  <entry>
     <title>Institutional Mentored Career Development Award (Parent K12) (Clinical Trials Not Allowed)</title>
     <link href="https://www.grants.gov/search-results-detail/361251"/>
     <id>urn:funding-finder:grants-gov:361251</id>
@@ -651,5 +641,19 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Social and behavioral sciences"/>
     <summary>National Institutes of Health | Application 2028-01-25 | This Notice of Funding Opportunity (NOFO) solicits applications to develop shared-use research facilities or research-supporting facilities that enable collaborative research and benefit broad research communities at large. The NOFO supports two existing construction programs: the Biomedical Research Facilities (BRF) program and the HIV/AIDS Research Facilities (HRF) program. The BRF program suppo…</summary>
+  </entry>
+  <entry>
+    <title>Collaboratory to Advance Mathematics Education and Learning (CAMEL) for K-12</title>
+    <link href="https://www.grants.gov/search-results-detail/361008"/>
+    <id>urn:funding-finder:grants-gov:361008</id>
+    <updated>2025-12-12T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Education and workforce"/>
+    <category term="Neuroscience"/>
+    <category term="Social and behavioral sciences"/>
+    <category term="Technology development"/>
+    <summary>U.S. National Science Foundation | Posted | The Collaboratory to Advance Mathematics Education and Learning (CAMEL) for K-12 initiative aims to advance mathematics learning and education through purposeful collaboration that draws on the interdisciplinary Science of Learning (including neuroscience; cognitive, developmental, and social sciences; computer science; machine learning; engineering; and education research), deep experiences in ed…</summary>
   </entry>
 </feed>

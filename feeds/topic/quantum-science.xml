@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/quantum-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/quantum-science.xml</id>
-  <updated>2026-10-12T16:10:13Z</updated>
+  <updated>2026-10-13T16:11:25Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>FY 2027 Continuation of Solicitation for the Office of Science Financial Assistance Program</title>
@@ -275,6 +275,16 @@
     <category term="Quantum science"/>
     <category term="Data science"/>
     <summary>U.S. National Science Foundation | Application 2027-04-05 | Government and the nation face a talent shortfall in artificial intelligence (AI) and cybersecurity. The CyberAICorps Scholarship for Service (CyberAI SFS) program welcomes proposals that address AI and cybersecurity education and workforce development. CyberAI refers to using AI in cybersecurity as well as providing security and resilience for AI systems. The Scholarship Track provides funding to…</summary>
+  </entry>
+  <entry>
+    <title>NEEDIPEDIA BROAD AGENCY ANNOUNCEMENT - BAA</title>
+    <link href="https://sam.gov/opp/4180ee1405cc4aadbd14f5830c55e900/view"/>
+    <id>urn:funding-finder:sam-gov:sam-gov%3A4180ee1405cc4aadbd14f5830c55e900</id>
+    <updated>2025-12-22T00:00:00Z</updated>
+    <author><name>Defense Intelligence Agency</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Quantum science"/>
+    <summary>Defense Intelligence Agency | White Paper 2028-12-26 | Open research ideas responding to current DIA needs, including AI/ML, sensing and mission science, analytics, quantum information and emerging technologies. Unclassified research scope only. Exclude classified submissions and closed Need2. Commercial services not automatically in research catalog. Institution consent and senior-official acknowledgement before negotiation; no guaranteed funding. Cu…</summary>
   </entry>
   <entry>
     <title>QBI Topic: Independent Verification and Validation</title>

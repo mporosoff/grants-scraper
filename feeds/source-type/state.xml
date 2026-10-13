@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/source-type/state.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/source-type/state.xml</id>
-  <updated>2026-10-12T16:10:13Z</updated>
+  <updated>2026-10-13T16:11:25Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Offshore Wind Project Predevelopment Program Opportunity Notice</title>
@@ -99,6 +99,7 @@
     <updated>2026-09-07T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
     <category term="Energy"/>
+    <category term="Catalysis and reaction engineering"/>
     <summary>NYSERDA | Application 2026-10-28 | Supporting research to improve the scientific and technical foundation for addressing key policy-relevant questions related to air quality and health effects research, Program Opportunity Notice (PON) 6220, Energy-Related Air Quality and Health Effects Research, is available through NYSERDA.rnPON 6220 focuses on: 1) pollutant trends analysis, source apportionment, and accountability studies; 2) po…</summary>
   </entry>
   <entry>
@@ -137,6 +138,8 @@
     <author><name>NYSERDA</name></author>
     <category term="Education and workforce"/>
     <category term="Energy"/>
+    <category term="Carbon management"/>
+    <category term="Climate change"/>
     <summary>NYSERDA | Application 2026-12-08 | Through this funding opportunity the New York State Energy Research and Development Authority (NYSERDA) seeks to work with labor organizations and registered pre-apprenticeship programs across the State, to grow a diverse, equitable, and inclusive pipeline of skilled talent for the clean energy labor market. This solicitation is intended to fund Projects that create and/or expand the capacity of d…</summary>
   </entry>
   <entry>
@@ -191,6 +194,7 @@
     <updated>2026-09-07T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
     <category term="Climate change"/>
+    <category term="Carbon management"/>
     <summary>NYSERDA | Application 2026-12-31 | The Owner’s Representative Services for Multifamily Buildings Program provides incentives to multifamily owners and managers of under-resourced multifamily buildings, for technical assistance and support services to advance efficiency and decarbonization projects.</summary>
   </entry>
   <entry>
@@ -200,6 +204,8 @@
     <updated>2026-09-07T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
     <category term="Manufacturing"/>
+    <category term="Carbon management"/>
+    <category term="Climate change"/>
     <summary>NYSERDA | Application 2027-06-30 | NYSERDA’s Clean Heat for All: Packaged Window Heat Pump Demonstration Program provides up to $10 million in incentives to support the installation and performance monitoring of cold-climate packaged window heat pumps (PWHPs) in multifamily buildings across New York State. Through a two-phase structure, the Program qualifies manufacturers and vendors whose PWHP products meet technical and installat…</summary>
   </entry>
   <entry>
@@ -209,6 +215,8 @@
     <updated>2026-09-07T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
     <category term="Manufacturing"/>
+    <category term="Carbon management"/>
+    <category term="Climate change"/>
     <summary>NYSERDA | Application 2027-06-30 | NYSERDA’s Clean Heat for All: Packaged Window Heat Pump Demonstration Program provides up to $10 million in incentives to support the installation and performance monitoring of cold-climate packaged window heat pumps (PWHPs) in multifamily buildings across New York State. Through a two-phase structure, the Program qualifies manufacturers and vendors whose PWHP products meet technical and installat…</summary>
   </entry>
   <entry>
@@ -229,6 +237,7 @@
     <category term="Climate change"/>
     <category term="Community development"/>
     <category term="Energy"/>
+    <category term="Carbon management"/>
     <summary>NYSERDA | Application 2027-12-31 | NY Green Bank’s RFP 23 for the Community Decarbonization Fund invites regulated and unregulated financial entities (including but not limited to community development financial institutions (CDFIs), insured credit unions and depository institutions, and not-for-profit corporations that perform lending activities) deploying capital into clean energy and sustainable infrastructure and related small …</summary>
   </entry>
   <entry>
@@ -261,6 +270,7 @@
     <category term="Energy"/>
     <category term="Health equity"/>
     <category term="Transportation"/>
+    <category term="Carbon management"/>
     <summary>NYSERDA | Application 2029-12-31 | NYSERDA is looking to establish a pool of contractors qualified to deliver training, develop curriculum and/or training tools, and provide market expertise and/or other services related to clean energy workforce development and training. Qualified contractors will have experience in one or more of the following categories: building decarbonization and energy efficiency, renewable energy, grid mode…</summary>
   </entry>
   <entry>
@@ -271,6 +281,7 @@
     <author><name>NYSERDA</name></author>
     <category term="Manufacturing"/>
     <category term="Transportation"/>
+    <category term="Energy"/>
     <summary>NYSERDA | Application 2029-12-31 | Helps fleet owners in New York State afford clean vehicle technologies that are quiet, efficient and do not emit harmful pollutants or carbon. NYTVIP provides point-of-sale vouchers to fleet owners that purchase or lease zero emission Class 3-8 vehicles, non-road equipment, and transit buses. Information about how fleets, dealers, and manufacturers can participate in NYTVIP can be found in the Imp…</summary>
   </entry>
   <entry>
@@ -321,6 +332,7 @@
     <author><name>NYSERDA</name></author>
     <category term="Environmental science"/>
     <category term="Manufacturing"/>
+    <category term="Energy"/>
     <summary>NYSERDA | Application 2030-12-30 | The New York School Bus Incentive Program (NYSBIP) is a voucher incentive program to accelerate the deployment of zero-emission school buses and associated charging infrastructure throughout New York State using funds allocated by the 2022 Clean Water, Clean Air, and Green Jobs Environmental Bond Act (Bond Act). More information about how fleets, dealers, and manufacturers can participate in NYSBI…</summary>
   </entry>
   <entry>
@@ -330,6 +342,8 @@
     <updated>2026-09-07T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
     <category term="Energy"/>
+    <category term="Carbon management"/>
+    <category term="Climate change"/>
     <summary>NYSERDA | Application 2030-12-31 | Provides technical assistance and financial incentives to support retrofits in low-to moderate-income (LMI) multifamily buildings in upstate New York under the LMI Energy Efficiency and Building Electrification (EE/BE) Order from 2026-2030.</summary>
   </entry>
   <entry>

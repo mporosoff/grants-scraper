@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/transportation.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/transportation.xml</id>
-  <updated>2026-10-12T16:10:13Z</updated>
+  <updated>2026-10-13T16:11:25Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Mentored Career Transition Award (KT1/R00)</title>
@@ -143,6 +143,16 @@
     <summary>National Institutes of Health | Estimated Application 2027-07-02 | The National Institute of Arthritis and Musculoskeletal and Skin Diseases (NIAMS) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for the Clinical Trial Cooperative Agreement Program within the mission areas of the institute. This Notice of Funding Opportunity (NOFO) solicits cooperative agreement applications for implementation of investigator-initiated, single o…</summary>
   </entry>
   <entry>
+    <title>Office of Hazardous Materials Safety Research Initiative - FY2026 BROAD AGENCY ANNOUNCEMENT (BAA)</title>
+    <link href="https://sam.gov/opp/b7f83ec10df84ff0ad8ec6290dba7176/view"/>
+    <id>urn:funding-finder:sam-gov:sam-gov%3Ab7f83ec10df84ff0ad8ec6290dba7176</id>
+    <updated>2026-10-13T00:00:00Z</updated>
+    <author><name>U.S. Department of Transportation - Pipeline and Hazardous Materials Safety Administration (PHMSA)</name></author>
+    <category term="Energy"/>
+    <category term="Transportation"/>
+    <summary>U.S. Department of Transportation - Pipeline and Hazardous Materials Safety Administration (PHMSA) | White Paper 2026-11-18 | Hazardous-materials transport research including energy-storage systems, packaging, emergency response, and rail safety; analytical studies and technology assessment. Current action Amendment0003 publishedOct13 replaces saved745e7a... action; only Q&amp;A added, other terms unchanged. US prime; foreign entities permitted as subcontractors under conditions. Federal/state/local government bodies exclude…</summary>
+  </entry>
+  <entry>
     <title>Clinical Trials and Ancillary Studies Conducted within NIH-Funded Clinical Trial Research Networks (UG3/UH3 - Clinical Trial Required)</title>
     <link href="https://www.grants.gov/search-results-detail/361522"/>
     <id>urn:funding-finder:grants-gov:361522</id>
@@ -180,6 +190,16 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Transportation"/>
     <summary>National Institutes of Health | Application 2028-10-13 | The purpose of the Stimulating Access to Research in Residency Transition Scholar (StARRTS) K38 Career Development program is to retain and support clinician-investigators who have successfully completed the Stimulating Access to Research in Residency (StARR) R38 Program (RFA-HL-26-012 and previous NOFOs) as resident-investigators. Individuals who receive K38 grants described in this Notice of Fun…</summary>
+  </entry>
+  <entry>
+    <title>Federal Aviation Administration (FAA) Research And Commercial Solutions Opening (RCSO) Area Of Interest (AOI) - Complexity Of Systems And Operations</title>
+    <link href="https://sam.gov/opp/e3d96ffd4a0a48b080e09dd5af732cc8/view"/>
+    <id>urn:funding-finder:sam-gov:sam-gov%3Ae3d96ffd4a0a48b080e09dd5af732cc8</id>
+    <updated>2026-10-06T00:00:00Z</updated>
+    <author><name>Federal Aviation Administration (FAA)</name></author>
+    <category term="Education and workforce"/>
+    <category term="Transportation"/>
+    <summary>Federal Aviation Administration (FAA) | Concept Paper 2026-11-02 | Basic/applied aviation human-factors research on how increasing system and operational complexity affects pilot performance, safety, automation and training. Actual AOI solicits submissions; parent BAA alone does not. Must satisfy one FAA OTA qualifier and technical criteria; subsequent phases only by invitation. CurrentSAM deadline supplies18:00EST; PDF statesNov2date. No small-business set-aside…</summary>
   </entry>
   <entry>
     <title>Small Business Transportation Technical Assistance Center (Region 1)</title>
@@ -364,6 +384,17 @@
     <summary>Bureau of Justice Assistance | Application 2026-10-30 | This is a notice of funding opportunity (NOFO) for the BJA FY 2026 Second Chance Act Community-based Reentry Program. This opportunity will support community-based organizations and tribal governments to provide mentoring and transitional services for people returning to communities from adult correctional facilities and who are assessed as moderate to high risk for recidivism. Services may be pro…</summary>
   </entry>
   <entry>
+    <title>ManTech special Broad Agency Announcement (sBAA): Accelerating Maritime Modernization: Innovation in Naval Manufacturing, Sustainment, and Industrial Base Capability</title>
+    <link href="https://sam.gov/opp/d2bb23d781124b8690158100ce7d5f1e/view"/>
+    <id>urn:funding-finder:sam-gov:sam-gov%3Ad2bb23d781124b8690158100ce7d5f1e</id>
+    <updated>2026-09-17T00:00:00Z</updated>
+    <author><name>Office of Naval Research (ONR)</name></author>
+    <category term="Manufacturing"/>
+    <category term="Technology development"/>
+    <category term="Transportation"/>
+    <summary>Office of Naval Research (ONR) | White Paper 2027-07-16 | Applied research and technology development in advanced manufacturing and sustainment. Applied research and advanced technology development for naval manufacturing and sustainment, with transition value. Phase II selections depend on funding and current technical focus. FFRDCs and military universities cannot be prime offerors; no mandatory industry partner invented.</summary>
+  </entry>
+  <entry>
     <title>FY26 US DOT Drone Infrastructure Inspection Grants (DIIG) Program</title>
     <link href="https://www.grants.gov/search-results-detail/363242"/>
     <id>urn:funding-finder:grants-gov:363242</id>
@@ -422,6 +453,7 @@
     <category term="Energy"/>
     <category term="Health equity"/>
     <category term="Transportation"/>
+    <category term="Carbon management"/>
     <summary>NYSERDA | Application 2029-12-31 | NYSERDA is looking to establish a pool of contractors qualified to deliver training, develop curriculum and/or training tools, and provide market expertise and/or other services related to clean energy workforce development and training. Qualified contractors will have experience in one or more of the following categories: building decarbonization and energy efficiency, renewable energy, grid mode…</summary>
   </entry>
   <entry>
@@ -432,6 +464,7 @@
     <author><name>NYSERDA</name></author>
     <category term="Manufacturing"/>
     <category term="Transportation"/>
+    <category term="Energy"/>
     <summary>NYSERDA | Application 2029-12-31 | Helps fleet owners in New York State afford clean vehicle technologies that are quiet, efficient and do not emit harmful pollutants or carbon. NYTVIP provides point-of-sale vouchers to fleet owners that purchase or lease zero emission Class 3-8 vehicles, non-road equipment, and transit buses. Information about how fleets, dealers, and manufacturers can participate in NYTVIP can be found in the Imp…</summary>
   </entry>
   <entry>
@@ -444,6 +477,16 @@
     <category term="Energy"/>
     <category term="Transportation"/>
     <summary>NYSERDA | Application 2030-09-30 | Funding is available to build and expand training capacity that advances skills and knowledge for clean energy workers in the areas of energy efficiency and building electrification, renewable energy, energy storage, smart grid, and electric vehicle charging stations. This solicitation may also support the enhancement of clean energy content delivered to students enrolled in a degree or certificat…</summary>
+  </entry>
+  <entry>
+    <title>FTA Broad Agency Announcement (FY26) -- “Research Initiatives in Support of Safety, Accessibility, and Mobility in Public Transportation</title>
+    <link href="https://sam.gov/opp/9fac6a86bf4f4561bd8bd464284d6297/view"/>
+    <id>urn:funding-finder:sam-gov:sam-gov%3A9fac6a86bf4f4561bd8bd464284d6297</id>
+    <updated>2026-09-04T00:00:00Z</updated>
+    <author><name>U.S. Department of Transportation - Federal Transit Administration (FTA)</name></author>
+    <category term="Technology development"/>
+    <category term="Transportation"/>
+    <summary>U.S. Department of Transportation - Federal Transit Administration (FTA) | Concept Paper 2026-10-19 | Applied public transit research, technology development and demonstration to improve transit safety, efficiency and deployment readiness, generally TRL3-6. Cost sharing may be mandated under49USC5312(g); FTA determines applicability during concept review and communicates it in writing. Federal-government-owned businesses not eligible as direct recipients; teaming allowed. SAM registration before a…</summary>
   </entry>
   <entry>
     <title>Egypt Annual Program Statement</title>
@@ -477,6 +520,15 @@
     <category term="Neuroscience"/>
     <category term="Transportation"/>
     <summary>National Institutes of Health | Application 2027-01-11 | Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) solicits applications for research on novel therapies for adult glioblastoma (GBM). The goal is to improve the treatment of adult GBM by developing novel effective agents that can cross the blood brain barrier (BBB) and testing them clinically. Successful early-stage trials of new drugs from this NOFO would tran…</summary>
+  </entry>
+  <entry>
+    <title>FY 26 Broad Agency Announcement (BAA) - Federal Railroad Administration</title>
+    <link href="https://sam.gov/opp/45850d5326944be1b187cece69fe7790/view"/>
+    <id>urn:funding-finder:sam-gov:sam-gov%3A45850d5326944be1b187cece69fe7790</id>
+    <updated>2026-08-21T00:00:00Z</updated>
+    <author><name>U.S. Department of Transportation - Federal Railroad Administration (FRA)</name></author>
+    <category term="Transportation"/>
+    <summary>U.S. Department of Transportation - Federal Railroad Administration (FRA) | Concept Paper 2027-09-30 | Applied rail transportation research in remaining FY26-27 track, rolling-stock, and train-control topics. Only current AppendixC research topics; Amendment1 removes FRA-TR-005,006,007,009. No HumanFactors topics inFY26-27. Cost investment not mandatory; typically$50,000-$500,000; SAM registration before award. Topic availability may close earlier if enough concept papers received. SpecialNotice la…</summary>
   </entry>
   <entry>
     <title>Fiscal Year (FY) 2027 AmeriCorps Seniors RSVP Competition</title>
@@ -574,58 +626,5 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Transportation"/>
     <summary>National Institutes of Health | Application 2029-03-16 | The purpose of this notice of funding opportunity (NOFO) is to facilitate the entry of investigators into multiple high-priority areas of substance use research, including comorbidity with HIV. The Science Track Award for Research Transition (START) Program aims to provide investigators with the opportunity to gather preliminary data that will assist them in securing future research grants and adv…</summary>
-  </entry>
-  <entry>
-    <title>Research Interests of the Air Force Office of Scientific Research</title>
-    <link href="https://www.grants.gov/search-results-detail/362681"/>
-    <id>urn:funding-finder:grants-gov:362681</id>
-    <updated>2026-06-04T00:00:00Z</updated>
-    <author><name>Air Force Office of Scientific Research</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Transportation"/>
-    <category term="Catalysis and reaction engineering"/>
-    <category term="Materials science"/>
-    <category term="Quantum science"/>
-    <category term="Energy"/>
-    <category term="Data science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <summary>Air Force Office of Scientific Research | Posted | AFOSR plans, coordinates, and executes the Air Force Research Laboratory’s (AFRL) basic research program in response to technical guidance from AFRL and requirements of the Air Force. Additionally, the office fosters, supports, and conducts research within Air Force, university, and industry laboratories; and ensures transition of research results to support U.S. Air Force needs. The focus of AFOS…</summary>
-  </entry>
-  <entry>
-    <title>Advancing Research on Empirically-Supported Interventions for Older Adults Living with Serious Mental Illness (SMI) (R01 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/359201"/>
-    <id>urn:funding-finder:grants-gov:359201</id>
-    <updated>2026-05-28T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Transportation"/>
-    <summary>National Institutes of Health | Application 2026-10-15 | The purpose of this notice of funding opportunity (NOFO) is to foster research that will inform and support the optimization, delivery, sustainability, and effectiveness of empirically-supported practices for addressing the mental health needs of older adults with serious mental illness (SMI). To this end, NIMH seeks applications that propose work that is focused on practice-relevant questions and…</summary>
-  </entry>
-  <entry>
-    <title>Limited Competition: Small Grant Program for Mentored Research Career Development Award Recipients (R03) (Clinical Trials Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/358824"/>
-    <id>urn:funding-finder:grants-gov:358824</id>
-    <updated>2026-05-28T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Transportation"/>
-    <summary>National Institutes of Health | Application 2029-07-16 | The National Institute of Arthritis and Musculoskeletal and Skin Diseases (NIAMS) announces a program that provides NIAMS-supported K01, K08, K23, and K25 recipients the opportunity to apply for the Small Grant (R03) during the second to fourth year of their K award, as well as to provide support to recipients of significant career development awards from federal or non-federal organizations that …</summary>
-  </entry>
-  <entry>
-    <title>DoW Autism Career Development Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362529"/>
-    <id>urn:funding-finder:grants-gov:362529</id>
-    <updated>2026-05-21T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Transportation"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA | Application 2026-10-22 | invitation required | Summary: The fiscal year 2026 (FY26) Autism Research Program (ARP) Career Development Award supports early-career, independent investigators and/or the transition of established investigators from other research fields to conduct innovative, high-impact ideas or early-phase, proof-of-principle clinical trials with the potential to have a major impact on autism. Distinctive Features: ﻿Applications …</summary>
-  </entry>
-  <entry>
-    <title>NASA Innovative Advanced Concepts (NIAC) Phase II</title>
-    <link href="https://www.grants.gov/search-results-detail/362393"/>
-    <id>urn:funding-finder:grants-gov:362393</id>
-    <updated>2026-05-14T00:00:00Z</updated>
-    <author><name>NASA Headquarters</name></author>
-    <category term="Space and aeronautics"/>
-    <category term="Transportation"/>
-    <summary>NASA Headquarters | Posted | The National Aeronautics and Space Administration (NASA) Headquarters anticipates release of a solicitation, titled “NASA Innovative Advanced Concepts (NIAC), Phase II,” as an Appendix to the Space Technology Mission Directorate (STMD) NASA Research Announcement (NRA), titled “Space Technology Research, Development, Demonstration, and Infusion - 2026 (SpaceTech-REDDI-2026),” on or about May 11, 20…</summary>
   </entry>
 </feed>

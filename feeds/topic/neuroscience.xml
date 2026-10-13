@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/neuroscience.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/neuroscience.xml</id>
-  <updated>2026-10-12T16:10:13Z</updated>
+  <updated>2026-10-13T16:11:25Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIH Stroke Clinical Trials Network (StrokeNet) Infrastructure - National Coordinating Center (NCC) and National Data Management Center (NDMC)</title>
@@ -304,6 +304,16 @@
     <summary>National Institutes of Health | Application 2027-02-08 | The National Institute on Drug Abuse (NIDA) invites applications to renew and expand the Collaboratory on Neural Ensembles and Used Substances (NExUS).NExUS is a collaborative research program to decode how substance use experiences and addictive neurobehavioral states are represented in the brain at the level of cell populations. This funding opportunity seeks applications that propose systematic…</summary>
   </entry>
   <entry>
+    <title>High-throughput Unmasking of Biological Interactomes with Binding Landscape Emulators (HUBBLE)</title>
+    <link href="https://sam.gov/opp/98c034706e4b430281ead1c3497e9d72/view"/>
+    <id>urn:funding-finder:sam-gov:sam-gov%3A98c034706e4b430281ead1c3497e9d72</id>
+    <updated>2026-10-08T00:00:00Z</updated>
+    <author><name>Defense Advanced Research Projects Agency</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Neuroscience"/>
+    <summary>Defense Advanced Research Projects Agency | Preproposal 2026-11-05 | Develop in-silico protein-protein interaction maps to identify diagnostic and therapeutic targets, including traumatic brain injury. CMMC Level 1 self-assessment; research security review; no human-subjects research; Phase 2 limited to Phase 1 performers.</summary>
+  </entry>
+  <entry>
     <title>Identify and Evaluate Potential Risk Factors for Amyotrophic Lateral Sclerosis (ALS)</title>
     <link href="https://www.grants.gov/search-results-detail/363115"/>
     <id>urn:funding-finder:grants-gov:363115</id>
@@ -345,6 +355,15 @@
     <category term="Neuroscience"/>
     <category term="Social and behavioral sciences"/>
     <summary>Bureau of Justice Assistance | Application 2026-10-30 | This is a notice of funding opportunity (NOFO) for the BJA FY 2026 National Center for Veterans Justice. This opportunity will establish a national center to provide specialized support to state, local, and tribal criminal justice agencies; treatment and service providers; courts; corrections systems; and community supervision agencies to effectively support and respond to the needs of veterans ac…</summary>
+  </entry>
+  <entry>
+    <title>Firefox</title>
+    <link href="https://sam.gov/opp/182eab6ca77d465f931c6dc118b939ca/view"/>
+    <id>urn:funding-finder:sam-gov:sam-gov%3A182eab6ca77d465f931c6dc118b939ca</id>
+    <updated>2026-09-16T00:00:00Z</updated>
+    <author><name>Defense Advanced Research Projects Agency</name></author>
+    <category term="Neuroscience"/>
+    <summary>Defense Advanced Research Projects Agency | Preproposal 2026-10-19 | Research optical scanning components and analog processing architectures for a 100-channel non-invasive brain-computer interface. Fundamental-research determination is proposal-specific; CMMC and research-security requirements apply.</summary>
   </entry>
   <entry>
     <title>Data Coordinating Center for the Aging and Alzheimer’s Disease Mouse Brain Atlas (AD-MBA) (U24 Clinical Trial Not Allowed)</title>
@@ -463,27 +482,6 @@ we will not consider for support include Covid-19 relat…</summary>
     <category term="Neuroscience"/>
     <category term="Social and behavioral sciences"/>
     <summary>National Institutes of Health | Estimated Application 2026-11-15 | The Fogarty International Center, with NINDS, NIMH, NIA, NIEHS, NICHD, NEI, NIDCD, and NCCIH, intends to continue support of neuro-health research through the Global Brain and Nervous System Disorders Research Across the Lifespan program. Awards will catalyze and strengthen collaborative research on the brain and nervous system that leverages the unique scientific contexts of low- and middle-incom…</summary>
-  </entry>
-  <entry>
-    <title>NIH Blueprint Initiative: Tools for Germline Gene Editing in the Nervous System</title>
-    <link href="https://www.grants.gov/search-results-detail/362313"/>
-    <id>urn:funding-finder:grants-gov:362313</id>
-    <updated>2026-08-10T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Neuroscience"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health | Estimated Application 2026-10-12 | The NIH Blueprint (a consortium of NIH Institutes that support neuroscience research) seeks to advance its mission by supporting the development, optimization, validation, and application of germline and somatic transgenic and gene-editing approaches in experimental systems modeling key features of human brain anatomy, circuitry, cognition, behavior, and lifespan. This initiative will build on the…</summary>
-  </entry>
-  <entry>
-    <title>HEAL Initiative: Program to Reveal and Evaluate Cells-to-gene Information that Specify Intricacies, Origins and the Nature of (PRECISION) Human Pain Network</title>
-    <link href="https://www.grants.gov/search-results-detail/361334"/>
-    <id>urn:funding-finder:grants-gov:361334</id>
-    <updated>2026-07-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Environmental science"/>
-    <category term="Neuroscience"/>
-    <summary>National Institutes of Health | Estimated Application 2026-10-12 | The National Institute of Neurological Disorders and Stroke, in conjunction with other NIH Institutes and Centers (ICs) as a part of the congressionally mandated NIH Helping to End Addiction Long Term (HEAL) initiative intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for comprehensive ‘omics and physiology dataset generation using primary human tissue across the pa…</summary>
   </entry>
   <entry>
     <title>Autism Centers of Excellence P50</title>
