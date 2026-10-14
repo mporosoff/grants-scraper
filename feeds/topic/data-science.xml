@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml</id>
-  <updated>2026-10-13T16:11:25Z</updated>
+  <updated>2026-10-14T15:15:41Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>ancient DNA for Modern Genomics (aDMG) Research Projects (U01 Clinical Trials Not Allowed)</title>
@@ -73,6 +73,19 @@
     <category term="Social and behavioral sciences"/>
     <category term="Technology development"/>
     <summary>National Institutes of Health | Estimated Application 2027-05-25 | The National Institute of Mental Health (NIMH) seeks research applications to support the NIMH HIV/AIDS Research Centers (ARC) program, including Developmental Centers (D-ARCs) and full AIDS Research Centers (ARCs). These Research Centers aim to capitalize on the coordinated infrastructure to advance high-impact, interdisciplinary HIV/AIDS research. The ARC program supports innovative research acr…</summary>
+  </entry>
+  <entry>
+    <title>Implementation and Evaluation of Databases to Examine AIDS</title>
+    <link href="https://www.grants.gov/search-results-detail/359142"/>
+    <id>urn:funding-finder:grants-gov:359142</id>
+    <updated>2027-02-18T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Data science"/>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health | Estimated Application 2027-05-27 | The National Institute of Allergy and Infectious Diseases (NIAID), with partnering National Institutes of Health Institutes, Centers, and Offices, seeks to advance its mission through continued support for the Implementation and Evaluation of Databases to Examine AIDS Consortium. This research network integrates clinical, epidemiologic, genomic, and contextual real-world data through harmonized da…</summary>
   </entry>
   <entry>
     <title>Limited Competition: The NHGRI Analysis, Visualization, and Informatics Lab-space (AnVIL) (U54 Clinical Trial Not Allowed)</title>
@@ -156,6 +169,17 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Data science"/>
     <summary>National Institutes of Health | Estimated Application 2026-12-01 | The National Institute of Arthritis and Musculoskeletal and Skin Diseases (NIAMS), in conjunction with other NIH Institutes and Centers (ICs) as a part of the congressionally mandated NIH Helping to End Addiction Long Term (HEAL) initiative intends to publish a Notice of Funding Opportunity (NOFO) to leverage and accelerate the progress achieved in the Restoring Joint Health and Function to Reduce…</summary>
+  </entry>
+  <entry>
+    <title>WATER RESOURCES RESEARCH ACT PROGRAM NATIONAL COMPETITIVE GRANTS FY2026 (104g General)</title>
+    <link href="https://www.grants.gov/search-results-detail/364012"/>
+    <id>urn:funding-finder:grants-gov:364012</id>
+    <updated>2026-09-30T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Water"/>
+    <summary>Geological Survey | Application 2026-11-12 | This Program Announcement is issued under the provisions of section 104 of the Water Resources Research Act of 1984 (Public Law 98-242), as amended by Public Laws 101-397, 104-147, 106-374, 109-471, and 117-58. Section 104 of the Water Resources Research Act directs the Secretary of the Interior to administer program grants to Institutes established under the provisions of section 104(a) of the Ac…</summary>
   </entry>
   <entry>
     <title>FY 2027 Continuation of Solicitation for the Office of Science Financial Assistance Program</title>
@@ -269,18 +293,6 @@
     <summary>Office of Science | Application 2026-10-19 | The Department of Energy (DOE) recently announced the establishment of the Quantum Genesis initiative to develop and deploy the world’s first fault-tolerant, scientifically relevant quantum computing (SRQC) capability for research and development. The Department seeks to realize this bold ambition through the Quantum Genesis Q Competition (herein, the Q Competition), a first of its kind effort to …</summary>
   </entry>
   <entry>
-    <title>Restorative &amp; health-Enhancing Sleep Time (REST)</title>
-    <link href="https://arpa-h.gov/explore-funding/programs/rest"/>
-    <id>urn:funding-finder:arpa-h:arpa-h%3Arest</id>
-    <updated>2026-09-11T00:00:00Z</updated>
-    <author><name>Advanced Research Projects Agency for Health (ARPA-H)</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Technology development"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Advanced Research Projects Agency for Health (ARPA-H) | Application 2026-10-13 | prerequisite closed | Current ARPA-H program. REST | ARPA-H (function(w, d, s, l, i){w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&amp;l='+l:''; j.async=true; j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j, f); })(window, document,'script','dataLayer','GTM-W5GM3DT9'); window…</summary>
-  </entry>
-  <entry>
     <title>Unifying​ Imaging with​ Quantum​ Entanglement (UNIQUE)</title>
     <link href="https://arpa-h.gov/explore-funding/programs/unique"/>
     <id>urn:funding-finder:arpa-h:arpa-h%3Aunique</id>
@@ -325,7 +337,7 @@
     <category term="Catalysis and reaction engineering"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
-    <summary>Simons Foundation | Application 2026-12-01 | The Simons Foundation (SF) is accepting applications for the Utilizing the Full Power of Empire AI program. Deadline for application submission: 12 p.m. (noon) Eastern time on December 1, 2026.</summary>
+    <summary>Simons Foundation | Application 2026-12-01</summary>
   </entry>
   <entry>
     <title>1890 Institution Teaching, Research, and Extension Capacity Building Grants Program</title>
@@ -532,6 +544,22 @@
     <summary>U.S. National Science Foundation | Posted | The U.S. National Science Foundation's Directorate for Biological Sciences (NSF BIO) Core Research in Biological Sciences (BIO Core) funding opportunity supports foundational and interdisciplinary research projects that expand knowledge of biology at any level of organization, from the molecular to the biome scale. We accept proposals that cover scientific topics associated with legacy programs hi…</summary>
   </entry>
   <entry>
+    <title>Engineering (ENG): Chemical, Bioengineering, Energy, and Transport Systems (CBET)</title>
+    <link href="https://www.grants.gov/search-results-detail/363616"/>
+    <id>urn:funding-finder:grants-gov:363616</id>
+    <updated>2026-08-17T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Energy"/>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Separations and membranes"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Materials science"/>
+    <category term="Manufacturing"/>
+    <summary>U.S. National Science Foundation | Posted | The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational engineering research for chemical, bioengineering, energy, and transport systems through the following programs:  The Chemical Process Systems (CPS) program supports foundational engineering research in chemical and biochemical processes for chemicals, fuels, energy, and materials. The Engineering Biol…</summary>
+  </entry>
+  <entry>
     <title>Engineering (ENG): Civil, Mechanical and Manufacturing Innovation (CMMI)</title>
     <link href="https://www.grants.gov/search-results-detail/363614"/>
     <id>urn:funding-finder:grants-gov:363614</id>
@@ -717,31 +745,5 @@ Successful candidates for a Fellowship generally have a strong record of signifi
     <category term="Data science"/>
     <category term="Water"/>
     <summary>Bureau of Reclamation | Application 2028-02-15 | The WaterSMART Cooperative Watershed Management Program funding opportunity invites eligible entities to apply for funding to develop local solutions to address their water management needs. This opportunity provides funding for watershed group development, restoration planning, and watershed management project planning and design. By providing this funding, Reclamation promotes water reliability …</summary>
-  </entry>
-  <entry>
-    <title>HEAL Initiative: Translating Addiction Epidemiology, Prevention, Treatment, and Recovery Research into Practice (R61/R33 - Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/362672"/>
-    <id>urn:funding-finder:grants-gov:362672</id>
-    <updated>2026-06-04T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Data science"/>
-    <category term="Public health"/>
-    <summary>National Institutes of Health | Application 2029-02-09 | The goal of this notice of funding opportunity (NOFO) is to address the opioid crisis and/or overdose events by supporting action-oriented research, accelerating the translation of addiction epidemiology, prevention, treatment services, and recovery research to practice. Proposed studies may target the individual, provider, organizational, community, or system level. This initiative prioritizes re…</summary>
-  </entry>
-  <entry>
-    <title>Research Interests of the Air Force Office of Scientific Research</title>
-    <link href="https://www.grants.gov/search-results-detail/362681"/>
-    <id>urn:funding-finder:grants-gov:362681</id>
-    <updated>2026-06-04T00:00:00Z</updated>
-    <author><name>Air Force Office of Scientific Research</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Transportation"/>
-    <category term="Catalysis and reaction engineering"/>
-    <category term="Materials science"/>
-    <category term="Quantum science"/>
-    <category term="Energy"/>
-    <category term="Data science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <summary>Air Force Office of Scientific Research | Posted | AFOSR plans, coordinates, and executes the Air Force Research Laboratory’s (AFRL) basic research program in response to technical guidance from AFRL and requirements of the Air Force. Additionally, the office fosters, supports, and conducts research within Air Force, university, and industry laboratories; and ensures transition of research results to support U.S. Air Force needs. The focus of AFOS…</summary>
   </entry>
 </feed>

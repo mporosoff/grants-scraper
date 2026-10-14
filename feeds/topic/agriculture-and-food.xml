@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml</id>
-  <updated>2026-10-13T16:11:25Z</updated>
+  <updated>2026-10-14T15:15:41Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Tobacco Centers of Regulatory Science (TCORS) (Clinical Trial Optional)</title>
@@ -98,6 +98,8 @@
     <author><name>National Institute of Food and Agriculture</name></author>
     <category term="Agriculture and food"/>
     <category term="Technology development"/>
+    <category term="Materials science"/>
+    <category term="Manufacturing"/>
     <summary>National Institute of Food and Agriculture | Application 2026-11-17 | The USDA SBIR/STTR programs, Assistance Listing number 10.212, support scientific excellence and technological innovation through investment of Federal research funds to build a strong national economy by stimulating technological innovation in the private sector; strengthening the role of small business in meeting Federal research and development needs; and increasing the commercial application o…</summary>
   </entry>
   <entry>
@@ -254,17 +256,6 @@
     <category term="Agriculture and food"/>
     <category term="Education and workforce"/>
     <summary>National Institute of Food and Agriculture | Application 2026-10-15 | The purpose of the NNF program, Assistance Listing 10.210, is to provide funding to support new graduate (master’s, DVM, or doctoral) student training and completion of degree programs to develop human capital to participate in meeting the mission of the USDA to increase the pipeline of domestic agricultural students. The NNF program offers funding for eligible full-time students pursuing graduate…</summary>
-  </entry>
-  <entry>
-    <title>Community Forest and Open Space Conservation Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363348"/>
-    <id>urn:funding-finder:grants-gov:363348</id>
-    <updated>2026-08-12T00:00:00Z</updated>
-    <author><name>Forest Service</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <summary>Forest Service | Application 2026-10-13 | The U.S. Department of Agriculture (USDA), Forest Service, State, Private &amp; Tribal Forestry, is requesting applications for the Community Forest and Open Space Conservation Program (Community Forest Program or CFP). CFP is a competitive grant program that provides financial assistance to Indian Tribes, local governments, and qualified conservation non-profit organizations to establish community fo…</summary>
   </entry>
   <entry>
     <title>Higher Education Challenge Grants Program</title>
@@ -691,5 +682,16 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
     <summary>National Institutes of Health | Application 2028-01-07 | The NIH Research Project Grant supports a discrete, specified, circumscribed project in areas representing the specific interests and competencies of the investigator(s). The proposed project must be related to the programmatic interests of one or more of the participating NIH Institutes and Centers (ICs) based on their scientific missions. This Notice of Funding Opportunity does not accept applic…</summary>
+  </entry>
+  <entry>
+    <title>NIH Research Project Grant (Parent R01 Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/357813"/>
+    <id>urn:funding-finder:grants-gov:357813</id>
+    <updated>2024-12-18T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <summary>National Institutes of Health | Application 2028-01-07 | The NIH Research Project Grant supports a discrete, specified, circumscribed project in areas representing the specific interests and competencies of the investigator(s). This Parent Notice of Funding Opportunity Announcement requires that at lease 1 clinical trial be proposed. The proposed project must be related to the programmatic interests of one or more of the participating NIH Institutes and…</summary>
   </entry>
 </feed>

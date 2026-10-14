@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/arts-and-culture.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/arts-and-culture.xml</id>
-  <updated>2026-10-13T16:11:25Z</updated>
+  <updated>2026-10-14T15:15:41Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Public Health Nursing</title>
@@ -175,6 +175,16 @@
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
     <summary>Centers for Disease Control and Prevention - ERA | Estimated Application 2027-01-26 | Background: Despite advances in technology and improvements in work environments, mining remains one of the most challenging and hazardous occupations in the United States. The industry continues to experience a fatality rate nearly three times higher than the national average for all industries, according to the U.S. Bureau of Labor Statistics (BLS). Public MSHA data show that in 2025, the U.S. m…</summary>
+  </entry>
+  <entry>
+    <title>FY 2027-2028 NESDIS Broad Agency Announcement (BAA)</title>
+    <link href="https://www.grants.gov/search-results-detail/364069"/>
+    <id>urn:funding-finder:grants-gov:364069</id>
+    <updated>2026-10-13T00:00:00Z</updated>
+    <author><name>DOC NOAA - ERA Production</name></author>
+    <category term="Arts and culture"/>
+    <category term="Environmental science"/>
+    <summary>DOC NOAA - ERA Production | Application 2028-09-30 | A description of NOAA Line and Staff Offices is found at https://www.noaa.gov/about/organization, and applicants may contact the Agency Contacts in Section VII. below for more information. If you submit the same application to more than one Line or Staff Office, mention this in your application and notify the relevant contacts in Section VII. so that NOAA may coordinate internally. This notice als…</summary>
   </entry>
   <entry>
     <title>NIAMS P30 Centers Program (P30 - Clinical Trial Not Allowed)</title>
@@ -641,15 +651,5 @@
     <category term="Environmental science"/>
     <category term="Social and behavioral sciences"/>
     <summary>National Institutes of Health | Application 2027-05-28 | The SuRE program supports research capacity building at eligible higher education institutions through funding investigator-initiated biomedical research inbasic, social, clinical, behavioral, or translational science that falls in the mission areas of the NIH. The purpose of SuRE-First awards is to provide support for investigator-initiated research at resource-limited institutions by full-time f…</summary>
-  </entry>
-  <entry>
-    <title>NIGMS National and Regional Resources (R24 - Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/358934"/>
-    <id>urn:funding-finder:grants-gov:358934</id>
-    <updated>2025-06-11T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <summary>National Institutes of Health | Application 2027-06-14 | This Notice of Funding Opportunity (NOFO) encourages applications for support of resources that will provide access to state-of-the-art equipment, technologies, research tools, materials, organisms, software, and/or services to a substantial regional (multi-state) or national user base. Only those resources with technical capabilities that fall within the NIGMS-supported program areas are eligible…</summary>
   </entry>
 </feed>

@@ -4,8 +4,17 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/source-type/state.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/source-type/state.xml</id>
-  <updated>2026-10-13T16:11:25Z</updated>
+  <updated>2026-10-14T15:15:41Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>Commercialization Cohort Programs</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr00001L5iYZAAZ"/>
+    <id>urn:funding-finder:nyserda:nyserda%3APON6239</id>
+    <updated>2026-10-13T00:00:00Z</updated>
+    <author><name>NYSERDA</name></author>
+    <category term="Technology development"/>
+    <summary>NYSERDA | Application 2026-12-02 | Supports climate-tech innovators in bringing their technology to market, starting from the earliest stages to full commercial scale up. NYSERDA is making $37.9 M available through the Commercialization Cohort program which will launch four accelerators that span the continuum of the start-up journey, with programming that builds on each other in successive stages. rnRound 1 is now open for proposa…</summary>
+  </entry>
   <entry>
     <title>Offshore Wind Project Predevelopment Program Opportunity Notice</title>
     <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr00001NP7i5AAD"/>

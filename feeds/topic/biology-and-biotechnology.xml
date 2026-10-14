@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/biology-and-biotechnology.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/biology-and-biotechnology.xml</id>
-  <updated>2026-10-13T16:11:25Z</updated>
+  <updated>2026-10-14T15:15:41Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Development of Models, New Approach Methodologies, and Biological Materials for Studying Human Health and Diseases (R21 Clinical Trial Not Allowed)</title>
@@ -24,6 +24,15 @@
     <category term="Biology and biotechnology"/>
     <category term="Technology development"/>
     <summary>National Institutes of Health | Estimated Application 2028-02-05 | This Technology Development funding opportunity will support technology research projects from proof-of-concept through prototype development. The program will prioritize innovation over feasibility. To maximize impact on future biomedical research, projects must focus on technological advances and should not include tests of biological hypotheses or biomedical aims.</summary>
+  </entry>
+  <entry>
+    <title>Testing Centers for Evaluation of Somatic Cell Genome Editing Approaches for Translational Applications (U42 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/364066"/>
+    <id>urn:funding-finder:grants-gov:364066</id>
+    <updated>2027-11-25T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <summary>National Institutes of Health | Estimated Application 2028-01-25 | This Notice of Funding Opportunity (NOFO) invites applicants to support Testing Centers for Evaluation of Somatic Cell Genome Editing Approaches for Translational Applications. Each center will provide resources and testing services to the growing community, developing new genome editing technologies and conducting preclinical testing based on these technologies for therapeutics for human diseases…</summary>
   </entry>
   <entry>
     <title>ancient DNA for Modern Genomics (aDMG) Research Projects (U01 Clinical Trials Not Allowed)</title>
@@ -203,6 +212,19 @@
     <category term="Biology and biotechnology"/>
     <category term="Neuroscience"/>
     <summary>National Institutes of Health | Estimated Application 2027-06-01 | invitation required | The National Institute of Mental Health (NIMH) intends to issue a single-source cooperative agreement award to the University of California, Santa Cruz. The award will renew the Data Resource and Administrative Coordination Center (DRACC), a component of the Scalable and Systematic Neurobiology of Psychiatric and Neurodevelopmental Disorder Risk Genes (SSPsyGene) Consortium. The long-term goal of …</summary>
+  </entry>
+  <entry>
+    <title>Implementation and Evaluation of Databases to Examine AIDS</title>
+    <link href="https://www.grants.gov/search-results-detail/359142"/>
+    <id>urn:funding-finder:grants-gov:359142</id>
+    <updated>2027-02-18T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Data science"/>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health | Estimated Application 2027-05-27 | The National Institute of Allergy and Infectious Diseases (NIAID), with partnering National Institutes of Health Institutes, Centers, and Offices, seeks to advance its mission through continued support for the Implementation and Evaluation of Databases to Examine AIDS Consortium. This research network integrates clinical, epidemiologic, genomic, and contextual real-world data through harmonized da…</summary>
   </entry>
   <entry>
     <title>BRAIN Initiative: Development and Validation of Novel Tools and New Approaches for Neuroscience Research</title>
@@ -614,18 +636,6 @@
     <summary>National Institutes of Health | Application 2029-11-16 | The purpose of NEI's Translational Research program (TRP) is the rapid and efficient translation of innovative laboratory research findings into therapeutics for use by clinicians to treat visual system diseases or disorders. The TRP will support the product development of biological, pharmaceutical, medical device, and/or combination therapies for any disease or disorder of the visual system. The…</summary>
   </entry>
   <entry>
-    <title>Restorative &amp; health-Enhancing Sleep Time (REST)</title>
-    <link href="https://arpa-h.gov/explore-funding/programs/rest"/>
-    <id>urn:funding-finder:arpa-h:arpa-h%3Arest</id>
-    <updated>2026-09-11T00:00:00Z</updated>
-    <author><name>Advanced Research Projects Agency for Health (ARPA-H)</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Technology development"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Advanced Research Projects Agency for Health (ARPA-H) | Application 2026-10-13 | prerequisite closed | Current ARPA-H program. REST | ARPA-H (function(w, d, s, l, i){w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&amp;l='+l:''; j.async=true; j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j, f); })(window, document,'script','dataLayer','GTM-W5GM3DT9'); window…</summary>
-  </entry>
-  <entry>
     <title>Continuation and Expansion of the National Mesothelioma Virtual Bank for Translational Research (U24)</title>
     <link href="https://www.grants.gov/search-results-detail/363281"/>
     <id>urn:funding-finder:grants-gov:363281</id>
@@ -634,17 +644,5 @@
     <category term="Biology and biotechnology"/>
     <category term="Cancer"/>
     <summary>Centers for Disease Control and Prevention - ERA | Estimated Application 2026-11-02 | The National Mesothelioma Virtual Bank (NMVB) was established in 2006 to serve as a resource for malignant mesothelioma research. This funding opportunity will advance biomedical research for malignant mesothelioma by adding more biospecimens together with demographic data and clinical data. Examples of biospecimens include fresh frozen tumor and control tissues, paraffin embedded tissues, blood, …</summary>
-  </entry>
-  <entry>
-    <title>The NIA Genetics of Alzheimer's Disease Data Storage Site (NIAGADS)</title>
-    <link href="https://www.grants.gov/search-results-detail/362454"/>
-    <id>urn:funding-finder:grants-gov:362454</id>
-    <updated>2026-09-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Community development"/>
-    <category term="Education and workforce"/>
-    <summary>National Institutes of Health | Estimated Application 2026-11-01 | The National Institute on Aging (NIA) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to develop, operate, and sustain a cloud-based data storage and computing platform that democratizes access to large-scale Alzheimer’s disease (AD) and AD-related dementias (ADRD) genetic and genomic data. The platform must be secure, scalable, and interoperable. The platform wil…</summary>
   </entry>
 </feed>

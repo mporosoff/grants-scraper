@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml</id>
-  <updated>2026-10-13T16:11:25Z</updated>
+  <updated>2026-10-14T15:15:41Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Single Source: Scalable and Systematic Neurobiology of Psychiatric and Neurodevelopmental Disorder Risk Genes: Data Resource and Administrative Coordination Center (U24 Clinical Trial Not Allowed)</title>
@@ -28,6 +28,19 @@
     <category term="Infectious disease"/>
     <category term="Public health"/>
     <summary>National Institutes of Health | Estimated Application 2027-06-11 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission through the continued support of the Immune Drivers of Autoimmune Disease (IDAD) network. This network aims to understand the earliest steps and triggers leading to autoimmunity and flare in humans, with the vision of ultimately preventing autoimmune disease. Priorities include discovering pre-clinical i…</summary>
+  </entry>
+  <entry>
+    <title>Implementation and Evaluation of Databases to Examine AIDS</title>
+    <link href="https://www.grants.gov/search-results-detail/359142"/>
+    <id>urn:funding-finder:grants-gov:359142</id>
+    <updated>2027-02-18T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Data science"/>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health | Estimated Application 2027-05-27 | The National Institute of Allergy and Infectious Diseases (NIAID), with partnering National Institutes of Health Institutes, Centers, and Offices, seeks to advance its mission through continued support for the Implementation and Evaluation of Databases to Examine AIDS Consortium. This research network integrates clinical, epidemiologic, genomic, and contextual real-world data through harmonized da…</summary>
   </entry>
   <entry>
     <title>Continuation of the Exceptional Longevity Data Management and Coordinating Center (EL DMCC) (U24 Clinical Trial Not Allowed)</title>
@@ -91,6 +104,15 @@
     <summary>National Institutes of Health | Estimated Application 2027-01-22 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting multidisciplinary, consortium-based research using precision systems biology approaches to uncover links among chronic illnesses, infectious diseases and microbiomes. There is an urgent scientific and clinical need to understand the pathways by which infections lead to chronic lifelong heal…</summary>
   </entry>
   <entry>
+    <title>Artificial Intelligence, Formal Methods, and Mathematical Reasoning (AIMing)</title>
+    <link href="https://www.grants.gov/search-results-detail/364068"/>
+    <id>urn:funding-finder:grants-gov:364068</id>
+    <updated>2026-10-13T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <summary>U.S. National Science Foundation | Posted | The Artificial Intelligence, Formal Methods, and Mathematical Reasoning (AIMing) program seeks to support research at the interface of innovative computational and artificial intelligence (AI) technologies and new strategies/technologies in mathematical reasoning to automate knowledge discovery. Mathematical reasoning is a central ability of human intelligence that plays an important role in knowl…</summary>
+  </entry>
+  <entry>
     <title>NIAMS P30 Centers Program (P30 - Clinical Trial Not Allowed)</title>
     <link href="https://www.grants.gov/search-results-detail/359152"/>
     <id>urn:funding-finder:grants-gov:359152</id>
@@ -133,6 +155,17 @@
     <category term="Energy"/>
     <category term="Transportation"/>
     <summary>NYSERDA | Application 2026-11-10 | Helping to achieve a modernized energy grid, investments in Battery Energy Storage System (BESS) Health Operations Tools and Artificial Intelligence (AI) roll up to help New York State transition to cleaner energy resources. Up to $3 million total is available in Program Opportunity Notice (PON) 6240 to promote product developments and demonstrations in the New York State National Grid service ter…</summary>
+  </entry>
+  <entry>
+    <title>WATER RESOURCES RESEARCH ACT PROGRAM NATIONAL COMPETITIVE GRANTS FY2026 (104g General)</title>
+    <link href="https://www.grants.gov/search-results-detail/364012"/>
+    <id>urn:funding-finder:grants-gov:364012</id>
+    <updated>2026-09-30T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Water"/>
+    <summary>Geological Survey | Application 2026-11-12 | This Program Announcement is issued under the provisions of section 104 of the Water Resources Research Act of 1984 (Public Law 98-242), as amended by Public Laws 101-397, 104-147, 106-374, 109-471, and 117-58. Section 104 of the Water Resources Research Act directs the Secretary of the Interior to administer program grants to Institutes established under the provisions of section 104(a) of the Ac…</summary>
   </entry>
   <entry>
     <title>FY 2027 Continuation of Solicitation for the Office of Science Financial Assistance Program</title>
@@ -233,18 +266,6 @@
     <summary>Office of Science | Application 2026-10-19 | The Department of Energy (DOE) recently announced the establishment of the Quantum Genesis initiative to develop and deploy the world’s first fault-tolerant, scientifically relevant quantum computing (SRQC) capability for research and development. The Department seeks to realize this bold ambition through the Quantum Genesis Q Competition (herein, the Q Competition), a first of its kind effort to …</summary>
   </entry>
   <entry>
-    <title>Restorative &amp; health-Enhancing Sleep Time (REST)</title>
-    <link href="https://arpa-h.gov/explore-funding/programs/rest"/>
-    <id>urn:funding-finder:arpa-h:arpa-h%3Arest</id>
-    <updated>2026-09-11T00:00:00Z</updated>
-    <author><name>Advanced Research Projects Agency for Health (ARPA-H)</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Technology development"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Advanced Research Projects Agency for Health (ARPA-H) | Application 2026-10-13 | prerequisite closed | Current ARPA-H program. REST | ARPA-H (function(w, d, s, l, i){w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&amp;l='+l:''; j.async=true; j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j, f); })(window, document,'script','dataLayer','GTM-W5GM3DT9'); window…</summary>
-  </entry>
-  <entry>
     <title>Unifying​ Imaging with​ Quantum​ Entanglement (UNIQUE)</title>
     <link href="https://arpa-h.gov/explore-funding/programs/unique"/>
     <id>urn:funding-finder:arpa-h:arpa-h%3Aunique</id>
@@ -289,7 +310,7 @@
     <category term="Catalysis and reaction engineering"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
-    <summary>Simons Foundation | Application 2026-12-01 | The Simons Foundation (SF) is accepting applications for the Utilizing the Full Power of Empire AI program. Deadline for application submission: 12 p.m. (noon) Eastern time on December 1, 2026.</summary>
+    <summary>Simons Foundation | Application 2026-12-01</summary>
   </entry>
   <entry>
     <title>1890 Institution Teaching, Research, and Extension Capacity Building Grants Program</title>
@@ -494,6 +515,22 @@
     <category term="Data science"/>
     <category term="Artificial intelligence and machine learning"/>
     <summary>U.S. National Science Foundation | Posted | The U.S. National Science Foundation's Directorate for Biological Sciences (NSF BIO) Core Research in Biological Sciences (BIO Core) funding opportunity supports foundational and interdisciplinary research projects that expand knowledge of biology at any level of organization, from the molecular to the biome scale. We accept proposals that cover scientific topics associated with legacy programs hi…</summary>
+  </entry>
+  <entry>
+    <title>Engineering (ENG): Chemical, Bioengineering, Energy, and Transport Systems (CBET)</title>
+    <link href="https://www.grants.gov/search-results-detail/363616"/>
+    <id>urn:funding-finder:grants-gov:363616</id>
+    <updated>2026-08-17T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Energy"/>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Separations and membranes"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Materials science"/>
+    <category term="Manufacturing"/>
+    <summary>U.S. National Science Foundation | Posted | The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational engineering research for chemical, bioengineering, energy, and transport systems through the following programs:  The Chemical Process Systems (CPS) program supports foundational engineering research in chemical and biochemical processes for chemicals, fuels, energy, and materials. The Engineering Biol…</summary>
   </entry>
   <entry>
     <title>Engineering (ENG): Civil, Mechanical and Manufacturing Innovation (CMMI)</title>
@@ -703,45 +740,5 @@ Successful candidates for a Fellowship generally have a strong record of signifi
     <category term="Data science"/>
     <category term="Water"/>
     <summary>Bureau of Reclamation | Application 2028-02-15 | The WaterSMART Cooperative Watershed Management Program funding opportunity invites eligible entities to apply for funding to develop local solutions to address their water management needs. This opportunity provides funding for watershed group development, restoration planning, and watershed management project planning and design. By providing this funding, Reclamation promotes water reliability …</summary>
-  </entry>
-  <entry>
-    <title>Research Interests of the Air Force Office of Scientific Research</title>
-    <link href="https://www.grants.gov/search-results-detail/362681"/>
-    <id>urn:funding-finder:grants-gov:362681</id>
-    <updated>2026-06-04T00:00:00Z</updated>
-    <author><name>Air Force Office of Scientific Research</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Transportation"/>
-    <category term="Catalysis and reaction engineering"/>
-    <category term="Materials science"/>
-    <category term="Quantum science"/>
-    <category term="Energy"/>
-    <category term="Data science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <summary>Air Force Office of Scientific Research | Posted | AFOSR plans, coordinates, and executes the Air Force Research Laboratory’s (AFRL) basic research program in response to technical guidance from AFRL and requirements of the Air Force. Additionally, the office fosters, supports, and conducts research within Air Force, university, and industry laboratories; and ensures transition of research results to support U.S. Air Force needs. The focus of AFOS…</summary>
-  </entry>
-  <entry>
-    <title>Native American Affairs: Fiscal Year 2025 Colorado River Basin Tribal Drought Resiliency Program</title>
-    <link href="https://www.grants.gov/search-results-detail/362644"/>
-    <id>urn:funding-finder:grants-gov:362644</id>
-    <updated>2026-06-02T00:00:00Z</updated>
-    <author><name>Bureau of Reclamation</name></author>
-    <category term="Energy"/>
-    <category term="Water"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Bureau of Reclamation | Application 2026-11-20 | The objectives of this NAA/TAP funding opportunity are to provide funding for drought relief actions/projects that mitigate drought impacts for designated federally recognized tribes within the Colorado River Basin (see Eligibility section for list of tribes), and which advance Presidential and Department of the Interior Priorities within the Basin. Proposals should meet one or more of the followi…</summary>
-  </entry>
-  <entry>
-    <title>F25AS00332 Highlands Conservation Act - Competitive Funding Round</title>
-    <link href="https://www.grants.gov/search-results-detail/362484"/>
-    <id>urn:funding-finder:grants-gov:362484</id>
-    <updated>2026-05-19T00:00:00Z</updated>
-    <author><name>Fish and Wildlife Service</name></author>
-    <category term="Environmental science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Water"/>
-    <summary>Fish and Wildlife Service | Application 2026-10-31 | The Highlands Conservation Act Program (HCA) is administered by the US Fish and Wildlife Service (Service) to assist Connecticut, New Jersey, New York, and Pennsylvania in the protection of land and natural resources in the Highlands Region. HCA grants support land conservation projects in which a State, County, or Municipal entity acquires land or an interest in land from a willing seller to cons…</summary>
   </entry>
 </feed>

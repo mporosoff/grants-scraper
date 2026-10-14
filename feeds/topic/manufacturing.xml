@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/manufacturing.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/manufacturing.xml</id>
-  <updated>2026-10-13T16:11:25Z</updated>
+  <updated>2026-10-14T15:15:41Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>BRAIN Initiative: Clinical Studies to Advance Next-Generation Devices for Recording and Modulation in the Human Central Nervous System</title>
@@ -40,6 +40,18 @@
     <summary>NASA Glenn Research Center | Full Application 2026-10-15 | Lunar infrastructure technology maturation: vertical solar arrays, oxygen extraction from regolith, radioisotope Stirling generators, in-space advanced manufacturing, and nanomaterials; generally TRL 5-6 demonstrations. US organizations as prime; foreign organizations may team but NASA funds cannot support their R&amp;D; non-US persons employed/studying at US organizations may receive funding. NASA/JP…</summary>
   </entry>
   <entry>
+    <title>Small Business Innovation Research and Small Business Technology Transfer Programs Phase II</title>
+    <link href="https://www.grants.gov/search-results-detail/364020"/>
+    <id>urn:funding-finder:grants-gov:364020</id>
+    <updated>2026-10-01T00:00:00Z</updated>
+    <author><name>National Institute of Food and Agriculture</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Technology development"/>
+    <category term="Materials science"/>
+    <category term="Manufacturing"/>
+    <summary>National Institute of Food and Agriculture | Application 2026-11-17 | The USDA SBIR/STTR programs, Assistance Listing number 10.212, support scientific excellence and technological innovation through investment of Federal research funds to build a strong national economy by stimulating technological innovation in the private sector; strengthening the role of small business in meeting Federal research and development needs; and increasing the commercial application o…</summary>
+  </entry>
+  <entry>
     <title>The Science, Mathematics and Research for Transformation (SMART) Scholarship for Service Program Cooperative Agreement</title>
     <link href="https://www.grants.gov/search-results-detail/364008"/>
     <id>urn:funding-finder:grants-gov:364008</id>
@@ -48,6 +60,7 @@
     <category term="Education and workforce"/>
     <category term="Manufacturing"/>
     <category term="Transportation"/>
+    <category term="Materials science"/>
     <summary>Dept of the Army -- Materiel Command | Application 2026-12-03 | The Department of War (DoW) seeks innovative applications to cooperatively partner with eligible entities in the implementation and execution of the SMART Scholarship-for-Service Program. The Department intends to award ONE (1) CA award, with a maximum award of up to $1,300M over a ten-year period of performance. The National Defense Education Program (NDEP) supports the Department's priorities to…</summary>
   </entry>
   <entry>
@@ -241,9 +254,10 @@
     <category term="Energy"/>
     <category term="Catalysis and reaction engineering"/>
     <category term="Separations and membranes"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
     <category term="Materials science"/>
     <category term="Manufacturing"/>
-    <category term="Water"/>
     <summary>U.S. National Science Foundation | Posted | The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational engineering research for chemical, bioengineering, energy, and transport systems through the following programs:  The Chemical Process Systems (CPS) program supports foundational engineering research in chemical and biochemical processes for chemicals, fuels, energy, and materials. The Engineering Biol…</summary>
   </entry>
   <entry>
@@ -767,16 +781,5 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Manufacturing"/>
     <category term="Cybersecurity"/>
     <summary>U.S. National Science Foundation | Application 2026-12-04 | invitation required | CREST Center awards provide support to enhance the research capabilities of Minority-serving institutions (MSIs) through the establishment of centers that effectively integrate education and research. CREST Center awards promote the development of new knowledge, enhancements of the research productivity of individual faculty, and an expanded presence of students historically underrepresented in sc…</summary>
-  </entry>
-  <entry>
-    <title>NDEP STEM Open NFO</title>
-    <link href="https://www.grants.gov/search-results-detail/345938"/>
-    <id>urn:funding-finder:grants-gov:345938</id>
-    <updated>2023-02-09T00:00:00Z</updated>
-    <author><name>Washington Headquarters Services</name></author>
-    <category term="Data science"/>
-    <category term="Education and workforce"/>
-    <category term="Manufacturing"/>
-    <summary>Washington Headquarters Services | Application 2028-02-08 | verify prerequisite | This is an open NFO, applicants may apply to this posting or subsequent amendments for specific STEM activities. See the Related Documents tab for the full NFO, and amendments announcing new funding opportunities. The Department of War (DoW) Office of the Under Secretary of War for Research and Engineering (OUSW(R&amp;E)) seeks innovative applications on mechanisms to implement and research the effect…</summary>
   </entry>
 </feed>

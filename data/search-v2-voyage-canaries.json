@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-13T16:14:07.240Z",
+  "generated_at": "2026-10-14T15:20:18.655Z",
   "canary_set_version": 1,
   "model_alias": "voyage-4-lite",
   "response_model": "voyage-4-lite",
@@ -15,8 +15,8 @@
   "batch_space_checks": [
     {
       "exact_match": false,
-      "minimum_cosine": 0.999959,
-      "mean_cosine": 0.999969,
+      "minimum_cosine": 0.99997,
+      "mean_cosine": 0.999974,
       "gross_discontinuity": false
     },
     {
@@ -39,14 +39,14 @@
     },
     {
       "exact_match": false,
-      "minimum_cosine": 0.99996,
-      "mean_cosine": 0.999969,
+      "minimum_cosine": 0.999959,
+      "mean_cosine": 0.99997,
       "gross_discontinuity": false
     },
     {
       "exact_match": false,
-      "minimum_cosine": 0.999967,
-      "mean_cosine": 0.999973,
+      "minimum_cosine": 0.999959,
+      "mean_cosine": 0.999971,
       "gross_discontinuity": false
     }
   ],
