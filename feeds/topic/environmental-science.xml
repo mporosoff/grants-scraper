@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/environmental-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/environmental-science.xml</id>
-  <updated>2026-10-13T16:11:25Z</updated>
+  <updated>2026-10-14T15:15:41Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Limited Competition: Biomedical Research Environment &amp; Sponsored Programs Administration Development (BRE-SPAD) Program</title>
@@ -336,6 +336,16 @@
     <summary>Centers for Disease Control and Prevention - ERA | Estimated Application 2027-01-26 | Background: Despite advances in technology and improvements in work environments, mining remains one of the most challenging and hazardous occupations in the United States. The industry continues to experience a fatality rate nearly three times higher than the national average for all industries, according to the U.S. Bureau of Labor Statistics (BLS). Public MSHA data show that in 2025, the U.S. m…</summary>
   </entry>
   <entry>
+    <title>FY 2027-2028 NESDIS Broad Agency Announcement (BAA)</title>
+    <link href="https://www.grants.gov/search-results-detail/364069"/>
+    <id>urn:funding-finder:grants-gov:364069</id>
+    <updated>2026-10-13T00:00:00Z</updated>
+    <author><name>DOC NOAA - ERA Production</name></author>
+    <category term="Arts and culture"/>
+    <category term="Environmental science"/>
+    <summary>DOC NOAA - ERA Production | Application 2028-09-30 | A description of NOAA Line and Staff Offices is found at https://www.noaa.gov/about/organization, and applicants may contact the Agency Contacts in Section VII. below for more information. If you submit the same application to more than one Line or Staff Office, mention this in your application and notify the relevant contacts in Section VII. so that NOAA may coordinate internally. This notice als…</summary>
+  </entry>
+  <entry>
     <title>Cellular Senescence Network (SenNet): SenNet Technology Projects (SenTecs) (UG3/UH3 Clinical Trial Not Allowed)</title>
     <link href="https://www.grants.gov/search-results-detail/359168"/>
     <id>urn:funding-finder:grants-gov:359168</id>
@@ -413,6 +423,7 @@
     <category term="Environmental science"/>
     <category term="Transportation"/>
     <category term="Water"/>
+    <category term="Cybersecurity"/>
     <summary>Rural Utilities Service | Application 2026-12-31 | verify prerequisite | Funds may be used to pay expenses associated with providing technical assistance and/or training (TAT) to: Identify and evaluate solutions to water problems relating to source, storage, treatment, or distribution; identify and evaluate solutions to waste problems relating to collection, treatment, or disposal: assist applicants, that have filed a pre-application with RUS, in the preparation of wat…</summary>
   </entry>
   <entry>
@@ -646,15 +657,5 @@
     <author><name>DOC NOAA - ERA Production</name></author>
     <category term="Environmental science"/>
     <summary>DOC NOAA - ERA Production | Application 2027-01-22 | prerequisite closed | This grant program provides competitive grants to non-Federal researchers working to benefit U.S. fishermen and fisheries, including aquaculture, through the development of improved fishing practices and innovative gear technologies. The Magnuson-Stevens Fishery Conservation and Management Act, as amended (MSA), 16 U.S.C. 1865, requires that NOAA’s conservation and management measures minimize byc…</summary>
-  </entry>
-  <entry>
-    <title>F26AS00105 National Fish Passage Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363699"/>
-    <id>urn:funding-finder:grants-gov:363699</id>
-    <updated>2026-08-24T00:00:00Z</updated>
-    <author><name>Fish and Wildlife Service</name></author>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <summary>Fish and Wildlife Service | Application 2027-04-30 | The National Fish Passage Program (NFPP) provides technical and financial assistance to partners to remove instream barriers and restore aquatic connectivity, improve community safety, and support local economies. Fish passage projects benefit communities by reducing flood risk, improving recreational opportunities, and improving roads while supporting native fish populations and aquatic ecosystem…</summary>
   </entry>
 </feed>

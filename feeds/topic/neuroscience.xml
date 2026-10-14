@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/neuroscience.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/neuroscience.xml</id>
-  <updated>2026-10-13T16:11:25Z</updated>
+  <updated>2026-10-14T15:15:41Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIH Stroke Clinical Trials Network (StrokeNet) Infrastructure - National Coordinating Center (NCC) and National Data Management Center (NDMC)</title>
@@ -517,16 +517,6 @@ we will not consider for support include Covid-19 relat…</summary>
     <summary>National Institutes of Health | Estimated Application 2026-11-10 | The National Institutes of Neurological Disorders and Stroke (NINDS) is interested in supporting research projects proposing the optimization and translational development of genomic and biologic therapeutic candidates for Alzheimer’s Disease-Related Dementias (ADRD). Breakthroughs in genomic and biologic therapies are creating new opportunities to treat, prevent, and potentially modify the course…</summary>
   </entry>
   <entry>
-    <title>BRAIN Initiative: Brain-Behavior Quantification and Synchronization - Transformative Research on Behavior at the Organismal Level</title>
-    <link href="https://www.grants.gov/search-results-detail/361205"/>
-    <id>urn:funding-finder:grants-gov:361205</id>
-    <updated>2026-06-25T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Environmental science"/>
-    <category term="Neuroscience"/>
-    <summary>National Institutes of Health | Estimated Application 2026-10-13 | The Brain Research Through Advancing Innovative Neurotechnologies® (BRAIN) Initiative, a collaboration of Federal and non-Federal partners led by NIH, seeks to accelerate development and dissemination of new neurotechnologies, transdisciplinary approaches, and scientific databases to study brain function with unprecedented resolution and scope. The BRAIN Initiative’s Brain Behavior Quantification …</summary>
-  </entry>
-  <entry>
     <title>HEAL Initiative: Optimization of Therapeutic Medical Devices through Team Science Mechanistic Research (RM1)</title>
     <link href="https://www.grants.gov/search-results-detail/361520"/>
     <id>urn:funding-finder:grants-gov:361520</id>
@@ -644,5 +634,15 @@ we will not consider for support include Covid-19 relat…</summary>
     <category term="Social and behavioral sciences"/>
     <category term="Technology development"/>
     <summary>U.S. National Science Foundation | Posted | The Collaboratory to Advance Mathematics Education and Learning (CAMEL) for K-12 initiative aims to advance mathematics learning and education through purposeful collaboration that draws on the interdisciplinary Science of Learning (including neuroscience; cognitive, developmental, and social sciences; computer science; machine learning; engineering; and education research), deep experiences in ed…</summary>
+  </entry>
+  <entry>
+    <title>Mind and Body Interventions to Restore Whole Person Health via Emotional Well-Being Mechanisms (R61/R33 Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/359155"/>
+    <id>urn:funding-finder:grants-gov:359155</id>
+    <updated>2025-09-26T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Neuroscience"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>National Institutes of Health | Application 2028-06-07 | The National Center for Complementary and Integrative Health (NCCIH) announces this Notice of Funding Opportunity (NOFO) to solicit applications for research on how mind and body interventions through psychological and/or physical inputs (e.g., mindfulness meditation, yoga, acupuncture, massage, and other brain and/or body based interventions) impact mechanisms of emotional well-being (EWB) and th…</summary>
   </entry>
 </feed>

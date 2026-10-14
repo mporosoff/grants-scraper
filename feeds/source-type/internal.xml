@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/source-type/internal.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/source-type/internal.xml</id>
-  <updated>2026-10-13T16:11:25Z</updated>
+  <updated>2026-10-14T15:15:41Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>New NSF MPS funding opportunities for core research programs</title>
@@ -49,7 +49,7 @@
     <category term="Catalysis and reaction engineering"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
-    <summary>Simons Foundation | Application 2026-12-01 | The Simons Foundation (SF) is accepting applications for the Utilizing the Full Power of Empire AI program. Deadline for application submission: 12 p.m. (noon) Eastern time on December 1, 2026.</summary>
+    <summary>Simons Foundation | Application 2026-12-01</summary>
   </entry>
   <entry>
     <title>Research Areas</title>
@@ -98,7 +98,7 @@ we will not consider for support include Covid-19 relat…</summary>
     <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-02ca89881582e10d</id>
     <updated>2026-08-14T00:00:00Z</updated>
     <author><name>Simons Foundation</name></author>
-    <summary>Simons Foundation | Letter Of Intent 2026-10-29 | The Simons Foundation’s Mathematics and Physical Sciences (MPS) division invites applications for the Simons Collaborations in MPS program.</summary>
+    <summary>Simons Foundation | Letter Of Intent 2026-10-29 | The aim of the Simons Collaborations in MPS program is to stimulate progress on fundamental scientific questions of major importance in mathematics, theoretical physics and theoretical computer science.</summary>
   </entry>
   <entry>
     <title>NSF Plasma Physics</title>

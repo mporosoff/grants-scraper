@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml</id>
-  <updated>2026-10-13T16:11:25Z</updated>
+  <updated>2026-10-14T15:15:41Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Technology Development Program</title>
@@ -216,17 +216,6 @@
     <summary>National Institutes of Health | Estimated Application 2027-02-11 | This initiative will support research on the development, validation, feasibility, and effectiveness of innovative digital health interventions or tools (including mobile health) specifically suited for underserved settings in the U.S. and globally. Research should utilize new or emerging technologies, platforms, systems, and/or analytics to address high priority health problems, expand the eviden…</summary>
   </entry>
   <entry>
-    <title>Accelerating Research and Development of Next Generation Malaria Vaccines Against Malaria - A Model for Mosquito-Borne Diseases</title>
-    <link href="https://www.grants.gov/search-results-detail/361832"/>
-    <id>urn:funding-finder:grants-gov:361832</id>
-    <updated>2026-11-27T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <category term="Technology development"/>
-    <summary>National Institutes of Health | Estimated Application 2027-02-11 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to support basic research, discovery, and/or preclinical development of highly efficacious vaccines for malaria and potentially other mosquito-borne illness. The program will encourage novel approaches to vaccine design that capitalize on recent technological innovations including structure-based immunogen design, and/or combi…</summary>
-  </entry>
-  <entry>
     <title>National Biomedical Research Centers (P50 Clinical Trial Optional)</title>
     <link href="https://www.grants.gov/search-results-detail/362353"/>
     <id>urn:funding-finder:grants-gov:362353</id>
@@ -286,6 +275,25 @@
     <summary>Health Resources and Services Administration | Estimated Application 2026-11-13 | The purpose of the Alliance for Innovation on Maternal Health (AIM) program is to provide technical assistance to support all 50 states, the District of Columbia (D.C.), jurisdictions, U.S. territories, tribal communities, and birthing facilities that are participating in the AIM program. AIM is a quality improvement initiative to support best practices that make birth safer, improve maternal heal…</summary>
   </entry>
   <entry>
+    <title>Commercialization Cohort Programs</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr00001L5iYZAAZ"/>
+    <id>urn:funding-finder:nyserda:nyserda%3APON6239</id>
+    <updated>2026-10-13T00:00:00Z</updated>
+    <author><name>NYSERDA</name></author>
+    <category term="Technology development"/>
+    <summary>NYSERDA | Application 2026-12-02 | Supports climate-tech innovators in bringing their technology to market, starting from the earliest stages to full commercial scale up. NYSERDA is making $37.9 M available through the Commercialization Cohort program which will launch four accelerators that span the continuum of the start-up journey, with programming that builds on each other in successive stages. rnRound 1 is now open for proposa…</summary>
+  </entry>
+  <entry>
+    <title>Accelerating Research and Development of Next Generation Vaccines against Malaria - a Model for Mosquito-Borne Diseases (R61/R33 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/361832"/>
+    <id>urn:funding-finder:grants-gov:361832</id>
+    <updated>2026-10-13T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Public health"/>
+    <category term="Technology development"/>
+    <summary>National Institutes of Health | Application 2027-02-11 | The purpose of this notice of funding opportunity (NOFO) is to support research and/or preclinical development of highly efficacious vaccines against malaria - one of the deadliest mosquito-borne diseases - by capitalizing on recent technological innovations, particularly in structure-based immunogen design, improved formulations, and combination vaccines. The goal is to achieve long-lasting, high…</summary>
+  </entry>
+  <entry>
     <title>Field Initiated Projects Program (Development)</title>
     <link href="https://www.grants.gov/search-results-detail/363971"/>
     <id>urn:funding-finder:grants-gov:363971</id>
@@ -323,6 +331,8 @@
     <author><name>National Institute of Food and Agriculture</name></author>
     <category term="Agriculture and food"/>
     <category term="Technology development"/>
+    <category term="Materials science"/>
+    <category term="Manufacturing"/>
     <summary>National Institute of Food and Agriculture | Application 2026-11-17 | The USDA SBIR/STTR programs, Assistance Listing number 10.212, support scientific excellence and technological innovation through investment of Federal research funds to build a strong national economy by stimulating technological innovation in the private sector; strengthening the role of small business in meeting Federal research and development needs; and increasing the commercial application o…</summary>
   </entry>
   <entry>
@@ -407,18 +417,6 @@
     <category term="Technology development"/>
     <category term="Transportation"/>
     <summary>Office of Naval Research (ONR) | White Paper 2027-07-16 | Applied research and technology development in advanced manufacturing and sustainment. Applied research and advanced technology development for naval manufacturing and sustainment, with transition value. Phase II selections depend on funding and current technical focus. FFRDCs and military universities cannot be prime offerors; no mandatory industry partner invented.</summary>
-  </entry>
-  <entry>
-    <title>Restorative &amp; health-Enhancing Sleep Time (REST)</title>
-    <link href="https://arpa-h.gov/explore-funding/programs/rest"/>
-    <id>urn:funding-finder:arpa-h:arpa-h%3Arest</id>
-    <updated>2026-09-11T00:00:00Z</updated>
-    <author><name>Advanced Research Projects Agency for Health (ARPA-H)</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Technology development"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Advanced Research Projects Agency for Health (ARPA-H) | Application 2026-10-13 | prerequisite closed | Current ARPA-H program. REST | ARPA-H (function(w, d, s, l, i){w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&amp;l='+l:''; j.async=true; j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j, f); })(window, document,'script','dataLayer','GTM-W5GM3DT9'); window…</summary>
   </entry>
   <entry>
     <title>Unifying​ Imaging with​ Quantum​ Entanglement (UNIQUE)</title>

@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/all.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/all.xml</id>
-  <updated>2026-10-13T16:11:25Z</updated>
+  <updated>2026-10-14T15:15:41Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -89,6 +89,15 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Environmental science"/>
     <summary>National Institutes of Health | Estimated Application 2028-01-27 | The Biomedical Research Environment &amp; Sponsored Programs Administration Development (BRE-SPAD) Program supports resource-limited institutions to develop and strengthen their capacity to conduct rigorous and reproducible biomedical research. Eligible organizations are expected to propose plans based on identified needs in one or more of the following areas: biomedical research environment, sponsore…</summary>
+  </entry>
+  <entry>
+    <title>Testing Centers for Evaluation of Somatic Cell Genome Editing Approaches for Translational Applications (U42 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/364066"/>
+    <id>urn:funding-finder:grants-gov:364066</id>
+    <updated>2027-11-25T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <summary>National Institutes of Health | Estimated Application 2028-01-25 | This Notice of Funding Opportunity (NOFO) invites applicants to support Testing Centers for Evaluation of Somatic Cell Genome Editing Approaches for Translational Applications. Each center will provide resources and testing services to the growing community, developing new genome editing technologies and conducting preclinical testing based on these technologies for therapeutics for human diseases…</summary>
   </entry>
   <entry>
     <title>Limited Competition: Tribal Undergraduate and Graduate Research Training and Leadership Experiences (TURTLE) Program</title>
@@ -507,6 +516,14 @@
     <summary>Centers for Disease Control - NCHHSTP | Estimated Application 2027-05-31 | STIs represent a serious public health and economic burden in the United States (U.S.), with approximately 2.2 million new infections occurring each year. As the nation's lead public health agency, the Centers for Disease Control and Prevention (CDC) has a unique responsibility to provide national leadership in STI prevention and control. To meet this challenge, CDC supports a comprehensive and in…</summary>
   </entry>
   <entry>
+    <title>Coordinating Center for the Claude D. Pepper Older Americans Independence Centers (OAICs)</title>
+    <link href="https://www.grants.gov/search-results-detail/364065"/>
+    <id>urn:funding-finder:grants-gov:364065</id>
+    <updated>2027-03-25T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <summary>National Institutes of Health | Estimated Application 2027-05-25 | The National Institute on Aging intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for the Coordinating Center (CC) of the Claude D. Pepper Older Americans Independence Centers (OAIC) program. The CC serves as a facilitator for OAIC site interactions and as a conduit for translating OAIC objectives and findings to both scientific and general audiences. The proposed C…</summary>
+  </entry>
+  <entry>
     <title>Limited Competition: John Lewis NIMHD Research Endowment Program (S21 Clinical Trial Not Allowed)</title>
     <link href="https://www.grants.gov/search-results-detail/363826"/>
     <id>urn:funding-finder:grants-gov:363826</id>
@@ -815,6 +832,19 @@
     <summary>National Institutes of Health | Estimated Application 2027-05-18 | The Institutional Development Award program develops biomedical research capacity in states that have historically received low levels of NIH funding (IDeA states). The IDeA Networks of Biomedical Research Excellence (INBRE) Notice of Funding Opportunity will support statewide networks in IDeA states made up of one or more research intensive institution and multiple primarily undergraduate institu…</summary>
   </entry>
   <entry>
+    <title>Implementation and Evaluation of Databases to Examine AIDS</title>
+    <link href="https://www.grants.gov/search-results-detail/359142"/>
+    <id>urn:funding-finder:grants-gov:359142</id>
+    <updated>2027-02-18T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Data science"/>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health | Estimated Application 2027-05-27 | The National Institute of Allergy and Infectious Diseases (NIAID), with partnering National Institutes of Health Institutes, Centers, and Offices, seeks to advance its mission through continued support for the Implementation and Evaluation of Databases to Examine AIDS Consortium. This research network integrates clinical, epidemiologic, genomic, and contextual real-world data through harmonized da…</summary>
+  </entry>
+  <entry>
     <title>Comprehensive Suicide Prevention Program for States</title>
     <link href="https://www.grants.gov/search-results-detail/363329"/>
     <id>urn:funding-finder:grants-gov:363329</id>
@@ -934,35 +964,5 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Biology and biotechnology"/>
     <summary>National Institutes of Health | Estimated Application 2027-05-25 | The National Center for Complementary and Integrative Health (NCCIH) intends to publish a Notice of Funding Opportunity (NOFO) to support collaborative interdisciplinary research that advances foundational understanding of non-addictive natural products for chronic pain management through a holistic, system-oriented approach. This initiative aligns with the NIH Helping to End Addiction Long-term (…</summary>
-  </entry>
-  <entry>
-    <title>NLM Grants for Scholarly Works in Biomedicine and Health (G13 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/363939"/>
-    <id>urn:funding-finder:grants-gov:363939</id>
-    <updated>2027-02-02T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Education and workforce"/>
-    <category term="Public health"/>
-    <summary>National Institutes of Health | Estimated Application 2027-05-25 | This Notice of Funding Opportunity (NOFO) solicits applications for the NLM Grants for Scholarly Works in Biomedicine and Health program. The program supports the preparation of book-length manuscripts and other scholarly works of academic and/or public health importance to U.S. health professionals, scientists, public health professionals, and other relevant audiences. This NOFO is intended to su…</summary>
-  </entry>
-  <entry>
-    <title>Domestic Violence Prevention</title>
-    <link href="https://www.grants.gov/search-results-detail/363491"/>
-    <id>urn:funding-finder:grants-gov:363491</id>
-    <updated>2027-02-01T00:00:00Z</updated>
-    <author><name>Indian Health Service</name></author>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>Indian Health Service | Estimated Application 2027-04-01 | The purpose of this IHS grant is to support the development and expansion of Domestic Violence Prevention (DVP) programs that integrate culturally appropriate, trauma-informed prevention and victim services for Tribes, Tribal organizations, and Urban Indian Organizations serving AI/AN communities. The program will address domestic and sexual violence, sexual exploitation and human trafficking, Mis…</summary>
-  </entry>
-  <entry>
-    <title>Domestic Violence Prevention: Forensic Healthcare Services</title>
-    <link href="https://www.grants.gov/search-results-detail/363493"/>
-    <id>urn:funding-finder:grants-gov:363493</id>
-    <updated>2027-02-01T00:00:00Z</updated>
-    <author><name>Indian Health Service</name></author>
-    <category term="Arts and culture"/>
-    <summary>Indian Health Service | Estimated Application 2027-04-01 | The purpose of this IHS grant is to expand access to culturally appropriate, trauma-informed forensic healthcare (FHC) services for American Indian/Alaska Native (AI/AN) victims of domestic violence, sexual violence, child maltreatment, and human trafficking. The grant supports the development and expansion of FHC services across IHS Areas while promoting coordinated treatment, intervention, preve…</summary>
   </entry>
 </feed>

@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/water.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/water.xml</id>
-  <updated>2026-10-13T16:11:25Z</updated>
+  <updated>2026-10-14T15:15:41Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Cooperative Agreement for Affiliated Partner with the Southern Appalachian Cooperative Ecosystem Studies Unit (CESU)</title>
@@ -42,7 +42,19 @@
     <category term="Environmental science"/>
     <category term="Transportation"/>
     <category term="Water"/>
+    <category term="Cybersecurity"/>
     <summary>Rural Utilities Service | Application 2026-12-31 | verify prerequisite | Funds may be used to pay expenses associated with providing technical assistance and/or training (TAT) to: Identify and evaluate solutions to water problems relating to source, storage, treatment, or distribution; identify and evaluate solutions to waste problems relating to collection, treatment, or disposal: assist applicants, that have filed a pre-application with RUS, in the preparation of wat…</summary>
+  </entry>
+  <entry>
+    <title>WATER RESOURCES RESEARCH ACT PROGRAM NATIONAL COMPETITIVE GRANTS FY2026 (104g General)</title>
+    <link href="https://www.grants.gov/search-results-detail/364012"/>
+    <id>urn:funding-finder:grants-gov:364012</id>
+    <updated>2026-09-30T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Water"/>
+    <summary>Geological Survey | Application 2026-11-12 | This Program Announcement is issued under the provisions of section 104 of the Water Resources Research Act of 1984 (Public Law 98-242), as amended by Public Laws 101-397, 104-147, 106-374, 109-471, and 117-58. Section 104 of the Water Resources Research Act directs the Secretary of the Interior to administer program grants to Institutes established under the provisions of section 104(a) of the Ac…</summary>
   </entry>
   <entry>
     <title>Easement Restoration and Stewardship</title>
@@ -87,9 +99,10 @@
     <category term="Energy"/>
     <category term="Catalysis and reaction engineering"/>
     <category term="Separations and membranes"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
     <category term="Materials science"/>
     <category term="Manufacturing"/>
-    <category term="Water"/>
     <summary>U.S. National Science Foundation | Posted | The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational engineering research for chemical, bioengineering, energy, and transport systems through the following programs:  The Chemical Process Systems (CPS) program supports foundational engineering research in chemical and biochemical processes for chemicals, fuels, energy, and materials. The Engineering Biol…</summary>
   </entry>
   <entry>
