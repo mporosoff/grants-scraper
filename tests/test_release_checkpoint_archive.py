@@ -73,6 +73,12 @@ class CheckpointArchiveContracts(unittest.TestCase):
     def capture(self):
         return archive.capture(REPOSITORY, RUN, ATTEMPT, self.root / 'snapshot', api=self.read)
 
+    def add_artifact(self, identifier, name, raw):
+        self.raw[identifier] = raw
+        self.rows.append(artifact(identifier, name, raw))
+        self.values[f'actions/artifacts/{identifier}/zip'] = raw
+        self.values[f'actions/runs/{RUN}/artifacts?per_page=100&page=1']['total_count'] = len(self.rows)
+
     def backup(self, mutate=None, *, name=None):
         manifest = self.capture()
         files = {path.relative_to(self.root / 'snapshot').as_posix(): path.read_bytes()
@@ -105,6 +111,94 @@ class CheckpointArchiveContracts(unittest.TestCase):
         self.rows.pop()
         self.values[f'actions/runs/{RUN}/artifacts?per_page=100&page=1']['total_count'] = 1
         self.assertEqual(self.capture()['artifact_name'], f'originalrun-{RUN}-attempt-{ATTEMPT}')
+
+    def test_generic_artifacts_with_the_same_name_keep_distinct_ids_and_exact_zips(self):
+        self.add_artifact(31, 'github-pages', packed({'artifact.tar': b'first Pages package'}))
+        self.add_artifact(32, 'github-pages', packed({'artifact.tar': b'retried Pages package'}))
+        self.backup()
+        records = archive.preserved_artifacts(REPOSITORY, RUN, api=self.read)
+        pages = [row for row in records if row['name'] == 'github-pages']
+        self.assertEqual([row['id'] for row in pages], [31, 32])
+        for row in pages:
+            self.assertEqual(archive.read_preserved_artifact(REPOSITORY, RUN, row, api=self.read), self.raw[row['id']])
+
+    def test_duplicate_original_ids_still_fail_capture_and_reader(self):
+        duplicate = dict(self.rows[0], name='different-name')
+        self.rows.append(duplicate)
+        self.values[f'actions/runs/{RUN}/artifacts?per_page=100&page=1']['total_count'] = 3
+        with self.assertRaisesRegex(ValueError, 'Conflicting checkpoint artifact identities'):
+            self.capture()
+        # A separate authenticated bundle must also reject repeated IDs even
+        # when two manifest items claim the same fixed raw-ZIP path.
+        self.rows.pop()
+        self.values[f'actions/runs/{RUN}/artifacts?per_page=100&page=1']['total_count'] = 2
+        with tempfile.TemporaryDirectory(dir=self.root) as directory:
+            previous = self.root; self.root = Path(directory)
+            def duplicate_id(manifest, _):
+                manifest['artifacts'][1]['metadata']['id'] = 11
+                manifest['artifacts'][1]['path'] = 'artifacts/11.zip'
+            outer = self.backup(duplicate_id)
+            with self.assertRaisesRegex(ValueError, 'Conflicting checkpoint payload identities'):
+                archive.preserved_artifacts(REPOSITORY, RUN, inventory=[outer], api=self.read)
+            self.root = previous
+
+    def test_semantic_fetch_still_holds_an_ambiguous_requested_name(self):
+        from tools import fetch_release_artifact as transport
+        self.add_artifact(31, 'github-pages', packed({'artifact.tar': b'first'}))
+        self.add_artifact(32, 'github-pages', packed({'artifact.tar': b'second'}))
+        self.backup()
+        self.values[f'actions/runs/{RUN}/artifacts?per_page=100&page=1'] = {'artifacts': [], 'total_count': 0}
+        def command(args, **_):
+            prefix = 'repos/' + REPOSITORY + '/'
+            self.assertEqual(args[:2], ['gh', 'api'])
+            self.assertTrue(args[2].startswith(prefix))
+            return self.read(args[2][len(prefix):])
+        with patch.object(transport.subprocess, 'check_output', side_effect=command), \
+                self.assertRaisesRegex(ValueError, 'Conflicting artifact identities'):
+            transport.fetch(REPOSITORY, RUN, 'github-pages', self.root / 'ambiguous')
+        self.assertFalse((self.root / 'ambiguous').exists())
+
+    def test_task_selector_covers_partial_and_prior_attempt_checkpoint_families(self):
+        prefix = 'offline-ai-task-with-hyphens'
+        expected = f'originalrun-{RUN}-attempt-{ATTEMPT}-task-' + hashlib.sha256(prefix.encode()).hexdigest()
+        for names in ([prefix + '-reservation-101-2'], [prefix + '-state-101-2'],
+                      [prefix + '-reservation-101-1', prefix + '-state-101-2']):
+            with self.subTest(names=names):
+                self.assertEqual(archive.artifact_name(RUN, ATTEMPT, [{'name': name} for name in names]), expected)
+        for names in ([prefix + '-state-101-2', 'offline-ai-other-reservation-101-1'],
+                      [prefix + '-reservation-malformed']):
+            with self.subTest(names=names):
+                self.assertEqual(archive.artifact_name(RUN, ATTEMPT, [{'name': name} for name in names]),
+                                 f'originalrun-{RUN}-attempt-{ATTEMPT}-tasks-mixed')
+
+    def test_task_selector_skips_many_unrelated_archives_without_api_calls(self):
+        outer = self.backup()
+        other = hashlib.sha256(b'offline-ai-other').hexdigest()
+        rows = [dict(outer, id=2000 + index,
+                     name=f'originalrun-{500 + index}-attempt-1' + ('-task-' + other if index % 2 else ''))
+                for index in range(60)]
+        self.calls.clear()
+        self.assertEqual(archive.preserved_artifacts(REPOSITORY, task_prefix='offline-ai-wanted',
+                         inventory=rows, api=self.read), [])
+        self.assertEqual(self.calls, [])
+
+    def test_mixed_and_uncertain_task_inventories_remain_visible_to_every_task_lookup(self):
+        self.add_artifact(31, 'offline-ai-first-reservation-101-1', packed({'reservation.json': b'first'}))
+        self.add_artifact(32, 'offline-ai-second-state-101-2', packed({'ledger.json': b'second'}))
+        outer = self.backup()
+        self.assertTrue(outer['name'].endswith('-tasks-mixed'))
+        records = archive.preserved_artifacts(REPOSITORY, task_prefix='offline-ai-first', inventory=[outer], api=self.read)
+        self.assertEqual({row['id'] for row in records}, {11, 12, 31, 32})
+
+    def test_forged_task_selector_is_recomputed_from_authenticated_inventory(self):
+        prefix, forged = 'offline-ai-real', 'offline-ai-forged'
+        self.add_artifact(31, prefix + '-reservation-101-1', packed({'reservation.json': b'real'}))
+        def forge(manifest, _):
+            manifest['artifact_name'] = manifest['artifact_name'].replace(
+                hashlib.sha256(prefix.encode()).hexdigest(), hashlib.sha256(forged.encode()).hexdigest())
+        outer = self.backup(forge)
+        with self.assertRaisesRegex(ValueError, 'selector mismatch'):
+            archive.preserved_artifacts(REPOSITORY, task_prefix=forged, inventory=[outer], api=self.read)
 
     def test_roundtrip_restores_original_metadata_and_exact_raw_zip(self):
         outer = self.backup()

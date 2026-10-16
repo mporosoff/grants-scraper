@@ -59,7 +59,7 @@ def merge_artifacts(native, preserved):
     return result
 
 
-def repository_artifacts(repository, api, *, candidate=None):
+def repository_artifacts(repository, api, *, candidate=None, task_prefix=None):
     """Order native and preserved receipts together before selecting a result."""
     artifacts = []
     for page in range(1, 101):
@@ -72,7 +72,8 @@ def repository_artifacts(repository, api, *, candidate=None):
             if value.get('total_count', len(artifacts)) > len(artifacts):
                 raise ValueError('Repository release artifact history is incomplete')
             from tools.release_checkpoint_archive import preserved_artifacts
-            preserved = preserved_artifacts(repository, candidate=candidate, inventory=artifacts, api=api)
+            preserved = preserved_artifacts(repository, candidate=candidate, task_prefix=task_prefix,
+                                            inventory=artifacts, api=api)
             return merge_artifacts(artifacts, preserved)
     raise ValueError('Repository release evidence exceeds bounded lookup')
 

@@ -26,8 +26,11 @@ MAX_BUNDLE_BYTES = 1024 * 1024 * 1024
 MAX_EXPANDED_BYTES = 2 * 1024 * 1024 * 1024
 MAX_ZIP_MEMBERS = 20000
 MAX_MANIFEST_BYTES = 4 * 1024 * 1024
-BACKUP_NAME = re.compile(r'originalrun-([1-9][0-9]*)-attempt-([1-9][0-9]*)(?:-candidate-([a-f0-9]{64}))?')
+BACKUP_NAME = re.compile(r'originalrun-([1-9][0-9]*)-attempt-([1-9][0-9]*)(?:-candidate-([a-f0-9]{64}))?'
+                         r'(?:-task-([a-f0-9]{64})|-(tasks-mixed))?')
 CANDIDATE_NAME = re.compile(r'(?:candidate|validation|publication|live)-([a-f0-9]{64})(?:-[1-9][0-9]*)?')
+TASK_PREFIX = re.compile(r'offline-ai-[A-Za-z0-9][A-Za-z0-9_.-]*')
+TASK_ARTIFACT = re.compile(r'(offline-ai-[A-Za-z0-9][A-Za-z0-9_.-]*)-(?:reservation|state)-[1-9][0-9]*-[1-9][0-9]*')
 TERMINAL_CONCLUSIONS = frozenset({'success', 'failure', 'cancelled', 'skipped', 'timed_out',
                                   'action_required', 'neutral', 'stale', 'startup_failure'})
 MANIFEST_KEYS = {'schema_version', 'artifact_name', 'source', 'source_conclusion', 'artifacts'}
@@ -151,7 +154,19 @@ def _candidate(inventory):
 def artifact_name(run, attempt, inventory):
     name = f'originalrun-{_positive(run)}-attempt-{_positive(attempt)}'
     candidate = _candidate(inventory)
-    return name + ('-candidate-' + candidate if candidate else '')
+    name += '-candidate-' + candidate if candidate else ''
+    prefixes, uncertain = set(), False
+    for item in inventory:
+        label = str(item.get('name'))
+        if label.startswith('offline-ai-'):
+            match = TASK_ARTIFACT.fullmatch(label)
+            if match:
+                prefixes.add(match.group(1))
+            else:
+                uncertain = True
+    if uncertain or len(prefixes) > 1:
+        return name + '-tasks-mixed'
+    return name + ('-task-' + _sha(next(iter(prefixes)).encode()) if prefixes else '')
 
 
 def _members(raw, *, outer=False):
@@ -215,13 +230,12 @@ def capture(repository, run, attempt, output, *, api=None):
         raise ValueError('Checkpoint capture destination must be empty')
     destination.mkdir(parents=True, exist_ok=True)
     (destination / 'artifacts').mkdir()
-    items, identifiers, names, total = [], set(), set(), 0
+    items, identifiers, total = [], set(), 0
     for item in sorted(inventory, key=lambda value: _positive(value.get('id'))):
         identifier = _artifact(item, source)
-        if identifier in identifiers or item['name'] in names:
+        if identifier in identifiers:
             raise ValueError('Conflicting checkpoint artifact identities')
         identifiers.add(identifier)
-        names.add(item['name'])
         raw = read(f'actions/artifacts/{identifier}/zip')
         total += len(raw)
         if total > MAX_BUNDLE_BYTES or _sha(raw) != item['digest'].removeprefix('sha256:'):
@@ -278,16 +292,15 @@ def _bundle(repository, run, outer, read):
                 or manifest.get('artifact_name') != outer['name']
                 or not isinstance(inventory, list) or not 0 < len(inventory) <= MAX_ARTIFACTS):
             raise ValueError('Checkpoint manifest source identity mismatch')
-        records, contents, names, expected_files, total = [], {}, set(), {'manifest.json'}, 0
+        records, contents, expected_files, total = [], {}, {'manifest.json'}, 0
         for item in inventory:
             if not isinstance(item, dict) or set(item) != ITEM_KEYS:
                 raise ValueError('Unexpected checkpoint artifact item keys')
             metadata = item.get('metadata') or {}
             identifier = _artifact(metadata, source)
             path = f'artifacts/{identifier}.zip'
-            if identifier in contents or metadata['name'] in names or item.get('path') != path:
+            if identifier in contents or item.get('path') != path:
                 raise ValueError('Conflicting checkpoint payload identities')
-            names.add(metadata['name'])
             expected_files.add(path)
             try:
                 info = archive.getinfo(path)
@@ -314,7 +327,7 @@ def _bundle(repository, run, outer, read):
     return records, contents
 
 
-def preserved_artifacts(repository, run=None, *, candidate=None, inventory=None, api=None):
+def preserved_artifacts(repository, run=None, *, candidate=None, task_prefix=None, inventory=None, api=None):
     """Return original records from authenticated independent backup artifacts.
 
     Repository inventory and the optional candidate suffix let report lookup
@@ -325,6 +338,9 @@ def preserved_artifacts(repository, run=None, *, candidate=None, inventory=None,
         run = str(_positive(run))
     if candidate is not None and not re.fullmatch(r'[a-f0-9]{64}', str(candidate)):
         raise ValueError('Invalid checkpoint candidate selector')
+    if task_prefix is not None and (not isinstance(task_prefix, str) or not TASK_PREFIX.fullmatch(task_prefix)):
+        raise ValueError('Invalid checkpoint task selector')
+    task_digest = _sha(task_prefix.encode()) if task_prefix is not None else None
     read = (lambda path: globals()['api'](repository, path)) if api is None else api
     rows = _pages(read, 'actions/artifacts', 'artifacts') if inventory is None else inventory
     if not isinstance(rows, list) or len(rows) > MAX_PAGES * 100:
@@ -334,6 +350,10 @@ def preserved_artifacts(repository, run=None, *, candidate=None, inventory=None,
         name = str(outer.get('name', ''))
         match = BACKUP_NAME.fullmatch(name)
         if not match or (run is not None and match.group(1) != run) or (candidate is not None and match.group(3) != candidate):
+            continue
+        # New archives advertise their complete task inventory in the name.
+        # Mixed/uncertain inventories remain relevant to every task lookup.
+        if task_digest is not None and match.group(4) != task_digest and not match.group(5):
             continue
         if outer.get('expired') is True:
             continue

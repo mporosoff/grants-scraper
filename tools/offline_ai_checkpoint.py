@@ -25,10 +25,12 @@ def prepare(repository, destination, reservation):
     # A pilot's newest task allowance may survive only in the independent
     # release archive. Select by original artifact ID across both transports
     # before restoring, or an older native task ledger could erase its charges.
-    artifacts = [item for item in repository_artifacts(repository, lambda path: api(repository, path))
+    artifacts = [item for item in repository_artifacts(repository, lambda path: api(repository, path), task_prefix=PREFIX)
                  if item['name'].startswith(PREFIX + '-')]
     reservations = sorted((a for a in artifacts if "-reservation-" in a["name"]), key=lambda a: a["id"])
     if not reservations:
+        if artifacts:
+            raise ValueError("evaluation_spend_checkpoint_missing_reservation; retained task evidence cannot reset its allowance")
         prior = json.loads(api(repository, "actions/workflows/offline-ai-evaluation.yml/runs?event=workflow_dispatch&branch=main&per_page=100"))["workflow_runs"]
         if any(str(run["id"]) != os.environ["GITHUB_RUN_ID"] for run in prior):
             raise ValueError("prior_evaluation_has_no_spend_evidence; budget cannot be reset")
@@ -38,6 +40,9 @@ def prepare(repository, destination, reservation):
         states = [a for a in artifacts if a["name"] == expected]
         if len(states) != 1 or states[0]["expired"]:
             raise ValueError("evaluation_spend_checkpoint_missing_or_expired; remaining budget is conservatively unavailable")
+        task_states = [a for a in artifacts if a['name'].startswith(PREFIX + '-state-')]
+        if max(task_states, key=lambda a: a['id'])['name'] != expected:
+            raise ValueError("evaluation_spend_checkpoint_unpaired_latest_state; older accounting cannot replace newer task evidence")
         selected = states[0]
         run = json.loads(api(repository, f"actions/runs/{selected['workflow_run']['id']}"))
         if run["path"] not in (WORKFLOW, PILOT_WORKFLOW) or run["head_branch"] != "main" or run["event"] != "workflow_dispatch":

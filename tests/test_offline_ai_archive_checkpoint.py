@@ -70,6 +70,21 @@ class ArchivedTaskCheckpointContracts(unittest.TestCase):
         with patch.dict(os.environ, self.environment), patch.object(task, 'api', side_effect=self.api):
             task.prepare(REPOSITORY, destination, self.root / 'reservation.json')
 
+    def state_only_archive(self, *, older_native):
+        self.values[f'actions/runs/{PILOT}/artifacts?per_page=100&page=1'] = {
+            'artifacts': self.new_rows[1:], 'total_count': 1}
+        self.values['actions/artifacts/23/zip'] = self.raw[23]
+        snapshot = self.root / 'state-only-archive'
+        saved = archive.capture(REPOSITORY, PILOT, 2, snapshot, api=self.read)
+        raw = packed({path.relative_to(snapshot).as_posix(): path.read_bytes()
+                      for path in snapshot.rglob('*') if path.is_file()})
+        outer = artifact(1002, saved['artifact_name'], raw, BACKUP)
+        rows = (self.old_rows if older_native else []) + [outer]
+        self.values.update({'actions/artifacts/1002': outer, 'actions/artifacts/1002/zip': raw,
+            'actions/artifacts?per_page=100&page=1': {'artifacts': rows, 'total_count': len(rows)},
+            'actions/workflows/offline-ai-evaluation.yml/runs?event=workflow_dispatch&branch=main&per_page=100':
+                {'workflow_runs': []}})
+
     def test_newest_archived_pilot_task_preserves_all_charges_over_older_native_state(self):
         destination = self.root / 'restored-task'
         destination.mkdir()
@@ -94,6 +109,61 @@ class ArchivedTaskCheckpointContracts(unittest.TestCase):
         self.assertEqual((destination / 'ledger.json').read_bytes(), self.old.path.read_bytes())
         self.assertIn('actions/artifacts/10/zip', self.calls)
         self.assertNotIn('actions/artifacts/1001/zip', self.calls)
+
+    def test_task_restore_does_not_download_unrelated_release_archives(self):
+        unrelated = [dict(self.outer, id=2000 + index, name=f'originalrun-{500 + index}-attempt-1')
+                     for index in range(60)]
+        rows = self.old_rows + unrelated + [self.outer]
+        self.values['actions/artifacts?per_page=100&page=1'] = {'artifacts': rows, 'total_count': len(rows)}
+        destination = self.root / 'filtered-task'
+        self.restore(destination)
+        self.assertEqual((destination / 'ledger.json').read_bytes(), self.new_bytes)
+        self.assertFalse(any(path.startswith('actions/artifacts/2') for path in self.calls))
+
+    def test_archived_reservation_only_checkpoint_holds_without_older_state_fallback(self):
+        self.values[f'actions/runs/{PILOT}/artifacts?per_page=100&page=1'] = {
+            'artifacts': self.new_rows[:1], 'total_count': 1}
+        self.values['actions/artifacts/22/zip'] = self.raw[22]
+        snapshot = self.root / 'reservation-only-archive'
+        saved = archive.capture(REPOSITORY, PILOT, 2, snapshot, api=self.read)
+        raw = packed({path.relative_to(snapshot).as_posix(): path.read_bytes()
+                      for path in snapshot.rglob('*') if path.is_file()})
+        outer = artifact(1002, saved['artifact_name'], raw, BACKUP)
+        self.values.update({'actions/artifacts/1002': outer, 'actions/artifacts/1002/zip': raw,
+            'actions/artifacts?per_page=100&page=1': {'artifacts': self.old_rows + [outer], 'total_count': 3}})
+        destination = self.root / 'reservation-hold'
+        with self.assertRaisesRegex(ValueError, 'checkpoint_missing_or_expired'):
+            self.restore(destination)
+        self.assertFalse(destination.exists())
+
+    def test_archived_state_without_reservation_cannot_create_a_fresh_allowance(self):
+        self.state_only_archive(older_native=False)
+        destination = self.root / 'retained-task'
+        destination.mkdir()
+        (destination / 'ledger.json').write_bytes(self.new_bytes)
+        with self.assertRaisesRegex(ValueError, 'missing_reservation'):
+            self.restore(destination)
+        self.assertEqual((destination / 'ledger.json').read_bytes(), self.new_bytes)
+        self.assertFalse((self.root / 'reservation.json').exists())
+
+    def test_newer_archived_orphan_state_cannot_roll_back_to_an_older_native_pair(self):
+        self.state_only_archive(older_native=True)
+        destination = self.root / 'retained-task'
+        destination.mkdir()
+        (destination / 'ledger.json').write_bytes(self.new_bytes)
+        with self.assertRaisesRegex(ValueError, 'unpaired_latest_state'):
+            self.restore(destination)
+        self.assertEqual((destination / 'ledger.json').read_bytes(), self.new_bytes)
+        self.assertFalse((self.root / 'reservation.json').exists())
+        self.assertNotIn('actions/artifacts/10/zip', self.calls)
+
+    def test_newer_complete_pair_supersedes_older_orphan_state(self):
+        older = artifact(8, task.PREFIX + '-state-99-1', self.raw[23], '99')
+        rows = [older] + self.old_rows + [self.outer]
+        self.values['actions/artifacts?per_page=100&page=1'] = {'artifacts': rows, 'total_count': len(rows)}
+        destination = self.root / 'complete-task'
+        self.restore(destination)
+        self.assertEqual((destination / 'ledger.json').read_bytes(), self.new_bytes)
 
     def test_a_newer_native_reservation_without_state_does_not_reuse_older_archived_task(self):
         missing = artifact(30, task.PREFIX + '-reservation-102-1', self.raw[22], '102')
