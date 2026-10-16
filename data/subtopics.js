@@ -11,8 +11,8 @@ globalThis.SUBTOPIC_CATALOG={
   "frame_evidence_cache_sha256": "2e5196fceba24921b486dce76a29f5759f642ce207fa65fc9bb9a11632a1a71c",
   "top_level_fetch_failure_count": 51
  },
- "parent_count": 20,
- "record_count": 463,
+ "parent_count": 27,
+ "record_count": 481,
  "records": {
   "103313": {
    "segmentation_method": null,
@@ -74,6 +74,7 @@ globalThis.SUBTOPIC_CATALOG={
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
   "302271": {
@@ -107,6 +108,7 @@ globalThis.SUBTOPIC_CATALOG={
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
   "320087": {
@@ -15161,6 +15163,13 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
+  "356659": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
   "356690": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -15323,6 +15332,13 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "356935": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "356943": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -28525,16 +28541,130 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "363240": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
+   "segmentation_method": "nasa_roses_table",
+   "subtopic_count": 1,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopics": []
+   "subtopics": [
+    {
+     "amended": true,
+     "child_source_url": "https://solicitation.nasaprs.com/NNH25ZDA001N-ATMOS",
+     "child_type": "subject",
+     "confidence": "high",
+     "division": "A",
+     "evidence_anchor": null,
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-10-16",
+     "last_verified": "2026-10-16",
+     "native_deadline_text": "08/20/2026 (Mandatory NOI) | 12/02/2026",
+     "native_status": "dated",
+     "opportunity_id": "363240:a-14",
+     "ordinal_label": "A.14",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": null,
+     "page_start": null,
+     "parent_id": "363240",
+     "parent_opportunity_number": "NNH25ZDA001N-ATMOS",
+     "pattern_family": null,
+     "program_area_labels": [],
+     "publication_reason": "high_confidence",
+     "publication_state": "publishable",
+     "record_type": "subtopic",
+     "segmentation_method": null,
+     "source_document_hash": "08b6d52ae04d93b370cc7f134680e955e9dfa2d8a4cff59692dd262ee5b693ea",
+     "source_document_url": "https://nspires.nasaprs.com/external/viewrepositorydocument/cmdocumentid=1041498/solicitationId=%7B2A1D139B-B9C7-CE8C-2E81-223FD08460F9%7D/viewSolicitationDocument=1/Table 3 ROSES-2025_Amend 79.html",
+     "source_role": "authoritative_announcement",
+     "source_version": {
+      "amendment": 79,
+      "year": 2025
+     },
+     "status": "posted",
+     "subtopic_code": "A.14",
+     "subtopic_code_norm": "a-14",
+     "subtopic_id": "363240:a-14",
+     "subtopic_ordinal": 13,
+     "subtopic_source": "native",
+     "summary": "NASA ROSES program element A.14: Atmosphere.",
+     "term_display": {
+      "02": "02",
+      "08": "08",
+      "12": "12",
+      "20": "20",
+      "2026": "2026",
+      "atmosphere": "Atmosphere",
+      "division": "division",
+      "mandatory": "Mandatory",
+      "noi": "NOI",
+      "rose": "ROSES"
+     },
+     "title": "Atmosphere",
+     "title_fingerprint": "cafe3eba",
+     "topic_areas": []
+    }
+   ]
   },
   "363241": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
+   "segmentation_method": "nasa_roses_table",
+   "subtopic_count": 1,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopics": []
+   "subtopics": [
+    {
+     "amended": true,
+     "child_source_url": "https://solicitation.nasaprs.com/NNH25ZDA001N-BIOS",
+     "child_type": "subject",
+     "confidence": "high",
+     "division": "A",
+     "evidence_anchor": null,
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-10-16",
+     "last_verified": "2026-10-16",
+     "native_deadline_text": "09/04/2026 (Step-1) | 11/06/2026 (Step-2)",
+     "native_status": "dated",
+     "opportunity_id": "363241:a-15",
+     "ordinal_label": "A.15",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": null,
+     "page_start": null,
+     "parent_id": "363241",
+     "parent_opportunity_number": "NNH25ZDA001N-BIOS",
+     "pattern_family": null,
+     "program_area_labels": [],
+     "publication_reason": "high_confidence",
+     "publication_state": "publishable",
+     "record_type": "subtopic",
+     "segmentation_method": null,
+     "source_document_hash": "08b6d52ae04d93b370cc7f134680e955e9dfa2d8a4cff59692dd262ee5b693ea",
+     "source_document_url": "https://nspires.nasaprs.com/external/viewrepositorydocument/cmdocumentid=1041498/solicitationId=%7B2A1D139B-B9C7-CE8C-2E81-223FD08460F9%7D/viewSolicitationDocument=1/Table 3 ROSES-2025_Amend 79.html",
+     "source_role": "authoritative_announcement",
+     "source_version": {
+      "amendment": 79,
+      "year": 2025
+     },
+     "status": "posted",
+     "subtopic_code": "A.15",
+     "subtopic_code_norm": "a-15",
+     "subtopic_id": "363241:a-15",
+     "subtopic_ordinal": 14,
+     "subtopic_source": "native",
+     "summary": "NASA ROSES program element A.15: Biosphere.",
+     "term_display": {
+      "04": "04",
+      "06": "06",
+      "09": "09",
+      "11": "11",
+      "2026": "2026",
+      "biosphere": "Biosphere",
+      "division": "division",
+      "rose": "ROSES",
+      "step-1": "Step-1",
+      "step-2": "Step-2"
+     },
+     "title": "Biosphere",
+     "title_fingerprint": "fc4ad2d5",
+     "topic_areas": []
+    }
+   ]
   },
   "363242": {
    "segmentation_method": null,
@@ -28593,10 +28723,66 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "363258": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
+   "segmentation_method": "nasa_roses_table",
+   "subtopic_count": 1,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopics": []
+   "subtopics": [
+    {
+     "amended": true,
+     "child_source_url": "https://solicitation.nasaprs.com/NNH25ZDA001N-PSEF",
+     "child_type": "subject",
+     "confidence": "high",
+     "division": "C",
+     "evidence_anchor": null,
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-10-16",
+     "last_verified": "2026-10-16",
+     "native_deadline_text": "N/A | 11/10/2026",
+     "native_status": "dated",
+     "opportunity_id": "363258:c-4",
+     "ordinal_label": "C.4",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": null,
+     "page_start": null,
+     "parent_id": "363258",
+     "parent_opportunity_number": "NNH25ZDA001N-PSEF",
+     "pattern_family": null,
+     "program_area_labels": [],
+     "publication_reason": "high_confidence",
+     "publication_state": "publishable",
+     "record_type": "subtopic",
+     "segmentation_method": null,
+     "source_document_hash": "08b6d52ae04d93b370cc7f134680e955e9dfa2d8a4cff59692dd262ee5b693ea",
+     "source_document_url": "https://nspires.nasaprs.com/external/viewrepositorydocument/cmdocumentid=1041498/solicitationId=%7B2A1D139B-B9C7-CE8C-2E81-223FD08460F9%7D/viewSolicitationDocument=1/Table 3 ROSES-2025_Amend 79.html",
+     "source_role": "authoritative_announcement",
+     "source_version": {
+      "amendment": 79,
+      "year": 2025
+     },
+     "status": "posted",
+     "subtopic_code": "C.4",
+     "subtopic_code_norm": "c-4",
+     "subtopic_id": "363258:c-4",
+     "subtopic_ordinal": 29,
+     "subtopic_source": "native",
+     "summary": "NASA ROSES program element C.4: Planetary Science Enabling Facilities.",
+     "term_display": {
+      "10": "10",
+      "11": "11",
+      "2026": "2026",
+      "division": "division",
+      "enabl": "Enabling",
+      "facility": "Facilities",
+      "planetary": "Planetary",
+      "rose": "ROSES",
+      "science": "Science"
+     },
+     "title": "Planetary Science Enabling Facilities",
+     "title_fingerprint": "17b03481",
+     "topic_areas": []
+    }
+   ]
   },
   "363268": {
    "segmentation_method": null,
@@ -30710,6 +30896,72 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
+  "363747": {
+   "segmentation_method": "nasa_roses_table",
+   "subtopic_count": 1,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopics": [
+    {
+     "amended": true,
+     "child_source_url": "https://nspires.nasaprs.com/external/solicitations/summary.do?solId={5509DEBF-B8B4-2F3D-0EFB-350EFE67DCD5}&path=&method=init",
+     "child_type": "subject",
+     "confidence": "high",
+     "division": "D",
+     "evidence_anchor": null,
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-10-16",
+     "last_verified": "2026-10-16",
+     "native_deadline_text": "10/15/2026 (Mandatory NOI) | 12/03/2026",
+     "native_status": "dated",
+     "opportunity_id": "363747:d-4",
+     "ordinal_label": "D.4",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": null,
+     "page_start": null,
+     "parent_id": "363747",
+     "parent_opportunity_number": "NNH25ZDA001N-TCAN",
+     "pattern_family": null,
+     "program_area_labels": [],
+     "publication_reason": "high_confidence",
+     "publication_state": "publishable",
+     "record_type": "subtopic",
+     "segmentation_method": null,
+     "source_document_hash": "08b6d52ae04d93b370cc7f134680e955e9dfa2d8a4cff59692dd262ee5b693ea",
+     "source_document_url": "https://nspires.nasaprs.com/external/viewrepositorydocument/cmdocumentid=1041498/solicitationId=%7B2A1D139B-B9C7-CE8C-2E81-223FD08460F9%7D/viewSolicitationDocument=1/Table 3 ROSES-2025_Amend 79.html",
+     "source_role": "authoritative_announcement",
+     "source_version": {
+      "amendment": 79,
+      "year": 2025
+     },
+     "status": "posted",
+     "subtopic_code": "D.4",
+     "subtopic_code_norm": "d-4",
+     "subtopic_id": "363747:d-4",
+     "subtopic_ordinal": 48,
+     "subtopic_source": "native",
+     "summary": "NASA ROSES program element D.4: Theoretical and Computational Astrophysics Networks.",
+     "term_display": {
+      "03": "03",
+      "10": "10",
+      "12": "12",
+      "15": "15",
+      "2026": "2026",
+      "astrophysic": "Astrophysics",
+      "computational": "Computational",
+      "division": "division",
+      "mandatory": "Mandatory",
+      "network": "Networks",
+      "noi": "NOI",
+      "rose": "ROSES",
+      "theoretical": "Theoretical"
+     },
+     "title": "Theoretical and Computational Astrophysics Networks",
+     "title_fingerprint": "bb89344b",
+     "topic_areas": []
+    }
+   ]
+  },
   "363748": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -30744,6 +30996,69 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
+  },
+  "363759": {
+   "segmentation_method": "nasa_roses_table",
+   "subtopic_count": 1,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopics": [
+    {
+     "amended": true,
+     "child_source_url": "https://nspires.nasaprs.com/external/solicitations/summary.do?solNum=NNH25ZDA001N-CRYO",
+     "child_type": "subject",
+     "confidence": "high",
+     "division": "A",
+     "evidence_anchor": null,
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-10-16",
+     "last_verified": "2026-10-16",
+     "native_deadline_text": "10/16/2026 (Mandatory NOI) | 12/04/2026",
+     "native_status": "dated",
+     "opportunity_id": "363759:a-16",
+     "ordinal_label": "A.16",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": null,
+     "page_start": null,
+     "parent_id": "363759",
+     "parent_opportunity_number": "NNH25ZDA001N-CRYO",
+     "pattern_family": null,
+     "program_area_labels": [],
+     "publication_reason": "high_confidence",
+     "publication_state": "publishable",
+     "record_type": "subtopic",
+     "segmentation_method": null,
+     "source_document_hash": "08b6d52ae04d93b370cc7f134680e955e9dfa2d8a4cff59692dd262ee5b693ea",
+     "source_document_url": "https://nspires.nasaprs.com/external/viewrepositorydocument/cmdocumentid=1041498/solicitationId=%7B2A1D139B-B9C7-CE8C-2E81-223FD08460F9%7D/viewSolicitationDocument=1/Table 3 ROSES-2025_Amend 79.html",
+     "source_role": "authoritative_announcement",
+     "source_version": {
+      "amendment": 79,
+      "year": 2025
+     },
+     "status": "posted",
+     "subtopic_code": "A.16",
+     "subtopic_code_norm": "a-16",
+     "subtopic_id": "363759:a-16",
+     "subtopic_ordinal": 15,
+     "subtopic_source": "native",
+     "summary": "NASA ROSES program element A.16: Cryosphere.",
+     "term_display": {
+      "04": "04",
+      "10": "10",
+      "12": "12",
+      "16": "16",
+      "2026": "2026",
+      "cryosphere": "Cryosphere",
+      "division": "division",
+      "mandatory": "Mandatory",
+      "noi": "NOI",
+      "rose": "ROSES"
+     },
+     "title": "Cryosphere",
+     "title_fingerprint": "6eafcfa7",
+     "topic_areas": []
+    }
+   ]
   },
   "363762": {
    "segmentation_method": null,
@@ -30898,6 +31213,69 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
+  },
+  "363789": {
+   "segmentation_method": "nasa_roses_table",
+   "subtopic_count": 1,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopics": [
+    {
+     "amended": true,
+     "child_source_url": "https://solicitation.nasaprs.com/NNH25ZDA001N-HYDRO",
+     "child_type": "subject",
+     "confidence": "high",
+     "division": "A",
+     "evidence_anchor": null,
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-10-16",
+     "last_verified": "2026-10-16",
+     "native_deadline_text": "10/08/2026 (Step-1) | 1/28/2027 (Step-2)",
+     "native_status": "dated",
+     "opportunity_id": "363789:a-17",
+     "ordinal_label": "A.17",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": null,
+     "page_start": null,
+     "parent_id": "363789",
+     "parent_opportunity_number": "NNH25ZDA001N-HYDRO",
+     "pattern_family": null,
+     "program_area_labels": [],
+     "publication_reason": "high_confidence",
+     "publication_state": "publishable",
+     "record_type": "subtopic",
+     "segmentation_method": null,
+     "source_document_hash": "08b6d52ae04d93b370cc7f134680e955e9dfa2d8a4cff59692dd262ee5b693ea",
+     "source_document_url": "https://nspires.nasaprs.com/external/viewrepositorydocument/cmdocumentid=1041498/solicitationId=%7B2A1D139B-B9C7-CE8C-2E81-223FD08460F9%7D/viewSolicitationDocument=1/Table 3 ROSES-2025_Amend 79.html",
+     "source_role": "authoritative_announcement",
+     "source_version": {
+      "amendment": 79,
+      "year": 2025
+     },
+     "status": "posted",
+     "subtopic_code": "A.17",
+     "subtopic_code_norm": "a-17",
+     "subtopic_id": "363789:a-17",
+     "subtopic_ordinal": 16,
+     "subtopic_source": "native",
+     "summary": "NASA ROSES program element A.17: Hydrosphere.",
+     "term_display": {
+      "08": "08",
+      "10": "10",
+      "2026": "2026",
+      "2027": "2027",
+      "28": "28",
+      "division": "division",
+      "hydrosphere": "Hydrosphere",
+      "rose": "ROSES",
+      "step-1": "Step-1",
+      "step-2": "Step-2"
+     },
+     "title": "Hydrosphere",
+     "title_fingerprint": "843afbb7",
+     "topic_areas": []
+    }
+   ]
   },
   "363790": {
    "segmentation_method": null,
@@ -41355,6 +41733,13 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
+  "364003": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
   "364004": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -41426,6 +41811,13 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "364020": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "364024": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -41600,6 +41992,13 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
+  "45812": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
   "58617": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -41656,7 +42055,35 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
+  "arpa-h:surpass": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
   "arpa-h:unique": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "darpa-iarpa:darpa-darpapa250704": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "darpa-iarpa:darpa-darpapa250705": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "nasa-roses:25-A.10-87da4095c3": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -41671,6 +42098,13 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "nsf-funding:https://www.nsf.gov/funding/opportunities/grfp-nsf-graduate-research-fellowship-program/nsf26-526": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "nsf-funding:https://www.nsf.gov/funding/opportunities/small-business-innovation-research-small-business-technology/nsf26-510": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -41859,6 +42293,20 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
+  "nyserda:PON6239": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "nyserda:PON6240": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
   "nyserda:PON6242": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -41944,6 +42392,1173 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "nyserda:RFQL6152": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "sam-gov:02d98fba28de4a70b82ebe638954f5d4": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "sam-gov:182eab6ca77d465f931c6dc118b939ca": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "sam-gov:2b5fd12340a642e4ac3d1f5c21ecaeed": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "sam-gov:34e8be6e2d784d3c80c45c26fc033072": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "sam-gov:3510fb2e9dbd4c89bd826b06dd2ea284": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "sam-gov:3dc0d137a9404adab1b8623c4e279f31": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "sam-gov:4177337919ca4c9db8d9ddf1e58c24aa": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "sam-gov:4180ee1405cc4aadbd14f5830c55e900": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "sam-gov:45850d5326944be1b187cece69fe7790": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "sam-gov:53a81a363d9140b9b58207cae11e22ec": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "sam-gov:54e1bd529fd84e7db45fe5a236374ca0": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "sam-gov:5abc1a0ed8ab4c5e8f6aa62aa745d210": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "sam-gov:88bd6e35ec6742b6b1e94fb4aadc706b": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "sam-gov:98c034706e4b430281ead1c3497e9d72": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "sam-gov:a0969993ee8542988595334947e39a7d": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "sam-gov:aaef3e1141e74a12b1b75641f6c4cd7a": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "sam-gov:b6b54d0c14004fd893f7d44a725dd206": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "sam-gov:b9d86f57c8a348238b5322eda840c54e": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "sam-gov:bd71f84068534e5680335d83e31fc9df": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "sam-gov:c331e8db2d6746e9b0b9e8712a4679f7": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "sam-gov:c543f1934c4b495c838352fdc7087536": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "sam-gov:c7652cf54cb44eacb8de64f6f3f1fe1f": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "sam-gov:d24be7b2b899475b84850463d7edd6b4": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "sam-gov:d2bb23d781124b8690158100ce7d5f1e": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "sam-gov:d554d75951a340fcbed17668b1864648": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "sam-gov:d76bdb7bdda443e3b42e4214118cc746": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "sam-gov:e2a7a0592bfc4d43a0ab18d0c39147d3": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "sam-gov:e3d96ffd4a0a48b080e09dd5af732cc8": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "sam-gov:e7c3faad3433434aaf41a5eb5ce11920": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "sam-gov:f0fbc0533b024e2fbfbdfe8b5bd2d81d": {
+   "segmentation_method": "numbered",
+   "subtopic_count": 12,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopics": [
+    {
+     "child_type": "subject",
+     "confidence": "low",
+     "cov4_approval_contract": "c21136986e471b3e20f3c7519bbc63aa51932e0c6dabdfba7437a3c252a34689",
+     "cov4_fundability": "accept",
+     "cov4_ownership": "unestablished",
+     "cov4_ownership_basis": "agency_page_names_no_opportunity",
+     "cov4_prompt_version": "cov4-subject-context-1",
+     "cov4_review": true,
+     "evidence_anchor": null,
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-10-16",
+     "last_verified": "2026-10-16",
+     "opportunity_id": "sam-gov:f0fbc0533b024e2fbfbdfe8b5bd2d81d:t-1",
+     "ordinal_label": "1",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": null,
+     "page_start": null,
+     "parent_id": "sam-gov:f0fbc0533b024e2fbfbdfe8b5bd2d81d",
+     "parent_opportunity_number": "N39430-26-S-5000",
+     "pattern_family": "dod_topic",
+     "program_area_labels": [],
+     "publication_reason": "cov4_ownership_unestablished",
+     "publication_state": "review",
+     "record_type": "subtopic",
+     "segmentation_method": "numbered",
+     "source_document_hash": "be8d2dbda9c14a1ba290dd76d26628aa2fcf18a2858dd01772af2c861ffe135a",
+     "source_document_url": "https://sam.gov/opp/f0fbc0533b024e2fbfbdfe8b5bd2d81d/view",
+     "source_role": "agency_page",
+     "status": "posted",
+     "subtopic_code": "Topic 1",
+     "subtopic_code_norm": "t-1",
+     "subtopic_id": "sam-gov:f0fbc0533b024e2fbfbdfe8b5bd2d81d:t-1",
+     "subtopic_ordinal": 1,
+     "subtopic_source": "inferred",
+     "summary": "This area prioritizes technologies that enable rapid and effective construction, repair, and development of infrastructure in austere, contested, or damaged environments. Core interests span lightweight, multi-functional, and adaptable equipment suitable for diverse terrains; advanced construction and repair materials for rapid deployment and restoration; and automated or robotic systems to enhance speed and efficiency.",
+     "term_display": {
+      "adaptable": "adaptable",
+      "advanc": "advanced",
+      "advance": "Advance",
+      "area": "area",
+      "assessment": "assessment",
+      "austere": "austere",
+      "automat": "automated",
+      "base": "Base",
+      "battle": "Battle",
+      "construction": "Construction",
+      "contest": "contested",
+      "core": "Core",
+      "crucial": "Crucial",
+      "damag": "damaged",
+      "damage": "Damage",
+      "deployment": "deployment",
+      "development": "development",
+      "diverse": "diverse",
+      "effective": "effective",
+      "efficiency": "efficiency",
+      "efficient": "efficient",
+      "enable": "enable",
+      "enabler": "enablers",
+      "enhance": "enhance",
+      "environment": "environments",
+      "equipment": "equipment",
+      "expeditionary": "Expeditionary",
+      "footprint": "footprint",
+      "include": "include",
+      "infrastructure": "infrastructure",
+      "rapid": "rapid",
+      "repair": "repair",
+      "site": "site",
+      "system": "systems",
+      "technology": "Technologies"
+     },
+     "title": "Expeditionary Construction, Battle Damage Repair, and Advance Naval Base Construction Technologies",
+     "title_fingerprint": "0b9adbee",
+     "topic_areas": []
+    },
+    {
+     "child_type": "subject",
+     "confidence": "low",
+     "cov4_approval_contract": "38c2f73353cc0a9b41ce995e0db67c5348b5881450333d2c2f9fb6e9f98f4b61",
+     "cov4_fundability": "accept",
+     "cov4_ownership": "unestablished",
+     "cov4_ownership_basis": "agency_page_names_no_opportunity",
+     "cov4_prompt_version": "cov4-subject-context-1",
+     "cov4_review": true,
+     "evidence_anchor": null,
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-10-16",
+     "last_verified": "2026-10-16",
+     "opportunity_id": "sam-gov:f0fbc0533b024e2fbfbdfe8b5bd2d81d:t-2",
+     "ordinal_label": "2",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": null,
+     "page_start": null,
+     "parent_id": "sam-gov:f0fbc0533b024e2fbfbdfe8b5bd2d81d",
+     "parent_opportunity_number": "N39430-26-S-5000",
+     "pattern_family": "dod_topic",
+     "program_area_labels": [],
+     "publication_reason": "cov4_ownership_unestablished",
+     "publication_state": "review",
+     "record_type": "subtopic",
+     "segmentation_method": "numbered",
+     "source_document_hash": "be8d2dbda9c14a1ba290dd76d26628aa2fcf18a2858dd01772af2c861ffe135a",
+     "source_document_url": "https://sam.gov/opp/f0fbc0533b024e2fbfbdfe8b5bd2d81d/view",
+     "source_role": "agency_page",
+     "status": "posted",
+     "subtopic_code": "Topic 2",
+     "subtopic_code_norm": "t-2",
+     "subtopic_id": "sam-gov:f0fbc0533b024e2fbfbdfe8b5bd2d81d:t-2",
+     "subtopic_ordinal": 2,
+     "subtopic_source": "inferred",
+     "summary": "This area focuses on technologies that enable the rapid and sustained transfer of personnel, equipment, and supplies from ship to shore, particularly in austere or contested environments where traditional port infrastructure is limited or unavailable. Core interests include advanced amphibious connector craft and lighterage systems; modular and rapidly deployable causeways and piers; and automated cargo handling and transfer solutions that minimize beach time and maximize throughput.",
+     "term_display": {
+      "advanc": "advanced",
+      "all-terrain": "all-terrain",
+      "amphibiou": "amphibious",
+      "area": "area",
+      "austere": "austere",
+      "automat": "automated",
+      "beach": "beach",
+      "cargo": "cargo",
+      "causeway": "causeways",
+      "connector": "connector",
+      "contest": "contested",
+      "core": "Core",
+      "craft": "craft",
+      "critical": "Critical",
+      "deployable": "deployable",
+      "distribution": "distribution",
+      "enable": "enable",
+      "encompass": "encompass",
+      "ensure": "ensure",
+      "environment": "environments",
+      "equipment": "equipment",
+      "focuse": "focuses",
+      "fuel": "fuel",
+      "handl": "handling",
+      "include": "include",
+      "infrastructure": "infrastructure",
+      "interest": "interests",
+      "lighterage": "lighterage",
+      "limit": "limited",
+      "logistic": "Logistics",
+      "logistical": "logistical",
+      "shore": "Shore",
+      "system": "systems",
+      "technology": "technologies",
+      "transfer": "transfer"
+     },
+     "title": "Logistics Over the Shore Technologies",
+     "title_fingerprint": "a6333793",
+     "topic_areas": []
+    },
+    {
+     "child_type": "subject",
+     "confidence": "low",
+     "cov4_approval_contract": "ab3dbd7aae53b42eccf03318148fce6a18faa9d980cd9d0f6d22009e3ec66008",
+     "cov4_fundability": "accept",
+     "cov4_ownership": "unestablished",
+     "cov4_ownership_basis": "agency_page_names_no_opportunity",
+     "cov4_prompt_version": "cov4-subject-context-1",
+     "cov4_review": true,
+     "evidence_anchor": null,
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-10-16",
+     "last_verified": "2026-10-16",
+     "opportunity_id": "sam-gov:f0fbc0533b024e2fbfbdfe8b5bd2d81d:t-3",
+     "ordinal_label": "3",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": null,
+     "page_start": null,
+     "parent_id": "sam-gov:f0fbc0533b024e2fbfbdfe8b5bd2d81d",
+     "parent_opportunity_number": "N39430-26-S-5000",
+     "pattern_family": "dod_topic",
+     "program_area_labels": [],
+     "publication_reason": "cov4_ownership_unestablished",
+     "publication_state": "review",
+     "record_type": "subtopic",
+     "segmentation_method": "numbered",
+     "source_document_hash": "be8d2dbda9c14a1ba290dd76d26628aa2fcf18a2858dd01772af2c861ffe135a",
+     "source_document_url": "https://sam.gov/opp/f0fbc0533b024e2fbfbdfe8b5bd2d81d/view",
+     "source_role": "agency_page",
+     "status": "posted",
+     "subtopic_code": "Topic 3",
+     "subtopic_code_norm": "t-3",
+     "subtopic_id": "sam-gov:f0fbc0533b024e2fbfbdfe8b5bd2d81d:t-3",
+     "subtopic_ordinal": 3,
+     "subtopic_source": "inferred",
+     "summary": "Technologies that advance and sustain waterfront facilities in the harsh marine environment in the areas of cathodic protection, corrosion and weathering, metallurgy, concrete and pavements, and paints and coatings.",
+     "term_display": {
+      "adaptation": "adaptation",
+      "advance": "advance",
+      "area": "areas",
+      "barrier": "barrier",
+      "bridge": "bridges",
+      "cathodic": "cathodic",
+      "coating": "coatings",
+      "concrete": "concrete",
+      "construction": "construction",
+      "corrosion": "corrosion",
+      "dams": "dams",
+      "development": "development",
+      "dry-dock": "dry-docks",
+      "ensure": "ensure",
+      "environment": "environment",
+      "event": "events",
+      "expos": "exposed",
+      "extreme": "extreme",
+      "facility": "facilities",
+      "fleet": "fleet",
+      "fuel": "fuel",
+      "harbor": "harbor",
+      "harsh": "harsh",
+      "improve": "improve",
+      "include": "include",
+      "inspection": "inspections",
+      "interest": "interest",
+      "marine": "marine",
+      "metallurgy": "metallurgy",
+      "method": "methods",
+      "mooring": "moorings",
+      "off-shore": "off-shore",
+      "paint": "paints",
+      "passive": "passive",
+      "pavement": "pavements",
+      "pier": "pier",
+      "protection": "protection",
+      "resilience": "resilience",
+      "special": "Special",
+      "specializ": "specialized",
+      "structure": "structures",
+      "sustain": "sustain",
+      "system": "Systems",
+      "tank": "tanks",
+      "technology": "Technologies",
+      "tool": "tools",
+      "topic": "Topic",
+      "underwater": "underwater",
+      "waterfront": "waterfront",
+      "weather": "weather"
+     },
+     "title": "Waterfront Facilities and Systems",
+     "title_fingerprint": "a86835af",
+     "topic_areas": []
+    },
+    {
+     "child_type": "subject",
+     "confidence": "low",
+     "cov4_approval_contract": "02f066534af262ad289a7146c07a331a437d3b0cfa03651343985e12332714e1",
+     "cov4_fundability": "accept",
+     "cov4_ownership": "unestablished",
+     "cov4_ownership_basis": "agency_page_names_no_opportunity",
+     "cov4_prompt_version": "cov4-subject-context-1",
+     "cov4_review": true,
+     "evidence_anchor": null,
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-10-16",
+     "last_verified": "2026-10-16",
+     "opportunity_id": "sam-gov:f0fbc0533b024e2fbfbdfe8b5bd2d81d:t-4",
+     "ordinal_label": "4",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": null,
+     "page_start": null,
+     "parent_id": "sam-gov:f0fbc0533b024e2fbfbdfe8b5bd2d81d",
+     "parent_opportunity_number": "N39430-26-S-5000",
+     "pattern_family": "dod_topic",
+     "program_area_labels": [],
+     "publication_reason": "cov4_ownership_unestablished",
+     "publication_state": "review",
+     "record_type": "subtopic",
+     "segmentation_method": "numbered",
+     "source_document_hash": "be8d2dbda9c14a1ba290dd76d26628aa2fcf18a2858dd01772af2c861ffe135a",
+     "source_document_url": "https://sam.gov/opp/f0fbc0533b024e2fbfbdfe8b5bd2d81d/view",
+     "source_role": "agency_page",
+     "status": "posted",
+     "subtopic_code": "Topic 4",
+     "subtopic_code_norm": "t-4",
+     "subtopic_id": "sam-gov:f0fbc0533b024e2fbfbdfe8b5bd2d81d:t-4",
+     "subtopic_ordinal": 4,
+     "subtopic_source": "inferred",
+     "summary": "Technologies for engineering, installing, and maintaining ocean and littoral underwater systems and magnetic silencing facilities. Advancements in physical and numerical modeling analysis, survey and route planning, procurement, installation and repair methods for critical fleet ranges, undersea surveillance and tactical communication facilities, undersea infrastructure, and power infrastructure. Advancements in geotechnical engineering regarding interactions with the seafloor and installed heavy load handling shipboard cabled sensor systems.",
+     "term_display": {
+      "advancement": "Advancements",
+      "analysi": "analysis",
+      "cabl": "cabled",
+      "communication": "communication",
+      "critical": "critical",
+      "engineer": "engineering",
+      "facility": "facilities",
+      "fleet": "fleet",
+      "geotechnical": "geotechnical",
+      "handl": "handling",
+      "heavy": "heavy",
+      "infrastructure": "infrastructure",
+      "install": "installed",
+      "installation": "installation",
+      "interaction": "interactions",
+      "littoral": "littoral",
+      "load": "load",
+      "magnetic": "magnetic",
+      "maintain": "maintaining",
+      "method": "methods",
+      "model": "modeling",
+      "numerical": "numerical",
+      "ocean": "ocean",
+      "physical": "physical",
+      "plann": "planning",
+      "power": "power",
+      "procurement": "procurement",
+      "range": "ranges",
+      "regard": "regarding",
+      "repair": "repair",
+      "route": "route",
+      "system": "systems",
+      "undersea": "undersea"
+     },
+     "title": "Undersea Facilities & Systems",
+     "title_fingerprint": "db680cd1",
+     "topic_areas": []
+    },
+    {
+     "child_type": "subject",
+     "confidence": "low",
+     "cov4_approval_contract": "34f16497c5ef5aa394346eacc66ba3caed2068a0460cc891bf585c6698e1bbec",
+     "cov4_fundability": "accept",
+     "cov4_ownership": "unestablished",
+     "cov4_ownership_basis": "agency_page_names_no_opportunity",
+     "cov4_prompt_version": "cov4-subject-context-1",
+     "cov4_review": true,
+     "evidence_anchor": null,
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-10-16",
+     "last_verified": "2026-10-16",
+     "opportunity_id": "sam-gov:f0fbc0533b024e2fbfbdfe8b5bd2d81d:t-5",
+     "ordinal_label": "5",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": null,
+     "page_start": null,
+     "parent_id": "sam-gov:f0fbc0533b024e2fbfbdfe8b5bd2d81d",
+     "parent_opportunity_number": "N39430-26-S-5000",
+     "pattern_family": "dod_topic",
+     "program_area_labels": [],
+     "publication_reason": "cov4_ownership_unestablished",
+     "publication_state": "review",
+     "record_type": "subtopic",
+     "segmentation_method": "numbered",
+     "source_document_hash": "be8d2dbda9c14a1ba290dd76d26628aa2fcf18a2858dd01772af2c861ffe135a",
+     "source_document_url": "https://sam.gov/opp/f0fbc0533b024e2fbfbdfe8b5bd2d81d/view",
+     "source_role": "agency_page",
+     "status": "posted",
+     "subtopic_code": "Topic 5",
+     "subtopic_code_norm": "t-5",
+     "subtopic_id": "sam-gov:f0fbc0533b024e2fbfbdfe8b5bd2d81d:t-5",
+     "subtopic_ordinal": 5,
+     "subtopic_source": "inferred",
+     "summary": "Technologies to advance the full lifecycle of Naval shore facilities and infrastructure from planning and design through construction, operations, maintenance, repair and disposal. Examples include advanced survey, planning, and design tools, alternative construction methods, industrialized construction, cathodic protection systems, corrosion & weathering, concrete & pavement materials, materials chemistry, materials testing, metallurgy, paints and coatings, roofing, structural modeling and analysis.",
+     "term_display": {
+      "advanc": "advanced",
+      "advance": "advance",
+      "alternative": "alternative",
+      "analysi": "analysis",
+      "blast": "blast",
+      "cathodic": "cathodic",
+      "chemistry": "chemistry",
+      "close": "close",
+      "coating": "coatings",
+      "concrete": "concrete",
+      "construction": "construction",
+      "corrosion": "corrosion",
+      "data": "data",
+      "design": "design",
+      "disposal": "disposal",
+      "effect": "effects",
+      "efficiency": "efficiency",
+      "enhance": "enhance",
+      "equipment": "Equipment",
+      "example": "Examples",
+      "facility": "Facilities",
+      "field": "field",
+      "full": "full",
+      "gaps": "gaps",
+      "high": "high",
+      "impact": "impact",
+      "include": "include",
+      "infrastructure": "infrastructure",
+      "inspection": "inspections",
+      "material": "materials",
+      "naval": "Naval",
+      "plann": "planning",
+      "shore": "Shore",
+      "system": "Systems",
+      "technology": "Technologies",
+      "topic": "Topic"
+     },
+     "title": "Shore Facilities, Equipment & Systems",
+     "title_fingerprint": "d1f5c58b",
+     "topic_areas": []
+    },
+    {
+     "child_type": "subject",
+     "confidence": "low",
+     "cov4_approval_contract": "27730c6558924af1edf50c0d418b86175172157178ec7c25db6b7e5210d14fa3",
+     "cov4_fundability": "accept",
+     "cov4_ownership": "unestablished",
+     "cov4_ownership_basis": "agency_page_names_no_opportunity",
+     "cov4_prompt_version": "cov4-subject-context-1",
+     "cov4_review": true,
+     "evidence_anchor": null,
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-10-16",
+     "last_verified": "2026-10-16",
+     "opportunity_id": "sam-gov:f0fbc0533b024e2fbfbdfe8b5bd2d81d:t-7",
+     "ordinal_label": "7",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": null,
+     "page_start": null,
+     "parent_id": "sam-gov:f0fbc0533b024e2fbfbdfe8b5bd2d81d",
+     "parent_opportunity_number": "N39430-26-S-5000",
+     "pattern_family": "dod_topic",
+     "program_area_labels": [],
+     "publication_reason": "cov4_ownership_unestablished",
+     "publication_state": "review",
+     "record_type": "subtopic",
+     "segmentation_method": "numbered",
+     "source_document_hash": "be8d2dbda9c14a1ba290dd76d26628aa2fcf18a2858dd01772af2c861ffe135a",
+     "source_document_url": "https://sam.gov/opp/f0fbc0533b024e2fbfbdfe8b5bd2d81d/view",
+     "source_role": "agency_page",
+     "status": "posted",
+     "subtopic_code": "Topic 7",
+     "subtopic_code_norm": "t-7",
+     "subtopic_id": "sam-gov:f0fbc0533b024e2fbfbdfe8b5bd2d81d:t-7",
+     "subtopic_ordinal": 7,
+     "subtopic_source": "inferred",
+     "summary": "Technologies that advance energy security, efficiency, reliability, and resilience on Naval shore facilities and infrastructure. Unique program expertise includes: microgrid control systems, critical power applications, geothermal exploration and systems management, distributed energy resources, and alternatively fueled vehicles and infrastructure.",
+     "term_display": {
+      "advance": "advance",
+      "alternatively": "alternatively",
+      "control": "control",
+      "critical": "critical",
+      "distribut": "distributed",
+      "efficiency": "efficiency",
+      "energy": "energy",
+      "expertise": "expertise",
+      "exploration": "exploration",
+      "facility": "facilities",
+      "fuel": "fueled",
+      "geothermal": "geothermal",
+      "include": "includes",
+      "infrastructure": "infrastructure",
+      "management": "management",
+      "microgrid": "microgrid",
+      "naval": "Naval",
+      "power": "power",
+      "reliability": "reliability",
+      "resilience": "resilience",
+      "resource": "resources",
+      "security": "security",
+      "shore": "Shore",
+      "system": "systems",
+      "technology": "Technologies",
+      "topic": "Topic",
+      "unique": "Unique",
+      "vehicle": "vehicles"
+     },
+     "title": "Shore Energy Technology",
+     "title_fingerprint": "77288ef2",
+     "topic_areas": []
+    },
+    {
+     "child_type": "subject",
+     "confidence": "low",
+     "cov4_approval_contract": "f82a97d994cd617dbdbc85d96d8408ec01e60f15d90d875691164eb7c99bc56f",
+     "cov4_fundability": "accept",
+     "cov4_ownership": "unestablished",
+     "cov4_ownership_basis": "agency_page_names_no_opportunity",
+     "cov4_prompt_version": "cov4-subject-context-1",
+     "cov4_review": true,
+     "evidence_anchor": null,
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-10-16",
+     "last_verified": "2026-10-16",
+     "opportunity_id": "sam-gov:f0fbc0533b024e2fbfbdfe8b5bd2d81d:t-8",
+     "ordinal_label": "8",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": null,
+     "page_start": null,
+     "parent_id": "sam-gov:f0fbc0533b024e2fbfbdfe8b5bd2d81d",
+     "parent_opportunity_number": "N39430-26-S-5000",
+     "pattern_family": "dod_topic",
+     "program_area_labels": [
+      "cybersecurity"
+     ],
+     "publication_reason": "cov4_ownership_unestablished",
+     "publication_state": "review",
+     "record_type": "subtopic",
+     "segmentation_method": "numbered",
+     "source_document_hash": "be8d2dbda9c14a1ba290dd76d26628aa2fcf18a2858dd01772af2c861ffe135a",
+     "source_document_url": "https://sam.gov/opp/f0fbc0533b024e2fbfbdfe8b5bd2d81d/view",
+     "source_role": "agency_page",
+     "status": "posted",
+     "subtopic_code": "Topic 8",
+     "subtopic_code_norm": "t-8",
+     "subtopic_id": "sam-gov:f0fbc0533b024e2fbfbdfe8b5bd2d81d:t-8",
+     "subtopic_ordinal": 8,
+     "subtopic_source": "inferred",
+     "summary": "Technologies to ensure the security and effectiveness of facilities infrastructure controls and expeditionary systems-related Information Technology (IT) and Operational Technology (OT) to mitigate cyber threats and resolve cybersecurity incidents.",
+     "term_display": {
+      "control": "Control",
+      "cyber": "Cyber",
+      "cybersecurity": "Cybersecurity",
+      "effectiveness": "effectiveness",
+      "ensure": "ensure",
+      "expeditionary": "expeditionary",
+      "facility": "Facilities",
+      "incident": "incidents",
+      "information": "Information",
+      "infrastructure": "infrastructure",
+      "mitigate": "mitigate",
+      "operational": "Operational",
+      "ot": "OT",
+      "relat": "Related",
+      "resolve": "resolve",
+      "security": "security",
+      "system": "Systems",
+      "systems-relat": "systems-related",
+      "technology": "Technology",
+      "threat": "threats",
+      "topic": "Topic",
+      "warfare": "Warfare"
+     },
+     "title": "Facilities Related Control Systems Cybersecurity and Cyber Warfare",
+     "title_fingerprint": "92c2f134",
+     "topic_areas": [
+      "Cybersecurity"
+     ]
+    },
+    {
+     "child_type": "subject",
+     "confidence": "low",
+     "cov4_approval_contract": "03ed51415147ce3447ac99cca1c68b9b86ec027806a9e2fb1e857706e07c3698",
+     "cov4_fundability": "accept",
+     "cov4_ownership": "unestablished",
+     "cov4_ownership_basis": "agency_page_names_no_opportunity",
+     "cov4_prompt_version": "cov4-subject-context-1",
+     "cov4_review": true,
+     "evidence_anchor": null,
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-10-16",
+     "last_verified": "2026-10-16",
+     "opportunity_id": "sam-gov:f0fbc0533b024e2fbfbdfe8b5bd2d81d:t-9",
+     "ordinal_label": "9",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": null,
+     "page_start": null,
+     "parent_id": "sam-gov:f0fbc0533b024e2fbfbdfe8b5bd2d81d",
+     "parent_opportunity_number": "N39430-26-S-5000",
+     "pattern_family": "dod_topic",
+     "program_area_labels": [
+      "water"
+     ],
+     "publication_reason": "cov4_ownership_unestablished",
+     "publication_state": "review",
+     "record_type": "subtopic",
+     "segmentation_method": "numbered",
+     "source_document_hash": "be8d2dbda9c14a1ba290dd76d26628aa2fcf18a2858dd01772af2c861ffe135a",
+     "source_document_url": "https://sam.gov/opp/f0fbc0533b024e2fbfbdfe8b5bd2d81d/view",
+     "source_role": "agency_page",
+     "status": "posted",
+     "subtopic_code": "Topic 9",
+     "subtopic_code_norm": "t-9",
+     "subtopic_id": "sam-gov:f0fbc0533b024e2fbfbdfe8b5bd2d81d:t-9",
+     "subtopic_ordinal": 9,
+     "subtopic_source": "inferred",
+     "summary": "Technologies/methodologies for unencumbering military lands and reducing risk to human health including those to assess, manage, and/or remediate past releases of hazardous chemicals related to military operations, munitions and explosives of concern, material potentially presenting an explosive hazard, and chemicals of emerging concern in soil, soil covers, sediment, surface water, groundwater, and subsurface vapor.",
+     "term_display": {
+      "anthropogenic": "anthropogenic",
+      "approache": "approaches",
+      "aquifer": "aquifer",
+      "assess": "assess",
+      "assessment": "assessment",
+      "but": "but",
+      "chemical": "chemicals",
+      "concern": "concern",
+      "containment": "containment",
+      "cover": "covers",
+      "develop": "developing",
+      "emerg": "emerging",
+      "evaluation": "evaluation",
+      "explosive": "explosive",
+      "groundwater": "groundwater",
+      "hazard": "hazard",
+      "hazardou": "hazardous",
+      "health": "health",
+      "human": "human",
+      "hydrogeologic": "hydrogeologic",
+      "includ": "including",
+      "include": "Includes",
+      "installation": "Installation",
+      "investigation": "investigation",
+      "land": "lands",
+      "limit": "limited",
+      "long-term": "long-term",
+      "manage": "manage",
+      "management": "Management",
+      "material": "material",
+      "measure": "measures",
+      "methodology": "methodologies",
+      "military": "military",
+      "munition": "Munitions",
+      "soil": "soil"
+     },
+     "title": "Installation Restoration, Munitions Response, and Groundwater Management",
+     "title_fingerprint": "cdb21541",
+     "topic_areas": [
+      "Water"
+     ]
+    },
+    {
+     "child_type": "subject",
+     "confidence": "low",
+     "cov4_approval_contract": "8c7960b76426ba6e979d7229c62240a86607395ba522346598a2ec96c87a3a23",
+     "cov4_fundability": "accept",
+     "cov4_ownership": "unestablished",
+     "cov4_ownership_basis": "agency_page_names_no_opportunity",
+     "cov4_prompt_version": "cov4-subject-context-1",
+     "cov4_review": true,
+     "evidence_anchor": null,
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-10-16",
+     "last_verified": "2026-10-16",
+     "opportunity_id": "sam-gov:f0fbc0533b024e2fbfbdfe8b5bd2d81d:t-10",
+     "ordinal_label": "10",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": null,
+     "page_start": null,
+     "parent_id": "sam-gov:f0fbc0533b024e2fbfbdfe8b5bd2d81d",
+     "parent_opportunity_number": "N39430-26-S-5000",
+     "pattern_family": "dod_topic",
+     "program_area_labels": [
+      "water"
+     ],
+     "publication_reason": "cov4_ownership_unestablished",
+     "publication_state": "review",
+     "record_type": "subtopic",
+     "segmentation_method": "numbered",
+     "source_document_hash": "be8d2dbda9c14a1ba290dd76d26628aa2fcf18a2858dd01772af2c861ffe135a",
+     "source_document_url": "https://sam.gov/opp/f0fbc0533b024e2fbfbdfe8b5bd2d81d/view",
+     "source_role": "agency_page",
+     "status": "posted",
+     "subtopic_code": "Topic 10",
+     "subtopic_code_norm": "t-10",
+     "subtopic_id": "sam-gov:f0fbc0533b024e2fbfbdfe8b5bd2d81d:t-10",
+     "subtopic_ordinal": 10,
+     "subtopic_source": "inferred",
+     "summary": "Technologies to ensure shore and marine-based regulatory compliance while minimizing operational environmental risks, constraints, and costs. Supports improved infrastructure reliability, resilience and mission capability. Focus areas include water quality (drinking water, stormwater and wastewater, air quality, oil spill response, hazardous waste, and solid waste. Includes shore and marine water resources management approaches for securing water availability, including water supply, usage, infrastructure, and delivery systems at installations.",
+     "term_display": {
+      "10": "10",
+      "air": "air",
+      "approache": "approaches",
+      "area": "areas",
+      "availability": "availability",
+      "capability": "capability",
+      "compliance": "Compliance",
+      "constraint": "constraints",
+      "cost": "costs",
+      "delivery": "delivery",
+      "drink": "drinking",
+      "ensure": "ensure",
+      "environmental": "environmental",
+      "focu": "Focus",
+      "hazardou": "hazardous",
+      "improv": "improved",
+      "includ": "including",
+      "include": "include",
+      "infrastructure": "infrastructure",
+      "installation": "Installation",
+      "management": "Management",
+      "marine": "marine",
+      "marine-bas": "marine-based",
+      "minimiz": "minimizing",
+      "mission": "mission",
+      "oil": "oil",
+      "quality": "quality",
+      "resource": "Resource",
+      "shore": "shore",
+      "waste": "waste",
+      "water": "water"
+     },
+     "title": "Installation Compliance and Water Resource Management",
+     "title_fingerprint": "d1903e85",
+     "topic_areas": [
+      "Water"
+     ]
+    },
+    {
+     "child_type": "subject",
+     "confidence": "low",
+     "cov4_approval_contract": "b0e19ad662cce91e6921c382d665211c6d190b7acbd8b91cec72f54b7d4bea22",
+     "cov4_fundability": "accept",
+     "cov4_ownership": "unestablished",
+     "cov4_ownership_basis": "agency_page_names_no_opportunity",
+     "cov4_prompt_version": "cov4-subject-context-1",
+     "cov4_review": true,
+     "evidence_anchor": null,
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-10-16",
+     "last_verified": "2026-10-16",
+     "opportunity_id": "sam-gov:f0fbc0533b024e2fbfbdfe8b5bd2d81d:t-11",
+     "ordinal_label": "11",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": null,
+     "page_start": null,
+     "parent_id": "sam-gov:f0fbc0533b024e2fbfbdfe8b5bd2d81d",
+     "parent_opportunity_number": "N39430-26-S-5000",
+     "pattern_family": "dod_topic",
+     "program_area_labels": [],
+     "publication_reason": "cov4_ownership_unestablished",
+     "publication_state": "review",
+     "record_type": "subtopic",
+     "segmentation_method": "numbered",
+     "source_document_hash": "be8d2dbda9c14a1ba290dd76d26628aa2fcf18a2858dd01772af2c861ffe135a",
+     "source_document_url": "https://sam.gov/opp/f0fbc0533b024e2fbfbdfe8b5bd2d81d/view",
+     "source_role": "agency_page",
+     "status": "posted",
+     "subtopic_code": "Topic 11",
+     "subtopic_code_norm": "t-11",
+     "subtopic_id": "sam-gov:f0fbc0533b024e2fbfbdfe8b5bd2d81d:t-11",
+     "subtopic_ordinal": 11,
+     "subtopic_source": "inferred",
+     "summary": "Develop, demonstrate, and assess information and technology solutions that support U.S. Navy’s at-sea compliance and permitting for legally protected marine species. Navy driven research needs support the ability to conduct uninterrupted at-sea training and testing, which preserves core Navy readiness capabilities. Focus areas include data to support the Navy Acoustic Effects Model (NAEMO), data processing and analysis tools, monitoring and mitigation technology demonstrations, and standards and metrics development.",
+     "term_display": {
+      "11": "11",
+      "ability": "ability",
+      "abstract": "ABSTRACT",
+      "acoustic": "Acoustic",
+      "analysi": "analysis",
+      "area": "areas",
+      "assess": "assess",
+      "at-sea": "at-sea",
+      "before": "Before",
+      "but": "BUT",
+      "capability": "capabilities",
+      "compliance": "compliance",
+      "conduct": "conduct",
+      "core": "core",
+      "currently": "currently",
+      "data": "data",
+      "demonstrate": "demonstrate",
+      "demonstration": "demonstrations",
+      "develop": "Develop",
+      "development": "development",
+      "driven": "driven",
+      "effect": "Effects",
+      "environmental-security": "Environmental-Security",
+      "guide": "GUIDE",
+      "information": "INFORMATION",
+      "lmr": "LMR",
+      "marine": "Marine",
+      "navy": "Navy",
+      "need": "needs",
+      "please": "PLEASE",
+      "requir": "REQUIRED",
+      "specific": "SPECIFIC",
+      "submitt": "SUBMITTING",
+      "technology": "technology",
+      "topic": "Topic"
+     },
+     "title": "Living Marine Resources",
+     "title_fingerprint": "62ba67cb",
+     "topic_areas": []
+    },
+    {
+     "child_type": "subject",
+     "confidence": "low",
+     "cov4_approval_contract": "3420c021d95ac7ae739b7e17d1313fd6d118ec6637c791fa26fd19d8535d609b",
+     "cov4_fundability": "accept",
+     "cov4_ownership": "unestablished",
+     "cov4_ownership_basis": "agency_page_names_no_opportunity",
+     "cov4_prompt_version": "cov4-subject-context-1",
+     "cov4_review": true,
+     "evidence_anchor": null,
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-10-16",
+     "last_verified": "2026-10-16",
+     "opportunity_id": "sam-gov:f0fbc0533b024e2fbfbdfe8b5bd2d81d:t-12",
+     "ordinal_label": "12",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": null,
+     "page_start": null,
+     "parent_id": "sam-gov:f0fbc0533b024e2fbfbdfe8b5bd2d81d",
+     "parent_opportunity_number": "N39430-26-S-5000",
+     "pattern_family": "dod_topic",
+     "program_area_labels": [],
+     "publication_reason": "cov4_ownership_unestablished",
+     "publication_state": "review",
+     "record_type": "subtopic",
+     "segmentation_method": "numbered",
+     "source_document_hash": "be8d2dbda9c14a1ba290dd76d26628aa2fcf18a2858dd01772af2c861ffe135a",
+     "source_document_url": "https://sam.gov/opp/f0fbc0533b024e2fbfbdfe8b5bd2d81d/view",
+     "source_role": "agency_page",
+     "status": "posted",
+     "subtopic_code": "Topic 12",
+     "subtopic_code_norm": "t-12",
+     "subtopic_id": "sam-gov:f0fbc0533b024e2fbfbdfe8b5bd2d81d:t-12",
+     "subtopic_ordinal": 12,
+     "subtopic_source": "inferred",
+     "summary": "Technologies that advance energy generation, storage, management, and distribution in the marine environment (including surface and undersea) to provide for persistent surveillance, autonomous vehicle recharging, communications nodes, or other applications where legacy methods of power delivery are not available or are significantly limited. For additional details on NAVFAC EXWC see our command website: https://exwc.navfac.navy.mil/",
+     "term_display": {
+      "12": "12",
+      "additional": "additional",
+      "advance": "advance",
+      "autonomou": "autonomous",
+      "available": "available",
+      "command": "command",
+      "communication": "communications",
+      "delivery": "delivery",
+      "detail": "details",
+      "development": "Development",
+      "distribution": "distribution",
+      "energy": "Energy",
+      "environment": "environment",
+      "exwc": "EXWC",
+      "exwc.navfac.navy.mil": "exwc.navfac.navy.mil",
+      "generation": "generation",
+      "http": "https",
+      "includ": "including",
+      "legacy": "legacy",
+      "limit": "limited",
+      "management": "management",
+      "marine": "Marine",
+      "method": "methods",
+      "navfac": "NAVFAC",
+      "node": "nodes",
+      "our": "our",
+      "persistent": "persistent",
+      "power": "power",
+      "provide": "provide",
+      "recharg": "recharging",
+      "see": "see",
+      "significantly": "significantly",
+      "storage": "storage",
+      "surface": "surface",
+      "surveillance": "surveillance",
+      "technology": "Technologies",
+      "topic": "Topic",
+      "undersea": "undersea"
+     },
+     "title": "Marine Energy Development",
+     "title_fingerprint": "2da7aa3a",
+     "topic_areas": []
+    },
+    {
+     "child_type": "subject",
+     "confidence": "low",
+     "cov4_approval_contract": "7e698fd5432128586ea0f7c72f6510d583f0b817d01a31d522caf550320de660",
+     "cov4_fundability": "accept",
+     "cov4_ownership": "unestablished",
+     "cov4_ownership_basis": "agency_page_names_no_opportunity",
+     "cov4_prompt_version": "cov4-subject-context-1",
+     "cov4_review": true,
+     "evidence_anchor": null,
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-10-16",
+     "last_verified": "2026-10-16",
+     "opportunity_id": "sam-gov:f0fbc0533b024e2fbfbdfe8b5bd2d81d:t-13",
+     "ordinal_label": "13",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": null,
+     "page_start": null,
+     "parent_id": "sam-gov:f0fbc0533b024e2fbfbdfe8b5bd2d81d",
+     "parent_opportunity_number": "N39430-26-S-5000",
+     "pattern_family": "dod_topic",
+     "program_area_labels": [],
+     "publication_reason": "cov4_ownership_unestablished",
+     "publication_state": "review",
+     "record_type": "subtopic",
+     "segmentation_method": "numbered",
+     "source_document_hash": "be8d2dbda9c14a1ba290dd76d26628aa2fcf18a2858dd01772af2c861ffe135a",
+     "source_document_url": "https://sam.gov/opp/f0fbc0533b024e2fbfbdfe8b5bd2d81d/view",
+     "source_role": "agency_page",
+     "status": "posted",
+     "subtopic_code": "Topic 13",
+     "subtopic_code_norm": "t-13",
+     "subtopic_id": "sam-gov:f0fbc0533b024e2fbfbdfe8b5bd2d81d:t-13",
+     "subtopic_ordinal": 13,
+     "subtopic_source": "inferred",
+     "summary": "Physical Security and Asset Tracking technology for large facilities and expeditionary applications. Lightweight, forced entry resistant security containers and related technology for intermodal, expeditionary and special Missions. Development of advanced finite element and physical modeling to show proof of concept or test validation of different physical security systems. This can include both physical security systems as well as mechanical, energetic and ballistic threats.",
+     "term_display": {
+      "13": "13",
+      "abstract": "ABSTRACT",
+      "adaptation": "Adaptation",
+      "advanc": "advanced",
+      "against": "against",
+      "aid": "aid",
+      "asset": "asset",
+      "attach": "ATTACHED",
+      "awareness": "awareness",
+      "baa": "BAA",
+      "ballistic": "ballistic",
+      "barrier": "Barriers",
+      "board": "board",
+      "both": "both",
+      "concept": "concept",
+      "container": "containers",
+      "criteria": "criteria",
+      "defense": "defense",
+      "detect": "detect",
+      "development": "Development",
+      "different": "different",
+      "each": "each",
+      "element": "element",
+      "emerg": "Emerging",
+      "energetic": "energetic",
+      "evaluat": "evaluated",
+      "expeditionary": "expeditionary",
+      "facility": "facilities",
+      "force": "force",
+      "intermodal": "intermodal",
+      "mission": "mission",
+      "physical": "physical",
+      "protection": "protection",
+      "security": "security",
+      "system": "systems",
+      "technology": "technologies",
+      "us.navy.mil": "us.navy.mil"
+     },
+     "title": "Physical Security, Locks and Barriers.",
+     "title_fingerprint": "a1d9787a",
+     "topic_areas": []
+    }
+   ]
+  },
+  "sam-gov:f727147c651f4d63b6ebb629d3feb37a": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "sam-gov:fac0dcbe5eff43ab92e3dadb319daed1": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -42058,8 +43673,8 @@ globalThis.SUBTOPIC_CATALOG={
  },
  "schema_version": 1,
  "search_index": {
-  "average_document_length": 146.77522935779817,
-  "document_count": 218,
+  "average_document_length": 143.13839285714286,
+  "document_count": 224,
   "document_lengths": [
    836,
    401,
@@ -42276,9 +43891,15 @@ globalThis.SUBTOPIC_CATALOG={
    12,
    12,
    12,
+   11,
+   11,
+   9,
    82,
    120,
-   71
+   71,
+   14,
+   11,
+   10
   ],
   "postings": {
    "0.001-10": [
@@ -42287,6 +43908,30 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "0.1": [
     24,
+    1
+   ],
+   "02": [
+    215,
+    1
+   ],
+   "03": [
+    221,
+    1
+   ],
+   "04": [
+    216,
+    1,
+    222,
+    1
+   ],
+   "06": [
+    216,
+    1
+   ],
+   "08": [
+    215,
+    1,
+    223,
     1
    ],
    "09": [
@@ -42453,7 +44098,9 @@ globalThis.SUBTOPIC_CATALOG={
     80,
     2,
     81,
-    2
+    2,
+    216,
+    1
    ],
    "0d": [
     25,
@@ -42471,6 +44118,14 @@ globalThis.SUBTOPIC_CATALOG={
     72,
     1,
     81,
+    1,
+    217,
+    1,
+    221,
+    1,
+    222,
+    1,
+    223,
     1
    ],
    "10-1000x": [
@@ -42525,7 +44180,11 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "11": [
     3,
-    2
+    2,
+    216,
+    1,
+    217,
+    1
    ],
    "110": [
     68,
@@ -42731,7 +44390,13 @@ globalThis.SUBTOPIC_CATALOG={
     80,
     2,
     81,
-    2
+    2,
+    215,
+    1,
+    221,
+    1,
+    222,
+    1
    ],
    "12-mile": [
     95,
@@ -42771,11 +44436,15 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "15": [
     5,
-    2
+    2,
+    221,
+    1
    ],
    "16": [
     5,
-    2
+    2,
+    222,
+    1
    ],
    "17": [
     6,
@@ -42811,7 +44480,9 @@ globalThis.SUBTOPIC_CATALOG={
     7,
     2,
     95,
-    2
+    2,
+    215,
+    1
    ],
    "200": [
     72,
@@ -42985,7 +44656,23 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "2026": [
     95,
-    8
+    8,
+    215,
+    2,
+    216,
+    2,
+    217,
+    1,
+    221,
+    2,
+    222,
+    2,
+    223,
+    1
+   ],
+   "2027": [
+    223,
+    1
    ],
    "2030": [
     95,
@@ -43091,7 +44778,9 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "28": [
     12,
-    2
+    2,
+    223,
+    1
    ],
    "29": [
     12,
@@ -44258,7 +45947,7 @@ globalThis.SUBTOPIC_CATALOG={
    "acid": [
     2,
     2,
-    215,
+    218,
     1
    ],
    "acknowledg": [
@@ -44912,11 +46601,11 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     174,
     1,
-    215,
+    218,
     2,
-    216,
+    219,
     3,
-    217,
+    220,
     1
    ],
    "advance": [
@@ -45356,7 +47045,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     212,
     1,
-    216,
+    219,
     4
    ],
    "ai-accelerat": [
@@ -45660,7 +47349,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     157,
     1,
-    216,
+    219,
     2
    ],
    "algorithmic": [
@@ -45754,7 +47443,7 @@ globalThis.SUBTOPIC_CATALOG={
    "alloy": [
     26,
     1,
-    217,
+    220,
     1
    ],
    "almost": [
@@ -45810,7 +47499,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     81,
     1,
-    216,
+    219,
     1
    ],
    "although": [
@@ -46070,7 +47759,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     193,
     1,
-    215,
+    218,
     1
    ],
    "analyst": [
@@ -46388,7 +48077,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     49,
     1,
-    216,
+    219,
     2
    ],
    "another": [
@@ -46682,7 +48371,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     145,
     1,
-    216,
+    219,
     1
    ],
    "appropriate": [
@@ -47756,7 +49445,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     214,
     1,
-    216,
+    219,
     1
    ],
    "artificially": [
@@ -47896,7 +49585,7 @@ globalThis.SUBTOPIC_CATALOG={
     5,
     94,
     1,
-    216,
+    219,
     1
    ],
    "asset": [
@@ -48041,6 +49730,10 @@ globalThis.SUBTOPIC_CATALOG={
     91,
     1
    ],
+   "astrophysic": [
+    221,
+    1
+   ],
    "asymptotic": [
     4,
     1
@@ -48061,6 +49754,8 @@ globalThis.SUBTOPIC_CATALOG={
     3,
     1,
     9,
+    1,
+    215,
     1
    ],
    "atmospheric": [
@@ -48228,7 +49923,7 @@ globalThis.SUBTOPIC_CATALOG={
     4,
     88,
     1,
-    215,
+    218,
     1
    ],
    "autonomou": [
@@ -48276,7 +49971,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     178,
     1,
-    216,
+    219,
     2
    ],
    "autonomously": [
@@ -49074,7 +50769,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     1,
-    216,
+    219,
     1
    ],
    "behavioral": [
@@ -49505,6 +51200,8 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "biosphere": [
     3,
+    1,
+    216,
     1
    ],
    "biosynthetic": [
@@ -49870,7 +51567,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "brine": [
-    217,
+    220,
     1
    ],
    "bring": [
@@ -50086,7 +51783,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "byproduct": [
-    215,
+    218,
     1
    ],
    "byrd": [
@@ -50406,7 +52103,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     61,
     1,
-    215,
+    218,
     3
    ],
    "carbide": [
@@ -50416,7 +52113,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "carbon": [
-    215,
+    218,
     1
    ],
    "carbon-carbon": [
@@ -50738,7 +52435,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     88,
     1,
-    215,
+    218,
     1
    ],
    "channel": [
@@ -50834,9 +52531,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     140,
     1,
-    216,
+    219,
     1,
-    217,
+    220,
     1
    ],
    "characterize": [
@@ -51206,13 +52903,13 @@ globalThis.SUBTOPIC_CATALOG={
    "cmm": [
     134,
     1,
-    215,
+    218,
     1,
-    216,
+    219,
     1
    ],
    "co": [
-    215,
+    218,
     1
    ],
    "co-crystal": [
@@ -51244,27 +52941,27 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "co-product": [
-    215,
+    218,
     1
    ],
    "co2": [
-    215,
+    218,
     3
    ],
    "coal": [
-    215,
+    218,
     3
    ],
    "coal-bas": [
-    215,
+    218,
     1
    ],
    "coal-fir": [
-    215,
+    218,
     1
    ],
    "coal-power": [
-    215,
+    218,
     1
    ],
    "coating": [
@@ -51272,7 +52969,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     28,
     3,
-    217,
+    220,
     1
    ],
    "cod": [
@@ -51606,7 +53303,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "combustion": [
-    215,
+    218,
     1
    ],
    "come": [
@@ -52204,7 +53901,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     214,
     1,
-    216,
+    219,
     2
    ],
    "component-level": [
@@ -52242,7 +53939,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     78,
     3,
-    217,
+    220,
     1
    ],
    "composition": [
@@ -52441,7 +54138,9 @@ globalThis.SUBTOPIC_CATALOG={
     93,
     2,
     154,
-    2
+    2,
+    221,
+    1
    ],
    "computationally": [
     7,
@@ -52764,7 +54463,7 @@ globalThis.SUBTOPIC_CATALOG={
    "configuration": [
     17,
     1,
-    216,
+    219,
     1
    ],
    "confin": [
@@ -53372,9 +55071,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     184,
     1,
-    215,
+    218,
     3,
-    216,
+    219,
     1
    ],
    "convert": [
@@ -53544,11 +55243,11 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     93,
     1,
-    217,
+    220,
     1
    ],
    "cost-effective": [
-    215,
+    218,
     1
    ],
    "costly": [
@@ -53744,7 +55443,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     95,
     1,
-    217,
+    220,
     1
    ],
    "creation": [
@@ -53858,9 +55557,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     134,
     1,
-    215,
+    218,
     1,
-    217,
+    220,
     2
    ],
    "critically": [
@@ -53949,6 +55648,10 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "crust": [
     197,
+    1
+   ],
+   "cryosphere": [
+    222,
     1
    ],
    "cryptographic": [
@@ -54362,7 +56065,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     146,
     1,
-    217,
+    220,
     1
    ],
    "damage": [
@@ -54738,7 +56441,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     89,
     1,
-    216,
+    219,
     2
    ],
    "decision-maker": [
@@ -55644,7 +57347,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     211,
     1,
-    216,
+    219,
     2
    ],
    "detectivity": [
@@ -56076,11 +57779,11 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     205,
     1,
-    215,
+    218,
     2,
-    216,
+    219,
     4,
-    217,
+    220,
     4
    ],
    "developmental": [
@@ -56278,9 +57981,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     186,
     1,
-    215,
+    218,
     1,
-    216,
+    219,
     3
    ],
    "digitalization": [
@@ -56334,7 +58037,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "dioxide": [
-    215,
+    218,
     1
    ],
    "direct": [
@@ -56356,7 +58059,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     71,
     1,
-    217,
+    220,
     1
    ],
    "directed-energy": [
@@ -56506,7 +58209,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "discharge": [
-    215,
+    218,
     1
    ],
    "discipline": [
@@ -57087,6 +58790,20 @@ globalThis.SUBTOPIC_CATALOG={
     28,
     1
    ],
+   "division": [
+    215,
+    1,
+    216,
+    1,
+    217,
+    1,
+    221,
+    1,
+    222,
+    1,
+    223,
+    1
+   ],
    "dmitry": [
     77,
     1
@@ -57474,7 +59191,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "drill": [
-    217,
+    220,
     1
    ],
    "drive": [
@@ -57614,7 +59331,7 @@ globalThis.SUBTOPIC_CATALOG={
    "durability": [
     213,
     1,
-    217,
+    220,
     1
    ],
    "duration": [
@@ -57706,7 +59423,7 @@ globalThis.SUBTOPIC_CATALOG={
     4,
     174,
     1,
-    216,
+    219,
     1
    ],
    "dynamical": [
@@ -57780,9 +59497,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     93,
     6,
-    216,
+    219,
     1,
-    217,
+    220,
     1
    ],
    "each": [
@@ -57828,7 +59545,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     80,
     1,
-    215,
+    218,
     1
    ],
    "ease": [
@@ -57860,7 +59577,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "economically": [
-    215,
+    218,
     1
    ],
    "economy": [
@@ -58120,9 +59837,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     142,
     1,
-    215,
+    218,
     1,
-    217,
+    220,
     1
    ],
    "efficiently": [
@@ -58202,7 +59919,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "egs": [
-    217,
+    220,
     2
    ],
    "einstein": [
@@ -58302,7 +60019,7 @@ globalThis.SUBTOPIC_CATALOG={
     6,
     184,
     1,
-    215,
+    218,
     1
    ],
    "electrochemistry": [
@@ -58526,7 +60243,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     93,
     2,
-    215,
+    218,
     1
    ],
    "elicit": [
@@ -58843,7 +60560,9 @@ globalThis.SUBTOPIC_CATALOG={
     92,
     1,
     94,
-    2
+    2,
+    217,
+    1
    ],
    "enable": [
     0,
@@ -58938,7 +60657,7 @@ globalThis.SUBTOPIC_CATALOG={
     5,
     94,
     1,
-    215,
+    218,
     1
    ],
    "enabler": [
@@ -59288,9 +61007,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     148,
     1,
-    216,
+    219,
     1,
-    217,
+    220,
     1
    ],
    "engineerable": [
@@ -59342,9 +61061,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     186,
     1,
-    216,
+    219,
     2,
-    217,
+    220,
     2
    ],
    "enhance": [
@@ -59634,7 +61353,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     174,
     1,
-    217,
+    220,
     2
    ],
    "environment-task-technology": [
@@ -59942,7 +61661,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     93,
     4,
-    215,
+    218,
     1
    ],
    "ethically": [
@@ -60366,7 +62085,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     93,
     2,
-    215,
+    218,
     1
    ],
    "existence": [
@@ -60684,9 +62403,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     63,
     2,
-    215,
+    218,
     1,
-    216,
+    219,
     1
    ],
    "exploratory": [
@@ -60826,17 +62545,17 @@ globalThis.SUBTOPIC_CATALOG={
     3,
     56,
     1,
-    215,
+    218,
     1,
-    216,
+    219,
     1
    ],
    "extraction": [
     131,
     1,
-    216,
+    219,
     2,
-    217,
+    220,
     2
    ],
    "extraordinary": [
@@ -60908,7 +62627,7 @@ globalThis.SUBTOPIC_CATALOG={
     3,
     119,
     1,
-    217,
+    220,
     1
    ],
    "extreme-scale": [
@@ -61011,6 +62730,8 @@ globalThis.SUBTOPIC_CATALOG={
     139,
     1,
     185,
+    1,
+    217,
     1
    ],
    "fact": [
@@ -61070,7 +62791,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     1,
-    216,
+    219,
     1
    ],
    "fall": [
@@ -61328,7 +63049,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     87,
     2,
-    217,
+    220,
     1
    ],
    "field-generat": [
@@ -61556,9 +63277,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     214,
     1,
-    216,
+    219,
     2,
-    217,
+    220,
     1
    ],
    "fluorine-contain": [
@@ -61886,7 +63607,7 @@ globalThis.SUBTOPIC_CATALOG={
     3
    ],
    "formic": [
-    215,
+    218,
     1
    ],
    "formulation": [
@@ -62184,7 +63905,7 @@ globalThis.SUBTOPIC_CATALOG={
     4
    ],
    "fractur": [
-    216,
+    219,
     1
    ],
    "fracture": [
@@ -62192,7 +63913,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     198,
     1,
-    217,
+    220,
     1
    ],
    "fragment": [
@@ -62804,7 +64525,7 @@ globalThis.SUBTOPIC_CATALOG={
    "gas": [
     1,
     2,
-    216,
+    219,
     4
    ],
    "gase": [
@@ -63200,7 +64921,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "geochemical": [
-    216,
+    219,
     1
    ],
    "geographically": [
@@ -63262,7 +64983,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "geothermal": [
-    217,
+    220,
     6
    ],
    "gerde": [
@@ -63678,7 +65399,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "gypsum": [
-    215,
+    218,
     1
    ],
    "gyroscope": [
@@ -64084,7 +65805,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "high-pressure": [
-    217,
+    220,
     1
    ],
    "high-priority": [
@@ -64128,7 +65849,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     71,
     1,
-    217,
+    220,
     1
    ],
    "high-throughput": [
@@ -64210,7 +65931,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     81,
     2,
-    217,
+    220,
     1
    ],
    "highly-contextualiz": [
@@ -64647,6 +66368,8 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "hydrosphere": [
     3,
+    1,
+    223,
     1
    ],
    "hypersonic": [
@@ -65448,7 +67171,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     93,
     1,
-    216,
+    219,
     1
    ],
    "improvement": [
@@ -65594,7 +67317,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     2,
-    215,
+    218,
     1
    ],
    "include": [
@@ -66732,7 +68455,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     214,
     2,
-    216,
+    219,
     1
    ],
    "intelligent": [
@@ -66760,7 +68483,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     89,
     2,
-    216,
+    219,
     2
    ],
    "intelligently": [
@@ -66940,7 +68663,7 @@ globalThis.SUBTOPIC_CATALOG={
     4,
     187,
     1,
-    216,
+    219,
     1
    ],
    "interactional": [
@@ -67104,7 +68827,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     95,
     1,
-    216,
+    219,
     1
    ],
    "interfac": [
@@ -68512,7 +70235,7 @@ globalThis.SUBTOPIC_CATALOG={
     5,
     95,
     1,
-    216,
+    219,
     1
    ],
    "learning-bas": [
@@ -68774,9 +70497,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     1,
-    216,
+    219,
     1,
-    217,
+    220,
     1
    ],
    "lifecycle": [
@@ -69050,7 +70773,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "lithium": [
-    217,
+    220,
     1
    ],
    "lithosphere": [
@@ -69362,7 +71085,7 @@ globalThis.SUBTOPIC_CATALOG={
    "low-temperature": [
     170,
     1,
-    215,
+    218,
     1
    ],
    "lower": [
@@ -69460,7 +71183,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     4,
-    216,
+    219,
     1
    ],
    "machine-bas": [
@@ -69614,7 +71337,7 @@ globalThis.SUBTOPIC_CATALOG={
     11,
     94,
     1,
-    216,
+    219,
     2
    ],
    "major": [
@@ -69786,13 +71509,21 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     173,
     1,
-    215,
+    218,
     1
    ],
    "manager": [
     9,
     1,
     93,
+    1
+   ],
+   "mandatory": [
+    215,
+    1,
+    221,
+    1,
+    222,
     1
    ],
    "maneuver": [
@@ -70044,7 +71775,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "marketable": [
-    215,
+    218,
     1
    ],
    "markovian": [
@@ -70224,9 +71955,9 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     184,
     1,
-    215,
+    218,
     2,
-    217,
+    220,
     2
    ],
    "materials-by-design": [
@@ -70398,7 +72129,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     91,
     1,
-    216,
+    219,
     1
    ],
    "maximum": [
@@ -70932,9 +72663,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     93,
     1,
-    215,
+    218,
     1,
-    216,
+    219,
     1
    ],
    "methodological": [
@@ -71256,7 +72987,7 @@ globalThis.SUBTOPIC_CATALOG={
    "min": [
     16,
     1,
-    215,
+    218,
     1
    ],
    "mindfulness": [
@@ -71288,9 +73019,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     134,
     1,
-    215,
+    218,
     1,
-    217,
+    220,
     2
    ],
    "minima": [
@@ -71546,7 +73277,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     142,
     1,
-    216,
+    219,
     4
    ],
    "ml-bas": [
@@ -71758,9 +73489,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     212,
     1,
-    216,
+    219,
     3,
-    217,
+    220,
     1
    ],
    "model-bas": [
@@ -72118,7 +73849,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     88,
     2,
-    215,
+    218,
     1
    ],
    "mono": [
@@ -73044,7 +74775,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     175,
     1,
-    217,
+    220,
+    1,
+    221,
     1
    ],
    "network-bas": [
@@ -73280,7 +75013,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     1,
-    217,
+    220,
     1
    ],
    "nfv": [
@@ -73349,6 +75082,14 @@ globalThis.SUBTOPIC_CATALOG={
     75,
     1,
     80,
+    1
+   ],
+   "noi": [
+    215,
+    1,
+    221,
+    1,
+    222,
     1
    ],
    "noise": [
@@ -73726,9 +75467,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     1,
-    215,
+    218,
     1,
-    217,
+    220,
     1
    ],
    "novelty": [
@@ -74242,11 +75983,11 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "oil": [
-    216,
+    219,
     4
    ],
    "oilfield": [
-    216,
+    219,
     1
    ],
    "oleophobicity": [
@@ -74498,9 +76239,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     194,
     1,
-    215,
+    218,
     1,
-    216,
+    219,
     1
    ],
    "operational": [
@@ -74540,9 +76281,9 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     214,
     1,
-    215,
+    218,
     1,
-    217,
+    220,
     1
    ],
    "operationally": [
@@ -74632,7 +76373,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     89,
     1,
-    216,
+    219,
     1
    ],
    "optimality": [
@@ -74656,7 +76397,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     90,
     1,
-    216,
+    219,
     2
    ],
    "optimization": [
@@ -74682,7 +76423,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     199,
     1,
-    216,
+    219,
     1
    ],
    "optimize": [
@@ -74698,7 +76439,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     91,
     1,
-    217,
+    220,
     1
    ],
    "optimum": [
@@ -75346,7 +77087,7 @@ globalThis.SUBTOPIC_CATALOG={
     4,
     134,
     1,
-    215,
+    218,
     1
    ],
    "pattern": [
@@ -75606,7 +77347,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     213,
     1,
-    217,
+    220,
     1
    ],
    "performance-driven": [
@@ -75630,7 +77371,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "permeability": [
-    217,
+    220,
     1
    ],
    "permit": [
@@ -76058,7 +77799,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     189,
     1,
-    216,
+    219,
     1
    ],
    "physical": [
@@ -76201,6 +77942,10 @@ globalThis.SUBTOPIC_CATALOG={
     69,
     1
    ],
+   "planetary": [
+    217,
+    1
+   ],
    "planktonic": [
     19,
     1
@@ -76236,7 +77981,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     148,
     1,
-    215,
+    218,
     2
    ],
    "plasma": [
@@ -76728,7 +78473,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     195,
     1,
-    215,
+    218,
     2
    ],
    "powertrain": [
@@ -76854,7 +78599,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     192,
     1,
-    216,
+    219,
     1
    ],
    "predictable": [
@@ -76936,7 +78681,7 @@ globalThis.SUBTOPIC_CATALOG={
     11,
     125,
     1,
-    216,
+    219,
     4
    ],
    "predominately": [
@@ -77536,9 +79281,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     152,
     1,
-    215,
+    218,
     1,
-    216,
+    219,
     1
    ],
    "process-property": [
@@ -77612,7 +79357,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     41,
     1,
-    216,
+    219,
     1
    ],
    "produce": [
@@ -77632,7 +79377,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     1,
-    215,
+    218,
     2
    ],
    "production": [
@@ -77640,9 +79385,9 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     61,
     1,
-    216,
+    219,
     1,
-    217,
+    220,
     1
    ],
    "productivity": [
@@ -78692,7 +80437,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "rare": [
-    215,
+    218,
     1
    ],
    "rare-earth": [
@@ -78884,9 +80629,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     211,
     1,
-    215,
+    218,
     1,
-    216,
+    219,
     2
    ],
    "real-world": [
@@ -79202,7 +80947,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     93,
     1,
-    217,
+    220,
     1
    ],
    "reduction-oxidation": [
@@ -79214,9 +80959,9 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "ree": [
-    215,
+    218,
     1,
-    216,
+    219,
     1
    ],
    "reenvision": [
@@ -79260,7 +81005,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "refinery": [
-    216,
+    219,
     2
    ],
    "reflect": [
@@ -79590,9 +81335,9 @@ globalThis.SUBTOPIC_CATALOG={
     3,
     177,
     1,
-    215,
+    218,
     1,
-    216,
+    219,
     1
    ],
    "remotely": [
@@ -79840,13 +81585,13 @@ globalThis.SUBTOPIC_CATALOG={
    "reservoir": [
     3,
     2,
-    216,
+    219,
     2,
-    217,
+    220,
     2
    ],
    "residual": [
-    215,
+    218,
     1
    ],
    "resilience": [
@@ -79942,7 +81687,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     128,
     1,
-    216,
+    219,
     3
    ],
    "resource-efficient": [
@@ -80192,7 +81937,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "rheology": [
-    216,
+    219,
     1
    ],
    "rich": [
@@ -80414,7 +82159,7 @@ globalThis.SUBTOPIC_CATALOG={
    "rock": [
     9,
     1,
-    216,
+    219,
     1
    ],
    "role": [
@@ -80435,6 +82180,20 @@ globalThis.SUBTOPIC_CATALOG={
     22,
     1,
     53,
+    1
+   ],
+   "rose": [
+    215,
+    1,
+    216,
+    1,
+    217,
+    1,
+    221,
+    1,
+    222,
+    1,
+    223,
     1
    ],
    "rotary-w": [
@@ -80688,7 +82447,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     1,
-    215,
+    218,
     1
    ],
    "scale": [
@@ -81007,6 +82766,8 @@ globalThis.SUBTOPIC_CATALOG={
     210,
     1,
     211,
+    1,
+    217,
     1
    ],
    "scientific": [
@@ -81126,7 +82887,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "seal": [
-    217,
+    220,
     1
    ],
    "seamless": [
@@ -81346,7 +83107,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     84,
     1,
-    216,
+    219,
     1
    ],
    "selection": [
@@ -81364,7 +83125,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     28,
     1,
-    217,
+    220,
     1
    ],
    "selectively": [
@@ -81616,7 +83377,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     170,
     1,
-    215,
+    218,
     1
    ],
    "sensor-selection": [
@@ -81742,7 +83503,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "shale": [
-    216,
+    219,
     1
    ],
    "shap": [
@@ -82288,7 +84049,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     121,
     1,
-    217,
+    220,
     1
    ],
    "smoothness": [
@@ -83337,6 +85098,18 @@ globalThis.SUBTOPIC_CATALOG={
     89,
     1
    ],
+   "step-1": [
+    216,
+    1,
+    223,
+    1
+   ],
+   "step-2": [
+    216,
+    1,
+    223,
+    1
+   ],
    "stephanie": [
     2,
     1
@@ -83374,9 +85147,9 @@ globalThis.SUBTOPIC_CATALOG={
    "stimulation": [
     5,
     1,
-    216,
+    219,
     1,
-    217,
+    220,
     1
    ],
    "stimuli": [
@@ -83528,15 +85301,15 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     88,
     1,
-    216,
+    219,
     1,
-    217,
+    220,
     1
    ],
    "stream": [
     58,
     1,
-    216,
+    219,
     1
    ],
    "strength": [
@@ -83938,7 +85711,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     198,
     2,
-    217,
+    220,
     1
    ],
    "subsystem": [
@@ -84392,7 +86165,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     89,
     1,
-    217,
+    220,
     1
    ],
    "sustainability": [
@@ -84742,9 +86515,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     214,
     1,
-    216,
+    219,
     2,
-    217,
+    220,
     1
    ],
    "system-level": [
@@ -85242,11 +87015,11 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     2,
-    216,
+    219,
     1
    ],
    "technoeconomic": [
-    215,
+    218,
     1
    ],
    "technological": [
@@ -85374,9 +87147,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     214,
     1,
-    215,
+    218,
     1,
-    217,
+    220,
     1
    ],
    "technology-enhanc": [
@@ -85540,7 +87313,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     95,
     1,
-    217,
+    220,
     1
    ],
    "testbed": [
@@ -85657,6 +87430,8 @@ globalThis.SUBTOPIC_CATALOG={
     61,
     1,
     75,
+    1,
+    221,
     1
    ],
    "theory": [
@@ -86068,7 +87843,7 @@ globalThis.SUBTOPIC_CATALOG={
    "tight": [
     16,
     1,
-    216,
+    219,
     1
    ],
    "tim": [
@@ -86140,7 +87915,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     14,
     1,
-    215,
+    218,
     1
    ],
    "timescale": [
@@ -87264,9 +89039,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     186,
     1,
-    215,
+    218,
     1,
-    216,
+    219,
     2
    ],
    "twist": [
@@ -87560,7 +89335,7 @@ globalThis.SUBTOPIC_CATALOG={
    "unconventional": [
     68,
     1,
-    216,
+    219,
     1
    ],
    "uncover": [
@@ -87616,7 +89391,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     66,
     1,
-    216,
+    219,
     1
    ],
    "underpin": [
@@ -88616,7 +90391,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     95,
     1,
-    215,
+    218,
     1
    ],
    "vibration": [
@@ -89018,9 +90793,9 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "waste": [
-    215,
+    218,
     1,
-    216,
+    219,
     1
    ],
    "water": [
@@ -89036,9 +90811,9 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     192,
     1,
-    215,
+    218,
     1,
-    216,
+    219,
     1
    ],
    "wave": [
@@ -89298,7 +91073,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     94,
     1,
-    217,
+    220,
     1
    ],
    "well-be": [
@@ -89876,7 +91651,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "zero-liquid": [
-    215,
+    218,
     1
    ],
    "zone": [
@@ -90106,10 +91881,16 @@ globalThis.SUBTOPIC_CATALOG={
    "361526:a-21",
    "361526:b-21",
    "361526:c-21",
+   "363240:a-14",
+   "363241:a-15",
+   "363258:c-4",
    "363594:a-1",
    "363594:b-1",
-   "363594:c-1"
+   "363594:c-1",
+   "363747:d-4",
+   "363759:a-16",
+   "363789:a-17"
   ]
  },
- "searchable_record_count": 218
+ "searchable_record_count": 224
 };

@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/water.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/water.xml</id>
-  <updated>2026-10-16T14:38:47Z</updated>
+  <updated>2026-10-16T16:56:01Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Cooperative Agreement for affiliated Partner with Northern Great Plains Cooperative Ecosystem Studies Unit</title>
@@ -155,6 +155,19 @@
     <category term="Materials science"/>
     <category term="Manufacturing"/>
     <summary>U.S. National Science Foundation | Posted | The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational engineering research for chemical, bioengineering, energy, and transport systems through the following programs:  The Chemical Process Systems (CPS) program supports foundational engineering research in chemical and biochemical processes for chemicals, fuels, energy, and materials. The Engineering Biol…</summary>
+  </entry>
+  <entry>
+    <title>Command Wide Broad Agency Announcement for Naval Facilities Engineering and Expeditionary Warfare Center (NAVFAC EXWC) Research, Development, Testing, and Evaluation</title>
+    <link href="https://sam.gov/opp/f0fbc0533b024e2fbfbdfe8b5bd2d81d/view"/>
+    <id>urn:funding-finder:sam-gov:sam-gov%3Af0fbc0533b024e2fbfbdfe8b5bd2d81d</id>
+    <updated>2026-06-15T00:00:00Z</updated>
+    <author><name>Naval Facilities Engineering and Expeditionary Warfare Center (NAVFAC EXWC)</name></author>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Technology development"/>
+    <category term="Cybersecurity"/>
+    <category term="Water"/>
+    <summary>Naval Facilities Engineering and Expeditionary Warfare Center (NAVFAC EXWC) | Preproposal 2027-06-14 | Applied research, technology development and prototypes for naval facilities, expeditionary construction, shore and marine energy, environmental restoration, water, cyber-physical systems and security. Submit a research abstract using Attachment 1; the form explicitly includes other academic institutions. Proposals must fit applied research, advanced technology development or advanced component de…</summary>
   </entry>
   <entry>
     <title>FY26 Bureau of Land Management Youth Conservation Corps - Bureau wide</title>
