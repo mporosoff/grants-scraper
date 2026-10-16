@@ -2791,6 +2791,14 @@ def failed_attempt_signature(signature, acquisition_identity=None):
     return hashlib.sha256(value.encode("utf-8")).hexdigest()
 
 
+def failed_acquisition_profile_changed(entry, source_url):
+    """A supported, newly available acquisition path changes only a failed input."""
+    if not entry or not (entry.get("status") == "failed" or entry.get("last_error")):
+        return False
+    profile = document_acquisition_identity(source_url)
+    return profile is not None and entry.get("last_attempt_acquisition_identity") != profile
+
+
 def clear_failed_attempt(entry):
     for key in ("last_attempt_at", "last_attempt_signature", "last_attempt_url", "last_attempt_acquisition_identity",
                 "last_error_phase", "last_error_reason", "last_error_http_status"):
@@ -2853,6 +2861,8 @@ def document_failure(identifier, source, error, phase, response=None):
 
 def due_for_check(entry, signature, now, recheck_days, *, needs_subtopics=False, source_url=None):
     if not entry or entry.get("status") == "processing_incomplete":
+        return True
+    if failed_acquisition_profile_changed(entry, source_url or signature.split("|", 1)[0]):
         return True
     failed = entry.get("status") == "failed" or entry.get("last_error")
     profile = document_acquisition_identity(source_url or signature.split("|", 1)[0]) if failed else None
@@ -3538,8 +3548,9 @@ def enrich_document_evidence(
             if selected:
                 candidates.append(selected)
     candidates.sort(key=lambda item: (
+        0 if failed_acquisition_profile_changed(item[3], item[1]["url"]) else 1,
         0 if (item[3] or {}).get("subtopic_reason") == "scientific_body_revalidation_pending" else 1,
-        0 if item[3] and item[3].get("source_signature") != item[2] else
+        0 if item[3] and item[3].get("source_signature") and item[3]["source_signature"] != item[2] else
         1 if not item[3] else 2 if item[3].get("status") == "failed" else 3,
         0 if item[1]["kind"] == "primary_notice" else 1,
         0 if (item[0].get("has_preliminary_stage") or item[0].get("limited_submission")

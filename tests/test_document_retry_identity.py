@@ -29,6 +29,75 @@ class DocumentRetryIdentityTests(unittest.TestCase):
         return e.enrich_document_evidence({'opportunities': [record]}, cache,
             now=now or self.now, request_delay=0, structure_cache=self.structure, fetcher=fetcher)
 
+    def selected_urls(self, records, entries, now=None):
+        calls = []
+        def fetch(url, headers):
+            calls.append(url)
+            raise requests.ConnectionError('Offline acquisition selection probe')
+        e.enrich_document_evidence({'opportunities': records}, {'records': deepcopy(entries)},
+            now=now or self.now, request_delay=0, structure_cache=self.structure,
+            max_documents=1, fetcher=fetch)
+        return calls
+
+    def test_repaired_failed_profile_precedes_new_and_scientific_backlog_under_one_document_cap(self):
+        failed_record = dict(self.record, opportunity_id='failed', close_date='2027-01-01',
+                             primary_document_url='https://sam.gov/opp/' + 'a' * 32 + '/view')
+        failed_source = e.source_for_record(failed_record)
+        legacy = {'status': 'failed', 'last_error': 'ValueError', 'last_attempt_at': e.iso_utc(self.now),
+                  'source_signature': e.source_signature(failed_record, failed_source),
+                  'checked_at': e.iso_utc(self.now), 'document': {'url': failed_source['url']}, 'facts': []}
+        new_record = dict(self.record, opportunity_id='new', close_date='2026-10-17',
+                          primary_document_url='https://agency.example/new.html')
+        scientific = dict(self.record, opportunity_id='scientific', close_date='2026-12-15',
+                          primary_document_url='https://agency.example/scientific.html')
+        science_source = e.source_for_record(scientific)
+        science_entry = deepcopy(self.original)
+        science_entry.update(source_signature=e.source_signature(scientific, science_source),
+            source_url=science_source['url'], subtopic_reason='scientific_body_revalidation_pending', facts=[])
+        science_entry['document']['url'] = science_source['url']
+        self.profile.return_value = 'sam-public-description-v1'
+        self.assertTrue(e.failed_acquisition_profile_changed(legacy, failed_source['url']))
+        self.assertEqual(self.selected_urls([new_record, scientific, failed_record],
+            {'failed': legacy, 'scientific': science_entry}), [failed_source['url']])
+
+    def test_same_profile_failure_keeps_backoff_and_ordinary_retry_priority_when_it_expires(self):
+        failed_record = dict(self.record, opportunity_id='failed', close_date='2027-01-01',
+                             primary_document_url='https://sam.gov/opp/' + 'a' * 32 + '/view')
+        source = e.source_for_record(failed_record)
+        signature = e.source_signature(failed_record, source)
+        failed = {'status': 'failed', 'last_error': 'ValueError', 'last_attempt_at': e.iso_utc(self.now),
+                  'last_attempt_acquisition_identity': 'sam-public-description-v1',
+                  'last_attempt_signature': e.failed_attempt_signature(signature, 'sam-public-description-v1'),
+                  'document': {'url': source['url']}, 'facts': []}
+        new_record = dict(self.record, opportunity_id='new', close_date='2026-10-17',
+                          primary_document_url='https://agency.example/new.html')
+        self.profile.return_value = 'sam-public-description-v1'
+        self.assertFalse(e.failed_acquisition_profile_changed(failed, source['url']))
+        self.assertFalse(e.due_for_check(failed, signature, self.now + timedelta(hours=1), 14))
+        self.assertEqual(self.selected_urls([failed_record, new_record], {'failed': failed},
+                         self.now + timedelta(hours=1)), [new_record['primary_document_url']])
+        self.assertTrue(e.due_for_check(failed, signature, self.now + timedelta(days=1), 14))
+        # A first failed attempt has no verified source signature; its absence
+        # must not be mistaken for a changed verified source after backoff.
+        self.assertEqual(self.selected_urls([failed_record, new_record], {'failed': failed},
+                         self.now + timedelta(days=1)), [new_record['primary_document_url']])
+
+    def test_current_verified_entry_is_not_promoted_for_a_new_acquisition_profile(self):
+        verified_record = dict(self.record, opportunity_id='verified', close_date='2027-01-01',
+                               primary_document_url='https://sam.gov/opp/' + 'a' * 32 + '/view')
+        source = e.source_for_record(verified_record)
+        verified = deepcopy(self.original)
+        verified.update(source_signature=e.source_signature(verified_record, source), source_url=source['url'], facts=[])
+        verified['document']['url'] = source['url']
+        self.profile.return_value = 'sam-public-description-v1'
+        self.profile.reset_mock()
+        self.assertFalse(e.failed_acquisition_profile_changed(verified, source['url']))
+        self.profile.assert_not_called()
+        new_record = dict(self.record, opportunity_id='new', close_date='2026-10-17',
+                          primary_document_url='https://agency.example/new.html')
+        self.assertEqual(self.selected_urls([verified_record, new_record], {'verified': verified}),
+                         [new_record['primary_document_url']])
+
     def test_changed_route_or_revision_failure_backs_off_its_attempt_without_altering_receipt(self):
         for change in ('url', 'revision'):
             with self.subTest(change=change):
