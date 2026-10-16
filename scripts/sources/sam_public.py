@@ -9,10 +9,10 @@ import hashlib
 from http.client import IncompleteRead
 import json
 import re
-from time import sleep
+from time import monotonic, sleep
 from urllib.error import HTTPError, URLError
 from urllib.parse import parse_qsl, urlsplit
-from urllib.request import Request, build_opener
+from urllib.request import ProxyHandler, Request, build_opener
 
 from .sam_api import NOTICE_ID, NoRedirect, SamError
 
@@ -157,21 +157,54 @@ def snapshot(payload, resources, notice_id):
         raise SamError('invalid_public_notice') from None
 
 
-def _get_json(url, opener, diagnostics, endpoint):
+def _remaining(deadline, endpoint):
+    remaining = deadline - monotonic()
+    if remaining <= 0:
+        raise SamError('public_deadline_exceeded', {'failure_class': 'timeout', 'endpoint': endpoint})
+    return min(REQUEST_TIMEOUT, remaining)
+
+
+def _deadline_bytes(response, deadline, endpoint):
+    chunks, size = [], 0
+    read = getattr(response, 'read1', None) or response.read
+    while size <= MAX_BYTES:
+        remaining = _remaining(deadline, endpoint)
+        # urllib's HTTPResponse exposes its socket through this buffered reader.
+        # Update its idle timeout too, so a later read cannot outlive the shared
+        # remaining deadline established before the first endpoint.
+        sock = getattr(getattr(getattr(response, 'fp', None), 'raw', None), '_sock', None)
+        if sock is not None:
+            sock.settimeout(remaining)
+        chunk = read(min(65536, MAX_BYTES + 1 - size))
+        _remaining(deadline, endpoint)
+        if not chunk:
+            break
+        size += len(chunk)
+        chunks.append(chunk)
+    return b''.join(chunks)
+
+
+def _get_json(url, opener, diagnostics, endpoint, *, deadline=None):
     client = opener if opener is not None else build_opener(NoRedirect())
     # Both routes may serve HAL JSON; JSON-only negotiation returns HTTP 406.
     request = Request(url, headers={'Accept': '*/*',
                       'User-Agent': 'Funding-Finder-SAM-Research/1.0'}, method='GET')
     for attempt in range(MAX_ATTEMPTS):
         status, retry_after = None, None
+        timeout = REQUEST_TIMEOUT if deadline is None else _remaining(deadline, endpoint)
         diagnostics['request_count'] += 1
         try:
-            with client.open(request, timeout=REQUEST_TIMEOUT) as response:
+            with client.open(request, timeout=timeout) as response:
                 status = response.status
                 retry_after = getattr(response, 'headers', {}).get('Retry-After')
+                if deadline is not None and response.geturl() != url:
+                    raise SamError('public_redirect_refused', {'failure_class': 'response_schema', 'endpoint': endpoint})
                 # Error bodies can contain contacts or infrastructure details;
                 # their contents are irrelevant to this bounded retry decision.
-                raw = response.read(MAX_BYTES + 1) if status == 200 else b''
+                raw = ((response.read(MAX_BYTES + 1) if deadline is None
+                        else _deadline_bytes(response, deadline, endpoint)) if status == 200 else b'')
+        except SamError:
+            raise
         except HTTPError as error:
             status = error.code
             retry_after = (error.headers or {}).get('Retry-After')
@@ -200,25 +233,56 @@ def _get_json(url, opener, diagnostics, endpoint):
             raise SamError('public_http_error' if status is not None else 'public_network_error', {
                 'http_status': status, 'endpoint': endpoint,
                 'failure_class': 'transient_transport' if temporary else 'nonretry_http'})
+        if deadline is not None and _remaining(deadline, endpoint) <= RETRY_DELAY:
+            raise SamError('public_deadline_exceeded', {'failure_class': 'timeout', 'endpoint': endpoint})
         sleep(RETRY_DELAY)
 
 
-def fetch_notice(notice_id, *, opener=None):
-    """Two public endpoints, each with at most two bounded same-route attempts."""
+def _notice_inputs(notice_id, opener, *, deadline=None):
     diagnostics = {'request_count': 0, 'outcome': 'pending'}
     if not isinstance(notice_id, str) or not NOTICE_ID.fullmatch(notice_id):
         raise SamError('invalid_notice_id', diagnostics | {'failure_class': 'response_schema'})
     try:
+        bounded = {} if deadline is None else {'deadline': deadline}
         notice = _get_json(f'https://sam.gov/api/prod/opps/v2/opportunities/{notice_id}',
-                           opener, diagnostics, 'notice')
+                           opener, diagnostics, 'notice', **bounded)
         resources = _get_json(f'https://sam.gov/api/prod/opps/v3/opportunities/{notice_id}'
                               '/resources?excludeDeleted=true&withScanResult=false',
-                              opener, diagnostics, 'resources')
+                              opener, diagnostics, 'resources', **bounded)
         try:
             result = snapshot(notice, resources, notice_id)
         except SamError:
             raise SamError('invalid_public_snapshot', {
                 'failure_class': 'response_schema', 'endpoint': 'snapshot'}) from None
-        return result, diagnostics | {'outcome': 'ok', 'http_status': 200}
+        return notice, result, diagnostics | {'outcome': 'ok', 'http_status': 200}
     except SamError as error:
         raise SamError('public_notice_unavailable', diagnostics | error.diagnostics) from None
+
+
+def fetch_notice(notice_id, *, opener=None):
+    """Two public endpoints, each with at most two bounded same-route attempts."""
+    _, result, diagnostics = _notice_inputs(notice_id, opener)
+    return result, diagnostics
+
+
+def fetch_notice_description(notice_id, *, deadline, opener=None):
+    """Return only exact owned descriptions after authenticating both resources.
+
+    This opt-in document path never returns contacts, resource links, or the raw
+    notice JSON. The established snapshot-only fetch_notice contract is intact.
+    """
+    if opener is None:
+        opener = build_opener(ProxyHandler({}), NoRedirect())
+    notice, result, diagnostics = _notice_inputs(notice_id, opener, deadline=deadline)
+    if (not result['latest'] or result['latest_notice_id'] != notice_id
+            or result['status'] != 'published' or any(result[key] for key in ('archived', 'cancelled', 'deleted'))):
+        raise SamError('document_notice_not_current', diagnostics)
+    bodies = {}
+    for item in notice['description']:
+        identifier = item.get('descriptionId')
+        if not isinstance(identifier, str) or not identifier or len(identifier) > 200 or identifier in bodies:
+            raise SamError('document_description_schema', diagnostics)
+        bodies[identifier] = item['body']
+    if not bodies or not any(body.strip() for body in bodies.values()):
+        raise SamError('document_description_missing', diagnostics)
+    return tuple(body for _, body in sorted(bodies.items())), result, diagnostics
