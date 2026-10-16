@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/manufacturing.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/manufacturing.xml</id>
-  <updated>2026-10-16T14:38:47Z</updated>
+  <updated>2026-10-16T16:56:01Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>BRAIN Initiative: Clinical Studies to Advance Next-Generation Devices for Recording and Modulation in the Human Central Nervous System</title>
@@ -390,6 +390,8 @@
     <category term="Education and workforce"/>
     <category term="Energy"/>
     <category term="Manufacturing"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
     <summary>Defense Logistics Agency (DLA) | White Paper 2027-06-12 | Emergent logistics research; current Amendment 40includes advanced/additive manufacturing, materials, energy and logistics technology. Open non-IDIQ white paper entry; technical/cost proposals follow a government request. Educational organizations may be prime offerors, subject to financial, accounting and other FAR responsibility standards. No small-business set-aside. Use only the current BAA ar…</summary>
   </entry>
   <entry>
@@ -400,6 +402,7 @@
     <author><name>Defense Logistics Agency (DLA) Strategic Materials</name></author>
     <category term="Environmental science"/>
     <category term="Manufacturing"/>
+    <category term="Materials science"/>
     <summary>Defense Logistics Agency (DLA) Strategic Materials | White Paper 2028-05-01 | Strategic and critical materials, alloys, substitution, conservation, supply chains and qualification. Strategic/critical materials research, qualification and supply-chain assessments. SAM registration required when submitting and throughout award. Foreign-owned firms require foreign disclosure review. Source contains inconsistent umbrella/end dates, but the May 1, 2028initial-entry cutoff is exp…</summary>
   </entry>
   <entry>

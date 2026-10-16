@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml</id>
-  <updated>2026-10-16T14:38:47Z</updated>
+  <updated>2026-10-16T16:56:01Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Single Source: Scalable and Systematic Neurobiology of Psychiatric and Neurodevelopmental Disorder Risk Genes: Data Resource and Administrative Coordination Center (U24 Clinical Trial Not Allowed)</title>
@@ -155,6 +155,7 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Energy"/>
     <category term="Transportation"/>
+    <category term="Data science"/>
     <summary>NYSERDA | Application 2026-11-10 | Helping to achieve a modernized energy grid, investments in Battery Energy Storage System (BESS) Health Operations Tools and Artificial Intelligence (AI) roll up to help New York State transition to cleaner energy resources. Up to $3 million total is available in Program Opportunity Notice (PON) 6240 to promote product developments and demonstrations in the New York State National Grid service ter…</summary>
   </entry>
   <entry>
@@ -183,6 +184,17 @@
     <category term="Carbon management"/>
     <category term="Quantum science"/>
     <summary>Office of Science | Application 2027-09-30 | verify prerequisite | SC hereby announces its continuing interest in receiving applications for support of work in the following program areas: · Advanced Scientific Computing Research· Basic Energy Sciences· Biological and Environmental Research· Fusion Energy Sciences· High Energy and Nuclear Physics· Isotope R&amp;D and Production. On September 3, 1992, DOE published in the Federal Register the Office of Energy Research…</summary>
+  </entry>
+  <entry>
+    <title>Simulation-augmented, real-time Platform Adaptive Seamless Trials (SURPASS)</title>
+    <link href="https://arpa-h.gov/explore-funding/programs/surpass"/>
+    <id>urn:funding-finder:arpa-h:arpa-h%3Asurpass</id>
+    <updated>2026-09-30T00:00:00Z</updated>
+    <author><name>Advanced Research Projects Agency for Health (ARPA-H)</name></author>
+    <category term="Technology development"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Advanced Research Projects Agency for Health (ARPA-H) | Application 2026-11-30 | Current ARPA-H program. SURPASS | ARPA-H (function(w, d, s, l, i){w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&amp;l='+l:''; j.async=true; j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j, f); })(window, document,'script','dataLayer','GTM-W5GM3DT9'); win…</summary>
   </entry>
   <entry>
     <title>Pancreatic Cancer Detection Consortium: Research Units (U01 Clinical Trial Optional)</title>
@@ -678,6 +690,17 @@ Successful candidates for a Fellowship generally have a strong record of signifi
     <summary>U.S. National Science Foundation | Application 2026-11-04 | The NSF State and Regional AI Infrastructure Hubs program aims to expand access to the compute required for AI-enabled scientific discovery and to transform the research, education, and training opportunities offered by institutions of higher education. AI Infrastructure Hubs will connect researchers to new compute infrastructure that leverages contributions from state governments, research instit…</summary>
   </entry>
   <entry>
+    <title>RESEARCH AND DEVELOPMENT OF NAVAL POWER AND ENERGY SYSTEMS (N00024-19-R-4145 Broad Agency Announcement (BAA))</title>
+    <link href="https://sam.gov/opp/fac0dcbe5eff43ab92e3dadb319daed1/view"/>
+    <id>urn:funding-finder:sam-gov:sam-gov%3Afac0dcbe5eff43ab92e3dadb319daed1</id>
+    <updated>2026-08-05T00:00:00Z</updated>
+    <author><name>Naval Sea Systems Command (NAVSEA)</name></author>
+    <category term="Energy"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Naval Sea Systems Command (NAVSEA) | White Paper 2028-02-06 | Naval power and energy system research: power generation, storage, distribution, controls, advanced conductors, thermal management and modeling. Required white paper before invited full proposal. The current description extends receipt to February 6, 2033, while current SAM deadline metadata remains February 6, 2028. This entry deliberately uses the earlier 2028 deadline conservatively and retains…</summary>
+  </entry>
+  <entry>
     <title>Innovative Traffic Safety Enforcement (ITSE) Grant Program</title>
     <link href="https://www.grants.gov/search-results-detail/363446"/>
     <id>urn:funding-finder:grants-gov:363446</id>
@@ -721,26 +744,5 @@ Successful candidates for a Fellowship generally have a strong record of signifi
     <category term="Education and workforce"/>
     <category term="Technology development"/>
     <summary>National Institutes of Health | Application 2026-10-19 | The overarching goal of this notice of funding opportunity (NOFO) and its companion opportunities is to establish the Precision Medicine with AI: Integrating Imaging with Multimodal Data (PRIMED-AI) Program to support development of innovative, reliable, cost-effective, and sustainable multimodal AI-based clinical decision support (CDS) tools. PRIMED-AI CDS tools are based on the integration of cl…</summary>
-  </entry>
-  <entry>
-    <title>PRIMED-AI: Data-to-Model Academic-Industrial Partnerships (D2M-AIP) for Precision Medicine with AI: Integrating Imaging with Multimodal Data (UG3/UH3 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/359270"/>
-    <id>urn:funding-finder:grants-gov:359270</id>
-    <updated>2026-06-30T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <summary>National Institutes of Health | Application 2026-10-19 | The overarching goal of this notice of funding opportunity (NOFO) and its companion opportunities is to establish the Precision Medicine with AI: Integrating Imaging with Multimodal Data (PRIMED-AI) Program to support development of innovative, reliable, cost-effective, and sustainable multimodal AI-based clinical decision support (CDS) tools. PRIMED-AI CDS tools are based on the integration of cl…</summary>
-  </entry>
-  <entry>
-    <title>HEAL Initiative: Optimization of Therapeutic Medical Devices through Team Science Mechanistic Research (RM1)</title>
-    <link href="https://www.grants.gov/search-results-detail/361520"/>
-    <id>urn:funding-finder:grants-gov:361520</id>
-    <updated>2026-06-11T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Neuroscience"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health | Estimated Application 2026-10-30 | The National Institute of Neurological Disorders and Stroke (NINDS), with other NIH Institutes and Centers (ICs), intends to publish a Notice of Funding Opportunity (NOFO) to investigate the mechanisms of action of therapeutic medical devices with the overall goal of improving clinical outcomes with device-based approaches. Medical devices are essential in managing health conditions, complementing…</summary>
   </entry>
 </feed>

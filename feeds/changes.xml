@@ -4,8 +4,72 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/changes.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/changes.xml</id>
-  <updated>2026-10-16T14:44:43Z</updated>
+  <updated>2026-10-16T16:58:14Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>New opportunity: Resilient</title>
+    <link href="https://sam.gov/opp/0ea1a4cebcb24732b92a184df0a4bee2/view"/>
+    <id>urn:funding-finder:change:ec623f6a1dbce4b53783</id>
+    <updated>2026-10-16T16:54:22.635589Z</updated>
+    <category term="new"/>
+    <summary>First appeared in the public catalog</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Resilient</title>
+    <link href="https://sam.gov/opp/0ea1a4cebcb24732b92a184df0a4bee2/view"/>
+    <id>urn:funding-finder:change:c592467cfe7cf24785d5</id>
+    <updated>2026-10-16T16:54:22.635589Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-10-19</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Liquid Surge</title>
+    <link href="https://sam.gov/workspace/contract/opp/33a06aa2901440c29518b95f8e099cfa/view"/>
+    <id>urn:funding-finder:change:afc6424ed6071858eeaa</id>
+    <updated>2026-10-16T16:54:22.635589Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-11-03</summary>
+  </entry>
+  <entry>
+    <title>New opportunity: QBI Topic: Independent Verification and Validation</title>
+    <link href="https://sam.gov/workspace/contract/opp/3fc74819705a4a81b205327ba4537973/view"/>
+    <id>urn:funding-finder:change:a99ff2487d1d0adc13d5</id>
+    <updated>2026-10-16T16:54:22.635589Z</updated>
+    <category term="new"/>
+    <summary>First appeared in the public catalog</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: FY26 US DOT Drone Infrastructure Inspection Grants (DIIG) Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363242"/>
+    <id>urn:funding-finder:change:9171a9e0ac516a91c733</id>
+    <updated>2026-10-16T16:54:22.635589Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-11-15</summary>
+  </entry>
+  <entry>
+    <title>Deadline changed: Simulation-augmented, real-time Platform Adaptive Seamless Trials (SURPASS)</title>
+    <link href="https://arpa-h.gov/explore-funding/programs/surpass"/>
+    <id>urn:funding-finder:change:8ba8aafbb4cbea3c3df1</id>
+    <updated>2026-10-16T16:54:22.635589Z</updated>
+    <category term="deadline_changed"/>
+    <summary>not listed → 2026-11-30</summary>
+  </entry>
+  <entry>
+    <title>New opportunity: Liquid Surge</title>
+    <link href="https://sam.gov/workspace/contract/opp/33a06aa2901440c29518b95f8e099cfa/view"/>
+    <id>urn:funding-finder:change:61fa1d58056aa3614d66</id>
+    <updated>2026-10-16T16:54:22.635589Z</updated>
+    <category term="new"/>
+    <summary>First appeared in the public catalog</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Global Brain and Nervous System Disorders Research Across the Lifespan - Exploratory Grants</title>
+    <link href="https://www.grants.gov/search-results-detail/360660"/>
+    <id>urn:funding-finder:change:0e9d608d937edb5c8b02</id>
+    <updated>2026-10-16T16:54:22.635589Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-11-15</summary>
+  </entry>
   <entry>
     <title>Closed or removed: Innovative Water Infrastructure Workforce Development Grant</title>
     <link href="https://www.grants.gov/search-results-detail/363657"/>
@@ -357,14 +421,6 @@
     <updated>2026-10-16T14:35:42.543184Z</updated>
     <category term="closing_soon"/>
     <summary>Deadline 2026-11-14</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: FY26 US DOT Drone Infrastructure Inspection Grants (DIIG) Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363242"/>
-    <id>urn:funding-finder:change:9171a9e0ac516a91c733</id>
-    <updated>2026-10-16T14:35:42.543184Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-11-15</summary>
   </entry>
   <entry>
     <title>Deadline changed: NSF Astronomy and Astrophysics Postdoctoral Fellowships (AAPF)</title>
@@ -789,14 +845,6 @@
     <updated>2026-10-16T14:35:42.543184Z</updated>
     <category term="new"/>
     <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: Global Brain and Nervous System Disorders Research Across the Lifespan - Exploratory Grants</title>
-    <link href="https://www.grants.gov/search-results-detail/360660"/>
-    <id>urn:funding-finder:change:0e9d608d937edb5c8b02</id>
-    <updated>2026-10-16T14:35:42.543184Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-11-15</summary>
   </entry>
   <entry>
     <title>New opportunity: Cooperative Agreement for Affiliated Partner with the Colorado Plateau Cooperative Ecosystem Studies Unit (CESU)</title>
@@ -1557,53 +1605,5 @@
     <updated>2026-10-13T16:09:16.062851Z</updated>
     <category term="new"/>
     <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Aquatic Fauna Response to Ecosystem Restoration in Southwest Florida</title>
-    <link href="https://www.grants.gov/search-results-detail/363854"/>
-    <id>urn:funding-finder:change:6360f6694098b81d9539</id>
-    <updated>2026-10-13T16:09:16.062851Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: Federal Aviation Administration (FAA) Research And Commercial Solutions Opening (RCSO) Area Of Interest (AOI) - Complexity Of Systems And Operations</title>
-    <link href="https://sam.gov/opp/e3d96ffd4a0a48b080e09dd5af732cc8/view"/>
-    <id>urn:funding-finder:change:61e41ae72c95e55e8299</id>
-    <updated>2026-10-13T16:09:16.062851Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: High-throughput Unmasking of Biological Interactomes with Binding Landscape Emulators (HUBBLE)</title>
-    <link href="https://sam.gov/opp/98c034706e4b430281ead1c3497e9d72/view"/>
-    <id>urn:funding-finder:change:510edc43840b53f6adeb</id>
-    <updated>2026-10-13T16:09:16.062851Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: Firefox</title>
-    <link href="https://sam.gov/opp/182eab6ca77d465f931c6dc118b939ca/view"/>
-    <id>urn:funding-finder:change:505a1b89038c74d13a7b</id>
-    <updated>2026-10-13T16:09:16.062851Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-10-19</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: RESEARCH AND DEVELOPMENT OF NAVAL POWER AND ENERGY SYSTEMS (N00024-19-R-4145 Broad Agency Announcement (BAA))</title>
-    <link href="https://sam.gov/opp/fac0dcbe5eff43ab92e3dadb319daed1/view"/>
-    <id>urn:funding-finder:change:50301447a81eb3d6f638</id>
-    <updated>2026-10-13T16:09:16.062851Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: HEAL Initiative: Program to Reveal and Evaluate Cells-to-gene Information that Specify Intricacies, Origins and the Nature of (PRECISION) Human Pain Network</title>
-    <link href="https://www.grants.gov/search-results-detail/361334"/>
-    <id>urn:funding-finder:change:4f9d8f5f1603a50778d5</id>
-    <updated>2026-10-13T16:09:16.062851Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
   </entry>
 </feed>

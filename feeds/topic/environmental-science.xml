@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/environmental-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/environmental-science.xml</id>
-  <updated>2026-10-16T14:38:47Z</updated>
+  <updated>2026-10-16T16:56:01Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Limited Competition: Biomedical Research Environment &amp; Sponsored Programs Administration Development (BRE-SPAD) Program</title>
@@ -467,6 +467,15 @@
     <summary>Geological Survey | Application 2026-11-14 | The spread of invasive grasses, such as cheatgrass, adds fine fuels to the landscape that increase wildfire occurrence and frequency. Following a fire, invasive grasses regrow quickly, typically outcompeting native plants and perpetuating what is known as the invasive grass-fire cycle. This cycle has been well documented in western portions of the sagebrush biome, such as the Great Basin, but ther…</summary>
   </entry>
   <entry>
+    <title>Liquid Surge</title>
+    <link href="https://sam.gov/workspace/contract/opp/33a06aa2901440c29518b95f8e099cfa/view"/>
+    <id>urn:funding-finder:darpa-iarpa-research-solicitations:darpa-iarpa%3Adarpa-darpapa250705</id>
+    <updated>2026-10-14T00:00:00Z</updated>
+    <author><name>Defense Advanced Research Projects Agency (DARPA)</name></author>
+    <category term="Environmental science"/>
+    <summary>Defense Advanced Research Projects Agency (DARPA) | Abstract 2026-11-03 | DSO is issuing a Disruption Opportunity (DO) in the technical domain of developing novel metrology for understanding wave propagation in compressible fluids. | See DO Disruption Opportunity Liquid Surge seeks to advance scientific understanding, predictive modeling, and metrology of transient wave phenomena in liquid environments under challenging conditions. The program addresses complex thermody…</summary>
+  </entry>
+  <entry>
     <title>Early-Onset Cancers: Investigating Etiology, Mechanisms, and Early Detection Strategies (RP1 Clinical Trials Optional)</title>
     <link href="https://www.grants.gov/search-results-detail/361438"/>
     <id>urn:funding-finder:grants-gov:361438</id>
@@ -657,16 +666,5 @@
     <category term="Energy"/>
     <category term="Environmental science"/>
     <summary>NYSERDA | Application 2026-12-31 | Establishes a pool of consulting firms qualified to provide NYSERDA with diverse technical, energy, economic, and environmental analytical capacity, some of which may be requests for support services on short notice.</summary>
-  </entry>
-  <entry>
-    <title>New York School Bus Incentive Program</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0r8z000000EMPCAA4"/>
-    <id>urn:funding-finder:nyserda:nyserda%3APON5552</id>
-    <updated>2026-09-07T00:00:00Z</updated>
-    <author><name>NYSERDA</name></author>
-    <category term="Environmental science"/>
-    <category term="Manufacturing"/>
-    <category term="Energy"/>
-    <summary>NYSERDA | Application 2030-12-30 | The New York School Bus Incentive Program (NYSBIP) is a voucher incentive program to accelerate the deployment of zero-emission school buses and associated charging infrastructure throughout New York State using funds allocated by the 2022 Clean Water, Clean Air, and Green Jobs Environmental Bond Act (Bond Act). More information about how fleets, dealers, and manufacturers can participate in NYSBI…</summary>
   </entry>
 </feed>

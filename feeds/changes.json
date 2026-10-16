@@ -1,8 +1,754 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-16T14:44:43Z",
+  "generated_at": "2026-10-16T16:58:14Z",
   "retention_days": 90,
   "events": [
+    {
+      "id": "ec623f6a1dbce4b53783",
+      "type": "new",
+      "label": "New opportunity",
+      "changed_at": "2026-10-16T16:54:22.635589Z",
+      "opportunity_id": "darpa-iarpa:darpa-darpapa250704",
+      "detail": "First appeared in the public catalog",
+      "record": {
+        "opportunity_id": "darpa-iarpa:darpa-darpapa250704",
+        "opportunity_number": "DARPA-PA-25-07-04",
+        "title": "Resilient",
+        "agency": "Defense Advanced Research Projects Agency (DARPA)",
+        "source": "DARPA / IARPA research solicitations",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-20",
+        "close_date": "2026-10-19",
+        "deadlines": [
+          {
+            "kind": "application",
+            "date": "2026-10-19",
+            "time": null,
+            "timezone": null,
+            "note": "Submission deadline for DARPA-PA-25-07-04 on the official DARPA program page: https://www.darpa.mil/research/programs/resilient",
+            "estimated": false,
+            "source": "DARPA / IARPA research solicitations",
+            "source_url": "https://www.darpa.mil/research/programs/resilient",
+            "source_field": "exact solicitation on official program page",
+            "confidence": "source_listed"
+          }
+        ],
+        "submission_requirements": [],
+        "next_submission": {
+          "version": 2,
+          "as_of": "2026-10-16",
+          "application_class": "new",
+          "date": "2026-10-19",
+          "event": {
+            "kind": "application",
+            "date": "2026-10-19",
+            "time": null,
+            "timezone": null,
+            "note": "Submission deadline for DARPA-PA-25-07-04 on the official DARPA program page: https://www.darpa.mil/research/programs/resilient",
+            "estimated": false,
+            "source": "DARPA / IARPA research solicitations",
+            "source_url": "https://www.darpa.mil/research/programs/resilient",
+            "source_field": "exact solicitation on official program page",
+            "confidence": "source_listed"
+          },
+          "access": "open",
+          "prerequisites": []
+        },
+        "source_aliases": null,
+        "last_updated": "2026-08-20",
+        "version": null,
+        "topic_areas": [
+          "Materials science"
+        ],
+        "disciplines": [],
+        "applicant_types": [],
+        "funding_instruments": [],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://sam.gov/opp/0ea1a4cebcb24732b92a184df0a4bee2/view",
+        "funding_opportunity_url": "https://sam.gov/opp/0ea1a4cebcb24732b92a184df0a4bee2/view",
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "c592467cfe7cf24785d5",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-10-16T16:54:22.635589Z",
+      "opportunity_id": "darpa-iarpa:darpa-darpapa250704",
+      "detail": "Deadline 2026-10-19",
+      "record": {
+        "opportunity_id": "darpa-iarpa:darpa-darpapa250704",
+        "opportunity_number": "DARPA-PA-25-07-04",
+        "title": "Resilient",
+        "agency": "Defense Advanced Research Projects Agency (DARPA)",
+        "source": "DARPA / IARPA research solicitations",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-20",
+        "close_date": "2026-10-19",
+        "deadlines": [
+          {
+            "kind": "application",
+            "date": "2026-10-19",
+            "time": null,
+            "timezone": null,
+            "note": "Submission deadline for DARPA-PA-25-07-04 on the official DARPA program page: https://www.darpa.mil/research/programs/resilient",
+            "estimated": false,
+            "source": "DARPA / IARPA research solicitations",
+            "source_url": "https://www.darpa.mil/research/programs/resilient",
+            "source_field": "exact solicitation on official program page",
+            "confidence": "source_listed"
+          }
+        ],
+        "submission_requirements": [],
+        "next_submission": {
+          "version": 2,
+          "as_of": "2026-10-16",
+          "application_class": "new",
+          "date": "2026-10-19",
+          "event": {
+            "kind": "application",
+            "date": "2026-10-19",
+            "time": null,
+            "timezone": null,
+            "note": "Submission deadline for DARPA-PA-25-07-04 on the official DARPA program page: https://www.darpa.mil/research/programs/resilient",
+            "estimated": false,
+            "source": "DARPA / IARPA research solicitations",
+            "source_url": "https://www.darpa.mil/research/programs/resilient",
+            "source_field": "exact solicitation on official program page",
+            "confidence": "source_listed"
+          },
+          "access": "open",
+          "prerequisites": []
+        },
+        "source_aliases": null,
+        "last_updated": "2026-08-20",
+        "version": null,
+        "topic_areas": [
+          "Materials science"
+        ],
+        "disciplines": [],
+        "applicant_types": [],
+        "funding_instruments": [],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://sam.gov/opp/0ea1a4cebcb24732b92a184df0a4bee2/view",
+        "funding_opportunity_url": "https://sam.gov/opp/0ea1a4cebcb24732b92a184df0a4bee2/view",
+        "primary_document_url": null
+      },
+      "deadline": "2026-10-19"
+    },
+    {
+      "id": "afc6424ed6071858eeaa",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-10-16T16:54:22.635589Z",
+      "opportunity_id": "darpa-iarpa:darpa-darpapa250705",
+      "detail": "Deadline 2026-11-03",
+      "record": {
+        "opportunity_id": "darpa-iarpa:darpa-darpapa250705",
+        "opportunity_number": "DARPA-PA-25-07-05",
+        "title": "Liquid Surge",
+        "agency": "Defense Advanced Research Projects Agency (DARPA)",
+        "source": "DARPA / IARPA research solicitations",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-10-14",
+        "close_date": "2026-12-14",
+        "deadlines": [
+          {
+            "kind": "abstract",
+            "date": "2026-11-03",
+            "time": null,
+            "timezone": null,
+            "note": "Abstract submission deadline for DARPA-PA-25-07-05 on the official DARPA program page: https://www.darpa.mil/research/programs/liquid-surge",
+            "estimated": false,
+            "source": "DARPA / IARPA research solicitations",
+            "source_url": "https://www.darpa.mil/research/programs/liquid-surge",
+            "source_field": "exact solicitation on official program page",
+            "confidence": "source_listed",
+            "stage": "abstract",
+            "required": null,
+            "obligation": "unknown",
+            "date_status": "known",
+            "citation": {
+              "document_url": "https://www.darpa.mil/research/programs/liquid-surge",
+              "citation_url": "https://www.darpa.mil/research/programs/liquid-surge",
+              "sha256": "3cc39805fca75f018cf9257f2bee947704032669ceabeed9b3cda5d525b08e01",
+              "section": "DARPA-PA-25-07-05",
+              "quote": "Abstract: Nov. 3, 2026",
+              "structural_reference": {
+                "field_label": "Abstract",
+                "solicitation_number": "DARPA-PA-25-07-05"
+              }
+            }
+          },
+          {
+            "kind": "application",
+            "date": "2026-12-14",
+            "time": null,
+            "timezone": null,
+            "note": "Proposal submission deadline for DARPA-PA-25-07-05 on the official DARPA program page: https://www.darpa.mil/research/programs/liquid-surge",
+            "estimated": false,
+            "source": "DARPA / IARPA research solicitations",
+            "source_url": "https://www.darpa.mil/research/programs/liquid-surge",
+            "source_field": "exact solicitation on official program page",
+            "confidence": "source_listed",
+            "stage": "application",
+            "required": null,
+            "obligation": "unknown",
+            "date_status": "known",
+            "citation": {
+              "document_url": "https://www.darpa.mil/research/programs/liquid-surge",
+              "citation_url": "https://www.darpa.mil/research/programs/liquid-surge",
+              "sha256": "3cc39805fca75f018cf9257f2bee947704032669ceabeed9b3cda5d525b08e01",
+              "section": "DARPA-PA-25-07-05",
+              "quote": "Proposal: Dec. 14, 2026",
+              "structural_reference": {
+                "field_label": "Proposal",
+                "solicitation_number": "DARPA-PA-25-07-05"
+              }
+            }
+          }
+        ],
+        "submission_requirements": [],
+        "next_submission": {
+          "version": 2,
+          "as_of": "2026-10-16",
+          "application_class": "new",
+          "date": "2026-11-03",
+          "event": {
+            "kind": "abstract",
+            "date": "2026-11-03",
+            "time": null,
+            "timezone": null,
+            "note": "Abstract submission deadline for DARPA-PA-25-07-05 on the official DARPA program page: https://www.darpa.mil/research/programs/liquid-surge",
+            "estimated": false,
+            "source": "DARPA / IARPA research solicitations",
+            "source_url": "https://www.darpa.mil/research/programs/liquid-surge",
+            "source_field": "exact solicitation on official program page",
+            "confidence": "source_listed",
+            "stage": "abstract",
+            "required": null,
+            "obligation": "unknown",
+            "date_status": "known",
+            "citation": {
+              "document_url": "https://www.darpa.mil/research/programs/liquid-surge",
+              "citation_url": "https://www.darpa.mil/research/programs/liquid-surge",
+              "sha256": "3cc39805fca75f018cf9257f2bee947704032669ceabeed9b3cda5d525b08e01",
+              "section": "DARPA-PA-25-07-05",
+              "quote": "Abstract: Nov. 3, 2026",
+              "structural_reference": {
+                "field_label": "Abstract",
+                "solicitation_number": "DARPA-PA-25-07-05"
+              }
+            }
+          },
+          "access": "open",
+          "prerequisites": []
+        },
+        "source_aliases": null,
+        "last_updated": "2026-10-14",
+        "version": null,
+        "topic_areas": [
+          "Environmental science"
+        ],
+        "disciplines": [],
+        "applicant_types": [],
+        "funding_instruments": [],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://sam.gov/workspace/contract/opp/33a06aa2901440c29518b95f8e099cfa/view",
+        "funding_opportunity_url": "https://sam.gov/workspace/contract/opp/33a06aa2901440c29518b95f8e099cfa/view",
+        "primary_document_url": null
+      },
+      "deadline": "2026-11-03"
+    },
+    {
+      "id": "a99ff2487d1d0adc13d5",
+      "type": "new",
+      "label": "New opportunity",
+      "changed_at": "2026-10-16T16:54:22.635589Z",
+      "opportunity_id": "darpa-iarpa:darpa-darpapa260201",
+      "detail": "First appeared in the public catalog",
+      "record": {
+        "opportunity_id": "darpa-iarpa:darpa-darpapa260201",
+        "opportunity_number": "DARPA-PA-26-02-01",
+        "title": "QBI Topic: Independent Verification and Validation",
+        "agency": "Defense Advanced Research Projects Agency (DARPA)",
+        "source": "DARPA / IARPA research solicitations",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2025-11-17",
+        "close_date": "2026-12-30",
+        "deadlines": [
+          {
+            "kind": "application",
+            "date": "2026-12-30",
+            "time": null,
+            "timezone": null,
+            "note": "Submission deadline for DARPA-PA-26-02-01 on the official DARPA program page: https://www.darpa.mil/research/programs/quantum-benchmarking-initiative",
+            "estimated": false,
+            "source": "DARPA / IARPA research solicitations",
+            "source_url": "https://www.darpa.mil/research/programs/quantum-benchmarking-initiative",
+            "source_field": "exact solicitation on official program page",
+            "confidence": "source_listed"
+          }
+        ],
+        "submission_requirements": null,
+        "next_submission": {
+          "version": 2,
+          "as_of": "2026-10-16",
+          "application_class": "new",
+          "date": "2026-12-30",
+          "event": {
+            "kind": "application",
+            "date": "2026-12-30",
+            "time": null,
+            "timezone": null,
+            "note": "Submission deadline for DARPA-PA-26-02-01 on the official DARPA program page: https://www.darpa.mil/research/programs/quantum-benchmarking-initiative",
+            "estimated": false,
+            "source": "DARPA / IARPA research solicitations",
+            "source_url": "https://www.darpa.mil/research/programs/quantum-benchmarking-initiative",
+            "source_field": "exact solicitation on official program page",
+            "confidence": "source_listed"
+          },
+          "access": "open",
+          "prerequisites": []
+        },
+        "source_aliases": null,
+        "last_updated": "2025-11-17",
+        "version": null,
+        "topic_areas": [
+          "Quantum science"
+        ],
+        "disciplines": [],
+        "applicant_types": [],
+        "funding_instruments": [],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://sam.gov/workspace/contract/opp/3fc74819705a4a81b205327ba4537973/view",
+        "funding_opportunity_url": "https://sam.gov/workspace/contract/opp/3fc74819705a4a81b205327ba4537973/view",
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "9171a9e0ac516a91c733",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-10-16T16:54:22.635589Z",
+      "opportunity_id": "363242",
+      "detail": "Deadline 2026-11-15",
+      "record": {
+        "opportunity_id": "363242",
+        "opportunity_number": "DOT-HASS-FY26-DIIG",
+        "title": "FY26 US DOT Drone Infrastructure Inspection Grants (DIIG) Program",
+        "agency": "69A345 Office of the Under Secretary for Policy",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "forecasted",
+        "posted_date": "2026-09-15",
+        "close_date": "2026-11-15",
+        "deadlines": [
+          {
+            "kind": "estimated_application",
+            "date": "2026-11-15",
+            "time": null,
+            "timezone": null,
+            "note": null,
+            "estimated": true,
+            "source": "Grants.gov XML extract",
+            "source_url": "https://www.grants.gov/search-results-detail/363242",
+            "source_field": "EstimatedSynopsisCloseDate",
+            "confidence": "official_estimate",
+            "detail_checked_at": "2026-07-31T12:17:15.975581Z"
+          }
+        ],
+        "submission_requirements": null,
+        "next_submission": {
+          "version": 2,
+          "as_of": "2026-10-16",
+          "application_class": "new",
+          "date": "2026-11-15",
+          "event": {
+            "kind": "estimated_application",
+            "date": "2026-11-15",
+            "time": null,
+            "timezone": null,
+            "note": null,
+            "estimated": true,
+            "source": "Grants.gov XML extract",
+            "source_url": "https://www.grants.gov/search-results-detail/363242",
+            "source_field": "EstimatedSynopsisCloseDate",
+            "confidence": "official_estimate",
+            "detail_checked_at": "2026-07-31T12:17:15.975581Z"
+          },
+          "access": "open",
+          "prerequisites": []
+        },
+        "source_aliases": null,
+        "last_updated": "2026-07-28",
+        "version": "Forecast 3",
+        "topic_areas": [
+          "Community development",
+          "Education and workforce",
+          "Transportation"
+        ],
+        "disciplines": [
+          "Community and Social Sciences",
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Federally recognized Native American tribal governments",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": 500000,
+        "award_ceiling": 9000000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363242",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      },
+      "deadline": "2026-11-15"
+    },
+    {
+      "id": "8ba8aafbb4cbea3c3df1",
+      "type": "deadline_changed",
+      "label": "Deadline changed",
+      "changed_at": "2026-10-16T16:54:22.635589Z",
+      "opportunity_id": "arpa-h:surpass",
+      "detail": "not listed → 2026-11-30",
+      "record": {
+        "opportunity_id": "arpa-h:surpass",
+        "opportunity_number": "ARPA-H-SOL-26-164",
+        "title": "Simulation-augmented, real-time Platform Adaptive Seamless Trials (SURPASS)",
+        "agency": "Advanced Research Projects Agency for Health (ARPA-H)",
+        "source": "ARPA-H",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": null,
+        "close_date": null,
+        "deadlines": [
+          {
+            "kind": "application",
+            "date": "2026-11-30",
+            "time": null,
+            "timezone": null,
+            "estimated": false,
+            "source": "Official notice (machine extracted)",
+            "source_url": "https://arpa-h.gov/explore-funding/programs/surpass",
+            "confidence": "machine_extracted_needs_verification",
+            "evidence_id": "evidence-arpa-h:surpass-5d988da263a1",
+            "required": null,
+            "subject": "submission",
+            "parser_version": "official-evidence-3"
+          },
+          {
+            "kind": "application",
+            "date": "2027-01-22",
+            "time": null,
+            "timezone": null,
+            "estimated": false,
+            "source": "Official notice (machine extracted)",
+            "source_url": "https://arpa-h.gov/explore-funding/programs/surpass",
+            "confidence": "machine_extracted_needs_verification",
+            "evidence_id": "evidence-arpa-h:surpass-85e416712026",
+            "required": null,
+            "subject": "submission",
+            "parser_version": "official-evidence-3"
+          }
+        ],
+        "submission_requirements": [],
+        "next_submission": {
+          "version": 2,
+          "as_of": "2026-10-16",
+          "application_class": "new",
+          "date": "2026-11-30",
+          "event": {
+            "kind": "application",
+            "date": "2026-11-30",
+            "time": null,
+            "timezone": null,
+            "note": "…ity to learn more about this opportunity, ask questions, and make connections. Registration required, see Special Notice ARPA-H-SN-26-164 for event details. Solution Summary Due - November 30, 2026 Submitting a summary is required to move forward with this opportunity. After submitting a summary, await feedback from ARPA-H before proceeding. Proposal Due -…",
+            "estimated": false,
+            "source": "Official notice (machine extracted)",
+            "source_url": "https://arpa-h.gov/explore-funding/programs/surpass",
+            "confidence": "machine_extracted_needs_verification",
+            "evidence_id": "evidence-arpa-h:surpass-5d988da263a1",
+            "citation": {
+              "document_url": "https://arpa-h.gov/explore-funding/programs/surpass",
+              "citation_url": "https://arpa-h.gov/explore-funding/programs/surpass",
+              "document_name": null,
+              "sha256": "aa874e0da74d436d52451533c2b946a6176c2fbcd1dd078418a93d11e1e11776",
+              "page": null,
+              "section": "Solicitation Overview",
+              "location": "section “Solicitation Overview”",
+              "quote": "…ity to learn more about this opportunity, ask questions, and make connections. Registration required, see Special Notice ARPA-H-SN-26-164 for event details. Solution Summary Due - November 30, 2026 Submitting a summary is required to move forward with this opportunity. After submitting a summary, await feedback from ARPA-H before proceeding. Proposal Due -…",
+              "extracted_at": "2026-10-16T15:54:04.316189Z",
+              "structural_reference": {
+                "block_id": "html-30",
+                "kind": "list_item",
+                "heading_path": [
+                  "What if we could shorten clinical trials from taking more than a decade to less than four years?",
+                  "Solicitation Overview"
+                ],
+                "source_position": [
+                  399,
+                  2876
+                ]
+              }
+            },
+            "required": null,
+            "subject": "submission",
+            "parser_version": "official-evidence-3"
+          },
+          "access": "open",
+          "prerequisites": []
+        },
+        "source_aliases": null,
+        "last_updated": null,
+        "version": null,
+        "topic_areas": [
+          "Technology development",
+          "Artificial intelligence and machine learning",
+          "Data science"
+        ],
+        "disciplines": [],
+        "applicant_types": [],
+        "funding_instruments": [],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://arpa-h.gov/explore-funding/programs/surpass",
+        "funding_opportunity_url": "https://arpa-h.gov/explore-funding/programs/surpass",
+        "primary_document_url": null
+      },
+      "old_deadline": null,
+      "new_deadline": "2026-11-30"
+    },
+    {
+      "id": "61fa1d58056aa3614d66",
+      "type": "new",
+      "label": "New opportunity",
+      "changed_at": "2026-10-16T16:54:22.635589Z",
+      "opportunity_id": "darpa-iarpa:darpa-darpapa250705",
+      "detail": "First appeared in the public catalog",
+      "record": {
+        "opportunity_id": "darpa-iarpa:darpa-darpapa250705",
+        "opportunity_number": "DARPA-PA-25-07-05",
+        "title": "Liquid Surge",
+        "agency": "Defense Advanced Research Projects Agency (DARPA)",
+        "source": "DARPA / IARPA research solicitations",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-10-14",
+        "close_date": "2026-12-14",
+        "deadlines": [
+          {
+            "kind": "abstract",
+            "date": "2026-11-03",
+            "time": null,
+            "timezone": null,
+            "note": "Abstract submission deadline for DARPA-PA-25-07-05 on the official DARPA program page: https://www.darpa.mil/research/programs/liquid-surge",
+            "estimated": false,
+            "source": "DARPA / IARPA research solicitations",
+            "source_url": "https://www.darpa.mil/research/programs/liquid-surge",
+            "source_field": "exact solicitation on official program page",
+            "confidence": "source_listed",
+            "stage": "abstract",
+            "required": null,
+            "obligation": "unknown",
+            "date_status": "known",
+            "citation": {
+              "document_url": "https://www.darpa.mil/research/programs/liquid-surge",
+              "citation_url": "https://www.darpa.mil/research/programs/liquid-surge",
+              "sha256": "3cc39805fca75f018cf9257f2bee947704032669ceabeed9b3cda5d525b08e01",
+              "section": "DARPA-PA-25-07-05",
+              "quote": "Abstract: Nov. 3, 2026",
+              "structural_reference": {
+                "field_label": "Abstract",
+                "solicitation_number": "DARPA-PA-25-07-05"
+              }
+            }
+          },
+          {
+            "kind": "application",
+            "date": "2026-12-14",
+            "time": null,
+            "timezone": null,
+            "note": "Proposal submission deadline for DARPA-PA-25-07-05 on the official DARPA program page: https://www.darpa.mil/research/programs/liquid-surge",
+            "estimated": false,
+            "source": "DARPA / IARPA research solicitations",
+            "source_url": "https://www.darpa.mil/research/programs/liquid-surge",
+            "source_field": "exact solicitation on official program page",
+            "confidence": "source_listed",
+            "stage": "application",
+            "required": null,
+            "obligation": "unknown",
+            "date_status": "known",
+            "citation": {
+              "document_url": "https://www.darpa.mil/research/programs/liquid-surge",
+              "citation_url": "https://www.darpa.mil/research/programs/liquid-surge",
+              "sha256": "3cc39805fca75f018cf9257f2bee947704032669ceabeed9b3cda5d525b08e01",
+              "section": "DARPA-PA-25-07-05",
+              "quote": "Proposal: Dec. 14, 2026",
+              "structural_reference": {
+                "field_label": "Proposal",
+                "solicitation_number": "DARPA-PA-25-07-05"
+              }
+            }
+          }
+        ],
+        "submission_requirements": [],
+        "next_submission": {
+          "version": 2,
+          "as_of": "2026-10-16",
+          "application_class": "new",
+          "date": "2026-11-03",
+          "event": {
+            "kind": "abstract",
+            "date": "2026-11-03",
+            "time": null,
+            "timezone": null,
+            "note": "Abstract submission deadline for DARPA-PA-25-07-05 on the official DARPA program page: https://www.darpa.mil/research/programs/liquid-surge",
+            "estimated": false,
+            "source": "DARPA / IARPA research solicitations",
+            "source_url": "https://www.darpa.mil/research/programs/liquid-surge",
+            "source_field": "exact solicitation on official program page",
+            "confidence": "source_listed",
+            "stage": "abstract",
+            "required": null,
+            "obligation": "unknown",
+            "date_status": "known",
+            "citation": {
+              "document_url": "https://www.darpa.mil/research/programs/liquid-surge",
+              "citation_url": "https://www.darpa.mil/research/programs/liquid-surge",
+              "sha256": "3cc39805fca75f018cf9257f2bee947704032669ceabeed9b3cda5d525b08e01",
+              "section": "DARPA-PA-25-07-05",
+              "quote": "Abstract: Nov. 3, 2026",
+              "structural_reference": {
+                "field_label": "Abstract",
+                "solicitation_number": "DARPA-PA-25-07-05"
+              }
+            }
+          },
+          "access": "open",
+          "prerequisites": []
+        },
+        "source_aliases": null,
+        "last_updated": "2026-10-14",
+        "version": null,
+        "topic_areas": [
+          "Environmental science"
+        ],
+        "disciplines": [],
+        "applicant_types": [],
+        "funding_instruments": [],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://sam.gov/workspace/contract/opp/33a06aa2901440c29518b95f8e099cfa/view",
+        "funding_opportunity_url": "https://sam.gov/workspace/contract/opp/33a06aa2901440c29518b95f8e099cfa/view",
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "0e9d608d937edb5c8b02",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-10-16T16:54:22.635589Z",
+      "opportunity_id": "360660",
+      "detail": "Deadline 2026-11-15",
+      "record": {
+        "opportunity_id": "360660",
+        "opportunity_number": "PAR-26-144",
+        "title": "Global Brain and Nervous System Disorders Research Across the Lifespan - Exploratory Grants",
+        "agency": "National Institutes of Health",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "forecasted",
+        "posted_date": "2026-08-14",
+        "close_date": "2026-11-15",
+        "deadlines": [
+          {
+            "kind": "estimated_application",
+            "date": "2026-11-15",
+            "time": null,
+            "timezone": null,
+            "note": null,
+            "estimated": true,
+            "source": "Grants.gov XML extract",
+            "source_url": "https://www.grants.gov/search-results-detail/360660",
+            "source_field": "EstimatedSynopsisCloseDate",
+            "confidence": "official_estimate",
+            "detail_checked_at": "2026-07-31T12:17:15.975581Z"
+          }
+        ],
+        "submission_requirements": null,
+        "next_submission": {
+          "version": 2,
+          "as_of": "2026-10-16",
+          "application_class": "new",
+          "date": "2026-11-15",
+          "event": {
+            "kind": "estimated_application",
+            "date": "2026-11-15",
+            "time": null,
+            "timezone": null,
+            "note": null,
+            "estimated": true,
+            "source": "Grants.gov XML extract",
+            "source_url": "https://www.grants.gov/search-results-detail/360660",
+            "source_field": "EstimatedSynopsisCloseDate",
+            "confidence": "official_estimate",
+            "detail_checked_at": "2026-07-31T12:17:15.975581Z"
+          },
+          "access": "open",
+          "prerequisites": []
+        },
+        "source_aliases": null,
+        "last_updated": "2026-03-11",
+        "version": "Forecast 4",
+        "topic_areas": [
+          "Neuroscience",
+          "Social and behavioral sciences"
+        ],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Independent school districts",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Private institutions of higher education",
+          "For-profit organizations other than small businesses",
+          "Small businesses",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/360660",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      },
+      "deadline": "2026-11-15"
+    },
     {
       "id": "f8917c5a05cfee433c8d",
       "type": "closed_or_removed",
@@ -3781,90 +4527,6 @@
         "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/355233"
       },
       "deadline": "2026-11-14"
-    },
-    {
-      "id": "9171a9e0ac516a91c733",
-      "type": "closing_soon",
-      "label": "Closing soon",
-      "changed_at": "2026-10-16T14:35:42.543184Z",
-      "opportunity_id": "363242",
-      "detail": "Deadline 2026-11-15",
-      "record": {
-        "opportunity_id": "363242",
-        "opportunity_number": "DOT-HASS-FY26-DIIG",
-        "title": "FY26 US DOT Drone Infrastructure Inspection Grants (DIIG) Program",
-        "agency": "69A345 Office of the Under Secretary for Policy",
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "forecasted",
-        "posted_date": "2026-09-15",
-        "close_date": "2026-11-15",
-        "deadlines": [
-          {
-            "kind": "estimated_application",
-            "date": "2026-11-15",
-            "time": null,
-            "timezone": null,
-            "note": null,
-            "estimated": true,
-            "source": "Grants.gov XML extract",
-            "source_url": "https://www.grants.gov/search-results-detail/363242",
-            "source_field": "EstimatedSynopsisCloseDate",
-            "confidence": "official_estimate",
-            "detail_checked_at": "2026-07-31T12:17:15.975581Z"
-          }
-        ],
-        "submission_requirements": null,
-        "next_submission": {
-          "version": 2,
-          "as_of": "2026-10-16",
-          "application_class": "new",
-          "date": "2026-11-15",
-          "event": {
-            "kind": "estimated_application",
-            "date": "2026-11-15",
-            "time": null,
-            "timezone": null,
-            "note": null,
-            "estimated": true,
-            "source": "Grants.gov XML extract",
-            "source_url": "https://www.grants.gov/search-results-detail/363242",
-            "source_field": "EstimatedSynopsisCloseDate",
-            "confidence": "official_estimate",
-            "detail_checked_at": "2026-07-31T12:17:15.975581Z"
-          },
-          "access": "open",
-          "prerequisites": []
-        },
-        "source_aliases": null,
-        "last_updated": "2026-07-28",
-        "version": "Forecast 3",
-        "topic_areas": [
-          "Community development",
-          "Education and workforce",
-          "Transportation"
-        ],
-        "disciplines": [
-          "Community and Social Sciences",
-          "Engineering and Physical Sciences"
-        ],
-        "applicant_types": [
-          "State governments",
-          "County governments",
-          "City or township governments",
-          "Federally recognized Native American tribal governments",
-          "Other"
-        ],
-        "funding_instruments": [
-          "Grant"
-        ],
-        "award_floor": 500000,
-        "award_ceiling": 9000000,
-        "detail_page": "https://www.grants.gov/search-results-detail/363242",
-        "funding_opportunity_url": null,
-        "primary_document_url": null
-      },
-      "deadline": "2026-11-15"
     },
     {
       "id": "8c5d6d9d63730692e7c4",
@@ -8562,98 +9224,6 @@
         "funding_opportunity_url": null,
         "primary_document_url": null
       }
-    },
-    {
-      "id": "0e9d608d937edb5c8b02",
-      "type": "closing_soon",
-      "label": "Closing soon",
-      "changed_at": "2026-10-16T14:35:42.543184Z",
-      "opportunity_id": "360660",
-      "detail": "Deadline 2026-11-15",
-      "record": {
-        "opportunity_id": "360660",
-        "opportunity_number": "PAR-26-144",
-        "title": "Global Brain and Nervous System Disorders Research Across the Lifespan - Exploratory Grants",
-        "agency": "National Institutes of Health",
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "forecasted",
-        "posted_date": "2026-08-14",
-        "close_date": "2026-11-15",
-        "deadlines": [
-          {
-            "kind": "estimated_application",
-            "date": "2026-11-15",
-            "time": null,
-            "timezone": null,
-            "note": null,
-            "estimated": true,
-            "source": "Grants.gov XML extract",
-            "source_url": "https://www.grants.gov/search-results-detail/360660",
-            "source_field": "EstimatedSynopsisCloseDate",
-            "confidence": "official_estimate",
-            "detail_checked_at": "2026-07-31T12:17:15.975581Z"
-          }
-        ],
-        "submission_requirements": null,
-        "next_submission": {
-          "version": 2,
-          "as_of": "2026-10-16",
-          "application_class": "new",
-          "date": "2026-11-15",
-          "event": {
-            "kind": "estimated_application",
-            "date": "2026-11-15",
-            "time": null,
-            "timezone": null,
-            "note": null,
-            "estimated": true,
-            "source": "Grants.gov XML extract",
-            "source_url": "https://www.grants.gov/search-results-detail/360660",
-            "source_field": "EstimatedSynopsisCloseDate",
-            "confidence": "official_estimate",
-            "detail_checked_at": "2026-07-31T12:17:15.975581Z"
-          },
-          "access": "open",
-          "prerequisites": []
-        },
-        "source_aliases": null,
-        "last_updated": "2026-03-11",
-        "version": "Forecast 4",
-        "topic_areas": [
-          "Neuroscience",
-          "Social and behavioral sciences"
-        ],
-        "disciplines": [
-          "Medical and Health"
-        ],
-        "applicant_types": [
-          "State governments",
-          "County governments",
-          "City or township governments",
-          "Special district governments",
-          "Independent school districts",
-          "Public and state institutions of higher education",
-          "Federally recognized Native American tribal governments",
-          "Public and Indian housing authorities",
-          "Other Native American tribal organizations",
-          "Nonprofits with 501(c)(3) status",
-          "Nonprofits without 501(c)(3) status",
-          "Private institutions of higher education",
-          "For-profit organizations other than small businesses",
-          "Small businesses",
-          "Other"
-        ],
-        "funding_instruments": [
-          "Grant"
-        ],
-        "award_floor": null,
-        "award_ceiling": null,
-        "detail_page": "https://www.grants.gov/search-results-detail/360660",
-        "funding_opportunity_url": null,
-        "primary_document_url": null
-      },
-      "deadline": "2026-11-15"
     },
     {
       "id": "0c415085a3645a713837",
