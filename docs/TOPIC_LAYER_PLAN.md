@@ -1,5 +1,7 @@
 # Topic Layer Implementation Plan
 
+**Historical record:** The standalone pilot/review follow-up was retired on October 16, 2026. Current development is governed by [the single Team Match objective](TEAM_MATCH_OBJECTIVE.md); old future-work statements below are not a fresh execution plan.
+
 **Deterministic subtopic extraction for umbrella solicitations**
 Repository: `mporosoff/grants-scraper` (Funding Finder)
 Status: complete · Version 8.40 · Written 2026-08-15 · **Revised 2026-08-21 through the P11 production closeout**
@@ -5031,8 +5033,7 @@ investigation. What remains is narrower and specific.
    not carry. The pre-topic-layer results therefore need **post-P9 regression
    revalidation** and may not be assumed to transfer. → **MEAS-9**
 3. **No multi-researcher human relevance validation has been run.** The Phase 2C
-   pilot is written (`docs/PILOT_PARTICIPANT_INSTRUCTIONS.md`,
-   `evaluation/README.md`) and deferred; `docs/PHASE2_COVERAGE_ROLLOUT.md` calls
+   pilot was documented historically and was retired by the owner on October 16, 2026; the old rollout roadmap called
    it *"the highest product risk"*. It had **no canonical obligation ID until
    2026-08-27**. → **MEAS-10**
 

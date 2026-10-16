@@ -1,9 +1,8 @@
 # Phase 3 deployment review
 
-Phase 3 must be verified in the deployed application before the deferred
-multi-researcher relevance pilot begins. This review checks whether official
-FOA evidence is accurate, easy to reach, and easy to return to the project
-owner.
+**Scope update — October 16, 2026:** The owner retired the standalone human pilot/review and recruitment/handoff project. This file remains an optional tooling/privacy reference, not a pending project or release gate. Current development follows [the Team Match objective](../docs/TEAM_MATCH_OBJECTIVE.md); missing historical review evidence is not relabeled as completed.
+
+This historical workflow was designed to check official FOA evidence and return a private review before a researcher pilot. The owner retired that standalone review/pilot project on October 16, 2026. Existing privacy-safe review tooling remains optional; no new return or participant exercise is required by this document.
 
 ## What the site records
 
@@ -69,9 +68,9 @@ python -m scripts.summarize_phase3_reviews evaluation/inbox --output-dir evaluat
 The aggregator deduplicates repeated exports by review ID and keeps the latest
 copy. Invalid files are reported rather than silently ignored.
 
-## Deployment gate before the pilot
+## Historical pre-pilot gate — retired
 
-The Phase 3 deployment gate is met only after:
+The original checklist below described the planned pre-pilot review. It is retained as tooling history, not an active acceptance gate:
 
 - a scheduled run publishes a nonzero real document-evidence batch;
 - one PDF page citation and one HTML section/anchor citation are checked;
@@ -83,4 +82,4 @@ The Phase 3 deployment gate is met only after:
   report formats; and
 - mobile and desktop layouts remain usable.
 
-Only then should the 3–5 researcher Phase 2C pilot begin.
+These historical conditions do not start a pilot or create pending work. Missing review/handoff evidence is not claimed as completed.

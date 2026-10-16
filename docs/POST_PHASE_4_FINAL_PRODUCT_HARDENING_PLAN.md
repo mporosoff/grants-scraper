@@ -1,5 +1,7 @@
 # Funding Finder Post-Phase-4 Final Product Hardening Plan
 
+**Current scope — October 16, 2026:** This is a historical completion record. The owner retired the standalone Alerts orchestration redesign (`PFH-014`). The active development objective is [Make Team Match work better](TEAM_MATCH_OBJECTIVE.md).
+
 **Document status:** Unit D closeout candidate; this exact document becomes the final execution record only after protected exact-head CI, terminal review, and protected merge<br>
 **Plan version:** 3.0<br>
 **Repository:** `mporosoff/grants-scraper`  
@@ -33,7 +35,7 @@ This document governed Units 0 and A-C and now governs the conditional Unit D cl
 4. Unit C — perform the residual alert-delivery audit and mobile alert-dialog correction.
 5. Unit D — reconcile final documentation after Units A-C are live.
 
-Cloudflare Workflows/Queues evaluation is a separate future architecture item. It does not block Units A-D, but no additional scheduler feature may be added before that evaluation.
+The owner retired the separate Cloudflare Workflows/Queues architecture project on October 16, 2026. It is not a pending prerequisite or a new implementation commitment; existing Alerts operational controls remain in force.
 
 ---
 
@@ -42,7 +44,7 @@ Cloudflare Workflows/Queues evaluation is a separate future architecture item. I
 | Workstream | Status | Evidence or candidate | Remaining work |
 |---|---|---|---|
 | Four-phase bug-fix and UX-hardening program | Complete and live | PR #79; protected `main` `888ca4264f0c437f970b867b9e3c28b4d393643b` | None |
-| Alerts scheduler recovery and Phase 4 operational closeout | Complete and live | Alerts Worker `7b95c810-f46f-47a8-9a8d-6100aa75bb34`; rollback `34c69ecb-7c70-4892-a28f-748ece759df0` | Future Workflows/Queues evaluation only |
+| Alerts scheduler recovery and Phase 4 operational closeout | Complete and live | Alerts Worker `7b95c810-f46f-47a8-9a8d-6100aa75bb34`; rollback `34c69ecb-7c70-4892-a28f-748ece759df0` | None; redesign retired October 16, 2026 |
 | Unit A | Complete and live | Closed-unmerged preservation PR #82 at `443748b0381fedbae5ba478fb04b11dcf057827e`; integrated application PR #83 at candidate `55df7df2c20e92d3eff243b66ad10c0416292d28`; protected `main` `fee9912a47d0b5841d04973a23086e6566546200` | None |
 | Unit B | Complete and live | Historical frozen delta `cfbbcd309d8340313e7f10b70851603ddbbb95a6`; integrated application PR #83; Award Worker `d375880e-4ec4-4436-b435-2cb41e302124` | None |
 | Unit C | Complete and live within the A-C application release | Train commit `ba2938983d5689bdbbb757a0ba277cb40b4ccd9f`; integrated application PR #83; Pages deployment verified; Alerts Worker and D1 intentionally unchanged | No authorized inbox-receipt evidence; that boundary is recorded, not an unfinished defect |
@@ -94,7 +96,7 @@ Unit B may replace the existing incremental award-card browsing with its complet
 | `PFH-011` | C | High | Verification-email behavior across multiple addresses/subscriptions has not been conclusively separated into application acceptance, provider acceptance, and inbox delivery. | Complete: application/provider acceptance evidence confirmed; provider-webhook and authorized inbox-receipt evidence absent and not claimed |
 | `PFH-012` | C | Medium | The mobile alert dialog permits background-page scrolling and requires focus/scroll/repeated-open hardening. | Complete and live through PR #83 |
 | `PFH-013` | D | Medium | The post-Phase-4 implementation and production evidence is not yet recorded in one repository-tracked execution record. | Closure condition: protected merge of this exact Unit D closeout candidate; not complete before then |
-| `PFH-014` | Future | Architectural | Additional alert scheduler features require a Cloudflare Workflows/Queues versus Cron/D1 architecture decision. | Recorded; intentionally outside Units A-D |
+| `PFH-014` | Retired | Architectural | Standalone Alerts orchestration redesign. | Owner retired October 16, 2026; not implemented or pending |
 
 ---
 
@@ -408,7 +410,7 @@ Close the post-Phase-4 program after Units A-C are merged, deployed, and verifie
 - [x] Record Unit C provider-correlated versus inbox-delivery evidence and mobile dialog behavior.
 - [x] Append a concise post-Phase-4 addendum or pointer to `docs/FUNDING_FINDER_BUG_FIX_AND_UX_HARDENING_PLAN.md` without rewriting its completed Phase 4 evidence.
 - [x] Record genuine remaining source limitations, including JHU challenge behavior and snapshot/cache locality.
-- [x] Record the Workflows/Queues architecture follow-up as future work, not as completed implementation.
+- [x] Historically record the Workflows/Queues follow-up; the owner subsequently retired it on October 16, 2026 without implementation.
 
 ### Gate
 
@@ -424,15 +426,9 @@ Close the post-Phase-4 program after Units A-C are merged, deployed, and verifie
 
 ---
 
-## 11. Future architecture item — Cloudflare Workflows and Queues
+## 11. Retired architecture item — Alerts orchestration
 
-Before adding any new scheduler behavior, complete a separate architecture decision comparing:
-
-1. the current Cron + D1 orchestration;
-2. Cloudflare Workflows with D1 business state; and
-3. a Workflow + Queue hybrid with D1/provider idempotency.
-
-The decision must verify the actual account plan, CPU, wall-time, subrequest, step-result, state-retention, cost, migration, rollback, and observability constraints. Queues are at-least-once, so deterministic D1 and provider idempotency remains mandatory. This work is not authorized as part of Units A-D.
+The owner removed the standalone Cron/D1 versus Workflows/Queues redesign from the active backlog on October 16, 2026. No redesign was implemented, and it is not a pending project or a required Team Match milestone. The deployed Alerts service and its idempotency, privacy, reliability and security controls remain in place.
 
 ---
 
@@ -485,7 +481,7 @@ The decision must verify the actual account plan, CPU, wall-time, subrequest, st
 
 - [Pages `33246934213`](https://github.com/mporosoff/grants-scraper/actions/runs/33246934213) succeeded. Production equality checks confirmed the merged Funding Finder, Funded Awards, structured-provider, snapshot, and alert-dialog assets. No refresh workflow ran; no opportunity catalog, vector payload, passage corpus, model fingerprint, Strong/Potential membership, ranking threshold, or source mapping changed.
 - JHU remains explicitly disabled/fail-closed because its official unattended routes still require an interactive Cloudflare challenge. ROR remains identity evidence rather than a guaranteed legal-grantee crosswalk. External agency/provider availability can still yield truthfully labeled partial results or deterministic fallback.
-- Cloudflare Workflows/Queues evaluation remains a separate future architecture decision. It was not implemented in Units A-D and does not reopen this closeout.
+- The owner retired the unimplemented Cloudflare Workflows/Queues architecture follow-up on October 16, 2026; it does not reopen this historical closeout.
 - The historical untracked roadmap and the frozen Unit A/Unit B worktrees were preserved unchanged. Unit D changes only this execution record and the concise pointer in the completed twenty-five-finding plan.
 
-Post-Phase-4 findings `PFH-001` through `PFH-012` are complete with evidence. `PFH-013` and Unit D become complete only when this exact documentation-only candidate passes its protected exact-head gate, receives its terminal review, and merges without an unrelated deployment. `PFH-014` remains intentionally separate future architecture work. Before that merge, neither Unit D nor the post-Phase-4 program may be described as complete; after that merge, the stated closure condition is satisfied without changing the historical evidence above.
+Post-Phase-4 findings `PFH-001` through `PFH-012` are complete with evidence. `PFH-013` and Unit D become complete only when this exact documentation-only candidate passes its protected exact-head gate, receives its terminal review, and merges without an unrelated deployment. `PFH-014` was retired by the owner on October 16, 2026 and is no longer future work. Before that merge, neither Unit D nor the post-Phase-4 program may be described as complete; after that merge, the stated closure condition is satisfied without changing the historical evidence above.
