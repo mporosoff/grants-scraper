@@ -16,6 +16,7 @@ class Budget:
     def __init__(self):
         self.stopped = False
         self.units = []
+        self.active = []
 
     def expired(self, finalize=False):
         return self.stopped and not finalize
@@ -23,7 +24,11 @@ class Budget:
     @contextmanager
     def guard(self, phase, opportunity_id="", **kwargs):
         self.units.append((phase, opportunity_id))
-        yield
+        self.active.append(phase)
+        try:
+            yield
+        finally:
+            self.active.pop()
 
 
 class DocumentEvidenceBudget(unittest.TestCase):
@@ -78,6 +83,80 @@ class DocumentEvidenceBudget(unittest.TestCase):
         self.assertEqual(metrics["processing"]["timed_out_count"], 1)
         with self.assertRaisesRegex(RuntimeError, "incomplete"):
             e.validate_refresh_health(metrics)
+
+    def test_live_parse_and_topic_work_do_not_share_the_fetch_unit(self):
+        record, budget = self.record("fanout"), Budget()
+        containers = [{"text": "Completed notice text"}]
+        def parse(record, source, response, previous, now, *, subtopic_builder, **kwargs):
+            self.assertEqual(budget.active, ["notice_parse"])
+            subtopic_builder(record, b"notice", containers, {}, e.iso_utc(now), True)
+            return self.entry(record), True
+        def topics(*args, work_budget):
+            self.assertIs(work_budget, budget)
+            self.assertEqual(budget.active, [])
+            self.assertIs(args[2], containers)
+            return {"subtopics": []}
+        with patch.object(e, "_build_document_entry", side_effect=parse), \
+                patch.object(e, "subtopic_fields", side_effect=topics):
+            output, cache = e.enrich_document_evidence({"opportunities": [record]}, {"records": {}},
+                now=self.now, request_delay=0, work_budget=budget, enable_subtopics=True,
+                fetcher=lambda *_: {"status_code": 200})
+        self.assertEqual(cache["records"]["fanout"]["status"], "current")
+        self.assertEqual(output["diagnostics"]["document_evidence"]["processing"]["status"], "complete")
+
+    def test_fallback_topic_work_starts_after_its_fetch_unit(self):
+        record, budget = self.record("fallback"), Budget()
+        def topics(*args, work_budget):
+            self.assertIs(work_budget, budget)
+            self.assertEqual(budget.active, [])
+            return {"subtopics": []}
+        with patch.object(e, "subtopic_fields", side_effect=topics), \
+                patch("scripts.subtopic_sources.subtopic_only_primary", return_value=None):
+            _, metrics = e.refresh_subtopics_without_source([record], max_documents=1,
+                fetcher=lambda *_: {}, now=self.now, enabled=True, work_budget=budget)
+        self.assertEqual(metrics["processing"]["status"], "complete")
+
+    def test_every_topic_route_finishes_source_work_before_classification(self):
+        from scripts import subtopic_cov4, subtopic_records, subtopic_referenced, subtopic_sources, subtopic_structured
+        record = self.record("routes")
+        for route in ("structured", "referenced", "generic"):
+            with self.subTest(route=route):
+                budget = Budget()
+                structured = SimpleNamespace(records=[], document=None, method="native", diagnostics={}, reason=None)
+                result = SimpleNamespace(method="outline", reason=None)
+                def classify(*args):
+                    self.assertEqual(budget.active, [])
+                    return [], {}
+                with patch.object(subtopic_structured, "first_refusal", return_value=structured if route == "structured" else None), \
+                        patch.object(subtopic_referenced, "first_refusal", return_value=(result, {}, {}) if route == "referenced" else (None, None, {})), \
+                        patch.object(subtopic_sources, "best_segmentation", return_value=(result, {}, {})), \
+                        patch.object(subtopic_records, "build_records", return_value=[]), \
+                        patch.object(subtopic_cov4, "apply_gate", side_effect=classify) as gate:
+                    e.subtopic_fields(record, b"notice", [], {}, e.iso_utc(self.now), True, work_budget=budget)
+                gate.assert_called_once()
+                phases = [phase for phase, _ in budget.units]
+                self.assertIn({"structured": "subtopic_structured", "referenced": "subtopic_records",
+                               "generic": "subtopic_segmentation"}[route], phases)
+
+    def test_classification_timeout_discards_uncommitted_parse_and_keeps_publication_closed(self):
+        record, budget = self.record("pending"), Budget()
+        original = self.entry(record)
+        original["checked_at"] = "2026-09-01T00:00:00Z"
+        def parse(record, source, response, previous, now, *, subtopic_builder, **kwargs):
+            subtopic_builder(record, b"notice", [], {}, e.iso_utc(now), True)
+            completed = self.entry(record)
+            completed["checked_at"] = e.iso_utc(now)
+            return completed, True
+        with patch.object(e, "_build_document_entry", side_effect=parse), \
+                patch.object(e, "subtopic_fields", side_effect=WorkTimedOut("notice_classification", "pending")):
+            output, cache = e.enrich_document_evidence({"opportunities": [record]}, {"records": {"pending": original}},
+                now=self.now, request_delay=0, work_budget=budget, enable_subtopics=True,
+                fetcher=lambda *_: {"status_code": 200})
+        self.assertEqual(cache["records"]["pending"]["checked_at"], original["checked_at"])
+        self.assertEqual(cache["records"]["pending"]["status"], "processing_incomplete")
+        self.assertEqual(cache["records"]["pending"]["processing_incomplete"], "notice_classification_timeout")
+        with self.assertRaisesRegex(RuntimeError, "incomplete"):
+            e.validate_refresh_health(output["diagnostics"]["document_evidence"])
 
     def test_cached_reparse_timeout_keeps_original_receipt_and_does_not_fetch(self):
         record = self.record("cached")

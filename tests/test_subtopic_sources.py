@@ -9,12 +9,14 @@ extractable lines from 55 pages while matching a family inside prose.
 from pathlib import Path
 import sys
 import unittest
+from unittest.mock import Mock, patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from fixtures.minipdf import build_pdf, heading, line  # noqa: E402
 
 from scripts import subtopic_sources as sources  # noqa: E402
+from scripts import extract_document_evidence as evidence  # noqa: E402
 from scripts.extract_document_evidence import extract_containers  # noqa: E402
 
 
@@ -92,6 +94,64 @@ def run(record, primary, names, blobs, **kwargs):
 
 
 class PrimaryFirstTests(unittest.TestCase):
+    def test_evidence_containers_are_reused_without_reparsing_the_primary(self):
+        content = notice(TOPICS)
+        containers, _ = extract_containers(
+            content, PDF_DOC["content_type"], PDF_DOC["name"], PDF_DOC["url"])
+        original = repr(containers)
+        extract = Mock(side_effect=AssertionError("Already normalized primary was reparsed"))
+        result, document, diagnostics = sources.best_segmentation(
+            {"opportunity_id": "1001"}, content, PDF_DOC,
+            primary_containers=containers,
+            extract_containers=extract, download=downloader({}),
+            detail_fetcher=detail_with([]), collector=collector_for([]),
+        )
+        self.assertEqual(len(result.subtopics), 3)
+        self.assertEqual(result.method, "outline")
+        self.assertEqual(document, PDF_DOC)
+        self.assertEqual(diagnostics["attempts"][0]["outcome"], "outline")
+        self.assertEqual(repr(containers), original)
+        extract.assert_not_called()
+
+    def test_empty_supplied_containers_are_not_reextracted(self):
+        extract = Mock(side_effect=AssertionError("Empty completed extraction was repeated"))
+        result, _, diagnostics = sources.best_segmentation(
+            {"opportunity_id": "1001"}, b"unreadable document", PDF_DOC,
+            primary_containers=[], extract_containers=extract, download=downloader({}),
+            detail_fetcher=detail_with([]), collector=collector_for([]),
+        )
+        self.assertEqual(result.reason, "no_extractable_text")
+        self.assertEqual(diagnostics["attempts"][0]["outcome"], "no_extractable_text")
+        extract.assert_not_called()
+
+    def test_evidence_call_site_passes_its_completed_primary_extraction(self):
+        content = notice(TOPICS)
+        containers, _ = extract_containers(
+            content, PDF_DOC["content_type"], PDF_DOC["name"], PDF_DOC["url"])
+        with patch.object(evidence, "extract_containers", side_effect=AssertionError("Primary reparse")), \
+                patch("scripts.subtopic_cov4.apply_gate", side_effect=lambda record, children, document: (children, {})):
+            fields = evidence.subtopic_fields(
+                {"opportunity_id": "1001", "opportunity_number": "EXAMPLE", "title": "Notice"},
+                content, containers, PDF_DOC, "2026-10-16T00:00:00Z", True)
+        self.assertEqual(fields["subtopic_method"], "outline")
+        self.assertEqual(len(fields["subtopics"]), 3)
+
+    def test_reused_primary_containers_do_not_replace_secondary_extraction(self):
+        primary_containers, _ = extract_containers(
+            BLAND, PDF_DOC["content_type"], PDF_DOC["name"], PDF_DOC["url"])
+        secondary = notice(TOPICS)
+        extract = Mock(wraps=extract_containers)
+        result, document, _ = sources.best_segmentation(
+            {"opportunity_id": "1001"}, BLAND, PDF_DOC,
+            primary_containers=primary_containers,
+            extract_containers=extract, download=downloader({"appendix.pdf": secondary}),
+            detail_fetcher=detail_with(["appendix.pdf"]), collector=collector_for(["appendix.pdf"]),
+        )
+        self.assertEqual(len(result.subtopics), 3)
+        self.assertEqual(document["name"], "appendix.pdf")
+        self.assertEqual(result.confidence, "low")
+        extract.assert_called_once_with(secondary, "application/pdf", "appendix.pdf", "https://example.gov/appendix.pdf")
+
     def test_a_segmenting_primary_costs_no_extra_fetch(self):
         download = downloader({})
         result, document, diagnostics = sources.best_segmentation(

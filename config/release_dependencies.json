@@ -124,6 +124,7 @@
         "config/sam_gov.json",
         "requirements.txt",
         "tools/run_budgeted_documents.py",
+        "tools/generation_document_checkpoint.py",
         "tools/offline_spend.py",
         "tools/require_sam_refresh.py"
       ],

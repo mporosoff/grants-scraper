@@ -1943,7 +1943,7 @@ def referenced_fetch(url):
     return PoliteClient().get_text(url)
 
 
-def subtopic_fields(record, content, containers, document, fetched_at, enabled):
+def subtopic_fields(record, content, containers, document, fetched_at, enabled, *, work_budget=None):
     """Segmentation result for one document, or ``{}`` when the flag is off.
 
     Returns a dict so the caller can splat it into the entry literal. With the
@@ -1977,16 +1977,18 @@ def subtopic_fields(record, content, containers, document, fetched_at, enabled):
     # parents and current attachment lists. A claimed route that collapses
     # returns zero and does not fall through to generic inference; a higher rung
     # is never unioned with a weaker one.
-    structured = subtopic_structured.first_refusal(
-        record,
-        content,
-        document,
-        detail_fetcher=fetch_detail,
-        collector=collect_attachments,
-        download=download_document,
-        extract_containers=extract_containers,
-        as_of=fetched_at[:10],
-    )
+    identifier = str(record.get("opportunity_id") or record.get("opportunity_number") or "")
+    with work_guard(work_budget, "subtopic_structured", identifier):
+        structured = subtopic_structured.first_refusal(
+            record,
+            content,
+            document,
+            detail_fetcher=fetch_detail,
+            collector=collect_attachments,
+            download=download_document,
+            extract_containers=extract_containers,
+            as_of=fetched_at[:10],
+        )
     if structured is not None:
         gated, structured_cov4 = subtopic_cov4.apply_gate(
             record,
@@ -2019,9 +2021,10 @@ def subtopic_fields(record, content, containers, document, fetched_at, enabled):
     # other record, and declining costs nothing -- the generic path below runs
     # unchanged, so an unhealthy referenced source can never suppress an answer
     # inference would have found.
-    referenced_result, referenced_document, referenced_diagnostics = (
-        subtopic_referenced.first_refusal(record, fetch=referenced_fetch)
-    )
+    with work_guard(work_budget, "subtopic_referenced", identifier):
+        referenced_result, referenced_document, referenced_diagnostics = (
+            subtopic_referenced.first_refusal(record, fetch=referenced_fetch)
+        )
     if referenced_result is not None:
         # Cov4 is applied here too, and it is *supposed* to do nothing. The P6
         # forward obligation is that `referenced` children bypass the classifier
@@ -2029,9 +2032,8 @@ def subtopic_fields(record, content, containers, document, fetched_at, enabled):
         # gate is invoked and its own provenance boundary declines them --
         # `bypassed: 14, classifier_calls: 0` in the diagnostics below is the
         # proof, and a regression test reads exactly that.
-        referenced_records, referenced_cov4 = subtopic_cov4.apply_gate(
-            record,
-            subtopic_records.build_records(
+        with work_guard(work_budget, "subtopic_records", identifier):
+            referenced_records = subtopic_records.build_records(
                 record,
                 referenced_result,
                 document=referenced_document,
@@ -2040,7 +2042,10 @@ def subtopic_fields(record, content, containers, document, fetched_at, enabled):
                 # `referenced`. Never `native` -- the Army publishes the page,
                 # not the relationship.
                 provenance=subtopic_records.REFERENCED,
-            ),
+            )
+        referenced_records, referenced_cov4 = subtopic_cov4.apply_gate(
+            record,
+            referenced_records,
             referenced_document,
         )
         return {
@@ -2064,19 +2069,21 @@ def subtopic_fields(record, content, containers, document, fetched_at, enabled):
         # in hand, so a record whose topics are in the primary costs no extra
         # fetch. source_for_record() is untouched: this path is parallel and
         # subtopic-only, so fact extraction still reads exactly one document.
-        result, chosen, attempts = subtopic_sources.best_segmentation(
-            record,
-            content,
-            document,
-            extract_containers=extract_containers,
-            download=download_document,
-            detail_fetcher=fetch_detail,
-            collector=collect_attachments,
-            parent_deadline=record.get("close_date"),
-        )
-        built = subtopic_records.build_records(
-            record, result, document=chosen or document, as_of=fetched_at[:10]
-        )
+        with work_guard(work_budget, "subtopic_segmentation", identifier):
+            result, chosen, attempts = subtopic_sources.best_segmentation(
+                record,
+                content,
+                document,
+                extract_containers=extract_containers,
+                download=download_document,
+                detail_fetcher=fetch_detail,
+                collector=collect_attachments,
+                parent_deadline=record.get("close_date"),
+                primary_containers=containers,
+            )
+            built = subtopic_records.build_records(
+                record, result, document=chosen or document, as_of=fetched_at[:10]
+            )
         # §18.1 Cov4. The narrowest point that already holds everything the gate
         # needs: `built` carries the parent id, the parent opportunity number,
         # the §5.1 rung, the candidate title and its excerpt; `chosen or
@@ -2111,7 +2118,31 @@ def subtopic_fields(record, content, containers, document, fetched_at, enabled):
     return fields
 
 
-def build_document_entry(
+def build_document_entry(record, source, response, previous, now, *, enable_subtopics=False,
+                         backfill_subtopics=False, structure_cache=None, work_budget=None):
+    """Bound source parsing separately from the classifiers for its topic set.
+
+    A large notice may declare many valid subjects. Parsing is one bounded
+    unit; each classifier is a separate bounded unit under the same overall
+    deadline. The entry is committed only after all of its work completes.
+    """
+    deferred = []
+    def defer_subtopics(*args):
+        deferred.append(args)
+        return {}
+
+    identifier = str(record.get("opportunity_id") or record.get("opportunity_number") or "")
+    with work_guard(work_budget, "notice_parse", identifier):
+        entry, extracted = _build_document_entry(
+            record, source, response, previous, now,
+            enable_subtopics=enable_subtopics, backfill_subtopics=backfill_subtopics,
+            structure_cache=structure_cache, subtopic_builder=defer_subtopics)
+    for args in deferred:
+        entry.update(subtopic_fields(*args, work_budget=work_budget))
+    return entry, extracted
+
+
+def _build_document_entry(
     record,
     source,
     response,
@@ -2121,7 +2152,9 @@ def build_document_entry(
     enable_subtopics=False,
     backfill_subtopics=False,
     structure_cache=None,
+    subtopic_builder=None,
 ):
+    subtopic_builder = subtopic_builder or subtopic_fields
     fetched_at = iso_utc(now)
     content = response["content"]
     if content_kind(content, response.get("content_type"), source.get("name"), source["url"]) == "html":
@@ -2173,7 +2206,7 @@ def build_document_entry(
             entry.pop("subtopic_revalidation", None)
             entry.pop("subtopic_reason", None)
             entry.update(
-                subtopic_fields(
+                subtopic_builder(
                     record,
                     content,
                     containers,
@@ -2264,7 +2297,7 @@ def build_document_entry(
         "review_queue": review_queue,
         "version_history": version_history,
         "archived_from_catalog_at": None,
-        **subtopic_fields(
+        **subtopic_builder(
             record, content, containers, document, fetched_at, enable_subtopics
         ),
     }, True
@@ -2632,18 +2665,19 @@ def refresh_subtopics_without_source(
                         }
                     except Exception:  # noqa: BLE001 - an agency page is optional here
                         content, document = None, None
-                fields = subtopic_fields(
-                    record, content, None, document, fetched_at, True
-                ) or {
-                    "subtopics": [],
-                    "subtopic_reason": "no_source_or_extractable_text",
-                    "subtopic_method": "none",
-                }
-                fields["checked_at"] = fetched_at
-                fields["source_signature"] = source_signature(record, source)
-        except WorkTimedOut:
-            store[opportunity_id] = incomplete_entry(store.get(opportunity_id), "subtopic_timeout")
-            record_incomplete(processing, "subtopic_timeout")
+            fields = subtopic_fields(
+                record, content, None, document, fetched_at, True, work_budget=work_budget
+            ) or {
+                "subtopics": [],
+                "subtopic_reason": "no_source_or_extractable_text",
+                "subtopic_method": "none",
+            }
+            fields["checked_at"] = fetched_at
+            fields["source_signature"] = source_signature(record, source)
+        except WorkTimedOut as error:
+            phase = error.phase + "_timeout"
+            store[opportunity_id] = incomplete_entry(store.get(opportunity_id), phase)
+            record_incomplete(processing, phase)
             interrupted_ids.add(opportunity_id)
         else:
             store[opportunity_id] = fields
@@ -3425,9 +3459,10 @@ def enrich_document_evidence(
                     previous.pop("processing_incomplete", None)
                     previous_document["last_seen_at"] = iso_utc(now)
                     entry, extracted = previous, False
-                else:
-                    entry, extracted = build_document_entry(record, source, response, previous, now,
-                        enable_subtopics=enable_subtopics, backfill_subtopics=backfill, structure_cache=structure_cache)
+            if response.get("status_code") != 304:
+                entry, extracted = build_document_entry(record, source, response, previous, now,
+                    enable_subtopics=enable_subtopics, backfill_subtopics=backfill,
+                    structure_cache=structure_cache, work_budget=work_budget)
             cached_records[identifier] = entry
             refreshed += int(extracted)
             not_modified += int(not extracted)
@@ -3435,9 +3470,9 @@ def enrich_document_evidence(
             completed_ids.add(identifier)
             if enable_subtopics:
                 classifier_run_entries.append(entry)
-        except WorkTimedOut:
+        except WorkTimedOut as error:
             # The latest completed receipt survives; mutable live copies do not.
-            incomplete(cached_records, identifier, phase + "_timeout")
+            incomplete(cached_records, identifier, error.phase + "_timeout")
         except Exception as exc:  # noqa: BLE001 - retain other records
             failure = {"opportunity_id": identifier, "url": source["url"], "error": type(exc).__name__}
             failures.append(failure)
