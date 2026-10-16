@@ -10,6 +10,7 @@ import zipfile
 from tools.offline_ai import atomic_json, config, identity
 from tools.evaluate_offline_ai import TASK
 from tools.release_candidate import checked_path
+from tools.fetch_release_artifact import artifact_bytes, repository_artifacts
 
 WORKFLOW = ".github/workflows/offline-ai-evaluation.yml"
 PILOT_WORKFLOW = ".github/workflows/refresh-opportunities.yml"
@@ -21,14 +22,11 @@ def api(repository, path):
 
 
 def prepare(repository, destination, reservation):
-    artifacts = []
-    for page in range(1, 101):
-        chunk = json.loads(api(repository, f"actions/artifacts?per_page=100&page={page}"))["artifacts"]
-        artifacts.extend(a for a in chunk if a["name"].startswith(PREFIX + "-"))
-        if len(chunk) < 100:
-            break
-    else:
-        raise ValueError("artifact_history_limit_exceeded")
+    # A pilot's newest task allowance may survive only in the independent
+    # release archive. Select by original artifact ID across both transports
+    # before restoring, or an older native task ledger could erase its charges.
+    artifacts = [item for item in repository_artifacts(repository, lambda path: api(repository, path))
+                 if item['name'].startswith(PREFIX + '-')]
     reservations = sorted((a for a in artifacts if "-reservation-" in a["name"]), key=lambda a: a["id"])
     if not reservations:
         prior = json.loads(api(repository, "actions/workflows/offline-ai-evaluation.yml/runs?event=workflow_dispatch&branch=main&per_page=100"))["workflow_runs"]
@@ -44,7 +42,8 @@ def prepare(repository, destination, reservation):
         run = json.loads(api(repository, f"actions/runs/{selected['workflow_run']['id']}"))
         if run["path"] not in (WORKFLOW, PILOT_WORKFLOW) or run["head_branch"] != "main" or run["event"] != "workflow_dispatch":
             raise ValueError("untrusted_evaluation_checkpoint")
-        with zipfile.ZipFile(io.BytesIO(api(repository, f"actions/artifacts/{selected['id']}/zip"))) as archive:
+        with zipfile.ZipFile(io.BytesIO(artifact_bytes(repository, str(run['id']), selected,
+                                                     lambda path: api(repository, path)))) as archive:
             for item in archive.infolist():
                 if not item.is_dir():
                     target = checked_path(destination, item.filename)

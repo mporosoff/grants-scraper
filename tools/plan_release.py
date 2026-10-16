@@ -36,7 +36,7 @@ def release_plan_sha(repository, run, publication_attempt, destination):
     if not re.fullmatch('[1-9][0-9]*', str(publication_attempt)):
         raise ValueError('Invalid publication attempt for release plan')
     plans = []
-    for artifact in run_artifacts(run, lambda path: api(repository, path)):
+    for artifact in run_artifacts(run, lambda path: api(repository, path), repository=repository):
         match = re.fullmatch(r'release-plan-([1-9][0-9]*)', artifact['name'])
         if match and int(match[1]) <= int(publication_attempt):
             plans.append((int(match[1]), artifact))
@@ -58,82 +58,79 @@ def release_plan_sha(repository, run, publication_attempt, destination):
 
 
 def latest_report(repository, candidate, kind, destination):
-    from tools.fetch_release_artifact import fetch
+    from tools.fetch_release_artifact import fetch, repository_artifacts
     from tools.offline_ai_checkpoint import api
-    for page in range(1, 101):
-        rows = json.loads(api(repository, f'actions/artifacts?per_page=100&page={page}'))['artifacts']
-        artifact_kind = 'validation' if kind == 'browser' else 'publication' if kind == 'review' else kind
-        matches = [a for a in rows if re.fullmatch(f'{artifact_kind}-{candidate}-[1-9][0-9]*', a['name']) and not a['expired']]
-        for artifact in sorted(matches, key=lambda a: a['id'], reverse=True):
-            run = str(artifact['workflow_run']['id'])
-            target = Path(destination) / str(artifact['id'])
-            fetch(repository, run, artifact['name'], target)
-            report = target / {'live': 'live-verification.json', 'validation': 'validation.json',
-                              'publication': 'publication.json', 'browser': 'final-integration.json',
-                              'review': 'review-pending.json'}[kind]
-            if kind == 'review':
-                ready_path = target / 'review-ready.json'
-                if report.exists() and ready_path.exists():
-                    raise ValueError('Conflicting latest publication review checkpoints')
-                if report.exists():
-                    return run, c.read_json(report)
-                if not ready_path.exists():
-                    return run, None
-                ready = c.read_json(ready_path)
-                required = {'schema_version', 'candidate_id', 'base_sha', 'head_sha', 'pr_url',
-                            'artifact_run', 'validation_receipt_sha256', 'timestamp'}
-                validation = c.read_json(target / 'validation.json')
-                planned_sha = release_plan_sha(repository, run, artifact['name'].rsplit('-', 1)[1], target / 'plan')
-                if (set(ready) != required or type(ready['schema_version']) is not int or ready['schema_version'] != 1
-                        or ready['candidate_id'] != candidate
-                        or not re.fullmatch('[1-9][0-9]*', str(ready['artifact_run']))
-                        or not re.fullmatch('[a-f0-9]{40}', ready['head_sha'])
-                        or ready['base_sha'] != planned_sha
-                        or ready['validation_receipt_sha256'] != c.digest(c.encoded(validation))
-                        or validation.get('validation_sha') != ready['base_sha']
-                        or validation.get('candidate_id') != candidate
-                        or validation.get('production_mutated') is not False
-                        or validation.get('gates') != {gate: 'passed' for gate in c.GATES}):
-                    raise ValueError('Latest ready checkpoint does not bind its protected validation receipt')
-                # This selects saved bytes after a later publication failure.
-                # It never approves another PR head or current validation code.
-                return run, ready
-            if kind == 'browser' and not report.exists():
-                for receipt_name in ('validation.json', 'validation-report.json'):
-                    receipt_path = target / receipt_name
-                    if receipt_path.exists():
-                        nested = c.read_json(receipt_path).get('final_integration', {})
-                        if nested.get('identity'):
-                            # A killed explicit browser step may leave only its
-                            # pre-dispatch failed/unfinished marker. Do not skip
-                            # that marker in favor of an older passing run.
-                            return run, nested
-                continue  # Ordinary-only validation is not a newer browser result.
-            if kind == 'publication':
-                if not report.exists():
-                    return run, None  # Pre-publication failure is not a Pages checkpoint.
-                attempt = artifact['name'].rsplit('-', 1)[1]
-                jobs = []
-                for job_page in range(1, 101):
-                    batch = json.loads(api(repository, f'actions/runs/{run}/attempts/{attempt}/jobs?per_page=100&page={job_page}'))['jobs']
-                    jobs.extend(batch)
-                    if len(batch) < 100:
-                        break
-                else:
-                    raise ValueError('Pages evidence pagination exceeds bounded lookup')
-                pages = [job for job in jobs if job['name'] == 'pages / deploy']
-                return run, {'receipt': c.read_json(report), 'validation': c.read_json(target / 'validation.json'),
-                             'run': run, 'attempt': attempt,
-                             'pages_complete': len(pages) == 1 and pages[0]['conclusion'] == 'success'}
-            if kind == 'validation' and not report.exists():
-                report = target / 'validation-report.json'
+    rows = repository_artifacts(repository, lambda path: api(repository, path), candidate=candidate)
+    artifact_kind = 'validation' if kind == 'browser' else 'publication' if kind == 'review' else kind
+    matches = [a for a in rows if re.fullmatch(f'{artifact_kind}-{candidate}-[1-9][0-9]*', a['name']) and not a['expired']]
+    for artifact in sorted(matches, key=lambda a: a['id'], reverse=True):
+        run = str(artifact['workflow_run']['id'])
+        target = Path(destination) / str(artifact['id'])
+        fetch(repository, run, artifact['name'], target)
+        report = target / {'live': 'live-verification.json', 'validation': 'validation.json',
+                          'publication': 'publication.json', 'browser': 'final-integration.json',
+                          'review': 'review-pending.json'}[kind]
+        if kind == 'review':
+            ready_path = target / 'review-ready.json'
+            if report.exists() and ready_path.exists():
+                raise ValueError('Conflicting latest publication review checkpoints')
             if report.exists():
-                value = c.read_json(report)
-                return run, value
-            raise ValueError('Latest release evidence is incomplete; do not substitute an older passing receipt')
-        if len(rows) < 100:
-            return '', None
-    raise ValueError('Release evidence history exceeds bounded lookup')
+                return run, c.read_json(report)
+            if not ready_path.exists():
+                return run, None
+            ready = c.read_json(ready_path)
+            required = {'schema_version', 'candidate_id', 'base_sha', 'head_sha', 'pr_url',
+                        'artifact_run', 'validation_receipt_sha256', 'timestamp'}
+            validation = c.read_json(target / 'validation.json')
+            planned_sha = release_plan_sha(repository, run, artifact['name'].rsplit('-', 1)[1], target / 'plan')
+            if (set(ready) != required or type(ready['schema_version']) is not int or ready['schema_version'] != 1
+                    or ready['candidate_id'] != candidate
+                    or not re.fullmatch('[1-9][0-9]*', str(ready['artifact_run']))
+                    or not re.fullmatch('[a-f0-9]{40}', ready['head_sha'])
+                    or ready['base_sha'] != planned_sha
+                    or ready['validation_receipt_sha256'] != c.digest(c.encoded(validation))
+                    or validation.get('validation_sha') != ready['base_sha']
+                    or validation.get('candidate_id') != candidate
+                    or validation.get('production_mutated') is not False
+                    or validation.get('gates') != {gate: 'passed' for gate in c.GATES}):
+                raise ValueError('Latest ready checkpoint does not bind its protected validation receipt')
+            # This selects saved bytes after a later publication failure.
+            # It never approves another PR head or current validation code.
+            return run, ready
+        if kind == 'browser' and not report.exists():
+            for receipt_name in ('validation.json', 'validation-report.json'):
+                receipt_path = target / receipt_name
+                if receipt_path.exists():
+                    nested = c.read_json(receipt_path).get('final_integration', {})
+                    if nested.get('identity'):
+                        # A killed explicit browser step may leave only its
+                        # pre-dispatch failed/unfinished marker. Do not skip
+                        # that marker in favor of an older passing run.
+                        return run, nested
+            continue  # Ordinary-only validation is not a newer browser result.
+        if kind == 'publication':
+            if not report.exists():
+                return run, None  # Pre-publication failure is not a Pages checkpoint.
+            attempt = artifact['name'].rsplit('-', 1)[1]
+            jobs = []
+            for job_page in range(1, 101):
+                batch = json.loads(api(repository, f'actions/runs/{run}/attempts/{attempt}/jobs?per_page=100&page={job_page}'))['jobs']
+                jobs.extend(batch)
+                if len(batch) < 100:
+                    break
+            else:
+                raise ValueError('Pages evidence pagination exceeds bounded lookup')
+            pages = [job for job in jobs if job['name'] == 'pages / deploy']
+            return run, {'receipt': c.read_json(report), 'validation': c.read_json(target / 'validation.json'),
+                         'run': run, 'attempt': attempt,
+                         'pages_complete': len(pages) == 1 and pages[0]['conclusion'] == 'success'}
+        if kind == 'validation' and not report.exists():
+            report = target / 'validation-report.json'
+        if report.exists():
+            value = c.read_json(report)
+            return run, value
+        raise ValueError('Latest release evidence is incomplete; do not substitute an older passing receipt')
+    return '', None
 
 
 def pending_publication(root, repository, destination):
@@ -204,7 +201,7 @@ def completed_attempt(root, environment, destination):
     from tools.offline_ai_checkpoint import api
     from tools.fetch_release_artifact import fetch, run_artifacts
     repo, run = environment['GITHUB_REPOSITORY'], environment['GITHUB_RUN_ID']
-    artifacts = run_artifacts(run, lambda path: api(repo, path))
+    artifacts = run_artifacts(run, lambda path: api(repo, path), repository=repo)
     candidates = [a for a in artifacts if a['name'].startswith('candidate-')]
     if not candidates:
         return None

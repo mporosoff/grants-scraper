@@ -125,6 +125,8 @@
         "requirements.txt",
         "tools/run_budgeted_documents.py",
         "tools/generation_document_checkpoint.py",
+        "tools/generation_spend_recovery.py",
+        "config/generation_recovery/**/*.json",
         "tools/offline_spend.py",
         "tools/require_sam_refresh.py"
       ],
