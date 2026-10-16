@@ -9,7 +9,7 @@ from datetime import date
 import re
 
 VERSION = 2
-PRELIMINARY = {'letter_of_intent', 'concept_paper', 'white_paper', 'preapplication', 'preproposal'}
+PRELIMINARY = {'letter_of_intent', 'concept_paper', 'white_paper', 'preapplication', 'preproposal', 'abstract'}
 FULL = {'application', 'estimated_application', 'full_application', 'proposal'}
 KINDS = PRELIMINARY | FULL | {'submission', 'internal'}
 

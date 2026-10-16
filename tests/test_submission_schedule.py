@@ -4,7 +4,7 @@ from datetime import date
 from copy import deepcopy
 import unittest
 
-from scripts.submission_schedule import next_submission, project, project_invitation_access, project_two_step_prerequisite
+from scripts.submission_schedule import events, next_submission, project, project_invitation_access, project_two_step_prerequisite
 from scripts.build_changes import diff_catalogs
 from scripts.build_feeds import summarize
 from scripts.currentness import record_is_current
@@ -14,6 +14,40 @@ FIXTURE = Path(__file__).parent / 'fixtures/submission-schedule.json'
 
 
 class SubmissionScheduleTests(unittest.TestCase):
+    def test_abstract_schedule_retains_both_source_stages_and_proposal_window(self):
+        record = next(case['record'] for case in json.loads(FIXTURE.read_text(encoding='utf8'))
+                      if case['name'] == 'DARPA unknown Abstract before its deadline')
+        before = deepcopy(record)
+        self.assertEqual(events(record), record['deadlines'])
+        self.assertEqual([(event['kind'], event['date']) for event in events(record)],
+                         [('abstract', '2026-11-03'), ('application', '2026-12-14')])
+        for day in (date(2026, 11, 3), date(2026, 11, 4), date(2026, 12, 14)):
+            self.assertTrue(record_is_current(record, day)[0])
+        self.assertFalse(record_is_current(record, date(2026, 12, 15))[0])
+        selected = next_submission(record, '2026-11-04')
+        self.assertIsNone(selected['prerequisites'][0]['required'])
+        self.assertEqual(selected['prerequisites'][0]['obligation'], 'unknown')
+        self.assertIn('Abstract 2026-11-03', summarize(record, date(2026, 10, 16)))
+        self.assertIn('verify prerequisite', summarize(record, date(2026, 11, 4)))
+        self.assertEqual(record, before)
+
+    def test_abstract_uncertainty_blocks_later_proposal_closing_reminders(self):
+        template = next(case['record'] for case in json.loads(FIXTURE.read_text(encoding='utf8'))
+                        if case['name'] == 'DARPA unknown Abstract before its deadline')
+        for required in (None, True, False):
+            with self.subTest(required=required):
+                record = deepcopy(template)
+                record['deadlines'][0]['required'] = required
+                record['deadlines'][0]['obligation'] = 'required' if required is True else 'optional' if required is False else 'unknown'
+                record['preliminary_required'] = required
+                changed = diff_catalogs(catalog([record]), catalog([record]), as_of=date(2026, 11, 14))
+                reminders = [event for event in changed if event['type'] == 'closing_soon']
+                self.assertEqual(len(reminders), 1 if required is False else 0)
+        changed = diff_catalogs(catalog([]), catalog([template]), as_of=date(2026, 10, 20))
+        reminders = [event for event in changed if event['type'] == 'closing_soon']
+        self.assertEqual(len(reminders), 1)
+        self.assertIn('2026-11-03', reminders[0]['detail'])
+
     def test_source_contracts_preserve_dates_and_qualify_access(self):
         for case in json.loads(FIXTURE.read_text(encoding='utf8')):
             with self.subTest(case=case['name']):

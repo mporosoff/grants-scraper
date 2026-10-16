@@ -68,3 +68,16 @@ test("saved snapshots retain recommended dates and explicitly rolling prerequisi
   assert.equal(api.nextSubmission(saved, "2026-09-07").access, "open");
   assert.equal(api.nextSubmission(saved, "2026-11-17").access, "verify_stage");
 });
+
+test("saved Abstract schedules preserve both stages and unknown prerequisite access", () => {
+  for (const item of cases.filter(item => item.name.startsWith("DARPA "))) {
+    const saved = globalThis.FUNDING_SAVED.sanitizeItem(item.record);
+    assert.deepEqual(api.events(saved).map(event => [event.kind, event.date]),
+      [["abstract", "2026-11-03"], ["application", "2026-12-14"]]);
+    assert.equal(saved.deadlines[0].required, item.record.deadlines[0].required);
+    assert.equal(saved.close_date, "2026-12-14");
+    const actual = api.nextSubmission(saved, item.as_of);
+    assert.deepEqual({date: actual.date, access: actual.access, kind: actual.event?.kind ?? null},
+      item.expected, item.name);
+  }
+});
