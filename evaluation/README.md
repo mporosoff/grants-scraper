@@ -70,5 +70,7 @@ node evaluation/profile_relevance_probe.mjs
 
 Rank movement proves that profile fields affect production scoring; it does not
 prove that the movement is better. Treat the probe as a regression and
-diagnostic. Precision/recall benefit still requires the consented human labels
-described above.
+diagnostic. It does not establish precision/recall benefit. Evidence for a future
+quality claim must meet the source-grounded checks selected within the single
+Team Match objective; the retired human-label collection program is not a
+required replacement gate.

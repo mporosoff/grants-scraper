@@ -189,7 +189,7 @@ profile use, remove the CV extract, clear the saved profile, or clear
 evaluation labels at any time.
 
 Normal search no longer includes a permanent rating panel or rating-trained
-reranking. Invited pilot participants use `?evaluation=1`; those labels remain
+reranking. Optional evaluation tooling uses `?evaluation=1`; those labels remain
 measurement evidence only and never alter the deterministic product ranking.
 
 The additive AI refinement overlay, chat, and extracted uploaded-notice text remain page-memory
@@ -208,8 +208,8 @@ CSV and Phase 2 JSON are created only on explicit export. The evaluation JSON
 includes the current search-box text, filters, rankings, and explicit ratings
 needed to reproduce retrieval quality. It excludes the API key, saved
 profile/expertise fields, CV text, and chat. Because search text can itself
-describe research, pilot participants are told to use non-confidential wording
-they are comfortable returning to the project team.
+describe research, anyone using this optional export should use non-confidential
+wording they are comfortable sharing.
 
 ### 2.6 Document evidence and deployment learning
 
@@ -397,12 +397,12 @@ catalog or a shared institutional record.
 5. Select the same “Find funding” action used for keyword/filter searches.
 6. Remove the CV extract or clear the profile at any time.
 
-### Save opportunities and run a dedicated relevance evaluation
+### Save opportunities and optionally use existing evaluation tools
 
 1. Select “Save” on any result to keep a compact device-local shortcut.
 2. Normal search keeps rating controls absent.
-3. Invited pilot participants open `match_explorer.html?evaluation=1`, label
-   results locally, and explicitly export one evaluation file.
+3. If using the optional evaluation tools, open `match_explorer.html?evaluation=1`,
+   label results locally, and explicitly export a file only when needed.
 4. Evaluation labels do not change retrieval or ranking.
 
 ### Add AI refinement
@@ -488,8 +488,8 @@ The browser-only design cannot provide a secure institutional credential vault. 
 Evaluation labels also stay on the device until explicit export or deletion.
 The export uses a non-content comparison fingerprint, includes the current
 search text needed to reproduce retrieval, and excludes saved profile text, CV
-text, API keys, and chat. Pilot instructions disclose the search-text field
-before a participant returns the file.
+text, API keys, and chat. Anyone using the optional export must account for its
+search-text field before sharing a file; no participant return is required.
 
 Phase 3 deployment review uses a separate local-storage key. It contains only
 explicit source-verification choices, optional notes, checklist answers,
@@ -821,18 +821,12 @@ The former Supabase/account-service proposal and the standalone Alerts orchestra
 - Document-derived dates and amounts must not silently replace structured
   Grants.gov values used for filtering or sorting.
 - Raw official documents and full extracted notice text must not be committed.
-- Deployment review must be explicit, device-local until handoff, and free of
-  profile/CV text, API keys, search text, Funding Finder search URL parameters,
+- If optional review tooling is used, it must be explicit, device-local until
+  sharing, and free of profile/CV text, API keys, search text, Funding Finder search URL parameters,
   and chat by default.
 - API keys never enter source control, URLs, exports, profile storage, or
   review/evaluation storage. Optional browser credential storage requires an
   explicit save action and has a visible removal control.
-- Document-chat export preserves already-generated visible output; it must not
-  regenerate the answer, and it must exclude API keys and hidden profile/CV
-  context.
-- Governing-document answers retain source-level provenance and explicit
-  precedence; solicitation, governing-guide, and supplement/amendment facts
-  must not be silently merged or cited as though they came from one document.
 - The application remains usable on current mobile and desktop browsers.
 - Every added source has an identified maintenance strategy.
 - Opportunity-to-team proposals use only a specific parent, a currently
