@@ -8,6 +8,7 @@ actionability. Neither program directories nor SAM.gov search are inventories.
 
 from collections import Counter
 from datetime import date
+import hashlib
 from html import unescape
 import json
 import re
@@ -194,6 +195,40 @@ def labelled_date(block, label):
     return next(iter(dates)) if dates else None
 
 
+def darpa_deadlines(block, number, url, html):
+    """Accept the owned scalar deadline or the explicit Abstract/Proposal pair."""
+    fields = [plain(item) for item in re.findall(r'<li\b[^>]*>(.*?)</li>', block, re.I | re.S)
+              if re.match(r'^Deadline:', plain(item), re.I)]
+    if not any(re.search(r'\b(?:Abstract|Proposal):', value, re.I) for value in fields):
+        return labelled_date(block, 'Deadline'), []
+    value = fields[0] if len(fields) == 1 else ''
+    date_value = r'(?:[A-Za-z.]+ \d{1,2}, \d{4}|\d{4}-\d{2}-\d{2})'
+    pair = re.fullmatch(r'Deadline:\s*(?P<abstract_label>Abstract):\s*(?P<abstract>' + date_value
+                        + r')\s+(?P<proposal_label>Proposal):\s*(?P<proposal>' + date_value + r')', value, re.I)
+    if len(re.findall(r'\bDeadline:', plain(block), re.I)) != 1 or not pair:
+        raise ValueError('DARPA submission deadline missing, unparseable or conflicting')
+    dates = {stage: parsed_date(pair[stage]) for stage in ('abstract', 'proposal')}
+    if not all(dates.values()):
+        raise ValueError('DARPA submission deadline missing, unparseable or conflicting')
+    if dates['abstract'] > dates['proposal']:
+        raise ValueError('Inverted research submission window')
+    events = []
+    for stage, kind in (('abstract', 'abstract'), ('proposal', 'application')):
+        label = pair[stage + '_label']
+        quote = value[pair.start(stage + '_label'):pair.end(stage)]
+        events.append({
+            'kind': kind, 'stage': kind, 'date': dates[stage], 'required': None, 'obligation': 'unknown',
+            'note': f'{label} submission deadline for {number} on the official DARPA program page: {url}',
+            'source_url': url, 'source_field': 'exact solicitation on official program page',
+            'confidence': 'source_listed', 'date_status': 'known',
+            'citation': {'document_url': url, 'citation_url': url,
+                         'sha256': hashlib.sha256(html.encode('utf-8')).hexdigest(),
+                         'section': number, 'quote': quote,
+                         'structural_reference': {'field_label': label, 'solicitation_number': number}},
+        })
+    return dates['proposal'], events
+
+
 def darpa_description(html, fallback):
     fragments = re.findall(r'<div\b[^>]*class="[^"]*field--name-(?:field-text|field-body-with-summary)\b[^"]*"[^>]*>(.*?)</div>', html, re.S)
     descriptions = []
@@ -310,16 +345,22 @@ class DarpaIarpaAdapter(SourceAdapter):
             if not_accepting(block):
                 skipped["darpa_not_accepting"] += 1
                 continue
-            close = labelled_date(block, "Deadline")
-            opened = labelled_date(block, "Published")
+            try:
+                close, additional = darpa_deadlines(block, number, url, pages[url])
+                opened = labelled_date(block, "Published")
+            except ValueError as error:
+                raise ValueError(f'{error}: {number} on {url}') from None
             if not opened:
                 raise ValueError(f"DARPA publication date missing or unparseable: {number}")
+            for event in additional:
+                current(event['date'], opened, as_of)  # Validate every stage, including an expired abstract.
             if not current(close, opened, as_of):
                 skipped["darpa_outside_submission_window"] += 1
                 continue
             # Positive admission proof is relevant only after the exact call's
             # explicit status and verified date window leave it actionable.
-            if not re.search(r"inviting submissions|solicit|invites? proposals", summary, re.I):
+            if not re.search(r"inviting submissions|solicit|invites? proposals|"
+                             r"\b(?:DSO|DARPA) is issuing (?:a|an) Disruption Opportunity\b", summary, re.I):
                 raise ValueError(f"DARPA child research submission evidence missing: {number}")
             if not notice_url(row["field_external_url"]):
                 raise ValueError(f"DARPA required official route missing or unsupported: {number}")
@@ -337,12 +378,15 @@ class DarpaIarpaAdapter(SourceAdapter):
                 opportunity_number=number, agency=DARPA, url=action,
                 description=f"{summary} {description} Research topics: {topics}",
                 posted_date=opened, close_date=close,
-                deadline_note=f"Submission deadline for {number} on the official DARPA program page: {url}",
-                additional_deadlines=[],
+                deadline_note=(f"See the cited Abstract and Proposal submission stages for {number}: {url}"
+                               if additional else f"Submission deadline for {number} on the official DARPA program page: {url}"),
+                additional_deadlines=additional,
             )
             # Use the exact page as deadline provenance while preserving the
             # direct solicitation as the card's action link.
             opportunities[("darpa", normalized_number(number))].extra["deadline_page"] = url
+            if additional:
+                opportunities[("darpa", normalized_number(number))].extra['close_date_kind'] = 'submission_window_end'
 
         for row in iarpa_rows:
             html = pages.get(row["url"])
@@ -434,6 +478,8 @@ class DarpaIarpaAdapter(SourceAdapter):
         records = []
         for opportunity in opportunities:
             record = opportunity.to_record(slug=self.slug, source=self.display_name, source_type=self.source_type)
+            if any(event.get('kind') == 'abstract' for event in record['deadlines']):
+                record.update(has_preliminary_stage=True, preliminary_stage_type='abstract', preliminary_required=None)
             for deadline in record["deadlines"]:
                 deadline["source_url"] = opportunity.extra["deadline_page"]
                 deadline["source_field"] = "exact solicitation on official program page"

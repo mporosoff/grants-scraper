@@ -86,6 +86,37 @@ test("historical prerequisite rows remain visible and continue blocking new full
   assert.equal(scope.nextSubmission(record).prerequisites[0].date, "2026-09-27");
 });
 
+test("DARPA Abstract and Proposal display and calendar retain exact stages and prerequisite uncertainty", () => {
+  const record = JSON.parse(readFileSync(new URL("../fixtures/darpa_iarpa/liquid_surge_record.json", import.meta.url), "utf8"));
+  const before = structuredClone(record);
+  const open = context("2026-10-16");
+  vm.runInContext(readFileSync(new URL("../../assets/search-retrieval.js", import.meta.url), "utf8"), open);
+  for (const day of ["2026-11-03", "2026-11-04", "2026-12-14"])
+    assert.equal(open.FUNDING_RETRIEVAL.recordIsCurrent(record, day), true, day);
+  assert.equal(open.FUNDING_RETRIEVAL.recordIsCurrent(record, "2026-12-15"), false);
+  const rows = termRows(open.deadlineRows(record));
+  assert.deepEqual(rows.map(row => row.label), ["Abstract", "Application deadline"]);
+  assert.match(rows[0].value, /2026-11-03/);
+  assert.match(rows[1].value, /2026-12-14/);
+  assert.match(rows[0].value, /Abstract/);
+  assert.match(rows[1].value, /Proposal/);
+  const calendar = Array.from(open.calendarEvents(record));
+  assert.deepEqual(calendar.map(event => event.date), ["2026-11-03", "2026-12-14"]);
+  assert.match(calendar[0].summary, /^Abstract:/);
+  assert.match(calendar[1].summary, /^Application deadline:/);
+  assert.equal(open.nextSubmission(record).event.kind, "abstract");
+  assert.equal(open.nextSubmission(record).access, "open");
+
+  const later = context("2026-11-04");
+  assert.equal(termRows(later.deadlineRows(record))[0].label, "Past date · Abstract");
+  assert.equal(later.nextSubmission(record).access, "verify_prerequisite");
+  const remaining = Array.from(later.calendarEvents(record));
+  assert.deepEqual(remaining.map(event => event.date), ["2026-12-14"]);
+  assert.match(remaining[0].description, /Verify the required submission step/);
+  assert.equal(record.close_date, "2026-12-14");
+  assert.deepEqual(record, before);
+});
+
 test("past recommendations and forecasts retain uncertainty, citations, and escaped source text", () => {
   const scope = context();
   const record = { status: "forecasted", deadlines: [

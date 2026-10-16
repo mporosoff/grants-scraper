@@ -2593,6 +2593,7 @@
       application: "Application deadline",
       estimated_application: "Estimated application deadline",
       letter_of_intent: "Letter of intent",
+      abstract: "Abstract",
       concept_paper: "Concept paper",
       white_paper: "White paper",
       preapplication: "Preapplication",
@@ -3028,7 +3029,7 @@
         ? `<span class="badge potential">Potential match</span>`
         : "",
       isBroadOpportunity(record) ? `<span class="badge broad">Broad / umbrella call</span>` : "",
-      record.has_preliminary_stage ? `<span class="badge warning">LOI / preproposal</span>` : "",
+      record.has_preliminary_stage ? `<span class="badge warning">Preliminary stage</span>` : "",
       record.actionability_status === "preliminary_deadline_passed_verify"
         ? `<span class="badge warning">Preliminary deadline may have passed</span>`
         : "",
@@ -4105,7 +4106,7 @@
     });
     [
       ["flag-evidence", "Cited FOA facts"],
-      ["flag-preliminary", "LOI / preproposal"],
+      ["flag-preliminary", "Preliminary stage"],
       ["flag-limited", "Limited submission"],
       ["flag-early-career", "Early career"],
       ["flag-no-cost-share", "No cost share"],

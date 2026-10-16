@@ -567,6 +567,39 @@ test("internal submission gates suppress later sponsor reminders unless explicit
   }
 });
 
+test("Abstract requirements qualify Proposal reminders without hiding the Abstract date", async () => {
+  const cases = JSON.parse(await readFile(new URL("../fixtures/submission-schedule.json", import.meta.url), "utf8"));
+  const template = cases.find(item => item.name === "DARPA unknown Abstract before its deadline").record;
+  for (const [asOf, required, expectedDate, expectedStage, expectedMessages] of [
+    ["2026-10-20", null, "2026-11-03", "abstract", 1],
+    ["2026-11-14", null, "2026-12-14", "application", 0],
+    ["2026-11-14", true, "2026-12-14", "application", 0],
+    ["2026-11-14", false, "2026-12-14", "application", 1],
+  ]) {
+    const store = new MemoryStore();
+    await store.upsertSubscriber({id: "abstract-person", email: "fixture@example.test", manageToken: "m".repeat(43)});
+    store.subscriptions.set("abstract-watch", {
+      id: "abstract-watch", subscriber_id: "abstract-person", type: "opportunity", active: 1,
+      verified_at: "2026-10-16T00:00:00Z", cadence: "immediate", baseline_at: "2026-10-16T00:00:00Z",
+      definition_json: JSON.stringify({opportunity_id: template.opportunity_id, triggers: ["closing_reminders"]}),
+    });
+    const source = structuredClone(template);
+    source.deadlines[0].required = required;
+    source.deadlines[0].obligation = required === true ? "required" : required === false ? "optional" : "unknown";
+    source.preliminary_required = required;
+    await evaluateSubscriptions({store, assets: assets({records: [source]}), env, now: new Date(`${asOf}T12:00:00Z`)});
+    const messages = [...store.events.values()];
+    assert.equal(messages.length, expectedMessages, `${asOf}: Abstract required=${required}`);
+    if (expectedMessages) {
+      const payload = JSON.parse(messages[0].payload_json);
+      assert.equal(payload.close_date, expectedDate);
+      assert.equal(payload.submission_stage, expectedStage);
+      assert.equal(payload.submission_access, "open");
+      assert.equal(payload.source_close_date, "2026-12-14");
+    }
+  }
+});
+
 test("opportunity watches detect a non-closing status transition", async () => {
   const store = new MemoryStore();
   const provider = new MockEmailProvider();

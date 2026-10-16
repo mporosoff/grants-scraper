@@ -1910,5 +1910,250 @@
       "access": "prerequisite_closed",
       "kind": "application"
     }
+  },
+  {
+    "name": "DARPA unknown Abstract before its deadline",
+    "as_of": "2026-10-16",
+    "record": {
+      "opportunity_id": "darpa-iarpa:darpa-darpapa250705",
+      "title": "Liquid Surge",
+      "status": "posted",
+      "close_date": "2026-12-14",
+      "close_date_kind": "submission_window_end",
+      "has_preliminary_stage": true,
+      "preliminary_stage_type": "abstract",
+      "preliminary_required": null,
+      "deadlines": [
+        {
+          "kind": "abstract",
+          "stage": "abstract",
+          "date": "2026-11-03",
+          "required": null,
+          "obligation": "unknown"
+        },
+        {
+          "kind": "application",
+          "stage": "application",
+          "date": "2026-12-14",
+          "required": null,
+          "obligation": "unknown"
+        }
+      ]
+    },
+    "expected": {
+      "date": "2026-11-03",
+      "access": "open",
+      "kind": "abstract"
+    }
+  },
+  {
+    "name": "DARPA unknown Abstract on its deadline",
+    "as_of": "2026-11-03",
+    "record": {
+      "opportunity_id": "darpa-iarpa:darpa-darpapa250705",
+      "title": "Liquid Surge",
+      "status": "posted",
+      "close_date": "2026-12-14",
+      "close_date_kind": "submission_window_end",
+      "has_preliminary_stage": true,
+      "preliminary_stage_type": "abstract",
+      "preliminary_required": null,
+      "deadlines": [
+        {
+          "kind": "abstract",
+          "stage": "abstract",
+          "date": "2026-11-03",
+          "required": null,
+          "obligation": "unknown"
+        },
+        {
+          "kind": "application",
+          "stage": "application",
+          "date": "2026-12-14",
+          "required": null,
+          "obligation": "unknown"
+        }
+      ]
+    },
+    "expected": {
+      "date": "2026-11-03",
+      "access": "open",
+      "kind": "abstract"
+    }
+  },
+  {
+    "name": "DARPA unknown Abstract after its deadline",
+    "as_of": "2026-11-04",
+    "record": {
+      "opportunity_id": "darpa-iarpa:darpa-darpapa250705",
+      "title": "Liquid Surge",
+      "status": "posted",
+      "close_date": "2026-12-14",
+      "close_date_kind": "submission_window_end",
+      "has_preliminary_stage": true,
+      "preliminary_stage_type": "abstract",
+      "preliminary_required": null,
+      "deadlines": [
+        {
+          "kind": "abstract",
+          "stage": "abstract",
+          "date": "2026-11-03",
+          "required": null,
+          "obligation": "unknown"
+        },
+        {
+          "kind": "application",
+          "stage": "application",
+          "date": "2026-12-14",
+          "required": null,
+          "obligation": "unknown"
+        }
+      ]
+    },
+    "expected": {
+      "date": "2026-12-14",
+      "access": "verify_prerequisite",
+      "kind": "application"
+    }
+  },
+  {
+    "name": "DARPA unknown Abstract on the Proposal deadline",
+    "as_of": "2026-12-14",
+    "record": {
+      "opportunity_id": "darpa-iarpa:darpa-darpapa250705",
+      "title": "Liquid Surge",
+      "status": "posted",
+      "close_date": "2026-12-14",
+      "close_date_kind": "submission_window_end",
+      "has_preliminary_stage": true,
+      "preliminary_stage_type": "abstract",
+      "preliminary_required": null,
+      "deadlines": [
+        {
+          "kind": "abstract",
+          "stage": "abstract",
+          "date": "2026-11-03",
+          "required": null,
+          "obligation": "unknown"
+        },
+        {
+          "kind": "application",
+          "stage": "application",
+          "date": "2026-12-14",
+          "required": null,
+          "obligation": "unknown"
+        }
+      ]
+    },
+    "expected": {
+      "date": "2026-12-14",
+      "access": "verify_prerequisite",
+      "kind": "application"
+    }
+  },
+  {
+    "name": "DARPA unknown Abstract after both deadlines",
+    "as_of": "2026-12-15",
+    "record": {
+      "opportunity_id": "darpa-iarpa:darpa-darpapa250705",
+      "title": "Liquid Surge",
+      "status": "posted",
+      "close_date": "2026-12-14",
+      "close_date_kind": "submission_window_end",
+      "has_preliminary_stage": true,
+      "preliminary_stage_type": "abstract",
+      "preliminary_required": null,
+      "deadlines": [
+        {
+          "kind": "abstract",
+          "stage": "abstract",
+          "date": "2026-11-03",
+          "required": null,
+          "obligation": "unknown"
+        },
+        {
+          "kind": "application",
+          "stage": "application",
+          "date": "2026-12-14",
+          "required": null,
+          "obligation": "unknown"
+        }
+      ]
+    },
+    "expected": {
+      "date": null,
+      "access": "closed",
+      "kind": null
+    }
+  },
+  {
+    "name": "DARPA required Abstract after its deadline",
+    "as_of": "2026-11-04",
+    "record": {
+      "opportunity_id": "darpa-iarpa:darpa-darpapa250705",
+      "title": "Liquid Surge",
+      "status": "posted",
+      "close_date": "2026-12-14",
+      "close_date_kind": "submission_window_end",
+      "has_preliminary_stage": true,
+      "preliminary_stage_type": "abstract",
+      "preliminary_required": true,
+      "deadlines": [
+        {
+          "kind": "abstract",
+          "stage": "abstract",
+          "date": "2026-11-03",
+          "required": true,
+          "obligation": "required"
+        },
+        {
+          "kind": "application",
+          "stage": "application",
+          "date": "2026-12-14",
+          "required": null,
+          "obligation": "unknown"
+        }
+      ]
+    },
+    "expected": {
+      "date": "2026-12-14",
+      "access": "prerequisite_closed",
+      "kind": "application"
+    }
+  },
+  {
+    "name": "DARPA optional Abstract after its deadline",
+    "as_of": "2026-11-04",
+    "record": {
+      "opportunity_id": "darpa-iarpa:darpa-darpapa250705",
+      "title": "Liquid Surge",
+      "status": "posted",
+      "close_date": "2026-12-14",
+      "close_date_kind": "submission_window_end",
+      "has_preliminary_stage": true,
+      "preliminary_stage_type": "abstract",
+      "preliminary_required": false,
+      "deadlines": [
+        {
+          "kind": "abstract",
+          "stage": "abstract",
+          "date": "2026-11-03",
+          "required": false,
+          "obligation": "optional"
+        },
+        {
+          "kind": "application",
+          "stage": "application",
+          "date": "2026-12-14",
+          "required": null,
+          "obligation": "unknown"
+        }
+      ]
+    },
+    "expected": {
+      "date": "2026-12-14",
+      "access": "open",
+      "kind": "application"
+    }
   }
 ]

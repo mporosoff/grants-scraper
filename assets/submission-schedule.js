@@ -1,7 +1,7 @@
 /* Source-owned submission selection. Python parity: scripts/submission_schedule.py. */
 (() => {
   "use strict";
-  const PRELIMINARY = new Set(["letter_of_intent", "concept_paper", "white_paper", "preapplication", "preproposal"]);
+  const PRELIMINARY = new Set(["letter_of_intent", "concept_paper", "white_paper", "preapplication", "preproposal", "abstract"]);
   const FULL = new Set(["application", "estimated_application", "full_application", "proposal"]);
   const KINDS = new Set([...PRELIMINARY, ...FULL, "submission", "internal"]);
   const ACCESS_LABELS = Object.freeze({
