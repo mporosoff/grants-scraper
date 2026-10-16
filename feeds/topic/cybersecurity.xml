@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml</id>
-  <updated>2026-10-16T14:38:47Z</updated>
+  <updated>2026-10-16T16:56:01Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Genesis Mission Graduate Fellowship Pilot</title>
@@ -150,6 +150,19 @@
     <category term="Data science"/>
     <category term="Cybersecurity"/>
     <summary>U.S. National Science Foundation | Application 2026-11-04 | The NSF State and Regional AI Infrastructure Hubs program aims to expand access to the compute required for AI-enabled scientific discovery and to transform the research, education, and training opportunities offered by institutions of higher education. AI Infrastructure Hubs will connect researchers to new compute infrastructure that leverages contributions from state governments, research instit…</summary>
+  </entry>
+  <entry>
+    <title>Command Wide Broad Agency Announcement for Naval Facilities Engineering and Expeditionary Warfare Center (NAVFAC EXWC) Research, Development, Testing, and Evaluation</title>
+    <link href="https://sam.gov/opp/f0fbc0533b024e2fbfbdfe8b5bd2d81d/view"/>
+    <id>urn:funding-finder:sam-gov:sam-gov%3Af0fbc0533b024e2fbfbdfe8b5bd2d81d</id>
+    <updated>2026-06-15T00:00:00Z</updated>
+    <author><name>Naval Facilities Engineering and Expeditionary Warfare Center (NAVFAC EXWC)</name></author>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Technology development"/>
+    <category term="Cybersecurity"/>
+    <category term="Water"/>
+    <summary>Naval Facilities Engineering and Expeditionary Warfare Center (NAVFAC EXWC) | Preproposal 2027-06-14 | Applied research, technology development and prototypes for naval facilities, expeditionary construction, shore and marine energy, environmental restoration, water, cyber-physical systems and security. Submit a research abstract using Attachment 1; the form explicitly includes other academic institutions. Proposals must fit applied research, advanced technology development or advanced component de…</summary>
   </entry>
   <entry>
     <title>Research Interests of the Air Force Office of Scientific Research</title>

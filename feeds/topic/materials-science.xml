@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml</id>
-  <updated>2026-10-16T14:38:47Z</updated>
+  <updated>2026-10-16T16:56:01Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Cooperative Agreement for affiliated Partner with Northern Great Plains Cooperative Ecosystem Studies Unit</title>
@@ -151,6 +151,15 @@
     <category term="Energy"/>
     <category term="Manufacturing"/>
     <summary>U.S. National Science Foundation | Posted | The NSF Geosciences Research solicitation supports foundational research projects that advance the frontiers of knowledge across all areas of the geosciences. This solicitation calls for proposals in three programs: Atmospheric and Geospace Sciences (AGS) Program; Earth Sciences (EAR) Program; and Ocean Sciences (OCE) Program. These programs support projects that expand the frontiers of knowledge …</summary>
+  </entry>
+  <entry>
+    <title>Resilient</title>
+    <link href="https://sam.gov/opp/0ea1a4cebcb24732b92a184df0a4bee2/view"/>
+    <id>urn:funding-finder:darpa-iarpa-research-solicitations:darpa-iarpa%3Adarpa-darpapa250704</id>
+    <updated>2026-08-20T00:00:00Z</updated>
+    <author><name>Defense Advanced Research Projects Agency (DARPA)</name></author>
+    <category term="Materials science"/>
+    <summary>Defense Advanced Research Projects Agency (DARPA) | Application 2026-10-19 | DSO is issuing a Disruption Opportunity (DO), inviting submissions of innovative basic or applied research concepts in the technical domain of accelerated materials testing and prediction for concrete. | See Program The nation’s critical military and civilian infrastructure relies heavily on concrete structures that are aging and degrading at unpredictable rates. Current concrete testing methods f…</summary>
   </entry>
   <entry>
     <title>EMERGING FRONTIERS IN RESEARCH AND INNOVATION (EFRI-2026/27): Wave-Based Computing ( EFRI-WBC)</title>
@@ -303,6 +312,17 @@
     <category term="Data science"/>
     <category term="Artificial intelligence and machine learning"/>
     <summary>Air Force Office of Scientific Research | Posted | AFOSR plans, coordinates, and executes the Air Force Research Laboratory’s (AFRL) basic research program in response to technical guidance from AFRL and requirements of the Air Force. Additionally, the office fosters, supports, and conducts research within Air Force, university, and industry laboratories; and ensures transition of research results to support U.S. Air Force needs. The focus of AFOS…</summary>
+  </entry>
+  <entry>
+    <title>DLA-SM Broad Agency Announcement</title>
+    <link href="https://sam.gov/opp/54e1bd529fd84e7db45fe5a236374ca0/view"/>
+    <id>urn:funding-finder:sam-gov:sam-gov%3A54e1bd529fd84e7db45fe5a236374ca0</id>
+    <updated>2026-06-02T00:00:00Z</updated>
+    <author><name>Defense Logistics Agency (DLA) Strategic Materials</name></author>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <category term="Materials science"/>
+    <summary>Defense Logistics Agency (DLA) Strategic Materials | White Paper 2028-05-01 | Strategic and critical materials, alloys, substitution, conservation, supply chains and qualification. Strategic/critical materials research, qualification and supply-chain assessments. SAM registration required when submitting and throughout award. Foreign-owned firms require foreign disclosure review. Source contains inconsistent umbrella/end dates, but the May 1, 2028initial-entry cutoff is exp…</summary>
   </entry>
   <entry>
     <title>Chemical Process Systems (CPS)</title>

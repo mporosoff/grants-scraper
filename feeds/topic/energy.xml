@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/energy.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/energy.xml</id>
-  <updated>2026-10-16T14:38:47Z</updated>
+  <updated>2026-10-16T16:56:01Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Affordable Rural Cooperative (ARC) Energy Program</title>
@@ -142,6 +142,7 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Energy"/>
     <category term="Transportation"/>
+    <category term="Data science"/>
     <summary>NYSERDA | Application 2026-11-10 | Helping to achieve a modernized energy grid, investments in Battery Energy Storage System (BESS) Health Operations Tools and Artificial Intelligence (AI) roll up to help New York State transition to cleaner energy resources. Up to $3 million total is available in Program Opportunity Notice (PON) 6240 to promote product developments and demonstrations in the New York State National Grid service ter…</summary>
   </entry>
   <entry>
