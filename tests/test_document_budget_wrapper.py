@@ -10,6 +10,7 @@ import unittest
 from unittest.mock import Mock, patch
 
 from scripts import document_work_budget as work
+from scripts.document_work_budget import WorkBudget
 from scripts import extract_document_evidence as extractor
 from scripts import subtopic_cov4 as gate
 from tools import offline_ai
@@ -21,15 +22,18 @@ class Controller:
         self.deadline = time.monotonic() + remaining
         self.active = False
         self.calls = []
+        self.identifiers = []
 
     @contextmanager
-    def guard(self, phase, **kwargs):
+    def guard(self, phase, opportunity_id='', **kwargs):
         self.calls.append((phase, kwargs))
+        self.identifiers.append((phase, opportunity_id))
+        previous_active = self.active
         self.active = True
         try:
             yield
         finally:
-            self.active = False
+            self.active = previous_active
 
 
 class DocumentBudgetWrapperContracts(unittest.TestCase):
@@ -45,6 +49,7 @@ class DocumentBudgetWrapperContracts(unittest.TestCase):
         self.stack.enter_context(patch.dict(os.environ, {
             'OFFLINE_AI_STATE': str(self.root), 'TEAM_MODE': 'maintenance',
             'ANTHROPIC_API_KEY': 'synthetic-test-key',
+            'GITHUB_RUN_ID': '', 'GITHUB_RUN_ATTEMPT': '',
         }))
         self.ledger_factory = self.stack.enter_context(patch.object(wrapper, 'production_ledger', return_value=self.ledger))
         self.cache_factory = self.stack.enter_context(patch.object(wrapper, 'response_cache', return_value=self.cache))
@@ -93,6 +98,70 @@ class DocumentBudgetWrapperContracts(unittest.TestCase):
         self.network.assert_not_called()
         self.assertIs(gate.classify_fundability, self.original)
         self.assertEqual(self.ledger.read()['requests'], [])
+
+    def test_classification_units_allow_serial_fanout_within_the_unchanged_global_budget(self):
+        from tests.test_document_work_budget import Clock, Alarm
+        clock = Clock()
+        alarm = Alarm(clock)
+        deadlines = []
+        def classify(candidate, *, api_key, session, offline_client):
+            self.assertEqual(budget.deadline, clock() + 120)
+            self.assertEqual(alarm.at, budget.deadline)
+            deadlines.append(offline_client.deadline)
+            clock.advance(70)
+            return {'accepted': True}
+        def client(*_, deadline, **__):
+            return SimpleNamespace(deadline=deadline)
+        with patch.object(work, 'signal', alarm), patch('builtins.print'), \
+                patch.object(offline_ai, 'Client', side_effect=client):
+            budget = WorkBudget(1200, clock=clock)
+            bounded = wrapper.instrument(self.ledger, self.cache, classify, work_budget=budget)
+            with budget.guard('document_phase', finalize=True, seconds=1200):
+                for number in range(3):
+                    self.assertEqual(bounded({'parent_record_id': '363993', 'subtopic_id': str(number)}), {'accepted': True})
+                self.assertEqual(budget.total_deadline, 1300)
+                self.assertEqual(budget.work_deadline, 1240)
+                self.assertEqual(budget.deadline, 1240)
+                self.assertEqual(alarm.at, 1300)
+        self.assertEqual(clock(), 310)
+        self.assertEqual(deadlines, [220, 290, 360])
+        self.assertEqual(self.ledger.read()['requests'], [])
+        self.network.assert_not_called()
+
+    def test_remaining_global_work_time_caps_next_classification_before_dispatch(self):
+        from tests.test_document_work_budget import Clock, Alarm
+        clock = Clock()
+        alarm = Alarm(clock)
+        with patch.object(work, 'signal', alarm), patch('builtins.print'), \
+                patch.object(offline_ai, 'Client') as client:
+            budget = WorkBudget(1200, clock=clock)
+            classify = Mock()
+            bounded = wrapper.instrument(self.ledger, self.cache, classify, work_budget=budget)
+            with budget.guard('document_phase', finalize=True, seconds=1200):
+                clock.advance(1140)
+                with self.assertRaises(work.WorkTimedOut) as caught:
+                    bounded({'parent_record_id': '363993'})
+                self.assertEqual(caught.exception.phase, 'notice_classification')
+                self.assertEqual(caught.exception.opportunity_id, '363993')
+                self.assertEqual(budget.total_deadline, 1300)
+            client.assert_not_called()
+            classify.assert_not_called()
+        self.assertEqual(self.ledger.read()['requests'], [])
+        self.network.assert_not_called()
+
+    def test_replay_and_native_classifier_work_share_the_candidate_guard(self):
+        candidate = {'parent_record_id': '363993'}
+        def classify(*_, **__):
+            self.assertTrue(self.budget.active)
+            return {'accepted': True}
+        replay_client = SimpleNamespace()
+        with patch('tools.evaluate_team_prompt_repair.ReplayClient', return_value=replay_client):
+            bounded = wrapper.instrument(self.ledger, self.cache, classify, replay=True, work_budget=self.budget)
+            self.assertEqual(bounded(candidate), {'accepted': True})
+        self.assertIs(replay_client.ledger, self.ledger)
+        self.assertEqual(self.budget.identifiers, [('notice_classification', '363993')])
+        self.assertFalse(self.budget.active)
+        self.network.assert_not_called()
 
     def test_unsupported_alarm_leaves_startup_marker_and_restores_classifier(self):
         error = RuntimeError('Bounded notice processing requires Unix timers on the main thread')
@@ -192,6 +261,39 @@ class DocumentBudgetWrapperContracts(unittest.TestCase):
         self.assertIs(gate.classify_fundability, self.original)
         self.fallback.assert_not_called()
         self.assertEqual(json.loads((self.root / 'usage-summary.json').read_bytes()), self.ledger.summary())
+
+    def test_actions_restores_before_extraction_and_captures_after_failed_extraction(self):
+        from tools import generation_document_checkpoint as checkpoint
+        order = []
+        def run(*, work_budget):
+            order.append('extract')
+            raise ValueError('incomplete document phase')
+        def capture(*_):
+            self.assertIs(gate.classify_fundability, self.original)
+            self.assertTrue((self.root / 'usage-summary.json').exists())
+            order.append('capture')
+        with patch.dict(os.environ, {'GITHUB_RUN_ID': '123', 'GITHUB_RUN_ATTEMPT': '2'}), \
+                patch.object(checkpoint, 'restore', side_effect=lambda *_: order.append('restore')) as restore, \
+                patch.object(checkpoint, 'capture', side_effect=capture) as retained, \
+                patch.object(extractor, 'main', side_effect=run):
+            with self.assertRaisesRegex(ValueError, 'incomplete document phase'):
+                wrapper.main()
+        self.assertEqual(order, ['restore', 'extract', 'capture'])
+        self.assertEqual(restore.call_args.args[1:], (self.root, '123', '2'))
+        self.assertEqual(retained.call_args.args[1:], (self.root, '123', '2'))
+        self.network.assert_not_called()
+
+    def test_rejected_checkpoint_keeps_publication_closed_without_overwriting_retained_inputs(self):
+        from tools import generation_document_checkpoint as checkpoint
+        with patch.dict(os.environ, {'GITHUB_RUN_ID': '123', 'GITHUB_RUN_ATTEMPT': '2'}), \
+                patch.object(checkpoint, 'restore', side_effect=ValueError('checkpoint provenance mismatch')), \
+                patch.object(checkpoint, 'capture') as capture, patch.object(extractor, 'main') as run:
+            with self.assertRaisesRegex(ValueError, 'checkpoint provenance mismatch'):
+                wrapper.main()
+        self.marker.assert_called_once_with(phase='initializing')
+        run.assert_not_called()
+        capture.assert_not_called()
+        self.network.assert_not_called()
 
     def test_timeout_fallback_failure_still_restores_classifier_and_preserves_spend(self):
         self.ledger.reserve('anthropic', gate.MODEL, 'cov4', 'previous-request', 12345, 1)

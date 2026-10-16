@@ -297,19 +297,22 @@ def best_segmentation(
     collector,
     parent_deadline=None,
     run_budget=None,
+    primary_containers=None,
 ):
     """Segment every attachment and return the best result and its document.
 
     Returns ``(result, document, diagnostics)``. The primary is always tried
     first and from bytes already in hand, so a record whose topics are in the
-    primary costs no extra fetch at all.
+    primary costs no extra fetch at all. Its normalized containers may also be
+    supplied by the evidence parser for those same bytes; secondary attachments
+    always receive their own extraction.
 
     Never raises. Zero subtopics is a normal outcome (§9.3).
     """
     seen_hashes = set()
     attempts = []
 
-    def consider(content, document, label):
+    def consider(content, document, label, containers=None):
         if not content:
             return None
         digest = hashlib.sha256(content).hexdigest()
@@ -320,12 +323,13 @@ def best_segmentation(
             return None
         seen_hashes.add(digest)
         try:
-            containers, _extraction = extract_containers(
-                content,
-                (document or {}).get("content_type"),
-                (document or {}).get("name"),
-                (document or {}).get("url"),
-            )
+            if containers is None:
+                containers, _extraction = extract_containers(
+                    content,
+                    (document or {}).get("content_type"),
+                    (document or {}).get("name"),
+                    (document or {}).get("url"),
+                )
             outcome = segment_document(
                 record,
                 content,
@@ -344,7 +348,7 @@ def best_segmentation(
         })
         return outcome
 
-    best_result = consider(primary_content, primary_document, "primary")
+    best_result = consider(primary_content, primary_document, "primary", primary_containers)
     best_document = primary_document if best_result else None
     if best_result is None:
         best_result = SegmentationResult.empty("no_layer_accepted")

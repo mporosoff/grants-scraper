@@ -27,7 +27,8 @@ class GenerationSpend(unittest.TestCase):
             self.assertTrue(hasattr(extractor, 'DATE_RE'))
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
-            with patch.dict('os.environ', {'OFFLINE_AI_STATE': str(root / 'state'), 'TEAM_MODE': 'pilot'}), \
+            with patch.dict('os.environ', {'OFFLINE_AI_STATE': str(root / 'state'), 'TEAM_MODE': 'pilot',
+                    'GITHUB_RUN_ID': '', 'GITHUB_RUN_ATTEMPT': ''}), \
                     patch('scripts.document_work_budget.WorkBudget', return_value=budget), \
                     patch.object(extractor, 'mark_document_work_incomplete'), \
                     patch.object(extractor, 'main', side_effect=invoke), patch.object(gate, 'classify_fundability') as original:
