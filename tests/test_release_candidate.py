@@ -373,7 +373,7 @@ class CandidateLifecycleTests(unittest.TestCase):
         original = subprocess.check_output
         for expired in (False, True):
             name = 'candidate-' + manifest['candidate_id']
-            rows = [{'name': name, 'expired': True}] if expired else []
+            rows = [{'id': 9, 'name': name, 'expired': True}] if expired else []
             def call(command, **kwargs):
                 if command[0] == 'gh':
                     return json.dumps({'artifacts': rows} if 'artifacts?' in command[-1] else meta).encode()
@@ -393,7 +393,8 @@ class CandidateLifecycleTests(unittest.TestCase):
         meta = {'head_branch': 'main', 'path': '.github/workflows/refresh-opportunities.yml', 'event': 'push'}
         name = 'candidate-' + 'a' * 64
         cases = [subprocess.CalledProcessError(1, ['gh', 'api']),
-                 [json.dumps(meta).encode(), json.dumps({'artifacts': [{'name': name, 'expired': False, 'id': 1}]}).encode(), b'corrupt']]
+                 [json.dumps(meta).encode(), json.dumps({'artifacts': [{'name': name, 'expired': False, 'id': 1}]}).encode(),
+                  json.dumps({'artifacts': []}).encode(), b'corrupt']]
         for result in cases:
             with patch.object(subprocess, 'check_output', side_effect=result), patch.object(artifacts, 'reconstruct') as recover:
                 with self.assertRaises((subprocess.CalledProcessError, zipfile.BadZipFile)):

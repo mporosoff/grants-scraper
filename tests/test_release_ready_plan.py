@@ -139,7 +139,10 @@ class ReleaseReadyPlan(unittest.TestCase):
         self.artifacts = [{'id': i, 'name': f'unrelated-{i}', 'expired': False} for i in range(100)]
         self.artifacts.append(self.artifact(2))
         self.assertEqual(self.read_plan(), self.release_sha)
-        self.assertEqual(self.api_call.call_count, 2)
+        pages = [call.args[1] for call in self.api_call.call_args_list
+                 if call.args[1].startswith(f'actions/runs/{self.run_id}/artifacts?')]
+        self.assertEqual(len(pages), 2)
+        self.assertTrue(pages[-1].endswith('page=2'))
 
     def test_duplicate_across_pages_and_unbounded_lookup_fail_closed(self):
         self.artifacts = [self.artifact(2)] + [

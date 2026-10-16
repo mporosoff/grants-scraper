@@ -846,8 +846,8 @@ class WorkflowContracts(unittest.TestCase):
     def test_receipt_only_retry_selects_recovery_and_paired_retry_skips_all_mutation(self):
         from tools import restore_generation_checkpoint as restore
         candidate_id = 'a'*64
-        receipt = {'name': 'catalog-candidate-recovery-700-1', 'expired': False}
-        candidate = {'name': 'candidate-'+candidate_id, 'expired': False}
+        receipt = {'id': 1, 'name': 'catalog-candidate-recovery-700-1', 'expired': False}
+        candidate = {'id': 2, 'name': 'candidate-'+candidate_id, 'expired': False}
         for retained in ([], [receipt], [receipt, candidate]):
             with self.subTest(retained=[a['name'] for a in retained]), tempfile.TemporaryDirectory() as temp:
                 output = Path(temp)/'output'; output.write_bytes(b'')

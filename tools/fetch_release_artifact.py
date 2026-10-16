@@ -14,7 +14,7 @@ class ArtifactUnavailable(ValueError):
     pass
 
 
-def run_artifacts(run, api):
+def run_artifacts(run, api, *, repository=None):
     """Collect complete bounded evidence before choosing any run checkpoint."""
     if not re.fullmatch(r'[1-9][0-9]*', str(run)):
         raise ValueError('Invalid release run selector')
@@ -28,8 +28,62 @@ def run_artifacts(run, api):
         if len(rows) < 100:
             if value.get('total_count', len(artifacts)) > len(artifacts):
                 raise ValueError('Release artifact history is incomplete')
+            if repository is not None:
+                from tools.release_checkpoint_archive import preserved_artifacts
+                artifacts = merge_artifacts(artifacts, preserved_artifacts(repository, run, api=api))
             return artifacts
     raise ValueError('Release artifact evidence exceeds bounded lookup')
+
+
+def merge_artifacts(native, preserved):
+    """Keep original identities and never replace conflicting or newer evidence."""
+    result = list(native)
+    if not preserved:
+        return result
+    positions = {}
+    for index, artifact in enumerate(result):
+        if artifact['id'] in positions:
+            raise ValueError('Conflicting native artifact identities')
+        positions[artifact['id']] = index
+    for artifact in preserved:
+        index = positions.get(artifact['id'])
+        if index is None:
+            positions[artifact['id']] = len(result)
+            result.append(artifact)
+            continue
+        previous = result[index]
+        if any(previous.get(key) != artifact.get(key) for key in ('name', 'digest', 'workflow_run')):
+            raise ValueError('Native and preserved artifact identities disagree')
+        if previous.get('expired') is not False:
+            result[index] = artifact
+    return result
+
+
+def repository_artifacts(repository, api, *, candidate=None, task_prefix=None):
+    """Order native and preserved receipts together before selecting a result."""
+    artifacts = []
+    for page in range(1, 101):
+        value = json.loads(api(f'actions/artifacts?per_page=100&page={page}'))
+        rows = value['artifacts']
+        if not isinstance(rows, list) or len(rows) > 100:
+            raise ValueError('Invalid repository release artifact page')
+        artifacts.extend(rows)
+        if len(rows) < 100:
+            if value.get('total_count', len(artifacts)) > len(artifacts):
+                raise ValueError('Repository release artifact history is incomplete')
+            from tools.release_checkpoint_archive import preserved_artifacts
+            preserved = preserved_artifacts(repository, candidate=candidate, task_prefix=task_prefix,
+                                            inventory=artifacts, api=api)
+            return merge_artifacts(artifacts, preserved)
+    raise ValueError('Repository release evidence exceeds bounded lookup')
+
+
+def artifact_bytes(repository, run, artifact, api):
+    """Read exact native ZIP bytes or reauthenticate their independent archive."""
+    if '_checkpoint_archive' in artifact:
+        from tools.release_checkpoint_archive import read_preserved_artifact
+        return read_preserved_artifact(repository, run, artifact, api=api)
+    return api(f"actions/artifacts/{artifact['id']}/zip")
 
 
 def reconstruct(repository, run, name, destination):
@@ -71,7 +125,7 @@ def fetch(repository, run, name, destination):
     meta = json.loads(api(f'actions/runs/{run}'))
     if meta['head_branch'] != 'main' or meta['path'] != '.github/workflows/refresh-opportunities.yml' or meta['event'] not in ('push', 'schedule', 'workflow_dispatch'):
         raise ValueError('Candidate evidence must originate in the protected release workflow on main')
-    artifacts = run_artifacts(run, api)
+    artifacts = run_artifacts(run, api, repository=repository)
     matches = [a for a in artifacts if a['name'] == name]
     if not matches and not name.startswith('candidate-'):
         # Reports are append-only across workflow attempts. Select the latest
@@ -88,7 +142,7 @@ def fetch(repository, run, name, destination):
                           'next_action': 'verify_exact_protected_reconstruction'}))
         reconstruct(repository, run, name, destination)
         return meta
-    with zipfile.ZipFile(io.BytesIO(api(f"actions/artifacts/{matches[0]['id']}/zip"))) as archive:
+    with zipfile.ZipFile(io.BytesIO(artifact_bytes(repository, run, matches[0], api))) as archive:
         for item in archive.infolist():
             if item.is_dir():
                 continue

@@ -9,7 +9,7 @@ from tools import release_candidate as c
 
 def main():
     repo, run = os.environ['GITHUB_REPOSITORY'], os.environ['GITHUB_RUN_ID']
-    rows = run_artifacts(run, lambda path: subprocess.check_output(['gh', 'api', f'repos/{repo}/{path}'], timeout=60))
+    rows = run_artifacts(run, lambda path: subprocess.check_output(['gh', 'api', f'repos/{repo}/{path}'], timeout=60), repository=repo)
     artifacts = [a for a in rows if a['name'].startswith('candidate-')]
     if not artifacts:
         return

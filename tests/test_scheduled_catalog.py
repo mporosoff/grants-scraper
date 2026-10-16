@@ -219,6 +219,8 @@ class ScheduledHistory(unittest.TestCase):
     def response(self, repository, path):
         self.assertEqual(repository, ENV['GITHUB_REPOSITORY'])
         self.assertIn('per_page=100&page=', path)
+        if path == 'actions/artifacts?per_page=100&page=1':
+            return json.dumps({'artifacts': [], 'total_count': 0})
         if path.startswith('actions/workflows/'):
             return json.dumps({'workflow_runs': self.runs})
         run = path.split('/')[2]
@@ -523,7 +525,8 @@ class AccessParentSupersession(unittest.TestCase):
         batches = {'actions/workflows/refresh-opportunities.yml/runs?branch=main': [self.run, boundary],
                    'actions/runs/' + str(self.access.RUN) + '/artifacts': self.artifacts}
         with patch.object(scheduled, '_published', return_value={(self.pointer['artifact_run'], self.pointer['candidate_id'])}), \
-             patch.object(scheduled, '_pages', side_effect=lambda repository, path, key: iter([batches[path]])):
+             patch.object(scheduled, '_pages', side_effect=lambda repository, path, key: iter([batches[path]])), \
+             patch.object(scheduled, 'run_artifacts', side_effect=lambda identifier, read, **kwargs: batches[f'actions/runs/{identifier}/artifacts']):
             environment = ENV | {'GITHUB_RUN_ID': '41000000000'}
             self.assertIsNone(scheduled.prior_generation(Path('unused'), environment, {'generation_run_id': '36896442720'}))
             self.run['run_attempt'] = 2
@@ -629,7 +632,8 @@ class UrlParentSupersession(unittest.TestCase):
         batches = {'actions/workflows/refresh-opportunities.yml/runs?branch=main': [self.run, boundary],
                    'actions/runs/' + str(self.url.RUN) + '/artifacts': self.artifacts}
         with patch.object(scheduled, '_published', return_value={(self.pointer['artifact_run'], self.pointer['candidate_id'])}), \
-             patch.object(scheduled, '_pages', side_effect=lambda repository, path, key: iter([batches[path]])):
+             patch.object(scheduled, '_pages', side_effect=lambda repository, path, key: iter([batches[path]])), \
+             patch.object(scheduled, 'run_artifacts', side_effect=lambda identifier, read, **kwargs: batches[f'actions/runs/{identifier}/artifacts']):
             environment = ENV | {'GITHUB_RUN_ID': '41000000000'}
             self.assertIsNone(scheduled.prior_generation(Path('unused'), environment, {'generation_run_id': '38275115281'}))
             self.run['run_attempt'] = 2
@@ -647,6 +651,7 @@ class UrlParentSupersession(unittest.TestCase):
         base = {'stage': 'generate', 'reason': 'source changes require generation'}
         with patch.object(scheduled, '_published', return_value=set()), \
              patch.object(scheduled, '_pages', side_effect=lambda repository, path, key: iter([batches[path]])), \
+             patch.object(scheduled, 'run_artifacts', side_effect=lambda identifier, read, **kwargs: batches[f'actions/runs/{identifier}/artifacts']), \
              patch.object(c, 'read_json', return_value=manifest):
             self.git.side_effect = lambda root, *args: '' if args[0] == 'log' else '{}'
             held = scheduled.hold_competing_generation(Path('unused'), environment, base)
@@ -779,6 +784,7 @@ class UrlSiblingSupersession(unittest.TestCase):
         base = {'stage': 'generate', 'reason': 'current source inputs changed'}
         with patch.object(scheduled, '_published', return_value=set()), \
              patch.object(scheduled, '_pages', side_effect=lambda repository, path, key: iter([batches[path]])), \
+             patch.object(scheduled, 'run_artifacts', side_effect=lambda identifier, read, **kwargs: batches[f'actions/runs/{identifier}/artifacts']), \
              patch.object(c, 'read_json', return_value=manifest):
             self.git.side_effect = lambda root, *args: '' if args[0] == 'log' else '{}'
             held = scheduled.hold_competing_generation(Path('unused'), environment, base)

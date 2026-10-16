@@ -1,0 +1,49 @@
+name: Preserve immutable release checkpoints
+
+on:
+  workflow_run:
+    workflows: ["Funding Finder immutable release"]
+    types: [completed]
+    branches: [main]
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: release-checkpoint-archive-${{ github.event.workflow_run.id }}-${{ github.event.workflow_run.run_attempt }}
+  cancel-in-progress: false
+
+jobs:
+  preserve:
+    if: github.ref == 'refs/heads/main' && github.event.workflow_run.head_repository.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+      - run: python -m pip install -r requirements.txt
+      - name: Authenticate and preserve the completed attempt's exact artifact ZIPs
+        id: capture
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SOURCE_RUN: ${{ github.event.workflow_run.id }}
+          SOURCE_ATTEMPT: ${{ github.event.workflow_run.run_attempt }}
+        run: >-
+          python -m tools.release_checkpoint_archive capture
+          --run "$SOURCE_RUN" --attempt "$SOURCE_ATTEMPT"
+          --output "$RUNNER_TEMP/release-checkpoint"
+      - name: Retain evidence under an independent workflow run
+        if: steps.capture.outputs.artifact_name != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.capture.outputs.artifact_name }}
+          path: ${{ runner.temp }}/release-checkpoint
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 90

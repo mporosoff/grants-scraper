@@ -68,6 +68,8 @@ class CompleteRunArtifacts(unittest.TestCase):
         self.paths.append(path)
         if path == f'actions/runs/{self.run_id}':
             return json.dumps(self.meta).encode()
+        if path == 'actions/artifacts?per_page=100&page=1':
+            return b'{"artifacts":[],"total_count":0}'
         if path.startswith(f'actions/runs/{self.run_id}/artifacts?per_page=100&page='):
             page = int(path.rsplit('=', 1)[1])
             if self.page_error and page == 2:
