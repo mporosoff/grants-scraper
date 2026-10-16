@@ -4,19 +4,18 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml</id>
-  <updated>2026-10-14T15:15:41Z</updated>
+  <updated>2026-10-16T14:38:47Z</updated>
   <generator>Funding Finder</generator>
   <entry>
-    <title>Lunar Enabling Infrastructure Accelerator (LEIA) -Broad Agency Announcement (BAA) NextSTEP-3 Appendix A - Final Solicitation</title>
-    <link href="https://sam.gov/opp/812c81b0f0b84943be12a5f29615d3c8/view"/>
-    <id>urn:funding-finder:sam-gov:sam-gov%3A812c81b0f0b84943be12a5f29615d3c8</id>
-    <updated>2026-10-09T00:00:00Z</updated>
-    <author><name>NASA Glenn Research Center</name></author>
-    <category term="Energy"/>
-    <category term="Manufacturing"/>
+    <title>Cooperative Agreement for affiliated Partner with Northern Great Plains Cooperative Ecosystem Studies Unit</title>
+    <link href="https://www.grants.gov/search-results-detail/364078"/>
+    <id>urn:funding-finder:grants-gov:364078</id>
+    <updated>2026-10-14T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
+    <category term="Environmental science"/>
     <category term="Materials science"/>
-    <category term="Space and aeronautics"/>
-    <summary>NASA Glenn Research Center | Full Application 2026-10-15 | Lunar infrastructure technology maturation: vertical solar arrays, oxygen extraction from regolith, radioisotope Stirling generators, in-space advanced manufacturing, and nanomaterials; generally TRL 5-6 demonstrations. US organizations as prime; foreign organizations may team but NASA funds cannot support their R&amp;D; non-US persons employed/studying at US organizations may receive funding. NASA/JP…</summary>
+    <category term="Water"/>
+    <summary>Geological Survey | Application 2026-11-14 | Robust and reliable quantitative method to correct for solution chemistry interferences in molecularly imprinted polymer - electrochemical sensor (MIP-ES) measurements of complex environmental water matricesThe goal of this research is to develop a robust and reliable quantitative method to correct for solution chemistry interferences in MIP-ES measurements of complex environmental water matrices.…</summary>
   </entry>
   <entry>
     <title>Small Business Innovation Research and Small Business Technology Transfer Programs Phase II</title>
@@ -65,7 +64,7 @@
     <category term="Separations and membranes"/>
     <category term="Carbon management"/>
     <category term="Quantum science"/>
-    <summary>Office of Science | Application 2027-09-30 | SC hereby announces its continuing interest in receiving applications for support of work in the following program areas: · Advanced Scientific Computing Research· Basic Energy Sciences· Biological and Environmental Research· Fusion Energy Sciences· High Energy and Nuclear Physics· Isotope R&amp;D and Production. On September 3, 1992, DOE published in the Federal Register the Office of Energy Research…</summary>
+    <summary>Office of Science | Application 2027-09-30 | verify prerequisite | SC hereby announces its continuing interest in receiving applications for support of work in the following program areas: · Advanced Scientific Computing Research· Basic Energy Sciences· Biological and Environmental Research· Fusion Energy Sciences· High Energy and Nuclear Physics· Isotope R&amp;D and Production. On September 3, 1992, DOE published in the Federal Register the Office of Energy Research…</summary>
   </entry>
   <entry>
     <title>Fiscal Year (FY) 2027 Department of War (DoW) Multidisciplinary Research Program of the University Research Initiative (MURI)</title>
@@ -152,15 +151,6 @@
     <category term="Energy"/>
     <category term="Manufacturing"/>
     <summary>U.S. National Science Foundation | Posted | The NSF Geosciences Research solicitation supports foundational research projects that advance the frontiers of knowledge across all areas of the geosciences. This solicitation calls for proposals in three programs: Atmospheric and Geospace Sciences (AGS) Program; Earth Sciences (EAR) Program; and Ocean Sciences (OCE) Program. These programs support projects that expand the frontiers of knowledge …</summary>
-  </entry>
-  <entry>
-    <title>Resilient</title>
-    <link href="https://sam.gov/opp/f0e3e0d303254053922d9b2c7a67e878/view"/>
-    <id>urn:funding-finder:darpa-iarpa-research-solicitations:darpa-iarpa%3Adarpa-darpapa250704</id>
-    <updated>2026-08-20T00:00:00Z</updated>
-    <author><name>Defense Advanced Research Projects Agency (DARPA)</name></author>
-    <category term="Materials science"/>
-    <summary>Defense Advanced Research Projects Agency (DARPA) | Application 2026-10-19 | DSO is issuing a Disruption Opportunity (DO), inviting submissions of innovative basic or applied research concepts in the technical domain of accelerated materials testing and prediction for concrete. | See Program The nation’s critical military and civilian infrastructure relies heavily on concrete structures that are aging and degrading at unpredictable rates. Current concrete testing methods f…</summary>
   </entry>
   <entry>
     <title>EMERGING FRONTIERS IN RESEARCH AND INNOVATION (EFRI-2026/27): Wave-Based Computing ( EFRI-WBC)</title>
@@ -376,6 +366,18 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Manufacturing"/>
     <category term="Materials science"/>
     <summary>NASA Headquarters | Posted | The National Aeronautics and Space Administration (NASA) Headquarters, Space Technology Mission Directorate (STMD) will be releasing an Umbrella NASA Research Announcement (NRA) titled “Space Technology Research, Development, Demonstration, and Infusion-2026 (SpaceTech-REDDI-2026)” on or about December 9, 2025. The solicitation is available by opening the NSPIRES homepage at https://nspires.nasapr…</summary>
+  </entry>
+  <entry>
+    <title>Archaeology and Archaeometry</title>
+    <link href="https://www.grants.gov/search-results-detail/359606"/>
+    <id>urn:funding-finder:grants-gov:359606</id>
+    <updated>2025-06-06T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Materials science"/>
+    <summary>U.S. National Science Foundation | Posted | The goal of the Archaeology Program is to fund research which furthers anthropologically relevant archaeological knowledge. In accordance with the National Science Foundation’s mission such research has the potential to provide fundamental scientific insight. While within the broad range of “archaeology” the focus is on projects judged to be significant from an anthropological perspective, the Pro…</summary>
   </entry>
   <entry>
     <title>Staff Research Program</title>

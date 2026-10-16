@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/source-type/federal.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/source-type/federal.xml</id>
-  <updated>2026-10-14T15:15:41Z</updated>
+  <updated>2026-10-16T14:38:47Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -22,17 +22,9 @@
     <id>urn:funding-finder:grants-gov:363651</id>
     <updated>2028-04-28T00:00:00Z</updated>
     <author><name>Indian Health Service</name></author>
-    <category term="Public health"/>
-    <summary>Indian Health Service | Estimated Application 2028-06-30 | New cohort of NPHR awards designed to fund Tribes and Tribal Orgs to provide Essential Public Health Services</summary>
-  </entry>
-  <entry>
-    <title>Native Public Health Resilience</title>
-    <link href="https://www.grants.gov/search-results-detail/363844"/>
-    <id>urn:funding-finder:grants-gov:363844</id>
-    <updated>2028-04-28T00:00:00Z</updated>
-    <author><name>Indian Health Service</name></author>
-    <category term="Public health"/>
-    <summary>Indian Health Service | Estimated Application 2028-06-30 | New cohort of NPHR awards designed to fund Tribes and Tribal Orgs to provide Essential Public Health Services</summary>
+    <category term="Agriculture and food"/>
+    <category term="Education and workforce"/>
+    <summary>Indian Health Service | Estimated Application 2028-06-30 | This project promotes healthy lifestyles amongst American Indian and Alaska Native (AI/AN) youth at selected Native Boys and Girls Club sites across the nation. The long-term goal is to prevent or delay the onset of obesity and related diseases, such as type 2 diabetes. Participating sites implement the "Together Raising Awareness for Indian Life" (also known as T.R.A.I.L. or "On the T.R.A.I.L. to…</summary>
   </entry>
   <entry>
     <title>Public Health Nursing</title>
@@ -407,6 +399,15 @@
     <category term="Arts and culture"/>
     <category term="Biology and biotechnology"/>
     <summary>National Institutes of Health | Estimated Application 2027-07-01 | The purpose of the Somatic Mosaicism across Human Tissues (SMaHT) Network is to advance the discovery of biological processes and disease mechanisms mediated by somatic mutations in human tissues. Since 2023, the program has generated multi-omic somatic mutation datasets from a standardized set of human tissues spanning all three germ layers. Building on the Stage 1 foundation, the NIH intends to …</summary>
+  </entry>
+  <entry>
+    <title>Tribal Epidemiology Centers</title>
+    <link href="https://www.grants.gov/search-results-detail/363492"/>
+    <id>urn:funding-finder:grants-gov:363492</id>
+    <updated>2027-05-01T00:00:00Z</updated>
+    <author><name>Indian Health Service</name></author>
+    <category term="Public health"/>
+    <summary>Indian Health Service | Estimated Application 2027-07-01 | Second cohort of TEC sites for any currently unserved Areas.</summary>
   </entry>
   <entry>
     <title>Claude D. Pepper Older Americans Independence Centers</title>

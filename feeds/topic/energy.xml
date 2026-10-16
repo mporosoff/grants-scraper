@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/energy.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/energy.xml</id>
-  <updated>2026-10-14T15:15:41Z</updated>
+  <updated>2026-10-16T14:38:47Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Affordable Rural Cooperative (ARC) Energy Program</title>
@@ -18,26 +18,68 @@
     <summary>Rural Utilities Service | Letter Of Intent 2026-11-20 | The Rural Utilities Service (RUS or the Agency), a Rural Development (RD) agency of the United States Department of Agriculture (USDA), is soliciting Letters of Interest (LOI) for applications under the Affordable Rural Cooperative (ARC) Program. In addition, the Agency is announcing the eligibility requirements, application process and deadlines, and the criteria that will be used by RUS to asses…</summary>
   </entry>
   <entry>
-    <title>Office of Hazardous Materials Safety Research Initiative - FY2026 BROAD AGENCY ANNOUNCEMENT (BAA)</title>
-    <link href="https://sam.gov/opp/b7f83ec10df84ff0ad8ec6290dba7176/view"/>
-    <id>urn:funding-finder:sam-gov:sam-gov%3Ab7f83ec10df84ff0ad8ec6290dba7176</id>
-    <updated>2026-10-13T00:00:00Z</updated>
-    <author><name>U.S. Department of Transportation - Pipeline and Hazardous Materials Safety Administration (PHMSA)</name></author>
+    <title>Cooperative Agreement for Affiliated Partner with the Hawaiʻi-Pacific Islands Cooperative Ecosystem Studies Unit (CESU)</title>
+    <link href="https://www.grants.gov/search-results-detail/364083"/>
+    <id>urn:funding-finder:grants-gov:364083</id>
+    <updated>2026-10-14T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
     <category term="Energy"/>
-    <category term="Transportation"/>
-    <summary>U.S. Department of Transportation - Pipeline and Hazardous Materials Safety Administration (PHMSA) | White Paper 2026-11-18 | Hazardous-materials transport research including energy-storage systems, packaging, emergency response, and rail safety; analytical studies and technology assessment. Current action Amendment0003 publishedOct13 replaces saved745e7a... action; only Q&amp;A added, other terms unchanged. US prime; foreign entities permitted as subcontractors under conditions. Federal/state/local government bodies exclude…</summary>
+    <category term="Environmental science"/>
+    <category term="Space and aeronautics"/>
+    <category term="Water"/>
+    <summary>Geological Survey | Application 2026-11-14 | Invasive species are one of the greatest threats to biodiversity, biosecurity, ecosystem functioning, and human well-being in Hawaiʻi. Managers are increasingly concerned about the horticultural trade because it is the predominant pathway for non-native plant introduction in the state. However, they currently lack information about which species pose the greatest risk now and in the future. By ana…</summary>
   </entry>
   <entry>
-    <title>Lunar Enabling Infrastructure Accelerator (LEIA) -Broad Agency Announcement (BAA) NextSTEP-3 Appendix A - Final Solicitation</title>
-    <link href="https://sam.gov/opp/812c81b0f0b84943be12a5f29615d3c8/view"/>
-    <id>urn:funding-finder:sam-gov:sam-gov%3A812c81b0f0b84943be12a5f29615d3c8</id>
-    <updated>2026-10-09T00:00:00Z</updated>
-    <author><name>NASA Glenn Research Center</name></author>
+    <title>Cooperative Agreement for Affiliated Partner with the North Atlantic Coast Cooperative Ecosystem Studies Unit (CESU)</title>
+    <link href="https://www.grants.gov/search-results-detail/364085"/>
+    <id>urn:funding-finder:grants-gov:364085</id>
+    <updated>2026-10-14T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
     <category term="Energy"/>
-    <category term="Manufacturing"/>
-    <category term="Materials science"/>
+    <category term="Environmental science"/>
     <category term="Space and aeronautics"/>
-    <summary>NASA Glenn Research Center | Full Application 2026-10-15 | Lunar infrastructure technology maturation: vertical solar arrays, oxygen extraction from regolith, radioisotope Stirling generators, in-space advanced manufacturing, and nanomaterials; generally TRL 5-6 demonstrations. US organizations as prime; foreign organizations may team but NASA funds cannot support their R&amp;D; non-US persons employed/studying at US organizations may receive funding. NASA/JP…</summary>
+    <category term="Water"/>
+    <summary>Geological Survey | Application 2026-11-14 | Invasive plants harm ecosystems by outcompeting native plants and destabilizing natural communities. To reduce harm, practitioners use control methods such as herbicides or mowing. Rising temperatures can create a fertilization effect that boosts plant growth, an impact that is even stronger in invasive species, which tend to grow much faster than non-invasive plants. As a result, the recommended …</summary>
+  </entry>
+  <entry>
+    <title>Cooperative Agreement for Affiliated Partner with the Pacific Northwest Cooperative Ecosystem Studies Unit (CESU)</title>
+    <link href="https://www.grants.gov/search-results-detail/364084"/>
+    <id>urn:funding-finder:grants-gov:364084</id>
+    <updated>2026-10-14T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Space and aeronautics"/>
+    <category term="Water"/>
+    <summary>Geological Survey | Application 2026-11-14 | Freshwater aquatic habitats in the Northwest sustain native fish such as bull trout, salmon, and lamprey that are important to the region's food economy, outdoor recreation, and as Tribal resources. However, increasing water temperatures and fluctuating precipitation can increase the vulnerability of these habitats and native species to biological invasions. Among non-native species that are known…</summary>
+  </entry>
+  <entry>
+    <title>Cooperative Agreement for Affiliated Partner with the Rocky Mountains Cooperative Ecosystem Studies Unit (CESU)</title>
+    <link href="https://www.grants.gov/search-results-detail/364082"/>
+    <id>urn:funding-finder:grants-gov:364082</id>
+    <updated>2026-10-14T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Space and aeronautics"/>
+    <category term="Water"/>
+    <summary>Geological Survey | Application 2026-11-14 | The spread of invasive grasses, such as cheatgrass, adds fine fuels to the landscape that increase wildfire occurrence and frequency. Following a fire, invasive grasses regrow quickly, typically outcompeting native plants and perpetuating what is known as the invasive grass-fire cycle. This cycle has been well documented in western portions of the sagebrush biome, such as the Great Basin, but ther…</summary>
+  </entry>
+  <entry>
+    <title>Genesis Mission Graduate Fellowship Pilot</title>
+    <link href="https://www.grants.gov/search-results-detail/364033"/>
+    <id>urn:funding-finder:grants-gov:364033</id>
+    <updated>2026-10-08T00:00:00Z</updated>
+    <author><name>Office of Science</name></author>
+    <category term="Education and workforce"/>
+    <category term="Technology development"/>
+    <category term="Energy"/>
+    <category term="Cybersecurity"/>
+    <summary>Office of Science | Application 2027-01-12 | American scientists and engineers will power the super intelligence (SI) revolution in science and innovation through the Genesis Mission. DOE SC hereby invites applications from United States (U.S.) Institutions of Higher Education and domestic doctoral-granting institutions to develop and demonstrate the effectiveness of novel four-year doctoral training pilots with dual competency in SI and ano…</summary>
   </entry>
   <entry>
     <title>ROSES 2025: B.8 Heliophysics Spaceflight Science Foundations</title>
@@ -57,7 +99,7 @@
     <author><name>NASA Headquarters</name></author>
     <category term="Energy"/>
     <category term="Space and aeronautics"/>
-    <summary>NASA Headquarters | Application 2027-03-16 | The close date above is the date for the Step-2 proposal due date. The Step-1 proposal due date is November 20, 2026. Step-2 proposals cannot be submitted if a Step-1 proposal was not submitted. NOTICE: Amended October 7, 2026. This amendment adds this new program element to ROSES-2025. Step-1 proposals are due by November 20, 2026, and Step-2 proposals are due March 16, 2027. The page limit for t…</summary>
+    <summary>NASA Headquarters | Application 2027-03-16 | The close date above is the date for the Step-2 proposal due date. The Step-1 proposal due date is November 20, 2026. Step-2 proposals cannot be submitted if a Step-1 proposal was not submitted. ﻿NOTICE: Corrected October 15, 2026: A spurious reference to cubesats was removed from the first paragraph of the introduction. New text is in bold and deleted text is struck through. NOTICE: Amended Octob…</summary>
   </entry>
   <entry>
     <title>Silicon Carbide Cladding Lead Test Rod Development-Phase 1</title>
@@ -67,15 +109,6 @@
     <author><name>Idaho Field Office</name></author>
     <category term="Energy"/>
     <summary>Idaho Field Office | Application 2026-12-07 | Silicon Carbide Cladding Lead Test Rod Development-Phase 1Research, development, and fabrication of Silicon Carbide cladding specimens for research reactor insertion, irradiation, and post-irradiation examinations by 2030. The objective of this program is to advance the scientific and technological maturity of silicon carbide cladding for nuclear fuel rods for future use in commercial light water …</summary>
-  </entry>
-  <entry>
-    <title>A Study on Vessel Design Challenge</title>
-    <link href="https://sam.gov/opp/a59ae93e40ba49a9a53c7e23ca1ad3a0/view"/>
-    <id>urn:funding-finder:sam-gov:sam-gov%3Aa59ae93e40ba49a9a53c7e23ca1ad3a0</id>
-    <updated>2026-10-05T00:00:00Z</updated>
-    <author><name>U.S. Department of Transportation - Maritime Administration (MARAD)</name></author>
-    <category term="Energy"/>
-    <summary>U.S. Department of Transportation - Maritime Administration (MARAD) | Full Application 2027-01-10 | Scientific and engineering vessel-design study combining hydrodynamics, propulsion, energy efficiency, cost analysis, and underwater radiated-noise reduction. Domestic institutions eligible; preference for US-company/US-flag team leads is evaluative, not an exclusion. An organization can join multiple teams but may lead only one proposal; no identical teams rotating leads. SAM registration/current…</summary>
   </entry>
   <entry>
     <title>ROSES 2025: A.18 Geosphere</title>
@@ -125,7 +158,7 @@
     <category term="Separations and membranes"/>
     <category term="Carbon management"/>
     <category term="Quantum science"/>
-    <summary>Office of Science | Application 2027-09-30 | SC hereby announces its continuing interest in receiving applications for support of work in the following program areas: · Advanced Scientific Computing Research· Basic Energy Sciences· Biological and Environmental Research· Fusion Energy Sciences· High Energy and Nuclear Physics· Isotope R&amp;D and Production. On September 3, 1992, DOE published in the Federal Register the Office of Energy Research…</summary>
+    <summary>Office of Science | Application 2027-09-30 | verify prerequisite | SC hereby announces its continuing interest in receiving applications for support of work in the following program areas: · Advanced Scientific Computing Research· Basic Energy Sciences· Biological and Environmental Research· Fusion Energy Sciences· High Energy and Nuclear Physics· Isotope R&amp;D and Production. On September 3, 1992, DOE published in the Federal Register the Office of Energy Research…</summary>
   </entry>
   <entry>
     <title>2026 Diesel Emissions Reduction Act (DERA) National Program</title>
@@ -643,29 +676,5 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <summary>U.S. National Science Foundation | Posted | The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational research projects for civil, mechanical, and manufacturing innovation through the following programs: The Advanced Manufacturing, Design, and Operations (AMDO) program supports foundational research on advanced manufacturing, materials and service processes; their integration into facilities, supply ch…</summary>
-  </entry>
-  <entry>
-    <title>Engineering (ENG): Electrical, Communications, and Computing Systems (ECCS)</title>
-    <link href="https://www.grants.gov/search-results-detail/363613"/>
-    <id>urn:funding-finder:grants-gov:363613</id>
-    <updated>2026-08-17T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Energy"/>
-    <category term="Quantum science"/>
-    <category term="Data science"/>
-    <category term="Materials science"/>
-    <category term="Manufacturing"/>
-    <summary>U.S. National Science Foundation | Posted | The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational research for electrical, communications and computing systems through the following programs: The Electronic, Photonic, Magnetic, and Quantum Devices (EPMQD) program supports foundational engineering research on novel classical and quantum devices, exploring matter’s electronic, photonic, and magnetic …</summary>
-  </entry>
-  <entry>
-    <title>MPS Astronomical Sciences Research Programs (MPS Astro)</title>
-    <link href="https://www.grants.gov/search-results-detail/363620"/>
-    <id>urn:funding-finder:grants-gov:363620</id>
-    <updated>2026-08-17T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Energy"/>
-    <category term="Technology development"/>
-    <summary>U.S. National Science Foundation | Posted | The U.S. National Science Foundation Directorate for Mathematical and Physical Sciences (NSF MPS) supports multiple research programs in the astronomical sciences. NSF MPS funds foundational astronomical sciences research and instrumentation focused on exploring space and advancing fundamental understanding of the universe. The programs covered by this funding opportunity are: Astronomical Science…</summary>
   </entry>
 </feed>

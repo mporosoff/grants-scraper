@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/environmental-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/environmental-science.xml</id>
-  <updated>2026-10-14T15:15:41Z</updated>
+  <updated>2026-10-16T14:38:47Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Limited Competition: Biomedical Research Environment &amp; Sponsored Programs Administration Development (BRE-SPAD) Program</title>
@@ -336,14 +336,146 @@
     <summary>Centers for Disease Control and Prevention - ERA | Estimated Application 2027-01-26 | Background: Despite advances in technology and improvements in work environments, mining remains one of the most challenging and hazardous occupations in the United States. The industry continues to experience a fatality rate nearly three times higher than the national average for all industries, according to the U.S. Bureau of Labor Statistics (BLS). Public MSHA data show that in 2025, the U.S. m…</summary>
   </entry>
   <entry>
-    <title>FY 2027-2028 NESDIS Broad Agency Announcement (BAA)</title>
-    <link href="https://www.grants.gov/search-results-detail/364069"/>
-    <id>urn:funding-finder:grants-gov:364069</id>
-    <updated>2026-10-13T00:00:00Z</updated>
-    <author><name>DOC NOAA - ERA Production</name></author>
-    <category term="Arts and culture"/>
+    <title>Cooperative Agreement for affiliated Partner with Californian Cooperative Ecosystem Studies Unit</title>
+    <link href="https://www.grants.gov/search-results-detail/364074"/>
+    <id>urn:funding-finder:grants-gov:364074</id>
+    <updated>2026-10-14T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
     <category term="Environmental science"/>
-    <summary>DOC NOAA - ERA Production | Application 2028-09-30 | A description of NOAA Line and Staff Offices is found at https://www.noaa.gov/about/organization, and applicants may contact the Agency Contacts in Section VII. below for more information. If you submit the same application to more than one Line or Staff Office, mention this in your application and notify the relevant contacts in Section VII. so that NOAA may coordinate internally. This notice als…</summary>
+    <category term="Public health"/>
+    <summary>Geological Survey | Application 2026-11-14 | The USGS is offering a funding opportunity to a CESU partner for research to develop an enhanced gene expression panel with the ability to differentiate among several unique stressors that can potentially affect population and ecosystem health. This research will contribute to the development of ecosystem monitoring programs. Focal species include Californian sea lions, sea otters, salmon, longfin…</summary>
+  </entry>
+  <entry>
+    <title>Cooperative Agreement for affiliated Partner with Chesapeake Watershed Cooperative Ecosystem Studies Unit</title>
+    <link href="https://www.grants.gov/search-results-detail/364076"/>
+    <id>urn:funding-finder:grants-gov:364076</id>
+    <updated>2026-10-14T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
+    <category term="Environmental science"/>
+    <summary>Geological Survey | Application 2026-11-14 | The USGS is offering a funding opportunity to a CESU partner for research for meeting partner needs for quantifying current status and trends of North American amphibian populations and outcomes of management interventions. The research will be conducted in collaboration with USGS partners at the USGS Eastern Ecological Research Center and the USGS Amphibian Research and Monitoring Initiative. Spe…</summary>
+  </entry>
+  <entry>
+    <title>Cooperative Agreement for affiliated Partner with Great Lakes-Northern Forest Cooperative Ecosystem Studies Unit</title>
+    <link href="https://www.grants.gov/search-results-detail/364077"/>
+    <id>urn:funding-finder:grants-gov:364077</id>
+    <updated>2026-10-14T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
+    <category term="Environmental science"/>
+    <summary>Geological Survey | Application 2026-11-14 | The U.S. Geological Survey (USGS) is offering a funding opportunity to a CESU partner for research that supports cisco restoration priorities in Lakes Huron and Erie by hiring a structured decision-making expert and convening a structured decision-making workshop to help fisheries managers develop a restoration plan and by hiring a scientist to conduct experiments to determine what environmental c…</summary>
+  </entry>
+  <entry>
+    <title>Cooperative Agreement for affiliated Partner with Northern Great Plains Cooperative Ecosystem Studies Unit</title>
+    <link href="https://www.grants.gov/search-results-detail/364078"/>
+    <id>urn:funding-finder:grants-gov:364078</id>
+    <updated>2026-10-14T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
+    <category term="Environmental science"/>
+    <category term="Materials science"/>
+    <category term="Water"/>
+    <summary>Geological Survey | Application 2026-11-14 | Robust and reliable quantitative method to correct for solution chemistry interferences in molecularly imprinted polymer - electrochemical sensor (MIP-ES) measurements of complex environmental water matricesThe goal of this research is to develop a robust and reliable quantitative method to correct for solution chemistry interferences in MIP-ES measurements of complex environmental water matrices.…</summary>
+  </entry>
+  <entry>
+    <title>Cooperative Agreement for affiliated Partner with Rocky Mountain Cooperative Ecosystem Studies Unit</title>
+    <link href="https://www.grants.gov/search-results-detail/364079"/>
+    <id>urn:funding-finder:grants-gov:364079</id>
+    <updated>2026-10-14T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
+    <category term="Environmental science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Geological Survey | Application 2026-11-14 | U.S. Geological Survey's (USGS) Powell Center solicits research on "A spatially explicit framework to assess the risk of aquatic contaminants to insectivorous birds." This project will predict how contaminant and nutrient fluxes by adult aquatic insects contribute to a landscape of risk for aerial insectivorous birds. The research synthesis project will map areas of elevated risk for aerial insect…</summary>
+  </entry>
+  <entry>
+    <title>Cooperative Agreement for Affiliated Partner with the Colorado Plateau Cooperative Ecosystem Studies Unit (CESU)</title>
+    <link href="https://www.grants.gov/search-results-detail/364080"/>
+    <id>urn:funding-finder:grants-gov:364080</id>
+    <updated>2026-10-14T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Environmental science"/>
+    <summary>Geological Survey | Application 2026-11-14 | U.S. Geological Survey's (USGS), Northern Rocky Mountain Science Center (NOROCK), is offering a funding opportunity to improve assessments of floodplain connectivity and riverscape health. Current approaches to identify floodplain connectivity across the western United States rely on field data, limiting inference and spatial extent of data. However, existing lidar datasets through the USGS provid…</summary>
+  </entry>
+  <entry>
+    <title>Cooperative Agreement for Affiliated Partner with the Great Lakes-Northern Forest Cooperative Ecosystem Studies Unit (CESU)</title>
+    <link href="https://www.grants.gov/search-results-detail/364075"/>
+    <id>urn:funding-finder:grants-gov:364075</id>
+    <updated>2026-10-14T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Environmental science"/>
+    <summary>Geological Survey | Application 2026-11-14 | The U.S. Geological Survey (USGS) is offering a funding opportunity to a CESU partner for research in the development, evaluation, and synthesis of national-scale biogeographic information for fish and other aquatic organisms. This project supports research that improves how species distributions, habitat conditions, and conservation needs are mapped and analyzed across the United States. The proj…</summary>
+  </entry>
+  <entry>
+    <title>Cooperative Agreement for Affiliated Partner with the Hawaiʻi-Pacific Islands Cooperative Ecosystem Studies Unit (CESU)</title>
+    <link href="https://www.grants.gov/search-results-detail/364083"/>
+    <id>urn:funding-finder:grants-gov:364083</id>
+    <updated>2026-10-14T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Space and aeronautics"/>
+    <category term="Water"/>
+    <summary>Geological Survey | Application 2026-11-14 | Invasive species are one of the greatest threats to biodiversity, biosecurity, ecosystem functioning, and human well-being in Hawaiʻi. Managers are increasingly concerned about the horticultural trade because it is the predominant pathway for non-native plant introduction in the state. However, they currently lack information about which species pose the greatest risk now and in the future. By ana…</summary>
+  </entry>
+  <entry>
+    <title>Cooperative Agreement for Affiliated Partner with the North Atlantic Coast Cooperative Ecosystem Studies Unit (CESU)</title>
+    <link href="https://www.grants.gov/search-results-detail/364085"/>
+    <id>urn:funding-finder:grants-gov:364085</id>
+    <updated>2026-10-14T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Space and aeronautics"/>
+    <category term="Water"/>
+    <summary>Geological Survey | Application 2026-11-14 | Invasive plants harm ecosystems by outcompeting native plants and destabilizing natural communities. To reduce harm, practitioners use control methods such as herbicides or mowing. Rising temperatures can create a fertilization effect that boosts plant growth, an impact that is even stronger in invasive species, which tend to grow much faster than non-invasive plants. As a result, the recommended …</summary>
+  </entry>
+  <entry>
+    <title>Cooperative Agreement for Affiliated Partner with the Pacific Northwest Cooperative Ecosystem Studies Unit (CESU)</title>
+    <link href="https://www.grants.gov/search-results-detail/364084"/>
+    <id>urn:funding-finder:grants-gov:364084</id>
+    <updated>2026-10-14T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Space and aeronautics"/>
+    <category term="Water"/>
+    <summary>Geological Survey | Application 2026-11-14 | Freshwater aquatic habitats in the Northwest sustain native fish such as bull trout, salmon, and lamprey that are important to the region's food economy, outdoor recreation, and as Tribal resources. However, increasing water temperatures and fluctuating precipitation can increase the vulnerability of these habitats and native species to biological invasions. Among non-native species that are known…</summary>
+  </entry>
+  <entry>
+    <title>Cooperative Agreement for Affiliated Partner with the Pacific Northwest Cooperative Ecosystem Studies Unit (CESU)</title>
+    <link href="https://www.grants.gov/search-results-detail/364081"/>
+    <id>urn:funding-finder:grants-gov:364081</id>
+    <updated>2026-10-14T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
+    <category term="Environmental science"/>
+    <summary>Geological Survey | Application 2026-11-14 | The U.S. Geological Survey (USGS) is offering a funding opportunity to a CESU partner for research in the study of chronic wasting disease (CWD) to support its prevention and management in the northeastern, and western United States. This project builds on several existing projects in direct collaboration with natural resource agencies where, in many locations, chronic wasting disease is not yet w…</summary>
+  </entry>
+  <entry>
+    <title>Cooperative Agreement for Affiliated Partner with the Rocky Mountains Cooperative Ecosystem Studies Unit (CESU)</title>
+    <link href="https://www.grants.gov/search-results-detail/364082"/>
+    <id>urn:funding-finder:grants-gov:364082</id>
+    <updated>2026-10-14T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Space and aeronautics"/>
+    <category term="Water"/>
+    <summary>Geological Survey | Application 2026-11-14 | The spread of invasive grasses, such as cheatgrass, adds fine fuels to the landscape that increase wildfire occurrence and frequency. Following a fire, invasive grasses regrow quickly, typically outcompeting native plants and perpetuating what is known as the invasive grass-fire cycle. This cycle has been well documented in western portions of the sagebrush biome, such as the Great Basin, but ther…</summary>
+  </entry>
+  <entry>
+    <title>Early-Onset Cancers: Investigating Etiology, Mechanisms, and Early Detection Strategies (RP1 Clinical Trials Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/361438"/>
+    <id>urn:funding-finder:grants-gov:361438</id>
+    <updated>2026-10-14T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Cancer"/>
+    <category term="Environmental science"/>
+    <summary>National Institutes of Health | Application 2029-10-11 | This Notice of Funding Opportunity (NOFO) invites applications that investigate the etiology of sporadic non-hereditary early-onset cancers (EOCs: ages 18 to 49 years) and the underlying biological mechanisms that play a role in these cancers to inform prevention and control strategies. The proposed research is expected to advance the understanding of the unexplained rise of cancers in young adult…</summary>
   </entry>
   <entry>
     <title>Cellular Senescence Network (SenNet): SenNet Technology Projects (SenTecs) (UG3/UH3 Clinical Trial Not Allowed)</title>
@@ -378,6 +510,18 @@
     <summary>National Institutes of Health | Estimated Application 2026-12-07 | The goal of the Supporting Programs to Advance Research Knowledge in Environmental Health Sciences (SPARK-EHS) initiative is to extend the institutional, geographical, and research reach of NIEHS training. This initiative proposes to launch new and innovative environmental health training programs for research-focused predoctoral trainees at institutions that have not had a funded NIEHS T32 during…</summary>
   </entry>
   <entry>
+    <title>Strengthening American Infrastructure (SAI)</title>
+    <link href="https://www.grants.gov/search-results-detail/364025"/>
+    <id>urn:funding-finder:grants-gov:364025</id>
+    <updated>2026-10-05T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Arts and culture"/>
+    <category term="Environmental science"/>
+    <category term="Social and behavioral sciences"/>
+    <category term="Technology development"/>
+    <summary>U.S. National Science Foundation | Posted | Strengthening American Infrastructure (SAI) is an NSF program seeking to stimulate human-centered, use-inspired, fundamental and potentially transformative research aimed at strengthening America’s infrastructure. Effective infrastructure provides a strong foundation for socioeconomic vitality and broad improvement in quality of life. Robust, reliable and effective infrastructure spurs private-sec…</summary>
+  </entry>
+  <entry>
     <title>Cooperative Agreement for Affiliated Partner with the Southern Appalachian Cooperative Ecosystem Studies Unit (CESU)</title>
     <link href="https://www.grants.gov/search-results-detail/364016"/>
     <id>urn:funding-finder:grants-gov:364016</id>
@@ -400,17 +544,6 @@
     <category term="Environmental science"/>
     <category term="Neuroscience"/>
     <summary>Centers for Disease Control and Prevention - ERA | Estimated Application 2026-12-01 | CDC/ATSDR is inviting research proposals to study risk factors for Amyotrophic Lateral Sclerosis (ALS). Studies on military service, contact sports, traumatic brain injury, neuroinflammation, and infections agents and exposures are encouraged. Funding will be for four funding options: Option A - Support research with strong existing evidence such as studies on known environmental or genetic risk f…</summary>
-  </entry>
-  <entry>
-    <title>NGA - Boosting Innovative GEOINT - Science &amp; Technology Broad Agency Announcement (BIG-ST BAA): Topic # 07 - Lidar Analysis for Surface &amp; Environmental Reconnaissance (LASER)</title>
-    <link href="https://sam.gov/opp/84cb4b33be0641c1b54c4de34b542ed5/view"/>
-    <id>urn:funding-finder:sam-gov:sam-gov%3A84cb4b33be0641c1b54c4de34b542ed5</id>
-    <updated>2026-10-01T00:00:00Z</updated>
-    <author><name>National Geospatial-Intelligence Agency</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Environmental science"/>
-    <category term="Space and aeronautics"/>
-    <summary>National Geospatial-Intelligence Agency | Preproposal 2026-10-23 | Develop AI/ML methods to extract and classify 3D surface/subsurface objects using NASA ICESat-2 and GEDI lidar, including navigation safety applications. Topic7 LASER only, not BIG-ST parent or closed topics. Parent exists in catalog but specific Topic7 solicitation is distinct. CUI safeguards; foreign nationals need prior written CO/COR approval; HSPD-12 favorable adjudication if access to NGA fa…</summary>
   </entry>
   <entry>
     <title>Technical Assistance and Training Grant Program</title>
@@ -440,7 +573,7 @@
     <category term="Separations and membranes"/>
     <category term="Carbon management"/>
     <category term="Quantum science"/>
-    <summary>Office of Science | Application 2027-09-30 | SC hereby announces its continuing interest in receiving applications for support of work in the following program areas: · Advanced Scientific Computing Research· Basic Energy Sciences· Biological and Environmental Research· Fusion Energy Sciences· High Energy and Nuclear Physics· Isotope R&amp;D and Production. On September 3, 1992, DOE published in the Federal Register the Office of Energy Research…</summary>
+    <summary>Office of Science | Application 2027-09-30 | verify prerequisite | SC hereby announces its continuing interest in receiving applications for support of work in the following program areas: · Advanced Scientific Computing Research· Basic Energy Sciences· Biological and Environmental Research· Fusion Energy Sciences· High Energy and Nuclear Physics· Isotope R&amp;D and Production. On September 3, 1992, DOE published in the Federal Register the Office of Energy Research…</summary>
   </entry>
   <entry>
     <title>National Parks Business Plan Internship</title>
@@ -535,127 +668,5 @@
     <category term="Manufacturing"/>
     <category term="Energy"/>
     <summary>NYSERDA | Application 2030-12-30 | The New York School Bus Incentive Program (NYSBIP) is a voucher incentive program to accelerate the deployment of zero-emission school buses and associated charging infrastructure throughout New York State using funds allocated by the 2022 Clean Water, Clean Air, and Green Jobs Environmental Bond Act (Bond Act). More information about how fleets, dealers, and manufacturers can participate in NYSBI…</summary>
-  </entry>
-  <entry>
-    <title>DARRP Restoration Implementation Grants (2026)</title>
-    <link href="https://www.grants.gov/search-results-detail/363758"/>
-    <id>urn:funding-finder:grants-gov:363758</id>
-    <updated>2026-09-01T00:00:00Z</updated>
-    <author><name>DOC NOAA - ERA Production</name></author>
-    <category term="Environmental science"/>
-    <summary>DOC NOAA - ERA Production | Application 2026-11-18 | The principal objective of the Damage Assessment, Remediation and Restoration Program (DARRP) Restoration Implementation Grants is for NOAA to collaborate with non-federal partners to implement marine and coastal habitat restoration and conservation in order to accomplish common goals related to oil spills, hazardous substance releases, and other natural resource damages. Successful applicants wil…</summary>
-  </entry>
-  <entry>
-    <title>Solar System Exploration Research Virtual Institute Cooperative Agreement Notice-5 (SSERVI CAN-5)</title>
-    <link href="https://www.grants.gov/search-results-detail/363734"/>
-    <id>urn:funding-finder:grants-gov:363734</id>
-    <updated>2026-09-01T00:00:00Z</updated>
-    <author><name>NASA Headquarters</name></author>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Space and aeronautics"/>
-    <summary>NASA Headquarters | Application 2026-12-04 | prerequisite closed | The National Aeronautics and Space Administration (NASA) Science Mission Directorate (SMD) and Human Spaceflight Mission Directorate (HSMD) have released the fifth Solar System Exploration Research Virtual Institute (SSERVI) Cooperative Agreement Notice (CAN-5) as NNH26ZDA016C. SSERVI CAN-5 (NNH26ZDA016C) invites the submission of multi-institutional team-based proposals for research as participat…</summary>
-  </entry>
-  <entry>
-    <title>Clinical and Translational Science Award</title>
-    <link href="https://www.grants.gov/search-results-detail/363244"/>
-    <id>urn:funding-finder:grants-gov:363244</id>
-    <updated>2026-09-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Public health"/>
-    <summary>National Institutes of Health | Estimated Application 2027-01-25 | The purpose of the Congressionally mandated Clinical and Translational Science Award (CTSA) Program is to accelerate the translation of scientific discoveries into treatments, diagnostics, and health interventions that improve patient and public health by funding and coordinating a national network of academic medical centers that provide the infrastructure, expertise, training, and collaboration …</summary>
-  </entry>
-  <entry>
-    <title>Grants for Early Medical/Surgical Specialists' Transition to Aging Research (GEMSSTAR) (R03 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/359940"/>
-    <id>urn:funding-finder:grants-gov:359940</id>
-    <updated>2026-09-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Environmental science"/>
-    <category term="Transportation"/>
-    <summary>National Institutes of Health | Application 2028-07-16 | The goal of the Grants for Early Medical/Surgical Specialists' Transition to Aging Research (GEMSSTAR) program is to provide support for early-career clinician-scientists trained in medical or surgical specialties to launch careers as future leaders in aging- or geriatric-focused research. In support of the program's goal, this GEMSSTAR Notice of Funding Opportunity (NOFO) invites applications tha…</summary>
-  </entry>
-  <entry>
-    <title>NIH Brain Development Cohorts (NBDC) and Population Assessment of Tobacco and Health (PATH) Study Biospecimen Access (X01 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/360554"/>
-    <id>urn:funding-finder:grants-gov:360554</id>
-    <updated>2026-09-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Environmental science"/>
-    <category term="Neuroscience"/>
-    <summary>National Institutes of Health | Application 2029-04-17 | The National Institutes of Health seek to advance their mission by providing the scientific community with the opportunity to request access to biospecimens from the Adolescent Brain Cognitive DevelopmentSM (ABCD) Study, the HEALthy Brain and Child Development (HBCD) Study, and the Population Assessment of Tobacco and Health (PATH) Study to conduct research consistent with the respective study obj…</summary>
-  </entry>
-  <entry>
-    <title>Community Development Block Grant Program for Indian Tribes and Alaska Native Villages</title>
-    <link href="https://www.grants.gov/search-results-detail/362464"/>
-    <id>urn:funding-finder:grants-gov:362464</id>
-    <updated>2026-08-31T00:00:00Z</updated>
-    <author><name>Department of Housing and Urban Development</name></author>
-    <category term="Community development"/>
-    <category term="Environmental science"/>
-    <category term="Public health"/>
-    <summary>Department of Housing and Urban Development | Estimated Application 2026-11-16 | The primary objective of the Indian Community Development Block Grant (ICDBG) program is the development of viable Indian and Alaska Native communities, including the creation of decent housing, suitable living environments, and economic opportunities primarily for persons of low-and moderate-incomes. See the ICDBG regulations at 24 CFR 1003.2, the full text of which is available at 24 CFR part 10…</summary>
-  </entry>
-  <entry>
-    <title>Fiscal Year (FY) 2027 AmeriCorps State and National Competitive Grants</title>
-    <link href="https://www.grants.gov/search-results-detail/363696"/>
-    <id>urn:funding-finder:grants-gov:363696</id>
-    <updated>2026-08-28T00:00:00Z</updated>
-    <author><name>AmeriCorps</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Community development"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <summary>AmeriCorps | Application 2027-01-13 | AmeriCorps improves lives, strengthens communities, and fosters civic engagement through service and volunteering. AmeriCorps brings people together to tackle some of the country’s most pressing challenges through national service and volunteerism. AmeriCorps members serve with organizations dedicated to the improvement of communities and those serving. AmeriCorps grants are awarded to eligible or…</summary>
-  </entry>
-  <entry>
-    <title>SEFSC Bluefin Tuna Research Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363729"/>
-    <id>urn:funding-finder:grants-gov:363729</id>
-    <updated>2026-08-27T00:00:00Z</updated>
-    <author><name>DOC NOAA - ERA Production</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Environmental science"/>
-    <summary>DOC NOAA - ERA Production | Application 2026-12-31 | The objective of the program is to provide a basis for advancing science-based fisheries management for Atlantic bluefin tuna. Such advancement will depend upon improvements in understanding of the fisheries, total abundance, and biology of bluefin tuna, especially regarding the effects of mixing and movement between the eastern and western Atlantic populations. Contracting Parties to the Internat…</summary>
-  </entry>
-  <entry>
-    <title>FY2026 Implementation of the Quagga and Zebra Mussel Action Plan (QZAP) in the Western United States</title>
-    <link href="https://www.grants.gov/search-results-detail/363714"/>
-    <id>urn:funding-finder:grants-gov:363714</id>
-    <updated>2026-08-25T00:00:00Z</updated>
-    <author><name>Fish and Wildlife Service</name></author>
-    <category term="Environmental science"/>
-    <summary>Fish and Wildlife Service | Application 2026-10-24 | Quagga and Zebra Mussels are aquatic invasive species that are rapidly expanding their range in the Western United States. Popular recreational reservoirs on or connected to the lower Colorado River are one major source of invasive mussels, which are easily transported via trailered watercraft to areas that have not yet been invaded. This funding opportunity will fund projects in the listed princi…</summary>
-  </entry>
-  <entry>
-    <title>Assisting Specialty Crop Exports: Low Oxygen Storage and Packaging Systems for U.S. Tree Nuts with Phytosanitary Traceability</title>
-    <link href="https://www.grants.gov/search-results-detail/363690"/>
-    <id>urn:funding-finder:grants-gov:363690</id>
-    <updated>2026-08-24T00:00:00Z</updated>
-    <author><name>Foreign Agricultural Service</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Environmental science"/>
-    <summary>Foreign Agricultural Service | Application 2026-10-26 | The occurrence of insects as well as pesticide residuals can be significant barriers for U.S. horticultural exports. Each importing country can have unique phytosanitary and maximum residue limit (MRL) requirements, which creates operational and logistical challenges. To maximize return to growers, U.S. shippers need tools that can universally address all such requirements while maintaining produc…</summary>
-  </entry>
-  <entry>
-    <title>F26AS00071 Cooperative Endangered Species Conservation Fund: Habitat Conservation Plan Land Acquisition Grants</title>
-    <link href="https://www.grants.gov/search-results-detail/363691"/>
-    <id>urn:funding-finder:grants-gov:363691</id>
-    <updated>2026-08-24T00:00:00Z</updated>
-    <author><name>Fish and Wildlife Service</name></author>
-    <category term="Environmental science"/>
-    <category term="Cybersecurity"/>
-    <summary>Fish and Wildlife Service | Application 2026-10-30 | Established by Congress in fiscal year (FY) 1997, the Habitat Conservation Plan (HCP) Land Acquisition Grant program was designed to reduce conflicts between the conservation of listed species and competing land uses on specific parcels of land associated with approved and permitted HCPs. Under this program, the U.S. Fish and Wildlife Service (FWS) provides matching grants to State agencies in sup…</summary>
-  </entry>
-  <entry>
-    <title>National Bycatch Reduction Engineering Program (BREP) - FY2026/27</title>
-    <link href="https://www.grants.gov/search-results-detail/363692"/>
-    <id>urn:funding-finder:grants-gov:363692</id>
-    <updated>2026-08-24T00:00:00Z</updated>
-    <author><name>DOC NOAA - ERA Production</name></author>
-    <category term="Environmental science"/>
-    <summary>DOC NOAA - ERA Production | Application 2027-01-22 | prerequisite closed | This grant program provides competitive grants to non-Federal researchers working to benefit U.S. fishermen and fisheries, including aquaculture, through the development of improved fishing practices and innovative gear technologies. The Magnuson-Stevens Fishery Conservation and Management Act, as amended (MSA), 16 U.S.C. 1865, requires that NOAA’s conservation and management measures minimize byc…</summary>
   </entry>
 </feed>
