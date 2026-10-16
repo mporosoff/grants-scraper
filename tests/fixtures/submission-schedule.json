@@ -2155,5 +2155,209 @@
       "access": "open",
       "kind": "application"
     }
+  },
+  {
+    "name": "Required SURPASS before prerequisite",
+    "as_of": "2026-10-16",
+    "record": {
+      "opportunity_id": "arpa-h:surpass",
+      "title": "SURPASS",
+      "status": "posted",
+      "close_date": null,
+      "has_preliminary_stage": true,
+      "preliminary_stage_type": "preapplication",
+      "preliminary_required": true,
+      "deadlines": [
+        {
+          "kind": "preapplication",
+          "stage": "preapplication",
+          "date": "2026-11-30",
+          "required": true,
+          "obligation": "required"
+        },
+        {
+          "kind": "application",
+          "stage": "application",
+          "date": "2027-01-22",
+          "required": null,
+          "obligation": "unknown"
+        }
+      ]
+    },
+    "expected": {
+      "date": "2026-11-30",
+      "access": "open",
+      "kind": "preapplication"
+    }
+  },
+  {
+    "name": "Required SURPASS after prerequisite",
+    "as_of": "2026-12-01",
+    "record": {
+      "opportunity_id": "arpa-h:surpass",
+      "title": "SURPASS",
+      "status": "posted",
+      "close_date": null,
+      "has_preliminary_stage": true,
+      "preliminary_stage_type": "preapplication",
+      "preliminary_required": true,
+      "deadlines": [
+        {
+          "kind": "preapplication",
+          "stage": "preapplication",
+          "date": "2026-11-30",
+          "required": true,
+          "obligation": "required"
+        },
+        {
+          "kind": "application",
+          "stage": "application",
+          "date": "2027-01-22",
+          "required": null,
+          "obligation": "unknown"
+        }
+      ]
+    },
+    "expected": {
+      "date": "2027-01-22",
+      "access": "prerequisite_closed",
+      "kind": "application"
+    }
+  },
+  {
+    "name": "Required SURPASS after proposal",
+    "as_of": "2027-01-23",
+    "record": {
+      "opportunity_id": "arpa-h:surpass",
+      "title": "SURPASS",
+      "status": "posted",
+      "close_date": null,
+      "has_preliminary_stage": true,
+      "preliminary_stage_type": "preapplication",
+      "preliminary_required": true,
+      "deadlines": [
+        {
+          "kind": "preapplication",
+          "stage": "preapplication",
+          "date": "2026-11-30",
+          "required": true,
+          "obligation": "required"
+        },
+        {
+          "kind": "application",
+          "stage": "application",
+          "date": "2027-01-22",
+          "required": null,
+          "obligation": "unknown"
+        }
+      ]
+    },
+    "expected": {
+      "date": null,
+      "access": "closed",
+      "kind": null
+    }
+  },
+  {
+    "name": "Required STRI before prerequisite",
+    "as_of": "2026-10-16",
+    "record": {
+      "opportunity_id": "364024",
+      "title": "STRI",
+      "status": "posted",
+      "close_date": "2026-11-03",
+      "has_preliminary_stage": true,
+      "preliminary_stage_type": "preproposal",
+      "preliminary_required": true,
+      "deadlines": [
+        {
+          "kind": "preproposal",
+          "stage": "preproposal",
+          "date": "2026-11-03",
+          "required": true,
+          "obligation": "required"
+        },
+        {
+          "kind": "application",
+          "stage": "application",
+          "date": "2027-01-21",
+          "required": null,
+          "obligation": "unknown"
+        }
+      ]
+    },
+    "expected": {
+      "date": "2026-11-03",
+      "access": "open",
+      "kind": "preproposal"
+    }
+  },
+  {
+    "name": "Required STRI after prerequisite",
+    "as_of": "2026-11-04",
+    "record": {
+      "opportunity_id": "364024",
+      "title": "STRI",
+      "status": "posted",
+      "close_date": "2026-11-03",
+      "has_preliminary_stage": true,
+      "preliminary_stage_type": "preproposal",
+      "preliminary_required": true,
+      "deadlines": [
+        {
+          "kind": "preproposal",
+          "stage": "preproposal",
+          "date": "2026-11-03",
+          "required": true,
+          "obligation": "required"
+        },
+        {
+          "kind": "application",
+          "stage": "application",
+          "date": "2027-01-21",
+          "required": null,
+          "obligation": "unknown"
+        }
+      ]
+    },
+    "expected": {
+      "date": "2027-01-21",
+      "access": "prerequisite_closed",
+      "kind": "application"
+    }
+  },
+  {
+    "name": "Required STRI after proposal",
+    "as_of": "2027-01-22",
+    "record": {
+      "opportunity_id": "364024",
+      "title": "STRI",
+      "status": "posted",
+      "close_date": "2026-11-03",
+      "has_preliminary_stage": true,
+      "preliminary_stage_type": "preproposal",
+      "preliminary_required": true,
+      "deadlines": [
+        {
+          "kind": "preproposal",
+          "stage": "preproposal",
+          "date": "2026-11-03",
+          "required": true,
+          "obligation": "required"
+        },
+        {
+          "kind": "application",
+          "stage": "application",
+          "date": "2027-01-21",
+          "required": null,
+          "obligation": "unknown"
+        }
+      ]
+    },
+    "expected": {
+      "date": null,
+      "access": "closed",
+      "kind": null
+    }
   }
 ]

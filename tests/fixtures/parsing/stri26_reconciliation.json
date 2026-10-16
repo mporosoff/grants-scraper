@@ -1,0 +1,202 @@
+{
+  "source_record": {
+    "opportunity_id": "364024",
+    "opportunity_number": "NNH26ZTR001N-26STRI-B3",
+    "title": "Space Technology Research Institutes",
+    "source": "Grants.gov",
+    "primary_document_url": null,
+    "funding_opportunity_url": "https://nspires.nasaprs.com/external/solicitations/summary!init.do?solId={2E039405-794F-19D8-24ED-386F15C3C77A}&path=open",
+    "close_date": "2026-11-03",
+    "has_preliminary_stage": true,
+    "preliminary_stage_type": "preproposal",
+    "preliminary_required": true,
+    "description": "The National Aeronautics and Space Administration (NASA) Headquarters has released the solicitation \u201cSpace Technology Research Institutes (STRI26),\u201d as an appendix to the Research and Technology Mission Directorate (RTMD) umbrella NASA Research Announcement (NRA) titled \"Space Technology Research, Development, Demonstration, and Infusion 2026 (SpaceTech REDDI 2026).\u201d. The solicitation is available by opening the NSPIRES homepage at https://nspires.nasaprs.com/, selecting \u201cOpen\u201d under \"Solicitations,\" and searching \"Space Technology Research Institutes (STRI26)\u201d under Keywords, or directly via https://solicitation.nasaprs.com/NNH26ZTR001N-26STRI_B3. Through STRI26, Space Technology Research Grants (STRG) Program within RTMD solicits proposals from U.S. institutions of higher education (IHEs) for IHE-led, early-stage, sustained, multidisciplinary space-technology research focused in strategic areas for transformative impact to future NASA and other civil-space applications. Proposals are sought on specific space technologies that are currently at low Technology Readiness Levels (TRLs). This Appendix exclusively seeks proposals that are responsive to the topic featured in the Appendix: Enabling Future Rotating Detonation Rocket Engine (RDRE) Design Capabilities. The overarching goal of this topic is to advance RDRE system-level performance beyond the state of the art for traditional chemical rocket engines operating under the same system constraints. Only U.S. IHEs are eligible to submit proposals to this Appendix. The Principal Investigator (PI) must be, as their primary appointment, a faculty member at the lead IHE. Teaming among U.S. IHEs is required, with a minimum of three participant IHEs. Teaming with industry and non-profit entities is permitted., subject to the restrictions described in the solicitation. The maximum award duration is five years and the maximum amount $13M total over the five-year period. Awards are planned to start in May 2027. NASA plans to make one award as a result of this STRI solicitation, subject to the receipt of meritorious proposals and the availability of funds. The actual number of awards will depend on the quality of the proposals received; NASA reserves the right to make no awards under this solicitation. All proposals must be submitted electronically through NSPIRES by an authorized organizational representative. Proposals are being solicited via a two-step process where preliminary proposals are mandatory and only those invited may submit a full proposal. Mandatory preliminary proposals are due on or before November 3, 2026, 5 pm Eastern, and the target deadline for invited full proposals is January 21, 2027, 5 pm Eastern. Detailed submission instructions and due dates are provided in the solicitation. Potential proposers and their proposing organizations are urged to familiarize themselves with the submission system, ensure they are registered in NSPIRES, and submit the required proposal materials well in advance of the deadline. Technical and programmatic comments and questions may be addressed by email to the Space Technology Research Grants Program Executive at hq-stmd-stri@mail.nasa.gov. Responses to inquiries will be answered by email and may also be included in the Frequently Asked Questions (FAQ) documents located on the NSPIRES page associated with the solicitation; anonymity of persons/institutions who submit questions will be preserved.",
+    "deadlines": [
+      {
+        "kind": "application",
+        "date": "2026-11-03",
+        "time": null,
+        "timezone": null,
+        "note": null,
+        "estimated": false,
+        "source": "Grants.gov XML extract",
+        "source_url": "https://www.grants.gov/search-results-detail/364024",
+        "source_field": "CloseDate",
+        "confidence": "official_structured",
+        "detail_checked_at": "2026-10-08T19:04:02.960563Z"
+      },
+      {
+        "kind": "preliminary",
+        "date": "2026-11-03",
+        "text": "preliminary proposals are due on or before November 3, 2026",
+        "required": true,
+        "confidence": "machine_extracted_needs_verification",
+        "estimated": false,
+        "source": "Grants.gov synopsis text",
+        "source_url": "https://www.grants.gov/search-results-detail/364024",
+        "detail_checked_at": "2026-10-08T19:04:02.960563Z"
+      }
+    ]
+  },
+  "retained_entry": {
+    "status": "current",
+    "document": {
+      "url": "https://nspires.nasaprs.com/external/solicitations/summary!init.do?solId={2E039405-794F-19D8-24ED-386F15C3C77A}&path=open",
+      "name": null,
+      "source_kind": "agency_notice",
+      "content_type": "text/html;charset=UTF-8",
+      "sha256": "0f92fc21b201dbb57ba63dde2b5230bb6acc8d9de3078cfa7eb448e2c42eb73f",
+      "bytes": 25600,
+      "etag": null,
+      "last_modified": null,
+      "version": 1,
+      "first_seen_at": "2026-10-16T16:56:01.088916Z",
+      "last_seen_at": "2026-10-16T16:56:01.088916Z",
+      "changed_since_previous": false
+    },
+    "facts": [
+      {
+        "id": "evidence-364024-539135fb51fd",
+        "type": "deadline",
+        "label": "Preproposal deadline",
+        "value": "2026-11-03",
+        "display_value": "2026-11-03 \u00b7 05:00:00 PM EST",
+        "confidence": "machine_extracted_needs_verification",
+        "citation": {
+          "document_url": "https://nspires.nasaprs.com/external/solicitations/summary!init.do?solId={2E039405-794F-19D8-24ED-386F15C3C77A}&path=open",
+          "citation_url": "https://nspires.nasaprs.com/external/solicitations/summary!init.do?solId={2E039405-794F-19D8-24ED-386F15C3C77A}&path=open",
+          "document_name": null,
+          "sha256": "0f92fc21b201dbb57ba63dde2b5230bb6acc8d9de3078cfa7eb448e2c42eb73f",
+          "page": null,
+          "section": "Space Technology Research Institutes (STRI26)Close",
+          "location": "section \u201cSpace Technology Research Institutes (STRI26)Close\u201d",
+          "quote": "\u2026Technology Mission Directorate Type: NASA Research Announcement Status: Due within 30 Days Dates Label | Date | Option Release | Oct 05, 2026 | STRI Mandatory Pre-Proposals Due | Nov 03, 2026 05:00:00 PM Eastern Standard Time | Create STRI Full Proposals Due | Jan 21, 2027 05:00:00 PM Eastern Standard Time |",
+          "extracted_at": "2026-10-16T16:56:01.088916Z",
+          "structural_reference": {
+            "block_id": "html-21",
+            "kind": "table_row",
+            "row": 2,
+            "table_id": "table-1",
+            "heading_path": [
+              "Misconduct Policy",
+              "Space Technology Research Institutes (STRI26)Close"
+            ],
+            "source_position": [
+              351,
+              11
+            ],
+            "field_label": "STRI Mandatory Pre-Proposals Due",
+            "field_id": "table-1:2:1"
+          }
+        },
+        "fact_contract": "typed-notice-facts-1",
+        "source_authority": "machine_extracted_official_document",
+        "subject": "submission",
+        "parser_version": "submission-fields-21",
+        "deadline_kind": "preproposal",
+        "date": "2026-11-03",
+        "time": "05:00:00 PM",
+        "timezone": "EST",
+        "required": true,
+        "obligation": "required",
+        "stage": "preproposal",
+        "application_class": "unspecified",
+        "cycle": null,
+        "track": null,
+        "invitation_required": null,
+        "prerequisite": null,
+        "field_authority": "official_notice_field",
+        "requirement_citation": {
+          "document_url": "https://nspires.nasaprs.com/external/solicitations/summary!init.do?solId={2E039405-794F-19D8-24ED-386F15C3C77A}&path=open",
+          "citation_url": "https://nspires.nasaprs.com/external/solicitations/summary!init.do?solId={2E039405-794F-19D8-24ED-386F15C3C77A}&path=open",
+          "document_name": null,
+          "sha256": "0f92fc21b201dbb57ba63dde2b5230bb6acc8d9de3078cfa7eb448e2c42eb73f",
+          "page": null,
+          "section": "Space Technology Research Institutes (STRI26)Close",
+          "location": "section \u201cSpace Technology Research Institutes (STRI26)Close\u201d",
+          "quote": "\u202626STRI_B3 Directorate: Space Technology Mission Directorate Type: NASA Research Announcement Status: Due within 30 Days Dates Label | Date | Option Release | Oct 05, 2026 | STRI Mandatory Pre-Proposals Due | Nov 03, 2026 05:00:00 PM Eastern Standard Time | Create STRI Full Proposals Due | Jan 21, 2027 05:00:00 PM Eastern Standard Time |",
+          "extracted_at": "2026-10-16T16:56:01.088916Z",
+          "structural_reference": {
+            "block_id": "html-21",
+            "kind": "table_row",
+            "row": 2,
+            "table_id": "table-1",
+            "heading_path": [
+              "Misconduct Policy",
+              "Space Technology Research Institutes (STRI26)Close"
+            ],
+            "source_position": [
+              351,
+              11
+            ]
+          }
+        }
+      },
+      {
+        "id": "evidence-364024-a91830a3cde8",
+        "type": "deadline",
+        "label": "Full application deadline",
+        "value": "2027-01-21",
+        "display_value": "2027-01-21 \u00b7 05:00:00 PM EST",
+        "confidence": "machine_extracted_needs_verification",
+        "citation": {
+          "document_url": "https://nspires.nasaprs.com/external/solicitations/summary!init.do?solId={2E039405-794F-19D8-24ED-386F15C3C77A}&path=open",
+          "citation_url": "https://nspires.nasaprs.com/external/solicitations/summary!init.do?solId={2E039405-794F-19D8-24ED-386F15C3C77A}&path=open",
+          "document_name": null,
+          "sha256": "0f92fc21b201dbb57ba63dde2b5230bb6acc8d9de3078cfa7eb448e2c42eb73f",
+          "page": null,
+          "section": "Space Technology Research Institutes (STRI26)Close",
+          "location": "section \u201cSpace Technology Research Institutes (STRI26)Close\u201d",
+          "quote": "\u202630 Days Dates Label | Date | Option Release | Oct 05, 2026 | STRI Mandatory Pre-Proposals Due | Nov 03, 2026 05:00:00 PM Eastern Standard Time | Create STRI Full Proposals Due | Jan 21, 2027 05:00:00 PM Eastern Standard Time |",
+          "extracted_at": "2026-10-16T16:56:01.088916Z",
+          "structural_reference": {
+            "block_id": "html-22",
+            "kind": "table_row",
+            "row": 3,
+            "table_id": "table-1",
+            "heading_path": [
+              "Misconduct Policy",
+              "Space Technology Research Institutes (STRI26)Close"
+            ],
+            "source_position": [
+              374,
+              11
+            ],
+            "field_label": "STRI Full Proposals Due",
+            "field_id": "table-1:3:1"
+          }
+        },
+        "fact_contract": "typed-notice-facts-1",
+        "source_authority": "machine_extracted_official_document",
+        "subject": "submission",
+        "parser_version": "submission-fields-21",
+        "deadline_kind": "application",
+        "date": "2027-01-21",
+        "time": "05:00:00 PM",
+        "timezone": "EST",
+        "required": null,
+        "obligation": "unknown",
+        "stage": "application",
+        "application_class": "unspecified",
+        "cycle": null,
+        "track": null,
+        "invitation_required": null,
+        "prerequisite": null,
+        "field_authority": "official_notice_field"
+      }
+    ],
+    "checked_at": "2026-10-16T16:56:01.088916Z",
+    "extractor_identity": "official-evidence-3",
+    "deadline_extractor_identity": "submission-date-6",
+    "parser_dependencies": {
+      "amounts": "award-basis-11:primary-program-context-1:substantive-boundaries-2",
+      "cost_share": "cost-obligation-2:primary-program-context-1:substantive-boundaries-2",
+      "sections": "substantive-section-2:primary-program-context-1:substantive-boundaries-2",
+      "components": "component-owner-3:primary-program-context-1:substantive-boundaries-2",
+      "limits": "submission-subject-1:primary-program-context-1:substantive-boundaries-2",
+      "status": "notice-subject-2:primary-program-context-1:substantive-boundaries-2",
+      "deadlines": "submission-date-6:submission-fields-21:primary-program-context-1:substantive-boundaries-2",
+      "award_context": "award-context-1:primary-program-context-1:substantive-boundaries-2"
+    }
+  }
+}

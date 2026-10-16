@@ -3,11 +3,14 @@
 Only the supported field structures admit multiple dates. Narrative fallback
 keeps its independent, conservative local-ownership contract.
 """
+from copy import deepcopy
+import hashlib
 import re
 from urllib.parse import urlparse
 from scripts.notice_semantics import clauses
 
 SCHEDULE_VERSION = "submission-fields-21"
+ARPA_SUMMARY_VERSION = "arpa-summary-fields-1"
 FIELD_LABEL = re.compile(r'^(?:Required\s+|Optional\s+)?(?:Full\s+(?:Application|Proposal)|Application|Proposal|'
     r'Concept\s+(?:Paper|Outline)|White\s+Paper|Letter\s+of\s+Intent|Pre[\s-]Application(?:\s*\([^)]{1,30}\))?)'
     r'\s+(?:Submission\s+)?(?:Deadline|Due\s+Date)(?:\(s\)|s)?\s*(?:\([^)]{1,100}\))?\s*:', re.I)
@@ -800,6 +803,7 @@ _LOCAL_FIELD = re.compile(
 
 def _local_cover_fields(api, opportunity_id, containers, document, stamp):
     facts = []
+    arpa = (urlparse(document.get('url') or '').hostname or '').casefold() in {'arpa-h.gov', 'www.arpa-h.gov'}
     for container in containers:
         text = container['text']
         labels = list(_LOCAL_FIELD.finditer(text))
@@ -810,7 +814,9 @@ def _local_cover_fields(api, opportunity_id, containers, document, stamp):
                 if container.get('page') is not None else None)
             if api.SUBMISSION_GROUP_PREFIX_RE.search(text[max(0, field.start() - 100):field.start()]):
                 continue  # The existing grouped-field reader owns this form.
-            if not (':' in field.group() or field.group('scope') or field.group('period')
+            arpa_separator = (arpa and stage_for(field.group('label')) in {'preapplication', 'application'}
+                              and re.match(r'\s*[-–—]\s*' + api.DATE_RE.pattern, text[field.end():]))
+            if not (':' in field.group() or field.group('scope') or field.group('period') or arpa_separator
                     or len(labels) > 1 or header or field.group('label').lower().startswith('key dates')
                     or re.search(r'Closing Date Explanation|GrantSolutions', text, re.I)):
                 # An unstructured sentence is owned by deadline_context. A
@@ -828,6 +834,8 @@ def _local_cover_fields(api, opportunity_id, containers, document, stamp):
             if api._REQUIREMENT.match(value[candidate.end():].lstrip()):
                 continue  # Preserve the existing bounded postfix-marker reader.
             prefix = api._without_clocks(value[:candidate.start()])
+            if arpa_separator and prefix.strip() in {'-', '–', '—'}:
+                prefix = ''  # ARPA's explicitly labeled "Due - <scalar date>".
             # Measured IES cover fields sometimes print a clock without AM/PM.
             # The immediate, independently labeled date is still proved; the
             # incomplete clock is not. Do not invent the missing meridiem.
@@ -876,6 +884,9 @@ def _local_cover_fields(api, opportunity_id, containers, document, stamp):
             found = field_events(api, opportunity_id, container, document, stamp,
                 label=field.group('label'), start=start, end=end,
                 field_id=f"cover:{container.get('page')}:{field.start()}")
+            if arpa_separator:
+                for fact in found:
+                    fact['arpa_summary_version'] = ARPA_SUMMARY_VERSION
             if field.group('period'):
                 for fact in found:
                     fact['cycle'] = field.group('period').capitalize() + ' submission period'
@@ -1074,15 +1085,35 @@ def _arpa_submission_fields(api, opportunity_id, containers, document, stamp, fa
 
         # An abbreviated "A summary" has meaning only in this immediately
         # preceding Solution Summary field, never elsewhere in the notice.
-        required = re.compile(r'Solution Summary\s+(?:Due|Requested by):?\s*' + api.DATE_RE.pattern +
-            r'\s*[.]?\s*(?P<rule>A summary is required to submit a full proposal\.)', re.I)
+        clock = r'(?:\s*(?:at\s+|by\s+)?\(?' + api.TIME_RE.pattern + r'\)?)?'
+        required = re.compile(r'\bSolution Summary\s+(?:Due|Requested by)\s*(?::|[-–—])?\s*'
+            r'(?P<value>' + api.DATE_RE.pattern + r')' + clock + r'\s*[.]?\s*'
+            r'(?P<rule>A summary is required to submit a full proposal\.|'
+            r'Submitting a summary is required to move forward with this opportunity\.)', re.I)
         for match in required.finditer(text):
-            owned_date = api.parse_document_date(api.DATE_RE.search(match.group()).group())
+            owned_date = api.parse_document_date(match.group('value'))
             for fact in facts:
                 if (fact.get('deadline_kind') == 'preapplication' and fact.get('date') == owned_date
-                    and fact.get('citation', {}).get('page') == container.get('page')):
+                    and fact.get('citation', {}).get('page') == container.get('page')
+                    and re.match(r'Solution Summary\s+', (fact.get('citation', {}).get('structural_reference') or {}).get('field_label', ''), re.I)):
                     fact.update(required=True, obligation='required', requirement_citation=api.citation_for(
-                        container, document, match.start('rule'), match.end('rule'), stamp))
+                        container, document, match.start('rule'), match.end('rule'), stamp),
+                        arpa_summary_version=ARPA_SUMMARY_VERSION)
+
+        # Feedback is a source-owned condition, not proof that an invitation is
+        # required. Retain the exact instruction on its immediately following
+        # proposal field; the separately proved required summary gates access.
+        feedback = re.compile(r'(?P<rule>After submitting a summary, await feedback from ARPA-H before proceeding\.)\s*'
+            r'(?:Full\s+)?Proposal\s+Due\s*(?::|[-–—])?\s*(?P<value>' + api.DATE_RE.pattern + r')', re.I)
+        for match in feedback.finditer(text):
+            owned_date = api.parse_document_date(match.group('value'))
+            for fact in facts:
+                if (fact.get('deadline_kind') == 'application' and fact.get('date') == owned_date
+                        and fact.get('citation', {}).get('page') == container.get('page')
+                        and re.match(r'(?:Full\s+)?Proposal\s+Due\b', (fact.get('citation', {}).get('structural_reference') or {}).get('field_label', ''), re.I)):
+                    fact['prerequisite_citation'] = api.citation_for(
+                        container, document, match.start('rule'), match.end('rule'), stamp)
+                    fact['arpa_summary_version'] = ARPA_SUMMARY_VERSION
 
         # The season is explicitly prospective, not an exact calendar date.
         unknown = re.compile(r'Full Proposal Due:\s*Anticipated (?:Spring|Summer|Fall|Winter) 20\d{2}\s*'
@@ -1117,6 +1148,82 @@ def _arpa_submission_fields(api, opportunity_id, containers, document, stamp, fa
                 container.setdefault('_native_field_values', []).append((position, position + row.end()))
                 position += row.end()
                 position += len(text[position:]) - len(text[position:].lstrip())
+
+
+def repair_cached_arpa_summary(api, record, entry):
+    """Correct only a proved ARPA assertion, without refreshing its source receipt.
+
+    This local capability does not invalidate every sponsor's deadline parser.
+    A shortened quote can correct its own dated assertion; it cannot establish
+    the absence of other fields or create a date missing from retained evidence.
+    """
+    if not entry or entry.get('status') != 'current':
+        return False
+    document = entry.get('document') or {}
+    url, digest = document.get('url'), document.get('sha256')
+    if ((urlparse(url or '').hostname or '').casefold() not in {'arpa-h.gov', 'www.arpa-h.gov'}
+            or not isinstance(digest, str) or not re.fullmatch('[a-f0-9]{64}', digest)):
+        return False
+    source = api.source_for_record(record)
+    if (not source or source.get('url') != url
+            or entry.get('source_signature') != api.source_signature(record, source)):
+        return False
+    replacements, quotes, remapped = {}, set(), {}
+    for fact in entry.get('facts') or []:
+        if fact.get('type') != 'deadline' or fact.get('arpa_summary_version') == ARPA_SUMMARY_VERSION:
+            continue
+        citation = fact.get('citation') or {}
+        quote = citation.get('quote')
+        if (citation.get('document_url') != url or citation.get('sha256') != digest
+                or not isinstance(quote, str) or not 0 < len(quote) <= 4096):
+            continue
+        container = {'text': quote, 'page': citation.get('page'), 'section': citation.get('section')}
+        candidates = [candidate for candidate in api.extract_deadlines(
+            str(record.get('opportunity_id') or ''), [container], document,
+            citation.get('extracted_at') or entry.get('checked_at'))
+            if candidate.get('type') == 'deadline' and candidate.get('date') == fact.get('date')
+            and candidate.get('field_authority') == 'official_notice_field'
+            and candidate.get('arpa_summary_version') == ARPA_SUMMARY_VERSION]
+        if len(candidates) != 1:
+            continue  # Several owned interpretations are not a scalar repair.
+        candidate = candidates[0]
+        fields = ('deadline_kind', 'stage', 'required', 'obligation', 'field_authority', 'prerequisite_citation')
+        if all(candidate.get(key) == fact.get(key) for key in fields):
+            continue
+        if (fact.get('required') is not None and candidate.get('required') is not None
+                and fact['required'] != candidate['required']):
+            continue
+        quote_hash = hashlib.sha256(quote.encode('utf-8')).hexdigest()
+        original_citation = deepcopy(citation)
+        reference = deepcopy(candidate.get('citation', {}).get('structural_reference') or {})
+        reference['basis'] = 'limited_cached_quote'
+        if reference.get('field_id'):
+            reference['field_id'] = f"quote:{quote_hash}:{reference['field_id']}"
+        original_citation.setdefault('structural_reference', {}).update(reference)
+        candidate.update(citation=original_citation, interpretation_basis='limited_cached_quote')
+        for key in ('time', 'timezone'):
+            if fact.get(key) is not None:
+                candidate[key] = fact[key]
+        if candidate['deadline_kind'] == fact.get('deadline_kind'):
+            candidate['id'] = fact['id']
+        else:
+            candidate['replaces_evidence_id'] = fact['id']
+            remapped[fact['id']] = candidate['id']
+        for key in ('requirement_citation', 'prerequisite_citation'):
+            if candidate.get(key):
+                candidate[key].setdefault('structural_reference', {})['basis'] = 'limited_cached_quote'
+        replacements[id(fact)] = candidate
+        quotes.add(quote_hash)
+    if not replacements:
+        return False
+    entry['facts'] = [replacements.get(id(fact), fact) for fact in entry.get('facts') or []]
+    for item in entry.get('review_queue') or []:
+        if item.get('evidence_ids'):
+            item['evidence_ids'] = [remapped.get(identifier, identifier) for identifier in item['evidence_ids']]
+    entry['arpa_summary_capability'] = {'version': ARPA_SUMMARY_VERSION, 'basis': 'limited_cached_quote',
+        'document_url': url, 'document_sha256': digest, 'source_checked_at': entry.get('checked_at'),
+        'quote_sha256': sorted(quotes)}
+    return True
 
 
 def submission_windows(api, text):

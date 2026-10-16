@@ -42,11 +42,16 @@ def require(ok, reason):
 
 
 def reject_quarantined(manifest):
+    from tools.catalog_schedule_correction import reject_quarantined as reject_schedule_parent
+    reject_schedule_parent(manifest)
     require(manifest.get('candidate_id') != PARENT,
         'rejected_candidate_requires_exact_access_correction')
 
 
 def plan(root, environment):
+    from tools import catalog_schedule_correction as schedule
+    if environment.get('CANDIDATE_ID') == schedule.PARENT:
+        return schedule.plan(root, environment)
     expected = {'GITHUB_REPOSITORY': 'mporosoff/grants-scraper', 'GITHUB_REF': 'refs/heads/main',
         'GITHUB_EVENT_NAME': 'workflow_dispatch',
         'GITHUB_WORKFLOW_REF': 'mporosoff/grants-scraper/.github/workflows/refresh-opportunities.yml@refs/heads/main',
@@ -153,6 +158,9 @@ def receipt_for(original, spending, outputs, proof, audit_at):
 
 def verify_inputs(root, original, parent_bundle, receipt_path):
     receipt = c.read_json(receipt_path)
+    from tools import catalog_schedule_correction as schedule
+    if receipt.get('version') == schedule.VERSION:
+        return schedule.verify_inputs(root, original, parent_bundle, receipt_path)
     authenticated, spending = authenticate(parent_bundle)
     require(original == authenticated, 'constructor_parent')
     # Verify protected implementation inputs before materialization separately;
@@ -170,6 +178,9 @@ def verify_inputs(root, original, parent_bundle, receipt_path):
 
 
 def recover(root, parent_bundle, output, receipt_path):
+    from tools import catalog_schedule_correction as schedule
+    if os.environ.get('CANDIDATE_ID') == schedule.PARENT:
+        return schedule.recover(root, parent_bundle, output, receipt_path)
     root = Path(root)
     plan(root, dict(os.environ))
     original, spending = authenticate(parent_bundle)

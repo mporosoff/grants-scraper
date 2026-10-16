@@ -1610,6 +1610,47 @@ def structured_fact_conflicts(record, fact):
             and record[field] != value]
 
 
+def refine_preliminary_close_date(record, facts, document):
+    """Correct a generic CloseDate stage only from an owned two-stage notice.
+
+    The XML value and receipt remain source-owned. A unique native preliminary
+    field at that exact date and a later native full field in the same notice
+    can explain its stage; a conflicting or separately scoped date cannot.
+    """
+    preliminary = {'letter_of_intent', 'concept_paper', 'white_paper', 'preapplication', 'preproposal', 'abstract'}
+    full = {'application', 'full_application', 'proposal'}
+    source = source_for_record(record)
+    if (not document.get('url') or not document.get('sha256')
+        or not source or source.get('url') != document['url']):
+        return
+
+    def scope(value):
+        return tuple(None if value.get(key) in (None, '', 'unspecified') else value[key]
+                     for key in ('application_class', 'cycle', 'track'))
+
+    owned = [fact for fact in facts if fact.get('type') == 'deadline'
+             and fact.get('field_authority') == 'official_notice_field'
+             and fact.get('citation', {}).get('document_url') == document['url']
+             and fact.get('citation', {}).get('sha256') == document['sha256']
+             and (fact.get('citation', {}).get('structural_reference') or {}).get('field_id')
+             and (fact.get('citation', {}).get('structural_reference') or {}).get('field_label')]
+    for event in record.get('deadlines') or []:
+        if (event.get('kind') != 'application' or event.get('confidence') != 'official_structured'
+            or event.get('source_field') != 'CloseDate' or not event.get('date')
+            or event.get('date') != record.get('close_date')):
+            continue
+        scoped = [fact for fact in owned if scope(fact) == scope(event)]
+        stages = {fact.get('deadline_kind') for fact in scoped
+                  if fact.get('date') == event['date']}
+        later_full = {(fact.get('deadline_kind'), fact.get('date')) for fact in scoped
+                      if fact.get('deadline_kind') in full and fact.get('date')
+                      and fact['date'] > event['date']}
+        if len(stages) != 1 or not stages <= preliminary or len(later_full) != 1:
+            continue
+        event.setdefault('document_source_fields', {})['kind'] = {'present': True, 'value': event['kind']}
+        event['kind'] = next(iter(stages))
+
+
 def structured_deadline_conflicts(record, fact, facts):
     """A source date keeps its own stage/scope when a notice disagrees.
 
@@ -1681,7 +1722,15 @@ def build_review_queue(record, facts, changed_since_previous, extraction):
                 }
             )
 
-    structured_deadline = record.get("close_date")
+    # A proven preliminary CloseDate is not a competing full-application date.
+    # Keep the scalar value unchanged, including for callers inspecting it.
+    preliminary_close = any(event.get('source_field') == 'CloseDate'
+        and event.get('confidence') == 'official_structured'
+        and event.get('kind') in {'letter_of_intent', 'concept_paper', 'white_paper', 'preapplication', 'preproposal', 'abstract'}
+        and event.get('date') == record.get('close_date')
+        and event.get('document_source_fields', {}).get('kind') == {'present': True, 'value': 'application'}
+        for event in record.get('deadlines') or [])
+    structured_deadline = None if preliminary_close else record.get("close_date")
     conflicting_deadline_ids = [
         fact["id"]
         for fact in facts
@@ -2957,6 +3006,7 @@ def citation_deadline(fact):
 
 def merge_document_entry(record, entry):
     if entry:
+        notice_schedule.repair_cached_arpa_summary(sys.modules[__name__], record, entry)
         revalidate_cached_deadlines(entry)
     output = deepcopy(record)
     # Remember source-owned values when a new extraction adds conservative
@@ -3012,6 +3062,7 @@ def merge_document_entry(record, entry):
         return output
 
     facts = deepcopy(entry.get("facts") or [])
+    refine_preliminary_close_date(output, facts, entry.get('document') or {})
     for fact in facts:
         conflicts = structured_fact_conflicts(output, fact) + structured_deadline_conflicts(output, fact, facts)
         if conflicts:
@@ -3045,7 +3096,7 @@ def merge_document_entry(record, entry):
     if entry.get("extractor_identity"):
         output["document_evidence"]["dependency_version"] = 2
         output["document_evidence"]["review_queue"] = build_review_queue(
-            record, facts, bool((entry.get("document") or {}).get("changed_since_previous")), entry.get("extraction") or {})
+            output, facts, bool((entry.get("document") or {}).get("changed_since_previous")), entry.get("extraction") or {})
         # These explain extraction-time exclusions, which cannot be rebuilt
         # from the remaining facts. Keep them through repeated projections.
         output["document_evidence"]["review_queue"].extend(deepcopy([
