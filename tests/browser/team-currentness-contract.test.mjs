@@ -3,6 +3,7 @@ import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 import vm from "node:vm";
+import { load } from "cheerio";
 import { installSubmissionSchedule } from "../helpers/submission-schedule.mjs";
 
 const FIXED_NOW = new Date("2026-08-30T00:00:00.000Z");
@@ -184,6 +185,39 @@ test("Team Match cache and release identities cover the changed page", async () 
     teamPage,
     /python -m scripts\.faculty_match --registry config\/researcher_registry\.json --catalog data\/opportunities\.js --out data\/faculty_matches\.js/,
   );
+});
+
+test("Team Match renders the captured Abstract stage without claiming an LOI or preproposal", async () => {
+  const source = JSON.parse(await readFile(new URL("../fixtures/darpa_iarpa/liquid_surge_record.json", import.meta.url), "utf8"));
+  const before = structuredClone(source);
+  const functions = [...teamPage.matchAll(/^  function (\w+)\(/gm)];
+  for (const [asOf, stage, deadline, access] of [
+    ["2026-10-16", "abstract deadline", "2026-11-03", ""],
+    ["2026-11-04", "application deadline", "2026-12-14", "Verify the required submission step"],
+  ]) {
+    const scope = {
+      URL, Map, Set, encodeURIComponent,
+      Date: class extends Date {
+        constructor(...args) { super(...(args.length ? args : [`${asOf}T12:00:00Z`])); }
+      },
+    };
+    installSubmissionSchedule(scope, appSource, asOf);
+    for (const name of ["esc", "teamChips", "teamTopicSummary", "formatDate", "formatMoney", "perAwardLabel",
+      "displayAwardBounds", "programFundingLabel", "eligibilityLabel", "descriptionHtml", "teamOfficialActions", "opportunityCard"]) {
+      const index = functions.findIndex(match => match[1] === name);
+      assert.ok(index >= 0, name);
+      vm.runInContext(teamPage.slice(functions[index].index, functions[index + 1]?.index ?? teamPage.length), scope);
+    }
+    const $ = load(scope.opportunityCard({d: {id: source.opportunity_id, title: source.title,
+      url: source.detail_page, record: source}, fits: []}, 1));
+    assert.deepEqual($(".card-alerts .badge").map((_, badge) => $(badge).text()).get(), ["Preliminary stage"]);
+    assert.doesNotMatch($(".card-alerts").text(), /LOI|preproposal/i);
+    assert.equal($(".key-fact").first().find("span").text(), stage);
+    assert.equal(scope.FUNDING_SUBMISSION_SCHEDULE.nextSubmission(source).date, deadline);
+    assert.equal($(".key-fact").first().find("strong").text(), scope.formatDate(deadline) + (access ? ` · ${access}` : ""));
+    assert.equal($(".card-actions > a").attr("href"), source.detail_page);
+  }
+  assert.deepEqual(source, before);
 });
 
 test("Funding Finder and Team Match delegate to one shared currentness contract", () => {
