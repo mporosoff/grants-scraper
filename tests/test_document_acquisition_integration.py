@@ -30,6 +30,85 @@ def inputs():
 
 
 class AcquisitionIntegrationContracts(unittest.TestCase):
+    def test_digest_local_number_does_not_override_its_exact_sam_notice(self):
+        record, source, response = inputs()
+        # Public identity metadata from the supported VPR record; its digest
+        # number is not the linked notice's solicitation number.
+        identifier = '4bafe32bf3e14551b8164db3e8a4b990'
+        record = {'opportunity_id': 'vpr-email:26-123', 'opportunity_number': '26-123',
+                  'source': 'VPR funding digest (limited submissions & foundations)',
+                  'source_type': 'Internal', 'title': 'Research solicitation', 'status': 'posted'}
+        source['url'] = 'https://sam.gov/workspace/contract/opp/' + identifier + '/view'
+        response['url'] = source['url']
+        response['retrieval_provenance'].update(
+            notice_id=identifier, api_url='https://sam.gov/api/prod/opps/v2/opportunities/' + identifier)
+        signature = evidence.source_signature(record, source)
+        before = deepcopy(record)
+        entry, extracted = evidence.build_document_entry(
+            record, source, response, None, datetime(2026, 10, 16, tzinfo=timezone.utc))
+        self.assertTrue(extracted)
+        self.assertEqual(entry['status'], 'current')
+        self.assertEqual(entry['document']['retrieval_provenance'], response['retrieval_provenance'])
+        self.assertEqual(entry['source_signature'], signature)
+        self.assertEqual(record, before)
+
+    def test_cross_source_numbers_do_not_relax_notice_review_or_organization_binding(self):
+        for key, value in [('notice_id', 'c' * 32), ('review_sha256', 'c' * 64),
+                           ('organization_id', '200002')]:
+            record, source, response = inputs()
+            record.update(opportunity_id='vpr-email:26-123', opportunity_number='26-123',
+                          source='VPR funding digest (limited submissions & foundations)')
+            response['retrieval_provenance'][key] = value
+            with self.subTest(key=key), patch.object(evidence, 'extract_document_facts') as extract:
+                with self.assertRaises(acquisition.DocumentAcquisitionError):
+                    evidence.build_document_entry(record, source, response, None,
+                                                  datetime(2026, 10, 16, tzinfo=timezone.utc))
+                extract.assert_not_called()
+
+    def test_native_sam_record_must_identify_the_selected_notice(self):
+        record, source, response = inputs()
+        record['opportunity_id'] = 'sam-gov:' + 'c' * 32
+        with self.assertRaises(acquisition.DocumentAcquisitionError):
+            evidence.verified_retrieval_provenance(record, source, response)
+
+    def test_matching_native_alias_binds_its_own_number_instead_of_digest_number(self):
+        record, source, response = inputs()
+        alias = {key: record[key] for key in ('opportunity_id', 'opportunity_number', 'source')}
+        alias['funding_opportunity_url'] = URL
+        record = {'opportunity_id': 'vpr-email:26-123', 'opportunity_number': '26-123',
+                  'source': 'VPR funding digest (limited submissions & foundations)',
+                  'source_aliases': [alias]}
+        self.assertEqual(evidence.verified_retrieval_provenance(record, source, response),
+                         response['retrieval_provenance'])
+        alias['opportunity_number'] = 'OTHER-26-01'
+        with self.assertRaises(acquisition.DocumentAcquisitionError):
+            evidence.verified_retrieval_provenance(record, source, response)
+        alias['opportunity_id'] = 'sam-gov:' + 'c' * 32
+        alias['funding_opportunity_url'] = 'https://sam.gov/opp/' + 'c' * 32 + '/view'
+        self.assertEqual(evidence.verified_retrieval_provenance(record, source, response),
+                         response['retrieval_provenance'])
+
+    def test_official_research_source_and_alias_keep_solicitation_number_binding(self):
+        for through_alias in (False, True):
+            for sponsor in ('darpa', 'iarpa'):
+                record, source, response = inputs()
+                owner = {'opportunity_id': 'darpa-iarpa:' + sponsor + '-example2601',
+                         'opportunity_number': 'EXAMPLE-26-01',
+                         'source': 'DARPA / IARPA research solicitations',
+                         'funding_opportunity_url': URL}
+                if through_alias:
+                    record = {'opportunity_id': 'vpr-email:26-123', 'opportunity_number': '26-123',
+                              'source': 'VPR funding digest (limited submissions & foundations)',
+                              'source_aliases': [owner]}
+                else:
+                    record = owner
+                with self.subTest(alias=through_alias, sponsor=sponsor):
+                    self.assertEqual(evidence.verified_retrieval_provenance(record, source, response),
+                                     response['retrieval_provenance'])
+                    owner['opportunity_number'] = 'OTHER-26-01'
+                    with self.assertRaises(acquisition.DocumentAcquisitionError):
+                        evidence.verified_retrieval_provenance(record, source, response)
+
     def test_sam_download_uses_the_exact_public_reader_without_generic_fallback(self):
         _, _, response = inputs()
         with patch.object(evidence, 'validate_public_url') as validate, \

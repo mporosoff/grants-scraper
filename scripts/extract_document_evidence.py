@@ -2179,9 +2179,26 @@ def verified_retrieval_provenance(record, source, response):
     for field, key in (('sam_review_sha256', 'review_sha256'), ('sam_organization_id', 'organization_id')):
         if record.get(field) is not None and record[field] != value[key]:
             reject()
-    if (record.get('opportunity_number') and normalized_number(record['opportunity_number'])
-            != normalized_number(value['solicitation_number'])):
-        reject()
+    # Digest/local numbers do not identify SAM solicitations. Native source
+    # identities (including retained aliases) can bind an owned number to this
+    # exact notice without confusing it with the winning record's local ID.
+    for owner in [record] + list(record.get('source_aliases') or []):
+        if not isinstance(owner, dict):
+            continue
+        owner_id = str(owner.get('opportunity_id') or '')
+        sam_owner = owner.get('source') == 'SAM.gov' and owner_id.startswith('sam-gov:')
+        if sam_owner and owner_id != 'sam-gov:' + identifier:
+            if owner is record:
+                reject()
+            continue  # An alias for another notice does not own this body.
+        research_owner = (owner.get('source') == 'DARPA / IARPA research solicitations'
+                          and owner_id.startswith(('darpa-iarpa:darpa-', 'darpa-iarpa:iarpa-'))
+                          and any(document_acquisition.sam_notice_id(owner.get(field)) == identifier
+                                  for field in ('detail_page', 'funding_opportunity_url')))
+        if ((sam_owner or research_owner) and owner.get('opportunity_number')
+                and normalized_number(owner['opportunity_number'])
+                != normalized_number(value['solicitation_number'])):
+            reject()
     return deepcopy(value)
 
 
