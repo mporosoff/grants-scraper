@@ -1,8 +1,8 @@
 # Funding Finder — Product Plan
 
-**Status:** Funding Finder v1.3.0 has passed residual-hardening Gates 1–3; Gate 4 real-browser validation and protected release verification are in progress
+**Status:** The catalog and services are deployed. The single active development objective is [Make Team Match work better](docs/TEAM_MATCH_OBJECTIVE.md).
 
-**Next implementation phase:** Complete the v1.3.0 Gate 4 protected release and live verification, then return to post-launch operations and explicitly accepted follow-up work; do not treat MEAS-10, archive/search retention, topic-change feed events, or a SAM.gov adapter as completed or scheduled without their recorded human/product triggers
+**Next implementation phase:** Establish one Team Match baseline, choose one approach and validate one bounded improvement under the [single objective](docs/TEAM_MATCH_OBJECTIVE.md). The historical phases below are not parallel active projects.
 
 **Canonical application:** https://mporosoff.github.io/grants-scraper/
 
@@ -10,7 +10,7 @@
 
 **Initial audience:** University of Rochester researchers, with a design that remains useful to any public user
 
-**Last updated:** August 24, 2026
+**Last updated:** October 16, 2026
 
 ---
 
@@ -163,11 +163,7 @@ AI output is advisory. It must:
 - never invent deadlines, amounts, eligibility, or requirements; and
 - direct users to the official notice for final verification.
 
-**Planned in Phase 3E:** document chat will let the user explicitly export an
-already-generated answer or the current transcript as PDF or DOCX, without a
-second model call, and will support cited governing/parent documents with
-explicit provenance and precedence rather than assuming the uploaded notice is
-the complete rule set.
+The proposed document-chat export and governing-context project was retired on October 16, 2026. Existing notice parsing and document-grounded chat remain part of the deployed product.
 
 ### 2.5 Explicit device-local profiles, not a local funding database
 
@@ -193,7 +189,7 @@ profile use, remove the CV extract, clear the saved profile, or clear
 evaluation labels at any time.
 
 Normal search no longer includes a permanent rating panel or rating-trained
-reranking. Invited pilot participants use `?evaluation=1`; those labels remain
+reranking. Optional evaluation tooling uses `?evaluation=1`; those labels remain
 measurement evidence only and never alter the deterministic product ranking.
 
 The additive AI refinement overlay, chat, and extracted uploaded-notice text remain page-memory
@@ -212,8 +208,8 @@ CSV and Phase 2 JSON are created only on explicit export. The evaluation JSON
 includes the current search-box text, filters, rankings, and explicit ratings
 needed to reproduce retrieval quality. It excludes the API key, saved
 profile/expertise fields, CV text, and chat. Because search text can itself
-describe research, pilot participants are told to use non-confidential wording
-they are comfortable returning to the project team.
+describe research, anyone using this optional export should use non-confidential
+wording they are comfortable sharing.
 
 ### 2.6 Document evidence and deployment learning
 
@@ -401,12 +397,12 @@ catalog or a shared institutional record.
 5. Select the same “Find funding” action used for keyword/filter searches.
 6. Remove the CV extract or clear the profile at any time.
 
-### Save opportunities and run a dedicated relevance evaluation
+### Save opportunities and optionally use existing evaluation tools
 
 1. Select “Save” on any result to keep a compact device-local shortcut.
 2. Normal search keeps rating controls absent.
-3. Invited pilot participants open `match_explorer.html?evaluation=1`, label
-   results locally, and explicitly export one evaluation file.
+3. If using the optional evaluation tools, open `match_explorer.html?evaluation=1`,
+   label results locally, and explicitly export a file only when needed.
 4. Evaluation labels do not change retrieval or ranking.
 
 ### Add AI refinement
@@ -442,11 +438,6 @@ catalog or a shared institutional record.
 4. If no key is configured, enter and optionally save one in the chat prompt.
 5. Ask document-grounded questions and verify the returned page references in
    the original notice.
-6. **Planned in Phase 3E:** explicitly export a useful answer or current chat as
-   PDF/DOCX, and distinguish rules stated by the notice from rules inherited
-   from governing or supplemental documents. See Phase 3E for the preservation,
-   privacy, provenance, and precedence requirements.
-
 ### Verify an actual FOA
 
 1. Open the primary official FOA directly from the result card.
@@ -497,8 +488,8 @@ The browser-only design cannot provide a secure institutional credential vault. 
 Evaluation labels also stay on the device until explicit export or deletion.
 The export uses a non-content comparison fingerprint, includes the current
 search text needed to reproduce retrieval, and excludes saved profile text, CV
-text, API keys, and chat. Pilot instructions disclose the search-text field
-before a participant returns the file.
+text, API keys, and chat. Anyone using the optional export must account for its
+search-text field before sharing a file; no participant return is required.
 
 Phase 3 deployment review uses a separate local-storage key. It contains only
 explicit source-verification choices, optional notes, checklist answers,
@@ -639,9 +630,9 @@ repeatable, and missing evidence remains explicit.
 
 ## 8. Roadmap
 
-### Phase 2 — Pilot validation and relevance quality
+### Phase 2 — Matching controls and evaluation tooling
 
-**Status: engineering implementation complete; human pilot deliberately deferred until Phase 3 deployment verification**
+**Status: engineering implemented; the standalone human pilot/review project was retired on October 16, 2026. Further Team Match quality work belongs to the single current objective.**
 
 Phase 1 solved catalog coverage and established a bounded AI workflow. The next
 risk is quality: whether deterministic retrieval finds the right candidates
@@ -685,40 +676,15 @@ keyword string.
   and evaluator regression tests.
 - **Implemented:** provider/model and prompt versions in evaluation exports so
   comparisons are meaningful.
-- **Pilot task:** add consented synonym, interdisciplinary, eligibility, and
-  sparse-description cases based on real participant judgments.
+- Further matching-quality work uses the fixed, source-grounded checks chosen for the [Team Match objective](docs/TEAM_MATCH_OBJECTIVE.md); no separate recruitment or pilot project is planned.
 
-#### 2C. Pilot
+#### 2C. Standalone pilot — retired
 
-- **Deferred by product decision, not completed:** recruit 3–5 researchers
-  across multiple disciplines only after the first Phase 3 document-evidence
-  batch and handoff workflow pass deployment verification.
-- **Then:** evaluate approximately 75–150
-  researcher/opportunity pairs with the result-card controls.
-- **Then:** test whether 32 candidates and 12 recommendations are the right
-  cost/quality boundary.
-- **After collection:** tune search weights, topic rules, prompts, and thresholds only from labeled
-  evidence.
-- **After collection:** publish a short pilot report identifying retrieval failures, reranking
-  failures, source-data gaps, and the highest-value missing funding sources.
-
-**Exit criterion (not yet met):** a reproducible benchmark and pilot report separate search
-recall from AI ranking quality, identify the main failure modes, and provide
-evidence for whether Phase 3 source-evidence work or Phase 4 source expansion
-should be prioritized next.
-
-This directly responds to the
-[University at Albany funding-recommendation study](https://par.nsf.gov/servlets/purl/10566919).
-That pilot showed why exact keyword/string matching is not enough: participant
-feedback was mixed, and the system could return irrelevant or already-known
-opportunities even when some recommendations were useful. Funding Finder will
-therefore treat researcher-entered context and explicit usefulness feedback as
-evaluation evidence, while measuring catalog retrieval separately from AI
-reranking.
+The owner retired researcher recruitment, the relevance pilot and its report on October 16, 2026. They were not performed and are not pending exit gates. Existing evaluation controls and privacy-safe tooling remain available. Quality evidence for a Team Match change is handled within the single objective, without inventing labels or reviving a mandatory pilot.
 
 ### Phase 3 — Better source evidence
 
-**Status: deployed; first scheduled evidence batch successful; returned-review dry run still required**
+**Status: deployed; the standalone returned-review handoff project was retired on October 16, 2026.**
 
 Phase 3 is the “understand the actual FOA” layer. It remains a static,
 low-cost architecture: GitHub Actions performs document work once and every
@@ -802,81 +768,15 @@ visitor reuses the compact output.
   real-document batch succeeded, the generated catalog was committed, the
   refreshed GitHub Pages deployment succeeded, and the public asset returned
   the expected 45-document/524-fact diagnostics.
-- **Deployment gate remaining:** manually verify one PDF page citation and one
-  HTML section citation when an HTML source enters the batch, send one review
-  package through each available handoff path, and reproduce it with the
-  private aggregator. This gate occurs before the deferred Phase 2C researcher
-  pilot.
+- **Retired standalone work, not completed evidence:** the citation/review handoff dry run and private aggregation exercise were not performed. The owner removed that project from the backlog on October 16, 2026. Source citations, privacy protections and working evaluation tools remain; their old handoff exercise is no longer a separate release gate.
 
-**Exit criterion (not yet met):** decisive dates and requirements link to
-verifiable source evidence in the deployed site, document changes remain
-traceable, and at least one privacy-safe deployment review can be returned to
-the owner and reproduced as a private report.
+#### 3E. Document-chat export and governing context — retired
 
-#### 3E. Document-chat preservation and governing context — planned
-
-This is future document-chat work. It does not change Phase 3D's state or the
-current next implementation phase, and neither capability is implemented yet.
-
-**Export useful chat output.** A NOFO-chat analysis can itself become a useful
-working document; forcing the user to regenerate it later can change the answer
-or lose a useful synthesis. The user must therefore be able to explicitly choose
-at least **Export this answer** or **Export chat**, in either **PDF or DOCX**.
-
-- Export the response already generated; never call a model again to recreate
-  it.
-- Preserve the user's question and AI answer, useful formatting, page/source
-  citations and links, the matched opportunity/document identity, and the
-  document version/hash where already available.
-- Export only on explicit user action. Normal chat and uploaded-notice text
-  remain page-memory only and may disappear on reload; export introduces no
-  automatic server-side persistence.
-- Include only visible chat content plus public/source metadata. Never export
-  API keys or hidden profile/CV context.
-- Library and implementation choices remain open; this section defines behavior,
-  not a PDF/DOCX stack.
-
-**Governing/parent document context.** “Chat with the NOFO” must not assume the
-uploaded child notice contains every rule governing a proposal. The architecture
-must eventually represent an agency-generic relationship such as:
-
-```text
-specific solicitation / NOFO
-       ↓
-applicable governing policy / guide
-       ↓
-applicable supplements / amendments
-```
-
-The relationship may contain zero, one, or multiple governing documents. Each
-document needs explicit authority, provenance, applicability, and precedence;
-the system must not silently concatenate sources into one unattributed answer.
-Answers must distinguish and cite facts from the specific solicitation, facts
-inherited from a governing document, and facts supplied by a supplement or
-amendment. A useful answer can therefore say, conceptually, “The solicitation
-does not state this directly; the applicable governing guide supplies the
-general rule,” or “The guide gives the general rule, but this solicitation
-modifies it; the solicitation-specific instruction controls.”
-
-NSF is the first concrete case. The official
-[PAPPG 24-1 page](https://www.nsf.gov/policies/pappg/24-1) identifies that guide
-as effective for proposals submitted or due on or after May 20, 2024, identifies
-later supplemental policy notices, and states that some program solicitations
-modify the PAPPG's general provisions and that the solicitation guidelines must
-then be followed. Phase 3E must preserve that authority/precedence relationship.
-`PAPPG 24-1` is a motivating example, not a permanently hard-coded version: the
-applicable PAPPG and supplements must eventually be resolved from the proposal
-or solicitation's applicable date and official NSF guidance.
-
-The same architecture must allow analogous agency proposal guides, general
-terms/instructions, umbrella-program guidance, incorporated documents, and
-supplements/amendments elsewhere without asserting that every agency uses the
-same hierarchy. Complete schema and retrieval design are deferred to the future
-implementation package.
+The proposed PDF/DOCX export and governing-document expansion were not implemented and were retired by the owner on October 16, 2026. They are not future commitments. Working PDF notice parsing, cited document chat and uploads remain available.
 
 ### Phase 4 — Expand the funding universe
 
-Add one maintainable public source at a time, prioritizing gaps reported in the pilot:
+Add one maintainable public source at a time, prioritizing verified coverage gaps and current user needs:
 
 1. ~~DOE EERE Exchange and ARPA-E eXCHANGE~~ — enabled with NOFO-only parsing,
    health bounds, atomic snapshots, and last-known-good fallback
@@ -891,50 +791,11 @@ Each source requires a documented public-use basis, stable ingestion route, heal
 
 **Exit criterion:** each new source adds opportunities users actually value without silently degrading.
 
-### Phase 5 — Optional service-backed capabilities
+### Phase 5 — Deployed services and historical alternatives
 
-Static Atom feeds now cover the no-account alert case: the daily workflow
-generates an all-opportunities feed plus topic and source-type feeds under
-`feeds/`, without storing any personal data. A separate bundle in
-`docs/weekly-alerts/` can run manually consented weekly saved-search digests
-from a private GitHub repository. It reuses the production tokenizer and BM25
-index, stores subscribers and watermarks only in that private repository, and
-keeps SMTP credentials in encrypted repository secrets. The daily workflow
-now also publishes a rolling change feed keyed by stable opportunity ID for
-new, materially amended, deadline-changed, closing-soon, and removed/closed
-events. The digest includes relevant unseen change events as well as new
-matches.
+Self-service Alerts is deployed using Cloudflare Workers, D1 and the configured email provider, with confirmation/manage controls, retry and idempotency protections. Hosted AI and protected researcher intake are also deployed. Static feeds remain available without an account. See [the current product README](README.md) and [current project status](docs/PROJECT_STATUS.md).
 
-A public self-service system still requires a server or managed third-party
-service. Only consider that after the public pilot demonstrates value. It would
-be required for:
-
-- saved searches across devices;
-- watchlists and pursuit status;
-- self-service personalized alerts or email digests;
-- shared departmental feedback;
-- institutional identity and access controls; or
-- centrally managed AI credentials and budgets.
-
-The pilot bundle is still not a replacement for durable bounce, retry,
-account, and unsubscribe infrastructure. The recommended self-service design,
-data model, endpoint set, scheduled job, and deployment choices are documented
-in `docs/EMAIL_ALERT_SERVICE_SETUP.md`.
-
-Public personalized digests require a small server-side subscription API and
-database because a static GitHub Pages app cannot securely retain subscriber
-addresses, preferences, or an email-provider credential. Store only explicit
-saved-search criteria such as keywords, agencies, topics, eligibility, and
-deadline horizon; keep CV text, AI chat, and the full device-local research
-profile out of the subscription service. The sender must support confirmation,
-unsubscribe, bounce handling, retry-safe send identifiers, and a durable send
-log.
-
-A Google Sheet and Apps Script may be acceptable for a short, manually managed
-internal pilot, but they are not the production ingestion engine or subscriber
-system of record. The authoritative full-catalog refresh remains GitHub
-Actions; a managed database/serverless function plus a transactional email
-provider is the maintainable path if the pilot justifies personalized alerts.
+The former Supabase/account-service proposal and the standalone Alerts orchestration redesign are retired. The older private-repository weekly-digest bundle is a historical optional tool, not an active development project. This consolidation does not change deployed subscription, privacy, security or spending controls.
 
 ---
 
@@ -960,18 +821,12 @@ provider is the maintainable path if the pilot justifies personalized alerts.
 - Document-derived dates and amounts must not silently replace structured
   Grants.gov values used for filtering or sorting.
 - Raw official documents and full extracted notice text must not be committed.
-- Deployment review must be explicit, device-local until handoff, and free of
-  profile/CV text, API keys, search text, Funding Finder search URL parameters,
+- If optional review tooling is used, it must be explicit, device-local until
+  sharing, and free of profile/CV text, API keys, search text, Funding Finder search URL parameters,
   and chat by default.
 - API keys never enter source control, URLs, exports, profile storage, or
   review/evaluation storage. Optional browser credential storage requires an
   explicit save action and has a visible removal control.
-- Document-chat export preserves already-generated visible output; it must not
-  regenerate the answer, and it must exclude API keys and hidden profile/CV
-  context.
-- Governing-document answers retain source-level provenance and explicit
-  precedence; solicitation, governing-guide, and supplement/amendment facts
-  must not be silently merged or cited as though they came from one document.
 - The application remains usable on current mobile and desktop browsers.
 - Every added source has an identified maintenance strategy.
 - Opportunity-to-team proposals use only a specific parent, a currently

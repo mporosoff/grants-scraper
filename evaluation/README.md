@@ -1,8 +1,10 @@
 # Phase 2 evaluation workflow
 
-The human Phase 2C pilot is deferred until the Phase 3 source-evidence
-deployment gate passes. See `PHASE3_REVIEW.md` for the current explicit file
-handoff, private inbox, and reporting workflow.
+**Scope update — October 16, 2026:** The owner retired the standalone human pilot/review and recruitment/handoff project. This file remains an optional tooling/privacy reference, not a pending project or release gate. Current development follows [the Team Match objective](../docs/TEAM_MATCH_OBJECTIVE.md); missing historical review evidence is not relabeled as completed.
+
+This reference originally supported the planned Phase 2C pilot and Phase 3 review handoff. The owner retired both standalone activities on October 16, 2026. The remaining instructions describe optional existing tooling; they do not schedule participant collection or a new handoff exercise.
+
+## Optional existing evaluation tools
 
 Open the dedicated pilot route by adding `?evaluation=1` to Funding Finder's
 URL. Normal search does not show rating controls. In evaluation mode, Funding
@@ -53,9 +55,7 @@ Add `--json` for machine-readable output. The evaluator reports:
 
 The synthetic regression fixture is
 `tests/fixtures/phase2_evaluation_export.json`. It tests the evaluator's math
-but is not pilot evidence. Phase 2 is complete only after consented labels from
-3–5 researchers are aggregated and a short pilot report documents retrieval,
-reranking, and source-data failures separately.
+but is not pilot evidence. No researcher pilot is claimed. The former participant/report exit criterion was retired on October 16, 2026; checks for a Team Match improvement are selected within its single objective.
 
 ## Reproduce the profile-ranking probe
 
@@ -70,5 +70,7 @@ node evaluation/profile_relevance_probe.mjs
 
 Rank movement proves that profile fields affect production scoring; it does not
 prove that the movement is better. Treat the probe as a regression and
-diagnostic. Precision/recall benefit still requires the consented human labels
-described above.
+diagnostic. It does not establish precision/recall benefit. Evidence for a future
+quality claim must meet the source-grounded checks selected within the single
+Team Match objective; the retired human-label collection program is not a
+required replacement gate.

@@ -1,6 +1,20 @@
-# Funding Finder — continuation checkpoint
+# Team Match — continuation record
 
-Iteration 3 remains incomplete. Independent evaluation, scientific disagreements, performance qualification and current-source migration have unresolved requirements. Sealed Iteration 4 evaluation and Iteration 5 have not begun. Detailed scientific results and supporting evidence remain local in the private owner checkpoint.
+## Current direction — October 16, 2026
+
+The single active objective is [Make Team Match work better](../TEAM_MATCH_OBJECTIVE.md): relevant, complementary teams with source-backed contributions, understandable explanations, reliable behavior, and bounded latency and cost. Numerical research, contextual/on-demand qualification, and paid generation provide evidence and possible approaches within that objective. They are not parallel projects, and completing the former Iteration 3/4/5 sequence is not the continuation plan.
+
+Start from the current serving baseline, choose one approach and one bounded candidate, agree on fixed source-grounded checks, then use normal exact-head review and a validated cutover. This consolidation performs no ranking work or evaluation and grants no provider calls, experiments, allowance, migration, or activation.
+
+The old qualification gaps and unfavorable findings remain true evidence, not newly completed gates. Preserve the private owner checkpoint, research reports, source snapshots, receipts, ledgers, and caches. Contextual public activation and paid public work remain false; production paid team generation remains disabled for source-quality qualification. The separately qualified Cov4 document service is enabled. The September statement that automatic catalog generation was held is a historical control observation, not the current catalog-service policy. See [current project status](../PROJECT_STATUS.md) for the October publication baseline.
+
+The owner retired the standalone Alerts orchestration redesign, document-chat PDF/DOCX export, and human pilot/review project on October 16. Existing working services and reusable evaluation tools remain; no replacement pilot, recruitment, or review-handoff project is required. Retirement does not turn missing evidence into a pass or turn model-assisted judgments into independent human evidence.
+
+## Historical checkpoint — September 24, 2026
+
+The following records the state and evidence at that checkpoint. It preserves the earlier releases and unresolved findings; its proposed iteration sequence and pilot obligations do not override the current objective or retirement decisions.
+
+At this checkpoint, Iteration 3 was incomplete. Independent evaluation, scientific disagreements, performance qualification and current-source migration had unresolved requirements. Sealed Iteration 4 evaluation and Iteration 5 had not begun. Detailed scientific results and supporting evidence remain local in the private owner checkpoint.
 
 The corrected catalog is published. Release `35941161543` passed all seven ordinary gates and published PR293 as `0b02a6c511b06b2d3d4d788c2edec5548c545a8e`; Pages and live verification matched all 126 payloads. Three accepted Worker checks were reused after Pages without additional provider work. Earlier failed releases remain retained. PR288 was closed without merge as superseded by PR293.
 

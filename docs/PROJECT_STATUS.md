@@ -1,13 +1,21 @@
 # Funding Finder status
 
-Iteration 3 remains incomplete. Independent evaluation, scientific disagreements, performance qualification and current-source migration have unresolved requirements. Sealed Iteration 4 evaluation and Iteration 5 have not begun. Detailed scientific and accounting records remain local.
+**Updated October 16, 2026.** The single active Team Match objective is [Make Team Match work better](TEAM_MATCH_OBJECTIVE.md). Numerical recommender research, contextual/on-demand qualification, and paid team generation are inputs to that objective, not separate delivery programs or a mandatory iteration ladder.
 
-The corrected catalog is published, and the Awards status correction is now live. PR294's renderer repair and PR297's bounded authentication/resume correction are accepted. PR297 protected-merged as `d15283e2e17ccb3491cb364c8b69daa140bbaba9` after clean exact-head review and passing required checks. Successful release `35951355654` reused the retained two-file UI candidate and published PR295 as `731b631f2cca3b189d3400eaa845190af1fc207a`. All seven gates passed: 2,117 Python tests with two skipped, 894 browser tests, 37 frozen queries, 50 scoring cases and 23 no-drift cases, plus package and notice checks. Pages and live verification passed; the other 124 payloads and complete Search Worker identity were preserved. The original three accepted checks were reused with exact target coverage and no additional provider work. The earlier failed release remains retained; PR288 is closed without merge.
+## Deployed baseline
 
-Fresh live Chemical Process Systems/Rochester verification showed an initial **at least 296** awards and **31 exact** Rochester awards. Back and Forward now restore the matching count, snapshot and institution state; page 2 retains the Rochester scope. The original stale-note failure remains recorded. Clear selection was not tested, and no performance or new POST-wire claim follows from this functional check.
+The corrected catalog and its document-stage repairs are published at protected main `449d6ef94d73f16f7111a408236cca5aca326472`, serving candidate `45410e0951f79c45a57ae4952c9b42d8b456073a6a272dd89ad7c7ec543fc4ea`. The ordinary release gates, Pages publication, and live verification succeeded. Source, candidate, validation, publication, and live identity remain distinct evidence.
 
-Closing controls at **03:54:06Z on September 24** showed paid OFF/cache ON and no active service or executor jobs. Full researcher serving proof passed at 02:06:14Z. Public activation, audited-registry cutover, legacy withdrawal and recurring paid usage remain disabled; automatic paid catalog and team generation remain held.
+Opportunity discovery, the existing Team Match product, researcher intake and registry, search, funded awards, program-officer navigation, and Alerts are deployed capabilities. They remain the working baseline; the older roadmap's future-tense descriptions do not make them unshipped projects. The September Awards navigation correction and its earlier failures remain recorded in [the continuation history](team-recommender/CURRENT.md).
 
-Scientific qualification is unresolved. The new foreground diagnostic cohorts miss their p90 targets, and the 48 MiB feature-attributable peak remains unmeasured. The complete migration proposal remains on HOLD and uninstalled. Publication does not qualify Iteration 3 or start later iterations.
+## Team Match qualification remains honest
 
-The synchronized companion CURRENT document records the accepted release and remaining boundaries.
+The prior numerical and contextual work did not qualify a replacement serving recommender. Retain its scientific disagreements, incomplete evaluation, missed p90 targets, unmeasured 48 MiB feature-attributable peak, inconclusive findings, and migration HOLD as evidence. A successful catalog release does not qualify those results. The former Iteration 4/5 plans are not automatic next work, and this consolidation does not require finishing every earlier research branch.
+
+Current configuration still disables contextual public activation and paid public work. Production paid team generation remains disabled for source-quality qualification; the separately qualified Cov4 document service is enabled. Existing private evidence, caches, durable spending receipts, source currentness, privacy boundaries, and serving/rollback controls are preserved. This documentation change grants no experiments, provider requests, new allowance, migration, or activation.
+
+The next work is one baseline, one selected approach, and one bounded Team Match candidate, assessed with fixed source-grounded quality and workflow checks plus explicit latency and cost limits. It then follows normal exact-head review and a validated cutover. The [objective](TEAM_MATCH_OBJECTIVE.md) defines the scope and acceptance; no ranking implementation is part of this consolidation.
+
+## Owner-retired work
+
+On October 16, the owner retired the standalone Alerts orchestration redesign, document-chat PDF/DOCX export, and human pilot/review project. Their old proposals and unmet pilot gates are historical, not active commitments. Working Alerts, notice chat, parsers, uploads, and reusable evaluation/privacy tooling remain in place. No replacement human pilot or recruitment requirement is introduced, and no missing scientific evidence is declared satisfied.

@@ -1,5 +1,7 @@
 # Funding Finder
 
+**Current development objective:** [Make Team Match work better](docs/TEAM_MATCH_OBJECTIVE.md). Numerical research, contextual matching and team generation are inputs to this one objective.
+
 A public funding-opportunity search engine with optional hosted AI refinement and browser-based NOFO chat.
 
 Open the application:
@@ -201,9 +203,7 @@ The explicit evaluation export includes current search text, filters, ranks,
 and ratings while omitting API keys, saved profile text, CV text, and chat.
 `scripts/evaluate_phase2.py` measures retrieval recall separately from AI
 assessment precision. Evaluation exports distinguish the immutable ordinary
-baseline from up to 12 locally qualified additions. The 3–5 researcher pilot is
-deliberately deferred until the Phase 3 deployment batch and review handoff are
-verified.
+baseline from up to 12 locally qualified additions. The standalone researcher pilot/review project was retired on October 16, 2026. Current matching-quality work follows the single Team Match objective.
 
 Ratings appear directly on result cards. Invited testers can open the collapsed
 “Help improve Funding Finder” area to
@@ -281,13 +281,7 @@ change feed and rotates through official links, recording status, content
 type, redirect target, and last-check time. Confirmed 404/410 routes are marked
 in the generated catalog so both card views omit them and fall back to another
 official route; timeouts and access restrictions are not treated as broken.
-For a small manually managed pilot, `docs/weekly-alerts/` contains a
-private-repository email-digest bundle. It now includes deadline-change,
-amendment, closing-soon, and closure events from the rolling change feed. The
-public site does not collect email addresses; the bundle requires explicit
-consent and keeps subscriptions, watermarks, and SMTP secrets outside this
-public repository. See `docs/EMAIL_ALERT_SERVICE_SETUP.md` for the recommended
-self-service account, personalized RSS, and email-service architecture.
+Self-service Alerts is deployed through [the Alerts Worker](workers/alerts/), D1 and the configured email provider. Its confirmation, manage, scheduling and delivery controls are part of the live product. The older `docs/weekly-alerts/` private-repository digest bundle is a historical optional tool. The Supabase proposal and separate Alerts orchestration redesign are retired.
 
 <!-- catalog-stats:start -->
 This replaces the former 48-record Chemical and Sustainability Engineering feed. The
@@ -355,12 +349,13 @@ support it.
 | `scripts/import_opportunity_team_model.py` | Deterministic reduction of offline calibration artifacts and shared generation identity |
 | `scripts/alert_match.py` | Server-side saved-search matcher shared by the optional digest bundle |
 | `feeds/` | Generated public Atom feeds and feed directory |
-| `docs/weekly-alerts/` | Private-repository pilot bundle for consent-based weekly email digests |
-| `docs/EMAIL_ALERT_SERVICE_SETUP.md` | Self-service accounts, personalized RSS, and email-alert deployment guide |
+| `docs/weekly-alerts/` | Legacy optional private-repository digest bundle |
+| `workers/alerts/` | Deployed self-service Alerts, scheduling, confirmation and manage controls |
+| `docs/TEAM_MATCH_OBJECTIVE.md` | Single current Team Match objective and retired-project decisions |
 | `scripts/evaluate_phase2.py` | Phase 2 retrieval/reranking evaluator |
 | `scripts/summarize_phase3_reviews.py` | Private Phase 3 deployment-review aggregator |
-| `evaluation/README.md` | Pilot export, privacy, and aggregation workflow |
-| `evaluation/PHASE3_REVIEW.md` | Deployment-review storage, return, and reporting procedure |
+| `evaluation/README.md` | Optional evaluation export, privacy and aggregation reference |
+| `evaluation/PHASE3_REVIEW.md` | Historical/optional private review procedure; standalone project retired |
 | `docs/POST_RELEASE_HARDENING.md` | v1.2.1 release lifecycle, operating limits, verification, and rollback |
 | `docs/OPPORTUNITY_TO_TEAM_ROLLOUT.md` | Opportunity-role evidence, team assembly, replacement, and staged expansion contract |
 | `workers/search-voyage-proxy/` | Bounded hosted embedding/reranking proxy and compatibility allowlists |
@@ -432,9 +427,7 @@ owner about degradation; and commits the normalized browser catalog, feeds,
 and compact caches. Raw XML archives, raw notices, full extracted notice text,
 subscriber data, SMTP credentials, and returned review files are not committed.
 
-See `PROJECT.md` for the completed Phase 1/1.5 scope, deferred Phase 2 pilot,
-and Phase 3 implementation,
-and `docs/HOSTING.md` for the deployment boundary.
+See [the Team Match objective](docs/TEAM_MATCH_OBJECTIVE.md) for current development, `PROJECT.md` for product decisions and implementation history, and `docs/HOSTING.md` for the deployment boundary.
 
 ## Use and copyright
 
