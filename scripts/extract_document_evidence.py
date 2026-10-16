@@ -1825,6 +1825,11 @@ def download_document(
     maximum_bytes=MAX_DOWNLOAD_BYTES,
     session=None,
 ):
+    from scripts import document_acquisition
+
+    if document_acquisition.sam_notice_id(url):
+        validate_public_url(url)
+        return document_acquisition.read_document(url, headers, timeout=timeout, maximum_bytes=maximum_bytes)
     if session is None:
         with requests.Session() as anonymous:
             anonymous.trust_env = False
@@ -1840,6 +1845,8 @@ def download_document(
     }
     for _ in range(6):
         validate_public_url(current_url)
+        if document_acquisition.acquisition_identity(current_url) == document_acquisition.NASA_POLICY:
+            document_acquisition.configure_session(session)
         remaining = deadline - time.monotonic()
         if remaining <= 0:
             raise RuntimeError("Official document exceeded its time limit.")
@@ -2142,6 +2149,59 @@ def build_document_entry(record, source, response, previous, now, *, enable_subt
     return entry, extracted
 
 
+def verified_retrieval_provenance(record, source, response):
+    """Bind a derived public description to its exact source and reviewed notice."""
+    from scripts import document_acquisition
+    from scripts.solicitation_identity import normalized_number
+
+    value = response.get('retrieval_provenance')
+    if value is None:
+        return None
+    keys = {'schema_version', 'policy', 'representation', 'notice_id', 'api_url',
+            'body_sha256', 'review_sha256', 'organization_id', 'solicitation_number'}
+    def reject():
+        raise document_acquisition.DocumentAcquisitionError('notice_identity_mismatch')
+    if not isinstance(value, dict) or set(value) != keys:
+        reject()
+    if (type(value['schema_version']) is not int or value['schema_version'] != 1
+            or any(not isinstance(value[key], str) or not 0 < len(value[key]) <= 2048
+                   or any(ord(char) < 32 for char in value[key]) for key in keys - {'schema_version'})):
+        reject()
+    identifier = document_acquisition.sam_notice_id(source.get('url'))
+    if (not identifier or value['notice_id'] != identifier
+            or document_acquisition.sam_notice_id(response.get('url')) != identifier
+            or value['policy'] != document_acquisition.SAM_POLICY
+            or value['representation'] != 'owned-description-html'
+            or value['api_url'] != 'https://sam.gov/api/prod/opps/v2/opportunities/' + identifier
+            or not re.fullmatch('[a-f0-9]{64}', value['review_sha256'])
+            or value['body_sha256'] != hashlib.sha256(response['content']).hexdigest()):
+        reject()
+    for field, key in (('sam_review_sha256', 'review_sha256'), ('sam_organization_id', 'organization_id')):
+        if record.get(field) is not None and record[field] != value[key]:
+            reject()
+    # Digest/local numbers do not identify SAM solicitations. Native source
+    # identities (including retained aliases) can bind an owned number to this
+    # exact notice without confusing it with the winning record's local ID.
+    for owner in [record] + list(record.get('source_aliases') or []):
+        if not isinstance(owner, dict):
+            continue
+        owner_id = str(owner.get('opportunity_id') or '')
+        sam_owner = owner.get('source') == 'SAM.gov' and owner_id.startswith('sam-gov:')
+        if sam_owner and owner_id != 'sam-gov:' + identifier:
+            if owner is record:
+                reject()
+            continue  # An alias for another notice does not own this body.
+        research_owner = (owner.get('source') == 'DARPA / IARPA research solicitations'
+                          and owner_id.startswith(('darpa-iarpa:darpa-', 'darpa-iarpa:iarpa-'))
+                          and any(document_acquisition.sam_notice_id(owner.get(field)) == identifier
+                                  for field in ('detail_page', 'funding_opportunity_url')))
+        if ((sam_owner or research_owner) and owner.get('opportunity_number')
+                and normalized_number(owner['opportunity_number'])
+                != normalized_number(value['solicitation_number'])):
+            reject()
+    return deepcopy(value)
+
+
 def _build_document_entry(
     record,
     source,
@@ -2157,6 +2217,7 @@ def _build_document_entry(
     subtopic_builder = subtopic_builder or subtopic_fields
     fetched_at = iso_utc(now)
     content = response["content"]
+    retrieval = verified_retrieval_provenance(record, source, response)
     if content_kind(content, response.get("content_type"), source.get("name"), source["url"]) == "html":
         content = scoped_html(content, source["url"])
     digest = hashlib.sha256(content).hexdigest()
@@ -2173,12 +2234,14 @@ def _build_document_entry(
         entry = deepcopy(previous)
         entry["source_signature"] = source_signature(record, source)
         entry["checked_at"] = fetched_at
-        entry.pop("last_attempt_at", None)
+        clear_failed_attempt(entry)
         entry["last_error"] = None
         entry["status"] = "current"
         entry.pop('parser_pending', None)
         entry.pop("processing_incomplete", None)
         entry["document"]["last_seen_at"] = fetched_at
+        if retrieval is not None:
+            entry['document']['retrieval_provenance'] = retrieval
         entry["document"]["etag"] = response.get("etag") or entry[
             "document"
         ].get("etag")
@@ -2246,6 +2309,8 @@ def _build_document_entry(
         "last_seen_at": fetched_at,
         "changed_since_previous": changed_since_previous,
     }
+    if retrieval is not None:
+        document['retrieval_provenance'] = retrieval
     structure_dependencies = notice_structure_cache.identity(document, source_scope_identity(source['url']))
     restored = structure_cache.read(structure_dependencies) if structure_cache else None
     if restored is None:
@@ -2732,8 +2797,109 @@ def merge_subtopic_sidecar(cache, sources, current_parent_ids, *, as_of):
     return cache
 
 
-def due_for_check(entry, signature, now, recheck_days, *, needs_subtopics=False):
+def document_acquisition_identity(url):
+    from scripts.document_acquisition import acquisition_identity
+    return acquisition_identity(url)
+
+
+def failed_attempt_signature(signature, acquisition_identity=None):
+    """Identify attempted input without repeating URL queries in public diagnostics."""
+    value = json.dumps([signature, acquisition_identity], separators=(",", ":"), ensure_ascii=True)
+    return hashlib.sha256(value.encode("utf-8")).hexdigest()
+
+
+def failed_acquisition_profile_changed(entry, source_url):
+    """A supported, newly available acquisition path changes only a failed input."""
+    if not entry or not (entry.get("status") == "failed" or entry.get("last_error")):
+        return False
+    profile = document_acquisition_identity(source_url)
+    return profile is not None and entry.get("last_attempt_acquisition_identity") != profile
+
+
+def clear_failed_attempt(entry):
+    for key in ("last_attempt_at", "last_attempt_signature", "last_attempt_url", "last_attempt_acquisition_identity",
+                "last_error_phase", "last_error_reason", "last_error_http_status"):
+        entry.pop(key, None)
+
+
+def safe_attempt_url(value):
+    """Keep the public route while omitting credentials, queries and fragments."""
+    try:
+        parsed = urlparse(str(value or ""))
+        host = parsed.hostname
+        port = parsed.port
+        if parsed.scheme not in {"http", "https"} or not host or port not in (None, 80, 443):
+            return None
+        host = f"[{host}]" if ":" in host else host
+        authority = host + (f":{port}" if port is not None else "")
+        return f"{parsed.scheme}://{authority}{parsed.path}"
+    except ValueError:
+        return None
+
+
+def document_failure(identifier, source, error, phase, response=None):
+    """Expose only fixed diagnostic codes and a bounded numeric HTTP status."""
+    phase = phase if phase in {"notice_reparse", "notice_refresh", "notice_parse"} else "notice_processing"
+    status = getattr(getattr(error, "response", None), "status_code", None)
+    if status is None:
+        status = getattr(error, "http_status", None)
+    if status is None and isinstance(response, dict):
+        status = response.get("status_code")
+    status = status if type(status) is int and 100 <= status <= 599 else None
+    if isinstance(error, requests.exceptions.SSLError):
+        kind, reason = "SSLError", "tls_error"
+    elif isinstance(error, requests.Timeout):
+        kind, reason = "Timeout", "timeout"
+    elif isinstance(error, requests.HTTPError):
+        kind, reason = "HTTPError", "http_error"
+    elif isinstance(error, requests.ConnectionError):
+        kind, reason = "ConnectionError", "connection_error"
+    elif isinstance(error, ValueError):
+        kind, reason = "ValueError", "invalid_notice"
+        known = {"Official document response contains no readable notice text": "unreadable_notice",
+                 "unbound not-modified response": "unbound_not_modified"}
+        if len(error.args) == 1 and isinstance(error.args[0], str) and len(error.args[0]) <= 200:
+            reason = known.get(error.args[0], reason)
+    elif isinstance(error, RuntimeError):
+        kind, reason = "RuntimeError", "retrieval_error" if phase == "notice_refresh" else "processing_error"
+    elif isinstance(error, OSError):
+        kind, reason = "OSError", "io_error"
+    else:
+        kind, reason = "Exception", "processing_error"
+    declared_reason = getattr(error, "document_reason", None)
+    if isinstance(declared_reason, str) and declared_reason in {
+            "notice_identity_mismatch", "unreadable_notice", "unsupported_notice_response",
+            "sam_notice_identity", "sam_notice_not_current", "sam_notice_schema", "sam_notice_unavailable",
+            "sam_description_missing", "sam_description_oversize", "sam_acquisition_timeout"}:
+        reason = declared_reason
+    return {"opportunity_id": identifier, "url": safe_attempt_url(source.get("url")),
+            "error": kind, "phase": phase, "reason": reason, "http_status": status}
+
+
+def due_for_check(entry, signature, now, recheck_days, *, needs_subtopics=False, source_url=None):
     if not entry or entry.get("status") == "processing_incomplete":
+        return True
+    if failed_acquisition_profile_changed(entry, source_url or signature.split("|", 1)[0]):
+        return True
+    failed = entry.get("status") == "failed" or entry.get("last_error")
+    profile = document_acquisition_identity(source_url or signature.split("|", 1)[0]) if failed else None
+    attempted = entry.get("last_attempt_signature")
+    if failed and isinstance(attempted, str) and re.fullmatch(r"[a-f0-9]{64}", attempted):
+        # A failed changed source must not remain permanently new. Successful
+        # acquisition identity stays intact; only this attempted identity backs off.
+        if (entry.get("last_attempt_acquisition_identity") != profile
+                or attempted != failed_attempt_signature(signature, profile)):
+            return True
+        try:
+            checked = datetime.fromisoformat(entry["last_attempt_at"].replace("Z", "+00:00"))
+        except (AttributeError, KeyError, TypeError, ValueError):
+            return True
+        if checked.tzinfo is None or checked > now:
+            return True
+        return checked <= now - timedelta(days=1)
+    if failed and profile is not None:
+        # Legacy failures have no receipt for the supported acquisition profile.
+        # Try it once without relabeling any prior successful source evidence.
         return True
     # Parser recovery is due independently of HTTP freshness. A failed source
     # keeps its normal retry backoff even when recovery remains pending.
@@ -2756,7 +2922,9 @@ def due_for_check(entry, signature, now, recheck_days, *, needs_subtopics=False)
         return True
     try:
         checked = datetime.fromisoformat(checked_at.replace("Z", "+00:00"))
-    except ValueError:
+    except (AttributeError, TypeError, ValueError):
+        return True
+    if checked.tzinfo is None:
         return True
     retry_days = (
         1
@@ -3386,7 +3554,7 @@ def enrich_document_evidence(
                     signature = source_signature(record, source)
                     interval = recheck_days if record.get("primary_document_url") else max(30, recheck_days)
                     backfill = needs_subtopics(entry, enable_subtopics)
-                    if due_for_check(entry, signature, now, interval, needs_subtopics=backfill):
+                    if due_for_check(entry, signature, now, interval, needs_subtopics=backfill, source_url=source["url"]):
                         selected = (record, source, signature, entry, backfill)
         except WorkTimedOut:
             incomplete(cached_records, identifier, "notice_selection_timeout")
@@ -3397,8 +3565,9 @@ def enrich_document_evidence(
             if selected:
                 candidates.append(selected)
     candidates.sort(key=lambda item: (
+        0 if failed_acquisition_profile_changed(item[3], item[1]["url"]) else 1,
         0 if (item[3] or {}).get("subtopic_reason") == "scientific_body_revalidation_pending" else 1,
-        0 if item[3] and item[3].get("source_signature") != item[2] else
+        0 if item[3] and item[3].get("source_signature") and item[3]["source_signature"] != item[2] else
         1 if not item[3] else 2 if item[3].get("status") == "failed" else 3,
         0 if item[1]["kind"] == "primary_notice" else 1,
         0 if (item[0].get("has_preliminary_stage") or item[0].get("limited_submission")
@@ -3416,6 +3585,7 @@ def enrich_document_evidence(
             continue
         phase = "notice_reparse"
         previous = original
+        response = None
         try:
             with work_guard(work_budget, phase, identifier, seconds=10):
                 previous = deepcopy(original)
@@ -3423,7 +3593,7 @@ def enrich_document_evidence(
                              if previous and not backfill else None)
                 if recovered:
                     previous = recovered
-                needs_fetch = not recovered or due_for_check(previous, signature, now, recheck_days)
+                needs_fetch = not recovered or due_for_check(previous, signature, now, recheck_days, source_url=source["url"])
             if recovered:
                 # A completed interpretation is independent of the later HTTP
                 # freshness check. Commit it before that next mutable unit.
@@ -3455,11 +3625,12 @@ def enrich_document_evidence(
                     if not previous or not headers or resolved_document_url(source, response) != previous_document.get("url"):
                         raise ValueError("unbound not-modified response")
                     previous.update(checked_at=iso_utc(now), status="current", last_error=None, source_signature=signature)
-                    previous.pop("last_attempt_at", None)
+                    clear_failed_attempt(previous)
                     previous.pop("processing_incomplete", None)
                     previous_document["last_seen_at"] = iso_utc(now)
                     entry, extracted = previous, False
             if response.get("status_code") != 304:
+                phase = "notice_parse"
                 entry, extracted = build_document_entry(record, source, response, previous, now,
                     enable_subtopics=enable_subtopics, backfill_subtopics=backfill,
                     structure_cache=structure_cache, work_budget=work_budget)
@@ -3474,17 +3645,21 @@ def enrich_document_evidence(
             # The latest completed receipt survives; mutable live copies do not.
             incomplete(cached_records, identifier, error.phase + "_timeout")
         except Exception as exc:  # noqa: BLE001 - retain other records
-            failure = {"opportunity_id": identifier, "url": source["url"], "error": type(exc).__name__}
+            failure = document_failure(identifier, source, exc, phase, response)
             failures.append(failure)
             retained = cached_records.get(identifier)
             if retained:
                 entry = deepcopy(retained)
-                entry.update(status="failed", last_attempt_at=iso_utc(now), last_error=failure["error"])
             else:
-                entry = {"source_signature": signature, "checked_at": iso_utc(now), "status": "failed",
-                    "last_error": failure["error"], "document": {"url": source["url"], "name": source.get("name"),
+                entry = {"document": {"url": failure["url"], "name": source.get("name"),
                     "source_kind": source["kind"]}, "facts": [], "review_queue": [], "version_history": [],
                     "archived_from_catalog_at": None}
+            profile = document_acquisition_identity(source["url"])
+            entry.update(status="failed", last_attempt_at=iso_utc(now),
+                last_attempt_signature=failed_attempt_signature(signature, profile),
+                last_attempt_acquisition_identity=profile, last_attempt_url=failure["url"],
+                last_error=failure["error"], last_error_phase=failure["phase"],
+                last_error_reason=failure["reason"], last_error_http_status=failure["http_status"])
             cached_records[identifier] = entry
             completed += 1
             completed_ids.add(identifier)
