@@ -8,6 +8,24 @@ import "../../assets/saved.js";
 const api = globalThis.FUNDING_SUBMISSION_SCHEDULE;
 const cases = JSON.parse(readFileSync(new URL("../fixtures/submission-schedule.json", import.meta.url), "utf8"));
 
+test("saved SURPASS and STRI schedules keep required preliminary and full proposal stages", () => {
+  const requiredCases = cases.filter(item => /^Required (SURPASS|STRI) /.test(item.name));
+  assert.equal(requiredCases.length, 6);
+  for (const item of requiredCases) {
+    const saved = globalThis.FUNDING_SAVED.sanitizeItem(item.record);
+    assert.equal(saved.deadlines[0].required, true, item.name);
+    assert.equal(saved.deadlines[1].kind, "application", item.name);
+    assert.equal(saved.close_date || null, item.record.close_date, "Source close date changed");
+    const actual = api.nextSubmission(saved, item.as_of);
+    assert.deepEqual({date: actual.date, access: actual.access, kind: actual.event?.kind ?? null},
+      item.expected, item.name);
+    if (item.name.endsWith("after prerequisite")) {
+      assert.equal(actual.prerequisites[0].required, true, item.name);
+      assert.equal(actual.event.date, item.record.deadlines[1].date, item.name);
+    }
+  }
+});
+
 test("saved windows retain opening dates and full source track identity", () => {
   const track = "Division of Chemistry - Chemistry of Life Processes, Chemical Structure and Dynamics, Chemical Theory, Models and Computational Methods";
   const saved = globalThis.FUNDING_SAVED.sanitizeItem({opportunity_id: "window", title: "Window",
