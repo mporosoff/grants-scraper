@@ -4,8 +4,20 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml</id>
-  <updated>2026-10-14T15:15:41Z</updated>
+  <updated>2026-10-16T14:38:47Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>Genesis Mission Graduate Fellowship Pilot</title>
+    <link href="https://www.grants.gov/search-results-detail/364033"/>
+    <id>urn:funding-finder:grants-gov:364033</id>
+    <updated>2026-10-08T00:00:00Z</updated>
+    <author><name>Office of Science</name></author>
+    <category term="Education and workforce"/>
+    <category term="Technology development"/>
+    <category term="Energy"/>
+    <category term="Cybersecurity"/>
+    <summary>Office of Science | Application 2027-01-12 | American scientists and engineers will power the super intelligence (SI) revolution in science and innovation through the Genesis Mission. DOE SC hereby invites applications from United States (U.S.) Institutions of Higher Education and domestic doctoral-granting institutions to develop and demonstrate the effectiveness of novel four-year doctoral training pilots with dual competency in SI and ano…</summary>
+  </entry>
   <entry>
     <title>Small Business Transportation Technical Assistance Center (Region 1)</title>
     <link href="https://www.grants.gov/search-results-detail/363996"/>
@@ -113,6 +125,19 @@
     <category term="Data science"/>
     <category term="Cybersecurity"/>
     <summary>U.S. National Science Foundation | Posted | The U.S. National Science Foundation Directorate for Mathematical and Physical Sciences (NSF MPS) supports multiple research programs at the frontiers of discovery in theoretical and applied mathematical sciences. Programs include: Algebra and Number TheoryAnalysisApplied MathematicsCombinatoricsComputational MathematicsFoundationsGeometric AnalysisMathematical BiologyProbabilityStatisticsTopology…</summary>
+  </entry>
+  <entry>
+    <title>Annual Recurring University Training and Research</title>
+    <link href="https://www.grants.gov/search-results-detail/363594"/>
+    <id>urn:funding-finder:grants-gov:363594</id>
+    <updated>2026-08-14T00:00:00Z</updated>
+    <author><name>National Energy Technology Laboratory</name></author>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Cybersecurity"/>
+    <summary>National Energy Technology Laboratory | Application 2026-10-16 | Annual Recurring University Training and Research The purpose of this funding opportunity is to solicit and award research and development grants to educate and train the next generation of engineers and scientists; to support novel, early-stage research at U.S. colleges and universities; to increase research and development opportunities for underrepresented and structurally marginalized communit…</summary>
   </entry>
   <entry>
     <title>U.S. National Science Foundation State and Regional Artificial Intelligence Infrastructure Hubs:</title>
@@ -367,7 +392,7 @@
     <category term="Quantum science"/>
     <category term="Social and behavioral sciences"/>
     <category term="Technology development"/>
-    <summary>U.S. National Science Foundation | Application 2026-10-14 | The Tribal Colleges and Universities Program (TCUP) provides awards to federally recognized1 Tribal Colleges and Universities, Alaska Native-serving institutions, and Native Hawaiian-serving institutions to promote high quality science (including sociology, psychology, anthropology, linguistics, economics and bioeconomics, statistics, and other social and behavioral sciences; natural sciences; com…</summary>
+    <summary>U.S. National Science Foundation | Application 2027-01-11 | The Tribal Colleges and Universities Program (TCUP) provides awards to federally recognized1 Tribal Colleges and Universities, Alaska Native-serving institutions, and Native Hawaiian-serving institutions to promote high quality science (including sociology, psychology, anthropology, linguistics, economics and bioeconomics, statistics, and other social and behavioral sciences; natural sciences; com…</summary>
   </entry>
   <entry>
     <title>Research Interests of the United States Air Force Academy (formerly USAFA-BAA-2021)</title>

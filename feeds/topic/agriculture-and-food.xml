@@ -4,8 +4,18 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml</id>
-  <updated>2026-10-14T15:15:41Z</updated>
+  <updated>2026-10-16T14:38:47Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>Healthy Lifestyles in Youth</title>
+    <link href="https://www.grants.gov/search-results-detail/363651"/>
+    <id>urn:funding-finder:grants-gov:363651</id>
+    <updated>2028-04-28T00:00:00Z</updated>
+    <author><name>Indian Health Service</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Education and workforce"/>
+    <summary>Indian Health Service | Estimated Application 2028-06-30 | This project promotes healthy lifestyles amongst American Indian and Alaska Native (AI/AN) youth at selected Native Boys and Girls Club sites across the nation. The long-term goal is to prevent or delay the onset of obesity and related diseases, such as type 2 diabetes. Participating sites implement the "Together Raising Awareness for Indian Life" (also known as T.R.A.I.L. or "On the T.R.A.I.L. to…</summary>
+  </entry>
   <entry>
     <title>Tobacco Centers of Regulatory Science (TCORS) (Clinical Trial Optional)</title>
     <link href="https://www.grants.gov/search-results-detail/363126"/>
@@ -71,6 +81,15 @@
     <summary>Centers for Disease Control and Prevention - ERA | Estimated Application 2027-03-03 | The National Institute for Occupational Safety and Health (NIOSH) is committed to addressing a wide range of occupational health and safety hazards affecting those who work in the agriculture, forestry, and fishing (AgFF) sector. Children and adolescents ("youth") are consistently more likely to be fatally injured working in agriculture compared to other industries. While many steps have been take…</summary>
   </entry>
   <entry>
+    <title>Fiscal Year 2027 Regional Nutrition Hubs</title>
+    <link href="https://www.grants.gov/search-results-detail/363392"/>
+    <id>urn:funding-finder:grants-gov:363392</id>
+    <updated>2026-10-30T00:00:00Z</updated>
+    <author><name>Health Resources and Services Administration</name></author>
+    <category term="Agriculture and food"/>
+    <summary>Health Resources and Services Administration | Estimated Application 2026-12-29 | Fiscal Year (FY) 2027 Regional Nutrition Hubs (RNH) will support region-specific technical assistance (TA) on expanding high-quality nutrition services to the Health Resources and Services Administration's (HRSA) Health Center Program (H80) award recipients and look-alikes (health centers). Nutrition services prevent, manage, and treat diseases and conditions through nutritional and food-based int…</summary>
+  </entry>
+  <entry>
     <title>Affordable Rural Cooperative (ARC) Energy Program</title>
     <link href="https://www.grants.gov/search-results-detail/363779"/>
     <id>urn:funding-finder:grants-gov:363779</id>
@@ -82,13 +101,32 @@
     <summary>Rural Utilities Service | Letter Of Intent 2026-11-20 | The Rural Utilities Service (RUS or the Agency), a Rural Development (RD) agency of the United States Department of Agriculture (USDA), is soliciting Letters of Interest (LOI) for applications under the Affordable Rural Cooperative (ARC) Program. In addition, the Agency is announcing the eligibility requirements, application process and deadlines, and the criteria that will be used by RUS to asses…</summary>
   </entry>
   <entry>
-    <title>Fiscal Year 2027 Regional Nutrition Hubs</title>
-    <link href="https://www.grants.gov/search-results-detail/363392"/>
-    <id>urn:funding-finder:grants-gov:363392</id>
-    <updated>2026-10-15T00:00:00Z</updated>
-    <author><name>Health Resources and Services Administration</name></author>
+    <title>Cooperative Agreement for Affiliated Partner with the Pacific Northwest Cooperative Ecosystem Studies Unit (CESU)</title>
+    <link href="https://www.grants.gov/search-results-detail/364084"/>
+    <id>urn:funding-finder:grants-gov:364084</id>
+    <updated>2026-10-14T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
     <category term="Agriculture and food"/>
-    <summary>Health Resources and Services Administration | Estimated Application 2026-12-15 | Fiscal Year (FY) 2027 Regional Nutrition Hubs (RNH) will support region-specific technical assistance (TA) on expanding high-quality nutrition services to the Health Resources and Services Administration's (HRSA) Health Center Program (H80) award recipients and look-alikes (health centers). Nutrition services prevent, manage, and treat diseases and conditions through nutritional and food-based int…</summary>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Space and aeronautics"/>
+    <category term="Water"/>
+    <summary>Geological Survey | Application 2026-11-14 | Freshwater aquatic habitats in the Northwest sustain native fish such as bull trout, salmon, and lamprey that are important to the region's food economy, outdoor recreation, and as Tribal resources. However, increasing water temperatures and fluctuating precipitation can increase the vulnerability of these habitats and native species to biological invasions. Among non-native species that are known…</summary>
+  </entry>
+  <entry>
+    <title>Cooperative Agreement for Affiliated Partner with the Rocky Mountains Cooperative Ecosystem Studies Unit (CESU)</title>
+    <link href="https://www.grants.gov/search-results-detail/364082"/>
+    <id>urn:funding-finder:grants-gov:364082</id>
+    <updated>2026-10-14T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Space and aeronautics"/>
+    <category term="Water"/>
+    <summary>Geological Survey | Application 2026-11-14 | The spread of invasive grasses, such as cheatgrass, adds fine fuels to the landscape that increase wildfire occurrence and frequency. Following a fire, invasive grasses regrow quickly, typically outcompeting native plants and perpetuating what is known as the invasive grass-fire cycle. This cycle has been well documented in western portions of the sagebrush biome, such as the Great Basin, but ther…</summary>
   </entry>
   <entry>
     <title>Small Business Innovation Research and Small Business Technology Transfer Programs Phase II</title>
@@ -248,26 +286,6 @@
     <summary>AmeriCorps | Application 2026-10-20 | AmeriCorps improves lives, strengthens communities, and fosters civic engagement through service and volunteering. AmeriCorps brings people together to tackle some of the country’s most pressing challenges through national service and volunteerism. AmeriCorps members and AmeriCorps Seniors volunteers serve with organizations dedicated to the improvement of communities and those serving. AmeriCorps…</summary>
   </entry>
   <entry>
-    <title>Food and Agricultural Sciences National Needs Graduate and Postgraduate Fellowships</title>
-    <link href="https://www.grants.gov/search-results-detail/363559"/>
-    <id>urn:funding-finder:grants-gov:363559</id>
-    <updated>2026-08-13T00:00:00Z</updated>
-    <author><name>National Institute of Food and Agriculture</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Education and workforce"/>
-    <summary>National Institute of Food and Agriculture | Application 2026-10-15 | The purpose of the NNF program, Assistance Listing 10.210, is to provide funding to support new graduate (master’s, DVM, or doctoral) student training and completion of degree programs to develop human capital to participate in meeting the mission of the USDA to increase the pipeline of domestic agricultural students. The NNF program offers funding for eligible full-time students pursuing graduate…</summary>
-  </entry>
-  <entry>
-    <title>Higher Education Challenge Grants Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363479"/>
-    <id>urn:funding-finder:grants-gov:363479</id>
-    <updated>2026-08-05T00:00:00Z</updated>
-    <author><name>National Institute of Food and Agriculture</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Education and workforce"/>
-    <summary>National Institute of Food and Agriculture | Application 2026-10-15 | The purpose of HEC, under assistance listing 10.217, is to strengthen institutional capacities, including curriculum, faculty, scientific instrumentation, and student recruitment and retention. The HEC program is focused on developing and improving formal master’s or doctorate degree-level food and agricultural sciences education and first professional degree-level education in veterinary medicine…</summary>
-  </entry>
-  <entry>
     <title>Plant Protection Act Section 7721 Fiscal Year 2027 National Clean Plant Network (NCPN)</title>
     <link href="https://www.grants.gov/search-results-detail/363326"/>
     <id>urn:funding-finder:grants-gov:363326</id>
@@ -278,18 +296,6 @@
     <category term="Environmental science"/>
     <category term="Infectious disease"/>
     <summary>Animal and Plant Health Inspection Service | Application 2026-10-19 | The U.S. Department of Agriculture, Animal and Plant Health Inspection Service announce this funding opportunity to carry out the Plant Protection Act Section 7721 (PPA 7721) National Clean Plant Network (NCPN) program. APHIS will consider project proposals that clearly and directly support the strategic goals and objectives of the National Clean Plant Network as described in the NCPN Strategic Pl…</summary>
-  </entry>
-  <entry>
-    <title>ROSES25: A.13 Accelerating Earth Solutions</title>
-    <link href="https://www.grants.gov/search-results-detail/363224"/>
-    <id>urn:funding-finder:grants-gov:363224</id>
-    <updated>2026-07-17T00:00:00Z</updated>
-    <author><name>NASA Headquarters</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Space and aeronautics"/>
-    <summary>NASA Headquarters | Application 2026-10-15 | verify prerequisite | NOTICE: September 18, 2026. The instructions regarding Biographical Sketches and Current and Pending Support in Table A.13-2 have been improved. New text is in bold and deleted text is struck through. NOTICE: August 4, 2026. Going forward, a $0.09/SBU charge now applies to all proposing to Earth Science (ROSES Appendix A) to use any NASA high-end computing resource. Proposers must account for this…</summary>
   </entry>
   <entry>
     <title>FY26 Bureau of Land Management Youth Conservation Corps - Bureau wide</title>

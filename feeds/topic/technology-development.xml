@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml</id>
-  <updated>2026-10-14T15:15:41Z</updated>
+  <updated>2026-10-16T14:38:47Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Technology Development Program</title>
@@ -310,6 +310,8 @@
     <author><name>Office of Science</name></author>
     <category term="Education and workforce"/>
     <category term="Technology development"/>
+    <category term="Energy"/>
+    <category term="Cybersecurity"/>
     <summary>Office of Science | Application 2027-01-12 | American scientists and engineers will power the super intelligence (SI) revolution in science and innovation through the Genesis Mission. DOE SC hereby invites applications from United States (U.S.) Institutions of Higher Education and domestic doctoral-granting institutions to develop and demonstrate the effectiveness of novel four-year doctoral training pilots with dual competency in SI and ano…</summary>
   </entry>
   <entry>
@@ -322,6 +324,18 @@
     <category term="Public health"/>
     <category term="Technology development"/>
     <summary>National Institutes of Health | Application 2027-01-26 | The National Institutes of Health (NIH) intends to renew the Integrative Management of chronic Pain and OUD for Whole Recovery (IMPOWR) research network. This renewal consists of individual research projects, which will be supported by a single Coordination Center. This network is intended to test new innovations that integrate evidence based treatments for chronic pain (CP) and opioid use disorde…</summary>
+  </entry>
+  <entry>
+    <title>Strengthening American Infrastructure (SAI)</title>
+    <link href="https://www.grants.gov/search-results-detail/364025"/>
+    <id>urn:funding-finder:grants-gov:364025</id>
+    <updated>2026-10-05T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Arts and culture"/>
+    <category term="Environmental science"/>
+    <category term="Social and behavioral sciences"/>
+    <category term="Technology development"/>
+    <summary>U.S. National Science Foundation | Posted | Strengthening American Infrastructure (SAI) is an NSF program seeking to stimulate human-centered, use-inspired, fundamental and potentially transformative research aimed at strengthening America’s infrastructure. Effective infrastructure provides a strong foundation for socioeconomic vitality and broad improvement in quality of life. Robust, reliable and effective infrastructure spurs private-sec…</summary>
   </entry>
   <entry>
     <title>Small Business Innovation Research and Small Business Technology Transfer Programs Phase II</title>
@@ -462,16 +476,6 @@
     <summary>Rural Business-Cooperative Service | Application 2027-01-31 | The primary objective of the program is to provide grants to Agriculture Innovation Centers that will provide technical assistance to agricultural producers to market value-added agricultural products.</summary>
   </entry>
   <entry>
-    <title>FTA Broad Agency Announcement (FY26) -- “Research Initiatives in Support of Safety, Accessibility, and Mobility in Public Transportation</title>
-    <link href="https://sam.gov/opp/9fac6a86bf4f4561bd8bd464284d6297/view"/>
-    <id>urn:funding-finder:sam-gov:sam-gov%3A9fac6a86bf4f4561bd8bd464284d6297</id>
-    <updated>2026-09-04T00:00:00Z</updated>
-    <author><name>U.S. Department of Transportation - Federal Transit Administration (FTA)</name></author>
-    <category term="Technology development"/>
-    <category term="Transportation"/>
-    <summary>U.S. Department of Transportation - Federal Transit Administration (FTA) | Concept Paper 2026-10-19 | Applied public transit research, technology development and demonstration to improve transit safety, efficiency and deployment readiness, generally TRL3-6. Cost sharing may be mandated under49USC5312(g); FTA determines applicability during concept review and communicates it in writing. Federal-government-owned businesses not eligible as direct recipients; teaming allowed. SAM registration before a…</summary>
-  </entry>
-  <entry>
     <title>1890 Institution Teaching, Research, and Extension Capacity Building Grants Program</title>
     <link href="https://www.grants.gov/search-results-detail/363796"/>
     <id>urn:funding-finder:grants-gov:363796</id>
@@ -589,15 +593,6 @@
     <summary>U.S. National Science Foundation | Posted | The U.S. National Science Foundation Directorate for Mathematical and Physical Sciences (NSF MPS) supports multiple research programs in the astronomical sciences. NSF MPS funds foundational astronomical sciences research and instrumentation focused on exploring space and advancing fundamental understanding of the universe. The programs covered by this funding opportunity are: Astronomical Science…</summary>
   </entry>
   <entry>
-    <title>ASCENT-IBO</title>
-    <link href="https://arpa-h.gov/explore-funding/initiatives-and-sprints/ascent-ibo"/>
-    <id>urn:funding-finder:arpa-h:arpa-h%3Aascent-ibo</id>
-    <updated>2026-08-15T00:00:00Z</updated>
-    <author><name>Advanced Research Projects Agency for Health (ARPA-H)</name></author>
-    <category term="Technology development"/>
-    <summary>Advanced Research Projects Agency for Health (ARPA-H) | Preapplication 2026-10-15 | Current ARPA-H initiative. ASCENT-IBO | ARPA-H (function(w, d, s, l, i){w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&amp;l='+l:''; j.async=true; j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j, f); })(window, document,'script','dataLayer','GTM-W5GM3DT9'…</summary>
-  </entry>
-  <entry>
     <title>Fast Assessment of Solutions, Therapeutics, Pharmaceuticals, and Supplies (FASTPASS)</title>
     <link href="https://arpa-h.gov/explore-funding/programs/fastpass"/>
     <id>urn:funding-finder:arpa-h:arpa-h%3Afastpass</id>
@@ -647,5 +642,16 @@ a high level of innovation and creativity. The goal is to support the best young
     <category term="Technology development"/>
     <category term="Data science"/>
     <summary>U.S. National Science Foundation | Application 2026-11-04 | This program will advance scientific community datasets to enable scientific discovery and innovation using artificial intelligence (AI) and other methods. Its goal is to increase the value that can be derived from existing scientific datasets by leveraging novel methods and artificial intelligence (AI). This will unlock new AI-driven insights. It can enable interdisciplinary research. It also ena…</summary>
+  </entry>
+  <entry>
+    <title>Model-to-Clinic (M2C) for Precision Medicine with AI: Integrating Imaging with Multimodal Data (PRIMED-AI) (UG3/UH3, Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/359666"/>
+    <id>urn:funding-finder:grants-gov:359666</id>
+    <updated>2026-06-30T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Education and workforce"/>
+    <category term="Technology development"/>
+    <summary>National Institutes of Health | Application 2026-10-19 | The overarching goal of this notice of funding opportunity (NOFO) and its companion opportunities is to establish the Precision Medicine with AI: Integrating Imaging with Multimodal Data (PRIMED-AI) Program to support development of innovative, reliable, cost-effective, and sustainable multimodal AI-based clinical decision support (CDS) tools. PRIMED-AI CDS tools are based on the integration of cl…</summary>
   </entry>
 </feed>

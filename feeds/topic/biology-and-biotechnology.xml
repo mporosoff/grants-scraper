@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/biology-and-biotechnology.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/biology-and-biotechnology.xml</id>
-  <updated>2026-10-14T15:15:41Z</updated>
+  <updated>2026-10-16T14:38:47Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Development of Models, New Approach Methodologies, and Biological Materials for Studying Human Health and Diseases (R21 Clinical Trial Not Allowed)</title>
@@ -434,6 +434,53 @@
     <summary>National Institutes of Health | Estimated Application 2027-02-16 | The National Human Genome Research Institute (NHGRI) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications related to the ethical, legal, and social implications (ELSI) of genomics. Genomics has the potential to improve human health and well-being. Driven by advances in technology and analysis, genomics is being integrated into large swaths of biomedical research and me…</summary>
   </entry>
   <entry>
+    <title>Cooperative Agreement for Affiliated Partner with the Colorado Plateau Cooperative Ecosystem Studies Unit (CESU)</title>
+    <link href="https://www.grants.gov/search-results-detail/364080"/>
+    <id>urn:funding-finder:grants-gov:364080</id>
+    <updated>2026-10-14T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Environmental science"/>
+    <summary>Geological Survey | Application 2026-11-14 | U.S. Geological Survey's (USGS), Northern Rocky Mountain Science Center (NOROCK), is offering a funding opportunity to improve assessments of floodplain connectivity and riverscape health. Current approaches to identify floodplain connectivity across the western United States rely on field data, limiting inference and spatial extent of data. However, existing lidar datasets through the USGS provid…</summary>
+  </entry>
+  <entry>
+    <title>Cooperative Agreement for Affiliated Partner with the Pacific Northwest Cooperative Ecosystem Studies Unit (CESU)</title>
+    <link href="https://www.grants.gov/search-results-detail/364084"/>
+    <id>urn:funding-finder:grants-gov:364084</id>
+    <updated>2026-10-14T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Space and aeronautics"/>
+    <category term="Water"/>
+    <summary>Geological Survey | Application 2026-11-14 | Freshwater aquatic habitats in the Northwest sustain native fish such as bull trout, salmon, and lamprey that are important to the region's food economy, outdoor recreation, and as Tribal resources. However, increasing water temperatures and fluctuating precipitation can increase the vulnerability of these habitats and native species to biological invasions. Among non-native species that are known…</summary>
+  </entry>
+  <entry>
+    <title>Specialized Programs of Research Excellence (SPOREs) in Human Cancers for Years 2027, 2028, and 2029 (P50 Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/360541"/>
+    <id>urn:funding-finder:grants-gov:360541</id>
+    <updated>2026-10-14T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Cancer"/>
+    <summary>National Institutes of Health | Application 2029-09-25 | Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) invites applications for P50 Research Center Grants for Specialized Programs of Research Excellence (SPOREs). Based on the proposed research, applications may be jointly funded with the National Institute of Dental and Craniofacial Research (NIDCR). This is a re-issuance of PAR-23-284. The program will fund P50 …</summary>
+  </entry>
+  <entry>
+    <title>Early-Onset Cancers: Investigating Etiology, Mechanisms, and Early Detection Strategies (RP1 Clinical Trials Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/361438"/>
+    <id>urn:funding-finder:grants-gov:361438</id>
+    <updated>2026-10-14T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Cancer"/>
+    <category term="Environmental science"/>
+    <summary>National Institutes of Health | Application 2029-10-11 | This Notice of Funding Opportunity (NOFO) invites applications that investigate the etiology of sporadic non-hereditary early-onset cancers (EOCs: ages 18 to 49 years) and the underlying biological mechanisms that play a role in these cancers to inform prevention and control strategies. The proposed research is expected to advance the understanding of the unexplained rise of cancers in young adult…</summary>
+  </entry>
+  <entry>
     <title>Cellular Senescence Network (SenNet): Discovery, Validation Centers (UM1 Clinical Trials Not Allowed)</title>
     <link href="https://www.grants.gov/search-results-detail/359169"/>
     <id>urn:funding-finder:grants-gov:359169</id>
@@ -591,7 +638,7 @@
     <category term="Separations and membranes"/>
     <category term="Carbon management"/>
     <category term="Quantum science"/>
-    <summary>Office of Science | Application 2027-09-30 | SC hereby announces its continuing interest in receiving applications for support of work in the following program areas: · Advanced Scientific Computing Research· Basic Energy Sciences· Biological and Environmental Research· Fusion Energy Sciences· High Energy and Nuclear Physics· Isotope R&amp;D and Production. On September 3, 1992, DOE published in the Federal Register the Office of Energy Research…</summary>
+    <summary>Office of Science | Application 2027-09-30 | verify prerequisite | SC hereby announces its continuing interest in receiving applications for support of work in the following program areas: · Advanced Scientific Computing Research· Basic Energy Sciences· Biological and Environmental Research· Fusion Energy Sciences· High Energy and Nuclear Physics· Isotope R&amp;D and Production. On September 3, 1992, DOE published in the Federal Register the Office of Energy Research…</summary>
   </entry>
   <entry>
     <title>BRAIN Initiative: Research Opportunities Using Invasive Neural Recording and Stimulating Technologies in the Human Brain (R01 Clinical Trial Not Allowed)</title>
@@ -602,47 +649,5 @@
     <category term="Biology and biotechnology"/>
     <category term="Neuroscience"/>
     <summary>National Institutes of Health | Application 2029-02-08 | This funding opportunity supports transformative, mechanistic research aimed at understanding how the human brain functions. Applications should seek to reveal how the dynamic activity of individual neurons and ensembles of neurons within spatially organized brain networks gives rise to internal experiences, such as sensations, perceptions, emotions, thoughts, and memories, as well as to observabl…</summary>
-  </entry>
-  <entry>
-    <title>HEAL Initiative: Whole Joint Health Program (R61/R33 Clinical Trial Required)</title>
-    <link href="https://www.grants.gov/search-results-detail/361304"/>
-    <id>urn:funding-finder:grants-gov:361304</id>
-    <updated>2026-09-28T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <summary>National Institutes of Health | Application 2026-10-30 | The NIH Helping to End Addiction Long-term® (HEAL) Initiative is releasing this Notice of Funding Opportunity (NOFO) to support a phased mechanistic clinical research program focusing on understudied biological mechanisms that drive joint pain. The phased projects supported by this program (of up to five years total in duration) will first identify and validate multi-tissue mechanisms underlying j…</summary>
-  </entry>
-  <entry>
-    <title>Genomic Community Resources (U24 Clinical Trials Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/361263"/>
-    <id>urn:funding-finder:grants-gov:361263</id>
-    <updated>2026-09-25T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Cancer"/>
-    <category term="Data science"/>
-    <category term="Environmental science"/>
-    <summary>National Institutes of Health | Estimated Application 2027-01-25 | The National Human Genome Research Institute (NHGRI), with other NIH Institutes and Centers (ICs) National Cancer Institute (NCI) and National Institute of Environmental Health Sciences (NIEHS), intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to facilitate genomic research and the dissemination of its products, NHGRI proposes this RFA to support both new and exist…</summary>
-  </entry>
-  <entry>
-    <title>NEI Translational Research Program for Therapeutics (R61/R33 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/360545"/>
-    <id>urn:funding-finder:grants-gov:360545</id>
-    <updated>2026-09-25T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Manufacturing"/>
-    <category term="Transportation"/>
-    <summary>National Institutes of Health | Application 2029-11-16 | The purpose of NEI's Translational Research program (TRP) is the rapid and efficient translation of innovative laboratory research findings into therapeutics for use by clinicians to treat visual system diseases or disorders. The TRP will support the product development of biological, pharmaceutical, medical device, and/or combination therapies for any disease or disorder of the visual system. The…</summary>
-  </entry>
-  <entry>
-    <title>Continuation and Expansion of the National Mesothelioma Virtual Bank for Translational Research (U24)</title>
-    <link href="https://www.grants.gov/search-results-detail/363281"/>
-    <id>urn:funding-finder:grants-gov:363281</id>
-    <updated>2026-09-02T00:00:00Z</updated>
-    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Cancer"/>
-    <summary>Centers for Disease Control and Prevention - ERA | Estimated Application 2026-11-02 | The National Mesothelioma Virtual Bank (NMVB) was established in 2006 to serve as a resource for malignant mesothelioma research. This funding opportunity will advance biomedical research for malignant mesothelioma by adding more biospecimens together with demographic data and clinical data. Examples of biospecimens include fresh frozen tumor and control tissues, paraffin embedded tissues, blood, …</summary>
   </entry>
 </feed>

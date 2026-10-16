@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/quantum-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/quantum-science.xml</id>
-  <updated>2026-10-14T15:15:41Z</updated>
+  <updated>2026-10-16T14:38:47Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>FY 2027 Continuation of Solicitation for the Office of Science Financial Assistance Program</title>
@@ -20,7 +20,7 @@
     <category term="Separations and membranes"/>
     <category term="Carbon management"/>
     <category term="Quantum science"/>
-    <summary>Office of Science | Application 2027-09-30 | SC hereby announces its continuing interest in receiving applications for support of work in the following program areas: · Advanced Scientific Computing Research· Basic Energy Sciences· Biological and Environmental Research· Fusion Energy Sciences· High Energy and Nuclear Physics· Isotope R&amp;D and Production. On September 3, 1992, DOE published in the Federal Register the Office of Energy Research…</summary>
+    <summary>Office of Science | Application 2027-09-30 | verify prerequisite | SC hereby announces its continuing interest in receiving applications for support of work in the following program areas: · Advanced Scientific Computing Research· Basic Energy Sciences· Biological and Environmental Research· Fusion Energy Sciences· High Energy and Nuclear Physics· Isotope R&amp;D and Production. On September 3, 1992, DOE published in the Federal Register the Office of Energy Research…</summary>
   </entry>
   <entry>
     <title>Fiscal Year (FY) 2027 Department of War (DoW) Multidisciplinary Research Program of the University Research Initiative (MURI)</title>
@@ -287,15 +287,6 @@
     <summary>Defense Intelligence Agency | White Paper 2028-12-26 | Open research ideas responding to current DIA needs, including AI/ML, sensing and mission science, analytics, quantum information and emerging technologies. Unclassified research scope only. Exclude classified submissions and closed Need2. Commercial services not automatically in research catalog. Institution consent and senior-official acknowledgement before negotiation; no guaranteed funding. Cu…</summary>
   </entry>
   <entry>
-    <title>QBI Topic: Independent Verification and Validation</title>
-    <link href="https://sam.gov/workspace/contract/opp/3fc74819705a4a81b205327ba4537973/view"/>
-    <id>urn:funding-finder:darpa-iarpa-research-solicitations:darpa-iarpa%3Adarpa-darpapa260201</id>
-    <updated>2025-11-17T00:00:00Z</updated>
-    <author><name>Defense Advanced Research Projects Agency (DARPA)</name></author>
-    <category term="Quantum science"/>
-    <summary>Defense Advanced Research Projects Agency (DARPA) | Application 2026-12-30 | DARPA is issuing a Quantum Benchmarking Initiative topic (QBIT) inviting submissions of innovative infrastructure, equipment, and expertise available to provide independent verification and validation. | See Program Summary In the simplest terms, the Quantum Benchmarking Initiative (QBI) seeks to determine whether it’s possible to build an industrially-useful computer by 2033. Specifically, QBI is…</summary>
-  </entry>
-  <entry>
     <title>Computer and Information Science and Engineering (CISE): Future Computing Research (Future CoRe)</title>
     <link href="https://www.grants.gov/search-results-detail/360149"/>
     <id>urn:funding-finder:grants-gov:360149</id>
@@ -466,7 +457,7 @@ topological data analysis.
     <category term="Quantum science"/>
     <category term="Social and behavioral sciences"/>
     <category term="Technology development"/>
-    <summary>U.S. National Science Foundation | Application 2026-10-14 | The Tribal Colleges and Universities Program (TCUP) provides awards to federally recognized1 Tribal Colleges and Universities, Alaska Native-serving institutions, and Native Hawaiian-serving institutions to promote high quality science (including sociology, psychology, anthropology, linguistics, economics and bioeconomics, statistics, and other social and behavioral sciences; natural sciences; com…</summary>
+    <summary>U.S. National Science Foundation | Application 2027-01-11 | The Tribal Colleges and Universities Program (TCUP) provides awards to federally recognized1 Tribal Colleges and Universities, Alaska Native-serving institutions, and Native Hawaiian-serving institutions to promote high quality science (including sociology, psychology, anthropology, linguistics, economics and bioeconomics, statistics, and other social and behavioral sciences; natural sciences; com…</summary>
   </entry>
   <entry>
     <title>LPS Qubit Collaboratory (LQC)</title>

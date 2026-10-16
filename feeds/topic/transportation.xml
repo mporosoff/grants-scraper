@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/transportation.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/transportation.xml</id>
-  <updated>2026-10-14T15:15:41Z</updated>
+  <updated>2026-10-16T14:38:47Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Mentored Career Transition Award (KT1/R00)</title>
@@ -141,16 +141,6 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Transportation"/>
     <summary>National Institutes of Health | Estimated Application 2027-07-02 | The National Institute of Arthritis and Musculoskeletal and Skin Diseases (NIAMS) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for the Clinical Trial Cooperative Agreement Program within the mission areas of the institute. This Notice of Funding Opportunity (NOFO) solicits cooperative agreement applications for implementation of investigator-initiated, single o…</summary>
-  </entry>
-  <entry>
-    <title>Office of Hazardous Materials Safety Research Initiative - FY2026 BROAD AGENCY ANNOUNCEMENT (BAA)</title>
-    <link href="https://sam.gov/opp/b7f83ec10df84ff0ad8ec6290dba7176/view"/>
-    <id>urn:funding-finder:sam-gov:sam-gov%3Ab7f83ec10df84ff0ad8ec6290dba7176</id>
-    <updated>2026-10-13T00:00:00Z</updated>
-    <author><name>U.S. Department of Transportation - Pipeline and Hazardous Materials Safety Administration (PHMSA)</name></author>
-    <category term="Energy"/>
-    <category term="Transportation"/>
-    <summary>U.S. Department of Transportation - Pipeline and Hazardous Materials Safety Administration (PHMSA) | White Paper 2026-11-18 | Hazardous-materials transport research including energy-storage systems, packaging, emergency response, and rail safety; analytical studies and technology assessment. Current action Amendment0003 publishedOct13 replaces saved745e7a... action; only Q&amp;A added, other terms unchanged. US prime; foreign entities permitted as subcontractors under conditions. Federal/state/local government bodies exclude…</summary>
   </entry>
   <entry>
     <title>Clinical Trials and Ancillary Studies Conducted within NIH-Funded Clinical Trial Research Networks (UG3/UH3 - Clinical Trial Required)</title>
@@ -486,16 +476,6 @@
     <summary>NYSERDA | Application 2030-09-30 | Funding is available to build and expand training capacity that advances skills and knowledge for clean energy workers in the areas of energy efficiency and building electrification, renewable energy, energy storage, smart grid, and electric vehicle charging stations. This solicitation may also support the enhancement of clean energy content delivered to students enrolled in a degree or certificat…</summary>
   </entry>
   <entry>
-    <title>FTA Broad Agency Announcement (FY26) -- “Research Initiatives in Support of Safety, Accessibility, and Mobility in Public Transportation</title>
-    <link href="https://sam.gov/opp/9fac6a86bf4f4561bd8bd464284d6297/view"/>
-    <id>urn:funding-finder:sam-gov:sam-gov%3A9fac6a86bf4f4561bd8bd464284d6297</id>
-    <updated>2026-09-04T00:00:00Z</updated>
-    <author><name>U.S. Department of Transportation - Federal Transit Administration (FTA)</name></author>
-    <category term="Technology development"/>
-    <category term="Transportation"/>
-    <summary>U.S. Department of Transportation - Federal Transit Administration (FTA) | Concept Paper 2026-10-19 | Applied public transit research, technology development and demonstration to improve transit safety, efficiency and deployment readiness, generally TRL3-6. Cost sharing may be mandated under49USC5312(g); FTA determines applicability during concept review and communicates it in writing. Federal-government-owned businesses not eligible as direct recipients; teaming allowed. SAM registration before a…</summary>
-  </entry>
-  <entry>
     <title>Egypt Annual Program Statement</title>
     <link href="https://www.grants.gov/search-results-detail/363786"/>
     <id>urn:funding-finder:grants-gov:363786</id>
@@ -633,5 +613,30 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Transportation"/>
     <summary>National Institutes of Health | Application 2029-03-16 | The purpose of this notice of funding opportunity (NOFO) is to facilitate the entry of investigators into multiple high-priority areas of substance use research, including comorbidity with HIV. The Science Track Award for Research Transition (START) Program aims to provide investigators with the opportunity to gather preliminary data that will assist them in securing future research grants and adv…</summary>
+  </entry>
+  <entry>
+    <title>Research Interests of the Air Force Office of Scientific Research</title>
+    <link href="https://www.grants.gov/search-results-detail/362681"/>
+    <id>urn:funding-finder:grants-gov:362681</id>
+    <updated>2026-06-04T00:00:00Z</updated>
+    <author><name>Air Force Office of Scientific Research</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Transportation"/>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Materials science"/>
+    <category term="Quantum science"/>
+    <category term="Energy"/>
+    <category term="Data science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <summary>Air Force Office of Scientific Research | Posted | AFOSR plans, coordinates, and executes the Air Force Research Laboratory’s (AFRL) basic research program in response to technical guidance from AFRL and requirements of the Air Force. Additionally, the office fosters, supports, and conducts research within Air Force, university, and industry laboratories; and ensures transition of research results to support U.S. Air Force needs. The focus of AFOS…</summary>
+  </entry>
+  <entry>
+    <title>Limited Competition: Small Grant Program for Mentored Research Career Development Award Recipients (R03) (Clinical Trials Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/358824"/>
+    <id>urn:funding-finder:grants-gov:358824</id>
+    <updated>2026-05-28T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Transportation"/>
+    <summary>National Institutes of Health | Application 2029-07-16 | The National Institute of Arthritis and Musculoskeletal and Skin Diseases (NIAMS) announces a program that provides NIAMS-supported K01, K08, K23, and K25 recipients the opportunity to apply for the Small Grant (R03) during the second to fourth year of their K award, as well as to provide support to recipients of significant career development awards from federal or non-federal organizations that …</summary>
   </entry>
 </feed>

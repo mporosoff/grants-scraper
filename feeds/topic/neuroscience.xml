@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/neuroscience.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/neuroscience.xml</id>
-  <updated>2026-10-14T15:15:41Z</updated>
+  <updated>2026-10-16T14:38:47Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIH Stroke Clinical Trials Network (StrokeNet) Infrastructure - National Coordinating Center (NCC) and National Data Management Center (NDMC)</title>
@@ -550,39 +550,6 @@ we will not consider for support include Covid-19 relat…</summary>
     <summary>National Institutes of Health | Application 2027-10-04 | This funding announcement, issued by the Brain Research through Advancing Innovative Neurotechnologies® (BRAIN) Initiative, seeks transformative, cutting-edge, and innovative research that embraces new technologies, ideas, and approaches to understand brain circuit function and contributions to behavior. It is a component of the BRAIN Initiative Connectivity Across Scales (BRAIN CONNECTS) Program,…</summary>
   </entry>
   <entry>
-    <title>DoW Traumatic Brain Injury and Psychological Health, Clinical Trial Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362187"/>
-    <id>urn:funding-finder:grants-gov:362187</id>
-    <updated>2026-05-21T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Neuroscience"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA | Application 2026-10-15 | verify prerequisite | Summary: The fiscal year 2026 (FY26) Traumatic Brain Injury and Psychological Health Research Program (TBIPHRP) Clinical Trial Award (CTA) intends to support clinical trials with the potential to have a significant impact on psychological health conditions and/or traumatic brain injury (TBI) through clinical applications, including health care products, technologies and/or practice guidelines. Dis…</summary>
-  </entry>
-  <entry>
-    <title>DoW Traumatic Brain Injury and Psychological Health, Health Services Research Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362271"/>
-    <id>urn:funding-finder:grants-gov:362271</id>
-    <updated>2026-05-21T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Data science"/>
-    <category term="Neuroscience"/>
-    <category term="Public health"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA | Application 2026-10-15 | verify prerequisite | Summary: The fiscal year 2026 (FY26) Traumatic Brain Injury and Psychological Health Research Program (TBIPHRP) Health Services Research Award (HSRA) intends to fund high-impact research that bridges the gap between research, practice and policy by building real-world evidence on how interventions, clinical practices/guidelines, or policies can be deployed to targeted populations at the appropriat…</summary>
-  </entry>
-  <entry>
-    <title>DoW Traumatic Brain Injury and Psychological Health, Translational Research Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362272"/>
-    <id>urn:funding-finder:grants-gov:362272</id>
-    <updated>2026-05-21T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Neuroscience"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA | Application 2026-10-15 | verify prerequisite | Summary: The Translational Research Award (TRA) intends to accelerate the conversion of scientific findings into impactful clinical applications. The TRA prioritizes innovative approaches over purely iterative or incremental research. Submissions focusing on minor modifications to existing standards without the intent or potential to significantly improve clinical care or patient outcomes do not m…</summary>
-  </entry>
-  <entry>
     <title>Functional Target Validation for Alzheimer's Disease-Related Dementias</title>
     <link href="https://www.grants.gov/search-results-detail/361450"/>
     <id>urn:funding-finder:grants-gov:361450</id>
@@ -644,5 +611,42 @@ we will not consider for support include Covid-19 relat…</summary>
     <category term="Neuroscience"/>
     <category term="Social and behavioral sciences"/>
     <summary>National Institutes of Health | Application 2028-06-07 | The National Center for Complementary and Integrative Health (NCCIH) announces this Notice of Funding Opportunity (NOFO) to solicit applications for research on how mind and body interventions through psychological and/or physical inputs (e.g., mindfulness meditation, yoga, acupuncture, massage, and other brain and/or body based interventions) impact mechanisms of emotional well-being (EWB) and th…</summary>
+  </entry>
+  <entry>
+    <title>BRAIN Initiative: Theories, Models and Methods for Analysis of Complex Data from the Brain (R01 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/359068"/>
+    <id>urn:funding-finder:grants-gov:359068</id>
+    <updated>2025-09-16T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Education and workforce"/>
+    <category term="Neuroscience"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>National Institutes of Health | Application 2027-11-08 | The Theories, Models and Methods (TMM) initiative will support the development of computational tools for understanding dynamic brain circuits that are made broadly accessible to the greater research community. This program supports applications focused on tool building and dissemination in the domain of theories about neural circuit mechanisms, models of circuit structure and function, and/or com…</summary>
+  </entry>
+  <entry>
+    <title>Translational Efforts to Advance Gene-based Therapies for Ultra-Rare Neurological and Neuromuscular Disorders (U01 - Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/357817"/>
+    <id>urn:funding-finder:grants-gov:357817</id>
+    <updated>2024-12-18T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Infectious disease"/>
+    <category term="Neuroscience"/>
+    <summary>National Institutes of Health | Application 2027-10-08 | The Ultra-Rare Gene-Based Therapy (URGenT) network supports Investigational New Drug (IND)-enabling studies and planning activities for First-in-Human (FIH) clinical testing of gene-based or transcript-directed therapeutics, such as oligonucleotides and viral-based gene therapies, for ultra-rare neurological or neuromuscular disorders. The goal of this announcement is to accelerate the development…</summary>
+  </entry>
+  <entry>
+    <title>Alzheimer's Drug-Development Program (U01 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/357529"/>
+    <id>urn:funding-finder:grants-gov:357529</id>
+    <updated>2024-12-04T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Education and workforce"/>
+    <category term="Manufacturing"/>
+    <category term="Neuroscience"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>National Institutes of Health | Application 2027-02-05 | The goal of this Notice of Funding Opportunity (NOFO) is to provide funding support for the pre-clinical and early stage clinical (Phase I) development of novel small-molecule and biologic drug candidates that prevent Alzheimer's disease (AD), slow its progression, or treat its cognitive and behavioral symptoms. Participants in this program will receive funding for therapy development activities s…</summary>
   </entry>
 </feed>

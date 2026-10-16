@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/manufacturing.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/manufacturing.xml</id>
-  <updated>2026-10-14T15:15:41Z</updated>
+  <updated>2026-10-16T14:38:47Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>BRAIN Initiative: Clinical Studies to Advance Next-Generation Devices for Recording and Modulation in the Human Central Nervous System</title>
@@ -26,18 +26,6 @@
     <category term="Manufacturing"/>
     <category term="Neuroscience"/>
     <summary>National Institutes of Health | Estimated Application 2027-06-16 | The NIH Blueprint for Neuroscience Research is interested in continuing to support the BluePrint Neurotherapeutics Network for Small Molecules (BPN-SM)- a program designed to help investigators advance promising small-molecule therapeutics toward clinical testing. The BPN-SM program supports drug discovery and development activities in investigators’ own laboratories while also providing access to…</summary>
-  </entry>
-  <entry>
-    <title>Lunar Enabling Infrastructure Accelerator (LEIA) -Broad Agency Announcement (BAA) NextSTEP-3 Appendix A - Final Solicitation</title>
-    <link href="https://sam.gov/opp/812c81b0f0b84943be12a5f29615d3c8/view"/>
-    <id>urn:funding-finder:sam-gov:sam-gov%3A812c81b0f0b84943be12a5f29615d3c8</id>
-    <updated>2026-10-09T00:00:00Z</updated>
-    <author><name>NASA Glenn Research Center</name></author>
-    <category term="Energy"/>
-    <category term="Manufacturing"/>
-    <category term="Materials science"/>
-    <category term="Space and aeronautics"/>
-    <summary>NASA Glenn Research Center | Full Application 2026-10-15 | Lunar infrastructure technology maturation: vertical solar arrays, oxygen extraction from regolith, radioisotope Stirling generators, in-space advanced manufacturing, and nanomaterials; generally TRL 5-6 demonstrations. US organizations as prime; foreign organizations may team but NASA funds cannot support their R&amp;D; non-US persons employed/studying at US organizations may receive funding. NASA/JP…</summary>
   </entry>
   <entry>
     <title>Small Business Innovation Research and Small Business Technology Transfer Programs Phase II</title>
@@ -62,6 +50,22 @@
     <category term="Transportation"/>
     <category term="Materials science"/>
     <summary>Dept of the Army -- Materiel Command | Application 2026-12-03 | The Department of War (DoW) seeks innovative applications to cooperatively partner with eligible entities in the implementation and execution of the SMART Scholarship-for-Service Program. The Department intends to award ONE (1) CA award, with a maximum award of up to $1,300M over a ten-year period of performance. The National Defense Education Program (NDEP) supports the Department's priorities to…</summary>
+  </entry>
+  <entry>
+    <title>FY 2027 Continuation of Solicitation for the Office of Science Financial Assistance Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363993"/>
+    <id>urn:funding-finder:grants-gov:363993</id>
+    <updated>2026-09-30T00:00:00Z</updated>
+    <author><name>Office of Science</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Materials science"/>
+    <category term="Separations and membranes"/>
+    <category term="Carbon management"/>
+    <category term="Quantum science"/>
+    <summary>Office of Science | Application 2027-09-30 | verify prerequisite | SC hereby announces its continuing interest in receiving applications for support of work in the following program areas: · Advanced Scientific Computing Research· Basic Energy Sciences· Biological and Environmental Research· Fusion Energy Sciences· High Energy and Nuclear Physics· Isotope R&amp;D and Production. On September 3, 1992, DOE published in the Federal Register the Office of Energy Research…</summary>
   </entry>
   <entry>
     <title>NEI Translational Research Program for Therapeutics (R61/R33 Clinical Trial Not Allowed)</title>
