@@ -10,6 +10,7 @@ from tools.offline_ai_checkpoint import api
 from tools.offline_ai import atomic_json, config, identity, Ledger
 from tools.release_candidate import checked_path
 from tools.fetch_release_artifact import artifact_bytes, run_artifacts
+from tools.github_job_log_bytes import read_job_log
 
 
 def prepare(repository, run, attempt, destination, reservation, mode, *, qualification_pilot=False):
@@ -21,7 +22,8 @@ def prepare(repository, run, attempt, destination, reservation, mode, *, qualifi
     if not reservations and int(attempt) > 1:
         from tools import generation_spend_recovery
         recovered = generation_spend_recovery.restore(repository, run, attempt, destination, mode, meta, artifacts,
-            api=lambda path: api(repository, path), qualification_pilot=qualification_pilot)
+            api=lambda path: api(repository, path), qualification_pilot=qualification_pilot,
+            log_reader=lambda job: read_job_log(repository, job))
         if not recovered:
             raise ValueError('Prior attempt spend evidence unavailable; remaining budget cannot be reset')
     if reservations:
