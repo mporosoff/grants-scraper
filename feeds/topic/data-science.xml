@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml</id>
-  <updated>2026-10-16T16:56:01Z</updated>
+  <updated>2026-10-17T13:51:21Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>ancient DNA for Modern Genomics (aDMG) Research Projects (U01 Clinical Trials Not Allowed)</title>
@@ -149,6 +149,28 @@
     <summary>National Institutes of Health | Estimated Application 2027-01-22 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting multidisciplinary, consortium-based research using precision systems biology approaches to uncover links among chronic illnesses, infectious diseases and microbiomes. There is an urgent scientific and clinical need to understand the pathways by which infections lead to chronic lifelong heal…</summary>
   </entry>
   <entry>
+    <title>Institute of Education Sciences (IES): National Center on Education Research (NCER): From Seedlings to Scale, Assistance Listing Number (ALN) 84.305J</title>
+    <link href="https://www.grants.gov/search-results-detail/364086"/>
+    <id>urn:funding-finder:grants-gov:364086</id>
+    <updated>2026-10-16T00:00:00Z</updated>
+    <author><name>Department of Education</name></author>
+    <category term="Education and workforce"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Department of Education | Letter Of Intent 2026-10-29 | Through the From Seedlings to Scale (S2S) Grants program, IES will invest in innovative ideas within an identified focus area through three phases of increasing funding and duration to support ideas as they grow from seedlings to scalable solutions. Projects will incorporate high-quality research, robust solution development, and attention to sustainability and scaling throughout all phases. For t…</summary>
+  </entry>
+  <entry>
+    <title>NLM Institutional Grants for Research Training in Biomedical Informatics, Data Science, and AI (T15 Independent Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/361318"/>
+    <id>urn:funding-finder:grants-gov:361318</id>
+    <updated>2026-10-16T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Education and workforce"/>
+    <summary>National Institutes of Health | Application 2027-02-11 | The National Library of Medicine (NLM) invites applications for innovative predoctoral and postdoctoral training programs that prepare the next generation of researchers in biomedical informatics, data science, and artificial intelligence/machine learning (AI/ML). NLM emphasizes cutting-edge, forward-looking training experiences that equip trainees to address complex health and biomedical challeng…</summary>
+  </entry>
+  <entry>
     <title>Cooperative Agreement for affiliated Partner with Rocky Mountain Cooperative Ecosystem Studies Unit</title>
     <link href="https://www.grants.gov/search-results-detail/364079"/>
     <id>urn:funding-finder:grants-gov:364079</id>
@@ -205,6 +227,17 @@
     <summary>Geological Survey | Application 2026-11-12 | This Program Announcement is issued under the provisions of section 104 of the Water Resources Research Act of 1984 (Public Law 98-242), as amended by Public Laws 101-397, 104-147, 106-374, 109-471, and 117-58. Section 104 of the Water Resources Research Act directs the Secretary of the Interior to administer program grants to Institutes established under the provisions of section 104(a) of the Ac…</summary>
   </entry>
   <entry>
+    <title>Simulation-augmented, real-time Platform Adaptive Seamless Trials (SURPASS)</title>
+    <link href="https://arpa-h.gov/explore-funding/programs/surpass"/>
+    <id>urn:funding-finder:arpa-h:arpa-h%3Asurpass</id>
+    <updated>2026-09-30T00:00:00Z</updated>
+    <author><name>Advanced Research Projects Agency for Health (ARPA-H)</name></author>
+    <category term="Technology development"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Advanced Research Projects Agency for Health (ARPA-H) | Preapplication 2026-11-30 | Current ARPA-H program. SURPASS | ARPA-H (function(w, d, s, l, i){w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&amp;l='+l:''; j.async=true; j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j, f); })(window, document,'script','dataLayer','GTM-W5GM3DT9'); win…</summary>
+  </entry>
+  <entry>
     <title>FY 2027 Continuation of Solicitation for the Office of Science Financial Assistance Program</title>
     <link href="https://www.grants.gov/search-results-detail/363993"/>
     <id>urn:funding-finder:grants-gov:363993</id>
@@ -219,17 +252,6 @@
     <category term="Carbon management"/>
     <category term="Quantum science"/>
     <summary>Office of Science | Application 2027-09-30 | verify prerequisite | SC hereby announces its continuing interest in receiving applications for support of work in the following program areas: · Advanced Scientific Computing Research· Basic Energy Sciences· Biological and Environmental Research· Fusion Energy Sciences· High Energy and Nuclear Physics· Isotope R&amp;D and Production. On September 3, 1992, DOE published in the Federal Register the Office of Energy Research…</summary>
-  </entry>
-  <entry>
-    <title>Simulation-augmented, real-time Platform Adaptive Seamless Trials (SURPASS)</title>
-    <link href="https://arpa-h.gov/explore-funding/programs/surpass"/>
-    <id>urn:funding-finder:arpa-h:arpa-h%3Asurpass</id>
-    <updated>2026-09-30T00:00:00Z</updated>
-    <author><name>Advanced Research Projects Agency for Health (ARPA-H)</name></author>
-    <category term="Technology development"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Advanced Research Projects Agency for Health (ARPA-H) | Preapplication 2026-11-30 | Current ARPA-H program. SURPASS | ARPA-H (function(w, d, s, l, i){w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&amp;l='+l:''; j.async=true; j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j, f); })(window, document,'script','dataLayer','GTM-W5GM3DT9'); win…</summary>
   </entry>
   <entry>
     <title>Genomic Community Resources (U24 Clinical Trials Not Allowed)</title>
@@ -690,19 +712,6 @@
     <summary>Advanced Research Projects Agency for Health (ARPA-H) | Application 2026-11-10 | prerequisite closed | Current ARPA-H program. FASTPASS | ARPA-H (function(w, d, s, l, i){w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&amp;l='+l:''; j.async=true; j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j, f); })(window, document,'script','dataLayer','GTM-W5GM3DT9'); wi…</summary>
   </entry>
   <entry>
-    <title>Annual Recurring University Training and Research</title>
-    <link href="https://www.grants.gov/search-results-detail/363594"/>
-    <id>urn:funding-finder:grants-gov:363594</id>
-    <updated>2026-08-14T00:00:00Z</updated>
-    <author><name>National Energy Technology Laboratory</name></author>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Cybersecurity"/>
-    <summary>National Energy Technology Laboratory | Application 2026-10-16 | Annual Recurring University Training and Research The purpose of this funding opportunity is to solicit and award research and development grants to educate and train the next generation of engineers and scientists; to support novel, early-stage research at U.S. colleges and universities; to increase research and development opportunities for underrepresented and structurally marginalized communit…</summary>
-  </entry>
-  <entry>
     <title>NSF Plasma Physics</title>
     <link href="https://beta.nsf.gov/funding/opportunities/plasma-physics"/>
     <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-bd193799390f4580</id>
@@ -736,16 +745,5 @@ Successful candidates for a Fellowship generally have a strong record of signifi
     <category term="Data science"/>
     <category term="Cybersecurity"/>
     <summary>U.S. National Science Foundation | Application 2026-11-04 | The NSF State and Regional AI Infrastructure Hubs program aims to expand access to the compute required for AI-enabled scientific discovery and to transform the research, education, and training opportunities offered by institutions of higher education. AI Infrastructure Hubs will connect researchers to new compute infrastructure that leverages contributions from state governments, research instit…</summary>
-  </entry>
-  <entry>
-    <title>RESEARCH AND DEVELOPMENT OF NAVAL POWER AND ENERGY SYSTEMS (N00024-19-R-4145 Broad Agency Announcement (BAA))</title>
-    <link href="https://sam.gov/opp/fac0dcbe5eff43ab92e3dadb319daed1/view"/>
-    <id>urn:funding-finder:sam-gov:sam-gov%3Afac0dcbe5eff43ab92e3dadb319daed1</id>
-    <updated>2026-08-05T00:00:00Z</updated>
-    <author><name>Naval Sea Systems Command (NAVSEA)</name></author>
-    <category term="Energy"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Naval Sea Systems Command (NAVSEA) | White Paper 2028-02-06 | Naval power and energy system research: power generation, storage, distribution, controls, advanced conductors, thermal management and modeling. Required white paper before invited full proposal. The current description extends receipt to February 6, 2033, while current SAM deadline metadata remains February 6, 2028. This entry deliberately uses the earlier 2028 deadline conservatively and retains…</summary>
   </entry>
 </feed>
