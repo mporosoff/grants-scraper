@@ -6,6 +6,7 @@ transport. Responses stay in the private checkpoint, never the candidate.
 from __future__ import annotations
 
 import argparse
+from collections import Counter
 from contextlib import contextmanager
 import hashlib
 import json
@@ -17,6 +18,8 @@ import subprocess
 import sys
 import tempfile
 import time
+
+import yaml
 
 from tools.offline_spend import Deferred, Ledger, atomic_json, identity, production_ledger
 
@@ -33,7 +36,7 @@ GENERATION_INPUTS = (
 )
 VECTOR_OUTPUTS = ('data/search-v2-voyage-manifest.json', 'data/search-v2-voyage-vectors.f16',
                   'data/search-v2-voyage-canaries.json', 'evaluation/search_v2_hybrid_vector_build.json')
-OUTPUT_VERSION = 'vector-output-checkpoint-1'
+OUTPUT_VERSION = 'vector-output-checkpoint-2'
 
 
 def require(ok, reason):
@@ -102,20 +105,18 @@ def vector_usage(tokens):
                 output_tokens=0, reasoning_tokens=0)
 
 
-def protected_vector_asset(root, packet):
-    """Reuse one intact protected asset, never mix rows across generations."""
+def retained_origin(root, binding, outputs, protected_ref, *, descendant='HEAD'):
+    """Authenticate the exact protected asset from which zero new work arose."""
     from tools import release_candidate as c
     from tools.release_dependencies import snapshot
-    if packet.get('retained_asset_eligible') is not True:
-        return None
+    require(isinstance(protected_ref, str) and re.fullmatch('[a-f0-9]{40}', protected_ref), 'protected_vector_ref')
+    subprocess.check_output(['git', '-C', str(root), 'merge-base', '--is-ancestor', protected_ref, descendant],
+                            stderr=subprocess.DEVNULL)
     def protected(name):
-        return json.loads(subprocess.check_output(['git', '-C', str(root), 'show', 'HEAD:' + name],
-                                                  stderr=subprocess.DEVNULL))
-    try:
-        manifest, receipt, pointer = (protected(name) for name in
-            ('release/candidate.json', 'release/validation.json', 'release/candidate-source.json'))
-    except subprocess.CalledProcessError:
-        return None  # A first publication has no protected asset to retain.
+        return subprocess.check_output(['git', '-C', str(root), 'show', protected_ref + ':' + name],
+                                       stderr=subprocess.DEVNULL)
+    manifest, receipt, pointer = (json.loads(protected(name)) for name in
+        ('release/candidate.json', 'release/validation.json', 'release/candidate-source.json'))
     candidate = manifest.get('candidate_id')
     require(candidate == c.digest(c.encoded({k: v for k, v in manifest.items() if k != 'candidate_id'}))
             and pointer.get('candidate_id') == candidate
@@ -125,16 +126,49 @@ def protected_vector_asset(root, packet):
             and receipt.get('identity', {}).get('candidate_hashes') == manifest.get('files')
             and receipt.get('gates') == {gate: 'passed' for gate in c.GATES}, 'protected_vector_provenance')
     semantic = manifest.get('dependency_groups', {}).get('semantic')
-    if not semantic or semantic != snapshot(root)['semantic']:
+    require(semantic and semantic == snapshot(root, protected_ref)['semantic'], 'protected_vector_semantics')
+    require(set(outputs) == set(VECTOR_OUTPUTS)
+            and all(manifest['files'].get(name) == digest and hashlib.sha256(protected(name)).hexdigest() == digest
+                    for name, digest in outputs.items()), 'protected_vector_outputs')
+    vectors = json.loads(protected(VECTOR_OUTPUTS[0]))
+    require(all(vectors.get(key) == binding[key] for key in
+                ('corpus_sha256', 'configuration_sha256', 'passage_count')), 'protected_vector_corpus')
+    return {'version': 'vector-accounting-origin-1', 'kind': 'retained', 'protected_ref': protected_ref,
+            'protected_candidate_id': candidate, 'semantic_fingerprint': semantic['fingerprint'],
+            'outputs': outputs, 'report_sha256': outputs[VECTOR_OUTPUTS[-1]], 'new_requests': 0}
+
+
+def verify_retained_origin(root, origin, outputs, binding, *, descendant='HEAD'):
+    require(isinstance(origin, dict) and type(origin.get('new_requests')) is int, 'retained_origin_identity')
+    expected = retained_origin(root, binding, outputs, origin.get('protected_ref'), descendant=descendant)
+    require(origin == expected, 'retained_origin_identity')
+    return origin
+
+
+def protected_vector_asset(root, packet):
+    """Reuse one intact protected asset, never mix rows across generations."""
+    from tools.release_dependencies import snapshot
+    if packet.get('retained_asset_eligible') is not True:
         return None
+    ref = subprocess.check_output(['git', '-C', str(root), 'rev-parse', 'HEAD'],
+                                  stderr=subprocess.DEVNULL).decode().strip()
     outputs = {name: hashlib.sha256((root / name).read_bytes()).hexdigest() for name in VECTOR_OUTPUTS}
-    if any(manifest['files'].get(name) != value for name, value in outputs.items()):
+    try:
+        manifest = json.loads(subprocess.check_output(['git', '-C', str(root), 'show', ref + ':release/candidate.json'],
+                                                     stderr=subprocess.DEVNULL))
+        if (manifest.get('dependency_groups', {}).get('semantic') != snapshot(root)['semantic']
+                or any(manifest.get('files', {}).get(name) != digest for name, digest in outputs.items())):
+            return None
+        vectors = json.loads((root / VECTOR_OUTPUTS[0]).read_bytes())
+        if any(vectors.get(key) != packet[key] for key in ('corpus_sha256', 'configuration_sha256', 'passage_count')):
+            return None
+        origin = retained_origin(root, packet, outputs, ref)
+    except subprocess.CalledProcessError:
+        return None  # A first publication has no protected asset to retain.
+    if origin['semantic_fingerprint'] != snapshot(root)['semantic']['fingerprint']:
         return None
-    vectors = json.loads((root / VECTOR_OUTPUTS[0]).read_bytes())
-    if any(vectors.get(key) != packet[key] for key in
-           ('corpus_sha256', 'configuration_sha256', 'passage_count')):
-        return None
-    return {'protected_candidate_id': candidate, 'semantic_fingerprint': semantic['fingerprint'], 'outputs': outputs}
+    return {key: origin[key] for key in ('protected_ref', 'protected_candidate_id', 'semantic_fingerprint', 'outputs')} | {
+        'accounting_origin': origin}
 
 
 def vector_binding(packet):
@@ -148,9 +182,10 @@ def output_bytes(root):
     return raw
 
 
-def retain_outputs(state, value, binding, raw):
+def retain_outputs(state, value, binding, raw, origin):
     """Persist every completed byte before sealing the completion receipt."""
     hashes = {name: hashlib.sha256(data).hexdigest() for name, data in raw.items()}
+    verify_output_origin(state, value, binding, raw, origin)
     for name, digest in hashes.items():
         blob = Path(state) / 'vector-outputs' / digest
         blob.parent.mkdir(parents=True, exist_ok=True)
@@ -165,9 +200,18 @@ def retain_outputs(state, value, binding, raw):
         finally:
             Path(temporary).unlink(missing_ok=True)
     receipt = {'version': OUTPUT_VERSION, 'operation_sha256': value['operation_sha256'],
-               'vector_binding': binding, 'outputs': hashes}
+               'vector_binding': binding, 'outputs': hashes, 'accounting_origin': origin}
     atomic_json(Path(state) / 'vector-completions' / (value['operation_sha256'] + '.json'), receipt)
     return receipt
+
+
+def verify_output_origin(state, value, binding, raw, origin):
+    require(isinstance(origin, dict) and origin.get('kind') in {'retained', 'budgeted'}, 'completed_origin_identity')
+    if origin['kind'] == 'retained':
+        root = Path(__file__).resolve().parents[1]
+        verify_retained_origin(root, origin, {name: hashlib.sha256(data).hexdigest() for name, data in raw.items()}, binding)
+    else:
+        verify_budgeted_origin(state, value, raw, ledger(state, value.get('version') == 'generation-vector-operation-1'), origin)
 
 
 def completed_outputs(state, value, binding, root):
@@ -175,7 +219,7 @@ def completed_outputs(state, value, binding, root):
     if not path.exists():
         return None
     receipt = json.loads(path.read_bytes())
-    require(set(receipt) == {'version', 'operation_sha256', 'vector_binding', 'outputs'}
+    require(set(receipt) == {'version', 'operation_sha256', 'vector_binding', 'outputs', 'accounting_origin'}
             and receipt['version'] == OUTPUT_VERSION and receipt['operation_sha256'] == value['operation_sha256']
             and receipt['vector_binding'] == binding and isinstance(receipt['outputs'], dict)
             and set(receipt['outputs']) == set(VECTOR_OUTPUTS)
@@ -185,11 +229,14 @@ def completed_outputs(state, value, binding, root):
     for name, path in blobs.items():
         require(path.is_file() and 0 < path.stat().st_size <= 32 * 1024 * 1024
                 and hashlib.sha256(path.read_bytes()).hexdigest() == receipt['outputs'][name], 'completed_output_blob_changed')
+    origin = receipt['accounting_origin']
+    verify_output_origin(state, value, binding, {name: path.read_bytes() for name, path in blobs.items()}, origin)
     current = all((root / name).is_file()
                   and hashlib.sha256((root / name).read_bytes()).hexdigest() == digest
                   for name, digest in receipt['outputs'].items())
     return {'status': 'complete' if current else 'restore', 'operation_sha256': value['operation_sha256'],
-            'outputs': receipt['outputs'], 'blobs': {name: str(path.resolve()) for name, path in blobs.items()}}
+            'outputs': receipt['outputs'], 'blobs': {name: str(path.resolve()) for name, path in blobs.items()},
+            'accounting_origin': origin}
 
 
 def prepare(state, packet, *, generation=False):
@@ -238,7 +285,9 @@ def prepare(state, packet, *, generation=False):
         return completed
     retained = protected_vector_asset(root, packet)
     if retained:
-        retain_outputs(state, value, binding, output_bytes(root))
+        origin = retained['accounting_origin']
+        raw = output_bytes(root)
+        retain_outputs(state, value, binding, raw, origin)
         atomic_json(Path(state) / 'vector-stage.json', {'version': 'generation-vector-stage-1',
                     'status': 'retained_complete_asset', 'operation_sha256': value['operation_sha256'],
                     'new_requests': 0, 'new_usage_total_tokens': 0, **retained})
@@ -248,7 +297,7 @@ def prepare(state, packet, *, generation=False):
 
 def checkpoint(state, packet, *, generation=False):
     value = context(state, generation)
-    ledger(state, generation)
+    book = ledger(state, generation)
     require(packet.get('operation_sha256') == value['operation_sha256'], 'generation_checkpoint_identity')
     root = Path(__file__).resolve().parents[1]
     binding = value['operation_contract'] if generation else json.loads((Path(state) / 'vector-bindings' /
@@ -258,16 +307,143 @@ def checkpoint(state, packet, *, generation=False):
     require(packet.get('outputs') == actual, 'generation_checkpoint_outputs')
     prior = completed_outputs(state, value, binding, root)
     require(prior is None or prior['outputs'] == actual, 'completed_vectors_changed')
-    retain_outputs(state, value, binding, raw)
+    origin = prior['accounting_origin'] if prior else budgeted_origin(state, value, raw, book)
+    retain_outputs(state, value, binding, raw, origin)
     if packet.get('restored') is True:
         atomic_json(Path(state) / 'vector-stage.json', {'version': 'generation-vector-stage-1',
                     'status': 'restored_complete_asset', 'operation_sha256': value['operation_sha256'],
-                    'new_requests': 0, 'new_usage_total_tokens': 0, 'outputs': actual})
+                    'new_requests': 0, 'new_usage_total_tokens': 0, 'outputs': actual, 'accounting_origin': origin})
     return {'status': 'complete'}
 
 
+def vector_report(raw):
+    report = json.loads(raw)
+    rows = report.get('API_requests')
+    require(isinstance(rows, list) and report.get('API_request_count') == len(rows)
+            and report.get('model') == MODEL and report.get('status') == 'written'
+            and all(type(row.get('usage_total_tokens')) is int and row['usage_total_tokens'] > 0
+                    and row.get('model') == MODEL and row.get('http_status') == 200 for row in rows)
+            and report.get('usage_total_tokens') == sum(row['usage_total_tokens'] for row in rows),
+            'historical_receipt')
+    return report
+
+
+def budgeted_origin(state, value, raw, book):
+    """Bind a completed build to paid logical requests, including cached replay."""
+    require(set(raw) == set(VECTOR_OUTPUTS), 'budgeted_output_inventory')
+    report = vector_report(raw[VECTOR_OUTPUTS[-1]])
+    public = Counter()
+    for row in report['API_requests']:
+        require(type(row.get('passage_count')) is int and 0 < row['passage_count'] <= 256
+                and (row.get('request_id') is None or request_id(row['request_id'])), 'budgeted_report_request')
+        public[(row.get('request_id'), row['passage_count'], row['usage_total_tokens'])] += 1
+    current = local(book).read()
+    intents = {}
+    paths = list((Path(state) / 'vector-intents').glob('*.json'))
+    require(len(paths) <= local(book).max_requests, 'retained_intent_bound')
+    for path in paths:
+        intent = json.loads(path.read_bytes())
+        if intent.get('operation_sha256') != value['operation_sha256']:
+            continue
+        require(path.stem == intent.get('key') and intent['key'] == identity({
+                    'operation': value['operation_sha256'], 'body_sha256': intent.get('body_sha256')})
+                and isinstance(intent.get('body_sha256'), str) and re.fullmatch('[a-f0-9]{64}', intent['body_sha256'])
+                and type(intent.get('input_count')) is int and 0 < intent['input_count'] <= 256
+                and intent['key'] not in intents, 'budgeted_intent_identity')
+        intents[intent['key']] = intent
+    covered, requests = Counter(), []
+    for row in current['requests']:
+        intent = intents.get(row['key'])
+        if intent is None:
+            continue
+        require(row['id'] == intent.get('token') and row.get('provider') == 'voyage'
+                and row.get('model') == MODEL and row.get('stage') in ('generation_vectors', 'reconciled_vectors')
+                and row.get('status') == 'valid', 'budgeted_ledger_request')
+        saved = saved_response(state, row['key'], row['id'], value, intent['body_sha256'], intent['input_count'])
+        tokens = saved['payload']['usage']['total_tokens']; charge = (tokens + 49) // 50
+        require(row.get('response_sha256') == saved['response_sha256']
+                and row.get('charged_microusd') == charge <= row['reserved_microusd']
+                and row.get('usage') == vector_usage(tokens)
+                and row.get('provider_request_id') == saved.get('request_id'), 'budgeted_measured_usage')
+        covered[(saved.get('request_id'), intent['input_count'], tokens)] += 1
+        requests.append({'id': row['id'], 'key': row['key'], 'body_sha256': intent['body_sha256'],
+            'response_sha256': saved['response_sha256'], 'input_count': intent['input_count'],
+            'usage_total_tokens': tokens, 'charged_microusd': charge})
+    # A cached logical HTTP response can appear repeatedly in a reconstructed
+    # public receipt while its atomic reservation remains a single paid call.
+    require(requests and len(requests) == len(intents)
+            and set(public) == set(covered) and all(public[key] >= count for key, count in covered.items()),
+            'budgeted_report_coverage')
+    outputs = {name: hashlib.sha256(data).hexdigest() for name, data in raw.items()}
+    return {'version': 'vector-accounting-origin-1', 'kind': 'budgeted',
+        'logical_id': local(book).logical_id, 'operation_sha256': value['operation_sha256'],
+        'outputs': outputs, 'report_sha256': outputs[VECTOR_OUTPUTS[-1]], 'requests': requests}
+
+
+def verify_budgeted_origin(state, value, raw, book, origin):
+    require(origin == budgeted_origin(state, value, raw, book), 'budgeted_origin_identity')
+    return origin
+
+
+def parent_vector_mode(manifest, contract):
+    """Use the event workflow definition, separately from its checkout plan."""
+    from tools import release_candidate as c
+    require(not manifest.get('derived_from_candidate'), 'original_generation_parent_required')
+    producer = contract.get('parent_producer') or {}
+    require(manifest.get('generation_run_id') == contract['parent_run'] == producer.get('run_id')
+            and manifest.get('generation_run_attempt') == producer.get('run_attempt')
+            and manifest.get('generation_sha') == contract.get('parent_generation_sha')
+            and isinstance(manifest.get('generation_sha'), str) and re.fullmatch('[a-f0-9]{40}', manifest['generation_sha'])
+            and isinstance(producer.get('head_sha'), str) and re.fullmatch('[a-f0-9]{40}', producer['head_sha'])
+            and producer.get('path') == '.github/workflows/refresh-opportunities.yml'
+            and producer.get('event') in ('push', 'schedule', 'workflow_dispatch'), 'parent_vector_producer')
+    workflow = yaml.safe_load(c.git(c.ROOT, 'show', producer['head_sha'] + ':' + producer['path']))
+    steps = workflow.get('jobs', {}).get('generate', {}).get('steps', [])
+    selected = [step for step in steps if step.get('id') == 'semantic-vectors']
+    require(len(selected) == 1, 'parent_vector_invocation')
+    command = selected[0].get('run', '').strip()
+    if command == 'node tools/build_search_v2_voyage_vectors.mjs --production --write':
+        return 'legacy'
+    require(command == 'node tools/run_budgeted_vectors.mjs --production --write', 'parent_vector_invocation')
+    return 'managed'
+
+
+def parent_vector_accounting(state, parent, manifest, contract, book, original):
+    mode = parent_vector_mode(manifest, contract)
+    if mode == 'legacy':
+        require(not (Path(state) / 'vector-operation.json').exists()
+                and not any(row.get('provider') == 'voyage' for row in original['requests']),
+                'legacy_mixed_vector_accounting')
+        return {'classification': 'legacy_untracked'}, None
+    value = context(state, generation=True)
+    require(value.get('version') == 'generation-vector-operation-1' and value.get('mode') == 'maintenance'
+            and value['parent_run'] == contract['parent_run'], 'parent_vector_operation')
+    completion_path = Path(state) / 'vector-completions' / (value['operation_sha256'] + '.json')
+    completion = json.loads(completion_path.read_bytes())
+    outputs = {name: manifest['files'][name] for name in VECTOR_OUTPUTS}
+    require(completion.get('version') == OUTPUT_VERSION and completion.get('operation_sha256') == value['operation_sha256']
+            and completion.get('vector_binding') == value['operation_contract']
+            and completion.get('outputs') == outputs, 'parent_vector_completion')
+    raw = {name: (Path(parent) / 'files' / name).read_bytes() for name in VECTOR_OUTPUTS}
+    for name, digest in outputs.items():
+        blob = Path(state) / 'vector-outputs' / digest
+        require(hashlib.sha256(raw[name]).hexdigest() == digest and blob.is_file()
+                and hashlib.sha256(blob.read_bytes()).hexdigest() == digest, 'parent_vector_output')
+    origin = completion.get('accounting_origin') or {}
+    if origin.get('kind') == 'budgeted':
+        verify_budgeted_origin(state, value, raw, book, origin)
+    else:
+        require(origin.get('kind') == 'retained', 'parent_vector_origin_required')
+        verify_retained_origin(Path(__file__).resolve().parents[1], origin, outputs, value['operation_contract'],
+                               descendant=manifest['generation_sha'])
+        require(not any(json.loads(path.read_bytes()).get('operation_sha256') == value['operation_sha256']
+                    for path in (Path(state) / 'vector-intents').glob('*.json')), 'retained_operation_dispatched')
+    return {'classification': origin['kind'], 'completion_sha256': hashlib.sha256(completion_path.read_bytes()).hexdigest(),
+            'accounting_origin': origin}, raw
+
+
 def import_history(state, parent, original_ledger_sha256):
-    """Append authenticated measured historical costs once; keep original prefix."""
+    """Classify original vector accounting; import only unwrapped paid history."""
     book = ledger(state)
     contract = context(state)
     manifest = json.loads((Path(parent) / 'candidate.json').read_bytes())
@@ -278,43 +454,41 @@ def import_history(state, parent, original_ledger_sha256):
     report_raw = (Path(parent) / 'files/evaluation/search_v2_hybrid_vector_build.json').read_bytes()
     require(hashlib.sha256(report_raw).hexdigest() == manifest['files'][
         'evaluation/search_v2_hybrid_vector_build.json'], 'parent_vector_receipt')
-    report = json.loads(report_raw)
-    rows = report.get('API_requests')
-    require(isinstance(rows, list) and report.get('API_request_count') == len(rows)
-            and report.get('model') == MODEL and report.get('status') == 'written', 'historical_receipt')
-    historical = []
-    for index, row in enumerate(rows):
-        tokens = row.get('usage_total_tokens')
-        require(type(tokens) is int and tokens > 0 and row.get('model') == MODEL
-                and row.get('http_status') == 200 and isinstance(row.get('request_id'), str)
-                and request_id(row['request_id']), 'historical_measured_usage')
-        charge = (tokens + 49) // 50
-        key = identity({'candidate_id': manifest['candidate_id'], 'index': index, 'receipt': row})
-        historical.append({'id': key[:32], 'provider': 'voyage', 'model': MODEL,
-            'stage': 'historical_vector_generation', 'key': key, 'attempt': 1,
-            'reserved_microusd': charge, 'charged_microusd': charge,
-            'status': 'valid', 'usage': vector_usage(tokens),
-            'provider_request_id': row['request_id'], 'parent_candidate_id': manifest['candidate_id']})
-    marker = {'kind': 'authenticated_vector_history', 'candidate_id': manifest['candidate_id'],
-              'original_ledger_sha256': original_ledger_sha256,
-              'receipt_sha256': hashlib.sha256(report_raw).hexdigest(), 'requests': historical}
+    report = vector_report(report_raw)
     with book.locked():
         value = book.read()
-        events = [e for e in value['events'] if e.get('kind') == marker['kind']]
+        events = [event for event in value['events'] if event.get('kind') == 'authenticated_vector_history']
         if events:
-            require(len(events) == 1 and all(events[0].get(k) == v for k, v in marker.items()),
-                    'historical_import_identity')
+            require(len(events) == 1, 'historical_import_identity')
             n, e = events[0]['original_request_count'], events[0]['original_event_count']
             original = dict(value, requests=value['requests'][:n], events=value['events'][:e])
             require(identity(original) == original_ledger_sha256
                     and value['events'][e] == events[0], 'original_ledger_prefix')
+        else:
+            require(identity(value) == original_ledger_sha256, 'original_ledger_before_import')
+            original = value
+        accounting, _ = parent_vector_accounting(state, parent, manifest, contract, book, original)
+        historical = []
+        if accounting['classification'] == 'legacy_untracked':
+            for index, row in enumerate(report['API_requests']):
+                require(isinstance(row.get('request_id'), str) and request_id(row['request_id']), 'historical_measured_usage')
+                tokens = row['usage_total_tokens']; charge = (tokens + 49) // 50
+                key = identity({'candidate_id': manifest['candidate_id'], 'index': index, 'receipt': row})
+                historical.append({'id': key[:32], 'provider': 'voyage', 'model': MODEL,
+                    'stage': 'historical_vector_generation', 'key': key, 'attempt': 1,
+                    'reserved_microusd': charge, 'charged_microusd': charge,
+                    'status': 'valid', 'usage': vector_usage(tokens),
+                    'provider_request_id': row['request_id'], 'parent_candidate_id': manifest['candidate_id']})
+        marker = {'kind': 'authenticated_vector_history', 'candidate_id': manifest['candidate_id'],
+                  'original_ledger_sha256': original_ledger_sha256,
+                  'receipt_sha256': hashlib.sha256(report_raw).hexdigest(), 'requests': historical,
+                  **accounting}
+        if events:
+            require(all(events[0].get(key) == expected for key, expected in marker.items()), 'historical_import_identity')
             require(value['requests'][n:n + len(historical)] == historical
-                    and [r for r in value['requests'] if r.get('stage') == 'historical_vector_generation'] == historical,
+                    and [row for row in value['requests'] if row.get('stage') == 'historical_vector_generation'] == historical,
                     'historical_import_rows')
             return
-        require(identity(value) == original_ledger_sha256, 'original_ledger_before_import')
-        require(report.get('usage_total_tokens') == sum(row['usage_total_tokens'] for row in rows),
-                'historical_usage_total')
         require(len(value['requests']) + len(historical) <= book.max_requests
                 and sum(r['charged_microusd'] for r in value['requests'] + historical) <= book.limit,
                 'historical_allowance')

@@ -263,6 +263,31 @@ class ReviewContinuityTests(unittest.TestCase):
         self.assertIn('TA3', record['description'])
         self.assertIn('CMMC Level 2', record['description'])
 
+    def test_current_amendments_preserve_reviewed_deadlines_prerequisites_and_restrictions(self):
+        config = sam_reviewed.validate_config(json.loads((ROOT / 'config/sam_gov.json').read_bytes()))
+        current = json.loads((ROOT / 'tests/fixtures/sam_amendments_reviewed_20261018.json').read_bytes())
+        expected = {
+            'HM047627XXXX': ('4984511e4bbc4d01a21df55b30a88f02', ['2026-10-28', '2026-12-21']),
+            '693195-26-BAA-0001': ('4e98188266d74e73a6cede0b0bef0da0', ['2026-10-30', None]),
+            '693JF726R000016': ('7d63d061eb82403c8b6b4afb9afca040', ['2027-01-10']),
+            'PHMSA-26HM-BAA': ('f1d0665939c74ffa86ffc40e73985cc1', ['2026-11-18', None]),
+        }
+        by_number = {}
+        for number, (identifier, dates) in expected.items():
+            item = next(item for item in config['approved_notices'] if item['solicitation_number'] == number)
+            (record, reasons), _ = sam_reviewed.reconcile_notice(current[identifier], item, date(2026, 10, 18))
+            self.assertEqual(reasons, [], number)
+            self.assertEqual(record['opportunity_id'], 'sam-gov:' + identifier)
+            self.assertEqual([event['date'] for event in record['deadlines']], dates)
+            by_number[number] = record
+        self.assertTrue(by_number['HM047627XXXX']['deadlines'][0]['required'])
+        self.assertEqual(by_number['HM047627XXXX']['deadlines'][0]['timezone'], 'Etc/GMT+5')
+        self.assertIn('foreign nationals', by_number['HM047627XXXX']['description'].lower())
+        for number in ('693195-26-BAA-0001', 'PHMSA-26HM-BAA'):
+            self.assertTrue(by_number[number]['deadlines'][1]['invitation_required'])
+        self.assertIn('fishing vessels', by_number['693JF726R000016']['description'])
+        self.assertIn('clarification', by_number['PHMSA-26HM-BAA']['description'])
+
 
 if __name__ == '__main__':
     unittest.main()

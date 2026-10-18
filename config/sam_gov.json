@@ -1503,47 +1503,47 @@
       }
     },
     {
-      "notice_id": "84cb4b33be0641c1b54c4de34b542ed5",
+      "notice_id": "4984511e4bbc4d01a21df55b30a88f02",
       "solicitation_number": "HM047627XXXX",
       "organization_id": "500038581",
       "sponsor": "National Geospatial-Intelligence Agency",
       "evidence_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/5df2c1fa8a9c46a0ab22ba8a69b5dda5/download",
       "academic_eligibility_quote": "All responsible sources capable of satisfying the Government's needs may submit a proposal for NGA’s consideration.",
-      "verified_on": "2026-10-13",
-      "review_after": "2026-11-12",
-      "review_sha256": "52a242731315a9c56987c5ceeb2df7ba0c1b16576f420a96c173baa3e28f70b5",
+      "verified_on": "2026-10-18",
+      "review_after": "2026-11-17",
+      "review_sha256": "ced0975e8e8a1a727790e0a2d0c834dcafd472cbe5b29064cb0dcb23c77a9111",
       "summary": "Develop AI/ML methods to extract and classify 3D surface/subsurface objects using NASA ICESat-2 and GEDI lidar, including navigation safety applications.",
-      "scope_note": "Topic7 LASER only, not BIG-ST parent or closed topics. Parent exists in catalog but specific Topic7 solicitation is distinct. CUI safeguards; foreign nationals need prior written CO/COR approval; HSPD-12 favorable adjudication if access to NGA facilities/systems. One anticipated award, $854k /15months.",
+      "scope_note": "Topic7 LASER only, not BIG-ST parent or closed topics. General Solicitation Rev4 governs eligibility and abstract prerequisites; October16 Topic7 revision governs current dates, Phase2 label and corrected PD>75% metric. CUI safeguards; foreign nationals need prior written CO/COR approval; HSPD-12 favorable adjudication if access to NGA facilities/systems. One anticipated award, $854k /15months.",
       "cycles": [
         {
           "name": "Current open entry",
           "entry": {
             "kind": "preproposal",
-            "date": "2026-10-23",
+            "date": "2026-10-28",
             "time": "11:00",
             "timezone": "Etc/GMT+5",
             "required": true,
             "invitation_required": false,
-            "note": "Required abstract. Sponsor explicitly prints EST; confirm timezone with sponsor because October usually observes EDT. Dates: Topic7 document Table2. Prerequisite: attached General Solicitation Rev4 PDF page16.",
-            "source_url": "https://sam.gov/opp/84cb4b33be0641c1b54c4de34b542ed5/view",
-            "quote": "Abstracts Due 23 October 2026 at 1100 EST […] It is mandatory that prospective Offerors submit abstracts prior to submission of a complete proposal."
+            "note": "Required abstract. October16 topic revision Table2 supersedes October23. Sponsor explicitly prints EST; literal fixed EST retained; confirm with sponsor because October normally observes EDT. General Solicitation Rev4 requires the abstract before a full proposal.",
+            "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/0224451b0bc34e6f93f1ba561170f5cc/download",
+            "quote": "Abstracts Due 28 October 2026 at 1100 EST"
           },
           "full": {
             "kind": "full_application",
-            "date": "2026-12-11",
+            "date": "2026-12-21",
             "time": "11:00",
             "timezone": "Etc/GMT+5",
             "required": true,
             "invitation_required": false,
-            "note": "Prior abstract required; full proposals permitted regardless of abstract feedback. Source-specific deadline precedes SAM header; literal EST preserved. Dates: Topic7 document Table2. Prerequisite: attached General Solicitation Rev4 PDF page16.",
-            "source_url": "https://sam.gov/opp/84cb4b33be0641c1b54c4de34b542ed5/view",
-            "quote": "Proposals Due 11 December 2026 at 1100 EST […] Regardless of NGA’s abstract feedback, Offerors may choose to submit a full proposal."
+            "note": "October16 topic revision Table2 supersedes December11. Prior abstract required; full proposal permitted regardless of abstract feedback. Literal EST retained; topic deadline precedes the SAM header.",
+            "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/0224451b0bc34e6f93f1ba561170f5cc/download",
+            "quote": "Proposals Due 21 December 2026 at 1100 EST"
           }
         }
       ],
       "reviewed_snapshot": {
-        "notice_id": "84cb4b33be0641c1b54c4de34b542ed5",
-        "latest_notice_id": "84cb4b33be0641c1b54c4de34b542ed5",
+        "notice_id": "4984511e4bbc4d01a21df55b30a88f02",
+        "latest_notice_id": "4984511e4bbc4d01a21df55b30a88f02",
         "latest": true,
         "status": "published",
         "archived": false,
@@ -1558,14 +1558,14 @@
           "541715"
         ],
         "set_asides": [],
-        "posted_at": "2026-10-01T18:24:21.474+00:00",
-        "modified_at": "2026-10-01T18:24:21.479+00:00",
-        "response_deadline": "2026-12-11T23:59:00-05:00",
+        "posted_at": "2026-10-16T12:43:27.574+00:00",
+        "modified_at": "2026-10-16T12:43:27.584+00:00",
+        "response_deadline": "2026-12-21T23:59:00-05:00",
         "response_timezone": "America/New_York",
-        "archive_date": "2026-12-15",
-        "description_sha256": "bb6c249d941d76727a88a6dae2533a038a95978d6732994490c3d9be9e5fba07",
-        "resources_sha256": "e24939445a82ed28578a971067841663b7c16518a7cf6e88267bec9abac74687",
-        "review_sha256": "52a242731315a9c56987c5ceeb2df7ba0c1b16576f420a96c173baa3e28f70b5"
+        "archive_date": "2027-03-15",
+        "description_sha256": "42bb138b977855d68dd52260b75a53a271ca61f52768d97789f2caa7ddf452ec",
+        "resources_sha256": "cc3e25ea498be01537eb405f7c347bc054df2cd0ef34ed5fde6cf0927a8e24df",
+        "review_sha256": "ced0975e8e8a1a727790e0a2d0c834dcafd472cbe5b29064cb0dcb23c77a9111"
       }
     },
     {
@@ -2560,30 +2560,30 @@
       }
     },
     {
-      "notice_id": "9fac6a86bf4f4561bd8bd464284d6297",
+      "notice_id": "4e98188266d74e73a6cede0b0bef0da0",
       "solicitation_number": "693195-26-BAA-0001",
       "organization_id": "100184892",
       "sponsor": "U.S. Department of Transportation - Federal Transit Administration (FTA)",
       "evidence_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/f82878950d0642c88a6f679c6b733465/download",
       "academic_eligibility_quote": "This is an unrestricted solicitation. Any responsible source may submit a proposal concept paper for consideration, including, but not limited to, states or local governments, or organizations of state or local governments, universities or institutions of higher education, hospitals, non-profit organizations",
-      "verified_on": "2026-10-13",
-      "review_after": "2026-11-12",
-      "review_sha256": "b7449c0ec168ade2090284a40707a428d67a2cc7bbc3720354a1f007f92a85e7",
+      "verified_on": "2026-10-18",
+      "review_after": "2026-11-17",
+      "review_sha256": "4c21e8a9534ec584b0c15b4d9cdeff5e1fa9c3543e6cc94a9794ebaa3fb73e21",
       "summary": "Applied public transit research, technology development and demonstration to improve transit safety, efficiency and deployment readiness, generally TRL3–6.",
-      "scope_note": "Cost sharing may be mandated under49USC5312(g); FTA determines applicability during concept review and communicates it in writing. Federal-government-owned businesses not eligible as direct recipients; teaming allowed. SAM registration before award. Typically$150,000–$500,000, subject to funds. Submission: Electronic concept paper to the Contracting Specialist, copying the Contracting Officer, as Section2.6.1 directs.",
+      "scope_note": "Cost sharing may be mandated under49USC5312(g); FTA determines applicability during concept review and communicates it in writing. Federal-government-owned businesses not eligible as direct recipients; teaming allowed. SAM registration before award. Typically$150,000–$500,000, subject to funds. Submission: Electronic concept paper to the Contracting Specialist, copying the Contracting Officer, as Section2.6.1 directs. Current SAM Amendment0001 extends the concept-paper deadline to October30; the attached original solicitation still prints October19.",
       "cycles": [
         {
           "name": "Current reviewed call",
           "entry": {
             "kind": "concept_paper",
-            "date": "2026-10-19",
+            "date": "2026-10-30",
             "time": "23:59",
             "timezone": "America/New_York",
             "required": true,
             "invitation_required": false,
-            "note": "Required initial concept paper by email. Later full proposal only after invitation; its date is not publicly specified.",
-            "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/f82878950d0642c88a6f679c6b733465/download",
-            "quote": "Concept papers responding to this BAA can be submitted until 11:59 PM Eastern Time on October 19, 2026."
+            "note": "Required initial concept paper by email. Current SAM Amendment0001 extends the original PDF October19 deadline to October30; retain its 11:59 PM Eastern submission time. Full proposal only after invitation; its date is not publicly specified.",
+            "source_url": "https://sam.gov/opp/4e98188266d74e73a6cede0b0bef0da0/view",
+            "quote": "AMENDMENT No. 0001 - The purpose of this amendment is to extend the due date to October 30, 2026."
           },
           "full": {
             "kind": "full_application",
@@ -2599,8 +2599,8 @@
         }
       ],
       "reviewed_snapshot": {
-        "notice_id": "9fac6a86bf4f4561bd8bd464284d6297",
-        "latest_notice_id": "9fac6a86bf4f4561bd8bd464284d6297",
+        "notice_id": "4e98188266d74e73a6cede0b0bef0da0",
+        "latest_notice_id": "4e98188266d74e73a6cede0b0bef0da0",
         "latest": true,
         "status": "published",
         "archived": false,
@@ -2617,28 +2617,28 @@
         "set_asides": [
           "NONE"
         ],
-        "posted_at": "2026-09-04T18:43:50.864+00:00",
-        "modified_at": "2026-09-04T18:43:50.870+00:00",
-        "response_deadline": "2026-10-19T23:59:00-04:00",
+        "posted_at": "2026-10-14T15:15:49.879+00:00",
+        "modified_at": "2026-10-14T15:15:49.882+00:00",
+        "response_deadline": "2026-10-30T23:59:00-04:00",
         "response_timezone": "America/New_York",
-        "archive_date": "2026-11-03",
-        "description_sha256": "b01a5642d2f4f688cdff4eddd798c2ca9d3c8577e1c353cb82c687dd3eaa3d53",
-        "resources_sha256": "d040ffa5ce9df3a1bff749012daa6750a03f2cb081dbc4b43c382ab7e0e381c5",
-        "review_sha256": "b7449c0ec168ade2090284a40707a428d67a2cc7bbc3720354a1f007f92a85e7"
+        "archive_date": "2026-11-14",
+        "description_sha256": "44791f55d11a1f0d6e5cc0ca4964abb3d32046c2f8484ce621c8e6547fde420a",
+        "resources_sha256": "166f7602d79dcdd89cccb80ff33cf3e2e199afb70d362b599cfdb92bf6818764",
+        "review_sha256": "4c21e8a9534ec584b0c15b4d9cdeff5e1fa9c3543e6cc94a9794ebaa3fb73e21"
       }
     },
     {
-      "notice_id": "a59ae93e40ba49a9a53c7e23ca1ad3a0",
+      "notice_id": "7d63d061eb82403c8b6b4afb9afca040",
       "solicitation_number": "693JF726R000016",
       "organization_id": "100179145",
       "sponsor": "U.S. Department of Transportation - Maritime Administration (MARAD)",
       "evidence_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/ec4ca31b92744bd192a5a5190021e41a/download",
       "academic_eligibility_quote": "Eligible Applicants: Open to all types of domestic applicants other than individuals.",
-      "verified_on": "2026-10-13",
-      "review_after": "2026-11-12",
-      "review_sha256": "761a2bbe4e4fa200e0329a7868737ee85cd061a2d4e41556825a979dd87e052b",
+      "verified_on": "2026-10-18",
+      "review_after": "2026-11-17",
+      "review_sha256": "a1b3a549821facac6ee8a3dc729e93881ddd062b25f105db4af5c46cafc63ea8",
       "summary": "Scientific and engineering vessel-design study combining hydrodynamics, propulsion, energy efficiency, cost analysis, and underwater radiated-noise reduction.",
-      "scope_note": "Domestic institutions eligible; preference for US-company/US-flag team leads is evaluative, not an exclusion. An organization can join multiple teams but may lead only one proposal; no identical teams rotating leads. SAM registration/current UEI required for application and award. MARAD funds100% through cooperative agreements; generally$150k–$450k,12–18months. Vessel classes/preferences and Amendment4 Q&A apply. Eligibility basis: All domestic applicant types except individuals includes domestic universities; the proposal is for a research/design study, not acquisition of a finished vessel. Submission: PDF proposal by email to both listed MARAD acquisition contacts per SectionE.4; no separate application package required.",
+      "scope_note": "Domestic institutions eligible; preference for US-company/US-flag team leads is evaluative, not an exclusion. An organization can join multiple teams but may lead only one proposal; no identical teams rotating leads. SAM registration/current UEI required for application and award. MARAD funds100% through cooperative agreements; generally$150k–$450k,12–18months. Vessel classes/preferences and Amendments4/5 Q&A apply: whale-watching catamarans are outside preferred vessel types, and all fishing vessels, including large commercial vessels, are outside the specific RFP focus. Eligibility basis: All domestic applicant types except individuals includes domestic universities; the proposal is for a research/design study, not acquisition of a finished vessel. Submission: PDF proposal by email to both listed MARAD acquisition contacts per SectionE.4; no separate application package required.",
       "cycles": [
         {
           "name": "Current reviewed call",
@@ -2657,8 +2657,8 @@
         }
       ],
       "reviewed_snapshot": {
-        "notice_id": "a59ae93e40ba49a9a53c7e23ca1ad3a0",
-        "latest_notice_id": "a59ae93e40ba49a9a53c7e23ca1ad3a0",
+        "notice_id": "7d63d061eb82403c8b6b4afb9afca040",
+        "latest_notice_id": "7d63d061eb82403c8b6b4afb9afca040",
         "latest": true,
         "status": "published",
         "archived": false,
@@ -2673,28 +2673,28 @@
           "541720"
         ],
         "set_asides": [],
-        "posted_at": "2026-10-05T17:56:41.384+00:00",
-        "modified_at": "2026-10-05T17:56:41.388+00:00",
+        "posted_at": "2026-10-16T11:47:28.298+00:00",
+        "modified_at": "2026-10-16T11:47:28.309+00:00",
         "response_deadline": "2027-01-10T12:00:00-05:00",
         "response_timezone": "America/New_York",
         "archive_date": "2027-03-10",
-        "description_sha256": "b1d3d4b2d883fe185d14596c975fadc7ef91a292483ce51ba8b4b19763cb2b63",
-        "resources_sha256": "dbda0f17bbad9d6596aa57e4189e7050b31e991b26062ef63406994520a14ef4",
-        "review_sha256": "761a2bbe4e4fa200e0329a7868737ee85cd061a2d4e41556825a979dd87e052b"
+        "description_sha256": "b279a4064fb252f258b1b543e1df85f5ec8bf6705e9b9f47ce7a3ef6a9df17bd",
+        "resources_sha256": "4779c640da3bfd7f1fa09ea55a0b4d8ccc5c822002dc4bdbcc7ccf6da5488d5b",
+        "review_sha256": "a1b3a549821facac6ee8a3dc729e93881ddd062b25f105db4af5c46cafc63ea8"
       }
     },
     {
-      "notice_id": "b7f83ec10df84ff0ad8ec6290dba7176",
+      "notice_id": "f1d0665939c74ffa86ffc40e73985cc1",
       "solicitation_number": "PHMSA-26HM-BAA",
       "organization_id": "100182338",
       "sponsor": "U.S. Department of Transportation - Pipeline and Hazardous Materials Safety Administration (PHMSA)",
       "evidence_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/0ddad8729cc24db1afaf4e5dde19b020/download",
       "academic_eligibility_quote": "U.S.-based industry (including small businesses), accredited universities, non-profits, and permitted federally affiliated research centers.",
-      "verified_on": "2026-10-13",
-      "review_after": "2026-11-12",
-      "review_sha256": "a913d831418a7514f9b68e6b03747d18153febadea611a05f754aefb6cf74459",
+      "verified_on": "2026-10-18",
+      "review_after": "2026-11-17",
+      "review_sha256": "3d0a407502241b81e8477dabee21ee593c0610d25e68930f28b91e9d8e020d0b",
       "summary": "Hazardous-materials transport research including energy-storage systems, packaging, emergency response, and rail safety; analytical studies and technology assessment.",
-      "scope_note": "Current action Amendment0003 publishedOct13 replaces saved745e7a... action; only Q&A added, other terms unchanged. US prime; foreign entities permitted as subcontractors under conditions. Federal/state/local government bodies excluded, while accredited universities explicitly included. Contracts up to$2M, maximum36months including options; cost sharing optional. Amendment0003 permits omitting TIN from emailed white paper if already inSAM and does not require outside subcontractors or briefing travel. Submission: Email white papers to the submission address in Amendment0001; full proposals by invitation.",
+      "scope_note": "US prime; foreign entities permitted as subcontractors under conditions. Federal/state/local government bodies excluded, while accredited universities explicitly included. Contracts up to$2M, maximum36months including options; cost sharing optional. Amendment0003 permits omitting TIN from emailed white paper if already inSAM and does not require outside subcontractors or briefing travel. October15 notice retains Amendments0001-0003 but reattaches an unamended base document printing December22 and a placeholder inbox; follow the explicit Amendment0001 November18 deadline and submission address, still affirmed in the current notice. Sponsor clarification is required before relying on December22. Submission: Email white papers to the submission address in Amendment0001; full proposals by invitation.",
       "cycles": [
         {
           "name": "Current reviewed call",
@@ -2705,7 +2705,7 @@
             "timezone": "America/New_York",
             "required": true,
             "invitation_required": false,
-            "note": "Initial white paper via email; Amendment1 deadline is 11:59 AM Eastern, not midnight. Later full proposal by invitation; date not publicly specified.",
+            "note": "Initial white paper via email per Amendment0001. Its explicit November18 11:59 AM Eastern deadline remains affirmed by current SAM notice; the reattached original base December22 date does not override it. Confirm with sponsor before relying on any later date. Full proposal by invitation; date not publicly specified.",
             "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/0ddad8729cc24db1afaf4e5dde19b020/download",
             "quote": "Submissions can be made through November 18, 2026 (11:59 AM Eastern Time)."
           },
@@ -2723,8 +2723,8 @@
         }
       ],
       "reviewed_snapshot": {
-        "notice_id": "b7f83ec10df84ff0ad8ec6290dba7176",
-        "latest_notice_id": "b7f83ec10df84ff0ad8ec6290dba7176",
+        "notice_id": "f1d0665939c74ffa86ffc40e73985cc1",
+        "latest_notice_id": "f1d0665939c74ffa86ffc40e73985cc1",
         "latest": true,
         "status": "published",
         "archived": false,
@@ -2741,14 +2741,14 @@
         "set_asides": [
           "NONE"
         ],
-        "posted_at": "2026-10-13T14:05:15.692+00:00",
-        "modified_at": "2026-10-13T14:05:15.755+00:00",
+        "posted_at": "2026-10-15T16:15:29.078+00:00",
+        "modified_at": "2026-10-15T16:15:29.094+00:00",
         "response_deadline": "2026-11-18T11:59:00-05:00",
         "response_timezone": "America/New_York",
         "archive_date": "2026-12-03",
-        "description_sha256": "dbe2de4e3fc8034bd3dbae80c981cb872c1908c8a16de0f4a38954f0eb3e76fd",
-        "resources_sha256": "ba159eed03d0e0be781c0d1394186676b610612793478d611721d38cad6a8c83",
-        "review_sha256": "a913d831418a7514f9b68e6b03747d18153febadea611a05f754aefb6cf74459"
+        "description_sha256": "5c0896675e2e187e59bb54ae9d7345d24501dd4397cd6e36b6cea51c30edd6a0",
+        "resources_sha256": "9e3479066543c5387cd5dfc26e8526b5133a3183d2cbd094da73300436c8c71f",
+        "review_sha256": "3d0a407502241b81e8477dabee21ee593c0610d25e68930f28b91e9d8e020d0b"
       }
     }
   ]

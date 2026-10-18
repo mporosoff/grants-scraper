@@ -152,6 +152,14 @@ or new timestamps. Accepted responses from an earlier operation settle their
 original measured charges even when the next request body changed; those old
 vectors never satisfy the new operation.
 
+The atomic completion receipt also seals accounting origin. Reconciliation
+imports measured requests from an authenticated legacy unwrapped producer once.
+For managed generation it authenticates the existing request reservations and
+accepted responses without charging again. For a retained protected asset it
+authenticates that asset's original provenance without charging its historical
+build to the current run. Cold restoration preserves the sealed origin; missing
+or conflicting evidence holds the candidate rather than inventing a new budget.
+
 The separate `sam-preflight` job verifies reviewed source inputs before the
 generation job reserves an allowance or collects other sources. A failed
 preflight leaves generators skipped and does not create a spend owner. A

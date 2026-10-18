@@ -28,11 +28,24 @@ class ReconcileSpendTests(unittest.TestCase):
                                     'request_id': 'a' * 32}]}
         raw = json.dumps(report).encode(); relative = 'evaluation/search_v2_hybrid_vector_build.json'
         path = self.parent / 'files' / relative; path.parent.mkdir(parents=True); path.write_bytes(raw)
-        manifest = {'candidate_id': 'a' * 64, 'files': {relative: hashlib.sha256(raw).hexdigest()}}
+        manifest = {'candidate_id': 'a' * 64, 'generation_run_id': '123', 'generation_run_attempt': '1',
+                    'generation_sha': 'd' * 40, 'files': {relative: hashlib.sha256(raw).hexdigest()}}
         parent_raw = json.dumps(manifest).encode(); (self.parent / 'candidate.json').write_bytes(parent_raw)
         self.contract = {'parent_run': '123', 'parent_candidate_id': manifest['candidate_id'],
             'parent_manifest_sha256': hashlib.sha256(parent_raw).hexdigest(),
+            'parent_generation_sha': manifest['generation_sha'],
+            'parent_producer': {'run_id': '123', 'run_attempt': '1', 'head_sha': 'e' * 40,
+                'event': 'schedule', 'path': '.github/workflows/refresh-opportunities.yml'},
             'original_spend': {'ledger_sha256': self.original_hash}, 'operation_contract': {'safe-source': 'b' * 64}}
+        from tools import release_candidate as candidate
+        git = candidate.git
+        def protected_workflow(root, *args):
+            if args == ('show', 'e' * 40 + ':.github/workflows/refresh-opportunities.yml'):
+                return ('jobs:\n  generate:\n    steps:\n      - id: semantic-vectors\n'
+                        '        run: node tools/build_search_v2_voyage_vectors.mjs --production --write\n')
+            return git(root, *args)
+        workflow = patch.object(candidate, 'git', side_effect=protected_workflow)
+        workflow.start(); self.addCleanup(workflow.stop)
         self.contract['operation_sha256'] = identity(self.contract)
         atomic_json(self.state / 'reconciliation.json', self.contract)
         spend.import_history(self.state, self.parent, self.original_hash)
@@ -200,7 +213,7 @@ console.log(JSON.stringify({calls,equal:JSON.stringify(a)===JSON.stringify(b),au
         self.assertEqual(book.read()['requests'][-1]['status'], 'not_dispatched_task_limit')
         self.assertEqual(book.read()['requests'][-1]['charged_microusd'], 0)
 
-    def test_generation_checkpoint_reuses_exact_outputs_and_changed_inputs_keep_same_allowance(self):
+    def test_generation_checkpoint_requires_accepted_accounting_and_changed_inputs_keep_same_allowance(self):
         state, book, _ = self.generation()
         root = Path(spend.__file__).resolve().parents[1]
         inputs = ('tools/catalog_reconcile_spend.py',)
@@ -213,8 +226,8 @@ console.log(JSON.stringify({calls,equal:JSON.stringify(a)===JSON.stringify(b),au
             prepared = spend.prepare(state, packet, generation=True)
             self.assertEqual(prepared['status'], 'prepared')
             outputs = {name: hashlib.sha256((root / name).read_bytes()).hexdigest() for name in spend.VECTOR_OUTPUTS}
-            spend.checkpoint(state, {'operation_sha256': prepared['operation_sha256'], 'outputs': outputs}, generation=True)
-            self.assertEqual(spend.prepare(state, packet, generation=True)['status'], 'complete')
+            with self.assertRaises(ValueError):
+                spend.checkpoint(state, {'operation_sha256': prepared['operation_sha256'], 'outputs': outputs}, generation=True)
             changed = dict(packet, corpus_sha256='f' * 64)
             self.assertEqual(spend.prepare(state, changed, generation=True)['status'], 'prepared')
         self.assertEqual(book.read(), original)
@@ -258,7 +271,10 @@ console.log(JSON.stringify({calls,equal:JSON.stringify(a)===JSON.stringify(b),au
         protected = {'release/candidate.json': manifest, 'release/validation.json': receipt,
                      'release/candidate-source.json': {'candidate_id': manifest['candidate_id']}}
         def git_read(command, **kwargs):
-            return json.dumps(protected[command[-1].removeprefix('HEAD:')]).encode()
+            if 'rev-parse' in command: return ('f' * 40 + '\n').encode()
+            if 'merge-base' in command: return b''
+            name = command[-1].split(':', 1)[1]
+            return json.dumps(protected[name]).encode() if name in protected else before[name]
         before = {name: (root / name).read_bytes() for name in spend.VECTOR_OUTPUTS}
         with patch.object(spend.subprocess, 'check_output', side_effect=git_read), \
                 patch('tools.release_dependencies.snapshot', return_value={'semantic': semantic}) as snapshot:
@@ -289,15 +305,22 @@ console.log(JSON.stringify({calls,equal:JSON.stringify(a)===JSON.stringify(b),au
                   'configuration_sha256': 'e' * 64, 'passage_count': 1, 'retained_asset_eligible': True,
                   'source_hashes': {name: hashlib.sha256((root / name).read_bytes()).hexdigest() for name in inputs}}
         before = deepcopy(book.read())
+        origin = {'version': 'vector-accounting-origin-1', 'kind': 'retained', 'protected_ref': 'f' * 40,
+                  'protected_candidate_id': 'a' * 64, 'semantic_fingerprint': 'b' * 64, 'outputs': outputs,
+                  'report_sha256': outputs[spend.VECTOR_OUTPUTS[-1]], 'new_requests': 0}
         with patch.object(spend, 'GENERATION_INPUTS', inputs), patch.dict('os.environ', GITHUB_RUN_ID='123'), \
                 patch.object(spend, 'production_ledger', return_value=book), \
                 patch.object(spend, 'protected_vector_asset', return_value={'outputs': outputs,
-                    'protected_candidate_id': 'a' * 64, 'semantic_fingerprint': 'b' * 64}):
+                    'protected_ref': 'f' * 40, 'protected_candidate_id': 'a' * 64,
+                    'semantic_fingerprint': 'b' * 64, 'accounting_origin': origin}), \
+                patch.object(spend, 'verify_retained_origin', return_value=origin):
             result = spend.prepare(state, packet, generation=True)
         self.assertEqual(result['status'], 'complete'); self.assertEqual(result['new_requests'], 0)
         receipt = json.loads((state / 'vector-stage.json').read_bytes())
         self.assertEqual(receipt['new_requests'], 0); self.assertEqual(receipt['new_usage_total_tokens'], 0)
         self.assertEqual(receipt['status'], 'retained_complete_asset')
+        completion = json.loads((state / 'vector-completions' / (result['operation_sha256'] + '.json')).read_bytes())
+        self.assertEqual(completion['accounting_origin'], origin)
         self.assertEqual(book.read(), before)
         self.assertEqual({name: hashlib.sha256((root / name).read_bytes()).hexdigest() for name in spend.VECTOR_OUTPUTS}, outputs)
 

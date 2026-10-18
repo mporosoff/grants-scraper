@@ -18,6 +18,9 @@ class VectorCompletionRestore(unittest.TestCase):
         self.root = Path(temp.name); (self.root / 'tools').mkdir()
         (self.root / 'tools/clock.py').write_bytes(b'public_input = True\n')
         self.raw = {name: ('original completed bytes and timestamp: ' + name).encode() for name in spend.VECTOR_OUTPUTS}
+        self.raw[spend.VECTOR_OUTPUTS[-1]] = json.dumps({'status': 'written', 'model': spend.MODEL,
+            'API_request_count': 1, 'usage_total_tokens': 51, 'API_requests': [{'model': spend.MODEL,
+                'http_status': 200, 'request_id': 'c' * 32, 'usage_total_tokens': 51, 'passage_count': 1}]}).encode()
         for name, raw in self.raw.items():
             path = self.root / name; path.parent.mkdir(parents=True, exist_ok=True); path.write_bytes(raw)
         self.hashes = {name: hashlib.sha256(raw).hexdigest() for name, raw in self.raw.items()}
@@ -40,7 +43,14 @@ class VectorCompletionRestore(unittest.TestCase):
             value['operation_sha256'] = identity(value)
             atomic_json(self.state / 'reconciliation.json', value)
             self.book.event(kind='authenticated_vector_history', candidate_id='a' * 64)
-        return spend.prepare(self.state, self.packet, generation=generation)
+        prepared = spend.prepare(self.state, self.packet, generation=generation)
+        body = {'url': spend.URL, 'body': json.dumps({'input': ['Public funded research passage'],
+            'model': spend.MODEL, 'input_type': 'document', 'truncation': True, 'output_dimension': 1024, 'output_dtype': 'float'})}
+        reserved = spend.reserve(self.state, body, generation=generation)
+        spend.finish(self.state, {'key': reserved['key'], 'token': reserved['token'], 'status': 200,
+            'request_id': 'c' * 32, 'payload': {'model': spend.MODEL,
+                'data': [{'index': 0, 'embedding': [.125] * 1024}], 'usage': {'total_tokens': 51}}}, generation=generation)
+        return prepared
 
     def checkpoint(self, prepared, generation=True):
         return spend.checkpoint(self.state, {'operation_sha256': prepared['operation_sha256'], 'outputs': self.hashes},
@@ -56,6 +66,9 @@ class VectorCompletionRestore(unittest.TestCase):
                 for name, raw in self.raw.items(): (self.root / name).write_bytes(raw)
                 prepared = self.prepare(generation)
                 self.checkpoint(prepared, generation)
+                sealed_path = self.state / 'vector-completions' / (prepared['operation_sha256'] + '.json')
+                sealed = json.loads(sealed_path.read_bytes())
+                self.assertEqual(sealed['accounting_origin']['kind'], 'budgeted')
                 before = deepcopy(self.book.read()); self.cold_checkout()
                 restored = spend.prepare(self.state, self.packet, generation=generation)
                 self.assertEqual(restored['status'], 'restore')
@@ -68,6 +81,7 @@ class VectorCompletionRestore(unittest.TestCase):
                 spend.checkpoint(self.state, {'operation_sha256': prepared['operation_sha256'],
                     'outputs': self.hashes, 'restored': True}, generation=generation)
                 self.assertEqual(spend.prepare(self.state, self.packet, generation=generation)['status'], 'complete')
+                self.assertEqual(json.loads(sealed_path.read_bytes())['accounting_origin'], sealed['accounting_origin'])
                 self.assertEqual(self.book.read(), before)
                 stage = json.loads((self.state / 'vector-stage.json').read_bytes())
                 self.assertEqual(stage['new_requests'], 0); self.assertEqual(stage['new_usage_total_tokens'], 0)
@@ -98,6 +112,9 @@ class VectorCompletionRestore(unittest.TestCase):
             wrong = deepcopy(receipt); change(wrong); atomic_json(receipt_path, wrong)
             with self.assertRaisesRegex(ValueError, 'completed_vector_identity'):
                 spend.prepare(self.state, self.packet, generation=True)
+        atomic_json(receipt_path, receipt)
+        wrong = deepcopy(receipt); wrong['accounting_origin']['report_sha256'] = 'f' * 64; atomic_json(receipt_path, wrong)
+        with self.assertRaises(ValueError): spend.prepare(self.state, self.packet, generation=True)
         atomic_json(receipt_path, receipt)
         blob = self.state / 'vector-outputs' / next(iter(self.hashes.values()))
         raw = blob.read_bytes()
