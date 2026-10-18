@@ -40,7 +40,33 @@
             "quote": "An Applicant that does NOT receive an invitation from the Government to submit a Proposal is NOT eligible to submit a Proposal."
           }
         }
-      ]
+      ],
+      "reviewed_snapshot": {
+        "notice_id": "4177337919ca4c9db8d9ddf1e58c24aa",
+        "latest_notice_id": "4177337919ca4c9db8d9ddf1e58c24aa",
+        "latest": true,
+        "status": "published",
+        "archived": false,
+        "cancelled": false,
+        "deleted": false,
+        "title": "Experiments, Prototypes, Research, and Evaluation Supporting Systems (EXPRESS)",
+        "solicitation_number": "FA8650-22-S-5004",
+        "organization_id": "100025313",
+        "notice_type": "o",
+        "classification_code": "AC13",
+        "naics_codes": [
+          "541715"
+        ],
+        "set_asides": [],
+        "posted_at": "2024-07-19T15:17:25.822+00:00",
+        "modified_at": "2024-07-19T15:17:25.828+00:00",
+        "response_deadline": "2027-02-14T17:00:00-05:00",
+        "response_timezone": "America/New_York",
+        "archive_date": "2027-03-01",
+        "description_sha256": "cadd1e318acb1f2f9a47d5c924a5b5d7226c192a0b8e5cb28916447ab7dddd82",
+        "resources_sha256": "12365b3d3468e9cfd007bf7ca888a8122a3ff10e8ba2bc7efffd92b97f929148",
+        "review_sha256": "fd8dc97e41bcaff8eeb52c2a570a9327f663fc21b93adf94694ecc20f52edce2"
+      }
     },
     {
       "notice_id": "aaef3e1141e74a12b1b75641f6c4cd7a",
@@ -80,7 +106,33 @@
             "quote": "This is a Two-Step Process; full proposals will not be accepted or evaluated unless specifically requested by the CO/AO."
           }
         }
-      ]
+      ],
+      "reviewed_snapshot": {
+        "notice_id": "aaef3e1141e74a12b1b75641f6c4cd7a",
+        "latest_notice_id": "aaef3e1141e74a12b1b75641f6c4cd7a",
+        "latest": true,
+        "status": "published",
+        "archived": false,
+        "cancelled": false,
+        "deleted": false,
+        "title": "Directed Energy Technology Experimentation Research (DETER) Advanced Research Announcement (ARA) Open Announcement",
+        "solicitation_number": "FA9451-21-S-0001",
+        "organization_id": "100027540",
+        "notice_type": "o",
+        "classification_code": "AC33",
+        "naics_codes": [
+          "541715"
+        ],
+        "set_asides": [],
+        "posted_at": "2026-05-12T16:37:34.718+00:00",
+        "modified_at": "2026-05-12T16:37:34.722+00:00",
+        "response_deadline": "2031-03-12T17:00:00-06:00",
+        "response_timezone": "America/Denver",
+        "archive_date": "2031-03-12",
+        "description_sha256": "e98c078009e95398178f057a7f1064fdfb38abb384ece323c0c312a5a8c21d2e",
+        "resources_sha256": "4e1951435dcee5994a0266e4165d6612667f34698ae8afd2a83cf677dd646518",
+        "review_sha256": "d1c30b79a0732b9d38daa4ee7ef308240deb5b58615a09d217ebe10a658ef905"
+      }
     },
     {
       "notice_id": "8170c4735df64714adb2d1f8ce8671b1",
@@ -110,7 +162,33 @@
           },
           "full": null
         }
-      ]
+      ],
+      "reviewed_snapshot": {
+        "notice_id": "8170c4735df64714adb2d1f8ce8671b1",
+        "latest_notice_id": "8170c4735df64714adb2d1f8ce8671b1",
+        "latest": true,
+        "status": "published",
+        "archived": false,
+        "cancelled": false,
+        "deleted": false,
+        "title": "Biomedical Advanced Research and Development Authority (BARDA) Broad Agency Announcement (BAA)",
+        "solicitation_number": "BAA-23-100-SOL-00004",
+        "organization_id": "100188027",
+        "notice_type": "o",
+        "classification_code": "AN13",
+        "naics_codes": [
+          "541714"
+        ],
+        "set_asides": [],
+        "posted_at": "2026-03-20T14:01:22.761+00:00",
+        "modified_at": "2026-03-20T14:01:22.767+00:00",
+        "response_deadline": "2028-09-25T16:30:00-04:00",
+        "response_timezone": "America/New_York",
+        "archive_date": "2028-10-10",
+        "description_sha256": "6e95a13af5aaa7dfdc0dcfad606c674a902bfac7d3c8ca6af5d79e94ed8ceb61",
+        "resources_sha256": "0fb7d6866109e0bef06b65827596bf5458830129bdf52b0586bf1752fd44bc00",
+        "review_sha256": "29360581aebe9aae44c30e83707546d5454693443996ebb14dda4b87325dc6fc"
+      }
     },
     {
       "notice_id": "98c034706e4b430281ead1c3497e9d72",
@@ -150,7 +228,33 @@
             "quote": "Oral Proposal Package (OPP) Due Date and Time: December 11 th, 2026, 3:00 PM ET […] Selected abstract proposers will be invited to provide an OPP and participate in an oral presentation (see Section 6) to the Government."
           }
         }
-      ]
+      ],
+      "reviewed_snapshot": {
+        "notice_id": "98c034706e4b430281ead1c3497e9d72",
+        "latest_notice_id": "98c034706e4b430281ead1c3497e9d72",
+        "latest": true,
+        "status": "published",
+        "archived": false,
+        "cancelled": false,
+        "deleted": false,
+        "title": "High-throughput Unmasking of Biological Interactomes with Binding Landscape Emulators (HUBBLE)",
+        "solicitation_number": "DARPA-PA-27-01",
+        "organization_id": "500035490",
+        "notice_type": "o",
+        "classification_code": "AC12",
+        "naics_codes": [
+          "541714"
+        ],
+        "set_asides": [],
+        "posted_at": "2026-10-08T19:57:54.725+00:00",
+        "modified_at": "2026-10-08T19:57:54.725+00:00",
+        "response_deadline": "2026-11-05T15:00:00",
+        "response_timezone": "America/New_York",
+        "archive_date": "2027-01-10",
+        "description_sha256": "7b367d173e486532d4494b9d486a9a10cff1502dfb31c9f37e6ab156c2066663",
+        "resources_sha256": "ccda6faa75d972efb8f4023c1b390ad47b90d5e38c61380bd724be916dc779d2",
+        "review_sha256": "38890dbf1a5206fc5a366c526006071b00c246aa469b7b814c328ac088c1c745"
+      }
     },
     {
       "notice_id": "5abc1a0ed8ab4c5e8f6aa62aa745d210",
@@ -190,7 +294,33 @@
             "quote": "An Abstract must be submitted and an invitation to submit a Proposal must be received, prior to any Proposal submission."
           }
         }
-      ]
+      ],
+      "reviewed_snapshot": {
+        "notice_id": "5abc1a0ed8ab4c5e8f6aa62aa745d210",
+        "latest_notice_id": "5abc1a0ed8ab4c5e8f6aa62aa745d210",
+        "latest": true,
+        "status": "published",
+        "archived": false,
+        "cancelled": false,
+        "deleted": false,
+        "title": "Strategic Technology Office-wide Innovation Solutions Opening Announcement",
+        "solicitation_number": "DARPA-PS-26-09",
+        "organization_id": "500035490",
+        "notice_type": "o",
+        "classification_code": "AC13",
+        "naics_codes": [
+          "541715"
+        ],
+        "set_asides": [],
+        "posted_at": "2025-12-19T19:11:46.574+00:00",
+        "modified_at": "2025-12-19T19:11:46.577+00:00",
+        "response_deadline": "2026-12-18T23:59:00",
+        "response_timezone": "America/New_York",
+        "archive_date": "2027-01-17",
+        "description_sha256": "3c4f726dbcf995f5b142c8341336022f7a28610654b8447bf1ad5de367e3fa4f",
+        "resources_sha256": "addca9f14ed12aa3fc6d057011df484a7297c26838460019572cf8ba56f85e3c",
+        "review_sha256": "89a5bd307cf1a76604c17f706c1569d485ad25947323f74cf371cb40f02878c5"
+      }
     },
     {
       "notice_id": "2b5fd12340a642e4ac3d1f5c21ecaeed",
@@ -230,7 +360,33 @@
             "quote": "Proposal due date: By Government invitation stemming from the abstract review on a rolling basis until 4:00 PM on the closing date. oClosing date: June 4, 2027 […] An Abstract must be submitted and an invitation to submit a Proposal must be received, prior to any Proposal submission."
           }
         }
-      ]
+      ],
+      "reviewed_snapshot": {
+        "notice_id": "2b5fd12340a642e4ac3d1f5c21ecaeed",
+        "latest_notice_id": "2b5fd12340a642e4ac3d1f5c21ecaeed",
+        "latest": true,
+        "status": "published",
+        "archived": false,
+        "cancelled": false,
+        "deleted": false,
+        "title": "MXO Office-wide Innovative Solutions Opening",
+        "solicitation_number": "DARPA-PS-26-115",
+        "organization_id": "500035490",
+        "notice_type": "o",
+        "classification_code": "AC12",
+        "naics_codes": [
+          "541715"
+        ],
+        "set_asides": [],
+        "posted_at": "2026-09-23T11:27:29.165+00:00",
+        "modified_at": "2026-09-23T11:27:29.165+00:00",
+        "response_deadline": "2027-06-04T16:00:00",
+        "response_timezone": "America/New_York",
+        "archive_date": "2027-07-04",
+        "description_sha256": "2a2c8a9a6303ec1af6c251da4e2143e5b9d2ccd3a7a2d006a7353a8a65b74678",
+        "resources_sha256": "24cce91937f8e8e2892aba6b14315c938b4beebf1c99e910077620ba5faa9e7e",
+        "review_sha256": "9620d082cc1b3cea71fe3913d94242f2323bce395835fe028bb452c670b95250"
+      }
     },
     {
       "notice_id": "182eab6ca77d465f931c6dc118b939ca",
@@ -270,18 +426,44 @@
             "quote": "Anticipated Oral Presentation Proposal (OPP) Package Due Date and Time: November 9, 2026, by 3:00pm ET […] Following a decisional abstract review, selected proposers will be invited to submit an Oral Presentation Proposal (OPP) Package to present their program proposals to the DARPA Firefox program team."
           }
         }
-      ]
+      ],
+      "reviewed_snapshot": {
+        "notice_id": "182eab6ca77d465f931c6dc118b939ca",
+        "latest_notice_id": "182eab6ca77d465f931c6dc118b939ca",
+        "latest": true,
+        "status": "published",
+        "archived": false,
+        "cancelled": false,
+        "deleted": false,
+        "title": "Firefox",
+        "solicitation_number": "DARPA-PS-26-137",
+        "organization_id": "500035490",
+        "notice_type": "o",
+        "classification_code": "AC12",
+        "naics_codes": [
+          "541714"
+        ],
+        "set_asides": [],
+        "posted_at": "2026-09-16T20:57:54.941+00:00",
+        "modified_at": "2026-09-16T20:57:54.941+00:00",
+        "response_deadline": "2026-11-09T15:00:00",
+        "response_timezone": "America/New_York",
+        "archive_date": "2026-12-09",
+        "description_sha256": "b95ce4ca1b3c4a4530278990adaa3087adb69829551b135573f477dd1dd8da48",
+        "resources_sha256": "ff918289f4c05bb97f361e538c6d36a72ed6134bcbabfe9f10917da1c4c47e17",
+        "review_sha256": "0f7e0c041ac5e8c14014c0f0524b6eb2453bc0e5c0367f3edcb05f28423daa94"
+      }
     },
     {
-      "notice_id": "d554d75951a340fcbed17668b1864648",
+      "notice_id": "e86bce2c7d594d8ba016060da00e8a59",
       "solicitation_number": "DARPA-PS-26-138",
       "organization_id": "500035490",
       "sponsor": "Defense Advanced Research Projects Agency",
-      "evidence_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/c205517ab8874e0e82771331f68f370f/download",
+      "evidence_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/8c083295fbb841d28545554b52a2bc23/download",
       "academic_eligibility_quote": "and research institutions as defined in 15 U.S.C. § 632.",
-      "verified_on": "2026-10-13",
-      "review_after": "2026-11-12",
-      "review_sha256": "a30ff3a4040581fd357877b399ba86d723684e8ec2961c2249529df1560519d8",
+      "verified_on": "2026-10-18",
+      "review_after": "2026-11-17",
+      "review_sha256": "7d852d33cc985ede59a6477278503b90a67563dfd85a8479efe6c351131d226f",
       "summary": "Develop theoretical and computational tools for resilient market design; pilot scope covers TA1 and TA2 only.",
       "scope_note": "Exclude TA3: TOP SECRET//SCI//SAR work and classified entry prerequisites. Never present whole solicitation as unrestricted. CMMC1 for FCI; CMMC2 for CUI. Segregate fundamental research from CUI. FFRDC/UARC participation conditions and conflicts review. Only unclassified research not requiring CUI access or CMMC Level 2 is approved for this catalog scope.",
       "cycles": [
@@ -294,9 +476,9 @@
             "timezone": "America/New_York",
             "required": true,
             "invitation_required": false,
-            "note": "Required TA1/TA2 abstract through BAAT. TA3 excluded. Source: solicitation PDF pages 4 and 19.",
-            "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/c205517ab8874e0e82771331f68f370f/download",
-            "quote": "Abstract Due: October 22, 2026 by 2:00 PM […] Proposers are required to submit an abstract in advance of a full proposal submission to minimize effort and reduce the potential expense of preparing full proposals."
+            "note": "Required TA1/TA2 or combined TA1/TA2 abstract through BAAT. TA3 excluded. Source: Amendment 01 PDF pages 5 and 20.",
+            "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/8c083295fbb841d28545554b52a2bc23/download",
+            "quote": "TA1, TA2, and TA1/TA2 Abstract Due: October 22, 2026 by 2:00 PM […] Proposers are required to submit an abstract in advance of a full proposal submission to minimize effort and reduce the potential expense of preparing full proposals."
           },
           "full": {
             "kind": "full_application",
@@ -305,12 +487,38 @@
             "timezone": "America/New_York",
             "required": true,
             "invitation_required": true,
-            "note": "Only proposers receiving an Invitation to Proceed may advance. Source: solicitation PDF pages 4 and 25.",
-            "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/c205517ab8874e0e82771331f68f370f/download",
-            "quote": "Proposal Due: December 7, 2026 by 2:00 PM […] Only proposers receiving an Invitation to Proceed based on a submitted abstract may advance to the proposal phase."
+            "note": "Only proposers receiving an Invitation to Proceed may advance. Source: Amendment 01 PDF pages 5 and 26.",
+            "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/8c083295fbb841d28545554b52a2bc23/download",
+            "quote": "TA1, TA2, and TA1/TA2 Proposal Due: December 7, 2026 by 2:00 PM […] Only proposers receiving an Invitation to Proceed based on a submitted abstract may advance to the proposal phase."
           }
         }
-      ]
+      ],
+      "reviewed_snapshot": {
+        "notice_id": "e86bce2c7d594d8ba016060da00e8a59",
+        "latest_notice_id": "e86bce2c7d594d8ba016060da00e8a59",
+        "latest": true,
+        "status": "published",
+        "archived": false,
+        "cancelled": false,
+        "deleted": false,
+        "title": "Intrinsic Market Resilience (IMR)",
+        "solicitation_number": "DARPA-PS-26-138",
+        "organization_id": "500035490",
+        "notice_type": "o",
+        "classification_code": "AC12",
+        "naics_codes": [
+          "541715"
+        ],
+        "set_asides": [],
+        "posted_at": "2026-10-16T17:57:28.387+00:00",
+        "modified_at": "2026-10-16T17:57:28.387+00:00",
+        "response_deadline": "2026-12-07T14:00:00",
+        "response_timezone": "America/New_York",
+        "archive_date": "2027-01-06",
+        "description_sha256": "f16ac79e8a0279ea732e3edb8357896f959ce201929eb5a0fae80e070ebb0d08",
+        "resources_sha256": "24b741d959db341155321f67d3d3e4dacd52429cb63f78c36add658b15d28b52",
+        "review_sha256": "7d852d33cc985ede59a6477278503b90a67563dfd85a8479efe6c351131d226f"
+      }
     },
     {
       "notice_id": "4180ee1405cc4aadbd14f5830c55e900",
@@ -350,7 +558,33 @@
             "quote": "Proposals will only be accepted that respond to a specific written request from the Government."
           }
         }
-      ]
+      ],
+      "reviewed_snapshot": {
+        "notice_id": "4180ee1405cc4aadbd14f5830c55e900",
+        "latest_notice_id": "4180ee1405cc4aadbd14f5830c55e900",
+        "latest": true,
+        "status": "published",
+        "archived": false,
+        "cancelled": false,
+        "deleted": false,
+        "title": "NEEDIPEDIA BROAD AGENCY ANNOUNCEMENT - BAA",
+        "solicitation_number": "HHM402-23-S-0001",
+        "organization_id": "100525164",
+        "notice_type": "o",
+        "classification_code": "AC14",
+        "naics_codes": [
+          "54171"
+        ],
+        "set_asides": [],
+        "posted_at": "2025-12-22T19:13:32.724+00:00",
+        "modified_at": "2025-12-22T19:13:32.729+00:00",
+        "response_deadline": "2028-12-26T12:59:00-05:00",
+        "response_timezone": "America/New_York",
+        "archive_date": "2029-01-10",
+        "description_sha256": "2281abd814c2e855a313cc08dd305acacaf9496a99871968295ab0e39063ea80",
+        "resources_sha256": "7491277631d59877db7fd43b6a726ccae85f6949cbf514c92aa3e6325e392179",
+        "review_sha256": "1af32d0d86342043647b9a15ff50fe0e8083d82533f0c64d800c38f2c9406b59"
+      }
     },
     {
       "notice_id": "f727147c651f4d63b6ebb629d3feb37a",
@@ -390,7 +624,33 @@
             "quote": "DLA reserves the right to request technical proposals from any, all, some, or none of the Respondents submitting White Papers."
           }
         }
-      ]
+      ],
+      "reviewed_snapshot": {
+        "notice_id": "f727147c651f4d63b6ebb629d3feb37a",
+        "latest_notice_id": "f727147c651f4d63b6ebb629d3feb37a",
+        "latest": true,
+        "status": "published",
+        "archived": false,
+        "cancelled": false,
+        "deleted": false,
+        "title": "DLA Emergent IV Research and Development Program",
+        "solicitation_number": "BAA0001-22_",
+        "organization_id": "500035091",
+        "notice_type": "k",
+        "classification_code": "AC33",
+        "naics_codes": [
+          "541715"
+        ],
+        "set_asides": [],
+        "posted_at": "2026-06-02T12:55:24.853+00:00",
+        "modified_at": "2026-06-02T12:55:24.861+00:00",
+        "response_deadline": "2027-06-12T17:00:00-04:00",
+        "response_timezone": "America/New_York",
+        "archive_date": "2027-06-27",
+        "description_sha256": "93b9e80b09eeb2bfcdbdefd96e6e613cd1583a6d9110e46793ba5d4a16ca3528",
+        "resources_sha256": "689a9124f60a7fea7a13af48aeb0e2509b38746ed55a8a18e8ec598836a20dba",
+        "review_sha256": "f7993cd0ddbaac41b9e87e9467e4de8d806f1dcd921760fae7e6583413551ca2"
+      }
     },
     {
       "notice_id": "3dc0d137a9404adab1b8623c4e279f31",
@@ -430,7 +690,33 @@
             "quote": "When requested to submit a proposal after a successful white paper submission"
           }
         }
-      ]
+      ],
+      "reviewed_snapshot": {
+        "notice_id": "3dc0d137a9404adab1b8623c4e279f31",
+        "latest_notice_id": "3dc0d137a9404adab1b8623c4e279f31",
+        "latest": true,
+        "status": "published",
+        "archived": false,
+        "cancelled": false,
+        "deleted": false,
+        "title": "Strategic Distribution and Disposition SDD",
+        "solicitation_number": "BAA0001-23_",
+        "organization_id": "500035091",
+        "notice_type": "o",
+        "classification_code": "AC33",
+        "naics_codes": [
+          "541715"
+        ],
+        "set_asides": [],
+        "posted_at": "2024-03-21T13:35:55.437+00:00",
+        "modified_at": "2024-03-21T13:35:55.441+00:00",
+        "response_deadline": "2028-02-07T23:59:00-05:00",
+        "response_timezone": "America/New_York",
+        "archive_date": "2028-02-07",
+        "description_sha256": "4c55b447711281d345e91b875ece2d5d628a1551c3404df5c4a4e42b5afae76e",
+        "resources_sha256": "bc7846aa5a4246901b168a7ec69916e48e80b4c97a7c721cc7fd5c969b2275e8",
+        "review_sha256": "2701879ba961f6568d08aa03e47663ea2d17ef19d57d02b93a4d41db27212055"
+      }
     },
     {
       "notice_id": "c331e8db2d6746e9b0b9e8712a4679f7",
@@ -470,7 +756,33 @@
             "quote": "proposals submitted once the BAA reopens and vendors are asked to submit proposals after the review of submitted White Papers."
           }
         }
-      ]
+      ],
+      "reviewed_snapshot": {
+        "notice_id": "c331e8db2d6746e9b0b9e8712a4679f7",
+        "latest_notice_id": "c331e8db2d6746e9b0b9e8712a4679f7",
+        "latest": true,
+        "status": "published",
+        "archived": false,
+        "cancelled": false,
+        "deleted": false,
+        "title": "DLA Research and Development; Acquisition Modernization Technology Research (AMTR) SP4701-23-B-0001",
+        "solicitation_number": "SP4701-23-B-0001",
+        "organization_id": "500035091",
+        "notice_type": "k",
+        "classification_code": "AC33",
+        "naics_codes": [
+          "541715"
+        ],
+        "set_asides": [],
+        "posted_at": "2025-10-03T14:38:10.404+00:00",
+        "modified_at": "2025-10-03T14:38:10.409+00:00",
+        "response_deadline": "2028-05-29T23:59:00-04:00",
+        "response_timezone": "America/New_York",
+        "archive_date": "2028-06-13",
+        "description_sha256": "2202614cc0239f37da4d519e74f39541f0772a9e350bc9c5a69c34b26a463a75",
+        "resources_sha256": "c57d6a24aac5b241f3934d7e931ecb85ee2467e19fd9b4bd6632055f204cce85",
+        "review_sha256": "32596211cfcf80812c73afc587b8695348b31de9af3bd99c3232adbebecc6bc2"
+      }
     },
     {
       "notice_id": "3510fb2e9dbd4c89bd826b06dd2ea284",
@@ -510,7 +822,33 @@
             "quote": "The Contracting Officer will request proposals on White Papers that are of interest to the Government."
           }
         }
-      ]
+      ],
+      "reviewed_snapshot": {
+        "notice_id": "3510fb2e9dbd4c89bd826b06dd2ea284",
+        "latest_notice_id": "3510fb2e9dbd4c89bd826b06dd2ea284",
+        "latest": true,
+        "status": "published",
+        "archived": false,
+        "cancelled": false,
+        "deleted": false,
+        "title": "Strategic Materials Research & Development (R&D) Program",
+        "solicitation_number": "SP4701-25-B-0001",
+        "organization_id": "500035091",
+        "notice_type": "o",
+        "classification_code": "AC33",
+        "naics_codes": [
+          "541715"
+        ],
+        "set_asides": [],
+        "posted_at": "2026-08-17T18:46:27.256+00:00",
+        "modified_at": "2026-08-17T18:46:27.263+00:00",
+        "response_deadline": "2025-03-15T12:00:00-04:00",
+        "response_timezone": "America/New_York",
+        "archive_date": "2030-01-15",
+        "description_sha256": "0ee2afad8df5d8518c107d6a16f50d4a776a61b84d3ccf6c2fa931fe43e5c05c",
+        "resources_sha256": "56349230eaf4ccd6f6ab8f08f4237e118213ea6dcbaa4913104e640f1818eb7b",
+        "review_sha256": "bc251d40bce92ab71eba5fdad148a6c67e42ec41a76fbd88a0b56985d4fc1057"
+      }
     },
     {
       "notice_id": "c543f1934c4b495c838352fdc7087536",
@@ -550,7 +888,35 @@
             "quote": "Submission of a technical proposal, only if requested by the DLA Contracting Officer"
           }
         }
-      ]
+      ],
+      "reviewed_snapshot": {
+        "notice_id": "c543f1934c4b495c838352fdc7087536",
+        "latest_notice_id": "c543f1934c4b495c838352fdc7087536",
+        "latest": true,
+        "status": "published",
+        "archived": false,
+        "cancelled": false,
+        "deleted": false,
+        "title": "Technologies for Forging",
+        "solicitation_number": "SP4701-25-B-0002",
+        "organization_id": "500035091",
+        "notice_type": "k",
+        "classification_code": "AC33",
+        "naics_codes": [
+          "541715"
+        ],
+        "set_asides": [
+          "NONE"
+        ],
+        "posted_at": "2025-08-13T17:24:20.612+00:00",
+        "modified_at": "2025-08-13T17:24:20.614+00:00",
+        "response_deadline": "2030-08-12T23:59:00-04:00",
+        "response_timezone": "America/New_York",
+        "archive_date": "2030-08-27",
+        "description_sha256": "795ce11fc81bfbbdc35666d062f4bc88790a7c0f03a7085930262283d807ed6b",
+        "resources_sha256": "9ef10bba0abe882fb7ada2a8a4284bed69b9332243f0a6ca6a27acfbe057865f",
+        "review_sha256": "540a3324fe0ac594cdb58412980628961d80a430007d2fe3fa836c58436d2f88"
+      }
     },
     {
       "notice_id": "d76bdb7bdda443e3b42e4214118cc746",
@@ -590,7 +956,33 @@
             "quote": "If such a technical concept is deemed by the Government to be of interest, the Government may request a full cost and technical proposal"
           }
         }
-      ]
+      ],
+      "reviewed_snapshot": {
+        "notice_id": "d76bdb7bdda443e3b42e4214118cc746",
+        "latest_notice_id": "d76bdb7bdda443e3b42e4214118cc746",
+        "latest": true,
+        "status": "published",
+        "archived": false,
+        "cancelled": false,
+        "deleted": false,
+        "title": "Logistics Technology Research (LTR) Program",
+        "solicitation_number": "SP470124B0001_",
+        "organization_id": "500035091",
+        "notice_type": "o",
+        "classification_code": "AC33",
+        "naics_codes": [
+          "541715"
+        ],
+        "set_asides": [],
+        "posted_at": "2024-12-11T15:44:25.421+00:00",
+        "modified_at": "2024-12-11T15:44:25.427+00:00",
+        "response_deadline": "2029-08-27T23:59:00-04:00",
+        "response_timezone": "America/New_York",
+        "archive_date": "2029-08-27",
+        "description_sha256": "98de3bed919ab4936151f97466338c197545cf2ae81f0efbd63c03e68ce59123",
+        "resources_sha256": "47f994b557135f6fb66f6bd61a13f3c29a0fc1aa3c7b0265158f3fb3e9b538ba",
+        "review_sha256": "8f642636ecfd681f80f9f01117b5819fea6417ca033464cc20fe2d6c1f19805a"
+      }
     },
     {
       "notice_id": "c7652cf54cb44eacb8de64f6f3f1fe1f",
@@ -630,7 +1022,33 @@
             "quote": "If such a technical concept is deemed by the Government to be of interest, the Government may request a full cost and technical proposal"
           }
         }
-      ]
+      ],
+      "reviewed_snapshot": {
+        "notice_id": "c7652cf54cb44eacb8de64f6f3f1fe1f",
+        "latest_notice_id": "c7652cf54cb44eacb8de64f6f3f1fe1f",
+        "latest": true,
+        "status": "published",
+        "archived": false,
+        "cancelled": false,
+        "deleted": false,
+        "title": "Military Unique Sustainment Technology III (MUST III) Research and Development SP4701-26-B-0001",
+        "solicitation_number": "SP470126B0001_",
+        "organization_id": "500035091",
+        "notice_type": "o",
+        "classification_code": "AC33",
+        "naics_codes": [
+          "541715"
+        ],
+        "set_asides": [],
+        "posted_at": "2026-08-13T14:07:39.371+00:00",
+        "modified_at": "2026-08-13T14:07:39.375+00:00",
+        "response_deadline": "2030-12-02T23:59:00-05:00",
+        "response_timezone": "America/New_York",
+        "archive_date": "2030-12-03",
+        "description_sha256": "aa3ebaf8e122bd7d4f40e20dd467c37fdefa50172068017fdddc07dd9b339002",
+        "resources_sha256": "14565a5cbf8ad4f2d6baed96a7545405b6b2ae70cf253f331e4e8a23bb022690",
+        "review_sha256": "efbbf9fd2b61f09848e47186c2b4f8526d6305f97ae112089cdd845d7cb89c48"
+      }
     },
     {
       "notice_id": "53a81a363d9140b9b58207cae11e22ec",
@@ -670,7 +1088,35 @@
             "quote": "Submission of a technical proposal only if requested by the DLA Contracting Officer or Alternate POC"
           }
         }
-      ]
+      ],
+      "reviewed_snapshot": {
+        "notice_id": "53a81a363d9140b9b58207cae11e22ec",
+        "latest_notice_id": "53a81a363d9140b9b58207cae11e22ec",
+        "latest": true,
+        "status": "published",
+        "archived": false,
+        "cancelled": false,
+        "deleted": false,
+        "title": "DLA Battery Network IV (BATTNET) Broad Agency Announcement",
+        "solicitation_number": "SP470126B0006",
+        "organization_id": "500035091",
+        "notice_type": "k",
+        "classification_code": "AC33",
+        "naics_codes": [
+          "541715"
+        ],
+        "set_asides": [
+          "NONE"
+        ],
+        "posted_at": "2026-08-11T17:20:01.904+00:00",
+        "modified_at": "2026-08-11T17:20:01.911+00:00",
+        "response_deadline": "2031-08-09T14:00:00-04:00",
+        "response_timezone": "America/New_York",
+        "archive_date": "2031-08-24",
+        "description_sha256": "bc493a9685d6d95abc307488ea9391d73c40b9d8e07d3eaad3624859dedf7616",
+        "resources_sha256": "2f0fe3408c03eea508231143c44308b199d6957079eb2bf21f8d7ceb5eb89d06",
+        "review_sha256": "adcd7eec82a1ea8bdf8334d04210c80ba14c64e874bedf1eb29c43645b8f1d26"
+      }
     },
     {
       "notice_id": "54e1bd529fd84e7db45fe5a236374ca0",
@@ -710,7 +1156,35 @@
             "quote": "White papers evaluated to have significant merit may be invited to submit a complete detailed proposal."
           }
         }
-      ]
+      ],
+      "reviewed_snapshot": {
+        "notice_id": "54e1bd529fd84e7db45fe5a236374ca0",
+        "latest_notice_id": "54e1bd529fd84e7db45fe5a236374ca0",
+        "latest": true,
+        "status": "published",
+        "archived": false,
+        "cancelled": false,
+        "deleted": false,
+        "title": "DLA-SM Broad Agency Announcement",
+        "solicitation_number": "SP800026BBAA0",
+        "organization_id": "500023954",
+        "notice_type": "o",
+        "classification_code": "AJ12",
+        "naics_codes": [
+          "541720"
+        ],
+        "set_asides": [
+          "NONE"
+        ],
+        "posted_at": "2026-06-02T18:53:14.432+00:00",
+        "modified_at": "2026-06-02T18:53:14.436+00:00",
+        "response_deadline": "2029-01-30T09:00:00-05:00",
+        "response_timezone": "America/New_York",
+        "archive_date": "2028-09-15",
+        "description_sha256": "194021cdb9d868094bbba0b98d94e6a2efc63f9c5eec66ba1fdb9de993d17bf6",
+        "resources_sha256": "8b15d0f58b638601bac90db2d84469d95c4e9df9fc39d11f0a1aa5342b192996",
+        "review_sha256": "324e4ee17015e96a78adb3afba4150b1453af47e3b224fa26e8ee340f2bcb9ec"
+      }
     },
     {
       "notice_id": "7e9ec160dbe64a47aa768c225bb9f9a6",
@@ -740,7 +1214,35 @@
           },
           "full": null
         }
-      ]
+      ],
+      "reviewed_snapshot": {
+        "notice_id": "7e9ec160dbe64a47aa768c225bb9f9a6",
+        "latest_notice_id": "7e9ec160dbe64a47aa768c225bb9f9a6",
+        "latest": true,
+        "status": "published",
+        "archived": false,
+        "cancelled": false,
+        "deleted": false,
+        "title": "SDA Proliferated Warfighter Space Architecture (PWSA) - Systems, Technologies, and Emerging Capabilities (STEC) Broad Agency Announcement (BAA)",
+        "solicitation_number": "FA240126S0001",
+        "organization_id": "500185060",
+        "notice_type": "o",
+        "classification_code": "AC13",
+        "naics_codes": [
+          "541715"
+        ],
+        "set_asides": [
+          "NONE"
+        ],
+        "posted_at": "2026-03-13T15:35:42.405+00:00",
+        "modified_at": "2026-03-13T15:35:42.410+00:00",
+        "response_deadline": "2027-03-03T00:00:00-05:00",
+        "response_timezone": "America/New_York",
+        "archive_date": "2027-03-18",
+        "description_sha256": "ca1046e99310d6913c83d80daf5bc9873d8e9d119478ef77a90d6e271c7d9e57",
+        "resources_sha256": "eada78a2031b3f770f627ac5baf8500769aef05afd36bff8cd3f4aa551ddb901",
+        "review_sha256": "382371702f1642ce2c62dc6cb7f99a108d2ccd032e611b61c8d0617312e04a0a"
+      }
     },
     {
       "notice_id": "e3d96ffd4a0a48b080e09dd5af732cc8",
@@ -780,7 +1282,35 @@
             "quote": "Advancement from one phase to the next is by invitation from the FAA and is based on the Government's evaluation of the submission under the applicable evaluation procedures."
           }
         }
-      ]
+      ],
+      "reviewed_snapshot": {
+        "notice_id": "e3d96ffd4a0a48b080e09dd5af732cc8",
+        "latest_notice_id": "e3d96ffd4a0a48b080e09dd5af732cc8",
+        "latest": true,
+        "status": "published",
+        "archived": false,
+        "cancelled": false,
+        "deleted": false,
+        "title": "Federal Aviation Administration (FAA) Research And Commercial Solutions Opening (RCSO) Area Of Interest (AOI) - Complexity Of Systems And Operations",
+        "solicitation_number": "693KA8-27-T-00003",
+        "organization_id": "500000118",
+        "notice_type": "o",
+        "classification_code": "AS25",
+        "naics_codes": [
+          "541715"
+        ],
+        "set_asides": [
+          "NONE"
+        ],
+        "posted_at": "2026-10-06T17:10:45.078+00:00",
+        "modified_at": "2026-10-06T17:10:45.082+00:00",
+        "response_deadline": "2026-11-02T18:00:00-05:00",
+        "response_timezone": "America/New_York",
+        "archive_date": "2028-12-31",
+        "description_sha256": "2e3fc30b8f63737c92b4c2b6b9b0b56bf87038450766535328e23860eccf79f4",
+        "resources_sha256": "9713b49f88fe994cef4a435ce568ffaaeb313042f1eaf3165a00f4eec38797b8",
+        "review_sha256": "a37d74e3ddd2cc724d3b627b733f9300388b2427443572156c4a4b27175f8bf4"
+      }
     },
     {
       "notice_id": "b6b54d0c14004fd893f7d44a725dd206",
@@ -820,7 +1350,33 @@
             "quote": "DO NOT submit a formal proposal until requested by the FBI Contracting Officer."
           }
         }
-      ]
+      ],
+      "reviewed_snapshot": {
+        "notice_id": "b6b54d0c14004fd893f7d44a725dd206",
+        "latest_notice_id": "b6b54d0c14004fd893f7d44a725dd206",
+        "latest": true,
+        "status": "published",
+        "archived": false,
+        "cancelled": false,
+        "deleted": false,
+        "title": "Federal Bureau of Investigation (FBI) - Office of Chief Information Officer (OCIO) Innovation Ventures Office (IVO) Broad Agency Announcement (BAA)",
+        "solicitation_number": "DJF-23-1200-BAA-05172023",
+        "organization_id": "100500172",
+        "notice_type": "s",
+        "classification_code": "AJ11",
+        "naics_codes": [
+          "541330"
+        ],
+        "set_asides": [],
+        "posted_at": "2026-06-10T16:55:40.931+00:00",
+        "modified_at": "2026-06-10T16:55:40.940+00:00",
+        "response_deadline": "2027-05-16T16:00:00-04:00",
+        "response_timezone": "America/New_York",
+        "archive_date": "2027-06-16",
+        "description_sha256": "62525aff0219e17f49c53357d3303d87215330bbd82b51d7317df1f0ba5259f4",
+        "resources_sha256": "a05509febc2cd8333aefedafc03a3074983eaa7e6fc59dfb55ffa36fbbfe0c03",
+        "review_sha256": "94658dc7ea5bf4517a13174f21953d58a2be86ee65c3624d62d74cf85c7d6dc1"
+      }
     },
     {
       "notice_id": "e7c3faad3433434aaf41a5eb5ce11920",
@@ -860,7 +1416,33 @@
             "quote": "If the preproposal for a procurement contract is accepted, ACC-APG Edgewood Contracting Division will send a Request For Full Proposal (RFFP)"
           }
         }
-      ]
+      ],
+      "reviewed_snapshot": {
+        "notice_id": "e7c3faad3433434aaf41a5eb5ce11920",
+        "latest_notice_id": "e7c3faad3433434aaf41a5eb5ce11920",
+        "latest": true,
+        "status": "published",
+        "archived": false,
+        "cancelled": false,
+        "deleted": false,
+        "title": "BROAD AGENCY ANNOUNCEMENT (BAA) RESEARCH AND DEVELOPMENT IN SUPPORT OF THE JOINT PROGRAM EXECUTIVE OFFICE FOR CHEMICAL, BIOLOGICAL, RADIOLOGICAL AND NUCLEAR DEFENSE (JPEO-CBRND), JPM MEDICAL AND JPL EB",
+        "solicitation_number": "CBRND-BAA-22-01",
+        "organization_id": "500038578",
+        "notice_type": "o",
+        "classification_code": "AC12",
+        "naics_codes": [
+          "541715"
+        ],
+        "set_asides": [],
+        "posted_at": "2026-03-25T16:55:44.542+00:00",
+        "modified_at": "2026-03-25T16:55:44.545+00:00",
+        "response_deadline": "2030-12-31T23:59:00-05:00",
+        "response_timezone": "America/New_York",
+        "archive_date": "2031-01-15",
+        "description_sha256": "734b12dffbd442fac598d2b88087f8bb394c3ade4f5614c5d5981a29660877d1",
+        "resources_sha256": "f00d921a5b6f676607111dbf71c8054593d60cc52baaa45f66c128e736874f18",
+        "review_sha256": "854543aaf7d38083309d402481c01d4a75de802588cfe1dd9c008fbd07d6057d"
+      }
     },
     {
       "notice_id": "812c81b0f0b84943be12a5f29615d3c8",
@@ -890,7 +1472,35 @@
           },
           "full": null
         }
-      ]
+      ],
+      "reviewed_snapshot": {
+        "notice_id": "812c81b0f0b84943be12a5f29615d3c8",
+        "latest_notice_id": "812c81b0f0b84943be12a5f29615d3c8",
+        "latest": true,
+        "status": "published",
+        "archived": false,
+        "cancelled": false,
+        "deleted": false,
+        "title": "Lunar Enabling Infrastructure Accelerator (LEIA) -Broad Agency Announcement (BAA) NextSTEP-3 Appendix A - Final Solicitation",
+        "solicitation_number": "80GRC026R0008",
+        "organization_id": "100164057",
+        "notice_type": "o",
+        "classification_code": "AR12",
+        "naics_codes": [
+          "541715"
+        ],
+        "set_asides": [
+          "NONE"
+        ],
+        "posted_at": "2026-10-09T17:40:38.275+00:00",
+        "modified_at": "2026-10-09T17:40:38.281+00:00",
+        "response_deadline": "2026-10-15T17:00:00-04:00",
+        "response_timezone": "America/New_York",
+        "archive_date": "2026-10-30",
+        "description_sha256": "c8c03f0b546c86fddd241ef19c60d3f47725e7f7eee3232644c0c00613150f1a",
+        "resources_sha256": "b521521c00d921f3f1d95ab0017a784475d08d7d06f2d76a263cb823d5737e81",
+        "review_sha256": "99e106c0b2bc6285f8ddf4d126c381a018fbfa8b9427a7e1cd99f82a8c324822"
+      }
     },
     {
       "notice_id": "84cb4b33be0641c1b54c4de34b542ed5",
@@ -930,7 +1540,33 @@
             "quote": "Proposals Due 11 December 2026 at 1100 EST […] Regardless of NGA’s abstract feedback, Offerors may choose to submit a full proposal."
           }
         }
-      ]
+      ],
+      "reviewed_snapshot": {
+        "notice_id": "84cb4b33be0641c1b54c4de34b542ed5",
+        "latest_notice_id": "84cb4b33be0641c1b54c4de34b542ed5",
+        "latest": true,
+        "status": "published",
+        "archived": false,
+        "cancelled": false,
+        "deleted": false,
+        "title": "NGA - Boosting Innovative GEOINT - Science & Technology Broad Agency Announcement (BIG-ST BAA): Topic # 07 – Lidar Analysis for Surface & Environmental Reconnaissance (LASER)",
+        "solicitation_number": "HM047627XXXX",
+        "organization_id": "500038581",
+        "notice_type": "o",
+        "classification_code": "AC13",
+        "naics_codes": [
+          "541715"
+        ],
+        "set_asides": [],
+        "posted_at": "2026-10-01T18:24:21.474+00:00",
+        "modified_at": "2026-10-01T18:24:21.479+00:00",
+        "response_deadline": "2026-12-11T23:59:00-05:00",
+        "response_timezone": "America/New_York",
+        "archive_date": "2026-12-15",
+        "description_sha256": "bb6c249d941d76727a88a6dae2533a038a95978d6732994490c3d9be9e5fba07",
+        "resources_sha256": "e24939445a82ed28578a971067841663b7c16518a7cf6e88267bec9abac74687",
+        "review_sha256": "52a242731315a9c56987c5ceeb2df7ba0c1b16576f420a96c173baa3e28f70b5"
+      }
     },
     {
       "notice_id": "5f75330f42ee4145990fe6a51a3dc84e",
@@ -960,7 +1596,35 @@
           },
           "full": null
         }
-      ]
+      ],
+      "reviewed_snapshot": {
+        "notice_id": "5f75330f42ee4145990fe6a51a3dc84e",
+        "latest_notice_id": "5f75330f42ee4145990fe6a51a3dc84e",
+        "latest": true,
+        "status": "published",
+        "archived": false,
+        "cancelled": false,
+        "deleted": false,
+        "title": "2027 NIAID DMID Omnibus Broad Agency Announcement: Development of Medical Interventions for Infectious Diseases",
+        "solicitation_number": "HHS-NIH-NIAID-BAA2026-1",
+        "organization_id": "100188096",
+        "notice_type": "o",
+        "classification_code": "AN12",
+        "naics_codes": [
+          "541715"
+        ],
+        "set_asides": [
+          "NONE"
+        ],
+        "posted_at": "2026-10-09T20:58:18.754+00:00",
+        "modified_at": "2026-10-09T20:58:18.763+00:00",
+        "response_deadline": "2026-12-08T15:00:00-05:00",
+        "response_timezone": "America/New_York",
+        "archive_date": "2026-12-23",
+        "description_sha256": "4c54dfea9c7c30dd1a236fc76a924c64a1458ffd958257ae804677ef79ed25d3",
+        "resources_sha256": "515ec872a58dd2828b2812929d625b42447f91f949d19cee766b2b9ca80d4a6b",
+        "review_sha256": "9ba9e0894ef65808137e694ab7d652783cba32bc33577b7d0f5f6e0594cc00d8"
+      }
     },
     {
       "notice_id": "b9d86f57c8a348238b5322eda840c54e",
@@ -1000,7 +1664,35 @@
             "quote": "Any Offeror whose proposal was not identified as being of particular value to the Government is ineligible to submit a full proposal under this BAA."
           }
         }
-      ]
+      ],
+      "reviewed_snapshot": {
+        "notice_id": "b9d86f57c8a348238b5322eda840c54e",
+        "latest_notice_id": "b9d86f57c8a348238b5322eda840c54e",
+        "latest": true,
+        "status": "published",
+        "archived": false,
+        "cancelled": false,
+        "deleted": false,
+        "title": "Broad Agency Announcement (BAA) Naval Air Warfare Center Aircraft Division (NAWCAD) Webster Outlying Field (WOLF) Airborne Systems Integration (ASI) Division",
+        "solicitation_number": "N68335-26-R-0458",
+        "organization_id": "100255266",
+        "notice_type": "s",
+        "classification_code": "AC33",
+        "naics_codes": [
+          "541330"
+        ],
+        "set_asides": [
+          "NONE"
+        ],
+        "posted_at": "2026-04-02T16:09:18.009+00:00",
+        "modified_at": "2026-04-02T16:09:18.013+00:00",
+        "response_deadline": "2027-04-10T13:00:00-04:00",
+        "response_timezone": "America/New_York",
+        "archive_date": "2027-04-25",
+        "description_sha256": "2f3a6da769259f98a3a645a8507b5e50a18e9058eb0d551ad3f717370f4f69a3",
+        "resources_sha256": "c23b8e13572c9436e65d5537b3f7cc467243060151b1aa170244ce616d90cb74",
+        "review_sha256": "3df9c08193ccff4a4fab108de8d871f3b8ab979f4b8b8d4f837d4c18b67edf62"
+      }
     },
     {
       "notice_id": "3918e78c2c93423594588999696598cb",
@@ -1030,7 +1722,33 @@
           },
           "full": null
         }
-      ]
+      ],
+      "reviewed_snapshot": {
+        "notice_id": "3918e78c2c93423594588999696598cb",
+        "latest_notice_id": "3918e78c2c93423594588999696598cb",
+        "latest": true,
+        "status": "published",
+        "archived": false,
+        "cancelled": false,
+        "deleted": false,
+        "title": "A-- NAWCTSD R&D Broad Agency Announcement",
+        "solicitation_number": "N61340-26-S-0001",
+        "organization_id": "500045708",
+        "notice_type": "p",
+        "classification_code": "AJ12",
+        "naics_codes": [
+          "541720"
+        ],
+        "set_asides": [],
+        "posted_at": "2026-05-14T21:06:58.305+00:00",
+        "modified_at": "2026-05-14T21:06:58.309+00:00",
+        "response_deadline": "2031-01-25T18:00:00-05:00",
+        "response_timezone": "America/New_York",
+        "archive_date": "2031-02-09",
+        "description_sha256": "21ecc17b8d6ae72f63305c5971de29e462672988ad2a6bf3a487af900e8e1e5f",
+        "resources_sha256": "bf0da48edd7c8c433fa491e5d4265eca418313d9cfb5a38c20cb0efb061ef238",
+        "review_sha256": "073ce08b342574293114a49150614c7af234bb7c7eb4cd4512d37e034125cd62"
+      }
     },
     {
       "notice_id": "38b71a2fd903432ca02100ea9177b738",
@@ -1060,7 +1778,33 @@
           },
           "full": null
         }
-      ]
+      ],
+      "reviewed_snapshot": {
+        "notice_id": "38b71a2fd903432ca02100ea9177b738",
+        "latest_notice_id": "38b71a2fd903432ca02100ea9177b738",
+        "latest": true,
+        "status": "published",
+        "archived": false,
+        "cancelled": false,
+        "deleted": false,
+        "title": "Broad Agency Announcement (BAA) for Naval Warfare and Weapons at NAWCWD, China Lake, CA.",
+        "solicitation_number": "N6893626R5014",
+        "organization_id": "100076489",
+        "notice_type": "s",
+        "classification_code": "AC11",
+        "naics_codes": [
+          "541715"
+        ],
+        "set_asides": [],
+        "posted_at": "2026-10-01T16:48:19.341+00:00",
+        "modified_at": "2026-10-01T16:48:19.344+00:00",
+        "response_deadline": "2027-09-30T16:00:00-08:00",
+        "response_timezone": "America/Los_Angeles",
+        "archive_date": "2027-10-04",
+        "description_sha256": "c6b45f39515b91eb12644466f05dbae981f667f12cc9f29f8459e0d3d9973326",
+        "resources_sha256": "1b773523b8c5daffc6f5dd58a675c2f1dfe6c2e3f1e13e3e066a38f4f04e70b5",
+        "review_sha256": "61a64cbd1b2803b9863b0ee74e903b29b2ae9235724b4ecffe0c173e91bfe3aa"
+      }
     },
     {
       "notice_id": "f0fbc0533b024e2fbfbdfe8b5bd2d81d",
@@ -1100,7 +1844,35 @@
             "quote": "will be notified if a detailed proposal is requested."
           }
         }
-      ]
+      ],
+      "reviewed_snapshot": {
+        "notice_id": "f0fbc0533b024e2fbfbdfe8b5bd2d81d",
+        "latest_notice_id": "f0fbc0533b024e2fbfbdfe8b5bd2d81d",
+        "latest": true,
+        "status": "published",
+        "archived": false,
+        "cancelled": false,
+        "deleted": false,
+        "title": "Command Wide Broad Agency Announcement for Naval Facilities Engineering and Expeditionary Warfare Center (NAVFAC EXWC) Research, Development, Testing, and Evaluation",
+        "solicitation_number": "N39430-26-S-5000",
+        "organization_id": "500045579",
+        "notice_type": "o",
+        "classification_code": "AJ11",
+        "naics_codes": [
+          "5417"
+        ],
+        "set_asides": [
+          "NONE"
+        ],
+        "posted_at": "2026-06-15T21:26:03.484+00:00",
+        "modified_at": "2026-06-15T21:26:03.489+00:00",
+        "response_deadline": "2027-06-14T16:00:00-07:00",
+        "response_timezone": "America/Los_Angeles",
+        "archive_date": "2027-06-29",
+        "description_sha256": "97e5f7398a68bcb89103e387cd810e01e2ce0a41c67a5bb57f94f068e1061f95",
+        "resources_sha256": "147e6fe56cbce71e9bab2d5c1925e9eee68e4bda219b44f9cd0ae6315f057d8f",
+        "review_sha256": "c84368c9ec8753a3d9689d8f80160e637ece2c0f361aa5b5f51894ad0d09c0d0"
+      }
     },
     {
       "notice_id": "fac0dcbe5eff43ab92e3dadb319daed1",
@@ -1140,7 +1912,33 @@
             "quote": "For those who are requested to submit proposals, NAVSEA reserves the right to award all, some, or none of the proposals received under this BAA."
           }
         }
-      ]
+      ],
+      "reviewed_snapshot": {
+        "notice_id": "fac0dcbe5eff43ab92e3dadb319daed1",
+        "latest_notice_id": "fac0dcbe5eff43ab92e3dadb319daed1",
+        "latest": true,
+        "status": "published",
+        "archived": false,
+        "cancelled": false,
+        "deleted": false,
+        "title": "RESEARCH AND DEVELOPMENT OF NAVAL POWER AND ENERGY SYSTEMS (N00024-19-R-4145 Broad Agency Announcement (BAA))",
+        "solicitation_number": "N00024-19-R4145",
+        "organization_id": "100076491",
+        "notice_type": "k",
+        "classification_code": "1905",
+        "naics_codes": [
+          "335311"
+        ],
+        "set_asides": [],
+        "posted_at": "2026-08-05T21:04:41.083+00:00",
+        "modified_at": "2026-08-05T21:04:41.087+00:00",
+        "response_deadline": "2028-02-06T17:00:00-05:00",
+        "response_timezone": "America/New_York",
+        "archive_date": "2028-02-21",
+        "description_sha256": "1918e84c312d669cb7a3795aa024cce45590ca9ff3d945f792119d29bab7a9cf",
+        "resources_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "review_sha256": "890fa48a8d7a500e9b527574ed4e72f6e663c1421c48a1d6cb65526eab24de64"
+      }
     },
     {
       "notice_id": "e2a7a0592bfc4d43a0ab18d0c39147d3",
@@ -1205,7 +2003,33 @@
             "quote": "The deadline for proposal submission is no later than 3:00 PM EST, 30 March 2028."
           }
         }
-      ]
+      ],
+      "reviewed_snapshot": {
+        "notice_id": "e2a7a0592bfc4d43a0ab18d0c39147d3",
+        "latest_notice_id": "e2a7a0592bfc4d43a0ab18d0c39147d3",
+        "latest": true,
+        "status": "published",
+        "archived": false,
+        "cancelled": false,
+        "deleted": false,
+        "title": "BROAD AGENCY ANNOUNCEMENT - BIOMEDICAL RESEARCH AND DIVING EQUIPMENT DEVELOPMENT",
+        "solicitation_number": "N0002427S0001",
+        "organization_id": "100076491",
+        "notice_type": "o",
+        "classification_code": "AN12",
+        "naics_codes": [
+          "541714"
+        ],
+        "set_asides": [],
+        "posted_at": "2026-09-23T19:53:15.532+00:00",
+        "modified_at": "2026-09-23T19:53:15.535+00:00",
+        "response_deadline": "2027-11-30T15:00:00-05:00",
+        "response_timezone": "America/New_York",
+        "archive_date": "2028-11-30",
+        "description_sha256": "09328d1741972a462a5cbe6a8e04368dfc3c5c26ef7060c5b130194bcc4b0113",
+        "resources_sha256": "f8d7df0cf7701fd1d3dc42d891105902d571cdf071d2cf560bcf521dd78fb434",
+        "review_sha256": "0d08da86ade8ca4fa796269e19313651297368f95674e9883118947807476d31"
+      }
     },
     {
       "notice_id": "d2bb23d781124b8690158100ce7d5f1e",
@@ -1245,7 +2069,33 @@
             "quote": "Any Offeror whose white paper technology was not identified as being of “particular value” to the Navy is ineligible to submit a full proposal under this sBAA."
           }
         }
-      ]
+      ],
+      "reviewed_snapshot": {
+        "notice_id": "d2bb23d781124b8690158100ce7d5f1e",
+        "latest_notice_id": "d2bb23d781124b8690158100ce7d5f1e",
+        "latest": true,
+        "status": "published",
+        "archived": false,
+        "cancelled": false,
+        "deleted": false,
+        "title": "ManTech special Broad Agency Announcement (sBAA): Accelerating Maritime Modernization: Innovation in Naval Manufacturing, Sustainment, and Industrial Base Capability",
+        "solicitation_number": "N0001426SB002",
+        "organization_id": "100076476",
+        "notice_type": "o",
+        "classification_code": "AC13",
+        "naics_codes": [
+          "541715"
+        ],
+        "set_asides": [],
+        "posted_at": "2026-09-17T10:52:23.848+00:00",
+        "modified_at": "2026-09-17T10:52:23.851+00:00",
+        "response_deadline": "2027-07-16T17:00:00-04:00",
+        "response_timezone": "America/New_York",
+        "archive_date": "2027-09-16",
+        "description_sha256": "0b4d0454036df4858385fcf628510622324f260a9d66ff830dbc1ca99d7c9a44",
+        "resources_sha256": "84d1c52398222bad80048d893801dbaa3b162d05a7ebc3d2da635be86f7146ac",
+        "review_sha256": "55cabcdcf7048a8ee4463fa2cc1cdd071522ebf0a9f4f8a33f84f3ca7ae1ffa5"
+      }
     },
     {
       "notice_id": "02d98fba28de4a70b82ebe638954f5d4",
@@ -1285,7 +2135,35 @@
             "quote": "Any full proposal that has not been reviewed in the white paper phase will not be evaluated nor considered for award under this BAA."
           }
         }
-      ]
+      ],
+      "reviewed_snapshot": {
+        "notice_id": "02d98fba28de4a70b82ebe638954f5d4",
+        "latest_notice_id": "02d98fba28de4a70b82ebe638954f5d4",
+        "latest": true,
+        "status": "published",
+        "archived": false,
+        "cancelled": false,
+        "deleted": false,
+        "title": "Strategic Environmental Research and Development Program (SERDP) – Open Topics Broad Agency Announcement (BAA)",
+        "solicitation_number": "W912HQ26S0050",
+        "organization_id": "100221636",
+        "notice_type": "p",
+        "classification_code": "AJ11",
+        "naics_codes": [
+          "541715"
+        ],
+        "set_asides": [
+          "NONE"
+        ],
+        "posted_at": "2026-08-21T12:20:02.507+00:00",
+        "modified_at": "2026-08-21T12:20:02.511+00:00",
+        "response_deadline": "2027-08-20T14:00:00-04:00",
+        "response_timezone": "America/New_York",
+        "archive_date": "2027-09-04",
+        "description_sha256": "e5afdd50508f029f282e4e5949ead8b2216fb86995a3cc9b54d7712ecf271810",
+        "resources_sha256": "b639c232b408e43475e07880ae9bc3b3d8df3d63a5406598f220b15b5fbab56f",
+        "review_sha256": "0fc802c86ae2fe4f066d300f5a100eaafa4a47d4b129d7378c590c048dbebc34"
+      }
     },
     {
       "notice_id": "88bd6e35ec6742b6b1e94fb4aadc706b",
@@ -1325,7 +2203,31 @@
             "quote": "If a white paper receives a favorable technical review, the offeror may be solicited via a formal solicitation"
           }
         }
-      ]
+      ],
+      "reviewed_snapshot": {
+        "notice_id": "88bd6e35ec6742b6b1e94fb4aadc706b",
+        "latest_notice_id": "88bd6e35ec6742b6b1e94fb4aadc706b",
+        "latest": true,
+        "status": "published",
+        "archived": false,
+        "cancelled": false,
+        "deleted": false,
+        "title": "Broad Agency Announcement _ TRMC _ TE-ST _ W900KK-22-R-0012",
+        "solicitation_number": "W900KK-22-R-0012",
+        "organization_id": "500036903",
+        "notice_type": "s",
+        "classification_code": null,
+        "naics_codes": [],
+        "set_asides": [],
+        "posted_at": "2026-08-27T19:19:34.706+00:00",
+        "modified_at": "2026-08-27T19:19:34.715+00:00",
+        "response_deadline": "2030-03-14T17:00:00-04:00",
+        "response_timezone": "America/New_York",
+        "archive_date": "2037-05-17",
+        "description_sha256": "8b87f240736caeb47672f69290e62c854f14d973c67430ebd9e641f9b95f997b",
+        "resources_sha256": "902cd4b75323cf3f1a2469b87139d958dd6d67cb05ef589e56245e9f9c1891c9",
+        "review_sha256": "840e19e7bea9ed4c4b205e74596e63844922865b4e9713f702f73adb5c1b0c1c"
+      }
     },
     {
       "notice_id": "34e8be6e2d784d3c80c45c26fc033072",
@@ -1365,7 +2267,33 @@
             "quote": "Phase Two (2): Submission of Proposals (By Invitation Only)"
           }
         }
-      ]
+      ],
+      "reviewed_snapshot": {
+        "notice_id": "34e8be6e2d784d3c80c45c26fc033072",
+        "latest_notice_id": "34e8be6e2d784d3c80c45c26fc033072",
+        "latest": true,
+        "status": "published",
+        "archived": false,
+        "cancelled": false,
+        "deleted": false,
+        "title": "C2 Cross Functional Team (CFT) Broad Agency Announcement",
+        "solicitation_number": "BAA-25-R-C2CFT",
+        "organization_id": "500038571",
+        "notice_type": "p",
+        "classification_code": "5810",
+        "naics_codes": [
+          "334290"
+        ],
+        "set_asides": [],
+        "posted_at": "2026-04-01T11:51:56.868+00:00",
+        "modified_at": "2026-04-01T11:51:56.871+00:00",
+        "response_deadline": "2030-03-23T12:00:00-04:00",
+        "response_timezone": "America/New_York",
+        "archive_date": "2030-04-07",
+        "description_sha256": "1adf3772c130053301f64ee3bdd505287e552fe39869aaeb9b0663e513b49106",
+        "resources_sha256": "b7bb1371751bc172246e3169911972eb07e214b54a2c82039869b242e0066553",
+        "review_sha256": "ab92228a3dce2cc71876d7854de24defc04f88668eb12caf1886ed227748141b"
+      }
     },
     {
       "notice_id": "d24be7b2b899475b84850463d7edd6b4",
@@ -1405,7 +2333,33 @@
             "quote": "If the preproposal for a procurement contract is accepted, ACC-APG ECD will send a Request For Proposal (RFP)"
           }
         }
-      ]
+      ],
+      "reviewed_snapshot": {
+        "notice_id": "d24be7b2b899475b84850463d7edd6b4",
+        "latest_notice_id": "d24be7b2b899475b84850463d7edd6b4",
+        "latest": true,
+        "status": "published",
+        "archived": false,
+        "cancelled": false,
+        "deleted": false,
+        "title": "BROAD AGENCY ANNOUNCEMENT (BAA) FOR CHEMICAL BIOLOGICAL RADIOLOGICAL NUCLEAR AND EXPLOSIVE (CBRNE) DEFENSE EFFORTS UNDER PROCUREMENT CONTRACTS, COOPERATIVE AGREEMENTS, AND PROTOTYPES UNDER OTHER TRANSACTIONS AGREEMENTS",
+        "solicitation_number": "W911SR-24-R-DEVB",
+        "organization_id": "500038578",
+        "notice_type": "o",
+        "classification_code": "AC11",
+        "naics_codes": [
+          "541715"
+        ],
+        "set_asides": [],
+        "posted_at": "2026-04-13T13:16:27.513+00:00",
+        "modified_at": "2026-04-13T13:16:27.516+00:00",
+        "response_deadline": "2029-08-20T16:30:00-04:00",
+        "response_timezone": "America/New_York",
+        "archive_date": "2029-09-04",
+        "description_sha256": "41325c678fbe0d7271a067e70d5d8e374ab2b548e6e8183868cc9d323af3fe34",
+        "resources_sha256": "84450083d0341d88d084aa250d4a3326e1ffc01f613e33c6eded78474462963f",
+        "review_sha256": "d27ad0151b2fc664f549695aadf6ae2182065258530d5692986c38551d790ecd"
+      }
     },
     {
       "notice_id": "bd71f84068534e5680335d83e31fc9df",
@@ -1445,7 +2399,31 @@
             "quote": "An applicant that does not receive an invitation to submit a proposal is not eligible to submit a proposal."
           }
         }
-      ]
+      ],
+      "reviewed_snapshot": {
+        "notice_id": "bd71f84068534e5680335d83e31fc9df",
+        "latest_notice_id": "bd71f84068534e5680335d83e31fc9df",
+        "latest": true,
+        "status": "published",
+        "archived": false,
+        "cancelled": false,
+        "deleted": false,
+        "title": "U.S. ARMY SPACE AND MISSILE DEFENSE COMMAND (USASMDC) SPACE AND MISSILE DEFENSE TECHNICAL CENTER (SMDTC) BROAD AGENCY ANNOUNCEMENT FOR SCIENCE, TECHNOLOGY, AND TEST AND EVALUATION RESEARCH",
+        "solicitation_number": "W9113M-24-R-BAA1",
+        "organization_id": "500043562",
+        "notice_type": "s",
+        "classification_code": null,
+        "naics_codes": [],
+        "set_asides": [],
+        "posted_at": "2026-08-20T18:28:22.209+00:00",
+        "modified_at": "2026-08-20T18:28:22.217+00:00",
+        "response_deadline": "2029-08-26T17:00:00-05:00",
+        "response_timezone": "America/Chicago",
+        "archive_date": "2029-08-27",
+        "description_sha256": "92efca102854b90eef6f7d8d220cafb54c46eeca72d8246b7af76847ef2fc0c7",
+        "resources_sha256": "caa74ab5e85e412979106a5b993cd5e52bbc5ddb6b70c46828819e395ebd4d92",
+        "review_sha256": "92c36bba7f6e0017b203b6dcb6158d61dbdec821ef3f3934a9947e84974f9c14"
+      }
     },
     {
       "notice_id": "a0969993ee8542988595334947e39a7d",
@@ -1485,7 +2463,33 @@
             "quote": "Written Proposal submissions will not be accepted from an offeror that has not been invited to submit a written proposal."
           }
         }
-      ]
+      ],
+      "reviewed_snapshot": {
+        "notice_id": "a0969993ee8542988595334947e39a7d",
+        "latest_notice_id": "a0969993ee8542988595334947e39a7d",
+        "latest": true,
+        "status": "published",
+        "archived": false,
+        "cancelled": false,
+        "deleted": false,
+        "title": "2024 Department of Homeland Security (DHS) Directorate of Science and Technology (S&T) Long Range Broad Agency Announcement (LRBAA) 24-01",
+        "solicitation_number": "DHS_ST_LRBAA_24-01",
+        "organization_id": "100170417",
+        "notice_type": "s",
+        "classification_code": "AJ11",
+        "naics_codes": [
+          "541715"
+        ],
+        "set_asides": [],
+        "posted_at": "2025-08-28T17:01:15.218+00:00",
+        "modified_at": "2025-08-28T17:01:15.225+00:00",
+        "response_deadline": "2029-05-31T23:59:00-04:00",
+        "response_timezone": "America/New_York",
+        "archive_date": "2029-06-30",
+        "description_sha256": "a369a9fbbed767c57b4fb487c9adaede240ad4c9916e4b27eca7401267342a18",
+        "resources_sha256": "45303b6a908a2ad35faa780025e9fe4d113ebd61e5f0db2524f62117190d507e",
+        "review_sha256": "91ed5574f0f74414dec1d5acaf9ad7e1b439ab7f5f9a4d035bcff51bead6b267"
+      }
     },
     {
       "notice_id": "45850d5326944be1b187cece69fe7790",
@@ -1525,7 +2529,35 @@
             "quote": "Following Concept Paper evaluation and discussion, FRA may invite the Offeror to submit a detailed technical and price Proposal for award evaluation."
           }
         }
-      ]
+      ],
+      "reviewed_snapshot": {
+        "notice_id": "45850d5326944be1b187cece69fe7790",
+        "latest_notice_id": "45850d5326944be1b187cece69fe7790",
+        "latest": true,
+        "status": "published",
+        "archived": false,
+        "cancelled": false,
+        "deleted": false,
+        "title": "FY 26 Broad Agency Announcement (BAA) - Federal Railroad Administration",
+        "solicitation_number": "693JJ626R000001",
+        "organization_id": "100076812",
+        "notice_type": "s",
+        "classification_code": null,
+        "naics_codes": [
+          "541715"
+        ],
+        "set_asides": [
+          "NONE"
+        ],
+        "posted_at": "2026-08-21T17:11:49.180+00:00",
+        "modified_at": "2026-08-21T17:11:49.185+00:00",
+        "response_deadline": "2027-09-30T12:00:00-04:00",
+        "response_timezone": "America/New_York",
+        "archive_date": "2027-09-30",
+        "description_sha256": "4b83280ff0f974839e10157285ed2d42109d9a6427d04c3c0db9e16b7dee6546",
+        "resources_sha256": "4506adeac2912f22cf8f564361463d612edbb65a54ce62a1bf6f0883affe9eae",
+        "review_sha256": "e110eb66cb59c83ddc9d06c29221f06cc4734feec4f7a9bbb698aa87afbba8d4"
+      }
     },
     {
       "notice_id": "9fac6a86bf4f4561bd8bd464284d6297",
@@ -1565,7 +2597,35 @@
             "quote": "Following concept paper evaluation and discussion, FTA may invite the Offeror to submit a detailed technical and cost/price proposal for award evaluation."
           }
         }
-      ]
+      ],
+      "reviewed_snapshot": {
+        "notice_id": "9fac6a86bf4f4561bd8bd464284d6297",
+        "latest_notice_id": "9fac6a86bf4f4561bd8bd464284d6297",
+        "latest": true,
+        "status": "published",
+        "archived": false,
+        "cancelled": false,
+        "deleted": false,
+        "title": "FTA Broad Agency Announcement (FY26) -- “Research Initiatives in Support of Safety, Accessibility, and Mobility in Public Transportation",
+        "solicitation_number": "693195-26-BAA-0001",
+        "organization_id": "100184892",
+        "notice_type": "k",
+        "classification_code": "AS12",
+        "naics_codes": [
+          "541715"
+        ],
+        "set_asides": [
+          "NONE"
+        ],
+        "posted_at": "2026-09-04T18:43:50.864+00:00",
+        "modified_at": "2026-09-04T18:43:50.870+00:00",
+        "response_deadline": "2026-10-19T23:59:00-04:00",
+        "response_timezone": "America/New_York",
+        "archive_date": "2026-11-03",
+        "description_sha256": "b01a5642d2f4f688cdff4eddd798c2ca9d3c8577e1c353cb82c687dd3eaa3d53",
+        "resources_sha256": "d040ffa5ce9df3a1bff749012daa6750a03f2cb081dbc4b43c382ab7e0e381c5",
+        "review_sha256": "b7449c0ec168ade2090284a40707a428d67a2cc7bbc3720354a1f007f92a85e7"
+      }
     },
     {
       "notice_id": "a59ae93e40ba49a9a53c7e23ca1ad3a0",
@@ -1595,7 +2655,33 @@
           },
           "full": null
         }
-      ]
+      ],
+      "reviewed_snapshot": {
+        "notice_id": "a59ae93e40ba49a9a53c7e23ca1ad3a0",
+        "latest_notice_id": "a59ae93e40ba49a9a53c7e23ca1ad3a0",
+        "latest": true,
+        "status": "published",
+        "archived": false,
+        "cancelled": false,
+        "deleted": false,
+        "title": "A Study on Vessel Design Challenge",
+        "solicitation_number": "693JF726R000016",
+        "organization_id": "100179145",
+        "notice_type": "o",
+        "classification_code": "R405",
+        "naics_codes": [
+          "541720"
+        ],
+        "set_asides": [],
+        "posted_at": "2026-10-05T17:56:41.384+00:00",
+        "modified_at": "2026-10-05T17:56:41.388+00:00",
+        "response_deadline": "2027-01-10T12:00:00-05:00",
+        "response_timezone": "America/New_York",
+        "archive_date": "2027-03-10",
+        "description_sha256": "b1d3d4b2d883fe185d14596c975fadc7ef91a292483ce51ba8b4b19763cb2b63",
+        "resources_sha256": "dbda0f17bbad9d6596aa57e4189e7050b31e991b26062ef63406994520a14ef4",
+        "review_sha256": "761a2bbe4e4fa200e0329a7868737ee85cd061a2d4e41556825a979dd87e052b"
+      }
     },
     {
       "notice_id": "b7f83ec10df84ff0ad8ec6290dba7176",
@@ -1635,7 +2721,35 @@
             "quote": "Proposal submissions will be allowed by invitation only and based upon the evaluation of the White Papers."
           }
         }
-      ]
+      ],
+      "reviewed_snapshot": {
+        "notice_id": "b7f83ec10df84ff0ad8ec6290dba7176",
+        "latest_notice_id": "b7f83ec10df84ff0ad8ec6290dba7176",
+        "latest": true,
+        "status": "published",
+        "archived": false,
+        "cancelled": false,
+        "deleted": false,
+        "title": "Office of Hazardous Materials Safety Research Initiative – FY2026 BROAD AGENCY ANNOUNCEMENT (BAA)",
+        "solicitation_number": "PHMSA-26HM-BAA",
+        "organization_id": "100182338",
+        "notice_type": "k",
+        "classification_code": "AJ12",
+        "naics_codes": [
+          "541715"
+        ],
+        "set_asides": [
+          "NONE"
+        ],
+        "posted_at": "2026-10-13T14:05:15.692+00:00",
+        "modified_at": "2026-10-13T14:05:15.755+00:00",
+        "response_deadline": "2026-11-18T11:59:00-05:00",
+        "response_timezone": "America/New_York",
+        "archive_date": "2026-12-03",
+        "description_sha256": "dbe2de4e3fc8034bd3dbae80c981cb872c1908c8a16de0f4a38954f0eb3e76fd",
+        "resources_sha256": "ba159eed03d0e0be781c0d1394186676b610612793478d611721d38cad6a8c83",
+        "review_sha256": "a913d831418a7514f9b68e6b03747d18153febadea611a05f754aefb6cf74459"
+      }
     }
   ]
 }

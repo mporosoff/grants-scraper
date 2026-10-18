@@ -54,13 +54,15 @@ def snapshot(root, revision=None):
         # The budget wrapper invokes this exact unchanged module/arguments.
         # Provider routing and parser semantics remain fingerprinted separately.
         command = command.replace('python -m tools.run_budgeted_documents', 'python -m scripts.extract_document_evidence')
+        command = command.replace('node tools/run_budgeted_vectors.mjs', 'node tools/build_search_v2_voyage_vectors.mjs')
         if any(part in command for part in team_commands):
             continue
         group = ('semantic' if 'node tools/build_search_v2_voyage_vectors.mjs' in command else
                  'source' if re.search(r'python -m scripts\.', command) else None)
         if group:
             environment = {k: v for k, v in step.get('env', {}).items() if 'secrets.' not in str(v)
-                           and k not in ('OFFLINE_AI_STATE', 'TEAM_MODE')}
+                           and k not in ('OFFLINE_AI_STATE', 'TEAM_MODE',
+                                         'SAM_PREFLIGHT_RECEIPT', 'SAM_PREFLIGHT_RELEASE_SHA')}
             invocations[group].append({'command': ' '.join(command.split()), 'environment': environment})
     for group, rule in policy['dependency_groups'].items():
         selected = [name for name in inventory if not any(matches(name, p) for p in generated) and name not in rule['excluded']
@@ -108,6 +110,29 @@ def changed_groups(before, after):
     return {group: sorted(name for name in set(before[group]['files']) | set(after[group]['files'])
                          if before[group]['files'].get(name) != after[group]['files'].get(name))
             for group in before if before[group] != after[group]}
+
+
+def unpublished_input_changes(manifest, changes, current):
+    """Separate a generated package projection from changed protected inputs.
+
+    Catalog generation updates statistics and HTML asset references. Until its
+    publication those bytes intentionally differ from protected main. Accept
+    only the exact recorded baseline or candidate bytes for these paths; an
+    authored edit still requires assembly and review.
+    """
+    baselines = manifest.get('runtime_baseline', {}) | manifest.get('documentation_baseline', {})
+    packaged = manifest.get('files', {})
+    recorded = manifest.get('dependency_groups', {}).get('runtime', {}).get('files', {})
+    observed = current.get('runtime', {}).get('files', {})
+    result = {group: list(names) for group, names in changes.items()}
+    if 'runtime' in result:
+        result['runtime'] = [name for name in result['runtime'] if not (
+            name in baselines and name in packaged
+            and recorded.get(name) == packaged[name]
+            and observed.get(name) in (baselines[name], packaged[name]))]
+        if not result['runtime']:
+            del result['runtime']
+    return result
 
 
 def verify(root, manifest, allowed=()):

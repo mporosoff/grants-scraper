@@ -1,0 +1,1641 @@
+{
+  "schema_version": 2,
+  "enabled": true,
+  "approved_notices": [
+    {
+      "notice_id": "4177337919ca4c9db8d9ddf1e58c24aa",
+      "solicitation_number": "FA8650-22-S-5004",
+      "organization_id": "100025313",
+      "sponsor": "Air Force Research Laboratory",
+      "evidence_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/5913ffc603dd47a296c31e479221b3da/download",
+      "academic_eligibility_quote": "This is an unrestricted solicitation. Businesses of all sizes are encouraged to propose on all or any part of this solicitation during the Open Period and under each Closed Call. ... If the offeror is an educational institution, Part II does not apply unless the contemplated contract will be subject to full or modified CAS coverage pursuant to 48 CFR 9903.201-2(c)(5) or 9903.201-2(c)(6), respectively.",
+      "verified_on": "2026-10-13",
+      "review_after": "2026-11-12",
+      "review_sha256": "fd8dc97e41bcaff8eeb52c2a570a9327f663fc21b93adf94694ecc20f52edce2",
+      "summary": "Experimental evaluation, prototyping and transition of structural materials and manufacturing processes for Air Force and Space Force systems; emphasizes operational utility and demonstration rather than basic or applied research.",
+      "scope_note": "US academic offerors are inferred eligible from the unrestricted solicitation and the expressly included educational-institution offeror certifications. This entry covers the unclassified open white-paper route for structural materials and processes, excluding the separate expired Nuclear, Electromagnetic, and Laser Survivability Call001 and any scope reserved by an active closed call. No foreign prime participation. DD2345 applies only when a proposed effort is determined export-controlled; classified or controlled-data projects are outside this reviewed scope. Current SAM shows February14,2027 17:00 Eastern while the original parent PDF states February15,2028 17:00 WPAFB; the earlier current SAM date is used conservatively and the sponsor must resolve the discrepancy before relying on a later date. Full proposals require invitation with their own due date; submit through DoD SAFE following the current official contact instructions.",
+      "cycles": [
+        {
+          "name": "Open white-paper route",
+          "entry": {
+            "kind": "white_paper",
+            "date": "2027-02-14",
+            "time": "17:00",
+            "timezone": "America/New_York",
+            "required": true,
+            "invitation_required": false,
+            "note": "Use the earlier current SAM response deadline conservatively; original PDF says February15,2028. Only research objectives not reserved by an active closed call are open.",
+            "source_url": "https://sam.gov/opp/4177337919ca4c9db8d9ddf1e58c24aa/view",
+            "quote": "An Applicant that does NOT submit a timely and compliant white paper is NOT eligible to submit a Proposal for consideration for funding."
+          },
+          "full": {
+            "kind": "full_application",
+            "date": null,
+            "time": null,
+            "timezone": null,
+            "required": false,
+            "invitation_required": true,
+            "note": "A full proposal is accepted only by invitation; due date is supplied in the RFP.",
+            "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/5913ffc603dd47a296c31e479221b3da/download",
+            "quote": "An Applicant that does NOT receive an invitation from the Government to submit a Proposal is NOT eligible to submit a Proposal."
+          }
+        }
+      ]
+    },
+    {
+      "notice_id": "aaef3e1141e74a12b1b75641f6c4cd7a",
+      "solicitation_number": "FA9451-21-S-0001",
+      "organization_id": "100027540",
+      "sponsor": "Air Force Research Laboratory",
+      "evidence_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/6e76c9da5e9c412e86e17d3af7f64cb6/download",
+      "academic_eligibility_quote": "An award may be made from this open ARA announcement or any Calls in the form of a Grant, Cooperative Agreement (CA), or Other Transactions (OT) for Research, these are collectively known as \"Assistance Instruments.\" ... Primarily awarded to educational or non-profit organizations.",
+      "verified_on": "2026-10-13",
+      "review_after": "2026-11-12",
+      "review_sha256": "d1c30b79a0732b9d38daa4ee7ef308240deb5b58615a09d217ebe10a658ef905",
+      "summary": "Directed-energy research and experimentation, including modeling and simulation, novel sources, source components, prototype integration, laboratory and field testing, power systems and thermal management.",
+      "scope_note": "Open, normally unclassified white papers only; separately issued calls have their own eligibility and security requirements. Submit through the ValidEval route linked by the official notice. Full proposals require invitation and its due date; the Government may collapse the two steps when a white paper contains sufficient technical detail. Six-page white paper and rough-order cost estimate; duplicate submissions within 12 months are not separately evaluated. Research-security disclosures apply at proposal stage. The DD2345 requirement in the historical 2024 industry-day update applies to that expired CUI event, not this open white-paper route. No blanket clearance or controlled-data prerequisite was found for open entry.",
+      "cycles": [
+        {
+          "name": "Open white-paper route",
+          "entry": {
+            "kind": "white_paper",
+            "date": "2031-03-12",
+            "time": "17:00",
+            "timezone": "America/Denver",
+            "required": true,
+            "invitation_required": false,
+            "note": "Rolling entry; SAM current response field supplies the end of the open window. Use the current ValidEval submission link on the official notice.",
+            "source_url": "https://sam.gov/opp/aaef3e1141e74a12b1b75641f6c4cd7a/view",
+            "quote": "An Offeror submitting a proposal without first submitting a white paper will not be eligible for an award."
+          },
+          "full": {
+            "kind": "full_application",
+            "date": null,
+            "time": null,
+            "timezone": null,
+            "required": false,
+            "invitation_required": true,
+            "note": "Full proposal and its deadline only when requested; no independent dated full-proposal deadline is established.",
+            "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/6e76c9da5e9c412e86e17d3af7f64cb6/download",
+            "quote": "This is a Two-Step Process; full proposals will not be accepted or evaluated unless specifically requested by the CO/AO."
+          }
+        }
+      ]
+    },
+    {
+      "notice_id": "8170c4735df64714adb2d1f8ce8671b1",
+      "solicitation_number": "BAA-23-100-SOL-00004",
+      "organization_id": "100188027",
+      "sponsor": "Biomedical Advanced Research and Development Authority (BARDA)",
+      "evidence_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/80a098422a7546c6b64b1498561979ab/download",
+      "academic_eligibility_quote": "This BAA is open to ALL responsible sources. Offerors may include single entities or teams from private sector organizations, Government laboratories, and academic institutions and must be registered in the System for Award Management (SAM) at SAM.gov prior to submitting a proposal in accordance with FAR 4.1102.",
+      "verified_on": "2026-10-13",
+      "review_after": "2026-11-12",
+      "review_sha256": "29360581aebe9aae44c30e83707546d5454693443996ebb14dda4b87325dc6fc",
+      "summary": "Advanced development of medical countermeasures against chemical, biological, radiological and nuclear threats, pandemic influenza, and emerging infectious diseases.",
+      "scope_note": "Follow the currently open areas of interest and their maturity requirements. AOI-specific deadlines override the umbrella date. Preliminary assessment is recommended; direct proposals are permitted. Submit unclassified material and maintain SAM registration.",
+      "cycles": [
+        {
+          "name": "Current BAA open period",
+          "entry": {
+            "kind": "full_application",
+            "date": "2028-09-25",
+            "time": "16:30",
+            "timezone": "America/New_York",
+            "required": true,
+            "invitation_required": false,
+            "note": "Amendment 7 pages 9 and 26: direct proposals may bypass Stages 1 and 2; AOI-specific deadlines take precedence.",
+            "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/80a098422a7546c6b64b1498561979ab/download",
+            "quote": "As specified in the Invitation Letter. A Proposal may be submitted on any day during the open period of the BAA. Proposal submission deadline is September 25, 2028, at 4:30pm Eastern Time, unless otherwise indicated in an AOI. Offerors may also submit a proposal in the absence of a Stage 1 call or Stage 2 submission. Offerors must ensure that the proposal is valid for at least 120 days from the date of proposal submission."
+          },
+          "full": null
+        }
+      ]
+    },
+    {
+      "notice_id": "98c034706e4b430281ead1c3497e9d72",
+      "solicitation_number": "DARPA-PA-27-01",
+      "organization_id": "500035490",
+      "sponsor": "Defense Advanced Research Projects Agency",
+      "evidence_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/e416a682594c4abb8ce139edb3f32eb2/download",
+      "academic_eligibility_quote": "universities, and research institutions.",
+      "verified_on": "2026-10-13",
+      "review_after": "2026-11-12",
+      "review_sha256": "38890dbf1a5206fc5a366c526006071b00c246aa469b7b814c328ac088c1c745",
+      "summary": "Develop in-silico protein-protein interaction maps to identify diagnostic and therapeutic targets, including traumatic brain injury.",
+      "scope_note": "CMMC Level 1 self-assessment; research security review; no human-subjects research; Phase 2 limited to Phase 1 performers.",
+      "cycles": [
+        {
+          "name": "Current open entry",
+          "entry": {
+            "kind": "preproposal",
+            "date": "2026-11-05",
+            "time": "15:00",
+            "timezone": "America/New_York",
+            "required": true,
+            "invitation_required": false,
+            "note": "Required abstract through DARPA BAAT; Phase 1 entry. Source: solicitation PDF pages 2 and 11.",
+            "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/e416a682594c4abb8ce139edb3f32eb2/download",
+            "quote": "Abstract Due Date and Time: November 5 th, 2026, 3:00 PM ET […] Note that proposers must submit an abstract in response to this solicitation to be considered for participation in the HUBBLE program."
+          },
+          "full": {
+            "kind": "full_application",
+            "date": "2026-12-11",
+            "time": "15:00",
+            "timezone": "America/New_York",
+            "required": true,
+            "invitation_required": true,
+            "note": "Oral proposal package; only selected abstract submitters invited. Source: solicitation PDF pages 2 and 11.",
+            "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/e416a682594c4abb8ce139edb3f32eb2/download",
+            "quote": "Oral Proposal Package (OPP) Due Date and Time: December 11 th, 2026, 3:00 PM ET […] Selected abstract proposers will be invited to provide an OPP and participate in an oral presentation (see Section 6) to the Government."
+          }
+        }
+      ]
+    },
+    {
+      "notice_id": "5abc1a0ed8ab4c5e8f6aa62aa745d210",
+      "solicitation_number": "DARPA-PS-26-09",
+      "organization_id": "500035490",
+      "sponsor": "Defense Advanced Research Projects Agency",
+      "evidence_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/b6a763fd64a3438fbaae62ebdd904f25/download",
+      "academic_eligibility_quote": "agreements with industry, academia, and other organizations",
+      "verified_on": "2026-10-13",
+      "review_after": "2026-11-12",
+      "review_sha256": "89a5bd307cf1a76604c17f706c1569d485ad25947323f74cf371cb40f02878c5",
+      "summary": "Exploratory science and proof-of-concept research across sensing, communications, AI, autonomy, photonics, robotics, space and resilient systems.",
+      "scope_note": "Unclassified research entry only; classified branch excluded. Security/export rules apply to scope; unclassified entry is available.",
+      "cycles": [
+        {
+          "name": "Current open entry",
+          "entry": {
+            "kind": "preproposal",
+            "date": "2026-12-18",
+            "time": "23:59",
+            "timezone": "America/New_York",
+            "required": true,
+            "invitation_required": false,
+            "note": "Conservative current SAM response date; solicitation p2 instead states October 31, 2027. Rolling required abstract; earlier date used pending reconciliation. Date excerpt from current SAM metadata; prerequisite excerpt from attached solicitation PDF page 2.",
+            "source_url": "https://sam.gov/opp/5abc1a0ed8ab4c5e8f6aa62aa745d210/view",
+            "quote": "\"response\":\"2026-12-18T23:59:00\" […] An Abstract must be submitted and an invitation to submit a Proposal must be received, prior to any Proposal submission."
+          },
+          "full": {
+            "kind": "full_application",
+            "date": null,
+            "time": null,
+            "timezone": null,
+            "required": true,
+            "invitation_required": true,
+            "note": "Follow sponsor invitation. Document closing date conflicts with earlier SAM response date; no later date advertised.",
+            "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/b6a763fd64a3438fbaae62ebdd904f25/download",
+            "quote": "An Abstract must be submitted and an invitation to submit a Proposal must be received, prior to any Proposal submission."
+          }
+        }
+      ]
+    },
+    {
+      "notice_id": "2b5fd12340a642e4ac3d1f5c21ecaeed",
+      "solicitation_number": "DARPA-PS-26-115",
+      "organization_id": "500035490",
+      "sponsor": "Defense Advanced Research Projects Agency",
+      "evidence_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/9155f380120641cd845834ac83802a6b/download",
+      "academic_eligibility_quote": "All responsible sources capable of satisfying the Government's needs, including both U.S. and non-U.S. sources, may submit a proposal",
+      "verified_on": "2026-10-13",
+      "review_after": "2026-11-12",
+      "review_sha256": "9620d082cc1b3cea71fe3913d94242f2323bce395835fe028bb452c670b95250",
+      "summary": "Revolutionary materials, components, tools, domestic production methods, sensing, computing and communication modalities.",
+      "scope_note": "Unclassified research entry only; exclude classified proposals. CMMC1 minimum, CMMC2 for CUI; no human or animal subject research; UARC/FFRDC restrictions. Only unclassified research not requiring CUI access or CMMC Level 2 is approved for this catalog scope.",
+      "cycles": [
+        {
+          "name": "Current open entry",
+          "entry": {
+            "kind": "preproposal",
+            "date": "2027-04-23",
+            "time": "16:00",
+            "timezone": "America/New_York",
+            "required": true,
+            "invitation_required": false,
+            "note": "Rolling required abstract through BAAT. Source: solicitation PDF pages 2 and 2.",
+            "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/9155f380120641cd845834ac83802a6b/download",
+            "quote": "Abstract due date: Abstracts may be submitted on a rolling basis until 4:00 p.m. on April 23, 2027. […] An Abstract must be submitted and an invitation to submit a Proposal must be received, prior to any Proposal submission."
+          },
+          "full": {
+            "kind": "full_application",
+            "date": "2027-06-04",
+            "time": "16:00",
+            "timezone": "America/New_York",
+            "required": true,
+            "invitation_required": true,
+            "note": "Full proposal only after required invitation. Source: solicitation PDF pages 2 and 2.",
+            "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/9155f380120641cd845834ac83802a6b/download",
+            "quote": "Proposal due date: By Government invitation stemming from the abstract review on a rolling basis until 4:00 PM on the closing date. oClosing date: June 4, 2027 […] An Abstract must be submitted and an invitation to submit a Proposal must be received, prior to any Proposal submission."
+          }
+        }
+      ]
+    },
+    {
+      "notice_id": "182eab6ca77d465f931c6dc118b939ca",
+      "solicitation_number": "DARPA-PS-26-137",
+      "organization_id": "500035490",
+      "sponsor": "Defense Advanced Research Projects Agency",
+      "evidence_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/1eccfdde42d944e1a6eb8007b55f2228/download",
+      "academic_eligibility_quote": "universities, and research institutions.",
+      "verified_on": "2026-10-13",
+      "review_after": "2026-11-12",
+      "review_sha256": "0f7e0c041ac5e8c14014c0f0524b6eb2453bc0e5c0367f3edcb05f28423daa94",
+      "summary": "Research optical scanning components and analog processing architectures for a 100-channel non-invasive brain-computer interface.",
+      "scope_note": "Fundamental-research determination is proposal-specific; CMMC and research-security requirements apply.",
+      "cycles": [
+        {
+          "name": "Current open entry",
+          "entry": {
+            "kind": "preproposal",
+            "date": "2026-10-19",
+            "time": "15:00",
+            "timezone": "America/New_York",
+            "required": true,
+            "invitation_required": false,
+            "note": "Required abstract through DARPA BAAT. Source: solicitation PDF pages 2 and 16.",
+            "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/1eccfdde42d944e1a6eb8007b55f2228/download",
+            "quote": "Abstracts Due Date and Time: October 19, 2026, by 3:00pm ET […] Note that all proposers must submit an abstract(s) in response to this solicitation to be considered for participation in the Firefox program."
+          },
+          "full": {
+            "kind": "full_application",
+            "date": null,
+            "time": null,
+            "timezone": null,
+            "required": true,
+            "invitation_required": true,
+            "note": "OPP only by invitation. November 9, 2026 at 15:00 ET is anticipated, not a fixed deadline; follow the invitation. Source: PDF pages 2 and 4.",
+            "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/1eccfdde42d944e1a6eb8007b55f2228/download",
+            "quote": "Anticipated Oral Presentation Proposal (OPP) Package Due Date and Time: November 9, 2026, by 3:00pm ET […] Following a decisional abstract review, selected proposers will be invited to submit an Oral Presentation Proposal (OPP) Package to present their program proposals to the DARPA Firefox program team."
+          }
+        }
+      ]
+    },
+    {
+      "notice_id": "d554d75951a340fcbed17668b1864648",
+      "solicitation_number": "DARPA-PS-26-138",
+      "organization_id": "500035490",
+      "sponsor": "Defense Advanced Research Projects Agency",
+      "evidence_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/c205517ab8874e0e82771331f68f370f/download",
+      "academic_eligibility_quote": "and research institutions as defined in 15 U.S.C. § 632.",
+      "verified_on": "2026-10-13",
+      "review_after": "2026-11-12",
+      "review_sha256": "a30ff3a4040581fd357877b399ba86d723684e8ec2961c2249529df1560519d8",
+      "summary": "Develop theoretical and computational tools for resilient market design; pilot scope covers TA1 and TA2 only.",
+      "scope_note": "Exclude TA3: TOP SECRET//SCI//SAR work and classified entry prerequisites. Never present whole solicitation as unrestricted. CMMC1 for FCI; CMMC2 for CUI. Segregate fundamental research from CUI. FFRDC/UARC participation conditions and conflicts review. Only unclassified research not requiring CUI access or CMMC Level 2 is approved for this catalog scope.",
+      "cycles": [
+        {
+          "name": "Current open entry",
+          "entry": {
+            "kind": "preproposal",
+            "date": "2026-10-22",
+            "time": "14:00",
+            "timezone": "America/New_York",
+            "required": true,
+            "invitation_required": false,
+            "note": "Required TA1/TA2 abstract through BAAT. TA3 excluded. Source: solicitation PDF pages 4 and 19.",
+            "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/c205517ab8874e0e82771331f68f370f/download",
+            "quote": "Abstract Due: October 22, 2026 by 2:00 PM […] Proposers are required to submit an abstract in advance of a full proposal submission to minimize effort and reduce the potential expense of preparing full proposals."
+          },
+          "full": {
+            "kind": "full_application",
+            "date": "2026-12-07",
+            "time": "14:00",
+            "timezone": "America/New_York",
+            "required": true,
+            "invitation_required": true,
+            "note": "Only proposers receiving an Invitation to Proceed may advance. Source: solicitation PDF pages 4 and 25.",
+            "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/c205517ab8874e0e82771331f68f370f/download",
+            "quote": "Proposal Due: December 7, 2026 by 2:00 PM […] Only proposers receiving an Invitation to Proceed based on a submitted abstract may advance to the proposal phase."
+          }
+        }
+      ]
+    },
+    {
+      "notice_id": "4180ee1405cc4aadbd14f5830c55e900",
+      "solicitation_number": "HHM402-23-S-0001",
+      "organization_id": "100525164",
+      "sponsor": "Defense Intelligence Agency",
+      "evidence_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/5a87f95dc31b41e5a58b69fd521fc2f3/download",
+      "academic_eligibility_quote": "Academic institutions are encouraged to participate in the NeedipeDIA/SAM.gov system.",
+      "verified_on": "2026-10-13",
+      "review_after": "2026-11-12",
+      "review_sha256": "1af32d0d86342043647b9a15ff50fe0e8083d82533f0c64d800c38f2c9406b59",
+      "summary": "Open research ideas responding to current DIA needs, including AI/ML, sensing and mission science, analytics, quantum information and emerging technologies.",
+      "scope_note": "Unclassified research scope only. Exclude classified submissions and closed Need2. Commercial services not automatically in research catalog. Institution consent and senior-official acknowledgement before negotiation; no guaranteed funding. Current published needs exclude closed Need2.",
+      "cycles": [
+        {
+          "name": "Current open entry",
+          "entry": {
+            "kind": "white_paper",
+            "date": "2028-12-26",
+            "time": "12:59",
+            "timezone": "America/New_York",
+            "required": true,
+            "invitation_required": false,
+            "note": "Rolling unclassified white paper responding to an open Need. Earlier SAM date used; solicitation open period instead ends December 28, 2028. Date excerpt from current SAM metadata; required entry verified visually in attached BAA PDF page9 (printed7).",
+            "source_url": "https://sam.gov/opp/4180ee1405cc4aadbd14f5830c55e900/view",
+            "quote": "\"response\":\"2028-12-26T12:59:00-05:00\" […] NeedipeDIA will accept white paper submissions referencing published needs at any time during the entire open period of this BAA."
+          },
+          "full": {
+            "kind": "full_application",
+            "date": null,
+            "time": null,
+            "timezone": null,
+            "required": true,
+            "invitation_required": true,
+            "note": "Proposal only by written request; no general full-proposal deadline. Visually verified on PDF page 9 (printed page 7).",
+            "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/5a87f95dc31b41e5a58b69fd521fc2f3/download",
+            "quote": "Proposals will only be accepted that respond to a specific written request from the Government."
+          }
+        }
+      ]
+    },
+    {
+      "notice_id": "f727147c651f4d63b6ebb629d3feb37a",
+      "solicitation_number": "BAA0001-22_",
+      "organization_id": "500035091",
+      "sponsor": "Defense Logistics Agency (DLA)",
+      "evidence_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/89aff7abb6de486a86186202fb17026b/download",
+      "academic_eligibility_quote": "large businesses and non-profits (including educational institutions) shall provide a Subcontracting Plan",
+      "verified_on": "2026-10-13",
+      "review_after": "2026-11-12",
+      "review_sha256": "f7993cd0ddbaac41b9e87e9467e4de8d806f1dcd921760fae7e6583413551ca2",
+      "summary": "Emergent logistics research; current Amendment 40includes advanced/additive manufacturing, materials, energy and logistics technology.",
+      "scope_note": "Open non-IDIQ white paper entry; technical/cost proposals follow a government request. Educational organizations may be prime offerors, subject to financial, accounting and other FAR responsibility standards. No small-business set-aside. Use only the current BAA areas of interest and official submission route. Scientific scope uses current Amendment 40; older removed areas are not separately advertised.",
+      "cycles": [
+        {
+          "name": "Current open entry",
+          "entry": {
+            "kind": "white_paper",
+            "date": "2027-06-12",
+            "time": "17:00",
+            "timezone": "America/New_York",
+            "required": true,
+            "invitation_required": false,
+            "note": "Current official SAM deadline metadata; required white paper entry. Follow the reviewed BAA instructions for the submission route.",
+            "source_url": "https://sam.gov/api/prod/opps/v2/opportunities/f727147c651f4d63b6ebb629d3feb37a",
+            "quote": "{\"response\": \"2027-06-12T17:00:00-04:00\", \"responseTz\": \"America/New_York\"}"
+          },
+          "full": {
+            "kind": "full_application",
+            "date": null,
+            "time": null,
+            "timezone": null,
+            "required": true,
+            "invitation_required": true,
+            "note": "Base PDF p6: technical proposal only after requested; current technical scope comes from Amendment 40.",
+            "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/89aff7abb6de486a86186202fb17026b/download",
+            "quote": "DLA reserves the right to request technical proposals from any, all, some, or none of the Respondents submitting White Papers."
+          }
+        }
+      ]
+    },
+    {
+      "notice_id": "3dc0d137a9404adab1b8623c4e279f31",
+      "solicitation_number": "BAA0001-23_",
+      "organization_id": "500035091",
+      "sponsor": "Defense Logistics Agency (DLA)",
+      "evidence_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/9b062a854d074ff69911f3906bc71083/download",
+      "academic_eligibility_quote": "This is an unrestricted acquisition. All responsible sources capable of satisfying the Government’s needs may submit a white paper, which will be considered by DLA.",
+      "verified_on": "2026-10-13",
+      "review_after": "2026-11-12",
+      "review_sha256": "2701879ba961f6568d08aa03e47663ea2d17ef19d57d02b93a4d41db27212055",
+      "summary": "Industry4.0 warehouse technologies, robotics, modeling, IoT, cybersecurity and predictive analytics.",
+      "scope_note": "Open non-IDIQ white paper entry; technical/cost proposals follow a government request. Educational organizations may be prime offerors, subject to financial, accounting and other FAR responsibility standards. No small-business set-aside. Use only the current BAA areas of interest and official submission route.",
+      "cycles": [
+        {
+          "name": "Current open entry",
+          "entry": {
+            "kind": "white_paper",
+            "date": "2028-02-07",
+            "time": "23:59",
+            "timezone": "America/New_York",
+            "required": true,
+            "invitation_required": false,
+            "note": "Current official SAM deadline metadata; required white paper entry. Follow the reviewed BAA instructions for the submission route.",
+            "source_url": "https://sam.gov/api/prod/opps/v2/opportunities/3dc0d137a9404adab1b8623c4e279f31",
+            "quote": "{\"response\": \"2028-02-07T23:59:00-05:00\", \"responseTz\": \"America/New_York\"}"
+          },
+          "full": {
+            "kind": "full_application",
+            "date": null,
+            "time": null,
+            "timezone": null,
+            "required": true,
+            "invitation_required": true,
+            "note": "PDF p13: full proposals follow a successful white paper and government request.",
+            "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/9b062a854d074ff69911f3906bc71083/download",
+            "quote": "When requested to submit a proposal after a successful white paper submission"
+          }
+        }
+      ]
+    },
+    {
+      "notice_id": "c331e8db2d6746e9b0b9e8712a4679f7",
+      "solicitation_number": "SP4701-23-B-0001",
+      "organization_id": "500035091",
+      "sponsor": "Defense Logistics Agency (DLA)",
+      "evidence_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/385a8d9d24b94813831d683ac66047c8/download",
+      "academic_eligibility_quote": "This is an unrestricted acquisition. All responsible sources capable of satisfying the Government’s needs may submit a White Paper, which will be considered by DLA.",
+      "verified_on": "2026-10-13",
+      "review_after": "2026-11-12",
+      "review_sha256": "32596211cfcf80812c73afc587b8695348b31de9af3bd99c3232adbebecc6bc2",
+      "summary": "Acquisition modernization, source selection, supply-chain resilience and AI/ML research.",
+      "scope_note": "Open non-IDIQ white paper entry; technical/cost proposals follow a government request. Educational organizations may be prime offerors, subject to financial, accounting and other FAR responsibility standards. No small-business set-aside. Use only the current BAA areas of interest and official submission route.",
+      "cycles": [
+        {
+          "name": "Current open entry",
+          "entry": {
+            "kind": "white_paper",
+            "date": "2028-05-29",
+            "time": "23:59",
+            "timezone": "America/New_York",
+            "required": true,
+            "invitation_required": false,
+            "note": "Current official SAM deadline metadata; required white paper entry. Follow the reviewed BAA instructions for the submission route.",
+            "source_url": "https://sam.gov/api/prod/opps/v2/opportunities/c331e8db2d6746e9b0b9e8712a4679f7",
+            "quote": "{\"response\": \"2028-05-29T23:59:00-04:00\", \"responseTz\": \"America/New_York\"}"
+          },
+          "full": {
+            "kind": "full_application",
+            "date": null,
+            "time": null,
+            "timezone": null,
+            "required": true,
+            "invitation_required": true,
+            "note": "Base PDF p7, visually reviewed; Amendment 1 p18 reopens for white papers.",
+            "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/385a8d9d24b94813831d683ac66047c8/download",
+            "quote": "proposals submitted once the BAA reopens and vendors are asked to submit proposals after the review of submitted White Papers."
+          }
+        }
+      ]
+    },
+    {
+      "notice_id": "3510fb2e9dbd4c89bd826b06dd2ea284",
+      "solicitation_number": "SP4701-25-B-0001",
+      "organization_id": "500035091",
+      "sponsor": "Defense Logistics Agency (DLA)",
+      "evidence_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/efb458d6371a46b688d590c885108a09/download",
+      "academic_eligibility_quote": "For proposed contract awards exceeding $900,000.00 large businesses and non-profits (including educational institutions) shall provide a Small Business Subcontracting Plan",
+      "verified_on": "2026-10-13",
+      "review_after": "2026-11-12",
+      "review_sha256": "bc251d40bce92ab71eba5fdad148a6c67e42ec41a76fbd88a0b56985d4fc1057",
+      "summary": "Strategic/criticalmaterials, production/process substitution, energetic/power/aerospace/armor materials and supply-chain resilience.",
+      "scope_note": "Open non-IDIQ white paper entry; technical/cost proposals follow a government request. Educational organizations may be prime offerors, subject to financial, accounting and other FAR responsibility standards. No small-business set-aside. Use only the current BAA areas of interest and official submission route. Current SAM metadata still says March 15, 2025; reviewed source amendment overrides that obsolete initial close. The evidence fingerprint must retain both contradictory metadata and the amendments.",
+      "cycles": [
+        {
+          "name": "Current open entry",
+          "entry": {
+            "kind": "white_paper",
+            "date": "2030-01-14",
+            "time": null,
+            "timezone": null,
+            "required": true,
+            "invitation_required": false,
+            "note": "Amendment 0003 p7 with initialJanuary 15, 2025 posting and official DLA program index January 14, 2030 end. Amendment 0001 removed initial 60-day closing. Date-only bound.",
+            "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/efb458d6371a46b688d590c885108a09/download",
+            "quote": "This BAA will remain open for five years."
+          },
+          "full": {
+            "kind": "full_application",
+            "date": null,
+            "time": null,
+            "timezone": null,
+            "required": true,
+            "invitation_required": true,
+            "note": "Amendment 0003 PDF p10; required white paper before requested technical/cost proposal.",
+            "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/efb458d6371a46b688d590c885108a09/download",
+            "quote": "The Contracting Officer will request proposals on White Papers that are of interest to the Government."
+          }
+        }
+      ]
+    },
+    {
+      "notice_id": "c543f1934c4b495c838352fdc7087536",
+      "solicitation_number": "SP4701-25-B-0002",
+      "organization_id": "500035091",
+      "sponsor": "Defense Logistics Agency (DLA)",
+      "evidence_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/542e793a1f7144d1af31d02f6982a5b9/download",
+      "academic_eligibility_quote": "For proposed contract awards exceeding $750,000.00 large businesses and non-profits (including educational institutions) shall provide a Small Business Subcontracting Plan",
+      "verified_on": "2026-10-13",
+      "review_after": "2026-11-12",
+      "review_sha256": "540a3324fe0ac594cdb58412980628961d80a430007d2fe3fa836c58436d2f88",
+      "summary": "Forging materials/processes, manufacturing, qualification and industrial productivity.",
+      "scope_note": "Open non-IDIQ white paper entry; technical/cost proposals follow a government request. Educational organizations may be prime offerors, subject to financial, accounting and other FAR responsibility standards. No small-business set-aside. Use only the current BAA areas of interest and official submission route.",
+      "cycles": [
+        {
+          "name": "Current open entry",
+          "entry": {
+            "kind": "white_paper",
+            "date": "2030-08-12",
+            "time": "23:59",
+            "timezone": "America/New_York",
+            "required": true,
+            "invitation_required": false,
+            "note": "Current official SAM deadline metadata; required white paper entry. Follow the reviewed BAA instructions for the submission route.",
+            "source_url": "https://sam.gov/api/prod/opps/v2/opportunities/c543f1934c4b495c838352fdc7087536",
+            "quote": "{\"response\": \"2030-08-12T23:59:00-04:00\", \"responseTz\": \"America/New_York\"}"
+          },
+          "full": {
+            "kind": "full_application",
+            "date": null,
+            "time": null,
+            "timezone": null,
+            "required": true,
+            "invitation_required": true,
+            "note": "PDF p7: white paper required before requested technical and cost proposals.",
+            "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/542e793a1f7144d1af31d02f6982a5b9/download",
+            "quote": "Submission of a technical proposal, only if requested by the DLA Contracting Officer"
+          }
+        }
+      ]
+    },
+    {
+      "notice_id": "d76bdb7bdda443e3b42e4214118cc746",
+      "solicitation_number": "SP470124B0001_",
+      "organization_id": "500035091",
+      "sponsor": "Defense Logistics Agency (DLA)",
+      "evidence_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/b00816e373b64405b6862ded9844f000/download",
+      "academic_eligibility_quote": "This is an unrestricted acquisition. All responsible sources capable of satisfying the Government’s needs may submit a White Paper, which will be considered by DLA.",
+      "verified_on": "2026-10-13",
+      "review_after": "2026-11-12",
+      "review_sha256": "8f642636ecfd681f80f9f01117b5819fea6417ca033464cc20fe2d6c1f19805a",
+      "summary": "Logistics planning, procurement, order fulfillment and technical data research.",
+      "scope_note": "Open non-IDIQ white paper entry; technical/cost proposals follow a government request. Educational organizations may be prime offerors, subject to financial, accounting and other FAR responsibility standards. No small-business set-aside. Use only the current BAA areas of interest and official submission route.",
+      "cycles": [
+        {
+          "name": "Current open entry",
+          "entry": {
+            "kind": "white_paper",
+            "date": "2029-08-27",
+            "time": "23:59",
+            "timezone": "America/New_York",
+            "required": true,
+            "invitation_required": false,
+            "note": "Current official SAM deadline metadata; required white paper entry. Follow the reviewed BAA instructions for the submission route.",
+            "source_url": "https://sam.gov/api/prod/opps/v2/opportunities/d76bdb7bdda443e3b42e4214118cc746",
+            "quote": "{\"response\": \"2029-08-27T23:59:00-04:00\", \"responseTz\": \"America/New_York\"}"
+          },
+          "full": {
+            "kind": "full_application",
+            "date": null,
+            "time": null,
+            "timezone": null,
+            "required": true,
+            "invitation_required": true,
+            "note": "PDF p6: reopened non-IDIQ short-term-project white paper route.",
+            "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/b00816e373b64405b6862ded9844f000/download",
+            "quote": "If such a technical concept is deemed by the Government to be of interest, the Government may request a full cost and technical proposal"
+          }
+        }
+      ]
+    },
+    {
+      "notice_id": "c7652cf54cb44eacb8de64f6f3f1fe1f",
+      "solicitation_number": "SP470126B0001_",
+      "organization_id": "500035091",
+      "sponsor": "Defense Logistics Agency (DLA)",
+      "evidence_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/770f64c1b71842a0a051ce2bddf409db/download",
+      "academic_eligibility_quote": "This is an unrestricted acquisition. All responsible sources capable of satisfying the Government’s needs may submit a White Paper, which will be considered by DLA.",
+      "verified_on": "2026-10-13",
+      "review_after": "2026-11-12",
+      "review_sha256": "efbbf9fd2b61f09848e47186c2b4f8526d6305f97ae112089cdd845d7cb89c48",
+      "summary": "Clothing/textiles manufacturing, digitaldesign, supply-chain resilience and novel materials.",
+      "scope_note": "Open non-IDIQ white paper entry; technical/cost proposals follow a government request. Educational organizations may be prime offerors, subject to financial, accounting and other FAR responsibility standards. No small-business set-aside. Use only the current BAA areas of interest and official submission route. Amendment 0003 explicitly reopened white papers on August 13, 2026; do not revive the closed initial IDIQ proposal phase.",
+      "cycles": [
+        {
+          "name": "Current open entry",
+          "entry": {
+            "kind": "white_paper",
+            "date": "2030-12-02",
+            "time": "23:59",
+            "timezone": "America/New_York",
+            "required": true,
+            "invitation_required": false,
+            "note": "Current official SAM deadline metadata; required white paper entry. Follow the reviewed BAA instructions for the submission route.",
+            "source_url": "https://sam.gov/api/prod/opps/v2/opportunities/c7652cf54cb44eacb8de64f6f3f1fe1f",
+            "quote": "{\"response\": \"2030-12-02T23:59:00-05:00\", \"responseTz\": \"America/New_York\"}"
+          },
+          "full": {
+            "kind": "full_application",
+            "date": null,
+            "time": null,
+            "timezone": null,
+            "required": true,
+            "invitation_required": true,
+            "note": "Revised BAA p6; Amendment 0003 reopened new non-IDIQ white paper entry on August 13, 2026.",
+            "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/770f64c1b71842a0a051ce2bddf409db/download",
+            "quote": "If such a technical concept is deemed by the Government to be of interest, the Government may request a full cost and technical proposal"
+          }
+        }
+      ]
+    },
+    {
+      "notice_id": "53a81a363d9140b9b58207cae11e22ec",
+      "solicitation_number": "SP470126B0006",
+      "organization_id": "500035091",
+      "sponsor": "Defense Logistics Agency (DLA)",
+      "evidence_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/8d91166aec2347ac8d8158417ecba105/download",
+      "academic_eligibility_quote": "This is an unrestricted acquisition. All responsible sources capable of satisfying the Government’s needs will be considered by DLA.",
+      "verified_on": "2026-10-13",
+      "review_after": "2026-11-12",
+      "review_sha256": "adcd7eec82a1ea8bdf8334d04210c80ba14c64e874bedf1eb29c43645b8f1d26",
+      "summary": "Battery performance, safety, shelf life, manufacturing and logistics research.",
+      "scope_note": "Battery manufacturing, performance, reliability and logistics R&D; projects 6–24 months and government cost up to $2 million. Cost-type research proposals; standard accounting and responsibility requirements apply. This is unrestricted, with HBCUs/MIs expressly encouraged.",
+      "cycles": [
+        {
+          "name": "Current open entry",
+          "entry": {
+            "kind": "white_paper",
+            "date": "2031-08-09",
+            "time": null,
+            "timezone": null,
+            "required": true,
+            "invitation_required": false,
+            "note": "BATTNET IV PDF p3; required white paper route. Date-only source document deadline.",
+            "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/8d91166aec2347ac8d8158417ecba105/download",
+            "quote": "CLOSING DATE: August 9, 2031"
+          },
+          "full": {
+            "kind": "full_application",
+            "date": null,
+            "time": null,
+            "timezone": null,
+            "required": true,
+            "invitation_required": true,
+            "note": "BATTNET PDF p5: technical and cost proposals only on request after required white paper.",
+            "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/8d91166aec2347ac8d8158417ecba105/download",
+            "quote": "Submission of a technical proposal only if requested by the DLA Contracting Officer or Alternate POC"
+          }
+        }
+      ]
+    },
+    {
+      "notice_id": "54e1bd529fd84e7db45fe5a236374ca0",
+      "solicitation_number": "SP800026BBAA0",
+      "organization_id": "500023954",
+      "sponsor": "Defense Logistics Agency (DLA) Strategic Materials",
+      "evidence_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/3afde45ad98441f2ae89429c6a70d6e5/download",
+      "academic_eligibility_quote": "Any responsible source capable of satisfying the Government's needs may submit a white paper, which shall be considered by DLA Strategic Materials.",
+      "verified_on": "2026-10-13",
+      "review_after": "2026-11-12",
+      "review_sha256": "324e4ee17015e96a78adb3afba4150b1453af47e3b224fa26e8ee340f2bcb9ec",
+      "summary": "Strategic and critical materials, alloys, substitution, conservation, supply chains and qualification.",
+      "scope_note": "Strategic/critical materials research, qualification and supply-chain assessments. SAM registration required when submitting and throughout award. Foreign-owned firms require foreign disclosure review. Source contains inconsistent umbrella/end dates, but the May 1, 2028initial-entry cutoff is explicit.",
+      "cycles": [
+        {
+          "name": "Current open entry",
+          "entry": {
+            "kind": "white_paper",
+            "date": "2028-05-01",
+            "time": null,
+            "timezone": null,
+            "required": true,
+            "invitation_required": false,
+            "note": "Amendment 001 p6 exact white paper cutoff; no time specified. Do not use conflicting 2029 umbrella or Sep 2028 award date as the entry deadline.",
+            "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/3afde45ad98441f2ae89429c6a70d6e5/download",
+            "quote": "White papers may be submitted from the date of opening through May 1, 2028, and will be reviewed and evaluated as received."
+          },
+          "full": {
+            "kind": "full_application",
+            "date": null,
+            "time": null,
+            "timezone": null,
+            "required": true,
+            "invitation_required": true,
+            "note": "Amendment 001 PDF p8; each proposal request states its own deadline.",
+            "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/3afde45ad98441f2ae89429c6a70d6e5/download",
+            "quote": "White papers evaluated to have significant merit may be invited to submit a complete detailed proposal."
+          }
+        }
+      ]
+    },
+    {
+      "notice_id": "7e9ec160dbe64a47aa768c225bb9f9a6",
+      "solicitation_number": "FA240126S0001",
+      "organization_id": "500185060",
+      "sponsor": "Department of the Air Force",
+      "evidence_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/8200f3d45fa5484c852087843655f50f/download",
+      "academic_eligibility_quote": "All responsible sources capable of satisfying the Government's needs may submit a proposal",
+      "verified_on": "2026-10-13",
+      "review_after": "2026-11-12",
+      "review_sha256": "382371702f1642ce2c62dc6cb7f99a108d2ccd032e611b61c8d0617312e04a0a",
+      "summary": "Novel satellite architecture, communications, sensing, autonomous operations and related technologies enabling future proliferated space architecture.",
+      "scope_note": "Catalog scope unclassified concepts only; classified submission branch excluded. SAM registration, award-specific cost-sharing and research/security clauses.",
+      "cycles": [
+        {
+          "name": "Current open entry",
+          "entry": {
+            "kind": "full_application",
+            "date": "2027-03-03",
+            "time": "00:00",
+            "timezone": "America/New_York",
+            "required": true,
+            "invitation_required": false,
+            "note": "Direct full proposals allowed. Optional executive summary/abstract closes February 3, 2027 at 00:00 ET; no invitation required. Source: PDF pages 27 and 32.",
+            "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/8200f3d45fa5484c852087843655f50f/download",
+            "quote": "Full proposals must be submitted on or before 12:00 AM Eastern Time, 3 March 2027. […] Regardless of SDA’s response to an abstract, proposers may submit a full proposal"
+          },
+          "full": null
+        }
+      ]
+    },
+    {
+      "notice_id": "e3d96ffd4a0a48b080e09dd5af732cc8",
+      "solicitation_number": "693KA8-27-T-00003",
+      "organization_id": "500000118",
+      "sponsor": "Federal Aviation Administration (FAA)",
+      "evidence_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/2e7487dbacf54e13bc796cbd991eafef/download",
+      "academic_eligibility_quote": "to collaborate with traditional and nontraditional government contractors, as well as nonprofit research institutions.",
+      "verified_on": "2026-10-13",
+      "review_after": "2026-11-12",
+      "review_sha256": "a37d74e3ddd2cc724d3b627b733f9300388b2427443572156c4a4b27175f8bf4",
+      "summary": "Basic/applied aviation human-factors research on how increasing system and operational complexity affects pilot performance, safety, automation and training.",
+      "scope_note": "Actual AOI solicits submissions; parent BAA alone does not. Must satisfy one FAA OTA qualifier and technical criteria; subsequent phases only by invitation. CurrentSAM deadline supplies18:00EST; PDF statesNov2date. No small-business set-aside. Submission: Email research/solution brief to the Agreements Officer with the exact AOI subject line in Section1.1.4.",
+      "cycles": [
+        {
+          "name": "Current reviewed call",
+          "entry": {
+            "kind": "concept_paper",
+            "date": "2026-11-02",
+            "time": "18:00",
+            "timezone": "America/New_York",
+            "required": true,
+            "invitation_required": false,
+            "note": "PhaseI Research/Solution Brief; PhaseII pitch and PhaseIII full proposal only by invitation. The PDF specifies November2 and current SAM specifies18:00EST; later-stage dates are not public.",
+            "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/5727e47eace543a89f22b2d38db7a97e/download",
+            "quote": "Phase I – Research/Solutions Briefs Due Date: November 2, 2026"
+          },
+          "full": {
+            "kind": "full_application",
+            "date": null,
+            "time": null,
+            "timezone": null,
+            "required": false,
+            "invitation_required": true,
+            "note": "Only invited applicants may proceed. The full-proposal deadline is not publicly specified and will be supplied by the agency.",
+            "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/5727e47eace543a89f22b2d38db7a97e/download",
+            "quote": "Advancement from one phase to the next is by invitation from the FAA and is based on the Government's evaluation of the submission under the applicable evaluation procedures."
+          }
+        }
+      ]
+    },
+    {
+      "notice_id": "b6b54d0c14004fd893f7d44a725dd206",
+      "solicitation_number": "DJF-23-1200-BAA-05172023",
+      "organization_id": "100500172",
+      "sponsor": "Federal Bureau of Investigation (FBI)",
+      "evidence_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/6733ad509f764c1d844f3050339dfb1b/download",
+      "academic_eligibility_quote": "The objective of this BAA is to encourage participation by science and technology firms and educational institutions in meeting FBI Research and Development goals for innovative ideas and approaches for research that is general in nature.",
+      "verified_on": "2026-10-13",
+      "review_after": "2026-11-12",
+      "review_sha256": "94658dc7ea5bf4517a13174f21953d58a2be86ee65c3624d62d74cf85c7d6dc1",
+      "summary": "FBI science and technology basic/applied research addressing currently posted enterprise problem sets; prospective work must match a stated problem area.",
+      "scope_note": "In general work and whitepapers UNCLASSIFIED; classified approach needs prior approval. Personnel access to FBI IT networks/systems requires TS clearability and may requireSCI. This is conditional on proposed work, not a universal cleared-prime requirement. Awards subject to funds and scope; SAM registration and organizational conflict disclosures required. Submission: White paper by email to the Contracting Officer as specified in the current June10,2026 revision.",
+      "cycles": [
+        {
+          "name": "Current reviewed call",
+          "entry": {
+            "kind": "white_paper",
+            "date": "2027-05-16",
+            "time": "16:00",
+            "timezone": "America/New_York",
+            "required": true,
+            "invitation_required": false,
+            "note": "Rolling initial white papers by email through the closing date; current SAM specifies16:00EDT. Formal proposals must wait for invitation; full date not publicly specified.",
+            "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/6733ad509f764c1d844f3050339dfb1b/download",
+            "quote": "White papers may be submitted at any time during the BAA open period"
+          },
+          "full": {
+            "kind": "full_application",
+            "date": null,
+            "time": null,
+            "timezone": null,
+            "required": false,
+            "invitation_required": true,
+            "note": "Only invited applicants may proceed. The full-proposal deadline is not publicly specified and will be supplied by the agency.",
+            "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/6733ad509f764c1d844f3050339dfb1b/download",
+            "quote": "DO NOT submit a formal proposal until requested by the FBI Contracting Officer."
+          }
+        }
+      ]
+    },
+    {
+      "notice_id": "e7c3faad3433434aaf41a5eb5ce11920",
+      "solicitation_number": "CBRND-BAA-22-01",
+      "organization_id": "500038578",
+      "sponsor": "Joint Program Executive Office for Chemical, Biological, Radiological and Nuclear Defense (JPEO CBRND)",
+      "evidence_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/61a9877b296e49a8a5bc77c48aa3ce84/download",
+      "academic_eligibility_quote": "Proposals are sought from all eligible sources as specified herein, including educational institutions, nonprofit organizations, and private industry.",
+      "verified_on": "2026-10-13",
+      "review_after": "2026-11-12",
+      "review_sha256": "854543aaf7d38083309d402481c01d4a75de802588cfe1dd9c008fbd07d6057d",
+      "summary": "Applied/advanced medical countermeasure and enabling technology development; general S&T basic research excluded.",
+      "scope_note": "Medical countermeasure and enabling technology development, normally advanced-development maturity. General S&T basic research is excluded. PDF says continuously open until cancellation; this entry uses the earlier finite SAM window boundary. Individual topic calls retain their own deadlines. Full contracts normally due 45 days after request; grants use Grants.gov when invited.",
+      "cycles": [
+        {
+          "name": "Current open entry",
+          "entry": {
+            "kind": "preproposal",
+            "date": "2030-12-31",
+            "time": "23:59",
+            "timezone": "America/New_York",
+            "required": true,
+            "invitation_required": false,
+            "note": "Current official SAM deadline metadata; required white paper entry. Follow the reviewed BAA instructions for the submission route.",
+            "source_url": "https://sam.gov/api/prod/opps/v2/opportunities/e7c3faad3433434aaf41a5eb5ce11920",
+            "quote": "{\"response\": \"2030-12-31T23:59:00-05:00\", \"responseTz\": \"America/New_York\"}"
+          },
+          "full": {
+            "kind": "full_application",
+            "date": null,
+            "time": null,
+            "timezone": null,
+            "required": true,
+            "invitation_required": true,
+            "note": "PDF p18: contract full proposals due 45 days after request; grant/cooperative-agreement full proposals via Grants.gov after request.",
+            "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/61a9877b296e49a8a5bc77c48aa3ce84/download",
+            "quote": "If the preproposal for a procurement contract is accepted, ACC-APG Edgewood Contracting Division will send a Request For Full Proposal (RFFP)"
+          }
+        }
+      ]
+    },
+    {
+      "notice_id": "812c81b0f0b84943be12a5f29615d3c8",
+      "solicitation_number": "80GRC026R0008",
+      "organization_id": "100164057",
+      "sponsor": "NASA Glenn Research Center",
+      "evidence_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/749379988cd14b12900f8c3b3664a7c2/download",
+      "academic_eligibility_quote": "Eligible Offerors under this Appendix include all categories of U.S. organizations, including educational institutions, industry, and not-for-profit institutions.",
+      "verified_on": "2026-10-13",
+      "review_after": "2026-11-12",
+      "review_sha256": "99e106c0b2bc6285f8ddf4d126c381a018fbfa8b9427a7e1cd99f82a8c324822",
+      "summary": "Lunar infrastructure technology maturation: vertical solar arrays, oxygen extraction from regolith, radioisotope Stirling generators, in-space advanced manufacturing, and nanomaterials; generally TRL 5–6 demonstrations.",
+      "scope_note": "US organizations as prime; foreign organizations may team but NASA funds cannot support their R&D; non-US persons employed/studying at US organizations may receive funding. NASA/JPL, national laboratories and FFRDCs cannot prime. China bilateral-participation restriction applies. Section10.1 recommends 48-hour intent notice and five-day test upload using should; these are not described as mandatory eligibility prerequisites. SAM certifications must be current. One proposal per topic per prime. Submission: NASA EFSS Box, using the topic-specific links in Section10.1.",
+      "cycles": [
+        {
+          "name": "Current reviewed call",
+          "entry": {
+            "kind": "full_application",
+            "date": "2026-10-15",
+            "time": "17:00",
+            "timezone": "America/New_York",
+            "required": true,
+            "invitation_required": false,
+            "note": "NASA EFSS Box full proposal; October8 struck out and replaced by October15 in Amendment3. Recommended advance notification and test upload are not mandatory prerequisites.",
+            "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/749379988cd14b12900f8c3b3664a7c2/download",
+            "quote": "no later than October 8 October 15, 2026 5:00PM EDT."
+          },
+          "full": null
+        }
+      ]
+    },
+    {
+      "notice_id": "84cb4b33be0641c1b54c4de34b542ed5",
+      "solicitation_number": "HM047627XXXX",
+      "organization_id": "500038581",
+      "sponsor": "National Geospatial-Intelligence Agency",
+      "evidence_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/5df2c1fa8a9c46a0ab22ba8a69b5dda5/download",
+      "academic_eligibility_quote": "All responsible sources capable of satisfying the Government's needs may submit a proposal for NGA’s consideration.",
+      "verified_on": "2026-10-13",
+      "review_after": "2026-11-12",
+      "review_sha256": "52a242731315a9c56987c5ceeb2df7ba0c1b16576f420a96c173baa3e28f70b5",
+      "summary": "Develop AI/ML methods to extract and classify 3D surface/subsurface objects using NASA ICESat-2 and GEDI lidar, including navigation safety applications.",
+      "scope_note": "Topic7 LASER only, not BIG-ST parent or closed topics. Parent exists in catalog but specific Topic7 solicitation is distinct. CUI safeguards; foreign nationals need prior written CO/COR approval; HSPD-12 favorable adjudication if access to NGA facilities/systems. One anticipated award, $854k /15months.",
+      "cycles": [
+        {
+          "name": "Current open entry",
+          "entry": {
+            "kind": "preproposal",
+            "date": "2026-10-23",
+            "time": "11:00",
+            "timezone": "Etc/GMT+5",
+            "required": true,
+            "invitation_required": false,
+            "note": "Required abstract. Sponsor explicitly prints EST; confirm timezone with sponsor because October usually observes EDT. Dates: Topic7 document Table2. Prerequisite: attached General Solicitation Rev4 PDF page16.",
+            "source_url": "https://sam.gov/opp/84cb4b33be0641c1b54c4de34b542ed5/view",
+            "quote": "Abstracts Due 23 October 2026 at 1100 EST […] It is mandatory that prospective Offerors submit abstracts prior to submission of a complete proposal."
+          },
+          "full": {
+            "kind": "full_application",
+            "date": "2026-12-11",
+            "time": "11:00",
+            "timezone": "Etc/GMT+5",
+            "required": true,
+            "invitation_required": false,
+            "note": "Prior abstract required; full proposals permitted regardless of abstract feedback. Source-specific deadline precedes SAM header; literal EST preserved. Dates: Topic7 document Table2. Prerequisite: attached General Solicitation Rev4 PDF page16.",
+            "source_url": "https://sam.gov/opp/84cb4b33be0641c1b54c4de34b542ed5/view",
+            "quote": "Proposals Due 11 December 2026 at 1100 EST […] Regardless of NGA’s abstract feedback, Offerors may choose to submit a full proposal."
+          }
+        }
+      ]
+    },
+    {
+      "notice_id": "5f75330f42ee4145990fe6a51a3dc84e",
+      "solicitation_number": "HHS-NIH-NIAID-BAA2026-1",
+      "organization_id": "100188096",
+      "sponsor": "National Institutes of Health - National Institute of Allergy and Infectious Diseases (NIAID)",
+      "evidence_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/54f425b144884bea8e5aac6064a67d95/download",
+      "academic_eligibility_quote": "THIS REQUIREMENT IS NOT SET ASIDE FOR SMALL BUSINESS. Section 514 of the FY 1997 Appropriations Act prohibits NIH from providing contract funds to educational institutions that the Secretary of Defense determines have a policy or practice (regardless of when implemented ) that either prohibits, or in effect prevents (1) the maintaining, establishing, or operation of a unit of the Senior Reserve Officer Training Corps at the covered education entity; or (2) a student at the covered educational entity from enrolling in a unit of the Senior Reserve Officer Training Corps at another institution of higher education.",
+      "verified_on": "2026-10-13",
+      "review_after": "2026-11-12",
+      "review_sha256": "9ba9e0894ef65808137e694ab7d652783cba32bc33577b7d0f5f6e0594cc00d8",
+      "summary": "Development of infectious-disease vaccine candidates, therapeutic candidates, and in-vitro diagnostics, including stage-appropriate preclinical work and early clinical trials.",
+      "scope_note": "Cost-reimbursement completion contracts require an adequate accounting system. Educational institutions subject to stated ROTC and military recruiting access restrictions (pp33–34). Clinical research and stage-appropriate preliminary data requirements vary by research area; no invitation required for initial full proposal. Notice of Intent requested for planning, late letters accepted, not a hard application prerequisite. Eligibility basis: Academic eligibility follows the unrestricted solicitation and its express educational-institution contracting conditions; no separate blanket universities-eligible sentence is present. The quoted exclusion applies only to specified ROTC/military recruiting policies; it does not exclude academic institutions generally. Submission: Separate technical and business proposals for each research area through https://ecps.nih.gov; other submission methods are not permitted (PDFp37).",
+      "cycles": [
+        {
+          "name": "Current reviewed call",
+          "entry": {
+            "kind": "full_application",
+            "date": "2026-12-08",
+            "time": "15:00",
+            "timezone": "Etc/GMT+5",
+            "required": true,
+            "invitation_required": false,
+            "note": "Separate technical and business proposals through eCPS for each research area. Optional planning Notice of Intent November6; later notices accepted.",
+            "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/54f425b144884bea8e5aac6064a67d95/download",
+            "quote": "December 8, 2026. Proposals must be received before 3:00 PM Eastern Standard Time on the date specified herein."
+          },
+          "full": null
+        }
+      ]
+    },
+    {
+      "notice_id": "b9d86f57c8a348238b5322eda840c54e",
+      "solicitation_number": "N68335-26-R-0458",
+      "organization_id": "100255266",
+      "sponsor": "Naval Air Warfare Center Aircraft Division (NAWCAD) Webster Outlying Field",
+      "evidence_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/51fdc930fb1248a2b1dffdfdb4fa41e0/download",
+      "academic_eligibility_quote": "Historically Black Colleges and Universities, Minority Institutions, Other Educational, or Non-Profit",
+      "verified_on": "2026-10-13",
+      "review_after": "2026-11-12",
+      "review_sha256": "3df9c08193ccff4a4fab108de8d871f3b8ab979f4b8b8d4f837d4c18b67edf62",
+      "summary": "Research in airborne systems integration, manned/unmanned platforms, sensors, advanced computing, networking, protection and survivability.",
+      "scope_note": "Phase I requires a proposal abstract of at most five pages plus a quad chart. Only selected Phase I submissions can progress to full proposals. Current SAM explicitly sets April 10, 2027; PDF p13 retains an unfilled DD Month 2026 placeholder, which is not treated as a competing actual deadline. The PDF p19 lists educational offeror categories; no small-business set-aside is present. Export and controlled-research requirements depend on the proposed work.",
+      "cycles": [
+        {
+          "name": "Current open entry",
+          "entry": {
+            "kind": "preproposal",
+            "date": "2027-04-10",
+            "time": "13:00",
+            "timezone": "America/New_York",
+            "required": true,
+            "invitation_required": false,
+            "note": "Exact current official SAM metadata deadline; submission stage is established by the reviewed notice and attachments.",
+            "source_url": "https://sam.gov/api/prod/opps/v2/opportunities/b9d86f57c8a348238b5322eda840c54e",
+            "quote": "{\"response\": \"2027-04-10T13:00:00-04:00\", \"responseTz\": \"America/New_York\"}"
+          },
+          "full": {
+            "kind": "full_application",
+            "date": null,
+            "time": null,
+            "timezone": null,
+            "required": true,
+            "invitation_required": true,
+            "note": "PDF p13: Phase I abstract selection is required before Phase II full proposal; government supplies subsequent instructions.",
+            "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/51fdc930fb1248a2b1dffdfdb4fa41e0/download",
+            "quote": "Any Offeror whose proposal was not identified as being of particular value to the Government is ineligible to submit a full proposal under this BAA."
+          }
+        }
+      ]
+    },
+    {
+      "notice_id": "3918e78c2c93423594588999696598cb",
+      "solicitation_number": "N61340-26-S-0001",
+      "organization_id": "500045708",
+      "sponsor": "Naval Air Warfare Center Training Systems Division (NAWCTSD)",
+      "evidence_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/9537eee417d34672bcfc1058f257aefe/download",
+      "academic_eligibility_quote": "NAWCTSD encourages nonprofit organizations, educational institutions, small business, and small disadvantaged business concerns to submit research proposals for consideration.",
+      "verified_on": "2026-10-13",
+      "review_after": "2026-11-12",
+      "review_sha256": "073ce08b342574293114a49150614c7af234bb7c7eb4cd4512d37e034125cd62",
+      "summary": "Training technology, simulation, computer applications and STEM research.",
+      "scope_note": "Training and simulation R&D, including STEM methods; investigative concepts rather than development of specific hardware. Non-US participation depends on whether critical, sensitive or classified information is involved. Proposal email route is in Section 3.1.",
+      "cycles": [
+        {
+          "name": "Current open entry",
+          "entry": {
+            "kind": "full_application",
+            "date": "2031-01-25",
+            "time": null,
+            "timezone": null,
+            "required": true,
+            "invitation_required": false,
+            "note": "Amendment01 p22, Section 3.1.9; recommended technical dialogue and informal white paper are not mandatory prerequisites.",
+            "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/9537eee417d34672bcfc1058f257aefe/download",
+            "quote": "Proposals may be submitted at any time, but no later than the BAA expiration date (25 January 2031)."
+          },
+          "full": null
+        }
+      ]
+    },
+    {
+      "notice_id": "38b71a2fd903432ca02100ea9177b738",
+      "solicitation_number": "N6893626R5014",
+      "organization_id": "100076489",
+      "sponsor": "Naval Air Warfare Center Weapons Division (NAWCWD)",
+      "evidence_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/ec049159d535411188f9cca673e28cb2/download",
+      "academic_eligibility_quote": "All responsible sources from academia, industry and the research community may submit proposals under this BAA.",
+      "verified_on": "2026-10-13",
+      "review_after": "2026-11-12",
+      "review_sha256": "61a64cbd1b2803b9863b0ee74e903b29b2ae9235724b4ecffe0c173e91bfe3aa",
+      "summary": "Basic and applied science/engineering for aerospace, naval warfare and weapons.",
+      "scope_note": "Academic, industry and research sources may apply; federal laboratories and military universities cannot receive awards directly; UARC participation depends on its sponsoring contract. Consult the official unclassified submission instructions.",
+      "cycles": [
+        {
+          "name": "Current open entry",
+          "entry": {
+            "kind": "full_application",
+            "date": "2027-09-30",
+            "time": null,
+            "timezone": null,
+            "required": true,
+            "invitation_required": false,
+            "note": "Attachment 1 opening paragraph and Section V: white papers desired, not required; direct full proposal accepted. Date only because SAM numeric offset disagrees with the named Pacific timezone.",
+            "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/ec049159d535411188f9cca673e28cb2/download",
+            "quote": "This announcement will remain open until 30 September 2027. Proposals may be submitted at any time during this period."
+          },
+          "full": null
+        }
+      ]
+    },
+    {
+      "notice_id": "f0fbc0533b024e2fbfbdfe8b5bd2d81d",
+      "solicitation_number": "N39430-26-S-5000",
+      "organization_id": "500045579",
+      "sponsor": "Naval Facilities Engineering and Expeditionary Warfare Center (NAVFAC EXWC)",
+      "evidence_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/fd60375a237a468a85b97bad997b4f51/download",
+      "academic_eligibility_quote": "Historically Black College/University or Minority Institution (HBCU/MI) Other Academic Institution",
+      "verified_on": "2026-10-13",
+      "review_after": "2026-11-12",
+      "review_sha256": "c84368c9ec8753a3d9689d8f80160e637ece2c0f361aa5b5f51894ad0d09c0d0",
+      "summary": "Applied research, technology development and prototypes for naval facilities, expeditionary construction, shore and marine energy, environmental restoration, water, cyber-physical systems and security.",
+      "scope_note": "Submit a research abstract using Attachment 1; the form explicitly includes other academic institutions. Proposals must fit applied research, advanced technology development or advanced component development/prototypes. Topic 11 Living Marine Resources has separate abstract instructions and scope; its terms must not be generalized to every topic. No funding is reserved in advance. Abstracts are valid for one year after submission. A detailed proposal is requested only after review. Date only is retained for the current umbrella entry; consult the source for any topic-specific earlier deadline.",
+      "cycles": [
+        {
+          "name": "Current open entry",
+          "entry": {
+            "kind": "preproposal",
+            "date": "2027-06-14",
+            "time": null,
+            "timezone": null,
+            "required": true,
+            "invitation_required": false,
+            "note": "Exact current official SAM metadata deadline; submission stage is established by the reviewed notice and attachments.",
+            "source_url": "https://sam.gov/api/prod/opps/v2/opportunities/f0fbc0533b024e2fbfbdfe8b5bd2d81d",
+            "quote": "{\"response\": \"2027-06-14T16:00:00-07:00\", \"responseTz\": \"America/Los_Angeles\"}"
+          },
+          "full": {
+            "kind": "full_application",
+            "date": null,
+            "time": null,
+            "timezone": null,
+            "required": true,
+            "invitation_required": true,
+            "note": "Current official notice final submission paragraph: detailed proposal follows government request.",
+            "source_url": "https://sam.gov/opp/f0fbc0533b024e2fbfbdfe8b5bd2d81d/view",
+            "quote": "will be notified if a detailed proposal is requested."
+          }
+        }
+      ]
+    },
+    {
+      "notice_id": "fac0dcbe5eff43ab92e3dadb319daed1",
+      "solicitation_number": "N00024-19-R4145",
+      "organization_id": "100076491",
+      "sponsor": "Naval Sea Systems Command (NAVSEA)",
+      "evidence_url": "https://sam.gov/opp/fac0dcbe5eff43ab92e3dadb319daed1/view",
+      "academic_eligibility_quote": "All responsible sources from academia and industry may submit white papers under this BAA.",
+      "verified_on": "2026-10-13",
+      "review_after": "2026-11-12",
+      "review_sha256": "890fa48a8d7a500e9b527574ed4e72f6e663c1421c48a1d6cb65526eab24de64",
+      "summary": "Naval power and energy system research: power generation, storage, distribution, controls, advanced conductors, thermal management and modeling.",
+      "scope_note": "Required white paper before invited full proposal. The current description extends receipt to February 6, 2033, while current SAM deadline metadata remains February 6, 2028. This entry deliberately uses the earlier 2028 deadline conservatively and retains the contradiction. Anticipated CPFF awards require a DCMA/DCAA-approved accounting system or evidence of a pre-award approval process.",
+      "cycles": [
+        {
+          "name": "Current open entry",
+          "entry": {
+            "kind": "white_paper",
+            "date": "2028-02-06",
+            "time": "17:00",
+            "timezone": "America/New_York",
+            "required": true,
+            "invitation_required": false,
+            "note": "Exact current official SAM metadata deadline; submission stage is established by the reviewed notice and attachments.",
+            "source_url": "https://sam.gov/api/prod/opps/v2/opportunities/fac0dcbe5eff43ab92e3dadb319daed1",
+            "quote": "{\"response\": \"2028-02-06T17:00:00-05:00\", \"responseTz\": \"America/New_York\"}"
+          },
+          "full": {
+            "kind": "full_application",
+            "date": null,
+            "time": null,
+            "timezone": null,
+            "required": true,
+            "invitation_required": true,
+            "note": "Official notice Section V: selected white papers lead to requested full proposals.",
+            "source_url": "https://sam.gov/opp/fac0dcbe5eff43ab92e3dadb319daed1/view",
+            "quote": "For those who are requested to submit proposals, NAVSEA reserves the right to award all, some, or none of the proposals received under this BAA."
+          }
+        }
+      ]
+    },
+    {
+      "notice_id": "e2a7a0592bfc4d43a0ab18d0c39147d3",
+      "solicitation_number": "N0002427S0001",
+      "organization_id": "100076491",
+      "sponsor": "Naval Sea Systems Command (NAVSEA)",
+      "evidence_url": "https://sam.gov/opp/e2a7a0592bfc4d43a0ab18d0c39147d3/view",
+      "academic_eligibility_quote": "Proposals may be submitted by any governmental agency, commercial firm, individual, non-profit, or institution of higher education.",
+      "verified_on": "2026-10-13",
+      "review_after": "2026-11-12",
+      "review_sha256": "0d08da86ade8ca4fa796269e19313651297368f95674e9883118947807476d31",
+      "summary": "Applied biomedical research on diver physiology and health, decompression, and submarine survivability.",
+      "scope_note": "Diving biomedical research and diving equipment development. Proposals must fit the source research areas and fiscal-year cycle. Source deadlines explicitly sayEST, including March; no silent conversion to daylight time. Current SAM summary shows only the later FY29 preproposal deadline.",
+      "cycles": [
+        {
+          "name": "FY28",
+          "entry": {
+            "kind": "preproposal",
+            "date": "2026-11-30",
+            "time": "15:00",
+            "timezone": "Etc/GMT+5",
+            "required": true,
+            "invitation_required": false,
+            "note": "Required3–5 page preproposal; exact source EST preserved as fixed UTC−05:00.",
+            "source_url": "https://sam.gov/opp/e2a7a0592bfc4d43a0ab18d0c39147d3/view",
+            "quote": "For FY28, the pre-proposal submission deadline is no later than 3:00 PM EST, 30 November 2026."
+          },
+          "full": {
+            "kind": "full_application",
+            "date": "2027-03-30",
+            "time": "15:00",
+            "timezone": "Etc/GMT+5",
+            "required": true,
+            "invitation_required": true,
+            "note": "Only selected preproposals invited; fixed source EST preserved even in March.",
+            "source_url": "https://sam.gov/opp/e2a7a0592bfc4d43a0ab18d0c39147d3/view",
+            "quote": "The deadline for proposal submission is no later than 3:00 PM EST, 30 March 2027."
+          }
+        },
+        {
+          "name": "FY29",
+          "entry": {
+            "kind": "preproposal",
+            "date": "2027-11-30",
+            "time": "15:00",
+            "timezone": "Etc/GMT+5",
+            "required": true,
+            "invitation_required": false,
+            "note": "Required3–5 page preproposal; exact source EST preserved as fixed UTC−05:00.",
+            "source_url": "https://sam.gov/opp/e2a7a0592bfc4d43a0ab18d0c39147d3/view",
+            "quote": "For FY29, the pre-proposal submission deadline is no later than 3:00 PM EST, 30 November 2027."
+          },
+          "full": {
+            "kind": "full_application",
+            "date": "2028-03-30",
+            "time": "15:00",
+            "timezone": "Etc/GMT+5",
+            "required": true,
+            "invitation_required": true,
+            "note": "Only selected preproposals invited; fixed source EST preserved even in March.",
+            "source_url": "https://sam.gov/opp/e2a7a0592bfc4d43a0ab18d0c39147d3/view",
+            "quote": "The deadline for proposal submission is no later than 3:00 PM EST, 30 March 2028."
+          }
+        }
+      ]
+    },
+    {
+      "notice_id": "d2bb23d781124b8690158100ce7d5f1e",
+      "solicitation_number": "N0001426SB002",
+      "organization_id": "100076476",
+      "sponsor": "Office of Naval Research (ONR)",
+      "evidence_url": "https://www.onr.navy.mil/assets/2026-08/N0001426SB002%20Amendment%200001.pdf",
+      "academic_eligibility_quote": "All responsible sources from industry, academia, and the research community may submit proposals under this sBAA.",
+      "verified_on": "2026-10-13",
+      "review_after": "2026-11-12",
+      "review_sha256": "55cabcdcf7048a8ee4463fa2cc1cdd071522ebf0a9f4f8a33f84f3ca7ae1ffa5",
+      "summary": "Applied research and technology development in advanced manufacturing and sustainment.",
+      "scope_note": "Applied research and advanced technology development for naval manufacturing and sustainment, with transition value. Phase II selections depend on funding and current technical focus. FFRDCs and military universities cannot be prime offerors; no mandatory industry partner invented.",
+      "cycles": [
+        {
+          "name": "Current open entry",
+          "entry": {
+            "kind": "white_paper",
+            "date": "2027-07-16",
+            "time": "17:00",
+            "timezone": "America/New_York",
+            "required": true,
+            "invitation_required": false,
+            "note": "Phase II open white paper route through the SAM closing date; Amendment 0001 pp12/23 expressly keeps Phase II open after PhaseI. Submit through ONR Submission Portal.",
+            "source_url": "https://sam.gov/api/prod/opps/v2/opportunities/d2bb23d781124b8690158100ce7d5f1e",
+            "quote": "{\"response\": \"2027-07-16T17:00:00-04:00\", \"responseTz\": \"America/New_York\"}"
+          },
+          "full": {
+            "kind": "full_application",
+            "date": null,
+            "time": null,
+            "timezone": null,
+            "required": true,
+            "invitation_required": true,
+            "note": "Amendment 0001 PDF p23; selected Phase II full proposals due 45 days after notification, by 17:00 source EDT.",
+            "source_url": "https://www.onr.navy.mil/assets/2026-08/N0001426SB002%20Amendment%200001.pdf",
+            "quote": "Any Offeror whose white paper technology was not identified as being of “particular value” to the Navy is ineligible to submit a full proposal under this sBAA."
+          }
+        }
+      ]
+    },
+    {
+      "notice_id": "02d98fba28de4a70b82ebe638954f5d4",
+      "solicitation_number": "W912HQ26S0050",
+      "organization_id": "100221636",
+      "sponsor": "Strategic Environmental Research and Development Program (SERDP)",
+      "evidence_url": "https://sam.gov/opp/02d98fba28de4a70b82ebe638954f5d4/view",
+      "academic_eligibility_quote": "Submission of white papers is not restricted in any way to any particular entity.",
+      "verified_on": "2026-10-13",
+      "review_after": "2026-11-12",
+      "review_sha256": "0fc802c86ae2fe4f066d300f5a100eaafa4a47d4b129d7378c590c048dbebc34",
+      "summary": "Environmental restoration, munitions response, conservation/resilience and weapons-system environmental technologies.",
+      "scope_note": "Environmental restoration, munitions response, resource conservation/resilience and weapons-system/platform environmental technology. Whitepapers must not contain classified, controlled-unclassified or proprietary information. Submission is not restricted to a particular entity.",
+      "cycles": [
+        {
+          "name": "Current open entry",
+          "entry": {
+            "kind": "white_paper",
+            "date": "2027-08-20",
+            "time": "14:00",
+            "timezone": "America/New_York",
+            "required": true,
+            "invitation_required": false,
+            "note": "Required white paper for an AppendixA topic, submitted through SERDP SEMS. Instructions pp1–2 define the staged process; exact closing instant is current SAM metadata.",
+            "source_url": "https://sam.gov/api/prod/opps/v2/opportunities/02d98fba28de4a70b82ebe638954f5d4",
+            "quote": "{\"response\": \"2027-08-20T14:00:00-04:00\", \"responseTz\": \"America/New_York\"}"
+          },
+          "full": {
+            "kind": "full_application",
+            "date": null,
+            "time": null,
+            "timezone": null,
+            "required": true,
+            "invitation_required": true,
+            "note": "Whitepaper instructions p2; full proposal only after government request; individual instructions follow selection.",
+            "source_url": "https://sam.gov/opp/02d98fba28de4a70b82ebe638954f5d4/view",
+            "quote": "Any full proposal that has not been reviewed in the white paper phase will not be evaluated nor considered for award under this BAA."
+          }
+        }
+      ]
+    },
+    {
+      "notice_id": "88bd6e35ec6742b6b1e94fb4aadc706b",
+      "solicitation_number": "W900KK-22-R-0012",
+      "organization_id": "500036903",
+      "sponsor": "Test Resource Management Center (TRMC)",
+      "evidence_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/798977406097466689a5b6ce997dddac/download",
+      "academic_eligibility_quote": "Domestic accredited colleges, universities or institutions of higher learning registered by the U.S. Department of Education",
+      "verified_on": "2026-10-13",
+      "review_after": "2026-11-12",
+      "review_sha256": "840e19e7bea9ed4c4b205e74596e63844922865b4e9713f702f73adb5c1b0c1c",
+      "summary": "Test technology R&D, instrumentation, cyber, autonomy, space and other test infrastructure.",
+      "scope_note": "Only the current out-of-cycle Other Test Technologies route is represented. The May 4, 2026 centrifuge call and Sep 30, 2023 out-of-cycle call are closed. Domestic accredited colleges are eligible; government entities are excluded as offerors. Subsequent white paper and full proposal follow government feedback.",
+      "cycles": [
+        {
+          "name": "Current open entry",
+          "entry": {
+            "kind": "preproposal",
+            "date": "2027-03-14",
+            "time": null,
+            "timezone": null,
+            "required": true,
+            "invitation_required": false,
+            "note": "Enclosure 1.2 p1: open Other Test Technologies abstract entry; abstract required before white paper. Closing date is a conservative source cap, with time unspecified.",
+            "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/d7e5b41597d640c2a03adac19c69fe2e/download",
+            "quote": "In no event shall this Opportunity Notice be valid beyond 14 March 2027."
+          },
+          "full": {
+            "kind": "full_application",
+            "date": null,
+            "time": null,
+            "timezone": null,
+            "required": true,
+            "invitation_required": true,
+            "note": "Main BAA General Information: abstract precedes white paper, then selected offerors receive a full-proposal request.",
+            "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/798977406097466689a5b6ce997dddac/download",
+            "quote": "If a white paper receives a favorable technical review, the offeror may be solicited via a formal solicitation"
+          }
+        }
+      ]
+    },
+    {
+      "notice_id": "34e8be6e2d784d3c80c45c26fc033072",
+      "solicitation_number": "BAA-25-R-C2CFT",
+      "organization_id": "500038571",
+      "sponsor": "U.S. Army Command and Control Cross Functional Team (C2 CFT)",
+      "evidence_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/f945c30ed1e44e4ebc56460e8a36609e/download",
+      "academic_eligibility_quote": "The C2-CFT encourages industry interested in conducting scientific research, educational institutions",
+      "verified_on": "2026-10-13",
+      "review_after": "2026-11-12",
+      "review_sha256": "ab92228a3dce2cc71876d7854de24defc04f88668eb12caf1886ed227748141b",
+      "summary": "Command/control, networking, interoperability, common operating environment and command-post research.",
+      "scope_note": "Four umbrella research areas in networking, common operating environments, interoperability and command posts. Topic-specific calls retain their own deadlines. Selected white papers may require a demonstration before the invited proposal. Research excludes ordinary engineering/support services.",
+      "cycles": [
+        {
+          "name": "Current open entry",
+          "entry": {
+            "kind": "white_paper",
+            "date": "2030-03-23",
+            "time": null,
+            "timezone": null,
+            "required": true,
+            "invitation_required": false,
+            "note": "PDF p3 umbrella validity and p4 white papers accepted anytime; Joint Communications Marketplace submission.",
+            "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/f945c30ed1e44e4ebc56460e8a36609e/download",
+            "quote": "This BAA will be valid through 23 March 2030, unless terminated sooner."
+          },
+          "full": {
+            "kind": "full_application",
+            "date": null,
+            "time": null,
+            "timezone": null,
+            "required": true,
+            "invitation_required": true,
+            "note": "PDF p4: selected white papers may proceed to invited demonstration and full proposal.",
+            "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/f945c30ed1e44e4ebc56460e8a36609e/download",
+            "quote": "Phase Two (2): Submission of Proposals (By Invitation Only)"
+          }
+        }
+      ]
+    },
+    {
+      "notice_id": "d24be7b2b899475b84850463d7edd6b4",
+      "solicitation_number": "W911SR-24-R-DEVB",
+      "organization_id": "500038578",
+      "sponsor": "U.S. Army DEVCOM Chemical Biological Center",
+      "evidence_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/bbba1d76ea0c4a47b54e710201518d2d/download",
+      "academic_eligibility_quote": "Proposals are sought from all eligible sources as specified herein, including educational institutions, nonprofit organizations, and private industry.",
+      "verified_on": "2026-10-13",
+      "review_after": "2026-11-12",
+      "review_sha256": "d27ad0151b2fc664f549695aadf6ae2182065258530d5692986c38551d790ecd",
+      "summary": "Chemical/biological defense research and enabling technologies.",
+      "scope_note": "CBRNE defense basic/applied research and enabling technologies. Open preproposal first; instrument-specific eligibility, human/animal research protections and technology-protection requirements apply. Use the current official CBC BAA submission route.",
+      "cycles": [
+        {
+          "name": "Current open entry",
+          "entry": {
+            "kind": "preproposal",
+            "date": "2029-08-20",
+            "time": "16:30",
+            "timezone": "America/New_York",
+            "required": true,
+            "invitation_required": false,
+            "note": "Current official SAM deadline metadata; required white paper entry. Follow the reviewed BAA instructions for the submission route.",
+            "source_url": "https://sam.gov/api/prod/opps/v2/opportunities/d24be7b2b899475b84850463d7edd6b4",
+            "quote": "{\"response\": \"2029-08-20T16:30:00-04:00\", \"responseTz\": \"America/New_York\"}"
+          },
+          "full": {
+            "kind": "full_application",
+            "date": null,
+            "time": null,
+            "timezone": null,
+            "required": true,
+            "invitation_required": true,
+            "note": "Section IV.G: accepted preproposal receives request and instrument-specific submission terms.",
+            "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/bbba1d76ea0c4a47b54e710201518d2d/download",
+            "quote": "If the preproposal for a procurement contract is accepted, ACC-APG ECD will send a Request For Proposal (RFP)"
+          }
+        }
+      ]
+    },
+    {
+      "notice_id": "bd71f84068534e5680335d83e31fc9df",
+      "solicitation_number": "W9113M-24-R-BAA1",
+      "organization_id": "500043562",
+      "sponsor": "U.S. Army Space and Missile Defense Command (USASMDC)",
+      "evidence_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/6006f06bb55f4158bacde1088106a833/download",
+      "academic_eligibility_quote": "eligible applicants under this BAA include institutions of higher education, nonprofit organizations, state and local governments, and for-profit organizations",
+      "verified_on": "2026-10-13",
+      "review_after": "2026-11-12",
+      "review_sha256": "92c36bba7f6e0017b203b6dcb6158d61dbdec821ef3f3934a9947e84974f9c14",
+      "summary": "Space, missile defense, sensing, directed energy and test/evaluation research.",
+      "scope_note": "Cutting-edge scientific research supporting space and missile defense, not services. Required white paper precedes government invitation; basket placement is not an award. UARC submissions require primary-sponsor concurrence. Use the earlier explicit Rev 06 date rather than extending the window to the conflicting SAM date.",
+      "cycles": [
+        {
+          "name": "Current open entry",
+          "entry": {
+            "kind": "white_paper",
+            "date": "2029-08-23",
+            "time": null,
+            "timezone": null,
+            "required": true,
+            "invitation_required": false,
+            "note": "Rev 06 p5 controls this conservative earlier white paper-window bound. Current SAM summary instead saysAug 26, 2029; contradiction retained for review.",
+            "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/6006f06bb55f4158bacde1088106a833/download",
+            "quote": "The BAA is a continuously open announcement valid throughout the period from the date of issuance through 23 August 2029, unless announced otherwise."
+          },
+          "full": {
+            "kind": "full_application",
+            "date": null,
+            "time": null,
+            "timezone": null,
+            "required": true,
+            "invitation_required": true,
+            "note": "Rev 06 PDF p17: proposal deadline supplied in invitation; white paper basket selection is not an award.",
+            "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/6006f06bb55f4158bacde1088106a833/download",
+            "quote": "An applicant that does not receive an invitation to submit a proposal is not eligible to submit a proposal."
+          }
+        }
+      ]
+    },
+    {
+      "notice_id": "a0969993ee8542988595334947e39a7d",
+      "solicitation_number": "DHS_ST_LRBAA_24-01",
+      "organization_id": "100170417",
+      "sponsor": "U.S. Department of Homeland Security - Science and Technology Directorate",
+      "evidence_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/5a19ae2f73de4b46aebd6018e876b4d9/download",
+      "academic_eligibility_quote": "Potential sources may include independent organizations, single entities, or teams from private sector organizations, Government laboratories, airport authorities, FFRDCs, and academic institutions.",
+      "verified_on": "2026-10-13",
+      "review_after": "2026-11-12",
+      "review_sha256": "91ed5574f0f74414dec1d5acaf9ad7e1b439ab7f5f9a4d035bcff51bead6b267",
+      "summary": "Foundational science, emerging-threat research, and near-term homeland-security technology gaps in remaining DHS research topics; excludes ordinary support services and mature products.",
+      "scope_note": "Only current remaining topics; individual topics can have shorter submission periods. Unclassified submissions only; foreign participation subject to disclosure/export-control review. No set-aside. May31,2029 applies to initial research-concept submission; later dates specified by invitation. Current official attachment filenameAmendment04_20250828 retains internal Amendment2 footers; currentSAM action confirms this is latest attachment inventory. Public OIP landing page was not readable with web search fetch; application route is explicit in current official solicitation, no application or account tested. Submission: Register and submit industry-engagement research concept materials through https://oip.dhs.gov/baa/public; initial abstract/quad chart required, optional video.",
+      "cycles": [
+        {
+          "name": "Current reviewed call",
+          "entry": {
+            "kind": "concept_paper",
+            "date": "2029-05-31",
+            "time": "23:59",
+            "timezone": "America/New_York",
+            "required": true,
+            "invitation_required": false,
+            "note": "Initial Industry Engagement research concept, abstract and quad chart through OIP. Optional video. Later virtual pitch and written proposal by invitation; their dates are invitation-specific.",
+            "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/5a19ae2f73de4b46aebd6018e876b4d9/download",
+            "quote": "The DHS S&T LRBAA 24-01 is a five (5) year announcement and will remain open until May 31, 2029 at 11:59 PM, Eastern Time (ET)."
+          },
+          "full": {
+            "kind": "full_application",
+            "date": null,
+            "time": null,
+            "timezone": null,
+            "required": false,
+            "invitation_required": true,
+            "note": "Only invited applicants may proceed. The full-proposal deadline is not publicly specified and will be supplied by the agency.",
+            "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/5a19ae2f73de4b46aebd6018e876b4d9/download",
+            "quote": "Written Proposal submissions will not be accepted from an offeror that has not been invited to submit a written proposal."
+          }
+        }
+      ]
+    },
+    {
+      "notice_id": "45850d5326944be1b187cece69fe7790",
+      "solicitation_number": "693JJ626R000001",
+      "organization_id": "100076812",
+      "sponsor": "U.S. Department of Transportation - Federal Railroad Administration (FRA)",
+      "evidence_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/62c772c4cbda46b583bce609e153fb05/download",
+      "academic_eligibility_quote": "Any responsible source may submit a Concept Paper for consideration, including, but not limited to, States or local governments, organizations of State or local governments, universities or institutions of higher education, hospitals, non-profit organizations",
+      "verified_on": "2026-10-13",
+      "review_after": "2026-11-12",
+      "review_sha256": "e110eb66cb59c83ddc9d06c29221f06cc4734feec4f7a9bbb698aa87afbba8d4",
+      "summary": "Applied rail transportation research in remaining FY26–27 track, rolling-stock, and train-control topics.",
+      "scope_note": "Only current AppendixC research topics; Amendment1 removes FRA-TR-005,006,007,009. No HumanFactors topics inFY26–27. Cost investment not mandatory; typically$50,000–$500,000; SAM registration before award. Topic availability may close earlier if enough concept papers received. SpecialNotice label does not negate the attached unrestricted research call. Submission: Electronic concept paper to the BAA Program Manager via the official address in PDFp9; later full proposals follow FRA invitation.",
+      "cycles": [
+        {
+          "name": "Current reviewed call",
+          "entry": {
+            "kind": "concept_paper",
+            "date": "2027-09-30",
+            "time": "12:00",
+            "timezone": "America/New_York",
+            "required": true,
+            "invitation_required": false,
+            "note": "Rolling required initial concept papers, current topics only; the source SAM notice specifies noon Eastern on the end date. Later full proposal date set by invitation.",
+            "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/62c772c4cbda46b583bce609e153fb05/download",
+            "quote": "Concept Papers will be reviewed on a rolling basis throughout the fiscal year. The only deadline is the end of the next fiscal year — September 30, 2027."
+          },
+          "full": {
+            "kind": "full_application",
+            "date": null,
+            "time": null,
+            "timezone": null,
+            "required": false,
+            "invitation_required": true,
+            "note": "Only invited applicants may proceed. The full-proposal deadline is not publicly specified and will be supplied by the agency.",
+            "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/62c772c4cbda46b583bce609e153fb05/download",
+            "quote": "Following Concept Paper evaluation and discussion, FRA may invite the Offeror to submit a detailed technical and price Proposal for award evaluation."
+          }
+        }
+      ]
+    },
+    {
+      "notice_id": "9fac6a86bf4f4561bd8bd464284d6297",
+      "solicitation_number": "693195-26-BAA-0001",
+      "organization_id": "100184892",
+      "sponsor": "U.S. Department of Transportation - Federal Transit Administration (FTA)",
+      "evidence_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/f82878950d0642c88a6f679c6b733465/download",
+      "academic_eligibility_quote": "This is an unrestricted solicitation. Any responsible source may submit a proposal concept paper for consideration, including, but not limited to, states or local governments, or organizations of state or local governments, universities or institutions of higher education, hospitals, non-profit organizations",
+      "verified_on": "2026-10-13",
+      "review_after": "2026-11-12",
+      "review_sha256": "b7449c0ec168ade2090284a40707a428d67a2cc7bbc3720354a1f007f92a85e7",
+      "summary": "Applied public transit research, technology development and demonstration to improve transit safety, efficiency and deployment readiness, generally TRL3–6.",
+      "scope_note": "Cost sharing may be mandated under49USC5312(g); FTA determines applicability during concept review and communicates it in writing. Federal-government-owned businesses not eligible as direct recipients; teaming allowed. SAM registration before award. Typically$150,000–$500,000, subject to funds. Submission: Electronic concept paper to the Contracting Specialist, copying the Contracting Officer, as Section2.6.1 directs.",
+      "cycles": [
+        {
+          "name": "Current reviewed call",
+          "entry": {
+            "kind": "concept_paper",
+            "date": "2026-10-19",
+            "time": "23:59",
+            "timezone": "America/New_York",
+            "required": true,
+            "invitation_required": false,
+            "note": "Required initial concept paper by email. Later full proposal only after invitation; its date is not publicly specified.",
+            "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/f82878950d0642c88a6f679c6b733465/download",
+            "quote": "Concept papers responding to this BAA can be submitted until 11:59 PM Eastern Time on October 19, 2026."
+          },
+          "full": {
+            "kind": "full_application",
+            "date": null,
+            "time": null,
+            "timezone": null,
+            "required": false,
+            "invitation_required": true,
+            "note": "Only invited applicants may proceed. The full-proposal deadline is not publicly specified and will be supplied by the agency.",
+            "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/f82878950d0642c88a6f679c6b733465/download",
+            "quote": "Following concept paper evaluation and discussion, FTA may invite the Offeror to submit a detailed technical and cost/price proposal for award evaluation."
+          }
+        }
+      ]
+    },
+    {
+      "notice_id": "a59ae93e40ba49a9a53c7e23ca1ad3a0",
+      "solicitation_number": "693JF726R000016",
+      "organization_id": "100179145",
+      "sponsor": "U.S. Department of Transportation - Maritime Administration (MARAD)",
+      "evidence_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/ec4ca31b92744bd192a5a5190021e41a/download",
+      "academic_eligibility_quote": "Eligible Applicants: Open to all types of domestic applicants other than individuals.",
+      "verified_on": "2026-10-13",
+      "review_after": "2026-11-12",
+      "review_sha256": "761a2bbe4e4fa200e0329a7868737ee85cd061a2d4e41556825a979dd87e052b",
+      "summary": "Scientific and engineering vessel-design study combining hydrodynamics, propulsion, energy efficiency, cost analysis, and underwater radiated-noise reduction.",
+      "scope_note": "Domestic institutions eligible; preference for US-company/US-flag team leads is evaluative, not an exclusion. An organization can join multiple teams but may lead only one proposal; no identical teams rotating leads. SAM registration/current UEI required for application and award. MARAD funds100% through cooperative agreements; generally$150k–$450k,12–18months. Vessel classes/preferences and Amendment4 Q&A apply. Eligibility basis: All domestic applicant types except individuals includes domestic universities; the proposal is for a research/design study, not acquisition of a finished vessel. Submission: PDF proposal by email to both listed MARAD acquisition contacts per SectionE.4; no separate application package required.",
+      "cycles": [
+        {
+          "name": "Current reviewed call",
+          "entry": {
+            "kind": "full_application",
+            "date": "2027-01-10",
+            "time": "12:00",
+            "timezone": "Etc/GMT+5",
+            "required": true,
+            "invitation_required": false,
+            "note": "PDF full proposal by email to both acquisition contacts identified in SectionE.4. Current SAM closing date is January10,2027; RFP fixes noon EST.",
+            "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/ec4ca31b92744bd192a5a5190021e41a/download",
+            "quote": "The deadline for proposal submission is 12:00 PM EST on the closing date listed for this RFP on SAMS.gov"
+          },
+          "full": null
+        }
+      ]
+    },
+    {
+      "notice_id": "b7f83ec10df84ff0ad8ec6290dba7176",
+      "solicitation_number": "PHMSA-26HM-BAA",
+      "organization_id": "100182338",
+      "sponsor": "U.S. Department of Transportation - Pipeline and Hazardous Materials Safety Administration (PHMSA)",
+      "evidence_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/0ddad8729cc24db1afaf4e5dde19b020/download",
+      "academic_eligibility_quote": "U.S.-based industry (including small businesses), accredited universities, non-profits, and permitted federally affiliated research centers.",
+      "verified_on": "2026-10-13",
+      "review_after": "2026-11-12",
+      "review_sha256": "a913d831418a7514f9b68e6b03747d18153febadea611a05f754aefb6cf74459",
+      "summary": "Hazardous-materials transport research including energy-storage systems, packaging, emergency response, and rail safety; analytical studies and technology assessment.",
+      "scope_note": "Current action Amendment0003 publishedOct13 replaces saved745e7a... action; only Q&A added, other terms unchanged. US prime; foreign entities permitted as subcontractors under conditions. Federal/state/local government bodies excluded, while accredited universities explicitly included. Contracts up to$2M, maximum36months including options; cost sharing optional. Amendment0003 permits omitting TIN from emailed white paper if already inSAM and does not require outside subcontractors or briefing travel. Submission: Email white papers to the submission address in Amendment0001; full proposals by invitation.",
+      "cycles": [
+        {
+          "name": "Current reviewed call",
+          "entry": {
+            "kind": "white_paper",
+            "date": "2026-11-18",
+            "time": "11:59",
+            "timezone": "America/New_York",
+            "required": true,
+            "invitation_required": false,
+            "note": "Initial white paper via email; Amendment1 deadline is 11:59 AM Eastern, not midnight. Later full proposal by invitation; date not publicly specified.",
+            "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/0ddad8729cc24db1afaf4e5dde19b020/download",
+            "quote": "Submissions can be made through November 18, 2026 (11:59 AM Eastern Time)."
+          },
+          "full": {
+            "kind": "full_application",
+            "date": null,
+            "time": null,
+            "timezone": null,
+            "required": false,
+            "invitation_required": true,
+            "note": "Only invited applicants may proceed. The full-proposal deadline is not publicly specified and will be supplied by the agency.",
+            "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/0ddad8729cc24db1afaf4e5dde19b020/download",
+            "quote": "Proposal submissions will be allowed by invitation only and based upon the evaluation of the White Papers."
+          }
+        }
+      ]
+    }
+  ]
+}

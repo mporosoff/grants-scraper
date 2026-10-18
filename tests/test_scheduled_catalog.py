@@ -149,7 +149,7 @@ class ScheduledDecisions(unittest.TestCase):
         retained = self.retained()
         self.prior_generation.return_value = ('200', retained['candidate_id'])
         self.reports.side_effect = [('205', {'identity': self.identity,
-                                          'gates': {gate: 'passed' for gate in c.GATES}}), ('', None)]
+                                          'gates': {gate: 'passed' for gate in c.GATES}}), ('', None), ('', None)]
         value = self.resolve()
         self.assertEqual((value['stage'], value['daily_status']), ('publish', 'recovering'))
         self.assertEqual((value['candidate_run'], value['recovery_run'], value['receipt_run']), ('200', '200', '205'))
@@ -183,8 +183,22 @@ class ScheduledDecisions(unittest.TestCase):
         retained = self.retained()
         self.prior_generation.return_value = ('200', retained['candidate_id'])
         self.changed_groups.return_value = {'validation': ['fixed.py']}
-        self.reports.side_effect = [('205', {'identity': {'validation': 'old'}, 'gates': {'python': 'failed'}}), ('', None)]
+        self.reports.side_effect = [('205', {'identity': {'validation': 'old'}, 'gates': {'python': 'failed'}}), ('', None), ('', None)]
         self.assertEqual(self.resolve()['stage'], 'publish')
+
+    def test_terminal_source_review_holds_exact_owner_without_repeating_gates(self):
+        retained = self.retained()
+        self.prior_generation.return_value = ('200', retained['candidate_id'])
+        blocked = {'schema_version': 1, 'status': 'review_findings',
+            'candidate_id': retained['candidate_id'], 'artifact_run': '200',
+            'repository': ENV['GITHUB_REPOSITORY'], 'head_sha': 'b' * 40,
+            'pr_number': 349, 'production_mutated': False, 'finding_count': 1}
+        self.reports.side_effect = [('', None), ('', None), ('205', blocked)]
+        value = self.resolve()
+        self.assertEqual((value['stage'], value['daily_status']), ('noop', 'held'))
+        self.assertEqual((value['candidate_id'], value['candidate_run']), (retained['candidate_id'], '200'))
+        self.assertIn('terminal review findings in PR #349', value['reason'])
+        self.assertEqual(self.reports.call_args.args[2], 'review')
 
     def test_incompatible_candidate_and_failed_download_hold_named_original_run(self):
         retained = self.retained()
@@ -209,6 +223,7 @@ class ScheduledHistory(unittest.TestCase):
         self.jobs = {'200': [{'name': name, 'conclusion': 'skipped'} for name in ('generate', 'assemble')]}
         self.api = patch.object(scheduled, 'api', side_effect=self.response).start()
         self.published = patch.object(scheduled, '_published', return_value=set()).start()
+        patch.object(scheduled, '_published_reconciliation_supersedes', return_value=False).start()
         self.addCleanup(patch.stopall)
 
     @staticmethod
@@ -279,6 +294,17 @@ class ScheduledHistory(unittest.TestCase):
 
     def test_noop_runs_do_not_hide_a_future_due_generation(self):
         self.assertIsNone(self.discover())
+
+    def test_source_preflight_stop_before_reservation_does_not_lock_a_new_generation(self):
+        self.jobs['200'].append({'name': 'sam-preflight', 'conclusion': 'failure'})
+        self.runs[0]['conclusion'] = 'failure'
+        self.assertIsNone(self.discover())
+        self.runs[0]['run_attempt'] = 2
+        self.assertIsNone(self.discover())
+        self.assertTrue(any('/attempts/1/jobs?' in call.args[1] for call in self.api.call_args_list))
+        self.jobs['200'][0]['conclusion'] = 'failure'
+        with self.assertRaisesRegex(scheduled.Hold, 'no complete accounting'):
+            self.discover()
 
     def test_cancelled_first_attempt_with_no_jobs_or_artifacts_never_started(self):
         self.runs[0]['conclusion'] = 'cancelled'

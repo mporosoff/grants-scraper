@@ -2837,7 +2837,21 @@
       };
     }
 
-    return Object.freeze({ score, resolveTerm, expandGroups: expandedGroups });
+    function corpusCurrentness() {
+      // Vector rows describe one immutable catalog, rather than the date a
+      // verifier or browser happens to load it. Query scoring still uses now.
+      const stamp = String(catalog.generated_at || "");
+      const instant = Date.parse(stamp);
+      if (!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$/.test(stamp)
+        || !Number.isFinite(instant)) {
+        throw new Error("The catalog corpus requires a valid generated_at timestamp.");
+      }
+      return { currentnessRejectedIndexes: records.flatMap((record, index) => (
+        staleUndatedOpportunity(record, instant) ? [index] : []
+      )) };
+    }
+
+    return Object.freeze({ score, corpusCurrentness, resolveTerm, expandGroups: expandedGroups });
   }
 
   globalThis.FUNDING_RETRIEVAL = Object.freeze({

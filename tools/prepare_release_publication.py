@@ -4,7 +4,7 @@ import os
 from pathlib import Path
 
 from tools.publish_release_candidate import prepare
-from tools.wait_release_review import ReviewPending
+from tools.wait_release_review import ReviewPending, ReviewFindings
 from tools import release_candidate as c
 
 
@@ -15,6 +15,15 @@ def prepare_or_defer(bundle, receipt, reports, artifact_run):
         # Allow the established bounded review window inside the 45-minute job;
         # a slower review still preserves the non-serving pending checkpoint.
         result = prepare(bundle, receipt, reports, artifact_run, review_timeout=1800)
+    except ReviewFindings as blocked:
+        manifest = c.load(bundle)
+        c.write_json(Path(reports) / 'review-blocked.json', {
+            'schema_version': 1, 'status': 'review_findings',
+            'candidate_id': manifest['candidate_id'], 'artifact_run': str(artifact_run),
+            'head_sha': blocked.head, 'pr_number': blocked.number,
+            'repository': blocked.repository, 'production_mutated': False,
+            'finding_count': blocked.count, 'timestamp': c.timestamp()})
+        raise
     except ReviewPending as pending:
         manifest = c.load(bundle)
         result = {'schema_version': 1, 'status': 'awaiting_review',

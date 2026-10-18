@@ -18,7 +18,10 @@ endpoints are not fetched again. A longer server-requested wait ends this bounde
 attempt instead of retrying early. Responses have an 8 MiB cap; redirects,
 malformed responses, and other HTTP errors are not retried. Every attempt is
 counted, and terminal errors retain a sanitized failure classification. The
-100-notice limit has a nominal transport bound of 25 minutes 50 seconds. No API
+collector may follow one exact public latest-version pointer per approval,
+reading the same two endpoints for that successor. It never discovers candidates
+by title or follows another pointer. The 100-notice limit therefore has a nominal
+transport bound of 51 minutes 40 seconds; the manual preview allows 60 minutes. No API
 key, cookie, attachment body, contact information, or raw notice description is
 included in the resulting snapshot.
 The current manifest is checked; attachment bodies are downloaded during source
@@ -27,7 +30,17 @@ document again.
 
 The exact notice ID, complete solicitation number, numeric SAM organization ID,
 current publication state, description hash, and attachment-manifest hash bind
-the reviewed approval. A changed or superseded notice is withheld for review.
+the reviewed approval. An optional complete `reviewed_snapshot` must authenticate
+that approval's exact existing fingerprint and contain only the bounded safe
+snapshot fields. If all material snapshot fields still match, the collector may
+relink the current exact notice ID across an administrative version change.
+Only notice IDs, latest-version pointers and posting/modification timestamps may
+change under that proof. Description and attachment-manifest digests, sponsor
+organization, full solicitation number, title, dates, restrictions and all other
+material fields remain exact. Repackaged attachment IDs still require review
+because the retained manifest cannot establish their body equivalence.
+Changed active evidence or an unresolved successor requires review and stops
+generation before paid work or candidate persistence.
 Restrictive set-asides, cancellation, archiving, expired entry stages, approval
 expiry, and identity changes cannot be admitted by a matching title alone.
 Source-reviewed Special Notices and Presolicitations can represent actual open
@@ -35,21 +48,40 @@ research calls; a generic notice-type or title keyword cannot decide eligibility
 
 Configuration supports at most 100 approvals and requires explicit official
 academic-eligibility evidence, a scientific summary, material scope conditions,
-and source-cited submission cycles. The reviewed approval remains valid for at
-most 30 days. The source lifecycle also caps retained freshness at seven days and
-never beyond that approval. Expiry requires another evidence review; it is not
-automatically extended by a successful HTTP response. Removed approvals revoke
+and source-cited submission cycles. Original scientific approvals have a review
+window of at most 30 days. A complete exact-material proof may establish fresh
+currentness after that window without changing `verified_on`, `review_after` or
+the original approval digest. The record and diagnostics retain those original
+dates plus the current verification date, seven-day currentness limit and both
+exact notice fingerprints. Actual entry dates, archive dates and cycles are
+never extended. Without that full proof, approval expiry still withholds the
+record. A successful HTTP response alone cannot renew it. Removed approvals revoke
 retained records. Transport/schema failures are reported as source degradation,
 without publishing unverified SAM fallback records. The generation workflow
-requires a complete, healthy reviewed SAM scan before document-AI work or
-candidate persistence. If a request remains unavailable after bounded retries,
+requires a complete, healthy reviewed SAM scan in a separate preflight before
+the generation job, allowance reservation, or other source collection starts.
+The preflight retains safe normalized snapshots and diagnostics, including a
+failed review disposition. Generation replays those exact public inputs without
+another SAM request. The receipt binds the exact configuration bytes, protected
+checkout SHA, event SHA and GitHub run/attempt, retaining its original UTC source
+date and check timestamp. Replay accepts at most two hours of source age and
+reevaluates admission at the merge's current UTC date, including newly closed
+entry stages. Crossing midnight does not relabel the original source proof; missing,
+mismatched or malformed receipts fail closed. This artifact is only a same-run
+source-read optimization, never candidate identity or publication evidence.
+If a request remains unavailable after bounded retries,
 or current evidence cannot be parsed, that generation stops and the previously
 published catalog remains in service. It preserves source diagnostics and the
 existing spend checkpoint and emits a failure alert. A successful scan that
-proves closures, changed evidence, or revoked approvals may remove those calls;
+proves closures, restrictive eligibility, or expired/revoked approvals may remove those calls;
 an unavailable scan cannot publish an apparent withdrawal of the SAM inventory.
 The guard is included in generation dependencies, so a candidate created before
 this protection cannot be silently reused under the new contract.
+
+All 42 October 13 retained snapshots exactly authenticate their original
+approval fingerprints and provide the safe baseline for this continuity check.
+IMR's October 16 Amendment 01 changed material evidence and was reviewed
+separately on October 18; see `SAM_IMR_REVIEW_20261018.md`.
 
 Legacy schema version 1 remains supported for existing contracts and offline
 regressions. Its credentialed one-page search for the literal title phrase

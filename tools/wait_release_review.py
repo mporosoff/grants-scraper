@@ -15,6 +15,13 @@ class ReviewPending(ValueError):
         self.repository, self.number, self.head = repository, number, head
 
 
+class ReviewFindings(ValueError):
+    """A terminal exact-head rejection that another publication cannot repair."""
+    def __init__(self, repository, number, head, count):
+        super().__init__('Terminal generated-candidate review has findings; retain candidate and consolidate the PR findings')
+        self.repository, self.number, self.head, self.count = repository, number, head, count
+
+
 def api(path):
     return json.loads(subprocess.check_output(['gh', 'api', path], text=True, encoding='utf-8', timeout=45))
 
@@ -131,7 +138,7 @@ def wait_for_review(repository, number, head, *, timeout=1800, interval=30):
             errors = 0
             if completed:
                 if findings:
-                    raise ValueError('Terminal generated-candidate review has findings; retain candidate and consolidate the PR findings')
+                    raise ReviewFindings(repository, number, head, len(findings))
                 return
         print(f'Awaiting terminal exact-head review of PR #{number} ({head})', flush=True)
         time.sleep(interval)

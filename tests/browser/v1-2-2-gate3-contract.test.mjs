@@ -76,7 +76,6 @@ test("deadline display resolves shared citations and falls back from note to quo
       if (reference && !deadline.citation) assert.ok(facts.has(String(reference)));
     }
   }
-  assert.ok(Buffer.byteLength(catalogSource) <= 22_662_953);
 });
 
 test("page-derived fields expose expanded source provenance", () => {

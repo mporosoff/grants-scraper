@@ -37,6 +37,12 @@ handshake evidence. Receipts are append-only across attempts. The public
 `release/candidate.json`, `release/publication.json` and `pages-release-sha.txt`
 identify the serving release. Historical generation provenance is never renamed.
 
+A terminal review with findings also retains `review-blocked.json`, bound to
+the candidate, artifact run, PR and complete reviewed SHA. Automatic retries
+report that repair boundary without repeating validation or publication of
+unchanged rejected bytes. A pending review and a rejected review are distinct
+checkpoints; neither authorizes a serving change.
+
 ## Dispatch and retry
 
 Use the workflow dispatch `stage` input:
@@ -48,6 +54,7 @@ Use the workflow dispatch `stage` input:
 | `backfill` | Current validated candidate | Manual historical coverage work, at most $5 per logical run; same publication owner |
 | `generate` | Current protected main | One complete bounded generation; persist, validate, publish and verify |
 | `reuse` | Current `release/candidate-source.json` | Verify generation inputs and data bytes; assemble current runtime around unchanged data, persist a derived candidate and release |
+| `catalog-reconcile` | Exact original `candidate_run` and full `candidate_id`, retained reservation and spending state | Reconcile reviewed SAM only; retain other source/evidence/team decisions; rebuild affected deterministic assets and compatible vectors within the original allowance; persist a corrected child |
 | `validate` | `candidate_run`, full `candidate_id` | Load candidate, run current deterministic gates, retain reports/receipt |
 | `publish` | `candidate_run`, full `candidate_id`; optional `receipt_run` | Reuse a matching receipt or validate; prepare Worker, protected merge, Pages and live verification |
 | `verify` | `candidate_run`, full `candidate_id`, `receipt_run`, `publication_run` | Verify the expected retained publication receipt, stamped SHA and exact live release; no generation or publication |
@@ -55,7 +62,11 @@ Use the workflow dispatch `stage` input:
 Supply `receipt_run` after a downstream failure to reuse passing gates. A failed
 validation retains the candidate; correct a validator/release-control defect and
 dispatch `validate` or `publish` against the same artifact. A genuine generation
-defect requires one consolidated repair and one new `generate`. Workflow reruns
+defect requires a consolidated repair of the affected generation stage. Reviewed
+SAM corrections use `catalog-reconcile` on the exact retained original candidate;
+unrelated completed collection, extraction and team decisions remain unchanged.
+This route accepts original generation candidates with authenticated budget
+lineage; it does not invent an allowance for arbitrary derived parents. Workflow reruns
 restore an already persisted generation before executing expensive steps.
 For live-only retries, `publication_run` selects the expected publication
 checkpoint; `publication_attempt` can select an earlier retained attempt
@@ -95,6 +106,48 @@ are also hashed, so changing a budget/source parameter in workflow YAML cannot
 silently reuse stale data. Secret values, cache keys and orchestration are not
 generation inputs. Changing validator, deployment-checkpoint, retry or live
 verification code does not invalidate generated data.
+
+Unpublished candidates contain generated README/PROJECT statistics and HTML
+asset versions that intentionally differ from main. Recovery accepts their
+exact recorded protected baseline or exact candidate bytes. A third value is
+an authored edit and remains an input change. Comparing candidate output
+hashes directly with the older main pages would otherwise reject every normal
+catalog refresh before publication.
+
+Semantic corpus membership uses the catalog's immutable `generated_at` clock.
+Live retrieval still checks current eligibility using the current clock. A
+retained candidate therefore keeps the same passage order and vector identity
+as days pass, while expired calls stop appearing in live results. Missing or
+invalid corpus timestamps fail closed. Catalog growth is governed by the
+dedicated 32 MiB size budget rather than a historical catalog's byte count.
+
+Reviewed SAM calls distinguish actual closures from unresolved evidence changes.
+A bounded latest-notice lookup may follow one same-organization, same-solicitation
+replacement only when its complete reviewed material projection is unchanged.
+Administrative identifiers and timestamps alone do not require another scientific
+review. Changed solicitation material requires an explicit reviewed approval;
+it cannot silently become a healthy withdrawal. Complete protected material
+anchors also permit fresh verification of unchanged terms beyond the original
+review reminder, without extending an entry deadline or changing the original
+review identity.
+
+Ordinary vector generation and source reconciliation use the existing durable
+Ledger, including linked qualification limits. Each dispatch reserves before
+HTTP, and accepted responses are cached before final accounting so interrupted
+completion can recover without another request. Unknown dispatches remain
+charged. An unchanged ordered corpus with unchanged protected semantic inputs
+retains its complete verified vector asset with zero new Voyage requests;
+this preserves its original build receipt and timestamps. It does not combine
+rows from incompatible model spaces.
+
+The separate `sam-preflight` job verifies reviewed source inputs before the
+generation job reserves an allowance or collects other sources. A failed
+preflight leaves generators skipped and does not create a spend owner. A
+passing receipt carries only bounded normalized public snapshots, bound to the
+exact protected checkout, config, run and attempt. Collection reuses those
+snapshots without network reads and reevaluates admission at the current date;
+the receipt's two-hour age limit handles a UTC midnight crossing without
+extending expired entries.
 
 Candidate baseline hashes distinguish unchanged source inputs from the exact
 candidate already merged. A third generation's data is rejected. Unrelated main

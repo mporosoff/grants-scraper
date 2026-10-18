@@ -131,7 +131,7 @@ class OpportunityTeamModelTests(unittest.TestCase):
             self.assertIn(f"data/opportunity_team_index.js?v={generation}", source)
             self.assertNotIn("hajim-pr1", source)
         page = (ROOT / "match_explorer.html").read_text(encoding="utf-8")
-        for path in ("assets/search-retrieval.js",):
+        for path in ("assets/search-retrieval.js", "assets/search-hybrid.js"):
             self.assertIn(f'{path}?v={hashlib.sha256((ROOT / path).read_bytes()).hexdigest()}', page)
         panel_hash = hashlib.sha256((ROOT / "assets/opportunity-team-panel.js").read_bytes()).hexdigest()
         self.assertIn(f"assets/opportunity-team-panel.js?v={panel_hash}", page)

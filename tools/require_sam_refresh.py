@@ -6,6 +6,7 @@ import json
 from pathlib import Path
 
 from scripts.sources.adapters.sam_gov import CONFIG_PATH, load_config
+from scripts.sources.sam_reviewed import require_reviewed_observations
 
 
 def require_complete_refresh(config, summary):
@@ -26,16 +27,7 @@ def require_complete_refresh(config, summary):
             or summary.get('written') is not True
             or validation.get('ok') is not True):
         raise ValueError('SAM refresh failed; the current published catalog must remain in service')
-    diagnostics = sam[0].get('diagnostics') or {}
-    if not isinstance(diagnostics, dict):
-        raise ValueError('SAM refresh diagnostics are invalid')
-    observations = diagnostics.get('notice_observations')
-    expected = {item['notice_id'] for item in config['approved_notices']}
-    actual = [item.get('notice_id') for item in observations if isinstance(item, dict) and isinstance(item.get('notice_id'), str)] if isinstance(observations, list) else []
-    if (diagnostics.get('reviewed_inventory') is not True or diagnostics.get('outcome') != 'ok'
-            or diagnostics.get('failures') or len(actual) != len(expected)
-            or len(observations or []) != len(actual) or set(actual) != expected):
-        raise ValueError('SAM refresh did not account for every approved notice')
+    require_reviewed_observations(config, sam[0].get('diagnostics'))
 
 
 def main(argv=None):

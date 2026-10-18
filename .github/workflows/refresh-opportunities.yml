@@ -11,7 +11,7 @@ on:
       stage:
         description: Plan affected work automatically, bounded team maintenance/backfill, or resume exact evidence
         type: choice
-        options: [auto, generate, teams, backfill, reuse, catalog-correction, catalog-projection, program-area-revalidation, catalog-source-recovery, catalog-access-correction, catalog-identity-correction, catalog-url-correction, validate, publish, verify]
+        options: [auto, generate, teams, backfill, reuse, catalog-reconcile, catalog-correction, catalog-projection, program-area-revalidation, catalog-source-recovery, catalog-access-correction, catalog-identity-correction, catalog-url-correction, validate, publish, verify]
         default: auto
         required: true
       pilot_team_scopes:
@@ -104,10 +104,35 @@ jobs:
           path: ${{ runner.temp }}/release-plan.json
           retention-days: 90
 
+  sam-preflight:
+    needs: plan
+    if: needs.plan.outputs.stage == 'generate'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      SAM_PREFLIGHT_RELEASE_SHA: ${{ needs.plan.outputs.release_sha }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ needs.plan.outputs.release_sha }}
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+      - run: python -m pip install -r requirements.txt
+      - run: python -m tools.sam_refresh_preflight --output "$RUNNER_TEMP/sam-preflight/sam-preflight.json"
+      - name: Retain verified public source inputs before reserving any allowance
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sam-preflight-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/sam-preflight
+          if-no-files-found: error
+          retention-days: 90
+
   generate:
     env:
       QUALIFICATION_PILOT: ${{ inputs.qualification_pilot && 'true' || 'false' }}
-    needs: plan
+    needs: [plan, sam-preflight]
     if: needs.plan.outputs.stage == 'generate'
     runs-on: ubuntu-latest
     timeout-minutes: 75
@@ -125,6 +150,12 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: python -m tools.restore_generation_checkpoint
+      - name: Reuse the exact verified public SAM snapshots from this run
+        if: steps.restore.outputs.candidate_id == ''
+        uses: actions/download-artifact@v5
+        with:
+          name: sam-preflight-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/sam-preflight
       - name: Restore the logical spend checkpoint
         if: steps.restore.outputs.candidate_id == ''
         env:
@@ -179,6 +210,8 @@ jobs:
         id: additional-sources
         continue-on-error: true
         env:
+          SAM_PREFLIGHT_RECEIPT: ${{ runner.temp }}/sam-preflight/sam-preflight.json
+          SAM_PREFLIGHT_RELEASE_SHA: ${{ needs.plan.outputs.release_sha }}
           SAM_API_KEY: ${{ secrets.SAM_API_KEY }}
           VPR_IMAP_HOST: imap.gmail.com
           VPR_IMAP_USER: ${{ secrets.VPR_IMAP_USER }}
@@ -334,7 +367,9 @@ jobs:
         id: semantic-vectors
         env:
           VOYAGE_API_KEY: ${{ secrets.VOYAGE_API_KEY }}
-        run: node tools/build_search_v2_voyage_vectors.mjs --production --write
+          OFFLINE_AI_STATE: ${{ runner.temp }}/offline-${{ github.run_id }}
+          TEAM_MODE: ${{ needs.plan.outputs.team_mode }}
+        run: node tools/run_budgeted_vectors.mjs --production --write
       - name: Build the current/previous Worker compatibility package
         if: steps.restore.outputs.candidate_id == ''
         id: search-package
@@ -959,12 +994,101 @@ jobs:
           if-no-files-found: warn
           retention-days: 90
 
+  catalog-reconcile:
+    needs: plan
+    if: needs.plan.outputs.stage == 'catalog-reconcile'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    outputs:
+      candidate_id: ${{ steps.restore.outputs.candidate_id || steps.persist.outputs.candidate_id }}
+      artifact_run: ${{ steps.restore.outputs.artifact_run || github.run_id }}
+    env:
+      GH_TOKEN: ${{ github.token }}
+      CANDIDATE_RUN: ${{ needs.plan.outputs.candidate_run }}
+      CANDIDATE_ID: ${{ needs.plan.outputs.candidate_id }}
+      CATALOG_RECONCILE_STATE: ${{ runner.temp }}/reconcile-state
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ needs.plan.outputs.release_sha }}
+          fetch-depth: 0
+      - uses: ./.github/actions/release-setup
+      - name: Authenticate the exact retained parent
+        run: >-
+          python -m tools.fetch_release_artifact --repository "$GITHUB_REPOSITORY"
+          --run "$CANDIDATE_RUN" --name "candidate-$CANDIDATE_ID" --destination "$RUNNER_TEMP/reconcile-parent"
+      - name: Restore the latest logical budget or the complete derived child
+        id: restore
+        run: >-
+          python -m tools.catalog_reconcile restore
+          --parent "$RUNNER_TEMP/reconcile-parent" --state "$CATALOG_RECONCILE_STATE"
+          --output "$RUNNER_TEMP/reconciled-candidate" --receipt "$RUNNER_TEMP/source-reconciliation.json"
+      - name: Persist the original logical reservation before any provider request
+        if: steps.restore.outputs.candidate_id == ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: offline-ai-reconcile-${{ needs.plan.outputs.candidate_id }}-reservation-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/reconcile-state/reservation.json
+          if-no-files-found: error
+          retention-days: 90
+      - name: Reconcile only reviewed SAM and retain every other source
+        if: steps.restore.outputs.candidate_id == ''
+        run: >-
+          python -m tools.catalog_reconcile sources
+          --parent "$RUNNER_TEMP/reconcile-parent" --state "$CATALOG_RECONCILE_STATE"
+          --output "$RUNNER_TEMP/reconciled-candidate" --receipt "$RUNNER_TEMP/source-reconciliation.json"
+      - name: Rebuild deterministic faculty, feeds, and catalog references
+        if: steps.restore.outputs.candidate_id == ''
+        run: |
+          python -m scripts.faculty_match --catalog data/opportunities.js --registry config/researcher_registry.json --out data/faculty_matches.js --version-target team_match.html
+          python -m scripts.build_changes --previous "$RUNNER_TEMP/reconcile-parent/files/data/opportunities.js" --current data/opportunities.js --out feeds
+          python -m scripts.build_feeds --catalog data/opportunities.js --out feeds
+          python -m scripts.update_catalog_docs
+          python -m tools.release_coverage --previous "$RUNNER_TEMP/reconcile-parent/files/evaluation/release_coverage.json"
+      - name: Build only the affected homogeneous vector corpus within the original budget
+        if: steps.restore.outputs.candidate_id == ''
+        env:
+          VOYAGE_API_KEY: ${{ secrets.VOYAGE_API_KEY }}
+        run: node --import ./tools/catalog_reconcile_vectors.mjs tools/build_search_v2_voyage_vectors.mjs --production --write
+      - name: Bind the derived package to the actual published predecessor
+        if: steps.restore.outputs.candidate_id == ''
+        run: |
+          curl --fail --silent --show-error --max-filesize 65536 --max-time 30 --retry 2 --retry-max-time 90 \
+            "https://mporosoff.github.io/grants-scraper/data/search-v2-release.json?reconcile=${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" \
+            -o "$RUNNER_TEMP/reconcile-published.json"
+          node tools/build_search_release_package.mjs --write --published-release "$RUNNER_TEMP/reconcile-published.json"
+      - name: Persist the complete child without relabelling original generation
+        if: steps.restore.outputs.candidate_id == ''
+        id: persist
+        run: >-
+          python -m tools.catalog_reconcile finish
+          --parent "$RUNNER_TEMP/reconcile-parent" --state "$CATALOG_RECONCILE_STATE"
+          --output "$RUNNER_TEMP/reconciled-candidate" --receipt "$RUNNER_TEMP/source-reconciliation.json"
+      - name: Retain complete candidate before downstream gates
+        if: steps.persist.outcome == 'success' || steps.restore.outputs.needs_persist == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: candidate-${{ steps.restore.outputs.candidate_id || steps.persist.outputs.candidate_id }}
+          path: ${{ runner.temp }}/reconciled-candidate
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 90
+      - name: Preserve private accounting and completed source/vector work on every outcome
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: offline-ai-reconcile-${{ needs.plan.outputs.candidate_id }}-state-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/reconcile-state
+          include-hidden-files: true
+          if-no-files-found: warn
+          retention-days: 90
+
   candidate:
-    needs: [plan, generate, assemble, catalog-correction, program-area-revalidation, catalog-source-recovery, catalog-access-correction, catalog-identity-correction, catalog-url-correction]
+    needs: [plan, generate, assemble, catalog-reconcile, catalog-correction, program-area-revalidation, catalog-source-recovery, catalog-access-correction, catalog-identity-correction, catalog-url-correction]
     if: >-
       always() && needs.plan.result == 'success' && needs.plan.outputs.stage != 'noop' &&
-      (needs.generate.result == 'success' || needs.assemble.result == 'success' || needs.catalog-correction.result == 'success' || needs.program-area-revalidation.result == 'success' || needs.catalog-source-recovery.result == 'success' || needs.catalog-access-correction.result == 'success' || needs.catalog-identity-correction.result == 'success' || needs.catalog-url-correction.result == 'success' ||
-       (needs.generate.result == 'skipped' && needs.assemble.result == 'skipped' && needs.catalog-correction.result == 'skipped' && needs.program-area-revalidation.result == 'skipped' && needs.catalog-source-recovery.result == 'skipped' && needs.catalog-access-correction.result == 'skipped' && needs.catalog-identity-correction.result == 'skipped' && needs.catalog-url-correction.result == 'skipped'))
+      (needs.catalog-reconcile.result == 'success' || needs.generate.result == 'success' || needs.assemble.result == 'success' || needs.catalog-correction.result == 'success' || needs.program-area-revalidation.result == 'success' || needs.catalog-source-recovery.result == 'success' || needs.catalog-access-correction.result == 'success' || needs.catalog-identity-correction.result == 'success' || needs.catalog-url-correction.result == 'success' ||
+       (needs.catalog-reconcile.result == 'skipped' && needs.generate.result == 'skipped' && needs.assemble.result == 'skipped' && needs.catalog-correction.result == 'skipped' && needs.program-area-revalidation.result == 'skipped' && needs.catalog-source-recovery.result == 'skipped' && needs.catalog-access-correction.result == 'skipped' && needs.catalog-identity-correction.result == 'skipped' && needs.catalog-url-correction.result == 'skipped'))
     runs-on: ubuntu-latest
     outputs:
       candidate_id: ${{ steps.select.outputs.candidate_id }}
@@ -973,12 +1097,15 @@ jobs:
       - name: Select the immutable artifact checkpoint
         id: select
         env:
-          GENERATED_ID: ${{ needs.generate.outputs.candidate_id || needs.assemble.outputs.candidate_id || needs.catalog-correction.outputs.candidate_id || needs.program-area-revalidation.outputs.candidate_id || needs.catalog-source-recovery.outputs.candidate_id || needs.catalog-access-correction.outputs.candidate_id || needs.catalog-identity-correction.outputs.candidate_id || needs.catalog-url-correction.outputs.candidate_id }}
+          GENERATED_ID: ${{ needs.catalog-reconcile.outputs.candidate_id || needs.generate.outputs.candidate_id || needs.assemble.outputs.candidate_id || needs.catalog-correction.outputs.candidate_id || needs.program-area-revalidation.outputs.candidate_id || needs.catalog-source-recovery.outputs.candidate_id || needs.catalog-access-correction.outputs.candidate_id || needs.catalog-identity-correction.outputs.candidate_id || needs.catalog-url-correction.outputs.candidate_id }}
+          RECONCILED_RUN: ${{ needs.catalog-reconcile.outputs.artifact_run }}
           REQUESTED_ID: ${{ needs.plan.outputs.candidate_id }}
           REQUESTED_RUN: ${{ needs.plan.outputs.candidate_run }}
         run: |
           echo "candidate_id=${GENERATED_ID:-$REQUESTED_ID}" >> "$GITHUB_OUTPUT"
-          if [ -n "$GENERATED_ID" ]; then
+          if [ -n "$RECONCILED_RUN" ]; then
+            echo "candidate_run=$RECONCILED_RUN" >> "$GITHUB_OUTPUT"
+          elif [ -n "$GENERATED_ID" ]; then
             echo "candidate_run=$GITHUB_RUN_ID" >> "$GITHUB_OUTPUT"
           else
             echo "candidate_run=$REQUESTED_RUN" >> "$GITHUB_OUTPUT"
@@ -1362,7 +1489,7 @@ jobs:
           retention-days: 90
 
   closeout:
-    needs: [plan, generate, assemble, catalog-correction, program-area-revalidation, catalog-source-recovery, catalog-access-correction, catalog-identity-correction, catalog-url-correction, candidate, validate, publish, pages, verify-live]
+    needs: [plan, sam-preflight, generate, assemble, catalog-reconcile, catalog-correction, program-area-revalidation, catalog-source-recovery, catalog-access-correction, catalog-identity-correction, catalog-url-correction, candidate, validate, publish, pages, verify-live]
     if: always()
     runs-on: ubuntu-latest
     steps:
@@ -1379,9 +1506,9 @@ jobs:
         with:
           script: |
             const needs = JSON.parse(process.env.RESULTS);
-            const order = ['plan', 'generate', 'assemble', 'catalog-correction', 'program-area-revalidation', 'catalog-source-recovery', 'catalog-access-correction', 'catalog-identity-correction', 'catalog-url-correction', 'candidate', 'validate', 'publish', 'pages', 'verify-live'];
+            const order = ['plan', 'sam-preflight', 'generate', 'assemble', 'catalog-reconcile', 'catalog-correction', 'program-area-revalidation', 'catalog-source-recovery', 'catalog-access-correction', 'catalog-identity-correction', 'catalog-url-correction', 'candidate', 'validate', 'publish', 'pages', 'verify-live'];
             const failed = order.find(stage => ['failure', 'cancelled'].includes(needs[stage].result));
-            const stages = new Set(['auto', 'generate', 'teams', 'backfill', 'reuse', 'catalog-correction', 'catalog-projection', 'program-area-revalidation', 'catalog-source-recovery', 'catalog-access-correction', 'catalog-identity-correction', 'catalog-url-correction', 'validate', 'publish', 'verify']);
+            const stages = new Set(['auto', 'generate', 'teams', 'backfill', 'reuse', 'catalog-reconcile', 'catalog-correction', 'catalog-projection', 'program-area-revalidation', 'catalog-source-recovery', 'catalog-access-correction', 'catalog-identity-correction', 'catalog-url-correction', 'validate', 'publish', 'verify']);
             const planned = needs.plan.outputs.stage;
             const planReason = needs.plan.outputs.reason || 'not reported';
             const heldStage = needs.plan.outputs.held_stage || '';
@@ -1400,10 +1527,10 @@ jobs:
             let generationRun = needs.candidate.outputs.candidate_run;
             let identitySource = 'selected candidate output';
             if (!candidate || !generationRun) {
-              const producer = ['generate', 'assemble', 'catalog-correction', 'program-area-revalidation', 'catalog-source-recovery', 'catalog-access-correction', 'catalog-identity-correction', 'catalog-url-correction'].find(stage =>
+              const producer = ['generate', 'assemble', 'catalog-reconcile', 'catalog-correction', 'program-area-revalidation', 'catalog-source-recovery', 'catalog-access-correction', 'catalog-identity-correction', 'catalog-url-correction'].find(stage =>
                 needs[stage].result === 'success' && needs[stage].outputs.candidate_id);
               if (producer) {
-                candidate = needs[producer].outputs.candidate_id; generationRun = String(context.runId);
+                candidate = needs[producer].outputs.candidate_id; generationRun = needs[producer].outputs.artifact_run || String(context.runId);
                 identitySource = `successful ${producer} job; authenticate its retained artifact before reuse`;
               } else {
                 const completePlan = needs.plan.outputs.candidate_id && needs.plan.outputs.candidate_run;

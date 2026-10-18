@@ -20,6 +20,114 @@ EVENT_FIELDS = {'kind', 'date', 'time', 'timezone', 'required', 'invitation_requ
                 'note', 'source_url', 'quote'}
 ENTRY_KINDS = {'application', 'full_application', 'white_paper', 'concept_paper',
                'preproposal', 'preapplication', 'letter_of_intent'}
+SNAPSHOT_FIELDS = {'notice_id', 'latest_notice_id', 'latest', 'status', 'archived', 'cancelled',
+    'deleted', 'title', 'solicitation_number', 'organization_id', 'notice_type',
+    'classification_code', 'naics_codes', 'set_asides', 'posted_at', 'modified_at',
+    'response_deadline', 'response_timezone', 'archive_date', 'description_sha256',
+    'resources_sha256', 'review_sha256'}
+VERSION_FIELDS = {'notice_id', 'latest_notice_id', 'latest', 'posted_at', 'modified_at', 'review_sha256'}
+
+
+def reviewed_content(snapshot):
+    """Version metadata may move; every reviewed public material fact stays exact."""
+    return {key: snapshot[key] for key in SNAPSHOT_FIELDS - VERSION_FIELDS}
+
+
+def validate_reviewed_snapshot(snapshot, approval):
+    if (not isinstance(snapshot, dict) or set(snapshot) != SNAPSHOT_FIELDS
+            or snapshot['notice_id'] != approval['notice_id']
+            or snapshot['latest_notice_id'] != approval['notice_id'] or snapshot['latest'] is not True
+            or any(type(snapshot[key]) is not bool for key in ('latest', 'archived', 'cancelled', 'deleted'))
+            or any(snapshot[key] is not False for key in ('archived', 'cancelled', 'deleted'))
+            or snapshot['status'] != 'published'
+            or snapshot['solicitation_number'] != approval['solicitation_number']
+            or snapshot['organization_id'] != approval['organization_id']
+            or snapshot['review_sha256'] != approval['review_sha256']
+            or digest({key: value for key, value in snapshot.items() if key != 'review_sha256'})
+                != approval['review_sha256']):
+        raise ValueError('Reviewed snapshot must authenticate the exact approval')
+    for key in ('description_sha256', 'resources_sha256'):
+        if not isinstance(snapshot[key], str) or not re.fullmatch('[a-f0-9]{64}', snapshot[key]):
+            raise ValueError('Invalid reviewed content digest')
+    for key in SNAPSHOT_FIELDS - {'latest', 'archived', 'cancelled', 'deleted', 'naics_codes', 'set_asides'}:
+        if snapshot[key] is not None and not text(snapshot[key], 2000):
+            raise ValueError('Invalid reviewed snapshot field')
+    for key in ('naics_codes', 'set_asides'):
+        if (not isinstance(snapshot[key], list) or len(snapshot[key]) > 30
+                or any(not text(item, 100) for item in snapshot[key])):
+            raise ValueError('Invalid reviewed snapshot list')
+    if not to_iso_date(snapshot['posted_at']):
+        raise ValueError('Invalid reviewed posting date')
+
+
+def reconcile_notice(notice, approval, as_of):
+    """Reuse an approved contract only when its entire material snapshot is unchanged."""
+    anchor = approval.get('reviewed_snapshot')
+    if (anchor is None or set(notice) != SNAPSHOT_FIELDS
+            or as_of < iso(approval['verified_on'])
+            or notice['latest'] is not True or notice['latest_notice_id'] != notice['notice_id']
+            or not NOTICE_ID.fullmatch(notice['notice_id'])
+            or digest({key: value for key, value in notice.items() if key != 'review_sha256'})
+                != notice['review_sha256']
+            or reviewed_content(notice) != reviewed_content(anchor)):
+        return make_record(notice, approval, as_of), None
+    # The scientific approval remains dated; today's exact public-content check
+    # establishes currentness for at most seven days without extending entry.
+    current_review_after = as_of + timedelta(days=7)
+    current = dict(approval, notice_id=notice['notice_id'], review_sha256=notice['review_sha256'],
+                   review_after=current_review_after.isoformat())
+    record, reasons = make_record(notice, current, as_of)
+    proof = {'approved_notice_id': approval['notice_id'], 'current_notice_id': notice['notice_id'],
+             'approved_review_sha256': approval['review_sha256'], 'current_review_sha256': notice['review_sha256'],
+             'reviewed_content_sha256': digest(reviewed_content(anchor)), 'method': 'exact_reviewed_content',
+             'reviewed_on': approval['verified_on'], 'original_review_after': approval['review_after'],
+             'current_verified_on': as_of.isoformat(), 'current_review_after': current_review_after.isoformat()}
+    # This is fresh verification of old reviewed terms, never a new approval date.
+    record['sam_approval_sha256'] = digest(approval)
+    if not reasons:
+        record['sam_review_reconciliation'] = proof
+    return (record, reasons), proof
+
+
+def observation_disposition(notice, approval, reasons):
+    if not reasons:
+        return 'admitted'
+    if (notice['organization_id'] != approval['organization_id']
+            or notice['solicitation_number'] != approval['solicitation_number']):
+        return 'review_required'
+    if ('entry_closed' in reasons or 'archive_date_passed' in reasons
+            or notice['archived'] or notice['cancelled'] or notice['deleted']
+            or notice['status'] != 'published' or 'restrictive_set_aside' in reasons):
+        return 'verified_withdrawal'
+    if set(reasons) == {'approval_not_current'}:
+        return 'approval_expired'
+    return 'review_required'
+
+
+def require_reviewed_observations(config, diagnostics):
+    """An unresolved active review is not evidence of an official withdrawal."""
+    if not config['enabled'] or config['schema_version'] != 2:
+        return
+    if not isinstance(diagnostics, dict):
+        raise ValueError('SAM refresh diagnostics are invalid')
+    observations = diagnostics.get('notice_observations')
+    expected = {item['notice_id'] for item in config['approved_notices']}
+    actual = [item.get('notice_id') for item in observations if isinstance(item, dict)
+              and isinstance(item.get('notice_id'), str)] if isinstance(observations, list) else []
+    if (diagnostics.get('reviewed_inventory') is not True or diagnostics.get('outcome') != 'ok'
+            or diagnostics.get('failures') or len(actual) != len(expected)
+            or len(observations or []) != len(actual) or set(actual) != expected):
+        raise ValueError('SAM refresh did not account for every approved notice')
+    for observation in observations:
+        reasons = observation.get('reasons')
+        disposition = observation.get('disposition')
+        if (not isinstance(reasons, list) or any(not isinstance(reason, str) for reason in reasons)
+                or disposition not in (None, 'admitted', 'verified_withdrawal', 'approval_expired', 'review_required')):
+            raise ValueError('SAM refresh review disposition is invalid')
+        if disposition == 'review_required' or (disposition is None and reasons
+                and not set(reasons) <= {'entry_closed', 'archive_date_passed', 'approval_not_current',
+                                         'not_open_notice', 'restrictive_set_aside'}):
+            raise ValueError('SAM notice requires reviewed successor reconciliation; preserve the published catalog')
 
 
 def iso(value):
@@ -78,7 +186,7 @@ def validate_config(config):
             raise ValueError('Invalid reviewed configuration')
         ids, identities = set(), set()
         for approval in config['approved_notices']:
-            if (not isinstance(approval, dict) or set(approval) != FIELDS
+            if (not isinstance(approval, dict) or set(approval) not in (FIELDS, FIELDS | {'reviewed_snapshot'})
                     or any(not text(approval[k], 3000, required=k != 'scope_note') for k in FIELDS - {'cycles'})
                     or not NOTICE_ID.fullmatch(approval['notice_id'])
                     or not re.fullmatch(r'\d{1,20}', approval['organization_id'])
@@ -95,6 +203,8 @@ def validate_config(config):
                 raise ValueError('Ambiguous or stale approval')
             ids.add(approval['notice_id'])
             identities.add(identity)
+            if 'reviewed_snapshot' in approval:
+                validate_reviewed_snapshot(approval['reviewed_snapshot'], approval)
             cycles = approval['cycles']
             if not isinstance(cycles, list) or not 1 <= len(cycles) <= 10:
                 raise ValueError('Invalid cycles')
@@ -206,13 +316,33 @@ def collect(config, as_of, snapshots, *, client=None):
                    'reviewed_inventory': True, 'exclusion_reasons': {}, 'notice_observations': []}
 
     def fetch(approval):
+        request_count = 0
+        def read(identifier):
+            nonlocal request_count
+            try:
+                notice, detail = client(identifier)
+            except SamError as error:
+                request_count += error.diagnostics.get('request_count', 0)
+                raise
+            request_count += detail.get('request_count', 0)
+            return notice, detail
         try:
-            notice, detail = client(approval['notice_id'])
+            notice, detail = read(approval['notice_id'])
+            # Follow one exact public version pointer, never a broad listing,
+            # title match, unbounded amendment chain, or arbitrary URL.
+            latest = notice.get('latest_notice_id')
+            if (notice.get('latest') is False and isinstance(latest, str)
+                    and NOTICE_ID.fullmatch(latest) and latest != approval['notice_id']):
+                successor, extra = read(latest)
+                detail = dict(extra, request_count=request_count)
+                if successor.get('notice_id') != latest:
+                    raise SamError('invalid_successor_identity', detail)
+                notice = successor
             return notice, detail, None
         except SamError as error:
-            return None, error.diagnostics, 'public_notice_unavailable'
+            return None, dict(error.diagnostics, request_count=request_count), 'public_notice_unavailable'
         except Exception:
-            return None, {'request_count': 0}, 'invalid_notice_client'
+            return None, {'request_count': request_count}, 'invalid_notice_client'
 
     with ThreadPoolExecutor(max_workers=4) as executor:
         results = list(executor.map(fetch, approvals))
@@ -225,11 +355,15 @@ def collect(config, as_of, snapshots, *, client=None):
                              'http_status': detail.get('http_status'),
                              'failure_class': detail.get('failure_class', 'invalid_client')})
             continue
-        record, reasons = make_record(notice, approval, as_of)
+        (record, reasons), proof = reconcile_notice(notice, approval, as_of)
         records.append(record)
         seen.add(approval['notice_id'])
+        seen.add(notice['notice_id'])
         diagnostics['notice_observations'].append({'notice_id': approval['notice_id'],
-            'review_sha256': notice['review_sha256'], 'reasons': reasons})
+            'observed_notice_id': notice['notice_id'], 'latest_notice_id': notice['latest_notice_id'],
+            'review_sha256': notice['review_sha256'], 'reasons': reasons,
+            'disposition': observation_disposition(notice, approval, reasons),
+            **({'reconciliation': proof} if proof is not None else {})})
         for reason in reasons:
             diagnostics['exclusion_reasons'][reason] = diagnostics['exclusion_reasons'].get(reason, 0) + 1
     if failures:

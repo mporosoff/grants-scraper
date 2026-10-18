@@ -1,4 +1,7 @@
-export function buildCatalog(records, queryApi, { schemaVersion = 3 } = {}) {
+export function buildCatalog(records, queryApi, {
+  schemaVersion = 3,
+  generatedAt = "2026-08-20T00:00:00Z",
+} = {}) {
   const opportunities = records.map(record => ({
     document_search_text: "",
     funding_categories: [],
@@ -30,6 +33,8 @@ export function buildCatalog(records, queryApi, { schemaVersion = 3 } = {}) {
     }
   });
   return {
+    // Synthetic search fixtures own a fixed corpus clock, just like a release.
+    generated_at: generatedAt,
     schema_version: schemaVersion,
     opportunities,
     record_count: opportunities.length,

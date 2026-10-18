@@ -287,12 +287,15 @@ def create_source_correction(root, output, original_bundle, source_receipt, expo
 
 def create(root, output, *, generation_sha=None, run_id=None, attempt=None, parent=None, team_update=False,
            source_correction=None, source_export=None, program_area_revalidation=None, source_recovery=None,
-           access_correction=None, identity_correction=None, url_correction=None):
+           access_correction=None, identity_correction=None, url_correction=None, source_reconciliation=None):
     root, output = Path(root), Path(output)
     if output.exists():
         raise ValueError("Candidate destination already exists; immutable artifacts cannot be overwritten")
     policy = read_json(root / POLICY)
     generation = generation_dependencies(root)
+    if source_reconciliation is not None and (not parent or team_update or any(value is not None for value in
+            (source_correction, source_export, program_area_revalidation, source_recovery, access_correction, identity_correction, url_correction))):
+        raise ValueError('Source reconciliation requires its exact parent without other generation modes')
     if url_correction is not None and (not parent or team_update or source_correction is not None
             or source_export is not None or program_area_revalidation is not None or source_recovery is not None
             or access_correction is not None or identity_correction is not None):
@@ -312,7 +315,10 @@ def create(root, output, *, generation_sha=None, run_id=None, attempt=None, pare
         raise ValueError('Source correction requires its original candidate and exact export only')
     if parent:
         original = load(parent)
-        if url_correction is not None:
+        if source_reconciliation is not None:
+            from tools.catalog_reconcile import verify_inputs
+            retained = verify_inputs(root, original, parent, source_reconciliation)
+        elif url_correction is not None:
             from tools.catalog_url_correction import verify_inputs
             retained = verify_inputs(root, original, parent, url_correction)
         elif identity_correction is not None:
@@ -373,29 +379,31 @@ def create(root, output, *, generation_sha=None, run_id=None, attempt=None, pare
         affected_generation = {key: manifest[key] for key in ('generation_sha', 'generation_run_id',
             'generation_run_attempt', 'generation_timestamp')}
         for key in ("generation_sha", "generation_run_id", "generation_run_attempt", "generation_timestamp", "generation_dependencies", "generator_versions", "generation_baseline", "generation_files", "team_identity", "semantic_identity"):
-            if source_correction is not None or program_area_revalidation is not None or source_recovery is not None or access_correction is not None or identity_correction is not None or url_correction is not None:
+            if source_correction is not None or program_area_revalidation is not None or source_recovery is not None or access_correction is not None or identity_correction is not None or url_correction is not None or source_reconciliation is not None:
                 if key in ('generation_sha', 'generation_run_id', 'generation_run_attempt', 'generation_timestamp', 'team_identity'):
                     manifest[key] = original[key]
             elif not team_update or key not in ('generation_baseline', 'generation_files', 'team_identity'):
                 manifest[key] = original[key]
         manifest["derived_from_candidate"] = original["candidate_id"]
         manifest["assembly_sha"] = git(root, "rev-parse", "HEAD")
-        if source_correction is not None or program_area_revalidation is not None or source_recovery is not None or access_correction is not None or identity_correction is not None or url_correction is not None:
+        if source_correction is not None or program_area_revalidation is not None or source_recovery is not None or access_correction is not None or identity_correction is not None or url_correction is not None or source_reconciliation is not None:
             manifest['original_generation'] = {key: original[key] for key in (
                 'generation_sha', 'generation_run_id', 'generation_run_attempt', 'generation_timestamp',
                 'generation_dependencies', 'generation_baseline', 'generation_files', 'semantic_identity')}
-            if access_correction is not None or identity_correction is not None or url_correction is not None:
+            if access_correction is not None or identity_correction is not None or url_correction is not None or source_reconciliation is not None:
                 # A later projection adds its own proof without replacing the
                 # original science or the earlier source-recovery receipt.
-                for key in ('source_correction', 'program_area_revalidation', 'source_recovery', 'access_correction', 'identity_correction', 'url_correction', 'original_generation'):
+                for key in ('source_reconciliation', 'source_correction', 'program_area_revalidation', 'source_recovery', 'access_correction', 'identity_correction', 'url_correction', 'original_generation'):
                     if key in original:
                         manifest[key] = original[key]
-            correction_key = ('url_correction' if url_correction is not None else
+            correction_key = ('source_reconciliation' if source_reconciliation is not None else
+                'url_correction' if url_correction is not None else
                 'identity_correction' if identity_correction is not None else
                 'access_correction' if access_correction is not None else
                 'source_recovery' if source_recovery is not None else
                 'program_area_revalidation' if program_area_revalidation is not None else 'source_correction')
-            correction_receipt = (read_json(url_correction) if url_correction is not None else
+            correction_receipt = (read_json(source_reconciliation) if source_reconciliation is not None else
+                read_json(url_correction) if url_correction is not None else
                 read_json(identity_correction) if identity_correction is not None else
                 read_json(access_correction) if access_correction is not None else
                 read_json(source_recovery) if source_recovery is not None else
@@ -406,7 +414,7 @@ def create(root, output, *, generation_sha=None, run_id=None, attempt=None, pare
                 'affected_output_hashes': {n: h for n, h in manifest['generation_files'].items()
                     if original['generation_files'].get(n) != h}}
         else:
-            for key in ('source_correction', 'program_area_revalidation', 'source_recovery', 'access_correction', 'identity_correction', 'url_correction', 'original_generation'):
+            for key in ('source_reconciliation', 'source_correction', 'program_area_revalidation', 'source_recovery', 'access_correction', 'identity_correction', 'url_correction', 'original_generation'):
                 if key in original:
                     manifest[key] = original[key]
         if team_update:

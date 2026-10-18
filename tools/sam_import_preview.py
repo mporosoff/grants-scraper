@@ -20,7 +20,6 @@ from urllib.parse import unquote
 from scripts.solicitation_identity import normalized_number
 from scripts.sources.sam_api import SamError, fetch_description, fetch_listing, redacted
 from scripts.sources.sam_public import fetch_notice
-from scripts.sources.sam_reviewed import make_record
 from scripts.sources.adapters.sam_gov import SamGovAdapter, discovery_candidates, load_config
 from scripts.sources.merge import integrate, load_catalog
 
@@ -132,28 +131,42 @@ def reviewed_preview(config, *, root, today, public_notice):
             'failures': failures})
     snapshots = {approval['notice_id']: (notice, detail)
                  for approval, (notice, detail, _) in zip(approvals, fetched)}
+    allowed_successors = {notice.get('latest_notice_id') for notice, _ in snapshots.values()}
     catalog_path = root / 'data/opportunities.js'
     cache_path = root / 'data/source_records.json'
     records = load_catalog(catalog_path).get('opportunities', [])
+    def reviewed_snapshot(identifier):
+        if identifier not in snapshots:
+            # The collector may inspect one exact successor of an approved ID.
+            # No broad discovery or unrelated read is authorized by a preview.
+            if identifier not in allowed_successors:
+                raise SamError('unapproved_preview_notice')
+            snapshots[identifier] = public_notice(identifier)
+        return snapshots[identifier]
+    # The real merge reuses the exact snapshots, including a bounded successor.
+    adapter = SamGovAdapter(config_path=root / 'config/sam_gov.json',
+                            reviewed_client=reviewed_snapshot)
+    summary = merge_preview(adapter, catalog_path, cache_path, today)
+    sam = next(item for item in summary['sources'] if item['slug'] == 'sam-gov')
+    observations = {item['notice_id']: item for item in (sam.get('diagnostics') or {}).get('notice_observations', [])}
     candidates = []
     for approval in approvals:
-        notice, _ = snapshots[approval['notice_id']]
-        _, reasons = make_record(notice, approval, today)
+        observation = observations.get(approval['notice_id'])
+        if observation is None:
+            continue
+        notice, _ = snapshots[observation['observed_notice_id']]
         row = {'noticeId': notice['notice_id'], 'solicitationNumber': notice['solicitation_number']}
         candidates.append(dict(notice, catalog_matches=existing_matches(row, records),
-                               admission_reasons=reasons))
-    # The real adapter must consume the exact snapshots just inspected. A
-    # missing/unapproved ID fails locally rather than making a surprise request.
-    adapter = SamGovAdapter(config_path=root / 'config/sam_gov.json',
-                            reviewed_client=lambda notice_id: snapshots[notice_id])
-    summary = merge_preview(adapter, catalog_path, cache_path, today)
+                               approved_notice_id=approval['notice_id'],
+                               admission_reasons=observation['reasons'], disposition=observation['disposition']))
+    request_count = sum(detail.get('request_count', 0) for _, detail in snapshots.values())
     return {'schema_version': 2, 'checked_at': datetime.now(timezone.utc).isoformat(),
             'outcome': 'preview_completed', 'request_count': request_count,
             'request_mode': 'anonymous_public_reviewed_notices', 'credentialed_requests': 0,
             'production_enabled': config['enabled'], 'approved_notices': len(approvals),
             'catalog_changed': False, 'candidates': candidates,
             'comparison_scope': 'Current catalog only; absence here does not establish absence from Grants.gov',
-            'description_inspections': [], 'reviewed_notices_match': all(
+            'description_inspections': [], 'reviewed_notices_match': len(candidates) == len(approvals) and all(
                 not row['admission_reasons'] for row in candidates),
             'merge_preview': summary,
             'readiness': 'Exact reviewed notices and application stages checked against current public snapshots'}

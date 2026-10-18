@@ -58,9 +58,9 @@ class SamRefreshGuardTests(unittest.TestCase):
         require_complete_refresh(dict(configuration(), enabled=False), None)
         require_complete_refresh({'schema_version': 1, 'enabled': True}, None)
 
-    def test_real_source_merge_failure_is_blocked_but_confirmed_revocation_is_allowed(self):
-        for failed in (True, False):
-            with self.subTest(failed=failed), tempfile.TemporaryDirectory() as directory:
+    def test_real_merge_blocks_missing_or_unreviewed_evidence_but_allows_confirmed_closure(self):
+        for mode in ('failed', 'changed', 'closed'):
+            with self.subTest(mode=mode), tempfile.TemporaryDirectory() as directory:
                 root = Path(directory)
                 cfg = configuration()
                 other = deepcopy(cfg['approved_notices'][0])
@@ -70,12 +70,14 @@ class SamRefreshGuardTests(unittest.TestCase):
                 observed = sam_public.snapshot(payload(), resources(), NOTICE)
                 def client(identifier):
                     if identifier == OTHER:
-                        if failed:
+                        if mode == 'failed':
                             raise SamError('public_notice_unavailable', {
                                 'request_count': 2, 'http_status': 503, 'failure_class': 'transient_transport'})
-                        # Successful current evidence changed, so this one is revoked.
+                        # A changed active notice needs review; a verified
+                        # cancelled notice may be withdrawn normally.
                         return dict(observed, notice_id=OTHER, latest_notice_id=OTHER,
-                                    solicitation_number=other['solicitation_number'], review_sha256='0' * 64), {'request_count': 2}
+                                    solicitation_number=other['solicitation_number'],
+                                    cancelled=mode == 'closed', review_sha256='0' * 64), {'request_count': 2}
                     return observed, {'request_count': 2}
                 catalog = root / 'catalog.js'
                 save_catalog({'generated_at': '2026-10-13T12:00:00Z', 'opportunities': []}, catalog)
@@ -83,7 +85,7 @@ class SamRefreshGuardTests(unittest.TestCase):
                 with patch.dict('os.environ', {'VPR_ENRICH_LINKS': 'false'}):
                     summary = integrate(catalog_path=catalog, cache_path=root / 'cache.json',
                                         adapters=[adapter], as_of=TODAY, write=True)
-                if failed:
+                if mode != 'closed':
                     with self.assertRaises(ValueError): require_complete_refresh(cfg, summary)
                 else:
                     require_complete_refresh(cfg, summary)

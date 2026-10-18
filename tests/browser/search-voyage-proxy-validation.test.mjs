@@ -31,7 +31,7 @@ function loadHybridApi() {
 const api = loadHybridApi();
 const base = await loadHarness();
 const harness = makeVariantHarness(base, { searchV2: true });
-const currentness = harness.parentEngine.score("funding research", { evidence: false });
+const currentness = harness.parentEngine.corpusCurrentness();
 const corpus = api.buildCorpus({
   parentCatalog: harness.parentCatalog,
   childCatalog: harness.childCatalog,

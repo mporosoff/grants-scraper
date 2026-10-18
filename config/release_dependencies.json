@@ -13,6 +13,10 @@
     "pnpm-lock.yaml",
     "tools/build_search_v2_voyage_vectors.mjs",
     "tools/embedding_contract.mjs",
+    "tools/corpus_clock.mjs",
+    "tools/run_budgeted_vectors.mjs",
+    "tools/catalog_reconcile_vectors.mjs",
+    "tools/catalog_reconcile_spend.py",
     "tools/run_search_diagnosis.mjs",
     "tools/build_search_v2_config.mjs",
     "assets/search-hybrid.js",
@@ -25,7 +29,8 @@
     "assets/team-hybrid.js",
     "assets/team-matcher.js",
     "assets/team-researchers.js",
-    "tools/require_sam_refresh.py"
+    "tools/require_sam_refresh.py",
+    "tools/sam_refresh_preflight.py"
   ],
   "generation_excluded": [
     "scripts/verify_researcher_publication.py",
@@ -128,7 +133,8 @@
         "tools/generation_spend_recovery.py",
         "config/generation_recovery/**/*.json",
         "tools/offline_spend.py",
-        "tools/require_sam_refresh.py"
+        "tools/require_sam_refresh.py",
+        "tools/sam_refresh_preflight.py"
       ],
       "excluded": [
         "scripts/build_opportunity_teams.py",
@@ -165,6 +171,11 @@
     },
     "semantic": {
       "patterns": [
+        "tools/corpus_clock.mjs",
+        "tools/run_budgeted_vectors.mjs",
+        "tools/catalog_reconcile_vectors.mjs",
+        "tools/catalog_reconcile_spend.py",
+        "tools/offline_spend.py",
         "scripts/search_v2_contract.py",
         "scripts/search_query.py",
         "config/search_v2.json",
