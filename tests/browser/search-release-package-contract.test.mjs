@@ -76,8 +76,8 @@ test("production vector builds require compatibility before reuse and preserve e
   assert.match(vectorBuilder, /"forced_full_rebuild"/);
   assert.match(vectorBuilder, /production_reused_vectors: production \? reused > 0/);
   assert.match(vectorBuilder, /model: MODEL,[\s\S]*?input_type: "document",[\s\S]*?output_dimension: DIMENSION/);
-  assert.doesNotMatch(workflow, /build_search_v2_voyage_vectors\.mjs --write(?! --production)/);
-  assert.match(workflow, /build_search_v2_voyage_vectors\.mjs --production --write/);
+  assert.doesNotMatch(workflow, /(?:build_search_v2_voyage_vectors|run_budgeted_vectors)\.mjs --write(?! --production)/);
+  assert.match(workflow, /run_budgeted_vectors\.mjs --production --write/);
   assert.ok(["production_full_rebuild", "compatible_incremental", "forced_full_rebuild"].includes(receipt.build_mode));
   assert.equal(receipt.reused_passage_count + receipt.embedded_passage_count, receipt.passage_count);
   assert.equal(receipt.production_reused_vectors, receipt.reused_passage_count > 0);

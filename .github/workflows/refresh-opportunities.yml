@@ -1089,7 +1089,7 @@ jobs:
     if: >-
       always() && needs.plan.result == 'success' && needs.plan.outputs.stage != 'noop' &&
       (needs.catalog-reconcile.result == 'success' || needs.generate.result == 'success' || needs.assemble.result == 'success' || needs.catalog-correction.result == 'success' || needs.program-area-revalidation.result == 'success' || needs.catalog-source-recovery.result == 'success' || needs.catalog-access-correction.result == 'success' || needs.catalog-identity-correction.result == 'success' || needs.catalog-url-correction.result == 'success' ||
-       (needs.catalog-reconcile.result == 'skipped' && needs.generate.result == 'skipped' && needs.assemble.result == 'skipped' && needs.catalog-correction.result == 'skipped' && needs.program-area-revalidation.result == 'skipped' && needs.catalog-source-recovery.result == 'skipped' && needs.catalog-access-correction.result == 'skipped' && needs.catalog-identity-correction.result == 'skipped' && needs.catalog-url-correction.result == 'skipped'))
+       ((needs.plan.outputs.stage == 'validate' || needs.plan.outputs.stage == 'publish' || needs.plan.outputs.stage == 'verify') && needs.catalog-reconcile.result == 'skipped' && needs.generate.result == 'skipped' && needs.assemble.result == 'skipped' && needs.catalog-correction.result == 'skipped' && needs.program-area-revalidation.result == 'skipped' && needs.catalog-source-recovery.result == 'skipped' && needs.catalog-access-correction.result == 'skipped' && needs.catalog-identity-correction.result == 'skipped' && needs.catalog-url-correction.result == 'skipped'))
     runs-on: ubuntu-latest
     outputs:
       candidate_id: ${{ steps.select.outputs.candidate_id }}
