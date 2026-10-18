@@ -652,9 +652,66 @@ class CandidateLifecycleTests(unittest.TestCase):
             publisher.request_verification('owner/repo', 10, head, self.reports, c.timestamp())
             run.assert_not_called()
         with patch.object(review, 'review_state', return_value=(True, [{'body': 'P1'}])), patch.object(publisher, 'run') as run:
-            with self.assertRaisesRegex(ValueError, 'findings'):
+            with self.assertRaises(review.ReviewFindings) as raised:
                 publisher.request_verification('owner/repo', 10, head, self.reports, c.timestamp())
+            self.assertEqual((raised.exception.repository, raised.exception.number, raised.exception.head,
+                              raised.exception.count), ('owner/repo', 10, head, 1))
             run.assert_not_called()
+
+    def test_immediate_and_polled_findings_preserve_terminal_state_through_latest_publication(self):
+        from tools import prepare_release_publication as preparation, publish_release_candidate as publisher
+        from tools import plan_release as planner, wait_release_review as review
+        manifest = self.create()
+        receipt = validate(self.root, self.bundle, self.reports, execute=self.execute([]))
+        findings = [{'body': '[P1] Supported-path failure'}, {'body': '[P2] Retained-state failure'}]
+        for mode in ('immediate', 'polling'):
+            with self.subTest(mode=mode):
+                reports = self.reports / mode
+                reports.mkdir()
+                c.write_json(reports / 'validation.json', receipt)
+                calls = []
+                def execute(*args):
+                    calls.append(args)
+                    if args[:2] == ('git', 'ls-remote'):
+                        return self.source_sha + '\trefs/heads/main'
+                    if args[:3] == ('gh', 'pr', 'list'):
+                        return '[]'
+                    if args[:3] == ('gh', 'pr', 'create'):
+                        return 'https://github.com/owner/repo/pull/10'
+                    if args[:2] in (('git', 'config'), ('git', 'add')):
+                        return c.git(self.root, *args[1:])
+                    return ''
+                states = [(True, findings)] if mode == 'immediate' else [(False, []), (True, findings)]
+                with patch.object(c, 'ROOT', self.root), patch.object(publisher, 'run', side_effect=execute), \
+                        patch.object(review, 'review_state', side_effect=states) as state, \
+                        patch.object(review, 'all_pages', return_value=[]), \
+                        patch.object(review, 'api', return_value={'user': {'login': 'owner'}}), \
+                        patch.object(review.time, 'sleep', side_effect=AssertionError('Terminal evidence requires no polling delay')), \
+                        patch.dict(os.environ, {'GITHUB_REPOSITORY': 'owner/repo', 'GITHUB_RUN_ID': '456',
+                                                'GITHUB_RUN_ATTEMPT': '2'}):
+                    with self.assertRaises(review.ReviewFindings) as raised:
+                        preparation.prepare_or_defer(self.bundle, self.reports / 'validation.json', reports, '123')
+                self.assertEqual(state.call_count, 1 if mode == 'immediate' else 2)
+                blocked = c.read_json(reports / 'review-blocked.json')
+                self.assertEqual((blocked['candidate_id'], blocked['artifact_run'], blocked['repository'],
+                                  blocked['pr_number'], blocked['head_sha'], blocked['finding_count']),
+                                 (manifest['candidate_id'], '123', 'owner/repo', 10, raised.exception.head, 2))
+                self.assertIs(blocked['production_mutated'], False)
+                self.assertFalse((reports / 'review-ready.json').exists())
+                self.assertFalse((reports / 'review-pending.json').exists())
+                self.assertFalse(any(call[:3] == ('gh', 'pr', 'merge') for call in calls))
+                self.assertEqual(c.git(self.root, 'rev-parse', 'HEAD'), self.source_sha)
+                artifacts = [{'id': number, 'name': f'publication-{manifest["candidate_id"]}-{number}',
+                              'expired': False, 'workflow_run': {'id': 456}} for number in (1, 2)]
+                def fetch(repository, run, name, target):
+                    self.assertEqual((repository, run, name), ('owner/repo', '456', artifacts[-1]['name']))
+                    shutil.copytree(reports, target)
+                with patch('tools.fetch_release_artifact.repository_artifacts', return_value=artifacts), \
+                        patch('tools.fetch_release_artifact.fetch', side_effect=fetch) as fetched:
+                    run, latest = planner.latest_report('owner/repo', manifest['candidate_id'], 'review',
+                                                        self.reports / (mode + '-planner'))
+                self.assertEqual((run, latest), ('456', blocked))
+                fetched.assert_called_once()
 
     def test_preparation_is_non_serving_and_keeps_checkout_on_protected_base(self):
         from tools import publish_release_candidate as publisher, wait_release_review as review

@@ -43,6 +43,7 @@ CONTENT_HASHED_ASSETS = (
     "assets/submission-schedule.js",
     "assets/saved.js",
     "assets/search-retrieval.js",
+    "assets/search-hybrid.js",
     "assets/team-matcher.js",
     "assets/team-hybrid.js",
     "assets/opportunity-team.js",

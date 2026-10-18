@@ -150,6 +150,20 @@ class ReadyCheckpointResume(unittest.TestCase):
 
 
 class ReviewCheckpoint(unittest.TestCase):
+    def test_terminal_findings_preserve_a_blocking_checkpoint_and_still_fail(self):
+        with TemporaryDirectory() as directory:
+            root = Path(directory)
+            finding = reviews.ReviewFindings('owner/repo', 349, 'b' * 40, 1)
+            with patch.object(preparation, 'prepare', side_effect=finding), \
+                    patch.object(preparation.c, 'load', return_value={'candidate_id': 'a' * 64}):
+                with self.assertRaises(reviews.ReviewFindings):
+                    preparation.prepare_or_defer('bundle', 'receipt', root, '123')
+            saved = planner.c.read_json(root / 'review-blocked.json')
+            self.assertEqual((saved['status'], saved['head_sha'], saved['finding_count']),
+                             ('review_findings', 'b' * 40, 1))
+            self.assertIs(saved['production_mutated'], False)
+            self.assertFalse((root / 'review-ready.json').exists())
+
     def test_only_pending_review_can_defer_and_never_produces_ready_receipt(self):
         with TemporaryDirectory() as d:
             root=Path(d);manifest={'candidate_id':'a'*64}

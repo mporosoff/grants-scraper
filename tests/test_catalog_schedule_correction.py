@@ -192,6 +192,7 @@ class RoutingAndBoundaries(unittest.TestCase):
             runs = [{'id': recovery.RUN, 'path': scheduled_catalog.WORKFLOW, 'head_branch': 'main', 'event': 'push'},
                     {'id': 38757294301}]
             with patch.object(scheduled_catalog, '_published', return_value=set()), \
+                    patch.object(scheduled_catalog, '_published_reconciliation_supersedes', return_value=False), \
                     patch.object(scheduled_catalog, '_pages', return_value=iter([runs])), \
                     patch.object(scheduled_catalog, 'run_artifacts', return_value=[{'id': 1, 'name': 'candidate-' + recovery.PARENT, 'expired': False}]), \
                     patch.object(scheduled_catalog, 'api', side_effect=AssertionError('No generation or provider dispatch')):

@@ -43,6 +43,32 @@ class SamRefreshGuardTests(unittest.TestCase):
             with self.subTest(summary=summary), self.assertRaises(ValueError):
                 require_complete_refresh(configuration(), summary)
 
+    def test_mixed_review_reasons_cannot_be_hidden_by_admission_expiry_or_calendar_labels(self):
+        for disposition in (None, 'admitted', 'approval_expired', 'verified_withdrawal'):
+            for basis in (None, 'unchanged_reviewed_calendar'):
+                summary = receipt()
+                observation = summary['sources'][0]['diagnostics']['notice_observations'][0]
+                observation.update(observed_notice_id=NOTICE, latest_notice_id=NOTICE,
+                    reasons=['reviewed_evidence_changed', 'entry_closed'], disposition=disposition)
+                if basis: observation['withdrawal_basis'] = basis
+                with self.subTest(disposition=disposition, basis=basis), self.assertRaises(ValueError):
+                    require_complete_refresh(configuration(), summary)
+
+    def test_terminal_or_restriction_basis_requires_current_notice_and_matching_reason(self):
+        for basis, reason in (('current_terminal_notice', 'not_open_notice'),
+                              ('current_restrictive_set_aside', 'restrictive_set_aside')):
+            summary = receipt()
+            observation = summary['sources'][0]['diagnostics']['notice_observations'][0]
+            observation.update(observed_notice_id=NOTICE, latest_notice_id=NOTICE,
+                reasons=['reviewed_evidence_changed', 'entry_closed', reason],
+                disposition='verified_withdrawal', withdrawal_basis=basis)
+            require_complete_refresh(configuration(), summary)
+            observation['latest_notice_id'] = OTHER
+            with self.assertRaises(ValueError): require_complete_refresh(configuration(), summary)
+            observation['latest_notice_id'] = NOTICE
+            observation['reasons'].remove(reason)
+            with self.assertRaises(ValueError): require_complete_refresh(configuration(), summary)
+
     def test_missing_or_malformed_summary_and_invalid_config_fail_locally(self):
         with tempfile.TemporaryDirectory() as directory:
             config = Path(directory) / 'sam.json'; summary = Path(directory) / 'summary.json'
@@ -58,9 +84,9 @@ class SamRefreshGuardTests(unittest.TestCase):
         require_complete_refresh(dict(configuration(), enabled=False), None)
         require_complete_refresh({'schema_version': 1, 'enabled': True}, None)
 
-    def test_real_source_merge_failure_is_blocked_but_confirmed_revocation_is_allowed(self):
-        for failed in (True, False):
-            with self.subTest(failed=failed), tempfile.TemporaryDirectory() as directory:
+    def test_real_merge_blocks_missing_or_unreviewed_evidence_but_allows_confirmed_closure(self):
+        for mode in ('failed', 'changed', 'closed'):
+            with self.subTest(mode=mode), tempfile.TemporaryDirectory() as directory:
                 root = Path(directory)
                 cfg = configuration()
                 other = deepcopy(cfg['approved_notices'][0])
@@ -70,12 +96,14 @@ class SamRefreshGuardTests(unittest.TestCase):
                 observed = sam_public.snapshot(payload(), resources(), NOTICE)
                 def client(identifier):
                     if identifier == OTHER:
-                        if failed:
+                        if mode == 'failed':
                             raise SamError('public_notice_unavailable', {
                                 'request_count': 2, 'http_status': 503, 'failure_class': 'transient_transport'})
-                        # Successful current evidence changed, so this one is revoked.
+                        # A changed active notice needs review; a verified
+                        # cancelled notice may be withdrawn normally.
                         return dict(observed, notice_id=OTHER, latest_notice_id=OTHER,
-                                    solicitation_number=other['solicitation_number'], review_sha256='0' * 64), {'request_count': 2}
+                                    solicitation_number=other['solicitation_number'],
+                                    cancelled=mode == 'closed', review_sha256='0' * 64), {'request_count': 2}
                     return observed, {'request_count': 2}
                 catalog = root / 'catalog.js'
                 save_catalog({'generated_at': '2026-10-13T12:00:00Z', 'opportunities': []}, catalog)
@@ -83,7 +111,7 @@ class SamRefreshGuardTests(unittest.TestCase):
                 with patch.dict('os.environ', {'VPR_ENRICH_LINKS': 'false'}):
                     summary = integrate(catalog_path=catalog, cache_path=root / 'cache.json',
                                         adapters=[adapter], as_of=TODAY, write=True)
-                if failed:
+                if mode != 'closed':
                     with self.assertRaises(ValueError): require_complete_refresh(cfg, summary)
                 else:
                     require_complete_refresh(cfg, summary)

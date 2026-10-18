@@ -19,6 +19,18 @@ jobs:
 
     steps:
       - uses: actions/checkout@v6
+      - name: Validate GitHub Actions workflows
+        shell: bash
+        run: |
+          set -euo pipefail
+          actionlint_archive="$RUNNER_TEMP/actionlint_1.7.12_linux_amd64.tar.gz"
+          curl --fail --location --silent --show-error --connect-timeout 15 --max-time 60 --max-filesize 10485760 --retry 2 --retry-max-time 120 \
+            "https://github.com/rhysd/actionlint/releases/download/v1.7.12/actionlint_1.7.12_linux_amd64.tar.gz" \
+            -o "$actionlint_archive"
+          echo "8aca8db96f1b94770f1b0d72b6dddcb1ebb8123cb3712530b08cc387b349a3d8  $actionlint_archive" | sha256sum --check
+          mkdir -p "$RUNNER_TEMP/actionlint-1.7.12"
+          tar -xzf "$actionlint_archive" -C "$RUNNER_TEMP/actionlint-1.7.12" actionlint
+          "$RUNNER_TEMP/actionlint-1.7.12/actionlint" -shellcheck= -pyflakes=
       - uses: actions/setup-python@v6
         with:
           python-version: "3.13"

@@ -161,11 +161,11 @@ class CloseoutRetry(unittest.TestCase):
         flow = yaml.safe_load((bridge.ROOT/'.github/workflows/refresh-opportunities.yml').read_text())
         cls.script = flow['jobs']['closeout']['steps'][0]['with']['script']
         cls.plan_outputs = flow['jobs']['plan']['outputs']
+        cls.closeout_needs = flow['jobs']['closeout']['needs']
 
     def run_script(self, failed=None, stage='catalog-correction', *, requested=None, jobs=None, env=None,
                    event='workflow_dispatch', issues=None):
-        needs = {name: {'result': 'skipped', 'outputs': {}} for name in
-            ('plan', 'generate', 'assemble', 'catalog-correction', 'program-area-revalidation', 'catalog-source-recovery', 'catalog-access-correction', 'catalog-identity-correction', 'catalog-url-correction', 'candidate', 'validate', 'publish', 'pages', 'verify-live')}
+        needs = {name: {'result': 'skipped', 'outputs': {}} for name in self.closeout_needs}
         needs['plan'] = {'result': 'success', 'outputs': {'stage': stage} if stage else {}}
         for name, values in (jobs or {}).items(): needs[name].update(deepcopy(values))
         if event == 'schedule':

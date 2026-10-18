@@ -4,11 +4,12 @@ import json
 from pathlib import Path
 import re
 import subprocess
+import yaml
 
 from tools import release_candidate as c
-from tools.fetch_release_artifact import fetch, run_artifacts
+from tools.fetch_release_artifact import artifact_bytes, fetch, run_artifacts
 from tools.offline_ai_checkpoint import api
-from tools.release_dependencies import candidate_groups, changed_groups, snapshot
+from tools.release_dependencies import candidate_groups, changed_groups, snapshot, unpublished_input_changes
 
 WORKFLOW = '.github/workflows/refresh-opportunities.yml'
 METADATA = 'data/catalog-metadata.js'
@@ -202,6 +203,410 @@ def _published_url_supersedes(root, run, artifacts):
     return False
 
 
+def _require_reconciliation_history(repository, run, producers, artifacts, *, allowed_candidate_ids=None):
+    """Original artifact producers remain distinct from downstream retries."""
+    latest = run['run_attempt']
+    attempts = {int(producer['run_attempt']): producer for producer in producers}
+    if min(attempts) == latest:
+        return
+    if not repository:
+        raise Hold('Original reconciliation attempt history is unavailable', run['id'])
+    from tools.release_attempt_history import authenticate_attempt, require_downstream_only
+    read = lambda path: api(repository, path)
+    def matches(meta, producer):
+        return producer == {'run_id': str(meta['id']), 'run_attempt': str(meta['run_attempt']),
+                            'head_sha': meta['head_sha'], 'event': meta['event'], 'path': meta['path']}
+    try:
+        acknowledged = max(attempts)
+        for attempt, producer in attempts.items():
+            if attempt < latest and (attempt != acknowledged or acknowledged == latest):
+                if not matches(authenticate_attempt(repository, run, attempt, api=read), producer):
+                    raise ValueError('Original checkpoint producer changed')
+        if acknowledged < latest:
+            options = {} if allowed_candidate_ids is None else {'allowed_candidate_ids': allowed_candidate_ids}
+            original = require_downstream_only(repository, run, acknowledged, artifacts, api=read, **options)
+            if not matches(original, attempts[acknowledged]):
+                raise ValueError('Original checkpoint producer changed')
+    except (ValueError, KeyError, TypeError, OSError, subprocess.SubprocessError) as error:
+        raise Hold('Later release attempts do not authenticate unchanged reconciliation work: ' + str(error),
+                   run['id']) from error
+
+
+def _published_reconciliation_supersedes(root, run, artifacts, *, repository=None):
+    """Retire one exact original owner through its protected corrected child."""
+    candidates = [row for row in artifacts if row['name'].startswith('candidate-')]
+    if len(candidates) != 1:
+        return False
+    artifact = candidates[0]
+    parent = artifact['name'].removeprefix('candidate-')
+    revisions = c.git(root, 'log', '--first-parent', '--format=%H', '-100', '--',
+                      'release/candidate-source.json').splitlines()
+    for sha in revisions:
+        child = json.loads(c.git(root, 'show', sha + ':release/candidate.json'))
+        receipt = child.get('source_reconciliation') or {}
+        if (receipt.get('parent_candidate_id') != parent or receipt.get('parent_run') != str(run['id'])
+                or child.get('derived_from_candidate') != parent):
+            continue
+        pointer = json.loads(c.git(root, 'show', sha + ':release/candidate-source.json'))
+        producer = receipt.get('parent_producer') or {}
+        original_attempt = receipt.get('parent_attempt')
+        expected_producer = {'run_id': str(run['id']), 'run_attempt': original_attempt,
+                            'head_sha': run.get('head_sha'), 'event': run.get('event'), 'path': WORKFLOW}
+        pin = receipt.get('parent_artifact') or {}
+        affected = receipt.get('affected_generation') or {}
+        valid = (receipt.get('version') == 'catalog-source-reconciliation-1'
+            and receipt.get('source_slug') == 'sam-gov'
+            and child.get('derived_from_candidate') == parent
+            and child.get('candidate_id') == pointer.get('candidate_id')
+            == c.digest(c.encoded({k: v for k, v in child.items() if k != 'candidate_id'}))
+            and run.get('head_branch') == 'main' and run.get('path') == WORKFLOW
+            and run.get('status') == 'completed' and producer == expected_producer
+            and type(run.get('run_attempt')) is int
+            and re.fullmatch('[1-9][0-9]*', str(original_attempt)) is not None
+            and 1 <= int(original_attempt) <= run['run_attempt']
+            and receipt.get('parent_generation_sha') == child.get('generation_sha')
+            and original_attempt == str(producer.get('run_attempt'))
+            and pin == {'id': artifact.get('id'), 'name': artifact['name'],
+                        'sha256': str(artifact.get('digest', '')).removeprefix('sha256:')}
+            and artifact.get('expired') is False
+            and re.fullmatch('[a-f0-9]{64}', pin.get('sha256', '')) is not None
+            and affected.get('generation_run_id') == pointer.get('artifact_run')
+            and affected.get('generation_sha') == child.get('assembly_sha')
+            and re.fullmatch('[a-f0-9]{64}', receipt.get('parent_manifest_sha256', '')) is not None)
+        if not valid:
+            raise Hold('Published source reconciliation does not authenticate its exact original owner', run['id'])
+        _require_reconciliation_history(repository, run, [producer], artifacts)
+        return True
+    return False
+
+
+def _published_reconciliation_consumes(root, run, artifacts, *, repository=None):
+    """A corrected publication may consume exact earlier repair checkpoints."""
+    vouchers = [row for row in artifacts if re.fullmatch(
+        r'offline-ai-reconcile-[a-f0-9]{64}-reservation-' + str(run['id']) + r'-[1-9][0-9]*', row['name'])]
+    if not vouchers and (run.get('event') != 'workflow_dispatch'
+                         or not any(row['name'].startswith('candidate-') for row in artifacts)):
+        return False
+    def pin_matches(pin):
+        return (isinstance(pin, dict) and re.fullmatch('[a-f0-9]{64}', pin.get('sha256', '')) is not None
+            and any(row.get('id') == pin.get('id') and row.get('name') == pin.get('name')
+                    and row.get('digest') == 'sha256:' + pin['sha256'] for row in artifacts))
+    revisions = c.git(root, 'log', '--first-parent', '--format=%H', '-100', '--',
+                      'release/candidate-source.json').splitlines()
+    for sha in revisions:
+        child = json.loads(c.git(root, 'show', sha + ':release/candidate.json'))
+        receipt = child.get('source_reconciliation') or {}
+        links = [link for link in receipt.get('consumed_checkpoints', [])
+                 if (link.get('producer') or {}).get('run_id') == str(run['id'])]
+        affected = receipt.get('affected_generation') or {}
+        # Later runtime/team assemblies retain the source receipt, but its
+        # direct source child remains the owner-authentication boundary.
+        if (child.get('derived_from_candidate') != receipt.get('parent_candidate_id')
+                or affected.get('generation_sha') != child.get('assembly_sha')):
+            continue
+        own = affected.get('generation_run_id') == str(run['id'])
+        pointer = json.loads(c.git(root, 'show', sha + ':release/candidate-source.json'))
+        transport = pointer.get('artifact_run') == str(run['id']) and not own
+        if not links and not own and not transport:
+            continue
+        parent = receipt.get('parent_candidate_id', '')
+        valid = (receipt.get('version') == 'catalog-source-reconciliation-1'
+            and receipt.get('source_slug') == 'sam-gov'
+            and child.get('derived_from_candidate') == parent
+            and child.get('candidate_id') == pointer.get('candidate_id')
+            == c.digest(c.encoded({k: v for k, v in child.items() if k != 'candidate_id'}))
+            and re.fullmatch('[1-9][0-9]*', str(affected.get('generation_run_id', ''))) is not None
+            and re.fullmatch('[1-9][0-9]*', str(pointer.get('artifact_run', ''))) is not None
+            and affected.get('generation_sha') == child.get('assembly_sha')
+            and run.get('path') == WORKFLOW and run.get('head_branch') == 'main'
+            and run.get('event') == 'workflow_dispatch' and run.get('status') == 'completed'
+            and type(run.get('run_attempt')) is int)
+        acknowledged = set()
+        for link in links:
+            producer = link['producer']
+            valid = valid and (producer.get('head_sha') == run.get('head_sha')
+                and producer.get('event') == run.get('event') and producer.get('path') == WORKFLOW
+                and re.fullmatch('[1-9][0-9]*', producer.get('run_attempt', '')) is not None
+                and int(producer['run_attempt']) <= run['run_attempt']
+                and pin_matches(link.get('reservation')) and pin_matches(link.get('state'))
+                and all(link[role]['name'] == f'offline-ai-reconcile-{parent}-{role}-{run["id"]}-{producer["run_attempt"]}'
+                        for role in ('reservation', 'state'))
+                and type(link.get('request_count')) is int and 0 <= link['request_count'] <= 300
+                and type(link.get('charged_microusd')) is int and 0 <= link['charged_microusd'] <= 2_000_000
+                and all(re.fullmatch('[a-f0-9]{64}', link.get(name, '')) is not None for name in
+                        ('ledger_sha256', 'request_prefix_sha256', 'request_identity_prefix_sha256')))
+            acknowledged.add(link.get('reservation', {}).get('id'))
+            candidate = link.get('candidate')
+            if candidate:
+                valid = valid and (candidate.get('producer') == producer and pin_matches(candidate.get('artifact'))
+                    and candidate['artifact'].get('name') == 'candidate-' + candidate.get('candidate_id', '')
+                    and re.fullmatch('[a-f0-9]{64}', candidate.get('manifest_sha256', '')) is not None)
+        # An unacknowledged reservation or candidate remains an owner. Later
+        # state-only uploads cannot grant provider dispatch without a voucher.
+        candidates = [row for row in artifacts if row['name'].startswith('candidate-')]
+        covered = {link['candidate']['artifact']['id'] for link in links if link.get('candidate')}
+        producers = [link['producer'] for link in links]
+        restores = []
+        if own:
+            if not valid:
+                raise Hold('Published source reconciliation does not authenticate its producing run', run['id'])
+            producer, reservation, candidate, restores = _published_reconciliation_producer(
+                root, repository, run, artifacts, child, receipt)
+            producers.append(producer)
+            acknowledged.add(reservation['id'])
+            if candidate:
+                covered.add(candidate['id'])
+        elif transport:
+            if not valid:
+                raise Hold('Published source reconciliation does not authenticate its restoring run', run['id'])
+            candidate, restores = _published_reconciliation_transport(root, repository, run, artifacts, child, receipt,
+                after=max((int(producer['run_attempt']) for producer in producers), default=0))
+            covered.add(candidate['id'])
+        valid = valid and all(row['id'] in acknowledged for row in vouchers) and all(row['id'] in covered for row in candidates)
+        if not valid:
+            raise Hold('Published source reconciliation does not authenticate its consumed repair checkpoint', run['id'])
+        if restores:
+            _require_reconciliation_restore_history(repository, run, producers, restores, artifacts, covered)
+        else:
+            _require_reconciliation_history(repository, run, producers, artifacts,
+                                            allowed_candidate_ids=covered)
+        return True
+    return False
+
+
+def _published_reconciliation_producer(root, repository, run, artifacts, child, receipt):
+    """Authenticate the publishing attempt separately from restored checkpoints."""
+    from tools.offline_spend import identity
+    from tools.release_attempt_history import authenticate_attempt
+    try:
+        attempt = receipt['affected_generation']['generation_run_attempt']
+        if (not repository or re.fullmatch('[1-9][0-9]*', str(attempt)) is None
+                or not 1 <= int(attempt) <= run['run_attempt']):
+            raise ValueError('Invalid published producer attempt')
+        meta = authenticate_attempt(repository, run, int(attempt), api=lambda path: api(repository, path))
+        producer = {'run_id': str(meta['id']), 'run_attempt': str(meta['run_attempt']),
+                    'head_sha': meta['head_sha'], 'event': meta['event'], 'path': meta['path']}
+        parent = receipt['parent_candidate_id']
+        names = {role: f'offline-ai-reconcile-{parent}-{role}-{run["id"]}-{attempt}'
+                 for role in ('reservation', 'state')}
+        if any(row['name'] == 'candidate-' + child['candidate_id'] for row in artifacts):
+            names['candidate'] = 'candidate-' + child['candidate_id']
+        selected = {}
+        for role, name in names.items():
+            rows = [row for row in artifacts if row['name'] == name]
+            if len(rows) != 1:
+                raise ValueError('Missing or conflicting producer ' + role)
+            row = rows[0]; workflow = row.get('workflow_run') or {}
+            if (row.get('expired') is not False or type(row.get('id')) is not int or row['id'] <= 0
+                    or re.fullmatch('sha256:[a-f0-9]{64}', str(row.get('digest', ''))) is None
+                    or workflow.get('id') != run['id'] or workflow.get('head_sha') != run['head_sha']
+                    or workflow.get('head_branch') != 'main'):
+                raise ValueError('Invalid producer artifact identity')
+            selected[role] = row
+        if any(row['workflow_run'] != selected['state']['workflow_run'] for row in selected.values()):
+            raise ValueError('Producer artifact origins disagree')
+        reservation = _reconciliation_documents(repository, run, selected['reservation'], ['reservation.json'])['reservation.json']
+        candidate_path = 'complete-candidates/' + child['candidate_id'] + '/candidate.json'
+        state = _reconciliation_documents(repository, run, selected['state'],
+            ['reservation.json', 'ledger.json', 'reconciliation.json', candidate_path])
+        context, ledger = state['reconciliation.json'], state['ledger.json']
+        if (reservation != state['reservation.json']
+                or reservation.get('version') != 'catalog-source-reconciliation-1'
+                or reservation.get('producer_run') != str(run['id']) or reservation.get('producer_attempt') != str(attempt)
+                or reservation.get('parent_candidate_id') != parent
+                or reservation.get('operation_sha256') != receipt.get('operation_sha256')
+                or re.fullmatch('[a-f0-9]{64}', str(reservation.get('prior_ledger_sha256', ''))) is None
+                or context.get('completed_candidate_id') != child['candidate_id']
+                or context.get('operation_sha256') != receipt.get('operation_sha256')
+                or identity({key: value for key, value in context.items()
+                             if key not in ('operation_sha256', 'completed_candidate_id')}) != context.get('operation_sha256')
+                or any(context.get(key) != receipt.get(key) for key in
+                       ('parent_candidate_id', 'parent_run', 'parent_attempt', 'parent_generation_sha', 'parent_manifest_sha256'))
+                or ledger.get('logical_id') != 'offline-' + receipt.get('parent_run', '')
+                or ledger.get('limit_microusd') != 2_000_000 or ledger.get('max_requests') != 300
+                or identity(ledger) != receipt.get('ledger_sha256') or state[candidate_path] != child):
+            raise ValueError('Published producer checkpoint does not match its exact receipt')
+        restores = []
+        for later in range(int(attempt) + 1, run['run_attempt'] + 1):
+            name = f'offline-ai-reconcile-{parent}-state-{run["id"]}-{later}'
+            rows = [row for row in artifacts if row['name'] == name]
+            if not rows:
+                continue
+            voucher = name.replace('-state-', '-reservation-')
+            if len(rows) != 1 or any(row['name'] == voucher for row in artifacts):
+                raise ValueError('Later reconciliation work has a new or ambiguous allowance')
+            row = rows[0]
+            if row.get('workflow_run') != selected['state']['workflow_run']:
+                raise ValueError('Completed restore artifact origin changed')
+            candidate_path = 'complete-candidates/' + child['candidate_id'] + '/candidate.json'
+            restored = _reconciliation_documents(repository, run, row,
+                ['reservation.json', 'ledger.json', 'reconciliation.json', candidate_path])
+            if (restored['reservation.json'] != reservation or restored['reconciliation.json'] != context
+                    or identity(restored['ledger.json']) != receipt['ledger_sha256'] or restored[candidate_path] != child):
+                raise ValueError('Completed restore changed candidate, context, or budget')
+            later_meta = authenticate_attempt(repository, run, later, api=lambda path: api(repository, path))
+            _require_completed_restore_jobs(root, repository, run, later_meta)
+            restores.append({'producer': {'run_id': str(run['id']), 'run_attempt': str(later),
+                'head_sha': later_meta['head_sha'], 'event': later_meta['event'], 'path': later_meta['path']}, 'state_id': row['id']})
+        return producer, selected['reservation'], selected.get('candidate'), restores
+    except (ValueError, KeyError, TypeError, OSError, subprocess.SubprocessError) as error:
+        raise Hold('Published source reconciliation does not authenticate its producing checkpoint: ' + str(error), run['id']) from error
+
+
+def _published_reconciliation_transport(root, repository, run, artifacts, child, receipt, *, after):
+    """An exact complete child may be reuploaded without becoming new generation."""
+    from tools.offline_spend import identity
+    from tools.release_attempt_history import authenticate_attempt
+    try:
+        if not repository:
+            raise ValueError('Restoring run history unavailable')
+        candidates = [row for row in artifacts if row['name'] == 'candidate-' + child['candidate_id']]
+        if len(candidates) != 1 or _reconciliation_documents(repository, run, candidates[0], ['candidate.json'])['candidate.json'] != child:
+            raise ValueError('Restoring candidate is not the exact published child')
+        parent = receipt['parent_candidate_id']; affected = receipt['affected_generation']
+        pattern = re.compile(f'offline-ai-reconcile-{parent}-state-{run["id"]}-([1-9][0-9]*)')
+        restores = []
+        for row in artifacts:
+            match = pattern.fullmatch(row['name'])
+            if not match or int(match[1]) <= after:
+                continue
+            attempt = int(match[1])
+            if (attempt > run['run_attempt'] or len([item for item in artifacts if item['name'] == row['name']]) != 1
+                    or any(item['name'] == row['name'].replace('-state-', '-reservation-') for item in artifacts)):
+                raise ValueError('Restoring run has new or ambiguous accounting')
+            candidate_path = 'complete-candidates/' + child['candidate_id'] + '/candidate.json'
+            state = _reconciliation_documents(repository, run, row,
+                ['reservation.json', 'ledger.json', 'reconciliation.json', candidate_path])
+            reservation, context, ledger = (state[name] for name in ('reservation.json', 'reconciliation.json', 'ledger.json'))
+            if (reservation.get('version') != 'catalog-source-reconciliation-1'
+                    or reservation.get('producer_run') != affected.get('generation_run_id')
+                    or reservation.get('producer_attempt') != affected.get('generation_run_attempt')
+                    or reservation.get('parent_candidate_id') != parent
+                    or reservation.get('operation_sha256') != receipt.get('operation_sha256')
+                    or re.fullmatch('[a-f0-9]{64}', str(reservation.get('prior_ledger_sha256', ''))) is None
+                    or context.get('completed_candidate_id') != child['candidate_id']
+                    or context.get('operation_sha256') != receipt.get('operation_sha256')
+                    or identity({key: value for key, value in context.items()
+                                 if key not in ('operation_sha256', 'completed_candidate_id')}) != context.get('operation_sha256')
+                    or any(context.get(key) != receipt.get(key) for key in
+                           ('parent_candidate_id', 'parent_run', 'parent_attempt', 'parent_generation_sha', 'parent_manifest_sha256'))
+                    or ledger.get('logical_id') != 'offline-' + receipt.get('parent_run', '')
+                    or ledger.get('limit_microusd') != 2_000_000 or ledger.get('max_requests') != 300
+                    or identity(ledger) != receipt.get('ledger_sha256') or state[candidate_path] != child):
+                raise ValueError('Restoring run changed completed child or original accounting')
+            meta = authenticate_attempt(repository, run, attempt, api=lambda path: api(repository, path))
+            _require_completed_restore_jobs(root, repository, run, meta)
+            restores.append({'producer': {'run_id': str(run['id']), 'run_attempt': str(attempt),
+                'head_sha': meta['head_sha'], 'event': meta['event'], 'path': meta['path']}, 'state_id': row['id']})
+        if not restores:
+            raise ValueError('Exact completed-child restore checkpoint unavailable')
+        return candidates[0], restores
+    except (ValueError, KeyError, TypeError, OSError, subprocess.SubprocessError) as error:
+        raise Hold('Published source reconciliation does not authenticate its restoring checkpoint: ' + str(error), run['id']) from error
+
+
+def _reconciliation_documents(repository, run, artifact, expected):
+    from tools import release_checkpoint_archive as archive
+    workflow = artifact.get('workflow_run') or {}
+    if (artifact.get('expired') is not False or type(artifact.get('id')) is not int
+            or re.fullmatch('sha256:[a-f0-9]{64}', str(artifact.get('digest', ''))) is None
+            or workflow.get('id') != run['id'] or workflow.get('head_sha') != run['head_sha']
+            or workflow.get('head_branch') != 'main'):
+        raise ValueError('Invalid reconciliation checkpoint identity')
+    raw = artifact_bytes(repository, str(run['id']), artifact, lambda path: api(repository, path))
+    if c.digest(raw) != artifact['digest'].removeprefix('sha256:'):
+        raise ValueError('Producer artifact digest changed')
+    with archive._members(raw) as packet:
+        result = {}
+        for name in expected:
+            if packet.getinfo(name).file_size > archive.MAX_MANIFEST_BYTES:
+                raise ValueError('Producer checkpoint JSON exceeds bound')
+            value = archive._decode(packet.read(name))
+            if not isinstance(value, dict):
+                raise ValueError('Producer checkpoint JSON must be an object')
+            result[name] = value
+        return result
+
+
+def _require_completed_restore_jobs(root, repository, run, meta):
+    from tools import release_attempt_history as history
+    jobs = history._jobs(run, meta, api=lambda path: api(repository, path), full=False)
+    job = jobs.get('catalog-reconcile') or {}
+    if (job.get('conclusion') != 'success'
+            or any(row['conclusion'] != 'skipped' and name not in history.DOWNSTREAM | {'catalog-reconcile'}
+                   for name, row in jobs.items())):
+        raise ValueError('Later reconciliation did not only restore its completed checkpoint')
+    workflow = yaml.safe_load(c.git(root, 'show', meta['head_sha'] + ':' + WORKFLOW))
+    declared = workflow['jobs']['catalog-reconcile']['steps']
+    guarded = [step['name'] for step in declared if step.get('if') == "steps.restore.outputs.candidate_id == ''"]
+    restore = [step['name'] for step in declared if step.get('id') == 'restore']
+    uploads = [step['name'] for step in declared if step.get('if') == 'always()'
+               and '-state-' in step.get('with', {}).get('name', '')]
+    steps = job.get('steps')
+    if not isinstance(steps, list) or len(steps) > 100:
+        raise ValueError('Completed restore step evidence unavailable')
+    by_name = {}
+    for step in steps:
+        if (not isinstance(step, dict) or not isinstance(step.get('name'), str)
+                or step['name'] in by_name or step.get('status') != 'completed'):
+            raise ValueError('Completed restore step evidence is incomplete or ambiguous')
+        by_name[step['name']] = step
+    if (len(guarded) < 6 or len(restore) != 1 or len(uploads) != 1
+            or any(by_name.get(name, {}).get('conclusion') != 'skipped' for name in guarded)
+            or any(by_name.get(name, {}).get('conclusion') != 'success' for name in restore + uploads)):
+        raise ValueError('Completed restore did not skip every reservation and generation step')
+
+
+def _require_reconciliation_restore_history(repository, run, producers, restores, artifacts, covered):
+    """Keep ordinary downstream rules, admitting only proved completed restores."""
+    from tools import release_attempt_history as history
+    read = lambda path: api(repository, path)
+    try:
+        history._inventory(repository, run, artifacts, api=read)
+        if {row['id'] for row in artifacts if row['name'].startswith('candidate-')} != covered:
+            raise ValueError('Competing candidate evidence')
+        original = {int(producer['run_attempt']): producer for producer in producers}
+        restored = {int(row['producer']['run_attempt']): row for row in restores}
+        for artifact in artifacts:
+            if '-reservation-' in artifact['name'] or '-state-' in artifact['name']:
+                match = re.search(r'-' + str(run['id']) + r'-([1-9][0-9]*)$', artifact['name'])
+                if (not match or int(match[1]) > max(original, default=0)
+                        and artifact['id'] != restored.get(int(match[1]), {}).get('state_id')):
+                    raise ValueError('Unacknowledged allowance or task accounting')
+        for attempt in range(min(original, default=1), run['run_attempt'] + 1):
+            meta = history.authenticate_attempt(repository, run, attempt, api=read)
+            expected = original.get(attempt) or restored.get(attempt, {}).get('producer')
+            if expected:
+                if expected != {'run_id': str(meta['id']), 'run_attempt': str(meta['run_attempt']),
+                                'head_sha': meta['head_sha'], 'event': meta['event'], 'path': meta['path']}:
+                    raise ValueError('Reconciliation producer changed')
+            elif any(job['conclusion'] != 'skipped' and name not in history.DOWNSTREAM
+                     for name, job in history._jobs(run, meta, api=read, full=False).items()):
+                raise ValueError('Later generation or correction work started')
+    except (ValueError, KeyError, TypeError, OSError, subprocess.SubprocessError) as error:
+        raise Hold('Later release attempts do not authenticate completed reconciliation restore: ' + str(error), run['id']) from error
+
+
+def _only_preflight_stops(repository, run, jobs):
+    """A repeated source preflight may fail without ever starting generation."""
+    attempt = run.get('run_attempt')
+    if type(attempt) is not int or not 1 < attempt <= 10:
+        return False
+    def stopped(rows):
+        preflight = [job for job in rows if job.get('name') == 'sam-preflight']
+        producers = [job for job in rows if job.get('name') in ('generate', 'assemble')]
+        other = [job for job in rows if job.get('name') in ('catalog-reconcile', 'catalog-correction',
+            'program-area-revalidation', 'catalog-source-recovery', 'catalog-access-correction',
+            'catalog-identity-correction', 'catalog-url-correction')]
+        return (len(preflight) == 1 and preflight[0].get('conclusion') in ('failure', 'cancelled')
+                and len(producers) == 2 and all(job.get('conclusion') == 'skipped' for job in producers + other))
+    if not stopped(jobs):
+        return False
+    return all(stopped([job for batch in _pages(repository,
+        f'actions/runs/{run["id"]}/attempts/{prior}/jobs', 'jobs') for job in batch])
+        for prior in range(1, attempt))
+
+
 def prior_generation(root, environment, manifest):
     """Find one unfinished owner after the current source generation, or hold."""
     repository = environment['GITHUB_REPOSITORY']
@@ -221,6 +626,8 @@ def prior_generation(root, environment, manifest):
                     or run.get('event') not in ('push', 'schedule', 'workflow_dispatch')):
                 raise Hold('Untrusted release run in recovery history', identifier)
             artifacts = run_artifacts(identifier, lambda path: api(repository, path), repository=repository)
+            if _published_reconciliation_consumes(root, run, artifacts, repository=repository):
+                continue
             candidates = [a for a in artifacts if a['name'].startswith('candidate-')]
             reservations = [a for a in artifacts
                             if a['name'].startswith(f'generation-spend-reservation-{identifier}-')
@@ -234,7 +641,8 @@ def prior_generation(root, environment, manifest):
                 if (str(identifier), candidate_id) in published:
                     continue
                 if (_published_access_supersedes(root, run, artifacts)
-                        or _published_url_supersedes(root, run, artifacts)):
+                        or _published_url_supersedes(root, run, artifacts)
+                        or _published_reconciliation_supersedes(root, run, artifacts, repository=repository)):
                     continue
                 if artifact.get('expired') or not re.fullmatch('[a-f0-9]{64}', candidate_id):
                     raise Hold('Unpublished candidate evidence is expired or invalid', identifier)
@@ -249,9 +657,11 @@ def prior_generation(root, environment, manifest):
                 if (run.get('conclusion') == 'cancelled' and type(run.get('run_attempt')) is int
                         and run['run_attempt'] == 1 and not jobs and not artifacts):
                     continue
+                if _only_preflight_stops(repository, run, jobs):
+                    continue
                 producers = [job for job in jobs if job.get('name') in ('generate', 'assemble')]
-                corrections = [job for job in jobs if job.get('name') in ('program-area-revalidation', 'catalog-source-recovery', 'catalog-access-correction', 'catalog-identity-correction', 'catalog-url-correction')]
-                if (int(run.get('run_attempt', 1)) > 1 or len(producers) != 2 or len(corrections) > 5
+                corrections = [job for job in jobs if job.get('name') in ('catalog-reconcile', 'program-area-revalidation', 'catalog-source-recovery', 'catalog-access-correction', 'catalog-identity-correction', 'catalog-url-correction')]
+                if (int(run.get('run_attempt', 1)) > 1 or len(producers) != 2 or len(corrections) > 6
                         or any(job.get('conclusion') != 'skipped' for job in producers + corrections)):
                     raise Hold('Prior generation has no complete accounting/candidate evidence; inspect its original run', identifier)
             else:
@@ -301,8 +711,12 @@ def _recover(root, environment, result, destination, run, identifier, reports, f
     bundle = Path(destination) / 'recovery-candidate'
     fetch(environment['GITHUB_REPOSITORY'], run, 'candidate-' + identifier, bundle)
     manifest = c.load(bundle, identifier)
+    fields.update(candidate_id=identifier, candidate_run=str(run))
     c.verify_dependencies(root, manifest)
-    if set(changed_groups(candidate_groups(root, manifest), snapshot(root))) - {'validation'}:
+    current = snapshot(root)
+    changes = unpublished_input_changes(manifest,
+        changed_groups(candidate_groups(root, manifest), current), current)
+    if set(changes) - {'validation'}:
         raise Hold('Retained candidate inputs changed; preserve it for a named recovery', run)
     stamp = catalog_generated_at(bundle / 'files', manifest)
     if utc_timestamp(stamp) > now:
@@ -316,6 +730,16 @@ def _recover(root, environment, result, destination, run, identifier, reports, f
     _, publication = reports(repository, identifier, 'publication', Path(destination) / 'recovery-publication')
     from tools.plan_release import publication_ready
     published = publication_ready(manifest, publication)
+    if not published:
+        _, review = reports(repository, identifier, 'review', Path(destination) / 'recovery-review')
+        if review and review.get('status') == 'review_findings':
+            if (review.get('candidate_id') != identifier or review.get('artifact_run') != str(run)
+                    or review.get('repository') != repository or review.get('production_mutated') is not False
+                    or type(review.get('pr_number')) is not int or review['pr_number'] <= 0
+                    or not re.fullmatch('[a-f0-9]{40}', review.get('head_sha', ''))):
+                raise Hold('Terminal review checkpoint does not match the retained candidate', run)
+            raise Hold(f"Retained candidate has terminal review findings in PR #{review['pr_number']}; "
+                       'repair its source/code inputs before publication retry', run)
     return result | fields | {'stage': 'verify' if published else 'publish', 'daily_status': 'recovering',
         'candidate_id': identifier, 'candidate_run': str(run), 'receipt_run': receipt_run,
         'publication_run': publication['run'] if published else '',

@@ -1,0 +1,26 @@
+{
+  "notice_id": "e86bce2c7d594d8ba016060da00e8a59",
+  "latest_notice_id": "e86bce2c7d594d8ba016060da00e8a59",
+  "latest": true,
+  "status": "published",
+  "archived": false,
+  "cancelled": false,
+  "deleted": false,
+  "title": "Intrinsic Market Resilience (IMR)",
+  "solicitation_number": "DARPA-PS-26-138",
+  "organization_id": "500035490",
+  "notice_type": "o",
+  "classification_code": "AC12",
+  "naics_codes": [
+    "541715"
+  ],
+  "set_asides": [],
+  "posted_at": "2026-10-16T17:57:28.387+00:00",
+  "modified_at": "2026-10-16T17:57:28.387+00:00",
+  "response_deadline": "2026-12-07T14:00:00",
+  "response_timezone": "America/New_York",
+  "archive_date": "2027-01-06",
+  "description_sha256": "f16ac79e8a0279ea732e3edb8357896f959ce201929eb5a0fae80e070ebb0d08",
+  "resources_sha256": "24b741d959db341155321f67d3d3e4dacd52429cb63f78c36add658b15d28b52",
+  "review_sha256": "7d852d33cc985ede59a6477278503b90a67563dfd85a8479efe6c351131d226f"
+}

@@ -1,0 +1,110 @@
+{
+  "4984511e4bbc4d01a21df55b30a88f02": {
+    "notice_id": "4984511e4bbc4d01a21df55b30a88f02",
+    "latest_notice_id": "4984511e4bbc4d01a21df55b30a88f02",
+    "latest": true,
+    "status": "published",
+    "archived": false,
+    "cancelled": false,
+    "deleted": false,
+    "title": "NGA - Boosting Innovative GEOINT - Science & Technology Broad Agency Announcement (BIG-ST BAA): Topic # 07 – Lidar Analysis for Surface & Environmental Reconnaissance (LASER)",
+    "solicitation_number": "HM047627XXXX",
+    "organization_id": "500038581",
+    "notice_type": "o",
+    "classification_code": "AC13",
+    "naics_codes": [
+      "541715"
+    ],
+    "set_asides": [],
+    "posted_at": "2026-10-16T12:43:27.574+00:00",
+    "modified_at": "2026-10-16T12:43:27.584+00:00",
+    "response_deadline": "2026-12-21T23:59:00-05:00",
+    "response_timezone": "America/New_York",
+    "archive_date": "2027-03-15",
+    "description_sha256": "42bb138b977855d68dd52260b75a53a271ca61f52768d97789f2caa7ddf452ec",
+    "resources_sha256": "cc3e25ea498be01537eb405f7c347bc054df2cd0ef34ed5fde6cf0927a8e24df",
+    "review_sha256": "ced0975e8e8a1a727790e0a2d0c834dcafd472cbe5b29064cb0dcb23c77a9111"
+  },
+  "4e98188266d74e73a6cede0b0bef0da0": {
+    "notice_id": "4e98188266d74e73a6cede0b0bef0da0",
+    "latest_notice_id": "4e98188266d74e73a6cede0b0bef0da0",
+    "latest": true,
+    "status": "published",
+    "archived": false,
+    "cancelled": false,
+    "deleted": false,
+    "title": "FTA Broad Agency Announcement (FY26) -- “Research Initiatives in Support of Safety, Accessibility, and Mobility in Public Transportation",
+    "solicitation_number": "693195-26-BAA-0001",
+    "organization_id": "100184892",
+    "notice_type": "k",
+    "classification_code": "AS12",
+    "naics_codes": [
+      "541715"
+    ],
+    "set_asides": [
+      "NONE"
+    ],
+    "posted_at": "2026-10-14T15:15:49.879+00:00",
+    "modified_at": "2026-10-14T15:15:49.882+00:00",
+    "response_deadline": "2026-10-30T23:59:00-04:00",
+    "response_timezone": "America/New_York",
+    "archive_date": "2026-11-14",
+    "description_sha256": "44791f55d11a1f0d6e5cc0ca4964abb3d32046c2f8484ce621c8e6547fde420a",
+    "resources_sha256": "166f7602d79dcdd89cccb80ff33cf3e2e199afb70d362b599cfdb92bf6818764",
+    "review_sha256": "4c21e8a9534ec584b0c15b4d9cdeff5e1fa9c3543e6cc94a9794ebaa3fb73e21"
+  },
+  "7d63d061eb82403c8b6b4afb9afca040": {
+    "notice_id": "7d63d061eb82403c8b6b4afb9afca040",
+    "latest_notice_id": "7d63d061eb82403c8b6b4afb9afca040",
+    "latest": true,
+    "status": "published",
+    "archived": false,
+    "cancelled": false,
+    "deleted": false,
+    "title": "A Study on Vessel Design Challenge",
+    "solicitation_number": "693JF726R000016",
+    "organization_id": "100179145",
+    "notice_type": "o",
+    "classification_code": "R405",
+    "naics_codes": [
+      "541720"
+    ],
+    "set_asides": [],
+    "posted_at": "2026-10-16T11:47:28.298+00:00",
+    "modified_at": "2026-10-16T11:47:28.309+00:00",
+    "response_deadline": "2027-01-10T12:00:00-05:00",
+    "response_timezone": "America/New_York",
+    "archive_date": "2027-03-10",
+    "description_sha256": "b279a4064fb252f258b1b543e1df85f5ec8bf6705e9b9f47ce7a3ef6a9df17bd",
+    "resources_sha256": "4779c640da3bfd7f1fa09ea55a0b4d8ccc5c822002dc4bdbcc7ccf6da5488d5b",
+    "review_sha256": "a1b3a549821facac6ee8a3dc729e93881ddd062b25f105db4af5c46cafc63ea8"
+  },
+  "f1d0665939c74ffa86ffc40e73985cc1": {
+    "notice_id": "f1d0665939c74ffa86ffc40e73985cc1",
+    "latest_notice_id": "f1d0665939c74ffa86ffc40e73985cc1",
+    "latest": true,
+    "status": "published",
+    "archived": false,
+    "cancelled": false,
+    "deleted": false,
+    "title": "Office of Hazardous Materials Safety Research Initiative – FY2026 BROAD AGENCY ANNOUNCEMENT (BAA)",
+    "solicitation_number": "PHMSA-26HM-BAA",
+    "organization_id": "100182338",
+    "notice_type": "k",
+    "classification_code": "AJ12",
+    "naics_codes": [
+      "541715"
+    ],
+    "set_asides": [
+      "NONE"
+    ],
+    "posted_at": "2026-10-15T16:15:29.078+00:00",
+    "modified_at": "2026-10-15T16:15:29.094+00:00",
+    "response_deadline": "2026-11-18T11:59:00-05:00",
+    "response_timezone": "America/New_York",
+    "archive_date": "2026-12-03",
+    "description_sha256": "5c0896675e2e187e59bb54ae9d7345d24501dd4397cd6e36b6cea51c30edd6a0",
+    "resources_sha256": "9e3479066543c5387cd5dfc26e8526b5133a3183d2cbd094da73300436c8c71f",
+    "review_sha256": "3d0a407502241b81e8477dabee21ee593c0610d25e68930f28b91e9d8e020d0b"
+  }
+}

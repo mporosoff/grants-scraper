@@ -628,7 +628,7 @@
       if (assetsPromise) return assetsPromise;
       assetsPromise = (async () => {
         if (!fetchImpl) throw new HybridSearchError("asset_fetch_unavailable", "Semantic assets cannot be loaded.");
-        const currentness = parentEngine.score("funding research", { evidence: false });
+        const currentness = parentEngine.corpusCurrentness();
         const corpus = buildCorpus({
           parentCatalog,
           childCatalog,

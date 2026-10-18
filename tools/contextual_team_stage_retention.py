@@ -93,7 +93,10 @@ def seal(state, job, stage, api_call=None):
     if len(raw)>existing.STATE_LIMIT or existing.sha(raw)!=digest:
         raise ConfigurationFailure('iteration3_prior_stage_archive_digest')
     with zipfile.ZipFile(io.BytesIO(raw)) as archive:
-        infos=[i for i in archive.infolist() if not i.is_dir()]
+        try:
+            infos=existing.checkpoint_members(archive)
+        except ValueError as error:
+            raise ConfigurationFailure('iteration3_prior_stage_archive_shape') from error
         names=[i.filename for i in infos]
         if (len(names)!=len(set(names)) or len(names)>existing.STATE_FILE_LIMIT
                 or sum(i.file_size for i in infos)>existing.STATE_LIMIT or set(names)!=set(files)|{'checkpoint.json'}):

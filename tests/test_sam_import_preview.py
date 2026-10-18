@@ -507,6 +507,28 @@ class SamReviewedPreviewTests(unittest.TestCase):
         self.assertEqual(candidates[IDS[1]]['admission_reasons'], [])
         self.assertEqual(self.public_notice.call_count, 2)
 
+    def test_preview_and_merge_use_the_same_bounded_exact_successor_reconciliation(self):
+        from scripts.sources.sam_public import digest
+        item = self.config['approved_notices'][0]
+        anchor = self.snapshots[IDS[0]]
+        anchor['review_sha256'] = digest({key: value for key, value in anchor.items() if key != 'review_sha256'})
+        item.update(review_sha256=anchor['review_sha256'], reviewed_snapshot=deepcopy(anchor))
+        current = dict(deepcopy(anchor), notice_id=IDS[2], latest_notice_id=IDS[2],
+                       posted_at='2026-10-01', modified_at='2026-10-01')
+        current['review_sha256'] = digest({key: value for key, value in current.items() if key != 'review_sha256'})
+        self.snapshots[IDS[2]] = current
+        self.snapshots[IDS[0]].update(latest=False, latest_notice_id=IDS[2])
+        self.save_config()
+        report = self.run_preview()
+        self.assertTrue(report['reviewed_notices_match'])
+        self.assertEqual(self.public_notice.call_count, 3)
+        self.assertEqual(report['request_count'], 6)
+        candidate = next(row for row in report['candidates'] if row['approved_notice_id'] == IDS[0])
+        self.assertEqual(candidate['notice_id'], IDS[2])
+        self.assertEqual(candidate['admission_reasons'], [])
+        self.assertEqual(candidate['disposition'], 'admitted')
+        self.assertEqual(report['merge_preview']['stats']['external_added'], 2)
+
     def test_public_failure_is_not_retried_or_merged_and_omits_error_text(self):
         def public(notice_id):
             if notice_id == IDS[0]:
@@ -598,9 +620,9 @@ class SamPreviewWorkflowTests(unittest.TestCase):
         self.assertEqual(set(workflow['jobs']), {'preview'})
         job = workflow['jobs']['preview']
         self.assertEqual(job['if'], "github.repository == 'mporosoff/grants-scraper' && github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch'")
-        # Up to 100 reviewed notices, two 30-second reads each, four workers:
-        # 25 minutes of bounded transport plus installation/report overhead.
-        self.assertEqual(job['timeout-minutes'], 30)
+        # Up to 100 notices plus one exact successor each, four workers:
+        # 51m40s bounded transport plus installation/report overhead.
+        self.assertEqual(job['timeout-minutes'], 60)
         self.assertNotIn('env', job)
         secret_steps = [step for step in job['steps'] if 'secrets.' in json.dumps(step)]
         self.assertEqual(len(secret_steps), 1)

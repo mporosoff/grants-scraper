@@ -79,11 +79,12 @@ class ProductionReviewContracts(unittest.TestCase):
     def test_reviewed_inventory_replays_without_network_and_preserves_actual_entry_stages(self):
         from scripts.submission_schedule import project
         root = Path(__file__).resolve().parents[1]
-        config = load_config(root / 'config/sam_gov.json')
+        config_path = root / 'tests/fixtures/sam_reviewed_config_20261013.json'
+        config = load_config(config_path)
         observed = json.loads((root / 'tests/fixtures/sam_reviewed_inventory_20261013.json').read_text(encoding='utf8'))
         self.assertEqual(len(observed), 42)
         client = Mock(side_effect=lambda identifier: (deepcopy(observed[identifier]), {'request_count': 0}))
-        adapter = SamGovAdapter(config_path=root / 'config/sam_gov.json', reviewed_client=client)
+        adapter = SamGovAdapter(config_path=config_path, reviewed_client=client)
         with patch.dict(os.environ, {}, clear=True), \
                 patch('urllib.request.OpenerDirector.open', side_effect=AssertionError('Live request forbidden')), \
                 patch('requests.Session.request', side_effect=AssertionError('Provider forbidden')):

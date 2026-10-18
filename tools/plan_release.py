@@ -7,7 +7,7 @@ import re
 import tempfile
 
 from tools import release_candidate as c
-from tools.release_dependencies import snapshot, candidate_groups, changed_groups
+from tools.release_dependencies import snapshot, candidate_groups, changed_groups, unpublished_input_changes
 
 
 def decide(changes, *, event, requested='', verified=False, receipt_current=False, runtime_changed=False, published=False,
@@ -72,8 +72,20 @@ def latest_report(repository, candidate, kind, destination):
                           'review': 'review-pending.json'}[kind]
         if kind == 'review':
             ready_path = target / 'review-ready.json'
-            if report.exists() and ready_path.exists():
+            blocked_path = target / 'review-blocked.json'
+            if sum(path.exists() for path in (report, ready_path, blocked_path)) > 1:
                 raise ValueError('Conflicting latest publication review checkpoints')
+            if blocked_path.exists():
+                blocked = c.read_json(blocked_path)
+                if (blocked.get('schema_version') != 1 or blocked.get('status') != 'review_findings'
+                        or blocked.get('candidate_id') != candidate or blocked.get('repository') != repository
+                        or blocked.get('production_mutated') is not False
+                        or not re.fullmatch('[a-f0-9]{40}', blocked.get('head_sha', ''))
+                        or not re.fullmatch('[1-9][0-9]*', str(blocked.get('artifact_run', '')))
+                        or type(blocked.get('pr_number')) is not int or blocked['pr_number'] <= 0
+                        or type(blocked.get('finding_count')) is not int or blocked['finding_count'] <= 0):
+                    raise ValueError('Invalid terminal review checkpoint')
+                return run, blocked
             if report.exists():
                 return run, c.read_json(report)
             if not ready_path.exists():
@@ -161,6 +173,8 @@ def pending_publication(root, repository, destination):
         _, pending = latest_report(repository, candidate, 'review', Path(destination) / candidate / 'review')
         if not pending:
             continue
+        if pending.get('status') == 'review_findings':
+            continue  # A source/code repair must produce new reviewed bytes.
         awaiting = (pending.get('status') == 'awaiting_review'
                     and pending.get('repository') == repository
                     and pending.get('pr_number') == pr['number']
@@ -178,7 +192,9 @@ def pending_publication(root, repository, destination):
         bundle = Path(destination) / candidate / 'candidate'
         fetch(repository, run, 'candidate-' + candidate, bundle)
         manifest = c.load(bundle, candidate)
-        changes = changed_groups(candidate_groups(root, manifest), snapshot(root))
+        current = snapshot(root)
+        changes = unpublished_input_changes(manifest,
+            changed_groups(candidate_groups(root, manifest), current), current)
         if set(changes) - {'validation'}:
             continue  # An actual changed input needs the ordinary dependency plan.
         c.verify_dependencies(root, manifest)

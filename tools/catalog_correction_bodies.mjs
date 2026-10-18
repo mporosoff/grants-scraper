@@ -31,7 +31,7 @@ export async function prepareBodies(directory) {
   base.childCatalog = base.retrievalApi.createChildCatalog(child);
   const corpus = catalog => {
     const h = makeVariantHarness({...base, catalog}, {searchV2:true});
-    const gate = h.parentEngine.score('funding research', {evidence:false});
+    const gate = h.parentEngine.corpusCurrentness();
     return hybrid.buildCorpus({parentCatalog:h.parentCatalog, childCatalog:h.childCatalog,
       currentnessRejectedIndexes:gate.currentnessRejectedIndexes});
   };

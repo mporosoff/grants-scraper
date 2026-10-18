@@ -239,9 +239,18 @@ class SamGovAdapter(SourceAdapter):
             if not isinstance(as_of, date):
                 as_of = _iso_date(as_of)
             if config['schema_version'] == 2:
+                client = self.reviewed_client
+                receipt = os.environ.get('SAM_PREFLIGHT_RECEIPT')
+                if receipt:
+                    from ..sam_preflight import replay_client, utc_now
+                    now = utc_now()
+                    as_of = now.date()
+                    client = replay_client(receipt, self.config_path, as_of, now=now)
                 records, self.diagnostics = sam_reviewed.collect(
                     config, as_of, self.context.get('source_snapshots', {}),
-                    client=self.reviewed_client)
+                    client=client)
+                if receipt:
+                    self.diagnostics['preflight'] = client.preflight_provenance
                 return records
             if not config['enabled'] and not config['approved_notices']:
                 rows = []

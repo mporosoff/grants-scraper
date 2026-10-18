@@ -155,7 +155,7 @@ function scoreScale(values) {
 }
 
 function buildCorpus(harness) {
-  const currentness = harness.parentEngine.score("funding research", { evidence: false });
+  const currentness = harness.parentEngine.corpusCurrentness();
   const rejected = new Set(currentness.currentnessRejectedIndexes || []);
   const parentById = new Map();
   const passages = [];

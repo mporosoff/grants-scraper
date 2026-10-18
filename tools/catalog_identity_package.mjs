@@ -4,6 +4,7 @@ import {readFile, access, mkdir} from 'node:fs/promises';
 import {resolve, dirname, join, relative, isAbsolute, sep} from 'node:path';
 import {pathToFileURL} from 'node:url';
 import vm from 'node:vm';
+import {corpusDateClass} from './corpus_clock.mjs';
 import {digest, validateAsset} from './embedding_contract.mjs';
 import {withBuildLock, writeCoherentFiles} from './coherent_files.mjs';
 
@@ -180,15 +181,16 @@ function assignment(raw) {
   return JSON.parse(text.slice(text.indexOf('{'), text.lastIndexOf('}') + 1));
 }
 
-function makeCorpus(catalog, subtopics, sources) {
-  const context = {globalThis:{}};
+function makeCorpus(catalog, subtopics, sources, instant) {
+  const context = {globalThis:{}, Date:corpusDateClass(instant)};
   for (const name of RUNTIME) vm.runInNewContext(sources[name].toString('utf8'), context, {filename:name});
   const api = context.globalThis;
   const children = api.FUNDING_RETRIEVAL.createChildCatalog(subtopics);
   const engine = api.FUNDING_RETRIEVAL.create(catalog, api.FUNDING_SEARCH_QUERY,
     {searchV2:true, searchV2Config:api.FUNDING_SEARCH_V2_CONFIG, catalogRole:'parent'});
   return api.FUNDING_HYBRID_SEARCH.buildCorpus({parentCatalog:catalog, childCatalog:children,
-    currentnessRejectedIndexes:engine.score('funding research', {evidence:false}).currentnessRejectedIndexes});
+    currentnessRejectedIndexes:(engine.corpusCurrentness?.()
+      || engine.score('funding research', {evidence:false})).currentnessRejectedIndexes});
 }
 
 function checked(root, name) {
@@ -238,9 +240,9 @@ export async function prepareProjection(parent, root, kind = 'identity') {
       verifyUrlPayload(name, JSON.parse(originals[name]), JSON.parse(await readFile(checked(root, name), 'utf8')), policy);
   } else verifyCatalog(beforeCatalog, afterCatalog, policy.corrections);
   const subtopics = assignment(originals[SUBTOPICS]);
-  const originalCorpus = makeCorpus(beforeCatalog, subtopics, originals);
-  const corpus = makeCorpus(afterCatalog, subtopics, originals);
   const manifest = JSON.parse(originals[MANIFEST]);
+  const originalCorpus = makeCorpus(beforeCatalog, subtopics, originals, manifest.generated_at);
+  const corpus = makeCorpus(afterCatalog, subtopics, originals, manifest.generated_at);
   verifyCorpus({originalCorpus, corpus, manifest,
     binary:originals[BINARY], canaries:JSON.parse(originals[CANARIES])});
   const parentRelease = JSON.parse(originals[RELEASE]);

@@ -37,6 +37,13 @@ handshake evidence. Receipts are append-only across attempts. The public
 `release/candidate.json`, `release/publication.json` and `pages-release-sha.txt`
 identify the serving release. Historical generation provenance is never renamed.
 
+A terminal review with findings also retains `review-blocked.json`, bound to
+the candidate, artifact run, PR and complete reviewed SHA. This includes a
+review already completed before publication starts waiting. Automatic retries
+report that repair boundary without repeating validation or publication of
+unchanged rejected bytes. A pending review and a rejected review are distinct
+checkpoints; neither authorizes a serving change.
+
 ## Dispatch and retry
 
 Use the workflow dispatch `stage` input:
@@ -48,6 +55,7 @@ Use the workflow dispatch `stage` input:
 | `backfill` | Current validated candidate | Manual historical coverage work, at most $5 per logical run; same publication owner |
 | `generate` | Current protected main | One complete bounded generation; persist, validate, publish and verify |
 | `reuse` | Current `release/candidate-source.json` | Verify generation inputs and data bytes; assemble current runtime around unchanged data, persist a derived candidate and release |
+| `catalog-reconcile` | Exact original `candidate_run` and full `candidate_id`, retained reservation and spending state | Reconcile reviewed SAM only; retain other source/evidence/team decisions; rebuild affected deterministic assets and compatible vectors within the original allowance; persist a corrected child |
 | `validate` | `candidate_run`, full `candidate_id` | Load candidate, run current deterministic gates, retain reports/receipt |
 | `publish` | `candidate_run`, full `candidate_id`; optional `receipt_run` | Reuse a matching receipt or validate; prepare Worker, protected merge, Pages and live verification |
 | `verify` | `candidate_run`, full `candidate_id`, `receipt_run`, `publication_run` | Verify the expected retained publication receipt, stamped SHA and exact live release; no generation or publication |
@@ -55,8 +63,24 @@ Use the workflow dispatch `stage` input:
 Supply `receipt_run` after a downstream failure to reuse passing gates. A failed
 validation retains the candidate; correct a validator/release-control defect and
 dispatch `validate` or `publish` against the same artifact. A genuine generation
-defect requires one consolidated repair and one new `generate`. Workflow reruns
+defect requires a consolidated repair of the affected generation stage. Reviewed
+SAM corrections use `catalog-reconcile` on the exact retained original candidate;
+unrelated completed collection, extraction and team decisions remain unchanged.
+This route accepts original generation candidates with authenticated budget
+lineage; it does not invent an allowance for arbitrary derived parents. Workflow reruns
 restore an already persisted generation before executing expensive steps.
+The event SHA and latest workflow attempt do not replace the original generation
+checkout and attempt. Recovery authenticates the generation checkout through its
+retained protected release plan. A preflight-only failed attempt can precede the
+first allowance only after complete job and artifact history proves that no work
+started; downstream retries cannot create a second allowance or candidate owner.
+After corrected publication, recovery authenticates both consumed checkpoints
+and the publishing attempt's own reservation, final state and candidate. A later
+restore of that complete child needs unchanged ledger/candidate proof and skipped
+generation steps; its state upload alone is not evidence of new spending.
+Unknown reservations, candidates or later generation work continue to hold.
+SAM reconciliation replaces both SAM evidence-cache partitions so departed IDs
+cannot survive as orphans. Other sources and cache timestamps remain unchanged.
 For live-only retries, `publication_run` selects the expected publication
 checkpoint; `publication_attempt` can select an earlier retained attempt
 explicitly. An older live receipt for the same candidate does not pass. Failed
@@ -95,6 +119,78 @@ are also hashed, so changing a budget/source parameter in workflow YAML cannot
 silently reuse stale data. Secret values, cache keys and orchestration are not
 generation inputs. Changing validator, deployment-checkpoint, retry or live
 verification code does not invalidate generated data.
+
+Unpublished candidates contain generated README/PROJECT statistics and HTML
+asset versions that intentionally differ from main. Recovery accepts their
+exact recorded protected baseline or exact candidate bytes. A third value is
+an authored edit and remains an input change. Comparing candidate output
+hashes directly with the older main pages would otherwise reject every normal
+catalog refresh before publication.
+
+Semantic corpus membership uses the catalog's immutable `generated_at` clock.
+Live retrieval still checks current eligibility using the current clock. A
+retained candidate therefore keeps the same passage order and vector identity
+as days pass, while expired calls stop appearing in live results. Missing or
+invalid corpus timestamps fail closed. Catalog growth is governed by the
+dedicated 32 MiB size budget rather than a historical catalog's byte count.
+
+Reviewed SAM calls distinguish actual closures from unresolved evidence changes.
+A bounded latest-notice lookup may follow one same-organization, same-solicitation
+replacement only when its complete reviewed material projection is unchanged.
+Administrative identifiers and timestamps alone do not require another scientific
+review. Changed solicitation material requires an explicit reviewed approval;
+it cannot silently become a healthy withdrawal. Complete protected material
+anchors also permit fresh verification of unchanged terms beyond the original
+review reminder, without extending an entry deadline or changing the original
+review identity.
+
+Ordinary vector generation and source reconciliation use the existing durable
+Ledger, including linked qualification limits. Each dispatch reserves before
+HTTP, and accepted responses are cached before final accounting so interrupted
+completion can recover without another request. Unknown dispatches remain
+charged. An unchanged ordered corpus with unchanged protected semantic inputs
+retains its complete verified vector asset with zero new Voyage requests;
+this preserves its original build receipt and timestamps. It does not combine
+rows from incompatible model spaces.
+Request and ledger mutex ownership is held by the operating system. Process
+termination releases ownership even when a private checkpoint retains the empty
+lock file; restoring that file cannot permanently strand paid work. The file
+is never unlinked while other processes may be waiting on its inode. Strict
+team checkpoint readers discard only a validated empty root `ledger.lock`
+transport entry; the JSON allowlists, hashes and authorization remain unchanged.
+
+The private checkpoint retains the exact completed vector binary, manifest,
+canaries and build receipt before packaging. A cold retry authenticates their
+operation, corpus and hashes, then restores them together without provider calls
+or new timestamps. Accepted responses from an earlier operation settle their
+original measured charges even when the next request body changed; those old
+vectors never satisfy the new operation.
+
+The atomic completion receipt also seals accounting origin. Reconciliation
+imports measured requests from an authenticated legacy unwrapped producer once.
+For managed generation it authenticates the existing request reservations and
+accepted responses without charging again. For a retained protected asset it
+authenticates that asset's original provenance without charging its historical
+build to the current run. Cold restoration preserves the sealed origin; missing
+or conflicting evidence holds the candidate rather than inventing a new budget.
+
+The separate `sam-preflight` job verifies reviewed source inputs before the
+generation job reserves an allowance or collects other sources. A failed
+preflight leaves generators skipped and does not create a spend owner. A
+passing receipt carries only bounded normalized public snapshots, bound to the
+exact protected checkout, config, run and attempt. Collection reuses those
+snapshots without network reads and reevaluates admission at the current date;
+the receipt's two-hour age limit handles a UTC midnight crossing without
+extending expired entries.
+Failed-job reruns distinguish an inherited successful preflight from a preflight
+produced in the current attempt. An inherited preflight triggers a fresh bounded
+SAM-only check before allowance restoration or other generation work, with the
+current attempt and original planned checkout/event identities. Complete-candidate
+restoration skips this work. A first allowance after an internal preflight stop
+still requires native job-step and artifact proof that nothing could dispatch.
+Withdrawal diagnostics distinguish a current terminal notice or restriction from
+an unchanged reviewed calendar expiring. A changed active amendment cannot be
+removed merely because its older approved deadline passed.
 
 Candidate baseline hashes distinguish unchanged source inputs from the exact
 candidate already merged. A third generation's data is rejected. Unrelated main

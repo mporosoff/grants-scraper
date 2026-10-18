@@ -183,7 +183,7 @@ async function validateCurrentPackage(manifest, vectorBuffer, canaries) {
 
   const [base, api] = await Promise.all([loadHarness(), hybridApi()]);
   const harness = makeVariantHarness(base, { searchV2: true });
-  const currentness = harness.parentEngine.score("funding research", { evidence: false });
+  const currentness = harness.parentEngine.corpusCurrentness();
   const corpus = api.buildCorpus({
     parentCatalog: harness.parentCatalog,
     childCatalog: harness.childCatalog,
