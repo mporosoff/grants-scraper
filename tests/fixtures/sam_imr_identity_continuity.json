@@ -1,0 +1,169 @@
+{
+  "evidence": {
+    "scope": "Public identity/submission field projections; no private source responses",
+    "previous_candidate_id": "17cab298410389f0bc27d643107f38da6a3d7f856467bf7841686f0ea4742b94",
+    "current_candidate_id": "a10dbef969bdd7dded9625c49a32dd0672e75a236bb50c39e527a69bf87090cc",
+    "previous_catalog_sha256": "e6ba508493476eea7e4b034336e16a82192d3cfb4773f064ede41e4ae0a05a03",
+    "current_catalog_sha256": "b89ae929074b69d181aa1e9531da036571c3d81586aaec158cd5314da7fedd84"
+  },
+  "previous": {
+    "opportunity_id": "sam-gov:d554d75951a340fcbed17668b1864648",
+    "opportunity_number": "DARPA-PS-26-138",
+    "title": "Intrinsic Market Resilience (IMR)",
+    "source": "SAM.gov",
+    "source_type": "Federal",
+    "agency": "Defense Advanced Research Projects Agency",
+    "agency_authority": "source_listed",
+    "sam_organization_id": "500035490",
+    "status": "posted",
+    "description": "Develop theoretical and computational tools for resilient market design; pilot scope covers TA1 and TA2 only. Exclude TA3: TOP SECRET//SCI//SAR work and classified entry prerequisites. Never present whole solicitation as unrestricted. CMMC1 for FCI; CMMC2 for CUI. Segregate fundamental research from CUI. FFRDC/UARC participation conditions and conflicts review. Only unclassified research not requiring CUI access or CMMC Level 2 is approved for this catalog scope.",
+    "eligibility_text": "and research institutions as defined in 15 U.S.C. § 632.",
+    "close_date": "2026-12-07",
+    "close_date_kind": "submission_window_end",
+    "has_preliminary_stage": true,
+    "preliminary_required": true,
+    "deadlines": [
+      {
+        "kind": "preproposal",
+        "date": "2026-10-22",
+        "time": "14:00",
+        "timezone": "America/New_York",
+        "note": "Required TA1/TA2 abstract through BAAT. TA3 excluded. Source: solicitation PDF pages 4 and 19.",
+        "estimated": false,
+        "source": "SAM.gov reviewed solicitation",
+        "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/c205517ab8874e0e82771331f68f370f/download",
+        "source_field": "reviewed solicitation",
+        "confidence": "source_verified",
+        "stage": "preproposal",
+        "application_class": "new",
+        "cycle": "Current open entry",
+        "required": true,
+        "invitation_required": false,
+        "citation": {
+          "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/c205517ab8874e0e82771331f68f370f/download",
+          "source_field": "reviewed solicitation",
+          "quote": "Abstract Due: October 22, 2026 by 2:00 PM […] Proposers are required to submit an abstract in advance of a full proposal submission to minimize effort and reduce the potential expense of preparing full proposals."
+        },
+        "requirement_citation": {
+          "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/c205517ab8874e0e82771331f68f370f/download",
+          "source_field": "reviewed solicitation",
+          "quote": "Abstract Due: October 22, 2026 by 2:00 PM […] Proposers are required to submit an abstract in advance of a full proposal submission to minimize effort and reduce the potential expense of preparing full proposals."
+        }
+      },
+      {
+        "kind": "full_application",
+        "date": "2026-12-07",
+        "time": "14:00",
+        "timezone": "America/New_York",
+        "note": "Only proposers receiving an Invitation to Proceed may advance. Source: solicitation PDF pages 4 and 25.",
+        "estimated": false,
+        "source": "SAM.gov reviewed solicitation",
+        "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/c205517ab8874e0e82771331f68f370f/download",
+        "source_field": "reviewed solicitation",
+        "confidence": "source_verified",
+        "stage": "full_application",
+        "application_class": "new",
+        "cycle": "Current open entry",
+        "required": true,
+        "invitation_required": true,
+        "prerequisite": "invitation",
+        "citation": {
+          "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/c205517ab8874e0e82771331f68f370f/download",
+          "source_field": "reviewed solicitation",
+          "quote": "Proposal Due: December 7, 2026 by 2:00 PM […] Only proposers receiving an Invitation to Proceed based on a submitted abstract may advance to the proposal phase."
+        },
+        "requirement_citation": {
+          "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/c205517ab8874e0e82771331f68f370f/download",
+          "source_field": "reviewed solicitation",
+          "quote": "Proposal Due: December 7, 2026 by 2:00 PM […] Only proposers receiving an Invitation to Proceed based on a submitted abstract may advance to the proposal phase."
+        }
+      }
+    ],
+    "detail_page": "https://sam.gov/opp/d554d75951a340fcbed17668b1864648/view",
+    "funding_opportunity_url": "https://sam.gov/opp/d554d75951a340fcbed17668b1864648/view",
+    "source_review_after": "2026-10-23",
+    "last_updated": "2026-10-06",
+    "posted_date": "2026-10-06",
+    "version": null
+  },
+  "current": {
+    "opportunity_id": "sam-gov:e86bce2c7d594d8ba016060da00e8a59",
+    "opportunity_number": "DARPA-PS-26-138",
+    "title": "Intrinsic Market Resilience (IMR)",
+    "source": "SAM.gov",
+    "source_type": "Federal",
+    "agency": "Defense Advanced Research Projects Agency",
+    "agency_authority": "source_listed",
+    "sam_organization_id": "500035490",
+    "status": "posted",
+    "description": "Develop theoretical and computational tools for resilient market design; pilot scope covers TA1 and TA2 only. Exclude TA3: TOP SECRET//SCI//SAR work and classified entry prerequisites. Never present whole solicitation as unrestricted. CMMC1 for FCI; CMMC2 for CUI. Segregate fundamental research from CUI. FFRDC/UARC participation conditions and conflicts review. Only unclassified research not requiring CUI access or CMMC Level 2 is approved for this catalog scope.",
+    "eligibility_text": "and research institutions as defined in 15 U.S.C. § 632.",
+    "close_date": "2026-12-07",
+    "close_date_kind": "submission_window_end",
+    "has_preliminary_stage": true,
+    "preliminary_required": true,
+    "deadlines": [
+      {
+        "kind": "preproposal",
+        "date": "2026-10-22",
+        "time": "14:00",
+        "timezone": "America/New_York",
+        "note": "Required TA1/TA2 or combined TA1/TA2 abstract through BAAT. TA3 excluded. Source: Amendment 01 PDF pages 5 and 20.",
+        "estimated": false,
+        "source": "SAM.gov reviewed solicitation",
+        "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/8c083295fbb841d28545554b52a2bc23/download",
+        "source_field": "reviewed solicitation",
+        "confidence": "source_verified",
+        "stage": "preproposal",
+        "application_class": "new",
+        "cycle": "Current open entry",
+        "required": true,
+        "invitation_required": false,
+        "citation": {
+          "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/8c083295fbb841d28545554b52a2bc23/download",
+          "source_field": "reviewed solicitation",
+          "quote": "TA1, TA2, and TA1/TA2 Abstract Due: October 22, 2026 by 2:00 PM […] Proposers are required to submit an abstract in advance of a full proposal submission to minimize effort and reduce the potential expense of preparing full proposals."
+        },
+        "requirement_citation": {
+          "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/8c083295fbb841d28545554b52a2bc23/download",
+          "source_field": "reviewed solicitation",
+          "quote": "TA1, TA2, and TA1/TA2 Abstract Due: October 22, 2026 by 2:00 PM […] Proposers are required to submit an abstract in advance of a full proposal submission to minimize effort and reduce the potential expense of preparing full proposals."
+        }
+      },
+      {
+        "kind": "full_application",
+        "date": "2026-12-07",
+        "time": "14:00",
+        "timezone": "America/New_York",
+        "note": "Only proposers receiving an Invitation to Proceed may advance. Source: Amendment 01 PDF pages 5 and 26.",
+        "estimated": false,
+        "source": "SAM.gov reviewed solicitation",
+        "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/8c083295fbb841d28545554b52a2bc23/download",
+        "source_field": "reviewed solicitation",
+        "confidence": "source_verified",
+        "stage": "full_application",
+        "application_class": "new",
+        "cycle": "Current open entry",
+        "required": true,
+        "invitation_required": true,
+        "prerequisite": "invitation",
+        "citation": {
+          "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/8c083295fbb841d28545554b52a2bc23/download",
+          "source_field": "reviewed solicitation",
+          "quote": "TA1, TA2, and TA1/TA2 Proposal Due: December 7, 2026 by 2:00 PM […] Only proposers receiving an Invitation to Proceed based on a submitted abstract may advance to the proposal phase."
+        },
+        "requirement_citation": {
+          "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/8c083295fbb841d28545554b52a2bc23/download",
+          "source_field": "reviewed solicitation",
+          "quote": "TA1, TA2, and TA1/TA2 Proposal Due: December 7, 2026 by 2:00 PM […] Only proposers receiving an Invitation to Proceed based on a submitted abstract may advance to the proposal phase."
+        }
+      }
+    ],
+    "detail_page": "https://sam.gov/opp/e86bce2c7d594d8ba016060da00e8a59/view",
+    "funding_opportunity_url": "https://sam.gov/opp/e86bce2c7d594d8ba016060da00e8a59/view",
+    "source_review_after": "2026-10-25",
+    "last_updated": "2026-10-16",
+    "posted_date": "2026-10-16",
+    "version": null
+  }
+}

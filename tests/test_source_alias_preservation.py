@@ -11,7 +11,7 @@ from unittest.mock import patch
 
 from scripts.build_changes import diff_catalogs
 from scripts.sources import __main__ as cli
-from scripts.sources.merge import integrate, reconcile_source_aliases
+from scripts.sources.merge import integrate, merge_records, reconcile_source_aliases
 
 
 NUMBER = 'NNH25ZDA001N-SSF'
@@ -188,6 +188,119 @@ class SourceAliasPreservationTests(unittest.TestCase):
         with patch.object(cli, 'integrate', return_value=result) as merge, redirect_stdout(io.StringIO()):
             cli.main(['merge', '--previous-catalog', 'accepted.js'])
         self.assertEqual(merge.call_args.kwargs['previous_catalog_path'], Path('accepted.js'))
+
+
+class SamSourceAliasPreservationTests(unittest.TestCase):
+    def setUp(self):
+        fixture = json.loads((Path(__file__).parent / 'fixtures/sam_imr_identity_continuity.json').read_text(encoding='utf8'))
+        self.previous, self.current = fixture['previous'], fixture['current']
+
+    @staticmethod
+    def sam_alias(record):
+        return {key: record.get(key) for key in ('opportunity_id', 'opportunity_number', 'source', 'agency',
+            'agency_authority', 'sam_organization_id', 'detail_page', 'funding_opportunity_url')}
+
+    def test_real_imr_successor_retains_only_prior_public_identity(self):
+        inputs = deepcopy((self.current, self.previous))
+        result, stats = reconcile_source_aliases([self.current], [self.previous])
+        self.assertEqual(result, [{**self.current, 'source_aliases': [self.sam_alias(self.previous)]}])
+        self.assertEqual((self.current, self.previous), inputs)
+        self.assertEqual(stats['added_alias_ids'], ['sam-gov:d554d75951a340fcbed17668b1864648'])
+        self.assertEqual(result[0]['deadlines'], self.current['deadlines'])
+        self.assertFalse(set(result[0]['source_aliases'][0]) & {'description', 'deadlines', 'source_review_after'})
+
+    def test_stable_rebuild_and_next_version_retain_the_identity_chain(self):
+        first, _ = reconcile_source_aliases([self.current], [self.previous])
+        stable, _ = reconcile_source_aliases([self.current], first)
+        self.assertEqual(stable, first)
+        later = deepcopy(self.current)
+        later['opportunity_id'] = 'sam-gov:' + 'f' * 32
+        later['detail_page'] = later['funding_opportunity_url'] = 'https://sam.gov/opp/' + 'f' * 32 + '/view'
+        result, _ = reconcile_source_aliases([later], stable)
+        self.assertEqual([item['opportunity_id'] for item in result[0]['source_aliases']],
+                         [self.current['opportunity_id'], self.previous['opportunity_id']])
+        self.assertEqual({key: value for key, value in result[0].items() if key != 'source_aliases'}, later)
+
+    def test_exact_sponsor_full_number_and_organization_are_required(self):
+        for changes in ({'sam_organization_id': '500035491'}, {'sam_organization_id': None},
+                        {'agency': 'Intelligence Advanced Research Projects Activity'},
+                        {'agency_authority': 'source_default'}, {'opportunity_number': 'DARPA-PS-26'},
+                        {'opportunity_number': 'DARPA-PS-27-138'}, {'source': 'VPR funding digest'}):
+            with self.subTest(changes=changes):
+                previous = self.previous | changes
+                output, stats = reconcile_source_aliases([self.current], [previous])
+                self.assertEqual(output, [self.current]); self.assertEqual(stats['added_alias_ids'], [])
+        output, _ = reconcile_source_aliases([self.current], [self.previous | {'title': 'An administrative retitle'}])
+        self.assertEqual(output[0]['source_aliases'], [self.sam_alias(self.previous)])
+
+    def test_child_scope_never_becomes_a_sam_parent_alias(self):
+        for scope in ({'parent_id': 'parent'}, {'parent_opportunity_id': 'parent'},
+                      {'subtopic_id': 'child'}, {'record_type': 'subtopic'}):
+            with self.subTest(scope=scope):
+                output, _ = reconcile_source_aliases([self.current], [self.previous | scope])
+                self.assertEqual(output, [self.current])
+                output, _ = reconcile_source_aliases([self.current | scope], [self.previous])
+                self.assertEqual(output, [self.current | scope])
+
+    def test_ambiguous_previous_or_current_sam_scope_fails_closed(self):
+        another = deepcopy(self.previous); another['opportunity_id'] = 'sam-gov:' + 'f' * 32
+        with self.assertRaisesRegex(ValueError, 'ambiguous'):
+            reconcile_source_aliases([self.current], [self.previous, another])
+        another = deepcopy(self.current); another['opportunity_id'] = 'sam-gov:' + 'f' * 32
+        with self.assertRaisesRegex(ValueError, 'ambiguous'):
+            reconcile_source_aliases([self.current, another], [self.previous])
+
+    def test_historical_sam_alias_cannot_change_organization_number_sponsor_or_official_id_url(self):
+        previous, _ = reconcile_source_aliases([self.current], [self.previous])
+        for changes in ({'sam_organization_id': '123'}, {'opportunity_number': 'OTHER'},
+                        {'agency': 'National Science Foundation'}, {'agency_authority': 'source_default'},
+                        {'detail_page': 'https://sam.gov/opp/' + 'f' * 32 + '/view'},
+                        {'description': 'Old scientific text is not alias metadata'}):
+            with self.subTest(changes=changes):
+                altered = deepcopy(previous); altered[0]['source_aliases'][0].update(changes)
+                with self.assertRaisesRegex(ValueError, 'consistent identity proof'):
+                    reconcile_source_aliases([self.current], altered)
+
+    def test_live_or_another_owner_alias_cannot_be_stolen(self):
+        with self.assertRaisesRegex(ValueError, 'ambiguous'):
+            reconcile_source_aliases([self.current, self.previous], [self.previous])
+        other = deepcopy(self.current); other.update(opportunity_id='sam-gov:' + 'f' * 32, opportunity_number='OTHER')
+        other['source_aliases'] = [self.sam_alias(self.previous)]
+        with self.assertRaisesRegex(ValueError, 'consistent identity proof'):
+            reconcile_source_aliases([self.current, other], [self.previous])
+
+    def test_sam_alias_bound_never_silently_discards_public_ids(self):
+        previous = deepcopy(self.current); previous['source_aliases'] = []
+        for number in range(41):
+            item = self.sam_alias(self.previous)
+            notice = f'{number:032x}'; item['opportunity_id'] = 'sam-gov:' + notice
+            item['detail_page'] = item['funding_opportunity_url'] = 'https://sam.gov/opp/' + notice + '/view'
+            previous['source_aliases'].append(item)
+        with self.assertRaisesRegex(ValueError, 'bound'):
+            reconcile_source_aliases([self.current], [previous])
+        previous['source_aliases'].pop()
+        output, _ = reconcile_source_aliases([self.current], [previous])
+        self.assertEqual(len(output[0]['source_aliases']), 40)
+
+    def test_real_successor_is_an_amendment_instead_of_a_new_or_removed_call(self):
+        current, _ = reconcile_source_aliases([self.current], [self.previous])
+        events = diff_catalogs(catalog([self.previous]), catalog(current), as_of=date(2026, 10, 18))
+        self.assertTrue(any(event['type'] == 'amended' for event in events))
+        self.assertFalse(any(event['type'] in {'new', 'closed_or_removed'} for event in events))
+        self.assertEqual({event['opportunity_id'] for event in events}, {self.current['opportunity_id']})
+
+    def test_existing_identity_proven_digest_alias_survives_sam_continuation(self):
+        digest = deepcopy(self.current)
+        digest.update(opportunity_id='vpr-email:imr', source='VPR funding digest')
+        combined, _ = merge_records([], [self.current, digest])
+        self.assertEqual(len(combined), 1)
+        vpr_alias = combined[0]['source_aliases'][0]
+        current, _ = reconcile_source_aliases(combined, [self.previous])
+        self.assertIn(vpr_alias, current[0]['source_aliases'])
+        self.assertIn(self.sam_alias(self.previous), current[0]['source_aliases'])
+        rebuilt, _ = reconcile_source_aliases([self.current], current)
+        self.assertEqual(rebuilt[0]['source_aliases'], current[0]['source_aliases'])
+        self.assertEqual({key: value for key, value in rebuilt[0].items() if key != 'source_aliases'}, self.current)
 
 
 if __name__ == '__main__':

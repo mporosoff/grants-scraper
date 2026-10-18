@@ -80,7 +80,16 @@ restore of that complete child needs unchanged ledger/candidate proof and skippe
 generation steps; its state upload alone is not evidence of new spending.
 Unknown reservations, candidates or later generation work continue to hold.
 SAM reconciliation replaces both SAM evidence-cache partitions so departed IDs
-cannot survive as orphans. Other sources and cache timestamps remain unchanged.
+cannot survive as orphans. Other sources' scientific fields and cache timestamps
+remain unchanged. Proven SAM aliases may also be retained on an unchanged
+canonical owner from another source. That identity projection cannot change its
+other fields or unrelated aliases.
+Its protected published catalog also supplies historical SAM identity aliases
+and the change-feed predecessor, even when the selected recovery parent predates
+that call. The published rolling change history is retained as well. The source
+checkpoint freezes the predecessor's protected Git ref, candidate and file hashes
+so a retry cannot combine a new comparison catalog with an older event history.
+This identity evidence never replaces current source terms.
 For live-only retries, `publication_run` selects the expected publication
 checkpoint; `publication_attempt` can select an earlier retained attempt
 explicitly. An older live receipt for the same candidate does not pass. Failed
@@ -188,6 +197,13 @@ operation, corpus and hashes, then restores them together without provider calls
 or new timestamps. Accepted responses from an earlier operation settle their
 original measured charges even when the next request body changed; those old
 vectors never satisfy the new operation.
+
+A source-only repair with an identical ordered corpus, embedding configuration
+and passage-processing code may restore the last authenticated complete vector
+asset. Its original completion and accounting origin remain unchanged; a separate
+zero-request receipt binds the new source operation to those exact four outputs
+and the same ledger. Successive identity-only repairs retain that original proof
+without walking an arbitrary chain of candidates.
 
 The atomic completion receipt also seals accounting origin. Reconciliation
 imports measured requests from an authenticated legacy unwrapped producer once.
