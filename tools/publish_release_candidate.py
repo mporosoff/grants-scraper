@@ -49,11 +49,11 @@ def reconcile_candidate_branch(root, existing, manifest, repository, *, execute=
 
 
 def request_verification(repository, number, head, reports, boundary):
-    from tools.wait_release_review import all_pages, api, review_state
+    from tools.wait_release_review import ReviewFindings, all_pages, api, review_state
     completed, findings = review_state(repository, number, head)
     if completed:
         if findings:
-            raise ValueError('Completed review has findings; consolidate before remediation')
+            raise ReviewFindings(repository, number, head, len(findings))
         return
     # A synchronized automatic review, if configured later, owns this round.
     comments = all_pages(f'repos/{repository}/issues/{number}/comments')

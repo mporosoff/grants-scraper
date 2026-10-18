@@ -38,7 +38,8 @@ handshake evidence. Receipts are append-only across attempts. The public
 identify the serving release. Historical generation provenance is never renamed.
 
 A terminal review with findings also retains `review-blocked.json`, bound to
-the candidate, artifact run, PR and complete reviewed SHA. Automatic retries
+the candidate, artifact run, PR and complete reviewed SHA. This includes a
+review already completed before publication starts waiting. Automatic retries
 report that repair boundary without repeating validation or publication of
 unchanged rejected bytes. A pending review and a rejected review are distinct
 checkpoints; neither authorizes a serving change.
@@ -154,7 +155,9 @@ rows from incompatible model spaces.
 Request and ledger mutex ownership is held by the operating system. Process
 termination releases ownership even when a private checkpoint retains the empty
 lock file; restoring that file cannot permanently strand paid work. The file
-is never unlinked while other processes may be waiting on its inode.
+is never unlinked while other processes may be waiting on its inode. Strict
+team checkpoint readers discard only a validated empty root `ledger.lock`
+transport entry; the JSON allowlists, hashes and authorization remain unchanged.
 
 The private checkpoint retains the exact completed vector binary, manifest,
 canaries and build receipt before packaging. A cold retry authenticates their

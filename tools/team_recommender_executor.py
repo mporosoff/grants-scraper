@@ -313,11 +313,24 @@ def validate_packet(packet, settings):
         seen.add(key)
 
 
+def checkpoint_members(archive):
+    """Ignore only the empty OS mutex sidecar, never restore lock ownership."""
+    files = [info for info in archive.infolist() if not info.is_dir()]
+    if len(files) > STATE_FILE_LIMIT or sum(info.file_size for info in files) > STATE_LIMIT:
+        raise ValueError("checkpoint_size_exceeded")
+    locks = [info for info in files if info.filename == 'ledger.lock']
+    if locks:
+        lock = locks[0]
+        if (len(locks) != 1 or lock.orig_filename != lock.filename or lock.file_size != 0
+                or stat.S_IFMT(lock.external_attr >> 16) not in (0, stat.S_IFREG)
+                or lock.flag_bits & 1 or archive.read(lock) != b''):
+            raise ValueError("unsafe_checkpoint_member")
+    return [info for info in files if info.filename != 'ledger.lock']
+
+
 def unpack_state(raw, destination):
     with zipfile.ZipFile(io.BytesIO(raw)) as archive:
-        files = [info for info in archive.infolist() if not info.is_dir()]
-        if len(files) > STATE_FILE_LIMIT or sum(info.file_size for info in files) > STATE_LIMIT:
-            raise ValueError("checkpoint_size_exceeded")
+        files = checkpoint_members(archive)
         seen = set()
         for info in files:
             name = info.filename
