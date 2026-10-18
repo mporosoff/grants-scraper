@@ -108,10 +108,13 @@ Grants.gov remains authoritative when the verified sponsor and full solicitation
 number identify the same opportunity; different display titles or SAM amendments
 do not justify duplicate records.
 
-When a reviewed SAM notice replaces another public notice ID, the canonical
-record keeps the current ID and retains the former ID as a source alias. The
-previous published catalog supplies identity evidence only: a unique matching
-sponsor, full solicitation number and exact SAM organization must agree. Old
+When a reviewed SAM notice replaces another public notice ID, a SAM-owned
+record keeps the current ID and retains the former ID as a source alias. Native
+SAM continuity requires a unique matching sponsor, full solicitation number and
+exact SAM organization. If Grants.gov or another existing source owns the
+canonical record, its proven SAM aliases retain continuity under the existing
+sponsor/solicitation identity rules.
+The previous published catalog supplies identity evidence only. Old
 science, dates and currentness are never copied. Later refreshes retain these
 aliases so saved calls, opportunity watches and change-feed continuity survive
 administrative notice replacement. Ambiguous ownership or conflicting aliases

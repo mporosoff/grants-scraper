@@ -7,6 +7,7 @@ from pathlib import Path
 import tempfile
 import unittest
 import zipfile
+import subprocess
 from unittest.mock import patch
 
 from scripts.sources.base import CanonicalOpportunity
@@ -48,15 +49,29 @@ class ReconcileContracts(unittest.TestCase):
         (self.state / 'reconciliation.json').write_text(json.dumps({'operation_sha256': 'c' * 64}))
         self.result = AdapterResult(slug='sam-gov', display_name='SAM.gov', source_type='Federal',
             ok=True, record_count=1, records=[self.sam], diagnostics={})
+        metadata = patch.object(repair, '_published_metadata', side_effect=lambda *_: self.published_metadata)
+        metadata.start(); self.addCleanup(metadata.stop)
+        native = subprocess.check_output
+        def pinned_bytes(command, *args, **kwargs):
+            if command == ['git', '-C', str(self.root), 'show', '1' * 40 + ':data/opportunities.js']:
+                return (self.state / 'published-predecessor.js').read_bytes()
+            return native(command, *args, **kwargs)
+        reads = patch.object(repair.subprocess, 'check_output', side_effect=pinned_bytes)
+        reads.start(); self.addCleanup(reads.stop)
 
     def run_sources(self, published=None):
         def predecessor(_root, destination):
             rows = list(published or [])
-            save_catalog(dict(self.catalog, opportunities=[self.other] + rows), destination)
-            return rows
+            destination.mkdir(parents=True, exist_ok=True)
+            save_catalog(dict(self.catalog, opportunities=[self.other] + rows), destination / 'published-predecessor.js')
+            (destination / 'published-changes.json').write_text('{"events":[]}')
+            self.published_metadata = {'ref': '1' * 40, 'candidate_id': '2' * 64, 'files': {
+                'data/opportunities.js': c.digest((destination / 'published-predecessor.js').read_bytes()),
+                'feeds/changes.json': c.digest((destination / 'published-changes.json').read_bytes())}}
+            return self.published_metadata
         with patch.object(c, 'load', return_value=self.manifest), \
                 patch.object(repair, 'verify_source_delta'), \
-                patch.object(repair, 'published_alias_records', side_effect=predecessor), \
+                patch.object(repair, 'capture_published_predecessor', side_effect=predecessor), \
                 patch('scripts.sources.registry.collect', return_value=([self.sam], [self.result])) as collect, \
                 patch('tools.require_sam_refresh.require_complete_refresh'):
             repair.reconcile(self.root, self.parent, self.state)
@@ -68,7 +83,8 @@ class ReconcileContracts(unittest.TestCase):
         return {'version': repair.VERSION, 'source_slug': 'sam-gov',
             'parent_candidate_id': self.manifest['candidate_id'],
             'parent_manifest_sha256': c.digest((self.parent / 'candidate.json').read_bytes()),
-            'operation_contract': {}, 'retained_output_hashes': retained}
+            'operation_contract': {}, 'retained_output_hashes': retained,
+            'published_predecessor': self.published_metadata, 'active_sam_ids': [self.sam['opportunity_id']]}
 
     def test_only_sam_is_replaced_and_successful_source_checkpoint_never_recollects(self):
         self.assertEqual(self.run_sources(), 1)
@@ -96,6 +112,43 @@ class ReconcileContracts(unittest.TestCase):
         self.assertEqual(self.run_sources([]), 0)
         self.assertEqual((self.state / 'published-predecessor.js').read_bytes(), predecessor)
         self.assertEqual(load_catalog(self.root / 'data/opportunities.js'), current)
+
+    def test_grants_owned_sam_aliases_pass_both_source_and_receipt_guards_without_science_changes(self):
+        from scripts.sources.merge import merge_records
+        fixture = c.read_json(Path(__file__).parent / 'fixtures/sam_imr_identity_continuity.json')
+        self.sam = deepcopy(fixture['current']); self.result.records[:] = [self.sam]
+        owner = deepcopy(self.sam)
+        owner.update(opportunity_id='900001', source='Grants.gov',
+            detail_page='https://www.grants.gov/search-results-detail/900001',
+            funding_opportunity_url='https://www.grants.gov/search-results-detail/900001',
+            source_facet='Grants.gov', disciplines=[])
+        unrelated = {'opportunity_id': 'legacy:accepted', 'opportunity_number': owner['opportunity_number'],
+            'source': 'Accepted digest', 'detail_page': 'https://www.darpa.mil/example',
+            'funding_opportunity_url': 'https://www.darpa.mil/example'}
+        owner['source_aliases'] = [unrelated]
+        self.catalog['opportunities'].append(owner)
+        save_catalog(self.catalog, self.parent / 'files/data/opportunities.js')
+        self.manifest['generation_files']['data/opportunities.js'] = c.digest(
+            (self.parent / 'files/data/opportunities.js').read_bytes())
+        (self.parent / 'candidate.json').write_text(json.dumps(self.manifest))
+        published = merge_records([owner], [fixture['previous']])[0][0]
+        self.assertEqual(self.run_sources([published]), 1)
+        current = load_catalog(self.root / 'data/opportunities.js')
+        derived = next(row for row in current['opportunities'] if row['opportunity_id'] == owner['opportunity_id'])
+        self.assertEqual({k: v for k, v in derived.items() if k != 'source_aliases'},
+                         {k: v for k, v in owner.items() if k != 'source_aliases'})
+        self.assertEqual(derived['source_aliases'][0], unrelated)
+        self.assertTrue({fixture['previous']['opportunity_id'], self.sam['opportunity_id']} <=
+                        {row['opportunity_id'] for row in derived['source_aliases']})
+        with patch.object(repair, 'operation_contract', return_value={}), patch.object(repair, 'verify_source_delta'):
+            repair.verify_inputs(self.root, self.manifest, self.parent, self.receipt())
+            for key, value in (('official_document_candidates', [{'url': 'https://www.darpa.mil/unrelated'}]),
+                               ('duplicate_source_conflicts', ['invented'])):
+                changed = deepcopy(current)
+                next(row for row in changed['opportunities'] if row['opportunity_id'] == owner['opportunity_id'])[key] = value
+                save_catalog(changed, self.root / 'data/opportunities.js')
+                with self.subTest(key=key), self.assertRaisesRegex(ValueError, 'derived_non_sam_records'):
+                    repair.verify_inputs(self.root, self.manifest, self.parent, self.receipt())
 
     def test_withdrawal_removes_both_sam_cache_partitions_without_pruning_other_sources(self):
         departed = 'sam-gov:' + 'b' * 32
