@@ -231,6 +231,13 @@ def restore(root, parent, state, output):
                 context['operation_sha256'] = identity(context)
                 atomic_json(state / 'reconciliation.json', context)
             else:
+                # Old complete children remain immutable evidence. Never reuse
+                # one whose SAM cache still includes withdrawn/replaced IDs;
+                # that needs an explicit migration, not repeated paid work.
+                from scripts.sources.merge import load_catalog
+                require_sam_cache_membership(load_catalog(complete / 'files/data/opportunities.js'),
+                    c.read_json(complete / 'files/data/document_evidence.json'),
+                    'completed_child_sam_cache_membership_requires_migration')
                 shutil.copytree(complete, output)
                 emit(candidate_id=child, artifact_run=str(producer) if available else environment['GITHUB_RUN_ID'],
                      needs_persist='false' if available else 'true')
@@ -280,6 +287,13 @@ def sam_record(row):
     return str(row.get('opportunity_id', '')).startswith(SLUG + ':')
 
 
+def require_sam_cache_membership(catalog, evidence, reason):
+    current = {str(row['opportunity_id']) for row in catalog['opportunities'] if sam_record(row)}
+    for key in ('records', 'subtopic_only'):
+        require(not any(identifier.startswith(SLUG + ':') and identifier not in current
+                        for identifier in evidence.get(key, {})), reason)
+
+
 def project_sam(catalog, evidence, state):
     """Normal zero-request projection, limited to this adapter's records/cache."""
     from scripts.extract_document_evidence import enrich_document_evidence
@@ -301,7 +315,9 @@ def project_sam(catalog, evidence, state):
     result['opportunities'] = [rows[r['opportunity_id']] if sam_record(r) else r for r in result['opportunities']]
     output_cache = copy.deepcopy(evidence)
     for key in ('records', 'subtopic_only'):
-        output_cache.setdefault(key, {}).update(updated.get(key, {}))
+        output_cache[key] = {identifier: entry for identifier, entry in output_cache.get(key, {}).items()
+                             if not identifier.startswith(SLUG + ':')}
+        output_cache[key].update(updated.get(key, {}))
     return result, output_cache
 
 

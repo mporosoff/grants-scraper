@@ -127,6 +127,14 @@ class CorrectedOwner(unittest.TestCase):
         self.assertEqual(history.call_args.args[2], 1)
         self.assertEqual(history.call_args.kwargs['allowed_candidate_ids'], {22})
 
+    def test_pre_candidate_failure_does_not_invent_a_candidate_in_later_downstream_history(self):
+        self.consumed()
+        original = deepcopy(self.run)
+        self.run['run_attempt'] = 2
+        with patch('tools.release_attempt_history.require_downstream_only', return_value=original) as history:
+            self.assertTrue(self.check_consumed())
+        self.assertEqual(history.call_args.kwargs['allowed_candidate_ids'], set())
+
     def test_each_consumed_producer_is_authenticated_before_checking_only_later_unacknowledged_work(self):
         self.consumed()
         links = self.child['source_reconciliation']['consumed_checkpoints']

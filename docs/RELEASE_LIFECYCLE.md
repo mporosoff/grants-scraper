@@ -73,6 +73,13 @@ checkout and attempt. Recovery authenticates the generation checkout through its
 retained protected release plan. A preflight-only failed attempt can precede the
 first allowance only after complete job and artifact history proves that no work
 started; downstream retries cannot create a second allowance or candidate owner.
+After corrected publication, recovery authenticates both consumed checkpoints
+and the publishing attempt's own reservation, final state and candidate. A later
+restore of that complete child needs unchanged ledger/candidate proof and skipped
+generation steps; its state upload alone is not evidence of new spending.
+Unknown reservations, candidates or later generation work continue to hold.
+SAM reconciliation replaces both SAM evidence-cache partitions so departed IDs
+cannot survive as orphans. Other sources and cache timestamps remain unchanged.
 For live-only retries, `publication_run` selects the expected publication
 checkpoint; `publication_attempt` can select an earlier retained attempt
 explicitly. An older live receipt for the same candidate does not pass. Failed

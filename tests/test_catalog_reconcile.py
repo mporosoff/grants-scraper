@@ -75,6 +75,50 @@ class ReconcileContracts(unittest.TestCase):
         cached = c.read_json(self.root / 'data/source_records.json')
         self.assertEqual(cached['sources']['nsf-test'], self.cache['sources']['nsf-test'])
 
+    def test_withdrawal_removes_both_sam_cache_partitions_without_pruning_other_sources(self):
+        departed = 'sam-gov:' + 'b' * 32
+        evidence = {'schema_version': 1, 'generated_at': '2026-10-01T12:00:00Z',
+            'retained_receipt': {'source': 'original'},
+            'records': {departed: {'status': 'current'},
+                        'nsf-test:departed': {'status': 'failed', 'last_error': 'http_error'}},
+            'subtopic_only': {departed: {'status': 'failed', 'subtopics': []},
+                             'nsf-test:departed': {'subtopics': [], 'subtopic_reason': 'no_layer_accepted'}}}
+        before = deepcopy(evidence)
+        projected, updated = repair.project_sam(self.catalog, evidence, self.state)
+        self.assertEqual(projected['opportunities'], self.catalog['opportunities'])
+        for key in ('records', 'subtopic_only'):
+            self.assertEqual(updated[key], {'nsf-test:departed': evidence[key]['nsf-test:departed']})
+        self.assertEqual({k: v for k, v in updated.items() if k not in ('records', 'subtopic_only')},
+                         {k: v for k, v in before.items() if k not in ('records', 'subtopic_only')})
+        self.assertEqual(evidence, before)
+
+    def test_replacement_prunes_departed_ids_and_keeps_current_negative_cache_entries(self):
+        from scripts import extract_document_evidence as document
+        identifier = self.sam['opportunity_id']
+        source = document.source_for_record(self.sam)
+        negative = {'status': 'failed', 'last_error': 'http_error', 'facts': [],
+            'review_queue': [], 'document': {'url': source['url']}, 'source_url': source['url'],
+            'source_signature': document.source_signature(self.sam, source),
+            'source_scope_identity': document.source_scope_identity(source['url']),
+            'archived_from_catalog_at': None}
+        rejected = {'status': 'failed', 'subtopics': [], 'subtopic_reason': 'no_layer_accepted'}
+        departed = 'sam-gov:' + 'b' * 32
+        evidence = {'generated_at': '2026-10-01T12:00:00Z',
+            'records': {departed: {'status': 'current'}, identifier: negative,
+                        'nsf-test:retained': {'status': 'failed'}},
+            'subtopic_only': {departed: rejected, identifier: rejected,
+                             'nsf-test:retained': {'subtopic_reason': 'no_layer_accepted'}}}
+        catalog = deepcopy(self.catalog)
+        catalog['opportunities'].append(self.sam)
+        _, updated = repair.project_sam(catalog, evidence, self.state)
+        for key in ('records', 'subtopic_only'):
+            self.assertEqual({i for i in updated[key] if i.startswith('sam-gov:')}, {identifier})
+            self.assertEqual(updated[key]['nsf-test:retained'], evidence[key]['nsf-test:retained'])
+        self.assertEqual(updated['records'][identifier]['status'], 'failed')
+        self.assertEqual(updated['records'][identifier]['last_error'], 'http_error')
+        self.assertEqual(updated['subtopic_only'][identifier], rejected)
+        self.assertEqual(updated['generated_at'], evidence['generated_at'])
+
     def test_derived_verifier_rejects_non_sam_changes_and_changed_paid_outputs(self):
         self.run_sources()
         with patch.object(repair, 'operation_contract', return_value={}), patch.object(repair, 'verify_source_delta'):
@@ -137,7 +181,8 @@ class ReconcileContracts(unittest.TestCase):
         self.assertEqual(child['team_identity'], original['team_identity'])
 
     @contextmanager
-    def completed_restore(self, *, changed_source=False, current_run='30', incompatible=False):
+    def completed_restore(self, *, changed_source=False, current_run='30', incompatible=False,
+                          completed_catalog=None, completed_evidence=None):
         """Authenticated transport fixtures; no GitHub/provider operations."""
         self.manifest.update(generation_run_id='10', generation_run_attempt='1', generation_sha='1' * 40)
         (self.parent / 'candidate.json').write_text(json.dumps(self.manifest))
@@ -170,13 +215,20 @@ class ReconcileContracts(unittest.TestCase):
             return json.dumps({'id': run, 'run_attempt': 1, 'head_sha': '1' * 40,
                 'head_branch': 'main', 'path': repair.archive.SOURCE_WORKFLOW,
                 'event': 'workflow_dispatch'}).encode()
+        def write_child(destination):
+            repair.atomic_json(destination / 'candidate.json', child)
+            (destination / 'files/data').mkdir(parents=True, exist_ok=True)
+            save_catalog(completed_catalog if completed_catalog is not None else self.catalog,
+                         destination / 'files/data/opportunities.js')
+            repair.atomic_json(destination / 'files/data/document_evidence.json',
+                               completed_evidence if completed_evidence is not None else {'records': {}})
         def unpack(_raw, destination):
             repair.atomic_json(destination / 'reconciliation.json', context)
             repair.atomic_json(destination / 'ledger.json', ledger)
             repair.atomic_json(destination / 'consumed-checkpoints.json', [])
-            repair.atomic_json(destination / 'complete-candidates' / child['candidate_id'] / 'candidate.json', child)
+            write_child(destination / 'complete-candidates' / child['candidate_id'])
         def fetch(_repo, _run, _name, destination):
-            repair.atomic_json(destination / 'candidate.json', child)
+            write_child(destination)
         with ExitStack() as stack:
             stack.enter_context(patch.dict('os.environ', {'GITHUB_REPOSITORY': 'mporosoff/grants-scraper',
                 'CANDIDATE_ID': self.manifest['candidate_id'], 'CANDIDATE_RUN': '10',
@@ -209,6 +261,29 @@ class ReconcileContracts(unittest.TestCase):
             self.assertEqual(consumed['candidate']['artifact']['id'], 103)
             self.assertEqual(consumed['producer']['run_id'], '20')
             self.assertEqual(consumed['request_identity_prefix_sha256'], repair.request_identity(fixture['ledger']['requests']))
+
+    def test_completed_child_with_departed_sam_cache_requires_migration_before_reuse(self):
+        for key in ('records', 'subtopic_only'):
+            with self.subTest(key=key):
+                evidence = {key: {'sam-gov:' + 'b' * 32: {'status': 'failed'}}}
+                with self.completed_restore(completed_evidence=evidence) as fixture:
+                    with self.assertRaisesRegex(ValueError, 'completed_child_sam_cache_membership_requires_migration'):
+                        repair.restore(self.root, self.parent, self.state, fixture['output'])
+                    self.assertFalse(fixture['output'].exists())
+                    self.assertEqual(c.read_json(self.state / 'ledger.json'), fixture['ledger'])
+                    fixture['imported'].assert_not_called()
+
+    def test_completed_child_keeps_current_negative_sam_and_unrelated_orphan_cache(self):
+        catalog = deepcopy(self.catalog)
+        catalog['opportunities'].append(self.sam)
+        evidence = {'records': {self.sam['opportunity_id']: {'status': 'failed'},
+                                'nsf-test:departed': {'status': 'failed'}},
+                    'subtopic_only': {self.sam['opportunity_id']: {'subtopics': [],
+                                                                'subtopic_reason': 'no_layer_accepted'}}}
+        with self.completed_restore(completed_catalog=catalog, completed_evidence=evidence) as fixture:
+            self.assertTrue(repair.restore(self.root, self.parent, self.state, fixture['output']))
+            self.assertEqual(c.read_json(fixture['output'] / 'files/data/document_evidence.json'), evidence)
+            fixture['imported'].assert_not_called()
 
     def test_source_repair_requires_new_dispatch_and_retains_exact_consumed_child_and_budget(self):
         with self.completed_restore(changed_source=True, incompatible=True) as fixture:

@@ -1006,13 +1006,15 @@ jobs:
       GH_TOKEN: ${{ github.token }}
       CANDIDATE_RUN: ${{ needs.plan.outputs.candidate_run }}
       CANDIDATE_ID: ${{ needs.plan.outputs.candidate_id }}
-      CATALOG_RECONCILE_STATE: ${{ runner.temp }}/reconcile-state
     steps:
       - uses: actions/checkout@v6
         with:
           ref: ${{ needs.plan.outputs.release_sha }}
           fetch-depth: 0
       - uses: ./.github/actions/release-setup
+      - name: Initialize reconciliation state path
+        shell: bash
+        run: echo "CATALOG_RECONCILE_STATE=$RUNNER_TEMP/reconcile-state" >> "$GITHUB_ENV"
       - name: Authenticate the exact retained parent
         run: >-
           python -m tools.fetch_release_artifact --repository "$GITHUB_REPOSITORY"
