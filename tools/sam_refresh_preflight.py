@@ -9,14 +9,25 @@ import subprocess
 
 from scripts.sources.adapters.sam_gov import CONFIG_PATH
 from scripts.sources.sam_api import SamError
-from scripts.sources.sam_preflight import KIND, MAX_RECEIPT_BYTES, build_receipt
+from scripts.sources.sam_preflight import KIND, MAX_RECEIPT_BYTES, build_receipt, replay_client
 
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--config', type=Path, default=CONFIG_PATH)
     parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--verify-only', action='store_true', help='Verify the exact retained receipt without fetching or rewriting it')
     args = parser.parse_args(argv)
+    if args.verify_only:
+        try:
+            checked_at = datetime.now(timezone.utc)
+            replay_client(args.output, args.config, checked_at.date(), now=checked_at)
+            completed = True
+        except (OSError, ValueError, TypeError, KeyError, SamError, subprocess.SubprocessError):
+            completed = False
+        print(json.dumps({'outcome': 'verified' if completed else 'invalid_preflight',
+                          'completed': completed, 'request_count': 0}))
+        return 0 if completed else 1
     try:
         checked_at = datetime.now(timezone.utc)
         receipt = build_receipt(args.config, checked_at.date(), checked_at=checked_at)

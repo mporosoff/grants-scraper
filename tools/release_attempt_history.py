@@ -125,6 +125,49 @@ def _inventory(repository, run_meta, artifacts, *, api):
     return expected
 
 
+def _generate_stopped_before_allocation(head_sha, job):
+    """Authenticate a failed public/setup prefix, never an uncheckpointed dispatch."""
+    require(job.get('conclusion') in ('failure', 'cancelled'), 'generate was not a pre-allocation stop')
+    workflow = yaml.safe_load(candidate.git(candidate.ROOT, 'show', head_sha + ':' + WORKFLOW))
+    declared = workflow['jobs']['generate']['steps']
+    allocation = [index for index, step in enumerate(declared)
+                  if 'python -m tools.generation_spend_checkpoint' in step.get('run', '')]
+    require(len(allocation) == 1 and allocation[0] >= 3, 'known generation allocation boundary')
+    tail = declared[allocation[0]:]
+    require(len(tail) >= 20 and all(isinstance(step.get('name'), str) for step in tail),
+            'complete named allocation and generation steps')
+    # These existing always() steps only report or upload already-existing files.
+    # The independently authenticated artifact inventory must still contain no
+    # allowance, private state, source output or candidate from any attempt.
+    diagnostics = {'Preserve source refresh diagnostics after any outcome',
+                   'Report automatic team coverage and remaining work',
+                   'Retain linked task accounting and exact completed responses',
+                   'Retain spend and completed safe stages after any outcome'}
+    require(all('always()' in step.get('if', '') for step in tail if step['name'] in diagnostics),
+            'known bounded public diagnostics')
+    steps = job.get('steps')
+    require(isinstance(steps, list) and 1 <= len(steps) <= 150, 'native pre-allocation step evidence')
+    by_name, numbers = {}, set()
+    for step in steps:
+        require(isinstance(step, dict) and isinstance(step.get('name'), str)
+                and step['name'] not in by_name and type(step.get('number')) is int
+                and step['number'] > 0 and step['number'] not in numbers
+                and step.get('status') == 'completed' and step.get('conclusion') in TERMINAL,
+                'complete unambiguous native pre-allocation steps')
+        by_name[step['name']] = step
+        numbers.add(step['number'])
+    require(all(step['name'] in by_name for step in tail), 'missing allocation or generation step evidence')
+    require(all(by_name[step['name']]['conclusion'] == 'skipped'
+                for step in tail if step['name'] not in diagnostics),
+            'allocation, source or provider work started')
+    boundary = by_name[tail[0]['name']]['number']
+    require(all(by_name[step['name']]['number'] >= boundary for step in tail)
+            and any(step['number'] < boundary and step['conclusion'] in ('failure', 'cancelled')
+                    for step in steps), 'failure did not precede allocation')
+    return {'job_id': job['id'], 'allocation_step_number': boundary,
+            'native_steps_sha256': hashlib.sha256(candidate.encoded(steps)).hexdigest()}
+
+
 def require_preflight_only_before_allocation(repository, run_meta, current_attempt, artifacts, *, api):
     """Prove this is the first reservation despite earlier preflight-only attempts."""
     _trusted_meta(run_meta)
@@ -137,19 +180,30 @@ def require_preflight_only_before_allocation(repository, run_meta, current_attem
         match = re.fullmatch(r'release-plan-([1-9][0-9]*)|sam-preflight-' + str(run_meta['id']) + r'-([1-9][0-9]*)', name)
         require(match is not None and int(next(value for value in match.groups() if value)) <= current_attempt,
                 'prior work or unknown artifact cannot initialize an allowance')
-    attempts = []
+    attempts, inherited, generate_stop = [], {}, None
     for number in range(1, current_attempt):
         prior = authenticate_attempt(repository, run_meta, number, api=api)
         require(prior['conclusion'] in ('failure', 'cancelled'), 'prior attempt was not a preflight stop')
-        jobs = _jobs(run_meta, prior, api=api, full=True)
-        require('sam-preflight' in jobs and jobs['sam-preflight']['conclusion'] in ('failure', 'cancelled')
-                and jobs['plan']['conclusion'] == 'success'
-                and all(job['conclusion'] == 'skipped' for name, job in jobs.items()
-                        if name not in ('plan', 'sam-preflight', 'closeout')),
+        # Failed-job retries omit successful prerequisite jobs from their native
+        # attempt inventory. Only the first complete authenticated inventory can
+        # seed inherited outcomes; each later returned job replaces its old row.
+        jobs = _jobs(run_meta, prior, api=api, full=number == 1)
+        inherited.update(jobs)
+        preflight = inherited.get('sam-preflight', {}).get('conclusion')
+        if 'generate' in jobs:
+            generate_stop = (_generate_stopped_before_allocation(prior['head_sha'], jobs['generate'])
+                             if preflight == 'success' and jobs['generate']['conclusion'] in ('failure', 'cancelled') else None)
+        generate = inherited['generate']['conclusion']
+        require(inherited['plan']['conclusion'] == 'success'
+                and ((preflight in ('failure', 'cancelled') and generate == 'skipped')
+                     or (preflight == 'success' and generate in ('failure', 'cancelled') and generate_stop))
+                and all(job['conclusion'] == 'skipped' for name, job in inherited.items()
+                        if name not in ('plan', 'sam-preflight', 'generate', 'closeout')),
                 'prior generation or downstream work started')
         attempts.append({'attempt': number, 'head_sha': prior['head_sha'],
                          'jobs': {name: {'id': job['id'], 'conclusion': job['conclusion']}
-                                  for name, job in sorted(jobs.items())}})
+                                  for name, job in sorted(jobs.items())},
+                         **({'generate_preallocation_stop': generate_stop} if generate_stop else {})})
     return {'version': 'first-allocation-after-preflight-1', 'run_id': str(run_meta['id']),
             'current_attempt': current_attempt, 'head_sha': run_meta['head_sha'], 'prior_attempts': attempts,
             'artifact_inventory_sha256': hashlib.sha256(candidate.encoded(inventory)).hexdigest(),

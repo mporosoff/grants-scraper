@@ -63,6 +63,21 @@ class AttemptHistoryContracts(unittest.TestCase):
         return history.require_downstream_only(REPOSITORY, self.meta, 1, self.artifacts,
                                                api=self.api, allowed_candidate_ids=allowed)
 
+    def public_prefix_failure(self, attempt=1, *, failed_id='verify-sam-preflight'):
+        raw = (history.candidate.ROOT / history.WORKFLOW).read_text(encoding='utf8')
+        declared = yaml.safe_load(raw)['jobs']['generate']['steps']
+        failed = next(index for index, step in enumerate(declared) if step.get('id') == failed_id)
+        steps = [{'name': 'Set up job', 'number': 1, 'status': 'completed', 'conclusion': 'success'}]
+        for index, step in enumerate(declared):
+            name = step.get('name', 'Run ' + step.get('uses', step.get('run', '').split('\n')[0]))
+            steps.append({'name': name, 'number': index + 2, 'status': 'completed',
+                          'conclusion': 'success' if index < failed else 'failure' if index == failed else 'skipped'})
+        for name, conclusion in (('sam-preflight', 'success'), ('generate', 'failure')):
+            row = next(job for job in self.jobs[attempt] if job['name'] == name)
+            row['conclusion'] = conclusion
+            if name == 'generate': row['steps'] = steps
+        return raw, steps
+
     def test_first_allocation_after_only_failed_preflight_records_exact_bounded_proof(self):
         proof = self.prove()
         self.assertEqual(proof['run_id'], '200')
@@ -88,6 +103,57 @@ class AttemptHistoryContracts(unittest.TestCase):
                 self.jobs[1] = jobs(1)
                 next(job for job in self.jobs[1] if job['name'] == name)['conclusion'] = 'failure'
                 with self.assertRaisesRegex(ValueError, 'work started'):
+                    self.prove()
+
+    def test_setup_download_fresh_check_or_verify_failure_before_allocation_can_reserve_once(self):
+        for failed_id in ('restore', 'download-sam-preflight', 'rerun-sam-preflight', 'verify-sam-preflight'):
+            with self.subTest(failed_id=failed_id):
+                self.jobs[1] = jobs(1)
+                raw, steps = self.public_prefix_failure(failed_id=failed_id)
+                if failed_id == 'restore':
+                    # A checkout/toolchain failure is equally safe if all native
+                    # allocation/source/provider steps are proved skipped.
+                    steps[1]['conclusion'] = 'failure'
+                    for step in steps[2:]: step['conclusion'] = 'skipped'
+                with patch.object(history.candidate, 'git', return_value=raw):
+                    proof = self.prove()
+                stop = proof['prior_attempts'][0]['generate_preallocation_stop']
+                self.assertEqual(stop['job_id'], next(job['id'] for job in self.jobs[1] if job['name'] == 'generate'))
+                self.assertRegex(stop['native_steps_sha256'], '^[a-f0-9]{64}$')
+                self.assertFalse(proof['prior_provider_dispatch'])
+
+    def test_selective_failed_job_retry_inherits_only_authenticated_prior_prerequisites(self):
+        self.meta['run_attempt'] = 3
+        raw, _ = self.public_prefix_failure(1)
+        self.public_prefix_failure(2, failed_id='rerun-sam-preflight')
+        self.jobs[2] = [job for job in self.jobs[2] if job['name'] in ('generate', 'closeout')]
+        with patch.object(history.candidate, 'git', return_value=raw):
+            proof = self.prove()
+        self.assertEqual(set(proof['prior_attempts'][1]['jobs']), {'generate', 'closeout'})
+        self.assertTrue(all('generate_preallocation_stop' in row for row in proof['prior_attempts']))
+        # No prior full inventory may be reconstructed from guessed omissions.
+        self.jobs[1] = [job for job in self.jobs[1] if job['name'] != 'plan']
+        with patch.object(history.candidate, 'git', return_value=raw), self.assertRaisesRegex(ValueError, 'missing declared'):
+            self.prove()
+
+    def test_missing_ambiguous_or_started_allocation_and_source_steps_fail_closed(self):
+        for change in ('missing', 'duplicate', 'duplicate-number', 'active', 'allocation', 'source', 'provider', 'no-prefix-failure'):
+            with self.subTest(change=change):
+                self.jobs[1] = jobs(1)
+                raw, steps = self.public_prefix_failure()
+                if change == 'missing': steps.pop()
+                elif change == 'duplicate': steps.append(deepcopy(steps[-1]))
+                elif change == 'duplicate-number': steps[-1]['number'] = steps[-2]['number']
+                elif change == 'active': steps[-1]['status'] = 'in_progress'
+                elif change == 'no-prefix-failure':
+                    for step in steps:
+                        if step['conclusion'] == 'failure': step['conclusion'] = 'success'
+                else:
+                    name = {'allocation': 'Restore the logical spend checkpoint',
+                            'source': 'Build and validate complete public opportunity catalog',
+                            'provider': 'Build compatible production document vectors'}[change]
+                    next(step for step in steps if step['name'] == name)['conclusion'] = 'success'
+                with patch.object(history.candidate, 'git', return_value=raw), self.assertRaises(ValueError):
                     self.prove()
 
     def test_reservation_or_orphan_state_candidate_and_unknown_artifact_cannot_reset_allowance(self):

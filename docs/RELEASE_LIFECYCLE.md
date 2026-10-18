@@ -151,6 +151,10 @@ charged. An unchanged ordered corpus with unchanged protected semantic inputs
 retains its complete verified vector asset with zero new Voyage requests;
 this preserves its original build receipt and timestamps. It does not combine
 rows from incompatible model spaces.
+Request and ledger mutex ownership is held by the operating system. Process
+termination releases ownership even when a private checkpoint retains the empty
+lock file; restoring that file cannot permanently strand paid work. The file
+is never unlinked while other processes may be waiting on its inode.
 
 The private checkpoint retains the exact completed vector binary, manifest,
 canaries and build receipt before packaging. A cold retry authenticates their
@@ -175,6 +179,12 @@ exact protected checkout, config, run and attempt. Collection reuses those
 snapshots without network reads and reevaluates admission at the current date;
 the receipt's two-hour age limit handles a UTC midnight crossing without
 extending expired entries.
+Failed-job reruns distinguish an inherited successful preflight from a preflight
+produced in the current attempt. An inherited preflight triggers a fresh bounded
+SAM-only check before allowance restoration or other generation work, with the
+current attempt and original planned checkout/event identities. Complete-candidate
+restoration skips this work. A first allowance after an internal preflight stop
+still requires native job-step and artifact proof that nothing could dispatch.
 Withdrawal diagnostics distinguish a current terminal notice or restriction from
 an unchanged reviewed calendar expiring. A changed active amendment cannot be
 removed merely because its older approved deadline passed.

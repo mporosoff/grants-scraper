@@ -2,6 +2,7 @@
 from __future__ import annotations
 from contextlib import contextmanager
 from decimal import Decimal, ROUND_CEILING
+import errno
 import hashlib
 import json
 import os
@@ -49,6 +50,48 @@ class Refusal(RuntimeError):
 
 class Incomplete(ValueError):
     pass
+
+
+@contextmanager
+def exclusive_file_lock(path, *, timeout=10, unavailable='budget_lock_unavailable'):
+    """The OS owns exclusion; a restored lock file carries no ownership.
+
+    Keep the file in place so waiting descriptors and new arrivals always use
+    the same inode. Process death closes its descriptor and releases the lock.
+    """
+    path = Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open('a+b', buffering=0) as stream:
+        acquired = False
+        deadline = time.monotonic() + timeout
+        try:
+            while True:
+                try:
+                    if os.name == 'nt':
+                        import msvcrt
+                        stream.seek(0)
+                        msvcrt.locking(stream.fileno(), msvcrt.LK_NBLCK, 1)
+                    else:
+                        import fcntl
+                        fcntl.flock(stream.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+                    acquired = True
+                    break
+                except OSError as error:
+                    if error.errno not in (errno.EACCES, errno.EAGAIN, errno.EDEADLK, errno.EINTR):
+                        raise
+                    if time.monotonic() >= deadline:
+                        raise Deferred(unavailable) from error
+                    time.sleep(.01)
+            yield
+        finally:
+            if acquired:
+                if os.name == 'nt':
+                    import msvcrt
+                    stream.seek(0)
+                    msvcrt.locking(stream.fileno(), msvcrt.LK_UNLCK, 1)
+                else:
+                    import fcntl
+                    fcntl.flock(stream.fileno(), fcntl.LOCK_UN)
 
 
 def error_diagnostics(response):
@@ -241,7 +284,7 @@ def check_run_transport(ledger, start):
 
 
 class Ledger:
-    """Cross-thread/process atomic reservations; a stale lock fails closed.
+    """Cross-thread/process atomic reservations with crash-releasing OS locks.
 
     Actions retains this ledger plus an outer full-run reservation artifact
     before dispatch. A missing checkpoint never restores a spent allowance.
@@ -261,21 +304,8 @@ class Ledger:
 
     @contextmanager
     def locked(self):
-        lock = self.path.with_suffix(".lock")
-        deadline = time.monotonic() + 10
-        while True:
-            try:
-                fd = os.open(lock, os.O_CREAT | os.O_EXCL | os.O_WRONLY)
-                os.close(fd)
-                break
-            except FileExistsError:
-                if time.monotonic() >= deadline:
-                    raise Deferred("budget_lock_unavailable")
-                time.sleep(.01)
-        try:
+        with exclusive_file_lock(self.path.with_suffix('.lock')):
             yield
-        finally:
-            lock.unlink()
 
     def read(self):
         value = json.loads(self.path.read_bytes())

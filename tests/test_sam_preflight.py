@@ -239,6 +239,46 @@ class SamPreflightContracts(unittest.TestCase):
             self.assertNotIn(PRIVATE, self.path.read_text(encoding='utf8') + stdout.getvalue())
         self.assertFalse(self.path.with_suffix('.json.tmp').exists())
 
+    def test_cli_verify_only_replays_current_binding_without_fetching_or_rewriting(self):
+        self.save(self.build())
+        saved = self.path.read_bytes()
+        now = datetime(2026, 10, 13, 12, 5, tzinfo=timezone.utc)
+        with patch.dict(os.environ, self.environment, clear=True), \
+                patch.object(sam_refresh_preflight, 'datetime') as clock, \
+                patch.object(sam_refresh_preflight, 'build_receipt', side_effect=AssertionError('No source collection')), \
+                patch.object(sam_preflight, 'fetch_notice', side_effect=AssertionError('No HTTP')), \
+                redirect_stdout(io.StringIO()) as stdout:
+            clock.now.return_value = now
+            result = sam_refresh_preflight.main(['--verify-only', '--config', str(self.config_path), '--output', str(self.path)])
+        self.assertEqual(result, 0)
+        self.assertEqual(self.path.read_bytes(), saved)
+        self.assertEqual(json.loads(stdout.getvalue()), {'completed': True, 'outcome': 'verified', 'request_count': 0})
+
+    def test_cli_verify_only_holds_invalid_receipt_and_preserves_failed_evidence(self):
+        valid = self.build()
+        for variant in ('attempt', 'age', 'failed', 'config', 'missing'):
+            with self.subTest(variant=variant):
+                receipt = deepcopy(valid)
+                environment = dict(self.environment)
+                now = datetime(2026, 10, 13, 12, 5, tzinfo=timezone.utc)
+                if variant == 'attempt': environment['GITHUB_RUN_ATTEMPT'] = '3'
+                if variant == 'age': now = datetime(2026, 10, 13, 14, 0, 1, tzinfo=timezone.utc)
+                if variant == 'failed': receipt.update(completed=False, outcome='review_required')
+                if variant == 'config': receipt['config_sha256'] = 'f' * 64
+                self.save(receipt)
+                if variant == 'missing': self.path.unlink()
+                before = self.path.read_bytes() if self.path.exists() else None
+                with patch.dict(os.environ, environment, clear=True), \
+                        patch.object(sam_refresh_preflight, 'datetime') as clock, \
+                        patch.object(sam_refresh_preflight, 'build_receipt', side_effect=AssertionError('No fallback')), \
+                        patch.object(sam_preflight, 'fetch_notice', side_effect=AssertionError('No HTTP')), \
+                        redirect_stdout(io.StringIO()) as stdout:
+                    clock.now.return_value = now
+                    result = sam_refresh_preflight.main(['--verify-only', '--config', str(self.config_path), '--output', str(self.path)])
+                self.assertEqual(result, 1)
+                self.assertEqual(self.path.read_bytes() if self.path.exists() else None, before)
+                self.assertEqual(json.loads(stdout.getvalue())['request_count'], 0)
+
 
 class SamPreflightWorkflowContracts(unittest.TestCase):
     def test_preflight_gates_generation_before_reservation_and_uses_same_run_public_receipt(self):
@@ -260,8 +300,30 @@ class SamPreflightWorkflowContracts(unittest.TestCase):
         self.assertIn('sam-preflight', jobs['generate']['needs'])
         self.assertNotIn('always()', jobs['generate']['if'])
         steps = jobs['generate']['steps']
-        download = next(step for step in steps if step.get('with', {}).get('name') == upload['with']['name'])
+        source = next(step for step in preflight['steps'] if step.get('id') == 'source-check')
+        for key in ('producer_attempt', 'artifact_name'):
+            self.assertEqual(preflight['outputs'][key], '${{ steps.source-check.outputs.' + key + ' }}')
+            self.assertIn('echo "' + key + '=', source['run'])
+        download = next(step for step in steps if step.get('id') == 'download-sam-preflight')
         self.assertTrue(download['uses'].startswith('actions/download-artifact@'))
+        self.assertEqual(download['with']['name'], '${{ needs.sam-preflight.outputs.artifact_name }}')
+        self.assertIn('needs.sam-preflight.outputs.producer_attempt == github.run_attempt', download['if'])
+        fresh = next(step for step in steps if step.get('id') == 'rerun-sam-preflight')
+        self.assertIn("needs.sam-preflight.result == 'success'", fresh['if'])
+        self.assertIn('fromJSON(needs.sam-preflight.outputs.producer_attempt) < fromJSON(github.run_attempt)', fresh['if'])
+        retained = next(step for step in steps if step.get('id') == 'retain-rerun-sam-preflight')
+        self.assertIn('always()', retained['if'])
+        self.assertEqual(retained['with']['name'], upload['with']['name'])
+        verify = next(step for step in steps if step.get('id') == 'verify-sam-preflight')
+        self.assertIn('--verify-only', verify['run'])
+        spend = next(step for step in steps if 'python -m tools.generation_spend_checkpoint' in step.get('run', ''))
+        self.assertLess(steps.index(retained), steps.index(verify))
+        self.assertLess(steps.index(verify), steps.index(spend))
+        for step in (download, fresh, verify):
+            self.assertIn("steps.restore.outputs.candidate_id == ''", step['if'])
+        for step in (fresh, verify):
+            self.assertEqual(step['env']['SAM_PREFLIGHT_RELEASE_SHA'], '${{ needs.plan.outputs.release_sha }}')
+            self.assertNotIn('secrets.', json.dumps(step))
         merge = next(step for step in steps if step.get('id') == 'additional-sources')
         self.assertEqual(merge['env']['SAM_PREFLIGHT_RECEIPT'], '${{ runner.temp }}/sam-preflight/sam-preflight.json')
         self.assertEqual(merge['env']['SAM_PREFLIGHT_RELEASE_SHA'], '${{ needs.plan.outputs.release_sha }}')

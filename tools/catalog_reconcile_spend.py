@@ -21,7 +21,7 @@ import time
 
 import yaml
 
-from tools.offline_spend import Deferred, Ledger, atomic_json, identity, production_ledger
+from tools.offline_spend import Deferred, Ledger, atomic_json, identity, production_ledger, exclusive_file_lock
 
 MODEL = 'voyage-4-lite'
 URL = 'https://api.voyageai.com/v1/embeddings'
@@ -75,21 +75,8 @@ def ledger(state, generation=False):
 def request_locked(state, key):
     """Serialize identical reservations while retaining the existing ledger API."""
     path = Path(state) / 'vector-intents' / (key + '.lock')
-    path.parent.mkdir(parents=True, exist_ok=True)
-    deadline = time.monotonic() + 10
-    while True:
-        try:
-            descriptor = os.open(path, os.O_CREAT | os.O_EXCL | os.O_WRONLY)
-            os.close(descriptor)
-            break
-        except FileExistsError:
-            if time.monotonic() >= deadline:
-                raise Deferred('vector_request_lock_unavailable')
-            time.sleep(.01)
-    try:
+    with exclusive_file_lock(path, unavailable='vector_request_lock_unavailable'):
         yield
-    finally:
-        path.unlink()
 
 
 def request_id(value):
