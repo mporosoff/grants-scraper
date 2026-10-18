@@ -43,6 +43,32 @@ class SamRefreshGuardTests(unittest.TestCase):
             with self.subTest(summary=summary), self.assertRaises(ValueError):
                 require_complete_refresh(configuration(), summary)
 
+    def test_mixed_review_reasons_cannot_be_hidden_by_admission_expiry_or_calendar_labels(self):
+        for disposition in (None, 'admitted', 'approval_expired', 'verified_withdrawal'):
+            for basis in (None, 'unchanged_reviewed_calendar'):
+                summary = receipt()
+                observation = summary['sources'][0]['diagnostics']['notice_observations'][0]
+                observation.update(observed_notice_id=NOTICE, latest_notice_id=NOTICE,
+                    reasons=['reviewed_evidence_changed', 'entry_closed'], disposition=disposition)
+                if basis: observation['withdrawal_basis'] = basis
+                with self.subTest(disposition=disposition, basis=basis), self.assertRaises(ValueError):
+                    require_complete_refresh(configuration(), summary)
+
+    def test_terminal_or_restriction_basis_requires_current_notice_and_matching_reason(self):
+        for basis, reason in (('current_terminal_notice', 'not_open_notice'),
+                              ('current_restrictive_set_aside', 'restrictive_set_aside')):
+            summary = receipt()
+            observation = summary['sources'][0]['diagnostics']['notice_observations'][0]
+            observation.update(observed_notice_id=NOTICE, latest_notice_id=NOTICE,
+                reasons=['reviewed_evidence_changed', 'entry_closed', reason],
+                disposition='verified_withdrawal', withdrawal_basis=basis)
+            require_complete_refresh(configuration(), summary)
+            observation['latest_notice_id'] = OTHER
+            with self.assertRaises(ValueError): require_complete_refresh(configuration(), summary)
+            observation['latest_notice_id'] = NOTICE
+            observation['reasons'].remove(reason)
+            with self.assertRaises(ValueError): require_complete_refresh(configuration(), summary)
+
     def test_missing_or_malformed_summary_and_invalid_config_fail_locally(self):
         with tempfile.TemporaryDirectory() as directory:
             config = Path(directory) / 'sam.json'; summary = Path(directory) / 'summary.json'

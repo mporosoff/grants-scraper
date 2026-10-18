@@ -145,6 +145,13 @@ retains its complete verified vector asset with zero new Voyage requests;
 this preserves its original build receipt and timestamps. It does not combine
 rows from incompatible model spaces.
 
+The private checkpoint retains the exact completed vector binary, manifest,
+canaries and build receipt before packaging. A cold retry authenticates their
+operation, corpus and hashes, then restores them together without provider calls
+or new timestamps. Accepted responses from an earlier operation settle their
+original measured charges even when the next request body changed; those old
+vectors never satisfy the new operation.
+
 The separate `sam-preflight` job verifies reviewed source inputs before the
 generation job reserves an allowance or collects other sources. A failed
 preflight leaves generators skipped and does not create a spend owner. A
@@ -153,6 +160,9 @@ exact protected checkout, config, run and attempt. Collection reuses those
 snapshots without network reads and reevaluates admission at the current date;
 the receipt's two-hour age limit handles a UTC midnight crossing without
 extending expired entries.
+Withdrawal diagnostics distinguish a current terminal notice or restriction from
+an unchanged reviewed calendar expiring. A changed active amendment cannot be
+removed merely because its older approved deadline passed.
 
 Candidate baseline hashes distinguish unchanged source inputs from the exact
 candidate already merged. A third generation's data is rejected. Unrelated main

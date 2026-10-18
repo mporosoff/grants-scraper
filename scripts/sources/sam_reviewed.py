@@ -26,6 +26,7 @@ SNAPSHOT_FIELDS = {'notice_id', 'latest_notice_id', 'latest', 'status', 'archive
     'response_deadline', 'response_timezone', 'archive_date', 'description_sha256',
     'resources_sha256', 'review_sha256'}
 VERSION_FIELDS = {'notice_id', 'latest_notice_id', 'latest', 'posted_at', 'modified_at', 'review_sha256'}
+CALENDAR_REASONS = {'entry_closed', 'archive_date_passed', 'approval_not_current'}
 
 
 def reviewed_content(snapshot):
@@ -89,15 +90,29 @@ def reconcile_notice(notice, approval, as_of):
     return (record, reasons), proof
 
 
+def withdrawal_basis(notice, approval, reasons):
+    """Current source closure can supersede terms; an old reviewed clock cannot."""
+    if (notice['organization_id'] != approval['organization_id']
+            or notice['solicitation_number'] != approval['solicitation_number']
+            or notice['latest'] is not True or notice['latest_notice_id'] != notice['notice_id']):
+        return None
+    if (notice['archived'] or notice['cancelled'] or notice['deleted'] or notice['status'] != 'published'):
+        return 'current_terminal_notice'
+    if 'restrictive_set_aside' in reasons:
+        return 'current_restrictive_set_aside'
+    if set(reasons) <= CALENDAR_REASONS and set(reasons) & {'entry_closed', 'archive_date_passed'}:
+        return 'unchanged_reviewed_calendar'
+    return None
+
+
 def observation_disposition(notice, approval, reasons):
     if not reasons:
         return 'admitted'
     if (notice['organization_id'] != approval['organization_id']
-            or notice['solicitation_number'] != approval['solicitation_number']):
+            or notice['solicitation_number'] != approval['solicitation_number']
+            or notice['latest'] is not True or notice['latest_notice_id'] != notice['notice_id']):
         return 'review_required'
-    if ('entry_closed' in reasons or 'archive_date_passed' in reasons
-            or notice['archived'] or notice['cancelled'] or notice['deleted']
-            or notice['status'] != 'published' or 'restrictive_set_aside' in reasons):
+    if withdrawal_basis(notice, approval, reasons):
         return 'verified_withdrawal'
     if set(reasons) == {'approval_not_current'}:
         return 'approval_expired'
@@ -121,12 +136,26 @@ def require_reviewed_observations(config, diagnostics):
     for observation in observations:
         reasons = observation.get('reasons')
         disposition = observation.get('disposition')
+        basis = observation.get('withdrawal_basis')
         if (not isinstance(reasons, list) or any(not isinstance(reason, str) for reason in reasons)
                 or disposition not in (None, 'admitted', 'verified_withdrawal', 'approval_expired', 'review_required')):
             raise ValueError('SAM refresh review disposition is invalid')
-        if disposition == 'review_required' or (disposition is None and reasons
-                and not set(reasons) <= {'entry_closed', 'archive_date_passed', 'approval_not_current',
-                                         'not_open_notice', 'restrictive_set_aside'}):
+        reason_set = set(reasons)
+        current = (isinstance(observation.get('observed_notice_id'), str)
+                   and NOTICE_ID.fullmatch(observation['observed_notice_id']) is not None
+                   and observation['observed_notice_id'] == observation.get('latest_notice_id'))
+        calendar = reason_set <= CALENDAR_REASONS and bool(reason_set & {'entry_closed', 'archive_date_passed'})
+        consistent = (
+            disposition is None and basis is None and reason_set <= CALENDAR_REASONS
+            or disposition == 'admitted' and not reasons and basis is None
+            or disposition == 'approval_expired' and reason_set == {'approval_not_current'} and basis is None
+            or disposition == 'verified_withdrawal' and (
+                basis is None and calendar
+                or current and (
+                    basis == 'current_terminal_notice' and 'not_open_notice' in reason_set
+                    or basis == 'current_restrictive_set_aside' and 'restrictive_set_aside' in reason_set
+                    or basis == 'unchanged_reviewed_calendar' and calendar)))
+        if not consistent:
             raise ValueError('SAM notice requires reviewed successor reconciliation; preserve the published catalog')
 
 
@@ -356,6 +385,7 @@ def collect(config, as_of, snapshots, *, client=None):
                              'failure_class': detail.get('failure_class', 'invalid_client')})
             continue
         (record, reasons), proof = reconcile_notice(notice, approval, as_of)
+        basis = withdrawal_basis(notice, approval, reasons)
         records.append(record)
         seen.add(approval['notice_id'])
         seen.add(notice['notice_id'])
@@ -363,6 +393,7 @@ def collect(config, as_of, snapshots, *, client=None):
             'observed_notice_id': notice['notice_id'], 'latest_notice_id': notice['latest_notice_id'],
             'review_sha256': notice['review_sha256'], 'reasons': reasons,
             'disposition': observation_disposition(notice, approval, reasons),
+            **({'withdrawal_basis': basis} if basis is not None else {}),
             **({'reconciliation': proof} if proof is not None else {})})
         for reason in reasons:
             diagnostics['exclusion_reasons'][reason] = diagnostics['exclusion_reasons'].get(reason, 0) + 1

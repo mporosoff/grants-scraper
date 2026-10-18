@@ -15,6 +15,7 @@ from pathlib import Path
 import re
 import subprocess
 import sys
+import tempfile
 import time
 
 from tools.offline_spend import Deferred, Ledger, atomic_json, identity, production_ledger
@@ -25,12 +26,14 @@ MAX_RESPONSE = 24 * 1024 * 1024
 GENERATION_INPUTS = (
     'tools/run_budgeted_vectors.mjs', 'tools/catalog_reconcile_vectors.mjs', 'tools/catalog_reconcile_spend.py',
     'tools/offline_spend.py', 'tools/build_search_v2_voyage_vectors.mjs', 'tools/embedding_contract.mjs',
+    'tools/coherent_files.mjs',
     'tools/run_search_diagnosis.mjs', 'assets/search-hybrid.js', 'assets/search-retrieval.js',
     'assets/search-query.js', 'assets/search-v2-config.js', 'assets/match-explain.js',
     'config/offline_ai.json', 'data/opportunities.js', 'data/subtopics.js',
 )
 VECTOR_OUTPUTS = ('data/search-v2-voyage-manifest.json', 'data/search-v2-voyage-vectors.f16',
                   'data/search-v2-voyage-canaries.json', 'evaluation/search_v2_hybrid_vector_build.json')
+OUTPUT_VERSION = 'vector-output-checkpoint-1'
 
 
 def require(ok, reason):
@@ -134,27 +137,93 @@ def protected_vector_asset(root, packet):
     return {'protected_candidate_id': candidate, 'semantic_fingerprint': semantic['fingerprint'], 'outputs': outputs}
 
 
+def vector_binding(packet):
+    return {key: packet[key] for key in ('corpus_sha256', 'configuration_sha256', 'passage_count')} | {
+        'source_hashes': {key: value for key, value in packet['source_hashes'].items() if not key.startswith('data/')}}
+
+
+def output_bytes(root):
+    raw = {name: (root / name).read_bytes() for name in VECTOR_OUTPUTS}
+    require(all(0 < len(value) <= 32 * 1024 * 1024 for value in raw.values()), 'bounded_completed_outputs')
+    return raw
+
+
+def retain_outputs(state, value, binding, raw):
+    """Persist every completed byte before sealing the completion receipt."""
+    hashes = {name: hashlib.sha256(data).hexdigest() for name, data in raw.items()}
+    for name, digest in hashes.items():
+        blob = Path(state) / 'vector-outputs' / digest
+        blob.parent.mkdir(parents=True, exist_ok=True)
+        if blob.exists():
+            require(hashlib.sha256(blob.read_bytes()).hexdigest() == digest, 'completed_output_blob_changed')
+            continue
+        descriptor, temporary = tempfile.mkstemp(prefix='.vector-', dir=blob.parent)
+        try:
+            with os.fdopen(descriptor, 'wb') as stream:
+                stream.write(raw[name]); stream.flush(); os.fsync(stream.fileno())
+            os.replace(temporary, blob)
+        finally:
+            Path(temporary).unlink(missing_ok=True)
+    receipt = {'version': OUTPUT_VERSION, 'operation_sha256': value['operation_sha256'],
+               'vector_binding': binding, 'outputs': hashes}
+    atomic_json(Path(state) / 'vector-completions' / (value['operation_sha256'] + '.json'), receipt)
+    return receipt
+
+
+def completed_outputs(state, value, binding, root):
+    path = Path(state) / 'vector-completions' / (value['operation_sha256'] + '.json')
+    if not path.exists():
+        return None
+    receipt = json.loads(path.read_bytes())
+    require(set(receipt) == {'version', 'operation_sha256', 'vector_binding', 'outputs'}
+            and receipt['version'] == OUTPUT_VERSION and receipt['operation_sha256'] == value['operation_sha256']
+            and receipt['vector_binding'] == binding and isinstance(receipt['outputs'], dict)
+            and set(receipt['outputs']) == set(VECTOR_OUTPUTS)
+            and all(re.fullmatch('[a-f0-9]{64}', str(digest)) for digest in receipt['outputs'].values()),
+            'completed_vector_identity')
+    blobs = {name: Path(state) / 'vector-outputs' / digest for name, digest in receipt['outputs'].items()}
+    for name, path in blobs.items():
+        require(path.is_file() and 0 < path.stat().st_size <= 32 * 1024 * 1024
+                and hashlib.sha256(path.read_bytes()).hexdigest() == receipt['outputs'][name], 'completed_output_blob_changed')
+    current = all((root / name).is_file()
+                  and hashlib.sha256((root / name).read_bytes()).hexdigest() == digest
+                  for name, digest in receipt['outputs'].items())
+    return {'status': 'complete' if current else 'restore', 'operation_sha256': value['operation_sha256'],
+            'outputs': receipt['outputs'], 'blobs': {name: str(path.resolve()) for name, path in blobs.items()}}
+
+
 def prepare(state, packet, *, generation=False):
-    """Bind ordinary vector work to existing source inputs and its existing book."""
-    require(generation and packet.get('run_id') == os.environ.get('GITHUB_RUN_ID')
-            and re.fullmatch('[1-9][0-9]*', str(packet.get('run_id', '')))
-            and Path(state).name == 'offline-' + packet['run_id']
-            and packet.get('mode') in {'maintenance', 'pilot'}, 'generation_owner')
+    """Bind vector work and completed bytes to the existing logical allowance."""
     root = Path(__file__).resolve().parents[1]
     hashes = {name: hashlib.sha256((root / name).read_bytes()).hexdigest() for name in GENERATION_INPUTS}
     require(packet.get('source_hashes') == hashes
             and all(re.fullmatch('[a-f0-9]{64}', str(packet.get(key, ''))) for key in
                     ('corpus_sha256', 'configuration_sha256'))
             and type(packet.get('passage_count')) is int and packet['passage_count'] > 0, 'generation_inputs')
+    binding = vector_binding(packet)
+    if not generation:
+        value = context(state)
+        book = ledger(state)
+        require(any(event.get('kind') == 'authenticated_vector_history' and event.get('candidate_id') ==
+                    value['parent_candidate_id'] for event in book.read()['events']), 'history_required')
+        path = Path(state) / 'vector-bindings' / (value['operation_sha256'] + '.json')
+        if path.exists():
+            require(json.loads(path.read_bytes()) == binding, 'reconciliation_vector_inputs_changed')
+        else:
+            atomic_json(path, binding)
+        return completed_outputs(state, value, binding, root) or {
+            'status': 'prepared', 'operation_sha256': value['operation_sha256']}
+    require(packet.get('run_id') == os.environ.get('GITHUB_RUN_ID')
+            and re.fullmatch('[1-9][0-9]*', str(packet.get('run_id', '')))
+            and Path(state).name == 'offline-' + packet['run_id']
+            and packet.get('mode') in {'maintenance', 'pilot'}, 'generation_owner')
     path = Path(state) / 'ledger.json'
     require(path.is_file(), 'original_ledger_required')
     Ledger(path, 'offline-' + packet['run_id'], 2, 300)
     value = {'version': 'generation-vector-operation-1', 'parent_run': packet['run_id'], 'mode': packet['mode'],
-             'operation_contract': {key: packet[key] for key in
-                ('corpus_sha256', 'configuration_sha256', 'passage_count')}}
+             'operation_contract': binding}
     # Incidental catalog timestamps do not change embedding inputs. Retain
     # exact observed bytes separately; corpus/config/code bind cache identity.
-    value['operation_contract']['source_hashes'] = {k: v for k, v in hashes.items() if not k.startswith('data/')}
     value['operation_sha256'] = identity(value)
     archive = Path(state) / 'vector-operations' / (value['operation_sha256'] + '.json')
     if archive.exists():
@@ -164,15 +233,12 @@ def prepare(state, packet, *, generation=False):
     atomic_json(Path(state) / 'vector-operation.json', value)
     atomic_json(Path(state) / 'vector-inputs' / (identity(hashes) + '.json'), hashes)
     ledger(state, True)  # Also enforce the existing qualification task linkage.
-    completed = Path(state) / 'vector-completions' / (value['operation_sha256'] + '.json')
-    if completed.exists():
-        receipt = json.loads(completed.read_bytes())
-        actual = {name: hashlib.sha256((root / name).read_bytes()).hexdigest() for name in VECTOR_OUTPUTS}
-        require(receipt == {'operation_sha256': value['operation_sha256'], 'outputs': actual}, 'completed_vectors_changed')
-        return {'status': 'complete', 'operation_sha256': value['operation_sha256']}
+    completed = completed_outputs(state, value, binding, root)
+    if completed:
+        return completed
     retained = protected_vector_asset(root, packet)
     if retained:
-        atomic_json(completed, {'operation_sha256': value['operation_sha256'], 'outputs': retained['outputs']})
+        retain_outputs(state, value, binding, output_bytes(root))
         atomic_json(Path(state) / 'vector-stage.json', {'version': 'generation-vector-stage-1',
                     'status': 'retained_complete_asset', 'operation_sha256': value['operation_sha256'],
                     'new_requests': 0, 'new_usage_total_tokens': 0, **retained})
@@ -181,14 +247,22 @@ def prepare(state, packet, *, generation=False):
 
 
 def checkpoint(state, packet, *, generation=False):
-    require(generation, 'generation_checkpoint')
-    value = context(state, True)
+    value = context(state, generation)
+    ledger(state, generation)
     require(packet.get('operation_sha256') == value['operation_sha256'], 'generation_checkpoint_identity')
     root = Path(__file__).resolve().parents[1]
-    actual = {name: hashlib.sha256((root / name).read_bytes()).hexdigest() for name in VECTOR_OUTPUTS}
+    binding = value['operation_contract'] if generation else json.loads((Path(state) / 'vector-bindings' /
+                        (value['operation_sha256'] + '.json')).read_bytes())
+    raw = output_bytes(root)
+    actual = {name: hashlib.sha256(data).hexdigest() for name, data in raw.items()}
     require(packet.get('outputs') == actual, 'generation_checkpoint_outputs')
-    atomic_json(Path(state) / 'vector-completions' / (value['operation_sha256'] + '.json'),
-                {'operation_sha256': value['operation_sha256'], 'outputs': actual})
+    prior = completed_outputs(state, value, binding, root)
+    require(prior is None or prior['outputs'] == actual, 'completed_vectors_changed')
+    retain_outputs(state, value, binding, raw)
+    if packet.get('restored') is True:
+        atomic_json(Path(state) / 'vector-stage.json', {'version': 'generation-vector-stage-1',
+                    'status': 'restored_complete_asset', 'operation_sha256': value['operation_sha256'],
+                    'new_requests': 0, 'new_usage_total_tokens': 0, 'outputs': actual})
     return {'status': 'complete'}
 
 
@@ -308,24 +382,38 @@ def reserve(state, packet, *, generation=False):
     book = ledger(state, generation)
     cache = state / 'vector-responses' / (key + '.json')
     current = local(book).read()
-    if not any(row['key'] == key for row in current['requests']):
-        intents = list((state / 'vector-intents').glob('*.json'))
-        require(len(intents) <= local(book).max_requests, 'retained_intent_bound')
-        for path in intents:
-            old = json.loads(path.read_bytes())
-            if old.get('body_sha256') != body_sha256 or old.get('key') == key:
-                continue
-            rows = [row for row in current['requests'] if row['id'] == old.get('token') and row['key'] == old.get('key')]
-            require(len(rows) == 1, 'retained_intent_without_reservation')
-            if rows[0]['status'] == 'reserved_unknown':
-                old_cache = state / 'vector-responses' / (old['key'] + '.json')
-                require(old_cache.is_file(), 'previous_operation_dispatch_unknown_no_retry')
-                saved = saved_response(state, old['key'], old['token'],
-                    {'operation_sha256': old['operation_sha256']}, body_sha256, old['input_count'])
-                complete_saved(book, current, rows[0], saved)
-                # Recover accounting, but do not mix old-space vectors into a
-                # fresh homogeneous generation under changed semantic inputs.
-                raise Deferred('previous_operation_response_recovered_retry_generation')
+    intents = list((state / 'vector-intents').glob('*.json'))
+    require(len(intents) <= local(book).max_requests, 'retained_intent_bound')
+    recovered, unknown_same_body = False, False
+    for path in intents:
+        old = json.loads(path.read_bytes())
+        require(isinstance(old, dict) and all(isinstance(old.get(field), str)
+                and re.fullmatch('[a-f0-9]{64}', old[field]) for field in
+                ('key', 'operation_sha256', 'body_sha256'))
+                and path.stem == old['key']
+                and old['key'] == identity({'operation': old['operation_sha256'], 'body_sha256': old['body_sha256']})
+                and type(old.get('input_count')) is int and 0 < old['input_count'] <= 256,
+                'retained_intent_identity')
+        if old['key'] == key:
+            continue
+        rows = [row for row in current['requests'] if row['id'] == old.get('token') and row['key'] == old['key']]
+        require(len(rows) == 1, 'retained_intent_without_reservation')
+        if rows[0]['status'] != 'reserved_unknown':
+            continue
+        old_cache = state / 'vector-responses' / (old['key'] + '.json')
+        if old_cache.is_file():
+            # Accepted usage belongs to its original request, independently of
+            # the body/configuration the next generation now needs.
+            saved = saved_response(state, old['key'], old['token'],
+                {'operation_sha256': old['operation_sha256']}, old['body_sha256'], old['input_count'])
+            complete_saved(book, current, rows[0], saved)
+            recovered = True
+        elif old['body_sha256'] == body_sha256:
+            unknown_same_body = True
+    if recovered:
+        # Settle accounting, but never return old-space vectors to a new build.
+        raise Deferred('previous_operation_response_recovered_retry_generation')
+    require(not unknown_same_body, 'previous_operation_dispatch_unknown_no_retry')
     def cached(value):
         prior = [r for r in value['requests'] if r['key'] == key]
         if prior:

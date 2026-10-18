@@ -153,6 +153,26 @@ class SamPreflightContracts(unittest.TestCase):
         self.save(receipt)
         with self.assertRaises(ValueError): self.replay()
 
+    def test_old_entry_closure_cannot_complete_or_replay_a_changed_active_amendment(self):
+        checked = datetime(2026, 10, 21, 12, tzinfo=timezone.utc)
+        changed = signed(self.item['reviewed_snapshot'], description_sha256='1' * 64,
+                         resources_sha256='2' * 64, response_deadline='2026-12-20T15:00:00')
+        with patch.object(sam_preflight, 'utc_now', return_value=checked):
+            receipt = sam_preflight.build_receipt(self.config_path, checked.date(), environment=self.environment,
+                client=Mock(return_value=(changed, {'request_count': 2})))
+        self.assertFalse(receipt['completed'])
+        observation = receipt['diagnostics']['notice_observations'][0]
+        self.assertEqual(observation['reasons'], ['reviewed_evidence_changed', 'entry_closed'])
+        self.assertEqual(observation['disposition'], 'review_required')
+        # A receipt produced by the old buggy rule is independently reevaluated.
+        receipt.update(completed=True, outcome='verified')
+        observation['disposition'] = 'verified_withdrawal'
+        observation['withdrawal_basis'] = 'unchanged_reviewed_calendar'
+        self.save(receipt)
+        with patch.object(sam_preflight, 'utc_now', return_value=checked), \
+                patch.object(sam_preflight, 'fetch_notice', side_effect=AssertionError('No fallback')), self.assertRaises(ValueError):
+            self.replay(as_of=checked.date())
+
     def test_source_failure_retains_sanitized_counts_without_raw_exception_or_private_body(self):
         receipt = self.build(Mock(side_effect=SamError('RAW EXCEPTION ' + PRIVATE, {
             'request_count': 2, 'http_status': 503, 'failure_class': 'transient_transport', 'raw_body': PRIVATE})))

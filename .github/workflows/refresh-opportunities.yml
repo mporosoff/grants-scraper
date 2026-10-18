@@ -1049,7 +1049,8 @@ jobs:
         if: steps.restore.outputs.candidate_id == ''
         env:
           VOYAGE_API_KEY: ${{ secrets.VOYAGE_API_KEY }}
-        run: node --import ./tools/catalog_reconcile_vectors.mjs tools/build_search_v2_voyage_vectors.mjs --production --write
+          CATALOG_VECTOR_OPERATION: reconciliation
+        run: node tools/run_budgeted_vectors.mjs --production --write
       - name: Bind the derived package to the actual published predecessor
         if: steps.restore.outputs.candidate_id == ''
         run: |

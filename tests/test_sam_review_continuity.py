@@ -136,7 +136,7 @@ class ReviewContinuityTests(unittest.TestCase):
     def test_expired_entries_and_current_confirmed_withdrawals_remain_permitted(self):
         item = anchored()
         for changes in ({}, {'archived': True}, {'cancelled': True}, {'deleted': True},
-                        {'status': 'withdrawn'}, {'archive_date': '2026-10-12'}, {'set_asides': ['SBA']}):
+                        {'status': 'withdrawn'}, {'set_asides': ['SBA']}):
             with self.subTest(changes=changes):
                 current = signed(item['reviewed_snapshot'], **changes)
                 as_of = TODAY if changes else date(2026, 10, 21)
@@ -145,6 +145,67 @@ class ReviewContinuityTests(unittest.TestCase):
                 self.assertNotEqual(rows[0]['status'], 'posted')
                 self.assertEqual(diagnostics['notice_observations'][0]['disposition'], 'verified_withdrawal')
                 require_complete_refresh(configuration(item), summary(diagnostics))
+
+    def test_active_amendment_extension_cannot_be_withdrawn_using_the_old_reviewed_entry(self):
+        item = anchored()
+        current = signed(item['reviewed_snapshot'], description_sha256='1' * 64,
+                         resources_sha256='2' * 64, response_deadline='2026-12-20T15:00:00')
+        rows, diagnostics = sam_reviewed.collect(configuration(item), date(2026, 10, 21), {},
+            client=Mock(return_value=(current, {'request_count': 2})))
+        observation = diagnostics['notice_observations'][0]
+        self.assertEqual(observation['reasons'], ['reviewed_evidence_changed', 'entry_closed'])
+        self.assertEqual(observation['disposition'], 'review_required')
+        self.assertNotIn('withdrawal_basis', observation)
+        with self.assertRaises(ValueError): require_complete_refresh(configuration(item), summary(diagnostics))
+        self.assertNotEqual(rows[0]['status'], 'posted')
+
+    def test_old_calendar_cannot_mask_other_unresolved_changes_or_another_successor(self):
+        item = anchored()
+        changes = [{'archive_date': '2026-10-20', 'description_sha256': '1' * 64,
+                    'response_deadline': '2026-12-20T15:00:00'},
+                   {'posted_at': '2026-10-22T12:00:00+00:00'}, {'notice_type': 'r'}]
+        for change in changes:
+            with self.subTest(change=change):
+                current = signed(item['reviewed_snapshot'], **change)
+                _, diagnostics = sam_reviewed.collect(configuration(item), date(2026, 10, 21), {},
+                    client=Mock(return_value=(current, {'request_count': 2})))
+                self.assertEqual(diagnostics['notice_observations'][0]['disposition'], 'review_required')
+                with self.assertRaises(ValueError): require_complete_refresh(configuration(item), summary(diagnostics))
+        old = signed(item['reviewed_snapshot'], latest=False, latest_notice_id=OTHER)
+        for terminal in (False, True):
+            intermediate = signed(old, notice_id=OTHER, latest_notice_id='c' * 32, archived=terminal)
+            _, diagnostics = sam_reviewed.collect(configuration(item), date(2026, 10, 21), {},
+                client=Mock(side_effect=[(old, {'request_count': 2}), (intermediate, {'request_count': 2})]))
+            self.assertEqual(diagnostics['notice_observations'][0]['disposition'], 'review_required')
+            with self.assertRaises(ValueError): require_complete_refresh(configuration(item), summary(diagnostics))
+
+    def test_current_true_terminal_or_restricted_successor_can_withdraw_despite_changed_terms(self):
+        item = anchored()
+        old = signed(item['reviewed_snapshot'], latest=False, latest_notice_id=OTHER)
+        for change in ({'cancelled': True}, {'archived': True}, {'deleted': True},
+                       {'status': 'withdrawn'}, {'set_asides': ['SBA']}):
+            current = signed(item['reviewed_snapshot'], notice_id=OTHER, latest_notice_id=OTHER,
+                             description_sha256='1' * 64, resources_sha256='2' * 64,
+                             response_deadline='2026-12-20T15:00:00', **change)
+            with self.subTest(change=change):
+                _, diagnostics = sam_reviewed.collect(configuration(item), date(2026, 10, 21), {},
+                    client=Mock(side_effect=[(old, {'request_count': 2}), (current, {'request_count': 2})]))
+                observation = diagnostics['notice_observations'][0]
+                self.assertEqual(observation['disposition'], 'verified_withdrawal')
+                self.assertEqual(observation['withdrawal_basis'], 'current_restrictive_set_aside'
+                                 if 'set_asides' in change else 'current_terminal_notice')
+                require_complete_refresh(configuration(item), summary(diagnostics))
+
+    def test_unchanged_reviewed_archive_and_entry_dates_expire_without_a_new_approval(self):
+        item = anchored()
+        _, diagnostics = sam_reviewed.collect(configuration(item), date(2027, 1, 2), {},
+            client=Mock(return_value=(item['reviewed_snapshot'], {'request_count': 2})))
+        observation = diagnostics['notice_observations'][0]
+        self.assertEqual(observation['disposition'], 'verified_withdrawal')
+        self.assertEqual(observation['withdrawal_basis'], 'unchanged_reviewed_calendar')
+        self.assertIn('entry_closed', observation['reasons'])
+        self.assertIn('archive_date_passed', observation['reasons'])
+        require_complete_refresh(configuration(item), summary(diagnostics))
 
     def test_legacy_approval_expiry_is_not_silently_renewed(self):
         item = approval()
