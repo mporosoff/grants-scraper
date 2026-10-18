@@ -63,6 +63,7 @@ class RuntimeReconciliationPublication(unittest.TestCase):
         self.runs = {220: self.run}
         self.attempts = {(220, 1): deepcopy(self.run)}
         self.job_rows = {}
+        self.publications = None
         self.later_jobs = []
         self.marker = {'version': 'catalog-source-reconciliation-1', 'parent_candidate_id': self.PARENT,
             'operation_sha256': self.context['operation_sha256'], 'producer_run': '220', 'producer_attempt': '1',
@@ -92,7 +93,7 @@ class RuntimeReconciliationPublication(unittest.TestCase):
     def add_artifact(self, identifier, name, members, *, run=220):
         stream = io.BytesIO()
         with zipfile.ZipFile(stream, 'w', zipfile.ZIP_DEFLATED) as archive:
-            for path, value in members.items(): archive.writestr(path, c.encoded(value))
+            for path, value in members.items(): archive.writestr(path, value if isinstance(value, bytes) else c.encoded(value))
         self.payloads[identifier] = stream.getvalue()
         inventory = self.inventories.setdefault(run, [])
         inventory[:] = [row for row in inventory if row['id'] != identifier]
@@ -101,9 +102,13 @@ class RuntimeReconciliationPublication(unittest.TestCase):
         return {'id': identifier, 'name': name, 'sha256': c.digest(stream.getvalue())}
 
     def git(self, root, *args):
-        if args[0] == 'log': return 'protected-runtime'
+        if args[0] == 'log': return '\n'.join(self.publications) if self.publications is not None else 'protected-runtime'
         self.assertEqual(args[0], 'show')
         revision, name = args[1].split(':', 1)
+        if self.publications is not None and revision in self.publications:
+            child, pointer = self.publications[revision]
+            if name == 'release/candidate-source.json': return json.dumps(pointer)
+            if name == 'release/candidate.json': return json.dumps(child)
         if revision == 'protected-runtime':
             if name == 'release/candidate-source.json': return json.dumps(self.pointer)
             if name == 'release/candidate.json': return json.dumps(self.child)
@@ -115,7 +120,7 @@ class RuntimeReconciliationPublication(unittest.TestCase):
     def git_bytes(self, command, **options):
         self.assertEqual(command[:4], ['git', '-C', str(self.root), 'show'])
         revision, name = command[4].split(':', 1)
-        self.assertEqual(revision, 'protected-runtime'); self.binary_reads.append(name)
+        self.assertIn(revision, self.publications or {'protected-runtime': None}); self.binary_reads.append(name)
         self.assertNotIn('text', options)
         return self.protected_raw[name]
 
@@ -196,6 +201,54 @@ class RuntimeReconciliationPublication(unittest.TestCase):
         self.job_rows[240, 1] = [{'id': 240001, 'name': 'catalog-reconcile', 'run_id': 240, 'run_attempt': 1,
             'head_sha': self.HEAD, 'head_branch': 'main', 'status': 'completed', 'conclusion': 'success', 'steps': steps}]
 
+    def later_publication(self, *, teams=False):
+        first, pointer = deepcopy(self.child), deepcopy(self.pointer)
+        self.child['derived_from_candidate'] = first['candidate_id']
+        self.child['assembly_sha'] = 'e' * 40
+        self.child['files']['team_match.html'] = c.digest(b'later runtime')
+        if teams:
+            self.child['team_identity'] = {'generation_id': '6' * 64}
+            name = 'config/opportunity_team_model.json'
+            self.child['generation_files'][name] = self.child['files'][name] = c.digest(b'new team decisions')
+            self.child['team_generation'] = {'sha': 'e' * 40, 'run_id': '260', 'run_attempt': '1',
+                'parent_candidate_id': first['candidate_id']}
+        self.seal_child(); self.pointer['artifact_run'] = '260'
+        self.publications = {'later-publication': (deepcopy(self.child), deepcopy(self.pointer)),
+                             'protected-runtime': (first, pointer)}
+
+    def unpublished_runtime_parent(self):
+        self.later_publication()
+        parent, _ = self.publications.pop('protected-runtime')
+        run = self.run | {'id': 250, 'conclusion': 'failure'}
+        self.runs[250] = run; self.attempts[250, 1] = deepcopy(run)
+        self.add_artifact(250, 'candidate-' + parent['candidate_id'], {'candidate.json': parent,
+            **{'files/' + name: raw for name, raw in self.raw.items()},
+            'files/team_match.html': b'corrected runtime'}, run=250)
+        self.add_artifact(1250, 'release-plan-1', {'release-plan.json': {'stage': 'reuse',
+            'candidate_run': '240' if 240 in self.runs else '220',
+            'candidate_id': parent['derived_from_candidate'], 'release_sha': parent['assembly_sha']}}, run=250)
+        steps = []
+        workflow = yaml.safe_load(self.workflow)
+        for number, step in enumerate(workflow['jobs']['assemble']['steps'], 1):
+            condition = step.get('if', '')
+            steps.append({'name': step.get('name', 'Run ' + step.get('uses', 'setup')), 'number': number,
+                'status': 'completed', 'conclusion': 'skipped' if "needs.plan.outputs.stage != 'reuse'" in condition
+                    or 'inputs.qualification_pilot' in condition else 'success'})
+        self.job_rows[250, 1] = [{'id': 250000 + number, 'name': name, 'run_id': 250, 'run_attempt': 1,
+            'head_sha': self.HEAD, 'head_branch': 'main', 'status': 'completed',
+            'conclusion': 'success' if name in ('plan', 'assemble', 'candidate') else
+                'failure' if name == 'validate' else 'skipped', **({'steps': steps} if name == 'assemble' else {})}
+            for number, name in enumerate(workflow['jobs'], 1)]
+        self.retain_current_publication()
+        return parent
+
+    def retain_current_publication(self):
+        self.runs[260] = self.run | {'id': 260, 'conclusion': 'success'}
+        self.attempts[260, 1] = deepcopy(self.runs[260])
+        self.add_artifact(260, 'candidate-' + self.child['candidate_id'], {'candidate.json': self.child,
+            **{'files/' + name: raw for name, raw in self.protected_raw.items()},
+            'files/team_match.html': b'later runtime'}, run=260)
+
     def test_actual_caller_floor_retires_unpublished_source_child_through_proven_runtime_publication(self):
         self.assertIsNone(self.select())
         self.assertIn('data/search-v2-voyage-vectors.f16', self.binary_reads)
@@ -216,14 +269,14 @@ class RuntimeReconciliationPublication(unittest.TestCase):
                 self.child = deepcopy(valid); change(self.child); self.seal_child()
                 with self.assertRaises(scheduled.Hold): self.select()
 
-    def test_canonical_publication_pointer_and_immediate_private_parent_are_required(self):
+    def test_canonical_publication_pointer_and_valid_assembly_parent_are_required(self):
         original, pointer = deepcopy(self.child), deepcopy(self.pointer)
         self.pointer['candidate_id'] = 'f' * 64
         with self.assertRaises(scheduled.Hold): self.select()
         self.pointer = deepcopy(pointer)
         self.child['assembly_sha'] = 'f' * 40  # Invalid canonical ID must not authenticate by receipt alone.
         with self.assertRaises(scheduled.Hold): self.select()
-        self.child = deepcopy(original); self.child['derived_from_candidate'] = 'f' * 64; self.seal_child()
+        self.child = deepcopy(original); self.child['derived_from_candidate'] = 'invalid'; self.seal_child()
         with self.assertRaises(scheduled.Hold): self.select()
 
     def test_changed_protected_binary_or_private_completed_manifest_and_ledger_hold(self):
@@ -304,6 +357,206 @@ class RuntimeReconciliationPublication(unittest.TestCase):
                     next(step for step in self.job_rows[240, 1][0]['steps'] if step['name'] ==
                         'Build only the affected homogeneous vector corpus within the original budget')['conclusion'] = 'success'
                 with self.assertRaises(scheduled.Hold): self.select()
+
+    def test_later_runtime_and_team_publications_reach_original_private_source_boundary(self):
+        for teams in (False, True):
+            with self.subTest(teams=teams):
+                self.child = deepcopy(self.publications['protected-runtime'][0]) if self.publications else self.child
+                self.seal_child(); self.later_publication(teams=teams)
+                self.assertIsNone(self.select())
+        self.assertIn('data/search-v2-voyage-vectors.f16', self.binary_reads)
+        self.http.assert_not_called(); self.paid.assert_not_called()
+
+    def test_later_publication_does_not_turn_runtime_publisher_into_source_transport(self):
+        self.later_publication()
+        for identifier, child in ((250, self.publications['protected-runtime'][0]), (260, self.child)):
+            self.runs[identifier] = self.run | {'id': identifier, 'conclusion': 'success'}
+            self.add_artifact(identifier, 'candidate-' + child['candidate_id'], {'candidate.json': child}, run=identifier)
+        self.assertIsNone(self.select())
+        self.assertNotIn('actions/artifacts/250/zip', self.api_calls)
+        self.assertNotIn('actions/artifacts/260/zip', self.api_calls)
+
+    def test_later_descendant_can_cover_consumed_and_zero_work_transport_roles(self):
+        self.consumed_prior(); self.zero_work_transport(); self.later_publication(teams=True)
+        self.assertIsNone(self.select())
+        self.assertIn('actions/artifacts/41/zip', self.api_calls)
+        self.assertIn('actions/runs/180/artifacts?per_page=100&page=1', self.api_calls)
+
+    def test_missing_or_broken_protected_parent_cannot_skip_the_private_boundary(self):
+        # Changed team outputs require the earlier protected publication;
+        # identical runtime outputs can instead prove the source checkpoint.
+        self.later_publication(teams=True)
+        valid = deepcopy(self.publications)
+        for change in ('missing', 'canonical', 'pointer', 'origin', 'receipt'):
+            with self.subTest(change=change):
+                self.publications = deepcopy(valid)
+                if change == 'missing': self.publications.pop('protected-runtime')
+                else:
+                    parent, pointer = self.publications['protected-runtime']
+                    if change == 'canonical': parent['assembly_sha'] = 'f' * 40
+                    if change == 'pointer': pointer['candidate_id'] = 'f' * 64
+                    if change == 'origin': parent['original_generation']['generation_sha'] = 'f' * 40
+                    if change == 'receipt': parent['source_reconciliation']['ledger_sha256'] = 'f' * 64
+                with self.assertRaises(scheduled.Hold): self.select()
+
+    def test_later_publication_still_checks_private_source_ledger_and_protected_bytes(self):
+        self.later_publication()
+        for change in ('ledger', 'source', 'bytes'):
+            with self.subTest(change=change):
+                state = deepcopy(self.state); self.protected_raw = dict(self.raw)
+                if change == 'ledger': state['ledger.json']['requests'][0]['charged_microusd'] = 0
+                if change == 'source': state.pop('complete-candidates/' + self.source['candidate_id'] + '/candidate.json')
+                if change == 'bytes': self.protected_raw['data/search-v2-voyage-vectors.f16'] = b'changed'
+                self.add_artifact(11, self.family + '-state-220-1', state)
+                with self.assertRaises(scheduled.Hold): self.select()
+
+    def test_later_publication_cannot_hide_new_allowance_candidate_or_started_work(self):
+        self.later_publication()
+        for kind in ('reservation', 'candidate', 'correction'):
+            with self.subTest(kind=kind):
+                self.artifacts[:] = [row for row in self.artifacts if row['id'] < 20]
+                self.later(job='catalog-reconcile' if kind == 'correction' else 'validate')
+                if kind != 'correction':
+                    name = self.family + '-reservation-220-2' if kind == 'reservation' else 'candidate-' + '9' * 64
+                    self.add_artifact(20, name, {'unacknowledged.json': {}})
+                with self.assertRaises(scheduled.Hold): self.select()
+
+    def test_later_publication_accepts_only_downstream_retry_after_original_boundary(self):
+        self.later_publication(teams=True); self.later()
+        self.assertIsNone(self.select())
+        self.assertIn('actions/runs/220/attempts/2/jobs?per_page=100&page=1', self.api_calls)
+
+    def test_first_publication_from_unpublished_runtime_parent_covers_runtime_and_source_owners(self):
+        parent = self.unpublished_runtime_parent()
+        self.assertNotEqual(self.child['derived_from_candidate'], self.source['candidate_id'])
+        self.assertEqual(self.child['derived_from_candidate'], parent['candidate_id'])
+        self.assertIsNone(self.select())
+        self.assertIn('actions/artifacts/250/zip', self.api_calls)
+        self.assertIn('actions/runs/250/attempts/1/jobs?per_page=100&page=1', self.api_calls)
+        self.assertIn('data/search-v2-voyage-vectors.f16', self.binary_reads)
+        self.assertEqual(self.ledger['requests'][0]['charged_microusd'], 25)
+        self.http.assert_not_called(); self.paid.assert_not_called()
+
+    def test_unpublished_runtime_parent_preserves_consumed_and_zero_work_source_transports(self):
+        self.consumed_prior(); self.zero_work_transport(); self.unpublished_runtime_parent()
+        self.assertIsNone(self.select())
+        self.assertIn('actions/artifacts/41/zip', self.api_calls)
+        self.assertIn('actions/runs/180/artifacts?per_page=100&page=1', self.api_calls)
+
+    def test_completed_source_identity_and_operation_remain_authenticated_without_published_parent(self):
+        self.unpublished_runtime_parent()
+        for change in ('missing-id', 'invalid-id', 'different-id', 'operation', 'parent'):
+            with self.subTest(change=change):
+                state = deepcopy(self.state)
+                context = state['reconciliation.json']
+                if change == 'missing-id': context.pop('completed_candidate_id')
+                if change == 'invalid-id': context['completed_candidate_id'] = '../candidate'
+                if change == 'different-id': context['completed_candidate_id'] = 'f' * 64
+                if change == 'operation': context['operation_sha256'] = 'f' * 64
+                if change == 'parent': context['parent_candidate_id'] = 'f' * 64
+                self.add_artifact(11, self.family + '-state-220-1', state)
+                with self.assertRaises(scheduled.Hold): self.select()
+
+    def test_unpublished_runtime_owner_with_allowance_provider_work_or_extra_candidate_is_not_retired(self):
+        self.unpublished_runtime_parent()
+        original_jobs = deepcopy(self.job_rows[250, 1])
+        for kind in ('allowance', 'provider', 'candidate'):
+            with self.subTest(kind=kind):
+                self.inventories[250][:] = [row for row in self.inventories[250] if row['id'] in (250, 1250)]
+                self.job_rows[250, 1] = deepcopy(original_jobs)
+                if kind == 'allowance': self.add_artifact(251, 'generation-spend-reservation-250-1', {}, run=250)
+                if kind == 'candidate': self.add_artifact(251, 'candidate-' + 'f' * 64, {}, run=250)
+                if kind == 'provider':
+                    job = next(row for row in self.job_rows[250, 1] if row['name'] == 'assemble')
+                    next(step for step in job['steps'] if step['name'] ==
+                        'Run only bounded selected team work on the pinned catalog')['conclusion'] = 'success'
+                try:
+                    self.assertIsNotNone(self.select())
+                except scheduled.Hold:
+                    pass
+
+    def test_unpublished_runtime_parent_still_enforces_original_source_retry_history(self):
+        self.unpublished_runtime_parent(); self.later()
+        self.assertIsNone(self.select())
+        for kind in ('reservation', 'candidate', 'correction'):
+            with self.subTest(kind=kind):
+                self.artifacts[:] = [row for row in self.artifacts if row['id'] < 20]
+                self.later(job='catalog-reconcile' if kind == 'correction' else 'validate')
+                if kind != 'correction':
+                    name = self.family + '-reservation-220-2' if kind == 'reservation' else 'candidate-' + '9' * 64
+                    self.add_artifact(20, name, {'unacknowledged.json': {}})
+                with self.assertRaises(scheduled.Hold): self.select()
+
+    def test_two_unpublished_runtime_runs_are_proved_independently_before_source_retirement(self):
+        first = self.unpublished_runtime_parent()
+        second = deepcopy(first)
+        second.update(derived_from_candidate=first['candidate_id'], assembly_sha='f' * 40)
+        second.pop('candidate_id'); second['candidate_id'] = c.digest(c.encoded(second))
+        self.runs[255] = self.run | {'id': 255, 'conclusion': 'failure'}
+        self.attempts[255, 1] = deepcopy(self.runs[255])
+        self.add_artifact(255, 'candidate-' + second['candidate_id'], {'candidate.json': second,
+            **{'files/' + name: raw for name, raw in self.raw.items()},
+            'files/team_match.html': b'corrected runtime'}, run=255)
+        self.add_artifact(1255, 'release-plan-1', {'release-plan.json': {'stage': 'reuse',
+            'candidate_run': '250', 'candidate_id': second['derived_from_candidate'],
+            'release_sha': second['assembly_sha']}}, run=255)
+        self.job_rows[255, 1] = deepcopy(self.job_rows[250, 1])
+        for job in self.job_rows[255, 1]: job.update(id=job['id'] + 5000, run_id=255)
+        self.child['derived_from_candidate'] = second['candidate_id']; self.seal_child(); self.pointer['artifact_run'] = '260'
+        self.publications['later-publication'] = deepcopy(self.child), deepcopy(self.pointer)
+        self.retain_current_publication()
+        self.assertIsNone(self.select())
+        self.assertIn('actions/runs/250/attempts/1/jobs?per_page=100&page=1', self.api_calls)
+        self.assertIn('actions/runs/255/attempts/1/jobs?per_page=100&page=1', self.api_calls)
+        originals = {number: deepcopy(self.job_rows[number, 1]) for number in (250, 255)}
+        for number in (250, 255):
+            for change in ('voucher', 'provider'):
+                with self.subTest(run=number, change=change):
+                    for producer in (250, 255):
+                        self.inventories[producer][:] = [row for row in self.inventories[producer]
+                            if row['id'] in (producer, 1000 + producer)]
+                        self.job_rows[producer, 1] = deepcopy(originals[producer])
+                    if change == 'voucher':
+                        self.add_artifact(500, f'generation-spend-reservation-{number}-1', {}, run=number)
+                    else:
+                        job = next(row for row in self.job_rows[number, 1] if row['name'] == 'assemble')
+                        next(step for step in job['steps'] if step['name'] ==
+                            'Run only bounded selected team work on the pinned catalog')['conclusion'] = 'success'
+                    try:
+                        owner = self.select()
+                        self.assertIsNotNone(owner); self.assertEqual(owner[0], str(number))
+                    except scheduled.Hold:
+                        pass
+
+    def test_zero_allowance_runtime_cannot_block_a_later_different_source_generation(self):
+        self.unpublished_runtime_parent()
+        self.protected_raw['data/opportunities.js'] = b'newer independently generated catalog\n'
+        digest = c.digest(self.protected_raw['data/opportunities.js'])
+        self.child['generation_files']['data/opportunities.js'] = self.child['files']['data/opportunities.js'] = digest
+        self.child.update(generation_run_id='230', generation_sha='e' * 40,
+                          generation_timestamp='2026-10-18T15:00:00Z')
+        self.child['semantic_identity']['corpus_sha256'] = 'f' * 64
+        for key in ('derived_from_candidate', 'assembly_sha', 'source_reconciliation', 'original_generation'):
+            self.child.pop(key)
+        self.seal_child(); self.pointer['artifact_run'] = '230'
+        self.publications['later-publication'] = deepcopy(self.child), deepcopy(self.pointer)
+        self.runs.pop(260)
+        self.runs[230] = self.run | {'id': 230, 'conclusion': 'success'}
+        self.assertIsNone(self.select())
+        self.assertIn('actions/runs/250/attempts/1/jobs?per_page=100&page=1', self.api_calls)
+        self.assertNotIn('actions/runs/220/artifacts?per_page=100&page=1', self.api_calls)
+
+    def test_zero_allowance_runtime_proof_cannot_retire_an_unproved_paid_source(self):
+        self.unpublished_runtime_parent()
+        self.protected_raw['data/opportunities.js'] = b'changed published science\n'
+        digest = c.digest(self.protected_raw['data/opportunities.js'])
+        self.child['generation_files']['data/opportunities.js'] = self.child['files']['data/opportunities.js'] = digest
+        self.seal_child(); self.pointer['artifact_run'] = '260'
+        self.publications['later-publication'] = deepcopy(self.child), deepcopy(self.pointer)
+        self.retain_current_publication()
+        with self.assertRaises(scheduled.Hold) as held: self.select()
+        self.assertEqual(held.exception.run, '220')
+        self.assertIn('actions/runs/250/attempts/1/jobs?per_page=100&page=1', self.api_calls)
 
 
 if __name__ == '__main__':
