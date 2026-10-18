@@ -119,6 +119,67 @@ class ReconciliationVectorRetention(unittest.TestCase):
                 self.assertIsNone(spend.retained_reconciliation_outputs(self.state, current, changed, self.root))
         self.assertEqual(self.book.path.read_bytes(), self.original_ledger)
 
+    def test_reuse_then_fresh_corpus_seals_new_origin_and_later_reuses_new_asset(self):
+        stage = self.reuse()
+        child = self.complete_candidate(self.current, stage)
+        self.new_operation(dict(self.current, completed_candidate_id=child['candidate_id']), child, 'c')
+        changed = deepcopy(self.packet); changed['corpus_sha256'] = 'f' * 64
+        self.assertEqual(spend.prepare(self.state, changed)['status'], 'prepared')
+        before = self.book.read()
+        reservation = spend.reserve(self.state, {'url': spend.URL, 'body': json.dumps({
+            'input': ['Genuinely changed scientific passage'], 'model': spend.MODEL,
+            'input_type': 'document', 'truncation': True, 'output_dimension': 1024, 'output_dtype': 'float'})})
+        spend.finish(self.state, {'key': reservation['key'], 'token': reservation['token'], 'status': 200,
+            'request_id': 'e' * 32, 'payload': {'model': spend.MODEL, 'usage': {'total_tokens': 51},
+                'data': [{'index': 0, 'embedding': [.25] * 1024}]}})
+        self.raw = {name: ('new completed asset: ' + name).encode() for name in spend.VECTOR_OUTPUTS}
+        self.raw[spend.VECTOR_OUTPUTS[-1]] = c.encoded({'status': 'written', 'model': spend.MODEL,
+            'API_request_count': 1, 'usage_total_tokens': 51, 'API_requests': [{'model': spend.MODEL,
+                'http_status': 200, 'request_id': 'e' * 32, 'usage_total_tokens': 51, 'passage_count': 1}]})
+        self.hashes = {name: c.digest(raw) for name, raw in self.raw.items()}; self.write_outputs(self.raw)
+        self.assertEqual(spend.checkpoint(self.state, {'operation_sha256': self.current['operation_sha256'],
+            'outputs': self.hashes}), {'status': 'complete'})
+        completion = self.state / 'vector-completions' / (self.current['operation_sha256'] + '.json')
+        sealed = completion.read_bytes(); origin = json.loads(sealed)['accounting_origin']
+        self.assertEqual(origin['operation_sha256'], self.current['operation_sha256'])
+        self.assertEqual([row['id'] for row in origin['requests']], [reservation['token']])
+        after = self.book.read()
+        self.assertEqual(after['requests'][:-1], before['requests'])
+        self.assertEqual(after['events'], before['events'])
+        self.assertEqual(after['requests'][-1]['status'], 'valid')
+        self.assertEqual(self.sealed.read_bytes(), self.original_sealed)
+        fresh = self.complete_candidate(self.current)
+        self.new_operation(dict(self.current, completed_candidate_id=fresh['candidate_id']), fresh, 'd')
+        self.assertEqual(self.current['retained_vector_source']['candidate_id'], fresh['candidate_id'])
+        self.write_outputs({name: b'cold predecessor' for name in spend.VECTOR_OUTPUTS})
+        restored = spend.prepare(self.state, changed)
+        self.assertEqual(restored['status'], 'restore')
+        self.assertEqual(restored['outputs'], self.hashes)
+        self.write_outputs({name: Path(path).read_bytes() for name, path in restored['blobs'].items()})
+        spend.checkpoint(self.state, {'operation_sha256': self.current['operation_sha256'],
+            'outputs': self.hashes, 'restored': True})
+        self.assertEqual(self.book.read(), after)
+        self.assertEqual(completion.read_bytes(), sealed)
+
+    def test_same_corpus_valid_json_ledger_change_still_cannot_retain_old_asset(self):
+        changed = self.book.read(); changed['requests'][0]['charged_microusd'] += 1
+        atomic_json(self.book.path, changed)
+        with self.assertRaisesRegex(ValueError, 'budgeted_measured_usage'):
+            spend.retained_reconciliation_outputs(self.state, self.current, spend.vector_binding(self.packet), self.root)
+
+    def test_old_binding_conflicting_with_sealed_completion_cannot_select_fresh_work(self):
+        pointer = self.current['retained_vector_source']
+        path = self.state / 'vector-bindings' / (pointer['operation_sha256'] + '.json')
+        original = path.read_bytes()
+        for key in ('corpus_sha256', 'configuration_sha256'):
+            with self.subTest(key=key):
+                changed = json.loads(original); changed[key] = 'f' * 64
+                atomic_json(path, changed)
+                with self.assertRaisesRegex(ValueError, 'completed_vector_identity'):
+                    spend.prepare(self.state, self.packet)
+                self.assertEqual(self.book.path.read_bytes(), self.original_ledger)
+        path.write_bytes(original)
+
     def test_context_blob_ledger_or_manifest_tampering_fails_closed_without_dispatch(self):
         pointer = self.current['retained_vector_source']
         paths = [self.state / 'retained-vector-contexts' / (pointer['operation_sha256'] + '.json'),

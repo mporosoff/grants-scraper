@@ -255,7 +255,6 @@ def retained_reconciliation_outputs(state, value, binding, root):
     receipt = manifest.get('source_reconciliation', {})
     require(receipt.get('operation_sha256') == prior['operation_sha256']
             and receipt.get('cache_operation_contract') == prior['operation_contract']
-            and receipt.get('ledger_sha256') == identity(ledger(state).read())
             and all(manifest['files'].get(name) == digest for name, digest in source['outputs'].items()),
             'retained_source_receipt')
     old_binding = json.loads((Path(state) / 'vector-bindings' / (prior['operation_sha256'] + '.json')).read_bytes())
@@ -276,6 +275,7 @@ def retained_reconciliation_outputs(state, value, binding, root):
             or prior['operation_contract'].get('tools/corpus_clock.mjs') !=
                value['operation_contract'].get('tools/corpus_clock.mjs')):
         return None
+    require(receipt.get('ledger_sha256') == identity(ledger(state).read()), 'retained_source_receipt')
     proof = {'version': 'reconciliation-vector-retention-1', 'operation_sha256': value['operation_sha256'],
         'source': source, 'source_completion_sha256': hashlib.sha256((Path(state) / 'vector-completions' /
             (prior['operation_sha256'] + '.json')).read_bytes()).hexdigest(),
