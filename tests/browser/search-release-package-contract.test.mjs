@@ -128,6 +128,7 @@ test("release package verification is a deterministic no-write gate", () => {
   const run = spawnSync(process.execPath, [fileURLToPath(paths.packageBuilder), "--check"], {
     cwd: fileURLToPath(root),
     encoding: "utf8",
+    env: { ...process.env, PYTHON: "unavailable-python-check-must-not-bind-references" },
   });
   assert.equal(run.status, 0, run.stderr);
   assert.match(run.stdout, /"status": "verified"/);

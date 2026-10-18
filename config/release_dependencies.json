@@ -200,6 +200,7 @@
         "workers/search-voyage-proxy/src/**/*",
         "workers/search-voyage-proxy/wrangler.jsonc",
         "tools/build_search_release_package.mjs",
+        "tools/assemble_release_candidate.py",
         "workers/award-api/src/adapters/dod.js",
         "workers/award-api/src/institutions.js",
         "workers/award-api/src/ror.js",

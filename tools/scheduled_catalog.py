@@ -280,7 +280,7 @@ def _published_reconciliation_supersedes(root, run, artifacts, *, repository=Non
     return False
 
 
-def _published_reconciliation_consumes(root, run, artifacts, *, repository=None):
+def _published_reconciliation_consumes(root, run, artifacts, *, repository=None, _source_boundary=None):
     """A corrected publication may consume exact earlier repair checkpoints."""
     vouchers = [row for row in artifacts if re.fullmatch(
         r'offline-ai-reconcile-[a-f0-9]{64}-reservation-' + str(run['id']) + r'-[1-9][0-9]*', row['name'])]
@@ -291,21 +291,36 @@ def _published_reconciliation_consumes(root, run, artifacts, *, repository=None)
         return (isinstance(pin, dict) and re.fullmatch('[a-f0-9]{64}', pin.get('sha256', '')) is not None
             and any(row.get('id') == pin.get('id') and row.get('name') == pin.get('name')
                     and row.get('digest') == 'sha256:' + pin['sha256'] for row in artifacts))
-    revisions = c.git(root, 'log', '--first-parent', '--format=%H', '-100', '--',
-                      'release/candidate-source.json').splitlines()
+    revisions = ([None] if _source_boundary is not None else
+        c.git(root, 'log', '--first-parent', '--format=%H', '-100', '--',
+              'release/candidate-source.json').splitlines())
     for sha in revisions:
-        child = json.loads(c.git(root, 'show', sha + ':release/candidate.json'))
+        child = _source_boundary[0] if sha is None else json.loads(c.git(root, 'show', sha + ':release/candidate.json'))
         receipt = child.get('source_reconciliation') or {}
+        if not receipt:
+            continue
         links = [link for link in receipt.get('consumed_checkpoints', [])
                  if (link.get('producer') or {}).get('run_id') == str(run['id'])]
         affected = receipt.get('affected_generation') or {}
-        # Later runtime/team assemblies retain the source receipt, but its
-        # direct source child remains the owner-authentication boundary.
+        pointer = _source_boundary[1] if sha is None else None
+        # A first publication can assemble runtime around an unpublished source
+        # child. Authenticate that exact private child before retiring its owner.
         if (child.get('derived_from_candidate') != receipt.get('parent_candidate_id')
                 or affected.get('generation_sha') != child.get('assembly_sha')):
-            continue
+            source_id = child.get('derived_from_candidate')
+            transporting = any(row['name'] == 'candidate-' + str(source_id) for row in artifacts)
+            if affected.get('generation_run_id') != str(run['id']) and not links and not transporting:
+                continue
+            pointer = json.loads(c.git(root, 'show', sha + ':release/candidate-source.json'))
+            child = _runtime_reconciliation_source(root, repository, run, artifacts, child, pointer, sha)
+            receipt, affected = child['source_reconciliation'], child['source_reconciliation']['affected_generation']
+            # This is the authenticated source boundary behind the publication,
+            # not a claim that its unchanged package was itself published.
+            pointer = {'candidate_id': child['candidate_id'], 'artifact_run':
+                str(run['id']) if transporting and not links else affected['generation_run_id']}
         own = affected.get('generation_run_id') == str(run['id'])
-        pointer = json.loads(c.git(root, 'show', sha + ':release/candidate-source.json'))
+        if pointer is None:
+            pointer = json.loads(c.git(root, 'show', sha + ':release/candidate-source.json'))
         transport = pointer.get('artifact_run') == str(run['id']) and not own
         if not links and not own and not transport:
             continue
@@ -372,6 +387,64 @@ def _published_reconciliation_consumes(root, run, artifacts, *, repository=None)
                                             allowed_candidate_ids=covered)
         return True
     return False
+
+
+def _runtime_reconciliation_source(root, repository, run, artifacts, published, pointer, revision):
+    """Prove one runtime assembly conserves its privately completed source child."""
+    try:
+        source_id = published.get('derived_from_candidate')
+        receipt = published['source_reconciliation']; affected = receipt['affected_generation']
+        attempt = affected['generation_run_attempt']
+        if (not repository or re.fullmatch('[a-f0-9]{64}', str(source_id)) is None
+                or published.get('candidate_id') != pointer.get('candidate_id')
+                or published['candidate_id'] != c.digest(c.encoded({key: value for key, value in published.items()
+                                                                  if key != 'candidate_id'}))
+                or re.fullmatch('[1-9][0-9]*', str(pointer.get('artifact_run', ''))) is None
+                or pointer['artifact_run'] == affected.get('generation_run_id')
+                or re.fullmatch('[1-9][0-9]*', str(affected.get('generation_run_id', ''))) is None
+                or re.fullmatch('[1-9][0-9]*', str(attempt)) is None):
+            raise ValueError('Invalid runtime descendant identity')
+        source_run = affected['generation_run_id']
+        owner = run if source_run == str(run['id']) else json.loads(api(repository, f'actions/runs/{source_run}'))
+        if owner.get('id') != int(source_run):
+            raise ValueError('Completed source producer identity changed')
+        owned = artifacts if source_run == str(run['id']) else run_artifacts(source_run,
+            lambda path: api(repository, path), repository=repository)
+        name = f'offline-ai-reconcile-{receipt["parent_candidate_id"]}-state-{source_run}-{attempt}'
+        states = [row for row in owned if row['name'] == name]
+        if len(states) != 1:
+            raise ValueError('Exact completed source checkpoint unavailable')
+        path = 'complete-candidates/' + source_id + '/candidate.json'
+        documents = _reconciliation_documents(repository, owner, states[0], ['reconciliation.json', path])
+        source, context = documents[path], documents['reconciliation.json']
+        conserved = ('generation_sha', 'generation_run_id', 'generation_run_attempt', 'generation_timestamp',
+            'generation_dependencies', 'generator_versions', 'generation_baseline', 'generation_files',
+            'team_identity', 'semantic_identity', 'original_generation', 'source_reconciliation')
+        if (source.get('candidate_id') != source_id or context.get('completed_candidate_id') != source_id
+                or source_id != c.digest(c.encoded({key: value for key, value in source.items() if key != 'candidate_id'}))
+                or source.get('derived_from_candidate') != receipt.get('parent_candidate_id')
+                or source.get('assembly_sha') != affected.get('generation_sha')
+                or any(key not in source or published.get(key) != source[key] for key in conserved)
+                or any(published.get('dependency_groups', {}).get(group) != source.get('dependency_groups', {}).get(group)
+                       or not source.get('dependency_groups', {}).get(group) for group in ('source', 'teams', 'semantic'))):
+            raise ValueError('Runtime assembly changed source provenance or generation identity')
+        generated = source['generation_files']
+        if not isinstance(generated, dict) or not generated:
+            raise ValueError('Completed source output inventory unavailable')
+        for name, digest in generated.items():
+            c.checked_path(root, name)
+            if (source.get('files', {}).get(name) != digest or published.get('files', {}).get(name) != digest
+                    or c.digest(subprocess.check_output(['git', '-C', str(root), 'show', revision + ':' + name],
+                                                       stderr=subprocess.DEVNULL)) != digest):
+                raise ValueError('Published generated bytes differ from the completed source child')
+        if source_run != str(run['id']) and not _published_reconciliation_consumes(root, owner, owned,
+                repository=repository, _source_boundary=(source,
+                    {'candidate_id': source_id, 'artifact_run': source_run})):
+            raise ValueError('Completed source owner is not fully covered by its checkpoint')
+        return source
+    except (ValueError, KeyError, TypeError, OSError, subprocess.SubprocessError) as error:
+        raise Hold('Published runtime assembly does not authenticate its completed source child: ' + str(error),
+                   run['id']) from error
 
 
 def _published_reconciliation_producer(root, repository, run, artifacts, child, receipt):

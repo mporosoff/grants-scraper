@@ -1,8 +1,8 @@
 """Protected whole-vector reuse across generation recovery and reconciliation.
 
-The four public assets and their protected release receipts are real checked-in
-bytes. Git's read-only object transport is supplied by a self-contained fixture;
-the asset authenticator, durable completion and history importer all run normally.
+The protected Git object fixture contains a complete, coherent small asset and
+its release receipts, independent of the candidate materialized for validation.
+The asset authenticator, durable completion and history importer run normally.
 """
 from contextlib import ExitStack
 from copy import deepcopy
@@ -10,6 +10,7 @@ import hashlib
 import json
 from pathlib import Path
 import shutil
+import struct
 import subprocess
 import tempfile
 import unittest
@@ -30,13 +31,39 @@ class RetainedVectorOriginIntegration(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        repository = Path(__file__).resolve().parents[1]
-        cls.public_bytes = {name: (repository / name).read_bytes() for name in spend.VECTOR_OUTPUTS}
-        cls.public_metadata = {name: (repository / name).read_bytes() for name in (
-            'release/candidate.json', 'release/candidate-source.json', 'release/validation.json')}
-        cls.public_manifest = json.loads(cls.public_metadata['release/candidate.json'])
-        cls.public_vectors = json.loads(cls.public_bytes[spend.VECTOR_OUTPUTS[0]])
-        cls.semantic = cls.public_manifest['dependency_groups']['semantic']
+        # Validation intentionally overlays new candidate outputs while the
+        # protected release markers still describe the previous publication.
+        # Never assemble a supposed protected Git tree from those mixed inputs.
+        configuration = {'model': spend.MODEL, 'input_type': 'document',
+                         'dimension': 1024, 'dtype': 'float16-le'}
+        vectors = struct.pack('<1024e', *([.125] * 1024))
+        canaries = {'schema_version': 1, 'model': spend.MODEL, 'dimension': 1024,
+                    'canaries': [{'id': 'protected-fixture', 'embedding': [.125] * 1024}]}
+        cls.public_vectors = {'schema_version': 1, 'generated_at': '2026-10-13T12:00:00Z',
+            **configuration, 'corpus_sha256': identity(['protected fixture passage']),
+            'configuration_sha256': identity(configuration), 'passage_count': 1,
+            'vector_bytes': len(vectors), 'vector_sha256': hashlib.sha256(vectors).hexdigest(),
+            'model_space_fingerprint': identity(canaries), 'reuse_permitted': False}
+        report = {'status': 'written', 'model': spend.MODEL, 'API_request_count': 1,
+            'usage_total_tokens': 51, 'API_requests': [{'model': spend.MODEL, 'http_status': 200,
+                'passage_count': 1, 'usage_total_tokens': 51, 'request_id': 'f' * 32}]}
+        cls.public_bytes = dict(zip(spend.VECTOR_OUTPUTS,
+            (candidate.encoded(cls.public_vectors), vectors, candidate.encoded(canaries), candidate.encoded(report))))
+        hashes = {name: hashlib.sha256(raw).hexdigest() for name, raw in cls.public_bytes.items()}
+        inputs = {'tools/clock.py': hashlib.sha256(b'public_input = True\n').hexdigest()}
+        cls.semantic = {'files': inputs, 'fingerprint': identity(inputs)}
+        cls.public_manifest = {'schema_version': 1, 'generation_sha': 'e' * 40,
+            'generation_run_id': '42', 'generation_run_attempt': '1', 'files': hashes,
+            'dependency_groups': {'semantic': cls.semantic}}
+        cls.public_manifest['candidate_id'] = candidate.digest(candidate.encoded(cls.public_manifest))
+        receipt = {'schema_version': 1, 'candidate_id': cls.public_manifest['candidate_id'],
+            'generation_sha': cls.public_manifest['generation_sha'], 'production_mutated': False,
+            'identity': {'candidate_id': cls.public_manifest['candidate_id'], 'candidate_hashes': hashes},
+            'gates': {gate: 'passed' for gate in candidate.GATES}}
+        pointer = {'candidate_id': cls.public_manifest['candidate_id'], 'artifact_run': '42'}
+        cls.public_metadata = {'release/candidate.json': candidate.encoded(cls.public_manifest),
+            'release/validation.json': candidate.encoded(receipt),
+            'release/candidate-source.json': candidate.encoded(pointer)}
 
     def setUp(self):
         temporary = tempfile.TemporaryDirectory(); self.addCleanup(temporary.cleanup)
@@ -199,6 +226,19 @@ class RetainedVectorOriginIntegration(unittest.TestCase):
         self.assertIn(('merge-base', '--is-ancestor', self.PROTECTED_REF, self.VALIDATOR_DESCENDANT), self.git_calls)
         self.assertIn(('show', self.EVENT_SHA + ':' + self.WORKFLOW), self.git_calls)
         self.assertEqual(self.book.read()['events'][-1]['accounting_origin'], origin)
+        self.assert_no_new_spend()
+
+    def test_materialized_new_outputs_cannot_relabel_the_protected_asset_or_its_sealed_origin(self):
+        self.prepared()
+        origin = deepcopy(self.completion['accounting_origin'])
+        protected = dict(self.protected)
+        self.write_outputs({name: raw + b'\n' for name, raw in self.raw.items()})
+        self.assertIsNone(spend.protected_vector_asset(self.root, self.packet))
+        restored = spend.prepare(self.state, self.packet, generation=True)
+        self.assertEqual(restored['status'], 'restore')
+        self.assertEqual(restored['accounting_origin'], origin)
+        self.assertEqual({name: Path(path).read_bytes() for name, path in restored['blobs'].items()}, self.raw)
+        self.assertEqual(self.protected, protected)
         self.assert_no_new_spend()
 
     def test_tampered_or_missing_origin_cannot_fall_back_to_stage_or_legacy_history(self):

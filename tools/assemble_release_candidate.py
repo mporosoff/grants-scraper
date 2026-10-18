@@ -6,6 +6,17 @@ import shutil
 from tools import release_candidate as c
 
 
+def bind_runtime_references(root):
+    """Bind current HTML to retained data without rebuilding scientific outputs."""
+    root = Path(root)
+    from scripts.faculty_match import update_version_target as faculty_reference
+    from scripts.import_opportunity_team_model import update_version_target as team_reference
+    faculty_reference(root / 'team_match.html', root / 'data/faculty_matches.js')
+    model = c.read_json(root / 'config/opportunity_team_model.json')
+    for name in ('team_match.html', 'match_explorer.html'):
+        team_reference(root / name, model['generation_id'])
+
+
 def assemble(root, bundle, team_update=False):
     root, bundle = Path(root), Path(bundle)
     manifest = c.load(bundle)
@@ -17,13 +28,8 @@ def assemble(root, bundle, team_update=False):
         shutil.copyfile(bundle / 'files' / name, target)
     # Only content-addressed HTML references are materialized. These functions
     # update references and do not generate faculty data or select teams.
-    from scripts.faculty_match import update_version_target as faculty_reference
-    from scripts.import_opportunity_team_model import update_version_target as team_reference
     from scripts.update_catalog_docs import catalog_stats, load_catalog, render_docs, update_catalog_asset_reference
-    faculty_reference(root / 'team_match.html', root / 'data/faculty_matches.js')
-    model = c.read_json(root / 'config/opportunity_team_model.json')
-    for name in ('team_match.html', 'match_explorer.html'):
-        team_reference(root / name, model['generation_id'])
+    bind_runtime_references(root)
     # Older candidates did not retain their generated documentation. Derive
     # only statistics from the saved catalog, preserving current authored prose.
     if all((root / name).exists() for name in ('README.md', 'PROJECT.md')):
@@ -42,10 +48,17 @@ def assemble(root, bundle, team_update=False):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--bundle', type=Path, required=True)
+    action = parser.add_mutually_exclusive_group(required=True)
+    action.add_argument('--bundle', type=Path)
+    action.add_argument('--references-only', action='store_true')
     parser.add_argument('--team-update', action='store_true')
     args = parser.parse_args()
-    assemble(c.ROOT, args.bundle, args.team_update)
+    if args.references_only:
+        if args.team_update:
+            parser.error('--references-only cannot generate a team update')
+        bind_runtime_references(c.ROOT)
+    else:
+        assemble(c.ROOT, args.bundle, args.team_update)
 
 
 if __name__ == '__main__':

@@ -225,6 +225,16 @@ async function run() {
     publishedPath ? readFile(publishedPath, "utf8").then(JSON.parse) : Promise.resolve(undefined),
   ]);
   await validateCurrentPackage(manifest, vectorBuffer, canaries);
+  if (write) {
+    // Generated data may be retained from an older candidate while HTML comes
+    // from the protected checkout. Bind both before capturing package hashes.
+    await execFileAsync(process.env.PYTHON || "python", ["-m", "tools.assemble_release_candidate", "--references-only"], {
+      cwd: ROOT,
+      timeout: 30_000,
+      maxBuffer: 128 * 1024,
+      windowsHide: true,
+    });
+  }
   const allowlist = buildAllowlist(manifest, existing, bootstrapPrevious, publishedRelease);
   const allowlistBytes = jsonBytes(allowlist);
   const sourceHashes = {};
