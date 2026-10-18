@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/arts-and-culture.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/arts-and-culture.xml</id>
-  <updated>2026-10-16T16:56:01Z</updated>
+  <updated>2026-10-18T19:40:57Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Public Health Nursing</title>
@@ -177,6 +177,27 @@
     <summary>Centers for Disease Control and Prevention - ERA | Estimated Application 2027-01-26 | Background: Despite advances in technology and improvements in work environments, mining remains one of the most challenging and hazardous occupations in the United States. The industry continues to experience a fatality rate nearly three times higher than the national average for all industries, according to the U.S. Bureau of Labor Statistics (BLS). Public MSHA data show that in 2025, the U.S. m…</summary>
   </entry>
   <entry>
+    <title>Public Humanities Projects</title>
+    <link href="https://www.grants.gov/search-results-detail/364098"/>
+    <id>urn:funding-finder:grants-gov:364098</id>
+    <updated>2026-10-16T00:00:00Z</updated>
+    <author><name>National Endowment for the Humanities</name></author>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <summary>National Endowment for the Humanities | Application 2026-12-16 | The National Endowment for the Humanities (NEH) Division of Lifelong Learning is accepting applications for the Public Humanities Projects program. The purpose of this program is to support projects that bring the ideas and insights of the humanities to life in three areas: (1) exhibitions, (2) historic site interpretations, and (3) public lectures and discussions. For 2027, NEH welcomes applicati…</summary>
+  </entry>
+  <entry>
+    <title>FY 2027 - 2029 Broad Agency Announcement (BAA), National Marine Fisheries Service</title>
+    <link href="https://www.grants.gov/search-results-detail/364099"/>
+    <id>urn:funding-finder:grants-gov:364099</id>
+    <updated>2026-10-16T00:00:00Z</updated>
+    <author><name>DOC NOAA - ERA Production</name></author>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <summary>DOC NOAA - ERA Production | Application 2028-09-30 | This Broad Agency Announcement is a mechanism to encourage research, education, outreach, innovative projects, or sponsorships that are not addressed through NOAA’s competitive discretionary programs. This announcement is not soliciting goods or services for the direct benefit of NOAA. Funding for activities described in this notice is contingent upon the availability of appropriations in the fisc…</summary>
+  </entry>
+  <entry>
     <title>Cooperative Agreement for Affiliated Partner with the Pacific Northwest Cooperative Ecosystem Studies Unit (CESU)</title>
     <link href="https://www.grants.gov/search-results-detail/364084"/>
     <id>urn:funding-finder:grants-gov:364084</id>
@@ -234,18 +255,6 @@
     <category term="Education and workforce"/>
     <category term="Space and aeronautics"/>
     <summary>NASA Headquarters | Preproposal 2026-11-03 | The National Aeronautics and Space Administration (NASA) Headquarters has released the solicitation “Space Technology Research Institutes (STRI26),” as an appendix to the Research and Technology Mission Directorate (RTMD) umbrella NASA Research Announcement (NRA) titled "Space Technology Research, Development, Demonstration, and Infusion 2026 (SpaceTech REDDI 2026).”. The solicitation is available…</summary>
-  </entry>
-  <entry>
-    <title>Strengthening American Infrastructure (SAI)</title>
-    <link href="https://www.grants.gov/search-results-detail/364025"/>
-    <id>urn:funding-finder:grants-gov:364025</id>
-    <updated>2026-10-05T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Arts and culture"/>
-    <category term="Environmental science"/>
-    <category term="Social and behavioral sciences"/>
-    <category term="Technology development"/>
-    <summary>U.S. National Science Foundation | Posted | Strengthening American Infrastructure (SAI) is an NSF program seeking to stimulate human-centered, use-inspired, fundamental and potentially transformative research aimed at strengthening America’s infrastructure. Effective infrastructure provides a strong foundation for socioeconomic vitality and broad improvement in quality of life. Robust, reliable and effective infrastructure spurs private-sec…</summary>
   </entry>
   <entry>
     <title>Advancing coastal flood protection through public-private partnerships, innovative insurance products, and improved sediment management.</title>
@@ -532,19 +541,6 @@
     <category term="Biology and biotechnology"/>
     <category term="Technology development"/>
     <summary>National Institutes of Health | Application 2026-10-30 | The Genomics Research to Elucidate the Genetics of Rare Diseases: innovation (GREGoRi) initiative seeks to accelerate a paradigm shift in rare disease diagnosis by reimagining the tools, molecular technologies and analytical approaches used to identify the causal gene(s) and/or variant(s) underlying rare genetic disorders. This Notice of Funding Opportunity is intended to stimulate the development…</summary>
-  </entry>
-  <entry>
-    <title>FY26 Bureau of Land Management Youth Conservation Corps - Bureau wide</title>
-    <link href="https://www.grants.gov/search-results-detail/362787"/>
-    <id>urn:funding-finder:grants-gov:362787</id>
-    <updated>2026-06-12T00:00:00Z</updated>
-    <author><name>Bureau of Land Management</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Water"/>
-    <summary>Bureau of Land Management | Application 2026-10-16 | The Headquarters Bureau of Land Management (BLM) offices have collaborated with Qualified Youth Corps, as authorized by the Public Lands Corps Act (PLC), to accomplish natural and cultural resource-focused projects for numerous years. This program"s projects provide opportunities to gain work experience in public lands and natural resources management. Through their BLM experience, youth gain an a…</summary>
   </entry>
   <entry>
     <title>Biological Testing Facility for Contraception &amp; Reproductive Health (X01 Clinical Trial Not Allowed)</title>

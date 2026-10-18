@@ -11,8 +11,8 @@ globalThis.SUBTOPIC_CATALOG={
   "frame_evidence_cache_sha256": "2e5196fceba24921b486dce76a29f5759f642ce207fa65fc9bb9a11632a1a71c",
   "top_level_fetch_failure_count": 51
  },
- "parent_count": 27,
- "record_count": 481,
+ "parent_count": 32,
+ "record_count": 484,
  "records": {
   "103313": {
    "segmentation_method": null,
@@ -98,6 +98,13 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "314126": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "314743": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -3249,6 +3256,13 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
+  "342475": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
   "342747": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -3257,6 +3271,13 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "342959": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "343285": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -4010,6 +4031,13 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "343980": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "344001": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -10771,6 +10799,13 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
+  "344634": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
   "344715": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -13294,6 +13329,13 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
+  "350561": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
   "350582": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -13477,6 +13519,13 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "352273": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "352455": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -15325,13 +15374,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "356927": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "356935": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -17460,16 +17502,128 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "359996": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
+   "segmentation_method": "nasa_roses_table",
+   "subtopic_count": 1,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopics": []
+   "subtopics": [
+    {
+     "amended": true,
+     "child_source_url": "https://nspires.nasaprs.com/external/solicitations/summary.do?solId={F2C85D95-15CF-AB33-C8A7-2BF14ADA5A8A}&path=&method=init",
+     "child_type": "subject",
+     "confidence": "high",
+     "division": "A",
+     "evidence_anchor": null,
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-10-17",
+     "last_verified": "2026-10-17",
+     "native_deadline_text": "N/A | No Due Date [3]",
+     "native_status": "no_due_date",
+     "opportunity_id": "359996:a-4",
+     "ordinal_label": "A.4",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": null,
+     "page_start": null,
+     "parent_id": "359996",
+     "parent_opportunity_number": "NNH25ZDA001N-RRNES",
+     "pattern_family": null,
+     "program_area_labels": [],
+     "publication_reason": "high_confidence",
+     "publication_state": "publishable",
+     "record_type": "subtopic",
+     "segmentation_method": null,
+     "source_document_hash": "08b6d52ae04d93b370cc7f134680e955e9dfa2d8a4cff59692dd262ee5b693ea",
+     "source_document_url": "https://nspires.nasaprs.com/external/viewrepositorydocument/cmdocumentid=1041498/solicitationId=%7B2A1D139B-B9C7-CE8C-2E81-223FD08460F9%7D/viewSolicitationDocument=1/Table 3 ROSES-2025_Amend 79.html",
+     "source_role": "authoritative_announcement",
+     "source_version": {
+      "amendment": 79,
+      "year": 2025
+     },
+     "status": "posted",
+     "subtopic_code": "A.4",
+     "subtopic_code_norm": "a-4",
+     "subtopic_id": "359996:a-4",
+     "subtopic_ordinal": 4,
+     "subtopic_source": "native",
+     "summary": "NASA ROSES program element A.4: Rapid Response and Novel Research in Earth Science.",
+     "term_display": {
+      "date": "Date",
+      "division": "division",
+      "due": "Due",
+      "earth": "Earth",
+      "no": "No",
+      "novel": "Novel",
+      "rapid": "Rapid",
+      "response": "Response",
+      "rose": "ROSES",
+      "science": "Science"
+     },
+     "title": "Rapid Response and Novel Research in Earth Science",
+     "title_fingerprint": "3356a78a",
+     "topic_areas": []
+    }
+   ]
   },
   "360004": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
+   "segmentation_method": "nasa_roses_table",
+   "subtopic_count": 1,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopics": []
+   "subtopics": [
+    {
+     "amended": true,
+     "child_source_url": "https://nspires.nasaprs.com/external/solicitations/summary.do?solId={C92A28D2-9E30-4149-24B7-8A40ED4F564B}&path=&method=init",
+     "child_type": "subject",
+     "confidence": "high",
+     "division": "C",
+     "evidence_anchor": null,
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-10-17",
+     "last_verified": "2026-10-17",
+     "native_deadline_text": "N/A | No Due Date [5]",
+     "native_status": "no_due_date",
+     "opportunity_id": "360004:c-2",
+     "ordinal_label": "C.2",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": null,
+     "page_start": null,
+     "parent_id": "360004",
+     "parent_opportunity_number": "NNH25ZDA001N-SCUBED",
+     "pattern_family": null,
+     "program_area_labels": [],
+     "publication_reason": "high_confidence",
+     "publication_state": "publishable",
+     "record_type": "subtopic",
+     "segmentation_method": null,
+     "source_document_hash": "08b6d52ae04d93b370cc7f134680e955e9dfa2d8a4cff59692dd262ee5b693ea",
+     "source_document_url": "https://nspires.nasaprs.com/external/viewrepositorydocument/cmdocumentid=1041498/solicitationId=%7B2A1D139B-B9C7-CE8C-2E81-223FD08460F9%7D/viewSolicitationDocument=1/Table 3 ROSES-2025_Amend 79.html",
+     "source_role": "authoritative_announcement",
+     "source_version": {
+      "amendment": 79,
+      "year": 2025
+     },
+     "status": "posted",
+     "subtopic_code": "C.2",
+     "subtopic_code_norm": "c-2",
+     "subtopic_id": "360004:c-2",
+     "subtopic_ordinal": 27,
+     "subtopic_source": "native",
+     "summary": "NASA ROSES program element C.2: Solar System Science.",
+     "term_display": {
+      "date": "Date",
+      "division": "division",
+      "due": "Due",
+      "no": "No",
+      "rose": "ROSES",
+      "science": "Science",
+      "solar": "Solar",
+      "system": "System"
+     },
+     "title": "Solar System Science",
+     "title_fingerprint": "292ef8ec",
+     "topic_areas": []
+    }
+   ]
   },
   "360006": {
    "segmentation_method": null,
@@ -20731,7 +20885,7 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "360759": {
+  "360869": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -21314,6 +21468,13 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "361317": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "361318": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -27988,13 +28149,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "362787": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "362827": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -28241,6 +28395,13 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "362984": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "362990": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -28897,10 +29058,71 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "363325": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
+   "segmentation_method": "nasa_roses_table",
+   "subtopic_count": 1,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopics": []
+   "subtopics": [
+    {
+     "amended": true,
+     "child_source_url": "https://solicitation.nasaprs.com/NNH25ZDA001N-HWOPSI",
+     "child_type": "subject",
+     "confidence": "high",
+     "division": "D",
+     "evidence_anchor": null,
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-10-17",
+     "last_verified": "2026-10-17",
+     "native_deadline_text": "09/10/2026 (Mandatory NOI) | 10/26/2026",
+     "native_status": "dated",
+     "opportunity_id": "363325:d-8",
+     "ordinal_label": "D.8",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": null,
+     "page_start": null,
+     "parent_id": "363325",
+     "parent_opportunity_number": "NNH25ZDA001N-HWOPSI",
+     "pattern_family": null,
+     "program_area_labels": [],
+     "publication_reason": "high_confidence",
+     "publication_state": "publishable",
+     "record_type": "subtopic",
+     "segmentation_method": null,
+     "source_document_hash": "08b6d52ae04d93b370cc7f134680e955e9dfa2d8a4cff59692dd262ee5b693ea",
+     "source_document_url": "https://nspires.nasaprs.com/external/viewrepositorydocument/cmdocumentid=1041498/solicitationId=%7B2A1D139B-B9C7-CE8C-2E81-223FD08460F9%7D/viewSolicitationDocument=1/Table 3 ROSES-2025_Amend 79.html",
+     "source_role": "authoritative_announcement",
+     "source_version": {
+      "amendment": 79,
+      "year": 2025
+     },
+     "status": "posted",
+     "subtopic_code": "D.8",
+     "subtopic_code_norm": "d-8",
+     "subtopic_id": "363325:d-8",
+     "subtopic_ordinal": 52,
+     "subtopic_source": "native",
+     "summary": "NASA ROSES program element D.8: Habitable Worlds Observatory Precursor Science Investigations.",
+     "term_display": {
+      "09": "09",
+      "10": "10",
+      "2026": "2026",
+      "26": "26",
+      "division": "division",
+      "habitable": "Habitable",
+      "investigation": "Investigations",
+      "mandatory": "Mandatory",
+      "noi": "NOI",
+      "observatory": "Observatory",
+      "precursor": "Precursor",
+      "rose": "ROSES",
+      "science": "Science",
+      "world": "Worlds"
+     },
+     "title": "Habitable Worlds Observatory Precursor Science Investigations",
+     "title_fingerprint": "062f8c08",
+     "topic_areas": []
+    }
+   ]
   },
   "363326": {
    "segmentation_method": null,
@@ -30283,13 +30505,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "363590": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "363591": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -30303,259 +30518,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
-  },
-  "363594": {
-   "segmentation_method": "hgeo_declared_topics",
-   "subtopic_count": 3,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopics": [
-    {
-     "child_type": "subject",
-     "confidence": "high",
-     "cov4_approval_contract": "d1ff2de480fa779a592ceac1aa7c757858d55f34e7d7d6d45043d208ed666e20",
-     "cov4_fundability": "accept",
-     "cov4_ownership": "owned",
-     "cov4_ownership_basis": "grants_gov_attachment_binding",
-     "cov4_prompt_version": "cov4-subject-context-1",
-     "evidence_anchor": "p15",
-     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-     "first_seen": "2026-08-20",
-     "last_verified": "2026-10-16",
-     "opportunity_id": "363594:a-1",
-     "ordinal_label": "1A",
-     "own_deadline": null,
-     "own_deadline_is_advisory": true,
-     "page_end": 15,
-     "page_start": 15,
-     "parent_id": "363594",
-     "parent_opportunity_number": "DE-FOA-0003215",
-     "pattern_family": null,
-     "program_area_labels": [
-      "chemical sciences",
-      "rare earth elements",
-      "critical minerals"
-     ],
-     "publication_reason": "high_confidence",
-     "publication_state": "publishable",
-     "record_type": "subtopic",
-     "segmentation_method": "hgeo_declared_topics",
-     "source_document_hash": "e0d726d61ce72d12111d0449e7699a09d5e32cc472e752569aec5f3978956c52",
-     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354568",
-     "source_role": "authoritative_announcement",
-     "source_version": "e0d726d61ce72d12111d0449e7699a09d5e32cc472e752569aec5f3978956c52",
-     "status": "posted",
-     "subtopic_code": "1A",
-     "subtopic_code_norm": "a-1",
-     "subtopic_id": "363594:a-1",
-     "subtopic_ordinal": 1,
-     "subtopic_source": "inline",
-     "summary": "• Mining and Processing: • Sensors for real-time monitoring or digital twins to enable timely operational changes and pathways for automation and remote operations. • Novel and efficient methods for extracting critical minerals and materials (CMM) and rare earth elements (REE), from coal-based byproducts. • Power and Capture: • Development of advanced, cost-effective and scalable technologies for the management of water and co-products from existing coal-power plants (including coal combustion residuals, gypsum, zero-liquid discharge, etc.).",
-     "term_display": {
-      "acid": "acid",
-      "advanc": "advanced",
-      "analysi": "analysis",
-      "automation": "automation",
-      "byproduct": "byproducts",
-      "capture": "capture",
-      "carbon": "carbon",
-      "change": "changes",
-      "cmm": "CMM",
-      "co": "CO",
-      "co-product": "co-products",
-      "co2": "CO2",
-      "coal": "coal",
-      "coal-bas": "coal-based",
-      "coal-fir": "coal-fired",
-      "coal-power": "coal-power",
-      "combustion": "combustion",
-      "conversion": "conversion",
-      "cost-effective": "cost-effective",
-      "critical": "critical",
-      "development": "Development",
-      "digital": "digital",
-      "dioxide": "dioxide",
-      "discharge": "discharge",
-      "earth": "earth",
-      "economically": "economically",
-      "efficient": "efficient",
-      "electrochemical": "electrochemical",
-      "element": "elements",
-      "material": "materials",
-      "plant": "plants",
-      "power": "Power",
-      "product": "Products"
-     },
-     "title": "Coal",
-     "title_fingerprint": "1ba10316",
-     "topic_areas": [
-      "Catalysis and reaction engineering",
-      "Materials science"
-     ]
-    },
-    {
-     "child_type": "subject",
-     "confidence": "high",
-     "cov4_approval_contract": "8f9ad8b4f4b7425760b5c2b2d04cc37a88dc700b0e8bf521b36936a08d075b51",
-     "cov4_fundability": "accept",
-     "cov4_ownership": "owned",
-     "cov4_ownership_basis": "grants_gov_attachment_binding",
-     "cov4_prompt_version": "cov4-subject-context-1",
-     "evidence_anchor": "p15",
-     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-     "first_seen": "2026-08-20",
-     "last_verified": "2026-10-16",
-     "opportunity_id": "363594:b-1",
-     "ordinal_label": "1B",
-     "own_deadline": null,
-     "own_deadline_is_advisory": true,
-     "page_end": 16,
-     "page_start": 15,
-     "parent_id": "363594",
-     "parent_opportunity_number": "DE-FOA-0003215",
-     "pattern_family": null,
-     "program_area_labels": [
-      "artificial intelligence"
-     ],
-     "publication_reason": "high_confidence",
-     "publication_state": "publishable",
-     "record_type": "subtopic",
-     "segmentation_method": "hgeo_declared_topics",
-     "source_document_hash": "e0d726d61ce72d12111d0449e7699a09d5e32cc472e752569aec5f3978956c52",
-     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354568",
-     "source_role": "authoritative_announcement",
-     "source_version": "e0d726d61ce72d12111d0449e7699a09d5e32cc472e752569aec5f3978956c52",
-     "status": "posted",
-     "subtopic_code": "1B",
-     "subtopic_code_norm": "b-1",
-     "subtopic_id": "363594:b-1",
-     "subtopic_ordinal": 2,
-     "subtopic_source": "inline",
-     "summary": "• Optimization of Oil & Gas Resources: • Development of advanced characterization techniques for unconventional reservoirs (e.g., shale, tight oil/gas) to improve resource assessment and predict optimal extraction strategies. • Exploration of the underlying fluid dynamics, rheology, and geochemical interactions of engineered fracturing fluids, or the physics of rock failure under alternative stimulation approaches that maximize resource extraction. • Methods for extracting CMM and REE from produced water and other oil and gas waste streams.",
-     "term_display": {
-      "advanc": "advanced",
-      "ai": "AI",
-      "algorithm": "algorithms",
-      "alternative": "alternative",
-      "anomaly": "anomaly",
-      "approache": "approaches",
-      "artificial": "Artificial",
-      "assessment": "assessment",
-      "autonomou": "autonomous",
-      "behavior": "behavior",
-      "characterization": "characterization",
-      "cmm": "CMM",
-      "component": "component",
-      "decision-mak": "decision-making",
-      "detection": "detection",
-      "development": "Development",
-      "digital": "Digital",
-      "enhanc": "enhancing",
-      "extraction": "extraction",
-      "fluid": "fluid",
-      "gas": "Gas",
-      "intelligent": "intelligent",
-      "maintenance": "maintenance",
-      "ml": "ML",
-      "model": "modeling",
-      "oil": "Oil",
-      "optimiz": "optimizing",
-      "predictive": "predictive",
-      "real-time": "real-time",
-      "refinery": "Refinery",
-      "reservoir": "reservoir",
-      "resource": "resource",
-      "system": "systems",
-      "twin": "Twins"
-     },
-     "title": "Oil & Gas",
-     "title_fingerprint": "ce6a7110",
-     "topic_areas": [
-      "Artificial intelligence and machine learning",
-      "Data science"
-     ]
-    },
-    {
-     "child_type": "subject",
-     "confidence": "high",
-     "cov4_approval_contract": "c3ad05185783ca871cc1ef5b4b15ffd33290376a0e755ff75520049eddaba1e8",
-     "cov4_fundability": "accept",
-     "cov4_ownership": "owned",
-     "cov4_ownership_basis": "grants_gov_attachment_binding",
-     "cov4_prompt_version": "cov4-subject-context-1",
-     "evidence_anchor": "p16",
-     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-     "first_seen": "2026-08-20",
-     "last_verified": "2026-10-16",
-     "opportunity_id": "363594:c-1",
-     "ordinal_label": "1C",
-     "own_deadline": null,
-     "own_deadline_is_advisory": true,
-     "page_end": 16,
-     "page_start": 16,
-     "parent_id": "363594",
-     "parent_opportunity_number": "DE-FOA-0003215",
-     "pattern_family": null,
-     "program_area_labels": [
-      "critical minerals"
-     ],
-     "publication_reason": "high_confidence",
-     "publication_state": "publishable",
-     "record_type": "subtopic",
-     "segmentation_method": "hgeo_declared_topics",
-     "source_document_hash": "e0d726d61ce72d12111d0449e7699a09d5e32cc472e752569aec5f3978956c52",
-     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354568",
-     "source_role": "authoritative_announcement",
-     "source_version": "e0d726d61ce72d12111d0449e7699a09d5e32cc472e752569aec5f3978956c52",
-     "status": "posted",
-     "subtopic_code": "1C",
-     "subtopic_code_norm": "c-1",
-     "subtopic_id": "363594:c-1",
-     "subtopic_ordinal": 3,
-     "subtopic_source": "inline",
-     "summary": "• Extreme Environment Drilling and Production: • Development and testing of next-generation materials for life cycle reductions in well field development cost (e.g., alloys, composites, coatings, seals, smart materials) with enhanced durability for high-pressure, high-temperature geothermal environments. • Enhanced Geothermal Systems (EGS) and Reservoir Engineering: • Advanced modeling and characterization of subsurface fracture networks to optimize EGS development and performance. • Novel stimulation and operational strategies to create and sustain permeability in geothermal reservoirs.",
-     "term_display": {
-      "advanc": "Advanced",
-      "alloy": "alloys",
-      "brine": "Brines",
-      "characterization": "characterization",
-      "coating": "coatings",
-      "composite": "composites",
-      "cost": "cost",
-      "create": "create",
-      "critical": "Critical",
-      "cycle": "cycle",
-      "development": "Development",
-      "direct": "direct",
-      "drill": "Drilling",
-      "durability": "durability",
-      "e.g": "e.g",
-      "efficient": "efficient",
-      "egs": "EGS",
-      "engineer": "Engineering",
-      "enhanc": "Enhanced",
-      "environment": "Environment",
-      "extraction": "Extraction",
-      "extreme": "Extreme",
-      "field": "field",
-      "fluid": "fluids",
-      "fracture": "fracture",
-      "geothermal": "Geothermal",
-      "high-pressure": "high-pressure",
-      "high-temperature": "high-temperature",
-      "highly": "highly",
-      "life": "life",
-      "lithium": "lithium",
-      "material": "materials",
-      "mineral": "Mineral",
-      "reservoir": "Reservoir"
-     },
-     "title": "Geothermal",
-     "title_fingerprint": "34c78010",
-     "topic_areas": [
-      "Materials science"
-     ]
-    }
-   ]
   },
   "363600": {
    "segmentation_method": null,
@@ -30840,6 +30802,13 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
+  "363712": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
   "363713": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -30880,6 +30849,13 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
    "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363734": {
+   "segmentation_method": "nasa_roses_table",
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "native_parent_reconciliation_failed",
    "subtopics": []
   },
   "363738": {
@@ -31492,13 +31468,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "363842": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363843": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -36500,6 +36469,13 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "363978": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363983": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -41817,6 +41793,70 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
+  "364021": {
+   "segmentation_method": "nasa_roses_table",
+   "subtopic_count": 1,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopics": [
+    {
+     "amended": true,
+     "child_source_url": "https://nspires.nasaprs.com/external/solicitations/summary.do?solNum=NNH25ZDA001N-GEO",
+     "child_type": "subject",
+     "confidence": "high",
+     "division": "A",
+     "evidence_anchor": null,
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-10-17",
+     "last_verified": "2026-10-17",
+     "native_deadline_text": "11/16/2026 (Mandatory NOI) | 01/15/2027",
+     "native_status": "dated",
+     "opportunity_id": "364021:a-18",
+     "ordinal_label": "A.18",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": null,
+     "page_start": null,
+     "parent_id": "364021",
+     "parent_opportunity_number": "NNH25ZDA001N-GEO",
+     "pattern_family": null,
+     "program_area_labels": [],
+     "publication_reason": "high_confidence",
+     "publication_state": "publishable",
+     "record_type": "subtopic",
+     "segmentation_method": null,
+     "source_document_hash": "08b6d52ae04d93b370cc7f134680e955e9dfa2d8a4cff59692dd262ee5b693ea",
+     "source_document_url": "https://nspires.nasaprs.com/external/viewrepositorydocument/cmdocumentid=1041498/solicitationId=%7B2A1D139B-B9C7-CE8C-2E81-223FD08460F9%7D/viewSolicitationDocument=1/Table 3 ROSES-2025_Amend 79.html",
+     "source_role": "authoritative_announcement",
+     "source_version": {
+      "amendment": 79,
+      "year": 2025
+     },
+     "status": "posted",
+     "subtopic_code": "A.18",
+     "subtopic_code_norm": "a-18",
+     "subtopic_id": "364021:a-18",
+     "subtopic_ordinal": 17,
+     "subtopic_source": "native",
+     "summary": "NASA ROSES program element A.18: Geosphere.",
+     "term_display": {
+      "01": "01",
+      "11": "11",
+      "15": "15",
+      "16": "16",
+      "2026": "2026",
+      "2027": "2027",
+      "division": "division",
+      "geosphere": "Geosphere",
+      "mandatory": "Mandatory",
+      "noi": "NOI",
+      "rose": "ROSES"
+     },
+     "title": "Geosphere",
+     "title_fingerprint": "9eb6814c",
+     "topic_areas": []
+    }
+   ]
+  },
   "364024": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -41852,7 +41892,162 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
+  "364032": {
+   "segmentation_method": "nasa_roses_table",
+   "subtopic_count": 1,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopics": [
+    {
+     "amended": true,
+     "child_source_url": "https://solicitation.nasaprs.com/NNH25ZDA001N-LCAS",
+     "child_type": "subject",
+     "confidence": "high",
+     "division": "B",
+     "evidence_anchor": null,
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-10-17",
+     "last_verified": "2026-10-17",
+     "native_deadline_text": "11/20/2026 (Step-1) | 03/16/2027 (Step-2)",
+     "native_status": "dated",
+     "opportunity_id": "364032:b-7",
+     "ordinal_label": "B.7",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": null,
+     "page_start": null,
+     "parent_id": "364032",
+     "parent_opportunity_number": "NNH25ZDA001N-LCAS",
+     "pattern_family": null,
+     "program_area_labels": [],
+     "publication_reason": "high_confidence",
+     "publication_state": "publishable",
+     "record_type": "subtopic",
+     "segmentation_method": null,
+     "source_document_hash": "08b6d52ae04d93b370cc7f134680e955e9dfa2d8a4cff59692dd262ee5b693ea",
+     "source_document_url": "https://nspires.nasaprs.com/external/viewrepositorydocument/cmdocumentid=1041498/solicitationId=%7B2A1D139B-B9C7-CE8C-2E81-223FD08460F9%7D/viewSolicitationDocument=1/Table 3 ROSES-2025_Amend 79.html",
+     "source_role": "authoritative_announcement",
+     "source_version": {
+      "amendment": 79,
+      "year": 2025
+     },
+     "status": "posted",
+     "subtopic_code": "B.7",
+     "subtopic_code_norm": "b-7",
+     "subtopic_id": "364032:b-7",
+     "subtopic_ordinal": 24,
+     "subtopic_source": "native",
+     "summary": "NASA ROSES program element B.7: Heliophysics Low-Cost Access to Space.",
+     "term_display": {
+      "03": "03",
+      "11": "11",
+      "16": "16",
+      "20": "20",
+      "2026": "2026",
+      "2027": "2027",
+      "access": "Access",
+      "division": "division",
+      "heliophysic": "Heliophysics",
+      "low-cost": "Low-Cost",
+      "rose": "ROSES",
+      "space": "Space",
+      "step-1": "Step-1",
+      "step-2": "Step-2"
+     },
+     "title": "Heliophysics Low-Cost Access to Space",
+     "title_fingerprint": "cbe2b560",
+     "topic_areas": []
+    }
+   ]
+  },
   "364033": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "364035": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "364036": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "364039": {
+   "segmentation_method": "nasa_roses_table",
+   "subtopic_count": 1,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopics": [
+    {
+     "amended": true,
+     "child_source_url": "https://solicitation.nasaprs.com/NNH25ZDA001N-SSF",
+     "child_type": "subject",
+     "confidence": "high",
+     "division": "B",
+     "evidence_anchor": null,
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-10-17",
+     "last_verified": "2026-10-17",
+     "native_deadline_text": "11/20/2026 (Step-1) | 02/05/2027 (Step-2)",
+     "native_status": "dated",
+     "opportunity_id": "364039:b-8",
+     "ordinal_label": "B.8",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": null,
+     "page_start": null,
+     "parent_id": "364039",
+     "parent_opportunity_number": "NNH25ZDA001N-SSF",
+     "pattern_family": null,
+     "program_area_labels": [],
+     "publication_reason": "high_confidence",
+     "publication_state": "publishable",
+     "record_type": "subtopic",
+     "segmentation_method": null,
+     "source_document_hash": "08b6d52ae04d93b370cc7f134680e955e9dfa2d8a4cff59692dd262ee5b693ea",
+     "source_document_url": "https://nspires.nasaprs.com/external/viewrepositorydocument/cmdocumentid=1041498/solicitationId=%7B2A1D139B-B9C7-CE8C-2E81-223FD08460F9%7D/viewSolicitationDocument=1/Table 3 ROSES-2025_Amend 79.html",
+     "source_role": "authoritative_announcement",
+     "source_version": {
+      "amendment": 79,
+      "year": 2025
+     },
+     "status": "posted",
+     "subtopic_code": "B.8",
+     "subtopic_code_norm": "b-8",
+     "subtopic_id": "364039:b-8",
+     "subtopic_ordinal": 25,
+     "subtopic_source": "native",
+     "summary": "NASA ROSES program element B.8: Heliophysics Spaceflight Science Foundations.",
+     "term_display": {
+      "02": "02",
+      "05": "05",
+      "11": "11",
+      "20": "20",
+      "2026": "2026",
+      "2027": "2027",
+      "division": "division",
+      "foundation": "Foundations",
+      "heliophysic": "Heliophysics",
+      "rose": "ROSES",
+      "science": "Science",
+      "spaceflight": "Spaceflight",
+      "step-1": "Step-1",
+      "step-2": "Step-2"
+     },
+     "title": "Heliophysics Spaceflight Science Foundations",
+     "title_fingerprint": "daa6f092",
+     "topic_areas": []
+    }
+   ]
+  },
+  "364040": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -41866,7 +42061,42 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
+  "364049": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "364050": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
   "364055": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "364059": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "364060": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "364061": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -41887,7 +42117,21 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
+  "364067": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
   "364069": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "364072": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -41972,6 +42216,34 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "364085": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "364086": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "364087": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "364098": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "364099": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -42083,7 +42355,21 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
+  "darpa-iarpa:darpa-darpapa260201": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
   "nasa-roses:25-A.10-87da4095c3": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "nasa-roses:25-D.3F-cca04702e5": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -42112,6 +42398,13 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "nyserda:NYT-VIP": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "nyserda:OSWPON26-1": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -42433,6 +42726,20 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
+  "sam-gov:38b71a2fd903432ca02100ea9177b738": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "sam-gov:3918e78c2c93423594588999696598cb": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
   "sam-gov:3dc0d137a9404adab1b8623c4e279f31": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -42476,6 +42783,27 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "sam-gov:5abc1a0ed8ab4c5e8f6aa62aa745d210": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "sam-gov:5f75330f42ee4145990fe6a51a3dc84e": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "sam-gov:7e9ec160dbe64a47aa768c225bb9f9a6": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "sam-gov:8170c4735df64714adb2d1f8ce8671b1": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -42560,13 +42888,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "sam-gov:d2bb23d781124b8690158100ce7d5f1e": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "sam-gov:d554d75951a340fcbed17668b1864648": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -43628,7 +43949,7 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "vpr-email:vpr-3a86f2f6b6e2925c": {
+  "vpr-email:vpr-40c8bd8449be89b5": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -43673,8 +43994,8 @@ globalThis.SUBTOPIC_CATALOG={
  },
  "schema_version": 1,
  "search_index": {
-  "average_document_length": 143.13839285714286,
-  "document_count": 224,
+  "average_document_length": 140.36563876651982,
+  "document_count": 227,
   "document_lengths": [
    836,
    401,
@@ -43772,6 +44093,8 @@ globalThis.SUBTOPIC_CATALOG={
    423,
    381,
    192,
+   10,
+   8,
    5,
    3,
    5,
@@ -43894,12 +44217,13 @@ globalThis.SUBTOPIC_CATALOG={
    11,
    11,
    9,
-   82,
-   120,
-   71,
+   16,
    14,
    11,
-   10
+   10,
+   11,
+   14,
+   14
   ],
   "postings": {
    "0.001-10": [
@@ -43910,26 +44234,38 @@ globalThis.SUBTOPIC_CATALOG={
     24,
     1
    ],
+   "01": [
+    224,
+    1
+   ],
    "02": [
-    215,
+    217,
+    1,
+    226,
     1
    ],
    "03": [
     221,
+    1,
+    225,
     1
    ],
    "04": [
-    216,
+    218,
     1,
     222,
     1
    ],
+   "05": [
+    226,
+    1
+   ],
    "06": [
-    216,
+    218,
     1
    ],
    "08": [
-    215,
+    217,
     1,
     223,
     1
@@ -44099,7 +44435,9 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     81,
     2,
-    216,
+    218,
+    1,
+    220,
     1
    ],
    "0d": [
@@ -44119,8 +44457,10 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     81,
     1,
-    217,
+    219,
     1,
+    220,
+    2,
     221,
     1,
     222,
@@ -44181,9 +44521,15 @@ globalThis.SUBTOPIC_CATALOG={
    "11": [
     3,
     2,
-    216,
+    218,
     1,
-    217,
+    219,
+    1,
+    224,
+    1,
+    225,
+    1,
+    226,
     1
    ],
    "110": [
@@ -44391,7 +44737,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     81,
     2,
-    215,
+    217,
     1,
     221,
     1,
@@ -44438,12 +44784,18 @@ globalThis.SUBTOPIC_CATALOG={
     5,
     2,
     221,
+    1,
+    224,
     1
    ],
    "16": [
     5,
     2,
     222,
+    1,
+    224,
+    1,
+    225,
     1
    ],
    "17": [
@@ -44481,7 +44833,11 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     95,
     2,
-    215,
+    217,
+    1,
+    225,
+    1,
+    226,
     1
    ],
    "200": [
@@ -44657,21 +45013,35 @@ globalThis.SUBTOPIC_CATALOG={
    "2026": [
     95,
     8,
-    215,
-    2,
-    216,
-    2,
     217,
+    2,
+    218,
+    2,
+    219,
     1,
+    220,
+    2,
     221,
     2,
     222,
     2,
     223,
+    1,
+    224,
+    1,
+    225,
+    1,
+    226,
     1
    ],
    "2027": [
     223,
+    1,
+    224,
+    1,
+    225,
+    1,
+    226,
     1
    ],
    "2030": [
@@ -44720,6 +45090,8 @@ globalThis.SUBTOPIC_CATALOG={
     11,
     2,
     95,
+    1,
+    220,
     1
    ],
    "27": [
@@ -45035,7 +45407,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     63,
     1,
-    165,
+    167,
     1
    ],
    "40": [
@@ -45679,17 +46051,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     91,
     1,
-    100,
+    102,
     1,
-    113,
+    115,
     1,
-    135,
+    137,
     1,
-    139,
-    1,
-    143,
-    1,
-    144,
+    141,
     1,
     145,
     1,
@@ -45701,11 +46069,11 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     149,
     1,
-    188,
+    150,
     1,
-    199,
+    151,
     1,
-    200,
+    190,
     1,
     201,
     1,
@@ -45716,6 +46084,10 @@ globalThis.SUBTOPIC_CATALOG={
     204,
     1,
     205,
+    1,
+    206,
+    1,
+    207,
     1
    ],
    "accelerate": [
@@ -45727,15 +46099,15 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     93,
     1,
-    178,
+    180,
     1
    ],
    "accelerator": [
-    108,
+    110,
     1,
-    185,
+    187,
     2,
-    186,
+    188,
     1
    ],
    "accelerometer": [
@@ -45782,6 +46154,8 @@ globalThis.SUBTOPIC_CATALOG={
     76,
     1,
     92,
+    1,
+    225,
     1
    ],
    "accessible": [
@@ -45893,17 +46267,17 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     81,
     1,
-    106,
-    1,
-    174,
-    1,
-    175,
+    108,
     1,
     176,
     1,
     177,
     1,
     178,
+    1,
+    179,
+    1,
+    180,
     1
    ],
    "achievable": [
@@ -45946,9 +46320,7 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "acid": [
     2,
-    2,
-    218,
-    1
+    2
    ],
    "acknowledg": [
     6,
@@ -46177,7 +46549,7 @@ globalThis.SUBTOPIC_CATALOG={
    "actuator": [
     37,
     1,
-    186,
+    188,
     1
    ],
    "acute": [
@@ -46497,7 +46869,7 @@ globalThis.SUBTOPIC_CATALOG={
    "adoption": [
     16,
     1,
-    142,
+    144,
     1
    ],
    "adsorption": [
@@ -46583,11 +46955,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     1,
-    96,
-    1,
-    117,
-    1,
-    118,
+    98,
     1,
     119,
     1,
@@ -46597,15 +46965,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     122,
     1,
-    145,
+    123,
     1,
-    174,
+    124,
     1,
-    218,
-    2,
-    219,
-    3,
-    220,
+    147,
+    1,
+    176,
     1
    ],
    "advance": [
@@ -46703,7 +47069,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     1,
-    205,
+    207,
     1
    ],
    "advantage": [
@@ -46729,7 +47095,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     93,
     1,
-    157,
+    159,
     1
    ],
    "advantageou": [
@@ -46765,7 +47131,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     87,
     2,
-    209,
+    211,
     1
    ],
    "adversary": [
@@ -46913,7 +47279,7 @@ globalThis.SUBTOPIC_CATALOG={
     6,
     89,
     3,
-    201,
+    203,
     1
    ],
    "agent-bas": [
@@ -46921,7 +47287,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "agentic": [
-    117,
+    119,
     1
    ],
    "aggressive": [
@@ -46997,19 +47363,15 @@ globalThis.SUBTOPIC_CATALOG={
     11,
     89,
     2,
-    102,
+    104,
     1,
-    114,
+    116,
     1,
-    142,
+    144,
     1,
-    150,
-    1,
-    151,
+    152,
     1,
     153,
-    1,
-    154,
     1,
     155,
     1,
@@ -47025,65 +47387,19 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     161,
     1,
-    175,
+    162,
     1,
-    188,
+    163,
     1,
-    203,
+    177,
+    1,
+    190,
     1,
     205,
-    1,
-    206,
     1,
     207,
     1,
     208,
-    1,
-    209,
-    1,
-    211,
-    1,
-    212,
-    1,
-    219,
-    4
-   ],
-   "ai-accelerat": [
-    176,
-    1
-   ],
-   "ai-assist": [
-    137,
-    1,
-    140,
-    1,
-    141,
-    1
-   ],
-   "ai-driven": [
-    106,
-    1,
-    115,
-    1,
-    117,
-    1,
-    118,
-    1,
-    164,
-    1,
-    174,
-    1,
-    175,
-    1,
-    176,
-    1,
-    177,
-    1,
-    178,
-    1,
-    185,
-    1,
-    199,
     1,
     209,
     1,
@@ -47092,22 +47408,70 @@ globalThis.SUBTOPIC_CATALOG={
     211,
     1,
     213,
+    1,
+    214,
+    1
+   ],
+   "ai-accelerat": [
+    178,
+    1
+   ],
+   "ai-assist": [
+    139,
+    1,
+    142,
+    1,
+    143,
+    1
+   ],
+   "ai-driven": [
+    108,
+    1,
+    117,
+    1,
+    119,
+    1,
+    120,
+    1,
+    166,
+    1,
+    176,
+    1,
+    177,
+    1,
+    178,
+    1,
+    179,
+    1,
+    180,
+    1,
+    187,
+    1,
+    201,
+    1,
+    211,
+    1,
+    212,
+    1,
+    213,
+    1,
+    215,
     1
    ],
    "ai-enabl": [
     82,
     10,
-    119,
-    1,
     121,
     1,
-    127,
+    123,
     1,
     129,
     1,
-    177,
+    131,
     1,
-    183,
+    179,
+    1,
+    185,
     1
    ],
    "ai-integration": [
@@ -47179,7 +47543,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "aiop": [
-    175,
+    177,
     1
    ],
    "air": [
@@ -47337,20 +47701,18 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     93,
     6,
-    102,
-    1,
-    153,
-    1,
-    154,
+    104,
     1,
     155,
-    2,
-    156,
-    2,
-    157,
     1,
-    219,
-    2
+    156,
+    1,
+    157,
+    2,
+    158,
+    2,
+    159,
+    1
    ],
    "algorithmic": [
     6,
@@ -47442,8 +47804,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "alloy": [
     26,
-    1,
-    220,
     1
    ],
    "almost": [
@@ -47498,8 +47858,6 @@ globalThis.SUBTOPIC_CATALOG={
     50,
     1,
     81,
-    1,
-    219,
     1
    ],
    "although": [
@@ -47553,13 +47911,9 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "america": [
-    98,
+    100,
     1,
-    104,
-    1,
-    128,
-    1,
-    129,
+    106,
     1,
     130,
     1,
@@ -47571,9 +47925,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     134,
     1,
-    162,
+    135,
     1,
-    163,
+    136,
     1,
     164,
     1,
@@ -47590,16 +47944,20 @@ globalThis.SUBTOPIC_CATALOG={
     170,
     1,
     171,
+    1,
+    172,
+    1,
+    173,
     1
    ],
    "american": [
-    111,
-    1,
-    193,
-    1,
-    194,
+    113,
     1,
     195,
+    1,
+    196,
+    1,
+    197,
     1
    ],
    "amo": [
@@ -47755,11 +48113,9 @@ globalThis.SUBTOPIC_CATALOG={
     4,
     94,
     8,
-    130,
+    132,
     1,
-    193,
-    1,
-    218,
+    195,
     1
    ],
    "analyst": [
@@ -47867,7 +48223,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "angstrom": [
-    162,
+    164,
     1
    ],
    "animal": [
@@ -48076,9 +48432,7 @@ globalThis.SUBTOPIC_CATALOG={
     20,
     1,
     49,
-    1,
-    219,
-    2
+    1
    ],
    "another": [
     4,
@@ -48233,7 +48587,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "application-aware": [
-    153,
+    155,
     1
    ],
    "application-specific": [
@@ -48369,9 +48723,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     90,
     1,
-    145,
-    1,
-    219,
+    147,
     1
    ],
    "appropriate": [
@@ -48469,9 +48821,9 @@ globalThis.SUBTOPIC_CATALOG={
     11,
     94,
     1,
-    163,
+    165,
     1,
-    164,
+    166,
     1
    ],
    "arctic": [
@@ -49435,17 +49787,15 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     90,
     2,
-    116,
+    118,
     1,
-    178,
-    1,
-    212,
-    1,
-    213,
+    180,
     1,
     214,
     1,
-    219,
+    215,
+    1,
+    216,
     1
    ],
    "artificially": [
@@ -49584,8 +49934,6 @@ globalThis.SUBTOPIC_CATALOG={
     93,
     5,
     94,
-    1,
-    219,
     1
    ],
    "asset": [
@@ -49605,13 +49953,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     3,
-    112,
-    1,
-    196,
-    1,
-    197,
+    114,
     1,
     198,
+    1,
+    199,
+    1,
+    200,
     1
    ],
    "assimilation": [
@@ -49755,7 +50103,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     9,
     1,
-    215,
+    217,
     1
    ],
    "atmospheric": [
@@ -49769,7 +50117,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     81,
     1,
-    190,
+    192,
     1
    ],
    "atom": [
@@ -49813,7 +50161,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     93,
     1,
-    211,
+    213,
     1
    ],
    "attacker": [
@@ -49909,7 +50257,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     89,
     1,
-    200,
+    202,
     1
    ],
    "automatic": [
@@ -49922,8 +50270,6 @@ globalThis.SUBTOPIC_CATALOG={
     82,
     4,
     88,
-    1,
-    218,
     1
    ],
    "autonomou": [
@@ -49955,15 +50301,11 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     89,
     2,
-    106,
-    1,
-    136,
+    108,
     1,
     138,
     1,
-    174,
-    1,
-    175,
+    140,
     1,
     176,
     1,
@@ -49971,8 +50313,10 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     178,
     1,
-    219,
-    2
+    179,
+    1,
+    180,
+    1
    ],
    "autonomously": [
     65,
@@ -50768,8 +51112,6 @@ globalThis.SUBTOPIC_CATALOG={
     90,
     1,
     94,
-    1,
-    219,
     1
    ],
    "behavioral": [
@@ -51009,7 +51351,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     67,
     1,
-    126,
+    128,
     1
    ],
    "bio-chemical": [
@@ -51127,9 +51469,9 @@ globalThis.SUBTOPIC_CATALOG={
     4,
     79,
     2,
-    127,
+    129,
     1,
-    134,
+    136,
     1
    ],
    "biology": [
@@ -51175,9 +51517,9 @@ globalThis.SUBTOPIC_CATALOG={
     10,
     6,
     1,
-    123,
+    125,
     1,
-    181,
+    183,
     1
    ],
    "biomolecule": [
@@ -51191,7 +51533,7 @@ globalThis.SUBTOPIC_CATALOG={
     3
    ],
    "bioreactor": [
-    127,
+    129,
     1
    ],
    "biosens": [
@@ -51201,7 +51543,7 @@ globalThis.SUBTOPIC_CATALOG={
    "biosphere": [
     3,
     1,
-    216,
+    218,
     1
    ],
    "biosynthetic": [
@@ -51229,17 +51571,17 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     79,
     1,
-    97,
-    1,
-    123,
-    1,
-    124,
+    99,
     1,
     125,
     1,
     126,
     1,
     127,
+    1,
+    128,
+    1,
+    129,
     1
    ],
    "biotronic": [
@@ -51277,7 +51619,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "blanket": [
-    147,
+    149,
     1
    ],
    "blast": [
@@ -51527,7 +51869,7 @@ globalThis.SUBTOPIC_CATALOG={
     2
    ],
    "breed": [
-    147,
+    149,
     1
    ],
    "brenda": [
@@ -51564,10 +51906,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "brillouin": [
     69,
-    1
-   ],
-   "brine": [
-    220,
     1
    ],
    "bring": [
@@ -51780,10 +52118,6 @@ globalThis.SUBTOPIC_CATALOG={
     92,
     2,
     95,
-    1
-   ],
-   "byproduct": [
-    218,
     1
    ],
    "byrd": [
@@ -52102,18 +52436,12 @@ globalThis.SUBTOPIC_CATALOG={
     46,
     1,
     61,
-    1,
-    218,
-    3
+    1
    ],
    "carbide": [
     25,
     1,
     78,
-    1
-   ],
-   "carbon": [
-    218,
     1
    ],
    "carbon-carbon": [
@@ -52175,7 +52503,7 @@ globalThis.SUBTOPIC_CATALOG={
    "catalyst": [
     26,
     1,
-    184,
+    186,
     1
    ],
    "catalytic": [
@@ -52245,11 +52573,11 @@ globalThis.SUBTOPIC_CATALOG={
    "center": [
     93,
     1,
-    105,
+    107,
     1,
-    172,
+    174,
     2,
-    173,
+    175,
     2
    ],
    "central": [
@@ -52434,8 +52762,6 @@ globalThis.SUBTOPIC_CATALOG={
     85,
     1,
     88,
-    1,
-    218,
     1
    ],
    "channel": [
@@ -52529,11 +52855,7 @@ globalThis.SUBTOPIC_CATALOG={
     5,
     86,
     1,
-    140,
-    1,
-    219,
-    1,
-    220,
+    142,
     1
    ],
    "characterize": [
@@ -52579,11 +52901,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "cheaper": [
-    99,
-    1,
-    135,
-    1,
-    136,
+    101,
     1,
     137,
     1,
@@ -52596,6 +52914,10 @@ globalThis.SUBTOPIC_CATALOG={
     141,
     1,
     142,
+    1,
+    143,
+    1,
+    144,
     1
    ],
    "chemical": [
@@ -52625,9 +52947,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     78,
     1,
-    117,
+    119,
     1,
-    196,
+    198,
     1
    ],
    "chemicalthe": [
@@ -52717,9 +53039,9 @@ globalThis.SUBTOPIC_CATALOG={
     5,
     93,
     1,
-    166,
+    168,
     1,
-    178,
+    180,
     1
    ],
    "circular": [
@@ -52801,7 +53123,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     88,
     1,
-    142,
+    144,
     1
    ],
    "classifier": [
@@ -52881,7 +53203,7 @@ globalThis.SUBTOPIC_CATALOG={
     5,
     92,
     2,
-    190,
+    192,
     1
    ],
    "cloudlet": [
@@ -52901,15 +53223,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "cmm": [
-    134,
-    1,
-    218,
-    1,
-    219,
-    1
-   ],
-   "co": [
-    218,
+    136,
     1
    ],
    "co-crystal": [
@@ -52940,37 +53254,11 @@ globalThis.SUBTOPIC_CATALOG={
     29,
     1
    ],
-   "co-product": [
-    218,
-    1
-   ],
-   "co2": [
-    218,
-    3
-   ],
-   "coal": [
-    218,
-    3
-   ],
-   "coal-bas": [
-    218,
-    1
-   ],
-   "coal-fir": [
-    218,
-    1
-   ],
-   "coal-power": [
-    218,
-    1
-   ],
    "coating": [
     10,
     1,
     28,
-    3,
-    220,
-    1
+    3
    ],
    "cod": [
     23,
@@ -52981,21 +53269,21 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     38,
     1,
-    113,
-    1,
-    199,
-    2,
-    200,
+    115,
     1,
     201,
     2,
     202,
     1,
     203,
-    1,
-    204,
     2,
+    204,
+    1,
     205,
+    1,
+    206,
+    2,
+    207,
     1
    ],
    "coefficient": [
@@ -53302,10 +53590,6 @@ globalThis.SUBTOPIC_CATALOG={
     46,
     1
    ],
-   "combustion": [
-    218,
-    1
-   ],
    "come": [
     4,
     1
@@ -53419,9 +53703,9 @@ globalThis.SUBTOPIC_CATALOG={
     5,
     94,
     1,
-    169,
-    1,
     171,
+    1,
+    173,
     1
    ],
    "communist": [
@@ -53443,7 +53727,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     89,
     2,
-    125,
+    127,
     1
    ],
    "compar": [
@@ -53795,7 +54079,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     94,
     2,
-    212,
+    214,
     1
    ],
    "complexe": [
@@ -53837,7 +54121,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     1,
-    189,
+    191,
     1
    ],
    "compliant": [
@@ -53893,16 +54177,14 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     93,
     5,
-    116,
-    1,
-    212,
-    1,
-    213,
+    118,
     1,
     214,
     1,
-    219,
-    2
+    215,
+    1,
+    216,
+    1
    ],
    "component-level": [
     6,
@@ -53915,7 +54197,7 @@ globalThis.SUBTOPIC_CATALOG={
     2
    ],
    "composable": [
-    208,
+    210,
     1
    ],
    "compose": [
@@ -53938,9 +54220,7 @@ globalThis.SUBTOPIC_CATALOG={
     63,
     1,
     78,
-    3,
-    220,
-    1
+    3
    ],
    "composition": [
     16,
@@ -54019,13 +54299,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     1,
-    161,
-    1,
     163,
     1,
-    171,
+    165,
     1,
-    178,
+    173,
+    1,
+    180,
     1
    ],
    "computation": [
@@ -54053,7 +54333,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     1,
-    170,
+    172,
     1
    ],
    "computational": [
@@ -54137,7 +54417,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     93,
     2,
-    154,
+    156,
     2,
     221,
     1
@@ -54159,7 +54439,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "compute-in-memory": [
-    165,
+    167,
     1
    ],
    "computer": [
@@ -54462,8 +54742,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "configuration": [
     17,
-    1,
-    219,
     1
    ],
    "confin": [
@@ -54477,7 +54755,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     28,
     1,
-    145,
+    147,
     1
    ],
    "confirm": [
@@ -54535,7 +54813,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     82,
     1,
-    133,
+    135,
     1
    ],
    "connectivity": [
@@ -54545,7 +54823,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     75,
     1,
-    171,
+    173,
     1
    ],
    "conop": [
@@ -54719,7 +54997,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     46,
     1,
-    137,
+    139,
     1
    ],
    "consumption": [
@@ -54965,11 +55243,11 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     90,
     1,
-    159,
+    161,
     1,
-    198,
+    200,
     1,
-    213,
+    215,
     1
    ],
    "controll": [
@@ -55069,11 +55347,7 @@ globalThis.SUBTOPIC_CATALOG={
     7,
     75,
     1,
-    184,
-    1,
-    218,
-    3,
-    219,
+    186,
     1
    ],
    "convert": [
@@ -55169,7 +55443,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     42,
     1,
-    153,
+    155,
     1
    ],
    "correctness": [
@@ -55189,7 +55463,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     43,
     1,
-    176,
+    178,
     1
    ],
    "correlative": [
@@ -55211,17 +55485,17 @@ globalThis.SUBTOPIC_CATALOG={
    "cosmic": [
     49,
     1,
-    187,
+    189,
     1
    ],
    "cosmo": [
-    109,
-    1,
-    187,
-    1,
-    188,
+    111,
     1,
     189,
+    1,
+    190,
+    1,
+    191,
     1
    ],
    "cost": [
@@ -55242,12 +55516,6 @@ globalThis.SUBTOPIC_CATALOG={
     92,
     2,
     93,
-    1,
-    220,
-    1
-   ],
-   "cost-effective": [
-    218,
     1
    ],
    "costly": [
@@ -55442,8 +55710,6 @@ globalThis.SUBTOPIC_CATALOG={
     87,
     2,
     95,
-    1,
-    220,
     1
    ],
    "creation": [
@@ -55541,11 +55807,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     94,
     2,
-    98,
-    1,
-    128,
-    1,
-    129,
+    100,
     1,
     130,
     1,
@@ -55557,10 +55819,10 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     134,
     1,
-    218,
+    135,
     1,
-    220,
-    2
+    136,
+    1
    ],
    "critically": [
     4,
@@ -55647,7 +55909,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "crust": [
-    197,
+    199,
     1
    ],
    "cryosphere": [
@@ -55705,11 +55967,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "curation": [
-    113,
-    1,
-    199,
-    1,
-    200,
+    115,
     1,
     201,
     1,
@@ -55720,6 +55978,10 @@ globalThis.SUBTOPIC_CATALOG={
     204,
     1,
     205,
+    1,
+    206,
+    1,
+    207,
     1
    ],
    "current": [
@@ -56035,13 +56297,13 @@ globalThis.SUBTOPIC_CATALOG={
    "cybersecurity": [
     87,
     2,
-    115,
-    1,
-    209,
-    1,
-    210,
+    117,
     1,
     211,
+    1,
+    212,
+    1,
+    213,
     1
    ],
    "cyberspace": [
@@ -56061,11 +56323,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     93,
     1,
-    139,
+    141,
     1,
-    146,
-    1,
-    220,
+    148,
     1
    ],
    "damage": [
@@ -56219,17 +56479,17 @@ globalThis.SUBTOPIC_CATALOG={
     9,
     94,
     1,
-    105,
+    107,
     1,
-    172,
+    174,
     2,
-    173,
+    175,
     2,
-    204,
+    206,
     1,
-    207,
+    209,
     1,
-    210,
+    212,
     1
    ],
    "data-driven": [
@@ -56243,7 +56503,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     88,
     1,
-    214,
+    216,
     1
    ],
    "data-feed": [
@@ -56271,7 +56531,7 @@ globalThis.SUBTOPIC_CATALOG={
    "dataset": [
     68,
     1,
-    189,
+    191,
     1
    ],
    "datatype": [
@@ -56280,6 +56540,10 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "date": [
     92,
+    1,
+    96,
+    1,
+    97,
     1
    ],
    "david": [
@@ -56440,9 +56704,7 @@ globalThis.SUBTOPIC_CATALOG={
     88,
     1,
     89,
-    1,
-    219,
-    2
+    1
    ],
    "decision-maker": [
     42,
@@ -56675,11 +56937,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "deliver": [
-    99,
-    1,
-    135,
-    1,
-    136,
+    101,
     1,
     137,
     1,
@@ -56692,6 +56950,10 @@ globalThis.SUBTOPIC_CATALOG={
     141,
     1,
     142,
+    1,
+    143,
+    1,
+    144,
     1
    ],
    "delivery": [
@@ -56701,11 +56963,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     49,
     1,
-    100,
-    1,
-    143,
-    1,
-    144,
+    102,
     1,
     145,
     1,
@@ -56716,6 +56974,10 @@ globalThis.SUBTOPIC_CATALOG={
     148,
     1,
     149,
+    1,
+    150,
+    1,
+    151,
     1
    ],
    "demand": [
@@ -57191,27 +57453,23 @@ globalThis.SUBTOPIC_CATALOG={
     4,
     94,
     1,
-    107,
+    109,
     1,
-    126,
+    128,
     1,
-    127,
+    129,
     1,
-    135,
-    1,
-    139,
+    137,
     1,
     141,
     1,
-    158,
+    143,
     1,
-    164,
+    160,
     1,
     166,
     1,
-    178,
-    1,
-    179,
+    168,
     1,
     180,
     1,
@@ -57223,7 +57481,11 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     184,
     1,
-    213,
+    185,
+    1,
+    186,
+    1,
+    215,
     1
    ],
    "designer": [
@@ -57345,10 +57607,8 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     87,
     1,
-    211,
-    1,
-    219,
-    2
+    213,
+    1
    ],
    "detectivity": [
     11,
@@ -57755,36 +58015,30 @@ globalThis.SUBTOPIC_CATALOG={
     6,
     94,
     4,
-    113,
+    115,
     1,
-    128,
+    130,
     1,
-    138,
+    140,
     1,
-    142,
+    144,
     1,
-    183,
-    1,
-    199,
-    1,
-    200,
+    185,
     1,
     201,
-    2,
+    1,
     202,
     1,
     203,
-    1,
+    2,
     204,
     1,
     205,
     1,
-    218,
-    2,
-    219,
-    4,
-    220,
-    4
+    206,
+    1,
+    207,
+    1
    ],
    "developmental": [
     29,
@@ -57837,7 +58091,7 @@ globalThis.SUBTOPIC_CATALOG={
     3,
     93,
     1,
-    163,
+    165,
     1
    ],
    "devis": [
@@ -57861,7 +58115,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     92,
     1,
-    177,
+    179,
     1
    ],
    "diamond": [
@@ -57979,15 +58233,11 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     90,
     1,
-    186,
-    1,
-    218,
-    1,
-    219,
-    3
+    188,
+    1
    ],
    "digitalization": [
-    120,
+    122,
     1
    ],
    "digitally": [
@@ -58036,10 +58286,6 @@ globalThis.SUBTOPIC_CATALOG={
     81,
     1
    ],
-   "dioxide": [
-    218,
-    1
-   ],
    "direct": [
     7,
     2,
@@ -58058,8 +58304,6 @@ globalThis.SUBTOPIC_CATALOG={
     51,
     1,
     71,
-    1,
-    220,
     1
    ],
    "directed-energy": [
@@ -58206,10 +58450,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "disaster": [
     7,
-    1
-   ],
-   "discharge": [
-    218,
     1
    ],
    "discipline": [
@@ -58411,17 +58651,17 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     76,
     1,
-    102,
-    1,
-    153,
-    1,
-    154,
+    104,
     1,
     155,
     1,
     156,
     1,
     157,
+    1,
+    158,
+    1,
+    159,
     1
    ],
    "discovery": [
@@ -58465,35 +58705,31 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     95,
     1,
-    103,
+    105,
     1,
-    108,
+    110,
     1,
-    113,
+    115,
     1,
-    129,
-    1,
-    158,
-    1,
-    159,
+    131,
     1,
     160,
     1,
     161,
     1,
-    183,
+    162,
     1,
-    184,
+    163,
     1,
     185,
     1,
     186,
     1,
-    189,
+    187,
     1,
-    199,
+    188,
     1,
-    200,
+    191,
     1,
     201,
     1,
@@ -58504,6 +58740,10 @@ globalThis.SUBTOPIC_CATALOG={
     204,
     1,
     205,
+    1,
+    206,
+    1,
+    207,
     1
    ],
    "discrete": [
@@ -58589,7 +58829,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "disposition": [
-    141,
+    143,
     1
    ],
    "disrupt": [
@@ -58791,17 +59031,29 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "division": [
-    215,
+    96,
     1,
-    216,
+    97,
     1,
     217,
+    1,
+    218,
+    1,
+    219,
+    1,
+    220,
     1,
     221,
     1,
     222,
     1,
     223,
+    1,
+    224,
+    1,
+    225,
+    1,
+    226,
     1
    ],
    "dmitry": [
@@ -59011,7 +59263,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     81,
     2,
-    142,
+    144,
     1
    ],
    "dod": [
@@ -59087,7 +59339,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "domestic": [
-    139,
+    141,
     1
    ],
    "dominance": [
@@ -59188,10 +59440,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "dress": [
     31,
-    1
-   ],
-   "drill": [
-    220,
     1
    ],
    "drive": [
@@ -59302,10 +59550,14 @@ globalThis.SUBTOPIC_CATALOG={
     92,
     3,
     93,
+    1,
+    96,
+    1,
+    97,
     1
    ],
    "dune": [
-    188,
+    190,
     1
    ],
    "dur": [
@@ -59329,9 +59581,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "durability": [
-    213,
-    1,
-    220,
+    215,
     1
    ],
    "duration": [
@@ -59421,9 +59671,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     89,
     4,
-    174,
-    1,
-    219,
+    176,
     1
    ],
    "dynamical": [
@@ -59496,11 +59744,7 @@ globalThis.SUBTOPIC_CATALOG={
     88,
     1,
     93,
-    6,
-    219,
-    1,
-    220,
-    1
+    6
    ],
    "each": [
     0,
@@ -59545,7 +59789,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     80,
     1,
-    218,
+    96,
     1
    ],
    "ease": [
@@ -59573,21 +59817,17 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     79,
     1,
-    130,
-    1
-   ],
-   "economically": [
-    218,
+    132,
     1
    ],
    "economy": [
-    111,
-    1,
-    193,
-    1,
-    194,
+    113,
     1,
     195,
+    1,
+    196,
+    1,
+    197,
     1
    ],
    "ecosystem": [
@@ -59835,11 +60075,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     81,
     1,
-    142,
-    1,
-    218,
-    1,
-    220,
+    144,
     1
    ],
    "efficiently": [
@@ -59917,10 +60153,6 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     93,
     1
-   ],
-   "egs": [
-    220,
-    2
    ],
    "einstein": [
     85,
@@ -60017,9 +60249,7 @@ globalThis.SUBTOPIC_CATALOG={
    "electrochemical": [
     10,
     6,
-    184,
-    1,
-    218,
+    186,
     1
    ],
    "electrochemistry": [
@@ -60205,9 +60435,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     93,
     1,
-    169,
+    171,
     1,
-    170,
+    172,
     1
    ],
    "electronically": [
@@ -60242,9 +60472,7 @@ globalThis.SUBTOPIC_CATALOG={
     87,
     1,
     93,
-    2,
-    218,
-    1
+    2
    ],
    "elicit": [
     56,
@@ -60297,7 +60525,7 @@ globalThis.SUBTOPIC_CATALOG={
    "em": [
     80,
     3,
-    150,
+    152,
     1
    ],
    "email": [
@@ -60323,7 +60551,7 @@ globalThis.SUBTOPIC_CATALOG={
    "embodi": [
     6,
     2,
-    178,
+    180,
     1
    ],
    "embodiment": [
@@ -60519,7 +60747,7 @@ globalThis.SUBTOPIC_CATALOG={
     6
    ],
    "emulation": [
-    166,
+    168,
     1
    ],
    "enabl": [
@@ -60561,7 +60789,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     2,
-    217,
+    219,
     1
    ],
    "enable": [
@@ -60656,8 +60884,6 @@ globalThis.SUBTOPIC_CATALOG={
     93,
     5,
     94,
-    1,
-    218,
     1
    ],
    "enabler": [
@@ -60723,7 +60949,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "end": [
-    141,
+    143,
     1
    ],
    "end-to-end": [
@@ -60837,23 +61063,19 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     81,
     1,
-    99,
+    101,
     1,
-    100,
-    1,
-    110,
+    102,
     1,
     112,
     1,
-    116,
+    114,
     1,
-    119,
+    118,
     1,
-    122,
+    121,
     1,
-    135,
-    1,
-    136,
+    124,
     1,
     137,
     1,
@@ -60881,25 +61103,29 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     149,
     1,
-    184,
+    150,
     1,
-    190,
+    151,
     1,
-    191,
-    2,
+    186,
+    1,
     192,
     1,
-    196,
-    1,
-    197,
+    193,
+    2,
+    194,
     1,
     198,
     1,
-    212,
+    199,
     1,
-    213,
+    200,
     1,
     214,
+    1,
+    215,
+    1,
+    216,
     1
    ],
    "energyg": [
@@ -60999,17 +61225,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     1,
-    125,
-    1,
     127,
     1,
     129,
     1,
-    148,
+    131,
     1,
-    219,
-    1,
-    220,
+    150,
     1
    ],
    "engineerable": [
@@ -61055,16 +61277,12 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     90,
     2,
-    108,
+    110,
     1,
-    185,
+    187,
     1,
-    186,
-    1,
-    219,
-    2,
-    220,
-    2
+    188,
+    1
    ],
    "enhance": [
     0,
@@ -61349,12 +61567,10 @@ globalThis.SUBTOPIC_CATALOG={
     3,
     94,
     1,
-    167,
+    169,
     1,
-    174,
-    1,
-    220,
-    2
+    176,
+    1
    ],
    "environment-task-technology": [
     57,
@@ -61523,7 +61739,7 @@ globalThis.SUBTOPIC_CATALOG={
     4,
     27,
     1,
-    153,
+    155,
     1
    ],
    "error-correction": [
@@ -61660,9 +61876,7 @@ globalThis.SUBTOPIC_CATALOG={
     87,
     1,
     93,
-    4,
-    218,
-    1
+    4
    ],
    "ethically": [
     4,
@@ -61825,7 +62039,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     20,
     1,
-    197,
+    199,
     1
    ],
    "evolutionary": [
@@ -62084,9 +62298,7 @@ globalThis.SUBTOPIC_CATALOG={
     86,
     1,
     93,
-    2,
-    218,
-    1
+    2
    ],
    "existence": [
     12,
@@ -62159,7 +62371,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "expedit": [
-    189,
+    191,
     1
    ],
    "expeditionary": [
@@ -62402,11 +62614,7 @@ globalThis.SUBTOPIC_CATALOG={
     48,
     1,
     63,
-    2,
-    218,
-    1,
-    219,
-    1
+    2
    ],
    "exploratory": [
     7,
@@ -62544,19 +62752,11 @@ globalThis.SUBTOPIC_CATALOG={
     15,
     3,
     56,
-    1,
-    218,
-    1,
-    219,
     1
    ],
    "extraction": [
-    131,
-    1,
-    219,
-    2,
-    220,
-    2
+    133,
+    1
    ],
    "extraordinary": [
     18,
@@ -62625,9 +62825,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     82,
     3,
-    119,
-    1,
-    220,
+    121,
     1
    ],
    "extreme-scale": [
@@ -62727,11 +62925,11 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     1,
-    139,
+    141,
     1,
-    185,
+    187,
     1,
-    217,
+    219,
     1
    ],
    "fact": [
@@ -62790,8 +62988,6 @@ globalThis.SUBTOPIC_CATALOG={
     84,
     1,
     92,
-    1,
-    219,
     1
    ],
    "fall": [
@@ -62841,11 +63037,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     93,
     1,
-    99,
-    1,
-    135,
-    1,
-    136,
+    101,
     1,
     137,
     1,
@@ -62858,6 +63050,10 @@ globalThis.SUBTOPIC_CATALOG={
     141,
     1,
     142,
+    1,
+    143,
+    1,
+    144,
     1
    ],
    "fate": [
@@ -62875,7 +63071,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     1,
-    154,
+    156,
     1
    ],
    "favor": [
@@ -62923,7 +63119,7 @@ globalThis.SUBTOPIC_CATALOG={
     4,
     88,
     2,
-    202,
+    204,
     1
    ],
    "feedback-loop": [
@@ -63048,9 +63244,7 @@ globalThis.SUBTOPIC_CATALOG={
     76,
     1,
     87,
-    2,
-    220,
-    1
+    2
    ],
    "field-generat": [
     49,
@@ -63095,7 +63289,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "finder": [
-    132,
+    134,
     1
    ],
    "finite": [
@@ -63181,7 +63375,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     66,
     1,
-    172,
+    174,
     1
    ],
    "flexible": [
@@ -63233,13 +63427,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     51,
     1,
-    116,
-    1,
-    212,
-    2,
-    213,
+    118,
     1,
     214,
+    2,
+    215,
+    1,
+    216,
     1
    ],
    "fluctuat": [
@@ -63269,17 +63463,13 @@ globalThis.SUBTOPIC_CATALOG={
     3,
     38,
     1,
-    116,
-    1,
-    212,
-    1,
-    213,
+    118,
     1,
     214,
     1,
-    219,
-    2,
-    220,
+    215,
+    1,
+    216,
     1
    ],
    "fluorine-contain": [
@@ -63606,10 +63796,6 @@ globalThis.SUBTOPIC_CATALOG={
     83,
     3
    ],
-   "formic": [
-    218,
-    1
-   ],
    "formulation": [
     4,
     1,
@@ -63689,11 +63875,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     93,
     1,
-    151,
+    153,
     1,
-    187,
+    189,
     1,
-    208,
+    210,
+    1,
+    226,
     1
    ],
    "foundational": [
@@ -63904,16 +64092,10 @@ globalThis.SUBTOPIC_CATALOG={
     7,
     4
    ],
-   "fractur": [
-    219,
-    1
-   ],
    "fracture": [
-    197,
+    199,
     1,
-    198,
-    1,
-    220,
+    200,
     1
    ],
    "fragment": [
@@ -64049,9 +64231,9 @@ globalThis.SUBTOPIC_CATALOG={
    "fuel": [
     59,
     1,
-    139,
+    141,
     2,
-    146,
+    148,
     1
    ],
    "fulda": [
@@ -64141,7 +64323,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     87,
     1,
-    179,
+    181,
     1
    ],
    "functionality": [
@@ -64157,11 +64339,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     88,
     1,
-    107,
-    1,
-    179,
-    1,
-    180,
+    109,
     1,
     181,
     1,
@@ -64170,6 +64348,10 @@ globalThis.SUBTOPIC_CATALOG={
     183,
     1,
     184,
+    1,
+    185,
+    1,
+    186,
     1
    ],
    "functionalization": [
@@ -64323,11 +64505,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     88,
     1,
-    100,
-    1,
-    143,
-    1,
-    144,
+    102,
     1,
     145,
     1,
@@ -64336,10 +64514,14 @@ globalThis.SUBTOPIC_CATALOG={
     147,
     1,
     148,
-    2,
+    1,
     149,
     1,
-    186,
+    150,
+    2,
+    151,
+    1,
+    188,
     1
    ],
    "future": [
@@ -64524,9 +64706,7 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "gas": [
     1,
-    2,
-    219,
-    4
+    2
    ],
    "gase": [
     1,
@@ -64889,9 +65069,9 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     93,
     1,
-    200,
+    202,
     1,
-    207,
+    209,
     1
    ],
    "generic": [
@@ -64913,15 +65093,11 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "genotype": [
-    124,
+    126,
     1
    ],
    "geo-physical": [
     43,
-    1
-   ],
-   "geochemical": [
-    219,
     1
    ],
    "geographically": [
@@ -64931,7 +65107,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "geological": [
-    132,
+    134,
     1
    ],
    "geometric": [
@@ -64982,9 +65158,9 @@ globalThis.SUBTOPIC_CATALOG={
     83,
     1
    ],
-   "geothermal": [
-    220,
-    6
+   "geosphere": [
+    224,
+    1
    ],
    "gerde": [
     37,
@@ -65255,13 +65431,13 @@ globalThis.SUBTOPIC_CATALOG={
    "grid": [
     49,
     1,
-    111,
+    113,
     1,
-    193,
-    2,
-    194,
-    2,
     195,
+    2,
+    196,
+    2,
+    197,
     1
    ],
    "ground": [
@@ -65398,16 +65574,16 @@ globalThis.SUBTOPIC_CATALOG={
     49,
     1
    ],
-   "gypsum": [
-    218,
-    1
-   ],
    "gyroscope": [
     85,
     1
    ],
+   "habitable": [
+    220,
+    1
+   ],
    "hadronic": [
-    157,
+    159,
     1
    ],
    "half-live": [
@@ -65429,7 +65605,7 @@ globalThis.SUBTOPIC_CATALOG={
    "handl": [
     15,
     1,
-    177,
+    179,
     1
    ],
    "handle": [
@@ -65477,7 +65653,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     87,
     1,
-    171,
+    173,
     1
    ],
    "harikumar": [
@@ -65497,7 +65673,7 @@ globalThis.SUBTOPIC_CATALOG={
    "harsh": [
     35,
     1,
-    167,
+    169,
     1
    ],
    "harvest": [
@@ -65558,6 +65734,12 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "heavy": [
     37,
+    1
+   ],
+   "heliophysic": [
+    225,
+    1,
+    226,
     1
    ],
    "help": [
@@ -65739,7 +65921,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     87,
     1,
-    189,
+    191,
     1
    ],
    "high-altitude": [
@@ -65804,10 +65986,6 @@ globalThis.SUBTOPIC_CATALOG={
     50,
     1
    ],
-   "high-pressure": [
-    220,
-    1
-   ],
    "high-priority": [
     6,
     1
@@ -65848,8 +66026,6 @@ globalThis.SUBTOPIC_CATALOG={
     55,
     2,
     71,
-    1,
-    220,
     1
    ],
    "high-throughput": [
@@ -65930,9 +66106,7 @@ globalThis.SUBTOPIC_CATALOG={
     78,
     1,
     81,
-    2,
-    220,
-    1
+    2
    ],
    "highly-contextualiz": [
     88,
@@ -66087,11 +66261,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "hpc": [
-    113,
-    1,
-    199,
-    1,
-    200,
+    115,
     1,
     201,
     1,
@@ -66102,6 +66272,10 @@ globalThis.SUBTOPIC_CATALOG={
     204,
     1,
     205,
+    1,
+    206,
+    1,
+    207,
     2
    ],
    "hsi": [
@@ -66347,7 +66521,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     73,
     1,
-    155,
+    157,
     1
    ],
    "hybridiz": [
@@ -66359,7 +66533,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "hydrologic": [
-    196,
+    198,
     1
    ],
    "hydrophobicity": [
@@ -66387,7 +66561,7 @@ globalThis.SUBTOPIC_CATALOG={
    "hypothesi": [
     4,
     1,
-    207,
+    209,
     1
    ],
    "hysteresi": [
@@ -66877,7 +67051,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     85,
     1,
-    160,
+    162,
     1
    ],
    "image": [
@@ -67005,7 +67179,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     2,
-    150,
+    152,
     1
    ],
    "implication": [
@@ -67170,8 +67344,6 @@ globalThis.SUBTOPIC_CATALOG={
     92,
     1,
     93,
-    1,
-    219,
     1
    ],
    "improvement": [
@@ -67316,9 +67488,7 @@ globalThis.SUBTOPIC_CATALOG={
     92,
     1,
     94,
-    2,
-    218,
-    1
+    2
    ],
    "include": [
     0,
@@ -67689,19 +67859,19 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     1,
-    96,
-    1,
-    117,
-    1,
-    118,
+    98,
     1,
     119,
     1,
     120,
-    2,
+    1,
     121,
     1,
     122,
+    2,
+    123,
+    1,
+    124,
     1
    ],
    "industry": [
@@ -67709,7 +67879,7 @@ globalThis.SUBTOPIC_CATALOG={
     5,
     95,
     1,
-    142,
+    144,
     1
    ],
    "inelastic": [
@@ -68363,15 +68533,15 @@ globalThis.SUBTOPIC_CATALOG={
     4,
     94,
     2,
-    127,
+    129,
     1,
-    148,
+    150,
     1,
-    171,
+    173,
     1,
-    186,
+    188,
     1,
-    204,
+    206,
     1
    ],
    "integrative": [
@@ -68389,7 +68559,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     74,
     1,
-    210,
+    212,
     1
    ],
    "intelligence": [
@@ -68443,20 +68613,18 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     90,
     2,
-    116,
+    118,
     1,
-    178,
+    180,
     1,
-    204,
-    1,
-    212,
-    1,
-    213,
+    206,
     1,
     214,
-    2,
-    219,
-    1
+    1,
+    215,
+    1,
+    216,
+    2
    ],
    "intelligent": [
     0,
@@ -68482,8 +68650,6 @@ globalThis.SUBTOPIC_CATALOG={
     82,
     1,
     89,
-    2,
-    219,
     2
    ],
    "intelligently": [
@@ -68661,9 +68827,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     4,
-    187,
-    1,
-    219,
+    189,
     1
    ],
    "interactional": [
@@ -68826,8 +68990,6 @@ globalThis.SUBTOPIC_CATALOG={
     84,
     1,
     95,
-    1,
-    219,
     1
    ],
    "interfac": [
@@ -69198,6 +69360,8 @@ globalThis.SUBTOPIC_CATALOG={
     80,
     1,
     87,
+    1,
+    220,
     1
    ],
    "invincible": [
@@ -69279,7 +69443,7 @@ globalThis.SUBTOPIC_CATALOG={
    "isolation": [
     93,
     1,
-    133,
+    135,
     1
    ],
    "isomer": [
@@ -69557,7 +69721,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "keeper": [
-    132,
+    134,
     1
    ],
    "key": [
@@ -69897,17 +70061,17 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     85,
     2,
-    106,
-    1,
-    174,
-    2,
-    175,
+    108,
     1,
     176,
-    1,
+    2,
     177,
     1,
     178,
+    1,
+    179,
+    1,
+    180,
     1
    ],
    "lack": [
@@ -70139,11 +70303,11 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     29,
     1,
-    105,
+    107,
     1,
-    172,
+    174,
     1,
-    173,
+    175,
     1
    ],
    "leap": [
@@ -70234,8 +70398,6 @@ globalThis.SUBTOPIC_CATALOG={
     92,
     5,
     95,
-    1,
-    219,
     1
    ],
    "learning-bas": [
@@ -70267,7 +70429,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "legacy": [
-    142,
+    144,
     1
    ],
    "length": [
@@ -70473,9 +70635,9 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "licens": [
-    135,
+    137,
     1,
-    139,
+    141,
     1
    ],
    "lidar": [
@@ -70496,10 +70658,6 @@ globalThis.SUBTOPIC_CATALOG={
     91,
     1,
     94,
-    1,
-    219,
-    1,
-    220,
     1
    ],
    "lifecycle": [
@@ -70772,10 +70930,6 @@ globalThis.SUBTOPIC_CATALOG={
     61,
     1
    ],
-   "lithium": [
-    220,
-    1
-   ],
    "lithosphere": [
     3,
     1
@@ -70823,7 +70977,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     90,
     1,
-    172,
+    174,
     1
    ],
    "local": [
@@ -70989,7 +71143,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     88,
     2,
-    202,
+    204,
     1
    ],
    "loosely": [
@@ -71054,6 +71208,10 @@ globalThis.SUBTOPIC_CATALOG={
     49,
     1
    ],
+   "low-cost": [
+    225,
+    1
+   ],
    "low-dimension": [
     6,
     1
@@ -71083,9 +71241,7 @@ globalThis.SUBTOPIC_CATALOG={
     2
    ],
    "low-temperature": [
-    170,
-    1,
-    218,
+    172,
     1
    ],
    "lower": [
@@ -71182,9 +71338,7 @@ globalThis.SUBTOPIC_CATALOG={
     90,
     1,
     92,
-    4,
-    219,
-    1
+    4
    ],
    "machine-bas": [
     51,
@@ -71336,9 +71490,7 @@ globalThis.SUBTOPIC_CATALOG={
     92,
     11,
     94,
-    1,
-    219,
-    2
+    1
    ],
    "major": [
     4,
@@ -71507,9 +71659,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     2,
-    173,
-    1,
-    218,
+    175,
     1
    ],
    "manager": [
@@ -71519,11 +71669,15 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "mandatory": [
-    215,
+    217,
+    1,
+    220,
     1,
     221,
     1,
     222,
+    1,
+    224,
     1
    ],
    "maneuver": [
@@ -71669,11 +71823,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     1,
-    96,
-    1,
-    117,
-    2,
-    118,
+    98,
     1,
     119,
     2,
@@ -71682,12 +71832,16 @@ globalThis.SUBTOPIC_CATALOG={
     121,
     2,
     122,
+    1,
+    123,
     2,
-    137,
+    124,
+    2,
+    139,
     1,
-    162,
+    164,
     1,
-    168,
+    170,
     1
    ],
    "manufacture": [
@@ -71727,7 +71881,7 @@ globalThis.SUBTOPIC_CATALOG={
     7
    ],
    "mapp": [
-    128,
+    130,
     1
    ],
    "maps": [
@@ -71771,11 +71925,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "market": [
-    130,
-    1
-   ],
-   "marketable": [
-    218,
+    132,
     1
    ],
    "markovian": [
@@ -71929,24 +72079,20 @@ globalThis.SUBTOPIC_CATALOG={
     3,
     94,
     1,
-    107,
+    109,
     1,
-    118,
+    120,
     1,
-    122,
+    124,
     1,
-    129,
+    131,
     1,
-    143,
+    145,
     1,
-    144,
+    146,
     1,
-    163,
+    165,
     1,
-    179,
-    2,
-    180,
-    2,
     181,
     2,
     182,
@@ -71954,11 +72100,11 @@ globalThis.SUBTOPIC_CATALOG={
     183,
     2,
     184,
-    1,
-    218,
     2,
-    220,
-    2
+    185,
+    2,
+    186,
+    1
    ],
    "materials-by-design": [
     68,
@@ -72039,7 +72185,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     83,
     2,
-    206,
+    208,
     1
    ],
    "mathematically": [
@@ -72128,8 +72274,6 @@ globalThis.SUBTOPIC_CATALOG={
     66,
     2,
     91,
-    1,
-    219,
     1
    ],
    "maximum": [
@@ -72662,10 +72806,6 @@ globalThis.SUBTOPIC_CATALOG={
     92,
     1,
     93,
-    1,
-    218,
-    1,
-    219,
     1
    ],
    "methodological": [
@@ -72791,7 +72931,7 @@ globalThis.SUBTOPIC_CATALOG={
    "microbial": [
     19,
     9,
-    125,
+    127,
     1
    ],
    "microbiological": [
@@ -72811,27 +72951,27 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "microelectronic": [
-    104,
-    1,
-    162,
-    2,
-    163,
+    106,
     1,
     164,
-    1,
+    2,
     165,
     1,
     166,
     1,
     167,
-    2,
+    1,
     168,
-    2,
+    1,
     169,
-    1,
+    2,
     170,
-    1,
+    2,
     171,
+    1,
+    172,
+    1,
+    173,
     1
    ],
    "microenvironment": [
@@ -72849,7 +72989,7 @@ globalThis.SUBTOPIC_CATALOG={
     2
    ],
    "microphysic": [
-    190,
+    192,
     1
    ],
    "microscale": [
@@ -72986,8 +73126,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "min": [
     16,
-    1,
-    218,
     1
    ],
    "mindfulness": [
@@ -73003,11 +73141,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     9,
     1,
-    98,
-    1,
-    128,
-    1,
-    129,
+    100,
     1,
     130,
     1,
@@ -73019,10 +73153,10 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     134,
     1,
-    218,
+    135,
     1,
-    220,
-    2
+    136,
+    1
    ],
    "minima": [
     22,
@@ -73201,7 +73335,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     93,
     6,
-    211,
+    213,
     1
    ],
    "mitochondria": [
@@ -73275,10 +73409,8 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     88,
     1,
-    142,
-    1,
-    219,
-    4
+    144,
+    1
    ],
    "ml-bas": [
     38,
@@ -73475,23 +73607,19 @@ globalThis.SUBTOPIC_CATALOG={
     3,
     94,
     5,
-    130,
+    132,
     1,
-    151,
+    153,
     1,
-    187,
+    189,
     1,
-    193,
+    195,
     1,
-    208,
+    210,
     1,
-    211,
+    213,
     1,
-    212,
-    1,
-    219,
-    3,
-    220,
+    214,
     1
    ],
    "model-bas": [
@@ -73737,7 +73865,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "modular": [
-    208,
+    210,
     1
    ],
    "modularity": [
@@ -73848,9 +73976,7 @@ globalThis.SUBTOPIC_CATALOG={
     72,
     1,
     88,
-    2,
-    218,
-    1
+    2
    ],
    "mono": [
     11,
@@ -74113,9 +74239,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     53,
     1,
-    204,
+    206,
     1,
-    207,
+    209,
     1
    ],
    "multi-particle": [
@@ -74769,13 +74895,11 @@ globalThis.SUBTOPIC_CATALOG={
     3,
     89,
     7,
-    161,
+    163,
     1,
-    169,
+    171,
     1,
-    175,
-    1,
-    220,
+    177,
     1,
     221,
     1
@@ -74789,7 +74913,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "neuman": [
-    163,
+    165,
     1
    ],
    "neumann": [
@@ -74835,7 +74959,7 @@ globalThis.SUBTOPIC_CATALOG={
    "neuro-symbolic": [
     40,
     1,
-    201,
+    203,
     1
    ],
    "neuro-synaptic": [
@@ -74869,9 +74993,9 @@ globalThis.SUBTOPIC_CATALOG={
    "neuromorphic": [
     24,
     1,
-    171,
+    173,
     1,
-    178,
+    180,
     1
    ],
    "neuron": [
@@ -75012,8 +75136,6 @@ globalThis.SUBTOPIC_CATALOG={
     73,
     1,
     94,
-    1,
-    220,
     1
    ],
    "nfv": [
@@ -75070,6 +75192,10 @@ globalThis.SUBTOPIC_CATALOG={
     86,
     1,
     88,
+    1,
+    96,
+    1,
+    97,
     1
    ],
    "node": [
@@ -75085,11 +75211,15 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "noi": [
-    215,
+    217,
+    1,
+    220,
     1,
     221,
     1,
     222,
+    1,
+    224,
     1
    ],
    "noise": [
@@ -75233,13 +75363,13 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "non-volatile": [
-    165,
+    167,
     1
    ],
    "non-von": [
     68,
     1,
-    163,
+    165,
     1
    ],
    "non-von-neumann": [
@@ -75291,7 +75421,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     62,
     4,
-    156,
+    158,
     1
    ],
    "nonlinearity": [
@@ -75467,9 +75597,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     1,
-    218,
-    1,
-    220,
+    96,
     1
    ],
    "novelty": [
@@ -75495,16 +75623,12 @@ globalThis.SUBTOPIC_CATALOG={
     6,
     93,
     3,
-    99,
-    1,
     101,
     1,
-    135,
-    2,
-    136,
+    103,
     1,
     137,
-    1,
+    2,
     138,
     1,
     139,
@@ -75514,14 +75638,18 @@ globalThis.SUBTOPIC_CATALOG={
     141,
     1,
     142,
+    1,
+    143,
+    1,
+    144,
     2,
-    150,
-    1,
-    151,
-    1,
     152,
     1,
-    157,
+    153,
+    1,
+    154,
+    1,
+    159,
     1
    ],
    "nuclear-scale": [
@@ -75686,6 +75814,10 @@ globalThis.SUBTOPIC_CATALOG={
     15,
     1,
     20,
+    1
+   ],
+   "observatory": [
+    220,
     1
    ],
    "obstacle": [
@@ -75982,14 +76114,6 @@ globalThis.SUBTOPIC_CATALOG={
     82,
     1
    ],
-   "oil": [
-    219,
-    4
-   ],
-   "oilfield": [
-    219,
-    1
-   ],
    "oleophobicity": [
     28,
     1
@@ -76233,15 +76357,11 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     93,
     1,
-    136,
+    138,
     1,
-    175,
+    177,
     1,
-    194,
-    1,
-    218,
-    1,
-    219,
+    196,
     1
    ],
    "operational": [
@@ -76279,11 +76399,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     2,
-    214,
-    1,
-    218,
-    1,
-    220,
+    216,
     1
    ],
    "operationally": [
@@ -76372,8 +76488,6 @@ globalThis.SUBTOPIC_CATALOG={
     77,
     1,
     89,
-    1,
-    219,
     1
    ],
    "optimality": [
@@ -76396,9 +76510,7 @@ globalThis.SUBTOPIC_CATALOG={
     78,
     1,
     90,
-    1,
-    219,
-    2
+    1
    ],
    "optimization": [
     20,
@@ -76415,15 +76527,13 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     88,
     2,
-    152,
+    154,
     1,
-    155,
+    157,
     1,
-    194,
+    196,
     1,
-    199,
-    1,
-    219,
+    201,
     1
    ],
    "optimize": [
@@ -76438,8 +76548,6 @@ globalThis.SUBTOPIC_CATALOG={
     90,
     1,
     91,
-    1,
-    220,
     1
    ],
    "optimum": [
@@ -76939,13 +77047,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     80,
     1,
-    108,
-    1,
-    185,
-    1,
-    186,
+    110,
     1,
     187,
+    1,
+    188,
+    1,
+    189,
     1
    ],
    "particular": [
@@ -77023,7 +77131,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "partnership": [
-    205,
+    207,
     1
    ],
    "paskova": [
@@ -77085,9 +77193,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     61,
     4,
-    134,
-    1,
-    218,
+    136,
     1
    ],
    "pattern": [
@@ -77343,11 +77449,9 @@ globalThis.SUBTOPIC_CATALOG={
     6,
     94,
     6,
-    202,
+    204,
     1,
-    213,
-    1,
-    220,
+    215,
     1
    ],
    "performance-driven": [
@@ -77368,10 +77472,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "permafrost": [
     3,
-    1
-   ],
-   "permeability": [
-    220,
     1
    ],
    "permit": [
@@ -77441,7 +77541,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "petabyte-scale": [
-    189,
+    191,
     1
    ],
    "pfas": [
@@ -77637,7 +77737,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "phenotype": [
-    124,
+    126,
     1
    ],
    "photoacoustic": [
@@ -77789,17 +77889,15 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     86,
     1,
-    109,
+    111,
     1,
-    156,
-    1,
-    187,
-    2,
-    188,
+    158,
     1,
     189,
+    2,
+    190,
     1,
-    219,
+    191,
     1
    ],
    "physical": [
@@ -77855,7 +77953,7 @@ globalThis.SUBTOPIC_CATALOG={
     5,
     93,
     4,
-    178,
+    180,
     1
    ],
    "physically": [
@@ -77869,11 +77967,11 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     45,
     1,
-    166,
+    168,
     1
    ],
    "physics-inform": [
-    212,
+    214,
     1
    ],
    "physiological": [
@@ -77943,7 +78041,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "planetary": [
-    217,
+    219,
     1
    ],
    "planktonic": [
@@ -77975,14 +78073,12 @@ globalThis.SUBTOPIC_CATALOG={
    "plant": [
     3,
     1,
-    135,
+    137,
     1,
-    136,
+    138,
     1,
-    148,
-    1,
-    218,
-    2
+    150,
+    1
    ],
    "plasma": [
     6,
@@ -77991,19 +78087,19 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     33,
     1,
-    149,
+    151,
     1,
-    156,
+    158,
     1
    ],
    "plasma-enabl": [
-    168,
+    170,
     1
    ],
    "plasma-fac": [
-    144,
+    146,
     1,
-    182,
+    184,
     1
    ],
    "plasmonic": [
@@ -78227,7 +78323,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "port": [
-    199,
+    201,
     1
    ],
    "portable": [
@@ -78459,22 +78555,20 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     2,
-    111,
+    113,
     1,
-    135,
+    137,
     1,
-    136,
+    138,
     1,
-    169,
-    1,
-    193,
-    1,
-    194,
+    171,
     1,
     195,
     1,
-    218,
-    2
+    196,
+    1,
+    197,
+    1
    ],
    "powertrain": [
     45,
@@ -78552,6 +78646,8 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "precursor": [
     33,
+    1,
+    220,
     1
    ],
    "predicability": [
@@ -78591,23 +78687,17 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     90,
     2,
-    110,
-    1,
-    190,
-    1,
-    191,
+    112,
     1,
     192,
     1,
-    219,
+    193,
+    1,
+    194,
     1
    ],
    "predictable": [
-    107,
-    1,
-    179,
-    1,
-    180,
+    109,
     1,
     181,
     1,
@@ -78616,6 +78706,10 @@ globalThis.SUBTOPIC_CATALOG={
     183,
     1,
     184,
+    1,
+    185,
+    1,
+    186,
     1
    ],
    "predictably": [
@@ -78657,9 +78751,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     2,
-    192,
+    194,
     1,
-    202,
+    204,
     1
    ],
    "predictive": [
@@ -78679,10 +78773,8 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     11,
-    125,
-    1,
-    219,
-    4
+    127,
+    1
    ],
    "predominately": [
     43,
@@ -78831,7 +78923,7 @@ globalThis.SUBTOPIC_CATALOG={
    "primitive": [
     0,
     3,
-    178,
+    180,
     1
    ],
    "principle": [
@@ -79157,7 +79249,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "problem-to-code": [
-    200,
+    202,
     1
    ],
    "procedural": [
@@ -79271,19 +79363,15 @@ globalThis.SUBTOPIC_CATALOG={
     4,
     94,
     1,
-    118,
+    120,
     1,
-    127,
+    129,
     1,
-    131,
+    133,
     1,
-    146,
+    148,
     1,
-    152,
-    1,
-    218,
-    1,
-    219,
+    154,
     1
    ],
    "process-property": [
@@ -79335,7 +79423,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     91,
     1,
-    120,
+    122,
     1
    ],
    "processing-microstructure-property": [
@@ -79356,8 +79444,6 @@ globalThis.SUBTOPIC_CATALOG={
     36,
     1,
     41,
-    1,
-    219,
     1
    ],
    "produce": [
@@ -79376,26 +79462,16 @@ globalThis.SUBTOPIC_CATALOG={
     52,
     1,
     94,
-    1,
-    218,
-    2
+    1
    ],
    "production": [
     36,
     2,
     61,
-    1,
-    219,
-    1,
-    220,
     1
    ],
    "productivity": [
-    96,
-    1,
-    117,
-    1,
-    118,
+    98,
     1,
     119,
     1,
@@ -79404,6 +79480,10 @@ globalThis.SUBTOPIC_CATALOG={
     121,
     1,
     122,
+    1,
+    123,
+    1,
+    124,
     1
    ],
    "profile": [
@@ -79659,7 +79739,7 @@ globalThis.SUBTOPIC_CATALOG={
    "prototyp": [
     36,
     1,
-    178,
+    180,
     1
    ],
    "prototype": [
@@ -79695,7 +79775,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     82,
     1,
-    210,
+    212,
     1
    ],
    "provid": [
@@ -79969,7 +80049,7 @@ globalThis.SUBTOPIC_CATALOG={
    "qualification": [
     36,
     1,
-    183,
+    185,
     1
    ],
    "qualitative": [
@@ -80009,7 +80089,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     83,
     1,
-    195,
+    197,
     1
    ],
    "quantify": [
@@ -80103,20 +80183,16 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     85,
     21,
-    102,
+    104,
     1,
-    103,
+    105,
     1,
-    153,
-    1,
-    154,
-    2,
     155,
     1,
     156,
     2,
     157,
-    2,
+    1,
     158,
     2,
     159,
@@ -80125,7 +80201,11 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     161,
     2,
-    179,
+    162,
+    2,
+    163,
+    2,
+    181,
     1
    ],
    "quantum-bas": [
@@ -80133,7 +80213,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "quantum-classical": [
-    155,
+    157,
     1
    ],
    "quantum-to-classical": [
@@ -80141,13 +80221,13 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "quark": [
-    109,
-    1,
-    187,
-    1,
-    188,
+    111,
     1,
     189,
+    1,
+    190,
+    1,
+    191,
     1
    ],
    "quasi-static": [
@@ -80408,6 +80488,8 @@ globalThis.SUBTOPIC_CATALOG={
     65,
     1,
     82,
+    1,
+    96,
     1
    ],
    "rapidly": [
@@ -80434,10 +80516,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "raptor": [
     95,
-    1
-   ],
-   "rare": [
-    218,
     1
    ],
    "rare-earth": [
@@ -80539,7 +80617,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     61,
     4,
-    127,
+    129,
     1
    ],
    "reaction-diffusion": [
@@ -80627,12 +80705,8 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     88,
     1,
-    211,
-    1,
-    218,
-    1,
-    219,
-    2
+    213,
+    1
    ],
    "real-world": [
     20,
@@ -80661,15 +80735,15 @@ globalThis.SUBTOPIC_CATALOG={
    "realiz": [
     85,
     1,
-    103,
-    1,
-    158,
-    1,
-    159,
+    105,
     1,
     160,
     1,
     161,
+    1,
+    162,
+    1,
+    163,
     1
    ],
    "realizable": [
@@ -80707,13 +80781,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     16,
     8,
-    114,
-    1,
-    206,
-    2,
-    207,
+    116,
     1,
     208,
+    2,
+    209,
+    1,
+    210,
     1
    ],
    "reasonable": [
@@ -80749,11 +80823,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "recenter": [
-    104,
-    1,
-    162,
-    1,
-    163,
+    106,
     1,
     164,
     1,
@@ -80770,6 +80840,10 @@ globalThis.SUBTOPIC_CATALOG={
     170,
     1,
     171,
+    1,
+    172,
+    1,
+    173,
     1
    ],
    "recently": [
@@ -80946,8 +81020,6 @@ globalThis.SUBTOPIC_CATALOG={
     62,
     1,
     93,
-    1,
-    220,
     1
    ],
    "reduction-oxidation": [
@@ -80958,18 +81030,8 @@ globalThis.SUBTOPIC_CATALOG={
     19,
     1
    ],
-   "ree": [
-    218,
-    1,
-    219,
-    1
-   ],
    "reenvision": [
-    96,
-    1,
-    117,
-    1,
-    118,
+    98,
     1,
     119,
     1,
@@ -80978,6 +81040,10 @@ globalThis.SUBTOPIC_CATALOG={
     121,
     1,
     122,
+    1,
+    123,
+    1,
+    124,
     1
    ],
    "refer": [
@@ -81003,10 +81069,6 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     91,
     1
-   ],
-   "refinery": [
-    219,
-    2
    ],
    "reflect": [
     56,
@@ -81205,7 +81267,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     61,
     2,
-    142,
+    144,
     1
    ],
    "relevance": [
@@ -81333,11 +81395,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     80,
     3,
-    177,
-    1,
-    218,
-    1,
-    219,
+    179,
     1
    ],
    "remotely": [
@@ -81584,15 +81642,7 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "reservoir": [
     3,
-    2,
-    219,
-    2,
-    220,
     2
-   ],
-   "residual": [
-    218,
-    1
    ],
    "resilience": [
     9,
@@ -81617,9 +81667,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     90,
     1,
-    209,
+    211,
     1,
-    214,
+    216,
     1
    ],
    "resiliency": [
@@ -81685,10 +81735,8 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     68,
     1,
-    128,
-    1,
-    219,
-    3
+    130,
+    1
    ],
    "resource-efficient": [
     47,
@@ -81742,7 +81790,9 @@ globalThis.SUBTOPIC_CATALOG={
     62,
     2,
     86,
-    2
+    2,
+    96,
+    1
    ],
    "responsible": [
     25,
@@ -81761,13 +81811,13 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "restoration": [
-    101,
-    1,
-    150,
-    1,
-    151,
+    103,
     1,
     152,
+    1,
+    153,
+    1,
+    154,
     1
    ],
    "restrict": [
@@ -81841,7 +81891,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     88,
     1,
-    142,
+    144,
     1
    ],
    "revis": [
@@ -81849,27 +81899,27 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "revitalization": [
-    101,
-    1,
-    150,
-    1,
-    151,
+    103,
     1,
     152,
+    1,
+    153,
+    1,
+    154,
     1
    ],
    "revolution": [
-    97,
-    1,
-    123,
-    1,
-    124,
+    99,
     1,
     125,
     1,
     126,
     1,
     127,
+    1,
+    128,
+    1,
+    129,
     1
    ],
    "revolutionary": [
@@ -81934,10 +81984,6 @@ globalThis.SUBTOPIC_CATALOG={
     76,
     1,
     77,
-    1
-   ],
-   "rheology": [
-    219,
     1
    ],
    "rich": [
@@ -82009,7 +82055,7 @@ globalThis.SUBTOPIC_CATALOG={
     4
    ],
    "roadmap": [
-    150,
+    152,
     1
    ],
    "robb": [
@@ -82103,9 +82149,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     89,
     1,
-    174,
+    176,
     1,
-    178,
+    180,
     1
    ],
    "robust": [
@@ -82153,13 +82199,11 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     57,
     1,
-    209,
+    211,
     1
    ],
    "rock": [
     9,
-    1,
-    219,
     1
    ],
    "role": [
@@ -82183,17 +82227,29 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "rose": [
-    215,
+    96,
     1,
-    216,
+    97,
     1,
     217,
+    1,
+    218,
+    1,
+    219,
+    1,
+    220,
     1,
     221,
     1,
     222,
     1,
     223,
+    1,
+    224,
+    1,
+    225,
+    1,
+    226,
     1
    ],
    "rotary-w": [
@@ -82291,11 +82347,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "safer": [
-    99,
-    1,
-    135,
-    1,
-    136,
+    101,
     1,
     137,
     1,
@@ -82308,6 +82360,10 @@ globalThis.SUBTOPIC_CATALOG={
     141,
     1,
     142,
+    1,
+    143,
+    1,
+    144,
     1
    ],
    "safety": [
@@ -82399,13 +82455,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     81,
     1,
-    97,
+    99,
     1,
-    111,
-    1,
-    123,
-    1,
-    124,
+    113,
     1,
     125,
     1,
@@ -82413,11 +82465,15 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     127,
     1,
-    193,
+    128,
     1,
-    194,
+    129,
     1,
     195,
+    1,
+    196,
+    1,
+    197,
     1
    ],
    "scalability": [
@@ -82446,8 +82502,6 @@ globalThis.SUBTOPIC_CATALOG={
     92,
     1,
     94,
-    1,
-    218,
     1
    ],
    "scale": [
@@ -82489,15 +82543,15 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     71,
     1,
-    162,
+    164,
     1,
-    184,
+    186,
     1
    ],
    "scale-bridg": [
     46,
     1,
-    151,
+    153,
     1
    ],
    "scale-resolv": [
@@ -82509,7 +82563,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     63,
     1,
-    127,
+    129,
     1
    ],
    "scatter": [
@@ -82749,25 +82803,33 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     90,
     1,
-    115,
+    96,
     1,
-    123,
+    97,
     1,
-    149,
+    117,
     1,
-    154,
+    125,
     1,
-    176,
+    151,
     1,
-    188,
+    156,
     1,
-    209,
+    178,
     1,
-    210,
+    190,
     1,
     211,
     1,
-    217,
+    212,
+    1,
+    213,
+    1,
+    219,
+    1,
+    220,
+    1,
+    226,
     1
    ],
    "scientific": [
@@ -82811,29 +82873,29 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     95,
     2,
-    113,
+    115,
     1,
-    114,
+    116,
     1,
-    199,
-    1,
-    200,
-    2,
     201,
     1,
     202,
-    1,
-    203,
     2,
+    203,
+    1,
     204,
     1,
     205,
-    1,
+    2,
     206,
     1,
     207,
     1,
     208,
+    1,
+    209,
+    1,
+    210,
     1
    ],
    "scientifically": [
@@ -82886,10 +82948,6 @@ globalThis.SUBTOPIC_CATALOG={
     80,
     1
    ],
-   "seal": [
-    220,
-    1
-   ],
    "seamless": [
     58,
     1,
@@ -82925,13 +82983,9 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "secur": [
-    98,
+    100,
     1,
-    105,
-    1,
-    128,
-    1,
-    129,
+    107,
     1,
     130,
     1,
@@ -82943,9 +82997,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     134,
     1,
-    172,
+    135,
     1,
-    173,
+    136,
+    1,
+    174,
+    1,
+    175,
     1
    ],
    "secure": [
@@ -82959,7 +83017,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     1,
-    139,
+    141,
     1
    ],
    "security": [
@@ -83106,8 +83164,6 @@ globalThis.SUBTOPIC_CATALOG={
     53,
     1,
     84,
-    1,
-    219,
     1
    ],
    "selection": [
@@ -83124,8 +83180,6 @@ globalThis.SUBTOPIC_CATALOG={
     11,
     1,
     28,
-    1,
-    220,
     1
    ],
    "selectively": [
@@ -83291,7 +83345,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     90,
     1,
-    160,
+    162,
     1
    ],
    "sense": [
@@ -83375,9 +83429,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     93,
     1,
-    170,
-    1,
-    218,
+    172,
     1
    ],
    "sensor-selection": [
@@ -83500,10 +83552,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "severely": [
     65,
-    1
-   ],
-   "shale": [
-    219,
     1
    ],
    "shap": [
@@ -83847,7 +83895,7 @@ globalThis.SUBTOPIC_CATALOG={
     4,
     94,
     2,
-    166,
+    168,
     1
    ],
    "simulator": [
@@ -83903,7 +83951,7 @@ globalThis.SUBTOPIC_CATALOG={
    "site": [
     92,
     1,
-    140,
+    142,
     1
    ],
    "situation": [
@@ -84047,9 +84095,7 @@ globalThis.SUBTOPIC_CATALOG={
    "smart": [
     17,
     1,
-    121,
-    1,
-    220,
+    123,
     1
    ],
    "smoothness": [
@@ -84165,7 +84211,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     87,
     1,
-    203,
+    205,
     1
    ],
    "soil": [
@@ -84173,6 +84219,10 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     9,
     2
+   ],
+   "solar": [
+    97,
+    1
    ],
    "soldier": [
     2,
@@ -84502,6 +84552,12 @@ globalThis.SUBTOPIC_CATALOG={
     91,
     1,
     94,
+    1,
+    225,
+    1
+   ],
+   "spaceflight": [
+    226,
     1
    ],
    "spacetime": [
@@ -85099,15 +85155,23 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "step-1": [
-    216,
+    218,
     1,
     223,
+    1,
+    225,
+    1,
+    226,
     1
    ],
    "step-2": [
-    216,
+    218,
     1,
     223,
+    1,
+    225,
+    1,
+    226,
     1
    ],
    "stephanie": [
@@ -85146,10 +85210,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "stimulation": [
     5,
-    1,
-    219,
-    1,
-    220,
     1
    ],
    "stimuli": [
@@ -85261,13 +85321,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     1,
-    112,
-    1,
-    196,
-    1,
-    197,
+    114,
     1,
     198,
+    1,
+    199,
+    1,
+    200,
     1
    ],
    "strategically": [
@@ -85300,16 +85360,10 @@ globalThis.SUBTOPIC_CATALOG={
     83,
     1,
     88,
-    1,
-    219,
-    1,
-    220,
     1
    ],
    "stream": [
     58,
-    1,
-    219,
     1
    ],
    "strength": [
@@ -85449,9 +85503,9 @@ globalThis.SUBTOPIC_CATALOG={
     3,
     86,
     1,
-    143,
+    145,
     1,
-    180,
+    182,
     1
    ],
    "structure": [
@@ -85605,7 +85659,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "sub-1-nm": [
-    162,
+    164,
     1
    ],
    "sub-10-micrometer": [
@@ -85703,16 +85757,14 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "subsurface": [
-    112,
-    1,
-    196,
-    2,
-    197,
+    114,
     1,
     198,
     2,
-    220,
-    1
+    199,
+    1,
+    200,
+    2
    ],
    "subsystem": [
     7,
@@ -86021,11 +86073,7 @@ globalThis.SUBTOPIC_CATALOG={
    "supply": [
     91,
     3,
-    98,
-    1,
-    128,
-    1,
-    129,
+    100,
     1,
     130,
     1,
@@ -86037,7 +86085,11 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     134,
     1,
-    139,
+    135,
+    1,
+    136,
+    1,
+    141,
     1
    ],
    "supportive": [
@@ -86164,8 +86216,6 @@ globalThis.SUBTOPIC_CATALOG={
     34,
     1,
     89,
-    1,
-    220,
     1
    ],
    "sustainability": [
@@ -86239,7 +86289,7 @@ globalThis.SUBTOPIC_CATALOG={
    "symbolic": [
     15,
     1,
-    206,
+    208,
     1
    ],
    "symmetry": [
@@ -86493,31 +86543,29 @@ globalThis.SUBTOPIC_CATALOG={
     4,
     94,
     9,
-    103,
+    97,
     1,
-    119,
+    105,
     1,
-    148,
+    121,
     1,
-    157,
+    150,
     1,
-    158,
-    2,
     159,
-    2,
+    1,
     160,
-    1,
-    161,
-    1,
-    171,
-    1,
-    186,
-    1,
-    214,
-    1,
-    219,
     2,
-    220,
+    161,
+    2,
+    162,
+    1,
+    163,
+    1,
+    173,
+    1,
+    188,
+    1,
+    216,
     1
    ],
    "system-level": [
@@ -87014,13 +87062,7 @@ globalThis.SUBTOPIC_CATALOG={
     90,
     1,
     94,
-    2,
-    219,
-    1
-   ],
-   "technoeconomic": [
-    218,
-    1
+    2
    ],
    "technological": [
     53,
@@ -87133,23 +87175,19 @@ globalThis.SUBTOPIC_CATALOG={
     5,
     95,
     1,
-    116,
+    118,
     1,
-    131,
+    133,
     1,
-    149,
+    151,
     1,
-    165,
-    1,
-    212,
-    1,
-    213,
+    167,
     1,
     214,
     1,
-    218,
+    215,
     1,
-    220,
+    216,
     1
    ],
    "technology-enhanc": [
@@ -87312,8 +87350,6 @@ globalThis.SUBTOPIC_CATALOG={
     94,
     1,
     95,
-    1,
-    220,
     1
    ],
    "testbed": [
@@ -87571,7 +87607,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     94,
     1,
-    173,
+    175,
     1
    ],
    "thermoconductive": [
@@ -87842,8 +87878,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "tight": [
     16,
-    1,
-    219,
     1
    ],
    "tim": [
@@ -87914,8 +87948,6 @@ globalThis.SUBTOPIC_CATALOG={
     7,
     2,
     14,
-    1,
-    218,
     1
    ],
    "timescale": [
@@ -88015,7 +88047,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "tolerant": [
-    154,
+    156,
     1
    ],
    "tomography": [
@@ -88071,9 +88103,9 @@ globalThis.SUBTOPIC_CATALOG={
     6,
     94,
     1,
-    142,
+    144,
     1,
-    154,
+    156,
     1
    ],
    "toopology": [
@@ -88735,15 +88767,15 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     74,
     1,
-    101,
-    1,
-    150,
-    1,
-    151,
+    103,
     1,
     152,
     1,
-    171,
+    153,
+    1,
+    154,
+    1,
+    173,
     1
    ],
    "transformation": [
@@ -88835,11 +88867,7 @@ globalThis.SUBTOPIC_CATALOG={
    "translation": [
     23,
     1,
-    113,
-    1,
-    199,
-    1,
-    200,
+    115,
     1,
     201,
     1,
@@ -88850,6 +88878,10 @@ globalThis.SUBTOPIC_CATALOG={
     204,
     1,
     205,
+    1,
+    206,
+    1,
+    207,
     1
    ],
    "transmission": [
@@ -88895,7 +88927,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     54,
     1,
-    196,
+    198,
     1
    ],
    "trapp": [
@@ -88923,7 +88955,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     82,
     1,
-    152,
+    154,
     1
    ],
    "tremendou": [
@@ -88943,9 +88975,9 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "tritium": [
-    146,
+    148,
     1,
-    147,
+    149,
     1
    ],
    "trivial": [
@@ -88975,9 +89007,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     14,
     2,
-    203,
+    205,
     1,
-    206,
+    208,
     1
    ],
    "try": [
@@ -89019,7 +89051,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     80,
     1,
-    190,
+    192,
     1
    ],
    "turbulent": [
@@ -89037,12 +89069,8 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     36,
     1,
-    186,
-    1,
-    218,
-    1,
-    219,
-    2
+    188,
+    1
    ],
    "twist": [
     11,
@@ -89155,19 +89183,19 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     3,
-    105,
+    107,
     1,
-    110,
+    112,
     1,
-    172,
+    174,
     1,
-    173,
-    1,
-    190,
-    1,
-    191,
+    175,
     1,
     192,
+    1,
+    193,
+    1,
+    194,
     1
    ],
    "uas": [
@@ -89315,7 +89343,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     82,
     1,
-    195,
+    197,
     1
    ],
    "uncertainty-aware": [
@@ -89334,8 +89362,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "unconventional": [
     68,
-    1,
-    219,
     1
    ],
    "uncover": [
@@ -89390,8 +89416,6 @@ globalThis.SUBTOPIC_CATALOG={
     33,
     1,
     66,
-    1,
-    219,
     1
    ],
    "underpin": [
@@ -89515,7 +89539,7 @@ globalThis.SUBTOPIC_CATALOG={
     4,
     94,
     5,
-    176,
+    178,
     1
    ],
    "understandable": [
@@ -89585,13 +89609,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     17,
     1,
-    109,
-    1,
-    187,
-    1,
-    188,
+    111,
     1,
     189,
+    1,
+    190,
+    1,
+    191,
     1
    ],
    "unintentional": [
@@ -89683,13 +89707,13 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "unleash": [
-    112,
-    1,
-    196,
-    1,
-    197,
+    114,
     1,
     198,
+    1,
+    199,
+    1,
+    200,
     1
    ],
    "unless": [
@@ -89789,7 +89813,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     64,
     1,
-    184,
+    186,
     1
    ],
    "updat": [
@@ -89813,7 +89837,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "upper": [
-    197,
+    199,
     1
    ],
    "uq": [
@@ -89977,7 +90001,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     90,
     1,
-    142,
+    144,
     1
    ],
    "utilize": [
@@ -90279,7 +90303,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     1,
-    210,
+    212,
     1
    ],
    "versa": [
@@ -90390,8 +90414,6 @@ globalThis.SUBTOPIC_CATALOG={
     93,
     1,
     95,
-    1,
-    218,
     1
    ],
    "vibration": [
@@ -90792,28 +90814,18 @@ globalThis.SUBTOPIC_CATALOG={
     92,
     1
    ],
-   "waste": [
-    218,
-    1,
-    219,
-    1
-   ],
    "water": [
     3,
     1,
     17,
     1,
-    110,
+    112,
     1,
-    190,
-    1,
-    191,
-    2,
     192,
     1,
-    218,
-    1,
-    219,
+    193,
+    2,
+    194,
     1
    ],
    "wave": [
@@ -90963,7 +90975,7 @@ globalThis.SUBTOPIC_CATALOG={
    "week": [
     49,
     1,
-    192,
+    194,
     1
    ],
    "weight": [
@@ -91072,8 +91084,6 @@ globalThis.SUBTOPIC_CATALOG={
     93,
     2,
     94,
-    1,
-    220,
     1
    ],
    "well-be": [
@@ -91535,13 +91545,13 @@ globalThis.SUBTOPIC_CATALOG={
    "workflow": [
     88,
     4,
-    115,
-    1,
-    209,
-    1,
-    210,
+    117,
     1,
     211,
+    1,
+    212,
+    1,
+    213,
     1
    ],
    "workforce": [
@@ -91566,6 +91576,8 @@ globalThis.SUBTOPIC_CATALOG={
     57,
     1,
     58,
+    1,
+    220,
     1
    ],
    "worst": [
@@ -91617,7 +91629,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     1,
-    192,
+    194,
     1
    ],
    "yet": [
@@ -91648,10 +91660,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "zero-day": [
     88,
-    1
-   ],
-   "zero-liquid": [
-    218,
     1
    ],
    "zone": [
@@ -91762,6 +91770,8 @@ globalThis.SUBTOPIC_CATALOG={
    "345241:tdac-baa-022",
    "345241:tdac-baa-024",
    "345241:tdac-baa-026",
+   "359996:a-4",
+   "360004:c-2",
    "361526:challenge-1",
    "361526:challenge-2",
    "361526:challenge-3",
@@ -91884,13 +91894,14 @@ globalThis.SUBTOPIC_CATALOG={
    "363240:a-14",
    "363241:a-15",
    "363258:c-4",
-   "363594:a-1",
-   "363594:b-1",
-   "363594:c-1",
+   "363325:d-8",
    "363747:d-4",
    "363759:a-16",
-   "363789:a-17"
+   "363789:a-17",
+   "364021:a-18",
+   "364032:b-7",
+   "364039:b-8"
   ]
  },
- "searchable_record_count": 224
+ "searchable_record_count": 227
 };

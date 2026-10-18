@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/environmental-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/environmental-science.xml</id>
-  <updated>2026-10-16T16:56:01Z</updated>
+  <updated>2026-10-18T19:40:57Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Limited Competition: Biomedical Research Environment &amp; Sponsored Programs Administration Development (BRE-SPAD) Program</title>
@@ -336,6 +336,28 @@
     <summary>Centers for Disease Control and Prevention - ERA | Estimated Application 2027-01-26 | Background: Despite advances in technology and improvements in work environments, mining remains one of the most challenging and hazardous occupations in the United States. The industry continues to experience a fatality rate nearly three times higher than the national average for all industries, according to the U.S. Bureau of Labor Statistics (BLS). Public MSHA data show that in 2025, the U.S. m…</summary>
   </entry>
   <entry>
+    <title>NGA - Boosting Innovative GEOINT - Science &amp; Technology Broad Agency Announcement (BIG-ST BAA): Topic # 07 - Lidar Analysis for Surface &amp; Environmental Reconnaissance (LASER)</title>
+    <link href="https://sam.gov/opp/4984511e4bbc4d01a21df55b30a88f02/view"/>
+    <id>urn:funding-finder:sam-gov:sam-gov%3A4984511e4bbc4d01a21df55b30a88f02</id>
+    <updated>2026-10-16T00:00:00Z</updated>
+    <author><name>National Geospatial-Intelligence Agency</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Environmental science"/>
+    <category term="Space and aeronautics"/>
+    <summary>National Geospatial-Intelligence Agency | Preproposal 2026-10-28 | Develop AI/ML methods to extract and classify 3D surface/subsurface objects using NASA ICESat-2 and GEDI lidar, including navigation safety applications. Topic7 LASER only, not BIG-ST parent or closed topics. General Solicitation Rev4 governs eligibility and abstract prerequisites; October16 Topic7 revision governs current dates, Phase2 label and corrected PD&gt;75% metric. CUI safeguards; foreign na…</summary>
+  </entry>
+  <entry>
+    <title>FY 2027 - 2029 Broad Agency Announcement (BAA), National Marine Fisheries Service</title>
+    <link href="https://www.grants.gov/search-results-detail/364099"/>
+    <id>urn:funding-finder:grants-gov:364099</id>
+    <updated>2026-10-16T00:00:00Z</updated>
+    <author><name>DOC NOAA - ERA Production</name></author>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <summary>DOC NOAA - ERA Production | Application 2028-09-30 | This Broad Agency Announcement is a mechanism to encourage research, education, outreach, innovative projects, or sponsorships that are not addressed through NOAA’s competitive discretionary programs. This announcement is not soliciting goods or services for the direct benefit of NOAA. Funding for activities described in this notice is contingent upon the availability of appropriations in the fisc…</summary>
+  </entry>
+  <entry>
     <title>Cooperative Agreement for affiliated Partner with Californian Cooperative Ecosystem Studies Unit</title>
     <link href="https://www.grants.gov/search-results-detail/364074"/>
     <id>urn:funding-finder:grants-gov:364074</id>
@@ -519,18 +541,6 @@
     <summary>National Institutes of Health | Estimated Application 2026-12-07 | The goal of the Supporting Programs to Advance Research Knowledge in Environmental Health Sciences (SPARK-EHS) initiative is to extend the institutional, geographical, and research reach of NIEHS training. This initiative proposes to launch new and innovative environmental health training programs for research-focused predoctoral trainees at institutions that have not had a funded NIEHS T32 during…</summary>
   </entry>
   <entry>
-    <title>Strengthening American Infrastructure (SAI)</title>
-    <link href="https://www.grants.gov/search-results-detail/364025"/>
-    <id>urn:funding-finder:grants-gov:364025</id>
-    <updated>2026-10-05T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Arts and culture"/>
-    <category term="Environmental science"/>
-    <category term="Social and behavioral sciences"/>
-    <category term="Technology development"/>
-    <summary>U.S. National Science Foundation | Posted | Strengthening American Infrastructure (SAI) is an NSF program seeking to stimulate human-centered, use-inspired, fundamental and potentially transformative research aimed at strengthening America’s infrastructure. Effective infrastructure provides a strong foundation for socioeconomic vitality and broad improvement in quality of life. Robust, reliable and effective infrastructure spurs private-sec…</summary>
-  </entry>
-  <entry>
     <title>Cooperative Agreement for Affiliated Partner with the Southern Appalachian Cooperative Ecosystem Studies Unit (CESU)</title>
     <link href="https://www.grants.gov/search-results-detail/364016"/>
     <id>urn:funding-finder:grants-gov:364016</id>
@@ -656,15 +666,5 @@
     <author><name>DOC NOAA - ERA Production</name></author>
     <category term="Environmental science"/>
     <summary>DOC NOAA - ERA Production | Application 2026-10-26 | The Earth System Science and Services Partnership (ESSSP) supports research, programs, projects and other activities related to NOAA's mission, primarily through collaborations among scientists and professionals in areas of mutual interest associated with understanding and predicting changes in the Earth's atmosphere, oceans, coasts, land, and ice and their interrelated effects on ecosystems, weat…</summary>
-  </entry>
-  <entry>
-    <title>New York State Flexible Energy Technical Analysis</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0r8z000000Dk3yAAC"/>
-    <id>urn:funding-finder:nyserda:nyserda%3ARFQL5548</id>
-    <updated>2026-09-07T00:00:00Z</updated>
-    <author><name>NYSERDA</name></author>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <summary>NYSERDA | Application 2026-12-31 | Establishes a pool of consulting firms qualified to provide NYSERDA with diverse technical, energy, economic, and environmental analytical capacity, some of which may be requests for support services on short notice.</summary>
   </entry>
 </feed>
