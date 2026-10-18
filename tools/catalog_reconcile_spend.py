@@ -37,6 +37,9 @@ GENERATION_INPUTS = (
 VECTOR_OUTPUTS = ('data/search-v2-voyage-manifest.json', 'data/search-v2-voyage-vectors.f16',
                   'data/search-v2-voyage-canaries.json', 'evaluation/search_v2_hybrid_vector_build.json')
 OUTPUT_VERSION = 'vector-output-checkpoint-2'
+VECTOR_PREPROCESSORS = ('tools/build_search_v2_voyage_vectors.mjs', 'tools/embedding_contract.mjs',
+    'tools/run_search_diagnosis.mjs', 'assets/search-hybrid.js', 'assets/search-retrieval.js',
+    'assets/search-query.js', 'assets/search-v2-config.js', 'assets/match-explain.js')
 
 
 def require(ok, reason):
@@ -226,6 +229,63 @@ def completed_outputs(state, value, binding, root):
             'accounting_origin': origin}
 
 
+def retained_reconciliation_outputs(state, value, binding, root):
+    """Reuse one authenticated complete asset, never cached rows from new space."""
+    source = value.get('retained_vector_source')
+    if not source:
+        return None
+    from tools import release_candidate as c
+    require(set(source) == {'candidate_id', 'manifest_sha256', 'operation_sha256', 'context_sha256', 'outputs'}
+            and all(re.fullmatch('[a-f0-9]{64}', str(source[key])) for key in
+                    ('candidate_id', 'manifest_sha256', 'operation_sha256', 'context_sha256'))
+            and set(source['outputs']) == set(VECTOR_OUTPUTS), 'retained_source_identity')
+    archived = Path(state) / 'retained-vector-contexts' / (source['operation_sha256'] + '.json')
+    prior = json.loads(archived.read_bytes())
+    require(identity(prior) == source['context_sha256']
+            and prior.get('operation_sha256') == source['operation_sha256']
+            and identity({k: v for k, v in prior.items() if k not in
+                          {'operation_sha256', 'completed_candidate_id'}}) == prior['operation_sha256']
+            and prior.get('completed_candidate_id') == source['candidate_id']
+            and all(prior.get(key) == value.get(key) for key in
+                    ('parent_run', 'parent_candidate_id', 'parent_manifest_sha256', 'original_spend')),
+            'retained_source_context')
+    bundle = Path(state) / 'complete-candidates' / source['candidate_id']
+    require(c.digest((bundle / 'candidate.json').read_bytes()) == source['manifest_sha256'], 'retained_source_manifest')
+    manifest = c.load(bundle, source['candidate_id'])
+    receipt = manifest.get('source_reconciliation', {})
+    require(receipt.get('operation_sha256') == prior['operation_sha256']
+            and receipt.get('cache_operation_contract') == prior['operation_contract']
+            and receipt.get('ledger_sha256') == identity(ledger(state).read())
+            and all(manifest['files'].get(name) == digest for name, digest in source['outputs'].items()),
+            'retained_source_receipt')
+    old_binding = json.loads((Path(state) / 'vector-bindings' / (prior['operation_sha256'] + '.json')).read_bytes())
+    require(all(re.fullmatch('[a-f0-9]{64}', str(old_binding.get('source_hashes', {}).get(name, '')))
+                and re.fullmatch('[a-f0-9]{64}', str(binding.get('source_hashes', {}).get(name, '')))
+                for name in VECTOR_PREPROCESSORS)
+            and re.fullmatch('[a-f0-9]{64}', str(prior['operation_contract'].get('tools/corpus_clock.mjs', '')))
+            and re.fullmatch('[a-f0-9]{64}', str(value['operation_contract'].get('tools/corpus_clock.mjs', ''))),
+            'retained_preprocessor_identity')
+    old = completed_outputs(state, prior, old_binding, root)
+    require(old is not None and old['outputs'] == source['outputs'], 'retained_source_completion')
+    # A changed SAM identity/diagnostic byte is not an embedding input. The
+    # corpus, configuration and every executed passage/preprocessing module are.
+    if (any(old_binding.get(key) != binding.get(key) for key in
+            ('corpus_sha256', 'configuration_sha256', 'passage_count'))
+            or any(old_binding['source_hashes'].get(name) != binding['source_hashes'].get(name)
+                   for name in VECTOR_PREPROCESSORS)
+            or prior['operation_contract'].get('tools/corpus_clock.mjs') !=
+               value['operation_contract'].get('tools/corpus_clock.mjs')):
+        return None
+    proof = {'version': 'reconciliation-vector-retention-1', 'operation_sha256': value['operation_sha256'],
+        'source': source, 'source_completion_sha256': hashlib.sha256((Path(state) / 'vector-completions' /
+            (prior['operation_sha256'] + '.json')).read_bytes()).hexdigest(),
+        'original_accounting_origin_sha256': identity(old['accounting_origin']),
+        'outputs': old['outputs'], 'corpus_sha256': binding['corpus_sha256'],
+        'configuration_sha256': binding['configuration_sha256'], 'passage_count': binding['passage_count'],
+        'ledger_sha256': identity(ledger(state).read()), 'new_requests': 0}
+    return old | {'operation_sha256': value['operation_sha256'], 'retention_proof': proof}
+
+
 def prepare(state, packet, *, generation=False):
     """Bind vector work and completed bytes to the existing logical allowance."""
     root = Path(__file__).resolve().parents[1]
@@ -245,8 +305,15 @@ def prepare(state, packet, *, generation=False):
             require(json.loads(path.read_bytes()) == binding, 'reconciliation_vector_inputs_changed')
         else:
             atomic_json(path, binding)
-        return completed_outputs(state, value, binding, root) or {
-            'status': 'prepared', 'operation_sha256': value['operation_sha256']}
+        completed = completed_outputs(state, value, binding, root)
+        if completed:
+            return completed
+        retained = retained_reconciliation_outputs(state, value, binding, root)
+        if retained:
+            if retained['status'] == 'complete':
+                atomic_json(Path(state) / 'vector-stage.json', retained['retention_proof'])
+            return retained
+        return {'status': 'prepared', 'operation_sha256': value['operation_sha256']}
     require(packet.get('run_id') == os.environ.get('GITHUB_RUN_ID')
             and re.fullmatch('[1-9][0-9]*', str(packet.get('run_id', '')))
             and Path(state).name == 'offline-' + packet['run_id']
@@ -293,6 +360,12 @@ def checkpoint(state, packet, *, generation=False):
     actual = {name: hashlib.sha256(data).hexdigest() for name, data in raw.items()}
     require(packet.get('outputs') == actual, 'generation_checkpoint_outputs')
     prior = completed_outputs(state, value, binding, root)
+    if not generation and prior is None:
+        retained = retained_reconciliation_outputs(state, value, binding, root)
+        if retained:
+            require(retained['outputs'] == actual, 'retained_completed_vectors_changed')
+            atomic_json(Path(state) / 'vector-stage.json', retained['retention_proof'])
+            return {'status': 'complete'}
     require(prior is None or prior['outputs'] == actual, 'completed_vectors_changed')
     origin = prior['accounting_origin'] if prior else budgeted_origin(state, value, raw, book)
     retain_outputs(state, value, binding, raw, origin)

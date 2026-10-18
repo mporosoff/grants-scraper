@@ -655,7 +655,7 @@ def _canonical_title(record: dict) -> str:
 
 
 def reconcile_source_aliases(records: list[dict], previous_records: list[dict]) -> tuple[list[dict], dict]:
-    """Retain proven public IDs across fresh Grants.gov reconstruction.
+    """Retain proven public IDs across source reconstruction and SAM versions.
 
     The accepted previous catalog is identity evidence only. Never carry its
     scientific fields, deadlines, currentness, document evidence, or source age.
@@ -744,6 +744,76 @@ def reconcile_source_aliases(records: list[dict], previous_records: list[dict]) 
                     add_alias(alias)
                 for alias in previous.get('source_aliases') or []:
                     add_alias(alias)
+            if len(aliases) > 40:
+                raise ValueError('Historical source aliases exceed the public identity bound')
+            if aliases != (winner.get('source_aliases') or []):
+                winner['source_aliases'] = aliases
+                changed.append(owner)
+
+    # SAM versions are separate notice IDs for the same sponsor-owned call.
+    # The organization must also remain exact; a shared title or URL is never
+    # identity evidence, and an old notice contributes no scientific fields.
+    sam_fields = ('opportunity_id', 'opportunity_number', 'source', 'agency',
+                  'agency_authority', 'sam_organization_id', 'detail_page', 'funding_opportunity_url')
+
+    def sam_key(record):
+        ident = record.get('opportunity_id')
+        organization = record.get('sam_organization_id')
+        key = solicitation_key(record)
+        if (record.get('source') != 'SAM.gov' or record.get('agency_authority') != 'source_listed'
+                or re.fullmatch(r'sam-gov:[a-f0-9]{32}', str(ident)) is None
+                or re.fullmatch(r'[0-9]{1,20}', str(organization)) is None
+                or not isinstance(organization, str) or scoped(record) or not key):
+            return None
+        return (*key, organization)
+
+    sam_current, sam_previous = {}, {}
+    for rows, groups in ((combined, sam_current), (previous_records, sam_previous)):
+        for record in rows:
+            key = sam_key(record)
+            if key:
+                groups.setdefault(key, []).append(record)
+    for key, winners in sam_current.items():
+        candidates = sam_previous.get(key, [])
+        if candidates and (len(winners) != 1 or len(candidates) != 1):
+            raise ValueError('Historical SAM source identity has ambiguous solicitation scope')
+        for winner in winners:
+            owner = winner['opportunity_id']
+            aliases = deepcopy(winner.get('source_aliases') or [])
+            seen = {str(item.get('opportunity_id') or '') for item in aliases}
+
+            def add_sam_alias(item):
+                ident = str(item.get('opportunity_id') or '')
+                url = 'https://sam.gov/opp/' + ident.removeprefix('sam-gov:') + '/view'
+                native = item.get('source') == 'SAM.gov' or ident.startswith('sam-gov:')
+                if native:
+                    valid = (set(item) == set(sam_fields) and sam_key(item) == key
+                        and all(isinstance(value, str) and len(value) <= 2000 for value in item.values())
+                        and item.get('detail_page') == url and item.get('funding_opportunity_url') == url)
+                else:
+                    # This alias was already proven on the accepted SAM owner;
+                    # do not infer a new cross-source transfer from its title.
+                    public = {'opportunity_id', 'opportunity_number', 'source', 'detail_page', 'funding_opportunity_url'}
+                    valid = (set(item) in (public, public | {'official_identity'})
+                        and normalized_number(item.get('opportunity_number')) == key[1]
+                        and bool(item.get('source'))
+                        and all(value is None or isinstance(value, str) and len(value) <= 2000
+                                for name, value in item.items() if name != 'official_identity'))
+                if (not valid or not ident or ident == owner or ident in current_ids
+                        or owners.get(ident, owner) != owner):
+                    raise ValueError('Historical SAM source alias lacks consistent identity proof')
+                if ident not in seen:
+                    aliases.append(deepcopy(item)); seen.add(ident); owners[ident] = owner
+                    added.append(ident)
+
+            for item in aliases:
+                if item.get('source') == 'SAM.gov' or str(item.get('opportunity_id') or '').startswith('sam-gov:'):
+                    add_sam_alias(item)
+            for previous in candidates:
+                if previous['opportunity_id'] != owner:
+                    add_sam_alias({field: previous.get(field) for field in sam_fields})
+                for item in previous.get('source_aliases') or []:
+                    add_sam_alias(item)
             if len(aliases) > 40:
                 raise ValueError('Historical source aliases exceed the public identity bound')
             if aliases != (winner.get('source_aliases') or []):

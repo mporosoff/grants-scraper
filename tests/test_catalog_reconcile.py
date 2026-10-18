@@ -49,9 +49,14 @@ class ReconcileContracts(unittest.TestCase):
         self.result = AdapterResult(slug='sam-gov', display_name='SAM.gov', source_type='Federal',
             ok=True, record_count=1, records=[self.sam], diagnostics={})
 
-    def run_sources(self):
+    def run_sources(self, published=None):
+        def predecessor(_root, destination):
+            rows = list(published or [])
+            save_catalog(dict(self.catalog, opportunities=[self.other] + rows), destination)
+            return rows
         with patch.object(c, 'load', return_value=self.manifest), \
                 patch.object(repair, 'verify_source_delta'), \
+                patch.object(repair, 'published_alias_records', side_effect=predecessor), \
                 patch('scripts.sources.registry.collect', return_value=([self.sam], [self.result])) as collect, \
                 patch('tools.require_sam_refresh.require_complete_refresh'):
             repair.reconcile(self.root, self.parent, self.state)
@@ -74,6 +79,23 @@ class ReconcileContracts(unittest.TestCase):
         self.assertEqual(load_catalog(self.root / 'data/opportunities.js'), current)
         cached = c.read_json(self.root / 'data/source_records.json')
         self.assertEqual(cached['sources']['nsf-test'], self.cache['sources']['nsf-test'])
+
+    def test_published_same_id_aliases_and_change_predecessor_survive_checkpoint_replay(self):
+        from scripts.sources.merge import reconcile_source_aliases
+        fixture = c.read_json(Path(__file__).parent / 'fixtures/sam_imr_identity_continuity.json')
+        self.sam = deepcopy(fixture['current']); self.result.records[:] = [self.sam]
+        prior = reconcile_source_aliases([self.sam], [fixture['previous']])[0][0]
+        self.assertEqual(prior['opportunity_id'], self.sam['opportunity_id'])
+        self.assertEqual(self.run_sources([prior]), 1)
+        current = load_catalog(self.root / 'data/opportunities.js')
+        imr = next(row for row in current['opportunities'] if row['opportunity_id'] == self.sam['opportunity_id'])
+        self.assertEqual(imr['source_aliases'], prior['source_aliases'])
+        predecessor = (self.state / 'published-predecessor.js').read_bytes()
+        published = load_catalog(self.state / 'published-predecessor.js')
+        self.assertEqual(published['opportunities'][-1], prior)
+        self.assertEqual(self.run_sources([]), 0)
+        self.assertEqual((self.state / 'published-predecessor.js').read_bytes(), predecessor)
+        self.assertEqual(load_catalog(self.root / 'data/opportunities.js'), current)
 
     def test_withdrawal_removes_both_sam_cache_partitions_without_pruning_other_sources(self):
         departed = 'sam-gov:' + 'b' * 32
@@ -196,7 +218,8 @@ class ReconcileContracts(unittest.TestCase):
         context['operation_sha256'] = repair.identity(context)
         context['completed_candidate_id'] = 'd' * 64
         child = {'candidate_id': 'd' * 64, 'derived_from_candidate': self.manifest['candidate_id'],
-                 'source_reconciliation': {'version': repair.VERSION}}
+                 'source_reconciliation': {'version': repair.VERSION},
+                 'files': {name: 'f' * 64 for name in repair.VECTOR_FILES}}
         row = {'id': 'r1', 'provider': 'voyage', 'model': 'voyage-4-lite', 'stage': 'vectors',
             'key': 'key', 'attempt': 1, 'reserved_microusd': 20, 'charged_microusd': 10, 'status': 'completed'}
         ledger = {'logical_id': 'offline-10', 'limit_microusd': 2_000_000, 'max_requests': 300, 'requests': [row]}

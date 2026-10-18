@@ -27,7 +27,7 @@ from tools import release_checkpoint_archive as archive
 VERSION = 'catalog-source-reconciliation-1'
 STAGE = 'catalog-reconcile'
 SLUG = 'sam-gov'
-SOURCE_INPUTS = {'config/sam_gov.json', 'scripts/sources/sam_reviewed.py',
+SOURCE_INPUTS = {'config/sam_gov.json', 'scripts/sources/sam_reviewed.py', 'scripts/sources/merge.py',
     'scripts/sources/sam_public.py', 'scripts/sources/adapters/sam_gov.py',
     'scripts/sources/sam_preflight.py', 'tools/sam_refresh_preflight.py', 'tools/require_sam_refresh.py'}
 SEMANTIC_INPUTS = {'assets/search-hybrid.js', 'assets/search-retrieval.js',
@@ -138,6 +138,30 @@ def original_state(repository, run, manifest, destination, *, root=None):
     return selected | {'ledger_sha256': identity(value)}
 
 
+def retain_vector_source(state, context, manifest, bundle):
+    """Keep one original sealed asset, including across zero-work repairs."""
+    from tools.catalog_reconcile_spend import VECTOR_OUTPUTS
+    receipt = manifest.get('source_reconciliation', {})
+    prior = context.get('retained_vector_source')
+    if receipt.get('retained_vector_asset'):
+        require(prior and receipt.get('retained_vector_source') == prior
+                and receipt['retained_vector_asset'].get('source') == prior
+                and all(manifest['files'].get(name) == digest for name, digest in prior['outputs'].items()),
+                'forwarded_vector_source')
+        return prior
+    # The original source operation and its completion remain immutable. A
+    # later source-only operation never relabels those accepted provider calls.
+    archived = Path(state) / 'retained-vector-contexts' / (context['operation_sha256'] + '.json')
+    if archived.exists():
+        require(c.read_json(archived) == context, 'retained_vector_context_changed')
+    else:
+        atomic_json(archived, context)
+    return {'candidate_id': manifest['candidate_id'],
+        'manifest_sha256': c.digest((Path(bundle) / 'candidate.json').read_bytes()),
+        'operation_sha256': context['operation_sha256'], 'context_sha256': identity(context),
+        'outputs': {name: manifest['files'][name] for name in VECTOR_OUTPUTS}}
+
+
 def restore(root, parent, state, output):
     """Newest paired private checkpoint wins across all runs of this parent."""
     root, parent, state, output = map(Path, (root, parent, state, output))
@@ -226,7 +250,9 @@ def restore(root, parent, state, output):
                         'completed_child_requires_named_runtime_assembly_or_validation')
                 # A new bounded repair round consumes this exact prior child;
                 # preserve its budget and complete bytes, never restore origin.
+                retained_vectors = retain_vector_source(state, context, loaded, complete)
                 context = {k: v for k, v in context.items() if k not in ('operation_sha256', 'completed_candidate_id')}
+                context['retained_vector_source'] = retained_vectors
                 context['operation_contract'] = operation_contract(root)
                 context['operation_sha256'] = identity(context)
                 atomic_json(state / 'reconciliation.json', context)
@@ -321,8 +347,25 @@ def project_sam(catalog, evidence, state):
     return result, output_cache
 
 
+def published_alias_records(root, destination):
+    """Protected published bytes supply identity only, never scientific data."""
+    manifest = json.loads(c.git(root, 'show', 'HEAD:release/candidate.json'))
+    pointer = json.loads(c.git(root, 'show', 'HEAD:release/candidate-source.json'))
+    identifier = manifest.get('candidate_id')
+    require(identifier == c.digest(c.encoded({k: v for k, v in manifest.items() if k != 'candidate_id'}))
+            and pointer.get('candidate_id') == identifier, 'published_alias_identity')
+    raw = subprocess.check_output(['git', '-C', str(root), 'show', 'HEAD:data/opportunities.js'])
+    require(0 < len(raw) <= 32 * 1024 * 1024
+            and c.digest(raw) == manifest['files'].get('data/opportunities.js'), 'published_alias_catalog')
+    text = raw.decode('utf8')
+    catalog = json.loads(text[text.index('{'):text.rfind(';')])
+    Path(destination).parent.mkdir(parents=True, exist_ok=True)
+    Path(destination).write_bytes(raw)
+    return [row for row in catalog['opportunities'] if sam_record(row)]
+
+
 def reconcile(root, parent, state):
-    from scripts.sources.merge import load_catalog, load_source_cache, resolve_live_records, rebuild_catalog, save_catalog, save_source_cache, merge_records
+    from scripts.sources.merge import load_catalog, load_source_cache, resolve_live_records, rebuild_catalog, save_catalog, save_source_cache, merge_records, reconcile_source_aliases
     from scripts.sources.registry import collect
     from scripts.sources.adapters.sam_gov import SamGovAdapter, load_config
     from scripts.build_catalog import validate_catalog
@@ -355,6 +398,9 @@ def reconcile(root, parent, state):
         external, cache, lifecycle = resolve_live_records(results, cache, datetime.now(timezone.utc).date())
         combined, merge_summary = merge_records(
             [r for r in catalog['opportunities'] if not sam_record(r)], external)
+        historical = published_alias_records(root, checkpoint / 'published-predecessor.js')
+        combined, aliases = reconcile_source_aliases(combined, historical)
+        merge_summary['source_alias_preservation'] = aliases
         validate_catalog(combined, len(combined), len(combined))
         summary = {'sources': lifecycle, 'written': True, 'validation': {'ok': True}, 'merge': merge_summary}
         require_complete_refresh(load_config(), summary)
@@ -377,12 +423,17 @@ def reconcile(root, parent, state):
         save_catalog(catalog, root / 'data/opportunities.js')
         save_source_cache(cache, root / 'data/source_records.json')
         summary['operation_sha256'] = c.read_json(state / 'reconciliation.json')['operation_sha256']
+        summary['published_predecessor_sha256'] = c.digest((checkpoint / 'published-predecessor.js').read_bytes())
         summary['files'] = {}
         for name in ('data/opportunities.js', 'data/source_records.json', 'data/document_evidence.json'):
             raw = (root / name).read_bytes(); target = checkpoint / name
             target.parent.mkdir(parents=True, exist_ok=True); target.write_bytes(raw)
             summary['files'][name] = c.digest(raw)
         atomic_json(checkpoint / 'summary.json', summary)
+    predecessor = checkpoint / 'published-predecessor.js'
+    require(predecessor.is_file() and c.digest(predecessor.read_bytes()) == summary.get('published_predecessor_sha256'),
+            'published_predecessor_checkpoint')
+    shutil.copyfile(predecessor, state / 'published-predecessor.js')
     current = load_catalog(root / 'data/opportunities.js')
     current_cache = load_source_cache(root / 'data/source_records.json')
     require([r for r in current['opportunities'] if not sam_record(r)] ==
@@ -454,6 +505,15 @@ def finish(root, parent, state, output, receipt):
         'new_document_requests': 0, 'new_team_requests': 0,
         'retained_output_hashes': {n: h for n, h in original['generation_files'].items()
             if n not in DERIVED_FILES and not n.startswith('feeds/')}}
+    vector_stage = state / 'vector-stage.json'
+    if vector_stage.exists():
+        stage = c.read_json(vector_stage)
+        if (stage.get('version') == 'reconciliation-vector-retention-1'
+                and stage.get('operation_sha256') == context['operation_sha256']):
+            require(stage.get('ledger_sha256') == identity(ledger)
+                    and stage.get('new_requests') == 0, 'retained_vector_stage')
+            c.verify_files(root, stage['outputs'])
+            value['retained_vector_asset'] = stage
     atomic_json(receipt, value)
     child = c.create(root, output, parent=parent, source_reconciliation=receipt)
     # An interrupted artifact upload must still retain the complete child,
