@@ -86,6 +86,29 @@ checkpoint; `publication_attempt` can select an earlier retained attempt
 explicitly. An older live receipt for the same candidate does not pass. Failed
 job reruns can load receipts retained by an earlier workflow attempt.
 
+Normal package writing binds the HTML team-generation and content references
+to the retained generated data before recording source hashes. It uses the
+same deterministic binder as runtime assembly, without importing a new team
+model or changing catalog/vector bytes. Package checking remains read-only.
+A runtime-only repair of a completed reconciled candidate uses explicit
+`reuse` of that exact child; it does not rerun source reconciliation.
+Its first publication authenticates the native completed source child selected
+by the private checkpoint and conserves all generated identities and bytes.
+The assembly parent remains the exact selected candidate, including a retained
+unpublished runtime package; it does not redefine the completed source identity. The
+original producer reservation, ledger and later-work checks still govern
+checkpoint retirement; runtime assembly never creates a source allowance.
+Later runtime or team descendants may continue through their canonical immediate
+parent in the bounded protected publication history. They never replace the first
+publication's private-source, ledger, reservation and generated-byte proof.
+An unpublished runtime assembly does not own a generation allowance merely
+because it uploaded a candidate. Its complete native candidate remains retained;
+its exact reuse plan and bounded native attempt history must prove every source,
+team-generation, provider and allowance step was skipped before the planner can
+exclude that run as an allowance owner. Unknown spending or private checkpoints
+remain held. Actual scientific owners separately require their full publication,
+generated-byte and accounting proof.
+
 If main advances while a generated PR is reviewed, a publication retry waits for
 that old-head review to finish, verifies unchanged generation dependencies and
 candidate bytes, and advances the same branch with a merge commit preserving both

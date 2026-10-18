@@ -191,12 +191,17 @@ class RoutingAndBoundaries(unittest.TestCase):
             environment = {'GITHUB_REPOSITORY': 'mporosoff/grants-scraper', 'GITHUB_RUN_ID': '40000000000'}
             runs = [{'id': recovery.RUN, 'path': scheduled_catalog.WORKFLOW, 'head_branch': 'main', 'event': 'push'},
                     {'id': 38757294301}]
+            # This minimal source-owner fixture is not a native runtime bundle.
+            # Complete native ZIP/history proofs have their own integration tests.
             with patch.object(scheduled_catalog, '_published', return_value=set()), \
                     patch.object(scheduled_catalog, '_published_reconciliation_supersedes', return_value=False), \
+                    patch('tools.runtime_assembly_history.no_generation_allowance', return_value=False) as runtime_proof, \
                     patch.object(scheduled_catalog, '_pages', return_value=iter([runs])), \
                     patch.object(scheduled_catalog, 'run_artifacts', return_value=[{'id': 1, 'name': 'candidate-' + recovery.PARENT, 'expired': False}]), \
-                    patch.object(scheduled_catalog, 'api', side_effect=AssertionError('No generation or provider dispatch')):
+                    patch.object(scheduled_catalog, 'api', side_effect=AssertionError('No unexpected GitHub reads in routing fixture')) as github:
                 value = scheduled_catalog.hold_competing_generation(root, environment, {'stage': 'generate'})
+            runtime_proof.assert_called_once()
+            github.assert_not_called()
             self.assertEqual(value['stage'], 'noop')
             self.assertEqual(value['held_stage'], 'generate')
             self.assertEqual(value['recovery_run'], str(recovery.RUN))

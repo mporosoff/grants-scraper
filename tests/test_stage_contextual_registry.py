@@ -6,6 +6,7 @@ from pathlib import Path
 import shutil
 import socket
 import subprocess
+import sys
 import tempfile
 import unittest
 from unittest.mock import patch
@@ -97,9 +98,10 @@ class StageModelTests(unittest.TestCase):
     def test_node_process_receives_no_credentials(self):
         with tempfile.TemporaryDirectory() as folder:
             fake = subprocess.CompletedProcess([], 0, '{}', '')
-            with patch.dict('os.environ', {'ANTHROPIC_API_KEY': 'synthetic', 'GITHUB_TOKEN': 'synthetic', 'NODE_OPTIONS': 'synthetic'}), patch.object(stage.subprocess, 'run', return_value=fake) as run:
+            with patch.dict('os.environ', {'ANTHROPIC_API_KEY': 'synthetic', 'GITHUB_TOKEN': 'synthetic', 'NODE_OPTIONS': 'synthetic', 'PYTHON': 'wrong-interpreter'}), patch.object(stage.subprocess, 'run', return_value=fake) as run:
                 stage._node('node', Path(folder), 'tools/check.mjs')
             self.assertFalse({'ANTHROPIC_API_KEY', 'GITHUB_TOKEN', 'NODE_OPTIONS'} & set(run.call_args.kwargs['env']))
+            self.assertEqual(run.call_args.kwargs['env']['PYTHON'], sys.executable)
 
 
 @unittest.skipUnless(NODE, 'Node runtime required for the actual local package contract')
@@ -150,6 +152,12 @@ class LocalPackageTests(unittest.TestCase):
             self.assertEqual(archive.read('config/opportunity_team_model.json'), (self.public/'config/opportunity_team_model.json').read_bytes())
             for name, pin in self.original_hashes.items(): self.assertEqual(stage.digest(archive.read(name)), pin)
         for name, pin in self.original_hashes.items(): self.assertEqual(stage.digest((self.public/name).read_bytes()), pin)
+        for name in stage.BUILDER_FILES:
+            self.assertEqual(result['implementation_files'][name], stage.digest((ROOT/name).read_bytes()))
+            self.assertEqual((self.base/'first/package'/name).read_bytes(), (ROOT/name).read_bytes())
+            self.assertNotIn(name, result['files'])
+        with zipfile.ZipFile(self.base/'first/local-unavailable.zip') as archive:
+            self.assertTrue(set(stage.BUILDER_FILES).isdisjoint(archive.namelist()))
         matches = stage._assignment(self.base/'first/package/data/faculty_matches.js', 'FACULTY_MATCHES')
         self.assertTrue(all('claims' in person and 'summary_evidence' in person for person in matches['faculty'].values()))
         with self.assertRaisesRegex(ValueError, 'isolated'): self.assemble('first')
@@ -217,6 +225,22 @@ class LocalPackageTests(unittest.TestCase):
             self.assertFalse((self.base/'changed-source/LOCAL-STAGE.json').exists())
         finally:
             changed.write_bytes(original)
+
+    def test_reference_binder_implementation_change_after_copy_rejects_completion(self):
+        source = ROOT/'tools/assemble_release_candidate.py'
+        actual_bytes = stage._bytes; actual_node = stage._node; copied = False
+        def read(path):
+            raw = actual_bytes(path)
+            return raw + b'\n# changed protected binder\n' if copied and path == source else raw
+        def checked(*args, **kwargs):
+            nonlocal copied
+            result = actual_node(*args, **kwargs); copied = True
+            return result
+        with patch.object(stage, '_bytes', side_effect=read), patch.object(stage, '_node', side_effect=checked):
+            with self.assertRaisesRegex(ValueError, 'pin_mismatch'):
+                self.assemble('changed-reference-binder')
+        self.assertTrue((self.base/'changed-reference-binder/FAILED.json').is_file())
+        self.assertFalse((self.base/'changed-reference-binder/LOCAL-STAGE.json').exists())
 
     def test_pinned_release_cannot_hide_a_rekeyed_original_model(self):
         path = self.public/'config/opportunity_team_model.json'

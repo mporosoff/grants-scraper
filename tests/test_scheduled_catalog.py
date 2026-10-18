@@ -218,6 +218,8 @@ class ScheduledDecisions(unittest.TestCase):
 
 class ScheduledHistory(unittest.TestCase):
     def setUp(self):
+        # These owner-selection fixtures do not model native pure-runtime ZIPs.
+        patch('tools.runtime_assembly_history.no_generation_allowance', return_value=False).start()
         self.runs = [self.workflow_run(200), self.workflow_run(100)]
         self.artifacts = {'200': []}
         self.jobs = {'200': [{'name': name, 'conclusion': 'skipped'} for name in ('generate', 'assemble')]}
@@ -455,6 +457,7 @@ class ScheduledHistory(unittest.TestCase):
 
 class AccessParentSupersession(unittest.TestCase):
     def setUp(self):
+        patch('tools.runtime_assembly_history.no_generation_allowance', return_value=False).start()
         from tools import catalog_access_correction as access
         self.access = access
         self.run = {'id': access.RUN, 'run_attempt': access.ATTEMPT, 'head_sha': access.EVENT_SHA,
@@ -562,6 +565,7 @@ class AccessParentSupersession(unittest.TestCase):
 
 class UrlParentSupersession(unittest.TestCase):
     def setUp(self):
+        patch('tools.runtime_assembly_history.no_generation_allowance', return_value=False).start()
         from tools import catalog_url_correction as url
         self.url = url
         self.run = {'id': url.RUN, 'run_attempt': url.ATTEMPT, 'head_sha': url.EVENT_SHA,

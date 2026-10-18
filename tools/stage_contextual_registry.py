@@ -14,6 +14,7 @@ from pathlib import Path, PurePosixPath
 import re
 import shutil
 import subprocess
+import sys
 import zipfile
 
 from scripts import faculty_match, researcher_registry as legacy
@@ -33,11 +34,12 @@ EXTRA_FILES = (
     'workers/search-voyage-proxy/generated/corpus-allowlist.json',
 )
 BUILDER_FILES = ('tools/build_search_release_package.mjs', 'tools/embedding_contract.mjs',
-                 'tools/run_search_diagnosis.mjs')
+                 'tools/run_search_diagnosis.mjs', 'tools/assemble_release_candidate.py',
+                 'tools/release_candidate.py', 'scripts/__init__.py', 'scripts/faculty_match.py',
+                 'scripts/currentness.py', 'scripts/researcher_registry.py',
+                 'scripts/import_opportunity_team_model.py')
 IMPLEMENTATION_FILES = (*BUILDER_FILES, 'tools/contextual_team_audited_registry.py',
-                        'tools/stage_contextual_registry.py', 'scripts/researcher_registry.py',
-                        'scripts/faculty_match.py', 'scripts/currentness.py',
-                        'scripts/import_opportunity_team_model.py')
+                        'tools/stage_contextual_registry.py')
 UNCHANGED = ('data/opportunities.js', 'data/subtopics.js', 'data/catalog-metadata.js',
              'data/search-v2-voyage-manifest.json', 'data/search-v2-voyage-vectors.f16',
              'data/search-v2-voyage-canaries.json',
@@ -196,6 +198,9 @@ def _forward(registry, catalog, output, as_of):
 def _node(node, package, script, *args):
     env = {key: value for key, value in os.environ.items()
            if not re.search(r'(?i)(KEY|TOKEN|SECRET|PASSWORD|CREDENTIAL|NODE_OPTIONS)', key)}
+    # The package writer invokes the bounded reference binder, using the same
+    # Python environment that authenticated this staging operation.
+    env['PYTHON'] = sys.executable
     result = subprocess.run([str(node), '--import', (package/'tools/stage-local-only.mjs').as_uri(),
                              str(package/script), *args], cwd=package, env=env,
                             capture_output=True, text=True, timeout=45, check=False)
