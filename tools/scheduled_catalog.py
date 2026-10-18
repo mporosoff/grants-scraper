@@ -202,7 +202,36 @@ def _published_url_supersedes(root, run, artifacts):
     return False
 
 
-def _published_reconciliation_supersedes(root, run, artifacts):
+def _require_reconciliation_history(repository, run, producers, artifacts, *, allowed_candidate_ids=None):
+    """Original artifact producers remain distinct from downstream retries."""
+    latest = run['run_attempt']
+    attempts = {int(producer['run_attempt']): producer for producer in producers}
+    if min(attempts) == latest:
+        return
+    if not repository:
+        raise Hold('Original reconciliation attempt history is unavailable', run['id'])
+    from tools.release_attempt_history import authenticate_attempt, require_downstream_only
+    read = lambda path: api(repository, path)
+    def matches(meta, producer):
+        return producer == {'run_id': str(meta['id']), 'run_attempt': str(meta['run_attempt']),
+                            'head_sha': meta['head_sha'], 'event': meta['event'], 'path': meta['path']}
+    try:
+        acknowledged = max(attempts)
+        for attempt, producer in attempts.items():
+            if attempt < latest and (attempt != acknowledged or acknowledged == latest):
+                if not matches(authenticate_attempt(repository, run, attempt, api=read), producer):
+                    raise ValueError('Original checkpoint producer changed')
+        if acknowledged < latest:
+            options = {} if allowed_candidate_ids is None else {'allowed_candidate_ids': allowed_candidate_ids}
+            original = require_downstream_only(repository, run, acknowledged, artifacts, api=read, **options)
+            if not matches(original, attempts[acknowledged]):
+                raise ValueError('Original checkpoint producer changed')
+    except (ValueError, KeyError, TypeError, OSError, subprocess.SubprocessError) as error:
+        raise Hold('Later release attempts do not authenticate unchanged reconciliation work: ' + str(error),
+                   run['id']) from error
+
+
+def _published_reconciliation_supersedes(root, run, artifacts, *, repository=None):
     """Retire one exact original owner through its protected corrected child."""
     candidates = [row for row in artifacts if row['name'].startswith('candidate-')]
     if len(candidates) != 1:
@@ -219,7 +248,8 @@ def _published_reconciliation_supersedes(root, run, artifacts):
             continue
         pointer = json.loads(c.git(root, 'show', sha + ':release/candidate-source.json'))
         producer = receipt.get('parent_producer') or {}
-        expected_producer = {'run_id': str(run['id']), 'run_attempt': str(run.get('run_attempt')),
+        original_attempt = receipt.get('parent_attempt')
+        expected_producer = {'run_id': str(run['id']), 'run_attempt': original_attempt,
                             'head_sha': run.get('head_sha'), 'event': run.get('event'), 'path': WORKFLOW}
         pin = receipt.get('parent_artifact') or {}
         affected = receipt.get('affected_generation') or {}
@@ -231,8 +261,10 @@ def _published_reconciliation_supersedes(root, run, artifacts):
             and run.get('head_branch') == 'main' and run.get('path') == WORKFLOW
             and run.get('status') == 'completed' and producer == expected_producer
             and type(run.get('run_attempt')) is int
+            and re.fullmatch('[1-9][0-9]*', str(original_attempt)) is not None
+            and 1 <= int(original_attempt) <= run['run_attempt']
             and receipt.get('parent_generation_sha') == child.get('generation_sha')
-            and receipt.get('parent_attempt') == str(run['run_attempt'])
+            and original_attempt == str(producer.get('run_attempt'))
             and pin == {'id': artifact.get('id'), 'name': artifact['name'],
                         'sha256': str(artifact.get('digest', '')).removeprefix('sha256:')}
             and artifact.get('expired') is False
@@ -242,11 +274,12 @@ def _published_reconciliation_supersedes(root, run, artifacts):
             and re.fullmatch('[a-f0-9]{64}', receipt.get('parent_manifest_sha256', '')) is not None)
         if not valid:
             raise Hold('Published source reconciliation does not authenticate its exact original owner', run['id'])
+        _require_reconciliation_history(repository, run, [producer], artifacts)
         return True
     return False
 
 
-def _published_reconciliation_consumes(root, run, artifacts):
+def _published_reconciliation_consumes(root, run, artifacts, *, repository=None):
     """A corrected publication may consume exact earlier repair checkpoints."""
     vouchers = [row for row in artifacts if re.fullmatch(
         r'offline-ai-reconcile-[a-f0-9]{64}-reservation-' + str(run['id']) + r'-[1-9][0-9]*', row['name'])]
@@ -305,6 +338,8 @@ def _published_reconciliation_consumes(root, run, artifacts):
         valid = valid and all(row['id'] in acknowledged for row in vouchers) and all(row['id'] in covered for row in candidates)
         if not valid:
             raise Hold('Published source reconciliation does not authenticate its consumed repair checkpoint', run['id'])
+        _require_reconciliation_history(repository, run, [link['producer'] for link in links], artifacts,
+                                        allowed_candidate_ids=covered)
         return True
     return False
 
@@ -348,7 +383,7 @@ def prior_generation(root, environment, manifest):
                     or run.get('event') not in ('push', 'schedule', 'workflow_dispatch')):
                 raise Hold('Untrusted release run in recovery history', identifier)
             artifacts = run_artifacts(identifier, lambda path: api(repository, path), repository=repository)
-            if _published_reconciliation_consumes(root, run, artifacts):
+            if _published_reconciliation_consumes(root, run, artifacts, repository=repository):
                 continue
             candidates = [a for a in artifacts if a['name'].startswith('candidate-')]
             reservations = [a for a in artifacts
@@ -364,7 +399,7 @@ def prior_generation(root, environment, manifest):
                     continue
                 if (_published_access_supersedes(root, run, artifacts)
                         or _published_url_supersedes(root, run, artifacts)
-                        or _published_reconciliation_supersedes(root, run, artifacts)):
+                        or _published_reconciliation_supersedes(root, run, artifacts, repository=repository)):
                     continue
                 if artifact.get('expired') or not re.fullmatch('[a-f0-9]{64}', candidate_id):
                     raise Hold('Unpublished candidate evidence is expired or invalid', identifier)

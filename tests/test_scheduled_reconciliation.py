@@ -33,8 +33,9 @@ class CorrectedOwner(unittest.TestCase):
             if args[0] == 'log':
                 return 'published'
             return json.dumps(pointer if args[-1].endswith('candidate-source.json') else child)
-        with patch.object(c, 'git', side_effect=git):
-            return s._published_reconciliation_supersedes(Path('.'), self.run, [self.artifact])
+        with patch.object(c, 'git', side_effect=git), \
+                patch.object(s, 'api', side_effect=ValueError('Attempt history must be injected')):
+            return s._published_reconciliation_supersedes(Path('.'), self.run, [self.artifact], repository='owner/repo')
 
     def test_exact_published_child_releases_original_owner(self):
         self.assertTrue(self.check())
@@ -54,6 +55,24 @@ class CorrectedOwner(unittest.TestCase):
         self.run['run_attempt'] = 2
         with self.assertRaises(s.Hold):
             self.check()
+
+    def test_later_downstream_retry_authenticates_original_attempt_without_relabelling_it(self):
+        original = deepcopy(self.run)
+        self.run['run_attempt'] = 2
+        with patch('tools.release_attempt_history.require_downstream_only', return_value=original) as history:
+            self.assertTrue(self.check())
+        self.assertEqual(history.call_args.args[:4], ('owner/repo', self.run, 1, [self.artifact]))
+        self.assertEqual(self.child['source_reconciliation']['parent_producer']['run_attempt'], '1')
+
+    def test_incomplete_or_changed_historical_producer_still_holds(self):
+        original = deepcopy(self.run)
+        self.run['run_attempt'] = 2
+        with patch('tools.release_attempt_history.require_downstream_only', side_effect=ValueError('Executed later producer')):
+            with self.assertRaises(s.Hold):
+                self.check()
+        with patch('tools.release_attempt_history.require_downstream_only', return_value=original | {'head_sha': 'f' * 40}):
+            with self.assertRaises(s.Hold):
+                self.check()
 
     def consumed(self, *, candidate=False):
         producer = {'run_id': '220', 'run_attempt': '1', 'head_sha': 'f' * 40,
@@ -77,8 +96,9 @@ class CorrectedOwner(unittest.TestCase):
         child['candidate_id'] = c.digest(c.encoded(child))
         pointer = {'candidate_id': child['candidate_id'], 'artifact_run': '250'}
         with patch.object(c, 'git', side_effect=lambda root, *args: 'published' if args[0] == 'log'
-                else json.dumps(pointer if args[-1].endswith('candidate-source.json') else child)):
-            return s._published_reconciliation_consumes(Path('.'), self.run, self.artifacts)
+                else json.dumps(pointer if args[-1].endswith('candidate-source.json') else child)), \
+                patch.object(s, 'api', side_effect=ValueError('Attempt history must be injected')):
+            return s._published_reconciliation_consumes(Path('.'), self.run, self.artifacts, repository='owner/repo')
 
     def test_published_child_consumes_exact_failed_repair_and_rejected_candidate(self):
         for candidate in (False, True):
@@ -97,6 +117,32 @@ class CorrectedOwner(unittest.TestCase):
         self.run['run_attempt'] = 2
         with self.assertRaises(s.Hold):
             self.check_consumed()
+
+    def test_consumed_checkpoint_retires_only_after_proving_later_downstream_retry(self):
+        self.consumed(candidate=True)
+        original = deepcopy(self.run)
+        self.run['run_attempt'] = 2
+        with patch('tools.release_attempt_history.require_downstream_only', return_value=original) as history:
+            self.assertTrue(self.check_consumed())
+        self.assertEqual(history.call_args.args[2], 1)
+        self.assertEqual(history.call_args.kwargs['allowed_candidate_ids'], {22})
+
+    def test_each_consumed_producer_is_authenticated_before_checking_only_later_unacknowledged_work(self):
+        self.consumed()
+        links = self.child['source_reconciliation']['consumed_checkpoints']
+        later = deepcopy(links[0])
+        later['producer']['run_attempt'] = '2'
+        for role in ('reservation', 'state'):
+            later[role]['id'] += 10
+            later[role]['name'] = later[role]['name'].removesuffix('-1') + '-2'
+            self.artifacts.append(dict(later[role], digest='sha256:' + later[role]['sha256']))
+        links.append(later)
+        self.run['run_attempt'] = 3
+        with patch('tools.release_attempt_history.authenticate_attempt', return_value=self.run | {'run_attempt': 1}) as auth, \
+                patch('tools.release_attempt_history.require_downstream_only', return_value=self.run | {'run_attempt': 2}) as history:
+            self.assertTrue(self.check_consumed())
+        self.assertEqual(auth.call_args.args[2], 1)
+        self.assertEqual(history.call_args.args[2], 2)
 
 
 if __name__ == '__main__':

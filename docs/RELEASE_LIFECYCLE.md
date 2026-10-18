@@ -68,6 +68,11 @@ unrelated completed collection, extraction and team decisions remain unchanged.
 This route accepts original generation candidates with authenticated budget
 lineage; it does not invent an allowance for arbitrary derived parents. Workflow reruns
 restore an already persisted generation before executing expensive steps.
+The event SHA and latest workflow attempt do not replace the original generation
+checkout and attempt. Recovery authenticates the generation checkout through its
+retained protected release plan. A preflight-only failed attempt can precede the
+first allowance only after complete job and artifact history proves that no work
+started; downstream retries cannot create a second allowance or candidate owner.
 For live-only retries, `publication_run` selects the expected publication
 checkpoint; `publication_attempt` can select an earlier retained attempt
 explicitly. An older live receipt for the same candidate does not pass. Failed

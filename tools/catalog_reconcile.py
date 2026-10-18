@@ -14,6 +14,7 @@ import io
 import json
 import os
 from pathlib import Path
+import re
 import shutil
 import subprocess
 
@@ -70,7 +71,6 @@ def plan(root, environment):
             'mporosoff/grants-scraper/.github/workflows/refresh-opportunities.yml@refs/heads/main',
             'protected_manual_stage')
     run, candidate = environment.get('CANDIDATE_RUN', ''), environment.get('CANDIDATE_ID', '')
-    import re
     require(re.fullmatch('[1-9][0-9]*', run) and re.fullmatch('[a-f0-9]{64}', candidate), 'exact_parent_selector')
     require(not any(environment.get(k) for k in ('RECEIPT_RUN', 'PUBLICATION_RUN', 'PUBLICATION_ATTEMPT'))
             and environment.get('QUALIFICATION_PILOT') != 'true', 'no_other_modes')
@@ -101,13 +101,23 @@ def unpack(raw, destination):
                 target.write_bytes(packet.read(item))
 
 
-def original_state(repository, run, manifest, destination):
+def original_state(repository, run, manifest, destination, *, root=None):
     read = lambda path: api(repository, path)
     meta = json.loads(read(f'actions/runs/{run}/attempts/{manifest["generation_run_attempt"]}'))
-    require(meta.get('id') == int(run) and meta.get('head_sha') == manifest['generation_sha']
+    require(meta.get('id') == int(run)
+            and meta.get('run_attempt') == int(manifest['generation_run_attempt'])
+            and isinstance(meta.get('head_sha'), str) and re.fullmatch('[a-f0-9]{40}', meta['head_sha'])
             and meta.get('head_branch') == 'main' and meta.get('path') == archive.SOURCE_WORKFLOW
             and meta.get('event') in {'push', 'schedule', 'workflow_dispatch'}
             and meta.get('status') == 'completed', 'original_generation_origin')
+    # The event SHA is fixed when Actions creates the run. The protected plan
+    # independently pins the main checkout used by generation, including when
+    # all jobs are rerun after main advances or a failed job inherits its plan.
+    from tools.plan_release import release_plan_sha
+    planned = release_plan_sha(repository, run, manifest['generation_run_attempt'],
+                               Path(destination) / 'original-plan')
+    require(planned == manifest['generation_sha'], 'original_generation_plan')
+    c.git(Path(root) if root is not None else c.ROOT, 'merge-base', '--is-ancestor', planned, 'HEAD')
     rows = run_artifacts(run, read, repository=repository)
     suffix = f'{run}-{manifest["generation_run_attempt"]}'
     selected = {}
@@ -233,7 +243,7 @@ def restore(root, parent, state, output):
             atomic_json(state / 'reconciliation.json', context)
     else:
         require(environment.get('GITHUB_RUN_ATTEMPT', '1') == '1', 'missing_prior_repair_accounting')
-        provenance = original_state(repository, environment['CANDIDATE_RUN'], manifest, state)
+        provenance = original_state(repository, environment['CANDIDATE_RUN'], manifest, state, root=root)
         context = {'version': VERSION, 'parent_candidate_id': manifest['candidate_id'],
             'parent_run': environment['CANDIDATE_RUN'], 'parent_attempt': manifest['generation_run_attempt'],
             'parent_manifest_sha256': c.digest((parent / 'candidate.json').read_bytes()),

@@ -39,7 +39,7 @@ async function withFixture(catalog, inspect) {
       export function makeVariantHarness(base) {
         writeFileSync(new URL('../corpus-started', import.meta.url), 'started');
         return {parentCatalog: base.catalog, childCatalog: {},
-          parentEngine: {score: () => ({currentnessRejectedIndexes: []})}};
+          parentEngine: {corpusCurrentness: () => ({currentnessRejectedIndexes: []})}};
       }
     `);
     await writeFile(join(directory, "assets/search-hybrid.js"), `

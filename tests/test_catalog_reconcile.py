@@ -2,9 +2,11 @@
 from copy import deepcopy
 from contextlib import contextmanager, ExitStack
 import json
+import io
 from pathlib import Path
 import tempfile
 import unittest
+import zipfile
 from unittest.mock import patch
 
 from scripts.sources.base import CanonicalOpportunity
@@ -229,6 +231,63 @@ class ReconcileContracts(unittest.TestCase):
                 repair.restore(self.root, self.parent, self.state, fixture['output'])
             self.assertEqual(c.read_json(self.state / 'ledger.json'), fixture['ledger'])
             fixture['imported'].assert_not_called()
+
+
+class OriginalGenerationProvenance(unittest.TestCase):
+    def setUp(self):
+        temporary = tempfile.TemporaryDirectory(); self.addCleanup(temporary.cleanup)
+        self.destination = Path(temporary.name) / 'state'
+        self.manifest = {'generation_run_attempt': '2', 'generation_sha': 'b' * 40}
+        self.meta = {'id': 100, 'run_attempt': 2, 'head_sha': 'a' * 40,
+            'head_branch': 'main', 'path': repair.archive.SOURCE_WORKFLOW,
+            'event': 'schedule', 'status': 'completed'}
+        self.ledger = {'logical_id': 'offline-100', 'limit_microusd': 2_000_000,
+                       'max_requests': 300, 'requests': []}
+        reservation = {'run_id': '100', 'attempt': '2', 'mode': 'maintenance', 'maximum_logical_spend_usd': 2}
+        def packet(name, value):
+            raw = io.BytesIO()
+            with zipfile.ZipFile(raw, 'w') as archive:
+                archive.writestr(name, json.dumps(value))
+            return raw.getvalue()
+        self.raw = {1: packet('spend-reservation.json', reservation), 2: packet('ledger.json', self.ledger)}
+        self.artifacts = [{'id': number, 'name': f'generation-spend-{role}-100-2',
+            'expired': False, 'digest': 'sha256:' + c.digest(self.raw[number])}
+            for number, role in ((1, 'reservation'), (2, 'state'))]
+
+    def restore(self, *, plan='b' * 40, ancestor_error=None):
+        with patch.object(repair, 'api', return_value=json.dumps(self.meta)), \
+                patch.object(repair, 'run_artifacts', return_value=self.artifacts), \
+                patch.object(repair, 'artifact_bytes', side_effect=lambda _repo, _run, row, _read: self.raw[row['id']]), \
+                patch('tools.plan_release.release_plan_sha', side_effect=plan if isinstance(plan, Exception) else None,
+                      return_value=plan) as planned, \
+                patch.object(c, 'git', side_effect=ancestor_error) as git:
+            value = repair.original_state('owner/repo', '100', self.manifest, self.destination)
+            planned.assert_called_once_with('owner/repo', '100', '2', self.destination / 'original-plan')
+            git.assert_called_once_with(c.ROOT, 'merge-base', '--is-ancestor', 'b' * 40, 'HEAD')
+            return value
+
+    def test_event_sha_stays_distinct_from_authenticated_generation_checkout_and_budget(self):
+        provenance = self.restore()
+        self.assertEqual(c.read_json(self.destination / 'ledger.json'), self.ledger)
+        self.assertEqual(provenance['state']['artifact_id'], 2)
+        self.assertEqual(self.meta['head_sha'], 'a' * 40)
+        self.assertEqual(self.manifest['generation_sha'], 'b' * 40)
+
+    def test_wrong_or_missing_plan_never_falls_back_to_matching_event_sha(self):
+        self.meta['head_sha'] = self.manifest['generation_sha']
+        for plan in ('c' * 40, ValueError('Retained plan unavailable')):
+            with self.subTest(plan=plan), self.assertRaises(ValueError):
+                self.restore(plan=plan)
+            self.assertFalse((self.destination / 'ledger.json').exists())
+
+    def test_original_attempt_and_protected_ancestry_are_still_required(self):
+        self.meta['run_attempt'] = 3
+        with self.assertRaisesRegex(ValueError, 'original_generation_origin'):
+            self.restore()
+        self.meta['run_attempt'] = 2
+        with self.assertRaisesRegex(ValueError, 'Not a protected ancestor'):
+            self.restore(ancestor_error=ValueError('Not a protected ancestor'))
+        self.assertFalse((self.destination / 'ledger.json').exists())
 
 
 if __name__ == '__main__':

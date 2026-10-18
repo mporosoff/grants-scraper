@@ -19,13 +19,18 @@ def prepare(repository, run, attempt, destination, reservation, mode, *, qualifi
         raise ValueError('Untrusted generation spend origin')
     artifacts = run_artifacts(run, lambda path: api(repository, path), repository=repository)
     reservations = [a for a in artifacts if a['name'].startswith(f'generation-spend-reservation-{run}-')]
+    initial_proof = None
     if not reservations and int(attempt) > 1:
         from tools import generation_spend_recovery
         recovered = generation_spend_recovery.restore(repository, run, attempt, destination, mode, meta, artifacts,
             api=lambda path: api(repository, path), qualification_pilot=qualification_pilot,
             log_reader=lambda job: read_job_log(repository, job))
         if not recovered:
-            raise ValueError('Prior attempt spend evidence unavailable; remaining budget cannot be reset')
+            from tools.release_attempt_history import require_preflight_only_before_allocation
+            initial_proof = require_preflight_only_before_allocation(repository, meta, int(attempt), artifacts,
+                api=lambda path: api(repository, path))
+            if str(meta['id']) != str(run):
+                raise ValueError('First-allocation history belongs to a different generation run')
     if reservations:
         prior = max(reservations, key=lambda a: a['id'])
         name = prior['name'].replace('-reservation-', '-state-')
@@ -41,6 +46,8 @@ def prepare(repository, run, attempt, destination, reservation, mode, *, qualifi
         if not (destination / 'ledger.json').exists():
             raise ValueError('Authoritative generation ledger missing')
     ledger = Ledger(destination / 'ledger.json', destination.name, config()['budgets_usd'][mode], config()['max_requests'])
+    if initial_proof is not None:
+        atomic_json(destination / 'initial-allocation-provenance.json', initial_proof)
     for provider, evidence in config().get('generation_provider_pauses', {}).items():
         if provider not in ledger.read()['blocked_providers']:
             ledger.block(provider, evidence['reason'])
@@ -58,7 +65,8 @@ def prepare(repository, run, attempt, destination, reservation, mode, *, qualifi
                        config()['max_requests'], authorization)
         atomic_json(destination / 'task-accounting.json', {'task': TASK, 'authorization_id': authorization['id']})
     atomic_json(reservation, {'run_id': str(run), 'attempt': str(attempt), 'mode': mode,
-        'maximum_logical_spend_usd': config()['budgets_usd'][mode], 'prior_ledger_hash': identity(ledger.read())})
+        'maximum_logical_spend_usd': config()['budgets_usd'][mode], 'prior_ledger_hash': identity(ledger.read()),
+        **({'first_allocation_proof_sha256': identity(initial_proof)} if initial_proof is not None else {})})
 
 
 def main():
