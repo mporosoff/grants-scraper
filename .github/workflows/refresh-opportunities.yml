@@ -860,6 +860,7 @@ jobs:
         with:
           name: ${{ steps.prepare.outputs.state_artifact }}
           path: ${{ steps.prepare.outputs.vector_state }}
+          include-hidden-files: true
           if-no-files-found: error
           retention-days: 90
       - name: Retain the immutable corrected catalog before ordinary protected validation

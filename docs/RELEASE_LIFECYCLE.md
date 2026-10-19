@@ -22,6 +22,11 @@ match. Missing receipts require validation again; they are never invented.
 Authentication failures, conflicting artifacts and corruption fail closed and
 never trigger recovery or generation. A cache cannot substitute for an artifact.
 
+Private checkpoints that mirror complete public candidates include hidden files.
+Missing mirror paths can be restored only from authenticated public bytes matching
+the unchanged manifest hashes. Existing corrupt bytes, extra paths and conflicting
+manifests fail closed. This does not create a new candidate or generation identity.
+
 Each validation attempt preserves `validation-<candidate>-<attempt>` containing
 safe machine-readable diagnostics and, only on success, `validation.json`.
 The receipt covers exact file hashes, validator/dependency files, required gate

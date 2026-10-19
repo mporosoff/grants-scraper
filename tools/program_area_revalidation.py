@@ -533,6 +533,76 @@ def modern_unpack(raw, destination):
     unpack(raw, destination)
 
 
+def hydrate_public_bundle(destination, manifest, sources):
+    """Fill missing private copies only with exact authenticated public bytes.
+
+    Callers authenticate each source's native artifact first. Validate the
+    entire destination and all missing-byte proofs before writing anything.
+    Present corruption and extra members are never repaired or discarded.
+    """
+    destination = Path(destination)
+    require(manifest.get('candidate_id') == sha(candidate.encoded(
+        {k: v for k, v in manifest.items() if k != 'candidate_id'}))
+        and (destination/'candidate.json').read_bytes() == candidate.encoded(manifest), 'hydration_manifest_identity')
+    expected = {'candidate.json', *('files/' + name for name in manifest['files'])}
+    directories = {parent.as_posix() for name in expected for parent in Path(name).parents if str(parent) != '.'}
+    actual = set()
+    require(not destination.is_symlink() and not getattr(destination, 'is_junction', lambda: False)(),
+        'hydration_directory_link')
+    for path in destination.rglob('*'):
+        name = path.relative_to(destination).as_posix()
+        require(not path.is_symlink() and not getattr(path, 'is_junction', lambda: False)(), 'hydration_member_link')
+        if path.is_dir():
+            require(name in directories, 'hydration_extra_directory')
+        else:
+            require(path.is_file() and name in expected, 'hydration_extra_member')
+            actual.add(name)
+    needed = {}
+    for name, digest in manifest['files'].items():
+        target = candidate.checked_path(destination/'files', name)
+        if 'files/' + name in actual:
+            require(sha(target.read_bytes()) == digest, 'hydration_present_corruption')
+        else:
+            needed[name] = digest
+    verified = []
+    for source in sources:
+        source = Path(source); value = candidate.load(source)
+        verified.append((source, value))
+    copies = {}
+    for name, digest in needed.items():
+        available = [source/'files'/name for source, value in verified if value['files'].get(name) == digest]
+        require(available, 'hydration_missing_authenticated_bytes')
+        raw = available[0].read_bytes()
+        require(sha(raw) == digest, 'hydration_source_changed')
+        copies[name] = raw
+    for name, raw in copies.items():
+        target = candidate.checked_path(destination/'files', name)
+        target.parent.mkdir(parents=True, exist_ok=True); target.write_bytes(raw)
+    require(candidate.load(destination, manifest['candidate_id']) == manifest, 'hydration_complete_candidate')
+    return tuple(sorted(copies))
+
+
+def authenticate_public_parent(parent, context, repository, api):
+    """The public parent is an artifact authority, not an unverified cache."""
+    from tools.fetch_release_artifact import run_artifacts
+    producer = context['parent_producer']
+    meta = modern_run(producer['run_id'], producer['run_attempt'], api)
+    require(modern_producer(meta) == producer, 'hydration_parent_producer')
+    pin = context['parent_artifact']
+    matches = [row for row in run_artifacts(producer['run_id'], api, repository=repository)
+        if row['id'] == pin['id'] or row['name'] == pin['name']]
+    require(len(matches) == 1 and {'id': matches[0]['id'], 'name': matches[0]['name'],
+        'sha256': matches[0]['digest'].removeprefix('sha256:')} == pin, 'hydration_parent_artifact_pin')
+    raw = modern_packet(repository, meta, matches[0], api)
+    with tempfile.TemporaryDirectory(prefix='program-public-parent-') as temporary:
+        authenticated = Path(temporary); auth.unpack_public(raw, authenticated)
+        original = candidate.load(authenticated, context['parent_candidate_id'])
+        require(sha((authenticated/'candidate.json').read_bytes()) == context['parent_manifest_sha256']
+            and (authenticated/'candidate.json').read_bytes() == (Path(parent)/'candidate.json').read_bytes()
+            and candidate.load(parent) == original and all((authenticated/'files'/name).read_bytes() ==
+                (Path(parent)/'files'/name).read_bytes() for name in original['files']), 'hydration_exact_public_parent')
+
+
 def modern_original(parent, state, repository, run, identifier, api, root):
     """Authenticate the complete native candidate and its original spend owner."""
     from tools.fetch_release_artifact import run_artifacts
@@ -617,6 +687,8 @@ def modern_history(parent, state, root, repository, run, identifier, api):
         and value['parent_run'] == str(run)
         and value['parent_manifest_sha256'] == sha((Path(parent)/'candidate.json').read_bytes())
         and value['operation_sha256'] == reservation['operation_sha256'], 'modern_checkpoint_context')
+    authenticate_public_parent(parent, value, repository, api)
+    hydrate_public_bundle(Path(state)/'parent-candidate', candidate.load(parent, identifier), [parent])
     ledger = read(Path(state)/'ledger.json')
     link = {'producer': modern_producer(producer),
         'reservation': {'id': latest['id'], 'name': latest['name'], 'sha256': latest['digest'].removeprefix('sha256:')},
@@ -625,22 +697,30 @@ def modern_history(parent, state, root, repository, run, identifier, api):
         'request_prefix_sha256': identity(ledger['requests']),
         'request_identity_prefix_sha256': request_identity(ledger['requests']),
         'charged_microusd': sum(r['charged_microusd'] for r in ledger['requests'])}
+    completed_public_raw = None
     if value.get('completed_candidate_id'):
         child = value['completed_candidate_id']
         complete = Path(state)/'complete-candidates'/child
-        loaded = candidate.load(complete, child)
-        require(loaded.get('derived_from_candidate') == identifier
+        loaded = read(complete/'candidate.json')
+        require(loaded.get('candidate_id') == child and loaded.get('derived_from_candidate') == identifier
             and loaded.get('program_area_revalidation', {}).get('operation_sha256') == value['operation_sha256'],
             'modern_completed_child')
         available = [r for r in run_artifacts(producer_run, api, repository=repository) if r['name'] == 'candidate-' + child]
         require(len(available) <= 1, 'modern_completed_child_ambiguity')
         if available:
+            completed_public_raw = modern_packet(repository, producer, available[0], api)
             with tempfile.TemporaryDirectory(prefix='program-completed-') as temporary:
-                auth.unpack_public(modern_packet(repository, producer, available[0], api), temporary)
+                auth.unpack_public(completed_public_raw, temporary)
                 require(candidate.load(temporary, child) == loaded, 'modern_completed_child_native')
+                hydrate_public_bundle(complete, loaded, [Path(temporary), parent])
             link['candidate'] = {'candidate_id': child, 'manifest_sha256': sha((complete/'candidate.json').read_bytes()),
                 'producer': link['producer'], 'artifact': {'id': available[0]['id'], 'name': available[0]['name'],
                     'sha256': available[0]['digest'].removeprefix('sha256:')}}
+        else:
+            # Upload may have failed after private persistence. The public
+            # parent can supply a missing member only when its declared hash
+            # proves those exact bytes also belong to this completed child.
+            hydrate_public_bundle(complete, loaded, [parent])
     lineage_path = Path(state)/'consumed-checkpoints.json'
     lineage = read(lineage_path)
     if not any(r['state']['id'] == link['state']['id'] for r in lineage):
@@ -658,8 +738,14 @@ def modern_history(parent, state, root, repository, run, identifier, api):
         require(not any(r['name'] == transport['name'].replace('-state-', '-reservation-') for r in reservations),
             'modern_state_only_new_reservation')
         with tempfile.TemporaryDirectory(prefix='program-restore-') as temporary:
-            restored = Path(temporary)
+            restored = Path(temporary)/'state'
             modern_unpack(modern_packet(repository, transport_meta, transport, api), restored)
+            hydrate_public_bundle(restored/'parent-candidate', candidate.load(parent, identifier), [parent])
+            sources = [parent]
+            if completed_public_raw is not None:
+                public_child = Path(temporary)/'public-child'
+                auth.unpack_public(completed_public_raw, public_child); sources.insert(0, public_child)
+            hydrate_public_bundle(restored/'complete-candidates'/value['completed_candidate_id'], loaded, sources)
             require({n.relative_to(restored).as_posix(): sha(n.read_bytes()) for n in restored.rglob('*')
                 if n.is_file() and n.relative_to(restored).as_posix() != 'consumed-checkpoints.json'} == unchanged
                 and read(restored/'consumed-checkpoints.json') == lineage, 'modern_completed_transport_bytes')
