@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/transportation.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/transportation.xml</id>
-  <updated>2026-10-19T00:51:20Z</updated>
+  <updated>2026-10-19T01:16:13Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Mentored Career Transition Award (KT1/R00)</title>
@@ -150,6 +150,7 @@
     <author><name>U.S. Department of Transportation - Pipeline and Hazardous Materials Safety Administration (PHMSA)</name></author>
     <category term="Energy"/>
     <category term="Transportation"/>
+    <category term="Materials science"/>
     <summary>U.S. Department of Transportation - Pipeline and Hazardous Materials Safety Administration (PHMSA) | White Paper 2026-11-18 | Hazardous-materials transport research including energy-storage systems, packaging, emergency response, and rail safety; analytical studies and technology assessment. US prime; foreign entities permitted as subcontractors under conditions. Federal/state/local government bodies excluded, while accredited universities explicitly included. Contracts up to$2M, maximum36months including options; cost s…</summary>
   </entry>
   <entry>
@@ -553,16 +554,6 @@
     <summary>AmeriCorps | Application 2026-10-20 | AmeriCorps improves lives, strengthens communities, and fosters civic engagement through service and volunteering. AmeriCorps brings people together to tackle some of the country’s most pressing challenges through national service and volunteerism. AmeriCorps members and AmeriCorps Seniors volunteers serve with organizations dedicated to the improvement of communities and those serving. AmeriCorps…</summary>
   </entry>
   <entry>
-    <title>Limited Competition: Small Grant Program for the NCATS Clinical and Translational Science Award (CTSA) Program (Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/361317"/>
-    <id>urn:funding-finder:grants-gov:361317</id>
-    <updated>2026-08-17T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Public health"/>
-    <category term="Transportation"/>
-    <summary>National Institutes of Health | Estimated Application 2026-10-17 | The purpose of this NOFO is to enhance the capability of NCATS CTSA Program KL2 scholars supported by the CTSA Program to conduct research as they complete the transition to fully independent academic translational scientists. These small research grants will support different clinical and translational science research projects, including pilot and feasibility studies; secondary data analysis of …</summary>
-  </entry>
-  <entry>
     <title>Family Unification Program (FUP) Multi-Year NOFO</title>
     <link href="https://www.grants.gov/search-results-detail/362319"/>
     <id>urn:funding-finder:grants-gov:362319</id>
@@ -634,5 +625,21 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Transportation"/>
     <summary>National Institutes of Health | Application 2029-03-16 | The purpose of this notice of funding opportunity (NOFO) is to facilitate the entry of investigators into multiple high-priority areas of substance use research, including comorbidity with HIV. The Science Track Award for Research Transition (START) Program aims to provide investigators with the opportunity to gather preliminary data that will assist them in securing future research grants and adv…</summary>
+  </entry>
+  <entry>
+    <title>Research Interests of the Air Force Office of Scientific Research</title>
+    <link href="https://www.grants.gov/search-results-detail/362681"/>
+    <id>urn:funding-finder:grants-gov:362681</id>
+    <updated>2026-06-04T00:00:00Z</updated>
+    <author><name>Air Force Office of Scientific Research</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Transportation"/>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Materials science"/>
+    <category term="Quantum science"/>
+    <category term="Energy"/>
+    <category term="Data science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <summary>Air Force Office of Scientific Research | Posted | AFOSR plans, coordinates, and executes the Air Force Research Laboratory’s (AFRL) basic research program in response to technical guidance from AFRL and requirements of the Air Force. Additionally, the office fosters, supports, and conducts research within Air Force, university, and industry laboratories; and ensures transition of research results to support U.S. Air Force needs. The focus of AFOS…</summary>
   </entry>
 </feed>

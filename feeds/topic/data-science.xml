@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml</id>
-  <updated>2026-10-19T00:51:20Z</updated>
+  <updated>2026-10-19T01:16:13Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>ancient DNA for Modern Genomics (aDMG) Research Projects (U01 Clinical Trials Not Allowed)</title>
@@ -158,6 +158,18 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <summary>Department of Education | Letter Of Intent 2026-10-29 | Through the From Seedlings to Scale (S2S) Grants program, IES will invest in innovative ideas within an identified focus area through three phases of increasing funding and duration to support ideas as they grow from seedlings to scalable solutions. Projects will incorporate high-quality research, robust solution development, and attention to sustainability and scaling throughout all phases. For t…</summary>
+  </entry>
+  <entry>
+    <title>NGA - Boosting Innovative GEOINT - Science &amp; Technology Broad Agency Announcement (BIG-ST BAA): Topic # 07 - Lidar Analysis for Surface &amp; Environmental Reconnaissance (LASER)</title>
+    <link href="https://sam.gov/opp/4984511e4bbc4d01a21df55b30a88f02/view"/>
+    <id>urn:funding-finder:sam-gov:sam-gov%3A4984511e4bbc4d01a21df55b30a88f02</id>
+    <updated>2026-10-16T00:00:00Z</updated>
+    <author><name>National Geospatial-Intelligence Agency</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Environmental science"/>
+    <category term="Space and aeronautics"/>
+    <category term="Data science"/>
+    <summary>National Geospatial-Intelligence Agency | Preproposal 2026-10-28 | Develop AI/ML methods to extract and classify 3D surface/subsurface objects using NASA ICESat-2 and GEDI lidar, including navigation safety applications. Topic7 LASER only, not BIG-ST parent or closed topics. General Solicitation Rev4 governs eligibility and abstract prerequisites; October16 Topic7 revision governs current dates, Phase2 label and corrected PD&gt;75% metric. CUI safeguards; foreign na…</summary>
   </entry>
   <entry>
     <title>NLM Institutional Grants for Research Training in Biomedical Informatics, Data Science, and AI (T15 Independent Clinical Trial Not Allowed)</title>
@@ -733,17 +745,5 @@
     <category term="Data science"/>
     <summary>Alfred P. Sloan Foundation | Posted | The Sloan Research Fellowship Program recognizes and rewards outstanding early-career faculty who have the potential to revolutionize their fields of study.
 Successful candidates for a Fellowship generally have a strong record of significant independent research accomplishments that demonstrate creativity and the potential to become future leaders in the scientific community. While Fellows are exp…</summary>
-  </entry>
-  <entry>
-    <title>U.S. National Science Foundation State and Regional Artificial Intelligence Infrastructure Hubs:</title>
-    <link href="https://www.grants.gov/search-results-detail/363481"/>
-    <id>urn:funding-finder:grants-gov:363481</id>
-    <updated>2026-08-06T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Education and workforce"/>
-    <category term="Data science"/>
-    <category term="Cybersecurity"/>
-    <summary>U.S. National Science Foundation | Application 2026-11-04 | The NSF State and Regional AI Infrastructure Hubs program aims to expand access to the compute required for AI-enabled scientific discovery and to transform the research, education, and training opportunities offered by institutions of higher education. AI Infrastructure Hubs will connect researchers to new compute infrastructure that leverages contributions from state governments, research instit…</summary>
   </entry>
 </feed>
