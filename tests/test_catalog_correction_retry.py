@@ -213,9 +213,48 @@ class CloseoutRetry(unittest.TestCase):
                 self.assertIn('Resume the same workflow', result['body']); self.assertEqual(len(result['writes']), 1)
 
     def test_plan_failure_preserves_requested_stage_and_unknown_uses_auto(self):
-        for requested in ('catalog-correction', 'program-area-revalidation', 'catalog-source-recovery', 'catalog-access-correction', 'catalog-identity-correction', 'catalog-url-correction', 'reuse', 'teams', 'backfill', 'publish', 'verify', '', 'unsupported'):
+        for requested in ('catalog-correction', 'program-area-revalidation', 'submission-revalidation', 'catalog-source-recovery', 'catalog-access-correction', 'catalog-identity-correction', 'catalog-url-correction', 'reuse', 'teams', 'backfill', 'publish', 'verify', '', 'unsupported'):
             with self.subTest(requested=requested):
                 self.assert_route(self.run_script('plan', None, requested=requested), requested if requested and requested != 'unsupported' else 'auto')
+
+    def test_submission_projection_retry_survives_private_checkpoint_and_downstream_handoff(self):
+        plan = {'stage': 'program-area-revalidation', 'projection_kind': 'administrative_submission',
+                'candidate_id': 'parent-id', 'candidate_run': '600'}
+        for result in ('failure', 'cancelled'):
+            with self.subTest(producer_result=result):
+                response = self.run_script(stage='program-area-revalidation', requested='submission-revalidation', jobs={
+                    'plan': {'outputs': plan}, 'program-area-revalidation': {'result': result,
+                        'outputs': {'candidate_id': 'private-or-unuploaded-child', 'artifact_run': '650'}}})
+                self.assert_route(response, 'submission-revalidation')
+                self.assertIn('Original lifecycle stage: submission-revalidation\n', response['body'])
+                self.assertIn('Candidate: parent-id\nArtifact run: 600\n', response['body'])
+                self.assertNotIn('Candidate: private-or-unuploaded-child', response['body'])
+                self.assertIn('Resume the same workflow', response['body'])
+
+        response = self.run_script('candidate', stage='program-area-revalidation', requested='submission-revalidation', jobs={
+            'plan': {'outputs': plan}, 'program-area-revalidation': {'result': 'success',
+                'outputs': {'candidate_id': 'persisted-child', 'artifact_run': '650'}}})
+        self.assert_route(response, 'validate')
+        self.assertIn('Candidate: persisted-child\nArtifact run: 650\n', response['body'])
+        self.assertIn('Original lifecycle stage: submission-revalidation\n', response['body'])
+
+        for failed, route in (('validate', 'validate'), ('publish', 'publish'), ('pages', 'publish'), ('verify-live', 'verify')):
+            with self.subTest(downstream=failed):
+                response = self.run_script(failed, stage='program-area-revalidation', requested='submission-revalidation', jobs={
+                    'plan': {'outputs': plan}, 'candidate': {'result': 'success',
+                        'outputs': {'candidate_id': 'persisted-child', 'candidate_run': '650'}}})
+                self.assert_route(response, route)
+                self.assertIn('Candidate: persisted-child\nArtifact run: 650\n', response['body'])
+                self.assertIn('Original lifecycle stage: submission-revalidation\n', response['body'])
+
+        response = self.run_script('program-area-revalidation', stage='program-area-revalidation', requested='program-area-revalidation',
+            jobs={'plan': {'outputs': {**plan, 'projection_kind': 'program_area'}}})
+        self.assert_route(response, 'program-area-revalidation')
+        self.assertIn('Original lifecycle stage: program-area-revalidation\n', response['body'])
+        response = self.run_script('candidate', stage='validate', requested='submission-revalidation',
+            jobs={'plan': {'outputs': {**plan, 'stage': 'validate'}}})
+        self.assert_route(response, 'validate')
+        self.assertIn('Original lifecycle stage: validate\n', response['body'])
 
     def test_candidate_selection_failure_recovers_only_successful_producer_pair(self):
         for producer in ('generate', 'assemble', 'catalog-correction', 'program-area-revalidation', 'catalog-source-recovery', 'catalog-access-correction', 'catalog-identity-correction', 'catalog-url-correction'):

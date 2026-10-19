@@ -1602,7 +1602,8 @@ jobs:
             const alreadyCurrent = context.eventName === 'schedule' && needs.plan.result === 'success' &&
               planned === 'noop' && dailyStatus === 'already_current' && fresh;
             const scheduledIncomplete = context.eventName === 'schedule' && !(alreadyCurrent || (liveComplete && fresh));
-            const originalStage = stages.has(planned) ? planned : stages.has(process.env.REQUESTED_STAGE) ? process.env.REQUESTED_STAGE : 'auto';
+            const originalStage = planned === 'program-area-revalidation' && needs.plan.outputs.projection_kind === 'administrative_submission' ?
+              'submission-revalidation' : stages.has(planned) ? planned : stages.has(process.env.REQUESTED_STAGE) ? process.env.REQUESTED_STAGE : 'auto';
             let candidate = needs.candidate.outputs.candidate_id;
             let generationRun = needs.candidate.outputs.candidate_run;
             let identitySource = 'selected candidate output';
