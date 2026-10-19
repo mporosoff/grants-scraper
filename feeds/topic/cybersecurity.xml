@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml</id>
-  <updated>2026-10-19T01:16:13Z</updated>
+  <updated>2026-10-19T17:05:45Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Fiscal Year 2027 Counter Unmanned Aircraft Systems (C-UAS) Grant Program</title>
@@ -181,6 +181,22 @@
     <category term="Data science"/>
     <category term="Cybersecurity"/>
     <summary>U.S. National Science Foundation | Application 2027-07-27 | The Integrated Data Systems and Services (IDSS) program supports operations-level national-scale cyberinfrastructure systems and services that broadly advance and facilitate open, data-intensive and artificial intelligence-driven science and engineering research, innovation, and education. Through this solicitation, the IDSS program is accepting proposals for three categories of projects: Category…</summary>
+  </entry>
+  <entry>
+    <title>The Genesis Mission: Transforming Science and Energy with AI</title>
+    <link href="https://www.grants.gov/search-results-detail/361526"/>
+    <id>urn:funding-finder:grants-gov:361526</id>
+    <updated>2026-03-17T00:00:00Z</updated>
+    <author><name>Office of Science</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <category term="Quantum science"/>
+    <category term="Technology development"/>
+    <category term="Catalysis and reaction engineering"/>
+    <summary>Office of Science | Application 2026-12-17 | verify prerequisite | The DOE Office of Science (SC), Office of Critical Minerals and Energy Innovation (CMEI), Office of Environmental Management (EM), Office of Nuclear Energy (NE), Office of Electricity (OE), and Hydrocarbons and Geothermal Office (HGEO) hereby announce interest in receiving applications from interdisciplinary teams addressing the Genesis Mission National Science and Technology Challenges to acceler…</summary>
   </entry>
   <entry>
     <title>Pathways to Enable Secure Open-Source Ecosystems (PESOSE)</title>
@@ -378,6 +394,21 @@
     <category term="Manufacturing"/>
     <category term="Materials science"/>
     <summary>Dept of the Army -- Materiel Command | Application 2027-11-20 | The purpose of this combined Broad Agency Announcement (BAA) under Federal Acquisition Regulation (FAR) Part 35 and Funding Opportunity Announcement (FOA) under 2 Code of Federal Regulations (CFR) 200.204 (henceforth referred to as “BAA”) is to solicit research proposals for submission to the U.S. Army Combat Capabilities Development Command (DEVCOM) Army Research Laboratory (ARL) for funding cons…</summary>
+  </entry>
+  <entry>
+    <title>DOD Defense Health Agency (DHA) Research &amp; Development FY23-FY27 BROAD AGENCY ANNOUNCEMENT for Extramural Medical Research</title>
+    <link href="https://www.grants.gov/search-results-detail/343725"/>
+    <id>urn:funding-finder:grants-gov:343725</id>
+    <updated>2022-09-22T00:00:00Z</updated>
+    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
+    <category term="Arts and culture"/>
+    <category term="Technology development"/>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Energy"/>
+    <category term="Cybersecurity"/>
+    <summary>Defense Health Agency Contracting Activity - DHACA | Application 2027-09-30 | verify prerequisite | The USAMRDC’s mission is to provide solutions to medical problems of importance to the American Service Member at home and abroad, as well as to the general public at large. The scope of this effort and the priorities attached to specific projects are influenced by changes in military and civilian medical science and technology (S&amp;T), operational requirements, military threat assessments, and nati…</summary>
   </entry>
   <entry>
     <title>Tribal Colleges and Universities Program (TCUP)</title>

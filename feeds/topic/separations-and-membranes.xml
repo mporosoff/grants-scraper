@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/separations-and-membranes.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/separations-and-membranes.xml</id>
-  <updated>2026-10-19T01:16:13Z</updated>
+  <updated>2026-10-19T17:05:45Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>FY 2027 Continuation of Solicitation for the Office of Science Financial Assistance Program</title>
@@ -117,6 +117,22 @@
     <category term="Technology development"/>
     <category term="Transportation"/>
     <summary>U.S. National Science Foundation | Posted | The Transport Phenomena (TP) program supports fundamental research to understand, model, and control the transport of mass, momentum, energy, and species across multiple scales. Innovative TP research supports advances in artificial intelligence; manufacturing; biotechnology; microelectronics; energy generation, extraction, and utilization; nuclear energy; quantum science and engineering; and othe…</summary>
+  </entry>
+  <entry>
+    <title>The Genesis Mission: Transforming Science and Energy with AI</title>
+    <link href="https://www.grants.gov/search-results-detail/361526"/>
+    <id>urn:funding-finder:grants-gov:361526</id>
+    <updated>2026-03-17T00:00:00Z</updated>
+    <author><name>Office of Science</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <category term="Quantum science"/>
+    <category term="Technology development"/>
+    <category term="Catalysis and reaction engineering"/>
+    <summary>Office of Science | Application 2026-12-17 | verify prerequisite | The DOE Office of Science (SC), Office of Critical Minerals and Energy Innovation (CMEI), Office of Environmental Management (EM), Office of Nuclear Energy (NE), Office of Electricity (OE), and Hydrocarbons and Geothermal Office (HGEO) hereby announce interest in receiving applications from interdisciplinary teams addressing the Genesis Mission National Science and Technology Challenges to acceler…</summary>
   </entry>
   <entry>
     <title>Novel approaches to support therapeutic development in ultra-rare cancers</title>

@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml</id>
-  <updated>2026-10-19T01:16:13Z</updated>
+  <updated>2026-10-19T17:05:45Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Office of Hazardous Materials Safety Research Initiative - FY2026 BROAD AGENCY ANNOUNCEMENT (BAA)</title>
@@ -384,6 +384,22 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <summary>U.S. National Science Foundation | Posted | The Transport Phenomena (TP) program supports fundamental research to understand, model, and control the transport of mass, momentum, energy, and species across multiple scales. Innovative TP research supports advances in artificial intelligence; manufacturing; biotechnology; microelectronics; energy generation, extraction, and utilization; nuclear energy; quantum science and engineering; and othe…</summary>
   </entry>
   <entry>
+    <title>The Genesis Mission: Transforming Science and Energy with AI</title>
+    <link href="https://www.grants.gov/search-results-detail/361526"/>
+    <id>urn:funding-finder:grants-gov:361526</id>
+    <updated>2026-03-17T00:00:00Z</updated>
+    <author><name>Office of Science</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <category term="Quantum science"/>
+    <category term="Technology development"/>
+    <category term="Catalysis and reaction engineering"/>
+    <summary>Office of Science | Application 2026-12-17 | verify prerequisite | The DOE Office of Science (SC), Office of Critical Minerals and Energy Innovation (CMEI), Office of Environmental Management (EM), Office of Nuclear Energy (NE), Office of Electricity (OE), and Hydrocarbons and Geothermal Office (HGEO) hereby announce interest in receiving applications from interdisciplinary teams addressing the Genesis Mission National Science and Technology Challenges to acceler…</summary>
+  </entry>
+  <entry>
     <title>Space Technology Research, Development, Demonstration, and Infusion (SpaceTech REDDI-2026)</title>
     <link href="https://www.grants.gov/search-results-detail/360954"/>
     <id>urn:funding-finder:grants-gov:360954</id>
@@ -397,6 +413,17 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Manufacturing"/>
     <category term="Materials science"/>
     <summary>NASA Headquarters | Posted | The National Aeronautics and Space Administration (NASA) Headquarters, Space Technology Mission Directorate (STMD) will be releasing an Umbrella NASA Research Announcement (NRA) titled “Space Technology Research, Development, Demonstration, and Infusion-2026 (SpaceTech-REDDI-2026)” on or about December 9, 2025. The solicitation is available by opening the NSPIRES homepage at https://nspires.nasapr…</summary>
+  </entry>
+  <entry>
+    <title>EDA FY25 Disaster Supplemental</title>
+    <link href="https://www.grants.gov/search-results-detail/359225"/>
+    <id>urn:funding-finder:grants-gov:359225</id>
+    <updated>2025-06-04T00:00:00Z</updated>
+    <author><name>Economic Development Administration</name></author>
+    <category term="Materials science"/>
+    <category term="Manufacturing"/>
+    <category term="Water"/>
+    <summary>Economic Development Administration | Posted | Through this Disaster NOFO, EDA will award investments in regions experiencing severe economic distress or other economic harm resulting from hurricanes, wildfires, tornadoes, floods, and other natural disasters occurring in calendar years 2023 and 2024. EDA’s goal under this NOFO is to assist communities recovering from a disaster by realizing opportunities to recover and change the economic traj…</summary>
   </entry>
   <entry>
     <title>Staff Research Program</title>
@@ -454,6 +481,20 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Artificial intelligence and machine learning"/>
     <category term="Energy"/>
     <summary>National Institutes of Health | Application 2027-06-15 | This NOFO solicits applications for next generation sensor and bioelectronic device development that will synchronize with brain recordings. The sensor and neural recording data will be used to generate new computational models of behavior in human and animal models. There has been a lack of quantitative approaches and models to understand the complexity of human and animal behavior in naturalisti…</summary>
+  </entry>
+  <entry>
+    <title>SEEDING CRITICAL ADVANCES FOR LEADING ENERGY TECHNOLOGIES WITH UNTAPPED POTENTIAL (SCALEUP) READY</title>
+    <link href="https://www.grants.gov/search-results-detail/356623"/>
+    <id>urn:funding-finder:grants-gov:356623</id>
+    <updated>2024-10-02T00:00:00Z</updated>
+    <author><name>Advanced Research Projects Agency Energy</name></author>
+    <category term="Carbon management"/>
+    <category term="Climate change"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <category term="Materials science"/>
+    <summary>Advanced Research Projects Agency Energy | Application 2029-09-29 | The purpose of this modification is to clarify the meaning of the Program Policy Factors in Section V.C. To obtain a copy of the Notice of Funding Opportunity (NOFO) please go to the ARPA-E website at https://arpa-e-foa.energy.gov. To apply to this NOFO, Applicants must register with and submit application materials through ARPA-E eXCHANGE (https://arpa-e-foa.energy.gov/Registration.aspx). For det…</summary>
   </entry>
   <entry>
     <title>FY25 Long Range Broad Agency Announcement (BAA) for Navy and Marine Corps Science and Technology</title>
@@ -533,6 +574,19 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <summary>Naval Research Laboratory | Application 2026-12-30 | verify prerequisite | Amendment 0008 The purpose of this amendment is to extend the due date for acceptance of White Papers. All other terms and conditions remain unchanged. -------------------------------------------------------------- Amendment 0007 The purpose of this amendment is to add Summary Topic 61-24-06 - AFFF ALTERNATIVE PROGRAM COMPATIBILITY OF FLUORINE-FREE FOAM (F3) WITH NON-ASPIRATING SPRINKLER NOZZLES t…</summary>
   </entry>
   <entry>
+    <title>Long Range Broad Agency Announcement (BAA) for NSWC Crane</title>
+    <link href="https://www.grants.gov/search-results-detail/352238"/>
+    <id>urn:funding-finder:grants-gov:352238</id>
+    <updated>2024-02-08T00:00:00Z</updated>
+    <author><name>NSWC CRANE - N00164</name></author>
+    <category term="Energy"/>
+    <category term="Data science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Materials science"/>
+    <category term="Manufacturing"/>
+    <summary>NSWC CRANE - N00164 | Posted | This announcement seeks revolutionary research ideas, and technology demonstrators that offer potential for advancement and improvement of NSWC Crane’s primary mission areas. NSWC Crane is a field activity of the Naval Sea Systems Command. NSWC Crane supports a wide range of government agencies in the interest of national security. NSWC Crane may publish BAAs and other solicitations in response to…</summary>
+  </entry>
+  <entry>
     <title>Joint Center of Excellence for Advanced Materials Research</title>
     <link href="https://www.grants.gov/search-results-detail/39841"/>
     <id>urn:funding-finder:grants-gov:39841</id>
@@ -591,6 +645,19 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <author><name>U.S. National Science Foundation</name></author>
     <category term="Materials science"/>
     <summary>U.S. National Science Foundation | Application 2026-12-01 | The Archaeology Program administers an annual Archaeometry competition with a target date of December 1. The goal is to fund projects in two main categories: To develop or refine anthropologically relevant archaeometric techniques. Examples include the development of methods to identify specific types of organic residues on ceramics or development of field applicable analytic techniques. To suppor…</summary>
+  </entry>
+  <entry>
+    <title>NDEP STEM Open NFO</title>
+    <link href="https://www.grants.gov/search-results-detail/345938"/>
+    <id>urn:funding-finder:grants-gov:345938</id>
+    <updated>2023-02-09T00:00:00Z</updated>
+    <author><name>Washington Headquarters Services</name></author>
+    <category term="Data science"/>
+    <category term="Education and workforce"/>
+    <category term="Manufacturing"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Materials science"/>
+    <summary>Washington Headquarters Services | Application 2028-02-08 | verify prerequisite | This is an open NFO, applicants may apply to this posting or subsequent amendments for specific STEM activities. See the Related Documents tab for the full NFO, and amendments announcing new funding opportunities. The Department of War (DoW) Office of the Under Secretary of War for Research and Engineering (OUSW(R&amp;E)) seeks innovative applications on mechanisms to implement and research the effect…</summary>
   </entry>
   <entry>
     <title>Training-based Workforce Development for Advanced Cyberinfrastructure</title>
