@@ -80,6 +80,33 @@ class ModernProgramAreaRelease(unittest.TestCase):
         select = next(step for step in workflow['jobs']['candidate']['steps'] if step.get('id') == 'select')
         self.assertIn('needs.program-area-revalidation.outputs.artifact_run', select['env']['RECONCILED_RUN'])
 
+    def test_private_resume_uploads_preserve_hidden_candidate_files(self):
+        workflow = yaml.safe_load((c.ROOT / '.github/workflows/refresh-opportunities.yml').read_text(encoding='utf8'))
+        inventories = (
+            ('generate', 'generation-spend-state-${{ github.run_id }}-${{ github.run_attempt }}',
+                '${{ runner.temp }}/offline-${{ github.run_id }}'),
+            ('assemble', 'generation-spend-state-${{ github.run_id }}-${{ github.run_attempt }}',
+                '${{ runner.temp }}/offline-${{ github.run_id }}'),
+            ('catalog-reconcile',
+                'offline-ai-reconcile-${{ needs.plan.outputs.candidate_id }}-state-${{ github.run_id }}-${{ github.run_attempt }}',
+                '${{ runner.temp }}/reconcile-state'),
+            ('program-area-revalidation', '${{ steps.prepare.outputs.state_artifact }}',
+                '${{ steps.prepare.outputs.vector_state }}'),
+        )
+        for job, artifact, path in inventories:
+            with self.subTest(job=job):
+                uploads = [step for step in workflow['jobs'][job]['steps']
+                    if step.get('with', {}).get('name') == artifact]
+                self.assertEqual(len(uploads), 1)
+                upload = uploads[0]
+                self.assertEqual(upload['uses'], 'actions/upload-artifact@v4')
+                self.assertEqual(upload['with']['path'], path)
+                # Candidate manifests include .nojekyll. A successful private
+                # upload must retain it for strict parent/completed-child load.
+                self.assertIs(upload['with'].get('include-hidden-files'), True)
+                self.assertIn('always()', upload['if'])
+                self.assertNotIn('overwrite', upload['with'])
+
     def test_modern_constructor_uses_original_state_and_checkpoints_complete_child(self):
         events = []
         def create(*args, **kwargs):

@@ -368,6 +368,7 @@ class CandidateLifecycleTests(unittest.TestCase):
         c.write_json(self.root / 'release/candidate.json', manifest)
         c.write_json(self.root / 'release/candidate-source.json', {'candidate_id': manifest['candidate_id'], 'artifact_run': '123'})
         self.commit()
+        publication_sha = c.git(self.root, 'rev-parse', 'HEAD')
         c.git(self.root, 'update-ref', 'refs/remotes/origin/main', 'HEAD')
         meta = {'head_branch': 'main', 'path': '.github/workflows/refresh-opportunities.yml', 'event': 'push'}
         original = subprocess.check_output
@@ -386,6 +387,39 @@ class CandidateLifecycleTests(unittest.TestCase):
                     artifacts.reconstruct('owner/repo', '124', name, destination / 'wrong-run')
                 with self.assertRaises(artifacts.ArtifactUnavailable):
                     artifacts.reconstruct('owner/repo', '123', 'validation-' + manifest['candidate_id'], destination / 'receipt')
+        proof = artifacts.reconstruct('owner/repo', '123', name, Path(self.temp.name)/'proof', root=self.root)
+        self.assertEqual(proof, {'recovered_candidate': manifest['candidate_id'],
+            'protected_sha': publication_sha, 'generation_sha': manifest['generation_sha']})
+
+    def test_reconstruction_ignores_publication_pointer_on_merged_side_branch(self):
+        from tools import fetch_release_artifact as artifacts
+        manifest = self.create()
+        c.materialize(self.root, self.bundle)
+        c.write_json(self.root/'release/candidate.json', manifest)
+        pointer = self.root/'release/candidate-source.json'
+        c.write_json(pointer, {'candidate_id': manifest['candidate_id'], 'artifact_run': '123'})
+        self.commit()
+        branch = c.git(self.root, 'branch', '--show-current')
+        c.git(self.root, 'checkout', '-qb', 'unpublished-pointer')
+        c.write_json(pointer, {'candidate_id': manifest['candidate_id'], 'artifact_run': '999'})
+        self.commit(); side_sha = c.git(self.root, 'rev-parse', 'HEAD')
+        c.git(self.root, 'checkout', '-q', branch)
+        c.write_json(pointer, {'candidate_id': manifest['candidate_id'], 'artifact_run': '444'})
+        self.commit()
+        with self.assertRaises(subprocess.CalledProcessError):
+            c.git(self.root, 'merge', '--no-ff', '--no-commit', 'unpublished-pointer')
+        c.write_json(pointer, {'candidate_id': manifest['candidate_id'], 'artifact_run': '555'})
+        self.commit()
+        c.git(self.root, 'update-ref', 'refs/remotes/origin/main', 'HEAD')
+        # Ordinary ancestry includes the side-branch pointer; protected
+        # publication authority follows only main's first-parent history.
+        self.assertIn(side_sha, c.git(self.root, 'log', 'origin/main', '--format=%H',
+            '-100', '--', 'release/candidate-source.json').splitlines())
+        destination = Path(self.temp.name)/'side-branch-recovery'
+        with self.assertRaises(artifacts.ArtifactUnavailable):
+            artifacts.reconstruct('owner/repo', '999', 'candidate-'+manifest['candidate_id'],
+                destination, root=self.root)
+        self.assertFalse(destination.exists())
 
     def test_artifact_authentication_or_corruption_never_triggers_reconstruction(self):
         from tools import fetch_release_artifact as artifacts
@@ -400,6 +434,24 @@ class CandidateLifecycleTests(unittest.TestCase):
                 with self.assertRaises((subprocess.CalledProcessError, zipfile.BadZipFile)):
                     artifacts.fetch('owner/repo', '123', name, self.bundle)
                 recover.assert_not_called()
+        import io
+        manifest = self.create(); name = 'candidate-' + manifest['candidate_id']
+        stream = io.BytesIO()
+        with zipfile.ZipFile(stream, 'w') as archive:
+            for path in self.bundle.rglob('*'):
+                if path.is_file():
+                    member = path.relative_to(self.bundle).as_posix()
+                    archive.writestr(member, b'corrupt scientific bytes' if member ==
+                        'files/data/opportunities.js' else path.read_bytes())
+        with patch.object(subprocess, 'check_output', return_value=json.dumps(meta).encode()), \
+                patch.object(artifacts, 'run_artifacts', return_value=[{'id': 1, 'name': name, 'expired': False}]), \
+                patch.object(artifacts, 'artifact_bytes', return_value=stream.getvalue()), \
+                patch.object(artifacts, 'reconstruct') as recover:
+            destination = Path(self.temp.name)/'corrupt-live-artifact'
+            artifacts.fetch('owner/repo', '123', name, destination)
+            with self.assertRaisesRegex(ValueError, 'Candidate bytes differ'):
+                c.load(destination, manifest['candidate_id'])
+            recover.assert_not_called()
 
     def test_automatic_rerun_after_pages_resumes_verification_of_exact_candidate(self):
         from tools import plan_release as planner

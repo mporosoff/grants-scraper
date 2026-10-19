@@ -4,6 +4,7 @@ from copy import deepcopy
 import io
 import json
 from pathlib import Path
+import shutil
 import tempfile
 import unittest
 from unittest.mock import patch
@@ -135,6 +136,29 @@ class ModernProgramAreaBudget(unittest.TestCase):
         self.assertEqual(sum(r['charged_microusd'] for r in ledger['requests']), 2)
         before = deepcopy(ledger); spend.import_history(state, self.bundle, self.original_hash)
         self.assertEqual(spend.ledger(state).read(), before)
+
+    def test_initial_known_expired_public_parent_uses_protected_bytes_without_replacing_budget(self):
+        self.artifacts[0]['expired'] = True
+        pin = {key: self.artifacts[0][key] for key in ('id', 'name')}
+        pin['sha256'] = self.artifacts[0]['digest'].removeprefix('sha256:')
+        def reconstruct(repository, run, name, destination, *, root):
+            self.assertEqual((repository, run, name, Path(root)), ('owner/repo', '123', 'candidate-'+self.cid, self.root))
+            shutil.copytree(self.bundle, destination, dirs_exist_ok=True)
+            return {'recovered_candidate': self.cid, 'protected_sha': '7'*40, 'generation_sha': 'a'*40}
+        with patch('tools.fetch_release_artifact.reconstruct', side_effect=reconstruct) as protected:
+            state, value = self.authenticate()
+            protected.assert_called_once()
+        self.assertEqual(value['parent_artifact'], pin)
+        self.assertEqual(spend.ledger(state).read()['requests'], self.original['requests'])
+        self.assertEqual(value['original_spend']['ledger_sha256'], self.original_hash)
+
+    def test_initial_missing_public_pin_cannot_be_invented_from_protected_bytes(self):
+        self.artifacts = [row for row in self.artifacts if row['name'] != 'candidate-'+self.cid]
+        with patch('tools.fetch_release_artifact.reconstruct') as protected:
+            with self.assertRaisesRegex(ValueError, 'modern_unique_candidate'):
+                self.authenticate()
+            protected.assert_not_called()
+        self.assertFalse((self.root/'restored/ledger.json').exists())
 
     def test_tampered_native_artifact_or_wrong_checkout_fails_before_spend_restore(self):
         self.archives[1] += b'tampered'

@@ -57,7 +57,23 @@ Its paired `state` artifact preserves the original ledger, cached responses,
 projection context, vector completion and completed child. The final private
 state upload runs after candidate persistence and before the public candidate
 upload; it also retains partial work after a failed vector step. Private state
-does not enter the public candidate.
+does not enter the public candidate. The upload explicitly includes hidden files
+so complete bundle mirrors retain `.nojekyll` and every manifest-declared path.
+
+An older private mirror may omit a declared public file. Recovery may fill only
+missing paths from an authenticated public candidate with matching declared
+hashes; it never replaces corrupt existing bytes or changes a manifest. The
+exact public parent can supply identical retained bytes when a child upload
+failed. Missing changed bytes still require the exact public child. A repaired
+mirror must pass the ordinary complete candidate loader before reuse. This
+repairs transport loss without repeating projection, vectors or provider work.
+
+If a pinned public parent artifact is missing or expired, an exact protected
+publication can supply its candidate bytes. The original producer and stored
+artifact pin remain unchanged; the protected pointer, canonical manifest and
+every file must match. Retained native conflicts or corruption do not use this
+fallback. Private reservations, ledgers and response evidence still require
+their authenticated retained checkpoints.
 
 Retries authenticate the newest paired checkpoint across the operation family;
 missing, mismatched or ambiguous evidence holds recovery. A complete compatible
