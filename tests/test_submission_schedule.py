@@ -14,6 +14,20 @@ FIXTURE = Path(__file__).parent / 'fixtures/submission-schedule.json'
 
 
 class SubmissionScheduleTests(unittest.TestCase):
+    def test_administrative_dates_neither_submit_nor_revive_scalar_close_fallback(self):
+        administrative = {'kind': 'submission', 'date': '2026-12-16', 'date_qualifier': 'administrative'}
+        record = {'close_date': '2026-12-16', 'deadlines': [administrative,
+            {'kind': 'application', 'date': '2026-10-14'}]}
+        self.assertEqual(next_submission(record, '2026-10-14')['date'], '2026-10-14')
+        self.assertEqual(next_submission(record, '2026-10-19')['access'], 'closed')
+        self.assertIsNone(next_submission(record, '2026-10-19')['date'])
+        record['deadlines'] = [administrative]
+        self.assertEqual(events(record), [])
+        self.assertIsNone(next_submission(record, '2026-10-19')['date'])
+        record['deadlines'][0] = {'kind': 'submission', 'date': '2026-12-16'}
+        self.assertEqual(next_submission(record, '2026-10-19')['access'], 'verify_stage')
+        self.assertEqual(next_submission(record, '2026-10-19')['date'], '2026-12-16')
+
     def test_abstract_schedule_retains_both_source_stages_and_proposal_window(self):
         record = next(case['record'] for case in json.loads(FIXTURE.read_text(encoding='utf8'))
                       if case['name'] == 'DARPA unknown Abstract before its deadline')

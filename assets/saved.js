@@ -63,7 +63,7 @@
         invitation_required: event.invitation_required === true,
         prerequisite: cleanString(event.prerequisite, 60) || null,
         rolling: event.rolling === true,
-        date_qualifier: ["recommended", "anticipated"].includes(event.date_qualifier) ? event.date_qualifier : null,
+        date_qualifier: ["recommended", "anticipated", "administrative"].includes(event.date_qualifier) ? event.date_qualifier : null,
         estimated: event.estimated === true,
       }))])),
       url: cleanString(

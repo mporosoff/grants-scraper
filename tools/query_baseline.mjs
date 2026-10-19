@@ -54,6 +54,7 @@ function usage(code) {
 async function loadEngine(catalogPath) {
   const context = { globalThis: {} };
   for (const relative of [
+    "assets/submission-schedule.js",
     "assets/search-query.js",
     "assets/search-retrieval.js",
     "assets/profile-ranking.js",

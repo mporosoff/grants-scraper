@@ -140,6 +140,7 @@ function emptyScores(count) {
 async function loadHarness() {
   const sources = {};
   for (const relative of [
+    "assets/submission-schedule.js",
     "assets/search-v2-config.js",
     "assets/search-query.js",
     "assets/search-retrieval.js",
@@ -150,6 +151,7 @@ async function loadHarness() {
 
   const context = { globalThis: {} };
   for (const relative of [
+    "assets/submission-schedule.js",
     "assets/search-v2-config.js",
     "assets/search-query.js",
     "assets/search-retrieval.js",

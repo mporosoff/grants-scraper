@@ -8,6 +8,23 @@ import "../../assets/saved.js";
 const api = globalThis.FUNDING_SUBMISSION_SCHEDULE;
 const cases = JSON.parse(readFileSync(new URL("../fixtures/submission-schedule.json", import.meta.url), "utf8"));
 
+test("saved administrative closes cannot become submissions or scalar fallback dates", () => {
+  const record = {opportunity_id: "processing-close", title: "Processing close", close_date: "2026-12-16",
+    deadlines: [{kind: "submission", date: "2026-12-16", date_qualifier: "administrative"},
+      {kind: "application", date: "2026-10-14"}]};
+  const saved = globalThis.FUNDING_SAVED.sanitizeItem(record);
+  assert.equal(saved.deadlines[0].date_qualifier, "administrative");
+  assert.equal(api.nextSubmission(saved, "2026-10-14").date, "2026-10-14");
+  assert.equal(api.nextSubmission(saved, "2026-10-19").access, "closed");
+  assert.equal(api.nextSubmission(saved, "2026-10-19").date, null);
+  saved.deadlines = saved.deadlines.slice(0, 1);
+  assert.deepEqual(api.events(saved), []);
+  assert.equal(api.nextSubmission(saved, "2026-10-19").date, null);
+  delete saved.deadlines[0].date_qualifier;
+  assert.equal(api.nextSubmission(saved, "2026-10-19").access, "verify_stage");
+  assert.equal(api.nextSubmission(saved, "2026-10-19").date, "2026-12-16");
+});
+
 test("saved SURPASS and STRI schedules keep required preliminary and full proposal stages", () => {
   const requiredCases = cases.filter(item => /^Required (SURPASS|STRI) /.test(item.name));
   assert.equal(requiredCases.length, 6);

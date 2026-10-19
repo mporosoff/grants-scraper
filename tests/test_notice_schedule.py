@@ -340,8 +340,12 @@ class NoticeScheduleTests(unittest.TestCase):
                     projected = e.merge_document_entry(case['record'], deepcopy(prior))
                     window = next(d for d in projected['deadlines'] if d['date'] == '2026-12-16')
                     self.assertEqual(window['kind'], 'submission')
+                    self.assertEqual(window['date_qualifier'], 'administrative')
+                    self.assertEqual(window['date_qualifier_citation']['actual_application_date'], '2026-10-14')
                     self.assertEqual(window['note'], case['record']['deadlines'][0]['note'])
-                    self.assertEqual(next_submission(projected, '2026-10-15')['access'], 'verify_stage')
+                    after_application = next_submission(projected, '2026-10-15')
+                    self.assertEqual(after_application['access'], 'closed')
+                    self.assertIsNone(after_application['date'])
                     unproved = deepcopy(case['record'])
                     unproved['deadlines'][0]['note'] = 'Full applications close December 16, 2026.'
                     self.assertEqual(next_submission(e.merge_document_entry(unproved, deepcopy(prior)), '2026-09-07')['date'], '2026-12-16')

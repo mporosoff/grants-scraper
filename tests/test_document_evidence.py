@@ -93,6 +93,76 @@ def response(content=NOTICE_HTML, etag='"notice-v1"'):
 
 
 class DocumentEvidenceTests(unittest.TestCase):
+    def administrative_close_source(self):
+        from scripts import extract_document_evidence as e
+        record = base_record()
+        note = ('Pre-proposals are due on July 29, 2026. Important note: The Closing Date for this '
+            'funding opportunity is December 16, 2026. However, that is the date that the funding '
+            'opportunity closes and applications can no longer be accepted. To give applicants the time '
+            'to fix issues and complete their applications, the actual due date for Application '
+            'Submission in GrantSolutions is October 14, 2026.')
+        record.update(close_date='2026-12-16', deadlines=[{'kind': 'application', 'date': '2026-12-16',
+            'confidence': 'official_structured', 'source_field': 'CloseDate', 'note': note,
+            'source_url': 'https://www.grants.gov/search-results-detail/362893'}])
+        document = {'url': record['primary_document_url'], 'sha256': 'a' * 64, 'name': 'notice.pdf'}
+        facts = e.extract_document_facts(record, [{'text': note, 'page': 3},
+            {'text': 'Submission Dates and Times Closing Date for Applications: 12/16/2026 '
+                     'Closing Date Explanation', 'page': 15}], document, '2026-10-19T17:05:45Z',
+            families={'deadlines'})
+        entry = {'status': 'current', 'checked_at': '2026-10-19T17:05:45Z', 'document': document,
+                 'facts': facts, 'deadline_extractor_identity': e.DEADLINE_EXTRACTOR_IDENTITY}
+        return record, entry
+
+    def test_fresh_and_cached_administrative_close_keep_the_actual_application_deadline(self):
+        from copy import deepcopy
+        from scripts import extract_document_evidence as e
+        from scripts.submission_schedule import next_submission
+        record, entry = self.administrative_close_source()
+        saved = deepcopy(entry)
+        with mock.patch.object(e, 'refine_administrative_close', return_value=False):
+            unqualified = e.merge_document_entry(record, deepcopy(entry))
+        self.assertEqual(next_submission(unqualified, '2026-10-19')['date'], '2026-12-16')
+        output = e.merge_document_entry(record, entry)
+        self.assertEqual(entry, saved, 'Public refinement must not rewrite cached source facts')
+        self.assertEqual(output['close_date'], '2026-12-16')
+        self.assertTrue(all(d['kind'] == 'submission' and d['date_qualifier'] == 'administrative'
+            for d in output['deadlines'] if d.get('date') == '2026-12-16'))
+        for day in ('2026-10-13', '2026-10-14'):
+            self.assertEqual(next_submission(output, day)['date'], '2026-10-14')
+        self.assertEqual(next_submission(output, '2026-10-15')['access'], 'closed')
+        self.assertIsNone(next_submission(output, '2026-10-15')['date'])
+        self.assertEqual(e.merge_document_entry(output, deepcopy(entry)), output)
+        self.assertTrue(e.refine_administrative_close(unqualified))
+        self.assertEqual(unqualified, output)
+        self.assertFalse(e.refine_administrative_close(unqualified))
+        self.assertNotEqual(output['document_search_text'],
+                            e.clean_text(' '.join(str(v) for f in saved['facts'] for v in
+                                (f.get('label'), f.get('display_value'), f.get('citation', {}).get('quote')) if v)))
+
+    def test_administrative_close_requires_unique_current_native_application_proof(self):
+        from copy import deepcopy
+        from scripts import extract_document_evidence as e
+        source, entry = self.administrative_close_source()
+        with mock.patch.object(e, 'refine_administrative_close', return_value=False):
+            original = e.merge_document_entry(source, entry)
+        for mutation in ('missing', 'duplicate', 'url', 'sha', 'cycle', 'track', 'class', 'structure', 'same_date'):
+            record = deepcopy(original)
+            facts = record['document_evidence']['facts']
+            actual = next(f for f in facts if f.get('date') == '2026-10-14')
+            if mutation == 'missing': facts.remove(actual)
+            elif mutation == 'duplicate': facts.append(deepcopy(actual))
+            elif mutation in {'url', 'sha'}:
+                actual['citation']['document_url' if mutation == 'url' else 'sha256'] = 'different'
+            elif mutation in {'cycle', 'track', 'class'}:
+                actual['application_class' if mutation == 'class' else mutation] = 'different'
+            elif mutation == 'structure': actual['citation'].pop('structural_reference')
+            else:
+                record['deadlines'][0]['note'] = record['deadlines'][0]['note'].replace('October 14', 'December 16')
+            before = deepcopy(record)
+            with self.subTest(mutation=mutation):
+                self.assertFalse(e.refine_administrative_close(record))
+                self.assertEqual(record, before)
+
     def test_http_success_without_notice_text_is_a_retrieval_failure(self):
         from copy import deepcopy
         from pathlib import Path

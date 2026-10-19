@@ -226,21 +226,24 @@ class LocalPackageTests(unittest.TestCase):
         finally:
             changed.write_bytes(original)
 
-    def test_reference_binder_implementation_change_after_copy_rejects_completion(self):
-        source = ROOT/'tools/assemble_release_candidate.py'
-        actual_bytes = stage._bytes; actual_node = stage._node; copied = False
-        def read(path):
-            raw = actual_bytes(path)
-            return raw + b'\n# changed protected binder\n' if copied and path == source else raw
-        def checked(*args, **kwargs):
-            nonlocal copied
-            result = actual_node(*args, **kwargs); copied = True
-            return result
-        with patch.object(stage, '_bytes', side_effect=read), patch.object(stage, '_node', side_effect=checked):
-            with self.assertRaisesRegex(ValueError, 'pin_mismatch'):
-                self.assemble('changed-reference-binder')
-        self.assertTrue((self.base/'changed-reference-binder/FAILED.json').is_file())
-        self.assertFalse((self.base/'changed-reference-binder/LOCAL-STAGE.json').exists())
+    def test_python_builder_dependency_change_after_copy_rejects_completion(self):
+        for name in ('tools/assemble_release_candidate.py', 'scripts/submission_schedule.py'):
+            with self.subTest(dependency=name):
+                source = ROOT/name
+                actual_bytes = stage._bytes; actual_node = stage._node; copied = False
+                def read(path):
+                    raw = actual_bytes(path)
+                    return raw + b'\n# changed protected builder dependency\n' if copied and path == source else raw
+                def checked(*args, **kwargs):
+                    nonlocal copied
+                    result = actual_node(*args, **kwargs); copied = True
+                    return result
+                target = 'changed-' + source.stem
+                with patch.object(stage, '_bytes', side_effect=read), patch.object(stage, '_node', side_effect=checked):
+                    with self.assertRaisesRegex(ValueError, 'pin_mismatch'):
+                        self.assemble(target)
+                self.assertTrue((self.base/target/'FAILED.json').is_file())
+                self.assertFalse((self.base/target/'LOCAL-STAGE.json').exists())
 
     def test_pinned_release_cannot_hide_a_rekeyed_original_model(self):
         path = self.public/'config/opportunity_team_model.json'

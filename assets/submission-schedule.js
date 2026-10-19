@@ -16,9 +16,12 @@
     return Number.isFinite(instant.getTime()) && instant.toISOString().slice(0, 10) === value;
   }
   function events(record) {
-    const result = [...(record?.deadlines || []), ...(record?.submission_requirements || [])]
-      .filter(event => event && KINDS.has(event.kind)).map(event => ({...event}));
-    if (!result.some(event => FULL.has(event.kind) || event.kind === "submission" || event.date === record?.close_date) && validDate(record?.close_date)) result.push({
+    const declared = [...(record?.deadlines || []), ...(record?.submission_requirements || [])];
+    const result = declared.filter(event => event && KINDS.has(event.kind)
+      && event.date_qualifier !== "administrative").map(event => ({...event}));
+    if (!result.some(event => FULL.has(event.kind) || event.kind === "submission" || event.date === record?.close_date)
+      && !declared.some(event => event?.date_qualifier === "administrative" && event.date === record?.close_date)
+      && validDate(record?.close_date)) result.push({
       kind: record.close_date_kind === "submission_window_end" ? "submission" : "application", date: record.close_date,
       time: record.deadline_time ?? null, timezone: record.deadline_timezone ?? null, source: record.source ?? null});
     return result;
@@ -74,11 +77,20 @@
     }
     return result;
   }
+  function administrativeSubmissionClosed(record, asOf = new Date().toISOString().slice(0, 10)) {
+    if (record?.rolling) return false;
+    const declared = [...(record?.deadlines || []), ...(record?.submission_requirements || [])];
+    if (!declared.some(event => event?.date_qualifier === "administrative"
+      && validDate(event.date) && event.date === record?.close_date)) return false;
+    const classes = new Set(["new", ...events(record).map(event => event.application_class)
+      .filter(value => typeof value === "string" && value && value !== "unspecified")]);
+    return [...classes].every(applicationClass => nextSubmission(record, asOf, applicationClass).access === "closed");
+  }
   function recordById(records, id) {
     const direct = records.find(record => String(record.opportunity_id || record.opportunity_number || "") === String(id));
     if (direct) return direct;
     const aliases = records.filter(record => (record.source_aliases || []).some(alias => String(alias.opportunity_id || "") === String(id)));
     return aliases.length === 1 ? aliases[0] : null;
   }
-  globalThis.FUNDING_SUBMISSION_SCHEDULE = Object.freeze({version: 2, events, nextSubmission, validDate, recordById, ACCESS_LABELS});
+  globalThis.FUNDING_SUBMISSION_SCHEDULE = Object.freeze({version: 2, events, nextSubmission, administrativeSubmissionClosed, validDate, recordById, ACCESS_LABELS});
 })();

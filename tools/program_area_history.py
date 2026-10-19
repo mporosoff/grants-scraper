@@ -64,6 +64,9 @@ def checkpoint(repository, run, rows, attempt, child, receipt, *, link=None, res
     linked_restore = link is not None and link.get('restored') is True
     documents = daily._reconciliation_documents(repository, run, state, names, complete_source=linked_restore)
     voucher, ledger, context = (documents[name] for name in names[:3])
+    from tools.program_area_revalidation import require_projection_kind, require_administrative_budget
+    kind = require_projection_kind(context, voucher, receipt)
+    require_administrative_budget(context, ledger)
     require(context.get('version') == VERSION and voucher.get('version') == VERSION
         and context.get('parent_candidate_id') == receipt['parent_candidate_id']
         and voucher.get('parent_candidate_id') == receipt['parent_candidate_id']
@@ -78,6 +81,8 @@ def checkpoint(repository, run, rows, attempt, child, receipt, *, link=None, res
         required = ('version', 'parent_candidate_id', 'parent_run', 'parent_attempt', 'parent_generation_sha',
             'parent_manifest_sha256', 'parent_producer', 'parent_artifact', 'original_spend',
             'operation_contract', 'audit_at', 'operation_sha256')
+        if kind == 'administrative_submission':
+            required += ('projection_kind', 'retained_requests')
         require(all(key in context and context[key] == receipt.get(key) for key in required)
             and context.get('completed_candidate_id') == child['candidate_id']
             and documents[candidate_path] == child and identity(ledger) == receipt['ledger_sha256'],
@@ -99,6 +104,7 @@ def checkpoint(repository, run, rows, attempt, child, receipt, *, link=None, res
             source_id = context.get('completed_candidate_id')
             source = documents.get('complete-candidates/' + str(source_id) + '/candidate.json', {})
             prior = source.get(FIELD) or {}; owner = prior.get('affected_generation') or {}
+            require_projection_kind(context, prior)
             require(canonical(source) and source.get('candidate_id') == source_id
                 and source.get('derived_from_candidate') == receipt['parent_candidate_id']
                 and prior.get('operation_sha256') == context['operation_sha256']

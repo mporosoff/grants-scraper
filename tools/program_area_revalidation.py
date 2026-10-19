@@ -48,16 +48,76 @@ MAX_SECONDS = 960
 PARENT_VECTOR_RECEIPT_SHA256 = '915c49a3da9e8c3a91421e9dac4d7011acc02ebd596a2f64c4391c95720ca660'
 DERIVED_KEYS = {'topic_areas', 'document_program_areas', 'document_search_text'}
 MODERN_VERSION = 'program-area-revalidation-modern-1'
+PROJECTION_KINDS = frozenset({'program_area', 'administrative_submission'})
 MODERN_OPERATION_FILES = ('tools/program_area_revalidation.py', 'tools/program_area_release.py',
     'scripts/extract_document_evidence.py', 'scripts/build_feeds.py',
     'tools/build_search_release_package.mjs', 'tools/run_budgeted_vectors.mjs',
     'tools/catalog_reconcile_spend.py', 'tools/embedding_contract.mjs',
     '.github/workflows/refresh-opportunities.yml')
+ADMINISTRATIVE_INPUTS = ('tools/administrative_submission_revalidation.py',
+    'scripts/submission_schedule.py', 'scripts/build_catalog.py', 'scripts/currentness.py',
+    'assets/submission-schedule.js', 'assets/search-retrieval.js', 'tools/run_search_diagnosis.mjs')
 
 
 def require(ok, reason):
     if not ok:
         raise ValueError('program_area_revalidation_' + reason)
+
+
+def projection_kind(value=None):
+    """Old checkpoints retain their program-area meaning without relabelling."""
+    selected = value.get('projection_kind', 'program_area') if isinstance(value, dict) else (
+        'program_area' if value is None else value)
+    require(isinstance(selected, str) and selected in PROJECTION_KINDS, 'projection_kind')
+    return selected
+
+
+def require_projection_kind(*values):
+    kinds = {projection_kind(value) for value in values}
+    require(len(kinds) == 1, 'projection_kind_mismatch')
+    return kinds.pop()
+
+
+def modern_projection(parent_root, audit_at, identifier, kind):
+    kind = projection_kind(kind)
+    if kind == 'administrative_submission':
+        from tools.administrative_submission_revalidation import projection as administrative_projection
+        return administrative_projection(parent_root, audit_at, identifier)
+    return projection(parent_root, audit_at, identifier)
+
+
+def retained_requests(ledger):
+    return {'count': len(ledger['requests']), 'sha256': identity(ledger['requests']),
+        'charged_microusd': sum(row['charged_microusd'] for row in ledger['requests'])}
+
+
+def require_administrative_budget(value, ledger):
+    if projection_kind(value) == 'administrative_submission':
+        saved = value.get('retained_requests') or {}
+        rows = ledger.get('requests')
+        count = saved.get('count')
+        require(isinstance(rows, list) and type(count) is int and 0 <= count <= len(rows)
+            and saved == retained_requests({'requests': rows[:count]}),
+            'administrative_original_request_prefix')
+        require(ledger.get('logical_id') == 'offline-' + value['parent_run']
+            and ledger.get('limit_microusd') == 2_000_000 and ledger.get('max_requests') == 300
+            and len(rows) <= 300, 'administrative_original_allowance')
+        for row in rows[count:]:
+            # The shared vector bridge remains the sole dispatcher and seals
+            # accepted outputs against its durable intents/responses. Source,
+            # document and team calls cannot join this continuation's ledger.
+            require(row.get('provider') == 'voyage' and row.get('model') == 'voyage-4-lite'
+                and row.get('stage') == 'reconciled_vectors'
+                and re.fullmatch('[a-f0-9]{32}', str(row.get('id', '')))
+                and re.fullmatch('[a-f0-9]{64}', str(row.get('key', '')))
+                and type(row.get('charged_microusd')) is int
+                and type(row.get('reserved_microusd')) is int
+                and 0 <= row['charged_microusd'] <= row['reserved_microusd']
+                and (row.get('status') != 'reserved_unknown'
+                     or row['charged_microusd'] == row['reserved_microusd']),
+                'administrative_vector_only_append')
+        require(sum(row['charged_microusd'] for row in rows) <= ledger['limit_microusd'],
+            'administrative_original_allowance')
 
 
 def sha(raw):
@@ -489,15 +549,24 @@ def modern_prefix(identifier):
     return 'offline-ai-program-area-' + identifier
 
 
-def modern_contract(root):
-    return hashes(root, MODERN_OPERATION_FILES)
+def modern_contract(root, kind='program_area'):
+    names = MODERN_OPERATION_FILES
+    if projection_kind(kind) == 'administrative_submission':
+        names += ADMINISTRATIVE_INPUTS
+    return hashes(root, names)
 
 
-def modern_scope(root, original):
+def modern_scope(root, original, kind='program_area'):
     from tools.release_dependencies import snapshot, changed_groups
     changes = changed_groups(original['dependency_groups'], snapshot(root))
-    require(set(changes.get('source', [])) <= {'scripts/extract_document_evidence.py'}
-        and not changes.get('teams') and not changes.get('semantic'), 'modern_extractor_only_change')
+    allowed = {'scripts/extract_document_evidence.py'}
+    administrative = projection_kind(kind) == 'administrative_submission'
+    if administrative:
+        allowed.update({'scripts/submission_schedule.py', 'scripts/currentness.py'})
+    require(set(changes.get('source', [])) <= allowed
+        and not changes.get('teams') and set(changes.get('semantic', [])) <= (
+            {'assets/submission-schedule.js', 'assets/search-retrieval.js', 'tools/run_search_diagnosis.mjs'}
+            if administrative else set()), 'modern_extractor_only_change')
     candidate.git(root, 'merge-base', '--is-ancestor', original['generation_sha'], 'HEAD')
 
 
@@ -673,7 +742,7 @@ def modern_original(parent, state, repository, run, identifier, api, root):
     return original, spending, modern_producer(producer), parent_pin
 
 
-def modern_history(parent, state, root, repository, run, identifier, api):
+def modern_history(parent, state, root, repository, run, identifier, api, kind='program_area'):
     """Restore the newest paired task checkpoint, never an earlier allowance."""
     from tools.fetch_release_artifact import repository_artifacts, run_artifacts
     from tools.catalog_reconcile import request_identity
@@ -701,6 +770,7 @@ def modern_history(parent, state, root, repository, run, identifier, api):
         'modern_reservation_binding')
     modern_unpack(modern_packet(repository, producer, selected, api), state)
     value = context(state)
+    require_projection_kind(kind, value, reservation)
     require(value['version'] == MODERN_VERSION and value['parent_candidate_id'] == identifier
         and value['parent_run'] == str(run)
         and value['parent_manifest_sha256'] == sha((Path(parent)/'candidate.json').read_bytes())
@@ -708,6 +778,7 @@ def modern_history(parent, state, root, repository, run, identifier, api):
     authenticate_public_parent(parent, value, repository, api, root=root)
     hydrate_public_bundle(Path(state)/'parent-candidate', candidate.load(parent, identifier), [parent])
     ledger = read(Path(state)/'ledger.json')
+    require_administrative_budget(value, ledger)
     link = {'producer': modern_producer(producer),
         'reservation': {'id': latest['id'], 'name': latest['name'], 'sha256': latest['digest'].removeprefix('sha256:')},
         'state': {'id': selected['id'], 'name': selected['name'], 'sha256': selected['digest'].removeprefix('sha256:')},
@@ -723,6 +794,7 @@ def modern_history(parent, state, root, repository, run, identifier, api):
         require(loaded.get('candidate_id') == child and loaded.get('derived_from_candidate') == identifier
             and loaded.get('program_area_revalidation', {}).get('operation_sha256') == value['operation_sha256'],
             'modern_completed_child')
+        require_projection_kind(value, loaded['program_area_revalidation'])
         available = [r for r in run_artifacts(producer_run, api, repository=repository) if r['name'] == 'candidate-' + child]
         require(len(available) <= 1, 'modern_completed_child_ambiguity')
         if available:
@@ -836,6 +908,8 @@ def modern_native_vectors(root, state, parent, original, value, packet):
 
 
 def _modern_receipt(value, original, outputs, changes, ledger, consumed):
+    projection_kind(value)
+    require_administrative_budget(value, ledger)
     return {k: v for k, v in value.items() if k != 'completed_candidate_id'} | {
         'projection': changes, 'projection_hashes': {n: sha(raw) for n, raw in outputs.items()},
         'retained_hashes': {n: h for n, h in original['generation_files'].items()
@@ -845,22 +919,25 @@ def _modern_receipt(value, original, outputs, changes, ledger, consumed):
 
 
 def prepare_modern(parent_bundle, receipt_path, state, parent_run, parent_id, *, root=ROOT,
-                   api=auth.existing.api, output=None):
+                   api=auth.existing.api, output=None, projection_kind='program_area'):
     from tools import catalog_reconcile_spend as spend
     require(re.fullmatch('[1-9][0-9]*', str(parent_run)) and state is not None, 'modern_exact_run_and_state')
+    kind = require_projection_kind(projection_kind)
     modern_prefix(parent_id)
     root, parent, state = Path(root), Path(parent_bundle), Path(state)
     require(not state.exists() or not any(state.iterdir()), 'modern_fresh_local_state')
-    original = candidate.load(parent, parent_id); modern_scope(root, original)
+    original = candidate.load(parent, parent_id); modern_scope(root, original, kind)
     repository = os.environ['GITHUB_REPOSITORY']
-    value = modern_history(parent, state, root, repository, parent_run, parent_id, api)
+    value = modern_history(parent, state, root, repository, parent_run, parent_id, api, kind)
     if value is None:
         original, spending, producer, artifact = modern_original(parent, state, repository, parent_run, parent_id, api, root)
         value = {'version': MODERN_VERSION, 'parent_candidate_id': parent_id, 'parent_run': str(parent_run),
             'parent_attempt': original['generation_run_attempt'], 'parent_generation_sha': original['generation_sha'],
             'parent_manifest_sha256': sha((parent/'candidate.json').read_bytes()), 'parent_producer': producer,
-            'parent_artifact': artifact, 'original_spend': spending, 'operation_contract': modern_contract(root),
+            'parent_artifact': artifact, 'original_spend': spending, 'operation_contract': modern_contract(root, kind),
             'audit_at': datetime.now(timezone.utc).isoformat()}
+        if kind == 'administrative_submission':
+            value.update(projection_kind=kind, retained_requests=retained_requests(read(state/'ledger.json')))
         value['operation_sha256'] = identity(value)
         atomic_json(state/'reconciliation.json', value); atomic_json(state/'consumed-checkpoints.json', [])
         shutil.copytree(parent, state/'parent-candidate')
@@ -869,16 +946,19 @@ def prepare_modern(parent_bundle, receipt_path, state, parent_run, parent_id, *,
         if value.get('completed_candidate_id'):
             complete = state/'complete-candidates'/value['completed_candidate_id']
             child = candidate.load(complete)
+            require_projection_kind(kind, value, child['program_area_revalidation'])
             try:
                 candidate.verify_dependencies(root, child)
             except ValueError:
-                require(value['operation_contract'].get('scripts/extract_document_evidence.py') !=
-                    modern_contract(root)['scripts/extract_document_evidence.py'], 'modern_completed_use_named_runtime_resume')
+                sources = ('scripts/extract_document_evidence.py', *ADMINISTRATIVE_INPUTS) if kind == 'administrative_submission' else (
+                    'scripts/extract_document_evidence.py',)
+                require(any(value['operation_contract'].get(name) != modern_contract(root, kind).get(name)
+                    for name in sources), 'modern_completed_use_named_runtime_resume')
                 receipt = child['program_area_revalidation']
                 require(receipt['affected_generation']['generation_run_id'] != os.environ['GITHUB_RUN_ID'],
                     'modern_changed_child_requires_new_dispatch')
                 value = {k: v for k, v in value.items() if k not in {'completed_candidate_id', 'operation_sha256'}}
-                value['operation_contract'] = modern_contract(root); value['audit_at'] = datetime.now(timezone.utc).isoformat()
+                value['operation_contract'] = modern_contract(root, kind); value['audit_at'] = datetime.now(timezone.utc).isoformat()
                 value['operation_sha256'] = identity(value); atomic_json(state/'reconciliation.json', value)
             else:
                 require(output is not None, 'modern_completed_output_required')
@@ -891,12 +971,13 @@ def prepare_modern(parent_bundle, receipt_path, state, parent_run, parent_id, *,
                     'artifact_run': native[-1]['producer']['run_id'] if native else os.environ['GITHUB_RUN_ID'],
                     'upload_candidate': 'false' if native else 'true',
                     'state_artifact': modern_prefix(parent_id) + '-state-' + os.environ['GITHUB_RUN_ID'] + '-' + os.environ['GITHUB_RUN_ATTEMPT']}
-        if value['operation_contract'] != modern_contract(root):
+        if value['operation_contract'] != modern_contract(root, kind):
             value = {k: v for k, v in value.items() if k != 'operation_sha256'}
-            value['operation_contract'] = modern_contract(root)
+            value['operation_contract'] = modern_contract(root, kind)
             value['operation_sha256'] = identity(value); atomic_json(state/'reconciliation.json', value)
     spend.import_history(state, parent, value['original_spend']['ledger_sha256'])
-    outputs, changes = projection(parent/'files', value['audit_at'], parent_id)
+    require_administrative_budget(value, read(state/'ledger.json'))
+    outputs, changes = modern_projection(parent/'files', value['audit_at'], parent_id, kind)
     for name in managed_feed_names(root) - set(outputs):
         require(FACET_FEED.fullmatch(name), 'modern_obsolete_feed_scope'); candidate.checked_path(root, name).unlink()
     for name in original['generation_files']:
@@ -917,6 +998,8 @@ def prepare_modern(parent_bundle, receipt_path, state, parent_run, parent_id, *,
     reservation = {'version': MODERN_VERSION, 'parent_candidate_id': parent_id,
         'operation_sha256': value['operation_sha256'], 'producer_run': str(current['id']),
         'producer_attempt': str(current['run_attempt']), 'prior_ledger_sha256': identity(ledger)}
+    if kind == 'administrative_submission':
+        reservation['projection_kind'] = kind
     atomic_json(state/'reservation.json', reservation)
     reservation_path = state.parent/(state.name + '-reservation')/'reservation.json'
     atomic_json(reservation_path, reservation)
@@ -930,8 +1013,10 @@ def checkpoint_modern(receipt_path, state, *, root=ROOT, write=True):
     from tools import catalog_reconcile_spend as spend
     state, root = Path(state), Path(root); value = spend.context(state)
     receipt = read(receipt_path); original = candidate.load(state/'parent-candidate', value['parent_candidate_id'])
+    kind = require_projection_kind(value, receipt)
+    require_administrative_budget(value, read(state/'ledger.json'))
     require(receipt['operation_sha256'] == value['operation_sha256']
-        and value['operation_contract'] == modern_contract(root), 'modern_checkpoint_operation')
+        and value['operation_contract'] == modern_contract(root, kind), 'modern_checkpoint_operation')
     packet = vector_packet(root); inputs = read(state/'program-vector-inputs.json')
     require(spend.vector_binding(packet) == spend.vector_binding(inputs['packet']) and packet['retained_asset_eligible'],
         'modern_complete_current_corpus')
@@ -946,6 +1031,7 @@ def checkpoint_modern(receipt_path, state, *, root=ROOT, write=True):
         proof = {'classification': 'budgeted', 'accounting_origin': completed['accounting_origin'],
             'completion_sha256': sha((state/'vector-completions'/(value['operation_sha256']+'.json')).read_bytes())}
     ledger = spend.ledger(state).read()
+    require_administrative_budget(value, ledger)
     from tools.catalog_reconcile import request_identity
     for link in receipt['consumed_checkpoints']:
         count = link['request_count']
@@ -966,12 +1052,13 @@ def verify_modern_inputs(root, original, receipt_path, *, api=auth.existing.api)
     require(candidate.load(parent, value['parent_candidate_id']) == original
         and value['version'] == MODERN_VERSION and value['parent_manifest_sha256'] == sha((parent/'candidate.json').read_bytes()),
         'modern_constructor_original')
-    modern_scope(root, original)
+    kind = require_projection_kind(value, read(receipt_path))
+    modern_scope(root, original, kind)
     import_history(state, parent, value['original_spend']['ledger_sha256'])
     saved = read(receipt_path)
     require(checkpoint_modern(receipt_path, state, root=root, write=False) == saved,
         'modern_constructor_receipt_sealed')
-    outputs, changes = projection(parent/'files', value['audit_at'], value['parent_candidate_id'])
+    outputs, changes = modern_projection(parent/'files', value['audit_at'], value['parent_candidate_id'], kind)
     base = _modern_receipt(value, original, outputs, changes, read(state/'ledger.json'), read(state/'consumed-checkpoints.json'))
     require(all(saved.get(k) == v for k, v in base.items()), 'modern_deterministic_projection_receipt')
     require(hashes(root, outputs) == saved['projection_hashes']
@@ -982,6 +1069,7 @@ def verify_modern_inputs(root, original, receipt_path, *, api=auth.existing.api)
 def record_modern_candidate(state, bundle):
     from tools.catalog_reconcile_spend import context
     state = Path(state); value = context(state); child = candidate.load(bundle)
+    require_projection_kind(value, child.get('program_area_revalidation', {}))
     require(child.get('derived_from_candidate') == value['parent_candidate_id']
         and child.get('program_area_revalidation', {}).get('operation_sha256') == value['operation_sha256'],
         'modern_record_completed_candidate')
@@ -1004,13 +1092,16 @@ def main():
     parser.add_argument('--parent-run')
     parser.add_argument('--parent-id')
     parser.add_argument('--output', type=Path)
+    parser.add_argument('--projection-kind', choices=sorted(PROJECTION_KINDS), default='program_area')
     args = parser.parse_args(); outputs = {'receipt_path': str(args.receipt)}
     if args.action == 'prepare':
         require(args.parent_bundle is not None, 'parent_bundle_required')
         if args.parent_id and args.parent_id != PARENT_CANDIDATE:
             outputs.update(prepare_modern(args.parent_bundle, args.receipt, args.state,
-                args.parent_run, args.parent_id, root=args.root, output=args.output))
+                args.parent_run, args.parent_id, root=args.root, output=args.output,
+                projection_kind=args.projection_kind))
         else:
+            require(args.projection_kind == 'program_area', 'legacy_projection_kind')
             prepare(args.parent_bundle, args.receipt, root=args.root)
     elif args.action == 'vectors-restore':
         require(args.state is not None, 'state_path_required')

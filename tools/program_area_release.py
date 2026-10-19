@@ -33,6 +33,10 @@ def plan(root, environment):
         raise ValueError("Program-area revalidation requires the exact retained candidate and protected manual workflow")
     if any(environment.get(k) for k in ("RECEIPT_RUN", "PUBLICATION_RUN", "PUBLICATION_ATTEMPT")) or environment.get("QUALIFICATION_PILOT") == "true":
         raise ValueError("Program-area revalidation cannot be combined with other recovery or team selectors")
+    selector = environment.get("REQUESTED_STAGE") or "program-area-revalidation"
+    if selector not in {"program-area-revalidation", "submission-revalidation"}:
+        raise ValueError("Cached evidence revalidation requires a named supported projection")
+    projection_kind = "administrative_submission" if selector == "submission-revalidation" else "program_area"
     run, identifier = environment.get("CANDIDATE_RUN", ""), environment.get("CANDIDATE_ID", "")
     if (not re.fullmatch(r"[1-9][0-9]*", run) or not re.fullmatch(r"[a-f0-9]{64}", identifier)
             or (run == str(recovery.PARENT_RUN)) != (identifier == recovery.PARENT_CANDIDATE)):
@@ -40,11 +44,15 @@ def plan(root, environment):
     # The historical policy stays isolated. Modern selectors are authenticated
     # against their native candidate and original budget before any work starts.
     mode = "legacy" if identifier == recovery.PARENT_CANDIDATE else "modern"
+    if mode == "legacy" and projection_kind != "program_area":
+        raise ValueError("Submission revalidation requires a modern native generation checkpoint")
     return {
         "stage": "program-area-revalidation", "release_sha": release.git(root, "rev-parse", "HEAD"),
-        "candidate_run": run, "candidate_id": identifier, "program_area_mode": mode,
+        "candidate_run": run, "candidate_id": identifier, "program_area_mode": mode, "projection_kind": projection_kind,
         "openai": "false", "anthropic": "false", "team_mode": "maintenance",
-        "reason": "Correct retained program-area evidence and its coherent vectors; preserve original source, document allowance and team outputs",
+        "reason": ("Correct retained administrative submission dates; preserve source, document and team work, and use only the original vector allowance when required"
+            if projection_kind == "administrative_submission" else
+            "Correct retained program-area evidence and its coherent vectors; preserve original source, document allowance and team outputs"),
     }
 
 
