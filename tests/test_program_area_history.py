@@ -31,6 +31,8 @@ class ModernHistory(unittest.TestCase):
             'operation_sha256': self.context['operation_sha256']}
         self.artifacts = [self.artifact(1, 'reservation'), self.artifact(2, 'state'),
             self.artifact(3, 'candidate')]
+        self.native_owner = deepcopy(self.run)
+        self.native_artifacts = deepcopy(self.artifacts)
         self.pointer = {'candidate_id': self.child['candidate_id'], 'artifact_run': '200'}
         self.state = {'reservation.json': self.voucher, 'ledger.json': self.ledger,
             'reconciliation.json': self.context,
@@ -39,6 +41,8 @@ class ModernHistory(unittest.TestCase):
         self.docs = patch.object(daily, '_reconciliation_documents', side_effect=self.documents).start()
         self.history = patch.object(daily, '_require_reconciliation_restore_history').start()
         patch.object(daily.c, 'git', side_effect=self.git).start()
+        patch.object(daily, 'api', return_value=json.dumps(self.native_owner)).start()
+        patch.object(daily, 'run_artifacts', return_value=self.native_artifacts).start()
         self.addCleanup(patch.stopall)
 
     def artifact(self, identifier, role, attempt=1):
@@ -123,6 +127,68 @@ class ModernHistory(unittest.TestCase):
             self.assertTrue(self.retire())
             restored.assert_called_once()
         self.assertEqual(self.receipt['affected_generation']['generation_run_id'], '200')
+
+    def state_only_restorer(self):
+        self.run.update(id=201)
+        self.artifacts = [dict(self.artifact(4, 'state'), name=f'{h.prefix("b"*64)}-state-201-1')]
+        self.assertEqual(self.pointer['artifact_run'], '200')
+        self.assertEqual(self.receipt['consumed_checkpoints'], [])
+
+    def test_state_only_restorer_needs_no_future_public_receipt_link(self):
+        self.state_only_restorer()
+        with patch.object(h, 'completed_restore') as restored:
+            self.assertTrue(self.retire())
+            restored.assert_called_once()
+        self.assertEqual(self.history.call_args.args[3][0]['state_id'], 4)
+        self.assertEqual(self.receipt['affected_generation']['generation_run_id'], '200')
+
+    def test_state_only_restorer_does_not_hold_the_next_daily_run(self):
+        self.state_only_restorer()
+        def pages(repository, path, key):
+            return iter([[self.run, dict(self.run, id=100)]]) if key == 'workflow_runs' else iter([[]])
+        with patch.object(h, 'completed_restore'), patch.object(daily, '_pages', side_effect=pages), \
+                patch.object(daily, 'run_artifacts', side_effect=lambda run, *a, **k:
+                    self.artifacts if int(run) == 201 else self.native_artifacts), \
+                patch.object(daily, '_published', return_value={('200', self.child['candidate_id'])}), \
+                patch.object(daily, '_published_reconciliation_consumes', return_value=False), \
+                patch('tools.runtime_assembly_history.no_generation_allowance', return_value=False):
+            self.assertIsNone(daily.prior_generation('.', {'GITHUB_REPOSITORY': 'owner/repo',
+                'GITHUB_RUN_ID': '300'}, {'generation_run_id': '100'}))
+
+    def test_state_only_restorer_still_authenticates_original_native_voucher(self):
+        self.state_only_restorer()
+        original = self.documents
+        def documents(repository, run, artifact, names, **kwargs):
+            result = original(repository, run, artifact, names, **kwargs)
+            if artifact['id'] == 1:
+                result['reservation.json']['prior_ledger_sha256'] = '9'*64
+            return result
+        with patch.object(h, 'completed_restore'), patch.object(daily, '_reconciliation_documents', side_effect=documents):
+            with self.assertRaisesRegex(daily.Hold, 'original reservation'):
+                self.retire()
+
+    def test_state_only_restorer_cannot_hide_new_allowance_or_foreign_state(self):
+        for role in ('reservation', 'foreign-state'):
+            with self.subTest(role=role):
+                self.state_only_restorer()
+                extra = self.artifact(5, 'reservation' if role == 'reservation' else 'state')
+                extra['name'] = (f'{h.prefix("b"*64)}-reservation-201-1' if role == 'reservation'
+                    else f'{h.prefix("9"*64)}-state-201-1')
+                self.artifacts.append(extra)
+                with patch.object(h, 'completed_restore'):
+                    with self.assertRaises(daily.Hold):
+                        self.retire()
+
+    def test_state_only_restorer_rejects_changed_ledger_or_executed_generation(self):
+        self.state_only_restorer()
+        self.ledger['requests'] = [{'charged_microusd': 1}]
+        with patch.object(h, 'completed_restore'):
+            with self.assertRaisesRegex(daily.Hold, 'exact completed child'):
+                self.retire()
+        self.ledger['requests'] = []
+        with patch.object(h, 'completed_restore', side_effect=ValueError('generation executed')):
+            with self.assertRaisesRegex(daily.Hold, 'generation executed'):
+                self.retire()
 
     def test_actual_workflow_restoration_guards_are_authenticated(self):
         workflow = yaml.safe_load((h.c.ROOT/h.WORKFLOW).read_text(encoding='utf8'))

@@ -113,7 +113,7 @@ def checkpoint(repository, run, rows, attempt, child, receipt, *, link=None, res
     require(re.fullmatch('[a-f0-9]{64}', str(voucher.get('prior_ledger_sha256', ''))) is not None,
         'prior logical ledger identity')
     reservation = None
-    if linked_restore:
+    if linked_restore or restored:
         require(not any(row['name'] == f'{family}-reservation-{run["id"]}-{attempt}' for row in rows),
             'consumed restore allocated new work')
         original_run = json.loads(daily.api(repository, 'actions/runs/' + voucher['producer_run']))
@@ -121,18 +121,17 @@ def checkpoint(repository, run, rows, attempt, child, receipt, *, link=None, res
             api=lambda path: daily.api(repository, path))
         originals = daily.run_artifacts(original_run['id'], lambda path: daily.api(repository, path), repository=repository)
         reservation = selected(originals,
-            f'{family}-reservation-{voucher["producer_run"]}-{voucher["producer_attempt"]}', link['reservation'])
+            f'{family}-reservation-{voucher["producer_run"]}-{voucher["producer_attempt"]}',
+            link['reservation'] if linked_restore else None)
         require(daily._reconciliation_documents(repository, original_run, reservation,
             ['reservation.json'])['reservation.json'] == voucher, 'consumed original reservation')
+        if restored:
+            completed_restore(repository, run, meta)
     elif not restored:
         reservation = selected(rows, f'{family}-reservation-{run["id"]}-{attempt}',
             link.get('reservation') if link else None)
         require(daily._reconciliation_documents(repository, run, reservation,
             ['reservation.json'])['reservation.json'] == voucher, 'paired reservation')
-    else:
-        require(not any(row['name'] == f'{family}-reservation-{run["id"]}-{attempt}' for row in rows),
-            'restore allocated new work')
-        completed_restore(repository, run, meta)
     return producer(meta), state, reservation, ledger
 
 
@@ -236,7 +235,9 @@ def published_consumes(root, run, artifacts, *, repository):
             pointer = json.loads(c.git(root, 'show', revision + ':release/candidate-source.json'))
             own = affected.get('generation_run_id') == str(run['id'])
             transport = pointer.get('artifact_run') == str(run['id'])
-            if not own and not links and not transport:
+            restoring = any(re.fullmatch(re.escape(prefix(receipt['parent_candidate_id']))
+                + '-state-' + str(run['id']) + '-[1-9][0-9]*', row['name']) for row in artifacts)
+            if not own and not links and not transport and not restoring:
                 continue
             require(repository and run.get('status') == 'completed' and run.get('path') == WORKFLOW
                 and run.get('head_branch') == 'main' and run.get('event') == 'workflow_dispatch', 'native owner')
