@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml</id>
-  <updated>2026-10-19T00:51:20Z</updated>
+  <updated>2026-10-19T01:16:13Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Single Source: Scalable and Systematic Neurobiology of Psychiatric and Neurodevelopmental Disorder Risk Genes: Data Resource and Administrative Coordination Center (U24 Clinical Trial Not Allowed)</title>
@@ -123,7 +123,19 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Environmental science"/>
     <category term="Space and aeronautics"/>
+    <category term="Data science"/>
     <summary>National Geospatial-Intelligence Agency | Preproposal 2026-10-28 | Develop AI/ML methods to extract and classify 3D surface/subsurface objects using NASA ICESat-2 and GEDI lidar, including navigation safety applications. Topic7 LASER only, not BIG-ST parent or closed topics. General Solicitation Rev4 governs eligibility and abstract prerequisites; October16 Topic7 revision governs current dates, Phase2 label and corrected PD&gt;75% metric. CUI safeguards; foreign na…</summary>
+  </entry>
+  <entry>
+    <title>A Study on Vessel Design Challenge</title>
+    <link href="https://sam.gov/opp/7d63d061eb82403c8b6b4afb9afca040/view"/>
+    <id>urn:funding-finder:sam-gov:sam-gov%3A7d63d061eb82403c8b6b4afb9afca040</id>
+    <updated>2026-10-16T00:00:00Z</updated>
+    <author><name>U.S. Department of Transportation - Maritime Administration (MARAD)</name></author>
+    <category term="Energy"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>U.S. Department of Transportation - Maritime Administration (MARAD) | Full Application 2027-01-10 | Scientific and engineering vessel-design study combining hydrodynamics, propulsion, energy efficiency, cost analysis, and underwater radiated-noise reduction. Domestic institutions eligible; preference for US-company/US-flag team leads is evaluative, not an exclusion. An organization can join multiple teams but may lead only one proposal; no identical teams rotating leads. SAM registration/current…</summary>
   </entry>
   <entry>
     <title>NLM Institutional Grants for Research Training in Biomedical Informatics, Data Science, and AI (T15 Independent Clinical Trial Not Allowed)</title>
@@ -730,16 +742,5 @@ Successful candidates for a Fellowship generally have a strong record of signifi
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <summary>National Highway Traffic Safety Administration | Application 2027-09-01 | While the agency will consider innovative enhancements to existing countermeasures, the goal is to develop evidence-based projects that are scalable and transferable for use by State and local law enforcement agencies. The primary intent of this of the ITSE Grant Program is to 1) develop innovative traffic safety enforcement programs that demonstrate effectiveness by reducing the number of motor v…</summary>
-  </entry>
-  <entry>
-    <title>Unlocking Dataset Value for AI-Enabled Scientific Discovery (AI Datasets)</title>
-    <link href="https://www.grants.gov/search-results-detail/363268"/>
-    <id>urn:funding-finder:grants-gov:363268</id>
-    <updated>2026-07-21T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Technology development"/>
-    <category term="Data science"/>
-    <summary>U.S. National Science Foundation | Application 2026-11-04 | This program will advance scientific community datasets to enable scientific discovery and innovation using artificial intelligence (AI) and other methods. Its goal is to increase the value that can be derived from existing scientific datasets by leveraging novel methods and artificial intelligence (AI). This will unlock new AI-driven insights. It can enable interdisciplinary research. It also ena…</summary>
   </entry>
 </feed>

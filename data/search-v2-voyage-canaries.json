@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-18T19:41:20.555Z",
+  "generated_at": "2026-10-19T01:18:44.280Z",
   "canary_set_version": 1,
   "model_alias": "voyage-4-lite",
   "response_model": "voyage-4-lite",
@@ -14,9 +14,9 @@
   "reuse_permitted": false,
   "batch_space_checks": [
     {
-      "exact_match": false,
-      "minimum_cosine": 0.999958,
-      "mean_cosine": 0.999971,
+      "exact_match": true,
+      "minimum_cosine": 1,
+      "mean_cosine": 1,
       "gross_discontinuity": false
     },
     {
@@ -34,13 +34,13 @@
     {
       "exact_match": false,
       "minimum_cosine": 0.999971,
-      "mean_cosine": 0.999987,
+      "mean_cosine": 0.999991,
       "gross_discontinuity": false
     },
     {
       "exact_match": false,
-      "minimum_cosine": 0.999971,
-      "mean_cosine": 0.999987,
+      "minimum_cosine": 0.99996,
+      "mean_cosine": 0.99997,
       "gross_discontinuity": false
     },
     {
@@ -51,8 +51,8 @@
     }
   ],
   "comparison_to_prior_generation": {
-    "prior_fingerprint": "c4d3be4b72e33661569455ec63b787810c60e206970d52211a6a01279ab2afb5",
-    "drift_detected": true,
+    "prior_fingerprint": "9fc4a9ad41ec58b792f109ab06321853e19793256e2dcd021033e2f4b827f71b",
+    "drift_detected": false,
     "minimum_cosine": 1,
     "mean_cosine": 1,
     "per_canary_cosine": {

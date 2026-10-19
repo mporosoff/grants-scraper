@@ -76,11 +76,11 @@ verified. Degradation exits visibly and opens or updates an owner-facing GitHub
 issue. UR InfoReady is a disabled shell pending a stable permissioned route.
 
 <!-- catalog-summary:start -->
-The October 17, 2026 build contains 1,308 open or current forecasted funding
-opportunities (974 posted and 334 forecasted) rather than the former 48-record
+The October 19, 2026 build contains 1,307 open or current forecasted funding
+opportunities (974 posted and 333 forecasted) rather than the former 48-record
 engineering shortlist. It contains no record with a deadline before the catalog date.
 Current published sources are ARPA-H (9), DARPA / IARPA research solicitations (3),
-Grants.gov (1,192), NASA ROSES (2), NYSERDA (42), National Science Foundation (2),
+Grants.gov (1,191), NASA ROSES (2), NYSERDA (42), National Science Foundation (2),
 SAM.gov (41), U.S. National Science Foundation (1), VPR funding digest (limited
 submissions & foundations) (16); additional sources are enabled only after a sustainable
 public ingestion path and health bounds are verified.
@@ -603,14 +603,14 @@ presented as the FOA.
 ### Current evidence baseline
 
 <!-- catalog-evidence:start -->
-The October 17, 2026 catalog contains 1,308 current posted or forecasted opportunities:
+The October 19, 2026 catalog contains 1,307 current posted or forecasted opportunities:
 
 - 204 have a defensible direct announcement attachment (150 high confidence, 54 medium
   confidence);
 - another 618 use an official source page as their primary route;
-- the remaining 486 use the official Grants.gov record as their primary route;
+- the remaining 485 use the official Grants.gov record as their primary route;
 - 703 contain an agency notice URL across all route types;
-- 368 preserve an official deadline time or timezone;
+- 370 preserve an official deadline time or timezone;
 - 118 carry a preliminary-stage signal, including 3 narrative dates visibly marked for
   verification;
 - 571 (43.7%) have an official per-award floor or ceiling;

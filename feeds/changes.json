@@ -1,8 +1,867 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-19T00:51:31Z",
+  "generated_at": "2026-10-19T01:18:15Z",
   "retention_days": 90,
   "events": [
+    {
+      "id": "d11a70de88103ca694cf",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-10-19T01:14:30.193874Z",
+      "opportunity_id": "357250",
+      "detail": "Deadline 2026-11-18",
+      "record": {
+        "opportunity_id": "357250",
+        "opportunity_number": "RFA-DA-26-034",
+        "title": "Chemical Countermeasures Research Program (CCRP) Initiative: Basic Research on The Deleterious Effects of Acute Exposure to Ultra-Potent Synthetic (UPS) Opioids (R01 Clinical Trial Not Allowed)",
+        "agency": "National Institutes of Health",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2024-11-20",
+        "close_date": "2027-11-18",
+        "deadlines": [
+          {
+            "kind": "application",
+            "date": "2027-11-18",
+            "time": "5:00 PM",
+            "timezone": "applicant_local",
+            "note": null,
+            "estimated": false,
+            "source": "Grants.gov XML extract",
+            "source_url": "https://www.grants.gov/search-results-detail/357250",
+            "source_field": "CloseDate",
+            "confidence": "official_structured",
+            "detail_checked_at": "2026-08-03T13:20:57.268810Z",
+            "document_evidence_id": "evidence-357250-c13e0506ab5d",
+            "document_confidence": "machine_extracted_needs_verification",
+            "document_source_fields": {
+              "time": {
+                "present": true,
+                "value": null
+              },
+              "timezone": {
+                "present": true,
+                "value": null
+              },
+              "stage": {
+                "present": false,
+                "value": null
+              },
+              "application_class": {
+                "present": false,
+                "value": null
+              },
+              "clock_citation": {
+                "present": false,
+                "value": null
+              }
+            },
+            "stage": "application",
+            "application_class": "new",
+            "clock_citation": {
+              "citation_url": "https://grants.nih.gov/grants/guide/rfa-files/RFA-DA-26-034.html",
+              "document_name": null,
+              "document_url": "https://grants.nih.gov/grants/guide/rfa-files/RFA-DA-26-034.html",
+              "extracted_at": "2026-09-29T16:35:06.494892Z",
+              "location": "section “Key Dates”",
+              "page": null,
+              "quote": "…vember 18, 2026 | November 18, 2026 | Not Applicable | March 2027 | May 2027 | July 2027 November 18, 2027 | November 18, 2027 | Not Applicable | March 2028 | May 2028 | July 2028 All applications are due by 5:00 PM local time of applicant organization. Applicants are encouraged to apply early to allow adequate time to make any corrections to errors found…",
+              "section": "Key Dates",
+              "sha256": "c0b111bef7a347c35d34cc97cd8dfd2cff21b6508c306b0a2d8abf55b345ffeb",
+              "structural_reference": {
+                "block_id": "html-45",
+                "heading_path": [
+                  "Part 1. Overview Information",
+                  "Key Dates"
+                ],
+                "kind": "paragraph",
+                "source_position": [
+                  439,
+                  68
+                ]
+              }
+            }
+          },
+          {
+            "kind": "application",
+            "date": "2025-11-18",
+            "time": "5:00 PM",
+            "timezone": "applicant_local",
+            "estimated": false,
+            "source": "Official notice (machine extracted)",
+            "source_url": "https://grants.nih.gov/grants/guide/rfa-files/RFA-DA-26-034.html",
+            "confidence": "machine_extracted_needs_verification",
+            "evidence_id": "evidence-357250-794a2d36e1ca",
+            "required": null,
+            "subject": "submission",
+            "stage": "application",
+            "application_class": "new",
+            "cycle": null,
+            "track": null,
+            "obligation": "unknown",
+            "invitation_required": null,
+            "prerequisite": null,
+            "clock_citation": {
+              "citation_url": "https://grants.nih.gov/grants/guide/rfa-files/RFA-DA-26-034.html",
+              "document_name": null,
+              "document_url": "https://grants.nih.gov/grants/guide/rfa-files/RFA-DA-26-034.html",
+              "extracted_at": "2026-09-29T16:35:06.494892Z",
+              "location": "section “Key Dates”",
+              "page": null,
+              "quote": "…vember 18, 2026 | November 18, 2026 | Not Applicable | March 2027 | May 2027 | July 2027 November 18, 2027 | November 18, 2027 | Not Applicable | March 2028 | May 2028 | July 2028 All applications are due by 5:00 PM local time of applicant organization. Applicants are encouraged to apply early to allow adequate time to make any corrections to errors found…",
+              "section": "Key Dates",
+              "sha256": "c0b111bef7a347c35d34cc97cd8dfd2cff21b6508c306b0a2d8abf55b345ffeb",
+              "structural_reference": {
+                "block_id": "html-45",
+                "heading_path": [
+                  "Part 1. Overview Information",
+                  "Key Dates"
+                ],
+                "kind": "paragraph",
+                "source_position": [
+                  439,
+                  68
+                ]
+              }
+            },
+            "field_authority": "official_notice_field",
+            "parser_version": "submission-fields-21"
+          },
+          {
+            "kind": "application",
+            "date": "2026-11-18",
+            "time": "5:00 PM",
+            "timezone": "applicant_local",
+            "estimated": false,
+            "source": "Official notice (machine extracted)",
+            "source_url": "https://grants.nih.gov/grants/guide/rfa-files/RFA-DA-26-034.html",
+            "confidence": "machine_extracted_needs_verification",
+            "evidence_id": "evidence-357250-7442697ca9c8",
+            "required": null,
+            "subject": "submission",
+            "stage": "application",
+            "application_class": "new",
+            "cycle": null,
+            "track": null,
+            "obligation": "unknown",
+            "invitation_required": null,
+            "prerequisite": null,
+            "clock_citation": {
+              "citation_url": "https://grants.nih.gov/grants/guide/rfa-files/RFA-DA-26-034.html",
+              "document_name": null,
+              "document_url": "https://grants.nih.gov/grants/guide/rfa-files/RFA-DA-26-034.html",
+              "extracted_at": "2026-09-29T16:35:06.494892Z",
+              "location": "section “Key Dates”",
+              "page": null,
+              "quote": "…vember 18, 2026 | November 18, 2026 | Not Applicable | March 2027 | May 2027 | July 2027 November 18, 2027 | November 18, 2027 | Not Applicable | March 2028 | May 2028 | July 2028 All applications are due by 5:00 PM local time of applicant organization. Applicants are encouraged to apply early to allow adequate time to make any corrections to errors found…",
+              "section": "Key Dates",
+              "sha256": "c0b111bef7a347c35d34cc97cd8dfd2cff21b6508c306b0a2d8abf55b345ffeb",
+              "structural_reference": {
+                "block_id": "html-45",
+                "heading_path": [
+                  "Part 1. Overview Information",
+                  "Key Dates"
+                ],
+                "kind": "paragraph",
+                "source_position": [
+                  439,
+                  68
+                ]
+              }
+            },
+            "field_authority": "official_notice_field",
+            "parser_version": "submission-fields-21"
+          },
+          {
+            "kind": "application",
+            "date": "2026-11-18",
+            "time": "5:00 PM",
+            "timezone": "applicant_local",
+            "estimated": false,
+            "source": "Official notice (machine extracted)",
+            "source_url": "https://grants.nih.gov/grants/guide/rfa-files/RFA-DA-26-034.html",
+            "confidence": "machine_extracted_needs_verification",
+            "evidence_id": "evidence-357250-eb39e1f6f7f4",
+            "required": null,
+            "subject": "submission",
+            "stage": "application",
+            "application_class": "resubmission",
+            "cycle": null,
+            "track": null,
+            "obligation": "unknown",
+            "invitation_required": null,
+            "prerequisite": null,
+            "clock_citation": {
+              "citation_url": "https://grants.nih.gov/grants/guide/rfa-files/RFA-DA-26-034.html",
+              "document_name": null,
+              "document_url": "https://grants.nih.gov/grants/guide/rfa-files/RFA-DA-26-034.html",
+              "extracted_at": "2026-09-29T16:35:06.494892Z",
+              "location": "section “Key Dates”",
+              "page": null,
+              "quote": "…vember 18, 2026 | November 18, 2026 | Not Applicable | March 2027 | May 2027 | July 2027 November 18, 2027 | November 18, 2027 | Not Applicable | March 2028 | May 2028 | July 2028 All applications are due by 5:00 PM local time of applicant organization. Applicants are encouraged to apply early to allow adequate time to make any corrections to errors found…",
+              "section": "Key Dates",
+              "sha256": "c0b111bef7a347c35d34cc97cd8dfd2cff21b6508c306b0a2d8abf55b345ffeb",
+              "structural_reference": {
+                "block_id": "html-45",
+                "heading_path": [
+                  "Part 1. Overview Information",
+                  "Key Dates"
+                ],
+                "kind": "paragraph",
+                "source_position": [
+                  439,
+                  68
+                ]
+              }
+            },
+            "field_authority": "official_notice_field",
+            "parser_version": "submission-fields-21"
+          },
+          {
+            "kind": "application",
+            "date": "2027-11-18",
+            "time": "5:00 PM",
+            "timezone": "applicant_local",
+            "estimated": false,
+            "source": "Official notice (machine extracted)",
+            "source_url": "https://grants.nih.gov/grants/guide/rfa-files/RFA-DA-26-034.html",
+            "confidence": "machine_extracted_needs_verification",
+            "evidence_id": "evidence-357250-2f59edf0e630",
+            "required": null,
+            "subject": "submission",
+            "stage": "application",
+            "application_class": "resubmission",
+            "cycle": null,
+            "track": null,
+            "obligation": "unknown",
+            "invitation_required": null,
+            "prerequisite": null,
+            "clock_citation": {
+              "citation_url": "https://grants.nih.gov/grants/guide/rfa-files/RFA-DA-26-034.html",
+              "document_name": null,
+              "document_url": "https://grants.nih.gov/grants/guide/rfa-files/RFA-DA-26-034.html",
+              "extracted_at": "2026-09-29T16:35:06.494892Z",
+              "location": "section “Key Dates”",
+              "page": null,
+              "quote": "…vember 18, 2026 | November 18, 2026 | Not Applicable | March 2027 | May 2027 | July 2027 November 18, 2027 | November 18, 2027 | Not Applicable | March 2028 | May 2028 | July 2028 All applications are due by 5:00 PM local time of applicant organization. Applicants are encouraged to apply early to allow adequate time to make any corrections to errors found…",
+              "section": "Key Dates",
+              "sha256": "c0b111bef7a347c35d34cc97cd8dfd2cff21b6508c306b0a2d8abf55b345ffeb",
+              "structural_reference": {
+                "block_id": "html-45",
+                "heading_path": [
+                  "Part 1. Overview Information",
+                  "Key Dates"
+                ],
+                "kind": "paragraph",
+                "source_position": [
+                  439,
+                  68
+                ]
+              }
+            },
+            "field_authority": "official_notice_field",
+            "parser_version": "submission-fields-21"
+          }
+        ],
+        "submission_requirements": [],
+        "next_submission": {
+          "version": 2,
+          "as_of": "2026-10-19",
+          "application_class": "new",
+          "date": "2026-11-18",
+          "event": {
+            "kind": "application",
+            "date": "2026-11-18",
+            "time": "5:00 PM",
+            "timezone": "applicant_local",
+            "note": "…ision, as allowed | Scientific Merit Review | Advisory Council Review | Earliest Start Date November 18, 2025 | Not Applicable | Not Applicable | March 2026 | May 2026 | July 2026 November 18, 2026 | November 18, 2026 | Not Applicable | March 2027 | May 2027 | July 2027 November 18, 2027 | November 18, 2027 | Not Applicable | March 2028 | May 2028 | July 2…",
+            "estimated": false,
+            "source": "Official notice (machine extracted)",
+            "source_url": "https://grants.nih.gov/grants/guide/rfa-files/RFA-DA-26-034.html",
+            "confidence": "machine_extracted_needs_verification",
+            "evidence_id": "evidence-357250-7442697ca9c8",
+            "citation": {
+              "citation_url": "https://grants.nih.gov/grants/guide/rfa-files/RFA-DA-26-034.html",
+              "document_name": null,
+              "document_url": "https://grants.nih.gov/grants/guide/rfa-files/RFA-DA-26-034.html",
+              "extracted_at": "2026-09-29T16:35:06.494892Z",
+              "location": "section “Key Dates”",
+              "page": null,
+              "quote": "…ision, as allowed | Scientific Merit Review | Advisory Council Review | Earliest Start Date November 18, 2025 | Not Applicable | Not Applicable | March 2026 | May 2026 | July 2026 November 18, 2026 | November 18, 2026 | Not Applicable | March 2027 | May 2027 | July 2027 November 18, 2027 | November 18, 2027 | Not Applicable | March 2028 | May 2028 | July 2…",
+              "section": "Key Dates",
+              "sha256": "c0b111bef7a347c35d34cc97cd8dfd2cff21b6508c306b0a2d8abf55b345ffeb",
+              "structural_reference": {
+                "block_id": "html-43",
+                "column_header": "New",
+                "field_id": "table-1:3:0",
+                "field_label": "Application Due Dates: New",
+                "heading_path": [
+                  "Part 1. Overview Information",
+                  "Key Dates"
+                ],
+                "kind": "table_row",
+                "row": 3,
+                "source_position": [
+                  385,
+                  4
+                ],
+                "table_id": "table-1"
+              }
+            },
+            "required": null,
+            "subject": "submission",
+            "stage": "application",
+            "application_class": "new",
+            "cycle": null,
+            "track": null,
+            "obligation": "unknown",
+            "invitation_required": null,
+            "prerequisite": null,
+            "clock_citation": {
+              "citation_url": "https://grants.nih.gov/grants/guide/rfa-files/RFA-DA-26-034.html",
+              "document_name": null,
+              "document_url": "https://grants.nih.gov/grants/guide/rfa-files/RFA-DA-26-034.html",
+              "extracted_at": "2026-09-29T16:35:06.494892Z",
+              "location": "section “Key Dates”",
+              "page": null,
+              "quote": "…vember 18, 2026 | November 18, 2026 | Not Applicable | March 2027 | May 2027 | July 2027 November 18, 2027 | November 18, 2027 | Not Applicable | March 2028 | May 2028 | July 2028 All applications are due by 5:00 PM local time of applicant organization. Applicants are encouraged to apply early to allow adequate time to make any corrections to errors found…",
+              "section": "Key Dates",
+              "sha256": "c0b111bef7a347c35d34cc97cd8dfd2cff21b6508c306b0a2d8abf55b345ffeb",
+              "structural_reference": {
+                "block_id": "html-45",
+                "heading_path": [
+                  "Part 1. Overview Information",
+                  "Key Dates"
+                ],
+                "kind": "paragraph",
+                "source_position": [
+                  439,
+                  68
+                ]
+              }
+            },
+            "field_authority": "official_notice_field",
+            "parser_version": "submission-fields-21"
+          },
+          "access": "open",
+          "prerequisites": []
+        },
+        "source_aliases": null,
+        "last_updated": "2025-08-12",
+        "version": "Synopsis 2",
+        "topic_areas": [
+          "Education and workforce"
+        ],
+        "disciplines": [
+          "Education",
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Independent school districts",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Private institutions of higher education",
+          "For-profit organizations other than small businesses",
+          "Small businesses",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": 300000,
+        "detail_page": "https://www.grants.gov/search-results-detail/357250",
+        "funding_opportunity_url": "https://grants.nih.gov/grants/guide/rfa-files/RFA-DA-26-034.html",
+        "primary_document_url": null
+      },
+      "deadline": "2026-11-18"
+    },
+    {
+      "id": "9ac910ca123c2fd59f10",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-10-19T01:14:30.193874Z",
+      "opportunity_id": "358181",
+      "detail": "Deadline 2026-11-18",
+      "record": {
+        "opportunity_id": "358181",
+        "opportunity_number": "PAR-25-371",
+        "title": "Ethical, Legal and Social Implications (ELSI) Research (R01 Clinical Trial Optional)",
+        "agency": "National Institutes of Health",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2025-01-13",
+        "close_date": "2026-11-18",
+        "deadlines": [
+          {
+            "kind": "application",
+            "date": "2026-11-18",
+            "time": null,
+            "timezone": null,
+            "note": null,
+            "estimated": false,
+            "source": "Grants.gov XML extract",
+            "source_url": "https://www.grants.gov/search-results-detail/358181",
+            "source_field": "CloseDate",
+            "confidence": "official_structured",
+            "detail_checked_at": "2026-08-02T11:34:50.877871Z"
+          }
+        ],
+        "submission_requirements": [],
+        "next_submission": {
+          "version": 2,
+          "as_of": "2026-10-19",
+          "application_class": "new",
+          "date": "2026-11-18",
+          "event": {
+            "kind": "application",
+            "date": "2026-11-18",
+            "time": null,
+            "timezone": null,
+            "note": null,
+            "estimated": false,
+            "source": "Grants.gov XML extract",
+            "source_url": "https://www.grants.gov/search-results-detail/358181",
+            "source_field": "CloseDate",
+            "confidence": "official_structured",
+            "detail_checked_at": "2026-08-02T11:34:50.877871Z"
+          },
+          "access": "open",
+          "prerequisites": []
+        },
+        "source_aliases": null,
+        "last_updated": "2025-04-02",
+        "version": "Synopsis 4",
+        "topic_areas": [
+          "Biology and biotechnology",
+          "Education and workforce",
+          "Environmental science",
+          "Artificial intelligence and machine learning",
+          "Data science"
+        ],
+        "disciplines": [
+          "Education",
+          "Environmental and Life Sciences",
+          "Medical and Health",
+          "Community and Social Sciences"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Independent school districts",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Private institutions of higher education",
+          "For-profit organizations other than small businesses",
+          "Small businesses",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/358181",
+        "funding_opportunity_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-371.html",
+        "primary_document_url": null
+      },
+      "deadline": "2026-11-18"
+    },
+    {
+      "id": "856967321d470ad67189",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-10-19T01:14:30.193874Z",
+      "opportunity_id": "363758",
+      "detail": "Deadline 2026-11-18",
+      "record": {
+        "opportunity_id": "363758",
+        "opportunity_number": "NOAA-NMFS-HCPO-2026-33781",
+        "title": "DARRP Restoration Implementation Grants (2026)",
+        "agency": "DOC NOAA - ERA Production",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-09-01",
+        "close_date": "2026-11-18",
+        "deadlines": [
+          {
+            "kind": "application",
+            "date": "2026-11-18",
+            "time": null,
+            "timezone": null,
+            "note": null,
+            "estimated": false,
+            "source": "Grants.gov XML extract",
+            "source_url": "https://www.grants.gov/search-results-detail/363758",
+            "source_field": "CloseDate",
+            "confidence": "official_structured",
+            "detail_checked_at": "2026-09-02T18:06:43.037145Z"
+          }
+        ],
+        "submission_requirements": [],
+        "next_submission": {
+          "version": 2,
+          "as_of": "2026-10-19",
+          "application_class": "new",
+          "date": "2026-11-18",
+          "event": {
+            "kind": "application",
+            "date": "2026-11-18",
+            "time": null,
+            "timezone": null,
+            "note": null,
+            "estimated": false,
+            "source": "Grants.gov XML extract",
+            "source_url": "https://www.grants.gov/search-results-detail/363758",
+            "source_field": "CloseDate",
+            "confidence": "official_structured",
+            "detail_checked_at": "2026-09-02T18:06:43.037145Z"
+          },
+          "access": "open",
+          "prerequisites": []
+        },
+        "source_aliases": null,
+        "last_updated": "2026-09-01",
+        "version": "Synopsis 2",
+        "topic_areas": [
+          "Environmental science"
+        ],
+        "disciplines": [
+          "Environmental and Life Sciences"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 2500000,
+        "award_ceiling": 100000000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363758",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354907"
+      },
+      "deadline": "2026-11-18"
+    },
+    {
+      "id": "4d41b651beac881f9b87",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-10-19T01:14:30.193874Z",
+      "opportunity_id": "358176",
+      "detail": "Deadline 2026-11-18",
+      "record": {
+        "opportunity_id": "358176",
+        "opportunity_number": "PAR-25-369",
+        "title": "Ethical, Legal and Social Implications (ELSI) Exploratory/Developmental Research Grant (R21 Clinical Trial Optional)",
+        "agency": "National Institutes of Health",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2025-01-13",
+        "close_date": "2026-11-18",
+        "deadlines": [
+          {
+            "kind": "application",
+            "date": "2026-11-18",
+            "time": null,
+            "timezone": null,
+            "note": null,
+            "estimated": false,
+            "source": "Grants.gov XML extract",
+            "source_url": "https://www.grants.gov/search-results-detail/358176",
+            "source_field": "CloseDate",
+            "confidence": "official_structured",
+            "detail_checked_at": "2026-08-02T11:34:50.877871Z"
+          }
+        ],
+        "submission_requirements": [],
+        "next_submission": {
+          "version": 2,
+          "as_of": "2026-10-19",
+          "application_class": "new",
+          "date": "2026-11-18",
+          "event": {
+            "kind": "application",
+            "date": "2026-11-18",
+            "time": null,
+            "timezone": null,
+            "note": null,
+            "estimated": false,
+            "source": "Grants.gov XML extract",
+            "source_url": "https://www.grants.gov/search-results-detail/358176",
+            "source_field": "CloseDate",
+            "confidence": "official_structured",
+            "detail_checked_at": "2026-08-02T11:34:50.877871Z"
+          },
+          "access": "open",
+          "prerequisites": []
+        },
+        "source_aliases": null,
+        "last_updated": "2025-04-02",
+        "version": "Synopsis 3",
+        "topic_areas": [
+          "Biology and biotechnology",
+          "Education and workforce",
+          "Environmental science",
+          "Artificial intelligence and machine learning",
+          "Data science"
+        ],
+        "disciplines": [
+          "Education",
+          "Environmental and Life Sciences",
+          "Medical and Health",
+          "Community and Social Sciences"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Independent school districts",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Private institutions of higher education",
+          "For-profit organizations other than small businesses",
+          "Small businesses",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/358176",
+        "funding_opportunity_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-369.html",
+        "primary_document_url": null
+      },
+      "deadline": "2026-11-18"
+    },
+    {
+      "id": "31b1bc01999d0fa24c4a",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-10-19T01:14:30.193874Z",
+      "opportunity_id": "sam-gov:f1d0665939c74ffa86ffc40e73985cc1",
+      "detail": "Deadline 2026-11-18",
+      "record": {
+        "opportunity_id": "sam-gov:f1d0665939c74ffa86ffc40e73985cc1",
+        "opportunity_number": "PHMSA-26HM-BAA",
+        "title": "Office of Hazardous Materials Safety Research Initiative - FY2026 BROAD AGENCY ANNOUNCEMENT (BAA)",
+        "agency": "U.S. Department of Transportation - Pipeline and Hazardous Materials Safety Administration (PHMSA)",
+        "source": "SAM.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-10-15",
+        "close_date": "2026-11-18",
+        "deadlines": [
+          {
+            "kind": "white_paper",
+            "date": "2026-11-18",
+            "time": "11:59",
+            "timezone": "America/New_York",
+            "note": "Initial white paper via email per Amendment0001. Its explicit November18 11:59 AM Eastern deadline remains affirmed by current SAM notice; the reattached original base December22 date does not override it. Confirm with sponsor before relying on any later date. Full proposal by invitation; date not publicly specified.",
+            "estimated": false,
+            "source": "SAM.gov reviewed solicitation",
+            "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/0ddad8729cc24db1afaf4e5dde19b020/download",
+            "source_field": "reviewed solicitation",
+            "confidence": "source_verified",
+            "stage": "white_paper",
+            "application_class": "new",
+            "cycle": "Current reviewed call",
+            "required": true,
+            "invitation_required": false,
+            "citation": {
+              "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/0ddad8729cc24db1afaf4e5dde19b020/download",
+              "source_field": "reviewed solicitation",
+              "quote": "Submissions can be made through November 18, 2026 (11:59 AM Eastern Time)."
+            },
+            "requirement_citation": {
+              "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/0ddad8729cc24db1afaf4e5dde19b020/download",
+              "source_field": "reviewed solicitation",
+              "quote": "Submissions can be made through November 18, 2026 (11:59 AM Eastern Time)."
+            }
+          },
+          {
+            "kind": "full_application",
+            "date": null,
+            "time": null,
+            "timezone": null,
+            "note": "Only invited applicants may proceed. The full-proposal deadline is not publicly specified and will be supplied by the agency.",
+            "estimated": false,
+            "source": "SAM.gov reviewed solicitation",
+            "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/0ddad8729cc24db1afaf4e5dde19b020/download",
+            "source_field": "reviewed solicitation",
+            "confidence": "source_verified",
+            "stage": "full_application",
+            "application_class": "new",
+            "cycle": "Current reviewed call",
+            "required": false,
+            "invitation_required": true,
+            "prerequisite": "invitation",
+            "date_status": "unknown",
+            "citation": {
+              "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/0ddad8729cc24db1afaf4e5dde19b020/download",
+              "source_field": "reviewed solicitation",
+              "quote": "Proposal submissions will be allowed by invitation only and based upon the evaluation of the White Papers."
+            }
+          }
+        ],
+        "submission_requirements": [],
+        "next_submission": {
+          "version": 2,
+          "as_of": "2026-10-19",
+          "application_class": "new",
+          "date": "2026-11-18",
+          "event": {
+            "kind": "white_paper",
+            "date": "2026-11-18",
+            "time": "11:59",
+            "timezone": "America/New_York",
+            "note": "Initial white paper via email per Amendment0001. Its explicit November18 11:59 AM Eastern deadline remains affirmed by current SAM notice; the reattached original base December22 date does not override it. Confirm with sponsor before relying on any later date. Full proposal by invitation; date not publicly specified.",
+            "estimated": false,
+            "source": "SAM.gov reviewed solicitation",
+            "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/0ddad8729cc24db1afaf4e5dde19b020/download",
+            "source_field": "reviewed solicitation",
+            "confidence": "source_verified",
+            "stage": "white_paper",
+            "application_class": "new",
+            "cycle": "Current reviewed call",
+            "required": true,
+            "invitation_required": false,
+            "citation": {
+              "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/0ddad8729cc24db1afaf4e5dde19b020/download",
+              "source_field": "reviewed solicitation",
+              "quote": "Submissions can be made through November 18, 2026 (11:59 AM Eastern Time)."
+            },
+            "requirement_citation": {
+              "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/0ddad8729cc24db1afaf4e5dde19b020/download",
+              "source_field": "reviewed solicitation",
+              "quote": "Submissions can be made through November 18, 2026 (11:59 AM Eastern Time)."
+            }
+          },
+          "access": "open",
+          "prerequisites": []
+        },
+        "source_aliases": null,
+        "last_updated": "2026-10-15",
+        "version": null,
+        "topic_areas": [
+          "Energy",
+          "Transportation",
+          "Materials science"
+        ],
+        "disciplines": [],
+        "applicant_types": [],
+        "funding_instruments": [],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://sam.gov/opp/f1d0665939c74ffa86ffc40e73985cc1/view",
+        "funding_opportunity_url": "https://sam.gov/opp/f1d0665939c74ffa86ffc40e73985cc1/view",
+        "primary_document_url": null
+      },
+      "deadline": "2026-11-18"
+    },
+    {
+      "id": "1d02e1617745019c1173",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-10-19T01:14:30.193874Z",
+      "opportunity_id": "361604",
+      "detail": "Deadline 2026-11-18",
+      "record": {
+        "opportunity_id": "361604",
+        "opportunity_number": "26-507",
+        "title": "National Science Foundation Fostering Interdisciplinary Networks to Develop Emergent and Responsive Solutions Foundry (NSF FINDERS FOUNDRY)",
+        "agency": "U.S. National Science Foundation",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-03-23",
+        "close_date": "2026-11-18",
+        "deadlines": [
+          {
+            "kind": "application",
+            "date": "2026-11-18",
+            "time": null,
+            "timezone": null,
+            "note": "For Development Proposals",
+            "estimated": false,
+            "source": "Grants.gov XML extract",
+            "source_url": "https://www.grants.gov/search-results-detail/361604",
+            "source_field": "CloseDate",
+            "confidence": "official_structured",
+            "detail_checked_at": "2026-10-08T19:04:02.960563Z"
+          }
+        ],
+        "submission_requirements": [],
+        "next_submission": {
+          "version": 2,
+          "as_of": "2026-10-19",
+          "application_class": "new",
+          "date": "2026-11-18",
+          "event": {
+            "kind": "application",
+            "date": "2026-11-18",
+            "time": null,
+            "timezone": null,
+            "note": "For Development Proposals",
+            "estimated": false,
+            "source": "Grants.gov XML extract",
+            "source_url": "https://www.grants.gov/search-results-detail/361604",
+            "source_field": "CloseDate",
+            "confidence": "official_structured",
+            "detail_checked_at": "2026-10-08T19:04:02.960563Z"
+          },
+          "access": "open",
+          "prerequisites": []
+        },
+        "source_aliases": null,
+        "last_updated": "2026-10-06",
+        "version": "Synopsis 6",
+        "topic_areas": [
+          "Artificial intelligence and machine learning",
+          "Education and workforce",
+          "Data science"
+        ],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/361604",
+        "funding_opportunity_url": "https://www.nsf.gov/publications/pub_summ.jsp?ods_key=nsf26507",
+        "primary_document_url": null
+      },
+      "deadline": "2026-11-18"
+    },
     {
       "id": "fdee09244533b547a01b",
       "type": "new",

@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/space-and-aeronautics.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/space-and-aeronautics.xml</id>
-  <updated>2026-10-19T00:51:20Z</updated>
+  <updated>2026-10-19T01:16:13Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NGA - Boosting Innovative GEOINT - Science &amp; Technology Broad Agency Announcement (BIG-ST BAA): Topic # 07 - Lidar Analysis for Surface &amp; Environmental Reconnaissance (LASER)</title>
@@ -15,6 +15,7 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Environmental science"/>
     <category term="Space and aeronautics"/>
+    <category term="Data science"/>
     <summary>National Geospatial-Intelligence Agency | Preproposal 2026-10-28 | Develop AI/ML methods to extract and classify 3D surface/subsurface objects using NASA ICESat-2 and GEDI lidar, including navigation safety applications. Topic7 LASER only, not BIG-ST parent or closed topics. General Solicitation Rev4 governs eligibility and abstract prerequisites; October16 Topic7 revision governs current dates, Phase2 label and corrected PD&gt;75% metric. CUI safeguards; foreign na…</summary>
   </entry>
   <entry>

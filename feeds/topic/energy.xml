@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/energy.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/energy.xml</id>
-  <updated>2026-10-19T00:51:20Z</updated>
+  <updated>2026-10-19T01:16:13Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Affordable Rural Cooperative (ARC) Energy Program</title>
@@ -24,6 +24,8 @@
     <updated>2026-10-16T00:00:00Z</updated>
     <author><name>U.S. Department of Transportation - Maritime Administration (MARAD)</name></author>
     <category term="Energy"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
     <summary>U.S. Department of Transportation - Maritime Administration (MARAD) | Full Application 2027-01-10 | Scientific and engineering vessel-design study combining hydrodynamics, propulsion, energy efficiency, cost analysis, and underwater radiated-noise reduction. Domestic institutions eligible; preference for US-company/US-flag team leads is evaluative, not an exclusion. An organization can join multiple teams but may lead only one proposal; no identical teams rotating leads. SAM registration/current…</summary>
   </entry>
   <entry>
@@ -34,6 +36,7 @@
     <author><name>U.S. Department of Transportation - Pipeline and Hazardous Materials Safety Administration (PHMSA)</name></author>
     <category term="Energy"/>
     <category term="Transportation"/>
+    <category term="Materials science"/>
     <summary>U.S. Department of Transportation - Pipeline and Hazardous Materials Safety Administration (PHMSA) | White Paper 2026-11-18 | Hazardous-materials transport research including energy-storage systems, packaging, emergency response, and rail safety; analytical studies and technology assessment. US prime; foreign entities permitted as subcontractors under conditions. Federal/state/local government bodies excluded, while accredited universities explicitly included. Contracts up to$2M, maximum36months including options; cost s…</summary>
   </entry>
   <entry>
