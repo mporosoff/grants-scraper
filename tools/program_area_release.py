@@ -50,7 +50,7 @@ def plan(root, environment):
         "stage": "program-area-revalidation", "release_sha": release.git(root, "rev-parse", "HEAD"),
         "candidate_run": run, "candidate_id": identifier, "program_area_mode": mode, "projection_kind": projection_kind,
         "openai": "false", "anthropic": "false", "team_mode": "maintenance",
-        "reason": ("Correct retained administrative submission dates without source, document, team or vector generation"
+        "reason": ("Correct retained administrative submission dates; preserve source, document and team work, and use only the original vector allowance when required"
             if projection_kind == "administrative_submission" else
             "Correct retained program-area evidence and its coherent vectors; preserve original source, document allowance and team outputs"),
     }

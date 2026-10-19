@@ -52,7 +52,7 @@ class AdministrativeSubmissionRelease(unittest.TestCase):
         write.assert_called_once()
         ordinary.assert_not_called()
 
-    def test_workflow_binds_the_selected_projection_and_forbids_its_vector_secret_route(self):
+    def test_workflow_binds_the_selected_projection_and_reuses_only_budgeted_vector_route(self):
         workflow = yaml.safe_load((c.ROOT / ".github/workflows/refresh-opportunities.yml").read_text(encoding="utf-8"))
         events = workflow.get("on", workflow.get(True))
         self.assertIn("submission-revalidation", events["workflow_dispatch"]["inputs"]["stage"]["options"])
@@ -62,7 +62,9 @@ class AdministrativeSubmissionRelease(unittest.TestCase):
         steps = {step["id"]: step for step in job["steps"] if step.get("id")}
         self.assertEqual(steps["prepare"]["env"]["EVIDENCE_PROJECTION_KIND"], "${{ needs.plan.outputs.projection_kind }}")
         self.assertIn('--projection-kind "$EVIDENCE_PROJECTION_KIND"', steps["prepare"]["run"])
-        self.assertIn("needs.plan.outputs.projection_kind != 'administrative_submission'", steps["modern-vectors"]["if"])
+        self.assertNotIn("needs.plan.outputs.projection_kind", steps["modern-vectors"]["if"])
+        self.assertIn("steps.prepare.outputs.vector_reused != 'true'", steps["modern-vectors"]["if"])
+        self.assertIn("steps.modern-reservation-upload.outcome == 'success'", steps["modern-vectors"]["if"])
         self.assertEqual([step["id"] for step in job["steps"] if "VOYAGE_API_KEY" in step.get("env", {})], ["vectors", "modern-vectors"])
         self.assertIn("steps.prepare.outputs.modern != 'true'", steps["vectors"]["if"])
         self.assertTrue(steps["modern-state-upload"]["with"]["include-hidden-files"])

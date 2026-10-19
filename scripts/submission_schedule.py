@@ -110,6 +110,22 @@ def next_submission(record, as_of=None, *, application_class='new'):
     return result
 
 
+def administrative_submission_closed(record, as_of=None):
+    """An administrative source close cannot reopen completed submissions."""
+    if record.get('rolling'):
+        return False
+    declared = (record.get('deadlines') or []) + (record.get('submission_requirements') or [])
+    if not any(isinstance(event, dict) and event.get('date_qualifier') == 'administrative'
+               and valid_date(event.get('date')) and event['date'] == record.get('close_date')
+               for event in declared):
+        return False
+    classes = {'new'} | {event['application_class'] for event in events(record)
+                        if isinstance(event.get('application_class'), str)
+                        and event['application_class'] not in {'', 'unspecified'}}
+    return all(next_submission(record, as_of, application_class=application_class)['access'] == 'closed'
+               for application_class in classes)
+
+
 def _invitation_evidence(record):
     title = record.get('title')
     quote = title[:500] if isinstance(title, str) else ''

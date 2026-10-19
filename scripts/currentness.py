@@ -11,6 +11,8 @@ from __future__ import annotations
 from datetime import date, datetime
 import re
 
+from scripts.submission_schedule import administrative_submission_closed
+
 
 NON_FUNDING_TITLE_RE = re.compile(
     r"^(?:[A-Z0-9-]+\s+)?(?:"
@@ -83,6 +85,9 @@ def record_is_current(
     non_funding = non_funding_reason(record)
     if non_funding:
         return False, non_funding
+
+    if administrative_submission_closed(record, as_of):
+        return False, "submission_closed"
 
     close_value = record.get("close_date")
     if close_value:

@@ -151,8 +151,11 @@ program-area meaning; unsupported or conflicting kinds fail closed.
 The projection recognizes the existing explicit source-note distinction between
 an actual portal application date and a later processing close. It qualifies
 only proven matching administrative events and derives their public labels,
-submission selection and feeds. Source dates, original evidence, scientific
+submission selection, currentness and feeds. Source dates, original evidence, scientific
 facts, source/document clocks and team outputs retain their original identity.
-The complete ordered semantic corpus and all sealed vector outputs must match
-the retained generation. The original request ledger must remain exact; this
-selector cannot make new source, document, classifier, team or vector requests.
+Whole-vector retention requires the same ordered corpus, configuration and
+authenticated preprocessing contract. A changed vector dependency uses the
+existing coherent builder within the original durable allowance. The original
+request prefix remains exact, and only this operation's bounded vector requests
+may be appended. This selector cannot make new source, document, classifier or
+team requests.

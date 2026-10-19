@@ -86,6 +86,13 @@
     if ((status && !["posted", "forecasted"].includes(status)) || nonFundingReason(record)) return false;
     const today = runtimeDateIso(now);
     if (!today) return false;
+    const schedule = globalThis.FUNDING_SUBMISSION_SCHEDULE;
+    if (typeof schedule?.administrativeSubmissionClosed === "function") {
+      if (schedule.administrativeSubmissionClosed(record, today)) return false;
+    } else if ([...(record.deadlines || []), ...(record.submission_requirements || [])]
+      .some(event => event?.date_qualifier === "administrative")) {
+      throw new Error("Funding currentness requires the shared administrative submission schedule.");
+    }
     const closeDate = String(record.close_date || "").trim();
     if (closeDate) {
       if (!/^\d{4}-\d{2}-\d{2}$/.test(closeDate)) return false;

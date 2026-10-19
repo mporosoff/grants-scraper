@@ -1,3 +1,5 @@
+import "../../../assets/submission-schedule.js";
+
 export const ALERT_SCHEMA_VERSION = 4;
 export const STRONG_CONTRACT_VERSION = "funding-search-v2-strong-1";
 export const SUBSCRIPTION_TYPES = Object.freeze(["opportunity", "saved_search", "program"]);
@@ -133,6 +135,7 @@ export function recordIsCurrent(record, asOf) {
   const instruments = (record?.funding_instruments || []).map(value => clean(value).toLowerCase());
   const note = `${record?.description || ""} ${record?.close_date_note || ""}`;
   if (instruments.length && instruments.every(value => value === "other") && /\bnot accepting applications?\b/i.test(note)) return false;
+  if (globalThis.FUNDING_SUBMISSION_SCHEDULE.administrativeSubmissionClosed(record, asOf)) return false;
   const closeDate = clean(record?.close_date, 10);
   return !closeDate || (/^\d{4}-\d{2}-\d{2}$/.test(closeDate) && closeDate >= asOf);
 }

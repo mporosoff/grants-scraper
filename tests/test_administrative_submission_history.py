@@ -1,4 +1,4 @@
-"""Protected administrative continuations retire only their exact unpaid replay."""
+"""Protected administrative continuations retire only their exact accounted work."""
 from copy import deepcopy
 import unittest
 from unittest.mock import patch
@@ -60,6 +60,26 @@ class AdministrativeSubmissionHistory(unittest.TestCase):
         self.f.receipt['ledger_sha256'] = identity(self.f.ledger)
         with self.assertRaises(daily.Hold):
             self.f.retire()
+
+    def test_accounted_vector_append_retires_with_original_prefix_and_state_only_resume(self):
+        f=self.f
+        f.ledger['requests'].append({'id':'8'*32,'key':'9'*64,'provider':'voyage','model':'voyage-4-lite',
+            'stage':'reconciled_vectors','reserved_microusd':40,'charged_microusd':25,'status':'valid'})
+        f.receipt['ledger_sha256']=identity(f.ledger)
+        f.child.pop('candidate_id')
+        f.child['candidate_id']=daily.c.digest(daily.c.encoded(f.child))
+        f.pointer['candidate_id']=f.child['candidate_id'];f.context['completed_candidate_id']=f.child['candidate_id']
+        for name in list(f.state):
+            if name.startswith('complete-candidates/'):
+                f.state.pop(name)
+        f.state['complete-candidates/'+f.child['candidate_id']+'/candidate.json']=f.child
+        f.artifacts[-1]['name']='candidate-'+f.child['candidate_id']
+        f.native_artifacts[:]=deepcopy(f.artifacts)
+        self.assertTrue(f.retire())
+        self.assertEqual(f.context['retained_requests']['count'],0)
+        f.state_only_restorer()
+        with patch.object(h,'completed_restore'):
+            self.assertTrue(f.retire())
 
 
 if __name__ == '__main__':

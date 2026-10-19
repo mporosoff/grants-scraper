@@ -54,6 +54,9 @@ MODERN_OPERATION_FILES = ('tools/program_area_revalidation.py', 'tools/program_a
     'tools/build_search_release_package.mjs', 'tools/run_budgeted_vectors.mjs',
     'tools/catalog_reconcile_spend.py', 'tools/embedding_contract.mjs',
     '.github/workflows/refresh-opportunities.yml')
+ADMINISTRATIVE_INPUTS = ('tools/administrative_submission_revalidation.py',
+    'scripts/submission_schedule.py', 'scripts/build_catalog.py', 'scripts/currentness.py',
+    'assets/submission-schedule.js', 'assets/search-retrieval.js', 'tools/run_search_diagnosis.mjs')
 
 
 def require(ok, reason):
@@ -90,8 +93,31 @@ def retained_requests(ledger):
 
 def require_administrative_budget(value, ledger):
     if projection_kind(value) == 'administrative_submission':
-        require(value.get('retained_requests') == retained_requests(ledger),
-            'administrative_requests_unchanged')
+        saved = value.get('retained_requests') or {}
+        rows = ledger.get('requests')
+        count = saved.get('count')
+        require(isinstance(rows, list) and type(count) is int and 0 <= count <= len(rows)
+            and saved == retained_requests({'requests': rows[:count]}),
+            'administrative_original_request_prefix')
+        require(ledger.get('logical_id') == 'offline-' + value['parent_run']
+            and ledger.get('limit_microusd') == 2_000_000 and ledger.get('max_requests') == 300
+            and len(rows) <= 300, 'administrative_original_allowance')
+        for row in rows[count:]:
+            # The shared vector bridge remains the sole dispatcher and seals
+            # accepted outputs against its durable intents/responses. Source,
+            # document and team calls cannot join this continuation's ledger.
+            require(row.get('provider') == 'voyage' and row.get('model') == 'voyage-4-lite'
+                and row.get('stage') == 'reconciled_vectors'
+                and re.fullmatch('[a-f0-9]{32}', str(row.get('id', '')))
+                and re.fullmatch('[a-f0-9]{64}', str(row.get('key', '')))
+                and type(row.get('charged_microusd')) is int
+                and type(row.get('reserved_microusd')) is int
+                and 0 <= row['charged_microusd'] <= row['reserved_microusd']
+                and (row.get('status') != 'reserved_unknown'
+                     or row['charged_microusd'] == row['reserved_microusd']),
+                'administrative_vector_only_append')
+        require(sum(row['charged_microusd'] for row in rows) <= ledger['limit_microusd'],
+            'administrative_original_allowance')
 
 
 def sha(raw):
@@ -526,8 +552,7 @@ def modern_prefix(identifier):
 def modern_contract(root, kind='program_area'):
     names = MODERN_OPERATION_FILES
     if projection_kind(kind) == 'administrative_submission':
-        names += ('tools/administrative_submission_revalidation.py',
-            'scripts/submission_schedule.py', 'scripts/build_catalog.py', 'assets/submission-schedule.js')
+        names += ADMINISTRATIVE_INPUTS
     return hashes(root, names)
 
 
@@ -537,10 +562,11 @@ def modern_scope(root, original, kind='program_area'):
     allowed = {'scripts/extract_document_evidence.py'}
     administrative = projection_kind(kind) == 'administrative_submission'
     if administrative:
-        allowed.add('scripts/submission_schedule.py')
+        allowed.update({'scripts/submission_schedule.py', 'scripts/currentness.py'})
     require(set(changes.get('source', [])) <= allowed
         and not changes.get('teams') and set(changes.get('semantic', [])) <= (
-            {'assets/submission-schedule.js'} if administrative else set()), 'modern_extractor_only_change')
+            {'assets/submission-schedule.js', 'assets/search-retrieval.js', 'tools/run_search_diagnosis.mjs'}
+            if administrative else set()), 'modern_extractor_only_change')
     candidate.git(root, 'merge-base', '--is-ancestor', original['generation_sha'], 'HEAD')
 
 
@@ -924,8 +950,7 @@ def prepare_modern(parent_bundle, receipt_path, state, parent_run, parent_id, *,
             try:
                 candidate.verify_dependencies(root, child)
             except ValueError:
-                sources = ('scripts/extract_document_evidence.py', 'scripts/submission_schedule.py',
-                    'assets/submission-schedule.js') if kind == 'administrative_submission' else (
+                sources = ('scripts/extract_document_evidence.py', *ADMINISTRATIVE_INPUTS) if kind == 'administrative_submission' else (
                     'scripts/extract_document_evidence.py',)
                 require(any(value['operation_contract'].get(name) != modern_contract(root, kind).get(name)
                     for name in sources), 'modern_completed_use_named_runtime_resume')
@@ -964,7 +989,6 @@ def prepare_modern(parent_bundle, receipt_path, state, parent_run, parent_id, *,
         target = candidate.checked_path(root, name); target.parent.mkdir(parents=True, exist_ok=True); target.write_bytes(raw)
     packet = vector_packet(root)
     reused, accounting = modern_native_vectors(root, state, parent, original, value, packet)
-    require(kind != 'administrative_submission' or reused, 'administrative_exact_retained_vectors')
     atomic_json(state/'program-vector-inputs.json', {'packet': packet, 'vector_reused': reused, 'accounting': accounting})
     ledger = read(state/'ledger.json')
     receipt = _modern_receipt(value, original, outputs, changes, ledger, read(state/'consumed-checkpoints.json'))
@@ -994,8 +1018,6 @@ def checkpoint_modern(receipt_path, state, *, root=ROOT, write=True):
     require(receipt['operation_sha256'] == value['operation_sha256']
         and value['operation_contract'] == modern_contract(root, kind), 'modern_checkpoint_operation')
     packet = vector_packet(root); inputs = read(state/'program-vector-inputs.json')
-    require(kind != 'administrative_submission' or inputs['vector_reused'] is True,
-        'administrative_exact_retained_vectors')
     require(spend.vector_binding(packet) == spend.vector_binding(inputs['packet']) and packet['retained_asset_eligible'],
         'modern_complete_current_corpus')
     if inputs['vector_reused']:

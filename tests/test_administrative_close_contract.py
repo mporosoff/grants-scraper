@@ -183,6 +183,38 @@ class AdministrativeCloseContract(unittest.TestCase):
         self.assertEqual(fresh, cached)
         self.assertEqual(entry, before, 'Raw cached native source facts changed')
 
+    def test_currentness_bug_is_rejected_independently_of_correct_projection(self):
+        record = corrected_record()
+        self.assertEqual(next_submission(record, AS_OF)['access'], 'closed')
+        with patch('scripts.currentness.record_is_current', return_value=(True, 'current_by_close_date')):
+            findings = administrative_close_contract(record, AS_OF)
+        self.assertEqual(len(findings), 1)
+        self.assertEqual(findings[0]['fields'], ['currentness'])
+        self.assertEqual(findings[0]['opportunity_id'], '362893')
+        difference = findings[0]['differences'][0]
+        self.assertEqual(difference['before'], {'current': True, 'reason': 'current_by_close_date',
+                                              'source_close_date': '2026-12-16'})
+        self.assertEqual(difference['after'], {'current': False, 'submission_access': 'closed',
+            'actual_application_date': '2026-10-14', 'source_close_date': '2026-12-16'})
+
+    def test_currentness_boundary_recomputes_the_date_and_preserves_other_scopes(self):
+        record = corrected_record()
+        with patch('scripts.currentness.record_is_current', return_value=(True, 'current_by_close_date')):
+            self.assertEqual(administrative_close_contract(record, '2026-10-14'), [])
+            self.assertIn('currentness', administrative_close_contract(record, '2026-10-15')[0]['fields'])
+            for extra in (
+                {'kind': 'application', 'date': '2026-11-01', 'track': 'independent'},
+                {'kind': 'application', 'date': '2026-11-01', 'application_class': 'resubmission'},
+                {'kind': 'application', 'date': None, 'rolling': True, 'application_class': 'resubmission'},
+            ):
+                with self.subTest(extra=extra):
+                    other = deepcopy(record)
+                    other['deadlines'].append(extra)
+                    self.assertEqual(administrative_close_contract(other, AS_OF), [])
+            rolling = deepcopy(record)
+            rolling['rolling'] = True
+            self.assertEqual(administrative_close_contract(rolling, AS_OF), [])
+
 
 if __name__ == '__main__':
     unittest.main()

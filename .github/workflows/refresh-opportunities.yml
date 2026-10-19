@@ -826,7 +826,7 @@ jobs:
           retention-days: 90
       - name: Rebuild the corrected corpus inside its original durable logical allowance
         id: modern-vectors
-        if: steps.restore.outputs.candidate_id == '' && steps.prepare.outputs.candidate_id == '' && steps.prepare.outputs.modern == 'true' && steps.prepare.outputs.vector_reused != 'true' && needs.plan.outputs.projection_kind != 'administrative_submission' && steps.modern-reservation-upload.outcome == 'success'
+        if: steps.restore.outputs.candidate_id == '' && steps.prepare.outputs.candidate_id == '' && steps.prepare.outputs.modern == 'true' && steps.prepare.outputs.vector_reused != 'true' && steps.modern-reservation-upload.outcome == 'success'
         env:
           VOYAGE_API_KEY: ${{ secrets.VOYAGE_API_KEY }}
           CATALOG_VECTOR_OPERATION: reconciliation

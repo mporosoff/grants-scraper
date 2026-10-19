@@ -6,7 +6,7 @@ Pages/search publication. This does not regenerate data or authorize a merge.
 """
 import argparse
 from copy import deepcopy
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
 import json
 import hashlib
 from pathlib import Path
@@ -25,7 +25,7 @@ PUBLIC_FIELDS = ('document_evidence_status', 'document_evidence', 'document_sear
     'preliminary_stage_type', 'preliminary_required', 'next_submission')
 
 
-VALIDATOR_VERSION = 'notice-publication-5'
+VALIDATOR_VERSION = 'notice-publication-6'
 
 
 def bounded_public_value(value, limit=2048):
@@ -53,6 +53,7 @@ def administrative_close_contract(record, as_of):
     date, or a date from another document/application scope this way.
     """
     from scripts.submission_schedule import events, next_submission
+    from scripts.currentness import record_is_current
 
     full = {'application', 'full_application', 'estimated_application', 'proposal'}
 
@@ -146,11 +147,27 @@ def administrative_close_contract(record, as_of):
             fields.append('next_submission')
         if any(administrative_event(row) for row in events(record)):
             fields.append('submission_events')
+        # Prove closure from the independently stripped processing date, rather
+        # than trusting the record's cached next_submission or refinement code.
+        # Another application's future/rolling scope keeps the overall call
+        # eligible for currentness; this check is not a new-applicant filter.
+        classes = {'new'} | {row['application_class'] for row in events(actionable)
+                            if row.get('application_class') not in (None, '', 'unspecified')}
+        definitely_closed = (not record.get('rolling') and all(
+            next_submission(actionable, as_of, application_class=value)['access'] == 'closed'
+            for value in classes))
+        current, current_reason = record_is_current(record, date.fromisoformat(as_of))
+        if definitely_closed and current:
+            fields.append('currentness')
+            expected['currentness'] = {'current': False, 'submission_access': 'closed',
+                'actual_application_date': actual, 'source_close_date': end}
         if fields:
             findings.append({'opportunity_id': str(record['opportunity_id']),
                 'reason': 'administrative_close_is_not_an_application_deadline', 'fields': fields,
                 'differences': [{'field': field,
-                    'before': bounded_public_value(events(record) if field == 'submission_events' else record.get(field)),
+                    'before': bounded_public_value(events(record) if field == 'submission_events'
+                        else {'current': current, 'reason': current_reason, 'source_close_date': end}
+                        if field == 'currentness' else record.get(field)),
                     'after': bounded_public_value(events(actionable) if field == 'submission_events' else expected.get(field))}
                     for field in fields]})
     return findings
