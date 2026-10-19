@@ -36,7 +36,7 @@ EXTRA_FILES = (
 BUILDER_FILES = ('tools/build_search_release_package.mjs', 'tools/embedding_contract.mjs',
                  'tools/run_search_diagnosis.mjs', 'tools/assemble_release_candidate.py',
                  'tools/release_candidate.py', 'scripts/__init__.py', 'scripts/faculty_match.py',
-                 'scripts/currentness.py', 'scripts/researcher_registry.py',
+                 'scripts/currentness.py', 'scripts/submission_schedule.py', 'scripts/researcher_registry.py',
                  'scripts/import_opportunity_team_model.py')
 IMPLEMENTATION_FILES = (*BUILDER_FILES, 'tools/contextual_team_audited_registry.py',
                         'tools/stage_contextual_registry.py')
