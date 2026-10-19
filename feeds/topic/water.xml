@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/water.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/water.xml</id>
-  <updated>2026-10-19T01:16:13Z</updated>
+  <updated>2026-10-19T17:05:45Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Cooperative Agreement for affiliated Partner with Northern Great Plains Cooperative Ecosystem Studies Unit</title>
@@ -283,6 +283,17 @@
     <summary>National Institute of Food and Agriculture | Application 2026-12-31 | The AFRI Foundational and Applied Science Program supports grants in six AFRI priority areas to advance knowledge in both fundamental and applied sciences important to agriculture. The six priority areas are: Plant Health and Production and Plant Products; Animal Health and Production and Animal Products; Food Safety, Nutrition, and Health; Bioenergy, Natural Resources, and Environment; Agricultur…</summary>
   </entry>
   <entry>
+    <title>EDA FY25 Disaster Supplemental</title>
+    <link href="https://www.grants.gov/search-results-detail/359225"/>
+    <id>urn:funding-finder:grants-gov:359225</id>
+    <updated>2025-06-04T00:00:00Z</updated>
+    <author><name>Economic Development Administration</name></author>
+    <category term="Materials science"/>
+    <category term="Manufacturing"/>
+    <category term="Water"/>
+    <summary>Economic Development Administration | Posted | Through this Disaster NOFO, EDA will award investments in regions experiencing severe economic distress or other economic harm resulting from hurricanes, wildfires, tornadoes, floods, and other natural disasters occurring in calendar years 2023 and 2024. EDA’s goal under this NOFO is to assist communities recovering from a disaster by realizing opportunities to recover and change the economic traj…</summary>
+  </entry>
+  <entry>
     <title>Laboratory Flexible Funding Model (LFFM)</title>
     <link href="https://www.grants.gov/search-results-detail/358411"/>
     <id>urn:funding-finder:grants-gov:358411</id>
@@ -292,5 +303,17 @@
     <category term="Separations and membranes"/>
     <category term="Water"/>
     <summary>Food and Drug Administration | Letter Of Intent 2026-12-14 | This cooperative agreement is intended to enhance the capacity and capabilities of state human and animal food testing laboratories in support of an integrated food safety system (IFSS). This is achieved through prioritized sample testing and food defense preparedness in the areas of microbiology, chemistry, and radiochemistry, as well as method development and capacity/capability development proj…</summary>
+  </entry>
+  <entry>
+    <title>Climate Program Office for FY 2012</title>
+    <link href="https://www.grants.gov/search-results-detail/103313"/>
+    <id>urn:funding-finder:grants-gov:103313</id>
+    <updated>2011-07-06T00:00:00Z</updated>
+    <author><name>Department of Commerce</name></author>
+    <category term="Climate change"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Water"/>
+    <summary>Department of Commerce | Posted | Changing climate confronts society with significant economic, health, safety, and national security challenges. NOAA advances scientific and technical programs to help society cope with, and adapt to, today's variations in climate and to prepare for tomorrow's. Toward this end, the agency conducts and supports climate research, observations, modeling, information management, assessments, interdisc…</summary>
   </entry>
 </feed>
