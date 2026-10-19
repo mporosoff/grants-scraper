@@ -4,8 +4,19 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/space-and-aeronautics.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/space-and-aeronautics.xml</id>
-  <updated>2026-10-16T16:56:01Z</updated>
+  <updated>2026-10-19T00:51:20Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>NGA - Boosting Innovative GEOINT - Science &amp; Technology Broad Agency Announcement (BIG-ST BAA): Topic # 07 - Lidar Analysis for Surface &amp; Environmental Reconnaissance (LASER)</title>
+    <link href="https://sam.gov/opp/4984511e4bbc4d01a21df55b30a88f02/view"/>
+    <id>urn:funding-finder:sam-gov:sam-gov%3A4984511e4bbc4d01a21df55b30a88f02</id>
+    <updated>2026-10-16T00:00:00Z</updated>
+    <author><name>National Geospatial-Intelligence Agency</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Environmental science"/>
+    <category term="Space and aeronautics"/>
+    <summary>National Geospatial-Intelligence Agency | Preproposal 2026-10-28 | Develop AI/ML methods to extract and classify 3D surface/subsurface objects using NASA ICESat-2 and GEDI lidar, including navigation safety applications. Topic7 LASER only, not BIG-ST parent or closed topics. General Solicitation Rev4 governs eligibility and abstract prerequisites; October16 Topic7 revision governs current dates, Phase2 label and corrected PD&gt;75% metric. CUI safeguards; foreign na…</summary>
+  </entry>
   <entry>
     <title>Cooperative Agreement for Affiliated Partner with the Hawaiʻi-Pacific Islands Cooperative Ecosystem Studies Unit (CESU)</title>
     <link href="https://www.grants.gov/search-results-detail/364083"/>
@@ -76,7 +87,7 @@
     <author><name>NASA Headquarters</name></author>
     <category term="Energy"/>
     <category term="Space and aeronautics"/>
-    <summary>NASA Headquarters | Application 2027-03-16 | The close date above is the date for the Step-2 proposal due date. The Step-1 proposal due date is November 20, 2026. Step-2 proposals cannot be submitted if a Step-1 proposal was not submitted. ﻿NOTICE: Corrected October 15, 2026: A spurious reference to cubesats was removed from the first paragraph of the introduction. New text is in bold and deleted text is struck through. NOTICE: Amended Octob…</summary>
+    <summary>NASA Headquarters | Application 2027-03-16 | The close date above is the date for the Step-2 proposal due date. The Step-1 proposal due date is November 20, 2026. Step-2 proposals cannot be submitted if a Step-1 proposal was not submitted. NOTICE: Corrected October 16, 2026: In the first paragraph of the introduction a vestigial reference to cubesats was replaced with "airborne platforms". New text is in bold and deleted text is struck throu…</summary>
   </entry>
   <entry>
     <title>Space Technology Research Institutes</title>

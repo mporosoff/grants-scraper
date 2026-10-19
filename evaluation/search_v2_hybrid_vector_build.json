@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-16T16:58:41.230Z",
+  "generated_at": "2026-10-18T19:41:20.555Z",
   "status": "written",
   "build_mode": "production_full_rebuild",
   "reuse_reason": "homogeneous_unstable_identity",
@@ -8,38 +8,38 @@
   "batch_space_checks": [
     {
       "exact_match": false,
-      "minimum_cosine": 0.999964,
-      "mean_cosine": 0.999972,
-      "gross_discontinuity": false
-    },
-    {
-      "exact_match": false,
-      "minimum_cosine": 0.999961,
-      "mean_cosine": 0.999969,
-      "gross_discontinuity": false
-    },
-    {
-      "exact_match": false,
-      "minimum_cosine": 0.99995,
-      "mean_cosine": 0.999968,
-      "gross_discontinuity": false
-    },
-    {
-      "exact_match": false,
-      "minimum_cosine": 0.999961,
-      "mean_cosine": 0.999969,
-      "gross_discontinuity": false
-    },
-    {
-      "exact_match": false,
-      "minimum_cosine": 1,
-      "mean_cosine": 1,
-      "gross_discontinuity": false
-    },
-    {
-      "exact_match": false,
       "minimum_cosine": 0.999958,
       "mean_cosine": 0.999971,
+      "gross_discontinuity": false
+    },
+    {
+      "exact_match": false,
+      "minimum_cosine": 0.999968,
+      "mean_cosine": 0.999974,
+      "gross_discontinuity": false
+    },
+    {
+      "exact_match": false,
+      "minimum_cosine": 0.999957,
+      "mean_cosine": 0.99997,
+      "gross_discontinuity": false
+    },
+    {
+      "exact_match": false,
+      "minimum_cosine": 0.999971,
+      "mean_cosine": 0.999987,
+      "gross_discontinuity": false
+    },
+    {
+      "exact_match": false,
+      "minimum_cosine": 0.999971,
+      "mean_cosine": 0.999987,
+      "gross_discontinuity": false
+    },
+    {
+      "exact_match": false,
+      "minimum_cosine": 0.999967,
+      "mean_cosine": 0.999973,
       "gross_discontinuity": false
     }
   ],
@@ -52,32 +52,32 @@
   "response_model": "voyage-4-lite",
   "input_type": "document",
   "API_key_printed_or_persisted": false,
-  "passage_count": 1513,
+  "passage_count": 1519,
   "reused_passage_count": 0,
-  "embedded_passage_count": 1513,
+  "embedded_passage_count": 1519,
   "removed_prior_passage_count": 0,
-  "corpus_sha256": "4d37641f38c468ac76ee3c47dc612e942dcfdd70b7678b8193360857c4be4271",
-  "vector_sha256": "0adef3ee24d589e6676b73d57e65f614750fe5ac792d789ecb25d71299adcfa6",
+  "corpus_sha256": "b85e29ddc174c524c99deebcd958cb85799cd9bf329f7e47504e18d79077b5b4",
+  "vector_sha256": "2e1a7cf85e9975bc640e192eec017b50a2e2b950614882da0db2f3a4fb371b16",
   "vector_format": "float16-le",
-  "vector_bytes": 3098624,
-  "build_timestamp": "2026-10-16T16:58:41.230Z",
-  "model_space_fingerprint": "098d9b7fd4ad3e2b2a042e34a8cbe1afa37557a4f102d301a9b02d338b36ed95",
+  "vector_bytes": 3110912,
+  "build_timestamp": "2026-10-18T19:41:20.555Z",
+  "model_space_fingerprint": "9fc4a9ad41ec58b792f109ab06321853e19793256e2dcd021033e2f4b827f71b",
   "model_space": {
     "canary_set_version": 1,
     "canary_count": 6,
     "fingerprint_method": "sha256 of exact unrounded canaries and complete embedding configuration",
     "comparison_to_prior_generation": {
-      "prior_fingerprint": "f60bce25862886594a00dabbc8527a044dca1f05e684936d269b13039e3af4af",
+      "prior_fingerprint": "c4d3be4b72e33661569455ec63b787810c60e206970d52211a6a01279ab2afb5",
       "drift_detected": true,
-      "minimum_cosine": 0.99996,
-      "mean_cosine": 0.999969,
+      "minimum_cosine": 1,
+      "mean_cosine": 1,
       "per_canary_cosine": {
-        "carbon-catalysis": 0.999969,
-        "critical-minerals": 0.999964,
-        "rural-health": 0.999976,
-        "quantum-sensing": 0.999972,
-        "maritime-autonomy": 0.999976,
-        "ecosystem-resilience": 0.99996
+        "carbon-catalysis": 1,
+        "critical-minerals": 1,
+        "rural-health": 1,
+        "quantum-sensing": 1,
+        "maritime-autonomy": 1,
+        "ecosystem-resilience": 1
       },
       "minimum_cosine_gate": 0.95,
       "mean_cosine_gate": 0.98,
@@ -86,21 +86,21 @@
     }
   },
   "source_hashes": {
-    "assets/search-hybrid.js": "29db9a04d4f66600b8c50eb762fe4f8f5d0d472fce485ec19447e81ba230442d",
-    "data/opportunities.js": "f3022ae30619522e0a585056529be2ed2956c90c092f5f23cad89ff76c2878f1",
-    "data/subtopics.js": "28627cbbdfff9f070ffef509869eb1d0d51e0fbc66e3fc627c05531f6f7bb5bf"
+    "assets/search-hybrid.js": "ed418efea1ed6eaf68eda8476361e96a9adaf8d35c523c08b05f41bdb99ff229",
+    "data/opportunities.js": "b89ae929074b69d181aa1e9531da036571c3d81586aaec158cd5314da7fedd84",
+    "data/subtopics.js": "1f69296c67fcb6198a7d0265c0e3df1a7695c13ca6695ea2aae4fdd012425ee0"
   },
   "API_requests": [
     {
       "batch_index": "model-space-canaries",
       "passage_count": 256,
       "http_status": 200,
-      "request_id": "7f79baa48047249f7c7350304af9b9a5",
+      "request_id": "7b460b55e4a10f869d769d60ae124ae0",
       "model": "voyage-4-lite",
-      "usage_total_tokens": 26943,
-      "request_payload_bytes": 150762,
-      "response_payload_bytes": 3266150,
-      "latency_ms": 1021.418034,
+      "usage_total_tokens": 25900,
+      "request_payload_bytes": 144547,
+      "response_payload_bytes": 3257799,
+      "latency_ms": 1907.963639,
       "request_kind": "model_space_canaries",
       "canary_input_count": 6,
       "corpus_passage_count": 250
@@ -109,12 +109,12 @@
       "batch_index": 1,
       "passage_count": 256,
       "http_status": 200,
-      "request_id": "790500814e55f880cba7c5f55e70eb5b",
+      "request_id": "30b407d6e997ba5f8985bc5fea882a4c",
       "model": "voyage-4-lite",
-      "usage_total_tokens": 57498,
-      "request_payload_bytes": 317714,
-      "response_payload_bytes": 3265700,
-      "latency_ms": 1072.353835,
+      "usage_total_tokens": 58561,
+      "request_payload_bytes": 323832,
+      "response_payload_bytes": 3257394,
+      "latency_ms": 1278.75191,
       "request_kind": "corpus_passages",
       "corpus_passage_count": 250,
       "canary_input_count": 6
@@ -123,12 +123,12 @@
       "batch_index": 2,
       "passage_count": 256,
       "http_status": 200,
-      "request_id": "32b2592200ff81613cfd97c2f7baaf59",
+      "request_id": "172beb9d981fb5cf9d769d60ae12416e",
       "model": "voyage-4-lite",
-      "usage_total_tokens": 57244,
-      "request_payload_bytes": 313047,
-      "response_payload_bytes": 3265602,
-      "latency_ms": 1081.385119,
+      "usage_total_tokens": 56883,
+      "request_payload_bytes": 311224,
+      "response_payload_bytes": 3257550,
+      "latency_ms": 1304.324883,
       "request_kind": "corpus_passages",
       "corpus_passage_count": 250,
       "canary_input_count": 6
@@ -137,12 +137,12 @@
       "batch_index": 3,
       "passage_count": 256,
       "http_status": 200,
-      "request_id": "358bc24be7fd0567cba7c5f55e70e8a6",
+      "request_id": "2e741025485bc3a63e1a1254d574a651",
       "model": "voyage-4-lite",
-      "usage_total_tokens": 61705,
-      "request_payload_bytes": 332103,
-      "response_payload_bytes": 3265582,
-      "latency_ms": 519.777307,
+      "usage_total_tokens": 61593,
+      "request_payload_bytes": 331962,
+      "response_payload_bytes": 3257139,
+      "latency_ms": 831.16818,
       "request_kind": "corpus_passages",
       "corpus_passage_count": 250,
       "canary_input_count": 6
@@ -151,12 +151,12 @@
       "batch_index": 4,
       "passage_count": 256,
       "http_status": 200,
-      "request_id": "9100ea33983f4ca93cfd97c2f7baa0d1",
+      "request_id": "c1da5b80b2af7bceb6cb7234f2149e94",
       "model": "voyage-4-lite",
-      "usage_total_tokens": 51575,
-      "request_payload_bytes": 279932,
-      "response_payload_bytes": 3265314,
-      "latency_ms": 1053.313695,
+      "usage_total_tokens": 51815,
+      "request_payload_bytes": 280225,
+      "response_payload_bytes": 3257064,
+      "latency_ms": 1513.793269,
       "request_kind": "corpus_passages",
       "corpus_passage_count": 250,
       "canary_input_count": 6
@@ -165,36 +165,36 @@
       "batch_index": 5,
       "passage_count": 256,
       "http_status": 200,
-      "request_id": "a41468fecc6033581045693a8420009d",
+      "request_id": "b299b46500b497873e1a1254d574a619",
       "model": "voyage-4-lite",
-      "usage_total_tokens": 49940,
-      "request_payload_bytes": 266461,
-      "response_payload_bytes": 3267039,
-      "latency_ms": 1021.124331,
+      "usage_total_tokens": 52006,
+      "request_payload_bytes": 276824,
+      "response_payload_bytes": 3258628,
+      "latency_ms": 802.980515,
       "request_kind": "corpus_passages",
       "corpus_passage_count": 250,
       "canary_input_count": 6
     },
     {
       "batch_index": 6,
-      "passage_count": 19,
+      "passage_count": 25,
       "http_status": 200,
-      "request_id": "b8778ca5251ee92e3cfd97c2f7baab4f",
+      "request_id": "deb328dbdb7178e2b6cb7234f21492e2",
       "model": "voyage-4-lite",
-      "usage_total_tokens": 1196,
-      "request_payload_bytes": 6948,
-      "response_payload_bytes": 242405,
-      "latency_ms": 471.4382,
+      "usage_total_tokens": 1626,
+      "request_payload_bytes": 9226,
+      "response_payload_bytes": 318195,
+      "latency_ms": 592.965429,
       "request_kind": "corpus_passages",
-      "corpus_passage_count": 13,
+      "corpus_passage_count": 19,
       "canary_input_count": 6
     }
   ],
   "API_request_count": 7,
-  "usage_total_tokens": 306101,
-  "estimated_cost_at_published_paid_pricing_usd": 0.006122,
+  "usage_total_tokens": 308384,
+  "estimated_cost_at_published_paid_pricing_usd": 0.006168,
   "float16_quantization": {
-    "vectors_checked": 1513,
+    "vectors_checked": 1519,
     "minimum_cosine_to_float32": 1,
     "mean_cosine_to_float32": 1,
     "spent_set_candidate_recall_validation_required": true
