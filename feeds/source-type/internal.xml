@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/source-type/internal.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/source-type/internal.xml</id>
-  <updated>2026-10-16T16:56:01Z</updated>
+  <updated>2026-10-19T00:51:20Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>New NSF MPS funding opportunities for core research programs</title>
@@ -31,14 +31,6 @@
     <category term="Quantum science"/>
     <category term="Energy"/>
     <summary>VPR funding digest (limited submissions &amp; foundations) | Posted</summary>
-  </entry>
-  <entry>
-    <title>NIH Exploratory/Developmental Research Project Grant (Parent R21 Clinical Trial Not Allowed)</title>
-    <link href="https://grants.nih.gov/grants/guide/pa-files/PA-25-304.html"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-3a86f2f6b6e2925c</id>
-    <updated>2026-09-04T00:00:00Z</updated>
-    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Application 2026-10-16</summary>
   </entry>
   <entry>
     <title>Simons Foundation: Utilizing the Full Power of Empire AI (2026 RFA)</title>

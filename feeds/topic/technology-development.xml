@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml</id>
-  <updated>2026-10-16T16:56:01Z</updated>
+  <updated>2026-10-19T00:51:20Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Technology Development Program</title>
@@ -266,6 +266,16 @@
     <summary>Administration for Community Living | Estimated Application 2026-12-16 | The purpose of the Federal SBIR program is to stimulate technological innovation in the private sector, strengthen the role of small business in meeting Federal research or research and development (R/R&amp;D) needs, and improve the return on investment from Federally-funded research for economic and social benefits to the nation. The specific purpose of ACL's SBIR program is to improve the lives of p…</summary>
   </entry>
   <entry>
+    <title>FTA Broad Agency Announcement (FY26) -- “Research Initiatives in Support of Safety, Accessibility, and Mobility in Public Transportation</title>
+    <link href="https://sam.gov/opp/4e98188266d74e73a6cede0b0bef0da0/view"/>
+    <id>urn:funding-finder:sam-gov:sam-gov%3A4e98188266d74e73a6cede0b0bef0da0</id>
+    <updated>2026-10-14T00:00:00Z</updated>
+    <author><name>U.S. Department of Transportation - Federal Transit Administration (FTA)</name></author>
+    <category term="Technology development"/>
+    <category term="Transportation"/>
+    <summary>U.S. Department of Transportation - Federal Transit Administration (FTA) | Concept Paper 2026-10-30 | Applied public transit research, technology development and demonstration to improve transit safety, efficiency and deployment readiness, generally TRL3-6. Cost sharing may be mandated under49USC5312(g); FTA determines applicability during concept review and communicates it in writing. Federal-government-owned businesses not eligible as direct recipients; teaming allowed. SAM registration before a…</summary>
+  </entry>
+  <entry>
     <title>Alliance for Innovation on Maternal Health (AIM) Technical Assistance Center</title>
     <link href="https://www.grants.gov/search-results-detail/363532"/>
     <id>urn:funding-finder:grants-gov:363532</id>
@@ -324,18 +334,6 @@
     <category term="Public health"/>
     <category term="Technology development"/>
     <summary>National Institutes of Health | Application 2027-01-26 | The National Institutes of Health (NIH) intends to renew the Integrative Management of chronic Pain and OUD for Whole Recovery (IMPOWR) research network. This renewal consists of individual research projects, which will be supported by a single Coordination Center. This network is intended to test new innovations that integrate evidence based treatments for chronic pain (CP) and opioid use disorde…</summary>
-  </entry>
-  <entry>
-    <title>Strengthening American Infrastructure (SAI)</title>
-    <link href="https://www.grants.gov/search-results-detail/364025"/>
-    <id>urn:funding-finder:grants-gov:364025</id>
-    <updated>2026-10-05T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Arts and culture"/>
-    <category term="Environmental science"/>
-    <category term="Social and behavioral sciences"/>
-    <category term="Technology development"/>
-    <summary>U.S. National Science Foundation | Posted | Strengthening American Infrastructure (SAI) is an NSF program seeking to stimulate human-centered, use-inspired, fundamental and potentially transformative research aimed at strengthening America’s infrastructure. Effective infrastructure provides a strong foundation for socioeconomic vitality and broad improvement in quality of life. Robust, reliable and effective infrastructure spurs private-sec…</summary>
   </entry>
   <entry>
     <title>Small Business Innovation Research and Small Business Technology Transfer Programs Phase II</title>

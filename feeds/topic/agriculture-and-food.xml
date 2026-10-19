@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml</id>
-  <updated>2026-10-16T16:56:01Z</updated>
+  <updated>2026-10-19T00:51:20Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Healthy Lifestyles in Youth</title>
@@ -298,19 +298,6 @@
     <summary>Animal and Plant Health Inspection Service | Application 2026-10-19 | The U.S. Department of Agriculture, Animal and Plant Health Inspection Service announce this funding opportunity to carry out the Plant Protection Act Section 7721 (PPA 7721) National Clean Plant Network (NCPN) program. APHIS will consider project proposals that clearly and directly support the strategic goals and objectives of the National Clean Plant Network as described in the NCPN Strategic Pl…</summary>
   </entry>
   <entry>
-    <title>FY26 Bureau of Land Management Youth Conservation Corps - Bureau wide</title>
-    <link href="https://www.grants.gov/search-results-detail/362787"/>
-    <id>urn:funding-finder:grants-gov:362787</id>
-    <updated>2026-06-12T00:00:00Z</updated>
-    <author><name>Bureau of Land Management</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Water"/>
-    <summary>Bureau of Land Management | Application 2026-10-16 | The Headquarters Bureau of Land Management (BLM) offices have collaborated with Qualified Youth Corps, as authorized by the Public Lands Corps Act (PLC), to accomplish natural and cultural resource-focused projects for numerous years. This program"s projects provide opportunities to gain work experience in public lands and natural resources management. Through their BLM experience, youth gain an a…</summary>
-  </entry>
-  <entry>
     <title>WaterSMART Enhancing Water Resources Projects</title>
     <link href="https://www.grants.gov/search-results-detail/362394"/>
     <id>urn:funding-finder:grants-gov:362394</id>
@@ -397,7 +384,7 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <updated>2026-04-13T00:00:00Z</updated>
     <author><name>Agricultural Marketing Service</name></author>
     <category term="Agriculture and food"/>
-    <summary>Agricultural Marketing Service | Application 2026-10-16 | The U.S. Department of Agriculture (USDA), Agricultural Marketing Service (AMS), requests applications for the fiscal year (FY) 2026 Specialty Crop Multi-State Grant Program (SCMP). The SCMP supports collaborative multi-state partnerships to enhance the competitiveness of specialty crops through competitively funded projects. A multi-state partnership is a project that implements activities with m…</summary>
+    <summary>Agricultural Marketing Service | Application 2026-12-04 | The U.S. Department of Agriculture (USDA), Agricultural Marketing Service (AMS), requests applications for the fiscal year (FY) 2026 Specialty Crop Multi-State Grant Program (SCMP). The SCMP supports collaborative multi-state partnerships to enhance the competitiveness of specialty crops through competitively funded projects. A multi-state partnership is a project that implements activities with m…</summary>
   </entry>
   <entry>
     <title>Agriculture and Food Research Initiative Competitive Grants Program Education and Workforce Development</title>
@@ -642,7 +629,7 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <author><name>National Institutes of Health</name></author>
     <category term="Agriculture and food"/>
     <category term="Transportation"/>
-    <summary>National Institutes of Health | Application 2026-10-16 | The National Institute of Diabetes and Digestive and Kidney Diseases (NIDDK) announces a program that provides NIDDK-supported K01, K08, K23, and K25 recipients the opportunity to apply for Small Grant (R03) support at some point during the latter years of their award period of their K award. Through the use of this mechanism, the NIDDK is seeking to enhance the capability of its K01, K08, K23, an…</summary>
+    <summary>National Institutes of Health | Application 2027-02-16 | The National Institute of Diabetes and Digestive and Kidney Diseases (NIDDK) announces a program that provides NIDDK-supported K01, K08, K23, and K25 recipients the opportunity to apply for Small Grant (R03) support at some point during the latter years of their award period of their K award. Through the use of this mechanism, the NIDDK is seeking to enhance the capability of its K01, K08, K23, an…</summary>
   </entry>
   <entry>
     <title>Priority HIV/AIDS Research within the Mission of NIDDK (R01 Clinical Trial Optional)</title>
@@ -699,5 +686,17 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
     <summary>National Institutes of Health | Application 2028-01-07 | The NIH Research Project Grant supports a discrete, specified, circumscribed project in areas representing the specific interests and competencies of the investigator(s). This Parent Notice of Funding Opportunity Announcement requires that at lease 1 clinical trial be proposed. The proposed project must be related to the programmatic interests of one or more of the participating NIH Institutes and…</summary>
+  </entry>
+  <entry>
+    <title>Accelerating Solutions to Improve Access and Quality of Empirically-Supported Practices for Youth Mental Health (R01 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/357524"/>
+    <id>urn:funding-finder:grants-gov:357524</id>
+    <updated>2024-12-03T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Education and workforce"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>National Institutes of Health | Application 2027-01-07 | This NOFO is a call to action in response to the mental health crisis in the United States. We seek applications that will study methods to increase access to evidence-based interventions and services for youth mental health, including those living in rural areas, inner cities, and other under-resourced areas, and youth experiencing housing and food insecurities and out-right homelessness. Applica…</summary>
   </entry>
 </feed>

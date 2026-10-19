@@ -4,8 +4,18 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml</id>
-  <updated>2026-10-16T16:56:01Z</updated>
+  <updated>2026-10-19T00:51:20Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>Fiscal Year 2027 Counter Unmanned Aircraft Systems (C-UAS) Grant Program</title>
+    <link href="https://www.grants.gov/search-results-detail/364067"/>
+    <id>urn:funding-finder:grants-gov:364067</id>
+    <updated>2026-10-16T00:00:00Z</updated>
+    <author><name>Department of Homeland Security - FEMA</name></author>
+    <category term="Education and workforce"/>
+    <category term="Cybersecurity"/>
+    <summary>Department of Homeland Security - FEMA | Application 2026-11-16 | Using C-UAS Grant Program funds, eligible governments and their subrecipients may purchase unmanned aircraft system (UAS) Detection, Identifying, Monitoring, Tracking, and Mitigation (DIMT-M) technologies to support public safety officials in the protection of the public and critical infrastructure from nefarious or unlawful use of UAS consistent with 6 U.S.C. § 124n and 6 C.F.R. 124. The operatio…</summary>
+  </entry>
   <entry>
     <title>Genesis Mission Graduate Fellowship Pilot</title>
     <link href="https://www.grants.gov/search-results-detail/364033"/>
@@ -93,15 +103,6 @@
     <summary>Fish and Wildlife Service | Application 2026-11-30 | The John H. Prescott Marine Mammal Rescue and Response Grant Program (Prescott program) provides financial assistance to eligible marine mammal stranding participants and stranding network collaborators to provide (A) the recovery, care, or treatment of sick, injured, or entangled marine mammals; (B) responses to marine mammal stranding events that require emergency assistance; (C) the collection …</summary>
   </entry>
   <entry>
-    <title>Advisory Support for Establishing a National Cybersecurity Operations Center (SOC)</title>
-    <link href="https://www.grants.gov/search-results-detail/363843"/>
-    <id>urn:funding-finder:grants-gov:363843</id>
-    <updated>2026-09-10T00:00:00Z</updated>
-    <author><name>Bureau of Emerging Threats</name></author>
-    <category term="Cybersecurity"/>
-    <summary>Bureau of Emerging Threats | Application 2026-10-16 | Improve Argentina's national cybersecurity posture by providing advisory support to design, establish, and operationalize a centralized, civilian led national Cybersecurity Operations Center capable of preventing, detecting, analyzing, and responding to advanced cyber threats targeting Argentine government networks and critical infrastructure, in alignment with trusted U.S. and allied security pra…</summary>
-  </entry>
-  <entry>
     <title>F26AS00071 Cooperative Endangered Species Conservation Fund: Habitat Conservation Plan Land Acquisition Grants</title>
     <link href="https://www.grants.gov/search-results-detail/363691"/>
     <id>urn:funding-finder:grants-gov:363691</id>
@@ -125,19 +126,6 @@
     <category term="Data science"/>
     <category term="Cybersecurity"/>
     <summary>U.S. National Science Foundation | Posted | The U.S. National Science Foundation Directorate for Mathematical and Physical Sciences (NSF MPS) supports multiple research programs at the frontiers of discovery in theoretical and applied mathematical sciences. Programs include: Algebra and Number TheoryAnalysisApplied MathematicsCombinatoricsComputational MathematicsFoundationsGeometric AnalysisMathematical BiologyProbabilityStatisticsTopology…</summary>
-  </entry>
-  <entry>
-    <title>Annual Recurring University Training and Research</title>
-    <link href="https://www.grants.gov/search-results-detail/363594"/>
-    <id>urn:funding-finder:grants-gov:363594</id>
-    <updated>2026-08-14T00:00:00Z</updated>
-    <author><name>National Energy Technology Laboratory</name></author>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Cybersecurity"/>
-    <summary>National Energy Technology Laboratory | Application 2026-10-16 | Annual Recurring University Training and Research The purpose of this funding opportunity is to solicit and award research and development grants to educate and train the next generation of engineers and scientists; to support novel, early-stage research at U.S. colleges and universities; to increase research and development opportunities for underrepresented and structurally marginalized communit…</summary>
   </entry>
   <entry>
     <title>U.S. National Science Foundation State and Regional Artificial Intelligence Infrastructure Hubs:</title>
