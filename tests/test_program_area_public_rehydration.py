@@ -1,12 +1,17 @@
 """Public-byte recovery of complete private checkpoints, without new work."""
+from contextlib import contextmanager, redirect_stdout
 from copy import deepcopy
+import io
+import json
 from pathlib import Path
+import subprocess
 import tempfile
 import unittest
 from unittest.mock import patch
 
 from tools import program_area_revalidation as p, release_candidate as c
 from tools import catalog_reconcile_spend as spend
+from tools import fetch_release_artifact as fetch
 from tests import test_modern_program_area_budget as fixture_module
 
 
@@ -189,6 +194,137 @@ class CompletedPrivateCheckpointHydration(unittest.TestCase):
                     patch.object(p, 'modern_contract', return_value={'scripts/extract_document_evidence.py': '6'*64}):
                 return p.prepare_modern(f.bundle, f.root/('receipt-'+run+'.json'), state,
                     '123', f.cid, root=f.root, api=f.api, output=output)
+
+    @contextmanager
+    def protected_publication(self, *, wrong_run=False, corrupt_file=None, ancestor=True):
+        """Only mock transport: run the real protected reconstruction reader."""
+        f = self.fixture
+        ref = '7'*40
+        pointer = {'candidate_id': f.cid, 'artifact_run': '999' if wrong_run else '123'}
+        blobs = {'release/candidate-source.json': c.encoded(pointer),
+            'release/candidate.json': c.encoded(f.manifest), **f.raw}
+        if corrupt_file:
+            blobs[corrupt_file] = b'corrupt protected public bytes'
+
+        def git_read(root, *args):
+            if args == ('log', 'origin/main', '--first-parent', '--format=%H', '-100', '--',
+                    'release/candidate-source.json'):
+                return ref
+            if args == ('merge-base', '--is-ancestor', ref, 'HEAD'):
+                if not ancestor:
+                    raise subprocess.CalledProcessError(1, ['git', *args])
+                return ''
+            return f.git_read(root, *args)
+
+        def process_read(command, **kwargs):
+            if command[0] == 'gh':
+                route = command[-1].removeprefix('repos/owner/repo/')
+                if route == 'actions/runs/123':
+                    return c.encoded(f.runs[('123','1')])
+                return f.api(route)
+            if command[:4] == ['git', '-C', str(f.root), 'show']:
+                selected, name = command[4].split(':', 1)
+                self.assertEqual(selected, ref)
+                return blobs[name]
+            self.fail('unexpected process '+repr(command))
+
+        previous_git_read = f.git.side_effect
+        f.git.side_effect = git_read
+        try:
+            with patch.object(c, 'ROOT', f.root), \
+                    patch.object(subprocess, 'check_output', side_effect=process_read), \
+                    patch.object(fetch, 'reconstruct', wraps=fetch.reconstruct) as reconstruction, \
+                    redirect_stdout(io.StringIO()):
+                yield reconstruction
+        finally:
+            f.git.side_effect = previous_git_read
+
+    def reconstructed_checkpoint(self, *, expired):
+        f = self.fixture
+        original_state, bundle, child = self.completed_checkpoint()
+        context_before = (original_state/'reconciliation.json').read_bytes()
+        ledger_before = (original_state/'ledger.json').read_bytes()
+        native = f.artifacts[0]
+        if expired:
+            native['expired'] = True
+        else:
+            f.artifacts.remove(native)
+        with self.protected_publication() as reconstruction:
+            parent = f.root/'workflow-protected-parent'
+            fetch.fetch('owner/repo', '123', 'candidate-'+f.cid, parent)
+            self.assertEqual(inventory(parent), inventory(f.bundle))
+            self.assertEqual(c.load(parent), f.manifest)
+            f.bundle = parent
+            reconstruction.reset_mock()
+            state = f.root/'expired-parent-cold-state'
+            resumed = self.restore('789', state, f.root/'expired-parent-child')
+            reconstruction.assert_called_once()
+        self.assertEqual(resumed['candidate_id'], child['candidate_id'])
+        self.assertEqual(resumed['artifact_run'], '456')
+        self.assertEqual(inventory(f.root/'expired-parent-child'), inventory(bundle))
+        self.assertEqual((state/'reconciliation.json').read_bytes(), context_before)
+        self.assertEqual((state/'ledger.json').read_bytes(), ledger_before)
+        self.assertEqual(p.read(state/'reconciliation.json')['parent_artifact'],
+            json.loads(context_before)['parent_artifact'])
+        f.http.assert_not_called()
+
+    def test_expired_known_parent_uses_exact_protected_publication_for_cold_checkpoint(self):
+        self.reconstructed_checkpoint(expired=True)
+
+    def test_missing_parent_artifact_retains_checkpoint_pin_after_protected_reconstruction(self):
+        self.reconstructed_checkpoint(expired=False)
+
+    def test_corruption_ambiguity_metadata_or_conflicting_expired_pin_never_falls_back(self):
+        f = self.fixture
+        self.completed_checkpoint()
+        original = deepcopy(f.artifacts[0])
+        raw = f.archives[original['id']]
+        for case in ('corrupt-native', 'duplicate-name', 'wrong-origin', 'expired-conflicting-pin',
+                'expired-wrong-origin', 'invalid-expired-value'):
+            with self.subTest(case=case):
+                f.artifacts[0] = deepcopy(original)
+                f.archives[original['id']] = raw
+                if case == 'corrupt-native':
+                    f.archives[original['id']] += b'corrupted immutable ZIP'
+                elif case == 'duplicate-name':
+                    f.artifacts.append(dict(original, id=9999))
+                elif case in ('wrong-origin', 'expired-wrong-origin'):
+                    f.artifacts[0]['workflow_run']['head_sha'] = '9'*40
+                    if case == 'expired-wrong-origin':
+                        f.artifacts[0]['expired'] = True
+                elif case == 'expired-conflicting-pin':
+                    f.artifacts[0].update(expired=True, digest='sha256:'+'9'*64)
+                else:
+                    f.artifacts[0]['expired'] = None
+                with patch.object(fetch, 'reconstruct', side_effect=AssertionError('must not fallback')) as reconstruct:
+                    with self.assertRaises(ValueError):
+                        self.restore('789', f.root/('invalid-'+case), f.root/('output-'+case))
+                    reconstruct.assert_not_called()
+                if case == 'duplicate-name':
+                    f.artifacts.pop()
+        f.http.assert_not_called()
+
+    def test_protected_pointer_and_public_bytes_must_authenticate_before_parent_reuse(self):
+        f = self.fixture
+        self.completed_checkpoint()
+        f.artifacts[0]['expired'] = True
+        for case in ('wrong-run', 'corrupt-byte'):
+            with self.subTest(case=case), self.protected_publication(
+                    wrong_run=case == 'wrong-run', corrupt_file='.nojekyll' if case == 'corrupt-byte' else None):
+                with self.assertRaises((ValueError, fetch.ArtifactUnavailable)):
+                    self.restore('789', f.root/('protected-'+case), f.root/('protected-output-'+case))
+                self.assertFalse((f.root/('protected-output-'+case)).exists())
+        f.http.assert_not_called()
+
+    def test_protected_reconstruction_must_be_ancestor_of_pinned_current_checkout(self):
+        f = self.fixture
+        self.completed_checkpoint()
+        f.artifacts[0]['expired'] = True
+        with self.protected_publication(ancestor=False):
+            with self.assertRaises((ValueError, subprocess.CalledProcessError)):
+                self.restore('789', f.root/'not-ancestor', f.root/'not-ancestor-output')
+        self.assertFalse((f.root/'not-ancestor-output').exists())
+        f.http.assert_not_called()
 
     def test_consecutive_cold_completed_resumes_rehydrate_once_and_preserve_budget_caches(self):
         f = self.fixture

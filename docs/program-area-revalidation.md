@@ -68,6 +68,13 @@ failed. Missing changed bytes still require the exact public child. A repaired
 mirror must pass the ordinary complete candidate loader before reuse. This
 repairs transport loss without repeating projection, vectors or provider work.
 
+If a pinned public parent artifact is missing or expired, an exact protected
+publication can supply its candidate bytes. The original producer and stored
+artifact pin remain unchanged; the protected pointer, canonical manifest and
+every file must match. Retained native conflicts or corruption do not use this
+fallback. Private reservations, ledgers and response evidence still require
+their authenticated retained checkpoints.
+
 Retries authenticate the newest paired checkpoint across the operation family;
 missing, mismatched or ambiguous evidence holds recovery. A complete compatible
 child is copied exactly, preserving its ID, bytes and audit time while skipping

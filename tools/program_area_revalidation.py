@@ -582,25 +582,48 @@ def hydrate_public_bundle(destination, manifest, sources):
     return tuple(sorted(copies))
 
 
-def authenticate_public_parent(parent, context, repository, api):
+def authenticate_public_parent(parent, context, repository, api, *, root=ROOT):
     """The public parent is an artifact authority, not an unverified cache."""
-    from tools.fetch_release_artifact import run_artifacts
+    from tools.fetch_release_artifact import run_artifacts, reconstruct
     producer = context['parent_producer']
     meta = modern_run(producer['run_id'], producer['run_attempt'], api)
     require(modern_producer(meta) == producer, 'hydration_parent_producer')
     pin = context['parent_artifact']
+    require(type(pin.get('id')) is int and pin['id'] > 0
+        and pin.get('name') == 'candidate-' + context['parent_candidate_id']
+        and re.fullmatch('[a-f0-9]{64}', str(pin.get('sha256', ''))), 'hydration_parent_artifact_pin')
     matches = [row for row in run_artifacts(producer['run_id'], api, repository=repository)
         if row['id'] == pin['id'] or row['name'] == pin['name']]
-    require(len(matches) == 1 and {'id': matches[0]['id'], 'name': matches[0]['name'],
-        'sha256': matches[0]['digest'].removeprefix('sha256:')} == pin, 'hydration_parent_artifact_pin')
-    raw = modern_packet(repository, meta, matches[0], api)
+    require(len(matches) <= 1, 'hydration_parent_artifact_pin')
+    if matches:
+        row = matches[0]
+        require(type(row.get('expired')) is bool and {'id': row['id'], 'name': row['name'],
+            'sha256': str(row.get('digest', '')).removeprefix('sha256:')} == pin
+            and row.get('workflow_run', {}).get('id') == meta['id']
+            and row['workflow_run'].get('head_sha') == meta['head_sha']
+            and row['workflow_run'].get('head_branch') == 'main', 'hydration_parent_artifact_pin')
     with tempfile.TemporaryDirectory(prefix='program-public-parent-') as temporary:
-        authenticated = Path(temporary); auth.unpack_public(raw, authenticated)
+        authenticated = Path(temporary)
+        if matches and matches[0]['expired'] is False:
+            # Retained native evidence must authenticate as-is. Never turn a
+            # corrupt payload or failed download into an expiry fallback.
+            auth.unpack_public(modern_packet(repository, meta, matches[0], api), authenticated)
+        else:
+            # Public bytes may outlive their ZIP in protected Git. The native
+            # pin remains historical identity; this does not reauthenticate
+            # an unavailable ZIP or replace any private spending evidence.
+            proof = reconstruct(repository, producer['run_id'], pin['name'], authenticated, root=root)
+            require(proof.get('recovered_candidate') == context['parent_candidate_id']
+                and re.fullmatch('[a-f0-9]{40}', str(proof.get('protected_sha', ''))),
+                'hydration_protected_parent_identity')
+            candidate.git(root, 'merge-base', '--is-ancestor', proof['protected_sha'], 'HEAD')
         original = candidate.load(authenticated, context['parent_candidate_id'])
         require(sha((authenticated/'candidate.json').read_bytes()) == context['parent_manifest_sha256']
             and (authenticated/'candidate.json').read_bytes() == (Path(parent)/'candidate.json').read_bytes()
             and candidate.load(parent) == original and all((authenticated/'files'/name).read_bytes() ==
                 (Path(parent)/'files'/name).read_bytes() for name in original['files']), 'hydration_exact_public_parent')
+        require({path.relative_to(authenticated).as_posix() for path in authenticated.rglob('*') if path.is_file()} ==
+            {'candidate.json', *('files/' + name for name in original['files'])}, 'hydration_public_parent_inventory')
 
 
 def modern_original(parent, state, repository, run, identifier, api, root):
@@ -618,16 +641,12 @@ def modern_original(parent, state, repository, run, identifier, api, root):
         require(len(selected) == 1, 'modern_unique_' + name.split('-')[0])
         return selected[0]
     artifact = one('candidate-' + identifier)
-    with tempfile.TemporaryDirectory(prefix='program-parent-') as temporary:
-        packet = Path(temporary)
-        auth.unpack_public(modern_packet(repository, producer, artifact, api), packet)
-        require(candidate.load(packet, identifier) == original
-            and (packet/'candidate.json').read_bytes() == (Path(parent)/'candidate.json').read_bytes(),
-            'modern_exact_native_candidate')
-        require(all((packet/'files'/n).read_bytes() == (Path(parent)/'files'/n).read_bytes()
-            for n in original['files']), 'modern_complete_native_bytes')
-        require({n.relative_to(packet).as_posix() for n in packet.rglob('*') if n.is_file()} ==
-            {'candidate.json', *('files/' + n for n in original['files'])}, 'modern_native_archive_inventory')
+    require(re.fullmatch('sha256:[a-f0-9]{64}', str(artifact.get('digest', ''))), 'modern_parent_artifact_digest')
+    parent_pin = {'id': artifact['id'], 'name': artifact['name'],
+        'sha256': artifact['digest'].removeprefix('sha256:')}
+    authenticate_public_parent(parent, {'parent_candidate_id': identifier,
+        'parent_manifest_sha256': sha((Path(parent)/'candidate.json').read_bytes()),
+        'parent_producer': modern_producer(producer), 'parent_artifact': parent_pin}, repository, api, root=root)
     plans = [(int(m[1]), r) for r in rows if (m := re.fullmatch(r'release-plan-([1-9][0-9]*)', r['name']))
         and int(m[1]) <= int(original['generation_run_attempt'])]
     require(plans, 'modern_generation_plan')
@@ -651,8 +670,7 @@ def modern_original(parent, state, repository, run, identifier, api, root):
         and reservation['attempt'] == original['generation_run_attempt'] and reservation['mode'] == 'maintenance'
         and reservation['maximum_logical_spend_usd'] == 2, 'modern_original_budget')
     spending['ledger_sha256'] = identity(book)
-    return original, spending, modern_producer(producer), {
-        'id': artifact['id'], 'name': artifact['name'], 'sha256': artifact['digest'].removeprefix('sha256:')}
+    return original, spending, modern_producer(producer), parent_pin
 
 
 def modern_history(parent, state, root, repository, run, identifier, api):
@@ -687,7 +705,7 @@ def modern_history(parent, state, root, repository, run, identifier, api):
         and value['parent_run'] == str(run)
         and value['parent_manifest_sha256'] == sha((Path(parent)/'candidate.json').read_bytes())
         and value['operation_sha256'] == reservation['operation_sha256'], 'modern_checkpoint_context')
-    authenticate_public_parent(parent, value, repository, api)
+    authenticate_public_parent(parent, value, repository, api, root=root)
     hydrate_public_bundle(Path(state)/'parent-candidate', candidate.load(parent, identifier), [parent])
     ledger = read(Path(state)/'ledger.json')
     link = {'producer': modern_producer(producer),

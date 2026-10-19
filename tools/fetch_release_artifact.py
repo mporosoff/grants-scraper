@@ -86,14 +86,14 @@ def artifact_bytes(repository, run, artifact, api):
     return api(f"actions/artifacts/{artifact['id']}/zip")
 
 
-def reconstruct(repository, run, name, destination):
+def reconstruct(repository, run, name, destination, *, root=None):
     """Recover exact public bytes from their protected publication, never a receipt."""
     from tools import release_candidate as c
     if not re.fullmatch(r'candidate-[a-f0-9]{64}', name):
         raise ArtifactUnavailable('Validation/publication receipt unavailable; validate again or restore retained evidence')
     candidate_id = name[len('candidate-'):]
-    root = c.ROOT
-    history = c.git(root, 'log', 'origin/main', '--format=%H', '-100', '--', 'release/candidate-source.json').splitlines()
+    root = c.ROOT if root is None else Path(root)
+    history = c.git(root, 'log', 'origin/main', '--first-parent', '--format=%H', '-100', '--', 'release/candidate-source.json').splitlines()
     for sha in history:
         def read(path):
             return subprocess.check_output(['git', '-C', str(root), 'show', f'{sha}:{path}'])
@@ -112,8 +112,9 @@ def reconstruct(repository, run, name, destination):
             target.write_bytes(content)
         c.write_json(Path(destination) / c.MANIFEST, manifest)
         c.load(destination, candidate_id)
-        print(json.dumps({'recovered_candidate': candidate_id, 'protected_sha': sha, 'generation_sha': manifest['generation_sha']}))
-        return
+        proof = {'recovered_candidate': candidate_id, 'protected_sha': sha, 'generation_sha': manifest['generation_sha']}
+        print(json.dumps(proof))
+        return proof
     raise ArtifactUnavailable('Exact candidate unavailable from artifacts or protected history; request a new candidate explicitly')
 
 
