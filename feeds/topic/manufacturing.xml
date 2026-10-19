@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/manufacturing.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/manufacturing.xml</id>
-  <updated>2026-10-19T01:16:13Z</updated>
+  <updated>2026-10-19T17:05:45Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>BRAIN Initiative: Clinical Studies to Advance Next-Generation Devices for Recording and Modulation in the Human Central Nervous System</title>
@@ -480,6 +480,7 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Manufacturing"/>
     <category term="Quantum science"/>
     <category term="Technology development"/>
+    <category term="Catalysis and reaction engineering"/>
     <summary>Office of Science | Application 2026-12-17 | verify prerequisite | The DOE Office of Science (SC), Office of Critical Minerals and Energy Innovation (CMEI), Office of Environmental Management (EM), Office of Nuclear Energy (NE), Office of Electricity (OE), and Hydrocarbons and Geothermal Office (HGEO) hereby announce interest in receiving applications from interdisciplinary teams addressing the Genesis Mission National Science and Technology Challenges to acceler…</summary>
   </entry>
   <entry>
@@ -588,6 +589,17 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <summary>National Institutes of Health | Application 2028-01-28 | The purpose of this announcement is to encourage investigators to pursue translational activities and clinical feasibility studies to advance the development of therapeutic, and diagnostic devices for disorders that affect the nervous or neuromuscular systems. Activities supported in this program include implementation of clinical prototype devices, non-clinical safety and efficacy testing, design…</summary>
   </entry>
   <entry>
+    <title>EDA FY25 Disaster Supplemental</title>
+    <link href="https://www.grants.gov/search-results-detail/359225"/>
+    <id>urn:funding-finder:grants-gov:359225</id>
+    <updated>2025-06-04T00:00:00Z</updated>
+    <author><name>Economic Development Administration</name></author>
+    <category term="Materials science"/>
+    <category term="Manufacturing"/>
+    <category term="Water"/>
+    <summary>Economic Development Administration | Posted | Through this Disaster NOFO, EDA will award investments in regions experiencing severe economic distress or other economic harm resulting from hurricanes, wildfires, tornadoes, floods, and other natural disasters occurring in calendar years 2023 and 2024. EDA’s goal under this NOFO is to assist communities recovering from a disaster by realizing opportunities to recover and change the economic traj…</summary>
+  </entry>
+  <entry>
     <title>Security, Privacy, and Trust in Cyberspace (NSF SaTC)</title>
     <link href="https://www.grants.gov/search-results-detail/357554"/>
     <id>urn:funding-finder:grants-gov:357554</id>
@@ -643,6 +655,7 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Energy"/>
     <category term="Environmental science"/>
     <category term="Manufacturing"/>
+    <category term="Materials science"/>
     <summary>Advanced Research Projects Agency Energy | Application 2029-09-29 | The purpose of this modification is to clarify the meaning of the Program Policy Factors in Section V.C. To obtain a copy of the Notice of Funding Opportunity (NOFO) please go to the ARPA-E website at https://arpa-e-foa.energy.gov. To apply to this NOFO, Applicants must register with and submit application materials through ARPA-E eXCHANGE (https://arpa-e-foa.energy.gov/Registration.aspx). For det…</summary>
   </entry>
   <entry>
@@ -730,6 +743,19 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <summary>U.S. National Science Foundation | Application 2027-04-13 | Revolutionizing Engineering Departments (hereinafter referred to as RED) is designed to build upon previous efforts in engineering education research. Specifically, previous and ongoing evaluations of the NSF Engineering Education and Centers Division program and its predecessors, as well as those related programs in the Directorate for STEM Education, have shown that prior investments have signif…</summary>
   </entry>
   <entry>
+    <title>Long Range Broad Agency Announcement (BAA) for NSWC Crane</title>
+    <link href="https://www.grants.gov/search-results-detail/352238"/>
+    <id>urn:funding-finder:grants-gov:352238</id>
+    <updated>2024-02-08T00:00:00Z</updated>
+    <author><name>NSWC CRANE - N00164</name></author>
+    <category term="Energy"/>
+    <category term="Data science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Materials science"/>
+    <category term="Manufacturing"/>
+    <summary>NSWC CRANE - N00164 | Posted | This announcement seeks revolutionary research ideas, and technology demonstrators that offer potential for advancement and improvement of NSWC Crane’s primary mission areas. NSWC Crane is a field activity of the Naval Sea Systems Command. NSWC Crane supports a wide range of government agencies in the interest of national security. NSWC Crane may publish BAAs and other solicitations in response to…</summary>
+  </entry>
+  <entry>
     <title>Joint Center of Excellence for Advanced Materials Research</title>
     <link href="https://www.grants.gov/search-results-detail/39841"/>
     <id>urn:funding-finder:grants-gov:39841</id>
@@ -763,30 +789,5 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Materials science"/>
     <category term="Technology development"/>
     <summary>U.S. National Science Foundation | Application 2026-11-16 | Proposals in the area of plasma physics submitted to the Division of Physics that are not governed by another solicitation (such as CAREER), should be submitted to the Division-wide solicitation: Division of Physics: Investigator-Initiated Research Projects. The Plasma Physics program participates in multiple NSF meta-programs such as the ECosytem for Leading Innovation in Plasma Science and Engin…</summary>
-  </entry>
-  <entry>
-    <title>Research Experiences for Undergraduates (REU)</title>
-    <link href="https://www.grants.gov/search-results-detail/348985"/>
-    <id>urn:funding-finder:grants-gov:348985</id>
-    <updated>2023-06-29T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Education and workforce"/>
-    <category term="Materials science"/>
-    <category term="Manufacturing"/>
-    <summary>U.S. National Science Foundation | Application 2027-08-18 | The Research Experiences for Undergraduates (REU) program supports active research participation by undergraduate students in any of the areas of research funded by the National Science Foundation. REU projects involve students in meaningful ways in ongoing research programs or in research projects specifically designed for the REU program. This solicitation features two mechanisms for supporting …</summary>
-  </entry>
-  <entry>
-    <title>Centers of Research Excellence in Science and Technology (CREST)</title>
-    <link href="https://www.grants.gov/search-results-detail/348375"/>
-    <id>urn:funding-finder:grants-gov:348375</id>
-    <updated>2023-05-25T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Quantum science"/>
-    <category term="Materials science"/>
-    <category term="Manufacturing"/>
-    <category term="Cybersecurity"/>
-    <summary>U.S. National Science Foundation | Application 2026-12-04 | invitation required | CREST Center awards provide support to enhance the research capabilities of Minority-serving institutions (MSIs) through the establishment of centers that effectively integrate education and research. CREST Center awards promote the development of new knowledge, enhancements of the research productivity of individual faculty, and an expanded presence of students historically underrepresented in sc…</summary>
   </entry>
 </feed>

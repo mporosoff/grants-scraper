@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/catalysis-and-reaction-engineering.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/catalysis-and-reaction-engineering.xml</id>
-  <updated>2026-10-19T01:16:13Z</updated>
+  <updated>2026-10-19T17:05:45Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>FY 2027 Continuation of Solicitation for the Office of Science Financial Assistance Program</title>
@@ -191,6 +191,22 @@
     <summary>U.S. National Science Foundation | Posted | The Transport Phenomena (TP) program supports fundamental research to understand, model, and control the transport of mass, momentum, energy, and species across multiple scales. Innovative TP research supports advances in artificial intelligence; manufacturing; biotechnology; microelectronics; energy generation, extraction, and utilization; nuclear energy; quantum science and engineering; and othe…</summary>
   </entry>
   <entry>
+    <title>The Genesis Mission: Transforming Science and Energy with AI</title>
+    <link href="https://www.grants.gov/search-results-detail/361526"/>
+    <id>urn:funding-finder:grants-gov:361526</id>
+    <updated>2026-03-17T00:00:00Z</updated>
+    <author><name>Office of Science</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <category term="Quantum science"/>
+    <category term="Technology development"/>
+    <category term="Catalysis and reaction engineering"/>
+    <summary>Office of Science | Application 2026-12-17 | verify prerequisite | The DOE Office of Science (SC), Office of Critical Minerals and Energy Innovation (CMEI), Office of Environmental Management (EM), Office of Nuclear Energy (NE), Office of Electricity (OE), and Hydrocarbons and Geothermal Office (HGEO) hereby announce interest in receiving applications from interdisciplinary teams addressing the Genesis Mission National Science and Technology Challenges to acceler…</summary>
+  </entry>
+  <entry>
     <title>Limited Competition: Small Grant Program for the NCATS Clinical and Translational Science Award (CTSA) Program (R03 Clinical Trial Optional)</title>
     <link href="https://www.grants.gov/search-results-detail/357658"/>
     <id>urn:funding-finder:grants-gov:357658</id>
@@ -259,6 +275,21 @@
     <category term="Materials science"/>
     <category term="Technology development"/>
     <summary>U.S. National Science Foundation | Application 2026-11-16 | Proposals in the area of plasma physics submitted to the Division of Physics that are not governed by another solicitation (such as CAREER), should be submitted to the Division-wide solicitation: Division of Physics: Investigator-Initiated Research Projects. The Plasma Physics program participates in multiple NSF meta-programs such as the ECosytem for Leading Innovation in Plasma Science and Engin…</summary>
+  </entry>
+  <entry>
+    <title>DOD Defense Health Agency (DHA) Research &amp; Development FY23-FY27 BROAD AGENCY ANNOUNCEMENT for Extramural Medical Research</title>
+    <link href="https://www.grants.gov/search-results-detail/343725"/>
+    <id>urn:funding-finder:grants-gov:343725</id>
+    <updated>2022-09-22T00:00:00Z</updated>
+    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
+    <category term="Arts and culture"/>
+    <category term="Technology development"/>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Energy"/>
+    <category term="Cybersecurity"/>
+    <summary>Defense Health Agency Contracting Activity - DHACA | Application 2027-09-30 | verify prerequisite | The USAMRDC’s mission is to provide solutions to medical problems of importance to the American Service Member at home and abroad, as well as to the general public at large. The scope of this effort and the priorities attached to specific projects are influenced by changes in military and civilian medical science and technology (S&amp;T), operational requirements, military threat assessments, and nati…</summary>
   </entry>
   <entry>
     <title>Research Interests of the United States Air Force Academy (formerly USAFA-BAA-2021)</title>

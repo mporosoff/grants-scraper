@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-19T01:18:15Z",
+  "generated_at": "2026-10-19T17:17:49Z",
   "retention_days": 90,
   "events": [
     {
       "id": "d11a70de88103ca694cf",
       "type": "closing_soon",
       "label": "Closing soon",
-      "changed_at": "2026-10-19T01:14:30.193874Z",
+      "changed_at": "2026-10-19T17:04:10.369932Z",
       "opportunity_id": "357250",
       "detail": "Deadline 2026-11-18",
       "record": {
@@ -389,7 +389,7 @@
       "id": "9ac910ca123c2fd59f10",
       "type": "closing_soon",
       "label": "Closing soon",
-      "changed_at": "2026-10-19T01:14:30.193874Z",
+      "changed_at": "2026-10-19T17:04:10.369932Z",
       "opportunity_id": "358181",
       "detail": "Deadline 2026-11-18",
       "record": {
@@ -487,7 +487,7 @@
       "id": "856967321d470ad67189",
       "type": "closing_soon",
       "label": "Closing soon",
-      "changed_at": "2026-10-19T01:14:30.193874Z",
+      "changed_at": "2026-10-19T17:04:10.369932Z",
       "opportunity_id": "363758",
       "detail": "Deadline 2026-11-18",
       "record": {
@@ -564,7 +564,7 @@
       "id": "4d41b651beac881f9b87",
       "type": "closing_soon",
       "label": "Closing soon",
-      "changed_at": "2026-10-19T01:14:30.193874Z",
+      "changed_at": "2026-10-19T17:04:10.369932Z",
       "opportunity_id": "358176",
       "detail": "Deadline 2026-11-18",
       "record": {
@@ -662,7 +662,7 @@
       "id": "31b1bc01999d0fa24c4a",
       "type": "closing_soon",
       "label": "Closing soon",
-      "changed_at": "2026-10-19T01:14:30.193874Z",
+      "changed_at": "2026-10-19T17:04:10.369932Z",
       "opportunity_id": "sam-gov:f1d0665939c74ffa86ffc40e73985cc1",
       "detail": "Deadline 2026-11-18",
       "record": {
@@ -787,7 +787,7 @@
       "id": "1d02e1617745019c1173",
       "type": "closing_soon",
       "label": "Closing soon",
-      "changed_at": "2026-10-19T01:14:30.193874Z",
+      "changed_at": "2026-10-19T17:04:10.369932Z",
       "opportunity_id": "361604",
       "detail": "Deadline 2026-11-18",
       "record": {
@@ -837,7 +837,15 @@
           "access": "open",
           "prerequisites": []
         },
-        "source_aliases": null,
+        "source_aliases": [
+          {
+            "opportunity_id": "nsf-funding:https://www.nsf.gov/funding/opportunities/nsf-finders-foundry-national-science-foundation-fostering-interdisciplinary/nsf26-507",
+            "opportunity_number": "26-507",
+            "source": "National Science Foundation",
+            "detail_page": "https://www.nsf.gov/funding/opportunities/nsf-finders-foundry-national-science-foundation-fostering-interdisciplinary/nsf26-507",
+            "funding_opportunity_url": "https://www.nsf.gov/funding/opportunities/nsf-finders-foundry-national-science-foundation-fostering-interdisciplinary/nsf26-507"
+          }
+        ],
         "last_updated": "2026-10-06",
         "version": "Synopsis 6",
         "topic_areas": [
