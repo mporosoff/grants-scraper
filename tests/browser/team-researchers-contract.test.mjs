@@ -5,6 +5,7 @@ import test from "node:test";
 import vm from "node:vm";
 
 const [
+  scheduleSource,
   querySource,
   retrievalSource,
   teamSource,
@@ -15,6 +16,7 @@ const [
   facultyMatchesSource,
   teamStyles,
 ] = await Promise.all([
+  readFile(new URL("../../assets/submission-schedule.js", import.meta.url), "utf8"),
   readFile(new URL("../../assets/search-query.js", import.meta.url), "utf8"),
   readFile(new URL("../../assets/search-retrieval.js", import.meta.url), "utf8"),
   readFile(new URL("../../assets/team-researchers.js", import.meta.url), "utf8"),
@@ -41,6 +43,7 @@ function loadApis() {
       },
     },
   };
+  vm.runInNewContext(scheduleSource, context);
   vm.runInNewContext(querySource, context);
   vm.runInNewContext(retrievalSource, context);
   vm.runInNewContext(teamSource, context);
