@@ -3008,6 +3008,93 @@ def citation_deadline(fact):
     }
 
 
+def refine_administrative_close(record):
+    """Qualify a proved processing cutoff without changing its source date.
+
+    The existing Closing Date explanation must name a distinct, earlier actual
+    application date owned by one current native field. Other submission
+    fields, scopes and unproved closing dates keep their original meaning.
+    """
+    evidence = record.get('document_evidence') or {}
+    document = evidence.get('document') or {}
+    url, digest = document.get('url'), document.get('sha256')
+    if (record.get('document_evidence_status') != 'current' or not url
+            or not re.fullmatch('[a-f0-9]{64}', str(digest or ''))):
+        return False
+    facts = evidence.get('facts') or []
+    deadlines = record.get('deadlines') or []
+
+    def scope(value):
+        return (value.get('application_class') or 'unspecified', value.get('cycle') or None,
+                value.get('track') or None)
+
+    def owned(fact):
+        citation = fact.get('citation') or {}
+        ref = citation.get('structural_reference') or {}
+        return (fact.get('type') == 'deadline' and fact.get('field_authority') == 'official_notice_field'
+                and citation.get('document_url') == url and citation.get('sha256') == digest
+                and ref.get('field_id') and ref.get('field_label'))
+
+    sources = []
+    for event in deadlines:
+        if (event.get('evidence_id') or event.get('confidence') != 'official_structured'
+                or event.get('source_field') != 'CloseDate' or not event.get('source_url')
+                or event.get('kind') not in {'application', 'submission'}):
+            continue
+        pair = notice_schedule.explicit_submission_window_end(sys.modules[__name__], event.get('note') or '')
+        if pair and pair[0] == event.get('date') == record.get('close_date'):
+            sources.append((event, pair))
+    if not sources:
+        return False
+
+    def search_text():
+        values = [value for fact in facts for value in
+                  (fact.get('label'), fact.get('display_value'), (fact.get('citation') or {}).get('quote'))]
+        values.extend(record.get('document_program_areas') or [])
+        return clean_text(' '.join(str(value) for value in values if value))
+
+    previous_text = search_text()
+    before = deepcopy((deadlines, facts))
+    for source, (end, actual) in sources:
+        if sum(scope(other) == scope(source) for other, _ in sources) != 1:
+            continue
+        applications = [fact for fact in facts if owned(fact) and fact.get('id')
+            and fact.get('deadline_kind') in {'application', 'full_application', 'proposal'}
+            and fact.get('date') == actual and scope(fact) == scope(source)
+            and not fact.get('estimated') and fact.get('date_qualifier') != 'administrative'
+            and (fact.get('reconciliation') or {}).get('status') != 'conflict']
+        if len(applications) != 1:
+            continue
+        citation = {'basis': 'explicit_closing_date_explanation', 'source_field': 'CloseDate',
+            'source_url': source['source_url'], 'quote': source['note'],
+            'actual_application_date': actual, 'application_evidence_id': applications[0]['id']}
+        closing = [fact for fact in facts if owned(fact) and fact.get('id')
+            and fact.get('deadline_kind') in {'application', 'submission'} and fact.get('date') == end
+            and scope(fact) == scope(source) and re.fullmatch(r'Closing\s+Date\s+for\s+Applications\s*:?',
+                str(fact['citation']['structural_reference']['field_label']).strip(), re.I)]
+        identifiers = {fact['id'] for fact in closing}
+        for event in deadlines:
+            if event is source:
+                changes = {'kind': 'submission', 'stage': 'submission', 'date_qualifier': 'administrative',
+                           'date_qualifier_citation': citation}
+                for key, value in changes.items():
+                    if event.get(key) != value:
+                        event.setdefault('document_source_fields', {}).setdefault(key,
+                            {'present': key in event, 'value': deepcopy(event.get(key))})
+                        event[key] = deepcopy(value)
+            elif (event.get('evidence_id') in identifiers and event.get('date') == end
+                    and scope(event) == scope(source) and event.get('source_url') == url):
+                event.update(kind='submission', stage='submission', date_qualifier='administrative',
+                             date_qualifier_citation=deepcopy(citation))
+        for fact in closing:
+            fact.update(label='Administrative close', deadline_kind='submission', stage='submission',
+                        date_qualifier='administrative', date_qualifier_citation=deepcopy(citation))
+    changed = before != (deadlines, facts)
+    if changed and record.get('document_search_text') == previous_text:
+        record['document_search_text'] = search_text()
+    return changed
+
+
 def merge_document_entry(record, entry):
     if entry:
         notice_schedule.repair_cached_arpa_summary(sys.modules[__name__], record, entry)
@@ -3280,6 +3367,7 @@ def merge_document_entry(record, entry):
             key: value for key, value in source_fields.items()
             if key == "topic_areas" or output.get(key) != value["value"] or (key in output) != value["present"]
         }
+    refine_administrative_close(output)
     return output
 
 

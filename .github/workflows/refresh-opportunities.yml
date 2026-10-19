@@ -11,7 +11,7 @@ on:
       stage:
         description: Plan affected work automatically, bounded team maintenance/backfill, or resume exact evidence
         type: choice
-        options: [auto, generate, teams, backfill, reuse, catalog-reconcile, catalog-correction, catalog-projection, program-area-revalidation, catalog-source-recovery, catalog-access-correction, catalog-identity-correction, catalog-url-correction, validate, publish, verify]
+        options: [auto, generate, teams, backfill, reuse, catalog-reconcile, catalog-correction, catalog-projection, program-area-revalidation, submission-revalidation, catalog-source-recovery, catalog-access-correction, catalog-identity-correction, catalog-url-correction, validate, publish, verify]
         default: auto
         required: true
       pilot_team_scopes:
@@ -63,6 +63,7 @@ jobs:
     outputs:
       stage: ${{ steps.plan.outputs.stage }}
       program_area_mode: ${{ steps.plan.outputs.program_area_mode }}
+      projection_kind: ${{ steps.plan.outputs.projection_kind }}
       reason: ${{ steps.plan.outputs.reason }}
       held_stage: ${{ steps.plan.outputs.held_stage }}
       daily_status: ${{ steps.plan.outputs.daily_status }}
@@ -762,14 +763,16 @@ jobs:
         run: >-
           python -m tools.fetch_release_artifact --repository "$GITHUB_REPOSITORY"
           --run "$CANDIDATE_RUN" --name "candidate-$CANDIDATE_ID" --destination "$RUNNER_TEMP/parent-candidate"
-      - name: Authenticate original accounting and revalidate only saved program-area evidence
+      - name: Authenticate original accounting and revalidate the selected saved evidence
         id: prepare
         if: steps.restore.outputs.candidate_id == ''
+        env:
+          EVIDENCE_PROJECTION_KIND: ${{ needs.plan.outputs.projection_kind }}
         run: >-
           python -m tools.program_area_revalidation prepare
           --parent-bundle "$RUNNER_TEMP/parent-candidate" --receipt "$RUNNER_TEMP/program-area-receipt.json"
           --parent-run "$CANDIDATE_RUN" --parent-id "$CANDIDATE_ID" --state "$RUNNER_TEMP/program-area-modern"
-          --output "$RUNNER_TEMP/candidate"
+          --output "$RUNNER_TEMP/candidate" --projection-kind "$EVIDENCE_PROJECTION_KIND"
       - name: Restore an already completed coherent vector pass
         id: vectors-restore
         if: steps.restore.outputs.candidate_id == '' && steps.prepare.outputs.candidate_id == '' && steps.prepare.outputs.modern != 'true'
@@ -823,7 +826,7 @@ jobs:
           retention-days: 90
       - name: Rebuild the corrected corpus inside its original durable logical allowance
         id: modern-vectors
-        if: steps.restore.outputs.candidate_id == '' && steps.prepare.outputs.candidate_id == '' && steps.prepare.outputs.modern == 'true' && steps.prepare.outputs.vector_reused != 'true' && steps.modern-reservation-upload.outcome == 'success'
+        if: steps.restore.outputs.candidate_id == '' && steps.prepare.outputs.candidate_id == '' && steps.prepare.outputs.modern == 'true' && steps.prepare.outputs.vector_reused != 'true' && needs.plan.outputs.projection_kind != 'administrative_submission' && steps.modern-reservation-upload.outcome == 'success'
         env:
           VOYAGE_API_KEY: ${{ secrets.VOYAGE_API_KEY }}
           CATALOG_VECTOR_OPERATION: reconciliation
@@ -1585,7 +1588,7 @@ jobs:
             const needs = JSON.parse(process.env.RESULTS);
             const order = ['plan', 'sam-preflight', 'generate', 'assemble', 'catalog-reconcile', 'catalog-correction', 'program-area-revalidation', 'catalog-source-recovery', 'catalog-access-correction', 'catalog-identity-correction', 'catalog-url-correction', 'candidate', 'validate', 'publish', 'pages', 'verify-live'];
             const failed = order.find(stage => ['failure', 'cancelled'].includes(needs[stage].result));
-            const stages = new Set(['auto', 'generate', 'teams', 'backfill', 'reuse', 'catalog-reconcile', 'catalog-correction', 'catalog-projection', 'program-area-revalidation', 'catalog-source-recovery', 'catalog-access-correction', 'catalog-identity-correction', 'catalog-url-correction', 'validate', 'publish', 'verify']);
+            const stages = new Set(['auto', 'generate', 'teams', 'backfill', 'reuse', 'catalog-reconcile', 'catalog-correction', 'catalog-projection', 'program-area-revalidation', 'submission-revalidation', 'catalog-source-recovery', 'catalog-access-correction', 'catalog-identity-correction', 'catalog-url-correction', 'validate', 'publish', 'verify']);
             const planned = needs.plan.outputs.stage;
             const planReason = needs.plan.outputs.reason || 'not reported';
             const heldStage = needs.plan.outputs.held_stage || '';

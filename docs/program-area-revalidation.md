@@ -138,3 +138,21 @@ XML files in `feeds/topic` and `feeds/source-type`; publication stages those
 deletions. Pages receives the same complete immutable inventory. Older partial
 artifacts remain readable for exact recovery but cannot pass ordinary validation
 under the expanded inventory policy.
+
+## Administrative submission dates
+
+For a complete modern native generation, protected manual
+`stage=submission-revalidation` selects only the
+`administrative_submission` projection of retained evidence. It shares the
+authenticated checkpoint transport but binds that distinct projection kind in
+the operation, state and receipt. An absent kind retains the historical
+program-area meaning; unsupported or conflicting kinds fail closed.
+
+The projection recognizes the existing explicit source-note distinction between
+an actual portal application date and a later processing close. It qualifies
+only proven matching administrative events and derives their public labels,
+submission selection and feeds. Source dates, original evidence, scientific
+facts, source/document clocks and team outputs retain their original identity.
+The complete ordered semantic corpus and all sealed vector outputs must match
+the retained generation. The original request ledger must remain exact; this
+selector cannot make new source, document, classifier, team or vector requests.

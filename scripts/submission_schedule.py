@@ -24,9 +24,13 @@ def valid_date(value):
 
 
 def events(record):
-    result = [deepcopy(event) for event in (record.get('deadlines') or []) + (record.get('submission_requirements') or [])
-              if isinstance(event, dict) and event.get('kind') in KINDS]
+    declared = (record.get('deadlines') or []) + (record.get('submission_requirements') or [])
+    result = [deepcopy(event) for event in declared
+              if isinstance(event, dict) and event.get('kind') in KINDS
+              and event.get('date_qualifier') != 'administrative']
     if (not any(event.get('kind') in FULL | {'submission'} or event.get('date') == record.get('close_date') for event in result)
+        and not any(isinstance(event, dict) and event.get('date_qualifier') == 'administrative'
+                    and event.get('date') == record.get('close_date') for event in declared)
         and valid_date(record.get('close_date'))):
         result.append({'kind': 'submission' if record.get('close_date_kind') == 'submission_window_end' else 'application',
                        'date': record['close_date'], 'time': record.get('deadline_time'),

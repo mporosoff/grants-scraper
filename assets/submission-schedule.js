@@ -16,9 +16,12 @@
     return Number.isFinite(instant.getTime()) && instant.toISOString().slice(0, 10) === value;
   }
   function events(record) {
-    const result = [...(record?.deadlines || []), ...(record?.submission_requirements || [])]
-      .filter(event => event && KINDS.has(event.kind)).map(event => ({...event}));
-    if (!result.some(event => FULL.has(event.kind) || event.kind === "submission" || event.date === record?.close_date) && validDate(record?.close_date)) result.push({
+    const declared = [...(record?.deadlines || []), ...(record?.submission_requirements || [])];
+    const result = declared.filter(event => event && KINDS.has(event.kind)
+      && event.date_qualifier !== "administrative").map(event => ({...event}));
+    if (!result.some(event => FULL.has(event.kind) || event.kind === "submission" || event.date === record?.close_date)
+      && !declared.some(event => event?.date_qualifier === "administrative" && event.date === record?.close_date)
+      && validDate(record?.close_date)) result.push({
       kind: record.close_date_kind === "submission_window_end" ? "submission" : "application", date: record.close_date,
       time: record.deadline_time ?? null, timezone: record.deadline_timezone ?? null, source: record.source ?? null});
     return result;
