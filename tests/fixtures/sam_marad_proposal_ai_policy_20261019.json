@@ -1,0 +1,731 @@
+{
+  "schema_version": 1,
+  "provenance": {
+    "candidate_id": "e5bf737b3e9e577acbf356ae11315dd04d794ef3c6244d4b112c7aa688034b5e",
+    "generation_sha": "0cbf4c433fee4b3b9f145df108ade1ad175f5b25",
+    "document_evidence_sha256": "1c0be330cb5b9e79df925e8074ac4d4f837ebc880817fb5ceb012b9d3e71c6eb",
+    "catalog_sha256": "b88036a8b44441e97c21799261d6bf7ba2b6837695880f608ff2dfaed17a65e9",
+    "sam_record_count": 41
+  },
+  "record": {
+    "opportunity_id": "sam-gov:7d63d061eb82403c8b6b4afb9afca040",
+    "opportunity_number": "693JF726R000016",
+    "title": "A Study on Vessel Design Challenge",
+    "agency": "U.S. Department of Transportation - Maritime Administration (MARAD)",
+    "agency_authority": "source_listed",
+    "agency_code": null,
+    "status": "posted",
+    "source": "SAM.gov",
+    "source_type": "Federal",
+    "detail_page": "https://sam.gov/opp/7d63d061eb82403c8b6b4afb9afca040/view",
+    "funding_opportunity_url": "https://sam.gov/opp/7d63d061eb82403c8b6b4afb9afca040/view",
+    "primary_document_url": null,
+    "primary_document_name": null,
+    "primary_document_source": null,
+    "primary_document_confidence": null,
+    "detail_enrichment_status": "not_applicable",
+    "posted_date": "2026-10-16",
+    "close_date": "2027-01-10",
+    "close_date_note": "Follow the reviewed submission stage, cycle, and source instructions.",
+    "deadlines": [
+      {
+        "kind": "full_application",
+        "date": "2027-01-10",
+        "time": "12:00",
+        "timezone": "Etc/GMT+5",
+        "note": "PDF full proposal by email to both acquisition contacts identified in SectionE.4. Current SAM closing date is January10,2027; RFP fixes noon EST.",
+        "estimated": false,
+        "source": "SAM.gov reviewed solicitation",
+        "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/ec4ca31b92744bd192a5a5190021e41a/download",
+        "source_field": "reviewed solicitation",
+        "confidence": "source_verified",
+        "stage": "full_application",
+        "application_class": "new",
+        "cycle": "Current reviewed call",
+        "required": true,
+        "invitation_required": false,
+        "citation": {
+          "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/ec4ca31b92744bd192a5a5190021e41a/download",
+          "source_field": "reviewed solicitation",
+          "quote": "The deadline for proposal submission is 12:00 PM EST on the closing date listed for this RFP on SAMS.gov"
+        },
+        "requirement_citation": {
+          "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/ec4ca31b92744bd192a5a5190021e41a/download",
+          "source_field": "reviewed solicitation",
+          "quote": "The deadline for proposal submission is 12:00 PM EST on the closing date listed for this RFP on SAMS.gov"
+        }
+      }
+    ],
+    "deadline_source": "SAM.gov listing",
+    "archive_date": "2027-03-10",
+    "status_verification_required": false,
+    "last_updated": "2026-10-16",
+    "estimated_award_date": null,
+    "estimated_project_start": null,
+    "fiscal_year": null,
+    "version": null,
+    "rolling": false,
+    "opportunity_category": null,
+    "funding_category_codes": [],
+    "funding_categories": [],
+    "funding_instrument_codes": [],
+    "funding_instruments": [],
+    "eligibility_codes": [],
+    "applicant_types": [],
+    "eligibility_text": "Eligible Applicants: Open to all types of domestic applicants other than individuals.",
+    "disciplines": [],
+    "topic_areas": [
+      "Energy",
+      "Artificial intelligence and machine learning",
+      "Data science"
+    ],
+    "aln": [],
+    "award_floor": null,
+    "award_ceiling": null,
+    "total_program_funding": null,
+    "expected_number_of_awards": null,
+    "award_source": "SAM.gov listing",
+    "cost_share_required": null,
+    "has_preliminary_stage": false,
+    "preliminary_required": false,
+    "preliminary_stage_type": null,
+    "limited_submission": false,
+    "limited_submission_source": "synopsis_heuristic",
+    "career_stage_signal": null,
+    "description": "Scientific and engineering vessel-design study combining hydrodynamics, propulsion, energy efficiency, cost analysis, and underwater radiated-noise reduction. Domestic institutions eligible; preference for US-company/US-flag team leads is evaluative, not an exclusion. An organization can join multiple teams but may lead only one proposal; no identical teams rotating leads. SAM registration/current UEI required for application and award. MARAD funds100% through cooperative agreements; generally$150k–$450k,12–18months. Vessel classes/preferences and Amendments4/5 Q&A apply: whale-watching catamarans are outside preferred vessel types, and all fishing vessels, including large commercial vessels, are outside the specific RFP focus. Eligibility basis: All domestic applicant types except individuals includes domestic universities; the proposal is for a research/design study, not acquisition of a finished vessel. Submission: PDF proposal by email to both listed MARAD acquisition contacts per SectionE.4; no separate application package required.",
+    "detail_enriched_at": null,
+    "api_revision": null,
+    "api_version": null,
+    "api_last_updated": null,
+    "attachment_count": 0,
+    "document_urls": [],
+    "history": null,
+    "actionability_status": "current_by_source_listed_date",
+    "document_evidence_status": "current",
+    "document_evidence": {
+      "schema_version": 1,
+      "document": {
+        "url": "https://sam.gov/opp/7d63d061eb82403c8b6b4afb9afca040/view",
+        "name": null,
+        "source_kind": "agency_notice",
+        "content_type": "text/html; charset=utf-8",
+        "sha256": "44e86727b553d23fd50036c3eefda270f430d2d5a52423d4e71e79c206e284ff",
+        "version": 1,
+        "first_seen_at": "2026-10-19T01:16:13.605678Z",
+        "last_seen_at": "2026-10-19T01:16:13.605678Z",
+        "changed_since_previous": false
+      },
+      "extraction": {
+        "method": "html",
+        "page_count": null,
+        "pages_read": null,
+        "pages_with_text": 1,
+        "truncated": false,
+        "structure_version": "notice-blocks-2",
+        "warnings": [],
+        "content_kind": "html",
+        "text_characters": 29344
+      },
+      "facts": [
+        {
+          "id": "evidence-sam-gov:7d63d061eb82403c8b6b4afb9afca040-d80098eb680c",
+          "type": "program_funding",
+          "label": "Program funding",
+          "value": 1250000,
+          "display_value": "$1,250,000",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://sam.gov/opp/7d63d061eb82403c8b6b4afb9afca040/view",
+            "citation_url": "https://sam.gov/opp/7d63d061eb82403c8b6b4afb9afca040/view",
+            "document_name": null,
+            "sha256": "44e86727b553d23fd50036c3eefda270f430d2d5a52423d4e71e79c206e284ff",
+            "page": null,
+            "section": "Official notice",
+            "location": "section “Official notice”",
+            "quote": "…ed for the package. Awards are intended to be for not less than $150k and likely not more than $450k. Project completion timeline is 12-18 months. Total funding available is up to $1.25 million. PROGRAM DESCRIPTION: The META program (46 U.S.C. § 50307) is investigating the interconnections between broader fuel efficiency, reducing URN from vessels, and exp…",
+            "extracted_at": "2026-10-19T01:16:13.605678Z",
+            "structural_reference": {
+              "block_id": "html-66",
+              "kind": "paragraph",
+              "heading_path": [],
+              "source_position": [
+                136,
+                3
+              ]
+            }
+          },
+          "fact_contract": "typed-notice-facts-1",
+          "source_authority": "machine_extracted_official_document",
+          "subject": "program",
+          "parser_version": "award-basis-11",
+          "currency": "USD",
+          "basis": "program_total"
+        }
+      ],
+      "review_queue": [],
+      "dependency_version": 2,
+      "source_fields": {
+        "topic_areas": {
+          "present": true,
+          "value": [
+            "Energy"
+          ]
+        }
+      }
+    },
+    "document_search_text": "Program funding $1,250,000 …ed for the package. Awards are intended to be for not less than $150k and likely not more than $450k. Project completion timeline is 12-18 months. Total funding available is up to $1.25 million. PROGRAM DESCRIPTION: The META program (46 U.S.C. § 50307) is investigating the interconnections between broader fuel efficiency, reducing URN from vessels, and exp… artificial intelligence energy storage",
+    "close_date_kind": "submission_window_end",
+    "source_facet": null,
+    "source_review_after": "2026-10-26",
+    "sam_approval_sha256": "15eddb33d7550a5e28bb849ff3cf0e86d9bf72fca50a7dd5f9db32c7929e95d9",
+    "sam_review_sha256": "a1b3a549821facac6ee8a3dc729e93881ddd062b25f105db4af5c46cafc63ea8",
+    "sam_organization_id": "100179145",
+    "page_field_provenance": {
+      "eligibility_text": {
+        "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/ec4ca31b92744bd192a5a5190021e41a/download",
+        "fetched_at": "2026-10-18",
+        "source_excerpt": "Eligible Applicants: Open to all types of domestic applicants other than individuals.",
+        "extraction_method": "reviewed_sam_notice",
+        "confidence": "source_verified",
+        "status": "verified"
+      }
+    },
+    "sam_review_reconciliation": {
+      "approved_notice_id": "7d63d061eb82403c8b6b4afb9afca040",
+      "current_notice_id": "7d63d061eb82403c8b6b4afb9afca040",
+      "approved_review_sha256": "a1b3a549821facac6ee8a3dc729e93881ddd062b25f105db4af5c46cafc63ea8",
+      "current_review_sha256": "a1b3a549821facac6ee8a3dc729e93881ddd062b25f105db4af5c46cafc63ea8",
+      "reviewed_content_sha256": "41494fc869933d120db37ed406901efc05999fb1f3fdfb9ca61b9390bf649d23",
+      "method": "exact_reviewed_content",
+      "reviewed_on": "2026-10-18",
+      "original_review_after": "2026-11-17",
+      "current_verified_on": "2026-10-19",
+      "current_review_after": "2026-10-26"
+    },
+    "source_first_seen_date": "2026-10-17",
+    "source_last_seen_date": "2026-10-19",
+    "source_observation": "observed_in_window",
+    "document_evidence_checked_at": "2026-10-19T01:16:13.605678Z",
+    "submission_requirements": [],
+    "document_status_signals": [],
+    "document_program_areas": [
+      "artificial intelligence",
+      "energy storage"
+    ],
+    "next_submission": {
+      "version": 2,
+      "as_of": "2026-10-19",
+      "application_class": "new",
+      "date": "2027-01-10",
+      "event": {
+        "kind": "full_application",
+        "date": "2027-01-10",
+        "time": "12:00",
+        "timezone": "Etc/GMT+5",
+        "note": "PDF full proposal by email to both acquisition contacts identified in SectionE.4. Current SAM closing date is January10,2027; RFP fixes noon EST.",
+        "estimated": false,
+        "source": "SAM.gov reviewed solicitation",
+        "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/ec4ca31b92744bd192a5a5190021e41a/download",
+        "source_field": "reviewed solicitation",
+        "confidence": "source_verified",
+        "stage": "full_application",
+        "application_class": "new",
+        "cycle": "Current reviewed call",
+        "required": true,
+        "invitation_required": false,
+        "citation": {
+          "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/ec4ca31b92744bd192a5a5190021e41a/download",
+          "source_field": "reviewed solicitation",
+          "quote": "The deadline for proposal submission is 12:00 PM EST on the closing date listed for this RFP on SAMS.gov"
+        },
+        "requirement_citation": {
+          "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/ec4ca31b92744bd192a5a5190021e41a/download",
+          "source_field": "reviewed solicitation",
+          "quote": "The deadline for proposal submission is 12:00 PM EST on the closing date listed for this RFP on SAMS.gov"
+        }
+      },
+      "access": "open",
+      "prerequisites": []
+    }
+  },
+  "source_record": {
+    "opportunity_id": "sam-gov:7d63d061eb82403c8b6b4afb9afca040",
+    "opportunity_number": "693JF726R000016",
+    "title": "A Study on Vessel Design Challenge",
+    "agency": "U.S. Department of Transportation - Maritime Administration (MARAD)",
+    "agency_authority": "source_listed",
+    "agency_code": null,
+    "status": "posted",
+    "source": "SAM.gov",
+    "source_type": "Federal",
+    "detail_page": "https://sam.gov/opp/7d63d061eb82403c8b6b4afb9afca040/view",
+    "funding_opportunity_url": "https://sam.gov/opp/7d63d061eb82403c8b6b4afb9afca040/view",
+    "primary_document_url": null,
+    "primary_document_name": null,
+    "primary_document_source": null,
+    "primary_document_confidence": null,
+    "detail_enrichment_status": "not_applicable",
+    "posted_date": "2026-10-16",
+    "close_date": "2027-01-10",
+    "close_date_note": "Follow the reviewed submission stage, cycle, and source instructions.",
+    "deadlines": [
+      {
+        "kind": "full_application",
+        "date": "2027-01-10",
+        "time": "12:00",
+        "timezone": "Etc/GMT+5",
+        "note": "PDF full proposal by email to both acquisition contacts identified in SectionE.4. Current SAM closing date is January10,2027; RFP fixes noon EST.",
+        "estimated": false,
+        "source": "SAM.gov reviewed solicitation",
+        "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/ec4ca31b92744bd192a5a5190021e41a/download",
+        "source_field": "reviewed solicitation",
+        "confidence": "source_verified",
+        "stage": "full_application",
+        "application_class": "new",
+        "cycle": "Current reviewed call",
+        "required": true,
+        "invitation_required": false,
+        "citation": {
+          "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/ec4ca31b92744bd192a5a5190021e41a/download",
+          "source_field": "reviewed solicitation",
+          "quote": "The deadline for proposal submission is 12:00 PM EST on the closing date listed for this RFP on SAMS.gov"
+        },
+        "requirement_citation": {
+          "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/ec4ca31b92744bd192a5a5190021e41a/download",
+          "source_field": "reviewed solicitation",
+          "quote": "The deadline for proposal submission is 12:00 PM EST on the closing date listed for this RFP on SAMS.gov"
+        }
+      }
+    ],
+    "deadline_source": "SAM.gov listing",
+    "archive_date": "2027-03-10",
+    "status_verification_required": false,
+    "last_updated": "2026-10-16",
+    "estimated_award_date": null,
+    "estimated_project_start": null,
+    "fiscal_year": null,
+    "version": null,
+    "rolling": false,
+    "opportunity_category": null,
+    "funding_category_codes": [],
+    "funding_categories": [],
+    "funding_instrument_codes": [],
+    "funding_instruments": [],
+    "eligibility_codes": [],
+    "applicant_types": [],
+    "eligibility_text": "Eligible Applicants: Open to all types of domestic applicants other than individuals.",
+    "disciplines": [],
+    "topic_areas": [
+      "Energy"
+    ],
+    "aln": [],
+    "award_floor": null,
+    "award_ceiling": null,
+    "total_program_funding": null,
+    "expected_number_of_awards": null,
+    "award_source": "SAM.gov listing",
+    "cost_share_required": null,
+    "has_preliminary_stage": false,
+    "preliminary_required": false,
+    "preliminary_stage_type": null,
+    "limited_submission": false,
+    "limited_submission_source": "synopsis_heuristic",
+    "career_stage_signal": null,
+    "description": "Scientific and engineering vessel-design study combining hydrodynamics, propulsion, energy efficiency, cost analysis, and underwater radiated-noise reduction. Domestic institutions eligible; preference for US-company/US-flag team leads is evaluative, not an exclusion. An organization can join multiple teams but may lead only one proposal; no identical teams rotating leads. SAM registration/current UEI required for application and award. MARAD funds100% through cooperative agreements; generally$150k–$450k,12–18months. Vessel classes/preferences and Amendments4/5 Q&A apply: whale-watching catamarans are outside preferred vessel types, and all fishing vessels, including large commercial vessels, are outside the specific RFP focus. Eligibility basis: All domestic applicant types except individuals includes domestic universities; the proposal is for a research/design study, not acquisition of a finished vessel. Submission: PDF proposal by email to both listed MARAD acquisition contacts per SectionE.4; no separate application package required.",
+    "detail_enriched_at": null,
+    "api_revision": null,
+    "api_version": null,
+    "api_last_updated": null,
+    "attachment_count": 0,
+    "document_urls": [],
+    "history": null,
+    "actionability_status": "current_by_source_listed_date",
+    "document_evidence_status": "not_applicable",
+    "document_evidence": null,
+    "document_search_text": null,
+    "close_date_kind": "submission_window_end",
+    "source_facet": null,
+    "source_review_after": "2026-10-26",
+    "sam_approval_sha256": "15eddb33d7550a5e28bb849ff3cf0e86d9bf72fca50a7dd5f9db32c7929e95d9",
+    "sam_review_sha256": "a1b3a549821facac6ee8a3dc729e93881ddd062b25f105db4af5c46cafc63ea8",
+    "sam_organization_id": "100179145",
+    "page_field_provenance": {
+      "eligibility_text": {
+        "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/ec4ca31b92744bd192a5a5190021e41a/download",
+        "fetched_at": "2026-10-18",
+        "source_excerpt": "Eligible Applicants: Open to all types of domestic applicants other than individuals.",
+        "extraction_method": "reviewed_sam_notice",
+        "confidence": "source_verified",
+        "status": "verified"
+      }
+    },
+    "sam_review_reconciliation": {
+      "approved_notice_id": "7d63d061eb82403c8b6b4afb9afca040",
+      "current_notice_id": "7d63d061eb82403c8b6b4afb9afca040",
+      "approved_review_sha256": "a1b3a549821facac6ee8a3dc729e93881ddd062b25f105db4af5c46cafc63ea8",
+      "current_review_sha256": "a1b3a549821facac6ee8a3dc729e93881ddd062b25f105db4af5c46cafc63ea8",
+      "reviewed_content_sha256": "41494fc869933d120db37ed406901efc05999fb1f3fdfb9ca61b9390bf649d23",
+      "method": "exact_reviewed_content",
+      "reviewed_on": "2026-10-18",
+      "original_review_after": "2026-11-17",
+      "current_verified_on": "2026-10-19",
+      "current_review_after": "2026-10-26"
+    },
+    "source_first_seen_date": "2026-10-17",
+    "source_last_seen_date": "2026-10-19",
+    "source_observation": "observed_in_window"
+  },
+  "evidence": {
+    "status": "current",
+    "checked_at": "2026-10-19T01:16:13.605678Z",
+    "source_url": "https://sam.gov/opp/7d63d061eb82403c8b6b4afb9afca040/view",
+    "extractor_identity": "official-evidence-3",
+    "document": {
+      "url": "https://sam.gov/opp/7d63d061eb82403c8b6b4afb9afca040/view",
+      "name": null,
+      "source_kind": "agency_notice",
+      "content_type": "text/html; charset=utf-8",
+      "sha256": "44e86727b553d23fd50036c3eefda270f430d2d5a52423d4e71e79c206e284ff",
+      "bytes": 32674,
+      "etag": null,
+      "last_modified": null,
+      "version": 1,
+      "first_seen_at": "2026-10-19T01:16:13.605678Z",
+      "last_seen_at": "2026-10-19T01:16:13.605678Z",
+      "changed_since_previous": false,
+      "retrieval_provenance": {
+        "schema_version": 1,
+        "policy": "SAMpublic-description-v1",
+        "representation": "owned-description-html",
+        "notice_id": "7d63d061eb82403c8b6b4afb9afca040",
+        "api_url": "https://sam.gov/api/prod/opps/v2/opportunities/7d63d061eb82403c8b6b4afb9afca040",
+        "body_sha256": "44e86727b553d23fd50036c3eefda270f430d2d5a52423d4e71e79c206e284ff",
+        "review_sha256": "a1b3a549821facac6ee8a3dc729e93881ddd062b25f105db4af5c46cafc63ea8",
+        "organization_id": "100179145",
+        "solicitation_number": "693JF726R000016"
+      }
+    },
+    "extraction": {
+      "method": "html",
+      "page_count": null,
+      "pages_read": null,
+      "pages_with_text": 1,
+      "truncated": false,
+      "structure_version": "notice-blocks-2",
+      "warnings": [],
+      "content_kind": "html",
+      "text_characters": 29344
+    },
+    "facts": [
+      {
+        "id": "evidence-sam-gov:7d63d061eb82403c8b6b4afb9afca040-d80098eb680c",
+        "type": "program_funding",
+        "label": "Program funding",
+        "value": 1250000,
+        "display_value": "$1,250,000",
+        "confidence": "machine_extracted_needs_verification",
+        "citation": {
+          "document_url": "https://sam.gov/opp/7d63d061eb82403c8b6b4afb9afca040/view",
+          "citation_url": "https://sam.gov/opp/7d63d061eb82403c8b6b4afb9afca040/view",
+          "document_name": null,
+          "sha256": "44e86727b553d23fd50036c3eefda270f430d2d5a52423d4e71e79c206e284ff",
+          "page": null,
+          "section": "Official notice",
+          "location": "section “Official notice”",
+          "quote": "…ed for the package. Awards are intended to be for not less than $150k and likely not more than $450k. Project completion timeline is 12-18 months. Total funding available is up to $1.25 million. PROGRAM DESCRIPTION: The META program (46 U.S.C. § 50307) is investigating the interconnections between broader fuel efficiency, reducing URN from vessels, and exp…",
+          "extracted_at": "2026-10-19T01:16:13.605678Z",
+          "structural_reference": {
+            "block_id": "html-66",
+            "kind": "paragraph",
+            "heading_path": [],
+            "source_position": [
+              136,
+              3
+            ]
+          }
+        },
+        "fact_contract": "typed-notice-facts-1",
+        "source_authority": "machine_extracted_official_document",
+        "subject": "program",
+        "parser_version": "award-basis-11",
+        "currency": "USD",
+        "basis": "program_total"
+      }
+    ],
+    "program_areas": [
+      {
+        "label": "artificial intelligence",
+        "topics": [
+          "Artificial intelligence and machine learning",
+          "Data science"
+        ],
+        "citation": {
+          "document_url": "https://sam.gov/opp/7d63d061eb82403c8b6b4afb9afca040/view",
+          "citation_url": "https://sam.gov/opp/7d63d061eb82403c8b6b4afb9afca040/view",
+          "document_name": null,
+          "sha256": "44e86727b553d23fd50036c3eefda270f430d2d5a52423d4e71e79c206e284ff",
+          "page": null,
+          "section": "Official notice",
+          "location": "section “Official notice”",
+          "quote": "Proposals in response to this RFP are limited to 20 pages and must be received within 120 days of the publication of this notice. Proposals will be screened for use of Artificial Intelligence (AI) tools. Any use of AI tools in generating content for the proposal must be clearly identified and justified.",
+          "extracted_at": "2026-10-19T01:16:13.605678Z",
+          "structural_reference": {
+            "block_id": "html-124",
+            "kind": "paragraph",
+            "heading_path": [],
+            "source_position": [
+              295,
+              3
+            ]
+          }
+        }
+      },
+      {
+        "label": "energy storage",
+        "topics": [
+          "Energy"
+        ],
+        "citation": {
+          "document_url": "https://sam.gov/opp/7d63d061eb82403c8b6b4afb9afca040/view",
+          "citation_url": "https://sam.gov/opp/7d63d061eb82403c8b6b4afb9afca040/view",
+          "document_name": null,
+          "sha256": "44e86727b553d23fd50036c3eefda270f430d2d5a52423d4e71e79c206e284ff",
+          "page": null,
+          "section": "Official notice",
+          "location": "section “Official notice”",
+          "quote": "Is MARAD open to all forms of propulsion to gain fuel efficiencies - for example, hybrid diesel-electric equipment with electric motors and batteries?",
+          "extracted_at": "2026-10-19T01:16:13.605678Z",
+          "structural_reference": {
+            "block_id": "html-25",
+            "kind": "paragraph",
+            "heading_path": [],
+            "source_position": [
+              46,
+              3
+            ]
+          }
+        }
+      }
+    ],
+    "review_queue": []
+  },
+  "sam_ai_citations": [
+    {
+      "opportunity_id": "sam-gov:5abc1a0ed8ab4c5e8f6aa62aa745d210",
+      "title": "Strategic Technology Office-wide Innovation Solutions Opening Announcement",
+      "hit": {
+        "citation": {
+          "citation_url": "https://sam.gov/opp/5abc1a0ed8ab4c5e8f6aa62aa745d210/view",
+          "document_name": null,
+          "document_url": "https://sam.gov/opp/5abc1a0ed8ab4c5e8f6aa62aa745d210/view",
+          "extracted_at": "2026-10-16T16:56:01.088916Z",
+          "location": "section “Official notice”",
+          "page": null,
+          "quote": "• Artificial intelligence",
+          "section": "Official notice",
+          "sha256": "aa60fcb6e59c9ab812cd5c738e52cef22f7e82a32ade6d5e09843d65ebb28f07",
+          "structural_reference": {
+            "block_id": "html-15",
+            "heading_path": [],
+            "kind": "paragraph",
+            "source_position": [
+              2,
+              3006
+            ]
+          }
+        },
+        "label": "artificial intelligence",
+        "topics": [
+          "Artificial intelligence and machine learning",
+          "Data science"
+        ]
+      }
+    },
+    {
+      "opportunity_id": "sam-gov:4984511e4bbc4d01a21df55b30a88f02",
+      "title": "NGA - Boosting Innovative GEOINT - Science & Technology Broad Agency Announcement (BIG-ST BAA): Topic # 07 – Lidar Analysis for Surface & Environmental Reconnaissance (LASER)",
+      "hit": {
+        "label": "artificial intelligence",
+        "topics": [
+          "Artificial intelligence and machine learning",
+          "Data science"
+        ],
+        "citation": {
+          "document_url": "https://sam.gov/opp/4984511e4bbc4d01a21df55b30a88f02/view",
+          "citation_url": "https://sam.gov/opp/4984511e4bbc4d01a21df55b30a88f02/view",
+          "document_name": null,
+          "sha256": "d4378a2cd7812f1d3fc6b418927724d409a28356c60a9f74e721005eb8530bae",
+          "page": null,
+          "section": "Official notice",
+          "location": "section “Official notice”",
+          "quote": "Topic 5 - Better Ingested GEOINT - Identifying Artificial Intelligence and Manually Manipulated Media (BIGISLAND) is closed.",
+          "extracted_at": "2026-10-19T01:16:13.605678Z",
+          "structural_reference": {
+            "block_id": "html-14",
+            "kind": "paragraph",
+            "heading_path": [],
+            "source_position": [
+              28,
+              3
+            ]
+          }
+        }
+      }
+    },
+    {
+      "opportunity_id": "sam-gov:7d63d061eb82403c8b6b4afb9afca040",
+      "title": "A Study on Vessel Design Challenge",
+      "hit": {
+        "label": "artificial intelligence",
+        "topics": [
+          "Artificial intelligence and machine learning",
+          "Data science"
+        ],
+        "citation": {
+          "document_url": "https://sam.gov/opp/7d63d061eb82403c8b6b4afb9afca040/view",
+          "citation_url": "https://sam.gov/opp/7d63d061eb82403c8b6b4afb9afca040/view",
+          "document_name": null,
+          "sha256": "44e86727b553d23fd50036c3eefda270f430d2d5a52423d4e71e79c206e284ff",
+          "page": null,
+          "section": "Official notice",
+          "location": "section “Official notice”",
+          "quote": "Proposals in response to this RFP are limited to 20 pages and must be received within 120 days of the publication of this notice. Proposals will be screened for use of Artificial Intelligence (AI) tools. Any use of AI tools in generating content for the proposal must be clearly identified and justified.",
+          "extracted_at": "2026-10-19T01:16:13.605678Z",
+          "structural_reference": {
+            "block_id": "html-124",
+            "kind": "paragraph",
+            "heading_path": [],
+            "source_position": [
+              295,
+              3
+            ]
+          }
+        }
+      }
+    },
+    {
+      "opportunity_id": "sam-gov:b9d86f57c8a348238b5322eda840c54e",
+      "title": "Broad Agency Announcement (BAA) Naval Air Warfare Center Aircraft Division (NAWCAD) Webster Outlying Field (WOLF) Airborne Systems Integration (ASI) Division",
+      "hit": {
+        "citation": {
+          "citation_url": "https://sam.gov/opp/b9d86f57c8a348238b5322eda840c54e/view",
+          "document_name": null,
+          "document_url": "https://sam.gov/opp/b9d86f57c8a348238b5322eda840c54e/view",
+          "extracted_at": "2026-10-16T16:56:01.088916Z",
+          "location": "section “Official notice”",
+          "page": null,
+          "quote": "…anned aircraft), ground, surface, or undersea deployable as driven by the mission needs. Advanced computing and processing will be focused on air vehicle, payload, edge computing, artificial intelligence and machine learning, or multi-platform collaborative solutions supporting all aspects of mission information from pre-deployment, through operations, to…",
+          "section": "Official notice",
+          "sha256": "794b0b517355a08abd2aa11b835ed8d18432bbef2de188e248cf3351a40456a4",
+          "structural_reference": {
+            "block_id": "html-2",
+            "heading_path": [],
+            "kind": "paragraph",
+            "source_position": [
+              4,
+              3
+            ]
+          }
+        },
+        "label": "artificial intelligence",
+        "topics": [
+          "Artificial intelligence and machine learning",
+          "Data science"
+        ]
+      }
+    },
+    {
+      "opportunity_id": "sam-gov:f727147c651f4d63b6ebb629d3feb37a",
+      "title": "DLA Emergent IV Research and Development Program",
+      "hit": {
+        "citation": {
+          "citation_url": "https://sam.gov/opp/f727147c651f4d63b6ebb629d3feb37a/view",
+          "document_name": null,
+          "document_url": "https://sam.gov/opp/f727147c651f4d63b6ebb629d3feb37a/view",
+          "extracted_at": "2026-10-16T16:56:01.088916Z",
+          "location": "section “Official notice”",
+          "page": null,
+          "quote": "Amendment 14 adds a new subtopic to AOI H. Artificial Inteilligence/Machine Learning Application and to add IDIQ langauge.",
+          "section": "Official notice",
+          "sha256": "9b24b2734184e3e172d0ab1ee43c79a1aa07408327557c1ca6ebf57ed5bc69d0",
+          "structural_reference": {
+            "block_id": "html-27",
+            "heading_path": [],
+            "kind": "paragraph",
+            "source_position": [
+              54,
+              3
+            ]
+          }
+        },
+        "label": "artificial intelligence",
+        "topics": [
+          "Artificial intelligence and machine learning",
+          "Data science"
+        ]
+      }
+    },
+    {
+      "opportunity_id": "sam-gov:fac0dcbe5eff43ab92e3dadb319daed1",
+      "title": "RESEARCH AND DEVELOPMENT OF NAVAL POWER AND ENERGY SYSTEMS (N00024-19-R-4145 Broad Agency Announcement (BAA))",
+      "hit": {
+        "citation": {
+          "citation_url": "https://sam.gov/opp/fac0dcbe5eff43ab92e3dadb319daed1/view",
+          "document_name": null,
+          "document_url": "https://sam.gov/opp/fac0dcbe5eff43ab92e3dadb319daed1/view",
+          "extracted_at": "2026-10-16T16:56:01.088916Z",
+          "location": "section “Official notice”",
+          "page": null,
+          "quote": "Recent trends in electrical machines include neural networks; artificial intelligence; expert system; fiber communications and integrated electronics; new ceramic conducting and dielectric materials; and magnetic levitation. High Temperature Superconducting rotors…",
+          "section": "Official notice",
+          "sha256": "e384d0cc4a0b21889b38bf284e634784f7953509145a78f92b9c63d96c0fe252",
+          "structural_reference": {
+            "block_id": "html-46",
+            "heading_path": [],
+            "kind": "paragraph",
+            "source_position": [
+              123,
+              7
+            ]
+          }
+        },
+        "label": "artificial intelligence",
+        "topics": [
+          "Artificial intelligence and machine learning",
+          "Data science"
+        ]
+      }
+    },
+    {
+      "opportunity_id": "sam-gov:aaef3e1141e74a12b1b75641f6c4cd7a",
+      "title": "Directed Energy Technology Experimentation Research (DETER) Advanced Research Announcement (ARA) Open Announcement",
+      "hit": {
+        "citation": {
+          "citation_url": "https://sam.gov/opp/aaef3e1141e74a12b1b75641f6c4cd7a/view",
+          "document_name": null,
+          "document_url": "https://sam.gov/opp/aaef3e1141e74a12b1b75641f6c4cd7a/view",
+          "extracted_at": "2026-10-16T16:56:01.088916Z",
+          "location": "section “Official notice”",
+          "page": null,
+          "quote": "m. Machine learning algorithms to advance the state-of-the-art in areas such as:",
+          "section": "Official notice",
+          "sha256": "76218b75e24e0667f6547756df707769a2ab3893e24bbf7430b04d26324e2639",
+          "structural_reference": {
+            "block_id": "html-109",
+            "heading_path": [],
+            "kind": "paragraph",
+            "source_position": [
+              163,
+              108
+            ]
+          }
+        },
+        "label": "artificial intelligence",
+        "topics": [
+          "Artificial intelligence and machine learning",
+          "Data science"
+        ]
+      }
+    }
+  ]
+}

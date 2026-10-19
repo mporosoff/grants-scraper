@@ -1,6 +1,7 @@
 """Protected orchestration for the retained catalog's program-area correction."""
 import argparse
 import os
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -27,16 +28,21 @@ def plan(root, environment):
         "GITHUB_REF": "refs/heads/main",
         "GITHUB_EVENT_NAME": "workflow_dispatch",
         "GITHUB_WORKFLOW_REF": "mporosoff/grants-scraper/.github/workflows/refresh-opportunities.yml@refs/heads/main",
-        "CANDIDATE_RUN": str(recovery.PARENT_RUN),
-        "CANDIDATE_ID": recovery.PARENT_CANDIDATE,
     }
     if any(environment.get(k) != v for k, v in expected.items()):
         raise ValueError("Program-area revalidation requires the exact retained candidate and protected manual workflow")
     if any(environment.get(k) for k in ("RECEIPT_RUN", "PUBLICATION_RUN", "PUBLICATION_ATTEMPT")) or environment.get("QUALIFICATION_PILOT") == "true":
         raise ValueError("Program-area revalidation cannot be combined with other recovery or team selectors")
+    run, identifier = environment.get("CANDIDATE_RUN", ""), environment.get("CANDIDATE_ID", "")
+    if (not re.fullmatch(r"[1-9][0-9]*", run) or not re.fullmatch(r"[a-f0-9]{64}", identifier)
+            or (run == str(recovery.PARENT_RUN)) != (identifier == recovery.PARENT_CANDIDATE)):
+        raise ValueError("Program-area revalidation requires one exact candidate run and identity")
+    # The historical policy stays isolated. Modern selectors are authenticated
+    # against their native candidate and original budget before any work starts.
+    mode = "legacy" if identifier == recovery.PARENT_CANDIDATE else "modern"
     return {
         "stage": "program-area-revalidation", "release_sha": release.git(root, "rev-parse", "HEAD"),
-        "candidate_run": str(recovery.PARENT_RUN), "candidate_id": recovery.PARENT_CANDIDATE,
+        "candidate_run": run, "candidate_id": identifier, "program_area_mode": mode,
         "openai": "false", "anthropic": "false", "team_mode": "maintenance",
         "reason": "Correct retained program-area evidence and its coherent vectors; preserve original source, document allowance and team outputs",
     }
@@ -54,8 +60,23 @@ def update_references(root):
         team_reference(root / name, model["generation_id"])
 
 
-def persist(root, parent_bundle, receipt, bundle):
-    value = release.create(root, bundle, parent=parent_bundle, program_area_revalidation=receipt)
+def persist(root, parent_bundle, receipt, bundle, state=None):
+    modern = release.read_json(receipt).get('version') == recovery.MODERN_VERSION
+    if modern and state is None:
+        raise ValueError('Modern program-area correction requires its original budget state')
+    previous = os.environ.get('PROGRAM_AREA_VECTOR_STATE')
+    try:
+        if modern:
+            os.environ['PROGRAM_AREA_VECTOR_STATE'] = str(state)
+        value = release.create(root, bundle, parent=parent_bundle, program_area_revalidation=receipt)
+    finally:
+        if modern:
+            if previous is None:
+                os.environ.pop('PROGRAM_AREA_VECTOR_STATE', None)
+            else:
+                os.environ['PROGRAM_AREA_VECTOR_STATE'] = previous
+    if modern:
+        recovery.record_modern_candidate(state, bundle)
     if os.environ.get("GITHUB_OUTPUT"):
         with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf8") as output:
             output.write("candidate_id=" + value["candidate_id"] + "\n")
@@ -68,13 +89,14 @@ def main():
     parser.add_argument("--parent-bundle", type=Path)
     parser.add_argument("--receipt", type=Path)
     parser.add_argument("--bundle", type=Path)
+    parser.add_argument("--state", type=Path)
     args = parser.parse_args()
     if args.action == "references":
         update_references(release.ROOT)
     else:
         if not all((args.parent_bundle, args.receipt, args.bundle)):
             parser.error("persist requires --parent-bundle, --receipt and --bundle")
-        persist(release.ROOT, args.parent_bundle, args.receipt, args.bundle)
+        persist(release.ROOT, args.parent_bundle, args.receipt, args.bundle, args.state)
 
 
 if __name__ == "__main__":

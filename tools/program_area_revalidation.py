@@ -1,8 +1,7 @@
-"""One authenticated, zero-fetch program-area repair of the September 28 candidate.
+"""Revalidate cached program-area evidence without repeating source or team work.
 
-The original document budget is evidence, never a newly allocated allowance.
-A separate immutable whole-pass reservation prevents repeating vector spend,
-including on a later workflow run. Interrupted paid work fails closed.
+Modern native candidates retain their original logical allowance and accepted
+vector responses. The finite historical whole-pass route remains isolated.
 """
 from __future__ import annotations
 
@@ -19,6 +18,7 @@ import tempfile
 
 from tools import catalog_smoke_receipt as auth, release_candidate as candidate
 from tools.offline_spend import atomic_json
+from tools.offline_spend import identity
 
 ROOT = Path(__file__).resolve().parents[1]
 VERSION = 'program-area-revalidation-2'
@@ -47,6 +47,12 @@ MAX_REQUESTS = 8
 MAX_SECONDS = 960
 PARENT_VECTOR_RECEIPT_SHA256 = '915c49a3da9e8c3a91421e9dac4d7011acc02ebd596a2f64c4391c95720ca660'
 DERIVED_KEYS = {'topic_areas', 'document_program_areas', 'document_search_text'}
+MODERN_VERSION = 'program-area-revalidation-modern-1'
+MODERN_OPERATION_FILES = ('tools/program_area_revalidation.py', 'tools/program_area_release.py',
+    'scripts/extract_document_evidence.py', 'scripts/build_feeds.py',
+    'tools/build_search_release_package.mjs', 'tools/run_budgeted_vectors.mjs',
+    'tools/catalog_reconcile_spend.py', 'tools/embedding_contract.mjs',
+    '.github/workflows/refresh-opportunities.yml')
 
 
 def require(ok, reason):
@@ -242,7 +248,7 @@ def history(*, api=auth.existing.api):
     return reservation, files
 
 
-def projection(parent_root, audit_at):
+def projection(parent_root, audit_at, candidate_id=PARENT_CANDIDATE):
     """Pure replay plus an explicit firewall around all non-program-area facts."""
     from scripts import extract_document_evidence as evidence
     from scripts.build_catalog import facet_counts, catalog_javascript_bytes, catalog_metadata_javascript_bytes
@@ -281,7 +287,7 @@ def projection(parent_root, audit_at):
         else:
             stripped['records'][identifier].pop('program_areas', None)
     require(stripped == cache, 'unchanged_evidence_facts_and_clocks')
-    gate = verify(after, updated, read_cache(parent_root/'data/subtopics.js'), candidate_id=PARENT_CANDIDATE)
+    gate = verify(after, updated, read_cache(parent_root/'data/subtopics.js'), candidate_id=candidate_id)
     require(gate['publication_ready'], 'notice_projection_gate')
     cache_bytes = (json.dumps(updated, ensure_ascii=False, separators=(',', ':')) + '\n').encode()
     outputs = {PROJECTION[0]: catalog_javascript_bytes(after), PROJECTION[1]: catalog_metadata_javascript_bytes(after),
@@ -454,6 +460,8 @@ def checkpoint_vectors(receipt_path, state_path, *, root=ROOT, api=auth.existing
 
 def verify_inputs(root, original, receipt_path, *, api=auth.existing.api):
     """Constructor gate: authenticated parent, deterministic replay and uploaded state."""
+    if Path(receipt_path).is_file() and read(receipt_path).get('version') == MODERN_VERSION:
+        return verify_modern_inputs(root, original, receipt_path, api=api)
     receipt = validate_receipt(receipt_path, root)
     with tempfile.TemporaryDirectory(prefix='program-area-parent-') as directory:
         bundle = Path(directory)
@@ -476,6 +484,411 @@ def verify_inputs(root, original, receipt_path, *, api=auth.existing.api):
     return receipt['retained_hashes']
 
 
+def modern_prefix(identifier):
+    require(isinstance(identifier, str) and re.fullmatch('[a-f0-9]{64}', identifier), 'modern_parent_selector')
+    return 'offline-ai-program-area-' + identifier
+
+
+def modern_contract(root):
+    return hashes(root, MODERN_OPERATION_FILES)
+
+
+def modern_scope(root, original):
+    from tools.release_dependencies import snapshot, changed_groups
+    changes = changed_groups(original['dependency_groups'], snapshot(root))
+    require(set(changes.get('source', [])) <= {'scripts/extract_document_evidence.py'}
+        and not changes.get('teams') and not changes.get('semantic'), 'modern_extractor_only_change')
+    candidate.git(root, 'merge-base', '--is-ancestor', original['generation_sha'], 'HEAD')
+
+
+def modern_producer(run):
+    return {'run_id': str(run['id']), 'run_attempt': str(run['run_attempt']),
+        'head_sha': run['head_sha'], 'event': run['event'], 'path': run['path']}
+
+
+def modern_run(run, attempt, api, *, current=False):
+    meta = auth.json_value(api(f'actions/runs/{run}/attempts/{attempt}'))
+    require(str(meta.get('id')) == str(run) and str(meta.get('run_attempt')) == str(attempt)
+        and meta.get('head_branch') == 'main' and meta.get('path') == auth.REFRESH
+        and meta.get('event') in ({'workflow_dispatch'} if current else {'push', 'schedule', 'workflow_dispatch'})
+        and re.fullmatch('[a-f0-9]{40}', str(meta.get('head_sha', '')))
+        and meta.get('status') in ({'in_progress', 'completed'} if current else {'completed'}),
+        'modern_protected_producer')
+    return meta
+
+
+def modern_packet(repository, run, artifact, api):
+    from tools.fetch_release_artifact import artifact_bytes
+    require(artifact.get('expired') is False and re.fullmatch('sha256:[a-f0-9]{64}', artifact.get('digest', ''))
+        and str(artifact.get('workflow_run', {}).get('id')) == str(run['id'])
+        and artifact['workflow_run'].get('head_sha') == run['head_sha']
+        and artifact['workflow_run'].get('head_branch') == 'main', 'modern_artifact_origin')
+    raw = artifact_bytes(repository, str(run['id']), artifact, api)
+    require('sha256:' + sha(raw) == artifact['digest'], 'modern_artifact_digest')
+    return raw
+
+
+def modern_unpack(raw, destination):
+    from tools.catalog_reconcile import unpack
+    unpack(raw, destination)
+
+
+def modern_original(parent, state, repository, run, identifier, api, root):
+    """Authenticate the complete native candidate and its original spend owner."""
+    from tools.fetch_release_artifact import run_artifacts
+    original = candidate.load(parent, identifier)
+    require(not original.get('derived_from_candidate') and original['generation_run_id'] == str(run),
+        'modern_native_generation_parent')
+    require(all(original['files'].get(name) == digest for name, digest in original['generation_files'].items()),
+        'modern_generated_file_binding')
+    producer = modern_run(run, original['generation_run_attempt'], api)
+    rows = run_artifacts(run, api, repository=repository)
+    def one(name):
+        selected = [r for r in rows if r['name'] == name]
+        require(len(selected) == 1, 'modern_unique_' + name.split('-')[0])
+        return selected[0]
+    artifact = one('candidate-' + identifier)
+    with tempfile.TemporaryDirectory(prefix='program-parent-') as temporary:
+        packet = Path(temporary)
+        auth.unpack_public(modern_packet(repository, producer, artifact, api), packet)
+        require(candidate.load(packet, identifier) == original
+            and (packet/'candidate.json').read_bytes() == (Path(parent)/'candidate.json').read_bytes(),
+            'modern_exact_native_candidate')
+        require(all((packet/'files'/n).read_bytes() == (Path(parent)/'files'/n).read_bytes()
+            for n in original['files']), 'modern_complete_native_bytes')
+        require({n.relative_to(packet).as_posix() for n in packet.rglob('*') if n.is_file()} ==
+            {'candidate.json', *('files/' + n for n in original['files'])}, 'modern_native_archive_inventory')
+    plans = [(int(m[1]), r) for r in rows if (m := re.fullmatch(r'release-plan-([1-9][0-9]*)', r['name']))
+        and int(m[1]) <= int(original['generation_run_attempt'])]
+    require(plans, 'modern_generation_plan')
+    latest = max(n for n, _ in plans); selected = [r for n, r in plans if n == latest]
+    require(len(selected) == 1, 'modern_unique_generation_plan')
+    plan_producer = modern_run(run, latest, api)
+    plan = zip_files(modern_packet(repository, plan_producer, selected[0], api)).get('release-plan.json')
+    require(plan is not None and auth.json_value(plan).get('release_sha') == original['generation_sha']
+        and auth.json_value(plan).get('stage') == 'generate',
+        'modern_actual_generation_checkout')
+    candidate.git(root, 'merge-base', '--is-ancestor', original['generation_sha'], 'HEAD')
+    spending = {}
+    for role in ('reservation', 'state'):
+        row = one(f'generation-spend-{role}-{run}-{original["generation_run_attempt"]}')
+        raw = modern_packet(repository, producer, row, api)
+        spending[role] = {'artifact_id': row['id'], 'zip_sha256': sha(raw)}
+        modern_unpack(raw, Path(state) if role == 'state' else Path(state)/'original-reservation')
+    book = read(Path(state)/'ledger.json'); reservation = read(Path(state)/'original-reservation/spend-reservation.json')
+    require(book['logical_id'] == 'offline-' + str(run) and book['limit_microusd'] == 2_000_000
+        and book['max_requests'] == 300 and reservation['run_id'] == str(run)
+        and reservation['attempt'] == original['generation_run_attempt'] and reservation['mode'] == 'maintenance'
+        and reservation['maximum_logical_spend_usd'] == 2, 'modern_original_budget')
+    spending['ledger_sha256'] = identity(book)
+    return original, spending, modern_producer(producer), {
+        'id': artifact['id'], 'name': artifact['name'], 'sha256': artifact['digest'].removeprefix('sha256:')}
+
+
+def modern_history(parent, state, root, repository, run, identifier, api):
+    """Restore the newest paired task checkpoint, never an earlier allowance."""
+    from tools.fetch_release_artifact import repository_artifacts, run_artifacts
+    from tools.catalog_reconcile import request_identity
+    from tools.catalog_reconcile_spend import context
+    family = modern_prefix(identifier)
+    rows = [r for r in repository_artifacts(repository, api, task_prefix=family)
+        if r['name'].startswith(family + '-')]
+    reservations = [r for r in rows if re.fullmatch(re.escape(family) + r'-reservation-[1-9][0-9]*-[1-9][0-9]*', r['name'])]
+    states = [r for r in rows if re.fullmatch(re.escape(family) + r'-state-[1-9][0-9]*-[1-9][0-9]*', r['name'])]
+    require(len(rows) == len(reservations) + len(states) and (reservations or not states), 'modern_checkpoint_inventory')
+    if not reservations:
+        require(os.environ.get('GITHUB_RUN_ATTEMPT', '1') == '1', 'modern_missing_prior_attempt_state')
+        return None
+    latest = max(reservations, key=lambda r: r['id'])
+    selected = [r for r in states if r['name'] == latest['name'].replace('-reservation-', '-state-')]
+    require(len(selected) == 1, 'modern_newest_paired_checkpoint')
+    selected = selected[0]; _, producer_run, attempt = latest['name'].rsplit('-', 2)
+    producer = modern_run(producer_run, attempt, api)
+    require(latest['workflow_run'] == selected['workflow_run'], 'modern_paired_producer')
+    voucher = zip_files(modern_packet(repository, producer, latest, api))
+    require(set(voucher) == {'reservation.json'}, 'modern_reservation_members')
+    reservation = auth.json_value(voucher['reservation.json'])
+    require(reservation.get('version') == MODERN_VERSION and reservation.get('parent_candidate_id') == identifier
+        and reservation.get('producer_run') == producer_run and reservation.get('producer_attempt') == attempt,
+        'modern_reservation_binding')
+    modern_unpack(modern_packet(repository, producer, selected, api), state)
+    value = context(state)
+    require(value['version'] == MODERN_VERSION and value['parent_candidate_id'] == identifier
+        and value['parent_run'] == str(run)
+        and value['parent_manifest_sha256'] == sha((Path(parent)/'candidate.json').read_bytes())
+        and value['operation_sha256'] == reservation['operation_sha256'], 'modern_checkpoint_context')
+    ledger = read(Path(state)/'ledger.json')
+    link = {'producer': modern_producer(producer),
+        'reservation': {'id': latest['id'], 'name': latest['name'], 'sha256': latest['digest'].removeprefix('sha256:')},
+        'state': {'id': selected['id'], 'name': selected['name'], 'sha256': selected['digest'].removeprefix('sha256:')},
+        'ledger_sha256': identity(ledger), 'request_count': len(ledger['requests']),
+        'request_prefix_sha256': identity(ledger['requests']),
+        'request_identity_prefix_sha256': request_identity(ledger['requests']),
+        'charged_microusd': sum(r['charged_microusd'] for r in ledger['requests'])}
+    if value.get('completed_candidate_id'):
+        child = value['completed_candidate_id']
+        complete = Path(state)/'complete-candidates'/child
+        loaded = candidate.load(complete, child)
+        require(loaded.get('derived_from_candidate') == identifier
+            and loaded.get('program_area_revalidation', {}).get('operation_sha256') == value['operation_sha256'],
+            'modern_completed_child')
+        available = [r for r in run_artifacts(producer_run, api, repository=repository) if r['name'] == 'candidate-' + child]
+        require(len(available) <= 1, 'modern_completed_child_ambiguity')
+        if available:
+            with tempfile.TemporaryDirectory(prefix='program-completed-') as temporary:
+                auth.unpack_public(modern_packet(repository, producer, available[0], api), temporary)
+                require(candidate.load(temporary, child) == loaded, 'modern_completed_child_native')
+            link['candidate'] = {'candidate_id': child, 'manifest_sha256': sha((complete/'candidate.json').read_bytes()),
+                'producer': link['producer'], 'artifact': {'id': available[0]['id'], 'name': available[0]['name'],
+                    'sha256': available[0]['digest'].removeprefix('sha256:')}}
+    lineage_path = Path(state)/'consumed-checkpoints.json'
+    lineage = read(lineage_path)
+    if not any(r['state']['id'] == link['state']['id'] for r in lineage):
+        lineage.append(link)
+    # A completed replay emits a later state without a second reservation.
+    # It cannot change any private byte except this append-only transport
+    # lineage, and its actual workflow trace must prove zero generation work.
+    newer = sorted((r for r in states if r['id'] > selected['id']), key=lambda r: r['id'])
+    require(not newer or value.get('completed_candidate_id'), 'modern_state_only_requires_completed_child')
+    unchanged = {n.relative_to(state).as_posix(): sha(n.read_bytes()) for n in Path(state).rglob('*')
+        if n.is_file() and n.relative_to(state).as_posix() != 'consumed-checkpoints.json'}
+    for transport in newer:
+        _, transport_run, transport_attempt = transport['name'].rsplit('-', 2)
+        transport_meta = modern_run(transport_run, transport_attempt, api)
+        require(not any(r['name'] == transport['name'].replace('-state-', '-reservation-') for r in reservations),
+            'modern_state_only_new_reservation')
+        with tempfile.TemporaryDirectory(prefix='program-restore-') as temporary:
+            restored = Path(temporary)
+            modern_unpack(modern_packet(repository, transport_meta, transport, api), restored)
+            require({n.relative_to(restored).as_posix(): sha(n.read_bytes()) for n in restored.rglob('*')
+                if n.is_file() and n.relative_to(restored).as_posix() != 'consumed-checkpoints.json'} == unchanged
+                and read(restored/'consumed-checkpoints.json') == lineage, 'modern_completed_transport_bytes')
+        from tools.program_area_history import completed_restore
+        completed_restore(repository, transport_meta, transport_meta, api=api)
+        restored_link = {**link, 'producer': modern_producer(transport_meta), 'restored': True,
+            'state': {'id': transport['id'], 'name': transport['name'],
+                'sha256': transport['digest'].removeprefix('sha256:')}}
+        restored_link.pop('candidate', None)
+        child = value['completed_candidate_id']; complete = Path(state)/'complete-candidates'/child
+        candidates = [r for r in run_artifacts(transport_run, api, repository=repository)
+            if r['name'] == 'candidate-' + child]
+        require(len(candidates) <= 1, 'modern_transport_candidate_ambiguity')
+        if candidates:
+            with tempfile.TemporaryDirectory(prefix='program-transport-child-') as temporary:
+                auth.unpack_public(modern_packet(repository, transport_meta, candidates[0], api), temporary)
+                require(candidate.load(temporary, child) == candidate.load(complete, child),
+                    'modern_transport_candidate_bytes')
+            restored_link['candidate'] = {'candidate_id': child,
+                'manifest_sha256': sha((complete/'candidate.json').read_bytes()), 'producer': restored_link['producer'],
+                'artifact': {'id': candidates[0]['id'], 'name': candidates[0]['name'],
+                    'sha256': candidates[0]['digest'].removeprefix('sha256:')}}
+        lineage.append(restored_link)
+    atomic_json(lineage_path, lineage)
+    return value
+
+
+def vector_packet(root):
+    """Use the normal builder's exact ordered-corpus and whole-asset contract."""
+    root = Path(root).resolve()
+    script = r'''
+import {readFileSync} from 'node:fs'; import {createHash} from 'node:crypto'; import vm from 'node:vm';
+const root=new URL(process.argv[1]); const load=n=>readFileSync(new URL(n,root));
+const sha=b=>createHash('sha256').update(b).digest('hex');
+const {loadHarness,makeVariantHarness}=await import(new URL('tools/run_search_diagnosis.mjs',root));
+const {configuration}=await import(new URL('tools/embedding_contract.mjs',root));
+const {validateCorpusAsset}=await import(new URL('tools/run_budgeted_vectors.mjs',root));
+const names=JSON.parse(process.argv[2]); const hashes=Object.fromEntries(names.map(n=>[n,sha(load(n))]));
+const ctx={globalThis:{},URL,TextEncoder,Uint8Array,Uint16Array,Float32Array,ArrayBuffer};
+vm.runInNewContext(load('assets/search-hybrid.js').toString(),ctx);
+const base=await loadHarness(),h=makeVariantHarness(base,{searchV2:true});
+const corpus=ctx.globalThis.FUNDING_HYBRID_SEARCH.buildCorpus({parentCatalog:h.parentCatalog,childCatalog:h.childCatalog,
+currentnessRejectedIndexes:h.parentEngine.corpusCurrentness().currentnessRejectedIndexes});
+const corpusSha=sha(corpus.map(r=>`${r.passage_id}\0${r.parent_id}\0${r.text}\n`).join(''));
+const configSha=sha(JSON.stringify(configuration(hashes['assets/search-hybrid.js'])));
+let eligible=false;try{eligible=validateCorpusAsset(JSON.parse(load('data/search-v2-voyage-manifest.json')),
+load('data/search-v2-voyage-vectors.f16'),JSON.parse(load('data/search-v2-voyage-canaries.json')),corpus,corpusSha,configSha);}catch{}
+console.log(JSON.stringify({corpus_sha256:corpusSha,configuration_sha256:configSha,passage_count:corpus.length,
+source_hashes:hashes,retained_asset_eligible:eligible}));
+'''
+    from tools.catalog_reconcile_spend import GENERATION_INPUTS
+    result = subprocess.run([shutil.which('node') or 'node', '--input-type=module', '-e', script,
+        root.as_uri() + '/', json.dumps(GENERATION_INPUTS)], cwd=root, capture_output=True, timeout=120, check=False)
+    require(result.returncode == 0, 'modern_vector_corpus_contract')
+    return auth.json_value(result.stdout)
+
+
+def modern_native_vectors(root, state, parent, original, value, packet):
+    from tools import catalog_reconcile_spend as spend
+    book = spend.ledger(state)
+    accounting, raw = spend.parent_vector_accounting(state, parent, original, value, book, book.read())
+    require(accounting['classification'] in {'budgeted', 'retained'} and raw, 'modern_managed_native_vectors')
+    old = spend.context(state, generation=True)['operation_contract']; current = spend.vector_binding(packet)
+    compatible = (packet['retained_asset_eligible'] is True and all(old[key] == current[key]
+        for key in ('corpus_sha256', 'configuration_sha256', 'passage_count'))
+        and all(old['source_hashes'].get(n) == current['source_hashes'].get(n) for n in spend.VECTOR_PREPROCESSORS))
+    if compatible:
+        require(hashes(root, VECTORS) == {n: sha(raw[n]) for n in VECTORS}, 'modern_retained_vector_bytes')
+    return compatible, accounting
+
+
+def _modern_receipt(value, original, outputs, changes, ledger, consumed):
+    return {k: v for k, v in value.items() if k != 'completed_candidate_id'} | {
+        'projection': changes, 'projection_hashes': {n: sha(raw) for n, raw in outputs.items()},
+        'retained_hashes': {n: h for n, h in original['generation_files'].items()
+            if n not in outputs and n not in VECTORS and not FACET_FEED.fullmatch(n)},
+        'consumed_checkpoints': consumed, 'ledger_sha256': identity(ledger),
+        'new_source_requests': 0, 'new_document_requests': 0, 'new_team_requests': 0}
+
+
+def prepare_modern(parent_bundle, receipt_path, state, parent_run, parent_id, *, root=ROOT,
+                   api=auth.existing.api, output=None):
+    from tools import catalog_reconcile_spend as spend
+    require(re.fullmatch('[1-9][0-9]*', str(parent_run)) and state is not None, 'modern_exact_run_and_state')
+    modern_prefix(parent_id)
+    root, parent, state = Path(root), Path(parent_bundle), Path(state)
+    require(not state.exists() or not any(state.iterdir()), 'modern_fresh_local_state')
+    original = candidate.load(parent, parent_id); modern_scope(root, original)
+    repository = os.environ['GITHUB_REPOSITORY']
+    value = modern_history(parent, state, root, repository, parent_run, parent_id, api)
+    if value is None:
+        original, spending, producer, artifact = modern_original(parent, state, repository, parent_run, parent_id, api, root)
+        value = {'version': MODERN_VERSION, 'parent_candidate_id': parent_id, 'parent_run': str(parent_run),
+            'parent_attempt': original['generation_run_attempt'], 'parent_generation_sha': original['generation_sha'],
+            'parent_manifest_sha256': sha((parent/'candidate.json').read_bytes()), 'parent_producer': producer,
+            'parent_artifact': artifact, 'original_spend': spending, 'operation_contract': modern_contract(root),
+            'audit_at': datetime.now(timezone.utc).isoformat()}
+        value['operation_sha256'] = identity(value)
+        atomic_json(state/'reconciliation.json', value); atomic_json(state/'consumed-checkpoints.json', [])
+        shutil.copytree(parent, state/'parent-candidate')
+    else:
+        require(candidate.load(state/'parent-candidate', parent_id) == original, 'modern_saved_parent')
+        if value.get('completed_candidate_id'):
+            complete = state/'complete-candidates'/value['completed_candidate_id']
+            child = candidate.load(complete)
+            try:
+                candidate.verify_dependencies(root, child)
+            except ValueError:
+                require(value['operation_contract'].get('scripts/extract_document_evidence.py') !=
+                    modern_contract(root)['scripts/extract_document_evidence.py'], 'modern_completed_use_named_runtime_resume')
+                receipt = child['program_area_revalidation']
+                require(receipt['affected_generation']['generation_run_id'] != os.environ['GITHUB_RUN_ID'],
+                    'modern_changed_child_requires_new_dispatch')
+                value = {k: v for k, v in value.items() if k not in {'completed_candidate_id', 'operation_sha256'}}
+                value['operation_contract'] = modern_contract(root); value['audit_at'] = datetime.now(timezone.utc).isoformat()
+                value['operation_sha256'] = identity(value); atomic_json(state/'reconciliation.json', value)
+            else:
+                require(output is not None, 'modern_completed_output_required')
+                shutil.copytree(complete, output)
+                atomic_json(receipt_path, child['program_area_revalidation'])
+                native = [link['candidate'] for link in read(state/'consumed-checkpoints.json')
+                    if link.get('candidate', {}).get('candidate_id') == child['candidate_id']]
+                return {'modern': 'true', 'vector_state': str(state), 'parent_run': str(parent_run),
+                    'candidate_id': child['candidate_id'],
+                    'artifact_run': native[-1]['producer']['run_id'] if native else os.environ['GITHUB_RUN_ID'],
+                    'upload_candidate': 'false' if native else 'true',
+                    'state_artifact': modern_prefix(parent_id) + '-state-' + os.environ['GITHUB_RUN_ID'] + '-' + os.environ['GITHUB_RUN_ATTEMPT']}
+        if value['operation_contract'] != modern_contract(root):
+            value = {k: v for k, v in value.items() if k != 'operation_sha256'}
+            value['operation_contract'] = modern_contract(root)
+            value['operation_sha256'] = identity(value); atomic_json(state/'reconciliation.json', value)
+    spend.import_history(state, parent, value['original_spend']['ledger_sha256'])
+    outputs, changes = projection(parent/'files', value['audit_at'], parent_id)
+    for name in managed_feed_names(root) - set(outputs):
+        require(FACET_FEED.fullmatch(name), 'modern_obsolete_feed_scope'); candidate.checked_path(root, name).unlink()
+    for name in original['generation_files']:
+        if FACET_FEED.fullmatch(name) and name not in outputs:
+            continue
+        target = candidate.checked_path(root, name); target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes((parent/'files'/name).read_bytes())
+    for name, raw in outputs.items():
+        target = candidate.checked_path(root, name); target.parent.mkdir(parents=True, exist_ok=True); target.write_bytes(raw)
+    packet = vector_packet(root)
+    reused, accounting = modern_native_vectors(root, state, parent, original, value, packet)
+    atomic_json(state/'program-vector-inputs.json', {'packet': packet, 'vector_reused': reused, 'accounting': accounting})
+    ledger = read(state/'ledger.json')
+    receipt = _modern_receipt(value, original, outputs, changes, ledger, read(state/'consumed-checkpoints.json'))
+    atomic_json(receipt_path, receipt)
+    current = modern_run(os.environ['GITHUB_RUN_ID'], os.environ['GITHUB_RUN_ATTEMPT'], api, current=True)
+    require(os.environ['GITHUB_SHA'] == current['head_sha'], 'modern_current_event')
+    reservation = {'version': MODERN_VERSION, 'parent_candidate_id': parent_id,
+        'operation_sha256': value['operation_sha256'], 'producer_run': str(current['id']),
+        'producer_attempt': str(current['run_attempt']), 'prior_ledger_sha256': identity(ledger)}
+    atomic_json(state/'reservation.json', reservation)
+    reservation_path = state.parent/(state.name + '-reservation')/'reservation.json'
+    atomic_json(reservation_path, reservation)
+    suffix = str(current['id']) + '-' + str(current['run_attempt'])
+    return {'modern': 'true', 'vector_state': str(state), 'parent_run': str(parent_run),
+        'vector_reused': str(reused).lower(), 'reservation_artifact': modern_prefix(parent_id) + '-reservation-' + suffix,
+        'reservation_path': str(reservation_path), 'state_artifact': modern_prefix(parent_id) + '-state-' + suffix}
+
+
+def checkpoint_modern(receipt_path, state, *, root=ROOT, write=True):
+    from tools import catalog_reconcile_spend as spend
+    state, root = Path(state), Path(root); value = spend.context(state)
+    receipt = read(receipt_path); original = candidate.load(state/'parent-candidate', value['parent_candidate_id'])
+    require(receipt['operation_sha256'] == value['operation_sha256']
+        and value['operation_contract'] == modern_contract(root), 'modern_checkpoint_operation')
+    packet = vector_packet(root); inputs = read(state/'program-vector-inputs.json')
+    require(spend.vector_binding(packet) == spend.vector_binding(inputs['packet']) and packet['retained_asset_eligible'],
+        'modern_complete_current_corpus')
+    if inputs['vector_reused']:
+        reused, accounting = modern_native_vectors(root, state, state/'parent-candidate', original, value, packet)
+        require(reused and accounting == inputs['accounting'], 'modern_retained_origin')
+        proof = {'classification': 'retained_native_asset', 'accounting': accounting, 'new_requests': 0}
+    else:
+        binding = spend.vector_binding(packet)
+        completed = spend.completed_outputs(state, value, binding, root)
+        require(completed is not None and completed['status'] == 'complete', 'modern_sealed_completed_vectors')
+        proof = {'classification': 'budgeted', 'accounting_origin': completed['accounting_origin'],
+            'completion_sha256': sha((state/'vector-completions'/(value['operation_sha256']+'.json')).read_bytes())}
+    ledger = spend.ledger(state).read()
+    from tools.catalog_reconcile import request_identity
+    for link in receipt['consumed_checkpoints']:
+        count = link['request_count']
+        require(count <= len(ledger['requests']) and request_identity(ledger['requests'][:count]) ==
+            link['request_identity_prefix_sha256'] and sum(r['charged_microusd'] for r in
+                ledger['requests'][:count]) <= link['charged_microusd'], 'modern_consumed_ledger_prefix')
+    receipt.update(ledger_sha256=identity(ledger), vector_outputs=hashes(root, VECTORS), vector_accounting=proof)
+    if write:
+        atomic_json(receipt_path, receipt)
+    return receipt
+
+
+def verify_modern_inputs(root, original, receipt_path, *, api=auth.existing.api):
+    state = Path(os.environ.get('PROGRAM_AREA_VECTOR_STATE', ''))
+    require(os.environ.get('PROGRAM_AREA_VECTOR_STATE'), 'modern_constructor_private_state')
+    from tools.catalog_reconcile_spend import context, import_history
+    value = context(state); parent = state/'parent-candidate'
+    require(candidate.load(parent, value['parent_candidate_id']) == original
+        and value['version'] == MODERN_VERSION and value['parent_manifest_sha256'] == sha((parent/'candidate.json').read_bytes()),
+        'modern_constructor_original')
+    modern_scope(root, original)
+    import_history(state, parent, value['original_spend']['ledger_sha256'])
+    saved = read(receipt_path)
+    require(checkpoint_modern(receipt_path, state, root=root, write=False) == saved,
+        'modern_constructor_receipt_sealed')
+    outputs, changes = projection(parent/'files', value['audit_at'], value['parent_candidate_id'])
+    base = _modern_receipt(value, original, outputs, changes, read(state/'ledger.json'), read(state/'consumed-checkpoints.json'))
+    require(all(saved.get(k) == v for k, v in base.items()), 'modern_deterministic_projection_receipt')
+    require(hashes(root, outputs) == saved['projection_hashes']
+        and hashes(root, saved['retained_hashes']) == saved['retained_hashes'], 'modern_constructor_exact_outputs')
+    return saved['retained_hashes']
+
+
+def record_modern_candidate(state, bundle):
+    from tools.catalog_reconcile_spend import context
+    state = Path(state); value = context(state); child = candidate.load(bundle)
+    require(child.get('derived_from_candidate') == value['parent_candidate_id']
+        and child.get('program_area_revalidation', {}).get('operation_sha256') == value['operation_sha256'],
+        'modern_record_completed_candidate')
+    complete = state/'complete-candidates'/child['candidate_id']
+    if complete.exists():
+        require(candidate.load(complete) == child, 'modern_immutable_completed_candidate')
+    else:
+        shutil.copytree(bundle, complete)
+    value['completed_candidate_id'] = child['candidate_id']; atomic_json(state/'reconciliation.json', value)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('action', choices=('prepare', 'vectors-restore', 'vectors-reserve', 'vectors-checkpoint'))
@@ -484,10 +897,17 @@ def main():
     parser.add_argument('--receipt', type=Path, required=True)
     parser.add_argument('--state', type=Path)
     parser.add_argument('--reservation', type=Path)
+    parser.add_argument('--parent-run')
+    parser.add_argument('--parent-id')
+    parser.add_argument('--output', type=Path)
     args = parser.parse_args(); outputs = {'receipt_path': str(args.receipt)}
     if args.action == 'prepare':
         require(args.parent_bundle is not None, 'parent_bundle_required')
-        prepare(args.parent_bundle, args.receipt, root=args.root)
+        if args.parent_id and args.parent_id != PARENT_CANDIDATE:
+            outputs.update(prepare_modern(args.parent_bundle, args.receipt, args.state,
+                args.parent_run, args.parent_id, root=args.root, output=args.output))
+        else:
+            prepare(args.parent_bundle, args.receipt, root=args.root)
     elif args.action == 'vectors-restore':
         require(args.state is not None, 'state_path_required')
         outputs['restored'] = str(restore_vectors(args.receipt, args.state, root=args.root)).lower()
@@ -497,8 +917,11 @@ def main():
         outputs.update(artifact_name=artifact_name('reservation', value['owner']), artifact_path=str(args.reservation))
     else:
         require(args.state is not None, 'state_path_required')
-        value = checkpoint_vectors(args.receipt, args.state, root=args.root)
-        outputs.update(artifact_name=artifact_name('state', value['owner']), artifact_path=str(args.state))
+        if read(args.receipt).get('version') == MODERN_VERSION:
+            checkpoint_modern(args.receipt, args.state, root=args.root)
+        else:
+            value = checkpoint_vectors(args.receipt, args.state, root=args.root)
+            outputs.update(artifact_name=artifact_name('state', value['owner']), artifact_path=str(args.state))
     if os.environ.get('GITHUB_OUTPUT'):
         with open(os.environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as stream:
             for key, value in outputs.items():
