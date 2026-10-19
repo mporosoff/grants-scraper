@@ -62,6 +62,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       stage: ${{ steps.plan.outputs.stage }}
+      program_area_mode: ${{ steps.plan.outputs.program_area_mode }}
       reason: ${{ steps.plan.outputs.reason }}
       held_stage: ${{ steps.plan.outputs.held_stage }}
       daily_status: ${{ steps.plan.outputs.daily_status }}
@@ -737,9 +738,12 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 35
     outputs:
-      candidate_id: ${{ steps.restore.outputs.candidate_id || steps.persist.outputs.candidate_id }}
+      candidate_id: ${{ steps.restore.outputs.candidate_id || steps.prepare.outputs.candidate_id || steps.persist.outputs.candidate_id }}
+      artifact_run: ${{ steps.restore.outputs.artifact_run || steps.prepare.outputs.artifact_run || github.run_id }}
     env:
       GH_TOKEN: ${{ github.token }}
+      CANDIDATE_RUN: ${{ needs.plan.outputs.candidate_run }}
+      CANDIDATE_ID: ${{ needs.plan.outputs.candidate_id }}
     steps:
       - uses: actions/checkout@v6
         with:
@@ -748,6 +752,7 @@ jobs:
       - uses: ./.github/actions/release-setup
       - name: Restore this run's completed immutable correction
         id: restore
+        if: needs.plan.outputs.program_area_mode != 'modern'
         run: python -m tools.restore_generation_checkpoint
       - name: Load the exact original catalog candidate
         if: steps.restore.outputs.candidate_id == ''
@@ -763,21 +768,23 @@ jobs:
         run: >-
           python -m tools.program_area_revalidation prepare
           --parent-bundle "$RUNNER_TEMP/parent-candidate" --receipt "$RUNNER_TEMP/program-area-receipt.json"
+          --parent-run "$CANDIDATE_RUN" --parent-id "$CANDIDATE_ID" --state "$RUNNER_TEMP/program-area-modern"
+          --output "$RUNNER_TEMP/candidate"
       - name: Restore an already completed coherent vector pass
         id: vectors-restore
-        if: steps.restore.outputs.candidate_id == ''
+        if: steps.restore.outputs.candidate_id == '' && steps.prepare.outputs.candidate_id == '' && steps.prepare.outputs.modern != 'true'
         run: >-
           python -m tools.program_area_revalidation vectors-restore
           --receipt "$RUNNER_TEMP/program-area-receipt.json" --state "$RUNNER_TEMP/program-area-vectors"
       - name: Prepare one durable correction reservation before any vector request
         id: reserve
-        if: steps.restore.outputs.candidate_id == '' && steps.vectors-restore.outputs.restored != 'true'
+        if: steps.restore.outputs.candidate_id == '' && steps.prepare.outputs.candidate_id == '' && steps.vectors-restore.outputs.restored != 'true' && steps.prepare.outputs.modern != 'true'
         run: >-
           python -m tools.program_area_revalidation vectors-reserve
           --receipt "$RUNNER_TEMP/program-area-receipt.json" --reservation "$RUNNER_TEMP/program-area-reservation/reservation.json"
       - name: Persist the immutable correction reservation before provider dispatch
         id: reservation-upload
-        if: steps.restore.outputs.candidate_id == '' && steps.vectors-restore.outputs.restored != 'true'
+        if: steps.restore.outputs.candidate_id == '' && steps.prepare.outputs.candidate_id == '' && steps.vectors-restore.outputs.restored != 'true' && steps.prepare.outputs.modern != 'true'
         uses: actions/upload-artifact@v4
         with:
           name: ${{ steps.reserve.outputs.artifact_name }}
@@ -786,30 +793,53 @@ jobs:
           retention-days: 90
       - name: Rebuild only the corrected corpus under unchanged vector limits
         id: vectors
-        if: steps.restore.outputs.candidate_id == '' && steps.vectors-restore.outputs.restored != 'true' && steps.reservation-upload.outcome == 'success'
+        if: steps.restore.outputs.candidate_id == '' && steps.prepare.outputs.candidate_id == '' && steps.vectors-restore.outputs.restored != 'true' && steps.reservation-upload.outcome == 'success' && steps.prepare.outputs.modern != 'true'
         env:
           VOYAGE_API_KEY: ${{ secrets.VOYAGE_API_KEY }}
         run: node tools/build_search_v2_voyage_vectors.mjs --write --production
       - name: Verify and checkpoint the complete coherent vector result
         id: checkpoint
-        if: steps.restore.outputs.candidate_id == '' && steps.vectors-restore.outputs.restored != 'true'
+        if: steps.restore.outputs.candidate_id == '' && steps.prepare.outputs.candidate_id == '' && steps.vectors-restore.outputs.restored != 'true' && steps.prepare.outputs.modern != 'true'
         run: >-
           python -m tools.program_area_revalidation vectors-checkpoint
           --receipt "$RUNNER_TEMP/program-area-receipt.json" --state "$RUNNER_TEMP/program-area-vectors"
       - name: Retain complete vector bytes before package or publication work
         id: checkpoint-upload
-        if: steps.restore.outputs.candidate_id == '' && steps.vectors-restore.outputs.restored != 'true'
+        if: steps.restore.outputs.candidate_id == '' && steps.prepare.outputs.candidate_id == '' && steps.vectors-restore.outputs.restored != 'true' && steps.prepare.outputs.modern != 'true'
         uses: actions/upload-artifact@v4
         with:
           name: ${{ steps.checkpoint.outputs.artifact_name }}
           path: ${{ steps.checkpoint.outputs.artifact_path }}
           if-no-files-found: error
           retention-days: 90
+      - name: Persist the modern correction identity before vector dispatch
+        id: modern-reservation-upload
+        if: steps.restore.outputs.candidate_id == '' && steps.prepare.outputs.candidate_id == '' && steps.prepare.outputs.modern == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.prepare.outputs.reservation_artifact }}
+          path: ${{ steps.prepare.outputs.reservation_path }}
+          if-no-files-found: error
+          retention-days: 90
+      - name: Rebuild the corrected corpus inside its original durable logical allowance
+        id: modern-vectors
+        if: steps.restore.outputs.candidate_id == '' && steps.prepare.outputs.candidate_id == '' && steps.prepare.outputs.modern == 'true' && steps.prepare.outputs.vector_reused != 'true' && steps.modern-reservation-upload.outcome == 'success'
+        env:
+          VOYAGE_API_KEY: ${{ secrets.VOYAGE_API_KEY }}
+          CATALOG_VECTOR_OPERATION: reconciliation
+          CATALOG_RECONCILE_STATE: ${{ steps.prepare.outputs.vector_state }}
+        run: node tools/run_budgeted_vectors.mjs --production --write
+      - name: Verify the modern projection and sealed vector completion
+        id: modern-checkpoint
+        if: steps.restore.outputs.candidate_id == '' && steps.prepare.outputs.candidate_id == '' && steps.prepare.outputs.modern == 'true'
+        run: >-
+          python -m tools.program_area_revalidation vectors-checkpoint
+          --receipt "$RUNNER_TEMP/program-area-receipt.json" --state "$RUNNER_TEMP/program-area-modern"
       - name: Update public catalog and retained team references without generation
-        if: steps.restore.outputs.candidate_id == ''
+        if: steps.restore.outputs.candidate_id == '' && steps.prepare.outputs.candidate_id == ''
         run: python -m tools.program_area_release references
       - name: Assemble the corrected search package against the published corpus
-        if: steps.restore.outputs.candidate_id == ''
+        if: steps.restore.outputs.candidate_id == '' && steps.prepare.outputs.candidate_id == ''
         run: |
           curl --fail --silent --show-error --max-filesize 65536 --max-time 30 --retry 2 --retry-max-time 90 \
             "https://mporosoff.github.io/grants-scraper/data/search-v2-release.json?run=${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" \
@@ -818,15 +848,25 @@ jobs:
             --published-release "${RUNNER_TEMP}/published-search-release.json"
       - name: Persist a derived candidate with original source and spend provenance
         id: persist
-        if: steps.restore.outputs.candidate_id == ''
+        if: steps.restore.outputs.candidate_id == '' && steps.prepare.outputs.candidate_id == ''
         run: >-
           python -m tools.program_area_release --parent-bundle "$RUNNER_TEMP/parent-candidate"
           --receipt "$RUNNER_TEMP/program-area-receipt.json" --bundle "$RUNNER_TEMP/candidate"
-      - name: Retain the immutable corrected catalog before ordinary protected validation
-        if: steps.restore.outputs.candidate_id == ''
+          --state "$RUNNER_TEMP/program-area-modern"
+      - name: Preserve modern completed and partial work after every vector outcome
+        id: modern-state-upload
+        if: always() && steps.restore.outputs.candidate_id == '' && steps.prepare.outputs.modern == 'true' && steps.prepare.outcome == 'success'
         uses: actions/upload-artifact@v4
         with:
-          name: candidate-${{ steps.persist.outputs.candidate_id }}
+          name: ${{ steps.prepare.outputs.state_artifact }}
+          path: ${{ steps.prepare.outputs.vector_state }}
+          if-no-files-found: error
+          retention-days: 90
+      - name: Retain the immutable corrected catalog before ordinary protected validation
+        if: steps.restore.outputs.candidate_id == '' && (steps.prepare.outputs.candidate_id == '' || steps.prepare.outputs.upload_candidate == 'true')
+        uses: actions/upload-artifact@v4
+        with:
+          name: candidate-${{ steps.prepare.outputs.candidate_id || steps.persist.outputs.candidate_id }}
           path: ${{ runner.temp }}/candidate
           include-hidden-files: true
           if-no-files-found: error
@@ -1134,7 +1174,7 @@ jobs:
         id: select
         env:
           GENERATED_ID: ${{ needs.catalog-reconcile.outputs.candidate_id || needs.generate.outputs.candidate_id || needs.assemble.outputs.candidate_id || needs.catalog-correction.outputs.candidate_id || needs.program-area-revalidation.outputs.candidate_id || needs.catalog-source-recovery.outputs.candidate_id || needs.catalog-access-correction.outputs.candidate_id || needs.catalog-identity-correction.outputs.candidate_id || needs.catalog-url-correction.outputs.candidate_id }}
-          RECONCILED_RUN: ${{ needs.catalog-reconcile.outputs.artifact_run }}
+          RECONCILED_RUN: ${{ needs.catalog-reconcile.outputs.artifact_run || needs.program-area-revalidation.outputs.artifact_run }}
           REQUESTED_ID: ${{ needs.plan.outputs.candidate_id }}
           REQUESTED_RUN: ${{ needs.plan.outputs.candidate_run }}
         run: |

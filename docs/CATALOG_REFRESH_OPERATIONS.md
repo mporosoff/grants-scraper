@@ -25,7 +25,43 @@ Before retrying, retain the original artifact ZIPs and their authenticated metad
 The retained progress log identified NSF CAREER 22-586 (339594): a nested heading expression took longer than the per-notice deadline to reject an uppercase sentence ending with a period. The replacement checks the same heading language in linear time. A bounded diagnostic of the same public notice completed in about 1.3 seconds without provider requests. The IARPA adapter also now sends its truthful source identity and text-format preferences explicitly through the shared downloader; its prior document-oriented request profile returned HTTP 403.
 
 
-## Retained September 28 program-area correction
+## Retained program-area correction
+
+Use protected manual `stage=program-area-revalidation` with the exact original
+native `candidate_run` and full `candidate_id` when a bounded document-extractor
+repair must remove unsupported program-area signals from a persisted candidate.
+The generic route authenticates the candidate, actual generation checkout,
+original reservation and complete spending state. Only the extractor source
+dependency may change; team and embedding-semantic inputs must remain exact.
+Arbitrary derived candidates and mixed recovery selectors are rejected.
+
+The `program-area-revalidation-modern-1` receipt records the original identity,
+affected projection, retained output hashes, ledger and vector origin. Cached
+citations are revalidated without collection, document retrieval/AI or team
+generation. Only the three derived discoverability fields may change on a
+record. Catalog facets/indexes, metadata and complete managed feeds are rebuilt;
+scientific facts, deadlines, source/evidence clocks, historical change events,
+source cache and team outputs remain retained. Official notice content is not
+rewritten.
+
+The original $2/300-request ledger continues with every prior request, charge
+and response cache. Same-corpus/configuration/preprocessor proof plus the sealed
+native asset retains all four vector outputs with zero new calls. A changed
+corpus runs the existing budgeted production vector wrapper within that same
+remaining allowance. No replacement allowance is allocated. The operation's
+reservation is uploaded before any vector dispatch; its private state is retained
+after partial work and after the complete child is persisted.
+
+Resume from the newest authenticated paired checkpoint. A complete child is
+restored byte-for-byte before any projection, vector or package work; downstream
+failures use that child's exact validation/publication selectors. Missing or
+conflicting checkpoint/accounting evidence holds rather than restarting work.
+Runtime-only changes use named `reuse`; after a completed child, another extractor
+correction consumes the same retained ledger in a new dispatch. Ordinary gates, review, Worker
+provenance, protected merge, Pages and live verification still apply. See
+[the route and receipt contract](program-area-revalidation.md).
+
+### Historical September 28 compatibility
 
 The replacement refresh `36480049073` completed source and document work, then
 publication review found administrative language classified as program scope.
@@ -33,7 +69,7 @@ Its immutable parent is
 `85954ae156ca45aea2b6bac4db500f747e9e64725c230716087b085817c0c1de`.
 Do not rerun source collection or replace this candidate with an unrelated run.
 
-The protected manual `program-area-revalidation` stage accepts only that exact
+The historical compatibility branch of `program-area-revalidation` accepts only that exact
 `candidate_run` and `candidate_id`. It authenticates the parent artifact and its
 original spend evidence, revalidates retained citation excerpts, and keeps the
 original source/evidence timestamps and all team outputs. The correction audit

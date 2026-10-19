@@ -154,8 +154,9 @@ class ProgramAreaWorkflowTests(unittest.TestCase):
         self.assertIs(settings['production_services']['teams']['enabled'], False)
         self.assertNotIn('API_KEY', json.dumps(self.job.get('env', {})))
         secret_steps = [step.get('id') for step in self.steps if 'secrets.' in json.dumps(step)]
-        self.assertEqual(secret_steps, ['vectors'])
+        self.assertEqual(secret_steps, ['vectors', 'modern-vectors'])
         self.assertEqual(self.by_id['vectors']['env'], {'VOYAGE_API_KEY': '${{ secrets.VOYAGE_API_KEY }}'})
+        self.assertEqual(self.by_id['modern-vectors']['env']['VOYAGE_API_KEY'], '${{ secrets.VOYAGE_API_KEY }}')
         commands = '\n'.join(step.get('run', '') for step in self.steps)
         for command in ('scripts.build_catalog', 'scripts.enrich_catalog', 'scripts.sources merge',
                         'tools.run_budgeted_documents', 'scripts.build_opportunity_teams', 'pnpm test:e2e', 'playwright'):
@@ -188,7 +189,7 @@ class ProgramAreaWorkflowTests(unittest.TestCase):
         restore_index = self.steps.index(self.by_id['restore'])
         for step in self.steps[restore_index + 1:]:
             self.assertIn("steps.restore.outputs.candidate_id == ''", step['if'])
-        self.assertIn('steps.restore.outputs.candidate_id || steps.persist.outputs.candidate_id', self.job['outputs']['candidate_id'])
+        self.assertIn('steps.restore.outputs.candidate_id || steps.prepare.outputs.candidate_id || steps.persist.outputs.candidate_id', self.job['outputs']['candidate_id'])
         candidate = self.jobs['candidate']
         self.assertIn('program-area-revalidation', candidate['needs'])
         self.assertIn("needs.program-area-revalidation.result == 'success'", candidate['if'])

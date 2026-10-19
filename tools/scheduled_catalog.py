@@ -728,6 +728,7 @@ def _only_preflight_stops(repository, run, jobs):
 def prior_generation(root, environment, manifest):
     """Find one unfinished owner after the current source generation, or hold."""
     from tools.runtime_assembly_history import no_generation_allowance
+    from tools.program_area_history import published_consumes as program_area_consumes
     repository = environment['GITHUB_REPOSITORY']
     floor, current = int(manifest['generation_run_id']), int(environment['GITHUB_RUN_ID'])
     published = _published(root)
@@ -755,10 +756,14 @@ def prior_generation(root, environment, manifest):
                 raise Hold('Prior runtime assembly does not authenticate zero-spend reuse: ' + str(error), identifier) from error
             if _published_reconciliation_consumes(root, run, artifacts, repository=repository):
                 continue
+            if program_area_consumes(root, run, artifacts, repository=repository):
+                continue
             candidates = [a for a in artifacts if a['name'].startswith('candidate-')]
             reservations = [a for a in artifacts
                             if a['name'].startswith(f'generation-spend-reservation-{identifier}-')
                             or re.fullmatch(r'program-area-vectors-[a-f0-9]{64}-reservation-'
+                                            + str(identifier) + r'-[1-9][0-9]*', a['name'])
+                            or re.fullmatch(r'offline-ai-program-area-[a-f0-9]{64}-reservation-'
                                             + str(identifier) + r'-[1-9][0-9]*', a['name'])]
             if len(candidates) > 1:
                 raise Hold('Multiple candidate identities require an exact named recovery', identifier)

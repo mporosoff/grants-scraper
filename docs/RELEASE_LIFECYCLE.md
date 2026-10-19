@@ -56,6 +56,7 @@ Use the workflow dispatch `stage` input:
 | `generate` | Current protected main | One complete bounded generation; persist, validate, publish and verify |
 | `reuse` | Current `release/candidate-source.json` | Verify generation inputs and data bytes; assemble current runtime around unchanged data, persist a derived candidate and release |
 | `catalog-reconcile` | Exact original `candidate_run` and full `candidate_id`, retained reservation and spending state | Reconcile reviewed SAM only; retain other source/evidence/team decisions; rebuild affected deterministic assets and compatible vectors within the original allowance; persist a corrected child |
+| `program-area-revalidation` | Exact original native `candidate_run` and full `candidate_id`, retained reservation and spending state | Revalidate cached program-area citations; retain source/document/team work and clocks; rebuild affected discoverability assets and vectors within the original allowance; persist an exact derived child |
 | `validate` | `candidate_run`, full `candidate_id` | Load candidate, run current deterministic gates, retain reports/receipt |
 | `publish` | `candidate_run`, full `candidate_id`; optional `receipt_run` | Reuse a matching receipt or validate; prepare Worker, protected merge, Pages and live verification |
 | `verify` | `candidate_run`, full `candidate_id`, `receipt_run`, `publication_run` | Verify the expected retained publication receipt, stamped SHA and exact live release; no generation or publication |
@@ -90,6 +91,33 @@ that call. The published rolling change history is retained as well. The source
 checkpoint freezes the predecessor's protected Git ref, candidate and file hashes
 so a retry cannot combine a new comparison catalog with an older event history.
 This identity evidence never replaces current source terms.
+
+The generic `program-area-revalidation` route is separately bounded to an
+extractor-only source dependency change, with unchanged team and semantic
+dependencies. Its `program-area-revalidation-modern-1` receipt binds the original
+candidate, actual generation plan, complete accounting and projection hashes.
+It removes unsupported cached program-area hits without new source, document or
+team requests. Only the affected record's topics, program-area labels and
+document search text can change; facts, deadlines, membership, source/evidence
+clocks, source cache, team outputs and historical change events remain retained.
+Official notice content is not rewritten. It rebuilds the deterministic catalog/index/feed
+projection and records a separate correction audit time.
+
+The original $2/300-request ledger, prior charges and accepted-response caches
+continue without allocating another allowance. Exact unchanged corpus,
+configuration and preprocessor inputs plus the authenticated native asset origin
+permit zero-call vector retention. Changed corpus work uses the existing durable
+production wrapper against that same remaining budget. A reservation precedes
+provider dispatch, and the final private state retains the complete constructed
+child before its public artifact upload. The newest authenticated paired state
+restores that exact compatible child before projection, vectors or packaging;
+runtime-only changes use named `reuse`. Missing or conflicting proof holds.
+The original generation SHA/run/attempt never changes; the affected correction,
+normal validation, exact-head review, Worker preparation, protected merge, Pages
+and live verification have separate provenance. The September 28 selector remains
+an isolated historical compatibility branch. See
+[program-area revalidation](program-area-revalidation.md).
+
 For live-only retries, `publication_run` selects the expected publication
 checkpoint; `publication_attempt` can select an earlier retained attempt
 explicitly. An older live receipt for the same candidate does not pass. Failed
