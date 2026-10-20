@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/neuroscience.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/neuroscience.xml</id>
-  <updated>2026-10-19T17:05:45Z</updated>
+  <updated>2026-10-20T15:28:21Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIH Stroke Clinical Trials Network (StrokeNet) Infrastructure - National Coordinating Center (NCC) and National Data Management Center (NDMC)</title>
@@ -357,15 +357,6 @@
     <summary>Bureau of Justice Assistance | Application 2026-10-30 | This is a notice of funding opportunity (NOFO) for the BJA FY 2026 National Center for Veterans Justice. This opportunity will establish a national center to provide specialized support to state, local, and tribal criminal justice agencies; treatment and service providers; courts; corrections systems; and community supervision agencies to effectively support and respond to the needs of veterans ac…</summary>
   </entry>
   <entry>
-    <title>Firefox</title>
-    <link href="https://sam.gov/opp/182eab6ca77d465f931c6dc118b939ca/view"/>
-    <id>urn:funding-finder:sam-gov:sam-gov%3A182eab6ca77d465f931c6dc118b939ca</id>
-    <updated>2026-09-16T00:00:00Z</updated>
-    <author><name>Defense Advanced Research Projects Agency</name></author>
-    <category term="Neuroscience"/>
-    <summary>Defense Advanced Research Projects Agency | Preproposal 2026-10-19 | Research optical scanning components and analog processing architectures for a 100-channel non-invasive brain-computer interface. Fundamental-research determination is proposal-specific; CMMC and research-security requirements apply.</summary>
-  </entry>
-  <entry>
     <title>Data Coordinating Center for the Aging and Alzheimer’s Disease Mouse Brain Atlas (AD-MBA) (U24 Clinical Trial Not Allowed)</title>
     <link href="https://www.grants.gov/search-results-detail/359740"/>
     <id>urn:funding-finder:grants-gov:359740</id>
@@ -648,5 +639,15 @@ we will not consider for support include Covid-19 relat…</summary>
     <category term="Neuroscience"/>
     <category term="Social and behavioral sciences"/>
     <summary>National Institutes of Health | Application 2027-02-05 | The goal of this Notice of Funding Opportunity (NOFO) is to provide funding support for the pre-clinical and early stage clinical (Phase I) development of novel small-molecule and biologic drug candidates that prevent Alzheimer's disease (AD), slow its progression, or treat its cognitive and behavioral symptoms. Participants in this program will receive funding for therapy development activities s…</summary>
+  </entry>
+  <entry>
+    <title>Career Transition Award for NINDS Intramural Clinician-Scientists (K22 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/357474"/>
+    <id>urn:funding-finder:grants-gov:357474</id>
+    <updated>2024-12-02T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Neuroscience"/>
+    <category term="Transportation"/>
+    <summary>National Institutes of Health | Application 2027-11-12 | The objective of the NIH Career Transition Award (K22) is to provide support to outstanding basic or clinical investigators to develop their independent research skills through a two phase program: an initial period involving an intramural appointment at the NIH and a final period of support at an extramural institution. This NINDS K22 is specifically designed to facilitate the transition of NINDS…</summary>
   </entry>
 </feed>

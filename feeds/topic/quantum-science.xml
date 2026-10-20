@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/quantum-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/quantum-science.xml</id>
-  <updated>2026-10-19T17:05:45Z</updated>
+  <updated>2026-10-20T15:28:21Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>FY 2027 Continuation of Solicitation for the Office of Science Financial Assistance Program</title>
@@ -69,19 +69,6 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Energy"/>
     <summary>Office of Naval Research | Application 2027-04-09 | Established in 1985, the Department of War Multidisciplinary University Research Initiative (MURI) program funds U.S. academic research teams to conduct high-impact basic research that addresses future challenges faced by the Department of War. The MURI program specifically supports U.S. university teams investigating complex, DoW-relevant problem sets at the intersection of multiple scientific di…</summary>
-  </entry>
-  <entry>
-    <title>The DOE Quantum Genesis Q Competition</title>
-    <link href="https://www.grants.gov/search-results-detail/363869"/>
-    <id>urn:funding-finder:grants-gov:363869</id>
-    <updated>2026-09-17T00:00:00Z</updated>
-    <author><name>Office of Science</name></author>
-    <category term="Energy"/>
-    <category term="Quantum science"/>
-    <category term="Technology development"/>
-    <category term="Data science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <summary>Office of Science | Application 2026-10-19 | The Department of Energy (DOE) recently announced the establishment of the Quantum Genesis initiative to develop and deploy the world’s first fault-tolerant, scientifically relevant quantum computing (SRQC) capability for research and development. The Department seeks to realize this bold ambition through the Quantum Genesis Q Competition (herein, the Q Competition), a first of its kind effort to …</summary>
   </entry>
   <entry>
     <title>Unifying​ Imaging with​ Quantum​ Entanglement (UNIQUE)</title>
@@ -398,6 +385,19 @@
     <category term="Technology development"/>
     <category term="Data science"/>
     <summary>U.S. National Science Foundation | Application 2027-04-13 | Revolutionizing Engineering Departments (hereinafter referred to as RED) is designed to build upon previous efforts in engineering education research. Specifically, previous and ongoing evaluations of the NSF Engineering Education and Centers Division program and its predecessors, as well as those related programs in the Directorate for STEM Education, have shown that prior investments have signif…</summary>
+  </entry>
+  <entry>
+    <title>CHIPS Incentives Program - Facilities for Semiconductor Materials and Manufacturing Equipment</title>
+    <link href="https://www.grants.gov/search-results-detail/350338"/>
+    <id>urn:funding-finder:grants-gov:350338</id>
+    <updated>2023-09-29T00:00:00Z</updated>
+    <author><name>National Institute of Standards and Technology</name></author>
+    <category term="Manufacturing"/>
+    <category term="Quantum science"/>
+    <category term="Materials science"/>
+    <category term="Cybersecurity"/>
+    <category term="Water"/>
+    <summary>National Institute of Standards and Technology | Application 2026-11-01 | The CHIPS Incentives Program aims to catalyze long-term economically sustainable growth in the domestic semiconductor industry in support of U.S. economic and national security. This is the second Notice of Funding Opportunity under this program and seeks applications for projects for the construction, expansion, or modernization of commercial facilities for semiconductor materials and manufacturi…</summary>
   </entry>
   <entry>
     <title>Centers of Research Excellence in Science and Technology (CREST)</title>

@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/source-type/federal.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/source-type/federal.xml</id>
-  <updated>2026-10-19T17:05:45Z</updated>
+  <updated>2026-10-20T15:28:21Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -303,6 +303,14 @@
     <summary>National Institutes of Health | Estimated Application 2027-10-01 | Rigor Scholar Cohort Awards support early-career researchers to advance expertise in rigorous scientific practices, such as preregistration, blinding, randomization, and transparent dissemination, through multi-institutional collaboration. Working within local and national cohorts, scholars will co-develop procedures and share lessons, building the vital skills needed to champion good scientific p…</summary>
   </entry>
   <entry>
+    <title>Advancing State Implementation of the National Strategy to Support Family Caregivers</title>
+    <link href="https://www.grants.gov/search-results-detail/364116"/>
+    <id>urn:funding-finder:grants-gov:364116</id>
+    <updated>2027-06-26T00:00:00Z</updated>
+    <author><name>Administration for Community Living</name></author>
+    <summary>Administration for Community Living | Estimated Application 2027-07-22 | The purpose of this Notice of Funding Opportunity (NOFO) is to implement the demonstration authority in Section 373(i) of the Older Americans Act of 1965, as amended (OAA). Successful grantees will use the framework provided by the 2022 National Strategy to Support Family Caregivers (the Strategy) as the basis for their proposed projects. Under this NOFO, ACL is interested in supporting state impl…</summary>
+  </entry>
+  <entry>
     <title>Clinical Trials in Organ Transplantation in Children and Adults</title>
     <link href="https://www.grants.gov/search-results-detail/362955"/>
     <id>urn:funding-finder:grants-gov:362955</id>
@@ -573,15 +581,5 @@
     <category term="Biology and biotechnology"/>
     <category term="Education and workforce"/>
     <summary>National Institutes of Health | Estimated Application 2027-05-25 | NINDS intends to support multiple clinical Networks of Diagnostic Excellence (NODEs) as part of the next phase of the Undiagnosed Diseases Network (UDN). Unlike prior phases, clinical NODEs are expected to function as geographically distributed regional clinical networks rather than single-site centers. Each clinical NODE would establish and lead a regional network built on existing partnerships w…</summary>
-  </entry>
-  <entry>
-    <title>Undiagnosed Diseases Network (UDN) Diagnostic Research Innovation Center</title>
-    <link href="https://www.grants.gov/search-results-detail/363837"/>
-    <id>urn:funding-finder:grants-gov:363837</id>
-    <updated>2027-03-25T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Technology development"/>
-    <summary>National Institutes of Health | Estimated Application 2027-05-25 | NINDS intends to support a Diagnostic Research Innovation Center (DRIC) for the next phase of the Undiagnosed Diseases Network (UDN). The new Network is expected to include a Clinical and Data Coordinating Center (CDCC), geographically distributed clinical Networks of Diagnostic Excellence (NODEs), the NIH Undiagnosed Diseases Program (UDP), a DRIC, the UDN Foundation, patient advocacy organizatio…</summary>
   </entry>
 </feed>

@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml</id>
-  <updated>2026-10-19T17:05:45Z</updated>
+  <updated>2026-10-20T15:28:21Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Technology Development Program</title>
@@ -113,6 +113,15 @@
     <summary>National Institutes of Health | Estimated Application 2027-05-25 | NINDS intends to support a Diagnostic Research Innovation Center (DRIC) for the next phase of the Undiagnosed Diseases Network (UDN). The new Network is expected to include a Clinical and Data Coordinating Center (CDCC), geographically distributed clinical Networks of Diagnostic Excellence (NODEs), the NIH Undiagnosed Diseases Program (UDP), a DRIC, the UDN Foundation, patient advocacy organizatio…</summary>
   </entry>
   <entry>
+    <title>Elder Justice Innovation Grants FY2027</title>
+    <link href="https://www.grants.gov/search-results-detail/364118"/>
+    <id>urn:funding-finder:grants-gov:364118</id>
+    <updated>2027-03-15T00:00:00Z</updated>
+    <author><name>Administration for Community Living</name></author>
+    <category term="Technology development"/>
+    <summary>Administration for Community Living | Estimated Application 2027-05-17 | The purpose of the EJIG program is to support the development and advancement of new and emerging approaches to issues related to elder justice. Funded projects will contribute to the improvement of the field of elder abuse prevention and intervention by developing materials, programs, etc. that can be widely disseminated and/or replicated, or by establishing and/or contributing to the evidence-ba…</summary>
+  </entry>
+  <entry>
     <title>AIDS Research Center on Mental Health and HIV/AIDS (P30 Clinical Trial Optional)</title>
     <link href="https://www.grants.gov/search-results-detail/362945"/>
     <id>urn:funding-finder:grants-gov:362945</id>
@@ -131,6 +140,15 @@
     <author><name>Health Resources and Services Administration</name></author>
     <category term="Technology development"/>
     <summary>Health Resources and Services Administration | Estimated Application 2027-04-20 | The purpose of the Rural Maternity and Obstetrics Management Strategies (Rural MOMS) program is to support collaborative improvement and innovation networks to improve access to and delivery of maternity and obstetrics care in rural areas.</summary>
+  </entry>
+  <entry>
+    <title>No Wrong Door System Modernization: Connecting People to Services</title>
+    <link href="https://www.grants.gov/search-results-detail/364121"/>
+    <id>urn:funding-finder:grants-gov:364121</id>
+    <updated>2027-01-17T00:00:00Z</updated>
+    <author><name>Administration for Community Living</name></author>
+    <category term="Technology development"/>
+    <summary>Administration for Community Living | Estimated Application 2027-03-18 | The purpose of this funding is to support states and territories in advancing and modernizing their No Wrong Door (NWD) systems through innovative approaches that improve access to services and supports that enable community living. This anticipated opportunity supports ACL's strategic priority to connect people to services by strengthening statewide systems that allow older adults, people with di…</summary>
   </entry>
   <entry>
     <title>Ryan White HIV/AIDS Program Part C Capacity Development Program</title>
@@ -409,19 +427,6 @@
     <summary>NYSERDA | Application 2029-12-14 | Provides direct funding from the Regional Greenhouse Gas Initiative Operating Plan for the purchase and installation of cold-climate air source and ground source heat pumps in eligible new construction residential projects across New York State for projects that are less than 50,000 square feet in size. Supports the shift to high-performance, all-electric space conditioning to advance clean energy…</summary>
   </entry>
   <entry>
-    <title>The DOE Quantum Genesis Q Competition</title>
-    <link href="https://www.grants.gov/search-results-detail/363869"/>
-    <id>urn:funding-finder:grants-gov:363869</id>
-    <updated>2026-09-17T00:00:00Z</updated>
-    <author><name>Office of Science</name></author>
-    <category term="Energy"/>
-    <category term="Quantum science"/>
-    <category term="Technology development"/>
-    <category term="Data science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <summary>Office of Science | Application 2026-10-19 | The Department of Energy (DOE) recently announced the establishment of the Quantum Genesis initiative to develop and deploy the world’s first fault-tolerant, scientifically relevant quantum computing (SRQC) capability for research and development. The Department seeks to realize this bold ambition through the Quantum Genesis Q Competition (herein, the Q Competition), a first of its kind effort to …</summary>
-  </entry>
-  <entry>
     <title>ManTech special Broad Agency Announcement (sBAA): Accelerating Maritime Modernization: Innovation in Naval Manufacturing, Sustainment, and Industrial Base Capability</title>
     <link href="https://sam.gov/opp/d2bb23d781124b8690158100ce7d5f1e/view"/>
     <id>urn:funding-finder:sam-gov:sam-gov%3Ad2bb23d781124b8690158100ce7d5f1e</id>
@@ -642,16 +647,5 @@ a high level of innovation and creativity. The goal is to support the best young
     <category term="Technology development"/>
     <category term="Data science"/>
     <summary>U.S. National Science Foundation | Application 2026-11-04 | This program will advance scientific community datasets to enable scientific discovery and innovation using artificial intelligence (AI) and other methods. Its goal is to increase the value that can be derived from existing scientific datasets by leveraging novel methods and artificial intelligence (AI). This will unlock new AI-driven insights. It can enable interdisciplinary research. It also ena…</summary>
-  </entry>
-  <entry>
-    <title>Model-to-Clinic (M2C) for Precision Medicine with AI: Integrating Imaging with Multimodal Data (PRIMED-AI) (UG3/UH3, Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/359666"/>
-    <id>urn:funding-finder:grants-gov:359666</id>
-    <updated>2026-06-30T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Education and workforce"/>
-    <category term="Technology development"/>
-    <summary>National Institutes of Health | Application 2026-10-19 | The overarching goal of this notice of funding opportunity (NOFO) and its companion opportunities is to establish the Precision Medicine with AI: Integrating Imaging with Multimodal Data (PRIMED-AI) Program to support development of innovative, reliable, cost-effective, and sustainable multimodal AI-based clinical decision support (CDS) tools. PRIMED-AI CDS tools are based on the integration of cl…</summary>
   </entry>
 </feed>

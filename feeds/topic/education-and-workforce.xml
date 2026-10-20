@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/education-and-workforce.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/education-and-workforce.xml</id>
-  <updated>2026-10-19T17:05:45Z</updated>
+  <updated>2026-10-20T15:28:21Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -212,6 +212,25 @@
     <summary>National Institutes of Health | Estimated Application 2027-05-25 | The overall goal of the NIH Ruth L. Kirschstein National Research Service Award (NRSA) program is to help ensure that a pool of highly trained scientists is available in appropriate scientific disciplines to address the Nation's biomedical, behavioral, and clinical research needs. In alignment with the goal of the NRSA program, the Medical Scientist Training Program (MSTP) supports the development…</summary>
   </entry>
   <entry>
+    <title>National Adult Protective Services Training Center</title>
+    <link href="https://www.grants.gov/search-results-detail/364119"/>
+    <id>urn:funding-finder:grants-gov:364119</id>
+    <updated>2027-03-15T00:00:00Z</updated>
+    <author><name>Administration for Community Living</name></author>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <summary>Administration for Community Living | Estimated Application 2027-05-17 | This funding opportunity will award one cooperative agreement to operate a National APS Training Center (NATC) to build the capacity of adult protective services professionals and improving the organizations that recruit, train, supervise, manage, and retain them, with the goal of improving the safety and well-being of those experiencing adult maltreatment. The NATC will create various modes of on…</summary>
+  </entry>
+  <entry>
+    <title>National Center on Elder Abuse Resource Center</title>
+    <link href="https://www.grants.gov/search-results-detail/364112"/>
+    <id>urn:funding-finder:grants-gov:364112</id>
+    <updated>2027-03-15T00:00:00Z</updated>
+    <author><name>Administration for Community Living</name></author>
+    <category term="Education and workforce"/>
+    <summary>Administration for Community Living | Estimated Application 2027-05-17 | This cooperative agreement is to operate the National Center on Elder Abuse (NCEA) with the purpose to improve national, state, and local communities' preparation to prevent, identify, and intervene in elder abuse, neglect, and exploitation so that older Americans can live with dignity, integrity, and independence. The NCEA achieves this by providing web-based, downloadable, and in-person informat…</summary>
+  </entry>
+  <entry>
     <title>NIH Director's Early Independence Award (DP5 Clinical Trial Optional)</title>
     <link href="https://www.grants.gov/search-results-detail/363800"/>
     <id>urn:funding-finder:grants-gov:363800</id>
@@ -241,6 +260,16 @@
     <summary>Centers for Disease Control - NCIPC | Estimated Application 2027-05-03 | The purpose of this NOFO is to provide multiyear funding to state, territorial, tribal, and local health departments to implement and evaluate comprehensive primary prevention strategies that prevent multiple forms of violence and promote healthy development among adolescents and young adults. Building on the prior PREVAYL cooperative agreement, this NOFO emphasizes: Improving data-driven decision…</summary>
   </entry>
   <entry>
+    <title>Alzheimer's Disease Programs Initiative (ADPI) - States and Community Grants</title>
+    <link href="https://www.grants.gov/search-results-detail/364113"/>
+    <id>urn:funding-finder:grants-gov:364113</id>
+    <updated>2027-03-01T00:00:00Z</updated>
+    <author><name>Administration for Community Living</name></author>
+    <category term="Education and workforce"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>Administration for Community Living | Estimated Application 2027-03-03 | Cooperative agreements under the Alzheimer's Disease Programs Initiative (ADPI): State and Community Grants Notice of Funding Opportunity (NOFO), are intended to support and promote the development and expansion of dementia-capable home and community-based service (HCBS) systems in States and Communities. There are two application options contained in this single NOFO: Grants to States (Option A) …</summary>
+  </entry>
+  <entry>
     <title>Chronic Disease Education and Awareness</title>
     <link href="https://www.grants.gov/search-results-detail/364055"/>
     <id>urn:funding-finder:grants-gov:364055</id>
@@ -259,6 +288,15 @@
     <category term="Education and workforce"/>
     <category term="Public health"/>
     <summary>Centers for Disease Control - NCCDPHP | Estimated Application 2027-04-30 | CDC announces the availability of fiscal year (FY) 2027 funds to implement CDC-RFA-DP-27-0072, Promoting Population Health through Increased Capacity in Alcohol Epidemiology and the Prevention of Excessive Alcohol Use. The purpose of this NOFO is to build state capacity in alcohol epidemiology and provide the tools and information needed to perform core public health functions related to excessive…</summary>
+  </entry>
+  <entry>
+    <title>Alheimer's Disease Programs Initiative (ADPI) - State Programs for Dementia Specific Respite</title>
+    <link href="https://www.grants.gov/search-results-detail/364114"/>
+    <id>urn:funding-finder:grants-gov:364114</id>
+    <updated>2027-03-01T00:00:00Z</updated>
+    <author><name>Administration for Community Living</name></author>
+    <category term="Education and workforce"/>
+    <summary>Administration for Community Living | Estimated Application 2027-05-03 | Cooperative agreements awarded under the Alzheimer's Disease Programs Initiative (ADPI) State and Territory Programs for Dementia Specific Respite Notice of Funding Opportunity (NOFO) 36 month program are intended to expand and strengthen supports for unpaid family caregivers by increasing access to high-quality, dementia-specific respite services delivered by dementia-trained providers through th…</summary>
   </entry>
   <entry>
     <title>IDeA Networks of Biomedical Research Excellence (INBRE)</title>
@@ -567,51 +605,5 @@
     <author><name>Health Resources and Services Administration</name></author>
     <category term="Education and workforce"/>
     <summary>Health Resources and Services Administration | Estimated Application 2027-02-02 | The Centers of Excellence Program provides grants to health professions schools and other public and nonprofit health or educational entities to assist schools in supporting programs of excellence in health professions education for under-represented minority individuals. By statute, the Centers of Excellence Program awards funding to organizations to operate programs that establish, strengthen, a…</summary>
-  </entry>
-  <entry>
-    <title>National Urban Indian Health Program (Education and Research)</title>
-    <link href="https://www.grants.gov/search-results-detail/363494"/>
-    <id>urn:funding-finder:grants-gov:363494</id>
-    <updated>2026-12-01T00:00:00Z</updated>
-    <author><name>Indian Health Service</name></author>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Public health"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>Indian Health Service | Estimated Application 2027-02-01 | The purpose of the NUIBH program is to strengthen behavioral health services for Urban Indian communities by increasing awareness, advocacy, education, and collaboration nationwide. The program supports Urban Indian Organizations (UIOs) through technical assistance, training, information sharing, strategic planning, and quality improvement to expand culturally appropriate behavioral health service…</summary>
-  </entry>
-  <entry>
-    <title>Establishing a Research Network to Guide Foundational Research on Human Consciousness</title>
-    <link href="https://www.grants.gov/search-results-detail/362097"/>
-    <id>urn:funding-finder:grants-gov:362097</id>
-    <updated>2026-12-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Neuroscience"/>
-    <category term="Public health"/>
-    <category term="Social and behavioral sciences"/>
-    <category term="Transportation"/>
-    <summary>National Institutes of Health | Estimated Application 2027-02-08 | This Funding Opportunity will establish the NIH Blueprint for Neuroscience Research Network to Guide Foundational Research on Human Consciousness, leveraging a trans-NIH collaboration of 14 Institutes, Centers, and Offices dedicated to reducing the burden of nervous system disorders. Consciousness is central to numerous serious biomedical conditions, including coma, delirium, dementia, traumatic b…</summary>
-  </entry>
-  <entry>
-    <title>NIOSH Mentored Research Scientist Development Award (K01)</title>
-    <link href="https://www.grants.gov/search-results-detail/363783"/>
-    <id>urn:funding-finder:grants-gov:363783</id>
-    <updated>2026-11-30T00:00:00Z</updated>
-    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
-    <category term="Education and workforce"/>
-    <category term="Transportation"/>
-    <summary>Centers for Disease Control and Prevention - ERA | Estimated Application 2027-01-29 | The National Institute for Occupational Safety and Health (NIOSH) K01 grant provides "protected time" for a supervised career development experience in occupational health and safety research. NIOSH supports the mentoring of junior investigators during the critical transition from postdoctoral training to securing independent R01 funding. We hope to foster investigators' careers, who are vital for…</summary>
-  </entry>
-  <entry>
-    <title>NIDDK Multi-Purpose Resource-Related, Multi-Component Research Services Centers Cooperative Agreement (U2C - Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/363037"/>
-    <id>urn:funding-finder:grants-gov:363037</id>
-    <updated>2026-11-28T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Community development"/>
-    <category term="Education and workforce"/>
-    <summary>National Institutes of Health | Estimated Application 2027-01-28 | This Notice of Funding Opportunity (NOFO) announcement invites applications for NIDDK Multi-Purpose Resource-Related Research, Multi-Component Centers Cooperative Agreement (U2C - Clinical Trial Not Allowed). To help increase rigor, reproducibility and cost efficiencies, U2C centers offer highly specialized cores that provide a range of topic focused services including but not limited to hands-on …</summary>
   </entry>
 </feed>

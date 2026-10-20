@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/arts-and-culture.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/arts-and-culture.xml</id>
-  <updated>2026-10-19T17:05:45Z</updated>
+  <updated>2026-10-20T15:28:21Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Public Health Nursing</title>
@@ -34,6 +34,16 @@
     <category term="Arts and culture"/>
     <category term="Biology and biotechnology"/>
     <summary>National Institutes of Health | Estimated Application 2027-07-01 | The purpose of the Somatic Mosaicism across Human Tissues (SMaHT) Network is to advance the discovery of biological processes and disease mechanisms mediated by somatic mutations in human tissues. Since 2023, the program has generated multi-omic somatic mutation datasets from a standardized set of human tissues spanning all three germ layers. Building on the Stage 1 foundation, the NIH intends to …</summary>
+  </entry>
+  <entry>
+    <title>National Adult Protective Services Training Center</title>
+    <link href="https://www.grants.gov/search-results-detail/364119"/>
+    <id>urn:funding-finder:grants-gov:364119</id>
+    <updated>2027-03-15T00:00:00Z</updated>
+    <author><name>Administration for Community Living</name></author>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <summary>Administration for Community Living | Estimated Application 2027-05-17 | This funding opportunity will award one cooperative agreement to operate a National APS Training Center (NATC) to build the capacity of adult protective services professionals and improving the organizations that recruit, train, supervise, manage, and retain them, with the goal of improving the safety and well-being of those experiencing adult maltreatment. The NATC will create various modes of on…</summary>
   </entry>
   <entry>
     <title>Improved Drug Susceptibility Testing (DST) for Mycobacteria</title>
@@ -642,18 +652,5 @@
     <category term="Environmental science"/>
     <category term="Social and behavioral sciences"/>
     <summary>National Institutes of Health | Application 2027-05-28 | The SuRE program supports research capacity building at eligible higher education institutions by funding investigator-initiated biomedical research inbasic, social, clinical, behavioral, or translational science that falls in the mission areas of the NIH. The purpose of SuRE awards is to provide support for investigator-initiated research at resource-limited institutions by full-time faculty who …</summary>
-  </entry>
-  <entry>
-    <title>Support for Research Excellence First Independent Research (SuRE-First) Award (R16 - Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/358875"/>
-    <id>urn:funding-finder:grants-gov:358875</id>
-    <updated>2025-06-13T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health | Application 2027-05-28 | The SuRE program supports research capacity building at eligible higher education institutions through funding investigator-initiated biomedical research inbasic, social, clinical, behavioral, or translational science that falls in the mission areas of the NIH. The purpose of SuRE-First awards is to provide support for investigator-initiated research at resource-limited institutions by full-time f…</summary>
   </entry>
 </feed>

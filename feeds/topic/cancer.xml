@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/cancer.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/cancer.xml</id>
-  <updated>2026-10-19T17:05:45Z</updated>
+  <updated>2026-10-20T15:28:21Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Advanced Development and Sustainment of Informatics Technologies for Cancer Research and Management (U24 Clinical Trial Optional)</title>
@@ -415,33 +415,6 @@ a high level of innovation and creativity. The goal is to support the best young
     <summary>National Institutes of Health | Estimated Application 2026-11-11 | Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) solicits research projects that investigate actionable synthetic vulnerabilities that can be conditionally paired with tumor responses to radiation therapy. The goal of the Precision Approaches in Radiation Synthetic Combinations (PAIRS) program is to develop radiation-synthetic combination strategies and facili…</summary>
   </entry>
   <entry>
-    <title>Advanced Development of Informatics Technologies for Cancer Research and Management (U24 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/359855"/>
-    <id>urn:funding-finder:grants-gov:359855</id>
-    <updated>2026-05-21T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Cancer"/>
-    <category term="Data science"/>
-    <category term="Education and workforce"/>
-    <category term="Public health"/>
-    <category term="Technology development"/>
-    <summary>National Institutes of Health | Application 2026-10-19 | This Notice of Funding Opportunity (NOFO) invites applications for advanced development and enhancement of emerging informatics technologies to improve the acquisition, analysis, visualization, and interpretation of data across the cancer research continuum including cancer biology, cancer treatment and diagnosis, early cancer detection, risk assessment and prevention, cancer control and epidemiol…</summary>
-  </entry>
-  <entry>
-    <title>Sustained Support for Informatics Technologies for Cancer Research and Management (U24 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/359853"/>
-    <id>urn:funding-finder:grants-gov:359853</id>
-    <updated>2026-05-21T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Cancer"/>
-    <category term="Data science"/>
-    <category term="Education and workforce"/>
-    <category term="Public health"/>
-    <summary>National Institutes of Health | Application 2026-10-19 | This Notice of Funding Opportunity (NOFO) solicits applications for the continued development and sustainment of high value informatics research resources to improve the acquisition, management, analysis, and dissemination of data and knowledge across the cancer research continuum including cancer biology, cancer treatment and diagnosis, early cancer detection, risk assessment and prevention, canc…</summary>
-  </entry>
-  <entry>
     <title>Early-Stage Development of Informatics Technologies for Cancer Research and Management (U01 Clinical Trial Optional)</title>
     <link href="https://www.grants.gov/search-results-detail/359892"/>
     <id>urn:funding-finder:grants-gov:359892</id>
@@ -653,5 +626,27 @@ a high level of innovation and creativity. The goal is to support the best young
     <category term="Cancer"/>
     <category term="Education and workforce"/>
     <summary>National Institutes of Health | Application 2027-01-07 | The goal of the proposed funding announcement is twofold, to promote preclinical and patient based studies examining the mechanism(s) through which incretin mimetics (including agonists or antagonists of GLP-1, GIP-1, or dual GLP-1/GIP-1 agents) impact cancer risk, and to draw talented scientists who understand the dynamic changes caused by these agents to investigate the mechanisms of how these a…</summary>
+  </entry>
+  <entry>
+    <title>Mechanisms that Impact Cancer Risk with Use of Incretin Mimetics (R21 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/357203"/>
+    <id>urn:funding-finder:grants-gov:357203</id>
+    <updated>2024-11-18T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Cancer"/>
+    <category term="Education and workforce"/>
+    <summary>National Institutes of Health | Application 2027-01-07 | The goal of the proposed funding announcement is twofold, to promote preclinical and patient based studies examining the mechanism(s) through which incretin mimetics (including agonists or antagonists of GLP-1, GIP-1, or dual GLP-1/GIP-1 agents) impact cancer risk, and to draw talented scientists who understand the dynamic changes caused by these agents to investigate the mechanisms of how these a…</summary>
+  </entry>
+  <entry>
+    <title>Basic Research in Cancer Health Disparities (R21 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/357193"/>
+    <id>urn:funding-finder:grants-gov:357193</id>
+    <updated>2024-11-18T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Cancer"/>
+    <category term="Education and workforce"/>
+    <category term="Health equity"/>
+    <summary>National Institutes of Health | Application 2027-11-16 | This Notice of Funding Opportunity (NOFO) encourages grant applications from investigators interested in conducting basic, mechanistic research into the biological/genetic causes of cancer health disparities. These research project grants will support innovative studies designed to investigate biological/genetic bases of cancer health disparities, such as (1) mechanistic studies of biological fact…</summary>
   </entry>
 </feed>

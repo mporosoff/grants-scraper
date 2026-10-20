@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml</id>
-  <updated>2026-10-19T17:05:45Z</updated>
+  <updated>2026-10-20T15:28:21Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Healthy Lifestyles in Youth</title>
@@ -25,6 +25,15 @@
     <category term="Agriculture and food"/>
     <category term="Public health"/>
     <summary>National Institutes of Health | Estimated Application 2027-11-10 | The Tobacco Regulatory Science Program, participating NIH Institutes and Centers (ICs), and the Food and Drug Administration (FDA) Center for Tobacco Products (CTP) intend to issue a Notice of Funding Opportunity (NOFO) soliciting applications for Tobacco Centers of Regulatory Science (TCORS). The awards under this NOFO will be administered by NIH using funds made available through FDA CTP and the…</summary>
+  </entry>
+  <entry>
+    <title>Evaluating Innovative Community Based Nutrition Models that Improve Health Outcomes for Older Adults in Senior Nutrition Programs</title>
+    <link href="https://www.grants.gov/search-results-detail/364120"/>
+    <id>urn:funding-finder:grants-gov:364120</id>
+    <updated>2027-03-01T00:00:00Z</updated>
+    <author><name>Administration for Community Living</name></author>
+    <category term="Agriculture and food"/>
+    <summary>Administration for Community Living | Estimated Application 2027-04-30 | The purpose of this Notice of Funding Opportunity is to support innovative, community-based nutrition and healthy aging models that improve the health, well-being, and quality of life of participants in the Older Americans Act (OAA) Senior Nutrition Program. Projects are expected to develop, implement, and evaluate promising approaches that strengthen nutrition services through community partnersh…</summary>
   </entry>
   <entry>
     <title>Comprehensive Suicide Prevention Program for States</title>
@@ -98,7 +107,7 @@
     <category term="Agriculture and food"/>
     <category term="Community development"/>
     <category term="Energy"/>
-    <summary>Rural Utilities Service | Letter Of Intent 2026-11-20 | The Rural Utilities Service (RUS or the Agency), a Rural Development (RD) agency of the United States Department of Agriculture (USDA), is soliciting Letters of Interest (LOI) for applications under the Affordable Rural Cooperative (ARC) Program. In addition, the Agency is announcing the eligibility requirements, application process and deadlines, and the criteria that will be used by RUS to asses…</summary>
+    <summary>Rural Utilities Service | Application 2026-11-20 | The Rural Utilities Service (RUS or the Agency), a Rural Development (RD) agency of the United States Department of Agriculture (USDA), is soliciting Letters of Interest (LOI) for applications under the Affordable Rural Cooperative (ARC) Program. In addition, the Agency is announcing the eligibility requirements, application process and deadlines, and the criteria that will be used by RUS to asses…</summary>
   </entry>
   <entry>
     <title>Cooperative Agreement for Affiliated Partner with the Pacific Northwest Cooperative Ecosystem Studies Unit (CESU)</title>
@@ -284,18 +293,6 @@
     <category term="Environmental science"/>
     <category term="Transportation"/>
     <summary>AmeriCorps | Application 2026-10-20 | AmeriCorps improves lives, strengthens communities, and fosters civic engagement through service and volunteering. AmeriCorps brings people together to tackle some of the country’s most pressing challenges through national service and volunteerism. AmeriCorps members and AmeriCorps Seniors volunteers serve with organizations dedicated to the improvement of communities and those serving. AmeriCorps…</summary>
-  </entry>
-  <entry>
-    <title>Plant Protection Act Section 7721 Fiscal Year 2027 National Clean Plant Network (NCPN)</title>
-    <link href="https://www.grants.gov/search-results-detail/363326"/>
-    <id>urn:funding-finder:grants-gov:363326</id>
-    <updated>2026-07-27T00:00:00Z</updated>
-    <author><name>Animal and Plant Health Inspection Service</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Infectious disease"/>
-    <summary>Animal and Plant Health Inspection Service | Application 2026-10-19 | The U.S. Department of Agriculture, Animal and Plant Health Inspection Service announce this funding opportunity to carry out the Plant Protection Act Section 7721 (PPA 7721) National Clean Plant Network (NCPN) program. APHIS will consider project proposals that clearly and directly support the strategic goals and objectives of the National Clean Plant Network as described in the NCPN Strategic Pl…</summary>
   </entry>
   <entry>
     <title>WaterSMART Enhancing Water Resources Projects</title>
