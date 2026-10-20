@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/infectious-disease.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/infectious-disease.xml</id>
-  <updated>2026-10-19T17:05:45Z</updated>
+  <updated>2026-10-20T15:28:21Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Partnerships for Advancing Development of Diagnostics for Infectious Diseases</title>
@@ -224,7 +224,7 @@
     <summary>National Institutes of Health | Estimated Application 2027-01-25 | This NOFO is issued during a period of accelerating development, validation, and adoption of human new approach methodologies (NAMs). Accordingly, it has two integrated priorities for NIH-funded HIV/AIDS research: (1) implementation of a NAMs-enabled stewardship framework, including optional HIV-relevant human in vitro testing support and pilot benchmarking activities, to reduce or replace specifi…</summary>
   </entry>
   <entry>
-    <title>Translational Centers Using Microphysiologic Systems for Infectious Diseases</title>
+    <title>Translational Centers Using Microphysiological Systems for Infectious Diseases (U54 Clinical Trial Not Allowed)</title>
     <link href="https://www.grants.gov/search-results-detail/362954"/>
     <id>urn:funding-finder:grants-gov:362954</id>
     <updated>2026-11-13T00:00:00Z</updated>
@@ -268,7 +268,7 @@
     <summary>Centers for Disease Control and Prevention - ERA | Estimated Application 2026-12-31 | The purpose of this notice of funding opportunity (NOFO) is to continue the work of the US Influenza Vaccine Effectiveness (Flu VE) Network. Influenza and other respiratory pathogens are important causes of morbidity, mortality, and healthcare burden across the age spectrum. This network provides evidence needed to improve the effectiveness of influenza and other respiratory pathogen vaccines. You…</summary>
   </entry>
   <entry>
-    <title>Collaborative Network for Clinical Research on Immune Tolerance</title>
+    <title>Immune Tolerance Network (UM1 Clinical Trial Required)</title>
     <link href="https://www.grants.gov/search-results-detail/362946"/>
     <id>urn:funding-finder:grants-gov:362946</id>
     <updated>2026-10-16T00:00:00Z</updated>
@@ -413,18 +413,6 @@ we will not consider for support include Covid-19 relat…</summary>
     <category term="Public health"/>
     <category term="Transportation"/>
     <summary>Centers for Disease Control and Prevention - ERA | Application 2026-11-05 | verify prerequisite | The focus of this notice of funding opportunity (NOFO) is to produce insights into disease detection and prevention strategies, burden, severity, diagnostics, treatment, and outcomes of infectious diseases in international travelers. Timely surveillance and sentinel detection are essential for collecting actionable data. The research should: Address public health questions that improve the speed o…</summary>
-  </entry>
-  <entry>
-    <title>Plant Protection Act Section 7721 Fiscal Year 2027 National Clean Plant Network (NCPN)</title>
-    <link href="https://www.grants.gov/search-results-detail/363326"/>
-    <id>urn:funding-finder:grants-gov:363326</id>
-    <updated>2026-07-27T00:00:00Z</updated>
-    <author><name>Animal and Plant Health Inspection Service</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Infectious disease"/>
-    <summary>Animal and Plant Health Inspection Service | Application 2026-10-19 | The U.S. Department of Agriculture, Animal and Plant Health Inspection Service announce this funding opportunity to carry out the Plant Protection Act Section 7721 (PPA 7721) National Clean Plant Network (NCPN) program. APHIS will consider project proposals that clearly and directly support the strategic goals and objectives of the National Clean Plant Network as described in the NCPN Strategic Pl…</summary>
   </entry>
   <entry>
     <title>Avant Garde/Avenir Awards for Investigators Conducting High Risk/High Reward Research on HIV and Substance Use (or Substance Use Disorders) (DP1 Clinical Trial Optional)</title>

@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/water.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/water.xml</id>
-  <updated>2026-10-19T17:05:45Z</updated>
+  <updated>2026-10-20T15:28:21Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Cooperative Agreement for affiliated Partner with Northern Great Plains Cooperative Ecosystem Studies Unit</title>
@@ -303,6 +303,19 @@
     <category term="Separations and membranes"/>
     <category term="Water"/>
     <summary>Food and Drug Administration | Letter Of Intent 2026-12-14 | This cooperative agreement is intended to enhance the capacity and capabilities of state human and animal food testing laboratories in support of an integrated food safety system (IFSS). This is achieved through prioritized sample testing and food defense preparedness in the areas of microbiology, chemistry, and radiochemistry, as well as method development and capacity/capability development proj…</summary>
+  </entry>
+  <entry>
+    <title>CHIPS Incentives Program - Facilities for Semiconductor Materials and Manufacturing Equipment</title>
+    <link href="https://www.grants.gov/search-results-detail/350338"/>
+    <id>urn:funding-finder:grants-gov:350338</id>
+    <updated>2023-09-29T00:00:00Z</updated>
+    <author><name>National Institute of Standards and Technology</name></author>
+    <category term="Manufacturing"/>
+    <category term="Quantum science"/>
+    <category term="Materials science"/>
+    <category term="Cybersecurity"/>
+    <category term="Water"/>
+    <summary>National Institute of Standards and Technology | Application 2026-11-01 | The CHIPS Incentives Program aims to catalyze long-term economically sustainable growth in the domestic semiconductor industry in support of U.S. economic and national security. This is the second Notice of Funding Opportunity under this program and seeks applications for projects for the construction, expansion, or modernization of commercial facilities for semiconductor materials and manufacturi…</summary>
   </entry>
   <entry>
     <title>Climate Program Office for FY 2012</title>

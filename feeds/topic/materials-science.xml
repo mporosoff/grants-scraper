@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml</id>
-  <updated>2026-10-19T17:05:45Z</updated>
+  <updated>2026-10-20T15:28:21Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Office of Hazardous Materials Safety Research Initiative - FY2026 BROAD AGENCY ANNOUNCEMENT (BAA)</title>
@@ -162,15 +162,6 @@
     <category term="Energy"/>
     <category term="Manufacturing"/>
     <summary>U.S. National Science Foundation | Posted | The NSF Geosciences Research solicitation supports foundational research projects that advance the frontiers of knowledge across all areas of the geosciences. This solicitation calls for proposals in three programs: Atmospheric and Geospace Sciences (AGS) Program; Earth Sciences (EAR) Program; and Ocean Sciences (OCE) Program. These programs support projects that expand the frontiers of knowledge …</summary>
-  </entry>
-  <entry>
-    <title>Resilient</title>
-    <link href="https://sam.gov/opp/0ea1a4cebcb24732b92a184df0a4bee2/view"/>
-    <id>urn:funding-finder:darpa-iarpa-research-solicitations:darpa-iarpa%3Adarpa-darpapa250704</id>
-    <updated>2026-08-20T00:00:00Z</updated>
-    <author><name>Defense Advanced Research Projects Agency (DARPA)</name></author>
-    <category term="Materials science"/>
-    <summary>Defense Advanced Research Projects Agency (DARPA) | Application 2026-10-19 | DSO is issuing a Disruption Opportunity (DO), inviting submissions of innovative basic or applied research concepts in the technical domain of accelerated materials testing and prediction for concrete. | See Program The nation’s critical military and civilian infrastructure relies heavily on concrete structures that are aging and degrading at unpredictable rates. Current concrete testing methods f…</summary>
   </entry>
   <entry>
     <title>EMERGING FRONTIERS IN RESEARCH AND INNOVATION (EFRI-2026/27): Wave-Based Computing ( EFRI-WBC)</title>
@@ -597,6 +588,19 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Materials science"/>
     <category term="Transportation"/>
     <summary>FAA-COE-JAMS | Posted | The Joint Center of Excellence (COE) for Advanced Materials (JAMS) was established in January 2004 to assist in ensuring the safe and reliable application of composites and advanced materials to commercial aircraft. The Center is a joint effort of the Center of Excellence for Composite and Advanced Materials (CECAM) led by Wichita State University and the Center of Excellence for Advanced Material…</summary>
+  </entry>
+  <entry>
+    <title>CHIPS Incentives Program - Facilities for Semiconductor Materials and Manufacturing Equipment</title>
+    <link href="https://www.grants.gov/search-results-detail/350338"/>
+    <id>urn:funding-finder:grants-gov:350338</id>
+    <updated>2023-09-29T00:00:00Z</updated>
+    <author><name>National Institute of Standards and Technology</name></author>
+    <category term="Manufacturing"/>
+    <category term="Quantum science"/>
+    <category term="Materials science"/>
+    <category term="Cybersecurity"/>
+    <category term="Water"/>
+    <summary>National Institute of Standards and Technology | Application 2026-11-01 | The CHIPS Incentives Program aims to catalyze long-term economically sustainable growth in the domestic semiconductor industry in support of U.S. economic and national security. This is the second Notice of Funding Opportunity under this program and seeks applications for projects for the construction, expansion, or modernization of commercial facilities for semiconductor materials and manufacturi…</summary>
   </entry>
   <entry>
     <title>Plasma Physics</title>
