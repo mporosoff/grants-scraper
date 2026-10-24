@@ -28,6 +28,27 @@ function apis({schedule = true, asOf = "2026-10-19"} = {}) {
   return {...api, context};
 }
 
+test("dated source verification expires consistently across Search, Team Match, app and Alerts", () => {
+  const record = {...structuredClone(fixture), close_date: "2027-01-01", source_review_after: "2026-10-24",
+    deadlines: [{kind: "application", date: "2027-01-01"}], submission_requirements: []};
+  const before = structuredClone(record);
+  for (const [asOf, expected] of [["2026-10-24", true], ["2026-10-25", false]]) {
+    const api = apis({asOf});
+    assert.equal(api.FUNDING_RETRIEVAL.recordIsCurrent(record, asOf), expected);
+    api.context.record = record;
+    assert.equal(vm.runInContext("recordIsAvailable(record)", api.context), expected);
+    const team = api.FUNDING_TEAM_MATCHER.create({opportunities: [record]}, {}, null, {now: `${asOf}T12:00:00Z`});
+    assert.equal(team.records.some(row => row.id === "362893"), expected);
+    assert.equal(alertIsCurrent(record, asOf), expected);
+  }
+  for (const source_review_after of ["2026-02-30", "tomorrow", 123]) {
+    const invalid = {...record, source_review_after};
+    assert.equal(apis().FUNDING_RETRIEVAL.recordIsCurrent(invalid, "2026-10-24"), false);
+    assert.equal(alertIsCurrent(invalid, "2026-10-24"), false);
+  }
+  assert.deepEqual(record, before);
+});
+
 test("actual administrative close agrees across live schedule, search, Team Match and Alerts", () => {
   const before = structuredClone(fixture);
   for (const [asOf, expected] of [["2026-10-13", true], ["2026-10-14", true],

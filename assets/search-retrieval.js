@@ -86,6 +86,11 @@
     if ((status && !["posted", "forecasted"].includes(status)) || nonFundingReason(record)) return false;
     const today = runtimeDateIso(now);
     if (!today) return false;
+    const reviewAfter = record.source_review_after;
+    if (reviewAfter && (typeof reviewAfter !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(reviewAfter)
+      || !Number.isFinite(Date.parse(`${reviewAfter}T00:00:00Z`))
+      || new Date(`${reviewAfter}T00:00:00Z`).toISOString().slice(0, 10) !== reviewAfter
+      || reviewAfter < today)) return false;
     const schedule = globalThis.FUNDING_SUBMISSION_SCHEDULE;
     if (typeof schedule?.administrativeSubmissionClosed === "function") {
       if (schedule.administrativeSubmissionClosed(record, today)) return false;

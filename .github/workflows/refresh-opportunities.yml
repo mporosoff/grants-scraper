@@ -149,6 +149,7 @@ jobs:
     outputs:
       candidate_id: ${{ steps.restore.outputs.candidate_id || steps.persist.outputs.candidate_id }}
       sources_healthy: ${{ steps.additional-sources.outcome == 'success' && steps.document_evidence.outcome == 'success' }}
+      source_completeness: ${{ steps.sam-health.outputs.source_completeness }}
     steps:
       - uses: actions/checkout@v6
         with:
@@ -263,12 +264,13 @@ jobs:
           --write
           --summary-output "${{ runner.temp }}/source-refresh-summary.json"
           --fail-on-degraded
-      - name: Require a complete reviewed SAM refresh before generation continues
+      - name: Require complete SAM notice accounting before generation continues
         id: sam-health
         if: steps.restore.outputs.candidate_id == ''
         run: >-
           python -m tools.require_sam_refresh
           --summary "${{ runner.temp }}/source-refresh-summary.json"
+          --github-output "$GITHUB_OUTPUT"
       - name: Preserve source refresh diagnostics after any outcome
         if: always() && steps.restore.outputs.candidate_id == ''
         uses: actions/upload-artifact@v4
@@ -488,10 +490,33 @@ jobs:
                   const retainedAge = Number.isInteger(source.retained_data_age_days)
                     ? `${source.retained_data_age_days} day(s)`
                     : "not applicable (no retained records published)";
-                  return `- **${source.source}** (\`${source.slug}\`): ` +
+                  let evidence = `- **${source.source}** (\`${source.slug}\`): ` +
                     `failure class \`${source.failure_class || "unknown"}\`; ` +
                     `last successful refresh ${lastSuccess}; retained-data age ${retainedAge}; ` +
                     `publication decision \`${source.publication_decision || "unknown"}\`.`;
+                  if (source.slug === "sam-gov") {
+                    const observations = source.diagnostics?.notice_observations || [];
+                    const pending = observations.filter(row => ["review_required", "approval_expired"].includes(row.disposition));
+                    const unavailable = observations.filter(row => row.disposition === "source_unavailable");
+                    const withdrawals = observations.filter(row => row.disposition === "verified_withdrawal");
+                    const admitted = observations.filter(row => row.disposition === "admitted");
+                    evidence += `\n  SAM accounting: ${admitted.length} admitted; ${pending.length} awaiting review; ` +
+                      `${unavailable.length} unavailable; ${withdrawals.length} verified withdrawals.`;
+                    const link = (label, id) => /^[a-f0-9]{32}$/.test(id || "")
+                      ? `[${label} ${id}](https://sam.gov/opp/${id}/view)` : `${label} identity unavailable`;
+                    const unresolved = [...pending, ...unavailable];
+                    for (const row of unresolved.slice(0, 10)) {
+                      const reasons = (Array.isArray(row.reasons) ? row.reasons : [])
+                        .filter(reason => /^[a-z0-9_]{1,80}$/.test(reason)).slice(0, 6).join(", ") || row.disposition;
+                      evidence += `\n  - ${link("Reviewed notice", row.notice_id)}; ` +
+                        `${link("latest notice", row.latest_notice_id || row.observed_notice_id)}: ${reasons}.`;
+                    }
+                    if (unresolved.length > 10) evidence += `\n  - ${unresolved.length - 10} more unresolved notices are in the retained summary artifact.`;
+                    if (pending.length) evidence += "\n  Review the changed official content and eligibility before updating its approval. " +
+                      "Do not approve a replacement notice by copying its new ID or hash alone. These notices are quarantined while verified records can refresh.";
+                    if (unavailable.length) evidence += "\n  Retry unavailable notices using their retained status; unavailable evidence is not proof that a call closed.";
+                  }
+                  return evidence;
                 }).join("\n");
               } else if (validation.ok === false) {
                 const validationError = String(
@@ -1594,6 +1619,9 @@ jobs:
             const heldStage = needs.plan.outputs.held_stage || '';
             const dailyStatus = needs.plan.outputs.daily_status || '';
             const dailyWindow = needs.plan.outputs.daily_window_start || '';
+            const sourceCompleteness = needs.generate.outputs.source_completeness
+              ? (needs.generate.outputs.sources_healthy === 'true' ? 'complete' : 'degraded')
+              : 'not assessed for this continuation';
             const liveComplete = needs['verify-live'].result === 'success';
             const catalogDate = (liveComplete ? needs['verify-live'].outputs.catalog_generated_at : needs.plan.outputs.catalog_generated_at) || '';
             const windowTime = Date.parse(dailyWindow), sourceTime = Date.parse(catalogDate);
@@ -1646,6 +1674,7 @@ jobs:
             const body = `Candidate: ${candidate}\nArtifact run: ${generationRun}\nStage: ${checkpoint}\n` +
               `Planned lifecycle stage: ${planned || 'not reported'}\nHeld lifecycle stage: ${heldStage || 'none'}\nPlanner reason: ${planReason}\n` +
               `Daily state: ${dailyStatus || 'not scheduled'}\nDaily window start: ${dailyWindow || 'not applicable'}\nCatalog source timestamp: ${catalogDate || 'unknown'}\nRecovery run: ${needs.plan.outputs.recovery_run || 'none'}\n` +
+              `Source completeness: ${sourceCompleteness}\n` +
               (refreshFailure ? `Refresh failure: ${refreshFailure}\n` : '') +
               `Identity source: ${identitySource}\nOriginal lifecycle stage: ${originalStage}\nValidation receipt run: ${receiptRun}\n` +
               `Publication evidence run: ${publicationRun}\nPublication evidence attempt: ${publicationAttempt}\n` +

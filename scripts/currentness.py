@@ -82,6 +82,17 @@ def record_is_current(
     if status not in {"posted", "forecasted"}:
         return False, "invalid_status"
 
+    # A bounded source verification must expire even while the static catalog
+    # remains deployed. Its expiry is uncertainty, never an official closure.
+    review_after = record.get("source_review_after")
+    if review_after:
+        try:
+            verified_until = date.fromisoformat(review_after)
+        except (TypeError, ValueError):
+            return False, "invalid_source_review_date"
+        if verified_until < as_of:
+            return False, "source_review_expired"
+
     non_funding = non_funding_reason(record)
     if non_funding:
         return False, non_funding

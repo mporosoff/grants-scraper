@@ -27,6 +27,16 @@ def record(**overrides):
 
 
 class CurrentnessTests(unittest.TestCase):
+    def test_source_verification_expires_without_a_new_catalog_or_official_closure(self):
+        value = record(close_date='2027-01-01', source_review_after='2026-07-30')
+        before = deepcopy(value)
+        self.assertTrue(record_is_current(value, AS_OF)[0])
+        self.assertEqual(record_is_current(value, date(2026, 7, 31)), (False, 'source_review_expired'))
+        for invalid in ('2026-02-30', 'tomorrow', 123):
+            self.assertEqual(record_is_current(dict(value, source_review_after=invalid), AS_OF),
+                             (False, 'invalid_source_review_date'))
+        self.assertEqual(value, before)
+
     def test_keeps_future_and_rolling_records(self):
         self.assertTrue(record_is_current(record(), AS_OF)[0])
         self.assertTrue(

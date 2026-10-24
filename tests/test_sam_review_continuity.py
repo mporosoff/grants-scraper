@@ -30,8 +30,10 @@ def anchored():
 
 
 def summary(diagnostics):
+    degraded = diagnostics.get('outcome') == 'degraded'
     return {'written': True, 'validation': {'ok': True}, 'sources': [
-        {'slug': 'sam-gov', 'healthy': True, 'status': 'refreshed', 'diagnostics': diagnostics}]}
+        {'slug': 'sam-gov', 'healthy': not degraded,
+         'status': 'partial_refresh' if degraded else 'refreshed', 'diagnostics': diagnostics}]}
 
 
 class ReviewContinuityTests(unittest.TestCase):
@@ -131,7 +133,7 @@ class ReviewContinuityTests(unittest.TestCase):
                 self.assertNotEqual(rows[0]['status'], 'posted')
                 self.assertNotIn('sam_review_reconciliation', rows[0])
                 self.assertEqual(diagnostics['notice_observations'][0]['disposition'], 'review_required')
-                with self.assertRaises(ValueError): require_complete_refresh(configuration(item), summary(diagnostics))
+                require_complete_refresh(configuration(item), summary(diagnostics))
 
     def test_expired_entries_and_current_confirmed_withdrawals_remain_permitted(self):
         item = anchored()
@@ -156,7 +158,7 @@ class ReviewContinuityTests(unittest.TestCase):
         self.assertEqual(observation['reasons'], ['reviewed_evidence_changed', 'entry_closed'])
         self.assertEqual(observation['disposition'], 'review_required')
         self.assertNotIn('withdrawal_basis', observation)
-        with self.assertRaises(ValueError): require_complete_refresh(configuration(item), summary(diagnostics))
+        require_complete_refresh(configuration(item), summary(diagnostics))
         self.assertNotEqual(rows[0]['status'], 'posted')
 
     def test_old_calendar_cannot_mask_other_unresolved_changes_or_another_successor(self):
@@ -170,14 +172,14 @@ class ReviewContinuityTests(unittest.TestCase):
                 _, diagnostics = sam_reviewed.collect(configuration(item), date(2026, 10, 21), {},
                     client=Mock(return_value=(current, {'request_count': 2})))
                 self.assertEqual(diagnostics['notice_observations'][0]['disposition'], 'review_required')
-                with self.assertRaises(ValueError): require_complete_refresh(configuration(item), summary(diagnostics))
+                require_complete_refresh(configuration(item), summary(diagnostics))
         old = signed(item['reviewed_snapshot'], latest=False, latest_notice_id=OTHER)
         for terminal in (False, True):
             intermediate = signed(old, notice_id=OTHER, latest_notice_id='c' * 32, archived=terminal)
             _, diagnostics = sam_reviewed.collect(configuration(item), date(2026, 10, 21), {},
                 client=Mock(side_effect=[(old, {'request_count': 2}), (intermediate, {'request_count': 2})]))
             self.assertEqual(diagnostics['notice_observations'][0]['disposition'], 'review_required')
-            with self.assertRaises(ValueError): require_complete_refresh(configuration(item), summary(diagnostics))
+            require_complete_refresh(configuration(item), summary(diagnostics))
 
     def test_current_true_terminal_or_restricted_successor_can_withdraw_despite_changed_terms(self):
         item = anchored()
@@ -217,16 +219,21 @@ class ReviewContinuityTests(unittest.TestCase):
         self.assertEqual(rows[0]['status'], 'unverified')
         self.assertNotIn('sam_review_reconciliation', rows[0])
 
-    def test_successor_fetch_failure_or_wrong_id_stops_partial_collection(self):
+    def test_successor_fetch_failure_or_wrong_id_never_reuses_the_superseded_notice(self):
         item = anchored()
         old = signed(item['reviewed_snapshot'], latest=False, latest_notice_id=OTHER)
         for response in (SamError('unavailable', {'request_count': 1, 'failure_class': 'transient_transport'}),
                          (item['reviewed_snapshot'], {'request_count': 2})):
             client = Mock(side_effect=[(old, {'request_count': 2}), response])
-            with self.subTest(response=response), self.assertRaises(SamError) as raised:
-                sam_reviewed.collect(configuration(item), TODAY, {}, client=client)
+            with self.subTest(response=response):
+                rows, diagnostics = sam_reviewed.collect(configuration(item), TODAY, {}, client=client)
             self.assertEqual(client.call_count, 2)
-            self.assertEqual(raised.exception.diagnostics['request_count'], 3 if isinstance(response, SamError) else 4)
+            self.assertEqual(rows, [])
+            self.assertEqual(diagnostics['request_count'], 3 if isinstance(response, SamError) else 4)
+            observation = diagnostics['notice_observations'][0]
+            self.assertEqual(observation['disposition'], 'source_unavailable')
+            self.assertFalse(observation['fallback_allowed'])
+            self.assertEqual(observation['latest_notice_id'], OTHER)
 
     def test_another_version_pointer_is_not_followed_unboundedly(self):
         item = anchored()
@@ -266,8 +273,9 @@ class ReviewContinuityTests(unittest.TestCase):
     def test_current_amendments_preserve_reviewed_deadlines_prerequisites_and_restrictions(self):
         config = sam_reviewed.validate_config(json.loads((ROOT / 'config/sam_gov.json').read_bytes()))
         current = json.loads((ROOT / 'tests/fixtures/sam_amendments_reviewed_20261018.json').read_bytes())
+        current.update(json.loads((ROOT / 'tests/fixtures/sam_amendments_reviewed_20261024.json').read_bytes()))
         expected = {
-            'HM047627XXXX': ('4984511e4bbc4d01a21df55b30a88f02', ['2026-10-28', '2026-12-21']),
+            'HM047627XXXX': ('854d837d8dc842719d9fec95764d8ceb', ['2026-10-28', '2026-12-21']),
             '693195-26-BAA-0001': ('4e98188266d74e73a6cede0b0bef0da0', ['2026-10-30', None]),
             '693JF726R000016': ('7d63d061eb82403c8b6b4afb9afca040', ['2027-01-10']),
             'PHMSA-26HM-BAA': ('f1d0665939c74ffa86ffc40e73985cc1', ['2026-11-18', None]),
@@ -275,7 +283,7 @@ class ReviewContinuityTests(unittest.TestCase):
         by_number = {}
         for number, (identifier, dates) in expected.items():
             item = next(item for item in config['approved_notices'] if item['solicitation_number'] == number)
-            (record, reasons), _ = sam_reviewed.reconcile_notice(current[identifier], item, date(2026, 10, 18))
+            (record, reasons), _ = sam_reviewed.reconcile_notice(current[identifier], item, date(2026, 10, 24))
             self.assertEqual(reasons, [], number)
             self.assertEqual(record['opportunity_id'], 'sam-gov:' + identifier)
             self.assertEqual([event['date'] for event in record['deadlines']], dates)

@@ -157,7 +157,8 @@ def diff_catalogs(
         old = before.get(ident) or next((before[str(alias['opportunity_id'])] for alias in record.get('source_aliases') or []
                                        if str(alias.get('opportunity_id')) in before), None)
         if old is None:
-            add("new", record, "First appeared in the public catalog")
+            if record.get('source_observation') != 'reverified_existing_call':
+                add("new", record, "First appeared in the public catalog")
         else:
             old_status = old.get("status")
             new_status = record.get("status")
@@ -220,12 +221,21 @@ def diff_catalogs(
 
     for ident, record in before.items():
         current_record = after.get(ident) or aliases.get(ident)
+        lifecycle = (((current.get('diagnostics') or {}).get('additional_sources') or {}).get('lifecycle') or [])
+        unresolved = [row for source in lifecycle for row in source.get('unresolved_records') or []]
+        uncertain = any(ident in row.get('opportunity_ids', [])
+                        or record_identity(record) in row.get('canonical_identities', []) for row in unresolved)
+        if uncertain:
+            continue  # Amended terms or unread source facts do not prove closure.
+        if record_is_current(current_record or record, as_of)[1] in {'source_review_expired', 'invalid_source_review_date'}:
+            continue
         # The source lifecycle filters terminal calls out of the live catalog.
         # Keep its explicit observation distinct from an uninformative absence.
         if not current_record and record.get("source") not in {None, "Grants.gov"}:
             source_state = (current.get("diagnostics") or {}).get("additional_sources") or {}
             for source in source_state.get("lifecycle") or []:
-                if source.get("source") != record.get("source") or not source.get("healthy"):
+                if source.get("source") != record.get("source") or not (
+                        source.get("healthy") or source.get('source_completeness') in {'complete', 'degraded'}):
                     continue
                 for observed in source.get("observed_terminal_records") or []:
                     if (observed.get("opportunity_id") == ident

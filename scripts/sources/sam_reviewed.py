@@ -27,6 +27,11 @@ SNAPSHOT_FIELDS = {'notice_id', 'latest_notice_id', 'latest', 'status', 'archive
     'resources_sha256', 'review_sha256'}
 VERSION_FIELDS = {'notice_id', 'latest_notice_id', 'latest', 'posted_at', 'modified_at', 'review_sha256'}
 CALENDAR_REASONS = {'entry_closed', 'archive_date_passed', 'approval_not_current'}
+REVIEW_REASONS = CALENDAR_REASONS | {'identity_changed', 'superseded_notice',
+    'reviewed_evidence_changed', 'not_open_notice', 'restrictive_set_aside', 'invalid_posted_date'}
+FAILURE_CLASSES = {'transient_transport', 'timeout', 'nonretry_http', 'response_schema',
+                   'invalid_client', 'validation_failure'}
+FALLBACK_FAILURE_CLASSES = {'transient_transport', 'timeout'}
 
 
 def reviewed_content(snapshot):
@@ -120,7 +125,12 @@ def observation_disposition(notice, approval, reasons):
 
 
 def require_reviewed_observations(config, diagnostics):
-    """An unresolved active review is not evidence of an official withdrawal."""
+    """Require complete accounting, keeping quarantine distinct from withdrawal.
+
+    A changed notice may withhold its own record, but cannot veto independently
+    verified notices. The preflight authenticates these decisions by replaying
+    the exact successful snapshots and bounded failed reads.
+    """
     if not config['enabled'] or config['schema_version'] != 2:
         return
     if not isinstance(diagnostics, dict):
@@ -129,16 +139,21 @@ def require_reviewed_observations(config, diagnostics):
     expected = {item['notice_id'] for item in config['approved_notices']}
     actual = [item.get('notice_id') for item in observations if isinstance(item, dict)
               and isinstance(item.get('notice_id'), str)] if isinstance(observations, list) else []
-    if (diagnostics.get('reviewed_inventory') is not True or diagnostics.get('outcome') != 'ok'
-            or diagnostics.get('failures') or len(actual) != len(expected)
+    if (diagnostics.get('reviewed_inventory') is not True or diagnostics.get('outcome') not in {'ok', 'degraded'}
+            or len(actual) != len(expected)
             or len(observations or []) != len(actual) or set(actual) != expected):
         raise ValueError('SAM refresh did not account for every approved notice')
+    degraded = False
+    failures = []
+    pending = []
     for observation in observations:
         reasons = observation.get('reasons')
         disposition = observation.get('disposition')
         basis = observation.get('withdrawal_basis')
-        if (not isinstance(reasons, list) or any(not isinstance(reason, str) for reason in reasons)
-                or disposition not in (None, 'admitted', 'verified_withdrawal', 'approval_expired', 'review_required')):
+        if (not isinstance(reasons, list) or len(reasons) != len(set(reasons))
+                or any(reason not in REVIEW_REASONS | {'public_notice_unavailable'} for reason in reasons)
+                or disposition not in (None, 'admitted', 'verified_withdrawal', 'approval_expired',
+                                       'review_required', 'source_unavailable')):
             raise ValueError('SAM refresh review disposition is invalid')
         reason_set = set(reasons)
         current = (isinstance(observation.get('observed_notice_id'), str)
@@ -149,14 +164,40 @@ def require_reviewed_observations(config, diagnostics):
             disposition is None and basis is None and reason_set <= CALENDAR_REASONS
             or disposition == 'admitted' and not reasons and basis is None
             or disposition == 'approval_expired' and reason_set == {'approval_not_current'} and basis is None
+            or disposition == 'review_required' and bool(reason_set) and reason_set <= REVIEW_REASONS and basis is None
             or disposition == 'verified_withdrawal' and (
                 basis is None and calendar
                 or current and (
                     basis == 'current_terminal_notice' and 'not_open_notice' in reason_set
                     or basis == 'current_restrictive_set_aside' and 'restrictive_set_aside' in reason_set
                     or basis == 'unchanged_reviewed_calendar' and calendar)))
+        if disposition == 'source_unavailable':
+            failure_class = observation.get('failure_class')
+            status = observation.get('http_status')
+            observed, latest = observation.get('observed_notice_id'), observation.get('latest_notice_id')
+            fallback = observation.get('fallback_allowed')
+            consistent = (reason_set == {'public_notice_unavailable'} and basis is None
+                and failure_class in FAILURE_CLASSES
+                and (status is None or type(status) is int and 100 <= status <= 599)
+                and all(value is None or isinstance(value, str) and NOTICE_ID.fullmatch(value)
+                        for value in (observed, latest))
+                and (observed is None) == (latest is None)
+                and type(fallback) is bool
+                and fallback == (observed is None and failure_class in FALLBACK_FAILURE_CLASSES))
+            failures.append({'notice_id': observation['notice_id'], 'reason': 'public_notice_unavailable',
+                             'http_status': status, 'failure_class': failure_class})
+        if disposition in {'review_required', 'approval_expired'}:
+            pending.append(observation)
+        degraded |= disposition in {'review_required', 'approval_expired', 'source_unavailable'}
         if not consistent:
-            raise ValueError('SAM notice requires reviewed successor reconciliation; preserve the published catalog')
+            raise ValueError('SAM notice disposition is inconsistent with its evidence')
+    if diagnostics.get('accounting_complete') is True:
+        if (diagnostics.get('outcome') != ('degraded' if degraded else 'ok')
+                or diagnostics.get('failures', []) != failures
+                or diagnostics.get('pending_reviews', []) != pending):
+            raise ValueError('SAM aggregate state does not match its notice outcomes')
+    elif degraded or diagnostics.get('failures'):
+        raise ValueError('Degraded SAM refresh requires complete per-notice accounting')
 
 
 def iso(value):
@@ -342,10 +383,12 @@ def collect(config, as_of, snapshots, *, client=None):
     client = client or fetch_notice
     approvals = config['approved_notices']
     diagnostics = {'request_count': 0, 'outcome': 'ok', 'discovered': len(approvals),
-                   'reviewed_inventory': True, 'exclusion_reasons': {}, 'notice_observations': []}
+                   'reviewed_inventory': True, 'accounting_complete': True,
+                   'exclusion_reasons': {}, 'notice_observations': [], 'pending_reviews': []}
 
     def fetch(approval):
         request_count = 0
+        notice = None
         def read(identifier):
             nonlocal request_count
             try:
@@ -369,43 +412,69 @@ def collect(config, as_of, snapshots, *, client=None):
                 notice = successor
             return notice, detail, None
         except SamError as error:
-            return None, dict(error.diagnostics, request_count=request_count), 'public_notice_unavailable'
+            return notice, dict(error.diagnostics, request_count=request_count), 'public_notice_unavailable'
         except Exception:
             return None, {'request_count': request_count}, 'invalid_notice_client'
 
     with ThreadPoolExecutor(max_workers=4) as executor:
         results = list(executor.map(fetch, approvals))
     records, seen = [], set()
+    unavailable = set()
     failures = []
     for approval, (notice, detail, failure) in zip(approvals, results):
         diagnostics['request_count'] += detail.get('request_count', 0)
         if failure:
-            failures.append({'notice_id': approval['notice_id'], 'reason': failure,
-                             'http_status': detail.get('http_status'),
-                             'failure_class': detail.get('failure_class', 'invalid_client')})
+            failure_class = detail.get('failure_class', 'invalid_client')
+            if failure_class not in FAILURE_CLASSES:
+                failure_class = 'invalid_client'
+            status = detail.get('http_status')
+            if status is not None and (type(status) is not int or not 100 <= status <= 599):
+                status = None
+                failure_class = 'invalid_client'
+            failures.append({'notice_id': approval['notice_id'], 'reason': 'public_notice_unavailable',
+                             'http_status': status, 'failure_class': failure_class})
+            diagnostics['notice_observations'].append({'notice_id': approval['notice_id'],
+                'observed_notice_id': notice['notice_id'] if notice else None,
+                'latest_notice_id': notice['latest_notice_id'] if notice else None,
+                'reasons': ['public_notice_unavailable'], 'disposition': 'source_unavailable',
+                'http_status': status, 'failure_class': failure_class,
+                'fallback_allowed': notice is None and failure_class in FALLBACK_FAILURE_CLASSES})
+            seen.add(approval['notice_id'])
+            unavailable.add(approval['notice_id'])
+            diagnostics['exclusion_reasons']['public_notice_unavailable'] = len(failures)
             continue
         (record, reasons), proof = reconcile_notice(notice, approval, as_of)
         basis = withdrawal_basis(notice, approval, reasons)
+        disposition = observation_disposition(notice, approval, reasons)
+        if disposition in {'review_required', 'approval_expired'}:
+            # A calendar from superseded terms cannot close an active amendment.
+            record['status'] = 'unverified'
         records.append(record)
         seen.add(approval['notice_id'])
         seen.add(notice['notice_id'])
-        diagnostics['notice_observations'].append({'notice_id': approval['notice_id'],
+        observation = {'notice_id': approval['notice_id'],
             'observed_notice_id': notice['notice_id'], 'latest_notice_id': notice['latest_notice_id'],
             'review_sha256': notice['review_sha256'], 'reasons': reasons,
-            'disposition': observation_disposition(notice, approval, reasons),
+            'disposition': disposition,
             **({'withdrawal_basis': basis} if basis is not None else {}),
-            **({'reconciliation': proof} if proof is not None else {})})
+            **({'reconciliation': proof} if proof is not None else {})}
+        diagnostics['notice_observations'].append(observation)
+        if disposition in {'review_required', 'approval_expired'}:
+            diagnostics['pending_reviews'].append(observation)
         for reason in reasons:
             diagnostics['exclusion_reasons'][reason] = diagnostics['exclusion_reasons'].get(reason, 0) + 1
     if failures:
-        raise SamError('reviewed_notice_fetch_failed', diagnostics | {'failures': failures,
-            'failure_class': 'request_network' if all(
-                item['failure_class'] == 'transient_transport' for item in failures) else 'validation_failure',
-            'failure_reason': 'One or more reviewed SAM notices could not be verified'})
+        diagnostics['failures'] = failures
+    if failures or diagnostics['pending_reviews']:
+        diagnostics['outcome'] = 'degraded'
     for cached in snapshots.get('sam-gov', []) if isinstance(snapshots, dict) else []:
         record_id = str(cached.get('opportunity_id') or '')
+        anchor = (cached.get('sam_review_reconciliation') or {}).get('approved_notice_id')
+        if anchor in unavailable:
+            continue  # The merger decides bounded transport retention, without new freshness.
         if record_id.startswith('sam-gov:') and record_id.removeprefix('sam-gov:') not in seen:
             records.append(dict(cached, status='unverified'))
     admitted = sum(record['status'] == 'posted' for record in records)
     diagnostics.update(admitted=admitted, deferred=len(approvals) - admitted, observations=len(records))
+    require_reviewed_observations(config, diagnostics)
     return records, diagnostics

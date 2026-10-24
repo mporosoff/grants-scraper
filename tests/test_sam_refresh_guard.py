@@ -84,7 +84,7 @@ class SamRefreshGuardTests(unittest.TestCase):
         require_complete_refresh(dict(configuration(), enabled=False), None)
         require_complete_refresh({'schema_version': 1, 'enabled': True}, None)
 
-    def test_real_merge_blocks_missing_or_unreviewed_evidence_but_allows_confirmed_closure(self):
+    def test_real_merge_isolates_missing_or_unreviewed_evidence_and_allows_confirmed_closure(self):
         for mode in ('failed', 'changed', 'closed'):
             with self.subTest(mode=mode), tempfile.TemporaryDirectory() as directory:
                 root = Path(directory)
@@ -111,11 +111,14 @@ class SamRefreshGuardTests(unittest.TestCase):
                 with patch.dict('os.environ', {'VPR_ENRICH_LINKS': 'false'}):
                     summary = integrate(catalog_path=catalog, cache_path=root / 'cache.json',
                                         adapters=[adapter], as_of=TODAY, write=True)
-                if mode != 'closed':
-                    with self.assertRaises(ValueError): require_complete_refresh(cfg, summary)
-                else:
-                    require_complete_refresh(cfg, summary)
-                    self.assertEqual(summary['sources'][0]['published'], 1)
+                require_complete_refresh(cfg, summary)
+                source = summary['sources'][0]
+                self.assertEqual(source['published'], 1)
+                self.assertEqual(source['status'], 'refreshed' if mode == 'closed' else 'partial_refresh')
+                self.assertIs(source['healthy'], mode == 'closed')
+                expected = {'failed': 'source_unavailable', 'changed': 'review_required', 'closed': 'verified_withdrawal'}
+                observation = source['diagnostics']['notice_observations'][1]
+                self.assertEqual(observation['disposition'], expected[mode])
 
     def test_workflow_guard_blocks_paid_work_and_persistence_but_keeps_alerts(self):
         workflow = yaml.safe_load((ROOT / '.github/workflows/refresh-opportunities.yml').read_text(encoding='utf8'))

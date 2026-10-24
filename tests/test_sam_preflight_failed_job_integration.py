@@ -288,15 +288,17 @@ class SamFailedJobPreflightIntegration(unittest.TestCase):
                 self.public.assert_not_called()
         self.assert_no_paid_transport()
 
-    def test_transient_public_retry_failure_retains_diagnostics_and_stops_before_any_allowance(self):
+    def test_transient_public_retry_failure_is_accounted_without_a_second_source_read(self):
         self.public.side_effect = SamError('public_source_unavailable', {'request_count': 2,
             'http_status': 503, 'failure_class': 'transient_transport'})
         eligible, results = self.before_budget(self.context(), {})
-        self.assertFalse(eligible)
-        self.assertEqual(results['rerun-sam-preflight'], 'failure')
-        self.assertEqual(results['verify-sam-preflight'], 'skipped')
+        self.assertTrue(eligible)
+        self.assertEqual(results['rerun-sam-preflight'], 'success')
+        self.assertEqual(results['verify-sam-preflight'], 'success')
         retained = json.loads(self.uploads['sam-preflight-200-2'])
-        self.assertFalse(retained['completed']); self.assertEqual(retained['outcome'], 'source_unavailable')
+        self.assertTrue(retained['completed']); self.assertEqual(retained['outcome'], 'verified_degraded')
+        self.assertEqual(retained['diagnostics']['notice_observations'][0]['disposition'], 'source_unavailable')
+        self.assertEqual(self.public.call_count, 1)
         self.assertEqual((retained['run_id'], retained['run_attempt']), ('200', '2'))
         self.assertFalse((self.root / 'offline-200/ledger.json').exists())
         self.assert_no_paid_transport()

@@ -1245,17 +1245,17 @@
       }
     },
     {
-      "notice_id": "e3d96ffd4a0a48b080e09dd5af732cc8",
+      "notice_id": "897e1427461540d792897c599373758b",
       "solicitation_number": "693KA8-27-T-00003",
       "organization_id": "500000118",
       "sponsor": "Federal Aviation Administration (FAA)",
       "evidence_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/2e7487dbacf54e13bc796cbd991eafef/download",
       "academic_eligibility_quote": "to collaborate with traditional and nontraditional government contractors, as well as nonprofit research institutions.",
-      "verified_on": "2026-10-13",
-      "review_after": "2026-11-12",
-      "review_sha256": "a37d74e3ddd2cc724d3b627b733f9300388b2427443572156c4a4b27175f8bf4",
+      "verified_on": "2026-10-24",
+      "review_after": "2026-11-23",
+      "review_sha256": "b4516c12c27e7f23bbfb362bf92f2f48154ddf520040bb30db227941dae2803b",
       "summary": "Basic/applied aviation human-factors research on how increasing system and operational complexity affects pilot performance, safety, automation and training.",
-      "scope_note": "Actual AOI solicits submissions; parent BAA alone does not. Must satisfy one FAA OTA qualifier and technical criteria; subsequent phases only by invitation. CurrentSAM deadline supplies18:00EST; PDF statesNov2date. No small-business set-aside. Submission: Email research/solution brief to the Agreements Officer with the exact AOI subject line in Section1.1.4.",
+      "scope_note": "Actual AOI solicits submissions; parent BAA alone does not. Must satisfy one FAA OTA qualifier and technical criteria; subsequent phases only by invitation. October 23 official Q&A confirms briefs due November 2 at 18:00 EST, no required cost sharing, unrestricted teaming, and a total AOI budget up to $5 million across potentially multiple awards. No small-business set-aside. Research remains focused on pilot and maintenance human factors; a single brief may address multiple topics. Human-subjects work must meet FAA requirements, with the FAA IRB decision not expected before award. Submit the research/solution brief by email using the exact subject line in AOI Section 1.1.4, confirmed in Q&A answers 4 and 17.",
       "cycles": [
         {
           "name": "Current reviewed call",
@@ -1266,7 +1266,7 @@
             "timezone": "America/New_York",
             "required": true,
             "invitation_required": false,
-            "note": "PhaseI Research/Solution Brief; PhaseII pitch and PhaseIII full proposal only by invitation. The PDF specifies November2 and current SAM specifies18:00EST; later-stage dates are not public.",
+            "note": "Phase I Research/Solution Brief due November 2 at 18:00 EST, explicitly confirmed by October 23 Q&A answer 5. Phase II pitch and Phase III full proposal require invitation; later-stage dates are not public.",
             "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/5727e47eace543a89f22b2d38db7a97e/download",
             "quote": "Phase I – Research/Solutions Briefs Due Date: November 2, 2026"
           },
@@ -1284,8 +1284,8 @@
         }
       ],
       "reviewed_snapshot": {
-        "notice_id": "e3d96ffd4a0a48b080e09dd5af732cc8",
-        "latest_notice_id": "e3d96ffd4a0a48b080e09dd5af732cc8",
+        "notice_id": "897e1427461540d792897c599373758b",
+        "latest_notice_id": "897e1427461540d792897c599373758b",
         "latest": true,
         "status": "published",
         "archived": false,
@@ -1302,14 +1302,14 @@
         "set_asides": [
           "NONE"
         ],
-        "posted_at": "2026-10-06T17:10:45.078+00:00",
-        "modified_at": "2026-10-06T17:10:45.082+00:00",
+        "posted_at": "2026-10-23T13:26:50.481+00:00",
+        "modified_at": "2026-10-23T13:26:50.484+00:00",
         "response_deadline": "2026-11-02T18:00:00-05:00",
         "response_timezone": "America/New_York",
         "archive_date": "2028-12-31",
-        "description_sha256": "2e3fc30b8f63737c92b4c2b6b9b0b56bf87038450766535328e23860eccf79f4",
-        "resources_sha256": "9713b49f88fe994cef4a435ce568ffaaeb313042f1eaf3165a00f4eec38797b8",
-        "review_sha256": "a37d74e3ddd2cc724d3b627b733f9300388b2427443572156c4a4b27175f8bf4"
+        "description_sha256": "8f98172eecce730bcf4cb488f932f11f6c95ef47fec5e43a49c00bcfd238616b",
+        "resources_sha256": "6beeb1feb80766fd315e9abd3f13f3bb02a0a07777af51380c894ba830902bcc",
+        "review_sha256": "b4516c12c27e7f23bbfb362bf92f2f48154ddf520040bb30db227941dae2803b"
       }
     },
     {
@@ -1503,17 +1503,17 @@
       }
     },
     {
-      "notice_id": "4984511e4bbc4d01a21df55b30a88f02",
+      "notice_id": "854d837d8dc842719d9fec95764d8ceb",
       "solicitation_number": "HM047627XXXX",
       "organization_id": "500038581",
       "sponsor": "National Geospatial-Intelligence Agency",
       "evidence_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/5df2c1fa8a9c46a0ab22ba8a69b5dda5/download",
       "academic_eligibility_quote": "All responsible sources capable of satisfying the Government's needs may submit a proposal for NGA’s consideration.",
-      "verified_on": "2026-10-18",
-      "review_after": "2026-11-17",
-      "review_sha256": "ced0975e8e8a1a727790e0a2d0c834dcafd472cbe5b29064cb0dcb23c77a9111",
+      "verified_on": "2026-10-24",
+      "review_after": "2026-11-23",
+      "review_sha256": "98eb17d9e97616fac43ef74fae9ef5ac0d1e0f4eb065ff39b73cd05aabd0dab4",
       "summary": "Develop AI/ML methods to extract and classify 3D surface/subsurface objects using NASA ICESat-2 and GEDI lidar, including navigation safety applications.",
-      "scope_note": "Topic7 LASER only, not BIG-ST parent or closed topics. General Solicitation Rev4 governs eligibility and abstract prerequisites; October16 Topic7 revision governs current dates, Phase2 label and corrected PD>75% metric. CUI safeguards; foreign nationals need prior written CO/COR approval; HSPD-12 favorable adjudication if access to NGA facilities/systems. One anticipated award, $854k /15months.",
+      "scope_note": "Topic 7 LASER only, not the BIG-ST parent or closed topics. General Solicitation Rev4 governs eligibility and the required abstract; the October 16 topic revision retains October 28 abstract and December 21 proposal dates. October 20 Q&A allows a university prime to propose an OTA; the contracting officer selects the award instrument. Work remains unclassified with CUI safeguards and prior approval for public release; HSPD-12 favorable adjudication is required for access to NGA facilities or systems. Foreign nationals require written approval before performing work; they may be proposed before that approval, which is evaluated at proposal review. Research-security training applies at full proposal, not abstract. Government-furnished Phase 1 data establish the TRL 4 baseline; no new field collection is expected. PD must exceed 75 percent, with a one-meter vertical accuracy goal. One anticipated award over 15 months, including transition; the Q&A contains a conflicting budget figure, so confirm the award budget with the sponsor.",
       "cycles": [
         {
           "name": "Current open entry",
@@ -1542,8 +1542,8 @@
         }
       ],
       "reviewed_snapshot": {
-        "notice_id": "4984511e4bbc4d01a21df55b30a88f02",
-        "latest_notice_id": "4984511e4bbc4d01a21df55b30a88f02",
+        "notice_id": "854d837d8dc842719d9fec95764d8ceb",
+        "latest_notice_id": "854d837d8dc842719d9fec95764d8ceb",
         "latest": true,
         "status": "published",
         "archived": false,
@@ -1558,14 +1558,14 @@
           "541715"
         ],
         "set_asides": [],
-        "posted_at": "2026-10-16T12:43:27.574+00:00",
-        "modified_at": "2026-10-16T12:43:27.584+00:00",
+        "posted_at": "2026-10-20T19:18:09.937+00:00",
+        "modified_at": "2026-10-20T19:18:09.944+00:00",
         "response_deadline": "2026-12-21T23:59:00-05:00",
         "response_timezone": "America/New_York",
         "archive_date": "2027-03-15",
-        "description_sha256": "42bb138b977855d68dd52260b75a53a271ca61f52768d97789f2caa7ddf452ec",
-        "resources_sha256": "cc3e25ea498be01537eb405f7c347bc054df2cd0ef34ed5fde6cf0927a8e24df",
-        "review_sha256": "ced0975e8e8a1a727790e0a2d0c834dcafd472cbe5b29064cb0dcb23c77a9111"
+        "description_sha256": "7822671c8a29585a4f655ed8b12cc70a063bb4d3a979159cb510e72e57bc91af",
+        "resources_sha256": "04a96cf11b9fc3d132ba7599d84520ce7896efc1d4a765e9dd2c939d6cde2b15",
+        "review_sha256": "98eb17d9e97616fac43ef74fae9ef5ac0d1e0f4eb065ff39b73cd05aabd0dab4"
       }
     },
     {
@@ -2492,17 +2492,17 @@
       }
     },
     {
-      "notice_id": "45850d5326944be1b187cece69fe7790",
+      "notice_id": "7b28c18c42cf4d44b6b65709148ec8e0",
       "solicitation_number": "693JJ626R000001",
       "organization_id": "100076812",
       "sponsor": "U.S. Department of Transportation - Federal Railroad Administration (FRA)",
       "evidence_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/62c772c4cbda46b583bce609e153fb05/download",
       "academic_eligibility_quote": "Any responsible source may submit a Concept Paper for consideration, including, but not limited to, States or local governments, organizations of State or local governments, universities or institutions of higher education, hospitals, non-profit organizations",
-      "verified_on": "2026-10-13",
-      "review_after": "2026-11-12",
-      "review_sha256": "e110eb66cb59c83ddc9d06c29221f06cc4734feec4f7a9bbb698aa87afbba8d4",
+      "verified_on": "2026-10-24",
+      "review_after": "2026-11-23",
+      "review_sha256": "9a9e4cd03f4c96e828c13ba59d8991da69c303338f6fde3bc359c4d6edfb85ae",
       "summary": "Applied rail transportation research in remaining FY26–27 track, rolling-stock, and train-control topics.",
-      "scope_note": "Only current AppendixC research topics; Amendment1 removes FRA-TR-005,006,007,009. No HumanFactors topics inFY26–27. Cost investment not mandatory; typically$50,000–$500,000; SAM registration before award. Topic availability may close earlier if enough concept papers received. SpecialNotice label does not negate the attached unrestricted research call. Submission: Electronic concept paper to the BAA Program Manager via the official address in PDFp9; later full proposals follow FRA invitation.",
+      "scope_note": "Only current Appendix C research topics in the October 22 second revision. Amendment 2 closes FRA-TR-003 and FRA-TR-004 in addition to the previously closed FRA-TR-005, FRA-TR-006, FRA-TR-007, and FRA-TR-009; these six topics are excluded. Remaining track topics are FRA-TR-001, FRA-TR-002, FRA-TR-008, and FRA-TR-010, alongside FRA-RS-001 and FRA-TC-001 through FRA-TC-004. No Human Factors division topics in FY26-27. Academic eligibility and the September 30, 2027 noon Eastern entry deadline are unchanged. Cost investment is not mandatory; awards are typically $50,000-$500,000; SAM registration is required before award. Topics may close earlier when enough concept papers have been received. The Special Notice label does not negate the attached unrestricted research call. Submit the electronic concept paper through the official BAA Program Manager route in the parent PDF; later full proposals require FRA invitation.",
       "cycles": [
         {
           "name": "Current reviewed call",
@@ -2513,7 +2513,7 @@
             "timezone": "America/New_York",
             "required": true,
             "invitation_required": false,
-            "note": "Rolling required initial concept papers, current topics only; the source SAM notice specifies noon Eastern on the end date. Later full proposal date set by invitation.",
+            "note": "Rolling required concept papers for the remaining topics in the October 22 second revision of Appendix C only. FRA-TR-003, FRA-TR-004, FRA-TR-005, FRA-TR-006, FRA-TR-007, and FRA-TR-009 are closed. The SAM response deadline remains September 30, 2027 at noon Eastern; later full proposal dates are supplied by invitation.",
             "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/62c772c4cbda46b583bce609e153fb05/download",
             "quote": "Concept Papers will be reviewed on a rolling basis throughout the fiscal year. The only deadline is the end of the next fiscal year — September 30, 2027."
           },
@@ -2531,8 +2531,8 @@
         }
       ],
       "reviewed_snapshot": {
-        "notice_id": "45850d5326944be1b187cece69fe7790",
-        "latest_notice_id": "45850d5326944be1b187cece69fe7790",
+        "notice_id": "7b28c18c42cf4d44b6b65709148ec8e0",
+        "latest_notice_id": "7b28c18c42cf4d44b6b65709148ec8e0",
         "latest": true,
         "status": "published",
         "archived": false,
@@ -2549,14 +2549,14 @@
         "set_asides": [
           "NONE"
         ],
-        "posted_at": "2026-08-21T17:11:49.180+00:00",
-        "modified_at": "2026-08-21T17:11:49.185+00:00",
+        "posted_at": "2026-10-22T19:16:53.211+00:00",
+        "modified_at": "2026-10-22T19:16:53.215+00:00",
         "response_deadline": "2027-09-30T12:00:00-04:00",
         "response_timezone": "America/New_York",
         "archive_date": "2027-09-30",
-        "description_sha256": "4b83280ff0f974839e10157285ed2d42109d9a6427d04c3c0db9e16b7dee6546",
-        "resources_sha256": "4506adeac2912f22cf8f564361463d612edbb65a54ce62a1bf6f0883affe9eae",
-        "review_sha256": "e110eb66cb59c83ddc9d06c29221f06cc4734feec4f7a9bbb698aa87afbba8d4"
+        "description_sha256": "50a8eea12b12b31c67e9aa6eec95143c97fdd690172f55b26013759c481ccfe3",
+        "resources_sha256": "7a1a6d5cf6005ca242189a5f5a5fca0c8d5dd5f383e7e4dbf66f75c28b62d5d9",
+        "review_sha256": "9a9e4cd03f4c96e828c13ba59d8991da69c303338f6fde3bc359c4d6edfb85ae"
       }
     },
     {

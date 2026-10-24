@@ -143,15 +143,18 @@ class SamPreflightContracts(unittest.TestCase):
         self.save(receipt)
         with self.assertRaises(ValueError): self.replay()
 
-    def test_changed_active_terms_leave_safe_failed_receipt_before_any_generation(self):
+    def test_changed_active_terms_leave_accounted_quarantine_receipt_before_generation(self):
         changed = signed(self.item['reviewed_snapshot'], description_sha256='c' * 64)
         receipt = self.build(Mock(return_value=(changed, {'request_count': 2})))
-        self.assertFalse(receipt['completed'])
-        self.assertEqual(receipt['outcome'], 'review_required')
+        self.assertTrue(receipt['completed'])
+        self.assertEqual(receipt['outcome'], 'verified_degraded')
         self.assertEqual(receipt['diagnostics']['notice_observations'][0]['disposition'], 'review_required')
         self.assertEqual(receipt['snapshots'][NOTICE]['description_sha256'], 'c' * 64)
         self.save(receipt)
-        with self.assertRaises(ValueError): self.replay()
+        client = self.replay()
+        rows, diagnostics = sam_preflight.sam_reviewed.collect(configuration(self.item), TODAY, {}, client=client)
+        self.assertEqual(rows[0]['status'], 'unverified')
+        self.assertEqual(diagnostics['outcome'], 'degraded')
 
     def test_old_entry_closure_cannot_complete_or_replay_a_changed_active_amendment(self):
         checked = datetime(2026, 10, 21, 12, tzinfo=timezone.utc)
@@ -160,7 +163,8 @@ class SamPreflightContracts(unittest.TestCase):
         with patch.object(sam_preflight, 'utc_now', return_value=checked):
             receipt = sam_preflight.build_receipt(self.config_path, checked.date(), environment=self.environment,
                 client=Mock(return_value=(changed, {'request_count': 2})))
-        self.assertFalse(receipt['completed'])
+        self.assertTrue(receipt['completed'])
+        self.assertEqual(receipt['outcome'], 'verified_degraded')
         observation = receipt['diagnostics']['notice_observations'][0]
         self.assertEqual(observation['reasons'], ['reviewed_evidence_changed', 'entry_closed'])
         self.assertEqual(observation['disposition'], 'review_required')
@@ -176,12 +180,19 @@ class SamPreflightContracts(unittest.TestCase):
     def test_source_failure_retains_sanitized_counts_without_raw_exception_or_private_body(self):
         receipt = self.build(Mock(side_effect=SamError('RAW EXCEPTION ' + PRIVATE, {
             'request_count': 2, 'http_status': 503, 'failure_class': 'transient_transport', 'raw_body': PRIVATE})))
-        self.assertFalse(receipt['completed'])
-        self.assertEqual(receipt['outcome'], 'source_unavailable')
+        self.assertTrue(receipt['completed'])
+        self.assertEqual(receipt['outcome'], 'verified_degraded')
         self.assertEqual(receipt['diagnostics']['request_count'], 2)
         encoded = json.dumps(receipt)
         for forbidden in (PRIVATE, 'RAW EXCEPTION', 'raw_body'):
             self.assertNotIn(forbidden, encoded)
+        self.save(receipt)
+        with patch.object(sam_preflight, 'fetch_notice', side_effect=AssertionError('No second source read')):
+            replay = self.replay()
+            rows, diagnostics = sam_preflight.sam_reviewed.collect(configuration(self.item), TODAY, {}, client=replay)
+        self.assertEqual(rows, [])
+        self.assertEqual(diagnostics['request_count'], 0)
+        self.assertTrue(diagnostics['notice_observations'][0]['fallback_allowed'])
 
     def test_run_attempt_event_checkout_and_config_each_bind_replay(self):
         self.save(self.build())

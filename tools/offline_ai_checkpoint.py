@@ -4,13 +4,13 @@ import io
 import json
 import os
 from pathlib import Path
-import subprocess
 import zipfile
 
 from tools.offline_ai import atomic_json, config, identity
 from tools.evaluate_offline_ai import TASK
 from tools.release_candidate import checked_path
 from tools.fetch_release_artifact import artifact_bytes, repository_artifacts
+from tools.github_read import get
 
 WORKFLOW = ".github/workflows/offline-ai-evaluation.yml"
 PILOT_WORKFLOW = ".github/workflows/refresh-opportunities.yml"
@@ -18,7 +18,7 @@ PREFIX = "offline-ai-" + TASK
 
 
 def api(repository, path):
-    return subprocess.check_output(["gh", "api", f"repos/{repository}/{path}"], timeout=60)
+    return get(repository, path)
 
 
 def prepare(repository, destination, reservation):
