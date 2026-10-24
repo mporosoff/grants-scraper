@@ -378,6 +378,13 @@ def make_record(notice, approval, as_of):
     return record, reasons
 
 
+def _sam_identity(record):
+    sponsor = sponsor_identity(record)
+    number = normalized_number(record.get('opportunity_number'))
+    organization = record.get('sam_organization_id')
+    return (sponsor, number, organization) if sponsor and number and organization else None
+
+
 def collect(config, as_of, snapshots, *, client=None):
     validate_config(config)
     client = client or fetch_notice
@@ -418,7 +425,7 @@ def collect(config, as_of, snapshots, *, client=None):
 
     with ThreadPoolExecutor(max_workers=4) as executor:
         results = list(executor.map(fetch, approvals))
-    records, seen = [], set()
+    records, seen, reviewed_identities = [], set(), set()
     unavailable = set()
     failures = []
     for approval, (notice, detail, failure) in zip(approvals, results):
@@ -450,6 +457,8 @@ def collect(config, as_of, snapshots, *, client=None):
             # A calendar from superseded terms cannot close an active amendment.
             record['status'] = 'unverified'
         records.append(record)
+        if disposition == 'admitted' and (identity := _sam_identity(record)) is not None:
+            reviewed_identities.add(identity)
         seen.add(approval['notice_id'])
         seen.add(notice['notice_id'])
         observation = {'notice_id': approval['notice_id'],
@@ -473,6 +482,10 @@ def collect(config, as_of, snapshots, *, client=None):
         if anchor in unavailable:
             continue  # The merger decides bounded transport retention, without new freshness.
         if record_id.startswith('sam-gov:') and record_id.removeprefix('sam-gov:') not in seen:
+            # A reviewed successor supersedes its cached notice. Appending the
+            # old invalidation last would shadow it during incremental selection.
+            if _sam_identity(cached) in reviewed_identities:
+                continue
             records.append(dict(cached, status='unverified'))
     admitted = sum(record['status'] == 'posted' for record in records)
     diagnostics.update(admitted=admitted, deferred=len(approvals) - admitted, observations=len(records))

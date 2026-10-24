@@ -676,6 +676,11 @@ def resolve_live_records(results: list[AdapterResult], cache: dict,
                 **evidence,
                 **({'unresolved_records': sam_unresolved,
                     'retained_transport_ids': [r['opportunity_id'] for r in carried],
+                    'unpublished_admitted_ids': sorted(
+                        {'sam-gov:' + row['observed_notice_id']
+                         for row in result.diagnostics['notice_observations']
+                         if row['disposition'] == 'admitted'}
+                        - {row['opportunity_id'] for row in published}),
                     'source_completeness': 'degraded' if sam_degraded else 'complete'} if sam_accounted else {}),
                 **({"withheld_ids": [r["opportunity_id"] for r in dropped if r["reason"] != "expired"]}
                    if any(r["reason"] != "expired" for r in dropped) else {}),

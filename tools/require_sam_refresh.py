@@ -28,6 +28,10 @@ def require_complete_refresh(config, summary):
     source = sam[0]
     diagnostics = source.get('diagnostics')
     require_reviewed_observations(config, diagnostics)
+    missing = source.get('unpublished_admitted_ids', [])
+    if missing:
+        raise ValueError('Verified SAM admissions disappeared during source selection: '
+                         + ', '.join(missing[:10]))
     degraded = diagnostics.get('outcome') == 'degraded'
     if (source.get('status') != ('partial_refresh' if degraded else 'refreshed')
             or source.get('healthy') is not (not degraded)):

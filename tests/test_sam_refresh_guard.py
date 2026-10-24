@@ -143,6 +143,30 @@ class SamRefreshGuardTests(unittest.TestCase):
         self.assertIn('tools/require_sam_refresh.py', dependencies['generation'])
         self.assertIn('tools/require_sam_refresh.py', dependencies['dependency_groups']['source']['patterns'])
 
+    def test_admitted_notice_lost_by_merge_selection_blocks_paid_continuation(self):
+        # The October 24 successor regression passed preflight but lost a
+        # verified notice in incremental selection before candidate generation.
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            cfg = configuration()
+            config_path = root / 'sam.json'
+            config_path.write_text(json.dumps(cfg), encoding='utf8')
+            observed = sam_public.snapshot(payload(), resources(), NOTICE)
+            adapter = SamGovAdapter(config_path=config_path,
+                reviewed_client=lambda _: (observed, {'request_count': 0}))
+            catalog = root / 'catalog.js'
+            save_catalog({'generated_at': '2026-10-13T12:00:00Z', 'opportunities': []}, catalog)
+            with patch.dict('os.environ', {'VPR_ENRICH_LINKS': 'false'}), \
+                    patch('scripts.sources.merge._incremental_observations', return_value=([], [])):
+                summary = integrate(catalog_path=catalog, cache_path=root / 'cache.json',
+                                    adapters=[adapter], as_of=TODAY, write=True)
+            source = summary['sources'][0]
+            self.assertEqual(source['diagnostics']['notice_observations'][0]['disposition'], 'admitted')
+            self.assertEqual(source['unpublished_admitted_ids'], ['sam-gov:' + NOTICE])
+            self.assertEqual(source['published'], 0)
+            with self.assertRaisesRegex(ValueError, 'sam-gov:' + NOTICE):
+                require_complete_refresh(cfg, summary)
+
 
 if __name__ == '__main__':
     unittest.main()
