@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml</id>
-  <updated>2026-10-20T15:28:21Z</updated>
+  <updated>2026-10-24T22:43:50Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Healthy Lifestyles in Youth</title>
@@ -97,6 +97,17 @@
     <author><name>Health Resources and Services Administration</name></author>
     <category term="Agriculture and food"/>
     <summary>Health Resources and Services Administration | Estimated Application 2026-12-29 | Fiscal Year (FY) 2027 Regional Nutrition Hubs (RNH) will support region-specific technical assistance (TA) on expanding high-quality nutrition services to the Health Resources and Services Administration's (HRSA) Health Center Program (H80) award recipients and look-alikes (health centers). Nutrition services prevent, manage, and treat diseases and conditions through nutritional and food-based int…</summary>
+  </entry>
+  <entry>
+    <title>F26AS00088 Endangered Species Conservation - Wolf Livestock Loss Compensation and Prevention</title>
+    <link href="https://www.grants.gov/search-results-detail/364133"/>
+    <id>urn:funding-finder:grants-gov:364133</id>
+    <updated>2026-10-21T00:00:00Z</updated>
+    <author><name>Fish and Wildlife Service</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Environmental science"/>
+    <category term="Cybersecurity"/>
+    <summary>Fish and Wildlife Service | Application 2027-01-15 | The Wolf Livestock Loss Demonstration Project Grant Program, authorized under Subtitle C of the Omnibus Public Lands Management Act of 2009, provides federal financial assistance to states and tribes for two primary purposes: depredation prevention and depredation compensation. Depredation prevention funding supports livestock producers in implementing proactive, nonlethal strategies to reduce the…</summary>
   </entry>
   <entry>
     <title>Affordable Rural Cooperative (ARC) Energy Program</title>
@@ -279,20 +290,6 @@
     <category term="Agriculture and food"/>
     <category term="Environmental science"/>
     <summary>Foreign Agricultural Service | Application 2026-10-26 | The occurrence of insects as well as pesticide residuals can be significant barriers for U.S. horticultural exports. Each importing country can have unique phytosanitary and maximum residue limit (MRL) requirements, which creates operational and logistical challenges. To maximize return to growers, U.S. shippers need tools that can universally address all such requirements while maintaining produc…</summary>
-  </entry>
-  <entry>
-    <title>Fiscal Year (FY) 2027 AmeriCorps Seniors RSVP Competition</title>
-    <link href="https://www.grants.gov/search-results-detail/363482"/>
-    <id>urn:funding-finder:grants-gov:363482</id>
-    <updated>2026-08-20T00:00:00Z</updated>
-    <author><name>AmeriCorps</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Arts and culture"/>
-    <category term="Community development"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Transportation"/>
-    <summary>AmeriCorps | Application 2026-10-20 | AmeriCorps improves lives, strengthens communities, and fosters civic engagement through service and volunteering. AmeriCorps brings people together to tackle some of the country’s most pressing challenges through national service and volunteerism. AmeriCorps members and AmeriCorps Seniors volunteers serve with organizations dedicated to the improvement of communities and those serving. AmeriCorps…</summary>
   </entry>
   <entry>
     <title>WaterSMART Enhancing Water Resources Projects</title>

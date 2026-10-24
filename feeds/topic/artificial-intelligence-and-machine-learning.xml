@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml</id>
-  <updated>2026-10-20T15:28:21Z</updated>
+  <updated>2026-10-24T22:43:50Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Single Source: Scalable and Systematic Neurobiology of Psychiatric and Neurodevelopmental Disorder Risk Genes: Data Resource and Administrative Coordination Center (U24 Clinical Trial Not Allowed)</title>
@@ -104,6 +104,33 @@
     <summary>National Institutes of Health | Estimated Application 2027-01-22 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting multidisciplinary, consortium-based research using precision systems biology approaches to uncover links among chronic illnesses, infectious diseases and microbiomes. There is an urgent scientific and clinical need to understand the pathways by which infections lead to chronic lifelong heal…</summary>
   </entry>
   <entry>
+    <title>NGA - Boosting Innovative GEOINT - Science &amp; Technology Broad Agency Announcement (BIG-ST BAA): Topic # 07 - Lidar Analysis for Surface &amp; Environmental Reconnaissance (LASER)</title>
+    <link href="https://sam.gov/opp/854d837d8dc842719d9fec95764d8ceb/view"/>
+    <id>urn:funding-finder:sam-gov:sam-gov%3A854d837d8dc842719d9fec95764d8ceb</id>
+    <updated>2026-10-20T00:00:00Z</updated>
+    <author><name>National Geospatial-Intelligence Agency</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Space and aeronautics"/>
+    <category term="Transportation"/>
+    <summary>National Geospatial-Intelligence Agency | Preproposal 2026-10-28 | Develop AI/ML methods to extract and classify 3D surface/subsurface objects using NASA ICESat-2 and GEDI lidar, including navigation safety applications. Topic 7 LASER only, not the BIG-ST parent or closed topics. General Solicitation Rev4 governs eligibility and the required abstract; the October 16 topic revision retains October 28 abstract and December 21 proposal dates. October 20 Q&amp;A allows a…</summary>
+  </entry>
+  <entry>
+    <title>Young Faculty Award (YFA) 2027</title>
+    <link href="https://www.grants.gov/search-results-detail/364129"/>
+    <id>urn:funding-finder:grants-gov:364129</id>
+    <updated>2026-10-20T00:00:00Z</updated>
+    <author><name>DARPA - Defense Sciences Office</name></author>
+    <category term="Materials science"/>
+    <category term="Quantum science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Manufacturing"/>
+    <category term="Cybersecurity"/>
+    <summary>DARPA - Defense Sciences Office | Application 2027-01-13 | The Defense Advanced Research Projects Agency (DARPA) Young Faculty Award (YFA) program aims to identify and engage rising stars in junior research positions in academia and equivalent positions at non-profit research institutions, particularly those without prior DARPA funding, to expose them to Department of War (DoW) needs and DARPA’s mission to create and prevent technological surprise for nat…</summary>
+  </entry>
+  <entry>
     <title>Institute of Education Sciences (IES): National Center on Education Research (NCER): From Seedlings to Scale, Assistance Listing Number (ALN) 84.305J</title>
     <link href="https://www.grants.gov/search-results-detail/364086"/>
     <id>urn:funding-finder:grants-gov:364086</id>
@@ -113,18 +140,6 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <summary>Department of Education | Letter Of Intent 2026-10-29 | Through the From Seedlings to Scale (S2S) Grants program, IES will invest in innovative ideas within an identified focus area through three phases of increasing funding and duration to support ideas as they grow from seedlings to scalable solutions. Projects will incorporate high-quality research, robust solution development, and attention to sustainability and scaling throughout all phases. For t…</summary>
-  </entry>
-  <entry>
-    <title>NGA - Boosting Innovative GEOINT - Science &amp; Technology Broad Agency Announcement (BIG-ST BAA): Topic # 07 - Lidar Analysis for Surface &amp; Environmental Reconnaissance (LASER)</title>
-    <link href="https://sam.gov/opp/4984511e4bbc4d01a21df55b30a88f02/view"/>
-    <id>urn:funding-finder:sam-gov:sam-gov%3A4984511e4bbc4d01a21df55b30a88f02</id>
-    <updated>2026-10-16T00:00:00Z</updated>
-    <author><name>National Geospatial-Intelligence Agency</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Environmental science"/>
-    <category term="Space and aeronautics"/>
-    <category term="Data science"/>
-    <summary>National Geospatial-Intelligence Agency | Preproposal 2026-10-28 | Develop AI/ML methods to extract and classify 3D surface/subsurface objects using NASA ICESat-2 and GEDI lidar, including navigation safety applications. Topic7 LASER only, not BIG-ST parent or closed topics. General Solicitation Rev4 governs eligibility and abstract prerequisites; October16 Topic7 revision governs current dates, Phase2 label and corrected PD&gt;75% metric. CUI safeguards; foreign na…</summary>
   </entry>
   <entry>
     <title>NLM Institutional Grants for Research Training in Biomedical Informatics, Data Science, and AI (T15 Independent Clinical Trial Not Allowed)</title>
@@ -729,17 +744,5 @@ Successful candidates for a Fellowship generally have a strong record of signifi
     <category term="Technology development"/>
     <category term="Data science"/>
     <summary>U.S. National Science Foundation | Application 2026-11-04 | This program will advance scientific community datasets to enable scientific discovery and innovation using artificial intelligence (AI) and other methods. Its goal is to increase the value that can be derived from existing scientific datasets by leveraging novel methods and artificial intelligence (AI). This will unlock new AI-driven insights. It can enable interdisciplinary research. It also ena…</summary>
-  </entry>
-  <entry>
-    <title>ROSES25: A.14 Atmosphere</title>
-    <link href="https://www.grants.gov/search-results-detail/363240"/>
-    <id>urn:funding-finder:grants-gov:363240</id>
-    <updated>2026-07-20T00:00:00Z</updated>
-    <author><name>NASA Headquarters</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Space and aeronautics"/>
-    <summary>NASA Headquarters | Application 2026-12-02 | PLEASE NOTE: this program has MANDATORY Notices of Intent, which are due via NSPIRES by 8/20/2026. See the full posting on NSPIRES for details. NOTICE: September 18, 2026. Section 3.1 on participation of NASA ISFM scientists has been improved. Details on the redacted and anonymized budget requirements have been added to Table A.14-1 to be consistent with Section 4.3.2. The instructions regarding B…</summary>
   </entry>
 </feed>

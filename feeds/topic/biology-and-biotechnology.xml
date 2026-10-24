@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/biology-and-biotechnology.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/biology-and-biotechnology.xml</id>
-  <updated>2026-10-20T15:28:21Z</updated>
+  <updated>2026-10-24T22:43:50Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Development of Models, New Approach Methodologies, and Biological Materials for Studying Human Health and Diseases (R21 Clinical Trial Not Allowed)</title>
@@ -44,6 +44,16 @@
     <category term="Data science"/>
     <category term="Public health"/>
     <summary>National Institutes of Health | Estimated Application 2028-02-01 | The National Human Genome Research Institute (NHGRI) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to establish an ancient DNA for Modern Genomics (aDMG) program. The goal of aDMG is to establish an ethical resource of ancient and historical human DNA (aDNA) data to advance studies about contemporary human traits and biology. This NOFO aims to solicit applicatio…</summary>
+  </entry>
+  <entry>
+    <title>CAPSTONE Centers for Multidisciplinary Research in Child Abuse and Neglect</title>
+    <link href="https://www.grants.gov/search-results-detail/364128"/>
+    <id>urn:funding-finder:grants-gov:364128</id>
+    <updated>2027-07-24T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health | Estimated Application 2027-10-01 | This renewal of the CAPSTONE Centers for Child Maltreatment Research initiative will focus on child sexual abuse (CSA), a preventable but understudied public health problem with serious lifelong consequences. CSA is linked to adverse developmental and health outcomes, including chronic gynecological, gastrointestinal, sexual health, and mental health conditions. The renewed Centers are intended to…</summary>
   </entry>
   <entry>
     <title>Elucidation and Validation of the role of Transporters in the Placenta, Lactating Mammary Gland, Developing Gut, and Blood Brain Barrier</title>
@@ -398,17 +408,6 @@
     <category term="Manufacturing"/>
     <category term="Neuroscience"/>
     <summary>National Institutes of Health | Estimated Application 2027-06-16 | The NIH Blueprint for Neuroscience Research is interested in continuing to support the BluePrint Neurotherapeutics Network for Small Molecules (BPN-SM)- a program designed to help investigators advance promising small-molecule therapeutics toward clinical testing. The BPN-SM program supports drug discovery and development activities in investigators’ own laboratories while also providing access to…</summary>
-  </entry>
-  <entry>
-    <title>Translational Centers Using Microphysiological Systems for Infectious Diseases (U54 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/362954"/>
-    <id>urn:funding-finder:grants-gov:362954</id>
-    <updated>2026-11-13T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <summary>National Institutes of Health | Estimated Application 2027-01-29 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting the development of human microphysiologic systems (MPS) for infectious disease research and the development of therapeutics or biological products. MPS are in vitro platforms composed of cells or tissues maintained in a microenvironment designed to mimic the physiological aspects of in vivo…</summary>
   </entry>
   <entry>
     <title>Precision and Systems Biology to Uncover the Link Between Chronic and Infectious Diseases</title>

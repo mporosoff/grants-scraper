@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/arts-and-culture.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/arts-and-culture.xml</id>
-  <updated>2026-10-20T15:28:21Z</updated>
+  <updated>2026-10-24T22:43:50Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Public Health Nursing</title>
@@ -185,6 +185,16 @@
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
     <summary>Centers for Disease Control and Prevention - ERA | Estimated Application 2027-01-26 | Background: Despite advances in technology and improvements in work environments, mining remains one of the most challenging and hazardous occupations in the United States. The industry continues to experience a fatality rate nearly three times higher than the national average for all industries, according to the U.S. Bureau of Labor Statistics (BLS). Public MSHA data show that in 2025, the U.S. m…</summary>
+  </entry>
+  <entry>
+    <title>FY 2027 - 2029 Broad Agency Announcement (BAA), Oceanic and Atmospheric Research (OAR)</title>
+    <link href="https://www.grants.gov/search-results-detail/364130"/>
+    <id>urn:funding-finder:grants-gov:364130</id>
+    <updated>2026-10-20T00:00:00Z</updated>
+    <author><name>DOC NOAA - ERA Production</name></author>
+    <category term="Arts and culture"/>
+    <category term="Environmental science"/>
+    <summary>DOC NOAA - ERA Production | Application 2029-09-30 | A description of NOAA Line and Staff Offices is found at https://www.noaa.gov/about/organization, and applicants may contact the Agency Contacts in Section VII. below for more information. If you submit the same application to more than one Line or Staff Office, mention this in your application and notify the relevant contacts in Section VII. so that NOAA may coordinate internally. This notice als…</summary>
   </entry>
   <entry>
     <title>Public Humanities Projects</title>
@@ -462,20 +472,6 @@
     <category term="Infectious disease"/>
     <category term="Public health"/>
     <summary>National Institutes of Health | Estimated Application 2027-01-22 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting four Clinical Trials Networks (CTNs) each comprised of a Leadership and Operations Center, Statistical and Data Management Center, and Laboratory Center (LC) working with Clinical Trials Units, to test prevention and treatment strategies and conduct implementation research designed to end t…</summary>
-  </entry>
-  <entry>
-    <title>Fiscal Year (FY) 2027 AmeriCorps Seniors RSVP Competition</title>
-    <link href="https://www.grants.gov/search-results-detail/363482"/>
-    <id>urn:funding-finder:grants-gov:363482</id>
-    <updated>2026-08-20T00:00:00Z</updated>
-    <author><name>AmeriCorps</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Arts and culture"/>
-    <category term="Community development"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Transportation"/>
-    <summary>AmeriCorps | Application 2026-10-20 | AmeriCorps improves lives, strengthens communities, and fosters civic engagement through service and volunteering. AmeriCorps brings people together to tackle some of the country’s most pressing challenges through national service and volunteerism. AmeriCorps members and AmeriCorps Seniors volunteers serve with organizations dedicated to the improvement of communities and those serving. AmeriCorps…</summary>
   </entry>
   <entry>
     <title>The NIDDK Disorders of Gastrointestinal Interoception Consortium Clinical Centers (DGIC)</title>

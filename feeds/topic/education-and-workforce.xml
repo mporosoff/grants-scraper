@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/education-and-workforce.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/education-and-workforce.xml</id>
-  <updated>2026-10-20T15:28:21Z</updated>
+  <updated>2026-10-24T22:43:50Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -66,6 +66,19 @@
     <category term="Neuroscience"/>
     <category term="Technology development"/>
     <summary>National Institutes of Health | Estimated Application 2027-10-20 | The Eunice Kennedy Shriver National Institute of Child Health and Human Development seeks to advance its mission of supporting maternal, fetal, and child health by continuing to enhance the understanding of maternal, fetal, and child exposure to nutrients, metabolites, medications, supplements, microbiome-derived products, and environmental chemicals. This will be done by supporting a second phase…</summary>
+  </entry>
+  <entry>
+    <title>Prevention and Treatment through a Comprehensive Care Continuum for HIV-affected Adolescents in Resource-Constrained Settings--Implementation Science Network (PATC3H-IN)</title>
+    <link href="https://www.grants.gov/search-results-detail/364127"/>
+    <id>urn:funding-finder:grants-gov:364127</id>
+    <updated>2027-07-24T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Infectious disease"/>
+    <category term="Technology development"/>
+    <category term="Transportation"/>
+    <summary>National Institutes of Health | Estimated Application 2027-10-28 | The Prevention and Treatment through a Comprehensive Care Continuum for HIV-affected Adolescents in Resource Constrained Settings-Implementation Science Network (PATC3H-IN) conducts implementation science (IS) research on adolescent HIV. PATC3H-IN develops scalable, low-resource care delivery models in low- and middle-income countries that can be adapted for marginalized and high-burden US populat…</summary>
   </entry>
   <entry>
     <title>Limited Competition: Resources and Workforce Development for the Regional Biocontainment Laboratories</title>
@@ -596,14 +609,5 @@
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
     <summary>Centers for Disease Control and Prevention - ERA | Estimated Application 2027-03-03 | The National Institute for Occupational Safety and Health (NIOSH) is committed to addressing a wide range of occupational health and safety hazards affecting those who work in the agriculture, forestry, and fishing (AgFF) sector. Children and adolescents ("youth") are consistently more likely to be fatally injured working in agriculture compared to other industries. While many steps have been take…</summary>
-  </entry>
-  <entry>
-    <title>Centers of Excellence (COE)</title>
-    <link href="https://www.grants.gov/search-results-detail/363272"/>
-    <id>urn:funding-finder:grants-gov:363272</id>
-    <updated>2026-12-02T00:00:00Z</updated>
-    <author><name>Health Resources and Services Administration</name></author>
-    <category term="Education and workforce"/>
-    <summary>Health Resources and Services Administration | Estimated Application 2027-02-02 | The Centers of Excellence Program provides grants to health professions schools and other public and nonprofit health or educational entities to assist schools in supporting programs of excellence in health professions education for under-represented minority individuals. By statute, the Centers of Excellence Program awards funding to organizations to operate programs that establish, strengthen, a…</summary>
   </entry>
 </feed>
