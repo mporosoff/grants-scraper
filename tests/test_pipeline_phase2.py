@@ -119,8 +119,12 @@ class PipelineAcceptance(unittest.TestCase):
         self.assertEqual(sidecar["records"][identifier]["subtopics"], [])
         docs.merge_subtopic_sidecar(sidecar, [], set(), as_of="2027-01-01")
         self.assertEqual(sidecar["records"], {})
-        with patch("scripts.currentness.date") as clock:
-            clock.today.return_value = fixture.AS_OF.replace(year=2027)
+        class ExpiredDate(fixture.FixedDate):
+            @classmethod
+            def today(cls):
+                return fixture.AS_OF.replace(year=2027)
+
+        with patch("scripts.currentness.date", ExpiredDate):
             self.assertEqual(teams.scopes(self.root / "data/opportunities.js", self.root / "data/subtopics.js"), [])
 
     def test_material_hash_invalidates_team_even_when_extracted_scope_text_is_unchanged(self):

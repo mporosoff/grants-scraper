@@ -48,6 +48,8 @@ class IncrementalTeams(unittest.TestCase):
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name)
+        # Later team invocations must use the same date as their source fixture.
+        self.enterContext(patch("scripts.currentness.date", fixture.FixedDate))
         fixture.run_pipeline(self.root)
         self.model_path = self.root / "config/opportunity_team_model.json"
         self.empty = json.loads(self.model_path.read_text())
