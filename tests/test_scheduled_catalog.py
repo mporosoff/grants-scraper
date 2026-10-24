@@ -220,6 +220,7 @@ class ScheduledHistory(unittest.TestCase):
     def setUp(self):
         # These owner-selection fixtures do not model native pure-runtime ZIPs.
         patch('tools.runtime_assembly_history.no_generation_allowance', return_value=False).start()
+        self.sleep = patch.object(scheduled.time, 'sleep').start()
         self.runs = [self.workflow_run(200), self.workflow_run(100)]
         self.artifacts = {'200': []}
         self.jobs = {'200': [{'name': name, 'conclusion': 'skipped'} for name in ('generate', 'assemble')]}
@@ -446,6 +447,61 @@ class ScheduledHistory(unittest.TestCase):
             self.discover()
         self.runs = [self.workflow_run(200, status='in_progress'), self.workflow_run(100)]
         with self.assertRaisesRegex(scheduled.Hold, 'still pending'):
+            self.discover()
+
+    def test_transient_missing_boundary_rescans_before_selecting_any_generation(self):
+        calls = 0
+        original = self.response
+        def response(repository, path):
+            nonlocal calls
+            if path.startswith('actions/workflows/'):
+                calls += 1
+                return json.dumps({'workflow_runs': self.runs[:-1] if calls == 1 else self.runs})
+            return original(repository, path)
+        self.api.side_effect = response
+        self.assertIsNone(self.discover())
+        self.assertEqual(calls, 2)
+        self.sleep.assert_called_once_with(2)
+        self.assertEqual(sum('/200/jobs?' in call.args[1] for call in self.api.call_args_list), 1)
+
+    def test_second_scan_preserves_owner_found_after_transient_missing_page(self):
+        calls = 0
+        original = self.response
+        self.artifacts['200'] = [{'name': 'generation-spend-reservation-200-1', 'expired': False}]
+        def response(repository, path):
+            nonlocal calls
+            if path.startswith('actions/workflows/'):
+                calls += 1
+                return json.dumps({'workflow_runs': [] if calls == 1 else self.runs})
+            return original(repository, path)
+        self.api.side_effect = response
+        with self.assertRaisesRegex(scheduled.Hold, 'reserved its allowance') as raised:
+            self.discover()
+        self.assertEqual(raised.exception.run, '200')
+        self.assertEqual(calls, 2)
+
+    def test_persistently_missing_boundary_retains_bounded_counts_and_holds(self):
+        self.runs.pop()
+        with self.assertRaisesRegex(scheduled.Hold, r'boundary is missing.*scans=2.*rows=1.*oldest=200.*boundary=100'):
+            self.discover()
+        self.assertEqual(self.api.call_count, 2, 'No artifact lookup before complete workflow history')
+        self.sleep.assert_called_once_with(2)
+
+    def test_short_page_cannot_hide_an_owner_even_if_boundary_was_returned(self):
+        self.api.side_effect = lambda repository, path: json.dumps({'workflow_runs': [{'id': 100}], 'total_count': 2})
+        with self.assertRaisesRegex(scheduled.Hold, 'history is incomplete.*advertised=2'):
+            self.discover()
+        self.assertEqual(self.api.call_count, 2)
+        self.sleep.assert_called_once_with(2)
+
+    def test_short_job_page_is_not_proof_producer_jobs_were_skipped(self):
+        original = self.response
+        def response(repository, path):
+            if '/200/jobs?' in path:
+                return json.dumps({'jobs': self.jobs['200'], 'total_count': 3})
+            return original(repository, path)
+        self.api.side_effect = response
+        with self.assertRaisesRegex(scheduled.Hold, 'history is incomplete'):
             self.discover()
 
     def test_bounded_history_cannot_fall_through_to_paid_generation(self):

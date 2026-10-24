@@ -4,6 +4,8 @@ import json
 from pathlib import Path
 import re
 import subprocess
+import sys
+import time
 import yaml
 
 from tools import release_candidate as c
@@ -20,6 +22,10 @@ class Hold(ValueError):
     def __init__(self, message, run=''):
         super().__init__(message)
         self.run = str(run)
+
+
+class IncompleteHistory(Hold):
+    pass
 
 
 def utc_timestamp(value):
@@ -63,15 +69,45 @@ def catalog_generated_at(root, manifest):
 
 def _pages(repository, path, key):
     separator = '&' if '?' in path else '?'
+    count = 0
     for page in range(1, MAX_PAGES + 1):
         value = json.loads(api(repository, f'{path}{separator}per_page=100&page={page}'))
         rows = value[key]
-        if not isinstance(rows, list):
+        if not isinstance(rows, list) or len(rows) > 100:
             raise Hold('Invalid release history response')
+        count += len(rows)
+        total = value.get('total_count', count)
+        if type(total) is not int or total < 0:
+            raise Hold('Invalid release history total')
+        if len(rows) < 100 and count < total:
+            raise IncompleteHistory(f'Release history is incomplete: page={page}, rows={count}, advertised={total}')
         yield rows
         if len(rows) < 100:
             return
     raise Hold('Release history exceeds the bounded recovery lookup')
+
+
+def _release_history(repository, floor):
+    """A short/inconsistent listing is never proof that paid work has no owner."""
+    for scan in range(1, 3):
+        batches, identifiers = [], []
+        problem = 'Source-generation boundary is missing from the retained workflow history'
+        try:
+            for rows in _pages(repository, 'actions/workflows/refresh-opportunities.yml/runs?branch=main', 'workflow_runs'):
+                batches.append(rows)
+                identifiers.extend(int(run['id']) for run in rows)
+                if any(identifier <= floor for identifier in identifiers):
+                    return batches
+        except IncompleteHistory as error:
+            problem = str(error)
+        diagnostic = {'release_history_scan': scan, 'pages': len(batches), 'rows': len(identifiers),
+                      'newest_run': max(identifiers, default=None), 'oldest_run': min(identifiers, default=None),
+                      'generation_boundary': floor, 'reason': problem}
+        print(json.dumps(diagnostic, separators=(',', ':')), file=sys.stderr)
+        if scan == 2:
+            raise Hold(problem + f'; scans={scan}, pages={len(batches)}, rows={len(identifiers)}, '
+                       f'oldest={min(identifiers, default="none")}, boundary={floor}')
+        time.sleep(2)
 
 
 def _published(root):
@@ -734,7 +770,7 @@ def prior_generation(root, environment, manifest):
     published = _published(root)
     owners = []
     boundary = False
-    for rows in _pages(repository, 'actions/workflows/refresh-opportunities.yml/runs?branch=main', 'workflow_runs'):
+    for rows in _release_history(repository, floor):
         for run in rows:
             identifier = int(run['id'])
             if identifier <= floor:

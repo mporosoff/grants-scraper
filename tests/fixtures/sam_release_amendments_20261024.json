@@ -1,0 +1,629 @@
+{
+  "kind": "safe-projection-of-retained-release-preflight",
+  "protected_config_sha": "d7f970eee0bd9646ada1075fb6330b7dfb56dfa5",
+  "protected_config_sha256": "de5c87ced95f5d77f291d569870eec00a734b52428b05a068565ebc67321a637",
+  "config": {
+    "schema_version": 2,
+    "enabled": true,
+    "approved_notices": [
+      {
+        "notice_id": "4177337919ca4c9db8d9ddf1e58c24aa",
+        "solicitation_number": "FA8650-22-S-5004",
+        "organization_id": "100025313",
+        "sponsor": "Air Force Research Laboratory",
+        "evidence_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/5913ffc603dd47a296c31e479221b3da/download",
+        "academic_eligibility_quote": "This is an unrestricted solicitation. Businesses of all sizes are encouraged to propose on all or any part of this solicitation during the Open Period and under each Closed Call. ... If the offeror is an educational institution, Part II does not apply unless the contemplated contract will be subject to full or modified CAS coverage pursuant to 48 CFR 9903.201-2(c)(5) or 9903.201-2(c)(6), respectively.",
+        "verified_on": "2026-10-13",
+        "review_after": "2026-11-12",
+        "review_sha256": "fd8dc97e41bcaff8eeb52c2a570a9327f663fc21b93adf94694ecc20f52edce2",
+        "summary": "Experimental evaluation, prototyping and transition of structural materials and manufacturing processes for Air Force and Space Force systems; emphasizes operational utility and demonstration rather than basic or applied research.",
+        "scope_note": "US academic offerors are inferred eligible from the unrestricted solicitation and the expressly included educational-institution offeror certifications. This entry covers the unclassified open white-paper route for structural materials and processes, excluding the separate expired Nuclear, Electromagnetic, and Laser Survivability Call001 and any scope reserved by an active closed call. No foreign prime participation. DD2345 applies only when a proposed effort is determined export-controlled; classified or controlled-data projects are outside this reviewed scope. Current SAM shows February14,2027 17:00 Eastern while the original parent PDF states February15,2028 17:00 WPAFB; the earlier current SAM date is used conservatively and the sponsor must resolve the discrepancy before relying on a later date. Full proposals require invitation with their own due date; submit through DoD SAFE following the current official contact instructions.",
+        "cycles": [
+          {
+            "name": "Open white-paper route",
+            "entry": {
+              "kind": "white_paper",
+              "date": "2027-02-14",
+              "time": "17:00",
+              "timezone": "America/New_York",
+              "required": true,
+              "invitation_required": false,
+              "note": "Use the earlier current SAM response deadline conservatively; original PDF says February15,2028. Only research objectives not reserved by an active closed call are open.",
+              "source_url": "https://sam.gov/opp/4177337919ca4c9db8d9ddf1e58c24aa/view",
+              "quote": "An Applicant that does NOT submit a timely and compliant white paper is NOT eligible to submit a Proposal for consideration for funding."
+            },
+            "full": {
+              "kind": "full_application",
+              "date": null,
+              "time": null,
+              "timezone": null,
+              "required": false,
+              "invitation_required": true,
+              "note": "A full proposal is accepted only by invitation; due date is supplied in the RFP.",
+              "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/5913ffc603dd47a296c31e479221b3da/download",
+              "quote": "An Applicant that does NOT receive an invitation from the Government to submit a Proposal is NOT eligible to submit a Proposal."
+            }
+          }
+        ],
+        "reviewed_snapshot": {
+          "notice_id": "4177337919ca4c9db8d9ddf1e58c24aa",
+          "latest_notice_id": "4177337919ca4c9db8d9ddf1e58c24aa",
+          "latest": true,
+          "status": "published",
+          "archived": false,
+          "cancelled": false,
+          "deleted": false,
+          "title": "Experiments, Prototypes, Research, and Evaluation Supporting Systems (EXPRESS)",
+          "solicitation_number": "FA8650-22-S-5004",
+          "organization_id": "100025313",
+          "notice_type": "o",
+          "classification_code": "AC13",
+          "naics_codes": [
+            "541715"
+          ],
+          "set_asides": [],
+          "posted_at": "2024-07-19T15:17:25.822+00:00",
+          "modified_at": "2024-07-19T15:17:25.828+00:00",
+          "response_deadline": "2027-02-14T17:00:00-05:00",
+          "response_timezone": "America/New_York",
+          "archive_date": "2027-03-01",
+          "description_sha256": "cadd1e318acb1f2f9a47d5c924a5b5d7226c192a0b8e5cb28916447ab7dddd82",
+          "resources_sha256": "12365b3d3468e9cfd007bf7ca888a8122a3ff10e8ba2bc7efffd92b97f929148",
+          "review_sha256": "fd8dc97e41bcaff8eeb52c2a570a9327f663fc21b93adf94694ecc20f52edce2"
+        }
+      },
+      {
+        "notice_id": "e3d96ffd4a0a48b080e09dd5af732cc8",
+        "solicitation_number": "693KA8-27-T-00003",
+        "organization_id": "500000118",
+        "sponsor": "Federal Aviation Administration (FAA)",
+        "evidence_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/2e7487dbacf54e13bc796cbd991eafef/download",
+        "academic_eligibility_quote": "to collaborate with traditional and nontraditional government contractors, as well as nonprofit research institutions.",
+        "verified_on": "2026-10-13",
+        "review_after": "2026-11-12",
+        "review_sha256": "a37d74e3ddd2cc724d3b627b733f9300388b2427443572156c4a4b27175f8bf4",
+        "summary": "Basic/applied aviation human-factors research on how increasing system and operational complexity affects pilot performance, safety, automation and training.",
+        "scope_note": "Actual AOI solicits submissions; parent BAA alone does not. Must satisfy one FAA OTA qualifier and technical criteria; subsequent phases only by invitation. CurrentSAM deadline supplies18:00EST; PDF statesNov2date. No small-business set-aside. Submission: Email research/solution brief to the Agreements Officer with the exact AOI subject line in Section1.1.4.",
+        "cycles": [
+          {
+            "name": "Current reviewed call",
+            "entry": {
+              "kind": "concept_paper",
+              "date": "2026-11-02",
+              "time": "18:00",
+              "timezone": "America/New_York",
+              "required": true,
+              "invitation_required": false,
+              "note": "PhaseI Research/Solution Brief; PhaseII pitch and PhaseIII full proposal only by invitation. The PDF specifies November2 and current SAM specifies18:00EST; later-stage dates are not public.",
+              "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/5727e47eace543a89f22b2d38db7a97e/download",
+              "quote": "Phase I \u2013 Research/Solutions Briefs Due Date: November 2, 2026"
+            },
+            "full": {
+              "kind": "full_application",
+              "date": null,
+              "time": null,
+              "timezone": null,
+              "required": false,
+              "invitation_required": true,
+              "note": "Only invited applicants may proceed. The full-proposal deadline is not publicly specified and will be supplied by the agency.",
+              "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/5727e47eace543a89f22b2d38db7a97e/download",
+              "quote": "Advancement from one phase to the next is by invitation from the FAA and is based on the Government's evaluation of the submission under the applicable evaluation procedures."
+            }
+          }
+        ],
+        "reviewed_snapshot": {
+          "notice_id": "e3d96ffd4a0a48b080e09dd5af732cc8",
+          "latest_notice_id": "e3d96ffd4a0a48b080e09dd5af732cc8",
+          "latest": true,
+          "status": "published",
+          "archived": false,
+          "cancelled": false,
+          "deleted": false,
+          "title": "Federal Aviation Administration (FAA) Research And Commercial Solutions Opening (RCSO) Area Of Interest (AOI) - Complexity Of Systems And Operations",
+          "solicitation_number": "693KA8-27-T-00003",
+          "organization_id": "500000118",
+          "notice_type": "o",
+          "classification_code": "AS25",
+          "naics_codes": [
+            "541715"
+          ],
+          "set_asides": [
+            "NONE"
+          ],
+          "posted_at": "2026-10-06T17:10:45.078+00:00",
+          "modified_at": "2026-10-06T17:10:45.082+00:00",
+          "response_deadline": "2026-11-02T18:00:00-05:00",
+          "response_timezone": "America/New_York",
+          "archive_date": "2028-12-31",
+          "description_sha256": "2e3fc30b8f63737c92b4c2b6b9b0b56bf87038450766535328e23860eccf79f4",
+          "resources_sha256": "9713b49f88fe994cef4a435ce568ffaaeb313042f1eaf3165a00f4eec38797b8",
+          "review_sha256": "a37d74e3ddd2cc724d3b627b733f9300388b2427443572156c4a4b27175f8bf4"
+        }
+      },
+      {
+        "notice_id": "4984511e4bbc4d01a21df55b30a88f02",
+        "solicitation_number": "HM047627XXXX",
+        "organization_id": "500038581",
+        "sponsor": "National Geospatial-Intelligence Agency",
+        "evidence_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/5df2c1fa8a9c46a0ab22ba8a69b5dda5/download",
+        "academic_eligibility_quote": "All responsible sources capable of satisfying the Government's needs may submit a proposal for NGA\u2019s consideration.",
+        "verified_on": "2026-10-18",
+        "review_after": "2026-11-17",
+        "review_sha256": "ced0975e8e8a1a727790e0a2d0c834dcafd472cbe5b29064cb0dcb23c77a9111",
+        "summary": "Develop AI/ML methods to extract and classify 3D surface/subsurface objects using NASA ICESat-2 and GEDI lidar, including navigation safety applications.",
+        "scope_note": "Topic7 LASER only, not BIG-ST parent or closed topics. General Solicitation Rev4 governs eligibility and abstract prerequisites; October16 Topic7 revision governs current dates, Phase2 label and corrected PD>75% metric. CUI safeguards; foreign nationals need prior written CO/COR approval; HSPD-12 favorable adjudication if access to NGA facilities/systems. One anticipated award, $854k /15months.",
+        "cycles": [
+          {
+            "name": "Current open entry",
+            "entry": {
+              "kind": "preproposal",
+              "date": "2026-10-28",
+              "time": "11:00",
+              "timezone": "Etc/GMT+5",
+              "required": true,
+              "invitation_required": false,
+              "note": "Required abstract. October16 topic revision Table2 supersedes October23. Sponsor explicitly prints EST; literal fixed EST retained; confirm with sponsor because October normally observes EDT. General Solicitation Rev4 requires the abstract before a full proposal.",
+              "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/0224451b0bc34e6f93f1ba561170f5cc/download",
+              "quote": "Abstracts Due 28 October 2026 at 1100 EST"
+            },
+            "full": {
+              "kind": "full_application",
+              "date": "2026-12-21",
+              "time": "11:00",
+              "timezone": "Etc/GMT+5",
+              "required": true,
+              "invitation_required": false,
+              "note": "October16 topic revision Table2 supersedes December11. Prior abstract required; full proposal permitted regardless of abstract feedback. Literal EST retained; topic deadline precedes the SAM header.",
+              "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/0224451b0bc34e6f93f1ba561170f5cc/download",
+              "quote": "Proposals Due 21 December 2026 at 1100 EST"
+            }
+          }
+        ],
+        "reviewed_snapshot": {
+          "notice_id": "4984511e4bbc4d01a21df55b30a88f02",
+          "latest_notice_id": "4984511e4bbc4d01a21df55b30a88f02",
+          "latest": true,
+          "status": "published",
+          "archived": false,
+          "cancelled": false,
+          "deleted": false,
+          "title": "NGA - Boosting Innovative GEOINT - Science & Technology Broad Agency Announcement (BIG-ST BAA): Topic # 07 \u2013 Lidar Analysis for Surface & Environmental Reconnaissance (LASER)",
+          "solicitation_number": "HM047627XXXX",
+          "organization_id": "500038581",
+          "notice_type": "o",
+          "classification_code": "AC13",
+          "naics_codes": [
+            "541715"
+          ],
+          "set_asides": [],
+          "posted_at": "2026-10-16T12:43:27.574+00:00",
+          "modified_at": "2026-10-16T12:43:27.584+00:00",
+          "response_deadline": "2026-12-21T23:59:00-05:00",
+          "response_timezone": "America/New_York",
+          "archive_date": "2027-03-15",
+          "description_sha256": "42bb138b977855d68dd52260b75a53a271ca61f52768d97789f2caa7ddf452ec",
+          "resources_sha256": "cc3e25ea498be01537eb405f7c347bc054df2cd0ef34ed5fde6cf0927a8e24df",
+          "review_sha256": "ced0975e8e8a1a727790e0a2d0c834dcafd472cbe5b29064cb0dcb23c77a9111"
+        }
+      },
+      {
+        "notice_id": "45850d5326944be1b187cece69fe7790",
+        "solicitation_number": "693JJ626R000001",
+        "organization_id": "100076812",
+        "sponsor": "U.S. Department of Transportation - Federal Railroad Administration (FRA)",
+        "evidence_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/62c772c4cbda46b583bce609e153fb05/download",
+        "academic_eligibility_quote": "Any responsible source may submit a Concept Paper for consideration, including, but not limited to, States or local governments, organizations of State or local governments, universities or institutions of higher education, hospitals, non-profit organizations",
+        "verified_on": "2026-10-13",
+        "review_after": "2026-11-12",
+        "review_sha256": "e110eb66cb59c83ddc9d06c29221f06cc4734feec4f7a9bbb698aa87afbba8d4",
+        "summary": "Applied rail transportation research in remaining FY26\u201327 track, rolling-stock, and train-control topics.",
+        "scope_note": "Only current AppendixC research topics; Amendment1 removes FRA-TR-005,006,007,009. No HumanFactors topics inFY26\u201327. Cost investment not mandatory; typically$50,000\u2013$500,000; SAM registration before award. Topic availability may close earlier if enough concept papers received. SpecialNotice label does not negate the attached unrestricted research call. Submission: Electronic concept paper to the BAA Program Manager via the official address in PDFp9; later full proposals follow FRA invitation.",
+        "cycles": [
+          {
+            "name": "Current reviewed call",
+            "entry": {
+              "kind": "concept_paper",
+              "date": "2027-09-30",
+              "time": "12:00",
+              "timezone": "America/New_York",
+              "required": true,
+              "invitation_required": false,
+              "note": "Rolling required initial concept papers, current topics only; the source SAM notice specifies noon Eastern on the end date. Later full proposal date set by invitation.",
+              "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/62c772c4cbda46b583bce609e153fb05/download",
+              "quote": "Concept Papers will be reviewed on a rolling basis throughout the fiscal year. The only deadline is the end of the next fiscal year \u2014 September 30, 2027."
+            },
+            "full": {
+              "kind": "full_application",
+              "date": null,
+              "time": null,
+              "timezone": null,
+              "required": false,
+              "invitation_required": true,
+              "note": "Only invited applicants may proceed. The full-proposal deadline is not publicly specified and will be supplied by the agency.",
+              "source_url": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/62c772c4cbda46b583bce609e153fb05/download",
+              "quote": "Following Concept Paper evaluation and discussion, FRA may invite the Offeror to submit a detailed technical and price Proposal for award evaluation."
+            }
+          }
+        ],
+        "reviewed_snapshot": {
+          "notice_id": "45850d5326944be1b187cece69fe7790",
+          "latest_notice_id": "45850d5326944be1b187cece69fe7790",
+          "latest": true,
+          "status": "published",
+          "archived": false,
+          "cancelled": false,
+          "deleted": false,
+          "title": "FY 26 Broad Agency Announcement (BAA) - Federal Railroad Administration",
+          "solicitation_number": "693JJ626R000001",
+          "organization_id": "100076812",
+          "notice_type": "s",
+          "classification_code": null,
+          "naics_codes": [
+            "541715"
+          ],
+          "set_asides": [
+            "NONE"
+          ],
+          "posted_at": "2026-08-21T17:11:49.180+00:00",
+          "modified_at": "2026-08-21T17:11:49.185+00:00",
+          "response_deadline": "2027-09-30T12:00:00-04:00",
+          "response_timezone": "America/New_York",
+          "archive_date": "2027-09-30",
+          "description_sha256": "4b83280ff0f974839e10157285ed2d42109d9a6427d04c3c0db9e16b7dee6546",
+          "resources_sha256": "4506adeac2912f22cf8f564361463d612edbb65a54ce62a1bf6f0883affe9eae",
+          "review_sha256": "e110eb66cb59c83ddc9d06c29221f06cc4734feec4f7a9bbb698aa87afbba8d4"
+        }
+      }
+    ]
+  },
+  "cases": [
+    {
+      "run_id": "39624562905",
+      "source_receipt_sha256": "09fb1e54a621ae1bb01b5d5278ea35f004405555165f67d9ce62ab58ff666a33",
+      "as_of": "2026-10-21",
+      "checked_at": "2026-10-21T15:21:07.136064+00:00",
+      "snapshots": {
+        "4177337919ca4c9db8d9ddf1e58c24aa": {
+          "notice_id": "4177337919ca4c9db8d9ddf1e58c24aa",
+          "latest_notice_id": "4177337919ca4c9db8d9ddf1e58c24aa",
+          "latest": true,
+          "status": "published",
+          "archived": false,
+          "cancelled": false,
+          "deleted": false,
+          "title": "Experiments, Prototypes, Research, and Evaluation Supporting Systems (EXPRESS)",
+          "solicitation_number": "FA8650-22-S-5004",
+          "organization_id": "100025313",
+          "notice_type": "o",
+          "classification_code": "AC13",
+          "naics_codes": [
+            "541715"
+          ],
+          "set_asides": [],
+          "posted_at": "2024-07-19T15:17:25.822+00:00",
+          "modified_at": "2024-07-19T15:17:25.828+00:00",
+          "response_deadline": "2027-02-14T17:00:00-05:00",
+          "response_timezone": "America/New_York",
+          "archive_date": "2027-03-01",
+          "description_sha256": "cadd1e318acb1f2f9a47d5c924a5b5d7226c192a0b8e5cb28916447ab7dddd82",
+          "resources_sha256": "12365b3d3468e9cfd007bf7ca888a8122a3ff10e8ba2bc7efffd92b97f929148",
+          "review_sha256": "fd8dc97e41bcaff8eeb52c2a570a9327f663fc21b93adf94694ecc20f52edce2"
+        },
+        "e3d96ffd4a0a48b080e09dd5af732cc8": {
+          "notice_id": "e3d96ffd4a0a48b080e09dd5af732cc8",
+          "latest_notice_id": "e3d96ffd4a0a48b080e09dd5af732cc8",
+          "latest": true,
+          "status": "published",
+          "archived": false,
+          "cancelled": false,
+          "deleted": false,
+          "title": "Federal Aviation Administration (FAA) Research And Commercial Solutions Opening (RCSO) Area Of Interest (AOI) - Complexity Of Systems And Operations",
+          "solicitation_number": "693KA8-27-T-00003",
+          "organization_id": "500000118",
+          "notice_type": "o",
+          "classification_code": "AS25",
+          "naics_codes": [
+            "541715"
+          ],
+          "set_asides": [
+            "NONE"
+          ],
+          "posted_at": "2026-10-06T17:10:45.078+00:00",
+          "modified_at": "2026-10-06T17:10:45.082+00:00",
+          "response_deadline": "2026-11-02T18:00:00-05:00",
+          "response_timezone": "America/New_York",
+          "archive_date": "2028-12-31",
+          "description_sha256": "2e3fc30b8f63737c92b4c2b6b9b0b56bf87038450766535328e23860eccf79f4",
+          "resources_sha256": "9713b49f88fe994cef4a435ce568ffaaeb313042f1eaf3165a00f4eec38797b8",
+          "review_sha256": "a37d74e3ddd2cc724d3b627b733f9300388b2427443572156c4a4b27175f8bf4"
+        },
+        "4984511e4bbc4d01a21df55b30a88f02": {
+          "notice_id": "4984511e4bbc4d01a21df55b30a88f02",
+          "latest_notice_id": "854d837d8dc842719d9fec95764d8ceb",
+          "latest": false,
+          "status": "published",
+          "archived": false,
+          "cancelled": false,
+          "deleted": false,
+          "title": "NGA - Boosting Innovative GEOINT - Science & Technology Broad Agency Announcement (BIG-ST BAA): Topic # 07 \u2013 Lidar Analysis for Surface & Environmental Reconnaissance (LASER)",
+          "solicitation_number": "HM047627XXXX",
+          "organization_id": "500038581",
+          "notice_type": "o",
+          "classification_code": "AC13",
+          "naics_codes": [
+            "541715"
+          ],
+          "set_asides": [],
+          "posted_at": "2026-10-16T12:43:27.574+00:00",
+          "modified_at": "2026-10-20T19:18:09.937+00:00",
+          "response_deadline": "2026-12-21T23:59:00-05:00",
+          "response_timezone": "America/New_York",
+          "archive_date": "2027-03-15",
+          "description_sha256": "42bb138b977855d68dd52260b75a53a271ca61f52768d97789f2caa7ddf452ec",
+          "resources_sha256": "cc3e25ea498be01537eb405f7c347bc054df2cd0ef34ed5fde6cf0927a8e24df",
+          "review_sha256": "8be68da635d3512899ed4d3919a8dbbe810c06cadcd38cea7784d6f78c427475"
+        },
+        "854d837d8dc842719d9fec95764d8ceb": {
+          "notice_id": "854d837d8dc842719d9fec95764d8ceb",
+          "latest_notice_id": "854d837d8dc842719d9fec95764d8ceb",
+          "latest": true,
+          "status": "published",
+          "archived": false,
+          "cancelled": false,
+          "deleted": false,
+          "title": "NGA - Boosting Innovative GEOINT - Science & Technology Broad Agency Announcement (BIG-ST BAA): Topic # 07 \u2013 Lidar Analysis for Surface & Environmental Reconnaissance (LASER)",
+          "solicitation_number": "HM047627XXXX",
+          "organization_id": "500038581",
+          "notice_type": "o",
+          "classification_code": "AC13",
+          "naics_codes": [
+            "541715"
+          ],
+          "set_asides": [],
+          "posted_at": "2026-10-20T19:18:09.937+00:00",
+          "modified_at": "2026-10-20T19:18:09.944+00:00",
+          "response_deadline": "2026-12-21T23:59:00-05:00",
+          "response_timezone": "America/New_York",
+          "archive_date": "2027-03-15",
+          "description_sha256": "7822671c8a29585a4f655ed8b12cc70a063bb4d3a979159cb510e72e57bc91af",
+          "resources_sha256": "04a96cf11b9fc3d132ba7599d84520ce7896efc1d4a765e9dd2c939d6cde2b15",
+          "review_sha256": "98eb17d9e97616fac43ef74fae9ef5ac0d1e0f4eb065ff39b73cd05aabd0dab4"
+        },
+        "45850d5326944be1b187cece69fe7790": {
+          "notice_id": "45850d5326944be1b187cece69fe7790",
+          "latest_notice_id": "45850d5326944be1b187cece69fe7790",
+          "latest": true,
+          "status": "published",
+          "archived": false,
+          "cancelled": false,
+          "deleted": false,
+          "title": "FY 26 Broad Agency Announcement (BAA) - Federal Railroad Administration",
+          "solicitation_number": "693JJ626R000001",
+          "organization_id": "100076812",
+          "notice_type": "s",
+          "classification_code": null,
+          "naics_codes": [
+            "541715"
+          ],
+          "set_asides": [
+            "NONE"
+          ],
+          "posted_at": "2026-08-21T17:11:49.180+00:00",
+          "modified_at": "2026-08-21T17:11:49.185+00:00",
+          "response_deadline": "2027-09-30T12:00:00-04:00",
+          "response_timezone": "America/New_York",
+          "archive_date": "2027-09-30",
+          "description_sha256": "4b83280ff0f974839e10157285ed2d42109d9a6427d04c3c0db9e16b7dee6546",
+          "resources_sha256": "4506adeac2912f22cf8f564361463d612edbb65a54ce62a1bf6f0883affe9eae",
+          "review_sha256": "e110eb66cb59c83ddc9d06c29221f06cc4734feec4f7a9bbb698aa87afbba8d4"
+        }
+      },
+      "expected_review_ids": [
+        "4984511e4bbc4d01a21df55b30a88f02"
+      ]
+    },
+    {
+      "run_id": "40131924791",
+      "source_receipt_sha256": "758aa75d3f057be34c567d3c679d0ceee5f028479b86ee9852d4999b98d78c88",
+      "as_of": "2026-10-24",
+      "checked_at": "2026-10-24T20:58:35.794449+00:00",
+      "snapshots": {
+        "4177337919ca4c9db8d9ddf1e58c24aa": {
+          "notice_id": "4177337919ca4c9db8d9ddf1e58c24aa",
+          "latest_notice_id": "4177337919ca4c9db8d9ddf1e58c24aa",
+          "latest": true,
+          "status": "published",
+          "archived": false,
+          "cancelled": false,
+          "deleted": false,
+          "title": "Experiments, Prototypes, Research, and Evaluation Supporting Systems (EXPRESS)",
+          "solicitation_number": "FA8650-22-S-5004",
+          "organization_id": "100025313",
+          "notice_type": "o",
+          "classification_code": "AC13",
+          "naics_codes": [
+            "541715"
+          ],
+          "set_asides": [],
+          "posted_at": "2024-07-19T15:17:25.822+00:00",
+          "modified_at": "2024-07-19T15:17:25.828+00:00",
+          "response_deadline": "2027-02-14T17:00:00-05:00",
+          "response_timezone": "America/New_York",
+          "archive_date": "2027-03-01",
+          "description_sha256": "cadd1e318acb1f2f9a47d5c924a5b5d7226c192a0b8e5cb28916447ab7dddd82",
+          "resources_sha256": "12365b3d3468e9cfd007bf7ca888a8122a3ff10e8ba2bc7efffd92b97f929148",
+          "review_sha256": "fd8dc97e41bcaff8eeb52c2a570a9327f663fc21b93adf94694ecc20f52edce2"
+        },
+        "e3d96ffd4a0a48b080e09dd5af732cc8": {
+          "notice_id": "e3d96ffd4a0a48b080e09dd5af732cc8",
+          "latest_notice_id": "897e1427461540d792897c599373758b",
+          "latest": false,
+          "status": "published",
+          "archived": false,
+          "cancelled": false,
+          "deleted": false,
+          "title": "Federal Aviation Administration (FAA) Research And Commercial Solutions Opening (RCSO) Area Of Interest (AOI) - Complexity Of Systems And Operations",
+          "solicitation_number": "693KA8-27-T-00003",
+          "organization_id": "500000118",
+          "notice_type": "o",
+          "classification_code": "AS25",
+          "naics_codes": [
+            "541715"
+          ],
+          "set_asides": [
+            "NONE"
+          ],
+          "posted_at": "2026-10-06T17:10:45.078+00:00",
+          "modified_at": "2026-10-21T18:27:37.732+00:00",
+          "response_deadline": "2026-11-02T18:00:00-05:00",
+          "response_timezone": "America/New_York",
+          "archive_date": "2028-12-31",
+          "description_sha256": "2e3fc30b8f63737c92b4c2b6b9b0b56bf87038450766535328e23860eccf79f4",
+          "resources_sha256": "9713b49f88fe994cef4a435ce568ffaaeb313042f1eaf3165a00f4eec38797b8",
+          "review_sha256": "c853f7ba04f4635d82edb7f889668d052c9849b73754420dd5ceab454e1a3967"
+        },
+        "897e1427461540d792897c599373758b": {
+          "notice_id": "897e1427461540d792897c599373758b",
+          "latest_notice_id": "897e1427461540d792897c599373758b",
+          "latest": true,
+          "status": "published",
+          "archived": false,
+          "cancelled": false,
+          "deleted": false,
+          "title": "Federal Aviation Administration (FAA) Research And Commercial Solutions Opening (RCSO) Area Of Interest (AOI) - Complexity Of Systems And Operations",
+          "solicitation_number": "693KA8-27-T-00003",
+          "organization_id": "500000118",
+          "notice_type": "o",
+          "classification_code": "AS25",
+          "naics_codes": [
+            "541715"
+          ],
+          "set_asides": [
+            "NONE"
+          ],
+          "posted_at": "2026-10-23T13:26:50.481+00:00",
+          "modified_at": "2026-10-23T13:26:50.484+00:00",
+          "response_deadline": "2026-11-02T18:00:00-05:00",
+          "response_timezone": "America/New_York",
+          "archive_date": "2028-12-31",
+          "description_sha256": "8f98172eecce730bcf4cb488f932f11f6c95ef47fec5e43a49c00bcfd238616b",
+          "resources_sha256": "6beeb1feb80766fd315e9abd3f13f3bb02a0a07777af51380c894ba830902bcc",
+          "review_sha256": "b4516c12c27e7f23bbfb362bf92f2f48154ddf520040bb30db227941dae2803b"
+        },
+        "4984511e4bbc4d01a21df55b30a88f02": {
+          "notice_id": "4984511e4bbc4d01a21df55b30a88f02",
+          "latest_notice_id": "854d837d8dc842719d9fec95764d8ceb",
+          "latest": false,
+          "status": "published",
+          "archived": false,
+          "cancelled": false,
+          "deleted": false,
+          "title": "NGA - Boosting Innovative GEOINT - Science & Technology Broad Agency Announcement (BIG-ST BAA): Topic # 07 \u2013 Lidar Analysis for Surface & Environmental Reconnaissance (LASER)",
+          "solicitation_number": "HM047627XXXX",
+          "organization_id": "500038581",
+          "notice_type": "o",
+          "classification_code": "AC13",
+          "naics_codes": [
+            "541715"
+          ],
+          "set_asides": [],
+          "posted_at": "2026-10-16T12:43:27.574+00:00",
+          "modified_at": "2026-10-20T19:18:09.937+00:00",
+          "response_deadline": "2026-12-21T23:59:00-05:00",
+          "response_timezone": "America/New_York",
+          "archive_date": "2027-03-15",
+          "description_sha256": "42bb138b977855d68dd52260b75a53a271ca61f52768d97789f2caa7ddf452ec",
+          "resources_sha256": "cc3e25ea498be01537eb405f7c347bc054df2cd0ef34ed5fde6cf0927a8e24df",
+          "review_sha256": "8be68da635d3512899ed4d3919a8dbbe810c06cadcd38cea7784d6f78c427475"
+        },
+        "854d837d8dc842719d9fec95764d8ceb": {
+          "notice_id": "854d837d8dc842719d9fec95764d8ceb",
+          "latest_notice_id": "854d837d8dc842719d9fec95764d8ceb",
+          "latest": true,
+          "status": "published",
+          "archived": false,
+          "cancelled": false,
+          "deleted": false,
+          "title": "NGA - Boosting Innovative GEOINT - Science & Technology Broad Agency Announcement (BIG-ST BAA): Topic # 07 \u2013 Lidar Analysis for Surface & Environmental Reconnaissance (LASER)",
+          "solicitation_number": "HM047627XXXX",
+          "organization_id": "500038581",
+          "notice_type": "o",
+          "classification_code": "AC13",
+          "naics_codes": [
+            "541715"
+          ],
+          "set_asides": [],
+          "posted_at": "2026-10-20T19:18:09.937+00:00",
+          "modified_at": "2026-10-20T19:18:09.944+00:00",
+          "response_deadline": "2026-12-21T23:59:00-05:00",
+          "response_timezone": "America/New_York",
+          "archive_date": "2027-03-15",
+          "description_sha256": "7822671c8a29585a4f655ed8b12cc70a063bb4d3a979159cb510e72e57bc91af",
+          "resources_sha256": "04a96cf11b9fc3d132ba7599d84520ce7896efc1d4a765e9dd2c939d6cde2b15",
+          "review_sha256": "98eb17d9e97616fac43ef74fae9ef5ac0d1e0f4eb065ff39b73cd05aabd0dab4"
+        },
+        "45850d5326944be1b187cece69fe7790": {
+          "notice_id": "45850d5326944be1b187cece69fe7790",
+          "latest_notice_id": "7b28c18c42cf4d44b6b65709148ec8e0",
+          "latest": false,
+          "status": "published",
+          "archived": false,
+          "cancelled": false,
+          "deleted": false,
+          "title": "FY 26 Broad Agency Announcement (BAA) - Federal Railroad Administration",
+          "solicitation_number": "693JJ626R000001",
+          "organization_id": "100076812",
+          "notice_type": "s",
+          "classification_code": null,
+          "naics_codes": [
+            "541715"
+          ],
+          "set_asides": [
+            "NONE"
+          ],
+          "posted_at": "2026-08-21T17:11:49.180+00:00",
+          "modified_at": "2026-10-22T19:16:53.211+00:00",
+          "response_deadline": "2027-09-30T12:00:00-04:00",
+          "response_timezone": "America/New_York",
+          "archive_date": "2027-09-30",
+          "description_sha256": "4b83280ff0f974839e10157285ed2d42109d9a6427d04c3c0db9e16b7dee6546",
+          "resources_sha256": "4506adeac2912f22cf8f564361463d612edbb65a54ce62a1bf6f0883affe9eae",
+          "review_sha256": "9a3055062495c95d29fc0d5397e878df5f322c2ba3600bda0fc9aa2c85780b3b"
+        },
+        "7b28c18c42cf4d44b6b65709148ec8e0": {
+          "notice_id": "7b28c18c42cf4d44b6b65709148ec8e0",
+          "latest_notice_id": "7b28c18c42cf4d44b6b65709148ec8e0",
+          "latest": true,
+          "status": "published",
+          "archived": false,
+          "cancelled": false,
+          "deleted": false,
+          "title": "FY 26 Broad Agency Announcement (BAA) - Federal Railroad Administration",
+          "solicitation_number": "693JJ626R000001",
+          "organization_id": "100076812",
+          "notice_type": "s",
+          "classification_code": null,
+          "naics_codes": [
+            "541715"
+          ],
+          "set_asides": [
+            "NONE"
+          ],
+          "posted_at": "2026-10-22T19:16:53.211+00:00",
+          "modified_at": "2026-10-22T19:16:53.215+00:00",
+          "response_deadline": "2027-09-30T12:00:00-04:00",
+          "response_timezone": "America/New_York",
+          "archive_date": "2027-09-30",
+          "description_sha256": "50a8eea12b12b31c67e9aa6eec95143c97fdd690172f55b26013759c481ccfe3",
+          "resources_sha256": "7a1a6d5cf6005ca242189a5f5a5fca0c8d5dd5f383e7e4dbf66f75c28b62d5d9",
+          "review_sha256": "9a9e4cd03f4c96e828c13ba59d8991da69c303338f6fde3bc359c4d6edfb85ae"
+        }
+      },
+      "expected_review_ids": [
+        "e3d96ffd4a0a48b080e09dd5af732cc8",
+        "4984511e4bbc4d01a21df55b30a88f02",
+        "45850d5326944be1b187cece69fe7790"
+      ]
+    }
+  ]
+}

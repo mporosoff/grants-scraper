@@ -66,12 +66,12 @@ test("generated team index and panel data agree on exact scope and researcher ev
   const api = context.OpportunityTeam;
   const data = api.validateData(context.OPPORTUNITY_TEAM_DATA, context.OPPORTUNITY_TEAM_INDEX.generation_id);
   const engine = api.create(data);
-  const found = engine.resolveScope({ record, parentId: record.opportunity_id, isBroad: false });
+  const found = engine.resolveScope({ record, parentId: record.opportunity_id, isBroad: false, now });
   assert.equal(found.ok, true);
   const state = engine.proposal(found.opportunity);
   assert.equal(state.selectedIds.length, 2);
   assert.ok(state.selectedIds.every(id => registry.researchers.some(r => r.researcher_id === id)));
-  assert.equal(engine.resolveScope({ record: unsuitable, parentId: unsuitable.opportunity_id, isBroad: false }).ok, false);
+  assert.equal(engine.resolveScope({ record: unsuitable, parentId: unsuitable.opportunity_id, isBroad: false, now }).ok, false);
   assert.equal(context.OPPORTUNITY_TEAM_INDEX.scopes.length, 1);
 });
 

@@ -1,4 +1,4 @@
-"""Stop catalog generation before paid work if the reviewed SAM scan failed."""
+"""Require complete SAM accounting before paid work; quarantine stays local."""
 from __future__ import annotations
 
 import argparse
@@ -22,18 +22,23 @@ def require_complete_refresh(config, summary):
     if not isinstance(validation, dict):
         raise ValueError('SAM refresh validation receipt is invalid')
     sam = [source for source in sources if isinstance(source, dict) and source.get('slug') == 'sam-gov']
-    if (len(sam) != 1 or sam[0].get('healthy') is not True
-            or sam[0].get('status') != 'refreshed'
-            or summary.get('written') is not True
+    if (len(sam) != 1 or summary.get('written') is not True
             or validation.get('ok') is not True):
         raise ValueError('SAM refresh failed; the current published catalog must remain in service')
-    require_reviewed_observations(config, sam[0].get('diagnostics'))
+    source = sam[0]
+    diagnostics = source.get('diagnostics')
+    require_reviewed_observations(config, diagnostics)
+    degraded = diagnostics.get('outcome') == 'degraded'
+    if (source.get('status') != ('partial_refresh' if degraded else 'refreshed')
+            or source.get('healthy') is not (not degraded)):
+        raise ValueError('SAM source state does not match its complete notice accounting')
 
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--config', type=Path, default=CONFIG_PATH)
     parser.add_argument('--summary', type=Path, required=True)
+    parser.add_argument('--github-output', type=Path)
     args = parser.parse_args(argv)
     try:
         config = load_config(args.config)
@@ -41,10 +46,14 @@ def main(argv=None):
             return
         summary = json.loads(args.summary.read_text(encoding='utf8'))
         require_complete_refresh(config, summary)
+        if args.github_output:
+            complete = all(source.get('healthy') is True for source in summary['sources'])
+            with args.github_output.open('a', encoding='utf8') as output:
+                output.write('source_completeness=' + ('complete' if complete else 'degraded') + '\n')
     except (OSError, ValueError, TypeError, KeyError):
-        raise SystemExit('Catalog generation stopped: a complete verified SAM refresh is required. '
+        raise SystemExit('Catalog generation stopped: complete verified SAM accounting is required. '
                          'The published catalog is unchanged; inspect the source refresh summary.') from None
-    print('Complete reviewed SAM refresh verified before paid continuation and candidate persistence.')
+    print('Complete reviewed SAM accounting verified before paid continuation and candidate persistence.')
 
 
 if __name__ == '__main__':

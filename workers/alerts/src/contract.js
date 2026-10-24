@@ -129,6 +129,11 @@ export function recordId(record) {
 }
 
 export function recordIsCurrent(record, asOf) {
+  const reviewAfter = record?.source_review_after;
+  if (reviewAfter && (typeof reviewAfter !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(reviewAfter)
+    || !Number.isFinite(Date.parse(`${reviewAfter}T00:00:00Z`))
+    || new Date(`${reviewAfter}T00:00:00Z`).toISOString().slice(0, 10) !== reviewAfter
+    || reviewAfter < asOf)) return false;
   const status = clean(record?.status, 40).toLowerCase();
   if (!["posted", "forecasted"].includes(status)) return false;
   if (/^(?:[A-Z0-9_.-]+\s+)?(?:notice of intent\b|request for information\b|rfi\s*[-:])/i.test(clean(record?.title))) return false;

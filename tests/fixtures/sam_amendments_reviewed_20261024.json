@@ -1,0 +1,84 @@
+{
+  "897e1427461540d792897c599373758b": {
+    "notice_id": "897e1427461540d792897c599373758b",
+    "latest_notice_id": "897e1427461540d792897c599373758b",
+    "latest": true,
+    "status": "published",
+    "archived": false,
+    "cancelled": false,
+    "deleted": false,
+    "title": "Federal Aviation Administration (FAA) Research And Commercial Solutions Opening (RCSO) Area Of Interest (AOI) - Complexity Of Systems And Operations",
+    "solicitation_number": "693KA8-27-T-00003",
+    "organization_id": "500000118",
+    "notice_type": "o",
+    "classification_code": "AS25",
+    "naics_codes": [
+      "541715"
+    ],
+    "set_asides": [
+      "NONE"
+    ],
+    "posted_at": "2026-10-23T13:26:50.481+00:00",
+    "modified_at": "2026-10-23T13:26:50.484+00:00",
+    "response_deadline": "2026-11-02T18:00:00-05:00",
+    "response_timezone": "America/New_York",
+    "archive_date": "2028-12-31",
+    "description_sha256": "8f98172eecce730bcf4cb488f932f11f6c95ef47fec5e43a49c00bcfd238616b",
+    "resources_sha256": "6beeb1feb80766fd315e9abd3f13f3bb02a0a07777af51380c894ba830902bcc",
+    "review_sha256": "b4516c12c27e7f23bbfb362bf92f2f48154ddf520040bb30db227941dae2803b"
+  },
+  "854d837d8dc842719d9fec95764d8ceb": {
+    "notice_id": "854d837d8dc842719d9fec95764d8ceb",
+    "latest_notice_id": "854d837d8dc842719d9fec95764d8ceb",
+    "latest": true,
+    "status": "published",
+    "archived": false,
+    "cancelled": false,
+    "deleted": false,
+    "title": "NGA - Boosting Innovative GEOINT - Science & Technology Broad Agency Announcement (BIG-ST BAA): Topic # 07 – Lidar Analysis for Surface & Environmental Reconnaissance (LASER)",
+    "solicitation_number": "HM047627XXXX",
+    "organization_id": "500038581",
+    "notice_type": "o",
+    "classification_code": "AC13",
+    "naics_codes": [
+      "541715"
+    ],
+    "set_asides": [],
+    "posted_at": "2026-10-20T19:18:09.937+00:00",
+    "modified_at": "2026-10-20T19:18:09.944+00:00",
+    "response_deadline": "2026-12-21T23:59:00-05:00",
+    "response_timezone": "America/New_York",
+    "archive_date": "2027-03-15",
+    "description_sha256": "7822671c8a29585a4f655ed8b12cc70a063bb4d3a979159cb510e72e57bc91af",
+    "resources_sha256": "04a96cf11b9fc3d132ba7599d84520ce7896efc1d4a765e9dd2c939d6cde2b15",
+    "review_sha256": "98eb17d9e97616fac43ef74fae9ef5ac0d1e0f4eb065ff39b73cd05aabd0dab4"
+  },
+  "7b28c18c42cf4d44b6b65709148ec8e0": {
+    "notice_id": "7b28c18c42cf4d44b6b65709148ec8e0",
+    "latest_notice_id": "7b28c18c42cf4d44b6b65709148ec8e0",
+    "latest": true,
+    "status": "published",
+    "archived": false,
+    "cancelled": false,
+    "deleted": false,
+    "title": "FY 26 Broad Agency Announcement (BAA) - Federal Railroad Administration",
+    "solicitation_number": "693JJ626R000001",
+    "organization_id": "100076812",
+    "notice_type": "s",
+    "classification_code": null,
+    "naics_codes": [
+      "541715"
+    ],
+    "set_asides": [
+      "NONE"
+    ],
+    "posted_at": "2026-10-22T19:16:53.211+00:00",
+    "modified_at": "2026-10-22T19:16:53.215+00:00",
+    "response_deadline": "2027-09-30T12:00:00-04:00",
+    "response_timezone": "America/New_York",
+    "archive_date": "2027-09-30",
+    "description_sha256": "50a8eea12b12b31c67e9aa6eec95143c97fdd690172f55b26013759c481ccfe3",
+    "resources_sha256": "7a1a6d5cf6005ca242189a5f5a5fca0c8d5dd5f383e7e4dbf66f75c28b62d5d9",
+    "review_sha256": "9a9e4cd03f4c96e828c13ba59d8991da69c303338f6fde3bc359c4d6edfb85ae"
+  }
+}

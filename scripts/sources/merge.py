@@ -384,6 +384,109 @@ def _verified_partial(result):
                 for r in result.records))
 
 
+def _sam_accounted(result):
+    diagnostics = result.diagnostics or {}
+    return (result.slug == 'sam-gov' and result.ok and result.snapshot_complete is False
+            and diagnostics.get('reviewed_inventory') is True
+            and diagnostics.get('accounting_complete') is True
+            and diagnostics.get('outcome') in {'ok', 'degraded'})
+
+
+def _sam_unresolved(result, snapshot):
+    """Keep amendment identity across quarantine and subsequent unavailable reads."""
+    prior = snapshot.get('sam_unresolved') or []
+    if not isinstance(prior, list) or len(prior) > 100:
+        raise ValueError('Invalid retained SAM amendment accounting')
+    records = (snapshot.get('records') or []) + result.records
+    pending = []
+    for observation in result.diagnostics['notice_observations']:
+        if observation['disposition'] in {'admitted', 'verified_withdrawal'}:
+            continue
+        approved_id = observation['notice_id']
+        disposition, reasons = observation['disposition'], observation['reasons']
+        ids = {'sam-gov:' + ident for ident in (approved_id, observation.get('observed_notice_id'),
+                                               observation.get('latest_notice_id')) if ident}
+        keys = set()
+        # A newer identifier cannot erase an unresolved earlier observation.
+        for old in prior:
+            if old.get('notice_id') == approved_id:
+                ids.update(old.get('opportunity_ids') or [])
+                keys.update(old.get('canonical_identities') or [])
+                if disposition == 'source_unavailable' and old.get('disposition') in {'review_required', 'approval_expired'}:
+                    disposition, reasons = old['disposition'], old['reasons']
+        for record in records:
+            proof = record.get('sam_review_reconciliation') or {}
+            if record.get('opportunity_id') in ids or proof.get('approved_notice_id') == approved_id:
+                ids.add(str(record['opportunity_id']))
+                keys.add(record_identity(record))
+        pending.append({'notice_id': approved_id, 'disposition': disposition,
+                        'opportunity_ids': sorted(ids), 'canonical_identities': sorted(keys),
+                        'reasons': reasons})
+    return pending
+
+
+def _sam_transport_carry(carried, result, snapshot):
+    """Only a temporary unread first notice may retain its dated verified facts."""
+    allowed = {o['notice_id'] for o in result.diagnostics['notice_observations']
+               if o['disposition'] == 'source_unavailable' and o.get('fallback_allowed') is True}
+    # Once substantive change is observed, later transport failure cannot
+    # restore the superseded scientific terms, even under the old approval.
+    blocked = {row['notice_id'] for row in snapshot.get('sam_unresolved') or []
+               if row.get('disposition') != 'source_unavailable'}
+    allowed -= blocked
+    retained = []
+    for record in carried:
+        identifier = str(record.get('opportunity_id') or '').removeprefix('sam-gov:')
+        approved_id = (record.get('sam_review_reconciliation') or {}).get('approved_notice_id', identifier)
+        if approved_id not in allowed or not record.get('source_review_after'):
+            continue
+        retained.append({**record, 'source_observation': 'retained_after_transport_failure'})
+    return retained
+
+
+def _sam_identity_archive(snapshot, records, observations):
+    """Retain accepted public identities through a missing or quarantined version."""
+    from scripts.solicitation_identity import solicitation_key
+    fields = ('opportunity_id', 'opportunity_number', 'source', 'agency', 'agency_authority',
+              'sam_organization_id', 'detail_page', 'funding_opportunity_url')
+    history = snapshot.get('sam_identity_history') or []
+    if not isinstance(history, list) or len(history) > 100:
+        raise ValueError('Invalid retained SAM identity history')
+    active_ids = {'sam-gov:' + identifier for row in observations
+                  for identifier in (row['notice_id'], row.get('observed_notice_id'), row.get('latest_notice_id')) if identifier}
+    active_keys = {(*solicitation_key(row), row['sam_organization_id']) for row in records
+                   if solicitation_key(row) and row.get('sam_organization_id')}
+    for row in history + (snapshot.get('records') or []):
+        ids = {row.get('opportunity_id')} | {a.get('opportunity_id') for a in row.get('source_aliases') or []}
+        if ids & active_ids and solicitation_key(row) and row.get('sam_organization_id'):
+            active_keys.add((*solicitation_key(row), row['sam_organization_id']))
+    grouped = {}
+    for row in history + (snapshot.get('records') or []) + records:
+        if row not in history and row.get('status') not in {'posted', 'forecasted'}:
+            continue
+        key = solicitation_key(row)
+        if not key or not row.get('sam_organization_id'):
+            continue
+        key = (*key, row['sam_organization_id'])
+        if key not in active_keys:
+            continue  # Removed inventory must not grow an unbounded live recovery index.
+        identity = {field: row.get(field) for field in fields}
+        if row.get('source_first_seen_date'):
+            identity['source_first_seen_date'] = row['source_first_seen_date']
+        if row.get('source_aliases'):
+            identity['source_aliases'] = deepcopy(row['source_aliases'])
+        prior = grouped.get(key)
+        if prior:
+            identity = reconcile_source_aliases([identity], [prior])[0][0]
+            dates = [r['source_first_seen_date'] for r in (identity, prior) if r.get('source_first_seen_date')]
+            if dates:
+                identity['source_first_seen_date'] = min(dates)
+        grouped[key] = identity
+    if len(grouped) > 100:
+        raise ValueError('SAM identity history exceeds its approved inventory bound')
+    return list(grouped.values())
+
+
 def _resolve_identity_before_selection(results, cache, as_of, *, allow_fetch=True, base_records=()):
     """One shared bounded lookup phase, before any identity is quarantined."""
     from .official_identity import resolve
@@ -425,6 +528,11 @@ def resolve_live_records(results: list[AdapterResult], cache: dict,
     for result in results:
         slug = result.slug
         partial = _verified_partial(result)
+        sam_accounted = _sam_accounted(result)
+        sam_degraded = sam_accounted and result.diagnostics['outcome'] == 'degraded'
+        prior_snapshot = sources.get(slug) or {}
+        sam_unresolved = _sam_unresolved(result, prior_snapshot) if sam_accounted else []
+        sam_history = _sam_identity_archive(prior_snapshot, result.records, result.diagnostics['notice_observations']) if sam_accounted else []
         incremental = result.snapshot_complete is False
         witnesses = (_identity_history(sources.get(slug) or {}, result.records if result.ok or partial else [],
                                       cache.get("official_identities"), as_of)
@@ -448,6 +556,8 @@ def resolve_live_records(results: list[AdapterResult], cache: dict,
                     and record_is_publishable(r, as_of)[1] in {"ok", "expired"}]
                 health_count = len(kept) + len(terminal_observations)
                 carried = _unobserved_current(sources, result, as_of, witnesses)
+                if sam_accounted:
+                    carried = _sam_transport_carry(carried, result, prior_snapshot)
                 if result.max_records is not None and max(len(result.records), len(kept) + len(carried)) > result.max_records:
                     # No truncation or partially updated cache on overflow.
                     raise ValueError(f"{slug}: incremental snapshot exceeds maximum records")
@@ -468,14 +578,19 @@ def resolve_live_records(results: list[AdapterResult], cache: dict,
                 for record in kept:
                     refreshed = dict(record)
                     previous = previous_records.get(record_identity(refreshed)) or {}
+                    archived = next((r for r in previous_snapshot.get('sam_identity_history') or []
+                                     if record_identity(r) == record_identity(refreshed)
+                                     and r.get('sam_organization_id') == refreshed.get('sam_organization_id')), {}) if sam_accounted else {}
                     refreshed["source_first_seen_date"] = (
                         previous.get("source_first_seen_date")
+                        or archived.get('source_first_seen_date')
                         or previous_fetch_date
                         or as_of.isoformat()
                     )
                     if incremental:
                         refreshed["source_last_seen_date"] = as_of.isoformat()
-                        refreshed["source_observation"] = "observed_in_window"
+                        refreshed["source_observation"] = ('reverified_existing_call' if archived and not previous
+                                                           else "observed_in_window")
                     refreshed_records.append(refreshed)
                 refreshed_records.extend(carried)
                 diagnostics = result.diagnostics or {}
@@ -505,7 +620,7 @@ def resolve_live_records(results: list[AdapterResult], cache: dict,
                     if source_snapshot_at
                     else 0
                 )
-                if partial:
+                if partial or sam_degraded:
                     sources[slug]["last_successful_refresh_at"] = previous_success
                     sources[slug]["last_successful_record_count"] = previous_snapshot.get(
                         "last_successful_record_count", previous_snapshot.get("record_count"))
@@ -513,6 +628,15 @@ def resolve_live_records(results: list[AdapterResult], cache: dict,
                     status = "partial_refresh"
                     publication_decision = "published_independently_verified_records"
                     failure_class = _classify_failure(result)
+                if sam_accounted:
+                    sources[slug]['sam_unresolved'] = sam_unresolved
+                    sources[slug]['sam_identity_history'] = sam_history
+                    if sam_degraded:
+                        sources[slug]['last_checked_at'] = refreshed_at
+                        sources[slug]['fetched_at'] = previous_snapshot.get('fetched_at')
+                        ages = [(as_of - date.fromisoformat(r['source_last_seen_date'])).days
+                                for r in carried if r.get('source_last_seen_date')]
+                        retained_data_age_days = max(ages) if ages else None
             else:
                 if result.retain_on_failure:
                     published = carried if incremental else _cached_publishable(sources, slug, as_of)
@@ -550,12 +674,15 @@ def resolve_live_records(results: list[AdapterResult], cache: dict,
                 "published": len(published), "healthy": healthy, "error": result.error if partial else None,
                 "diagnostics": result.diagnostics,
                 **evidence,
+                **({'unresolved_records': sam_unresolved,
+                    'retained_transport_ids': [r['opportunity_id'] for r in carried],
+                    'source_completeness': 'degraded' if sam_degraded else 'complete'} if sam_accounted else {}),
                 **({"withheld_ids": [r["opportunity_id"] for r in dropped if r["reason"] != "expired"]}
                    if any(r["reason"] != "expired" for r in dropped) else {}),
                 **({"snapshot_complete": False,
                     "retained_outside_window_ids": [r["opportunity_id"] for r in carried],
                     "identity_collision_ids": collisions,
-                    "observed_terminal_records": terminal_observations if healthy else []}
+                    "observed_terminal_records": terminal_observations if healthy or sam_accounted else []}
                    if incremental else {}),
             })
         else:
@@ -1108,6 +1235,12 @@ def integrate(catalog_path: Path = DEFAULT_CATALOG,
         identity_stats["withheld_base_ids"] = base_withheld
         base = [r for r in base if str(r.get("opportunity_id")) not in base_withheld]
     external, cache, source_summaries = resolve_live_records(results, cache, as_of)
+    # The accepted identity archive carries no scientific fields or freshness.
+    # It avoids a reviewed amendment becoming a duplicate/new call after a
+    # quarantine temporarily removed every version from the public catalog.
+    sam_history = (cache.get('sources', {}).get('sam-gov') or {}).get('sam_identity_history') or []
+    if sam_history:
+        external, _ = reconcile_source_aliases(external, sam_history)
     combined, stats = merge_records(base, external)
     combined, alias_stats = reconcile_source_aliases(combined, previous_records)
     # Discoverability: tag opaque umbrella FOAs (e.g. DOE Office of Science) with

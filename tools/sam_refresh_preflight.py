@@ -21,11 +21,11 @@ def main(argv=None):
     if args.verify_only:
         try:
             checked_at = datetime.now(timezone.utc)
-            replay_client(args.output, args.config, checked_at.date(), now=checked_at)
+            client = replay_client(args.output, args.config, checked_at.date(), now=checked_at)
             completed = True
         except (OSError, ValueError, TypeError, KeyError, SamError, subprocess.SubprocessError):
             completed = False
-        print(json.dumps({'outcome': 'verified' if completed else 'invalid_preflight',
+        print(json.dumps({'outcome': client.preflight_provenance['outcome'] if completed else 'invalid_preflight',
                           'completed': completed, 'request_count': 0}))
         return 0 if completed else 1
     try:

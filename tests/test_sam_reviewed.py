@@ -495,18 +495,22 @@ class ReviewedAdmissionTests(unittest.TestCase):
         self.assertEqual(rows[0]['status'],'unverified')
         self.assertEqual(diagnostics['admitted'],0)
 
-    def test_any_required_fetch_failure_prevents_partial_success(self):
+    def test_required_fetch_failure_accounts_for_missing_notice_and_keeps_verified_peer(self):
         other=deepcopy(self.approval)
         other.update(notice_id=OTHER,solicitation_number='DARPA-TEST-26-02')
         cfg=configuration(self.approval);cfg['approved_notices'].append(other)
         def fetch(identifier):
             if identifier==OTHER:raise SamError('public_http_error',{'request_count':1,'http_status':503,'failure_class':'transient_transport'})
             return self.notice,{'request_count':2}
-        with self.assertRaises(SamError) as raised:
-            sam_reviewed.collect(cfg,TODAY,{},client=fetch)
-        self.assertEqual(raised.exception.diagnostics['request_count'],3)
-        self.assertEqual(raised.exception.diagnostics['failures'],[
+        rows,diagnostics=sam_reviewed.collect(cfg,TODAY,{},client=fetch)
+        self.assertEqual(len(rows),1)
+        self.assertEqual(rows[0]['status'],'posted')
+        self.assertEqual(diagnostics['outcome'],'degraded')
+        self.assertEqual(diagnostics['request_count'],3)
+        self.assertEqual(diagnostics['failures'],[
             {'notice_id':OTHER,'reason':'public_notice_unavailable','http_status':503,'failure_class':'transient_transport'}])
+        self.assertEqual(diagnostics['notice_observations'][1]['disposition'],'source_unavailable')
+        sam_reviewed.require_reviewed_observations(cfg,diagnostics)
 
     def test_config_rejects_unsafe_urls_ambiguous_cycles_and_impossible_stages(self):
         changes=[]
