@@ -4,8 +4,42 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml</id>
-  <updated>2026-10-20T15:28:21Z</updated>
+  <updated>2026-10-24T22:43:50Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>Fiscal Year 2026 Flood Mitigation Assistance</title>
+    <link href="https://www.grants.gov/search-results-detail/364124"/>
+    <id>urn:funding-finder:grants-gov:364124</id>
+    <updated>2026-10-22T00:00:00Z</updated>
+    <author><name>Department of Homeland Security - FEMA</name></author>
+    <category term="Cybersecurity"/>
+    <summary>Department of Homeland Security - FEMA | Application 2027-02-26 | The Flood Mitigation Assistance (FMA) grant program provides federal funds to states, U.S. territories, federally recognized tribal governments, and local governments. The goal is to reduce or eliminate the risk of repetitive flood damage to buildings and structures insured by the National Flood Insurance Program (NFIP) in participating communities. FMA funds a variety of flood mitigation activiti…</summary>
+  </entry>
+  <entry>
+    <title>F26AS00088 Endangered Species Conservation - Wolf Livestock Loss Compensation and Prevention</title>
+    <link href="https://www.grants.gov/search-results-detail/364133"/>
+    <id>urn:funding-finder:grants-gov:364133</id>
+    <updated>2026-10-21T00:00:00Z</updated>
+    <author><name>Fish and Wildlife Service</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Environmental science"/>
+    <category term="Cybersecurity"/>
+    <summary>Fish and Wildlife Service | Application 2027-01-15 | The Wolf Livestock Loss Demonstration Project Grant Program, authorized under Subtitle C of the Omnibus Public Lands Management Act of 2009, provides federal financial assistance to states and tribes for two primary purposes: depredation prevention and depredation compensation. Depredation prevention funding supports livestock producers in implementing proactive, nonlethal strategies to reduce the…</summary>
+  </entry>
+  <entry>
+    <title>Young Faculty Award (YFA) 2027</title>
+    <link href="https://www.grants.gov/search-results-detail/364129"/>
+    <id>urn:funding-finder:grants-gov:364129</id>
+    <updated>2026-10-20T00:00:00Z</updated>
+    <author><name>DARPA - Defense Sciences Office</name></author>
+    <category term="Materials science"/>
+    <category term="Quantum science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Manufacturing"/>
+    <category term="Cybersecurity"/>
+    <summary>DARPA - Defense Sciences Office | Application 2027-01-13 | The Defense Advanced Research Projects Agency (DARPA) Young Faculty Award (YFA) program aims to identify and engage rising stars in junior research positions in academia and equivalent positions at non-profit research institutions, particularly those without prior DARPA funding, to expose them to Department of War (DoW) needs and DARPA’s mission to create and prevent technological surprise for nat…</summary>
+  </entry>
   <entry>
     <title>Fiscal Year 2027 Counter Unmanned Aircraft Systems (C-UAS) Grant Program</title>
     <link href="https://www.grants.gov/search-results-detail/364067"/>

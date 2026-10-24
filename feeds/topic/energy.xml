@@ -4,8 +4,40 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/energy.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/energy.xml</id>
-  <updated>2026-10-20T15:28:21Z</updated>
+  <updated>2026-10-24T22:43:50Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>Unlocking New Levels of Output and Capacity for Key Subsurface Resources (UNLOCK)</title>
+    <link href="https://www.grants.gov/search-results-detail/364136"/>
+    <id>urn:funding-finder:grants-gov:364136</id>
+    <updated>2026-10-21T00:00:00Z</updated>
+    <author><name>Advanced Research Projects Agency Energy</name></author>
+    <category term="Carbon management"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <category term="Materials science"/>
+    <category term="Technology development"/>
+    <category term="Water"/>
+    <category term="Separations and membranes"/>
+    <summary>Advanced Research Projects Agency Energy | Application 2026-11-20 | NOFO Number: DE-FOA-0003630 - Unlocking New Levels of Output and Capacity for Key Subsurface Resources (UNLOCK) To obtain a copy of the Notice of Funding Opportunity (NOFO) please go to DOE eXCHANGE at https://exchange.energy.gov/. To apply to this NOFO, Applicants must register with and submit application materials through DOE eXCHANGE (https://exchange.energy.gov/Registration.aspx). For detailed…</summary>
+  </entry>
+  <entry>
+    <title>Unlocking New Levels of Output and Capacity for Key Subsurface Resources SBIR/STTR (UNLOCK SBIR/STTR)</title>
+    <link href="https://www.grants.gov/search-results-detail/364135"/>
+    <id>urn:funding-finder:grants-gov:364135</id>
+    <updated>2026-10-21T00:00:00Z</updated>
+    <author><name>Advanced Research Projects Agency Energy</name></author>
+    <category term="Carbon management"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <category term="Materials science"/>
+    <category term="Technology development"/>
+    <category term="Water"/>
+    <category term="Separations and membranes"/>
+    <summary>Advanced Research Projects Agency Energy | Application 2026-11-20 | NOFO Number: DE-FOA-0003631 - Unlocking New Levels of Output and Capacity for Key Subsurface Resources SBIR/STTR (UNLOCK SBIR/STTR) To obtain a copy of the Notice of Funding Opportunity (NOFO) please go to DOE eXCHANGE at https://exchange.energy.gov/. To apply to this NOFO, Applicants must register with and submit application materials through DOE eXCHANGE (https://exchange.energy.gov/Registration…</summary>
+  </entry>
   <entry>
     <title>Affordable Rural Cooperative (ARC) Energy Program</title>
     <link href="https://www.grants.gov/search-results-detail/363779"/>
@@ -640,33 +672,5 @@
     <author><name>U.S. Army Space and Missile Defense Command (USASMDC)</name></author>
     <category term="Energy"/>
     <summary>U.S. Army Space and Missile Defense Command (USASMDC) | White Paper 2029-08-23 | Space, missile defense, sensing, directed energy and test/evaluation research. Cutting-edge scientific research supporting space and missile defense, not services. Required white paper precedes government invitation; basket placement is not an award. UARC submissions require primary-sponsor concurrence. Use the earlier explicit Rev 06 date rather than extending the window to the conflicting SAM da…</summary>
-  </entry>
-  <entry>
-    <title>ONR FY27 NOFO for Young Investigator Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363632"/>
-    <id>urn:funding-finder:grants-gov:363632</id>
-    <updated>2026-08-17T00:00:00Z</updated>
-    <author><name>Office of Naval Research</name></author>
-    <category term="Quantum science"/>
-    <category term="Data science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Energy"/>
-    <summary>Office of Naval Research | Application 2026-10-30 | The Office of Naval Research Young Investigator Program seeks proposals addressing research areas (as described in the ONR Science and Technology Department section of ONR's website at https://www.onr.navy.mil) which are of interest to ONR Program Officers will be considered. Contact information for each division (a subgroup of an S&amp;T Department) is also listed within the S&amp;T section of the websit…</summary>
-  </entry>
-  <entry>
-    <title>Engineering (ENG): Chemical, Bioengineering, Energy, and Transport Systems (CBET)</title>
-    <link href="https://www.grants.gov/search-results-detail/363616"/>
-    <id>urn:funding-finder:grants-gov:363616</id>
-    <updated>2026-08-17T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Energy"/>
-    <category term="Catalysis and reaction engineering"/>
-    <category term="Separations and membranes"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Materials science"/>
-    <category term="Manufacturing"/>
-    <summary>U.S. National Science Foundation | Posted | The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational engineering research for chemical, bioengineering, energy, and transport systems through the following programs:  The Chemical Process Systems (CPS) program supports foundational engineering research in chemical and biochemical processes for chemicals, fuels, energy, and materials. The Engineering Biol…</summary>
   </entry>
 </feed>

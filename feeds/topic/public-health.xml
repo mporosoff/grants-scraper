@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/public-health.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/public-health.xml</id>
-  <updated>2026-10-20T15:28:21Z</updated>
+  <updated>2026-10-24T22:43:50Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Public Health Nursing</title>
@@ -26,6 +26,16 @@
     <category term="Data science"/>
     <category term="Public health"/>
     <summary>National Institutes of Health | Estimated Application 2028-02-01 | The National Human Genome Research Institute (NHGRI) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to establish an ancient DNA for Modern Genomics (aDMG) program. The goal of aDMG is to establish an ethical resource of ancient and historical human DNA (aDNA) data to advance studies about contemporary human traits and biology. This NOFO aims to solicit applicatio…</summary>
+  </entry>
+  <entry>
+    <title>CAPSTONE Centers for Multidisciplinary Research in Child Abuse and Neglect</title>
+    <link href="https://www.grants.gov/search-results-detail/364128"/>
+    <id>urn:funding-finder:grants-gov:364128</id>
+    <updated>2027-07-24T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health | Estimated Application 2027-10-01 | This renewal of the CAPSTONE Centers for Child Maltreatment Research initiative will focus on child sexual abuse (CSA), a preventable but understudied public health problem with serious lifelong consequences. CSA is linked to adverse developmental and health outcomes, including chronic gynecological, gastrointestinal, sexual health, and mental health conditions. The renewed Centers are intended to…</summary>
   </entry>
   <entry>
     <title>Partnerships for Advancing Development of Diagnostics for Infectious Diseases</title>
@@ -596,17 +606,6 @@
     <summary>Centers for Disease Control and Prevention - ERA | Estimated Application 2027-02-23 | The National Institute for Occupational Safety and Health (NIOSH), World Trade Center (WTC) Health Program, plans to establish a WTC Youth Research Coordinating Center ("Center") through a U54 cooperative agreement. In December 2022, Congress amended the Public Health Service Act (42 U.S.C. § 300mm-51(c)) to direct the WTC Health Program Administrator to establish a research cohort for emerging he…</summary>
   </entry>
   <entry>
-    <title>Translational Centers Using Microphysiological Systems for Infectious Diseases (U54 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/362954"/>
-    <id>urn:funding-finder:grants-gov:362954</id>
-    <updated>2026-11-13T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <summary>National Institutes of Health | Estimated Application 2027-01-29 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting the development of human microphysiologic systems (MPS) for infectious disease research and the development of therapeutics or biological products. MPS are in vitro platforms composed of cells or tissues maintained in a microenvironment designed to mimic the physiological aspects of in vivo…</summary>
-  </entry>
-  <entry>
     <title>NIH Specialized Center Grant (Parent P50)</title>
     <link href="https://www.grants.gov/search-results-detail/361769"/>
     <id>urn:funding-finder:grants-gov:361769</id>
@@ -621,8 +620,9 @@
     <id>urn:funding-finder:grants-gov:363533</id>
     <updated>2026-11-06T00:00:00Z</updated>
     <author><name>Health Resources and Services Administration</name></author>
+    <category term="Education and workforce"/>
     <category term="Public health"/>
-    <summary>Health Resources and Services Administration | Estimated Application 2027-01-20 | The purpose of the Healthy Tomorrows Partnership for Children Program (HTPCP) is to support community-based projects that promote access to preventive clinical and public health services for children.</summary>
+    <summary>Health Resources and Services Administration | Estimated Application 2027-01-20 | The purpose of the Healthy Tomorrows Partnership for Children Program (HTPCP) is to support community-based projects that promote access to preventive clinical and public health services for children. The projects should address mental health, nutrition/health education, and/or physical activity to improve childhood chronic disease prevention in rural areas and communities with limited access to c…</summary>
   </entry>
   <entry>
     <title>Precision and Systems Biology to Uncover the Link Between Chronic and Infectious Diseases</title>

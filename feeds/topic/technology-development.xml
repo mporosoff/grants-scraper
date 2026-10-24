@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml</id>
-  <updated>2026-10-20T15:28:21Z</updated>
+  <updated>2026-10-24T22:43:50Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Technology Development Program</title>
@@ -37,6 +37,15 @@
     <summary>National Institutes of Health | Estimated Application 2027-11-01 | The National Institute of Neurological Disorders and Stroke (NINDS), at the National Institutes of Health (NIH) seek to continue support for the Infrastructure for the Network for Excellence in Neuroscience Clinical Trials (NeuroNEXT). NeuroNEXT conducts clinical trials and biomarker validation studies for neurological disorders in adult and pediatric populations. By offering infrastructure, exper…</summary>
   </entry>
   <entry>
+    <title>Discovery Gateway to Reproductive Health Innovation</title>
+    <link href="https://www.grants.gov/search-results-detail/364126"/>
+    <id>urn:funding-finder:grants-gov:364126</id>
+    <updated>2027-07-24T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Technology development"/>
+    <summary>National Institutes of Health | Estimated Application 2027-10-01 | The Eunice Kennedy Shriver National Institute of Child Health and Human Development (NICHD) seeks to establish a single Discovery Gateway to Reproductive Health Innovation, a comprehensive knowledgebase designed to advance research on male and female indications such as preeclampsia, endometriosis, preterm birth, infertility, and uterine fibroids. This initiative will expand shared resources and e…</summary>
+  </entry>
+  <entry>
     <title>Elucidation and Validation of the role of Transporters in the Placenta, Lactating Mammary Gland, Developing Gut, and Blood Brain Barrier</title>
     <link href="https://www.grants.gov/search-results-detail/363210"/>
     <id>urn:funding-finder:grants-gov:363210</id>
@@ -48,6 +57,19 @@
     <category term="Neuroscience"/>
     <category term="Technology development"/>
     <summary>National Institutes of Health | Estimated Application 2027-10-20 | The Eunice Kennedy Shriver National Institute of Child Health and Human Development seeks to advance its mission of supporting maternal, fetal, and child health by continuing to enhance the understanding of maternal, fetal, and child exposure to nutrients, metabolites, medications, supplements, microbiome-derived products, and environmental chemicals. This will be done by supporting a second phase…</summary>
+  </entry>
+  <entry>
+    <title>Prevention and Treatment through a Comprehensive Care Continuum for HIV-affected Adolescents in Resource-Constrained Settings--Implementation Science Network (PATC3H-IN)</title>
+    <link href="https://www.grants.gov/search-results-detail/364127"/>
+    <id>urn:funding-finder:grants-gov:364127</id>
+    <updated>2027-07-24T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Infectious disease"/>
+    <category term="Technology development"/>
+    <category term="Transportation"/>
+    <summary>National Institutes of Health | Estimated Application 2027-10-28 | The Prevention and Treatment through a Comprehensive Care Continuum for HIV-affected Adolescents in Resource Constrained Settings-Implementation Science Network (PATC3H-IN) conducts implementation science (IS) research on adolescent HIV. PATC3H-IN develops scalable, low-resource care delivery models in low- and middle-income countries that can be adapted for marginalized and high-burden US populat…</summary>
   </entry>
   <entry>
     <title>Partnerships for Advancing Development of Diagnostics for Infectious Diseases</title>
@@ -273,6 +295,66 @@
     <category term="Technology development"/>
     <category term="Transportation"/>
     <summary>National Institutes of Health | Estimated Application 2027-01-05 | The National Institutes of Health (NIH) and Centers for Disease Control and Prevention (CDC), including the participating Institutes, Centers and Offices, intend to publish a Notice of Funding Opportunity (NOFO) to invite eligible United States small business concerns (SBCs) to submit Small Business Innovation Research (SBIR) Phase I, and Fast-Track (NIH only) grant applications for the Small Busi…</summary>
+  </entry>
+  <entry>
+    <title>NextTech: Translational Development of Next-Generation Diagnostic and Therapeutic Devices (R18 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/361380"/>
+    <id>urn:funding-finder:grants-gov:361380</id>
+    <updated>2026-10-23T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Neuroscience"/>
+    <category term="Technology development"/>
+    <summary>National Institutes of Health | Application 2030-12-01 | This Notice of Funding Opportunity (NOFO) is to encourage applications from investigators to advance the development and translation of next-generation technologies to prevent, monitor, diagnose, and treat disorders within the missions of the NIH Brain Research through Advancing Innovative Neurotechnologies (BRAIN) and The Helping to End Addiction Long-term (HEAL) Initiatives. Awarded activities w…</summary>
+  </entry>
+  <entry>
+    <title>Unlocking New Levels of Output and Capacity for Key Subsurface Resources (UNLOCK)</title>
+    <link href="https://www.grants.gov/search-results-detail/364136"/>
+    <id>urn:funding-finder:grants-gov:364136</id>
+    <updated>2026-10-21T00:00:00Z</updated>
+    <author><name>Advanced Research Projects Agency Energy</name></author>
+    <category term="Carbon management"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <category term="Materials science"/>
+    <category term="Technology development"/>
+    <category term="Water"/>
+    <category term="Separations and membranes"/>
+    <summary>Advanced Research Projects Agency Energy | Application 2026-11-20 | NOFO Number: DE-FOA-0003630 - Unlocking New Levels of Output and Capacity for Key Subsurface Resources (UNLOCK) To obtain a copy of the Notice of Funding Opportunity (NOFO) please go to DOE eXCHANGE at https://exchange.energy.gov/. To apply to this NOFO, Applicants must register with and submit application materials through DOE eXCHANGE (https://exchange.energy.gov/Registration.aspx). For detailed…</summary>
+  </entry>
+  <entry>
+    <title>Unlocking New Levels of Output and Capacity for Key Subsurface Resources SBIR/STTR (UNLOCK SBIR/STTR)</title>
+    <link href="https://www.grants.gov/search-results-detail/364135"/>
+    <id>urn:funding-finder:grants-gov:364135</id>
+    <updated>2026-10-21T00:00:00Z</updated>
+    <author><name>Advanced Research Projects Agency Energy</name></author>
+    <category term="Carbon management"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <category term="Materials science"/>
+    <category term="Technology development"/>
+    <category term="Water"/>
+    <category term="Separations and membranes"/>
+    <summary>Advanced Research Projects Agency Energy | Application 2026-11-20 | NOFO Number: DE-FOA-0003631 - Unlocking New Levels of Output and Capacity for Key Subsurface Resources SBIR/STTR (UNLOCK SBIR/STTR) To obtain a copy of the Notice of Funding Opportunity (NOFO) please go to DOE eXCHANGE at https://exchange.energy.gov/. To apply to this NOFO, Applicants must register with and submit application materials through DOE eXCHANGE (https://exchange.energy.gov/Registration…</summary>
+  </entry>
+  <entry>
+    <title>FY27 Small Business Development Center State of Kansas Network Rebid</title>
+    <link href="https://www.grants.gov/search-results-detail/364132"/>
+    <id>urn:funding-finder:grants-gov:364132</id>
+    <updated>2026-10-20T00:00:00Z</updated>
+    <author><name>Small Business Administration</name></author>
+    <category term="Technology development"/>
+    <summary>Small Business Administration | Application 2026-11-19 | Eligible organizations, as defined in Section 3.2, may apply to SBA for an award of financial assistance under this Funding Opportunity to fund an SBDC Program. SBDC Programs deliver professional, high quality, individualized business advising and technical assistance to existing small businesses and pre- venture entrepreneurs. SBDCs shall provide problem solving assistance to help small businesse…</summary>
+  </entry>
+  <entry>
+    <title>Technology InteGrator and AcceleratoR (TIGAR) Exploratory Topic</title>
+    <link href="https://arpa-h.gov/explore-funding/initiatives-and-sprints/tigar"/>
+    <id>urn:funding-finder:arpa-h:arpa-h%3Atigar</id>
+    <updated>2026-10-20T00:00:00Z</updated>
+    <author><name>Advanced Research Projects Agency for Health (ARPA-H)</name></author>
+    <category term="Technology development"/>
+    <summary>Advanced Research Projects Agency for Health (ARPA-H) | Application 2027-02-05 | Current ARPA-H initiative. TIGAR Exploratory Topic | ARPA-H (function(w, d, s, l, i){w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&amp;l='+l:''; j.async=true; j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j, f); })(window, document,'script','dataLayer','…</summary>
   </entry>
   <entry>
     <title>Small Business Innovation Research (SBIR) program, Phase I</title>
@@ -559,93 +641,5 @@
     <category term="Data science"/>
     <category term="Artificial intelligence and machine learning"/>
     <summary>U.S. National Science Foundation | Concept Paper 2026-11-19 | The Emerging Frontiers in Research and Innovation (EFRI) program serves a critical role in helping the NSF Directorate for Engineering focus on important emerging areas in a timely way. The EFRI program invests in potentially transformative ideas that offer the opportunity for significant shifts in foundational engineering knowledge. EFRI-funded research must have strong potential for long-term im…</summary>
-  </entry>
-  <entry>
-    <title>Expeditions in Computing (Expeditions)</title>
-    <link href="https://www.grants.gov/search-results-detail/363623"/>
-    <id>urn:funding-finder:grants-gov:363623</id>
-    <updated>2026-08-17T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Neuroscience"/>
-    <category term="Social and behavioral sciences"/>
-    <category term="Technology development"/>
-    <summary>U.S. National Science Foundation | Application 2027-07-27 | verify prerequisite | The far-reaching impact and rate of innovation in the computer and information science and engineering ﬁelds has been remarkable, generating economic prosperity, and enhancing the quality of life for people. More than a decade ago, the NSF Directorate for Computer and Information Science and Engineering (NSF CISE) established the NSF Expeditions program to provide the NSF CISE research community w…</summary>
-  </entry>
-  <entry>
-    <title>Engineering (ENG): Civil, Mechanical and Manufacturing Innovation (CMMI)</title>
-    <link href="https://www.grants.gov/search-results-detail/363614"/>
-    <id>urn:funding-finder:grants-gov:363614</id>
-    <updated>2026-08-17T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Environmental science"/>
-    <category term="Manufacturing"/>
-    <category term="Materials science"/>
-    <category term="Technology development"/>
-    <category term="Energy"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>U.S. National Science Foundation | Posted | The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational research projects for civil, mechanical, and manufacturing innovation through the following programs: The Advanced Manufacturing, Design, and Operations (AMDO) program supports foundational research on advanced manufacturing, materials and service processes; their integration into facilities, supply ch…</summary>
-  </entry>
-  <entry>
-    <title>MPS Astronomical Sciences Research Programs (MPS Astro)</title>
-    <link href="https://www.grants.gov/search-results-detail/363620"/>
-    <id>urn:funding-finder:grants-gov:363620</id>
-    <updated>2026-08-17T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Energy"/>
-    <category term="Technology development"/>
-    <summary>U.S. National Science Foundation | Posted | The U.S. National Science Foundation Directorate for Mathematical and Physical Sciences (NSF MPS) supports multiple research programs in the astronomical sciences. NSF MPS funds foundational astronomical sciences research and instrumentation focused on exploring space and advancing fundamental understanding of the universe. The programs covered by this funding opportunity are: Astronomical Science…</summary>
-  </entry>
-  <entry>
-    <title>Fast Assessment of Solutions, Therapeutics, Pharmaceuticals, and Supplies (FASTPASS)</title>
-    <link href="https://arpa-h.gov/explore-funding/programs/fastpass"/>
-    <id>urn:funding-finder:arpa-h:arpa-h%3Afastpass</id>
-    <updated>2026-08-15T00:00:00Z</updated>
-    <author><name>Advanced Research Projects Agency for Health (ARPA-H)</name></author>
-    <category term="Technology development"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Advanced Research Projects Agency for Health (ARPA-H) | Application 2026-11-10 | prerequisite closed | Current ARPA-H program. FASTPASS | ARPA-H (function(w, d, s, l, i){w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&amp;l='+l:''; j.async=true; j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j, f); })(window, document,'script','dataLayer','GTM-W5GM3DT9'); wi…</summary>
-  </entry>
-  <entry>
-    <title>Limited Submission Opportunity: $700,000 - The G. Harold and Leila Y. Mathers Foundation - Research Grant (Spring 2027 Cycle)</title>
-    <link href="http://rochester.infoready4.com/CompetitionSpace/"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Ainfoready-2028504</id>
-    <updated>2026-08-15T00:00:00Z</updated>
-    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Cancer"/>
-    <category term="Climate change"/>
-    <category term="Infectious disease"/>
-    <category term="Neuroscience"/>
-    <category term="Technology development"/>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Application 2027-02-12 | prerequisite closed | The Foundation primarily
-supports basic science, ideally with potential translational applications. Examples of current research areas we support include
-immunology, microbiome, structural biology, cellular physiology, cancer biology, genetics, genomics, microbiology and infectious diseases, stem cell biology, and neuroscience. Research areas
-we will not consider for support include Covid-19 relat…</summary>
-  </entry>
-  <entry>
-    <title>Damon Runyon Cancer Research Foundation Clinical Investigator Award 2027</title>
-    <link href="http://rochester.infoready4.com/CompetitionSpace/"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Ainfoready-2024058</id>
-    <updated>2026-08-09T00:00:00Z</updated>
-    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <category term="Cancer"/>
-    <category term="Public health"/>
-    <category term="Technology development"/>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Application 2027-01-19 | prerequisite closed | The Damon Runyon Clinical Investigator Award supports independent young physician-scientists conducting disease-oriented research that demonstrates
-a high level of innovation and creativity. The goal is to support the best young physician-scientists doing work aimed at improving the practice of cancer medicine. The Clinical Investigator Award program is specifically intended to provide outstanding…</summary>
-  </entry>
-  <entry>
-    <title>Unlocking Dataset Value for AI-Enabled Scientific Discovery (AI Datasets)</title>
-    <link href="https://www.grants.gov/search-results-detail/363268"/>
-    <id>urn:funding-finder:grants-gov:363268</id>
-    <updated>2026-07-21T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Technology development"/>
-    <category term="Data science"/>
-    <summary>U.S. National Science Foundation | Application 2026-11-04 | This program will advance scientific community datasets to enable scientific discovery and innovation using artificial intelligence (AI) and other methods. Its goal is to increase the value that can be derived from existing scientific datasets by leveraging novel methods and artificial intelligence (AI). This will unlock new AI-driven insights. It can enable interdisciplinary research. It also ena…</summary>
   </entry>
 </feed>

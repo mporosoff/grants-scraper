@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/source-type/federal.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/source-type/federal.xml</id>
-  <updated>2026-10-20T15:28:21Z</updated>
+  <updated>2026-10-24T22:43:50Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -178,6 +178,33 @@
     <summary>National Institutes of Health | Estimated Application 2027-09-25 | The National Institute on Alcohol Abuse and Alcoholism (NIAAA) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to continue the Collaborative Initiative on Fetal Alcohol Spectrum Disorders (CIFASD). CIFASD is a multidisciplinary research consortium supporting coordinated basic, clinical, translational, diagnostic, intervention, and prevention research on fetal alco…</summary>
   </entry>
   <entry>
+    <title>CAPSTONE Centers for Multidisciplinary Research in Child Abuse and Neglect</title>
+    <link href="https://www.grants.gov/search-results-detail/364128"/>
+    <id>urn:funding-finder:grants-gov:364128</id>
+    <updated>2027-07-24T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health | Estimated Application 2027-10-01 | This renewal of the CAPSTONE Centers for Child Maltreatment Research initiative will focus on child sexual abuse (CSA), a preventable but understudied public health problem with serious lifelong consequences. CSA is linked to adverse developmental and health outcomes, including chronic gynecological, gastrointestinal, sexual health, and mental health conditions. The renewed Centers are intended to…</summary>
+  </entry>
+  <entry>
+    <title>Discovery Gateway to Reproductive Health Innovation</title>
+    <link href="https://www.grants.gov/search-results-detail/364126"/>
+    <id>urn:funding-finder:grants-gov:364126</id>
+    <updated>2027-07-24T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Technology development"/>
+    <summary>National Institutes of Health | Estimated Application 2027-10-01 | The Eunice Kennedy Shriver National Institute of Child Health and Human Development (NICHD) seeks to establish a single Discovery Gateway to Reproductive Health Innovation, a comprehensive knowledgebase designed to advance research on male and female indications such as preeclampsia, endometriosis, preterm birth, infertility, and uterine fibroids. This initiative will expand shared resources and e…</summary>
+  </entry>
+  <entry>
+    <title>Learning Disabilities Research Centers</title>
+    <link href="https://www.grants.gov/search-results-detail/364123"/>
+    <id>urn:funding-finder:grants-gov:364123</id>
+    <updated>2027-07-24T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <summary>National Institutes of Health | Estimated Application 2027-10-01 | The Eunice Kennedy Shriver National Institute of Child Health and Human Development (NICHD) seeks to support transdisciplinary research centers to improve outcomes for children and youth at risk for, or diagnosed with, specific learning disabilities (SLDs) impacting mathematics, reading and writing. These centers will focus on improving the identification and classification of SLDs, deepen underst…</summary>
+  </entry>
+  <entry>
     <title>Elucidation and Validation of the role of Transporters in the Placenta, Lactating Mammary Gland, Developing Gut, and Blood Brain Barrier</title>
     <link href="https://www.grants.gov/search-results-detail/363210"/>
     <id>urn:funding-finder:grants-gov:363210</id>
@@ -189,6 +216,19 @@
     <category term="Neuroscience"/>
     <category term="Technology development"/>
     <summary>National Institutes of Health | Estimated Application 2027-10-20 | The Eunice Kennedy Shriver National Institute of Child Health and Human Development seeks to advance its mission of supporting maternal, fetal, and child health by continuing to enhance the understanding of maternal, fetal, and child exposure to nutrients, metabolites, medications, supplements, microbiome-derived products, and environmental chemicals. This will be done by supporting a second phase…</summary>
+  </entry>
+  <entry>
+    <title>Prevention and Treatment through a Comprehensive Care Continuum for HIV-affected Adolescents in Resource-Constrained Settings--Implementation Science Network (PATC3H-IN)</title>
+    <link href="https://www.grants.gov/search-results-detail/364127"/>
+    <id>urn:funding-finder:grants-gov:364127</id>
+    <updated>2027-07-24T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Infectious disease"/>
+    <category term="Technology development"/>
+    <category term="Transportation"/>
+    <summary>National Institutes of Health | Estimated Application 2027-10-28 | The Prevention and Treatment through a Comprehensive Care Continuum for HIV-affected Adolescents in Resource Constrained Settings-Implementation Science Network (PATC3H-IN) conducts implementation science (IS) research on adolescent HIV. PATC3H-IN develops scalable, low-resource care delivery models in low- and middle-income countries that can be adapted for marginalized and high-burden US populat…</summary>
   </entry>
   <entry>
     <title>Partnerships for Advancing Development of Diagnostics for Infectious Diseases</title>
@@ -542,44 +582,5 @@
     <category term="Health equity"/>
     <category term="Public health"/>
     <summary>National Institutes of Health | Estimated Application 2027-05-25 | As authorized under section 464z-3(h) of the Public Health Service Act, the purpose of the John Lewis NIMHD Research Endowment Program is to strengthen the research infrastructure and training capacity at eligible institutions of higher education to facilitate health disparities research. Specific strategic objectives include: 1) improving the institutional physical infrastructure and acquisition …</summary>
-  </entry>
-  <entry>
-    <title>Limited Competition: Tribal Institutional Review Board Establishment and Enhancement (TIRBEE)</title>
-    <link href="https://www.grants.gov/search-results-detail/363862"/>
-    <id>urn:funding-finder:grants-gov:363862</id>
-    <updated>2027-03-25T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <summary>National Institutes of Health | Estimated Application 2027-05-25 | The Tribal Institutional Review Board Establishment and Enhancement (TIRBEE) Notice of Funding Opportunity will enable federally-recognized Tribes or Tribal Entities to establish or enhance Institutional Review Boards. TIRBEE builds the capacity and infrastructure for biomedical research involving human participants in federally-recognized Tribal communities by expanding their Institutional Review…</summary>
-  </entry>
-  <entry>
-    <title>Single Source: Resource Center for the Support for Research Excellence (SuRE) Program</title>
-    <link href="https://www.grants.gov/search-results-detail/362575"/>
-    <id>urn:funding-finder:grants-gov:362575</id>
-    <updated>2027-03-25T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Education and workforce"/>
-    <summary>National Institutes of Health | Estimated Application 2027-05-25 | invitation required | The Support for Research Excellence (SuRE) program aims to develop and sustain research excellence at resource-limited institutions, many of which disproportionately serve regions of the U.S. that have not historically participated in substantial NIH research, by supporting investigator-initiated research with strong student participation. A SuRE Resource Center has been established to enhance the…</summary>
-  </entry>
-  <entry>
-    <title>Undiagnosed Diseases Network (UDN) Clinical and Data Coordinating Center</title>
-    <link href="https://www.grants.gov/search-results-detail/363836"/>
-    <id>urn:funding-finder:grants-gov:363836</id>
-    <updated>2027-03-25T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Community development"/>
-    <category term="Data science"/>
-    <category term="Education and workforce"/>
-    <category term="Technology development"/>
-    <summary>National Institutes of Health | Estimated Application 2027-05-25 | NINDS intends to support a new phase of the Undiagnosed Diseases Network (UDN) to advance diagnosis for individuals with previously undiagnosed diseases and undiagnosed diseases research. This phase would emphasize participant and family engagement, provider engagement, use of NIH and non-NIH resources, education, community engagement, research innovation and discovery, and broader implementation …</summary>
-  </entry>
-  <entry>
-    <title>Undiagnosed Diseases Network (UDN) Clinical Networks of Diagnostic Excellence</title>
-    <link href="https://www.grants.gov/search-results-detail/363834"/>
-    <id>urn:funding-finder:grants-gov:363834</id>
-    <updated>2027-03-25T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Education and workforce"/>
-    <summary>National Institutes of Health | Estimated Application 2027-05-25 | NINDS intends to support multiple clinical Networks of Diagnostic Excellence (NODEs) as part of the next phase of the Undiagnosed Diseases Network (UDN). Unlike prior phases, clinical NODEs are expected to function as geographically distributed regional clinical networks rather than single-site centers. Each clinical NODE would establish and lead a regional network built on existing partnerships w…</summary>
   </entry>
 </feed>

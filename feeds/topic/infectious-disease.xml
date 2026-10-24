@@ -4,8 +4,21 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/infectious-disease.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/infectious-disease.xml</id>
-  <updated>2026-10-20T15:28:21Z</updated>
+  <updated>2026-10-24T22:43:50Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>Prevention and Treatment through a Comprehensive Care Continuum for HIV-affected Adolescents in Resource-Constrained Settings--Implementation Science Network (PATC3H-IN)</title>
+    <link href="https://www.grants.gov/search-results-detail/364127"/>
+    <id>urn:funding-finder:grants-gov:364127</id>
+    <updated>2027-07-24T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Infectious disease"/>
+    <category term="Technology development"/>
+    <category term="Transportation"/>
+    <summary>National Institutes of Health | Estimated Application 2027-10-28 | The Prevention and Treatment through a Comprehensive Care Continuum for HIV-affected Adolescents in Resource Constrained Settings-Implementation Science Network (PATC3H-IN) conducts implementation science (IS) research on adolescent HIV. PATC3H-IN develops scalable, low-resource care delivery models in low- and middle-income countries that can be adapted for marginalized and high-burden US populat…</summary>
+  </entry>
   <entry>
     <title>Partnerships for Advancing Development of Diagnostics for Infectious Diseases</title>
     <link href="https://www.grants.gov/search-results-detail/363944"/>
@@ -224,17 +237,6 @@
     <summary>National Institutes of Health | Estimated Application 2027-01-25 | This NOFO is issued during a period of accelerating development, validation, and adoption of human new approach methodologies (NAMs). Accordingly, it has two integrated priorities for NIH-funded HIV/AIDS research: (1) implementation of a NAMs-enabled stewardship framework, including optional HIV-relevant human in vitro testing support and pilot benchmarking activities, to reduce or replace specifi…</summary>
   </entry>
   <entry>
-    <title>Translational Centers Using Microphysiological Systems for Infectious Diseases (U54 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/362954"/>
-    <id>urn:funding-finder:grants-gov:362954</id>
-    <updated>2026-11-13T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <summary>National Institutes of Health | Estimated Application 2027-01-29 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting the development of human microphysiologic systems (MPS) for infectious disease research and the development of therapeutics or biological products. MPS are in vitro platforms composed of cells or tissues maintained in a microenvironment designed to mimic the physiological aspects of in vivo…</summary>
-  </entry>
-  <entry>
     <title>Precision and Systems Biology to Uncover the Link Between Chronic and Infectious Diseases</title>
     <link href="https://www.grants.gov/search-results-detail/362952"/>
     <id>urn:funding-finder:grants-gov:362952</id>
@@ -268,14 +270,13 @@
     <summary>Centers for Disease Control and Prevention - ERA | Estimated Application 2026-12-31 | The purpose of this notice of funding opportunity (NOFO) is to continue the work of the US Influenza Vaccine Effectiveness (Flu VE) Network. Influenza and other respiratory pathogens are important causes of morbidity, mortality, and healthcare burden across the age spectrum. This network provides evidence needed to improve the effectiveness of influenza and other respiratory pathogen vaccines. You…</summary>
   </entry>
   <entry>
-    <title>Immune Tolerance Network (UM1 Clinical Trial Required)</title>
-    <link href="https://www.grants.gov/search-results-detail/362946"/>
-    <id>urn:funding-finder:grants-gov:362946</id>
-    <updated>2026-10-16T00:00:00Z</updated>
+    <title>Translational Centers Using Microphysiological Systems for Infectious Diseases (U54 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/362954"/>
+    <id>urn:funding-finder:grants-gov:362954</id>
+    <updated>2026-10-20T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <summary>National Institutes of Health | Estimated Application 2027-01-29 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission through the continued support of the Collaborative Network for Clinical Research on Immune Tolerance. The purpose of this program is to enhance understanding of the underlying mechanisms of the induction, maintenance, and loss of immune tolerance in humans; and to develop improved tolerogenic interventio…</summary>
+    <summary>National Institutes of Health | Application 2027-01-29 | The purpose of this notice of funding opportunity (NOFO) is to support a consortium of Translational Centers using Microphysiological Systems (MPS) for Infectious Diseases (TCMID). Recent efforts in the MPS fields are moving towards validation and regulatory use but have not focused upon models studying infectious diseases and testing of medical interventions. The NIH and FDA have recently issued …</summary>
   </entry>
   <entry>
     <title>2027 NIAID DMID Omnibus Broad Agency Announcement: Development of Medical Interventions for Infectious Diseases</title>
@@ -374,16 +375,6 @@
     <category term="Infectious disease"/>
     <category term="Public health"/>
     <summary>National Institutes of Health | Estimated Application 2027-01-22 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance the National Institutes of Health (NIH) mission by supporting four Clinical Trials Networks (CTNs) each comprised of a Leadership and Operations Center, Statistical and Data Management Center (SDMC), and Laboratory Center (LC) working with Clinical Trials Units (CTUs), to advance prevention, treatment, and implement…</summary>
-  </entry>
-  <entry>
-    <title>Impact of Immunotherapies on CNS Outcomes in People with HIV: Potential Benefits, Challenges and Risks</title>
-    <link href="https://www.grants.gov/search-results-detail/361519"/>
-    <id>urn:funding-finder:grants-gov:361519</id>
-    <updated>2026-08-17T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Infectious disease"/>
-    <category term="Neuroscience"/>
-    <summary>National Institutes of Health | Estimated Application 2026-10-22 | The National Institute of Mental Health (NIMH) intends to publish a notice of funding opportunity (NOFO) to solicit biphasic research applications to evaluate the impact of HIV immunotherapies on central nervous system (CNS) outcomes in people with HIV and to identify mechanisms, benefits, and risks associated with their use in the CNS compartment. The primary goal is to generate evidence that inf…</summary>
   </entry>
   <entry>
     <title>Limited Submission Opportunity: $700,000 - The G. Harold and Leila Y. Mathers Foundation - Research Grant (Spring 2027 Cycle)</title>

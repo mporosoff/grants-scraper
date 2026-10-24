@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/all.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/all.xml</id>
-  <updated>2026-10-20T15:28:21Z</updated>
+  <updated>2026-10-24T22:43:50Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -178,6 +178,33 @@
     <summary>National Institutes of Health | Estimated Application 2027-09-25 | The National Institute on Alcohol Abuse and Alcoholism (NIAAA) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to continue the Collaborative Initiative on Fetal Alcohol Spectrum Disorders (CIFASD). CIFASD is a multidisciplinary research consortium supporting coordinated basic, clinical, translational, diagnostic, intervention, and prevention research on fetal alco…</summary>
   </entry>
   <entry>
+    <title>CAPSTONE Centers for Multidisciplinary Research in Child Abuse and Neglect</title>
+    <link href="https://www.grants.gov/search-results-detail/364128"/>
+    <id>urn:funding-finder:grants-gov:364128</id>
+    <updated>2027-07-24T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health | Estimated Application 2027-10-01 | This renewal of the CAPSTONE Centers for Child Maltreatment Research initiative will focus on child sexual abuse (CSA), a preventable but understudied public health problem with serious lifelong consequences. CSA is linked to adverse developmental and health outcomes, including chronic gynecological, gastrointestinal, sexual health, and mental health conditions. The renewed Centers are intended to…</summary>
+  </entry>
+  <entry>
+    <title>Discovery Gateway to Reproductive Health Innovation</title>
+    <link href="https://www.grants.gov/search-results-detail/364126"/>
+    <id>urn:funding-finder:grants-gov:364126</id>
+    <updated>2027-07-24T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Technology development"/>
+    <summary>National Institutes of Health | Estimated Application 2027-10-01 | The Eunice Kennedy Shriver National Institute of Child Health and Human Development (NICHD) seeks to establish a single Discovery Gateway to Reproductive Health Innovation, a comprehensive knowledgebase designed to advance research on male and female indications such as preeclampsia, endometriosis, preterm birth, infertility, and uterine fibroids. This initiative will expand shared resources and e…</summary>
+  </entry>
+  <entry>
+    <title>Learning Disabilities Research Centers</title>
+    <link href="https://www.grants.gov/search-results-detail/364123"/>
+    <id>urn:funding-finder:grants-gov:364123</id>
+    <updated>2027-07-24T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <summary>National Institutes of Health | Estimated Application 2027-10-01 | The Eunice Kennedy Shriver National Institute of Child Health and Human Development (NICHD) seeks to support transdisciplinary research centers to improve outcomes for children and youth at risk for, or diagnosed with, specific learning disabilities (SLDs) impacting mathematics, reading and writing. These centers will focus on improving the identification and classification of SLDs, deepen underst…</summary>
+  </entry>
+  <entry>
     <title>Elucidation and Validation of the role of Transporters in the Placenta, Lactating Mammary Gland, Developing Gut, and Blood Brain Barrier</title>
     <link href="https://www.grants.gov/search-results-detail/363210"/>
     <id>urn:funding-finder:grants-gov:363210</id>
@@ -189,6 +216,19 @@
     <category term="Neuroscience"/>
     <category term="Technology development"/>
     <summary>National Institutes of Health | Estimated Application 2027-10-20 | The Eunice Kennedy Shriver National Institute of Child Health and Human Development seeks to advance its mission of supporting maternal, fetal, and child health by continuing to enhance the understanding of maternal, fetal, and child exposure to nutrients, metabolites, medications, supplements, microbiome-derived products, and environmental chemicals. This will be done by supporting a second phase…</summary>
+  </entry>
+  <entry>
+    <title>Prevention and Treatment through a Comprehensive Care Continuum for HIV-affected Adolescents in Resource-Constrained Settings--Implementation Science Network (PATC3H-IN)</title>
+    <link href="https://www.grants.gov/search-results-detail/364127"/>
+    <id>urn:funding-finder:grants-gov:364127</id>
+    <updated>2027-07-24T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Infectious disease"/>
+    <category term="Technology development"/>
+    <category term="Transportation"/>
+    <summary>National Institutes of Health | Estimated Application 2027-10-28 | The Prevention and Treatment through a Comprehensive Care Continuum for HIV-affected Adolescents in Resource Constrained Settings-Implementation Science Network (PATC3H-IN) conducts implementation science (IS) research on adolescent HIV. PATC3H-IN develops scalable, low-resource care delivery models in low- and middle-income countries that can be adapted for marginalized and high-burden US populat…</summary>
   </entry>
   <entry>
     <title>Partnerships for Advancing Development of Diagnostics for Infectious Diseases</title>
@@ -924,44 +964,5 @@
     <category term="Infectious disease"/>
     <category term="Public health"/>
     <summary>National Institutes of Health | Estimated Application 2027-05-27 | The National Institute of Allergy and Infectious Diseases (NIAID), with partnering National Institutes of Health Institutes, Centers, and Offices, seeks to advance its mission through continued support for the Implementation and Evaluation of Databases to Examine AIDS Consortium. This research network integrates clinical, epidemiologic, genomic, and contextual real-world data through harmonized da…</summary>
-  </entry>
-  <entry>
-    <title>Comprehensive Suicide Prevention Program for States</title>
-    <link href="https://www.grants.gov/search-results-detail/363329"/>
-    <id>urn:funding-finder:grants-gov:363329</id>
-    <updated>2027-02-16T00:00:00Z</updated>
-    <author><name>Centers for Disease Control - NCIPC</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Public health"/>
-    <summary>Centers for Disease Control - NCIPC | Estimated Application 2027-04-17 | This forecast is for CDC's Comprehensive Suicide Prevention Program for States, a cooperative agreement intended to support implementation and evaluation of a comprehensive public health approach to suicide prevention in the United States. Funded recipients will focus on one or more Focus Prevention Areas (FPAs), groups or settings identified through available data as experiencing a significant su…</summary>
-  </entry>
-  <entry>
-    <title>State Biomonitoring Cooperative Agreement</title>
-    <link href="https://www.grants.gov/search-results-detail/363917"/>
-    <id>urn:funding-finder:grants-gov:363917</id>
-    <updated>2027-02-16T00:00:00Z</updated>
-    <author><name>Centers for Disease Control - NCEH</name></author>
-    <category term="Environmental science"/>
-    <category term="Public health"/>
-    <summary>Centers for Disease Control - NCEH | Estimated Application 2027-04-19 | The purpose of this Notice of Funding Opportunity is to support state, local, tribal, and territorial public health laboratories in conducting high-quality biomonitoring and assessing human exposure to environmental chemicals within their jurisdictions. Strengthened laboratory capacity for exposure assessment will help jurisdictions identify and reduce harmful exposures and evaluate the effectiven…</summary>
-  </entry>
-  <entry>
-    <title>Rehabilitation Engineering Research Center on Recreational, Sport, and Exercise Technologies for People with Disabilities</title>
-    <link href="https://www.grants.gov/search-results-detail/363973"/>
-    <id>urn:funding-finder:grants-gov:363973</id>
-    <updated>2027-02-15T00:00:00Z</updated>
-    <author><name>Administration for Community Living</name></author>
-    <category term="Environmental science"/>
-    <summary>Administration for Community Living | Estimated Application 2027-04-15 | The purpose of the Rehabilitation Engineering Research Centers (RERC) program is to improve the effectiveness of services authorized under the Rehabilitation Act by conducting advanced engineering research on and development of innovative technologies that are designed to solve particular rehabilitation problems or to remove environmental barriers. The purpose of this RERC is to conduct research a…</summary>
-  </entry>
-  <entry>
-    <title>BRAIN Initiative: Development and Validation of Novel Tools and New Approaches for Neuroscience Research</title>
-    <link href="https://www.grants.gov/search-results-detail/362947"/>
-    <id>urn:funding-finder:grants-gov:362947</id>
-    <updated>2027-02-10T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Neuroscience"/>
-    <summary>National Institutes of Health | Estimated Application 2027-06-10 | The Brain Research through Advancing Innovative Neurotechnologies (BRAIN) Initiative intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for research to develop novel tools and approaches that enable the interrogation of cell-specific and circuit-specific processes in the central nervous system. This NOFO consolidates three current BRAIN Initiative tool development pr…</summary>
   </entry>
 </feed>
