@@ -1,0 +1,46 @@
+{
+  "source_url": "https://www.darpa.mil/json/opportunity.json",
+  "retrieved_on": "2026-10-29",
+  "source_sha256": "7ac1c892076497b00d254af191ac332a5db9b2f2b5f089f3bf3d63b0151dfe67",
+  "notice_url": "https://sam.gov/api/prod/opps/v2/opportunities/f2853cfe575b4d1c9e26c81e19dd5bab",
+  "notice": {
+    "title": "Future Announcement: Quantum Computing – Applications Workshops (QC-AW)",
+    "type": "s",
+    "solicitationNumber": "DARPA-SN-27-14",
+    "organizationId": "500035490"
+  },
+  "rows": [
+    {
+      "title": "QBI workshops",
+      "field_opportunity_number": "DARPA-SN-27-14",
+      "field_close_date": "2026-12-30",
+      "field_external_url": "https://sam.gov/workspace/contract/opp/f2853cfe575b4d1c9e26c81e19dd5bab/view",
+      "field_body_with_summary": "",
+      "field_body_with_summary_1": ""
+    },
+    {
+      "title": "QBI workshops",
+      "field_opportunity_number": "DARPA-SN-27-14",
+      "field_close_date": "2026-12-30",
+      "field_external_url": "https://sam.gov/workspace/contract/opp/f2853cfe575b4d1c9e26c81e19dd5bab/view",
+      "field_body_with_summary": "<p>DARPA intends to host future workshops to determine the commercial impact of future utility-scale quantum computers. Any future QC-AW RFI's describing the workshop will be made available at https://sam.gov. | <a href=\"/research/programs/quantum-benchmarking-initiative\">See QBI</a></p>",
+      "field_body_with_summary_1": "<p>DARPA intends to host future workshops to determine the commercial impact of future utility-scale quantum computers. Any future QC-AW RFI's describing the workshop will be made available at https://sam.gov. | <a href=\"/research/programs/quantum-benchmarking-initiative\">See QBI</a></p>"
+    },
+    {
+      "title": "QBI workshops",
+      "field_opportunity_number": "DARPA-SN-27-14",
+      "field_close_date": "2026-12-30",
+      "field_external_url": "https://sam.gov/workspace/contract/opp/f2853cfe575b4d1c9e26c81e19dd5bab/view",
+      "field_body_with_summary": "",
+      "field_body_with_summary_1": ""
+    },
+    {
+      "title": "QBI workshops",
+      "field_opportunity_number": "DARPA-SN-27-14",
+      "field_close_date": "2026-12-30",
+      "field_external_url": "https://sam.gov/workspace/contract/opp/f2853cfe575b4d1c9e26c81e19dd5bab/view",
+      "field_body_with_summary": "",
+      "field_body_with_summary_1": ""
+    }
+  ]
+}

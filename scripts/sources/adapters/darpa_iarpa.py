@@ -132,6 +132,10 @@ def darpa_inventory(rows):
         key = normalized_number(number)
         child = _CHILD.fullmatch(key)
         if not child:
+            # QBI workshop Special Notices include summaryless join duplicates.
+            # Exclude this observed event form without hiding other unknown calls.
+            if re.fullmatch(r"darpasn\d{4}", key) and re.fullmatch(r"QBI workshops?", plain(row["title"]), re.I):
+                continue
             if _PARENT.fullmatch(key):
                 continue  # Recognized umbrellas are a legitimate non-child population.
             # A nonempty inventory is not sufficient proof of a healthy zero:

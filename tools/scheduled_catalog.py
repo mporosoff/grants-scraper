@@ -291,7 +291,7 @@ def _published_reconciliation_supersedes(root, run, artifacts, *, repository=Non
         pin = receipt.get('parent_artifact') or {}
         affected = receipt.get('affected_generation') or {}
         valid = (receipt.get('version') == 'catalog-source-reconciliation-1'
-            and receipt.get('source_slug') == 'sam-gov'
+            and receipt.get('source_slug') in ('sam-gov', 'darpa-iarpa')
             and child.get('derived_from_candidate') == parent
             and child.get('candidate_id') == pointer.get('candidate_id')
             == c.digest(c.encoded({k: v for k, v in child.items() if k != 'candidate_id'}))
@@ -367,7 +367,7 @@ def _published_reconciliation_consumes(root, run, artifacts, *, repository=None,
             continue
         parent = receipt.get('parent_candidate_id', '')
         valid = (receipt.get('version') == 'catalog-source-reconciliation-1'
-            and receipt.get('source_slug') == 'sam-gov'
+            and receipt.get('source_slug') in ('sam-gov', 'darpa-iarpa')
             and child.get('derived_from_candidate') == parent
             and child.get('candidate_id') == pointer.get('candidate_id')
             == c.digest(c.encoded({k: v for k, v in child.items() if k != 'candidate_id'}))
@@ -566,6 +566,7 @@ def _published_reconciliation_producer(root, repository, run, artifacts, child, 
                 or re.fullmatch('[a-f0-9]{64}', str(reservation.get('prior_ledger_sha256', ''))) is None
                 or context.get('completed_candidate_id') != child['candidate_id']
                 or context.get('operation_sha256') != receipt.get('operation_sha256')
+                or context.get('source_slug', 'sam-gov') != receipt.get('source_slug')
                 or identity({key: value for key, value in context.items()
                              if key not in ('operation_sha256', 'completed_candidate_id')}) != context.get('operation_sha256')
                 or any(context.get(key) != receipt.get(key) for key in
@@ -634,6 +635,7 @@ def _published_reconciliation_transport(root, repository, run, artifacts, child,
                     or re.fullmatch('[a-f0-9]{64}', str(reservation.get('prior_ledger_sha256', ''))) is None
                     or context.get('completed_candidate_id') != child['candidate_id']
                     or context.get('operation_sha256') != receipt.get('operation_sha256')
+                    or context.get('source_slug', 'sam-gov') != receipt.get('source_slug')
                     or identity({key: value for key, value in context.items()
                                  if key not in ('operation_sha256', 'completed_candidate_id')}) != context.get('operation_sha256')
                     or any(context.get(key) != receipt.get(key) for key in
