@@ -1,6 +1,7 @@
 """Exact-parent reconciliation boundaries; no source/provider requests."""
 from copy import deepcopy
 from contextlib import contextmanager, ExitStack
+from datetime import date, datetime, timezone
 import json
 import io
 from pathlib import Path
@@ -15,6 +16,9 @@ from scripts.sources.merge import save_catalog, load_catalog
 from scripts.sources.registry import AdapterResult
 from tools import catalog_reconcile as repair
 from tools import release_candidate as c
+
+
+FIXTURE_NOW = datetime(2026, 10, 17, 13, 49, 40, tzinfo=timezone.utc)
 
 
 class ReconcileContracts(unittest.TestCase):
@@ -59,7 +63,13 @@ class ReconcileContracts(unittest.TestCase):
         reads = patch.object(repair.subprocess, 'check_output', side_effect=pinned_bytes)
         reads.start(); self.addCleanup(reads.stop)
 
-    def run_sources(self, published=None):
+    def run_sources(self, published=None, *, now=FIXTURE_NOW):
+        # Replay the historical source observations at their catalog's clock.
+        class FixtureClock(datetime):
+            @classmethod
+            def now(cls, tz=None):
+                return now.astimezone(tz) if tz else now.replace(tzinfo=None)
+
         def predecessor(_root, destination):
             rows = list(published or [])
             destination.mkdir(parents=True, exist_ok=True)
@@ -70,6 +80,7 @@ class ReconcileContracts(unittest.TestCase):
                 'feeds/changes.json': c.digest((destination / 'published-changes.json').read_bytes())}}
             return self.published_metadata
         with patch.object(c, 'load', return_value=self.manifest), \
+                patch.object(repair, 'datetime', FixtureClock), \
                 patch.object(repair, 'verify_source_delta'), \
                 patch.object(repair, 'capture_published_predecessor', side_effect=predecessor), \
                 patch('scripts.sources.registry.collect', return_value=([self.sam], [self.result])) as collect, \
@@ -112,6 +123,18 @@ class ReconcileContracts(unittest.TestCase):
         self.assertEqual(self.run_sources([]), 0)
         self.assertEqual((self.state / 'published-predecessor.js').read_bytes(), predecessor)
         self.assertEqual(load_catalog(self.root / 'data/opportunities.js'), current)
+
+    def test_expired_source_review_is_still_excluded_at_an_explicit_later_clock(self):
+        from scripts.currentness import record_is_current
+        fixture = c.read_json(Path(__file__).parent / 'fixtures/sam_imr_identity_continuity.json')
+        self.sam = deepcopy(fixture['current']); self.result.records[:] = [self.sam]
+        self.assertEqual(record_is_current(self.sam, date(2026, 10, 26)),
+                         (False, 'source_review_expired'))
+        self.assertEqual(self.run_sources(now=datetime(2026, 10, 26, tzinfo=timezone.utc)), 1)
+        current = load_catalog(self.root / 'data/opportunities.js')
+        self.assertEqual(current['opportunities'], [self.other])
+        summary = c.read_json(self.state / ('source-' + 'c' * 64) / 'summary.json')
+        self.assertEqual(summary['active_sam_ids'], [])
 
     def test_grants_owned_sam_aliases_pass_both_source_and_receipt_guards_without_science_changes(self):
         from scripts.sources.merge import merge_records
