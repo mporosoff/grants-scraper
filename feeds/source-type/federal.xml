@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/source-type/federal.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/source-type/federal.xml</id>
-  <updated>2026-10-25T14:30:20Z</updated>
+  <updated>2026-10-29T22:20:09Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -410,6 +410,26 @@
     <summary>National Institutes of Health | Estimated Application 2027-10-15 | The National Institutes of Health (NIH) Tackling Acquisition of Language in Kids (TALK) initiative intends to publish a Notice of Funding Opportunity (NOFO) to solicit research grant applications to improve the earliest steps in clinical practice for late talking children. The overarching purpose of this funding opportunity is to inform, develop, and evaluate evidence-based practices and implement…</summary>
   </entry>
   <entry>
+    <title>Centers for Independent Living</title>
+    <link href="https://www.grants.gov/search-results-detail/364152"/>
+    <id>urn:funding-finder:grants-gov:364152</id>
+    <updated>2027-05-01T00:00:00Z</updated>
+    <author><name>Administration for Community Living</name></author>
+    <category term="Education and workforce"/>
+    <category term="Transportation"/>
+    <summary>Administration for Community Living | Estimated Application 2027-07-01 | ACL intends to award funds for the establishment of one (1) center for independent living in Oklahoma to provide, expand and improve the provision of independent living services and support the network of centers for independent living. At a minimum, centers funded by the program are required to provide the following core services: information and referral; independent living skills training; peer…</summary>
+  </entry>
+  <entry>
+    <title>Centers for Independent Living Competition - Guam</title>
+    <link href="https://www.grants.gov/search-results-detail/364151"/>
+    <id>urn:funding-finder:grants-gov:364151</id>
+    <updated>2027-05-01T00:00:00Z</updated>
+    <author><name>Administration for Community Living</name></author>
+    <category term="Education and workforce"/>
+    <category term="Transportation"/>
+    <summary>Administration for Community Living | Estimated Application 2027-07-01 | ACL intends to award funds for the establishment of one (1) center for independent living in Guam to provide, expand and improve the provision of independent living services and support the network of centers for independent living. At a minimum, centers funded by the program are required to provide the following core services: information and referral; independent living skills training; peer cou…</summary>
+  </entry>
+  <entry>
     <title>Somatic Mosaicism across Human Tissues (SMaHT) Program: Experimental and Computational Technology Development (RM1 Clinical Trial Not Allowed)</title>
     <link href="https://www.grants.gov/search-results-detail/363860"/>
     <id>urn:funding-finder:grants-gov:363860</id>
@@ -563,24 +583,5 @@
     <author><name>Centers for Disease Control - NCHHSTP</name></author>
     <category term="Public health"/>
     <summary>Centers for Disease Control - NCHHSTP | Estimated Application 2027-05-31 | STIs represent a serious public health and economic burden in the United States (U.S.), with approximately 2.2 million new infections occurring each year. As the nation's lead public health agency, the Centers for Disease Control and Prevention (CDC) has a unique responsibility to provide national leadership in STI prevention and control. To meet this challenge, CDC supports a comprehensive and in…</summary>
-  </entry>
-  <entry>
-    <title>Coordinating Center for the Claude D. Pepper Older Americans Independence Centers (OAICs)</title>
-    <link href="https://www.grants.gov/search-results-detail/364065"/>
-    <id>urn:funding-finder:grants-gov:364065</id>
-    <updated>2027-03-25T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <summary>National Institutes of Health | Estimated Application 2027-05-25 | The National Institute on Aging intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for the Coordinating Center (CC) of the Claude D. Pepper Older Americans Independence Centers (OAIC) program. The CC serves as a facilitator for OAIC site interactions and as a conduit for translating OAIC objectives and findings to both scientific and general audiences. The proposed C…</summary>
-  </entry>
-  <entry>
-    <title>Limited Competition: John Lewis NIMHD Research Endowment Program (S21 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/363826"/>
-    <id>urn:funding-finder:grants-gov:363826</id>
-    <updated>2027-03-25T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Education and workforce"/>
-    <category term="Health equity"/>
-    <category term="Public health"/>
-    <summary>National Institutes of Health | Estimated Application 2027-05-25 | As authorized under section 464z-3(h) of the Public Health Service Act, the purpose of the John Lewis NIMHD Research Endowment Program is to strengthen the research infrastructure and training capacity at eligible institutions of higher education to facilitate health disparities research. Specific strategic objectives include: 1) improving the institutional physical infrastructure and acquisition …</summary>
   </entry>
 </feed>

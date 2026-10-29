@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/biology-and-biotechnology.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/biology-and-biotechnology.xml</id>
-  <updated>2026-10-25T14:30:20Z</updated>
+  <updated>2026-10-29T22:20:09Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Development of Models, New Approach Methodologies, and Biological Materials for Studying Human Health and Diseases (R21 Clinical Trial Not Allowed)</title>
@@ -559,16 +559,6 @@
     <summary>National Institutes of Health | Application 2029-03-01 | The overall goal of this program is to accelerate scientific discovery, improve research efficiency, and enhance the translation of research findings into improved health outcomes. Centers funded under this program will also foster multidisciplinary collaboration, support workforce development across career stages, and promote training in emerging areas such as data science, artificial intelligenc…</summary>
   </entry>
   <entry>
-    <title>High-throughput Unmasking of Biological Interactomes with Binding Landscape Emulators (HUBBLE)</title>
-    <link href="https://sam.gov/opp/98c034706e4b430281ead1c3497e9d72/view"/>
-    <id>urn:funding-finder:sam-gov:sam-gov%3A98c034706e4b430281ead1c3497e9d72</id>
-    <updated>2026-10-08T00:00:00Z</updated>
-    <author><name>Defense Advanced Research Projects Agency</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Neuroscience"/>
-    <summary>Defense Advanced Research Projects Agency | Preproposal 2026-11-05 | Develop in-silico protein-protein interaction maps to identify diagnostic and therapeutic targets, including traumatic brain injury. CMMC Level 1 self-assessment; research security review; no human-subjects research; Phase 2 limited to Phase 1 performers.</summary>
-  </entry>
-  <entry>
     <title>Limited Competition: Supporting Programs to Advance Research Knowledge in Environmental Health Sciences (SPARK-EHS) (UE5/T32 - Clinical Trial Not Allowed)</title>
     <link href="https://www.grants.gov/search-results-detail/362977"/>
     <id>urn:funding-finder:grants-gov:362977</id>
@@ -648,5 +638,14 @@
     <category term="Biology and biotechnology"/>
     <category term="Neuroscience"/>
     <summary>National Institutes of Health | Application 2029-02-08 | This funding opportunity supports transformative, mechanistic research aimed at understanding how the human brain functions. Applications should seek to reveal how the dynamic activity of individual neurons and ensembles of neurons within spatially organized brain networks gives rise to internal experiences, such as sensations, perceptions, emotions, thoughts, and memories, as well as to observabl…</summary>
+  </entry>
+  <entry>
+    <title>HEAL Initiative: Whole Joint Health Program (R61/R33 Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/361304"/>
+    <id>urn:funding-finder:grants-gov:361304</id>
+    <updated>2026-09-28T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <summary>National Institutes of Health | Application 2026-10-30 | The NIH Helping to End Addiction Long-term® (HEAL) Initiative is releasing this Notice of Funding Opportunity (NOFO) to support a phased mechanistic clinical research program focusing on understudied biological mechanisms that drive joint pain. The phased projects supported by this program (of up to five years total in duration) will first identify and validate multi-tissue mechanisms underlying j…</summary>
   </entry>
 </feed>

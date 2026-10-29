@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/all.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/all.xml</id>
-  <updated>2026-10-25T14:30:20Z</updated>
+  <updated>2026-10-29T22:20:09Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -410,6 +410,26 @@
     <summary>National Institutes of Health | Estimated Application 2027-10-15 | The National Institutes of Health (NIH) Tackling Acquisition of Language in Kids (TALK) initiative intends to publish a Notice of Funding Opportunity (NOFO) to solicit research grant applications to improve the earliest steps in clinical practice for late talking children. The overarching purpose of this funding opportunity is to inform, develop, and evaluate evidence-based practices and implement…</summary>
   </entry>
   <entry>
+    <title>Centers for Independent Living</title>
+    <link href="https://www.grants.gov/search-results-detail/364152"/>
+    <id>urn:funding-finder:grants-gov:364152</id>
+    <updated>2027-05-01T00:00:00Z</updated>
+    <author><name>Administration for Community Living</name></author>
+    <category term="Education and workforce"/>
+    <category term="Transportation"/>
+    <summary>Administration for Community Living | Estimated Application 2027-07-01 | ACL intends to award funds for the establishment of one (1) center for independent living in Oklahoma to provide, expand and improve the provision of independent living services and support the network of centers for independent living. At a minimum, centers funded by the program are required to provide the following core services: information and referral; independent living skills training; peer…</summary>
+  </entry>
+  <entry>
+    <title>Centers for Independent Living Competition - Guam</title>
+    <link href="https://www.grants.gov/search-results-detail/364151"/>
+    <id>urn:funding-finder:grants-gov:364151</id>
+    <updated>2027-05-01T00:00:00Z</updated>
+    <author><name>Administration for Community Living</name></author>
+    <category term="Education and workforce"/>
+    <category term="Transportation"/>
+    <summary>Administration for Community Living | Estimated Application 2027-07-01 | ACL intends to award funds for the establishment of one (1) center for independent living in Guam to provide, expand and improve the provision of independent living services and support the network of centers for independent living. At a minimum, centers funded by the program are required to provide the following core services: information and referral; independent living skills training; peer cou…</summary>
+  </entry>
+  <entry>
     <title>Somatic Mosaicism across Human Tissues (SMaHT) Program: Experimental and Computational Technology Development (RM1 Clinical Trial Not Allowed)</title>
     <link href="https://www.grants.gov/search-results-detail/363860"/>
     <id>urn:funding-finder:grants-gov:363860</id>
@@ -759,6 +779,15 @@
     <summary>National Institutes of Health | Estimated Application 2027-09-10 | The NIH Director's Early Independence Award supports outstanding early-career investigators who are ready to pursue independent research soon after completing their doctoral degree or post-graduate clinical training, without following the traditional postdoctoral path. The award is designed to accelerate the transition to an independent research career. Applications are welcome across all fields r…</summary>
   </entry>
   <entry>
+    <title>Strengthening the Direct Care Workforce: A Technical Assistance and Capacity Building Initiative</title>
+    <link href="https://www.grants.gov/search-results-detail/364153"/>
+    <id>urn:funding-finder:grants-gov:364153</id>
+    <updated>2027-03-14T00:00:00Z</updated>
+    <author><name>Administration for Community Living</name></author>
+    <category term="Education and workforce"/>
+    <summary>Administration for Community Living | Estimated Application 2027-03-14 | The Administration for Community Living (ACL) intends to fund one (1) three-year cooperative agreement to maintain and expand the Direct Care Workforce Strategies Center. The primary goal of this initiative is to support cross-sector efforts to address the current shortage and high turnover rate of direct care workers. By strengthening this workforce, ACL aims to ensure that older adults, people w…</summary>
+  </entry>
+  <entry>
     <title>Improved Drug Susceptibility Testing (DST) for Mycobacteria</title>
     <link href="https://www.grants.gov/search-results-detail/362948"/>
     <id>urn:funding-finder:grants-gov:362948</id>
@@ -933,36 +962,5 @@
     <author><name>Administration for Community Living</name></author>
     <category term="Environmental science"/>
     <summary>Administration for Community Living | Estimated Application 2027-04-22 | The purpose of the Rehabilitation Engineering Research Centers (RERC) program is to improve the effectiveness of services authorized under the Rehabilitation Act by conducting advanced engineering research on and development of innovative technologies that are designed to solve particular rehabilitation problems or to remove environmental barriers. The purpose of this RERC is to conduct research a…</summary>
-  </entry>
-  <entry>
-    <title>Rural Maternity and Obstetrics Management Strategies Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363582"/>
-    <id>urn:funding-finder:grants-gov:363582</id>
-    <updated>2027-02-19T00:00:00Z</updated>
-    <author><name>Health Resources and Services Administration</name></author>
-    <category term="Technology development"/>
-    <summary>Health Resources and Services Administration | Estimated Application 2027-04-20 | The purpose of the Rural Maternity and Obstetrics Management Strategies (Rural MOMS) program is to support collaborative improvement and innovation networks to improve access to and delivery of maternity and obstetrics care in rural areas.</summary>
-  </entry>
-  <entry>
-    <title>IDeA Networks of Biomedical Research Excellence (INBRE)</title>
-    <link href="https://www.grants.gov/search-results-detail/360633"/>
-    <id>urn:funding-finder:grants-gov:360633</id>
-    <updated>2027-02-18T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Education and workforce"/>
-    <summary>National Institutes of Health | Estimated Application 2027-05-18 | The Institutional Development Award program develops biomedical research capacity in states that have historically received low levels of NIH funding (IDeA states). The IDeA Networks of Biomedical Research Excellence (INBRE) Notice of Funding Opportunity will support statewide networks in IDeA states made up of one or more research intensive institution and multiple primarily undergraduate institu…</summary>
-  </entry>
-  <entry>
-    <title>Implementation and Evaluation of Databases to Examine AIDS</title>
-    <link href="https://www.grants.gov/search-results-detail/359142"/>
-    <id>urn:funding-finder:grants-gov:359142</id>
-    <updated>2027-02-18T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Data science"/>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <summary>National Institutes of Health | Estimated Application 2027-05-27 | The National Institute of Allergy and Infectious Diseases (NIAID), with partnering National Institutes of Health Institutes, Centers, and Offices, seeks to advance its mission through continued support for the Implementation and Evaluation of Databases to Examine AIDS Consortium. This research network integrates clinical, epidemiologic, genomic, and contextual real-world data through harmonized da…</summary>
   </entry>
 </feed>

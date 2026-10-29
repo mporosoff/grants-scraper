@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/education-and-workforce.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/education-and-workforce.xml</id>
-  <updated>2026-10-25T14:30:20Z</updated>
+  <updated>2026-10-29T22:20:09Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -101,6 +101,26 @@
     <category term="Neuroscience"/>
     <category term="Social and behavioral sciences"/>
     <summary>National Institutes of Health | Estimated Application 2027-10-15 | The National Institutes of Health (NIH) Tackling Acquisition of Language in Kids (TALK) initiative intends to publish a Notice of Funding Opportunity (NOFO) to solicit research grant applications to improve the earliest steps in clinical practice for late talking children. The overarching purpose of this funding opportunity is to inform, develop, and evaluate evidence-based practices and implement…</summary>
+  </entry>
+  <entry>
+    <title>Centers for Independent Living</title>
+    <link href="https://www.grants.gov/search-results-detail/364152"/>
+    <id>urn:funding-finder:grants-gov:364152</id>
+    <updated>2027-05-01T00:00:00Z</updated>
+    <author><name>Administration for Community Living</name></author>
+    <category term="Education and workforce"/>
+    <category term="Transportation"/>
+    <summary>Administration for Community Living | Estimated Application 2027-07-01 | ACL intends to award funds for the establishment of one (1) center for independent living in Oklahoma to provide, expand and improve the provision of independent living services and support the network of centers for independent living. At a minimum, centers funded by the program are required to provide the following core services: information and referral; independent living skills training; peer…</summary>
+  </entry>
+  <entry>
+    <title>Centers for Independent Living Competition - Guam</title>
+    <link href="https://www.grants.gov/search-results-detail/364151"/>
+    <id>urn:funding-finder:grants-gov:364151</id>
+    <updated>2027-05-01T00:00:00Z</updated>
+    <author><name>Administration for Community Living</name></author>
+    <category term="Education and workforce"/>
+    <category term="Transportation"/>
+    <summary>Administration for Community Living | Estimated Application 2027-07-01 | ACL intends to award funds for the establishment of one (1) center for independent living in Guam to provide, expand and improve the provision of independent living services and support the network of centers for independent living. At a minimum, centers funded by the program are required to provide the following core services: information and referral; independent living skills training; peer cou…</summary>
   </entry>
   <entry>
     <title>Somatic Mosaicism across Human Tissues (SMaHT) Program: National Somatic Mosaicism Commons Data Analysis &amp; Organizational Center (UM1 Clinical Trial Not Allowed)</title>
@@ -252,6 +272,15 @@
     <category term="Education and workforce"/>
     <category term="Transportation"/>
     <summary>National Institutes of Health | Estimated Application 2027-09-10 | The NIH Director's Early Independence Award supports outstanding early-career investigators who are ready to pursue independent research soon after completing their doctoral degree or post-graduate clinical training, without following the traditional postdoctoral path. The award is designed to accelerate the transition to an independent research career. Applications are welcome across all fields r…</summary>
+  </entry>
+  <entry>
+    <title>Strengthening the Direct Care Workforce: A Technical Assistance and Capacity Building Initiative</title>
+    <link href="https://www.grants.gov/search-results-detail/364153"/>
+    <id>urn:funding-finder:grants-gov:364153</id>
+    <updated>2027-03-14T00:00:00Z</updated>
+    <author><name>Administration for Community Living</name></author>
+    <category term="Education and workforce"/>
+    <summary>Administration for Community Living | Estimated Application 2027-03-14 | The Administration for Community Living (ACL) intends to fund one (1) three-year cooperative agreement to maintain and expand the Direct Care Workforce Strategies Center. The primary goal of this initiative is to support cross-sector efforts to address the current shortage and high turnover rate of direct care workers. By strengthening this workforce, ACL aims to ensure that older adults, people w…</summary>
   </entry>
   <entry>
     <title>Veterans Legacy Grants Program</title>
@@ -490,6 +519,15 @@
     <summary>Health Resources and Services Administration | Estimated Application 2027-03-09 | The Health Workforce Research Centers support research that helps decision-makers at the federal, state, and local levels understand health workforce needs.</summary>
   </entry>
   <entry>
+    <title>National Center for Law and Elder Rights</title>
+    <link href="https://www.grants.gov/search-results-detail/364156"/>
+    <id>urn:funding-finder:grants-gov:364156</id>
+    <updated>2027-01-05T00:00:00Z</updated>
+    <author><name>Administration for Community Living</name></author>
+    <category term="Education and workforce"/>
+    <summary>Administration for Community Living | Estimated Application 2027-03-05 | Section 420(a)(1) of the Older Americans Act (OAA) requires a national legal assistance support system which provides, develops, and supports legal assistance activities for older individuals, including case consultations, training, the provision of substantive legal advice and assistance, and assistance in the design, implementation, and administration of legal assistance delivery systems to loca…</summary>
+  </entry>
+  <entry>
     <title>Promoting Cancer Surveillance Workforce, Education, and Data Use</title>
     <link href="https://www.grants.gov/search-results-detail/363986"/>
     <id>urn:funding-finder:grants-gov:363986</id>
@@ -567,47 +605,5 @@
     <author><name>Substance Abuse and Mental Health Services Adminis</name></author>
     <category term="Education and workforce"/>
     <summary>Substance Abuse and Mental Health Services Adminis | Forecasted | The purpose of this program is to fully prepare graduate-level health professional students to understand, identify, intervene, and treat patients with a substance use, misuse and substance use disorder upon becoming licensed practitioners.</summary>
-  </entry>
-  <entry>
-    <title>Capacity Building for National Immunization Programs in the Eastern Mediterranean Region</title>
-    <link href="https://www.grants.gov/search-results-detail/363749"/>
-    <id>urn:funding-finder:grants-gov:363749</id>
-    <updated>2026-12-14T00:00:00Z</updated>
-    <author><name>Centers for Disease Control-GHC</name></author>
-    <category term="Education and workforce"/>
-    <category term="Public health"/>
-    <summary>Centers for Disease Control-GHC | Estimated Application 2027-02-12 | The purpose of this award is to strengthen capacity and performance of national immunization programs in countries of the Eastern Mediterranean Region (EMR) to achieve regional vaccine preventable disease (VPD) control, elimination and eradication targets (i.e., polio eradication, measles and rubella elimination), reduce VPD-related morbidity and mortality, and address emerging public health threa…</summary>
-  </entry>
-  <entry>
-    <title>Informing global polio eradication efforts through innovative modeling approaches</title>
-    <link href="https://www.grants.gov/search-results-detail/363748"/>
-    <id>urn:funding-finder:grants-gov:363748</id>
-    <updated>2026-12-14T00:00:00Z</updated>
-    <author><name>Centers for Disease Control-GHC</name></author>
-    <category term="Education and workforce"/>
-    <category term="Public health"/>
-    <summary>Centers for Disease Control-GHC | Estimated Application 2027-02-12 | This NOFO will provide critical disease modeling to inform decision making on the development of strategies for cVDPV2 outbreak response, optimal surveillance upon global WPV eradication, and surveillance to detect containment breaches. It will also build capacity for a diverse public health workforce of statistical and mathematical modelers. Additionally, models will assess economic implications …</summary>
-  </entry>
-  <entry>
-    <title>NIOSH Centers for Agriculture, Forestry, and Fishing Safety and Health (U54)</title>
-    <link href="https://www.grants.gov/search-results-detail/363195"/>
-    <id>urn:funding-finder:grants-gov:363195</id>
-    <updated>2026-12-04T00:00:00Z</updated>
-    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Education and workforce"/>
-    <category term="Transportation"/>
-    <summary>Centers for Disease Control and Prevention - ERA | Estimated Application 2027-03-03 | The Agriculture, Forestry, and Fishing (AgFF) sector is essential to the safety, security, and economic stability of the U.S. because it produces the nation's food, fuel, and fiber. At the same time, AgFF workers experience some of the highest occupational fatality and non-fatal injury rates of any sector. AgFF workers also face increased risk of poor mental health, death by suicide, and substance…</summary>
-  </entry>
-  <entry>
-    <title>NIOSH National Center of Excellence for the Prevention of Childhood Agricultural Injury (U54)</title>
-    <link href="https://www.grants.gov/search-results-detail/363189"/>
-    <id>urn:funding-finder:grants-gov:363189</id>
-    <updated>2026-12-04T00:00:00Z</updated>
-    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <summary>Centers for Disease Control and Prevention - ERA | Estimated Application 2027-03-03 | The National Institute for Occupational Safety and Health (NIOSH) is committed to addressing a wide range of occupational health and safety hazards affecting those who work in the agriculture, forestry, and fishing (AgFF) sector. Children and adolescents ("youth") are consistently more likely to be fatally injured working in agriculture compared to other industries. While many steps have been take…</summary>
   </entry>
 </feed>

@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml</id>
-  <updated>2026-10-25T14:30:20Z</updated>
+  <updated>2026-10-29T22:20:09Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Single Source: Scalable and Systematic Neurobiology of Psychiatric and Neurodevelopmental Disorder Risk Genes: Data Resource and Administrative Coordination Center (U24 Clinical Trial Not Allowed)</title>
@@ -104,18 +104,32 @@
     <summary>National Institutes of Health | Estimated Application 2027-01-22 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting multidisciplinary, consortium-based research using precision systems biology approaches to uncover links among chronic illnesses, infectious diseases and microbiomes. There is an urgent scientific and clinical need to understand the pathways by which infections lead to chronic lifelong heal…</summary>
   </entry>
   <entry>
-    <title>NGA - Boosting Innovative GEOINT - Science &amp; Technology Broad Agency Announcement (BIG-ST BAA): Topic # 07 - Lidar Analysis for Surface &amp; Environmental Reconnaissance (LASER)</title>
-    <link href="https://sam.gov/opp/854d837d8dc842719d9fec95764d8ceb/view"/>
-    <id>urn:funding-finder:sam-gov:sam-gov%3A854d837d8dc842719d9fec95764d8ceb</id>
-    <updated>2026-10-20T00:00:00Z</updated>
-    <author><name>National Geospatial-Intelligence Agency</name></author>
+    <title>AFRL/AFOSR-Taiwan NSTC Frontiers in Materials and Nanostructures: AI-Driven Discovery, Quantum Geometry, and Energy-Efficient Information Technologies 2027-2030</title>
+    <link href="https://www.grants.gov/search-results-detail/364165"/>
+    <id>urn:funding-finder:grants-gov:364165</id>
+    <updated>2026-10-28T00:00:00Z</updated>
+    <author><name>Air Force Office of Scientific Research</name></author>
+    <category term="Arts and culture"/>
+    <category term="Energy"/>
+    <category term="Quantum science"/>
+    <category term="Materials science"/>
+    <category term="Data science"/>
     <category term="Artificial intelligence and machine learning"/>
-    <category term="Education and workforce"/>
+    <category term="Cybersecurity"/>
+    <summary>Air Force Office of Scientific Research | Application 2027-02-19 | verify prerequisite | This is a special Notice of Funding Opportunity Announcement (NOFO) sponsored by the Air Force Office of Scientific Research (AFOSR) and Taiwan’s National Science and Technology Council (NSTC), which will hereafter generally be referred to as “we, us, our, or AFOSR.” We announce the solicitation for a three-year program entitled “Frontiers in Materials and Nanostructures: AI-Driven Discovery, Quan…</summary>
+  </entry>
+  <entry>
+    <title>Climate Program Office FY 2027 - Super Intelligence/Machine Learning Innovation to Advance NOAA's Earth System Science and Support Hazard Resilience</title>
+    <link href="https://www.grants.gov/search-results-detail/364160"/>
+    <id>urn:funding-finder:grants-gov:364160</id>
+    <updated>2026-10-27T00:00:00Z</updated>
+    <author><name>DOC NOAA - ERA Production</name></author>
+    <category term="Artificial intelligence and machine learning"/>
     <category term="Environmental science"/>
-    <category term="Space and aeronautics"/>
+    <category term="Technology development"/>
     <category term="Transportation"/>
     <category term="Data science"/>
-    <summary>National Geospatial-Intelligence Agency | Preproposal 2026-10-28 | Develop AI/ML methods to extract and classify 3D surface/subsurface objects using NASA ICESat-2 and GEDI lidar, including navigation safety applications. Topic 7 LASER only, not the BIG-ST parent or closed topics. General Solicitation Rev4 governs eligibility and the required abstract; the October 16 topic revision retains October 28 abstract and December 21 proposal dates. October 20 Q&amp;A allows a…</summary>
+    <summary>DOC NOAA - ERA Production | Application 2027-02-09 | Through this Notice of Federal Funding Opportunity, the NOAA Climate Program Office (https://cpo.noaa.gov/funding-opportunities/) is soliciting proposals for a FY 2027 grants competition focused on Super Intelligence/Machine Learning Innovation to Advance NOAA's Earth System Science and Support Hazard Resilience. The NOAA Office of Oceanic and Atmospheric Research (OAR), or "NOAA Research," provid…</summary>
   </entry>
   <entry>
     <title>Young Faculty Award (YFA) 2027</title>
@@ -734,16 +748,5 @@ Successful candidates for a Fellowship generally have a strong record of signifi
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <summary>National Highway Traffic Safety Administration | Application 2027-09-01 | While the agency will consider innovative enhancements to existing countermeasures, the goal is to develop evidence-based projects that are scalable and transferable for use by State and local law enforcement agencies. The primary intent of this of the ITSE Grant Program is to 1) develop innovative traffic safety enforcement programs that demonstrate effectiveness by reducing the number of motor v…</summary>
-  </entry>
-  <entry>
-    <title>Unlocking Dataset Value for AI-Enabled Scientific Discovery (AI Datasets)</title>
-    <link href="https://www.grants.gov/search-results-detail/363268"/>
-    <id>urn:funding-finder:grants-gov:363268</id>
-    <updated>2026-07-21T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Technology development"/>
-    <category term="Data science"/>
-    <summary>U.S. National Science Foundation | Application 2026-11-04 | This program will advance scientific community datasets to enable scientific discovery and innovation using artificial intelligence (AI) and other methods. Its goal is to increase the value that can be derived from existing scientific datasets by leveraging novel methods and artificial intelligence (AI). This will unlock new AI-driven insights. It can enable interdisciplinary research. It also ena…</summary>
   </entry>
 </feed>

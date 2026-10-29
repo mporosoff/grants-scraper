@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/neuroscience.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/neuroscience.xml</id>
-  <updated>2026-10-25T14:30:20Z</updated>
+  <updated>2026-10-29T22:20:09Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIH Stroke Clinical Trials Network (StrokeNet) Infrastructure - National Coordinating Center (NCC) and National Data Management Center (NDMC)</title>
@@ -312,16 +312,6 @@
     <category term="Neuroscience"/>
     <category term="Social and behavioral sciences"/>
     <summary>National Institutes of Health | Application 2027-02-08 | The National Institute on Drug Abuse (NIDA) invites applications to renew and expand the Collaboratory on Neural Ensembles and Used Substances (NExUS).NExUS is a collaborative research program to decode how substance use experiences and addictive neurobehavioral states are represented in the brain at the level of cell populations. This funding opportunity seeks applications that propose systematic…</summary>
-  </entry>
-  <entry>
-    <title>High-throughput Unmasking of Biological Interactomes with Binding Landscape Emulators (HUBBLE)</title>
-    <link href="https://sam.gov/opp/98c034706e4b430281ead1c3497e9d72/view"/>
-    <id>urn:funding-finder:sam-gov:sam-gov%3A98c034706e4b430281ead1c3497e9d72</id>
-    <updated>2026-10-08T00:00:00Z</updated>
-    <author><name>Defense Advanced Research Projects Agency</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Neuroscience"/>
-    <summary>Defense Advanced Research Projects Agency | Preproposal 2026-11-05 | Develop in-silico protein-protein interaction maps to identify diagnostic and therapeutic targets, including traumatic brain injury. CMMC Level 1 self-assessment; research security review; no human-subjects research; Phase 2 limited to Phase 1 performers.</summary>
   </entry>
   <entry>
     <title>Identify and Evaluate Potential Risk Factors for Amyotrophic Lateral Sclerosis (ALS)</title>
@@ -644,6 +634,16 @@ we will not consider for support include Covid-19 relat…</summary>
     <title>Career Transition Award for NINDS Intramural Clinician-Scientists (K22 Clinical Trial Not Allowed)</title>
     <link href="https://www.grants.gov/search-results-detail/357474"/>
     <id>urn:funding-finder:grants-gov:357474</id>
+    <updated>2024-12-02T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Neuroscience"/>
+    <category term="Transportation"/>
+    <summary>National Institutes of Health | Application 2027-11-12 | The objective of the NIH Career Transition Award (K22) is to provide support to outstanding basic or clinical investigators to develop their independent research skills through a two phase program: an initial period involving an intramural appointment at the NIH and a final period of support at an extramural institution. This NINDS K22 is specifically designed to facilitate the transition of NINDS…</summary>
+  </entry>
+  <entry>
+    <title>Career Transition Award for NINDS Intramural Clinician-Scientists (K22 Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/357476"/>
+    <id>urn:funding-finder:grants-gov:357476</id>
     <updated>2024-12-02T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <category term="Neuroscience"/>

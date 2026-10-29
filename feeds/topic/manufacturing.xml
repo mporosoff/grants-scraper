@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/manufacturing.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/manufacturing.xml</id>
-  <updated>2026-10-25T14:30:20Z</updated>
+  <updated>2026-10-29T22:20:09Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>BRAIN Initiative: Clinical Studies to Advance Next-Generation Devices for Recording and Modulation in the Human Central Nervous System</title>
@@ -26,6 +26,28 @@
     <category term="Manufacturing"/>
     <category term="Neuroscience"/>
     <summary>National Institutes of Health | Estimated Application 2027-06-16 | The NIH Blueprint for Neuroscience Research is interested in continuing to support the BluePrint Neurotherapeutics Network for Small Molecules (BPN-SM)- a program designed to help investigators advance promising small-molecule therapeutics toward clinical testing. The BPN-SM program supports drug discovery and development activities in investigators’ own laboratories while also providing access to…</summary>
+  </entry>
+  <entry>
+    <title>Harvest to Hallways: National School Lunch Program, Equipment Assistance Grants</title>
+    <link href="https://www.grants.gov/search-results-detail/364164"/>
+    <id>urn:funding-finder:grants-gov:364164</id>
+    <updated>2026-10-28T00:00:00Z</updated>
+    <author><name>Food and Nutrition Service</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Education and workforce"/>
+    <category term="Manufacturing"/>
+    <summary>Food and Nutrition Service | Application 2027-01-11 | EXECUTIVE SUMMARY Under the leadership of Secretary Brooke Rollins, the United States Department of Agriculture (USDA) is committed to a new school meals policy plan aligning the National School Lunch and Breakfast Programs with the Dietary Guidelines for Americans, 2025-2030- providing real food, in every cafeteria. In support of this principle, the USDA Food and Nutrition Administration (FNA) is…</summary>
+  </entry>
+  <entry>
+    <title>U.S. Jordan Private Sector Innovation Fund APS</title>
+    <link href="https://www.grants.gov/search-results-detail/364147"/>
+    <id>urn:funding-finder:grants-gov:364147</id>
+    <updated>2026-10-26T00:00:00Z</updated>
+    <author><name>Bureau of Near Eastern Affairs</name></author>
+    <category term="Technology development"/>
+    <category term="Materials science"/>
+    <category term="Manufacturing"/>
+    <summary>Bureau of Near Eastern Affairs | Application 2027-09-30 | The Regional Foreign Assistance Office RFA in Amman, Jordan announces an open competition to organizations to submit one or more statements of interest, SOIs, for funding from the U.S. Jordan Private Sector Innovation Fund. SOIs should propose projects that advance commercial deals, support innovation driven bilateral commercial cooperation and market expansion, and promote U.S. exports in Jordan.</summary>
   </entry>
   <entry>
     <title>Unlocking New Levels of Output and Capacity for Key Subsurface Resources (UNLOCK)</title>
@@ -72,6 +94,17 @@
     <category term="Manufacturing"/>
     <category term="Cybersecurity"/>
     <summary>DARPA - Defense Sciences Office | Application 2027-01-13 | The Defense Advanced Research Projects Agency (DARPA) Young Faculty Award (YFA) program aims to identify and engage rising stars in junior research positions in academia and equivalent positions at non-profit research institutions, particularly those without prior DARPA funding, to expose them to Department of War (DoW) needs and DARPA’s mission to create and prevent technological surprise for nat…</summary>
+  </entry>
+  <entry>
+    <title>Silcon Carbide Cladding Lead Test Rod Development-Phase 1</title>
+    <link href="https://www.grants.gov/search-results-detail/364026"/>
+    <id>urn:funding-finder:grants-gov:364026</id>
+    <updated>2026-10-05T00:00:00Z</updated>
+    <author><name>Idaho Field Office</name></author>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Cybersecurity"/>
+    <summary>Idaho Field Office | Application 2026-12-07 | Silcon Carbide Cladding Lead Test Rod Development-Phase 1 Research, development, and fabrication of Silicon Carbide cladding specimens for research reactor insertion, irradiation, and post-irradiation examinations by 2030. The objective of this program is to advance the scientific and technological maturity of silicon carbide cladding for nuclear fuel rods for future use in commercial light water …</summary>
   </entry>
   <entry>
     <title>Small Business Innovation Research and Small Business Technology Transfer Programs Phase II</title>
@@ -760,46 +793,5 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Materials science"/>
     <category term="Cybersecurity"/>
     <summary>U.S. National Science Foundation | Application 2027-10-07 | With a focus on two-year Institutions of Higher Education (IHEs), the Advanced Technological Education (ATE) program supports the education of technicians for the high-technology fields that drive our nation's economy. The program involves partnerships between academic institutions (grades 7-12, IHEs), industry, and economic development agencies to promote improvement in the education of science a…</summary>
-  </entry>
-  <entry>
-    <title>IUSE / Professional Formation of Engineers: Revolutionizing Engineering Departments (IUSE/PFE: RED)</title>
-    <link href="https://www.grants.gov/search-results-detail/353413"/>
-    <id>urn:funding-finder:grants-gov:353413</id>
-    <updated>2024-04-05T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Education and workforce"/>
-    <category term="Manufacturing"/>
-    <category term="Quantum science"/>
-    <category term="Technology development"/>
-    <category term="Data science"/>
-    <summary>U.S. National Science Foundation | Application 2027-04-13 | Revolutionizing Engineering Departments (hereinafter referred to as RED) is designed to build upon previous efforts in engineering education research. Specifically, previous and ongoing evaluations of the NSF Engineering Education and Centers Division program and its predecessors, as well as those related programs in the Directorate for STEM Education, have shown that prior investments have signif…</summary>
-  </entry>
-  <entry>
-    <title>Long Range Broad Agency Announcement (BAA) for NSWC Crane</title>
-    <link href="https://www.grants.gov/search-results-detail/352238"/>
-    <id>urn:funding-finder:grants-gov:352238</id>
-    <updated>2024-02-08T00:00:00Z</updated>
-    <author><name>NSWC CRANE - N00164</name></author>
-    <category term="Energy"/>
-    <category term="Data science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Materials science"/>
-    <category term="Manufacturing"/>
-    <summary>NSWC CRANE - N00164 | Posted | This announcement seeks revolutionary research ideas, and technology demonstrators that offer potential for advancement and improvement of NSWC Crane’s primary mission areas. NSWC Crane is a field activity of the Naval Sea Systems Command. NSWC Crane supports a wide range of government agencies in the interest of national security. NSWC Crane may publish BAAs and other solicitations in response to…</summary>
-  </entry>
-  <entry>
-    <title>Joint Center of Excellence for Advanced Materials Research</title>
-    <link href="https://www.grants.gov/search-results-detail/39841"/>
-    <id>urn:funding-finder:grants-gov:39841</id>
-    <updated>2023-11-01T00:00:00Z</updated>
-    <author><name>FAA-COE-JAMS</name></author>
-    <category term="Education and workforce"/>
-    <category term="Manufacturing"/>
-    <category term="Materials science"/>
-    <category term="Transportation"/>
-    <summary>FAA-COE-JAMS | Posted | The Joint Center of Excellence (COE) for Advanced Materials (JAMS) was established in January 2004 to assist in ensuring the safe and reliable application of composites and advanced materials to commercial aircraft. The Center is a joint effort of the Center of Excellence for Composite and Advanced Materials (CECAM) led by Wichita State University and the Center of Excellence for Advanced Material…</summary>
   </entry>
 </feed>

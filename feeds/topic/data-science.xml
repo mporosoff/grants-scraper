@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml</id>
-  <updated>2026-10-25T14:30:20Z</updated>
+  <updated>2026-10-29T22:20:09Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>ancient DNA for Modern Genomics (aDMG) Research Projects (U01 Clinical Trials Not Allowed)</title>
@@ -149,18 +149,32 @@
     <summary>National Institutes of Health | Estimated Application 2027-01-22 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting multidisciplinary, consortium-based research using precision systems biology approaches to uncover links among chronic illnesses, infectious diseases and microbiomes. There is an urgent scientific and clinical need to understand the pathways by which infections lead to chronic lifelong heal…</summary>
   </entry>
   <entry>
-    <title>NGA - Boosting Innovative GEOINT - Science &amp; Technology Broad Agency Announcement (BIG-ST BAA): Topic # 07 - Lidar Analysis for Surface &amp; Environmental Reconnaissance (LASER)</title>
-    <link href="https://sam.gov/opp/854d837d8dc842719d9fec95764d8ceb/view"/>
-    <id>urn:funding-finder:sam-gov:sam-gov%3A854d837d8dc842719d9fec95764d8ceb</id>
-    <updated>2026-10-20T00:00:00Z</updated>
-    <author><name>National Geospatial-Intelligence Agency</name></author>
+    <title>AFRL/AFOSR-Taiwan NSTC Frontiers in Materials and Nanostructures: AI-Driven Discovery, Quantum Geometry, and Energy-Efficient Information Technologies 2027-2030</title>
+    <link href="https://www.grants.gov/search-results-detail/364165"/>
+    <id>urn:funding-finder:grants-gov:364165</id>
+    <updated>2026-10-28T00:00:00Z</updated>
+    <author><name>Air Force Office of Scientific Research</name></author>
+    <category term="Arts and culture"/>
+    <category term="Energy"/>
+    <category term="Quantum science"/>
+    <category term="Materials science"/>
+    <category term="Data science"/>
     <category term="Artificial intelligence and machine learning"/>
-    <category term="Education and workforce"/>
+    <category term="Cybersecurity"/>
+    <summary>Air Force Office of Scientific Research | Application 2027-02-19 | verify prerequisite | This is a special Notice of Funding Opportunity Announcement (NOFO) sponsored by the Air Force Office of Scientific Research (AFOSR) and Taiwan’s National Science and Technology Council (NSTC), which will hereafter generally be referred to as “we, us, our, or AFOSR.” We announce the solicitation for a three-year program entitled “Frontiers in Materials and Nanostructures: AI-Driven Discovery, Quan…</summary>
+  </entry>
+  <entry>
+    <title>Climate Program Office FY 2027 - Super Intelligence/Machine Learning Innovation to Advance NOAA's Earth System Science and Support Hazard Resilience</title>
+    <link href="https://www.grants.gov/search-results-detail/364160"/>
+    <id>urn:funding-finder:grants-gov:364160</id>
+    <updated>2026-10-27T00:00:00Z</updated>
+    <author><name>DOC NOAA - ERA Production</name></author>
+    <category term="Artificial intelligence and machine learning"/>
     <category term="Environmental science"/>
-    <category term="Space and aeronautics"/>
+    <category term="Technology development"/>
     <category term="Transportation"/>
     <category term="Data science"/>
-    <summary>National Geospatial-Intelligence Agency | Preproposal 2026-10-28 | Develop AI/ML methods to extract and classify 3D surface/subsurface objects using NASA ICESat-2 and GEDI lidar, including navigation safety applications. Topic 7 LASER only, not the BIG-ST parent or closed topics. General Solicitation Rev4 governs eligibility and the required abstract; the October 16 topic revision retains October 28 abstract and December 21 proposal dates. October 20 Q&amp;A allows a…</summary>
+    <summary>DOC NOAA - ERA Production | Application 2027-02-09 | Through this Notice of Federal Funding Opportunity, the NOAA Climate Program Office (https://cpo.noaa.gov/funding-opportunities/) is soliciting proposals for a FY 2027 grants competition focused on Super Intelligence/Machine Learning Innovation to Advance NOAA's Earth System Science and Support Hazard Resilience. The NOAA Office of Oceanic and Atmospheric Research (OAR), or "NOAA Research," provid…</summary>
   </entry>
   <entry>
     <title>Young Faculty Award (YFA) 2027</title>
@@ -737,16 +751,5 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <summary>VPR funding digest (limited submissions &amp; foundations) | Application 2026-11-16</summary>
-  </entry>
-  <entry>
-    <title>Sloan Research Fellowships</title>
-    <link href="http://www.sloan.org/sloan-research-fellowships/"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-aed7d81578b24028</id>
-    <updated>2026-08-09T00:00:00Z</updated>
-    <author><name>Alfred P. Sloan Foundation</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Alfred P. Sloan Foundation | Posted | The Sloan Research Fellowship Program recognizes and rewards outstanding early-career faculty who have the potential to revolutionize their fields of study.
-Successful candidates for a Fellowship generally have a strong record of significant independent research accomplishments that demonstrate creativity and the potential to become future leaders in the scientific community. While Fellows are exp…</summary>
   </entry>
 </feed>
