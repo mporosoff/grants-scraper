@@ -35,6 +35,49 @@ def assignment_json(path: Path) -> dict:
     return json.loads(source[source.index("{"):].rstrip().rstrip(";"))
 
 
+def calibrated_dependencies() -> tuple[dict, dict]:
+    """Fixed claim contracts, independent of which live calls remain eligible."""
+    researchers = []
+    for number, name in enumerate(("Alex Fixture", "Blake Fixture", "Casey Fixture"), 1):
+        identity = f"urh-90000{number}"
+        url = f"https://example.edu/researchers/{number}"
+        claims = [{"claim_id": f"{identity}-c00{claim_number}", "revision": 1,
+                   "status": "active", "label": f"Capability {claim_number}",
+                   "category": "Engineering", "categories": ["Engineering"], "type": "Method",
+                   "evidence": f"Reviewed capability {claim_number}", "source_urls": [url],
+                   "verified_on": "2026-09-03", "evidence_level": "direct", "legacy_claim_ids": []}
+                  for claim_number in (1, 2)]
+        for claim in claims:
+            claim["material_hash"] = material_claim_hash(claim)
+        researchers.append({"researcher_id": identity, "display_name": name,
+            "sort_name": canonical_sort_name(name), "aliases": [], "legacy_ids": [f"fixture-{number}"],
+            "orcid_id": "", "home_unit": "Engineering", "relationship": "hajim_core_faculty",
+            "pool_visibility": "department", "auto_proposable": True, "status": "active",
+            "research_summary": "Reviewed dependency fixture.", "official_interests": [],
+            "source_urls": [url], "source_checked_date": "2026-09-03", "claims": claims})
+    registry = {"schema_version": 3, "researchers": researchers}
+    registry["registry_generation"] = registry_generation(registry)
+    validate_registry(registry)
+    scopes = []
+    for kind, person in zip(("legacy", "generated"), researchers):
+        claim = person["claims"][0]
+        role = {"id": "role-1", "candidate_ids": [person["researcher_id"]], "alternative_ids": []}
+        if kind == "generated":
+            role["claim_refs"] = [{"researcher_id": person["researcher_id"], "claim_id": claim["claim_id"],
+                                   "revision": claim["revision"], "material_hash": claim["material_hash"]}]
+        scopes.append({"id": f"fixture:{kind}", "review_state": "proposed",
+            **({"generator_version": "registry-dependency-fixture-v1"} if kind == "generated" else {}),
+            "members": [{"faculty_id": person["researcher_id"], "claim_id": claim["claim_id"],
+                         "evidence_term": claim["label"], "evidence_phrase": claim["evidence"],
+                         "source_url": claim["source_urls"][0]}], "roles": [role]})
+    withheld = copy.deepcopy(scopes[0])
+    withheld.update(id="fixture:withheld", review_state="needs_revalidation",
+                    revalidation_reason="The official opportunity scope changed or is no longer eligible.")
+    model = {"faculty": legacy_faculty_projection(registry), "opportunities": [*scopes, withheld]}
+    validate_opportunity_team_dependencies(registry, model)
+    return registry, model
+
+
 class ResearcherRegistryTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -116,6 +159,7 @@ class ResearcherRegistryTests(unittest.TestCase):
 
     def test_team_model_researcher_projection_and_references_resolve(self):
         self.assertEqual(self.team_model["faculty"], legacy_faculty_projection(self.registry))
+        validate_opportunity_team_dependencies(self.registry, self.team_model)
         identities = {row["researcher_id"] for row in self.registry["researchers"]}
         for opportunity in self.team_model["opportunities"]:
             for member in opportunity["members"]:
@@ -142,34 +186,36 @@ class ResearcherRegistryTests(unittest.TestCase):
         self.assertEqual(profile["resolved_name"], "Astrid M. Müller")
 
     def test_cosmetic_and_scientific_changes_have_bounded_dependency_effects(self):
-        renamed = copy.deepcopy(self.registry)
+        registry, model = calibrated_dependencies()
+        renamed = copy.deepcopy(registry)
         renamed["researchers"][0]["display_name"] += " Test"
         renamed.pop("registry_generation")
         renamed["registry_generation"] = registry_generation(renamed)
-        cosmetic = dependency_report(self.registry, renamed, self.team_model)
+        cosmetic = dependency_report(registry, renamed, model)
         self.assertEqual(cosmetic["affected_team_scopes"], [])
 
-        selected_id = self.team_model["opportunities"][0]["members"][0]["faculty_id"]
-        scientific = copy.deepcopy(self.registry)
+        selected_id = model["opportunities"][0]["members"][0]["faculty_id"]
+        scientific = copy.deepcopy(registry)
         researcher = next(row for row in scientific["researchers"] if row["researcher_id"] == selected_id)
         researcher["claims"][0]["evidence"] += " (reviewed update)"
         researcher["claims"][0]["material_hash"] = material_claim_hash(researcher["claims"][0])
         scientific.pop("registry_generation")
         scientific["registry_generation"] = registry_generation(scientific)
-        report = dependency_report(self.registry, scientific, self.team_model)
+        report = dependency_report(registry, scientific, model)
         self.assertTrue(report["affected_team_scopes"])
         expected = {
             opportunity["id"]
-            for opportunity in self.team_model["opportunities"]
+            for opportunity in model["opportunities"]
             if selected_id in {member["faculty_id"] for member in opportunity["members"]}
             or any(selected_id in role["candidate_ids"] + role["alternative_ids"] for role in opportunity["roles"])
         }
         self.assertEqual({row["scope_id"] for row in report["affected_team_scopes"]}, expected)
 
     def test_team_calibrations_reject_referenced_evidence_changes(self):
-        validate_opportunity_team_dependencies(self.registry, self.team_model)
-        selected = self.team_model["opportunities"][0]["members"][0]
-        changed = copy.deepcopy(self.registry)
+        registry, model = calibrated_dependencies()
+        validate_opportunity_team_dependencies(registry, model)
+        selected = model["opportunities"][0]["members"][0]
+        changed = copy.deepcopy(registry)
         researcher = next(
             row for row in changed["researchers"]
             if row["researcher_id"] == selected["faculty_id"]
@@ -187,7 +233,7 @@ class ResearcherRegistryTests(unittest.TestCase):
             ValueError,
             r"calibrated opportunity-team scopes require recalibration.*urh-[0-9]{6}",
         ):
-            validate_opportunity_team_dependencies(changed, self.team_model)
+            validate_opportunity_team_dependencies(changed, model)
         approved_profile = {
             key: researcher[key]
             for key in (
@@ -197,7 +243,7 @@ class ResearcherRegistryTests(unittest.TestCase):
             )
         }
         updated, report = apply_approved_submission(
-                self.registry,
+                registry,
                 {
                     "schema_version": 1,
                     "state": "approved",
@@ -205,22 +251,22 @@ class ResearcherRegistryTests(unittest.TestCase):
                     "approved_at": "2026-09-03T12:00:00Z",
                     "approved_profile": approved_profile,
                 },
-                self.registry["registry_generation"],
-                team_model=self.team_model,
+                registry["registry_generation"],
+                team_model=model,
         )
         self.assertTrue(report["affected_team_scopes"])
         with tempfile.TemporaryDirectory() as folder:
             path = Path(folder) / "teams.json"
-            path.write_text(json.dumps(self.team_model), encoding="utf-8")
+            path.write_text(json.dumps(model), encoding="utf-8")
             synchronized = synchronize_opportunity_team_model(updated, path)
             stale = {row["id"] for row in synchronized["opportunities"] if row.get("review_state") == "needs_revalidation"}
-            self.assertIn(self.team_model["opportunities"][0]["id"], stale)
-            previously_stale = {row["id"] for row in self.team_model["opportunities"] if row.get("review_state") == "needs_revalidation"}
+            self.assertIn(model["opportunities"][0]["id"], stale)
+            previously_stale = {row["id"] for row in model["opportunities"] if row.get("review_state") == "needs_revalidation"}
             self.assertTrue(stale.issubset(previously_stale | {row["scope_id"] for row in report["affected_team_scopes"]}))
             again = synchronize_opportunity_team_model(updated, path)
             self.assertEqual(stale, {row["id"] for row in again["opportunities"] if row.get("review_state") == "needs_revalidation"})
 
-        ineligible = copy.deepcopy(self.registry)
+        ineligible = copy.deepcopy(registry)
         researcher = next(
             row for row in ineligible["researchers"]
             if row["researcher_id"] == selected["faculty_id"]
@@ -231,62 +277,90 @@ class ResearcherRegistryTests(unittest.TestCase):
         ineligible["registry_generation"] = registry_generation(ineligible)
         validate_registry(ineligible)
         with self.assertRaisesRegex(ValueError, r"require recalibration"):
-            validate_opportunity_team_dependencies(ineligible, self.team_model)
+            validate_opportunity_team_dependencies(ineligible, model)
 
     def test_admin_removal_preserves_identity_and_evidence_and_withholds_affected_teams(self):
-        scope = next(row for row in self.team_model["opportunities"]
-                     if row.get("review_state") != "needs_revalidation")
+        registry, model = calibrated_dependencies()
+        scope = next(row for row in model["opportunities"]
+                     if row["id"] == "fixture:legacy")
         identity = scope["members"][0]["faculty_id"]
-        original = next(row for row in self.registry["researchers"] if row["researcher_id"] == identity)
+        original = next(row for row in registry["researchers"] if row["researcher_id"] == identity)
         for status in ("inactive", "departed"):
             with self.subTest(status=status):
                 updated, report = apply_approved_submission(
-                    self.registry,
+                    registry,
                     {"schema_version": 1, "state": "approved", "researcher_id": identity,
                      "approved_profile": {"status": status, "pool_visibility": "hidden", "auto_proposable": False}},
-                    self.registry["registry_generation"], team_model=self.team_model,
+                    registry["registry_generation"], team_model=model,
                 )
                 person = next(row for row in updated["researchers"] if row["researcher_id"] == identity)
                 for key in original:
                     if key not in {"status", "pool_visibility", "auto_proposable"}:
                         self.assertEqual(person[key], original[key], key)
-                self.assertEqual(len(updated["researchers"]), len(self.registry["researchers"]))
+                self.assertEqual(len(updated["researchers"]), len(registry["researchers"]))
                 self.assertNotIn(identity, {row["researcher_id"] for row in matching_profiles(updated)})
                 directory_person = next(row for row in directory_projection(updated)["researchers"] if row["id"] == identity)
                 self.assertEqual(directory_person["pool_state"], "unadmitted")
                 self.assertTrue(report["affected_team_scopes"])
                 with tempfile.TemporaryDirectory() as folder:
                     path = Path(folder) / "teams.json"
-                    path.write_text(json.dumps(self.team_model), encoding="utf-8")
-                    model = synchronize_opportunity_team_model(updated, path)
-                    stale = {row["id"] for row in model["opportunities"] if row.get("review_state") == "needs_revalidation"}
+                    path.write_text(json.dumps(model), encoding="utf-8")
+                    synchronized = synchronize_opportunity_team_model(updated, path)
+                    stale = {row["id"] for row in synchronized["opportunities"] if row.get("review_state") == "needs_revalidation"}
                     self.assertIn(scope["id"], stale)
-                    valid_before = {row["id"] for row in self.team_model["opportunities"]
+                    valid_before = {row["id"] for row in model["opportunities"]
                                     if row.get("review_state") != "needs_revalidation"}
                     affected = {row["scope_id"] for row in report["affected_team_scopes"]}
                     self.assertTrue((stale & valid_before).issubset(affected))
 
     def test_generated_teams_depend_on_exact_claims_not_every_interest_of_a_person(self):
-        generated = next(row for row in self.team_model["opportunities"] if row.get("generator_version") and row.get("review_state") != "needs_revalidation")
-        model = {"faculty": self.team_model["faculty"], "opportunities": [generated]}
-        changed = copy.deepcopy(self.registry)
+        registry, model = calibrated_dependencies()
+        generated = next(row for row in model["opportunities"] if row["id"] == "fixture:generated")
+        model = {"faculty": model["faculty"], "opportunities": [generated]}
+        changed = copy.deepcopy(registry)
         member = generated["members"][0]
         person = next(row for row in changed["researchers"] if row["researcher_id"] == member["faculty_id"])
         claim = next(claim for claim in person["claims"] if claim["claim_id"] == member["claim_id"])
         additional = copy.deepcopy(claim)
-        additional["claim_id"] += "-new"
+        additional["claim_id"] = person["researcher_id"] + "-c003"
         additional["label"] = "A newly approved independent interest"
         additional["material_hash"] = material_claim_hash(additional)
         person["claims"].append(additional)
+        changed["registry_generation"] = registry_generation(changed)
+        validate_registry(changed)
         validate_opportunity_team_dependencies(changed, model)
         claim["revision"] += 1
         with self.assertRaisesRegex(ValueError, "require recalibration"):
             validate_opportunity_team_dependencies(changed, model)
 
+    def test_source_withheld_scopes_tolerate_changed_claims_without_reactivation(self):
+        for all_withheld in (False, True):
+            with self.subTest(all_scopes_withheld=all_withheld):
+                registry, model = calibrated_dependencies()
+                if not all_withheld:
+                    model["opportunities"] = [row for row in model["opportunities"]
+                                              if row["id"] == "fixture:withheld"]
+                for row in model["opportunities"]:
+                    row["review_state"] = "needs_revalidation"
+                    row["revalidation_reason"] = "The official opportunity scope changed or is no longer eligible."
+                for person in registry["researchers"]:
+                    claim = person["claims"][0]
+                    claim["status"] = "retired"
+                    claim["material_hash"] = material_claim_hash(claim)
+                registry["registry_generation"] = registry_generation(registry)
+                validate_registry(registry)
+                validate_opportunity_team_dependencies(registry, model)
+                before = copy.deepcopy(model["opportunities"])
+                synchronized = synchronize_opportunity_team_model(
+                    registry, Path("unused-fixture.json"), model=model, write=False)
+                self.assertEqual(synchronized["opportunities"], before)
+                self.assertTrue(all(row["review_state"] == "needs_revalidation" for row in before))
+
     def test_unreferenced_and_cosmetic_edits_do_not_invalidate_team_calibrations(self):
+        registry, model = calibrated_dependencies()
         referenced = {
             identity
-            for opportunity in self.team_model["opportunities"]
+            for opportunity in model["opportunities"]
             for identity in (
                 [member["faculty_id"] for member in opportunity["members"]]
                 + [
@@ -297,7 +371,7 @@ class ResearcherRegistryTests(unittest.TestCase):
                 ]
             )
         }
-        changed = copy.deepcopy(self.registry)
+        changed = copy.deepcopy(registry)
         unreferenced = next(
             row for row in changed["researchers"]
             if row["researcher_id"] not in referenced
@@ -314,7 +388,7 @@ class ResearcherRegistryTests(unittest.TestCase):
         changed.pop("registry_generation")
         changed["registry_generation"] = registry_generation(changed)
         validate_registry(changed)
-        validate_opportunity_team_dependencies(changed, self.team_model)
+        validate_opportunity_team_dependencies(changed, model)
 
     def test_approved_updates_are_registry_only_and_claim_revisions_increment(self):
         target = copy.deepcopy(self.registry["researchers"][0])
