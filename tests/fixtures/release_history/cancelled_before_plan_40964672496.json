@@ -1,0 +1,571 @@
+{
+  "provenance": {
+    "description": "Bounded projection of native cancelled first-attempt run40964672496, captured2026-10-29. The full protected workflow at6ec60747 supplies exact plan/closeout bodies and declared dependency/name/uses fields for all other jobs; unrelated generation bodies are omitted. Tests supply these immutable Git/API inputs and never consult current catalog/date or shallow Git ancestry.",
+    "repository": "mporosoff/grants-scraper",
+    "run_url": "https://github.com/mporosoff/grants-scraper/actions/runs/40964672496",
+    "protected_workflow_sha": "6ec607478bbc8a13a589e79566cdb5048e5db86a",
+    "native_source_sha256": {
+      "cancelled-push-run.json": "67b2d9b9f0d53ecedbc3f63957f57ef3fbf153d8aa8a07f3b88f5c68a7f1aa06",
+      "cancelled-push-jobs.json": "28b813bdb9edda600c78045d1fbb97ff1e917b1d5c009e74619a2c8bca83b3ab",
+      "cancelled-push-artifacts.json": "70e086bbff40b8ac91c0197e98628e148f16b531b93bdcdd098a222c7a398afe"
+    },
+    "workflow_bytes_sha256": "73cbadcae7719c9b591034c1cc0be029a5cbe6b4489a9a42d468135e430958cd",
+    "pages_workflow_bytes_sha256": "7ad34faa15f25b5f0b0fa946a8f3ee14a01208b115d5007c59ee43184043bee3"
+  },
+  "run": {
+    "id": 40964672496,
+    "run_attempt": 1,
+    "head_sha": "6ec607478bbc8a13a589e79566cdb5048e5db86a",
+    "head_branch": "main",
+    "event": "push",
+    "path": ".github/workflows/refresh-opportunities.yml",
+    "status": "completed",
+    "conclusion": "cancelled",
+    "created_at": "2026-10-29T22:17:09Z",
+    "updated_at": "2026-10-29T22:17:32Z",
+    "html_url": "https://github.com/mporosoff/grants-scraper/actions/runs/40964672496"
+  },
+  "jobs_response": {
+    "total_count": 17,
+    "jobs": [
+      {
+        "id": 123765996122,
+        "name": "plan",
+        "run_id": 40964672496,
+        "run_attempt": 1,
+        "head_sha": "6ec607478bbc8a13a589e79566cdb5048e5db86a",
+        "head_branch": "main",
+        "status": "completed",
+        "conclusion": "cancelled",
+        "started_at": "2026-10-29T22:17:12Z",
+        "completed_at": "2026-10-29T22:17:23Z",
+        "runner_id": 1000006045,
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1,
+            "started_at": "2026-10-29T22:17:12Z",
+            "completed_at": "2026-10-29T22:17:13Z"
+          },
+          {
+            "name": "Run actions/checkout@v6",
+            "status": "completed",
+            "conclusion": "cancelled",
+            "number": 2,
+            "started_at": "2026-10-29T22:17:13Z",
+            "completed_at": "2026-10-29T22:17:21Z"
+          },
+          {
+            "name": "Run actions/setup-python@v6",
+            "status": "completed",
+            "conclusion": "skipped",
+            "number": 3,
+            "started_at": "2026-10-29T22:17:21Z",
+            "completed_at": "2026-10-29T22:17:21Z"
+          },
+          {
+            "name": "Run python -m pip install -r requirements.txt",
+            "status": "completed",
+            "conclusion": "skipped",
+            "number": 4,
+            "started_at": "2026-10-29T22:17:21Z",
+            "completed_at": "2026-10-29T22:17:21Z"
+          },
+          {
+            "name": "Resolve explicit lifecycle checkpoint",
+            "status": "completed",
+            "conclusion": "skipped",
+            "number": 5,
+            "started_at": "2026-10-29T22:17:21Z",
+            "completed_at": "2026-10-29T22:17:21Z"
+          },
+          {
+            "name": "Run actions/upload-artifact@v4",
+            "status": "completed",
+            "conclusion": "skipped",
+            "number": 6,
+            "started_at": "2026-10-29T22:17:21Z",
+            "completed_at": "2026-10-29T22:17:21Z"
+          },
+          {
+            "name": "Post Run actions/checkout@v6",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 12,
+            "started_at": "2026-10-29T22:17:21Z",
+            "completed_at": "2026-10-29T22:17:21Z"
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 13,
+            "started_at": "2026-10-29T22:17:21Z",
+            "completed_at": "2026-10-29T22:17:22Z"
+          }
+        ]
+      },
+      {
+        "id": 123766103194,
+        "name": "catalog-correction",
+        "run_id": 40964672496,
+        "run_attempt": 1,
+        "head_sha": "6ec607478bbc8a13a589e79566cdb5048e5db86a",
+        "head_branch": "main",
+        "status": "completed",
+        "conclusion": "cancelled",
+        "started_at": "2026-10-29T22:17:24Z",
+        "completed_at": "2026-10-29T22:17:23Z",
+        "runner_id": null,
+        "steps": []
+      },
+      {
+        "id": 123766103384,
+        "name": "sam-preflight",
+        "run_id": 40964672496,
+        "run_attempt": 1,
+        "head_sha": "6ec607478bbc8a13a589e79566cdb5048e5db86a",
+        "head_branch": "main",
+        "status": "completed",
+        "conclusion": "cancelled",
+        "started_at": "2026-10-29T22:17:24Z",
+        "completed_at": "2026-10-29T22:17:23Z",
+        "runner_id": null,
+        "steps": []
+      },
+      {
+        "id": 123766103815,
+        "name": "catalog-reconcile",
+        "run_id": 40964672496,
+        "run_attempt": 1,
+        "head_sha": "6ec607478bbc8a13a589e79566cdb5048e5db86a",
+        "head_branch": "main",
+        "status": "completed",
+        "conclusion": "cancelled",
+        "started_at": "2026-10-29T22:17:24Z",
+        "completed_at": "2026-10-29T22:17:23Z",
+        "runner_id": null,
+        "steps": []
+      },
+      {
+        "id": 123766103929,
+        "name": "program-area-revalidation",
+        "run_id": 40964672496,
+        "run_attempt": 1,
+        "head_sha": "6ec607478bbc8a13a589e79566cdb5048e5db86a",
+        "head_branch": "main",
+        "status": "completed",
+        "conclusion": "cancelled",
+        "started_at": "2026-10-29T22:17:24Z",
+        "completed_at": "2026-10-29T22:17:23Z",
+        "runner_id": null,
+        "steps": []
+      },
+      {
+        "id": 123766104066,
+        "name": "catalog-identity-correction",
+        "run_id": 40964672496,
+        "run_attempt": 1,
+        "head_sha": "6ec607478bbc8a13a589e79566cdb5048e5db86a",
+        "head_branch": "main",
+        "status": "completed",
+        "conclusion": "cancelled",
+        "started_at": "2026-10-29T22:17:24Z",
+        "completed_at": "2026-10-29T22:17:23Z",
+        "runner_id": null,
+        "steps": []
+      },
+      {
+        "id": 123766104077,
+        "name": "catalog-access-correction",
+        "run_id": 40964672496,
+        "run_attempt": 1,
+        "head_sha": "6ec607478bbc8a13a589e79566cdb5048e5db86a",
+        "head_branch": "main",
+        "status": "completed",
+        "conclusion": "cancelled",
+        "started_at": "2026-10-29T22:17:24Z",
+        "completed_at": "2026-10-29T22:17:23Z",
+        "runner_id": null,
+        "steps": []
+      },
+      {
+        "id": 123766104316,
+        "name": "catalog-url-correction",
+        "run_id": 40964672496,
+        "run_attempt": 1,
+        "head_sha": "6ec607478bbc8a13a589e79566cdb5048e5db86a",
+        "head_branch": "main",
+        "status": "completed",
+        "conclusion": "cancelled",
+        "started_at": "2026-10-29T22:17:24Z",
+        "completed_at": "2026-10-29T22:17:23Z",
+        "runner_id": null,
+        "steps": []
+      },
+      {
+        "id": 123766104368,
+        "name": "assemble",
+        "run_id": 40964672496,
+        "run_attempt": 1,
+        "head_sha": "6ec607478bbc8a13a589e79566cdb5048e5db86a",
+        "head_branch": "main",
+        "status": "completed",
+        "conclusion": "cancelled",
+        "started_at": "2026-10-29T22:17:24Z",
+        "completed_at": "2026-10-29T22:17:23Z",
+        "runner_id": null,
+        "steps": []
+      },
+      {
+        "id": 123766104423,
+        "name": "generate",
+        "run_id": 40964672496,
+        "run_attempt": 1,
+        "head_sha": "6ec607478bbc8a13a589e79566cdb5048e5db86a",
+        "head_branch": "main",
+        "status": "completed",
+        "conclusion": "cancelled",
+        "started_at": "2026-10-29T22:17:24Z",
+        "completed_at": "2026-10-29T22:17:23Z",
+        "runner_id": null,
+        "steps": []
+      },
+      {
+        "id": 123766104529,
+        "name": "catalog-source-recovery",
+        "run_id": 40964672496,
+        "run_attempt": 1,
+        "head_sha": "6ec607478bbc8a13a589e79566cdb5048e5db86a",
+        "head_branch": "main",
+        "status": "completed",
+        "conclusion": "cancelled",
+        "started_at": "2026-10-29T22:17:24Z",
+        "completed_at": "2026-10-29T22:17:23Z",
+        "runner_id": null,
+        "steps": []
+      },
+      {
+        "id": 123766104940,
+        "name": "candidate",
+        "run_id": 40964672496,
+        "run_attempt": 1,
+        "head_sha": "6ec607478bbc8a13a589e79566cdb5048e5db86a",
+        "head_branch": "main",
+        "status": "completed",
+        "conclusion": "cancelled",
+        "started_at": "2026-10-29T22:17:24Z",
+        "completed_at": "2026-10-29T22:17:24Z",
+        "runner_id": null,
+        "steps": []
+      },
+      {
+        "id": 123766106194,
+        "name": "closeout",
+        "run_id": 40964672496,
+        "run_attempt": 1,
+        "head_sha": "6ec607478bbc8a13a589e79566cdb5048e5db86a",
+        "head_branch": "main",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-10-29T22:17:26Z",
+        "completed_at": "2026-10-29T22:17:32Z",
+        "runner_id": 1000006046,
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1,
+            "started_at": "2026-10-29T22:17:27Z",
+            "completed_at": "2026-10-29T22:17:28Z"
+          },
+          {
+            "name": "Report the exact lifecycle checkpoint and allowed retry",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2,
+            "started_at": "2026-10-29T22:17:28Z",
+            "completed_at": "2026-10-29T22:17:29Z"
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3,
+            "started_at": "2026-10-29T22:17:29Z",
+            "completed_at": "2026-10-29T22:17:29Z"
+          }
+        ]
+      },
+      {
+        "id": 123766106550,
+        "name": "publish",
+        "run_id": 40964672496,
+        "run_attempt": 1,
+        "head_sha": "6ec607478bbc8a13a589e79566cdb5048e5db86a",
+        "head_branch": "main",
+        "status": "completed",
+        "conclusion": "cancelled",
+        "started_at": "2026-10-29T22:17:24Z",
+        "completed_at": "2026-10-29T22:17:24Z",
+        "runner_id": null,
+        "steps": []
+      },
+      {
+        "id": 123766106731,
+        "name": "pages",
+        "run_id": 40964672496,
+        "run_attempt": 1,
+        "head_sha": "6ec607478bbc8a13a589e79566cdb5048e5db86a",
+        "head_branch": "main",
+        "status": "completed",
+        "conclusion": "skipped",
+        "started_at": "2026-10-29T22:17:24Z",
+        "completed_at": "2026-10-29T22:17:24Z",
+        "runner_id": null,
+        "steps": []
+      },
+      {
+        "id": 123766106805,
+        "name": "validate",
+        "run_id": 40964672496,
+        "run_attempt": 1,
+        "head_sha": "6ec607478bbc8a13a589e79566cdb5048e5db86a",
+        "head_branch": "main",
+        "status": "completed",
+        "conclusion": "cancelled",
+        "started_at": "2026-10-29T22:17:24Z",
+        "completed_at": "2026-10-29T22:17:24Z",
+        "runner_id": null,
+        "steps": []
+      },
+      {
+        "id": 123766108088,
+        "name": "verify-live",
+        "run_id": 40964672496,
+        "run_attempt": 1,
+        "head_sha": "6ec607478bbc8a13a589e79566cdb5048e5db86a",
+        "head_branch": "main",
+        "status": "completed",
+        "conclusion": "cancelled",
+        "started_at": "2026-10-29T22:17:24Z",
+        "completed_at": "2026-10-29T22:17:24Z",
+        "runner_id": null,
+        "steps": []
+      }
+    ]
+  },
+  "artifacts_response": {
+    "total_count": 0,
+    "artifacts": []
+  },
+  "workflow": {
+    "jobs": {
+      "plan": {
+        "env": {
+          "QUALIFICATION_PILOT": "${{ inputs.qualification_pilot && 'true' || 'false' }}"
+        },
+        "if": "github.ref == 'refs/heads/main'",
+        "runs-on": "ubuntu-latest",
+        "outputs": {
+          "stage": "${{ steps.plan.outputs.stage }}",
+          "program_area_mode": "${{ steps.plan.outputs.program_area_mode }}",
+          "projection_kind": "${{ steps.plan.outputs.projection_kind }}",
+          "reason": "${{ steps.plan.outputs.reason }}",
+          "held_stage": "${{ steps.plan.outputs.held_stage }}",
+          "daily_status": "${{ steps.plan.outputs.daily_status }}",
+          "daily_window_start": "${{ steps.plan.outputs.daily_window_start }}",
+          "catalog_generated_at": "${{ steps.plan.outputs.catalog_generated_at }}",
+          "recovery_run": "${{ steps.plan.outputs.recovery_run }}",
+          "release_sha": "${{ steps.plan.outputs.release_sha }}",
+          "team_mode": "${{ steps.plan.outputs.team_mode }}",
+          "receipt_run": "${{ steps.plan.outputs.receipt_run }}",
+          "publication_run": "${{ steps.plan.outputs.publication_run }}",
+          "publication_attempt": "${{ steps.plan.outputs.publication_attempt }}",
+          "openai": "${{ steps.plan.outputs.openai }}",
+          "anthropic": "${{ steps.plan.outputs.anthropic }}",
+          "candidate_run": "${{ steps.plan.outputs.candidate_run }}",
+          "candidate_id": "${{ steps.plan.outputs.candidate_id }}"
+        },
+        "steps": [
+          {
+            "uses": "actions/checkout@v6",
+            "with": {
+              "ref": "main",
+              "fetch-depth": 0
+            }
+          },
+          {
+            "uses": "actions/setup-python@v6",
+            "with": {
+              "python-version": "3.13"
+            }
+          },
+          {
+            "run": "python -m pip install -r requirements.txt"
+          },
+          {
+            "name": "Resolve explicit lifecycle checkpoint",
+            "id": "plan",
+            "shell": "bash",
+            "env": {
+              "REQUESTED_STAGE": "${{ inputs.stage }}",
+              "CANDIDATE_RUN": "${{ inputs.candidate_run }}",
+              "CANDIDATE_ID": "${{ inputs.candidate_id }}",
+              "CATALOG_RECONCILE_SOURCE": "${{ inputs.reconcile_source || 'sam-gov' }}",
+              "RECEIPT_RUN": "${{ inputs.receipt_run }}",
+              "PUBLICATION_RUN": "${{ inputs.publication_run }}",
+              "PUBLICATION_ATTEMPT": "${{ inputs.publication_attempt }}",
+              "GH_TOKEN": "${{ github.token }}"
+            },
+            "run": "python -m tools.catalog_correction_release plan"
+          },
+          {
+            "uses": "actions/upload-artifact@v4",
+            "with": {
+              "name": "release-plan-${{ github.run_attempt }}",
+              "path": "${{ runner.temp }}/release-plan.json",
+              "retention-days": 90
+            }
+          }
+        ]
+      },
+      "sam-preflight": {
+        "needs": "plan",
+        "if": "needs.plan.outputs.stage == 'generate'"
+      },
+      "generate": {
+        "needs": [
+          "plan",
+          "sam-preflight"
+        ],
+        "if": "needs.plan.outputs.stage == 'generate'"
+      },
+      "assemble": {
+        "needs": "plan",
+        "if": "contains(fromJSON('[\"reuse\",\"teams\",\"backfill\"]'), needs.plan.outputs.stage)"
+      },
+      "catalog-correction": {
+        "needs": "plan",
+        "if": "needs.plan.outputs.stage == 'catalog-correction' || needs.plan.outputs.stage == 'catalog-projection'"
+      },
+      "program-area-revalidation": {
+        "needs": "plan",
+        "if": "needs.plan.outputs.stage == 'program-area-revalidation'"
+      },
+      "catalog-source-recovery": {
+        "needs": "plan",
+        "if": "needs.plan.outputs.stage == 'catalog-source-recovery'"
+      },
+      "catalog-access-correction": {
+        "needs": "plan",
+        "if": "needs.plan.outputs.stage == 'catalog-access-correction'"
+      },
+      "catalog-identity-correction": {
+        "needs": "plan",
+        "if": "needs.plan.outputs.stage == 'catalog-identity-correction'"
+      },
+      "catalog-url-correction": {
+        "needs": "plan",
+        "if": "needs.plan.outputs.stage == 'catalog-url-correction'"
+      },
+      "catalog-reconcile": {
+        "needs": "plan",
+        "if": "needs.plan.outputs.stage == 'catalog-reconcile'"
+      },
+      "candidate": {
+        "needs": [
+          "plan",
+          "generate",
+          "assemble",
+          "catalog-reconcile",
+          "catalog-correction",
+          "program-area-revalidation",
+          "catalog-source-recovery",
+          "catalog-access-correction",
+          "catalog-identity-correction",
+          "catalog-url-correction"
+        ],
+        "if": "always() && needs.plan.result == 'success' && needs.plan.outputs.stage != 'noop' && (needs.catalog-reconcile.result == 'success' || needs.generate.result == 'success' || needs.assemble.result == 'success' || needs.catalog-correction.result == 'success' || needs.program-area-revalidation.result == 'success' || needs.catalog-source-recovery.result == 'success' || needs.catalog-access-correction.result == 'success' || needs.catalog-identity-correction.result == 'success' || needs.catalog-url-correction.result == 'success' ||\n ((needs.plan.outputs.stage == 'validate' || needs.plan.outputs.stage == 'publish' || needs.plan.outputs.stage == 'verify') && needs.catalog-reconcile.result == 'skipped' && needs.generate.result == 'skipped' && needs.assemble.result == 'skipped' && needs.catalog-correction.result == 'skipped' && needs.program-area-revalidation.result == 'skipped' && needs.catalog-source-recovery.result == 'skipped' && needs.catalog-access-correction.result == 'skipped' && needs.catalog-identity-correction.result == 'skipped' && needs.catalog-url-correction.result == 'skipped'))"
+      },
+      "validate": {
+        "needs": [
+          "plan",
+          "candidate"
+        ],
+        "if": "${{ !cancelled() && needs.candidate.result == 'success' }}"
+      },
+      "publish": {
+        "needs": [
+          "plan",
+          "candidate",
+          "validate"
+        ],
+        "if": "!cancelled() && needs.validate.result == 'success' && needs.plan.outputs.stage != 'validate' && needs.plan.outputs.stage != 'verify'"
+      },
+      "pages": {
+        "needs": "publish",
+        "if": "${{ !cancelled() && needs.publish.result == 'success' && needs.publish.outputs.merge_sha != '' }}",
+        "uses": "./.github/workflows/pages.yml"
+      },
+      "verify-live": {
+        "needs": [
+          "plan",
+          "candidate",
+          "validate",
+          "publish",
+          "pages"
+        ],
+        "if": "!cancelled() && needs.validate.result == 'success' && (needs.pages.result == 'success' || needs.plan.outputs.stage == 'verify')"
+      },
+      "closeout": {
+        "needs": [
+          "plan",
+          "sam-preflight",
+          "generate",
+          "assemble",
+          "catalog-reconcile",
+          "catalog-correction",
+          "program-area-revalidation",
+          "catalog-source-recovery",
+          "catalog-access-correction",
+          "catalog-identity-correction",
+          "catalog-url-correction",
+          "candidate",
+          "validate",
+          "publish",
+          "pages",
+          "verify-live"
+        ],
+        "if": "always()",
+        "runs-on": "ubuntu-latest",
+        "steps": [
+          {
+            "name": "Report the exact lifecycle checkpoint and allowed retry",
+            "uses": "actions/github-script@v8",
+            "env": {
+              "RESULTS": "${{ toJSON(needs) }}",
+              "REQUESTED_STAGE": "${{ inputs.stage }}",
+              "REQUESTED_CANDIDATE_ID": "${{ inputs.candidate_id }}",
+              "REQUESTED_CANDIDATE_RUN": "${{ inputs.candidate_run }}",
+              "REQUESTED_RECEIPT_RUN": "${{ inputs.receipt_run }}",
+              "REQUESTED_PUBLICATION_RUN": "${{ inputs.publication_run }}",
+              "REQUESTED_PUBLICATION_ATTEMPT": "${{ inputs.publication_attempt }}"
+            },
+            "with": {
+              "script": "const needs = JSON.parse(process.env.RESULTS);\nconst order = ['plan', 'sam-preflight', 'generate', 'assemble', 'catalog-reconcile', 'catalog-correction', 'program-area-revalidation', 'catalog-source-recovery', 'catalog-access-correction', 'catalog-identity-correction', 'catalog-url-correction', 'candidate', 'validate', 'publish', 'pages', 'verify-live'];\nconst failed = order.find(stage => ['failure', 'cancelled'].includes(needs[stage].result));\nconst stages = new Set(['auto', 'generate', 'teams', 'backfill', 'reuse', 'catalog-reconcile', 'catalog-correction', 'catalog-projection', 'program-area-revalidation', 'submission-revalidation', 'catalog-source-recovery', 'catalog-access-correction', 'catalog-identity-correction', 'catalog-url-correction', 'validate', 'publish', 'verify']);\nconst planned = needs.plan.outputs.stage;\nconst planReason = needs.plan.outputs.reason || 'not reported';\nconst heldStage = needs.plan.outputs.held_stage || '';\nconst dailyStatus = needs.plan.outputs.daily_status || '';\nconst dailyWindow = needs.plan.outputs.daily_window_start || '';\nconst sourceCompleteness = needs.generate.outputs.source_completeness\n  ? (needs.generate.outputs.sources_healthy === 'true' ? 'complete' : 'degraded')\n  : 'not assessed for this continuation';\nconst liveComplete = needs['verify-live'].result === 'success';\nconst catalogDate = (liveComplete ? needs['verify-live'].outputs.catalog_generated_at : needs.plan.outputs.catalog_generated_at) || '';\nconst windowTime = Date.parse(dailyWindow), sourceTime = Date.parse(catalogDate);\nconst fresh = Number.isFinite(windowTime) && Number.isFinite(sourceTime) &&\n  sourceTime >= windowTime && sourceTime <= Date.now();\nconst alreadyCurrent = context.eventName === 'schedule' && needs.plan.result === 'success' &&\n  planned === 'noop' && dailyStatus === 'already_current' && fresh;\nconst scheduledIncomplete = context.eventName === 'schedule' && !(alreadyCurrent || (liveComplete && fresh));\nconst originalStage = planned === 'program-area-revalidation' && needs.plan.outputs.projection_kind === 'administrative_submission' ?\n  'submission-revalidation' : stages.has(planned) ? planned : stages.has(process.env.REQUESTED_STAGE) ? process.env.REQUESTED_STAGE : 'auto';\nlet candidate = needs.candidate.outputs.candidate_id;\nlet generationRun = needs.candidate.outputs.candidate_run;\nlet identitySource = 'selected candidate output';\nif (!candidate || !generationRun) {\n  const producer = ['generate', 'assemble', 'catalog-reconcile', 'catalog-correction', 'program-area-revalidation', 'catalog-source-recovery', 'catalog-access-correction', 'catalog-identity-correction', 'catalog-url-correction'].find(stage =>\n    needs[stage].result === 'success' && needs[stage].outputs.candidate_id);\n  if (producer) {\n    candidate = needs[producer].outputs.candidate_id; generationRun = needs[producer].outputs.artifact_run || String(context.runId);\n    identitySource = `successful ${producer} job; authenticate its retained artifact before reuse`;\n  } else {\n    const completePlan = needs.plan.outputs.candidate_id && needs.plan.outputs.candidate_run;\n    candidate = completePlan ? needs.plan.outputs.candidate_id : process.env.REQUESTED_CANDIDATE_ID;\n    generationRun = completePlan ? needs.plan.outputs.candidate_run : process.env.REQUESTED_CANDIDATE_RUN;\n    identitySource = 'requested checkpoint selector; artifact authentication still required';\n  }\n}\nconst hasCheckpoint = Boolean(candidate && generationRun);\nif (!hasCheckpoint) { candidate = 'not persisted'; generationRun = 'none'; identitySource = 'no complete checkpoint selector'; }\nconst awaiting = needs.publish.outputs.review_ready === 'false';\nconst next = failed === 'pages' ? 'publish' : failed === 'verify-live' ? 'verify' :\n  ['publish', 'validate'].includes(failed) ? failed : failed === 'candidate' && hasCheckpoint ?\n  (['publish', 'verify'].includes(originalStage) ? originalStage : 'validate') : originalStage;\nconst sameRequested = hasCheckpoint && ((candidate === needs.plan.outputs.candidate_id && generationRun === needs.plan.outputs.candidate_run) ||\n  (candidate === process.env.REQUESTED_CANDIDATE_ID && generationRun === process.env.REQUESTED_CANDIDATE_RUN));\nconst receiptRun = needs.validate.result === 'success' ? String(context.runId) :\n  sameRequested ? needs.plan.outputs.receipt_run || process.env.REQUESTED_RECEIPT_RUN || 'none' : 'none';\nconst publicationRun = ['success', 'failure', 'cancelled'].includes(needs.publish.result) ? String(context.runId) :\n  sameRequested ? needs.plan.outputs.publication_run || process.env.REQUESTED_PUBLICATION_RUN || 'none' : 'none';\nconst publicationAttempt = publicationRun === String(context.runId) ? process.env.GITHUB_RUN_ATTEMPT || 'unknown' :\n  sameRequested ? needs.plan.outputs.publication_attempt || process.env.REQUESTED_PUBLICATION_ATTEMPT || 'latest retained' : 'none';\nconst runUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;\nconst checkpoint = failed || (awaiting ? 'awaiting_review' : alreadyCurrent ? 'already_current' : planned === 'noop' ?\n  (heldStage || scheduledIncomplete ? 'held' : 'noop') : scheduledIncomplete ?\n  (liveComplete ? 'stale_catalog' : 'incomplete_verification') : 'completed');\nconst refreshFailure = scheduledIncomplete ?\n  `Scheduled catalog refresh did not establish a fresh verified catalog: ${checkpoint}. Planner reason: ${planReason}` : '';\nconst retry = failed ? next : awaiting ? 'publish after exact-head review' :\n  scheduledIncomplete ? planned === 'noop' ? 'resolve the reported hold before resuming auto' :\n  'inspect the retained checkpoint before retry' : 'none';\nconst body = `Candidate: ${candidate}\\nArtifact run: ${generationRun}\\nStage: ${checkpoint}\\n` +\n  `Planned lifecycle stage: ${planned || 'not reported'}\\nHeld lifecycle stage: ${heldStage || 'none'}\\nPlanner reason: ${planReason}\\n` +\n  `Daily state: ${dailyStatus || 'not scheduled'}\\nDaily window start: ${dailyWindow || 'not applicable'}\\nCatalog source timestamp: ${catalogDate || 'unknown'}\\nRecovery run: ${needs.plan.outputs.recovery_run || 'none'}\\n` +\n  `Source completeness: ${sourceCompleteness}\\n` +\n  (refreshFailure ? `Refresh failure: ${refreshFailure}\\n` : '') +\n  `Identity source: ${identitySource}\\nOriginal lifecycle stage: ${originalStage}\\nValidation receipt run: ${receiptRun}\\n` +\n  `Publication evidence run: ${publicationRun}\\nPublication evidence attempt: ${publicationAttempt}\\n` +\n  `Release-control SHA: ${context.sha}\\nProtected publication SHA: ${needs.publish.outputs.merge_sha || 'none confirmed'}\\n` +\n  `Production mutation: ${needs.publish.outputs.merge_sha ? 'protected publication completed' : needs.publish.result === 'failure' ? 'inspect publication receipt and rollback evidence' : 'none'}\\n` +\n  `Known-good live identity: publication artifact known-good-live-release.json (when Worker preparation started)\\n` +\n  `Evidence and safe diagnostics: ${runUrl}#artifacts\\nAllowed next retry: ${retry}\\n` +\n  `Resume the same workflow for pre-candidate failures so its persisted generation checkpoint can be recovered; do not repeat completed expensive work.\\n` +\n  `A persisted candidate must be reused after downstream failure. Authenticate candidate and receipt artifacts before retry; reported selectors alone are not proof. Caches are not release evidence.`;\nawait core.summary.addRaw(body).write();\nif (failed || scheduledIncomplete) {\n  if (scheduledIncomplete) core.setFailed(refreshFailure);\n  const title = 'Funding Finder release checkpoint failed';\n  const {data: issues} = await github.rest.issues.listForRepo({...context.repo, state:'open', per_page:100});\n  const existing = issues.find(issue => !issue.pull_request && issue.title === title);\n  if (existing) await github.rest.issues.update({...context.repo, issue_number:existing.number, body});\n  else await github.rest.issues.create({...context.repo, title, body});\n} else if (liveComplete || alreadyCurrent) {\n  const {data: issues} = await github.rest.issues.listForRepo({...context.repo, state:'open', per_page:100});\n  const recovered = new Set(['Funding Finder release checkpoint failed', 'Automated Grants.gov refresh failed']);\n  if (needs.generate.outputs.sources_healthy === 'true') recovered.add('External funding source refresh degraded');\n  for (const issue of issues.filter(issue => !issue.pull_request && recovered.has(issue.title))) {\n    await github.rest.issues.update({...context.repo, issue_number:issue.number, state:'closed', state_reason:'completed',\n      body: body + '\\n\\nRecovered after exact live verification. A source disabled for documented upstream unavailability is not represented as healthy.'});\n  }\n}\n"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "pages_workflow": {
+    "jobs": {
+      "deploy": {}
+    }
+  }
+}
