@@ -125,6 +125,128 @@ def _inventory(repository, run_meta, artifacts, *, api):
     return expected
 
 
+def require_cancelled_before_planning(repository, run_meta, artifacts, *, api):
+    """Prove a first cancelled attempt never reached its lifecycle planner."""
+    from tools import release_checkpoint_archive as archive
+
+    _trusted_meta(run_meta)
+    require(run_meta['run_attempt'] == 1 and run_meta.get('status') == 'completed'
+            and run_meta.get('conclusion') == 'cancelled', 'first cancelled attempt required')
+    require(isinstance(artifacts, list) and not artifacts, 'cancelled attempt retained artifacts')
+    pagination = {}
+
+    def read(path):
+        raw = api(path)
+        match = re.fullmatch(r'(actions/(?:runs/[1-9][0-9]*/)?artifacts)\?per_page=100&page=([1-9][0-9]*)', path)
+        if match:
+            value = json.loads(raw)
+            rows, total = value.get('artifacts'), value.get('total_count')
+            page = int(match[2])
+            previous = pagination.get(match[1], (0, 0, total)) if page > 1 else (0, 0, total)
+            require(isinstance(rows, list) and len(rows) <= 100 and all(isinstance(row, dict) for row in rows)
+                    and type(total) is int and total >= 0
+                    and previous[0] == page - 1 and previous[2] == total,
+                    'complete stable cancellation artifact pagination')
+            count = previous[1] + len(rows)
+            require(count <= total and (len(rows) == 100 or count == total),
+                    'complete cancellation artifact inventory')
+            pagination[match[1]] = (page, count, total)
+            # Even an expired independent checkpoint is evidence of earlier work,
+            # not permission to treat an empty native listing as zero spending.
+            require(not any((pin := archive.BACKUP_NAME.fullmatch(str(row.get('name', ''))))
+                            and pin[1] == str(run_meta['id']) for row in rows),
+                    'cancelled attempt has preserved checkpoint evidence')
+        return raw
+
+    attempt = authenticate_attempt(repository, run_meta, 1, api=read)
+    require(attempt['conclusion'] == 'cancelled', 'attempt cancellation changed')
+    inventory = _inventory(repository, run_meta, artifacts, api=read)
+    require(not inventory, 'cancelled attempt retained artifacts')
+    jobs = _jobs(run_meta, attempt, api=read, full=False)
+    raw = candidate.git(candidate.ROOT, 'show', attempt['head_sha'] + ':' + WORKFLOW)
+    proof = {'version': 'cancelled-before-planning-1', 'run_id': str(run_meta['id']),
+        'run_attempt': 1, 'head_sha': attempt['head_sha'],
+        'workflow_sha256': hashlib.sha256(raw.encode()).hexdigest(),
+        'artifact_inventory_sha256': hashlib.sha256(candidate.encoded(inventory)).hexdigest(),
+        'jobs': {name: {'id': job['id'], 'conclusion': job['conclusion']} for name, job in sorted(jobs.items())},
+        'prior_allowance_reserved': False, 'prior_provider_dispatch': False}
+    if not jobs:
+        return proof | {'kind': 'queued'}
+
+    workflow = yaml.safe_load(raw)
+    declared = workflow['jobs']
+    require(set(jobs) == set(declared), 'missing declared workflow jobs before planning')
+    require(PRODUCERS <= set(declared), 'complete producer dependency graph')
+    for name in PRODUCERS | {'sam-preflight'}:
+        needs = declared[name].get('needs')
+        require('plan' in ([needs] if isinstance(needs, str) else needs or []),
+                'producer is not gated by plan')
+    plan = declared['plan']
+    steps = plan.get('steps')
+    require(isinstance(steps, list) and len(steps) == 5
+            and steps[0].get('uses') == 'actions/checkout@v6'
+            and steps[1].get('uses') == 'actions/setup-python@v6'
+            and steps[2].get('run') == 'python -m pip install -r requirements.txt'
+            and steps[3].get('id') == 'plan'
+            and steps[3].get('run') == 'python -m tools.catalog_correction_release plan'
+            and isinstance(steps[3].get('name'), str)
+            and steps[4].get('uses') == 'actions/upload-artifact@v4'
+            and steps[4].get('with', {}).get('name') == 'release-plan-${{ github.run_attempt }}'
+            and plan.get('outputs', {}).get('stage') == '${{ steps.plan.outputs.stage }}'
+            and not any('if' in step or 'continue-on-error' in step for step in steps)
+            and 'secrets.' not in json.dumps(plan), 'known non-provider planning prefix')
+    names = [step.get('name') or 'Run ' + step.get('uses', step.get('run', '')) for step in steps]
+    require(len(set(names)) == len(names), 'unique declared planning steps')
+    native = jobs['plan'].get('steps')
+    require(jobs['plan']['conclusion'] in ('cancelled', 'failure') and isinstance(native, list)
+            and 1 <= len(native) <= 20, 'native planning stop evidence')
+    by_name, numbers = {}, set()
+    allowed = set(names) | {'Set up job', 'Complete job', 'Post Run actions/checkout@v6'}
+    for step in native:
+        require(isinstance(step, dict) and step.get('name') in allowed and step['name'] not in by_name
+                and type(step.get('number')) is int and step['number'] > 0 and step['number'] not in numbers
+                and step.get('status') == 'completed' and step.get('conclusion') in TERMINAL,
+                'complete unambiguous planning step evidence')
+        by_name[step['name']] = step
+        numbers.add(step['number'])
+    require(all(name in by_name for name in names), 'missing planning step evidence')
+    ordered = [by_name[name]['number'] for name in names]
+    require(ordered == sorted(ordered) and all(by_name[name]['conclusion'] == 'skipped' for name in names[3:])
+            and any(step['number'] < ordered[3] and step['conclusion'] in ('failure', 'cancelled')
+                    for step in native), 'planner started or no preceding setup stop')
+    for name, job in jobs.items():
+        if name not in ('plan', 'closeout'):
+            require(job['conclusion'] in ('cancelled', 'skipped') and job.get('steps') == [],
+                    'generation or downstream work started before planning')
+
+    closeout = declared['closeout']
+    reports = closeout.get('steps')
+    public_environment = {'RESULTS', 'REQUESTED_STAGE', 'REQUESTED_CANDIDATE_ID', 'REQUESTED_CANDIDATE_RUN',
+                          'REQUESTED_RECEIPT_RUN', 'REQUESTED_PUBLICATION_RUN', 'REQUESTED_PUBLICATION_ATTEMPT'}
+    require(closeout.get('if') == 'always()' and not closeout.get('env')
+            and isinstance(reports, list) and len(reports) == 1
+            and reports[0].get('name') == 'Report the exact lifecycle checkpoint and allowed retry'
+            and reports[0].get('uses') == 'actions/github-script@v8' and 'run' not in reports[0]
+            and set(reports[0].get('with', {})) == {'script'}
+            and set(reports[0].get('env', {})) == public_environment
+            and reports[0]['env']['RESULTS'] == '${{ toJSON(needs) }}'
+            and all(value == '${{ inputs.' + name.removeprefix('REQUESTED_').lower() + ' }}'
+                    for name, value in reports[0]['env'].items() if name != 'RESULTS')
+            and 'secrets.' not in json.dumps(closeout), 'known reporting-only closeout')
+    closeout_steps = jobs['closeout'].get('steps')
+    require(isinstance(closeout_steps, list), 'native closeout step evidence')
+    seen, numbers = set(), set()
+    for step in closeout_steps:
+        require(isinstance(step, dict) and step.get('name') in
+                {'Set up job', reports[0]['name'], 'Complete job'} and step['name'] not in seen
+                and type(step.get('number')) is int and step['number'] > 0 and step['number'] not in numbers
+                and step.get('status') == 'completed' and step.get('conclusion') in TERMINAL,
+                'unexpected closeout execution')
+        seen.add(step['name']); numbers.add(step['number'])
+    return proof | {'kind': 'plan-setup',
+                    'plan_steps_sha256': hashlib.sha256(candidate.encoded(native)).hexdigest()}
+
+
 def _generate_stopped_before_allocation(head_sha, job):
     """Authenticate a failed public/setup prefix, never an uncheckpointed dispatch."""
     require(job.get('conclusion') in ('failure', 'cancelled'), 'generate was not a pre-allocation stop')

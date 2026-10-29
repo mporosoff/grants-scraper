@@ -820,18 +820,21 @@ def prior_generation(root, environment, manifest):
             elif reservations:
                 raise Hold('Generation reserved its allowance but no complete candidate is retained; recover this original run', identifier)
             elif run.get('status') == 'completed':
-                jobs = [job for batch in _pages(repository, f'actions/runs/{identifier}/jobs', 'jobs') for job in batch]
-                # A superseded concurrency-queued run may be cancelled before
-                # creating any job. Only an explicit first attempt with no
-                # retained evidence can prove that it never started spending.
                 if (run.get('conclusion') == 'cancelled' and type(run.get('run_attempt')) is int
-                        and run['run_attempt'] == 1 and not jobs and not artifacts):
+                        and run['run_attempt'] == 1 and not artifacts):
+                    from tools.release_attempt_history import require_cancelled_before_planning
+                    try:
+                        require_cancelled_before_planning(repository, run, artifacts,
+                            api=lambda path: api(repository, path))
+                    except (ValueError, KeyError, TypeError, OSError, subprocess.SubprocessError) as error:
+                        raise Hold('Cancelled release has no authenticated pre-planning stop: ' + str(error), identifier) from error
                     continue
+                jobs = [job for batch in _pages(repository, f'actions/runs/{identifier}/jobs', 'jobs') for job in batch]
                 if _only_preflight_stops(repository, run, jobs):
                     continue
                 producers = [job for job in jobs if job.get('name') in ('generate', 'assemble')]
-                corrections = [job for job in jobs if job.get('name') in ('catalog-reconcile', 'program-area-revalidation', 'catalog-source-recovery', 'catalog-access-correction', 'catalog-identity-correction', 'catalog-url-correction')]
-                if (int(run.get('run_attempt', 1)) > 1 or len(producers) != 2 or len(corrections) > 6
+                corrections = [job for job in jobs if job.get('name') in ('catalog-correction', 'catalog-reconcile', 'program-area-revalidation', 'catalog-source-recovery', 'catalog-access-correction', 'catalog-identity-correction', 'catalog-url-correction')]
+                if (int(run.get('run_attempt', 1)) > 1 or len(producers) != 2 or len(corrections) > 7
                         or any(job.get('conclusion') != 'skipped' for job in producers + corrections)):
                     raise Hold('Prior generation has no complete accounting/candidate evidence; inspect its original run', identifier)
             else:

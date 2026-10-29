@@ -232,17 +232,21 @@ class ScheduledHistory(unittest.TestCase):
     @staticmethod
     def workflow_run(identifier, **overrides):
         return {'id': identifier, 'path': scheduled.WORKFLOW, 'head_branch': 'main', 'event': 'schedule',
-                'status': 'completed', 'run_attempt': 1} | overrides
+                'head_sha': 'a' * 40, 'status': 'completed', 'run_attempt': 1} | overrides
 
     def response(self, repository, path):
         self.assertEqual(repository, ENV['GITHUB_REPOSITORY'])
+        parts = path.split('/')
+        if len(parts) == 5 and parts[:2] == ['actions', 'runs'] and parts[3] == 'attempts':
+            return json.dumps(next(row for row in self.runs if str(row['id']) == parts[2]))
         self.assertIn('per_page=100&page=', path)
         if path == 'actions/artifacts?per_page=100&page=1':
             return json.dumps({'artifacts': [], 'total_count': 0})
         if path.startswith('actions/workflows/'):
             return json.dumps({'workflow_runs': self.runs})
         run = path.split('/')[2]
-        return json.dumps({'artifacts': self.artifacts[run]} if '/artifacts?' in path else {'jobs': self.jobs[run]})
+        return json.dumps({'artifacts': self.artifacts[run], 'total_count': len(self.artifacts[run])}
+                          if '/artifacts?' in path else {'jobs': self.jobs[run], 'total_count': len(self.jobs[run])})
 
     def discover(self):
         return scheduled.prior_generation(Path('unused'), ENV, {'generation_run_id': '100'})
@@ -310,10 +314,15 @@ class ScheduledHistory(unittest.TestCase):
             self.discover()
 
     def test_cancelled_first_attempt_with_no_jobs_or_artifacts_never_started(self):
+        from tools import release_attempt_history as history
         self.runs[0]['conclusion'] = 'cancelled'
         self.jobs['200'] = []
-        self.assertIsNone(self.discover())
-        self.assertTrue(any('/200/jobs?' in call.args[1] for call in self.api.call_args_list))
+        workflow = (c.ROOT / scheduled.WORKFLOW).read_text(encoding='utf-8')
+        with patch.object(history, 'workflow_job_names', return_value=history.KNOWN_JOBS), \
+                patch.object(c, 'git', return_value=workflow):
+            self.assertIsNone(self.discover())
+        self.assertTrue(any('/200/attempts/1/jobs?' in call.args[1] for call in self.api.call_args_list))
+        self.assertFalse(any('/200/jobs?' in call.args[1] for call in self.api.call_args_list))
         self.assertTrue(any('/200/artifacts?' in call.args[1] for call in self.api.call_args_list))
 
     def test_empty_jobs_only_prove_no_start_for_conclusive_cancelled_first_attempt(self):
