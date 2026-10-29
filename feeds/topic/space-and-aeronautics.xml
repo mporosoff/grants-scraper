@@ -4,22 +4,8 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/space-and-aeronautics.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/space-and-aeronautics.xml</id>
-  <updated>2026-10-25T14:30:20Z</updated>
+  <updated>2026-10-29T22:20:09Z</updated>
   <generator>Funding Finder</generator>
-  <entry>
-    <title>NGA - Boosting Innovative GEOINT - Science &amp; Technology Broad Agency Announcement (BIG-ST BAA): Topic # 07 - Lidar Analysis for Surface &amp; Environmental Reconnaissance (LASER)</title>
-    <link href="https://sam.gov/opp/854d837d8dc842719d9fec95764d8ceb/view"/>
-    <id>urn:funding-finder:sam-gov:sam-gov%3A854d837d8dc842719d9fec95764d8ceb</id>
-    <updated>2026-10-20T00:00:00Z</updated>
-    <author><name>National Geospatial-Intelligence Agency</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Space and aeronautics"/>
-    <category term="Transportation"/>
-    <category term="Data science"/>
-    <summary>National Geospatial-Intelligence Agency | Preproposal 2026-10-28 | Develop AI/ML methods to extract and classify 3D surface/subsurface objects using NASA ICESat-2 and GEDI lidar, including navigation safety applications. Topic 7 LASER only, not the BIG-ST parent or closed topics. General Solicitation Rev4 governs eligibility and the required abstract; the October 16 topic revision retains October 28 abstract and December 21 proposal dates. October 20 Q&amp;A allows a…</summary>
-  </entry>
   <entry>
     <title>ROSES25: D.3F NuSTAR Cycle 13, Fermi Cycle 20, Swift Cycle 23, and TESS Cycle 10</title>
     <link href="https://nspires.nasaprs.com/external/solicitations/summary.do?solId={A952E51B-7AD4-B180-2F8C-4E8A79AFFAED}&amp;path=&amp;method=init"/>
@@ -145,15 +131,6 @@
     <summary>Naval Air Warfare Center Weapons Division (NAWCWD) | Full Application 2027-09-30 | Basic and applied science/engineering for aerospace, naval warfare and weapons. Academic, industry and research sources may apply; federal laboratories and military universities cannot receive awards directly; UARC participation depends on its sponsoring contract. Consult the official unclassified submission instructions.</summary>
   </entry>
   <entry>
-    <title>NASA Innovative Advanced Concepts (NIAC) Phase I</title>
-    <link href="https://www.grants.gov/search-results-detail/363983"/>
-    <id>urn:funding-finder:grants-gov:363983</id>
-    <updated>2026-09-28T00:00:00Z</updated>
-    <author><name>NASA Headquarters</name></author>
-    <category term="Space and aeronautics"/>
-    <summary>NASA Headquarters | Application 2026-10-28 | The National Aeronautics and Space Administration (NASA) Headquarters anticipates release of a solicitation, titled “NASA Innovative Advanced Concepts (NIAC), Phase I,” as an Appendix to the Space Technology Mission Directorate (STMD) NASA Research Announcement (NRA), titled “Space Technology Research, Development, Demonstration, and Infusion - 2026 (SpaceTech-REDDI-2026),” on or about September 2…</summary>
-  </entry>
-  <entry>
     <title>ROSES 2025: A.17 Hydrosphere</title>
     <link href="https://www.grants.gov/search-results-detail/363789"/>
     <id>urn:funding-finder:grants-gov:363789</id>
@@ -212,17 +189,6 @@
     <category term="Education and workforce"/>
     <category term="Space and aeronautics"/>
     <summary>Defense Logistics Agency (DLA) | White Paper 2030-01-14 | Strategic/criticalmaterials, production/process substitution, energetic/power/aerospace/armor materials and supply-chain resilience. Open non-IDIQ white paper entry; technical/cost proposals follow a government request. Educational organizations may be prime offerors, subject to financial, accounting and other FAR responsibility standards. No small-business set-aside. Use only the current BAA area…</summary>
-  </entry>
-  <entry>
-    <title>ROSES25: D.8 Habitable Worlds Observatory Precursor Science Investigation</title>
-    <link href="https://www.grants.gov/search-results-detail/363325"/>
-    <id>urn:funding-finder:grants-gov:363325</id>
-    <updated>2026-07-27T00:00:00Z</updated>
-    <author><name>NASA Headquarters</name></author>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Space and aeronautics"/>
-    <summary>NASA Headquarters | Application 2026-10-26 | PLEASE NOTE: this program has MANDATORY Notices of Intent, which are due via NSPIRES by September 10, 2026. See the full posting on NSPIRES for details. ﻿NOTICE: Corrected, August 28, 2026. The Open Science and Data Management Plan was added to Table D.8-1 in Section 3.4. New text is in bold. The due dates remain unchanged. NOTICE: Amended July 27, 2026. This amendment presents a new program eleme…</summary>
   </entry>
   <entry>
     <title>ROSES25: C.4 Planetary Science Enabling Facilities</title>

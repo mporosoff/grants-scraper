@@ -4,8 +4,28 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/water.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/water.xml</id>
-  <updated>2026-10-25T14:30:20Z</updated>
+  <updated>2026-10-29T22:20:09Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>Landscape Scale Restoration Grant Program for Non-Federal Lands</title>
+    <link href="https://www.grants.gov/search-results-detail/364144"/>
+    <id>urn:funding-finder:grants-gov:364144</id>
+    <updated>2026-10-28T00:00:00Z</updated>
+    <author><name>Forest Service</name></author>
+    <category term="Environmental science"/>
+    <category term="Water"/>
+    <summary>Forest Service | Application 2027-01-26 | The Forest Service is offering this one LSR non-federal lands Notice of Funding Opportunity (NOFO) which replaces the three regional (Southern/IITF, Western, and Northeast/Midwestern) NOFOs. The purpose of the Landscape Scale Restoration (LSR) Program is to encourage collaborative, science-based restoration of priority forest landscapes. This competitive grant program supports collaborative high i…</summary>
+  </entry>
+  <entry>
+    <title>Landscape Scale Restoration Grant Program for Tribes</title>
+    <link href="https://www.grants.gov/search-results-detail/364145"/>
+    <id>urn:funding-finder:grants-gov:364145</id>
+    <updated>2026-10-28T00:00:00Z</updated>
+    <author><name>Forest Service</name></author>
+    <category term="Environmental science"/>
+    <category term="Water"/>
+    <summary>Forest Service | Application 2027-01-26 | The purpose of the Landscape Scale Restoration (LSR) Program is to encourage collaborative, science-based restoration of priority forest landscapes. This competitive grant program supports collaborative high impact projects that lead to measurable outcomes on priority forest landscapes, leverage public and private resources, and further priorities identified in a science-based restoration strategy…</summary>
+  </entry>
   <entry>
     <title>Unlocking New Levels of Output and Capacity for Key Subsurface Resources (UNLOCK)</title>
     <link href="https://www.grants.gov/search-results-detail/364136"/>

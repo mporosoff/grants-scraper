@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/environmental-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/environmental-science.xml</id>
-  <updated>2026-10-25T14:30:20Z</updated>
+  <updated>2026-10-29T22:20:09Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Limited Competition: Biomedical Research Environment &amp; Sponsored Programs Administration Development (BRE-SPAD) Program</title>
@@ -338,6 +338,47 @@
     <summary>National Institutes of Health | Estimated Application 2027-03-02 | The overall goal of this NOFO is to solicit applications to create a national network of Children's Environmental Health Research Translation Centers (CEHRT). Through external collaboration with the children's environmental health community, the Centers will protect and improve children's health by developing and testing new scientific questions and public health interventions/strategies with an e…</summary>
   </entry>
   <entry>
+    <title>Landscape Scale Restoration Grant Program for Non-Federal Lands</title>
+    <link href="https://www.grants.gov/search-results-detail/364144"/>
+    <id>urn:funding-finder:grants-gov:364144</id>
+    <updated>2026-10-28T00:00:00Z</updated>
+    <author><name>Forest Service</name></author>
+    <category term="Environmental science"/>
+    <category term="Water"/>
+    <summary>Forest Service | Application 2027-01-26 | The Forest Service is offering this one LSR non-federal lands Notice of Funding Opportunity (NOFO) which replaces the three regional (Southern/IITF, Western, and Northeast/Midwestern) NOFOs. The purpose of the Landscape Scale Restoration (LSR) Program is to encourage collaborative, science-based restoration of priority forest landscapes. This competitive grant program supports collaborative high i…</summary>
+  </entry>
+  <entry>
+    <title>Landscape Scale Restoration Grant Program for Tribes</title>
+    <link href="https://www.grants.gov/search-results-detail/364145"/>
+    <id>urn:funding-finder:grants-gov:364145</id>
+    <updated>2026-10-28T00:00:00Z</updated>
+    <author><name>Forest Service</name></author>
+    <category term="Environmental science"/>
+    <category term="Water"/>
+    <summary>Forest Service | Application 2027-01-26 | The purpose of the Landscape Scale Restoration (LSR) Program is to encourage collaborative, science-based restoration of priority forest landscapes. This competitive grant program supports collaborative high impact projects that lead to measurable outcomes on priority forest landscapes, leverage public and private resources, and further priorities identified in a science-based restoration strategy…</summary>
+  </entry>
+  <entry>
+    <title>RESTORE Act Centers of Excellence Research Grants Program</title>
+    <link href="https://www.grants.gov/search-results-detail/364170"/>
+    <id>urn:funding-finder:grants-gov:364170</id>
+    <updated>2026-10-28T00:00:00Z</updated>
+    <author><name>U.S. Dept. of Treasury RESTORE Act Program</name></author>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <summary>U.S. Dept. of Treasury RESTORE Act Program | Application 2027-10-31 | Treasury is publishing multiple funding opportunity notices for its RESTORE Act grant programs. This announcement applies only to the Centers of Excellence Research Grants Program. Trust Fund amounts are available to establish one or more Centers of Excellence through competitive subawards to nongovernmental entities and consortia in the Gulf Coast Region, including institutions of higher educatio…</summary>
+  </entry>
+  <entry>
+    <title>RESTORE Act Direct Component - Non-Construction Activities</title>
+    <link href="https://www.grants.gov/search-results-detail/364169"/>
+    <id>urn:funding-finder:grants-gov:364169</id>
+    <updated>2026-10-28T00:00:00Z</updated>
+    <author><name>U.S. Dept. of Treasury RESTORE Act Program</name></author>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <summary>U.S. Dept. of Treasury RESTORE Act Program | Application 2027-10-31 | Treasury is publishing multiple funding opportunity announcements (FOAs) for its RESTORE Act grant programs. This announcement applies only to the Direct Component and is only for applications for eligible non-construction activities, including projects with or without a non-federal cost-share for another federally funded project or program. This announcement also includes planning assistance need…</summary>
+  </entry>
+  <entry>
     <title>NIOSH Miner Safety and Health Training Program - Western United States - U60</title>
     <link href="https://www.grants.gov/search-results-detail/363232"/>
     <id>urn:funding-finder:grants-gov:363232</id>
@@ -347,6 +388,19 @@
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
     <summary>Centers for Disease Control and Prevention - ERA | Estimated Application 2027-01-26 | Background: Despite advances in technology and improvements in work environments, mining remains one of the most challenging and hazardous occupations in the United States. The industry continues to experience a fatality rate nearly three times higher than the national average for all industries, according to the U.S. Bureau of Labor Statistics (BLS). Public MSHA data show that in 2025, the U.S. m…</summary>
+  </entry>
+  <entry>
+    <title>Climate Program Office FY 2027 - Super Intelligence/Machine Learning Innovation to Advance NOAA's Earth System Science and Support Hazard Resilience</title>
+    <link href="https://www.grants.gov/search-results-detail/364160"/>
+    <id>urn:funding-finder:grants-gov:364160</id>
+    <updated>2026-10-27T00:00:00Z</updated>
+    <author><name>DOC NOAA - ERA Production</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Environmental science"/>
+    <category term="Technology development"/>
+    <category term="Transportation"/>
+    <category term="Data science"/>
+    <summary>DOC NOAA - ERA Production | Application 2027-02-09 | Through this Notice of Federal Funding Opportunity, the NOAA Climate Program Office (https://cpo.noaa.gov/funding-opportunities/) is soliciting proposals for a FY 2027 grants competition focused on Super Intelligence/Machine Learning Innovation to Advance NOAA's Earth System Science and Support Hazard Resilience. The NOAA Office of Oceanic and Atmospheric Research (OAR), or "NOAA Research," provid…</summary>
   </entry>
   <entry>
     <title>Unlocking New Levels of Output and Capacity for Key Subsurface Resources (UNLOCK)</title>
@@ -400,20 +454,6 @@
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
     <summary>Environmental Protection Agency | Application 2026-12-11 | This announcement requests full proposals from Indian Tribes, State &amp; Local Governments, Institutions of Higher Education (IHEs), Interstate Agencies and Nonprofit organizations to support priorities of the Southeast New England Program (SNEP) for coastal watershed restoration. Priorities of the funding opportunity include advancing coastal and riverine restoration and connectivity across southeas…</summary>
-  </entry>
-  <entry>
-    <title>NGA - Boosting Innovative GEOINT - Science &amp; Technology Broad Agency Announcement (BIG-ST BAA): Topic # 07 - Lidar Analysis for Surface &amp; Environmental Reconnaissance (LASER)</title>
-    <link href="https://sam.gov/opp/854d837d8dc842719d9fec95764d8ceb/view"/>
-    <id>urn:funding-finder:sam-gov:sam-gov%3A854d837d8dc842719d9fec95764d8ceb</id>
-    <updated>2026-10-20T00:00:00Z</updated>
-    <author><name>National Geospatial-Intelligence Agency</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Space and aeronautics"/>
-    <category term="Transportation"/>
-    <category term="Data science"/>
-    <summary>National Geospatial-Intelligence Agency | Preproposal 2026-10-28 | Develop AI/ML methods to extract and classify 3D surface/subsurface objects using NASA ICESat-2 and GEDI lidar, including navigation safety applications. Topic 7 LASER only, not the BIG-ST parent or closed topics. General Solicitation Rev4 governs eligibility and the required abstract; the October 16 topic revision retains October 28 abstract and December 21 proposal dates. October 20 Q&amp;A allows a…</summary>
   </entry>
   <entry>
     <title>FY 2027 - 2029 Broad Agency Announcement (BAA), Oceanic and Atmospheric Research (OAR)</title>
@@ -568,15 +608,6 @@
     <summary>Geological Survey | Application 2026-11-14 | The spread of invasive grasses, such as cheatgrass, adds fine fuels to the landscape that increase wildfire occurrence and frequency. Following a fire, invasive grasses regrow quickly, typically outcompeting native plants and perpetuating what is known as the invasive grass-fire cycle. This cycle has been well documented in western portions of the sagebrush biome, such as the Great Basin, but ther…</summary>
   </entry>
   <entry>
-    <title>Liquid Surge</title>
-    <link href="https://sam.gov/workspace/contract/opp/33a06aa2901440c29518b95f8e099cfa/view"/>
-    <id>urn:funding-finder:darpa-iarpa-research-solicitations:darpa-iarpa%3Adarpa-darpapa250705</id>
-    <updated>2026-10-14T00:00:00Z</updated>
-    <author><name>Defense Advanced Research Projects Agency (DARPA)</name></author>
-    <category term="Environmental science"/>
-    <summary>Defense Advanced Research Projects Agency (DARPA) | Abstract 2026-11-03 | DSO is issuing a Disruption Opportunity (DO) in the technical domain of developing novel metrology for understanding wave propagation in compressible fluids. | See DO Disruption Opportunity Liquid Surge seeks to advance scientific understanding, predictive modeling, and metrology of transient wave phenomena in liquid environments under challenging conditions. The program addresses complex thermody…</summary>
-  </entry>
-  <entry>
     <title>Early-Onset Cancers: Investigating Etiology, Mechanisms, and Early Detection Strategies (RP1 Clinical Trials Optional)</title>
     <link href="https://www.grants.gov/search-results-detail/361438"/>
     <id>urn:funding-finder:grants-gov:361438</id>
@@ -586,6 +617,15 @@
     <category term="Cancer"/>
     <category term="Environmental science"/>
     <summary>National Institutes of Health | Application 2029-10-11 | This Notice of Funding Opportunity (NOFO) invites applications that investigate the etiology of sporadic non-hereditary early-onset cancers (EOCs: ages 18 to 49 years) and the underlying biological mechanisms that play a role in these cancers to inform prevention and control strategies. The proposed research is expected to advance the understanding of the unexplained rise of cancers in young adult…</summary>
+  </entry>
+  <entry>
+    <title>Liquid Surge</title>
+    <link href="https://sam.gov/workspace/contract/opp/33a06aa2901440c29518b95f8e099cfa/view"/>
+    <id>urn:funding-finder:darpa-iarpa-research-solicitations:darpa-iarpa%3Adarpa-darpapa250705</id>
+    <updated>2026-10-14T00:00:00Z</updated>
+    <author><name>Defense Advanced Research Projects Agency (DARPA)</name></author>
+    <category term="Environmental science"/>
+    <summary>Defense Advanced Research Projects Agency (DARPA) | Abstract 2026-11-03 | DSO is issuing a Disruption Opportunity (DO) in the technical domain of developing novel metrology for understanding wave propagation in compressible fluids. | See DO Disruption Opportunity Liquid Surge seeks to advance scientific understanding, predictive modeling, and metrology of transient wave phenomena in liquid environments under challenging conditions. The program addresses complex thermody…</summary>
   </entry>
   <entry>
     <title>Cellular Senescence Network (SenNet): SenNet Technology Projects (SenTecs) (UG3/UH3 Clinical Trial Not Allowed)</title>
@@ -631,56 +671,5 @@
     <category term="Space and aeronautics"/>
     <category term="Water"/>
     <summary>Geological Survey | Application 2026-10-30 | Invasive climbing plants, or vines, are spreading rapidly throughout the southeastern United States and the U.S. Caribbean, smothering local vegetation, altering forest structure, increasing infrastructure maintenance costs, and complicating management efforts for natural and working landscapes. Their expansion is influenced by disturbances such as hurricanes, flooding, uprooted trees, landslides,…</summary>
-  </entry>
-  <entry>
-    <title>Identify and Evaluate Potential Risk Factors for Amyotrophic Lateral Sclerosis (ALS)</title>
-    <link href="https://www.grants.gov/search-results-detail/363115"/>
-    <id>urn:funding-finder:grants-gov:363115</id>
-    <updated>2026-10-01T00:00:00Z</updated>
-    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Environmental science"/>
-    <category term="Neuroscience"/>
-    <summary>Centers for Disease Control and Prevention - ERA | Estimated Application 2026-12-01 | CDC/ATSDR is inviting research proposals to study risk factors for Amyotrophic Lateral Sclerosis (ALS). Studies on military service, contact sports, traumatic brain injury, neuroinflammation, and infections agents and exposures are encouraged. Funding will be for four funding options: Option A - Support research with strong existing evidence such as studies on known environmental or genetic risk f…</summary>
-  </entry>
-  <entry>
-    <title>Technical Assistance and Training Grant Program</title>
-    <link href="https://www.grants.gov/search-results-detail/364019"/>
-    <id>urn:funding-finder:grants-gov:364019</id>
-    <updated>2026-10-01T00:00:00Z</updated>
-    <author><name>Rural Utilities Service</name></author>
-    <category term="Community development"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Transportation"/>
-    <category term="Water"/>
-    <category term="Cybersecurity"/>
-    <summary>Rural Utilities Service | Application 2026-12-31 | verify prerequisite | Funds may be used to pay expenses associated with providing technical assistance and/or training (TAT) to: Identify and evaluate solutions to water problems relating to source, storage, treatment, or distribution; identify and evaluate solutions to waste problems relating to collection, treatment, or disposal: assist applicants, that have filed a pre-application with RUS, in the preparation of wat…</summary>
-  </entry>
-  <entry>
-    <title>FY 2027 Continuation of Solicitation for the Office of Science Financial Assistance Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363993"/>
-    <id>urn:funding-finder:grants-gov:363993</id>
-    <updated>2026-09-30T00:00:00Z</updated>
-    <author><name>Office of Science</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Catalysis and reaction engineering"/>
-    <category term="Materials science"/>
-    <category term="Separations and membranes"/>
-    <category term="Carbon management"/>
-    <category term="Quantum science"/>
-    <summary>Office of Science | Application 2027-09-30 | verify prerequisite | SC hereby announces its continuing interest in receiving applications for support of work in the following program areas: · Advanced Scientific Computing Research· Basic Energy Sciences· Biological and Environmental Research· Fusion Energy Sciences· High Energy and Nuclear Physics· Isotope R&amp;D and Production. On September 3, 1992, DOE published in the Federal Register the Office of Energy Research…</summary>
-  </entry>
-  <entry>
-    <title>National Parks Business Plan Internship</title>
-    <link href="https://www.grants.gov/search-results-detail/363985"/>
-    <id>urn:funding-finder:grants-gov:363985</id>
-    <updated>2026-09-28T00:00:00Z</updated>
-    <author><name>National Park Service</name></author>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <summary>National Park Service | Application 2027-01-04 | The National Parks Business Plan Internship (BPI) goal is to jointly administer a graduate-level internship program focused on improving the business management and operational health of our national parks and NPS programs. The internship program should: Provide students with in-depth training on NPS business management and operations, exposure to park and/or program level operations, and the oppo…</summary>
   </entry>
 </feed>

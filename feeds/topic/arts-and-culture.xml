@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/arts-and-culture.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/arts-and-culture.xml</id>
-  <updated>2026-10-25T14:30:20Z</updated>
+  <updated>2026-10-29T22:20:09Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Public Health Nursing</title>
@@ -174,6 +174,41 @@
     <author><name>Administration for Children and Families</name></author>
     <category term="Arts and culture"/>
     <summary>Administration for Children and Families | Estimated Application 2027-03-02 | The Office of Early Childhood Development (ECD) within the Administration for Children and Families (ACF) will be soliciting applications for the Fiscal Year 2027 Tribal Maternal, Infant, and Early Childhood Home Visiting (MIECHV) Program: Development and Implementation Grants. Funds will support 5-year cooperative agreements between ACF and federally recognized Indian tribes (or a consortium of I…</summary>
+  </entry>
+  <entry>
+    <title>FY27 National Network Cooperative Agreement to the National Railroad Passenger Corporation</title>
+    <link href="https://www.grants.gov/search-results-detail/364167"/>
+    <id>urn:funding-finder:grants-gov:364167</id>
+    <updated>2026-10-28T00:00:00Z</updated>
+    <author><name>DOT - Federal Railroad Administration</name></author>
+    <category term="Arts and culture"/>
+    <category term="Transportation"/>
+    <summary>DOT - Federal Railroad Administration | Application 2026-11-27 | Pursuant to the FY2027 Continuing Appropriations and Extensions Act, Pub. L. 119-103, the Federal Railroad Administration is to make available to Amtrak $309,586,389 to cover Operating, Capital, and Debt Service which will be used until January 31, 2030, or until expended. In order to receive these funds, Amtrak must complete the grant application and submit the following items electronically: (a)…</summary>
+  </entry>
+  <entry>
+    <title>FY27 Northeast Corridor Cooperative Agreement to the National Railroad Passenger Corporation</title>
+    <link href="https://www.grants.gov/search-results-detail/364166"/>
+    <id>urn:funding-finder:grants-gov:364166</id>
+    <updated>2026-10-28T00:00:00Z</updated>
+    <author><name>DOT - Federal Railroad Administration</name></author>
+    <category term="Arts and culture"/>
+    <category term="Transportation"/>
+    <summary>DOT - Federal Railroad Administration | Application 2026-11-27 | Pursuant to the FY2027 Continuing Appropriations and Extensions Act, Pub. L. 119-103, the Federal Railroad Administration is to make available to Amtrak $166,866,475 to cover Capital and Debt Service which will be used until January 31, 2030, or until expended. In order to receive these funds, Amtrak must complete the grant application and submit the following items electronically: (a) Application…</summary>
+  </entry>
+  <entry>
+    <title>AFRL/AFOSR-Taiwan NSTC Frontiers in Materials and Nanostructures: AI-Driven Discovery, Quantum Geometry, and Energy-Efficient Information Technologies 2027-2030</title>
+    <link href="https://www.grants.gov/search-results-detail/364165"/>
+    <id>urn:funding-finder:grants-gov:364165</id>
+    <updated>2026-10-28T00:00:00Z</updated>
+    <author><name>Air Force Office of Scientific Research</name></author>
+    <category term="Arts and culture"/>
+    <category term="Energy"/>
+    <category term="Quantum science"/>
+    <category term="Materials science"/>
+    <category term="Data science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Cybersecurity"/>
+    <summary>Air Force Office of Scientific Research | Application 2027-02-19 | verify prerequisite | This is a special Notice of Funding Opportunity Announcement (NOFO) sponsored by the Air Force Office of Scientific Research (AFOSR) and Taiwan’s National Science and Technology Council (NSTC), which will hereafter generally be referred to as “we, us, our, or AFOSR.” We announce the solicitation for a three-year program entitled “Frontiers in Materials and Nanostructures: AI-Driven Discovery, Quan…</summary>
   </entry>
   <entry>
     <title>NIOSH Miner Safety and Health Training Program - Western United States - U60</title>
@@ -612,41 +647,5 @@
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
     <summary>National Endowment for the Humanities | Application 2026-12-15 | The National Endowment for the Humanities (NEH) Division of Collections &amp; Infrastructure is accepting applications for Collections Stewardship, a program to advance the preservation and availability of physical and digital collections important for research, teaching, and public engagement in the humanities. Planning and implementation projects may include conservation and preservation; digitizati…</summary>
-  </entry>
-  <entry>
-    <title>Animal and Biological Material Resource Centers (P40 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/359646"/>
-    <id>urn:funding-finder:grants-gov:359646</id>
-    <updated>2025-12-05T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Arts and culture"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Data science"/>
-    <summary>National Institutes of Health | Application 2028-09-26 | This Notice of Funding Opportunity (NOFO) encourages grant applications for Animal and Biological Material Resource Centers. These Centers provide support for special colonies of laboratory animals and associated services, as well as other resources such as informatics tools, reagents, cultures (cells, tissues, and organs) and genetic stocks that serve the biomedical research community in a variet…</summary>
-  </entry>
-  <entry>
-    <title>US Army Combat Capabilities Development Command Broad Agency Announcement</title>
-    <link href="https://www.grants.gov/search-results-detail/360012"/>
-    <id>urn:funding-finder:grants-gov:360012</id>
-    <updated>2025-07-14T00:00:00Z</updated>
-    <author><name>ACC APG - Natick</name></author>
-    <category term="Arts and culture"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <summary>ACC APG - Natick | Application 2030-02-27 | The Soldier Center is seeking solutions in the following scientific and technical areas: Combat Feeding &amp; Equipment - Ration development, field feeding systems Soldier Protection &amp; Survivability - Headborne protection, modular armor, chemical/biological protection, nanotechnology Modeling &amp; Simulation - Soldier effectiveness, operational survivability Human Performance &amp; Biomechanics - Body-worn s…</summary>
-  </entry>
-  <entry>
-    <title>Support for Research Excellence (SuRE) Award (R16 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/358829"/>
-    <id>urn:funding-finder:grants-gov:358829</id>
-    <updated>2025-06-13T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health | Application 2027-05-28 | The SuRE program supports research capacity building at eligible higher education institutions by funding investigator-initiated biomedical research inbasic, social, clinical, behavioral, or translational science that falls in the mission areas of the NIH. The purpose of SuRE awards is to provide support for investigator-initiated research at resource-limited institutions by full-time faculty who …</summary>
   </entry>
 </feed>

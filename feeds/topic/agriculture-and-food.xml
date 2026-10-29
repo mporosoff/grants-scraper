@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml</id>
-  <updated>2026-10-25T14:30:20Z</updated>
+  <updated>2026-10-29T22:20:09Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Healthy Lifestyles in Youth</title>
@@ -93,10 +93,21 @@
     <title>Fiscal Year 2027 Regional Nutrition Hubs</title>
     <link href="https://www.grants.gov/search-results-detail/363392"/>
     <id>urn:funding-finder:grants-gov:363392</id>
-    <updated>2026-10-30T00:00:00Z</updated>
+    <updated>2026-12-02T00:00:00Z</updated>
     <author><name>Health Resources and Services Administration</name></author>
     <category term="Agriculture and food"/>
-    <summary>Health Resources and Services Administration | Estimated Application 2026-12-29 | Fiscal Year (FY) 2027 Regional Nutrition Hubs (RNH) will support region-specific technical assistance (TA) on expanding high-quality nutrition services to the Health Resources and Services Administration's (HRSA) Health Center Program (H80) award recipients and look-alikes (health centers). Nutrition services prevent, manage, and treat diseases and conditions through nutritional and food-based int…</summary>
+    <summary>Health Resources and Services Administration | Estimated Application 2027-02-11 | Fiscal Year (FY) 2027 Regional Nutrition Hubs (RNH) will support region-specific technical assistance (TA) on expanding high-quality nutrition services to the Health Resources and Services Administration's (HRSA) Health Center Program (H80) award recipients and look-alikes (health centers). Nutrition services prevent, manage, and treat diseases and conditions through nutritional and food-based int…</summary>
+  </entry>
+  <entry>
+    <title>Harvest to Hallways: National School Lunch Program, Equipment Assistance Grants</title>
+    <link href="https://www.grants.gov/search-results-detail/364164"/>
+    <id>urn:funding-finder:grants-gov:364164</id>
+    <updated>2026-10-28T00:00:00Z</updated>
+    <author><name>Food and Nutrition Service</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Education and workforce"/>
+    <category term="Manufacturing"/>
+    <summary>Food and Nutrition Service | Application 2027-01-11 | EXECUTIVE SUMMARY Under the leadership of Secretary Brooke Rollins, the United States Department of Agriculture (USDA) is committed to a new school meals policy plan aligning the National School Lunch and Breakfast Programs with the Dietary Guidelines for Americans, 2025-2030- providing real food, in every cafeteria. In support of this principle, the USDA Food and Nutrition Administration (FNA) is…</summary>
   </entry>
   <entry>
     <title>F26AS00088 Endangered Species Conservation - Wolf Livestock Loss Compensation and Prevention</title>
@@ -280,16 +291,6 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <summary>National Institute of Food and Agriculture | Application 2026-11-10 | The NLGCA Program, under assistance listing number 10.326, will assist NLGCA institutions in maintaining and expanding their capacity to conduct education, research, outreach, and integrated activities relating to agriculture, renewable resources, and other similar disciplines. NLGCA institutions may use the funds to maintain and expand capacity: 1. to successfully compete for funds from Federal g…</summary>
-  </entry>
-  <entry>
-    <title>Assisting Specialty Crop Exports: Low Oxygen Storage and Packaging Systems for U.S. Tree Nuts with Phytosanitary Traceability</title>
-    <link href="https://www.grants.gov/search-results-detail/363690"/>
-    <id>urn:funding-finder:grants-gov:363690</id>
-    <updated>2026-08-24T00:00:00Z</updated>
-    <author><name>Foreign Agricultural Service</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Environmental science"/>
-    <summary>Foreign Agricultural Service | Application 2026-10-26 | The occurrence of insects as well as pesticide residuals can be significant barriers for U.S. horticultural exports. Each importing country can have unique phytosanitary and maximum residue limit (MRL) requirements, which creates operational and logistical challenges. To maximize return to growers, U.S. shippers need tools that can universally address all such requirements while maintaining produc…</summary>
   </entry>
   <entry>
     <title>WaterSMART Enhancing Water Resources Projects</title>
