@@ -13,7 +13,7 @@ from scripts.build_catalog import record_identity
 from scripts.build_changes import diff_catalogs
 from scripts.build_feeds import build_feeds
 from scripts.sources.adapters.darpa_iarpa import (
-    DARPA, IARPA, DARPA_LIST, IARPA_LIST, DarpaIarpaAdapter, iarpa_inventory,
+    DARPA, IARPA, DARPA_LIST, IARPA_LIST, DarpaIarpaAdapter, darpa_inventory, iarpa_inventory,
 )
 from scripts.sources.merge import merge_records, rebuild_catalog, resolve_live_records
 from scripts.sources.registry import REGISTRY, collect
@@ -119,6 +119,48 @@ class InventoryTests(unittest.TestCase):
         self.assertEqual(live, [])
         self.assertFalse(results[0].ok)
         self.assertIn("Unrecognized DARPA", results[0].error)
+
+    def test_observed_qbi_workshop_notice_preserves_calls_and_fetch_inventory(self):
+        fixture = json.loads((FIXTURES / "qbi_workshops_20261029.json").read_text(encoding="utf-8"))
+        self.assertEqual(len(fixture["rows"]), 4)
+        self.assertEqual(fixture["notice"]["type"], "s")
+        data = payload()
+        liquid = "https://www.darpa.mil/research/programs/liquid-surge"
+        rows = json.loads((FIXTURES / "liquid_surge.json").read_text(encoding="utf-8")) + [
+            row for row in data["darpa"] if row["field_opportunity_number"] == "DARPA-PA-26-02-01"]
+
+        def run(inventory):
+            responses = {DARPA_LIST: json.dumps(inventory), IARPA_LIST: data["iarpa"],
+                QBI: data["pages"][QBI], liquid: (FIXTURES / "liquid_surge.html").read_text(encoding="utf-8")}
+            instance = adapter()
+            instance.set_context({"as_of": date(2026, 10, 29)})
+            with patch.object(instance._client, "get_text", side_effect=responses.__getitem__) as fetch:
+                published, results = collect([instance])
+            self.assertTrue(results[0].ok, results[0].error)
+            return published, [call.args[0] for call in fetch.call_args_list]
+
+        baseline, requests = run(rows)
+        self.assertEqual({row["opportunity_number"] for row in baseline},
+                         {"DARPA-PA-25-07-05", "DARPA-PA-26-02-01"})
+        self.assertEqual(set(requests), {DARPA_LIST, IARPA_LIST, QBI, liquid})
+        actual, actual_requests = run(fixture["rows"] + rows)
+        self.assertEqual(actual, baseline)
+        self.assertEqual(actual_requests, requests)
+
+    def test_workshop_notice_exception_does_not_hide_unknown_research_identifiers(self):
+        fixture = json.loads((FIXTURES / "qbi_workshops_20261029.json").read_text(encoding="utf-8"))
+        seed = next(row for row in fixture["rows"] if row["field_body_with_summary"])
+        for number, title in (("DARPA-PA-FY27-UNKNOWN", "QBI workshops"),
+                              ("DARPA-SN-27-14", "QBI workshop research funding"),
+                              ("DARPA-SN-27-14", "QBI research opportunity")):
+            row = {**seed, "field_opportunity_number": number, "title": title}
+            with self.subTest(number=number, title=title), self.assertRaisesRegex(ValueError, "Unrecognized DARPA"):
+                darpa_inventory([row])
+        data = payload()
+        for row in data["darpa"]:
+            if row["field_opportunity_number"] == "DARPA-PA-26-02-01":
+                row["title"] = "QBI workshops"
+        self.assertIn("DARPA-PA-26-02-01", [row["opportunity_number"] for row in records(data)])
 
     def test_recognized_umbrella_only_inventory_is_a_healthy_zero(self):
         data = payload()

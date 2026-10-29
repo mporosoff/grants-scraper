@@ -31,6 +31,11 @@ on:
       candidate_id:
         description: Complete immutable candidate ID (required for resume)
         type: string
+      reconcile_source:
+        description: Source to repair from the retained candidate (catalog-reconcile only)
+        type: choice
+        options: [sam-gov, darpa-iarpa]
+        default: sam-gov
       receipt_run:
         description: Run containing the prior validation receipt (optional for validate/publish, required for verify)
         type: string
@@ -95,6 +100,7 @@ jobs:
           REQUESTED_STAGE: ${{ inputs.stage }}
           CANDIDATE_RUN: ${{ inputs.candidate_run }}
           CANDIDATE_ID: ${{ inputs.candidate_id }}
+          CATALOG_RECONCILE_SOURCE: ${{ inputs.reconcile_source || 'sam-gov' }}
           RECEIPT_RUN: ${{ inputs.receipt_run }}
           PUBLICATION_RUN: ${{ inputs.publication_run }}
           PUBLICATION_ATTEMPT: ${{ inputs.publication_attempt }}
@@ -1108,6 +1114,7 @@ jobs:
       GH_TOKEN: ${{ github.token }}
       CANDIDATE_RUN: ${{ needs.plan.outputs.candidate_run }}
       CANDIDATE_ID: ${{ needs.plan.outputs.candidate_id }}
+      CATALOG_RECONCILE_SOURCE: ${{ inputs.reconcile_source || 'sam-gov' }}
     steps:
       - uses: actions/checkout@v6
         with:
@@ -1135,7 +1142,7 @@ jobs:
           path: ${{ runner.temp }}/reconcile-state/reservation.json
           if-no-files-found: error
           retention-days: 90
-      - name: Reconcile only reviewed SAM and retain every other source
+      - name: Reconcile the selected source and retain every other source
         if: steps.restore.outputs.candidate_id == ''
         run: >-
           python -m tools.catalog_reconcile sources

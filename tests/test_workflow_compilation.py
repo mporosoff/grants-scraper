@@ -56,6 +56,21 @@ class WorkflowCompilationContracts(unittest.TestCase):
         validation = next(step for step in steps if 'tools.run_refresh_validation' in step.get('run', ''))
         self.assertLess(steps.index(lint), steps.index(validation))
 
+    def test_source_repair_selector_is_identical_in_plan_and_execution(self):
+        workflow = yaml.safe_load((WORKFLOWS / 'refresh-opportunities.yml').read_text(encoding='utf-8'))
+        selector = workflow[True]['workflow_dispatch']['inputs']['reconcile_source']
+        self.assertEqual(selector['default'], 'sam-gov')
+        self.assertEqual(set(selector['options']), {'sam-gov', 'darpa-iarpa'})
+        plan = next(step for step in workflow['jobs']['plan']['steps'] if step.get('id') == 'plan')
+        repair = workflow['jobs']['catalog-reconcile']
+        expected = "${{ inputs.reconcile_source || 'sam-gov' }}"
+        self.assertEqual(plan['env']['CATALOG_RECONCILE_SOURCE'], expected)
+        self.assertEqual(repair['env']['CATALOG_RECONCILE_SOURCE'], expected)
+        self.assertEqual(repair['if'], "needs.plan.outputs.stage == 'catalog-reconcile'")
+        for name, job in workflow['jobs'].items():
+            if name != 'catalog-reconcile':
+                self.assertNotIn('CATALOG_RECONCILE_SOURCE', job.get('env', {}))
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -1,4 +1,4 @@
-"""Reconcile only reviewed SAM against one authenticated retained candidate.
+"""Reconcile reviewed SAM or DARPA/IARPA against one retained candidate.
 
 This explicit maintenance stage has no new allowance. Its artifact family uses
 the existing task-aware independent checkpoint transport so a retry cannot
@@ -8,7 +8,7 @@ from __future__ import annotations
 
 import argparse
 import copy
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
 import hashlib
 import io
 import json
@@ -27,9 +27,12 @@ from tools import release_checkpoint_archive as archive
 VERSION = 'catalog-source-reconciliation-1'
 STAGE = 'catalog-reconcile'
 SLUG = 'sam-gov'
+DARPA_SLUG = 'darpa-iarpa'
+SUPPORTED_SOURCES = {SLUG, DARPA_SLUG}
 SOURCE_INPUTS = {'config/sam_gov.json', 'scripts/sources/sam_reviewed.py', 'scripts/sources/merge.py',
     'scripts/sources/sam_public.py', 'scripts/sources/adapters/sam_gov.py',
     'scripts/sources/sam_preflight.py', 'tools/sam_refresh_preflight.py', 'tools/require_sam_refresh.py'}
+DARPA_INPUTS = {'scripts/sources/adapters/darpa_iarpa.py'}
 SEMANTIC_INPUTS = {'assets/search-hybrid.js', 'assets/search-retrieval.js',
     'tools/build_search_v2_voyage_vectors.mjs', 'tools/corpus_clock.mjs',
     'tools/run_budgeted_vectors.mjs', 'tools/catalog_reconcile_vectors.mjs',
@@ -55,15 +58,34 @@ def require(ok, reason):
         raise ValueError('catalog_reconcile_' + reason)
 
 
-def operation_contract(root):
-    return c.file_hashes(Path(root), sorted(OPERATION_FILES))
+def source_slug(value=None):
+    """Legacy checkpoints omit the selector and remain reviewed SAM repairs."""
+    slug = (value or {}).get('source_slug', SLUG)
+    require(slug in SUPPORTED_SOURCES, 'unsupported_source')
+    return slug
 
 
-def source_operation_changed(before, after):
-    return any(before.get(name) != after.get(name) for name in SOURCE_INPUTS | SEMANTIC_INPUTS)
+def requested_source(environment):
+    return source_slug({'source_slug': environment.get('CATALOG_RECONCILE_SOURCE') or SLUG})
+
+
+def source_inputs(slug):
+    source_slug({'source_slug': slug})
+    return SOURCE_INPUTS if slug == SLUG else DARPA_INPUTS
+
+
+def operation_contract(root, slug=SLUG):
+    files = OPERATION_FILES if slug == SLUG else (
+        (OPERATION_FILES - SOURCE_INPUTS) | DARPA_INPUTS | {'scripts/sources/merge.py'})
+    return c.file_hashes(Path(root), sorted(files))
+
+
+def source_operation_changed(before, after, slug=SLUG):
+    return any(before.get(name) != after.get(name) for name in source_inputs(slug) | SEMANTIC_INPUTS)
 
 
 def plan(root, environment):
+    slug = requested_source(environment)
     require(environment.get('GITHUB_EVENT_NAME') == 'workflow_dispatch'
             and environment.get('GITHUB_REF') == 'refs/heads/main'
             and environment.get('GITHUB_REPOSITORY') == 'mporosoff/grants-scraper'
@@ -77,7 +99,7 @@ def plan(root, environment):
     return {'stage': STAGE, 'release_sha': c.git(root, 'rev-parse', 'HEAD'),
         'candidate_run': run, 'candidate_id': candidate, 'team_mode': 'maintenance',
         'openai': 'false', 'anthropic': 'false',
-        'reason': 'Exact retained candidate; reviewed SAM only, original logical budget, no document/team generation'}
+        'reason': f'Exact retained candidate; {slug} only, original logical budget, no document/team generation'}
 
 
 def prefix(candidate):
@@ -166,6 +188,7 @@ def restore(root, parent, state, output):
     """Newest paired private checkpoint wins across all runs of this parent."""
     root, parent, state, output = map(Path, (root, parent, state, output))
     environment = os.environ; repository = environment['GITHUB_REPOSITORY']
+    slug = requested_source(environment)
     manifest = c.load(parent, environment['CANDIDATE_ID'])
     require(manifest['generation_run_id'] == environment['CANDIDATE_RUN'], 'original_parent_run')
     parent_rows = run_artifacts(environment['CANDIDATE_RUN'], lambda path: api(repository, path), repository=repository)
@@ -196,6 +219,9 @@ def restore(root, parent, state, output):
         require(c.digest(raw) == selected['digest'].removeprefix('sha256:'), 'repair_checkpoint_digest')
         unpack(raw, state)
         context = c.read_json(state / 'reconciliation.json')
+        # One family owns one original allowance. Switching sources must never
+        # discard a prior repair or restore an earlier, less-consumed ledger.
+        require(source_slug(context) == slug, 'repair_checkpoint_source_mismatch')
         require(context['parent_candidate_id'] == manifest['candidate_id']
                 and context['parent_manifest_sha256'] == c.digest((parent / 'candidate.json').read_bytes()),
                 'repair_checkpoint_parent')
@@ -244,16 +270,16 @@ def restore(root, parent, state, output):
             try:
                 c.verify_dependencies(root, loaded)
             except ValueError:
-                verify_source_delta(root, manifest)
+                verify_source_delta(root, manifest, slug)
                 require(str(producer) != environment['GITHUB_RUN_ID'], 'changed_completed_child_requires_new_dispatch')
-                require(source_operation_changed(context['operation_contract'], operation_contract(root)),
+                require(source_operation_changed(context['operation_contract'], operation_contract(root, slug), slug),
                         'completed_child_requires_named_runtime_assembly_or_validation')
                 # A new bounded repair round consumes this exact prior child;
                 # preserve its budget and complete bytes, never restore origin.
                 retained_vectors = retain_vector_source(state, context, loaded, complete)
                 context = {k: v for k, v in context.items() if k not in ('operation_sha256', 'completed_candidate_id')}
                 context['retained_vector_source'] = retained_vectors
-                context['operation_contract'] = operation_contract(root)
+                context['operation_contract'] = operation_contract(root, slug)
                 context['operation_sha256'] = identity(context)
                 atomic_json(state / 'reconciliation.json', context)
             else:
@@ -261,17 +287,19 @@ def restore(root, parent, state, output):
                 # one whose SAM cache still includes withdrawn/replaced IDs;
                 # that needs an explicit migration, not repeated paid work.
                 from scripts.sources.merge import load_catalog
-                require_sam_cache_membership(load_catalog(complete / 'files/data/opportunities.js'),
-                    c.read_json(complete / 'files/data/document_evidence.json'),
-                    'completed_child_sam_cache_membership_requires_migration')
+                require(source_slug(loaded.get('source_reconciliation')) == slug, 'completed_child_source')
+                if slug == SLUG:
+                    require_sam_cache_membership(load_catalog(complete / 'files/data/opportunities.js'),
+                        c.read_json(complete / 'files/data/document_evidence.json'),
+                        'completed_child_sam_cache_membership_requires_migration')
                 shutil.copytree(complete, output)
                 emit(candidate_id=child, artifact_run=str(producer) if available else environment['GITHUB_RUN_ID'],
                      needs_persist='false' if available else 'true')
                 return True
-        if source_operation_changed(context['operation_contract'], operation_contract(root)):
-            verify_source_delta(root, manifest)
+        if source_operation_changed(context['operation_contract'], operation_contract(root, slug), slug):
+            verify_source_delta(root, manifest, slug)
             context = {k: v for k, v in context.items() if k not in ('operation_sha256', 'completed_candidate_id')}
-            context['operation_contract'] = operation_contract(root)
+            context['operation_contract'] = operation_contract(root, slug)
             context['operation_sha256'] = identity(context)
             atomic_json(state / 'reconciliation.json', context)
     else:
@@ -284,7 +312,9 @@ def restore(root, parent, state, output):
             'parent_producer': parent_producer,
             'parent_artifact': {'id': parent_artifact['id'], 'name': parent_artifact['name'],
                                 'sha256': parent_artifact['digest'].removeprefix('sha256:')},
-            'operation_contract': operation_contract(root)}
+            'operation_contract': operation_contract(root, slug)}
+        if slug != SLUG:
+            context['source_slug'] = slug
         context['operation_sha256'] = identity(context)
         atomic_json(state / 'reconciliation.json', context)
         atomic_json(state / 'consumed-checkpoints.json', [])
@@ -298,7 +328,7 @@ def restore(root, parent, state, output):
     return False
 
 
-def verify_source_delta(root, original):
+def verify_source_delta(root, original, slug=SLUG):
     current = c.generation_dependencies(root)
     previous = original['generation_dependencies']
     require(current['contract'] == previous['contract'], 'generation_contract_changed')
@@ -306,11 +336,15 @@ def verify_source_delta(root, original):
     # Python AST hashing), rather than comparing raw bytes to AST digests.
     for name in set(current['files']) | set(previous['files']):
         if current['files'].get(name) != previous['files'].get(name):
-            require(name in SOURCE_INPUTS | SEMANTIC_INPUTS, 'unrelated_generation_input_' + name)
+            require(name in source_inputs(slug) | SEMANTIC_INPUTS, 'unrelated_generation_input_' + name)
 
 
 def sam_record(row):
-    return str(row.get('opportunity_id', '')).startswith(SLUG + ':')
+    return source_record(row, SLUG)
+
+
+def source_record(row, slug):
+    return str(row.get('opportunity_id', '')).startswith(slug + ':')
 
 
 def require_sam_cache_membership(catalog, evidence, reason):
@@ -321,28 +355,32 @@ def require_sam_cache_membership(catalog, evidence, reason):
 
 
 def project_sam(catalog, evidence, state):
+    return project_source(catalog, evidence, state, SLUG)
+
+
+def project_source(catalog, evidence, state, slug):
     """Normal zero-request projection, limited to this adapter's records/cache."""
     from scripts.extract_document_evidence import enrich_document_evidence
     from scripts.notice_structure_cache import StructureCache
     selected = copy.deepcopy(catalog)
-    selected['opportunities'] = [r for r in selected['opportunities'] if sam_record(r)]
+    selected['opportunities'] = [r for r in selected['opportunities'] if source_record(r, slug)]
     subset = copy.deepcopy(evidence)
     for key in ('records', 'subtopic_only'):
-        subset[key] = {k: v for k, v in subset.get(key, {}).items() if k.startswith(SLUG + ':')}
+        subset[key] = {k: v for k, v in subset.get(key, {}).items() if k.startswith(slug + ':')}
     stamp = catalog.get('document_evidence_generated_at') or catalog['generated_at']
     def forbidden_fetch(*_):
-        raise AssertionError('SAM reconciliation cannot extract or fetch documents')
+        raise AssertionError('Source reconciliation cannot extract or fetch documents')
     projected, updated = enrich_document_evidence(selected, subset, max_documents=0,
         max_subtopic_documents=0, request_delay=0, fetcher=forbidden_fetch,
         now=datetime.fromisoformat(stamp.replace('Z', '+00:00')),
         structure_cache=StructureCache(Path(state) / 'empty-structure-cache'))
     rows = {r['opportunity_id']: r for r in projected['opportunities']}
     result = copy.deepcopy(catalog)
-    result['opportunities'] = [rows[r['opportunity_id']] if sam_record(r) else r for r in result['opportunities']]
+    result['opportunities'] = [rows[r['opportunity_id']] if source_record(r, slug) else r for r in result['opportunities']]
     output_cache = copy.deepcopy(evidence)
     for key in ('records', 'subtopic_only'):
         output_cache[key] = {identifier: entry for identifier, entry in output_cache.get(key, {}).items()
-                             if not identifier.startswith(SLUG + ':')}
+                             if not identifier.startswith(slug + ':')}
         output_cache[key].update(updated.get(key, {}))
     return result, output_cache
 
@@ -420,6 +458,66 @@ def verify_sam_identity_projection(before, current, cache, active_ids, published
             [row for row in expected if not sam_record(row)], reason)
 
 
+def preserve_darpa_first_seen(external, cache, published):
+    """Recover only identity-bound first discovery from the verified publication."""
+    from scripts.solicitation_identity import solicitation_key
+    for record in external:
+        key = solicitation_key(record)
+        previous = [row for row in published if source_record(row, DARPA_SLUG)
+                    and row.get('opportunity_id') == record['opportunity_id']
+                    and key is not None and solicitation_key(row) == key]
+        require(len(previous) <= 1, 'published_darpa_identity_ambiguous')
+        if not previous or not previous[0].get('source_first_seen_date'):
+            continue
+        prior, current = previous[0]['source_first_seen_date'], record['source_first_seen_date']
+        try:
+            valid = all(re.fullmatch(r'\d{4}-\d{2}-\d{2}', value) is not None
+                        and date.fromisoformat(value) for value in (prior, current))
+        except (TypeError, ValueError):
+            valid = False
+        require(valid, 'published_darpa_first_seen')
+        first_seen = min(prior, current)
+        record['source_first_seen_date'] = first_seen
+        for cached in cache['sources'][DARPA_SLUG]['records']:
+            if cached['opportunity_id'] == record['opportunity_id']:
+                cached['source_first_seen_date'] = first_seen
+
+
+def merge_darpa_projection(before, external, published):
+    """Admit complete official rows without rewriting another source's owner."""
+    from scripts.sources.merge import merge_records, reconcile_source_aliases
+    require(all(source_record(row, DARPA_SLUG) for row in external), 'darpa_record_scope')
+    base = [row for row in before if not source_record(row, DARPA_SLUG)]
+    selected, _ = reconcile_source_aliases(external,
+        [row for row in published if source_record(row, DARPA_SLUG)])
+    merged, summary = merge_records(copy.deepcopy(base), selected)
+    # A cross-source ownership change needs a separate explicit repair. This
+    # path cannot drop a call or mutate another source's accepted evidence.
+    others = [row for row in merged if not source_record(row, DARPA_SLUG)]
+    require({row['opportunity_id']: row for row in others} ==
+            {row['opportunity_id']: row for row in base} and len(others) == len(base),
+            'darpa_cross_source_identity_requires_separate_repair')
+    target = [row for row in merged if source_record(row, DARPA_SLUG)]
+    require(len(target) == len(external)
+            and {row['opportunity_id'] for row in target} == {row['opportunity_id'] for row in external},
+            'darpa_active_records_not_preserved')
+    return copy.deepcopy(base) + target, summary
+
+
+def verify_darpa_projection(before, current, cache, active_ids, *, reason='non_target_records_unchanged'):
+    require(isinstance(active_ids, list) and len(active_ids) <= 200
+            and active_ids == sorted(set(active_ids))
+            and all(re.fullmatch(r'darpa-iarpa:(?:darpa|iarpa)-[a-z0-9]+', str(identifier))
+                    for identifier in active_ids), 'active_darpa_identity_selector')
+    target = [row for row in current['opportunities'] if source_record(row, DARPA_SLUG)]
+    selected = cache['sources'][DARPA_SLUG]['records']
+    require(len(target) == len(active_ids) and len(selected) == len(active_ids)
+            and {row['opportunity_id'] for row in target} == set(active_ids)
+            and {row['opportunity_id'] for row in selected} == set(active_ids), 'active_darpa_identity_cache')
+    require([row for row in current['opportunities'] if not source_record(row, DARPA_SLUG)] ==
+            [row for row in before['opportunities'] if not source_record(row, DARPA_SLUG)], reason)
+
+
 def reconcile(root, parent, state):
     from scripts.sources.merge import load_catalog, load_source_cache, resolve_live_records, rebuild_catalog, save_catalog, save_source_cache, merge_sam_identity_projection
     from scripts.sources.registry import collect
@@ -427,8 +525,11 @@ def reconcile(root, parent, state):
     from scripts.build_catalog import validate_catalog
     from tools.require_sam_refresh import require_complete_refresh
     root, parent, state = map(Path, (root, parent, state))
+    context = c.read_json(state / 'reconciliation.json')
+    slug = source_slug(context)
+    require(slug == requested_source(os.environ), 'source_checkpoint_selector')
     original = c.load(parent)
-    verify_source_delta(root, original)
+    verify_source_delta(root, original, slug)
     # Restore generated inputs only; protected runtime and adapter code stay at
     # the reviewed repair SHA. No document extraction or team engine is invoked.
     for name in original['generation_files']:
@@ -448,17 +549,36 @@ def reconcile(root, parent, state):
     else:
         published = capture_published_predecessor(root, checkpoint)
         historical = _published_catalog((checkpoint / 'published-predecessor.js').read_bytes())['opportunities']
-        adapter = SamGovAdapter()
+        if slug == SLUG:
+            adapter = SamGovAdapter()
+        else:
+            from scripts.sources.adapters.darpa_iarpa import DarpaIarpaAdapter
+            adapter = DarpaIarpaAdapter()
         _, results = collect(adapters=[adapter], context={'catalog_records': catalog['opportunities'],
             'as_of': datetime.now(timezone.utc).date(),
-            'source_snapshots': {SLUG: cache.get('sources', {}).get(SLUG, {}).get('records', [])}})
-        require(len(results) == 1 and results[0].ok, 'reviewed_sam_collection_failed')
+            'source_snapshots': {slug: cache.get('sources', {}).get(slug, {}).get('records', [])}})
+        require(len(results) == 1 and results[0].slug == slug and results[0].ok,
+                'reviewed_sam_collection_failed' if slug == SLUG else 'darpa_collection_incomplete')
+        if slug == DARPA_SLUG:
+            partitions = results[0].diagnostics.get('partitions', [])
+            require(results[0].snapshot_complete and len(partitions) == 2
+                    and {row.get('id_prefix') for row in partitions} ==
+                    {DARPA_SLUG + ':darpa-', DARPA_SLUG + ':iarpa-'}
+                    and all(row.get('healthy') is True and row.get('status') == 'refreshed'
+                            for row in partitions), 'darpa_partitions_incomplete')
         external, cache, lifecycle = resolve_live_records(results, cache, datetime.now(timezone.utc).date())
-        combined, merge_summary = merge_sam_identity_projection(
-            [r for r in catalog['opportunities'] if not sam_record(r)], external, historical)
+        if slug == SLUG:
+            combined, merge_summary = merge_sam_identity_projection(
+                [r for r in catalog['opportunities'] if not sam_record(r)], external, historical)
+        else:
+            require(len(lifecycle) == 1 and lifecycle[0].get('healthy') is True
+                    and lifecycle[0].get('status') == 'refreshed', 'darpa_lifecycle_incomplete')
+            preserve_darpa_first_seen(external, cache, historical)
+            combined, merge_summary = merge_darpa_projection(catalog['opportunities'], external, historical)
         validate_catalog(combined, len(combined), len(combined))
         summary = {'sources': lifecycle, 'written': True, 'validation': {'ok': True}, 'merge': merge_summary}
-        require_complete_refresh(load_config(), summary)
+        if slug == SLUG:
+            require_complete_refresh(load_config(), summary)
         # Only this adapter's records are replaced. Other source histories and
         # the catalog-wide freshness timestamp remain their original evidence.
         prior_additional = catalog.get('diagnostics', {}).get('additional_sources', {})
@@ -466,20 +586,23 @@ def reconcile(root, parent, state):
         additional = catalog['diagnostics']['additional_sources']
         for key in ('adapters', 'lifecycle'):
             def source_id(r): return r.get('slug') or r.get('adapter') or r.get('source_slug')
-            additional[key] = [r for r in prior_additional.get(key, []) if source_id(r) != SLUG] + additional[key]
+            additional[key] = [r for r in prior_additional.get(key, []) if source_id(r) != slug] + additional[key]
         evidence_path = root / 'data/document_evidence.json'
         if evidence_path.exists():
-            catalog, evidence = project_sam(catalog, c.read_json(evidence_path), state)
+            catalog, evidence = project_source(catalog, c.read_json(evidence_path), state, slug)
             # Rebuild indexes/facets after the normal public notice projection.
             from scripts.build_catalog import build_search_index, facet_counts
             catalog['search_index'] = build_search_index(catalog['opportunities'])
             catalog['facets'] = facet_counts(catalog['opportunities'])
-            atomic_json(evidence_path, evidence)
+            if slug == SLUG:
+                atomic_json(evidence_path, evidence)
         save_catalog(catalog, root / 'data/opportunities.js')
         save_source_cache(cache, root / 'data/source_records.json')
         summary['operation_sha256'] = c.read_json(state / 'reconciliation.json')['operation_sha256']
         summary['published_predecessor'] = published
-        summary['active_sam_ids'] = sorted(row['opportunity_id'] for row in external)
+        summary['active_sam_ids' if slug == SLUG else 'active_source_ids'] = sorted(row['opportunity_id'] for row in external)
+        if slug != SLUG:
+            summary['source_slug'] = slug
         summary['files'] = {}
         for name in ('data/opportunities.js', 'data/source_records.json', 'data/document_evidence.json'):
             raw = (root / name).read_bytes(); target = checkpoint / name
@@ -489,30 +612,38 @@ def reconcile(root, parent, state):
     historical = restore_published_predecessor(root, state, checkpoint, summary.get('published_predecessor'))
     current = load_catalog(root / 'data/opportunities.js')
     current_cache = load_source_cache(root / 'data/source_records.json')
-    verify_sam_identity_projection(before_catalog, current, current_cache, summary['active_sam_ids'], historical)
-    require({k: v for k, v in current_cache['sources'].items() if k != SLUG} ==
-            {k: v for k, v in before_cache['sources'].items() if k != SLUG}, 'non_sam_source_cache_unchanged')
+    if slug == SLUG:
+        verify_sam_identity_projection(before_catalog, current, current_cache, summary['active_sam_ids'], historical)
+    else:
+        require(source_slug(summary) == slug, 'source_summary_selector')
+        verify_darpa_projection(before_catalog, current, current_cache, summary['active_source_ids'])
+        require((root / 'data/document_evidence.json').read_bytes() ==
+                (parent / 'files/data/document_evidence.json').read_bytes(), 'darpa_document_cache_unchanged')
+    require({k: v for k, v in current_cache['sources'].items() if k != slug} ==
+            {k: v for k, v in before_cache['sources'].items() if k != slug},
+            'non_sam_source_cache_unchanged' if slug == SLUG else 'non_target_source_cache_unchanged')
     require(current.get('generated_at') == before_catalog.get('generated_at'), 'catalog_freshness_not_relabelled')
-    # This supported stage preserves all scientific team decisions. A SAM scope
+    # This supported stage preserves all scientific team decisions. A target scope
     # with an existing paid decision needs its own explicit team repair rather
     # than silently retaining or regenerating that decision here.
     model = c.read_json(root / 'config/opportunity_team_model.json')
-    old_sam = {r['opportunity_id']: r for r in before_catalog['opportunities'] if sam_record(r)}
-    new_sam = {r['opportunity_id']: r for r in current['opportunities'] if sam_record(r)}
-    changed = {key for key in set(old_sam) | set(new_sam) if old_sam.get(key) != new_sam.get(key)}
+    old_target = {r['opportunity_id']: r for r in before_catalog['opportunities'] if source_record(r, slug)}
+    new_target = {r['opportunity_id']: r for r in current['opportunities'] if source_record(r, slug)}
+    changed = {key for key in set(old_target) | set(new_target) if old_target.get(key) != new_target.get(key)}
     require(not any(str(row.get('id', '')).split(':', 2)[:2] == key.split(':', 2)[:2]
                     for row in model.get('opportunities', []) for key in changed),
-            'changed_sam_scope_has_existing_team_decision')
+            'changed_sam_scope_has_existing_team_decision' if slug == SLUG else 'changed_source_scope_has_existing_team_decision')
     return summary
 
 
 def verify_inputs(root, original, parent, receipt):
     value = c.read_json(receipt) if isinstance(receipt, (str, Path)) else receipt
-    require(value['version'] == VERSION and value['source_slug'] == SLUG
+    slug = source_slug(value)
+    require(value['version'] == VERSION and value.get('source_slug') == slug
             and value['parent_candidate_id'] == original['candidate_id']
             and value['parent_manifest_sha256'] == c.digest((Path(parent) / 'candidate.json').read_bytes())
-            and value['operation_contract'] == operation_contract(root), 'derived_receipt_contract')
-    verify_source_delta(root, original)
+            and value['operation_contract'] == operation_contract(root, slug), 'derived_receipt_contract')
+    verify_source_delta(root, original, slug)
     from scripts.sources.merge import load_catalog
     old = load_catalog(Path(parent) / 'files/data/opportunities.js')
     new = load_catalog(Path(root) / 'data/opportunities.js')
@@ -523,15 +654,20 @@ def verify_inputs(root, original, parent, receipt):
     require(published == _published_metadata(root, published['ref']), 'derived_published_predecessor')
     raw = subprocess.check_output(['git', '-C', str(root), 'show', published['ref'] + ':data/opportunities.js'])
     _verify_published_bytes(raw, published['files']['data/opportunities.js'], 'data/opportunities.js')
-    verify_sam_identity_projection(old, new, new_cache, value['active_sam_ids'],
-                                   _published_catalog(raw)['opportunities'], reason='derived_non_sam_records')
-    require({k: v for k, v in old_cache['sources'].items() if k != SLUG} ==
-            {k: v for k, v in new_cache['sources'].items() if k != SLUG}, 'derived_non_sam_source_cache')
+    if slug == SLUG:
+        verify_sam_identity_projection(old, new, new_cache, value['active_sam_ids'],
+                                       _published_catalog(raw)['opportunities'], reason='derived_non_sam_records')
+    else:
+        verify_darpa_projection(old, new, new_cache, value['active_source_ids'], reason='derived_non_target_records')
+        require((Path(parent) / 'files/data/document_evidence.json').read_bytes() ==
+                (Path(root) / 'data/document_evidence.json').read_bytes(), 'derived_darpa_document_cache')
+    require({k: v for k, v in old_cache['sources'].items() if k != slug} ==
+            {k: v for k, v in new_cache['sources'].items() if k != slug}, 'derived_non_sam_source_cache')
     old_evidence = c.read_json(Path(parent) / 'files/data/document_evidence.json')
     new_evidence = c.read_json(Path(root) / 'data/document_evidence.json')
     for key in ('records', 'subtopic_only'):
-        require({k: v for k, v in old_evidence.get(key, {}).items() if not k.startswith(SLUG + ':')} ==
-                {k: v for k, v in new_evidence.get(key, {}).items() if not k.startswith(SLUG + ':')},
+        require({k: v for k, v in old_evidence.get(key, {}).items() if not k.startswith(slug + ':')} ==
+                {k: v for k, v in new_evidence.get(key, {}).items() if not k.startswith(slug + ':')},
                 'derived_non_sam_document_cache')
     require(old_evidence.get('generated_at') == new_evidence.get('generated_at'), 'derived_evidence_freshness')
     retained = {n: h for n, h in original['generation_files'].items()
@@ -544,6 +680,8 @@ def verify_inputs(root, original, parent, receipt):
 def finish(root, parent, state, output, receipt):
     root, parent, state, output, receipt = map(Path, (root, parent, state, output, receipt))
     original = c.load(parent); context = c.read_json(state / 'reconciliation.json')
+    slug = source_slug(context)
+    require(slug == requested_source(os.environ), 'finish_source_selector')
     ledger = c.read_json(state / 'ledger.json')
     consumed = c.read_json(state / 'consumed-checkpoints.json')
     for link in consumed:
@@ -554,11 +692,13 @@ def finish(root, parent, state, output, receipt):
                 'consumed_checkpoint_request_prefix')
     checkpoint = state / ('source-' + context['operation_sha256'])
     summary = c.read_json(checkpoint / 'summary.json')
-    value = context | {'source_slug': SLUG, 'consumed_checkpoints': consumed,
-        'operation_contract': operation_contract(root),
+    require(source_slug(summary) == slug, 'finish_source_summary_selector')
+    selector = 'active_sam_ids' if slug == SLUG else 'active_source_ids'
+    value = context | {'source_slug': slug, 'consumed_checkpoints': consumed,
+        'operation_contract': operation_contract(root, slug),
         'cache_operation_contract': context['operation_contract'],
         'source_summary_sha256': c.digest((checkpoint / 'summary.json').read_bytes()),
-        'published_predecessor': summary['published_predecessor'], 'active_sam_ids': summary['active_sam_ids'],
+        'published_predecessor': summary['published_predecessor'], selector: summary[selector],
         'ledger_sha256': identity(ledger),
         'new_document_requests': 0, 'new_team_requests': 0,
         'retained_output_hashes': {n: h for n, h in original['generation_files'].items()
