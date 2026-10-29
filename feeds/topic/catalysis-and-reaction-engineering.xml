@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/catalysis-and-reaction-engineering.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/catalysis-and-reaction-engineering.xml</id>
-  <updated>2026-10-24T22:43:50Z</updated>
+  <updated>2026-10-25T14:30:20Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>FY 2027 Continuation of Solicitation for the Office of Science Financial Assistance Program</title>
@@ -263,6 +263,22 @@
     <category term="Materials science"/>
     <category term="Technology development"/>
     <summary>U.S. National Science Foundation | Application 2026-11-16 | Proposals in the area of plasma physics submitted to the Division of Physics that are not governed by another solicitation (such as CAREER), should be submitted to the Division-wide solicitation: Division of Physics: Investigator-Initiated Research Projects. The Plasma Physics program participates in multiple NSF meta-programs such as the ECosytem for Leading Innovation in Plasma Science and Engin…</summary>
+  </entry>
+  <entry>
+    <title>DEVCOM ARMY RESEARCH LABORATORY BROAD AGENCY ANNOUNCEMENT FOR FOUNDATIONAL RESEARCH</title>
+    <link href="https://www.grants.gov/search-results-detail/344592"/>
+    <id>urn:funding-finder:grants-gov:344592</id>
+    <updated>2022-11-21T00:00:00Z</updated>
+    <author><name>Dept of the Army -- Materiel Command</name></author>
+    <category term="Technology development"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Cybersecurity"/>
+    <category term="Data science"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Materials science"/>
+    <summary>Dept of the Army -- Materiel Command | Application 2027-11-20 | The purpose of this combined Broad Agency Announcement (BAA) under Federal Acquisition Regulation (FAR) Part 35 and Funding Opportunity Announcement (FOA) under 2 Code of Federal Regulations (CFR) 200.204 (henceforth referred to as “BAA”) is to solicit research proposals for submission to the U.S. Army Combat Capabilities Development Command (DEVCOM) Army Research Laboratory (ARL) for funding cons…</summary>
   </entry>
   <entry>
     <title>DOD Defense Health Agency (DHA) Research &amp; Development FY23-FY27 BROAD AGENCY ANNOUNCEMENT for Extramural Medical Research</title>

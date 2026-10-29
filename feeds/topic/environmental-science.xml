@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/environmental-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/environmental-science.xml</id>
-  <updated>2026-10-24T22:43:50Z</updated>
+  <updated>2026-10-25T14:30:20Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Limited Competition: Biomedical Research Environment &amp; Sponsored Programs Administration Development (BRE-SPAD) Program</title>
@@ -412,6 +412,7 @@
     <category term="Environmental science"/>
     <category term="Space and aeronautics"/>
     <category term="Transportation"/>
+    <category term="Data science"/>
     <summary>National Geospatial-Intelligence Agency | Preproposal 2026-10-28 | Develop AI/ML methods to extract and classify 3D surface/subsurface objects using NASA ICESat-2 and GEDI lidar, including navigation safety applications. Topic 7 LASER only, not the BIG-ST parent or closed topics. General Solicitation Rev4 governs eligibility and the required abstract; the October 16 topic revision retains October 28 abstract and December 21 proposal dates. October 20 Q&amp;A allows a…</summary>
   </entry>
   <entry>

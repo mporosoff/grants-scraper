@@ -1,8 +1,568 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-24T22:44:05Z",
+  "generated_at": "2026-10-25T14:40:25Z",
   "retention_days": 90,
   "events": [
+    {
+      "id": "bc1c3589a393cac7a337",
+      "type": "source_correction",
+      "label": "Source interpretation corrected",
+      "changed_at": "2026-10-25T14:28:34.882212Z",
+      "opportunity_id": "360593",
+      "detail": "2029-02-06 → 2027-02-03",
+      "record": {
+        "opportunity_id": "360593",
+        "opportunity_number": "PAR-27-032",
+        "title": "Maximizing Investigators’ Research Award (MIRA) for Early Stage Investigators (ESI)",
+        "agency": "National Institutes of Health",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-05-12",
+        "close_date": "2029-02-06",
+        "deadlines": [
+          {
+            "kind": "application",
+            "date": "2029-02-06",
+            "time": "5:00 p.m.",
+            "timezone": "applicant_local",
+            "note": null,
+            "estimated": false,
+            "source": "Grants.gov XML extract",
+            "source_url": "https://www.grants.gov/search-results-detail/360593",
+            "source_field": "CloseDate",
+            "confidence": "official_structured",
+            "detail_checked_at": "2026-08-01T11:35:33.536291Z",
+            "document_evidence_id": "evidence-360593-a072a20cde16",
+            "document_confidence": "machine_extracted_needs_verification",
+            "document_source_fields": {
+              "time": {
+                "present": true,
+                "value": null
+              },
+              "timezone": {
+                "present": true,
+                "value": null
+              },
+              "stage": {
+                "present": false,
+                "value": null
+              },
+              "clock_citation": {
+                "present": false,
+                "value": null
+              }
+            },
+            "stage": "application",
+            "clock_citation": {
+              "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/351937",
+              "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/351937#page=43",
+              "document_name": "PAR-27-032-Full-Announcement.pdf",
+              "sha256": "d198bd20db41cbcfccdc29a591982d0e25061b4d41341de242fee0c9a5eb2ab4",
+              "page": 43,
+              "section": null,
+              "location": "page 43",
+              "quote": "Submission requirements and deadlines Application due dates: Due on October 2, 2026, February 3, 2027, October 4, 2027, February 3, 2028, October 3, 2028, February 6, 2029 at 5:00 p.m. local time of the applicant organization. We encourage you to submit your application before the application deadline so that you have time to make any corrections needed to…",
+              "extracted_at": "2026-10-25T14:30:20.090060Z",
+              "structural_reference": {
+                "block_id": "pdf-43-5",
+                "kind": "line"
+              }
+            }
+          },
+          {
+            "kind": "application",
+            "date": "2026-10-02",
+            "time": "5:00 p.m.",
+            "timezone": "applicant_local",
+            "estimated": false,
+            "source": "Official notice (machine extracted)",
+            "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/351937",
+            "confidence": "machine_extracted_needs_verification",
+            "evidence_id": "evidence-360593-da561fac6b0f",
+            "required": null,
+            "subject": "submission",
+            "stage": "application",
+            "application_class": "unspecified",
+            "cycle": null,
+            "track": null,
+            "obligation": "unknown",
+            "invitation_required": null,
+            "prerequisite": null,
+            "clock_citation": {
+              "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/351937",
+              "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/351937#page=43",
+              "document_name": "PAR-27-032-Full-Announcement.pdf",
+              "sha256": "d198bd20db41cbcfccdc29a591982d0e25061b4d41341de242fee0c9a5eb2ab4",
+              "page": 43,
+              "section": null,
+              "location": "page 43",
+              "quote": "Submission requirements and deadlines Application due dates: Due on October 2, 2026, February 3, 2027, October 4, 2027, February 3, 2028, October 3, 2028, February 6, 2029 at 5:00 p.m. local time of the applicant organization. We encourage you to submit your application before the application deadline so that you have time to make any corrections needed to…",
+              "extracted_at": "2026-10-25T14:30:20.090060Z",
+              "structural_reference": {
+                "block_id": "pdf-43-5",
+                "kind": "line"
+              }
+            },
+            "field_authority": "official_notice_field",
+            "parser_version": "submission-fields-21"
+          },
+          {
+            "kind": "application",
+            "date": "2027-02-03",
+            "time": "5:00 p.m.",
+            "timezone": "applicant_local",
+            "estimated": false,
+            "source": "Official notice (machine extracted)",
+            "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/351937",
+            "confidence": "machine_extracted_needs_verification",
+            "evidence_id": "evidence-360593-56f4aa9a82fd",
+            "required": null,
+            "subject": "submission",
+            "stage": "application",
+            "application_class": "unspecified",
+            "cycle": null,
+            "track": null,
+            "obligation": "unknown",
+            "invitation_required": null,
+            "prerequisite": null,
+            "clock_citation": {
+              "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/351937",
+              "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/351937#page=43",
+              "document_name": "PAR-27-032-Full-Announcement.pdf",
+              "sha256": "d198bd20db41cbcfccdc29a591982d0e25061b4d41341de242fee0c9a5eb2ab4",
+              "page": 43,
+              "section": null,
+              "location": "page 43",
+              "quote": "Submission requirements and deadlines Application due dates: Due on October 2, 2026, February 3, 2027, October 4, 2027, February 3, 2028, October 3, 2028, February 6, 2029 at 5:00 p.m. local time of the applicant organization. We encourage you to submit your application before the application deadline so that you have time to make any corrections needed to…",
+              "extracted_at": "2026-10-25T14:30:20.090060Z",
+              "structural_reference": {
+                "block_id": "pdf-43-5",
+                "kind": "line"
+              }
+            },
+            "field_authority": "official_notice_field",
+            "parser_version": "submission-fields-21"
+          },
+          {
+            "kind": "application",
+            "date": "2027-10-04",
+            "time": "5:00 p.m.",
+            "timezone": "applicant_local",
+            "estimated": false,
+            "source": "Official notice (machine extracted)",
+            "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/351937",
+            "confidence": "machine_extracted_needs_verification",
+            "evidence_id": "evidence-360593-64fadc09bf89",
+            "required": null,
+            "subject": "submission",
+            "stage": "application",
+            "application_class": "unspecified",
+            "cycle": null,
+            "track": null,
+            "obligation": "unknown",
+            "invitation_required": null,
+            "prerequisite": null,
+            "clock_citation": {
+              "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/351937",
+              "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/351937#page=43",
+              "document_name": "PAR-27-032-Full-Announcement.pdf",
+              "sha256": "d198bd20db41cbcfccdc29a591982d0e25061b4d41341de242fee0c9a5eb2ab4",
+              "page": 43,
+              "section": null,
+              "location": "page 43",
+              "quote": "Submission requirements and deadlines Application due dates: Due on October 2, 2026, February 3, 2027, October 4, 2027, February 3, 2028, October 3, 2028, February 6, 2029 at 5:00 p.m. local time of the applicant organization. We encourage you to submit your application before the application deadline so that you have time to make any corrections needed to…",
+              "extracted_at": "2026-10-25T14:30:20.090060Z",
+              "structural_reference": {
+                "block_id": "pdf-43-5",
+                "kind": "line"
+              }
+            },
+            "field_authority": "official_notice_field",
+            "parser_version": "submission-fields-21"
+          },
+          {
+            "kind": "application",
+            "date": "2028-02-03",
+            "time": "5:00 p.m.",
+            "timezone": "applicant_local",
+            "estimated": false,
+            "source": "Official notice (machine extracted)",
+            "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/351937",
+            "confidence": "machine_extracted_needs_verification",
+            "evidence_id": "evidence-360593-1900b774e435",
+            "required": null,
+            "subject": "submission",
+            "stage": "application",
+            "application_class": "unspecified",
+            "cycle": null,
+            "track": null,
+            "obligation": "unknown",
+            "invitation_required": null,
+            "prerequisite": null,
+            "clock_citation": {
+              "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/351937",
+              "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/351937#page=43",
+              "document_name": "PAR-27-032-Full-Announcement.pdf",
+              "sha256": "d198bd20db41cbcfccdc29a591982d0e25061b4d41341de242fee0c9a5eb2ab4",
+              "page": 43,
+              "section": null,
+              "location": "page 43",
+              "quote": "Submission requirements and deadlines Application due dates: Due on October 2, 2026, February 3, 2027, October 4, 2027, February 3, 2028, October 3, 2028, February 6, 2029 at 5:00 p.m. local time of the applicant organization. We encourage you to submit your application before the application deadline so that you have time to make any corrections needed to…",
+              "extracted_at": "2026-10-25T14:30:20.090060Z",
+              "structural_reference": {
+                "block_id": "pdf-43-5",
+                "kind": "line"
+              }
+            },
+            "field_authority": "official_notice_field",
+            "parser_version": "submission-fields-21"
+          },
+          {
+            "kind": "application",
+            "date": "2028-10-03",
+            "time": "5:00 p.m.",
+            "timezone": "applicant_local",
+            "estimated": false,
+            "source": "Official notice (machine extracted)",
+            "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/351937",
+            "confidence": "machine_extracted_needs_verification",
+            "evidence_id": "evidence-360593-842e401b5ea2",
+            "required": null,
+            "subject": "submission",
+            "stage": "application",
+            "application_class": "unspecified",
+            "cycle": null,
+            "track": null,
+            "obligation": "unknown",
+            "invitation_required": null,
+            "prerequisite": null,
+            "clock_citation": {
+              "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/351937",
+              "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/351937#page=43",
+              "document_name": "PAR-27-032-Full-Announcement.pdf",
+              "sha256": "d198bd20db41cbcfccdc29a591982d0e25061b4d41341de242fee0c9a5eb2ab4",
+              "page": 43,
+              "section": null,
+              "location": "page 43",
+              "quote": "Submission requirements and deadlines Application due dates: Due on October 2, 2026, February 3, 2027, October 4, 2027, February 3, 2028, October 3, 2028, February 6, 2029 at 5:00 p.m. local time of the applicant organization. We encourage you to submit your application before the application deadline so that you have time to make any corrections needed to…",
+              "extracted_at": "2026-10-25T14:30:20.090060Z",
+              "structural_reference": {
+                "block_id": "pdf-43-5",
+                "kind": "line"
+              }
+            },
+            "field_authority": "official_notice_field",
+            "parser_version": "submission-fields-21"
+          }
+        ],
+        "submission_requirements": [],
+        "next_submission": {
+          "version": 2,
+          "as_of": "2026-10-25",
+          "application_class": "new",
+          "date": "2027-02-03",
+          "event": {
+            "kind": "application",
+            "date": "2027-02-03",
+            "time": "5:00 p.m.",
+            "timezone": "applicant_local",
+            "note": "Submission requirements and deadlines Application due dates: Due on October 2, 2026, February 3, 2027, October 4, 2027, February 3, 2028, October 3, 2028, February 6, 2029 at 5:00 p.m. local time of the applicant organization. We encourage you to submit your application before t…",
+            "estimated": false,
+            "source": "Official notice (machine extracted)",
+            "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/351937",
+            "confidence": "machine_extracted_needs_verification",
+            "evidence_id": "evidence-360593-56f4aa9a82fd",
+            "citation": {
+              "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/351937",
+              "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/351937#page=43",
+              "document_name": "PAR-27-032-Full-Announcement.pdf",
+              "sha256": "d198bd20db41cbcfccdc29a591982d0e25061b4d41341de242fee0c9a5eb2ab4",
+              "page": 43,
+              "section": null,
+              "location": "page 43",
+              "quote": "Submission requirements and deadlines Application due dates: Due on October 2, 2026, February 3, 2027, October 4, 2027, February 3, 2028, October 3, 2028, February 6, 2029 at 5:00 p.m. local time of the applicant organization. We encourage you to submit your application before t…",
+              "extracted_at": "2026-10-25T14:30:20.090060Z",
+              "structural_reference": {
+                "block_id": "pdf-43-4",
+                "kind": "line",
+                "field_label": "Application due dates",
+                "field_id": "pdf-submission-list:43:40"
+              }
+            },
+            "required": null,
+            "subject": "submission",
+            "stage": "application",
+            "application_class": "unspecified",
+            "cycle": null,
+            "track": null,
+            "obligation": "unknown",
+            "invitation_required": null,
+            "prerequisite": null,
+            "clock_citation": {
+              "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/351937",
+              "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/351937#page=43",
+              "document_name": "PAR-27-032-Full-Announcement.pdf",
+              "sha256": "d198bd20db41cbcfccdc29a591982d0e25061b4d41341de242fee0c9a5eb2ab4",
+              "page": 43,
+              "section": null,
+              "location": "page 43",
+              "quote": "Submission requirements and deadlines Application due dates: Due on October 2, 2026, February 3, 2027, October 4, 2027, February 3, 2028, October 3, 2028, February 6, 2029 at 5:00 p.m. local time of the applicant organization. We encourage you to submit your application before the application deadline so that you have time to make any corrections needed to…",
+              "extracted_at": "2026-10-25T14:30:20.090060Z",
+              "structural_reference": {
+                "block_id": "pdf-43-5",
+                "kind": "line"
+              }
+            },
+            "field_authority": "official_notice_field",
+            "parser_version": "submission-fields-21"
+          },
+          "access": "open",
+          "prerequisites": []
+        },
+        "source_aliases": null,
+        "last_updated": "2026-05-12",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Environmental science",
+          "Cybersecurity"
+        ],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Independent school districts",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Private institutions of higher education",
+          "For-profit organizations other than small businesses",
+          "Small businesses",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/360593",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/351937"
+      },
+      "old_deadline": "2029-02-06",
+      "new_deadline": "2027-02-03"
+    },
+    {
+      "id": "89f72e1a6ef1496d50b3",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-10-25T14:28:34.882212Z",
+      "opportunity_id": "351124",
+      "detail": "Deadline 2026-11-24",
+      "record": {
+        "opportunity_id": "351124",
+        "opportunity_number": "PA-23-317",
+        "title": "Competing Revisions to Existing NIH Single Project Research Grants and Cooperative Agreements (Clinical Trial Optional)",
+        "agency": "National Institutes of Health",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2023-11-24",
+        "close_date": "2026-11-24",
+        "deadlines": [
+          {
+            "kind": "application",
+            "date": "2026-11-24",
+            "time": null,
+            "timezone": null,
+            "note": null,
+            "estimated": false,
+            "source": "Grants.gov XML extract",
+            "source_url": "https://www.grants.gov/search-results-detail/351124",
+            "source_field": "CloseDate",
+            "confidence": "official_structured",
+            "detail_checked_at": "2026-08-02T11:34:50.877871Z"
+          }
+        ],
+        "submission_requirements": [],
+        "next_submission": {
+          "version": 2,
+          "as_of": "2026-10-25",
+          "application_class": "new",
+          "date": "2026-11-24",
+          "event": {
+            "kind": "application",
+            "date": "2026-11-24",
+            "time": null,
+            "timezone": null,
+            "note": null,
+            "estimated": false,
+            "source": "Grants.gov XML extract",
+            "source_url": "https://www.grants.gov/search-results-detail/351124",
+            "source_field": "CloseDate",
+            "confidence": "official_structured",
+            "detail_checked_at": "2026-08-02T11:34:50.877871Z"
+          },
+          "access": "open",
+          "prerequisites": []
+        },
+        "source_aliases": null,
+        "last_updated": "2025-01-13",
+        "version": "Synopsis 4",
+        "topic_areas": [
+          "Education and workforce"
+        ],
+        "disciplines": [
+          "Education",
+          "Medical and Health",
+          "Community and Social Sciences"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Independent school districts",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Private institutions of higher education",
+          "For-profit organizations other than small businesses",
+          "Small businesses",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/351124",
+        "funding_opportunity_url": "https://grants.nih.gov/grants/guide/pa-files/PA-23-317.html",
+        "primary_document_url": null
+      },
+      "deadline": "2026-11-24"
+    },
+    {
+      "id": "7fac5ee6000037ea9ee2",
+      "type": "closed_or_removed",
+      "label": "Closed or removed",
+      "changed_at": "2026-10-25T14:28:34.882212Z",
+      "opportunity_id": "363714",
+      "detail": "No longer in the current catalog",
+      "record": {
+        "opportunity_id": "363714",
+        "opportunity_number": "F26AS00107",
+        "title": "FY2026 Implementation of the Quagga and Zebra Mussel Action Plan (QZAP) in the Western United States",
+        "agency": "Fish and Wildlife Service",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-25",
+        "close_date": "2026-10-24",
+        "deadlines": [
+          {
+            "kind": "application",
+            "date": "2026-10-24",
+            "time": "11:59 PM.",
+            "timezone": "ET",
+            "note": "Notice of Funding Opportunity will be open for 60 days. Electronically submitted applications must be submitted no later than 11:59 PM., ET, on the listed application due date. DO NOT submit applications through GRANTS.GOV. Applications will only be accepted and considered through grantsolutions.gov.",
+            "estimated": false,
+            "source": "Grants.gov XML extract",
+            "source_url": "https://www.grants.gov/search-results-detail/363714",
+            "source_field": "CloseDate",
+            "confidence": "official_structured",
+            "detail_checked_at": "2026-09-02T06:01:24.461096Z",
+            "document_evidence_id": "evidence-363714-42ccaf187647",
+            "document_confidence": "machine_extracted_needs_verification",
+            "document_source_fields": {
+              "stage": {
+                "present": false,
+                "value": null
+              }
+            },
+            "stage": "application"
+          }
+        ],
+        "submission_requirements": [],
+        "next_submission": {
+          "version": 2,
+          "as_of": "2026-10-24",
+          "application_class": "new",
+          "date": "2026-10-24",
+          "event": {
+            "kind": "application",
+            "date": "2026-10-24",
+            "time": "11:59 PM.",
+            "timezone": "ET",
+            "note": "Notice of Funding Opportunity will be open for 60 days. Electronically submitted applications must be submitted no later than 11:59 PM., ET, on the listed application due date. DO NOT submit applications through GRANTS.GOV. Applications will only be accepted and considered through grantsolutions.gov.",
+            "estimated": false,
+            "source": "Grants.gov XML extract",
+            "source_url": "https://www.grants.gov/search-results-detail/363714",
+            "source_field": "CloseDate",
+            "confidence": "official_structured",
+            "detail_checked_at": "2026-09-02T06:01:24.461096Z",
+            "document_evidence_id": "evidence-363714-42ccaf187647",
+            "citation": {
+              "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354862#page=8",
+              "document_name": "REVISED Foa_Content_of_F26AS00107 (1).pdf",
+              "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354862",
+              "extracted_at": "2026-09-02T06:01:52.308951Z",
+              "location": "page 8",
+              "page": 8,
+              "quote": "…h documents or other application related assistance, please contact: Barak Shemai barak_shemai@fws.gov (505) 366-9565 Submission Dates and Times Closing Date for Applications: 10/24/2026 Closing Date Explanation Notice of Funding Opportunity will be open for 60 days. Electronically submitted applications must be submitted no later than 11:59 PM., ET, on th…",
+              "section": null,
+              "sha256": "160e3318964ce3cba2d43517654455fb743401370ce1b49b308a221290bd06e8",
+              "structural_reference": {
+                "basis": "limited_cached_quote",
+                "field_id": "quote:b0ea3c91a898e0e854db4bb7120f8ee378f36eded2ea695aad9df87dd264148f:cover:8:146",
+                "field_label": "Closing Date for Applications"
+              }
+            },
+            "document_confidence": "machine_extracted_needs_verification",
+            "document_source_fields": {
+              "stage": {
+                "present": false,
+                "value": null
+              }
+            },
+            "stage": "application"
+          },
+          "access": "open",
+          "prerequisites": []
+        },
+        "source_aliases": null,
+        "last_updated": "2026-08-28",
+        "version": "Synopsis 2",
+        "topic_areas": [
+          "Environmental science"
+        ],
+        "disciplines": [
+          "Environmental and Life Sciences"
+        ],
+        "applicant_types": [
+          "Unrestricted"
+        ],
+        "funding_instruments": [
+          "Grant",
+          "Other"
+        ],
+        "award_floor": 50000,
+        "award_ceiling": 600000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363714",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354862"
+      }
+    },
     {
       "id": "fbbda8f7a1ad1901dce4",
       "type": "amended",

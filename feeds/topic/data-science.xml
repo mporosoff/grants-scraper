@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml</id>
-  <updated>2026-10-24T22:43:50Z</updated>
+  <updated>2026-10-25T14:30:20Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>ancient DNA for Modern Genomics (aDMG) Research Projects (U01 Clinical Trials Not Allowed)</title>
@@ -147,6 +147,20 @@
     <category term="Infectious disease"/>
     <category term="Public health"/>
     <summary>National Institutes of Health | Estimated Application 2027-01-22 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting multidisciplinary, consortium-based research using precision systems biology approaches to uncover links among chronic illnesses, infectious diseases and microbiomes. There is an urgent scientific and clinical need to understand the pathways by which infections lead to chronic lifelong heal…</summary>
+  </entry>
+  <entry>
+    <title>NGA - Boosting Innovative GEOINT - Science &amp; Technology Broad Agency Announcement (BIG-ST BAA): Topic # 07 - Lidar Analysis for Surface &amp; Environmental Reconnaissance (LASER)</title>
+    <link href="https://sam.gov/opp/854d837d8dc842719d9fec95764d8ceb/view"/>
+    <id>urn:funding-finder:sam-gov:sam-gov%3A854d837d8dc842719d9fec95764d8ceb</id>
+    <updated>2026-10-20T00:00:00Z</updated>
+    <author><name>National Geospatial-Intelligence Agency</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Space and aeronautics"/>
+    <category term="Transportation"/>
+    <category term="Data science"/>
+    <summary>National Geospatial-Intelligence Agency | Preproposal 2026-10-28 | Develop AI/ML methods to extract and classify 3D surface/subsurface objects using NASA ICESat-2 and GEDI lidar, including navigation safety applications. Topic 7 LASER only, not the BIG-ST parent or closed topics. General Solicitation Rev4 governs eligibility and the required abstract; the October 16 topic revision retains October 28 abstract and December 21 proposal dates. October 20 Q&amp;A allows a…</summary>
   </entry>
   <entry>
     <title>Young Faculty Award (YFA) 2027</title>
@@ -734,17 +748,5 @@
     <category term="Data science"/>
     <summary>Alfred P. Sloan Foundation | Posted | The Sloan Research Fellowship Program recognizes and rewards outstanding early-career faculty who have the potential to revolutionize their fields of study.
 Successful candidates for a Fellowship generally have a strong record of significant independent research accomplishments that demonstrate creativity and the potential to become future leaders in the scientific community. While Fellows are exp…</summary>
-  </entry>
-  <entry>
-    <title>U.S. National Science Foundation State and Regional Artificial Intelligence Infrastructure Hubs:</title>
-    <link href="https://www.grants.gov/search-results-detail/363481"/>
-    <id>urn:funding-finder:grants-gov:363481</id>
-    <updated>2026-08-06T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Education and workforce"/>
-    <category term="Data science"/>
-    <category term="Cybersecurity"/>
-    <summary>U.S. National Science Foundation | Application 2026-11-04 | The NSF State and Regional AI Infrastructure Hubs program aims to expand access to the compute required for AI-enabled scientific discovery and to transform the research, education, and training opportunities offered by institutions of higher education. AI Infrastructure Hubs will connect researchers to new compute infrastructure that leverages contributions from state governments, research instit…</summary>
   </entry>
 </feed>

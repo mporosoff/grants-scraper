@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml</id>
-  <updated>2026-10-24T22:43:50Z</updated>
+  <updated>2026-10-25T14:30:20Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Unlocking New Levels of Output and Capacity for Key Subsurface Resources (UNLOCK)</title>
@@ -726,6 +726,20 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Manufacturing"/>
     <category term="Materials science"/>
     <summary>Dept of the Army -- Materiel Command | Application 2027-11-20 | The purpose of this combined Broad Agency Announcement (BAA) under Federal Acquisition Regulation (FAR) Part 35 and Funding Opportunity Announcement (FOA) under 2 Code of Federal Regulations (CFR) 200.204 (henceforth referred to as “BAA”) is to solicit research proposals for submission to the U.S. Army Combat Capabilities Development Command (DEVCOM) Army Research Laboratory (ARL) for funding cons…</summary>
+  </entry>
+  <entry>
+    <title>LPS Qubit Collaboratory (LQC)</title>
+    <link href="https://www.grants.gov/search-results-detail/332894"/>
+    <id>urn:funding-finder:grants-gov:332894</id>
+    <updated>2021-04-16T00:00:00Z</updated>
+    <author><name>Dept of the Army -- Materiel Command</name></author>
+    <category term="Education and workforce"/>
+    <category term="Quantum science"/>
+    <category term="Technology development"/>
+    <category term="Transportation"/>
+    <category term="Materials science"/>
+    <category term="Manufacturing"/>
+    <summary>Dept of the Army -- Materiel Command | Application 2027-04-30 | The U.S. Army Research Office (ARO) in partnership with NSA’s Laboratory for Physical Science (LPS) is soliciting Incubator, Collaboration, and Fellowship research proposals for participation in the LPS Qubit Collaboratory (LQC). The mission of the LQC can be captured in three broad goals: 1) pursue disruptive fundamental research and enabling technologies with a focus on qubit development for qua…</summary>
   </entry>
   <entry>
     <title>Research Interests of the United States Air Force Academy (formerly USAFA-BAA-2021)</title>
