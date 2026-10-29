@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml</id>
-  <updated>2026-10-24T22:43:50Z</updated>
+  <updated>2026-10-25T14:30:20Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Fiscal Year 2026 Flood Mitigation Assistance</title>
@@ -174,6 +174,15 @@
     <summary>U.S. National Science Foundation | Application 2026-11-04 | The NSF State and Regional AI Infrastructure Hubs program aims to expand access to the compute required for AI-enabled scientific discovery and to transform the research, education, and training opportunities offered by institutions of higher education. AI Infrastructure Hubs will connect researchers to new compute infrastructure that leverages contributions from state governments, research instit…</summary>
   </entry>
   <entry>
+    <title>Fiscal Year 2026 Flood Mitigation Assistance Swift Current</title>
+    <link href="https://www.grants.gov/search-results-detail/363151"/>
+    <id>urn:funding-finder:grants-gov:363151</id>
+    <updated>2026-07-14T00:00:00Z</updated>
+    <author><name>Department of Homeland Security - FEMA</name></author>
+    <category term="Cybersecurity"/>
+    <summary>Department of Homeland Security - FEMA | Application 2028-01-31 | FMA Swift Current aims to better align the delivery of FMA flood mitigation funding to the disaster survivor experience. The FMA grant program makes federal funds available to states, U.S. territories, federally recognized Indian/Native American Tribal Governments, and local governments to reduce or eliminate the risk of repetitive flood damage to buildings and structures insured under the Nationa…</summary>
+  </entry>
+  <entry>
     <title>Command Wide Broad Agency Announcement for Naval Facilities Engineering and Expeditionary Warfare Center (NAVFAC EXWC) Research, Development, Testing, and Evaluation</title>
     <link href="https://sam.gov/opp/f0fbc0533b024e2fbfbdfe8b5bd2d81d/view"/>
     <id>urn:funding-finder:sam-gov:sam-gov%3Af0fbc0533b024e2fbfbdfe8b5bd2d81d</id>
@@ -201,6 +210,16 @@
     <category term="Data science"/>
     <category term="Artificial intelligence and machine learning"/>
     <summary>Air Force Office of Scientific Research | Posted | AFOSR plans, coordinates, and executes the Air Force Research Laboratory’s (AFRL) basic research program in response to technical guidance from AFRL and requirements of the Air Force. Additionally, the office fosters, supports, and conducts research within Air Force, university, and industry laboratories; and ensures transition of research results to support U.S. Air Force needs. The focus of AFOS…</summary>
+  </entry>
+  <entry>
+    <title>Maximizing Investigators’ Research Award (MIRA) for Early Stage Investigators (ESI)</title>
+    <link href="https://www.grants.gov/search-results-detail/360593"/>
+    <id>urn:funding-finder:grants-gov:360593</id>
+    <updated>2026-05-12T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Environmental science"/>
+    <category term="Cybersecurity"/>
+    <summary>National Institutes of Health | Application 2027-02-03 | The Maximizing Investigators' Research Award (MIRA) for Early Stage Investigators (ESIs) provides support for ESIs with a program of research that aligns with the NIGMS mission. MIRA distributes funding among promising investigators across the country. The goal is to boost scientific productivity and the chances for important breakthroughs. Through this program, investigators can: Receive independ…</summary>
   </entry>
   <entry>
     <title>Integrated Data Systems &amp; Services (IDSS)</title>
@@ -376,6 +395,15 @@
     <summary>U.S. National Science Foundation | Application 2027-10-07 | With a focus on two-year Institutions of Higher Education (IHEs), the Advanced Technological Education (ATE) program supports the education of technicians for the high-technology fields that drive our nation's economy. The program involves partnerships between academic institutions (grades 7-12, IHEs), industry, and economic development agencies to promote improvement in the education of science a…</summary>
   </entry>
   <entry>
+    <title>Fiscal Year 2024 Flood Mitigation Assistance Swift Current</title>
+    <link href="https://www.grants.gov/search-results-detail/354620"/>
+    <id>urn:funding-finder:grants-gov:354620</id>
+    <updated>2024-05-30T00:00:00Z</updated>
+    <author><name>Department of Homeland Security - FEMA</name></author>
+    <category term="Cybersecurity"/>
+    <summary>Department of Homeland Security - FEMA | Application 2026-12-30 | FY 2024 FMA Swift Current aims to better align the delivery of FMA flood mitigation funding to the disaster survivor experience. The FMA grant program makes federal funds available to states, U.S. territories, federally recognized Indian/Native American Tribal Governments, and local governments to reduce or eliminate the risk of repetitive flood damage to buildings and structures insured under the…</summary>
+  </entry>
+  <entry>
     <title>Strategic Distribution and Disposition SDD</title>
     <link href="https://sam.gov/opp/3dc0d137a9404adab1b8623c4e279f31/view"/>
     <id>urn:funding-finder:sam-gov:sam-gov%3A3dc0d137a9404adab1b8623c4e279f31</id>
@@ -458,6 +486,19 @@
     <summary>Defense Health Agency Contracting Activity - DHACA | Application 2027-09-30 | verify prerequisite | The USAMRDC’s mission is to provide solutions to medical problems of importance to the American Service Member at home and abroad, as well as to the general public at large. The scope of this effort and the priorities attached to specific projects are influenced by changes in military and civilian medical science and technology (S&amp;T), operational requirements, military threat assessments, and nati…</summary>
   </entry>
   <entry>
+    <title>Department of Defense HIV/AIDS Prevention Program</title>
+    <link href="https://www.grants.gov/search-results-detail/343653"/>
+    <id>urn:funding-finder:grants-gov:343653</id>
+    <updated>2022-09-19T00:00:00Z</updated>
+    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
+    <category term="Cancer"/>
+    <category term="Infectious disease"/>
+    <category term="Social and behavioral sciences"/>
+    <category term="Transportation"/>
+    <category term="Cybersecurity"/>
+    <summary>Defense Health Agency Contracting Activity - DHACA | Application 2027-09-18 | ATTENTION: This announcement will be revised regularly to incorporate country specific narratives (Attachment 1 of the announcement) with information vital to the content of application. Potential applicants interested in applying to this announcement should click 'Subscribe' to be notified of future revisions. DoD HIV/AID Prevention Program's (DHAPP) objective, through the PEPFAR program, is to s…</summary>
+  </entry>
+  <entry>
     <title>Tribal Colleges and Universities Program (TCUP)</title>
     <link href="https://www.grants.gov/search-results-detail/334326"/>
     <id>urn:funding-finder:grants-gov:334326</id>
@@ -502,5 +543,21 @@
     <category term="Materials science"/>
     <category term="Technology development"/>
     <summary>Idaho Field Office | Application 2030-10-14 | A. STATEMENT OF OBJECTIVESThis Funding Opportunity Announcement (FOA) is to award multiple cooperative agreements to accredited United States (U.S.) two- and four-year colleges and universities (Institutions of Higher Education (IHEs)) to receive and administer scholarship and fellowship funding-provided through the University Nuclear Leadership Program (UNLP) and as administered by the Department…</summary>
+  </entry>
+  <entry>
+    <title>UNITED STATES MILITARY ACADEMY Broad Agency Announcement</title>
+    <link href="https://www.grants.gov/search-results-detail/325932"/>
+    <id>urn:funding-finder:grants-gov:325932</id>
+    <updated>2020-04-01T00:00:00Z</updated>
+    <author><name>Dept of the Army -- Materiel Command</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Quantum science"/>
+    <category term="Data science"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Environmental science"/>
+    <summary>Dept of the Army -- Materiel Command | Application 2027-03-31 | The U.S. Military Academy at West Point's mission is "to educate, train, and inspire the Corps of Cadets so that each graduate is a commissioned leader of character committed to the values of Duty, Honor, Country and prepared for a career of professional excellence and service to the Nation as an officer in the United States Army." The United States Military Academy is located at West Point, New Y…</summary>
   </entry>
 </feed>

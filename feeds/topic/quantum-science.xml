@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/quantum-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/quantum-science.xml</id>
-  <updated>2026-10-24T22:43:50Z</updated>
+  <updated>2026-10-25T14:30:20Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Unlocking New Levels of Output and Capacity for Key Subsurface Resources (UNLOCK)</title>
@@ -525,6 +525,8 @@ topological data analysis.
     <category term="Quantum science"/>
     <category term="Technology development"/>
     <category term="Transportation"/>
+    <category term="Materials science"/>
+    <category term="Manufacturing"/>
     <summary>Dept of the Army -- Materiel Command | Application 2027-04-30 | The U.S. Army Research Office (ARO) in partnership with NSA’s Laboratory for Physical Science (LPS) is soliciting Incubator, Collaboration, and Fellowship research proposals for participation in the LPS Qubit Collaboratory (LQC). The mission of the LQC can be captured in three broad goals: 1) pursue disruptive fundamental research and enabling technologies with a focus on qubit development for qua…</summary>
   </entry>
   <entry>
@@ -538,6 +540,9 @@ topological data analysis.
     <category term="Education and workforce"/>
     <category term="Energy"/>
     <category term="Quantum science"/>
+    <category term="Data science"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Environmental science"/>
     <summary>Dept of the Army -- Materiel Command | Application 2027-03-31 | The U.S. Military Academy at West Point's mission is "to educate, train, and inspire the Corps of Cadets so that each graduate is a commissioned leader of character committed to the values of Duty, Honor, Country and prepared for a career of professional excellence and service to the Nation as an officer in the United States Army." The United States Military Academy is located at West Point, New Y…</summary>
   </entry>
 </feed>

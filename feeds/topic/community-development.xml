@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/community-development.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/community-development.xml</id>
-  <updated>2026-10-24T22:43:50Z</updated>
+  <updated>2026-10-25T14:30:20Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Undiagnosed Diseases Network (UDN) Clinical and Data Coordinating Center</title>
@@ -335,7 +335,9 @@
     <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
     <category term="Cancer"/>
     <category term="Community development"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA | Application 2026-11-18 | verify prerequisite | Summary: The fiscal year 2026 (FY26) Rare Cancers Research Program (RCRP) Resource and Community Development Award (RCDA) supports the development of research resources and clinical or preclinical datasets that will advance the field of rare cancers research and ultimately improve outcomes for individuals with rare cancers. Research supporting this funding opportunity should fill one of the follow…</summary>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Defense Health Agency Contracting Activity - DHACA | Application 2026-11-18 | invitation required | Summary: The fiscal year 2026 (FY26) Rare Cancers Research Program (RCRP) Resource and Community Development Award (RCDA) supports the development of research resources and clinical or preclinical datasets that will advance the field of rare cancers research and ultimately improve outcomes for individuals with rare cancers. Research supporting this funding opportunity should fill one of the follow…</summary>
   </entry>
   <entry>
     <title>Authority to Accept Unsolicited Proposals for Research Partnerships Notice of Intent (NOI)</title>

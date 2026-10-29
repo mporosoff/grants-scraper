@@ -4,8 +4,32 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/changes.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/changes.xml</id>
-  <updated>2026-10-24T22:44:05Z</updated>
+  <updated>2026-10-25T14:40:25Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>Source interpretation corrected: Maximizing Investigators’ Research Award (MIRA) for Early Stage Investigators (ESI)</title>
+    <link href="https://www.grants.gov/search-results-detail/360593"/>
+    <id>urn:funding-finder:change:bc1c3589a393cac7a337</id>
+    <updated>2026-10-25T14:28:34.882212Z</updated>
+    <category term="source_correction"/>
+    <summary>2029-02-06 → 2027-02-03</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Competing Revisions to Existing NIH Single Project Research Grants and Cooperative Agreements (Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/351124"/>
+    <id>urn:funding-finder:change:89f72e1a6ef1496d50b3</id>
+    <updated>2026-10-25T14:28:34.882212Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-11-24</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: FY2026 Implementation of the Quagga and Zebra Mussel Action Plan (QZAP) in the Western United States</title>
+    <link href="https://www.grants.gov/search-results-detail/363714"/>
+    <id>urn:funding-finder:change:7fac5ee6000037ea9ee2</id>
+    <updated>2026-10-25T14:28:34.882212Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
   <entry>
     <title>Opportunity amended: National Parks Business Plan Internship</title>
     <link href="https://www.grants.gov/search-results-detail/363985"/>
@@ -1581,29 +1605,5 @@
     <updated>2026-10-16T14:35:42.543184Z</updated>
     <category term="new"/>
     <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: U.S. Department of Justice FY26 Coordinated Tribal Assistance Solicitation Notice of Funding Opportunity</title>
-    <link href="https://www.grants.gov/search-results-detail/363308"/>
-    <id>urn:funding-finder:change:a88804159935114e7122</id>
-    <updated>2026-10-16T14:35:42.543184Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: Tribal Colleges and Universities Program (TCUP)</title>
-    <link href="https://www.grants.gov/search-results-detail/334326"/>
-    <id>urn:funding-finder:change:a3e84d6da15e4537e63a</id>
-    <updated>2026-10-16T14:35:42.543184Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: Specialized Programs of Research Excellence (SPOREs) in Human Cancers for Years 2027, 2028, and 2029 (P50 Clinical Trial Required)</title>
-    <link href="https://www.grants.gov/search-results-detail/360541"/>
-    <id>urn:funding-finder:change:a071a89e1a2133c217de</id>
-    <updated>2026-10-16T14:35:42.543184Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
   </entry>
 </feed>
