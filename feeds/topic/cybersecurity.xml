@@ -4,8 +4,31 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml</id>
-  <updated>2026-10-29T22:20:09Z</updated>
+  <updated>2026-10-30T16:48:34Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>FY 2027 Crash Causal Factors Program</title>
+    <link href="https://www.grants.gov/search-results-detail/364171"/>
+    <id>urn:funding-finder:grants-gov:364171</id>
+    <updated>2026-10-29T00:00:00Z</updated>
+    <author><name>DOT-Federal Motor Carrier Safety Administration</name></author>
+    <category term="Transportation"/>
+    <category term="Cybersecurity"/>
+    <summary>DOT-Federal Motor Carrier Safety Administration | Application 2026-12-28 | The CCFP Cooperative Agreement Program will provide supplemental funding to eligible State and local law enforcement agencies to support the collection of advanced crash data to inform the Heavy-Duty Truck Study. FMCSA anticipates Congress, State and local law enforcement, industry stakeholders, and advocacy groups to support this action, as the results of the Heavy-Duty Truck Study will provide a…</summary>
+  </entry>
+  <entry>
+    <title>AFRL/AFOSR Fiscal Year (FY) 2027 University Center for High-Speed Aerothermoelasticity</title>
+    <link href="https://www.grants.gov/search-results-detail/364172"/>
+    <id>urn:funding-finder:grants-gov:364172</id>
+    <updated>2026-10-29T00:00:00Z</updated>
+    <author><name>Air Force Office of Scientific Research</name></author>
+    <category term="Education and workforce"/>
+    <category term="Space and aeronautics"/>
+    <category term="Data science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Cybersecurity"/>
+    <summary>Air Force Office of Scientific Research | Application 2027-04-02 | verify prerequisite | The Air Force Office of Scientific Research, in partnership with the Air Force Research Lab (AFRL) Air Warfare Directorate (RA), intends to provide support for a multidisciplinary team of scientists and engineers at U.S. universities to establish a university-led Center for High-Speed Aerothermoelasticity. This multidisciplinary, basic research initiative focuses on investigating complex problem s…</summary>
+  </entry>
   <entry>
     <title>AFRL/AFOSR-Taiwan NSTC Frontiers in Materials and Nanostructures: AI-Driven Discovery, Quantum Geometry, and Energy-Efficient Information Technologies 2027-2030</title>
     <link href="https://www.grants.gov/search-results-detail/364165"/>
@@ -446,11 +469,19 @@
     <updated>2023-09-29T00:00:00Z</updated>
     <author><name>National Institute of Standards and Technology</name></author>
     <category term="Manufacturing"/>
-    <category term="Quantum science"/>
     <category term="Materials science"/>
     <category term="Cybersecurity"/>
-    <category term="Water"/>
-    <summary>National Institute of Standards and Technology | Application 2026-11-01 | The CHIPS Incentives Program aims to catalyze long-term economically sustainable growth in the domestic semiconductor industry in support of U.S. economic and national security. This is the second Notice of Funding Opportunity under this program and seeks applications for projects for the construction, expansion, or modernization of commercial facilities for semiconductor materials and manufacturi…</summary>
+    <summary>National Institute of Standards and Technology | Application 2027-10-29 | The CHIPS Incentives Program aims to catalyze long-term economically sustainable growth in the domestic semiconductor industry in support of U.S. economic and national security. This is the second Notice of Funding Opportunity under this program and seeks applications for projects for the construction, expansion, or modernization of commercial facilities for semiconductor materials and manufacturi…</summary>
+  </entry>
+  <entry>
+    <title>Pioneering Aerospace Capabilities, Engineering and Research (PACER)</title>
+    <link href="https://www.grants.gov/search-results-detail/349554"/>
+    <id>urn:funding-finder:grants-gov:349554</id>
+    <updated>2023-07-26T00:00:00Z</updated>
+    <author><name>Air Force -- Research Lab</name></author>
+    <category term="Space and aeronautics"/>
+    <category term="Cybersecurity"/>
+    <summary>Air Force -- Research Lab | Application 2043-05-10 | Pioneering Aerospace Capabilities, Engineering and Research (PACER)</summary>
   </entry>
   <entry>
     <title>Centers of Research Excellence in Science and Technology (CREST)</title>

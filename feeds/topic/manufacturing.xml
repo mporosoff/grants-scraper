@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/manufacturing.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/manufacturing.xml</id>
-  <updated>2026-10-29T22:20:09Z</updated>
+  <updated>2026-10-30T16:48:34Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>BRAIN Initiative: Clinical Studies to Advance Next-Generation Devices for Recording and Modulation in the Human Central Nervous System</title>
@@ -214,16 +214,6 @@
     <category term="Technology development"/>
     <category term="Transportation"/>
     <summary>Office of Naval Research (ONR) | White Paper 2027-07-16 | Applied research and technology development in advanced manufacturing and sustainment. Applied research and advanced technology development for naval manufacturing and sustainment, with transition value. Phase II selections depend on funding and current technical focus. FFRDCs and military universities cannot be prime offerors; no mandatory industry partner invented.</summary>
-  </entry>
-  <entry>
-    <title>Upstate Through Wall Heat Pump Demonstration Program</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr00000Vto2LAAR"/>
-    <id>urn:funding-finder:nyserda:nyserda%3ARFQL5937</id>
-    <updated>2026-09-07T00:00:00Z</updated>
-    <author><name>NYSERDA</name></author>
-    <category term="Energy"/>
-    <category term="Manufacturing"/>
-    <summary>NYSERDA | Application 2026-10-29 | The New York State Energy Research and Development Authority (NYSERDA) is seeking applications from owners, managers, or operators of multifamily buildings to serve as demonstration host sites for Packaged Terminal Heat Pumps (PTHPs) through the Clean Heat for All: Room Heat Pump Program. Eligible buildings must contain at least five (5) dwelling units, be located in New York State counties within…</summary>
   </entry>
   <entry>
     <title>Window Heat Pump Demonstration Program - Phase I</title>
@@ -793,5 +783,21 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Materials science"/>
     <category term="Cybersecurity"/>
     <summary>U.S. National Science Foundation | Application 2027-10-07 | With a focus on two-year Institutions of Higher Education (IHEs), the Advanced Technological Education (ATE) program supports the education of technicians for the high-technology fields that drive our nation's economy. The program involves partnerships between academic institutions (grades 7-12, IHEs), industry, and economic development agencies to promote improvement in the education of science a…</summary>
+  </entry>
+  <entry>
+    <title>IUSE / Professional Formation of Engineers: Revolutionizing Engineering Departments (IUSE/PFE: RED)</title>
+    <link href="https://www.grants.gov/search-results-detail/353413"/>
+    <id>urn:funding-finder:grants-gov:353413</id>
+    <updated>2024-04-05T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Education and workforce"/>
+    <category term="Manufacturing"/>
+    <category term="Quantum science"/>
+    <category term="Technology development"/>
+    <category term="Data science"/>
+    <summary>U.S. National Science Foundation | Application 2027-04-13 | Revolutionizing Engineering Departments (hereinafter referred to as RED) is designed to build upon previous efforts in engineering education research. Specifically, previous and ongoing evaluations of the NSF Engineering Education and Centers Division program and its predecessors, as well as those related programs in the Directorate for STEM Education, have shown that prior investments have signif…</summary>
   </entry>
 </feed>

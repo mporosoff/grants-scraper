@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/cancer.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/cancer.xml</id>
-  <updated>2026-10-29T22:20:09Z</updated>
+  <updated>2026-10-30T16:48:34Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Advanced Development and Sustainment of Informatics Technologies for Cancer Research and Management (U24 Clinical Trial Optional)</title>
@@ -163,6 +163,27 @@
     <category term="Education and workforce"/>
     <category term="Public health"/>
     <summary>Centers for Disease Control and Prevention - ERA | Estimated Application 2026-12-30 | NIOSH has provided financial and technical assistance to develop or expand state-level OSH surveillance capacity and infrastructure since the 1970s. From 2021-2026, NIOSH funded cooperative agreements in 23 states under announcement PAR-20-312. These programs varied in scope and focus, each providing a level of occupational health expertise to the public health system in their state. Grantees incl…</summary>
+  </entry>
+  <entry>
+    <title>Genomic Data Generation Center for the Gabriella Miller Kids First Pediatric Research Program (U24 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/358954"/>
+    <id>urn:funding-finder:grants-gov:358954</id>
+    <updated>2026-10-29T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Cancer"/>
+    <summary>National Institutes of Health | Application 2027-01-08 | The purpose of this Notice of Funding Opportunity (NOFO) is to support the Genomic Data Generation Center(s) for the Gabriella Miller Kids First Pediatric Research Program to support rapid generation of high quality sequence and variant data (e.g., genome-wide, RNA, and long-read DNA and RNA sequencing, genome-wide methylation profiling, and chromatin accessibility data) from a large number of hum…</summary>
+  </entry>
+  <entry>
+    <title>Single Source: Continued Development of the Gabriella Miller Kids First Pediatric Data Resource Center (U2C Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/358959"/>
+    <id>urn:funding-finder:grants-gov:358959</id>
+    <updated>2026-10-29T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Cancer"/>
+    <category term="Education and workforce"/>
+    <summary>National Institutes of Health | Application 2027-01-08 | invitation required | This is a Notice of Funding Opportunity (NOFO) for a Single Source that will invite application(s) from the eligible organization(s) to apply. Please see Section III. Eligibility for additional information. In accordance with NIH standard peer-review processes, the application(s) will be peer-reviewed, and only meritorious application(s) will be considered. This NOFO solicits applications for the …</summary>
   </entry>
   <entry>
     <title>Limited Competition: Biospecimen Banks to support NCI National Clinical Trials Network Biospecimen Banks (NCTN Biobanks) and the NCI Early-Phase and Experimental Clinical Trials Biospecimen Bank (EET Biobank) (U24 Clinical Trial Not Allowed)</title>
@@ -630,27 +651,5 @@ a high level of innovation and creativity. The goal is to support the best young
     <category term="Cancer"/>
     <category term="Education and workforce"/>
     <summary>National Institutes of Health | Application 2027-01-07 | The goal of the proposed funding announcement is twofold, to promote preclinical and patient based studies examining the mechanism(s) through which incretin mimetics (including agonists or antagonists of GLP-1, GIP-1, or dual GLP-1/GIP-1 agents) impact cancer risk, and to draw talented scientists who understand the dynamic changes caused by these agents to investigate the mechanisms of how these a…</summary>
-  </entry>
-  <entry>
-    <title>Mechanisms that Impact Cancer Risk with Use of Incretin Mimetics (R21 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/357203"/>
-    <id>urn:funding-finder:grants-gov:357203</id>
-    <updated>2024-11-18T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Cancer"/>
-    <category term="Education and workforce"/>
-    <summary>National Institutes of Health | Application 2027-01-07 | The goal of the proposed funding announcement is twofold, to promote preclinical and patient based studies examining the mechanism(s) through which incretin mimetics (including agonists or antagonists of GLP-1, GIP-1, or dual GLP-1/GIP-1 agents) impact cancer risk, and to draw talented scientists who understand the dynamic changes caused by these agents to investigate the mechanisms of how these a…</summary>
-  </entry>
-  <entry>
-    <title>Basic Research in Cancer Health Disparities (R21 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/357193"/>
-    <id>urn:funding-finder:grants-gov:357193</id>
-    <updated>2024-11-18T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Cancer"/>
-    <category term="Education and workforce"/>
-    <category term="Health equity"/>
-    <summary>National Institutes of Health | Application 2027-11-16 | This Notice of Funding Opportunity (NOFO) encourages grant applications from investigators interested in conducting basic, mechanistic research into the biological/genetic causes of cancer health disparities. These research project grants will support innovative studies designed to investigate biological/genetic bases of cancer health disparities, such as (1) mechanistic studies of biological fact…</summary>
   </entry>
 </feed>
