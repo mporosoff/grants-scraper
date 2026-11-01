@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/arts-and-culture.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/arts-and-culture.xml</id>
-  <updated>2026-10-30T16:48:34Z</updated>
+  <updated>2026-11-01T21:09:01Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Public Health Nursing</title>
@@ -176,6 +176,35 @@
     <summary>Administration for Children and Families | Estimated Application 2027-03-02 | The Office of Early Childhood Development (ECD) within the Administration for Children and Families (ACF) will be soliciting applications for the Fiscal Year 2027 Tribal Maternal, Infant, and Early Childhood Home Visiting (MIECHV) Program: Development and Implementation Grants. Funds will support 5-year cooperative agreements between ACF and federally recognized Indian tribes (or a consortium of I…</summary>
   </entry>
   <entry>
+    <title>Cooperative Agreement for affiliated Partner with the Colorado Plateau Cooperative Ecosystem Studies Unit</title>
+    <link href="https://www.grants.gov/search-results-detail/364181"/>
+    <id>urn:funding-finder:grants-gov:364181</id>
+    <updated>2026-10-30T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
+    <category term="Arts and culture"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Infectious disease"/>
+    <category term="Space and aeronautics"/>
+    <category term="Water"/>
+    <summary>Geological Survey | Application 2026-11-30 | This Notice of Funding Opportunity (NOFO) is for a U.S. Geological Survey (USGS) National and Regional Climate Adaptation Science Center (NRCASC) competitive financial assistance research award to a CESU partner. Projects supported under this cooperative agreement should advance Administration priorities, including, but not limited to, American energy dominance, critical mineral development, water…</summary>
+  </entry>
+  <entry>
+    <title>Cooperative Agreement for affiliated Partner with the Great Lakes-Northern Forest Cooperative Ecosystem Studies Unit</title>
+    <link href="https://www.grants.gov/search-results-detail/364180"/>
+    <id>urn:funding-finder:grants-gov:364180</id>
+    <updated>2026-10-30T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Space and aeronautics"/>
+    <category term="Water"/>
+    <summary>Geological Survey | Application 2026-11-30 | This Notice of Funding Opportunity (NOFO) is for a U.S. Geological Survey (USGS) National and Regional Climate Adaptation Science Center (NRCASC) competitive research financial assistance award to a CESU partner. Projects supported under this cooperative agreement should advance Administration priorities, including, but not limited to, American energy dominance, critical mineral development, water…</summary>
+  </entry>
+  <entry>
     <title>FY 2026 - 2028 Broad Agency Announcement (BAA), National Ocean Service</title>
     <link href="https://www.grants.gov/search-results-detail/364142"/>
     <id>urn:funding-finder:grants-gov:364142</id>
@@ -330,18 +359,6 @@
     <category term="Arts and culture"/>
     <category term="Environmental science"/>
     <summary>DOC NOAA - ERA Production | Application 2027-02-12 | verify prerequisite | The purpose of this document is to advise the public that NOAA/NOS/National Centers for Coastal Ocean Science (NCCOS)/Competitive Research Program (CRP) [formerly Center for Sponsored Coastal Ocean Research (CSCOR)/Coastal Ocean Program (COP)], is soliciting proposals for projects that will support state-of-the-art information and products to advance the use of natural infrastructure for coastal f…</summary>
-  </entry>
-  <entry>
-    <title>BJA FY 2026 National Center for Veterans Justice</title>
-    <link href="https://www.grants.gov/search-results-detail/363898"/>
-    <id>urn:funding-finder:grants-gov:363898</id>
-    <updated>2026-09-21T00:00:00Z</updated>
-    <author><name>Bureau of Justice Assistance</name></author>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Neuroscience"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>Bureau of Justice Assistance | Application 2026-10-30 | This is a notice of funding opportunity (NOFO) for the BJA FY 2026 National Center for Veterans Justice. This opportunity will establish a national center to provide specialized support to state, local, and tribal criminal justice agencies; treatment and service providers; courts; corrections systems; and community supervision agencies to effectively support and respond to the needs of veterans ac…</summary>
   </entry>
   <entry>
     <title>Landmarks of History and Culture and Summer Institutes</title>
@@ -581,17 +598,6 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Arts and culture"/>
     <summary>National Institutes of Health | Application 2028-07-01 | This Notice of Funding Opportunity (NOFO) announces the restructured Shared Instrumentation Grant (SIG) Program that consolidates three existing shared-use instrumentation programs, i.e., the Shared Instrumentation Grant program, the High-End Instrumentation Grant program, and the Basic Instrumentation Grant program. The NOFO invites applications from groups of NIH-supported investigators to purch…</summary>
-  </entry>
-  <entry>
-    <title>GREGoRi Innovation Projects (U01 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/359644"/>
-    <id>urn:funding-finder:grants-gov:359644</id>
-    <updated>2026-06-18T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Arts and culture"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Technology development"/>
-    <summary>National Institutes of Health | Application 2026-10-30 | The Genomics Research to Elucidate the Genetics of Rare Diseases: innovation (GREGoRi) initiative seeks to accelerate a paradigm shift in rare disease diagnosis by reimagining the tools, molecular technologies and analytical approaches used to identify the causal gene(s) and/or variant(s) underlying rare genetic disorders. This Notice of Funding Opportunity is intended to stimulate the development…</summary>
   </entry>
   <entry>
     <title>Biological Testing Facility for Contraception &amp; Reproductive Health (X01 Clinical Trial Not Allowed)</title>

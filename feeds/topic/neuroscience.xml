@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/neuroscience.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/neuroscience.xml</id>
-  <updated>2026-10-30T16:48:34Z</updated>
+  <updated>2026-11-01T21:09:01Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIH Stroke Clinical Trials Network (StrokeNet) Infrastructure - National Coordinating Center (NCC) and National Data Management Center (NDMC)</title>
@@ -335,18 +335,6 @@
     <summary>National Institutes of Health | Application 2029-02-08 | This funding opportunity supports transformative, mechanistic research aimed at understanding how the human brain functions. Applications should seek to reveal how the dynamic activity of individual neurons and ensembles of neurons within spatially organized brain networks gives rise to internal experiences, such as sensations, perceptions, emotions, thoughts, and memories, as well as to observabl…</summary>
   </entry>
   <entry>
-    <title>BJA FY 2026 National Center for Veterans Justice</title>
-    <link href="https://www.grants.gov/search-results-detail/363898"/>
-    <id>urn:funding-finder:grants-gov:363898</id>
-    <updated>2026-09-21T00:00:00Z</updated>
-    <author><name>Bureau of Justice Assistance</name></author>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Neuroscience"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>Bureau of Justice Assistance | Application 2026-10-30 | This is a notice of funding opportunity (NOFO) for the BJA FY 2026 National Center for Veterans Justice. This opportunity will establish a national center to provide specialized support to state, local, and tribal criminal justice agencies; treatment and service providers; courts; corrections systems; and community supervision agencies to effectively support and respond to the needs of veterans ac…</summary>
-  </entry>
-  <entry>
     <title>Data Coordinating Center for the Aging and Alzheimer’s Disease Mouse Brain Atlas (AD-MBA) (U24 Clinical Trial Not Allowed)</title>
     <link href="https://www.grants.gov/search-results-detail/359740"/>
     <id>urn:funding-finder:grants-gov:359740</id>
@@ -486,18 +474,6 @@ we will not consider for support include Covid-19 relat…</summary>
     <category term="Manufacturing"/>
     <category term="Neuroscience"/>
     <summary>National Institutes of Health | Estimated Application 2026-11-10 | The National Institutes of Neurological Disorders and Stroke (NINDS) is interested in supporting research projects proposing the optimization and translational development of genomic and biologic therapeutic candidates for Alzheimer’s Disease-Related Dementias (ADRD). Breakthroughs in genomic and biologic therapies are creating new opportunities to treat, prevent, and potentially modify the course…</summary>
-  </entry>
-  <entry>
-    <title>HEAL Initiative: Optimization of Therapeutic Medical Devices through Team Science Mechanistic Research (RM1)</title>
-    <link href="https://www.grants.gov/search-results-detail/361520"/>
-    <id>urn:funding-finder:grants-gov:361520</id>
-    <updated>2026-06-11T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Neuroscience"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health | Estimated Application 2026-10-30 | The National Institute of Neurological Disorders and Stroke (NINDS), with other NIH Institutes and Centers (ICs), intends to publish a Notice of Funding Opportunity (NOFO) to investigate the mechanisms of action of therapeutic medical devices with the overall goal of improving clinical outcomes with device-based approaches. Medical devices are essential in managing health conditions, complementing…</summary>
   </entry>
   <entry>
     <title>Causal Hypotheses on the Oral-Systemic Health Impacts of Human Behaviors among People with Chronic Conditions (U01 Clinical Trial Not Allowed)</title>
@@ -649,5 +625,25 @@ we will not consider for support include Covid-19 relat…</summary>
     <category term="Neuroscience"/>
     <category term="Social and behavioral sciences"/>
     <summary>National Institutes of Health | Application 2027-10-15 | Development of Psychosocial Therapeutic and Preventive Interventions for Mental Disorders (R33 Clinical Trial Required). As part of NIMH's clinical trials pipeline, this NOFO encourages pilot research developing and testing novel psychosocial interventions and/or targets. Consistent with NIMH's emphasis on the experimental therapeutics approach to intervention development, it intends to speed the …</summary>
+  </entry>
+  <entry>
+    <title>Development of Psychosocial Therapeutic and Preventive Interventions for Mental Disorders (R61/R33 Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/357427"/>
+    <id>urn:funding-finder:grants-gov:357427</id>
+    <updated>2024-11-26T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Neuroscience"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>National Institutes of Health | Application 2027-10-15 | Development of Psychosocial Therapeutic and Preventive Interventions for Mental Disorders (R61/R33 Clinical Trial Required). As part of NIMH's clinical trials pipeline, this NOFO encourages pilot research developing and testing novel psychosocial interventions and/or targets. Consistent with NIMH's emphasis on the experimental therapeutics approach to intervention development, it intends to speed …</summary>
+  </entry>
+  <entry>
+    <title>First in Human and Early Stage Clinical Trials of Novel Investigational Drugs or Neuromodulatory Device-based Interventions for Psychiatric Disorders (U01 Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/357424"/>
+    <id>urn:funding-finder:grants-gov:357424</id>
+    <updated>2024-11-26T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Neuroscience"/>
+    <summary>National Institutes of Health | Application 2027-10-15 | The purpose of this Notice of Funding Opportunity (NOFO) is to encourage cooperative agreement applications to support early stage clinical trials of novel mechanism of action, investigational drugs, or novel neuromodulatory devices for the treatment of psychiatric disorders in areas of unmet medical need. The NOFO will support milestone-driven early stage trials in pediatric and adult populations…</summary>
   </entry>
 </feed>
