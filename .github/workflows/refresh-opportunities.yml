@@ -11,7 +11,7 @@ on:
       stage:
         description: Plan affected work automatically, bounded team maintenance/backfill, or resume exact evidence
         type: choice
-        options: [auto, generate, teams, backfill, reuse, catalog-reconcile, catalog-correction, catalog-projection, program-area-revalidation, submission-revalidation, catalog-source-recovery, catalog-access-correction, catalog-identity-correction, catalog-url-correction, validate, publish, verify]
+        options: [auto, generate, teams, backfill, reuse, catalog-reconcile, catalog-correction, catalog-projection, program-area-revalidation, submission-revalidation, document-fact-revalidation, catalog-source-recovery, catalog-access-correction, catalog-identity-correction, catalog-url-correction, validate, publish, verify]
         default: auto
         required: true
       pilot_team_scopes:
@@ -1620,7 +1620,7 @@ jobs:
             const needs = JSON.parse(process.env.RESULTS);
             const order = ['plan', 'sam-preflight', 'generate', 'assemble', 'catalog-reconcile', 'catalog-correction', 'program-area-revalidation', 'catalog-source-recovery', 'catalog-access-correction', 'catalog-identity-correction', 'catalog-url-correction', 'candidate', 'validate', 'publish', 'pages', 'verify-live'];
             const failed = order.find(stage => ['failure', 'cancelled'].includes(needs[stage].result));
-            const stages = new Set(['auto', 'generate', 'teams', 'backfill', 'reuse', 'catalog-reconcile', 'catalog-correction', 'catalog-projection', 'program-area-revalidation', 'submission-revalidation', 'catalog-source-recovery', 'catalog-access-correction', 'catalog-identity-correction', 'catalog-url-correction', 'validate', 'publish', 'verify']);
+            const stages = new Set(['auto', 'generate', 'teams', 'backfill', 'reuse', 'catalog-reconcile', 'catalog-correction', 'catalog-projection', 'program-area-revalidation', 'submission-revalidation', 'document-fact-revalidation', 'catalog-source-recovery', 'catalog-access-correction', 'catalog-identity-correction', 'catalog-url-correction', 'validate', 'publish', 'verify']);
             const planned = needs.plan.outputs.stage;
             const planReason = needs.plan.outputs.reason || 'not reported';
             const heldStage = needs.plan.outputs.held_stage || '';
@@ -1637,8 +1637,9 @@ jobs:
             const alreadyCurrent = context.eventName === 'schedule' && needs.plan.result === 'success' &&
               planned === 'noop' && dailyStatus === 'already_current' && fresh;
             const scheduledIncomplete = context.eventName === 'schedule' && !(alreadyCurrent || (liveComplete && fresh));
-            const originalStage = planned === 'program-area-revalidation' && needs.plan.outputs.projection_kind === 'administrative_submission' ?
-              'submission-revalidation' : stages.has(planned) ? planned : stages.has(process.env.REQUESTED_STAGE) ? process.env.REQUESTED_STAGE : 'auto';
+            const typedProjectionStages = {administrative_submission: 'submission-revalidation', document_facts: 'document-fact-revalidation'};
+            const originalStage = planned === 'program-area-revalidation' && typedProjectionStages[needs.plan.outputs.projection_kind] ?
+              typedProjectionStages[needs.plan.outputs.projection_kind] : stages.has(planned) ? planned : stages.has(process.env.REQUESTED_STAGE) ? process.env.REQUESTED_STAGE : 'auto';
             let candidate = needs.candidate.outputs.candidate_id;
             let generationRun = needs.candidate.outputs.candidate_run;
             let identitySource = 'selected candidate output';

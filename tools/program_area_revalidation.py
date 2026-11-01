@@ -48,7 +48,7 @@ MAX_SECONDS = 960
 PARENT_VECTOR_RECEIPT_SHA256 = '915c49a3da9e8c3a91421e9dac4d7011acc02ebd596a2f64c4391c95720ca660'
 DERIVED_KEYS = {'topic_areas', 'document_program_areas', 'document_search_text'}
 MODERN_VERSION = 'program-area-revalidation-modern-1'
-PROJECTION_KINDS = frozenset({'program_area', 'administrative_submission'})
+PROJECTION_KINDS = frozenset({'program_area', 'administrative_submission', 'document_facts'})
 MODERN_OPERATION_FILES = ('tools/program_area_revalidation.py', 'tools/program_area_release.py',
     'scripts/extract_document_evidence.py', 'scripts/build_feeds.py',
     'tools/build_search_release_package.mjs', 'tools/run_budgeted_vectors.mjs',
@@ -57,6 +57,8 @@ MODERN_OPERATION_FILES = ('tools/program_area_revalidation.py', 'tools/program_a
 ADMINISTRATIVE_INPUTS = ('tools/administrative_submission_revalidation.py',
     'scripts/submission_schedule.py', 'scripts/build_catalog.py', 'scripts/currentness.py',
     'assets/submission-schedule.js', 'assets/search-retrieval.js', 'tools/run_search_diagnosis.mjs')
+DOCUMENT_FACT_INPUTS = ('tools/document_fact_revalidation.py',
+    'scripts/notice_semantics.py', 'scripts/notice_fact_guards.py')
 
 
 def require(ok, reason):
@@ -83,6 +85,9 @@ def modern_projection(parent_root, audit_at, identifier, kind):
     if kind == 'administrative_submission':
         from tools.administrative_submission_revalidation import projection as administrative_projection
         return administrative_projection(parent_root, audit_at, identifier)
+    if kind == 'document_facts':
+        from tools.document_fact_revalidation import projection as document_fact_projection
+        return document_fact_projection(parent_root, audit_at, identifier)
     return projection(parent_root, audit_at, identifier)
 
 
@@ -92,7 +97,7 @@ def retained_requests(ledger):
 
 
 def require_administrative_budget(value, ledger):
-    if projection_kind(value) == 'administrative_submission':
+    if projection_kind(value) in {'administrative_submission', 'document_facts'}:
         saved = value.get('retained_requests') or {}
         rows = ledger.get('requests')
         count = saved.get('count')
@@ -553,6 +558,8 @@ def modern_contract(root, kind='program_area'):
     names = MODERN_OPERATION_FILES
     if projection_kind(kind) == 'administrative_submission':
         names += ADMINISTRATIVE_INPUTS
+    elif projection_kind(kind) == 'document_facts':
+        names += DOCUMENT_FACT_INPUTS
     return hashes(root, names)
 
 
@@ -563,6 +570,8 @@ def modern_scope(root, original, kind='program_area'):
     administrative = projection_kind(kind) == 'administrative_submission'
     if administrative:
         allowed.update({'scripts/submission_schedule.py', 'scripts/currentness.py'})
+    elif projection_kind(kind) == 'document_facts':
+        allowed.update({'scripts/notice_semantics.py', 'scripts/notice_fact_guards.py'})
     require(set(changes.get('source', [])) <= allowed
         and not changes.get('teams') and set(changes.get('semantic', [])) <= (
             {'assets/submission-schedule.js', 'assets/search-retrieval.js', 'tools/run_search_diagnosis.mjs'}
@@ -936,7 +945,7 @@ def prepare_modern(parent_bundle, receipt_path, state, parent_run, parent_id, *,
             'parent_manifest_sha256': sha((parent/'candidate.json').read_bytes()), 'parent_producer': producer,
             'parent_artifact': artifact, 'original_spend': spending, 'operation_contract': modern_contract(root, kind),
             'audit_at': datetime.now(timezone.utc).isoformat()}
-        if kind == 'administrative_submission':
+        if kind in {'administrative_submission', 'document_facts'}:
             value.update(projection_kind=kind, retained_requests=retained_requests(read(state/'ledger.json')))
         value['operation_sha256'] = identity(value)
         atomic_json(state/'reconciliation.json', value); atomic_json(state/'consumed-checkpoints.json', [])
@@ -948,10 +957,18 @@ def prepare_modern(parent_bundle, receipt_path, state, parent_run, parent_id, *,
             child = candidate.load(complete)
             require_projection_kind(kind, value, child['program_area_revalidation'])
             try:
+                # This pure projection is a tools module, so ordinary source
+                # fingerprints alone cannot detect a corrected replay recipe.
+                require(kind != 'document_facts' or not any(
+                    value['operation_contract'].get(name) != modern_contract(root, kind).get(name)
+                    for name in DOCUMENT_FACT_INPUTS), 'modern_completed_document_projection_changed')
                 candidate.verify_dependencies(root, child)
             except ValueError:
-                sources = ('scripts/extract_document_evidence.py', *ADMINISTRATIVE_INPUTS) if kind == 'administrative_submission' else (
-                    'scripts/extract_document_evidence.py',)
+                sources = ('scripts/extract_document_evidence.py',)
+                if kind == 'administrative_submission':
+                    sources += ADMINISTRATIVE_INPUTS
+                elif kind == 'document_facts':
+                    sources += DOCUMENT_FACT_INPUTS
                 require(any(value['operation_contract'].get(name) != modern_contract(root, kind).get(name)
                     for name in sources), 'modern_completed_use_named_runtime_resume')
                 receipt = child['program_area_revalidation']
@@ -998,7 +1015,7 @@ def prepare_modern(parent_bundle, receipt_path, state, parent_run, parent_id, *,
     reservation = {'version': MODERN_VERSION, 'parent_candidate_id': parent_id,
         'operation_sha256': value['operation_sha256'], 'producer_run': str(current['id']),
         'producer_attempt': str(current['run_attempt']), 'prior_ledger_sha256': identity(ledger)}
-    if kind == 'administrative_submission':
+    if kind in {'administrative_submission', 'document_facts'}:
         reservation['projection_kind'] = kind
     atomic_json(state/'reservation.json', reservation)
     reservation_path = state.parent/(state.name + '-reservation')/'reservation.json'

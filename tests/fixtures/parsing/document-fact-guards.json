@@ -1,0 +1,934 @@
+{
+  "provenance": {
+    "candidate_id": "0cbf0e175fc6851213fffab8358df9249371a4c414934a9bdcaf39e922a32691",
+    "generation_sha": "9ee7cd881b17ee9e7b868a8490c289133cdd72d2",
+    "source": "Authenticated retained candidate12995765716, short public citation quotes only; no new retrieval"
+  },
+  "cases": [
+    {
+      "opportunity_id": "325932",
+      "document": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/351130",
+        "name": "USMA-BAA-Amendment- 13.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/pdf",
+        "sha256": "3099db25f2654c76795d8994a8ca3adcffb7d75efc746581e82ba64189f00788",
+        "bytes": 437284,
+        "etag": null,
+        "last_modified": null,
+        "version": 1,
+        "first_seen_at": "2026-07-26T20:05:30.061543Z",
+        "last_seen_at": "2026-10-25T14:30:20.090060Z",
+        "changed_since_previous": false
+      },
+      "source_checked_at": "2026-10-25T14:30:20.090060Z",
+      "fact": {
+        "id": "evidence-325932-c1e75595e0bf",
+        "type": "program_funding",
+        "label": "Program funding",
+        "value": 55,
+        "display_value": "$55",
+        "confidence": "machine_extracted_needs_verification",
+        "citation": {
+          "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/351130",
+          "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/351130#page=65",
+          "document_name": "USMA-BAA-Amendment- 13.pdf",
+          "sha256": "3099db25f2654c76795d8994a8ca3adcffb7d75efc746581e82ba64189f00788",
+          "page": 65,
+          "section": null,
+          "location": "page 65",
+          "quote": "…OR YEAR 1 YEAR 2 Employee Name Labor Category Direct Hourly Rate Hours Total Direct Labor Direct Hourly Rate Hours Total Direct Labor Andy Smith Program Manager $55.00 720.00 $39,600.00 $56.65 720.00 $40,788.00 Bryan Andrews Senior Engineer $40.00 672.00 $26,880.00 $41.20 672.00 $27,686.40 Cindy Thomas Principal Engineer $50.00 512.00…",
+          "extracted_at": "2026-10-25T14:30:20.090060Z",
+          "structural_reference": {
+            "block_id": "pdf-65-34",
+            "kind": "line"
+          }
+        },
+        "fact_contract": "typed-notice-facts-1",
+        "source_authority": "machine_extracted_official_document",
+        "subject": "program",
+        "parser_version": "award-basis-11",
+        "currency": "USD",
+        "basis": "program_total"
+      },
+      "reason": "personnel_rate_not_program_funding"
+    },
+    {
+      "opportunity_id": "332894",
+      "document": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/350603",
+        "name": "LQC BAA W911NF-21-S-0009-3.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/pdf",
+        "sha256": "30a153acbe96aa4c8a586903507fee8f1d007e6a0f625c0c9859b0d225802913",
+        "bytes": 832097,
+        "etag": null,
+        "last_modified": null,
+        "version": 1,
+        "first_seen_at": "2026-07-26T20:05:30.061543Z",
+        "last_seen_at": "2026-10-25T14:30:20.090060Z",
+        "changed_since_previous": false
+      },
+      "source_checked_at": "2026-10-25T14:30:20.090060Z",
+      "fact": {
+        "id": "evidence-332894-455989bd65bc",
+        "type": "program_funding",
+        "label": "Program funding",
+        "value": 55,
+        "display_value": "$55",
+        "confidence": "machine_extracted_needs_verification",
+        "citation": {
+          "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/350603",
+          "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/350603#page=44",
+          "document_name": "LQC BAA W911NF-21-S-0009-3.pdf",
+          "sha256": "30a153acbe96aa4c8a586903507fee8f1d007e6a0f625c0c9859b0d225802913",
+          "page": 44,
+          "section": null,
+          "location": "page 44",
+          "quote": "…R YEAR 1 YEAR 2 Employee Name Labor Category Direct Hourly Rate Hours Total Direct Labor Direct Hourly Rate Hours Total Direct Labor Andy Smith Program Manager $55.00 720.00 $39,600.00 $56.65 720.00 $40,788.00 Bryan Andrew Senior Engineer $40.00 672.00 $26,880.00 $41.20 672.00 $27,686.40 Cindy Thomas Principal Engineer $50.00 512.00 $…",
+          "extracted_at": "2026-10-25T14:30:20.090060Z",
+          "structural_reference": {
+            "block_id": "pdf-44-36",
+            "kind": "line"
+          }
+        },
+        "fact_contract": "typed-notice-facts-1",
+        "source_authority": "machine_extracted_official_document",
+        "subject": "program",
+        "parser_version": "award-basis-11",
+        "currency": "USD",
+        "basis": "program_total"
+      },
+      "reason": "personnel_rate_not_program_funding"
+    },
+    {
+      "opportunity_id": "345241",
+      "document": {
+        "bytes": 612182,
+        "changed_since_previous": false,
+        "content_type": "application/pdf",
+        "etag": null,
+        "first_seen_at": "2026-07-26T17:56:06.367881Z",
+        "last_modified": null,
+        "last_seen_at": "2026-10-19T17:05:45.556389Z",
+        "name": "DAC BAA W911NF23S0003_20230105 FINAL.pdf",
+        "sha256": "c711d9732ff2e014963f51601bf65e6020bd3b02f1ca98973666be01046be173",
+        "source_kind": "primary_notice",
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/323211",
+        "version": 1
+      },
+      "source_checked_at": "2026-10-19T17:05:45.556389Z",
+      "fact": {
+        "basis": "program_total",
+        "citation": {
+          "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/323211#page=48",
+          "document_name": "DAC BAA W911NF23S0003_20230105 FINAL.pdf",
+          "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/323211",
+          "extracted_at": "2026-10-19T17:05:45.556389Z",
+          "location": "page 48",
+          "page": 48,
+          "quote": "…OR YEAR 1 YEAR 2 Employee Name Labor Category Direct Hourly Rate Hours Total Direct Labor Direct Hourly Rate Hours Total Direct Labor Andy Smith Program Manager $55.00 720.00 $39,600.00 $56.65 720.00 $40,788.00 Bryan Andrews Senior Engineer $40.00 672.00 $26,880.00 $41.20 672.00 $27,686.40 Cindy Thomas Principal Engineer $50.00 512.00…",
+          "section": null,
+          "sha256": "c711d9732ff2e014963f51601bf65e6020bd3b02f1ca98973666be01046be173",
+          "structural_reference": {
+            "block_id": "pdf-48-25",
+            "kind": "line"
+          }
+        },
+        "confidence": "machine_extracted_needs_verification",
+        "currency": "USD",
+        "display_value": "$55",
+        "fact_contract": "typed-notice-facts-1",
+        "id": "evidence-345241-40ad4a8ba6f4",
+        "label": "Program funding",
+        "parser_version": "award-basis-11",
+        "source_authority": "machine_extracted_official_document",
+        "subject": "program",
+        "type": "program_funding",
+        "value": 55
+      },
+      "reason": "personnel_rate_not_program_funding"
+    },
+    {
+      "opportunity_id": "355150",
+      "document": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/341024",
+        "name": "AAL BAA W911NF-24-S-0008.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/pdf",
+        "sha256": "5790cff05cabe179847422a5256ef9e93bcb5e6e9420afb4ecbf6e854d0df69a",
+        "bytes": 491724,
+        "etag": null,
+        "last_modified": null,
+        "version": 1,
+        "first_seen_at": "2026-07-26T20:05:30.061543Z",
+        "last_seen_at": "2026-10-30T16:48:34.265734Z",
+        "changed_since_previous": false
+      },
+      "source_checked_at": "2026-10-30T16:48:34.265734Z",
+      "fact": {
+        "id": "evidence-355150-abf8c8f5f090",
+        "type": "program_funding",
+        "label": "Program funding",
+        "value": 55,
+        "display_value": "$55",
+        "confidence": "machine_extracted_needs_verification",
+        "citation": {
+          "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/341024",
+          "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/341024#page=62",
+          "document_name": "AAL BAA W911NF-24-S-0008.pdf",
+          "sha256": "5790cff05cabe179847422a5256ef9e93bcb5e6e9420afb4ecbf6e854d0df69a",
+          "page": 62,
+          "section": null,
+          "location": "page 62",
+          "quote": "…OR YEAR 1 YEAR 2 Employee Name Labor Category Direct Hourly Rate Hours Total Direct Labor Direct Hourly Rate Hours Total Direct Labor Andy Smith Program Manager $55.00 720.00 $39, 600.00 $56.65 720.00 $40,788.0 0 Bryan Andrews Senior Engineer $40.00 672.00 $26, 880.00 $41.20 672.00 $27,686.4 0 Cindy Thomas Principal Engineer $50.00 512.0…",
+          "extracted_at": "2026-10-30T16:48:34.265734Z",
+          "structural_reference": {
+            "block_id": "pdf-62-44",
+            "kind": "line"
+          }
+        },
+        "fact_contract": "typed-notice-facts-1",
+        "source_authority": "machine_extracted_official_document",
+        "subject": "program",
+        "parser_version": "award-basis-11",
+        "currency": "USD",
+        "basis": "program_total"
+      },
+      "reason": "personnel_rate_not_program_funding"
+    },
+    {
+      "opportunity_id": "362034",
+      "document": {
+        "bytes": 118699,
+        "changed_since_previous": false,
+        "content_type": "application/pdf",
+        "etag": null,
+        "first_seen_at": "2026-07-29T12:21:41.359843Z",
+        "last_modified": null,
+        "last_seen_at": "2026-08-25T03:13:26.882006Z",
+        "name": "Foa_Content_of_NOAA-NMFS-AK-2026-33268 (2).pdf",
+        "sha256": "5a959b9bd91071baa078438ecf7f0bf32d523e1d680d90ec4998d0b9e272d53a",
+        "source_kind": "primary_notice",
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/351449",
+        "version": 1
+      },
+      "source_checked_at": "2026-08-25T03:13:26.882006Z",
+      "fact": {
+        "citation": {
+          "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/351449#page=6",
+          "document_name": "Foa_Content_of_NOAA-NMFS-AK-2026-33268 (2).pdf",
+          "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/351449",
+          "extracted_at": "2026-07-29T12:21:41.359843Z",
+          "location": "page 6",
+          "page": 6,
+          "quote": "…on of the proposed project; all attachments should be combined into one PDF document. This announcement is not seeking proposals that generate environmental data. Therefore, a Data Management Plan is not required as part of the Proposal.",
+          "section": null,
+          "sha256": "5a959b9bd91071baa078438ecf7f0bf32d523e1d680d90ec4998d0b9e272d53a"
+        },
+        "confidence": "machine_extracted_needs_verification",
+        "display_value": "Data management plan (required)",
+        "fact_contract": "typed-notice-facts-1",
+        "id": "evidence-362034-41cb5c9e1e52",
+        "interpretation_basis": "limited_cached_quote",
+        "label": "Data management plan",
+        "obligation": "required",
+        "parser_version": "component-owner-3",
+        "source_authority": "machine_extracted_official_document",
+        "stage": "application",
+        "subject": "Data management plan",
+        "type": "application_component",
+        "value": "Data management plan"
+      },
+      "reason": "component_explicit_not_required"
+    },
+    {
+      "opportunity_id": "363378",
+      "document": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354247",
+        "name": "FY27 DURIP NOFO_N0001426SF003.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/pdf",
+        "sha256": "919fff7719eb0c1e04351d290e44a6b84d76c3bd34d93d891b536b588df456e2",
+        "bytes": 481246,
+        "etag": null,
+        "last_modified": null,
+        "version": 1,
+        "first_seen_at": "2026-07-30T12:04:39.333303Z",
+        "last_seen_at": "2026-10-30T16:48:34.265734Z",
+        "changed_since_previous": false
+      },
+      "source_checked_at": "2026-10-30T16:48:34.265734Z",
+      "fact": {
+        "id": "evidence-363378-f2892971e78d",
+        "type": "application_component",
+        "label": "Letters of support",
+        "value": "Letters of support",
+        "display_value": "Letters of support (required)",
+        "confidence": "machine_extracted_needs_verification",
+        "citation": {
+          "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354247",
+          "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354247#page=8",
+          "document_name": "FY27 DURIP NOFO_N0001426SF003.pdf",
+          "sha256": "919fff7719eb0c1e04351d290e44a6b84d76c3bd34d93d891b536b588df456e2",
+          "page": 8,
+          "section": null,
+          "location": "page 8",
+          "quote": "…nder this Announcement. You are not prohibited from including voluntary committed cost sharing or matching in your proposal. Cost sharing or matching is not an evaluation factor. Letters of support/commitment are not required. (3) Other (i) Eligible Equipment and Instrumentation DURIP funds must be used for the acquisition of major equipment or instrumenta…",
+          "extracted_at": "2026-10-30T16:48:34.265734Z",
+          "structural_reference": {
+            "block_id": "pdf-8-21",
+            "kind": "line"
+          }
+        },
+        "fact_contract": "typed-notice-facts-1",
+        "source_authority": "machine_extracted_official_document",
+        "subject": "Letters of support",
+        "parser_version": "component-owner-3",
+        "stage": "application",
+        "obligation": "required"
+      },
+      "reason": "component_explicit_not_required"
+    },
+    {
+      "opportunity_id": "363379",
+      "document": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354244",
+        "name": "W911NF26S0095_DURIPFY27.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/pdf",
+        "sha256": "17cde3a3eb96bb2bd15ae6224f0938c764966c131fbb5e0865dd0203ea553e21",
+        "bytes": 412314,
+        "etag": null,
+        "last_modified": null,
+        "version": 1,
+        "first_seen_at": "2026-07-30T12:04:39.333303Z",
+        "last_seen_at": "2026-10-30T16:48:34.265734Z",
+        "changed_since_previous": false
+      },
+      "source_checked_at": "2026-10-30T16:48:34.265734Z",
+      "fact": {
+        "id": "evidence-363379-cc3a1d4a3a08",
+        "type": "application_component",
+        "label": "Letters of support",
+        "value": "Letters of support",
+        "display_value": "Letters of support (required)",
+        "confidence": "machine_extracted_needs_verification",
+        "citation": {
+          "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354244",
+          "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354244#page=8",
+          "document_name": "W911NF26S0095_DURIPFY27.pdf",
+          "sha256": "17cde3a3eb96bb2bd15ae6224f0938c764966c131fbb5e0865dd0203ea553e21",
+          "page": 8,
+          "section": null,
+          "location": "page 8",
+          "quote": "…nder this Announcement. You are not prohibited from including voluntary committed cost sharing or matching in your proposal. Cost sharing or matching is not an evaluation factor. Letters of support/commitment are not required. (3) Other (i) Eligible Equipment and Instrumentation DURIP funds must be used for the acquisition of major equipment or instrumenta…",
+          "extracted_at": "2026-10-30T16:48:34.265734Z",
+          "structural_reference": {
+            "block_id": "pdf-8-21",
+            "kind": "line"
+          }
+        },
+        "fact_contract": "typed-notice-facts-1",
+        "source_authority": "machine_extracted_official_document",
+        "subject": "Letters of support",
+        "parser_version": "component-owner-3",
+        "stage": "application",
+        "obligation": "required"
+      },
+      "reason": "component_explicit_not_required"
+    },
+    {
+      "opportunity_id": "363728",
+      "document": {
+        "bytes": 1820447,
+        "changed_since_previous": false,
+        "content_type": "application/pdf",
+        "etag": null,
+        "first_seen_at": "2026-08-28T21:13:02.902602Z",
+        "last_modified": null,
+        "last_seen_at": "2026-10-30T16:48:34.265734Z",
+        "name": "01-P27AS00032-Full Announcement.pdf",
+        "sha256": "5b31ff767f60a5bf9c7a00cf6f4fe215745c1b21b7f75ecf1d6b705537aedf31",
+        "source_kind": "primary_notice",
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354834",
+        "version": 1
+      },
+      "source_checked_at": "2026-10-30T16:48:34.265734Z",
+      "fact": {
+        "citation": {
+          "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354834#page=14",
+          "document_name": "01-P27AS00032-Full Announcement.pdf",
+          "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354834",
+          "extracted_at": "2026-09-20T14:17:22.025538Z",
+          "location": "page 14",
+          "page": 14,
+          "quote": "…this the first time the community has done such a project or partnered with the noted partners? Is the commitment and support of the partner(s) mentioned in the project narrative (letters of support are not required)? • Organization/Applicant Overview 1. Organization mission alignment—How does the project fit into the proposing organization’s mission and d…",
+          "section": null,
+          "sha256": "5b31ff767f60a5bf9c7a00cf6f4fe215745c1b21b7f75ecf1d6b705537aedf31",
+          "structural_reference": {
+            "block_id": "pdf-14-16",
+            "kind": "line"
+          }
+        },
+        "confidence": "machine_extracted_needs_verification",
+        "display_value": "Letters of support (required)",
+        "fact_contract": "typed-notice-facts-1",
+        "id": "evidence-363728-1c09a4d691d0",
+        "label": "Letters of support",
+        "obligation": "required",
+        "parser_version": "component-owner-3",
+        "source_authority": "machine_extracted_official_document",
+        "stage": "application",
+        "subject": "Letters of support",
+        "type": "application_component",
+        "value": "Letters of support"
+      },
+      "reason": "component_explicit_not_required"
+    },
+    {
+      "opportunity_id": "363846",
+      "document": {
+        "bytes": 437100,
+        "changed_since_previous": false,
+        "content_type": "application/pdf",
+        "etag": null,
+        "first_seen_at": "2026-09-11T14:29:18.412997Z",
+        "last_modified": null,
+        "last_seen_at": "2026-09-11T14:29:18.412997Z",
+        "name": "FY26-HSI-NOFO-P.pdf",
+        "sha256": "8149a2c33fe87f5a6d79de24b1bd6576804af25f369492def22ebcdc230154fc",
+        "source_kind": "primary_notice",
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355008",
+        "version": 1
+      },
+      "source_checked_at": "2026-09-11T14:29:18.412997Z",
+      "fact": {
+        "citation": {
+          "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355008#page=20",
+          "document_name": "FY26-HSI-NOFO-P.pdf",
+          "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355008",
+          "extracted_at": "2026-09-11T14:29:18.412997Z",
+          "location": "page 20",
+          "page": 20,
+          "quote": "…rocess (see Part V, B of this NOFO, NIFA’s Data Management Plan). b. Logic Model.1-Page Limit. Logic models are encouraged but not required. Title the attachment as ‘Logic Model’ in the document header and save file as ‘LogicModel.’ Applications for projects may include the elements of a logic model detailing the activities, outputs, and outcomes of the pr…",
+          "section": null,
+          "sha256": "8149a2c33fe87f5a6d79de24b1bd6576804af25f369492def22ebcdc230154fc",
+          "structural_reference": {
+            "block_id": "pdf-20-14",
+            "kind": "line"
+          }
+        },
+        "confidence": "machine_extracted_needs_verification",
+        "display_value": "Logic model (required)",
+        "fact_contract": "typed-notice-facts-1",
+        "id": "evidence-363846-95b5981314b8",
+        "label": "Logic model",
+        "obligation": "required",
+        "parser_version": "component-owner-3",
+        "source_authority": "machine_extracted_official_document",
+        "stage": "application",
+        "subject": "Logic model",
+        "type": "application_component",
+        "value": "Logic model"
+      },
+      "reason": "component_explicit_not_required"
+    },
+    {
+      "opportunity_id": "363846",
+      "document": {
+        "bytes": 437100,
+        "changed_since_previous": false,
+        "content_type": "application/pdf",
+        "etag": null,
+        "first_seen_at": "2026-09-11T14:29:18.412997Z",
+        "last_modified": null,
+        "last_seen_at": "2026-09-11T14:29:18.412997Z",
+        "name": "FY26-HSI-NOFO-P.pdf",
+        "sha256": "8149a2c33fe87f5a6d79de24b1bd6576804af25f369492def22ebcdc230154fc",
+        "source_kind": "primary_notice",
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355008",
+        "version": 1
+      },
+      "source_checked_at": "2026-09-11T14:29:18.412997Z",
+      "fact": {
+        "citation": {
+          "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355008#page=20",
+          "document_name": "FY26-HSI-NOFO-P.pdf",
+          "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355008",
+          "extracted_at": "2026-09-11T14:29:18.412997Z",
+          "location": "page 20",
+          "page": 20,
+          "quote": "…Support/Collaboration. If letters of support or collaboration are included as part of the application, they should be attached as a single PDF file titled as “Letters of Support” in the document header and save file as “LettersofSupport.” Letters of support or collaboration are encouraged from partners but are not required.",
+          "section": null,
+          "sha256": "8149a2c33fe87f5a6d79de24b1bd6576804af25f369492def22ebcdc230154fc",
+          "structural_reference": {
+            "block_id": "pdf-20-46",
+            "kind": "line"
+          }
+        },
+        "confidence": "machine_extracted_needs_verification",
+        "display_value": "Letters of support (required)",
+        "fact_contract": "typed-notice-facts-1",
+        "id": "evidence-363846-bf2ce9cf5854",
+        "label": "Letters of support",
+        "obligation": "required",
+        "parser_version": "component-owner-3",
+        "source_authority": "machine_extracted_official_document",
+        "stage": "application",
+        "subject": "Letters of support",
+        "type": "application_component",
+        "value": "Letters of support"
+      },
+      "reason": "component_explicit_not_required"
+    },
+    {
+      "opportunity_id": "363936",
+      "document": {
+        "bytes": 1481214,
+        "changed_since_previous": false,
+        "content_type": "application/pdf",
+        "etag": null,
+        "first_seen_at": "2026-09-27T16:19:10.972079Z",
+        "last_modified": null,
+        "last_seen_at": "2026-09-30T16:29:01.392707Z",
+        "name": "EPA-OAR-OTAQ-26-01.pdf",
+        "sha256": "0fd0b670baa140f364c014bd3d86f0b48f3a22f419767468454e70334e203397",
+        "source_kind": "primary_notice",
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355088",
+        "version": 1
+      },
+      "source_checked_at": "2026-09-30T16:29:01.392707Z",
+      "fact": {
+        "basis": "program_total",
+        "citation": {
+          "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355088#page=39",
+          "document_name": "EPA-OAR-OTAQ-26-01.pdf",
+          "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355088",
+          "extracted_at": "2026-09-27T16:19:10.972079Z",
+          "location": "page 39",
+          "page": 39,
+          "quote": "…e information in another format. Line Item & Itemized Costs: EPA Funding:18 Mandatory Cost Share:19 Voluntary Cost Share: Total Project Costs: Personnel Program Manager - $35/hr. x 1,200 hrs. $42,000 $0 $0 $42,000 Administrative Specialist - $12/hr. x 175 hrs. $2,100 $0 $0 $2,100 TOTAL PERSONNEL: $44,100 $0 $0 $44,100 Fringe Beneﬁts Fringe rate…",
+          "section": null,
+          "sha256": "0fd0b670baa140f364c014bd3d86f0b48f3a22f419767468454e70334e203397",
+          "structural_reference": {
+            "block_id": "pdf-39-22",
+            "kind": "line"
+          }
+        },
+        "confidence": "machine_extracted_needs_verification",
+        "currency": "USD",
+        "display_value": "$35",
+        "fact_contract": "typed-notice-facts-1",
+        "id": "evidence-363936-4a42fe103063",
+        "label": "Program funding",
+        "parser_version": "award-basis-11",
+        "source_authority": "machine_extracted_official_document",
+        "subject": "program",
+        "type": "program_funding",
+        "value": 35
+      },
+      "reason": "personnel_rate_not_program_funding"
+    }
+  ],
+  "scope_controls": [
+    {
+      "opportunity_id": "324456",
+      "document": {
+        "bytes": 156683,
+        "changed_since_previous": false,
+        "content_type": "text/html; charset=UTF-8",
+        "etag": "\"1790006459-gzip\"",
+        "first_seen_at": "2026-09-21T16:31:16.052511Z",
+        "last_modified": "Mon, 21 Sep 2026 16:00:59 GMT",
+        "last_seen_at": "2026-09-21T16:31:16.052511Z",
+        "name": null,
+        "sha256": "06789f68d8ad2f21e09f4a9a446d8a8d2f4298d37ae35d4ad27dd1b6c67410bc",
+        "source_kind": "agency_notice",
+        "url": "https://www.nsf.gov/funding/opportunities/expeditions-expeditions-computing/nsf20-544/solicitation",
+        "version": 1
+      },
+      "fact": {
+        "citation": {
+          "citation_url": "https://www.nsf.gov/funding/opportunities/expeditions-expeditions-computing/nsf20-544/solicitation",
+          "document_name": null,
+          "document_url": "https://www.nsf.gov/funding/opportunities/expeditions-expeditions-computing/nsf20-544/solicitation",
+          "extracted_at": "2026-09-21T16:31:16.052511Z",
+          "location": "section “A. Proposal Preparation Instructions”",
+          "page": null,
+          "quote": "…individual identified as Senior/Key Personnel within each proposal and, as Single Copy Documents, are available only to NSF staff. No other items or appendices are to be included. Information pertaining to \"Current and Pending (Other) Support\", \"Facilities, Equipment and Other Resources\" and \"Data Management and Sharing Plan\" are not required for prelimina…",
+          "section": "A. Proposal Preparation Instructions",
+          "sha256": "06789f68d8ad2f21e09f4a9a446d8a8d2f4298d37ae35d4ad27dd1b6c67410bc",
+          "structural_reference": {
+            "block_id": "html-194",
+            "heading_path": [
+              "NSF 20-544: Expeditions in Computing (Expeditions)",
+              "Program Solicitation NSF 20-544",
+              "V. Proposal Preparation And Submission Instructions",
+              "A. Proposal Preparation Instructions"
+            ],
+            "kind": "paragraph",
+            "source_position": [
+              1352,
+              3
+            ]
+          }
+        },
+        "confidence": "machine_extracted_needs_verification",
+        "display_value": "Data management plan (required)",
+        "fact_contract": "typed-notice-facts-1",
+        "id": "evidence-324456-ffbfddac1fb6",
+        "label": "Data management plan",
+        "obligation": "required",
+        "parser_version": "component-owner-3",
+        "source_authority": "machine_extracted_official_document",
+        "stage": "application",
+        "subject": "Data management plan",
+        "type": "application_component",
+        "value": "Data management plan"
+      }
+    },
+    {
+      "opportunity_id": "349280",
+      "document": {
+        "bytes": 127671,
+        "changed_since_previous": true,
+        "content_type": "text/html; charset=UTF-8",
+        "etag": "\"1792868586-gzip\"",
+        "first_seen_at": "2026-10-24T22:21:02.223886Z",
+        "last_modified": "Sat, 24 Oct 2026 19:03:06 GMT",
+        "last_seen_at": "2026-10-24T22:21:02.223886Z",
+        "name": null,
+        "sha256": "2ccbcdc4c1114df0becec1f9580f23226f26a891aa8d6b6013322ef45b1e21a1",
+        "source_kind": "agency_notice",
+        "url": "https://www.nsf.gov/funding/opportunities/msprf-mathematical-sciences-postdoctoral-research-fellowships/nsf23-603/solicitation",
+        "version": 3
+      },
+      "fact": {
+        "citation": {
+          "citation_url": "https://www.nsf.gov/funding/opportunities/msprf-mathematical-sciences-postdoctoral-research-fellowships/nsf23-603/solicitation",
+          "document_name": null,
+          "document_url": "https://www.nsf.gov/funding/opportunities/msprf-mathematical-sciences-postdoctoral-research-fellowships/nsf23-603/solicitation",
+          "extracted_at": "2026-10-24T22:21:02.223886Z",
+          "location": "section “A. Proposal Preparation Instructions”",
+          "page": null,
+          "quote": "…s done by going to the Personnel Documents section, clicking on the \"Add Sponsoring Scientist\" tab and entering the individual's NSF ID or Email or Personnel name and Organization. A Biographical Sketch and Current and Pending (Other) Support is not required to be included for the sponsoring scientist. The following instructions supplement or deviate from…",
+          "section": "A. Proposal Preparation Instructions",
+          "sha256": "2ccbcdc4c1114df0becec1f9580f23226f26a891aa8d6b6013322ef45b1e21a1",
+          "structural_reference": {
+            "block_id": "html-147",
+            "heading_path": [
+              "NSF 23-603: Mathematical Sciences Postdoctoral Research Fellowships (MSPRF)",
+              "Program Solicitation NSF 23-603",
+              "V. Proposal Preparation And Submission Instructions",
+              "A. Proposal Preparation Instructions"
+            ],
+            "kind": "paragraph",
+            "source_position": [
+              1238,
+              3
+            ]
+          }
+        },
+        "confidence": "machine_extracted_needs_verification",
+        "display_value": "Biosketch or biographical sketch (required)",
+        "fact_contract": "typed-notice-facts-1",
+        "id": "evidence-349280-5b161a4de770",
+        "label": "Biosketch or biographical sketch",
+        "obligation": "required",
+        "parser_version": "component-owner-3",
+        "source_authority": "machine_extracted_official_document",
+        "stage": "application",
+        "subject": "Biosketch or biographical sketch",
+        "type": "application_component",
+        "value": "Biosketch or biographical sketch"
+      }
+    },
+    {
+      "opportunity_id": "361526",
+      "document": {
+        "bytes": 1321107,
+        "changed_since_previous": false,
+        "content_type": "application/pdf",
+        "etag": null,
+        "first_seen_at": "2026-07-26T17:56:06.367881Z",
+        "last_modified": null,
+        "last_seen_at": "2026-10-19T17:05:45.556389Z",
+        "name": "DE-FOA-0003612.000003.pdf",
+        "sha256": "67cb16539b46e114a6e33ca0bd7f876fb08d614a61d0b821ffc5cea098281db3",
+        "source_kind": "primary_notice",
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/350588",
+        "version": 1
+      },
+      "fact": {
+        "citation": {
+          "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/350588#page=80",
+          "document_name": "DE-FOA-0003612.000003.pdf",
+          "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/350588",
+          "extracted_at": "2026-10-19T17:05:45.556389Z",
+          "location": "page 80",
+          "page": 80,
+          "quote": "…age limitation. • Do not attach an equipment statement to Field 11 of the Research and Related Other Project Information form. APPENDIX 4: DATA MANAGEMENT AND SHARING PLAN A Data Management and Sharing Plan (DMSP) is NOT required as an appendix to the project narrative but it will be required during award negotiation. Information about DMSPs is below. Subj…",
+          "section": null,
+          "sha256": "67cb16539b46e114a6e33ca0bd7f876fb08d614a61d0b821ffc5cea098281db3",
+          "structural_reference": {
+            "block_id": "pdf-80-16",
+            "kind": "line"
+          }
+        },
+        "confidence": "machine_extracted_needs_verification",
+        "display_value": "Data management plan (required)",
+        "fact_contract": "typed-notice-facts-1",
+        "id": "evidence-361526-d44bc0d9049b",
+        "label": "Data management plan",
+        "obligation": "required",
+        "parser_version": "component-owner-3",
+        "source_authority": "machine_extracted_official_document",
+        "stage": "application",
+        "subject": "Data management plan",
+        "type": "application_component",
+        "value": "Data management plan"
+      }
+    },
+    {
+      "opportunity_id": "362827",
+      "document": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/353624",
+        "name": "Foa_Content_of_OFH-2600-DC-021C.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/pdf",
+        "sha256": "2c61efb3cbabba963d2822e677474dc4cc93cea9a057477f7e936a3801d9d79f",
+        "bytes": 3652894,
+        "etag": null,
+        "last_modified": null,
+        "version": 1,
+        "first_seen_at": "2026-07-28T12:14:44.323320Z",
+        "last_seen_at": "2026-10-30T16:48:34.265734Z",
+        "changed_since_previous": false
+      },
+      "fact": {
+        "id": "evidence-362827-0ba2e1d6acee",
+        "type": "application_component",
+        "label": "Abstract",
+        "value": "Abstract",
+        "display_value": "Abstract (required)",
+        "confidence": "machine_extracted_needs_verification",
+        "citation": {
+          "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/353624",
+          "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/353624#page=77",
+          "document_name": "Foa_Content_of_OFH-2600-DC-021C.pdf",
+          "sha256": "2c61efb3cbabba963d2822e677474dc4cc93cea9a057477f7e936a3801d9d79f",
+          "page": 77,
+          "section": null,
+          "location": "page 77",
+          "quote": "…nalties, including confinement for up to 5 years, fines, and civil and administrative penalties. (18 U.S.C. §§ 287, 1001, 1010, 1012, 1014; 31 U.S.C § 3729, 3802). Appendix C. Required Abstract – Format This information must be in letter and number characters only. Do not include symbols, graphs, charts, icons or pictures. The Abstract is not required to b…",
+          "extracted_at": "2026-10-30T16:48:34.265734Z",
+          "structural_reference": {
+            "block_id": "pdf-77-57",
+            "kind": "line"
+          }
+        },
+        "fact_contract": "typed-notice-facts-1",
+        "source_authority": "machine_extracted_official_document",
+        "subject": "Abstract",
+        "parser_version": "component-owner-3",
+        "stage": "application",
+        "obligation": "required"
+      }
+    },
+    {
+      "opportunity_id": "363623",
+      "document": {
+        "bytes": 111886,
+        "changed_since_previous": true,
+        "content_type": "text/html; charset=UTF-8",
+        "etag": "\"1791808875-gzip\"",
+        "first_seen_at": "2026-10-12T16:10:13.427487Z",
+        "last_modified": "Mon, 12 Oct 2026 12:41:15 GMT",
+        "last_seen_at": "2026-10-12T16:10:13.427487Z",
+        "name": null,
+        "sha256": "5c899978cfca5e30c9ee0e0a57792ebe7e9222d81dc76a789123e50088ecaf46",
+        "source_kind": "agency_notice",
+        "url": "https://www.nsf.gov/funding/opportunities/expeditions-expeditions-computing/nsf26-525/solicitation",
+        "version": 2
+      },
+      "fact": {
+        "citation": {
+          "citation_url": "https://www.nsf.gov/funding/opportunities/expeditions-expeditions-computing/nsf26-525/solicitation",
+          "document_name": null,
+          "document_url": "https://www.nsf.gov/funding/opportunities/expeditions-expeditions-computing/nsf26-525/solicitation",
+          "extracted_at": "2026-10-12T16:10:13.427487Z",
+          "location": "section “A. Proposal Preparation Instructions”",
+          "page": null,
+          "quote": "…individual identified as Senior/Key Personnel within each proposal and, as Single Copy Documents, are available only to NSF staff. No other items or appendices are to be included. Information pertaining to \"Current and Pending (Other) Support\", \"Facilities, Equipment and Other Resources\" and \"Data Management and Sharing Plan\" are not required for prelimina…",
+          "section": "A. Proposal Preparation Instructions",
+          "sha256": "5c899978cfca5e30c9ee0e0a57792ebe7e9222d81dc76a789123e50088ecaf46",
+          "structural_reference": {
+            "block_id": "html-146",
+            "heading_path": [
+              "NSF 26-525: Expeditions in Computing (Expeditions)",
+              "Program Solicitation NSF 26-525",
+              "V. Proposal Preparation and Submission Instructions",
+              "A. Proposal Preparation Instructions"
+            ],
+            "kind": "paragraph",
+            "source_position": [
+              1187,
+              3
+            ]
+          }
+        },
+        "confidence": "machine_extracted_needs_verification",
+        "display_value": "Data management plan (required)",
+        "fact_contract": "typed-notice-facts-1",
+        "id": "evidence-363623-b7f7fc649c79",
+        "label": "Data management plan",
+        "obligation": "required",
+        "parser_version": "component-owner-3",
+        "source_authority": "machine_extracted_official_document",
+        "stage": "application",
+        "subject": "Data management plan",
+        "type": "application_component",
+        "value": "Data management plan"
+      }
+    },
+    {
+      "opportunity_id": "363804",
+      "document": {
+        "bytes": 646404,
+        "changed_since_previous": false,
+        "content_type": "application/pdf",
+        "etag": null,
+        "first_seen_at": "2026-09-08T09:42:24.791290Z",
+        "last_modified": null,
+        "last_seen_at": "2026-09-08T09:42:24.791290Z",
+        "name": "MPPEP NOFO Final.pdf",
+        "sha256": "0a5ac7fd612aef8fc59d35245f250c78788ea99a5e8d0f983f148fb5a54b9599",
+        "source_kind": "primary_notice",
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354973",
+        "version": 1
+      },
+      "fact": {
+        "citation": {
+          "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354973#page=14",
+          "document_name": "MPPEP NOFO Final.pdf",
+          "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354973",
+          "extracted_at": "2026-09-08T09:42:24.791290Z",
+          "location": "page 14",
+          "page": 14,
+          "quote": "…to determine project eligibility, including all other funding that is needed to complete the project. Refer to Section 1.3 for a list of project activities eligible for funding. Project activities not eligible for funding are listed in Section 1.4. (c) Applicants should note that while a letter of support from a community leader is not required for a Compl…",
+          "section": null,
+          "sha256": "0a5ac7fd612aef8fc59d35245f250c78788ea99a5e8d0f983f148fb5a54b9599",
+          "structural_reference": {
+            "block_id": "pdf-14-7",
+            "kind": "line"
+          }
+        },
+        "confidence": "machine_extracted_needs_verification",
+        "display_value": "Letters of support (required)",
+        "fact_contract": "typed-notice-facts-1",
+        "id": "evidence-363804-9bad00d602b4",
+        "label": "Letters of support",
+        "obligation": "required",
+        "parser_version": "component-owner-3",
+        "source_authority": "machine_extracted_official_document",
+        "stage": "application",
+        "subject": "Letters of support",
+        "type": "application_component",
+        "value": "Letters of support"
+      }
+    },
+    {
+      "opportunity_id": "363929",
+      "document": {
+        "bytes": 200230,
+        "changed_since_previous": false,
+        "content_type": "application/pdf",
+        "etag": null,
+        "first_seen_at": "2026-09-27T16:19:10.972079Z",
+        "last_modified": null,
+        "last_seen_at": "2026-09-27T16:19:10.972079Z",
+        "name": "Foa_Content_of_NOAA-NMFS-PRPO-2026-31863.pdf",
+        "sha256": "6a365250c3c41f94c5cb2ff299c435fa32d19c3d56f06a8d3e3860ffea775d22",
+        "source_kind": "primary_notice",
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355086",
+        "version": 1
+      },
+      "fact": {
+        "citation": {
+          "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355086#page=19",
+          "document_name": "Foa_Content_of_NOAA-NMFS-PRPO-2026-31863.pdf",
+          "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355086",
+          "extracted_at": "2026-09-27T16:19:10.972079Z",
+          "location": "page 19",
+          "page": 19,
+          "quote": "…igator, Co-Investigators, and named Collaborators that will receive Federal funds for their salary and/or fringe must each provide a resume summarizing their relevant experience. Resumes are not required for personnel that will not receive Federal funds for salary and/or fringe. 7d) Position Descriptions: Applicants requesting funds for new staff positions…",
+          "section": null,
+          "sha256": "6a365250c3c41f94c5cb2ff299c435fa32d19c3d56f06a8d3e3860ffea775d22",
+          "structural_reference": {
+            "block_id": "pdf-19-13",
+            "kind": "line"
+          }
+        },
+        "confidence": "machine_extracted_needs_verification",
+        "display_value": "PI resume (required)",
+        "fact_contract": "typed-notice-facts-1",
+        "id": "evidence-363929-b8b44c6a5853",
+        "label": "PI resume",
+        "obligation": "required",
+        "parser_version": "component-owner-3",
+        "source_authority": "machine_extracted_official_document",
+        "stage": "application",
+        "subject": "PI resume",
+        "type": "application_component",
+        "value": "PI resume"
+      }
+    },
+    {
+      "opportunity_id": "364149",
+      "document": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355363",
+        "name": "DRL IRF FY26 Global RSOI (4).pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/pdf",
+        "sha256": "33fbb035f0e29caae61ea5d45621d0fc19e44b401f545b85e8e90a906e00b332",
+        "bytes": 508268,
+        "etag": null,
+        "last_modified": null,
+        "version": 1,
+        "first_seen_at": "2026-10-29T18:27:54.648364Z",
+        "last_seen_at": "2026-10-29T18:27:54.648364Z",
+        "changed_since_previous": false
+      },
+      "fact": {
+        "id": "evidence-364149-c3cb933c08ba",
+        "type": "application_component",
+        "label": "Logic model",
+        "value": "Logic model",
+        "display_value": "Logic model (required)",
+        "confidence": "machine_extracted_needs_verification",
+        "citation": {
+          "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355363",
+          "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355363#page=6",
+          "document_name": "DRL IRF FY26 Global RSOI (4).pdf",
+          "sha256": "33fbb035f0e29caae61ea5d45621d0fc19e44b401f545b85e8e90a906e00b332",
+          "page": 6,
+          "section": null,
+          "location": "page 6",
+          "quote": "…dicate the place(s) of performance the program will operate in. • Include a theory of change that clearly outlines how project activities support project outcomes and objectives. Please note that due to the three-page limit, a full logic model is not required at the SOI stage – a brief paragraph outlining the project’s theory of change is sufficient. • Inc…",
+          "extracted_at": "2026-10-29T18:27:54.648364Z",
+          "structural_reference": {
+            "block_id": "pdf-6-25",
+            "kind": "line"
+          }
+        },
+        "fact_contract": "typed-notice-facts-1",
+        "source_authority": "machine_extracted_official_document",
+        "subject": "Logic model",
+        "parser_version": "component-owner-3",
+        "stage": "application",
+        "obligation": "required"
+      }
+    }
+  ]
+}
