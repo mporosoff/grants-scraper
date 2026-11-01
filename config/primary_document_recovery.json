@@ -4,6 +4,28 @@
   "parent_run": "41350168738",
   "parent_generation_sha": "da37d14444db6bda54a686ea1461aa79d8664ce8",
   "parent_manifest_sha256": "1512c8a2f3a8e1a90e23f253be19758e648f52fa0090e379a3057f435bb03dfb",
+  "retained_fact_removals": {
+    "334971": {
+      "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/319693",
+      "document_sha256": "ed7b40d5b7f89f5199a89777acb6f6da65752ecf166fe374d9a69d16ef3978c8",
+      "fact_ids": ["evidence-334971-7a6da70a8026"]
+    },
+    "334972": {
+      "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/319713",
+      "document_sha256": "f6dc792bfc92caabb7eb5a33497f667e0ca30dd84ba1f40b99d339c42abfe12c",
+      "fact_ids": ["evidence-334972-9f0b617bf18f"]
+    },
+    "340828": {
+      "document_url": "https://www.nsf.gov/funding/opportunities/nsf-nih-research-interface-biological-mathematical-sciences/nsf22-600/solicitation",
+      "document_sha256": "f9801ed059f5a140bc20212057cdcd4f4e9cc51ecc2703b096962aac71429265",
+      "fact_ids": ["evidence-340828-fd1f3b89df0b"]
+    },
+    "364188": {
+      "document_url": "https://nspires.nasaprs.com/external/viewrepositorydocument/cmdocumentid=1176896/solicitationId=%7B95538284-695B-C35A-E907-358C0D4F7A20%7D/viewSolicitationDocument=1/FY_2027_EPSCoR_Basic_Research_2026_10_27.pdf",
+      "document_sha256": "aa1a95f43dd90f0906968a0f1e81ab7219a781dd5a5458507a62c3bfb6773c5b",
+      "fact_ids": ["evidence-364188-c3633b51f026"]
+    }
+  },
   "records": {
     "364174": {
       "opportunity_number": "DE-FOA-0003641",

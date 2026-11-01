@@ -42,7 +42,7 @@ from scripts.build_catalog import (
     write_catalog,
 )
 from scripts.enrich_catalog import read_catalog
-from scripts import program_areas, notice_semantics, notice_schedule, notice_structure_cache, notice_fact_guards, notice_awards
+from scripts import program_areas, notice_semantics, notice_schedule, notice_structure_cache, notice_fact_guards, notice_awards, notice_duration
 from scripts.document_work_budget import WorkTimedOut
 from scripts.source_documents import is_doe_companion_document, DOE_PRIMARY_POLICY
 
@@ -161,13 +161,6 @@ EXPECTED_AWARDS_RE = re.compile(
     r"(?:\s+to)?\s+(?:make|fund|award|issue)?\s*"
     r"(?:approximately|about|up to)?\s*(\d{1,3})\s+"
     r"(?:awards?|grants?)\b",
-    re.I,
-)
-DURATION_RE = re.compile(
-    r"\b(?:period\s+of\s+performance|project\s+(?:period|duration)|"
-    r"award\s+(?:period|duration))\D{0,90}?"
-    r"(?:up\s+to\s+|not\s+to\s+exceed\s+)?(\d{1,3})\s*"
-    r"(months?|years?)\b",
     re.I,
 )
 PAGE_LIMIT_RE = re.compile(
@@ -1534,24 +1527,8 @@ def extract_document_facts(
         if expected_awards:
             facts.append(expected_awards)
 
-        duration = first_pattern_fact(
-            opportunity_id,
-            containers,
-            document,
-            extracted_at,
-            pattern=DURATION_RE,
-            fact_type="project_duration",
-            label="Project duration",
-            value_builder=lambda match: {
-                "amount": int(match.group(1)),
-                "unit": match.group(2).casefold(),
-            },
-            display_builder=lambda value: (
-                f"{value['amount']} {value['unit']}"
-            ),
-        )
-        if duration:
-            facts.append(duration)
+        facts.extend(notice_duration.facts(
+            sys.modules[__name__], opportunity_id, containers, document, extracted_at))
 
     if "components" in enabled:
         facts.extend(notice_semantics.component_facts(

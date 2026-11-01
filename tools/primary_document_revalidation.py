@@ -27,6 +27,7 @@ RECIPE_FILES = ('tools/primary_document_revalidation.py', 'scripts/extract_docum
     'scripts/source_documents.py', 'scripts/enrich_catalog.py', 'scripts/pull_grants.py',
     'scripts/subtopic_sources.py', 'scripts/notice_semantics.py', 'scripts/notice_fact_guards.py',
     'scripts/notice_schedule.py', 'scripts/submission_schedule.py', 'scripts/notice_awards.py',
+    'scripts/notice_duration.py', 'tools/document_fact_revalidation.py',
     'scripts/build_changes.py', 'scripts/build_feeds.py')
 PRIMARY_KEYS = {'primary_document_' + key for key in ('url', 'name', 'source', 'confidence')}
 DERIVED_KEYS = {'document_evidence', 'document_evidence_status', 'document_evidence_checked_at',
@@ -231,6 +232,42 @@ def project_catalog(before, cache, enrichment, packet, entries, audit_at):
     return after, updated, details
 
 
+def project_retained_facts(catalog, cache, packet):
+    """Compose only the reviewed quote removals, with no new document work."""
+    from tools.document_fact_revalidation import project_catalog as repair_facts
+
+    selected = packet.get('retained_fact_removals', {})
+    require(isinstance(selected, dict) and len(selected) <= 4
+        and not set(selected) & set(packet['records']), 'bounded_retained_fact_scope')
+    rows = {str(row['opportunity_id']): row for row in catalog['opportunities']}
+    expected = {}
+    for identifier, spec in selected.items():
+        require(isinstance(spec, dict)
+            and set(spec) == {'document_url', 'document_sha256', 'fact_ids'}
+            and isinstance(spec['document_url'], str) and spec['document_url'].startswith('https://')
+            and isinstance(spec['document_sha256'], str) and re.fullmatch('[a-f0-9]{64}', spec['document_sha256'])
+            and isinstance(spec['fact_ids'], list) and len(spec['fact_ids']) == 1
+            and isinstance(spec['fact_ids'][0], str) and spec['fact_ids'][0], 'retained_fact_spec')
+        require(identifier in rows and identifier in cache['records'], 'retained_fact_membership')
+        row, entry = rows[identifier], cache['records'][identifier]
+        require(row.get('document_evidence_status') == 'current' and entry.get('status') == 'current',
+            'current_retained_fact_document')
+        public = row.get('document_evidence') or {}
+        for value in (public, entry):
+            document = value.get('document') or {}
+            require(document.get('url') == spec['document_url']
+                and document.get('sha256') == spec['document_sha256'], 'retained_fact_document_identity')
+            ids = [fact.get('id') for fact in value.get('facts', [])]
+            require(all(ids.count(fact_id) == 1 for fact_id in spec['fact_ids']), 'retained_fact_identity')
+        expected[identifier] = sorted(spec['fact_ids'])
+    after, updated, changes = repair_facts(catalog, cache)
+    for key in ('public_fact_changes', 'cached_fact_changes'):
+        actual = {identifier: sorted(change['fact_id'] for change in values)
+            for identifier, values in changes[key].items()}
+        require(actual == expected, 'exact_retained_fact_removals')
+    return after, updated, changes
+
+
 def projection(parent_root, audit_at, candidate_id, *, checkpoint_directory=None, acquire=False):
     from scripts.build_catalog import catalog_javascript_bytes, catalog_metadata_javascript_bytes
     from scripts.subtopic_records import read_cache
@@ -276,6 +313,7 @@ def projection(parent_root, audit_at, candidate_id, *, checkpoint_directory=None
             variant / 'entries' / identifier, binding, audit_at, acquire=acquire,
             acquisition_directory=checkpoint / 'documents' / identifier / spec['selected_document']['sha256'])
     after, updated, details = project_catalog(before, cache, enrichment, packet, entries, audit_at)
+    after, updated, fact_changes = project_retained_facts(after, updated, packet)
     gate = verify(after, updated, read_cache(parent_root / 'data/subtopics.js'), candidate_id=candidate_id)
     atomic_json(variant / 'notice-projection-report.json', gate)
     require(gate['publication_ready'], 'notice_projection_gate')
@@ -284,13 +322,15 @@ def projection(parent_root, audit_at, candidate_id, *, checkpoint_directory=None
         common.PROJECTION[2]: json_bytes(updated), ENRICHMENT: json_bytes(details)}
     from scripts.build_changes import refresh_current_generation_snapshots, render_change_feed
     original_changes = read(parent_root / 'feeds/changes.json')
-    refreshed_changes = refresh_current_generation_snapshots(original_changes, after, affected_ids=entries)
+    affected_ids = sorted(set(entries) | set(fact_changes['affected_catalog_ids']))
+    refreshed_changes = refresh_current_generation_snapshots(original_changes, after, affected_ids=affected_ids)
     rendered_changes = {'feeds/' + name: raw for name, raw in render_change_feed(refreshed_changes).items()}
     outputs.update(common.feed_projection(after, rendered_changes['feeds/changes.xml']))
     outputs.update(rendered_changes)
     common.verify_feed_index(outputs, outputs, changes_present=True)
-    changes = {'projection_kind': 'primary_document', 'affected_catalog_ids': sorted(entries),
-        'affected_evidence_ids': sorted(entries), 'original_source_at': before['generated_at'],
+    changes = {'projection_kind': 'primary_document', 'affected_catalog_ids': affected_ids,
+        'affected_evidence_ids': sorted(set(entries) | set(fact_changes['affected_evidence_ids'])),
+        'retained_fact_removals': fact_changes, 'original_source_at': before['generated_at'],
         'original_evidence_at': before['document_evidence_generated_at'],
         'input_packet_sha256': identity(packet), 'document_requests': len(entries),
         'new_document_requests': sum(read(checkpoint / 'documents' / identifier /
