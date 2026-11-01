@@ -4,8 +4,21 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml</id>
-  <updated>2026-10-30T16:48:34Z</updated>
+  <updated>2026-11-01T21:09:01Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>Grid Supply Chain Alternatives to Lead Energy Dominance (SCALED)</title>
+    <link href="https://www.grants.gov/search-results-detail/364174"/>
+    <id>urn:funding-finder:grants-gov:364174</id>
+    <updated>2026-10-30T00:00:00Z</updated>
+    <author><name>National Energy Technology Laboratory</name></author>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Cybersecurity"/>
+    <summary>National Energy Technology Laboratory | Application 2027-02-08 | Grid Supply Chain Alternatives to Lead Energy Dominance (SCALED) This initiative will deploy a multi-faceted approach to bolster domestic capabilities to withstand supply chain shocks, ensure a reliable energy infrastructure, and position the U.S. as a global leader in foundational grid technologies.</summary>
+  </entry>
   <entry>
     <title>FY 2027 Crash Causal Factors Program</title>
     <link href="https://www.grants.gov/search-results-detail/364171"/>
@@ -112,26 +125,6 @@
     <summary>Idaho Field Office | Application 2026-12-07 | Silcon Carbide Cladding Lead Test Rod Development-Phase 1 Research, development, and fabrication of Silicon Carbide cladding specimens for research reactor insertion, irradiation, and post-irradiation examinations by 2030. The objective of this program is to advance the scientific and technological maturity of silicon carbide cladding for nuclear fuel rods for future use in commercial light water …</summary>
   </entry>
   <entry>
-    <title>Small Business Transportation Technical Assistance Center (Region 1)</title>
-    <link href="https://www.grants.gov/search-results-detail/363996"/>
-    <id>urn:funding-finder:grants-gov:363996</id>
-    <updated>2026-10-01T00:00:00Z</updated>
-    <author><name>69A350 OSDBU</name></author>
-    <category term="Transportation"/>
-    <category term="Cybersecurity"/>
-    <summary>69A350 OSDBU | Application 2026-10-31 | The U.S. Department of Transportation (USDOT), Office of the Secretary (OST), Office of Small and Disadvantaged Business Utilization (OSDBU), announces the availability of funding under Notice of Funding Opportunity (NOFO) Number OST/OSDBU-2027-SBTTAC-Region1-FY2027-1 to establish and operate the Region 1 Small Business Transportation Technical Assistance Center (SBTTAC) formerly known as the Smal…</summary>
-  </entry>
-  <entry>
-    <title>Small Business Transportation Technical Assistance Center (Region 3)</title>
-    <link href="https://www.grants.gov/search-results-detail/363998"/>
-    <id>urn:funding-finder:grants-gov:363998</id>
-    <updated>2026-10-01T00:00:00Z</updated>
-    <author><name>69A350 OSDBU</name></author>
-    <category term="Transportation"/>
-    <category term="Cybersecurity"/>
-    <summary>69A350 OSDBU | Application 2026-10-31 | The U.S. Department of Transportation (USDOT), Office of the Secretary (OST), Office of Small and Disadvantaged Business Utilization (OSDBU), announces the availability of funding under Notice of Funding Opportunity (NOFO) Number OST/OSDBU-2027-SBTTAC-Region3-FY2027-1 to establish and operate the Region 3 Small Business Transportation Technical Assistance Center (SBTTAC) formerly known as the Smal…</summary>
-  </entry>
-  <entry>
     <title>Technical Assistance and Training Grant Program</title>
     <link href="https://www.grants.gov/search-results-detail/364019"/>
     <id>urn:funding-finder:grants-gov:364019</id>
@@ -144,26 +137,6 @@
     <category term="Water"/>
     <category term="Cybersecurity"/>
     <summary>Rural Utilities Service | Application 2026-12-31 | verify prerequisite | Funds may be used to pay expenses associated with providing technical assistance and/or training (TAT) to: Identify and evaluate solutions to water problems relating to source, storage, treatment, or distribution; identify and evaluate solutions to waste problems relating to collection, treatment, or disposal: assist applicants, that have filed a pre-application with RUS, in the preparation of wat…</summary>
-  </entry>
-  <entry>
-    <title>Prioritization Process Pilot Program (PPPP) Competitive Grant Program</title>
-    <link href="https://www.grants.gov/search-results-detail/364011"/>
-    <id>urn:funding-finder:grants-gov:364011</id>
-    <updated>2026-09-30T00:00:00Z</updated>
-    <author><name>DOT Federal Highway Administration</name></author>
-    <category term="Transportation"/>
-    <category term="Cybersecurity"/>
-    <summary>DOT Federal Highway Administration | Application 2026-10-30 | This NOFO will award up to $26 million total in Fiscal Years (FYs) 2025 and 2026 funding and remaining FY 2024 funding via cost reimbursable grants. The actual amount available to be awarded under this notice will be subject to the availability of funds. Under Section 11204(c)(3) of the Infrastructure Investment and Jobs Act (IIJA) (Public Law 117-58), the maximum amount of a grant under the PPPP …</summary>
-  </entry>
-  <entry>
-    <title>Region 4 Small Business Transportation Technical Assistance Center (SBTTAC)</title>
-    <link href="https://www.grants.gov/search-results-detail/364004"/>
-    <id>urn:funding-finder:grants-gov:364004</id>
-    <updated>2026-09-30T00:00:00Z</updated>
-    <author><name>69A350 OSDBU</name></author>
-    <category term="Transportation"/>
-    <category term="Cybersecurity"/>
-    <summary>69A350 OSDBU | Application 2026-10-31 | The U.S. Department of Transportation (USDOT), Office of Small and Disadvantaged Business Utilization (OSDBU), will provide financial assistance to an eligible 501(c)(3) or 501(c)(6) nonprofit organization to establish, operate, and administer the Region 4 Small Business Transportation Technical Assistance Center (SBTTAC). The SBTTAC will provide technical assistance, business development support,…</summary>
   </entry>
   <entry>
     <title>Fiscal Year 2026 Wildlife Crossings Pilot Program</title>
@@ -184,16 +157,6 @@
     <category term="Education and workforce"/>
     <category term="Cybersecurity"/>
     <summary>Fish and Wildlife Service | Application 2026-11-30 | The John H. Prescott Marine Mammal Rescue and Response Grant Program (Prescott program) provides financial assistance to eligible marine mammal stranding participants and stranding network collaborators to provide (A) the recovery, care, or treatment of sick, injured, or entangled marine mammals; (B) responses to marine mammal stranding events that require emergency assistance; (C) the collection …</summary>
-  </entry>
-  <entry>
-    <title>F26AS00071 Cooperative Endangered Species Conservation Fund: Habitat Conservation Plan Land Acquisition Grants</title>
-    <link href="https://www.grants.gov/search-results-detail/363691"/>
-    <id>urn:funding-finder:grants-gov:363691</id>
-    <updated>2026-08-24T00:00:00Z</updated>
-    <author><name>Fish and Wildlife Service</name></author>
-    <category term="Environmental science"/>
-    <category term="Cybersecurity"/>
-    <summary>Fish and Wildlife Service | Application 2026-10-30 | Established by Congress in fiscal year (FY) 1997, the Habitat Conservation Plan (HCP) Land Acquisition Grant program was designed to reduce conflicts between the conservation of listed species and competing land uses on specific parcels of land associated with approved and permitted HCPs. Under this program, the U.S. Fish and Wildlife Service (FWS) provides matching grants to State agencies in sup…</summary>
   </entry>
   <entry>
     <title>MPS Mathematical Sciences Research Programs (MPS MathSci)</title>
