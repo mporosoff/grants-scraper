@@ -2,31 +2,12 @@ name: Deploy Funded Awards service
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
-    paths:
-      - ".github/workflows/deploy-award-api.yml"
-      - "assets/award-api-config.js"
-      - "assets/dod-awards-browser.mjs"
-      - "assets/award-links.js"
-      - "assets/funded-awards-core.js"
-      - "assets/funded-awards.css"
-      - "assets/funded-awards.js"
-      - "assets/institutional-intelligence-core.js"
-      - "assets/institutional-intelligence.css"
-      - "assets/institutional-intelligence.js"
-      - "assets/institutional-intelligence-snapshots.js"
-      - "config/award_institutions.json"
-      - "funded_awards.html"
-      - "match_explorer.html"
-      - "package.json"
-      - "pnpm-lock.yaml"
-      - "tools/classify_worker_deployment.mjs"
-      - "tools/smoke_award_worker.mjs"
-      - "tools/smoke_phase3_award_worker.mjs"
-      - "tools/smoke_unit_b_award_worker.mjs"
-      - "workers/award-api/**"
+  # Pages belongs to the immutable release. Checking newly committed HTML
+  # before that release finishes races its publication, even for a retained Worker.
+  workflow_run:
+    workflows: ["Funding Finder immutable release"]
+    types: [completed]
+    branches: [main]
 permissions:
   contents: read
 
@@ -36,12 +17,13 @@ concurrency:
 
 jobs:
   deploy:
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main' && (github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success')
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v6
         with:
+          ref: ${{ github.sha }}
           fetch-depth: 0
       - uses: pnpm/action-setup@v6
         with:
