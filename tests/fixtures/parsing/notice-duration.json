@@ -1,0 +1,185 @@
+{
+  "364174": {
+    "document": {
+      "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355417",
+      "name": "FundOpp_DE-FOA-0003641.pdf",
+      "source_kind": "primary_notice",
+      "content_type": "application/octet-stream",
+      "sha256": "1f31710884163f35b0882cf1783f0ed6a1e15eb21b07ec4de515803774b891e2",
+      "version": 2,
+      "first_seen_at": "2026-11-01T21:54:32.746705+00:00",
+      "last_seen_at": "2026-11-01T21:54:32.746705+00:00",
+      "changed_since_previous": true
+    },
+    "fact": {
+      "id": "evidence-364174-d042afca6639",
+      "type": "project_duration",
+      "label": "Project duration",
+      "value": {
+        "amount": 24,
+        "unit": "months"
+      },
+      "display_value": "24 months",
+      "confidence": "machine_extracted_needs_verification",
+      "citation": {
+        "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355417",
+        "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355417#page=7",
+        "document_name": "FundOpp_DE-FOA-0003641.pdf",
+        "sha256": "1f31710884163f35b0882cf1783f0ed6a1e15eb21b07ec4de515803774b891e2",
+        "page": 7,
+        "section": null,
+        "location": "page 7",
+        "quote": "…50,000,000 • Approximate number of awards: 3–20 • Approximate dollar amount of individual awards: $2,500,000–$15,000,000 • Minimum cost share required: 50% • Approximate award project period: up to 24 months • Anticipated length of budget periods: up to 24 months • Anticipated number of budget periods: 1 Topic Area 2: Alternative Materials and Subcomponent…",
+        "extracted_at": "2026-11-01T22:34:56.368127Z",
+        "structural_reference": {
+          "block_id": "pdf-7-14",
+          "kind": "line"
+        }
+      },
+      "fact_contract": "typed-notice-facts-1",
+      "source_authority": "machine_extracted_official_document",
+      "subject": "award_project",
+      "parser_version": "official-evidence-3"
+    },
+    "page_text": " \nVersion 4.1 Page 7 of 51 \n \n \nNotice of Funding Opportunity, Part 1 \n1.  Funding Details \nMultiple Topic Areas \nApproximate total available funding for all topic areas:  $237,000,000 in fiscal year 2027   \n \nTopic Area 1: Refurbishment and Reuse of Critical Grid Equipment \n• Approximate total available funding:  $50,000,000 \n• Approximate number of awards:  3–20 \n• Approximate dollar amount of individual awards:  $2,500,000–$15,000,000 \n• Minimum cost share required:  50% \n• Approximate award project period:  up to 24 months  \n• Anticipated length of budget periods:  up to 24 months  \n• Anticipated number of budget periods:  1 \nTopic Area 2: Alternative Materials and Subcomponents \n• Approximate total available funding:  $187,000,000 \n• Approximate number of awards:  7–50 \n• Approximate dollar amount of individual awards:  $1,000,000–$25,000,000 \n• Minimum cost share required:  50% \n• Approximate award project period:  up to 48 months  \n• Anticipated number of budget periods:  1 \n• Anticipated length of budget periods:  Phase 1—up to 12 months. Phase 2—up to 36 \nmonths  \n2.  Period of Performance \nDOE anticipates both Topic Areas will be coextensive (singular budget period); however, \nTopic Area Two (2) will contain two Phases.  For Topic Area 2, Phase 2 will be contingent on a \nGo/No-Go decision point.  You can find a complete list of post-award requirements and more \ninformation on the Go/No-Go review in NOFO Part 2, Award Administration Information. \nB.  Executive Summary \nThe Department of Energy (DOE), Office of Electricity (OE), is launching a strategic \ngrid supply chain program, as appropriated in the Energy and Water Development and Related \nAgencies Appropriations Act, 2026 (Pub. L. No. 119-74, Div. B), designed to significantly \nenhance the domestic supply chain for critical electric grid components such as (but not limited \nto) distribution transformers, larger power transformers, circuit breakers, switchgear, reclosers, \ninsulators, busbars, and high-voltage bushings.  This program seeks to (1) bolster domestic \ncapabilities and capacity to handle supply chain shocks, (2) complement ongoing investments in \ndomestic manufacturing capacity to meet increased equipment demands, and (3) strengthen \nsupply chains for next-generation grid components that reduce demand for existing solutions and \nenable global dominance.  \n\n"
+  },
+  "340828": {
+    "document": {
+      "changed_since_previous": true,
+      "content_type": "text/html; charset=UTF-8",
+      "first_seen_at": "2026-10-12T16:10:13.427487Z",
+      "last_seen_at": "2026-10-12T16:10:13.427487Z",
+      "name": null,
+      "sha256": "f9801ed059f5a140bc20212057cdcd4f4e9cc51ecc2703b096962aac71429265",
+      "source_kind": "agency_notice",
+      "url": "https://www.nsf.gov/funding/opportunities/nsf-nih-research-interface-biological-mathematical-sciences/nsf22-600/solicitation",
+      "version": 2
+    },
+    "fact": {
+      "citation": {
+        "citation_url": "https://www.nsf.gov/funding/opportunities/nsf-nih-research-interface-biological-mathematical-sciences/nsf22-600/solicitation",
+        "document_name": null,
+        "document_url": "https://www.nsf.gov/funding/opportunities/nsf-nih-research-interface-biological-mathematical-sciences/nsf22-600/solicitation",
+        "extracted_at": "2026-10-12T16:10:13.427487Z",
+        "location": "section “General Information”",
+        "page": null,
+        "quote": "…o support innovative activities by existing teams. The joint DMS/NIGMS initiative offers two submission tracks: Track 1 - for projects with a total budget of up to $600,000 for an award duration of 3 years, and Track 2 - for projects with a total budget of up to $1,200,000 for an award duration of 3-4 years. Cognizant Program Officer(s): Please note that t…",
+        "section": "General Information",
+        "sha256": "f9801ed059f5a140bc20212057cdcd4f4e9cc51ecc2703b096962aac71429265",
+        "structural_reference": {
+          "block_id": "html-33",
+          "heading_path": [
+            "NSF 22-600: Joint DMS/NIGMS Initiative to Support Research at the Interface of the Biological and Mathematical Sciences (DMS/NIGMS)",
+            "Program Solicitation NSF 22-600",
+            "Summary Of Program Requirements",
+            "General Information"
+          ],
+          "kind": "paragraph",
+          "source_position": [
+            927,
+            19
+          ]
+        }
+      },
+      "confidence": "machine_extracted_needs_verification",
+      "display_value": "3 years",
+      "fact_contract": "typed-notice-facts-1",
+      "id": "evidence-340828-fd1f3b89df0b",
+      "label": "Project duration",
+      "parser_version": "official-evidence-3",
+      "source_authority": "machine_extracted_official_document",
+      "subject": "award_project",
+      "type": "project_duration",
+      "value": {
+        "amount": 3,
+        "unit": "years"
+      }
+    }
+  },
+  "364033": {
+    "document": {
+      "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355184",
+      "name": "DE-FOA-0003673.000001.pdf",
+      "source_kind": "primary_notice",
+      "content_type": "application/pdf",
+      "sha256": "3b29efda7476f2fe1b2c9ee58be3f228c26b185dd50c949e5a2fc07d9cfc456f",
+      "version": 3,
+      "first_seen_at": "2026-11-01T21:54:27.403059+00:00",
+      "last_seen_at": "2026-11-01T21:54:27.403059+00:00",
+      "changed_since_previous": true
+    },
+    "fact": {
+      "id": "evidence-364033-17b3087f8134",
+      "type": "project_duration",
+      "label": "Project duration",
+      "value": {
+        "amount": 60,
+        "unit": "months"
+      },
+      "display_value": "60 months",
+      "confidence": "machine_extracted_needs_verification",
+      "citation": {
+        "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355184",
+        "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355184#page=5",
+        "document_name": "DE-FOA-0003673.000001.pdf",
+        "sha256": "3b29efda7476f2fe1b2c9ee58be3f228c26b185dd50c949e5a2fc07d9cfc456f",
+        "page": 5,
+        "section": null,
+        "location": "page 5",
+        "quote": "…n FY 2029, $20,000,000 FY 2030, $20,000,000 in FY 2031 • Approximate number of awards: 4–8 • Approximate dollar amount of individual awards: $12–25 million • Approximate award project period: 60 months • Anticipated length of budget periods: 12 months 2. Period of Performance We anticipate making awards with a project period of five years. Continuation fun…",
+        "extracted_at": "2026-11-01T22:34:56.368127Z",
+        "structural_reference": {
+          "block_id": "pdf-5-36",
+          "kind": "line"
+        }
+      },
+      "fact_contract": "typed-notice-facts-1",
+      "source_authority": "machine_extracted_official_document",
+      "subject": "award_project",
+      "parser_version": "official-evidence-3"
+    }
+  },
+  "364020": {
+    "document": {
+      "changed_since_previous": true,
+      "content_type": "application/pdf",
+      "first_seen_at": "2026-10-24T22:21:02.223886Z",
+      "last_seen_at": "2026-10-24T22:21:02.223886Z",
+      "name": "FY26-SBIR-STTR-PII-NOFO-P-MOD1.pdf",
+      "sha256": "66a354395defaa5468f817ba77ac12cec53215ba90fc43e1e107b05d604c42cc",
+      "source_kind": "primary_notice",
+      "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355152",
+      "version": 2
+    },
+    "fact": {
+      "citation": {
+        "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355152#page=1",
+        "document_name": "FY26-SBIR-STTR-PII-NOFO-P-MOD1.pdf",
+        "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355152",
+        "extracted_at": "2026-10-24T22:21:02.223886Z",
+        "location": "page 1",
+        "page": 1,
+        "quote": "…ts are indicated using track changes and red font so the public/potential applicants can identify the changes within the solicitation. In each table for each program code, the award duration should be 24 months, not 24-36 months. Edits appear on pages: 1, 10-14, 55. FUNDING YEAR: Fiscal Year (FY) 2026 and FY 2027 APPLICATION DEADLINE: FY 2026: November 17,…",
+        "section": null,
+        "sha256": "66a354395defaa5468f817ba77ac12cec53215ba90fc43e1e107b05d604c42cc",
+        "structural_reference": {
+          "block_id": "pdf-1-11",
+          "kind": "line"
+        }
+      },
+      "confidence": "machine_extracted_needs_verification",
+      "display_value": "24 months",
+      "fact_contract": "typed-notice-facts-1",
+      "id": "evidence-364020-53ad4050995b",
+      "label": "Project duration",
+      "parser_version": "official-evidence-3",
+      "source_authority": "machine_extracted_official_document",
+      "subject": "award_project",
+      "type": "project_duration",
+      "value": {
+        "amount": 24,
+        "unit": "months"
+      }
+    }
+  }
+}

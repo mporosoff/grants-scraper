@@ -2,6 +2,7 @@
 from copy import deepcopy
 from decimal import Decimal, InvalidOperation
 import re
+from scripts import notice_duration
 
 VERSION = 'notice-fact-guards-1'
 COMPONENT_NAMES = {
@@ -9,6 +10,20 @@ COMPONENT_NAMES = {
     'Data management plan': r'data\s+management(?:\s+and\s+sharing)?\s+plan',
     'Logic model': r'logic\s+models?',
 }
+
+
+def component_role_condition(text, subject):
+    """A complete same-component obligation restricted to a class of applicants."""
+    name = COMPONENT_NAMES.get(subject)
+    if not name:
+        return False
+    # The whole role, condition and required attachment must survive in one
+    # clause. A clipped quote or a neighboring component cannot supply scope.
+    pattern = (r'\b(?:Applicants|Proposers)\s+'
+               r'(?:that|who|including|using|with)\s+[^.!?;\u2026\u2022]{1,180}?'
+               r'\s+must\s+(?:submit|include|provide)\s+(?:(?:an?|the)\s+)?'
+               rf'{name}\b')
+    return bool(re.search(pattern, text, re.I))
 
 
 def component_not_required(text, subject):
@@ -64,6 +79,11 @@ def repair_facts(facts, document):
         if bound and fact.get('type') == 'application_component' and fact.get('obligation') == 'required':
             if component_not_required(quote, fact.get('subject') or fact.get('label')):
                 reason = 'component_explicit_not_required'
+            elif not fact.get('applicant_condition') and component_role_condition(
+                    quote, fact.get('subject') or fact.get('label')):
+                reason = 'component_applicant_condition_missing'
+        if bound and notice_duration.unscoped_duration(fact):
+            reason = 'project_duration_scope_missing'
         if bound and fact.get('type') == 'program_funding':
             for token in re.finditer(r'\$\s*(\d[\d,]*(?:\.\d+)?)', quote):
                 try:

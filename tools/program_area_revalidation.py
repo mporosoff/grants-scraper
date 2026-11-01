@@ -63,6 +63,7 @@ PRIMARY_DOCUMENT_INPUTS = ('tools/primary_document_revalidation.py',
     'config/primary_document_recovery.json', 'scripts/source_documents.py',
     'scripts/pull_grants.py', 'scripts/enrich_catalog.py', 'scripts/subtopic_sources.py',
     'scripts/notice_semantics.py', 'scripts/notice_schedule.py', 'scripts/notice_awards.py',
+    'scripts/notice_duration.py', 'scripts/notice_fact_guards.py', 'tools/document_fact_revalidation.py',
     'scripts/submission_schedule.py', 'scripts/build_changes.py', 'scripts/build_feeds.py',
     'tools/corpus_clock.mjs')
 PRIMARY_DOCUMENT_OUTPUTS = ('data/opportunity_enrichment.json', 'feeds/changes.json', 'feeds/changes.xml')
@@ -592,6 +593,7 @@ def modern_scope(root, original, kind='program_area'):
         allowed.update({'scripts/source_documents.py', 'scripts/pull_grants.py',
             'scripts/enrich_catalog.py', 'scripts/subtopic_sources.py', 'scripts/notice_semantics.py',
             'scripts/notice_schedule.py', 'scripts/notice_awards.py', 'scripts/submission_schedule.py',
+            'scripts/notice_duration.py', 'scripts/notice_fact_guards.py',
             'scripts/build_changes.py', 'scripts/build_feeds.py'})
     require(set(changes.get('source', [])) <= allowed
         and not changes.get('teams') and set(changes.get('semantic', [])) <= (

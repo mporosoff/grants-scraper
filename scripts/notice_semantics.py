@@ -808,7 +808,8 @@ def component_facts(api, opportunity_id, containers, document, stamp):
                 obligation = 'not_required'
             elif re.search(r"\boptional\b", local, re.I):
                 obligation = "optional"
-            elif re.search(r'\b(?:if|when)\b|\bas\s+applicable\b', prefix + local, re.I):
+            elif (notice_fact_guards.component_role_condition(prefix + local, name)
+                  or re.search(r'\b(?:if|when)\b|\bas\s+applicable\b', prefix + local, re.I)):
                 obligation = 'conditional'
             elif (re.search(r'\bnot\s+(?:required|mandatory|necessary)\b', local, re.I)
                   or re.search(r'\bnot\s+required\s+to\s+(?:include|submit|provide)\s*$', prefix, re.I)):

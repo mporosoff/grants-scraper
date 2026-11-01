@@ -1,0 +1,137 @@
+{
+  "origin": "Exact public candidate c5968a234bac1d03d9e5fd941ce791448b621615c713f05f21f4ad37eadc16fb; retained official notice citations; no new source requests",
+  "cases": [
+    {
+      "opportunity_id": "334971",
+      "fact": {
+        "citation": {
+          "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/319693#page=23",
+          "document_name": "Foa_Content_of_RFA-OH-22-005.pdf",
+          "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/319693",
+          "extracted_at": "2026-07-29T12:21:41.359843Z",
+          "location": "page 23",
+          "page": 23,
+          "quote": "…How to Apply - Application Guide must be followed along with any additional instructions provided in the NOFO. Applicants that plan to collect public health data must submit a Data Management Plan (DMP) in the Resource Sharing Plan section of the PHS 398 Research Plan Component of the application. A DMP is required for each collection of public health data…",
+          "section": null,
+          "sha256": "ed7b40d5b7f89f5199a89777acb6f6da65752ecf166fe374d9a69d16ef3978c8"
+        },
+        "confidence": "machine_extracted_needs_verification",
+        "display_value": "Data management plan (required)",
+        "fact_contract": "typed-notice-facts-1",
+        "id": "evidence-334971-7a6da70a8026",
+        "interpretation_basis": "limited_cached_quote",
+        "label": "Data management plan",
+        "obligation": "required",
+        "parser_version": "component-owner-3",
+        "source_authority": "machine_extracted_official_document",
+        "stage": "application",
+        "subject": "Data management plan",
+        "type": "application_component",
+        "value": "Data management plan"
+      },
+      "document": {
+        "bytes": 941767,
+        "changed_since_previous": false,
+        "content_type": "application/pdf",
+        "etag": null,
+        "first_seen_at": "2026-07-29T12:21:41.359843Z",
+        "last_modified": null,
+        "last_seen_at": "2026-08-25T03:13:26.882006Z",
+        "name": "Foa_Content_of_RFA-OH-22-005.pdf",
+        "sha256": "ed7b40d5b7f89f5199a89777acb6f6da65752ecf166fe374d9a69d16ef3978c8",
+        "source_kind": "primary_notice",
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/319693",
+        "version": 1
+      }
+    },
+    {
+      "opportunity_id": "334972",
+      "fact": {
+        "citation": {
+          "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/319713#page=23",
+          "document_name": "Foa_Content_of_RFA-OH-22-006.pdf",
+          "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/319713",
+          "extracted_at": "2026-07-29T12:21:41.359843Z",
+          "location": "page 23",
+          "page": 23,
+          "quote": "…How to Apply - Application Guide must be followed along with any additional instructions provided in the NOFO. Applicants that plan to collect public health data must submit a Data Management Plan (DMP) in the Resource Sharing Plan section of the PHS 398 Research Plan Component of the application. A DMP is required for each collection of public health data…",
+          "section": null,
+          "sha256": "f6dc792bfc92caabb7eb5a33497f667e0ca30dd84ba1f40b99d339c42abfe12c"
+        },
+        "confidence": "machine_extracted_needs_verification",
+        "display_value": "Data management plan (required)",
+        "fact_contract": "typed-notice-facts-1",
+        "id": "evidence-334972-9f0b617bf18f",
+        "interpretation_basis": "limited_cached_quote",
+        "label": "Data management plan",
+        "obligation": "required",
+        "parser_version": "component-owner-3",
+        "source_authority": "machine_extracted_official_document",
+        "stage": "application",
+        "subject": "Data management plan",
+        "type": "application_component",
+        "value": "Data management plan"
+      },
+      "document": {
+        "bytes": 919556,
+        "changed_since_previous": false,
+        "content_type": "application/pdf",
+        "etag": null,
+        "first_seen_at": "2026-07-29T12:21:41.359843Z",
+        "last_modified": null,
+        "last_seen_at": "2026-08-25T03:13:26.882006Z",
+        "name": "Foa_Content_of_RFA-OH-22-006.pdf",
+        "sha256": "f6dc792bfc92caabb7eb5a33497f667e0ca30dd84ba1f40b99d339c42abfe12c",
+        "source_kind": "primary_notice",
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/319713",
+        "version": 1
+      }
+    },
+    {
+      "opportunity_id": "364188",
+      "fact": {
+        "id": "evidence-364188-c3633b51f026",
+        "type": "application_component",
+        "label": "Letters of support",
+        "value": "Letters of support",
+        "display_value": "Letters of support (required)",
+        "confidence": "machine_extracted_needs_verification",
+        "citation": {
+          "document_url": "https://nspires.nasaprs.com/external/viewrepositorydocument/cmdocumentid=1176896/solicitationId=%7B95538284-695B-C35A-E907-358C0D4F7A20%7D/viewSolicitationDocument=1/FY_2027_EPSCoR_Basic_Research_2026_10_27.pdf",
+          "citation_url": "https://nspires.nasaprs.com/external/viewrepositorydocument/cmdocumentid=1176896/solicitationId=%7B95538284-695B-C35A-E907-358C0D4F7A20%7D/viewSolicitationDocument=1/FY_2027_EPSCoR_Basic_Research_2026_10_27.pdf#page=12",
+          "document_name": null,
+          "sha256": "aa1a95f43dd90f0906968a0f1e81ab7219a781dd5a5458507a62c3bfb6773c5b",
+          "page": 12,
+          "section": null,
+          "location": "page 12",
+          "quote": "…d by Mission Directorates, NASA Centers, or JPL shall be identified as “NASA responsibilities” in the proposals and shall not be included in the 50% cost matching requirement. • Proposers including the use of NASA Unique facilities must include a letter of support from the hosting center. EPSCoR funds may not be used to support civil servant or NASA contra…",
+          "extracted_at": "2026-11-01T21:09:01.066353Z",
+          "structural_reference": {
+            "block_id": "pdf-12-21",
+            "kind": "line"
+          }
+        },
+        "fact_contract": "typed-notice-facts-1",
+        "source_authority": "machine_extracted_official_document",
+        "subject": "Letters of support",
+        "parser_version": "component-owner-3",
+        "stage": "application",
+        "obligation": "required"
+      },
+      "document": {
+        "url": "https://nspires.nasaprs.com/external/viewrepositorydocument/cmdocumentid=1176896/solicitationId=%7B95538284-695B-C35A-E907-358C0D4F7A20%7D/viewSolicitationDocument=1/FY_2027_EPSCoR_Basic_Research_2026_10_27.pdf",
+        "name": null,
+        "source_kind": "agency_notice",
+        "content_type": "application/pdf",
+        "sha256": "aa1a95f43dd90f0906968a0f1e81ab7219a781dd5a5458507a62c3bfb6773c5b",
+        "bytes": 487272,
+        "etag": null,
+        "last_modified": "Tue, 27 Oct 2026 15:24:28 GMT",
+        "version": 1,
+        "first_seen_at": "2026-11-01T21:09:01.066353Z",
+        "last_seen_at": "2026-11-01T21:09:01.066353Z",
+        "changed_since_previous": false
+      }
+    }
+  ]
+}

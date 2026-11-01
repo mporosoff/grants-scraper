@@ -53,13 +53,14 @@ class PrimaryDocumentReleaseContract(unittest.TestCase):
         source_files = {'scripts/source_documents.py', 'scripts/pull_grants.py', 'scripts/enrich_catalog.py',
             'scripts/extract_document_evidence.py', 'scripts/subtopic_sources.py', 'scripts/notice_semantics.py',
             'scripts/notice_schedule.py', 'scripts/notice_awards.py', 'scripts/submission_schedule.py',
+            'scripts/notice_duration.py', 'scripts/notice_fact_guards.py',
             'scripts/build_changes.py', 'scripts/build_feeds.py'}
         selected['source']['files'].update({name: 'b' for name in source_files})
         with patch('tools.release_dependencies.snapshot', return_value=selected), patch.object(c, 'git'):
             p.modern_scope(Path('.'), original, 'primary_document')
             with self.assertRaises(ValueError): p.modern_scope(Path('.'), original, 'document_facts')
         for group, name in [('source', 'scripts/sources/adapters/sam_gov.py'),
-                            ('source', 'scripts/notice_fact_guards.py'),
+                            ('source', 'scripts/notice_eligibility.py'),
                             ('teams', 'scripts/build_opportunity_teams.py'), ('semantic', 'assets/search-hybrid.js')]:
             changed = deepcopy(selected); changed[group]['files'][name] = 'c'
             with self.subTest(name=name), patch('tools.release_dependencies.snapshot', return_value=changed), \
@@ -70,6 +71,7 @@ class PrimaryDocumentReleaseContract(unittest.TestCase):
         self.assertIn('config/primary_document_recovery.json', hashes.call_args.args[1])
         self.assertIn('tools/primary_document_revalidation.py', hashes.call_args.args[1])
         self.assertIn('tools/corpus_clock.mjs', hashes.call_args.args[1])
+        self.assertIn('tools/document_fact_revalidation.py', hashes.call_args.args[1])
         self.assertTrue(source_files <= set(hashes.call_args.args[1]))
 
     def test_only_primary_recipe_admits_its_bound_vector_accounting_helper_change(self):
