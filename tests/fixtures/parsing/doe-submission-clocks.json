@@ -1,0 +1,407 @@
+{
+  "provenance": "Exact public retained Part1 cover/KeyDates pages and c3b755 child cached facts; no new retrieval.",
+  "cases": [
+    {
+      "opportunity_id": "364174",
+      "record": {
+        "opportunity_id": "364174",
+        "opportunity_number": "DE-FOA-0003641",
+        "source": "Grants.gov",
+        "close_date": "2027-02-08",
+        "deadlines": [
+          {
+            "kind": "application",
+            "date": "2027-02-08",
+            "time": null,
+            "timezone": null,
+            "note": null,
+            "estimated": false,
+            "source": "Grants.gov XML extract",
+            "source_url": "https://www.grants.gov/search-results-detail/364174",
+            "source_field": "CloseDate",
+            "confidence": "official_structured",
+            "detail_checked_at": "2026-11-01T21:07:41.587732Z",
+            "document_evidence_id": "evidence-364174-8ee6dbdd89ba",
+            "document_confidence": "machine_extracted_needs_verification",
+            "document_source_fields": {
+              "stage": {
+                "present": false,
+                "value": null
+              }
+            },
+            "stage": "application"
+          },
+          {
+            "kind": "concept_paper",
+            "date": "2026-11-20",
+            "time": null,
+            "timezone": null,
+            "estimated": false,
+            "source": "Official notice (machine extracted)",
+            "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355417",
+            "confidence": "machine_extracted_needs_verification",
+            "evidence_id": "evidence-364174-03d5dd02e03c",
+            "required": true,
+            "subject": "submission",
+            "stage": "concept_paper",
+            "application_class": "unspecified",
+            "cycle": null,
+            "track": null,
+            "obligation": "required",
+            "invitation_required": null,
+            "prerequisite": null,
+            "requirement_citation": {
+              "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355417",
+              "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355417#page=25",
+              "document_name": "FundOpp_DE-FOA-0003641.pdf",
+              "sha256": "1f31710884163f35b0882cf1783f0ed6a1e15eb21b07ec4de515803774b891e2",
+              "page": 25,
+              "section": null,
+              "location": "page 25",
+              "quote": "…to submit an application. Application Must be submitted by the specified due date and time to be eligible for comprehensive merit review. C. Concept Paper Requirements You must submit a concept paper by the specified due date and time to be eligible to submit a full application. If you do not submit a concept paper, you cannot submit an application. Each c…",
+              "extracted_at": "2026-11-01T21:54:24.538558Z",
+              "structural_reference": {
+                "block_id": "pdf-25-13",
+                "kind": "line"
+              }
+            },
+            "field_authority": "official_notice_field",
+            "parser_version": "submission-fields-21"
+          }
+        ],
+        "has_preliminary_stage": true,
+        "preliminary_stage_type": "concept_paper"
+      },
+      "document": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355417",
+        "name": "FundOpp_DE-FOA-0003641.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/octet-stream",
+        "sha256": "1f31710884163f35b0882cf1783f0ed6a1e15eb21b07ec4de515803774b891e2",
+        "bytes": 1505176,
+        "etag": null,
+        "last_modified": null,
+        "version": 2,
+        "first_seen_at": "2026-11-01T21:54:32.746705+00:00",
+        "last_seen_at": "2026-11-01T21:54:32.746705+00:00",
+        "changed_since_previous": true
+      },
+      "checked_at": "2026-11-01T21:54:32.746705+00:00",
+      "facts": [
+        {
+          "id": "evidence-364174-8ee6dbdd89ba",
+          "type": "deadline",
+          "label": "Full application deadline",
+          "value": "2027-02-08",
+          "display_value": "2027-02-08",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355417",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355417#page=5",
+            "document_name": "FundOpp_DE-FOA-0003641.pdf",
+            "sha256": "1f31710884163f35b0882cf1783f0ed6a1e15eb21b07ec4de515803774b891e2",
+            "page": 5,
+            "section": null,
+            "location": "page 5",
+            "quote": "…p.m. ET unless indicated otherwise Notice of Funding Opportunity Issue Date: October 30, 2026 Concept Paper Deadline: November 20, 2026 Application Deadline: February 8, 2027 Anticipated Selection Notification Date: June 25, 2027 Anticipated Award Date: September 23, 2027 Estimated Period of Performance: Topic Area One (1): Oct. 20…",
+            "extracted_at": "2026-11-01T21:54:24.538558Z",
+            "structural_reference": {
+              "block_id": "pdf-5-84",
+              "kind": "line",
+              "field_label": "Application \nDeadline",
+              "field_id": "pdf:5:1974"
+            }
+          },
+          "fact_contract": "typed-notice-facts-1",
+          "source_authority": "machine_extracted_official_document",
+          "subject": "submission",
+          "parser_version": "submission-fields-21",
+          "deadline_kind": "application",
+          "date": "2027-02-08",
+          "time": null,
+          "timezone": null,
+          "required": null,
+          "obligation": "unknown",
+          "stage": "application",
+          "application_class": "unspecified",
+          "cycle": null,
+          "track": null,
+          "invitation_required": null,
+          "prerequisite": null,
+          "field_authority": "official_notice_field",
+          "source_section": "key_dates_summary"
+        },
+        {
+          "id": "evidence-364174-03d5dd02e03c",
+          "type": "deadline",
+          "label": "Concept paper deadline",
+          "value": "2026-11-20",
+          "display_value": "2026-11-20",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355417",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355417#page=5",
+            "document_name": "FundOpp_DE-FOA-0003641.pdf",
+            "sha256": "1f31710884163f35b0882cf1783f0ed6a1e15eb21b07ec4de515803774b891e2",
+            "page": 5,
+            "section": null,
+            "location": "page 5",
+            "quote": "…etails. KEY DATES All deadlines are 5:00 p.m. ET unless indicated otherwise Notice of Funding Opportunity Issue Date: October 30, 2026 Concept Paper Deadline: November 20, 2026 Application Deadline: February 8, 2027 Anticipated Selection Notification Date: June 25, 2027 Anticipated Award Date: September 23, 2027 Estimated Period of Pe…",
+            "extracted_at": "2026-11-01T21:54:24.538558Z",
+            "structural_reference": {
+              "block_id": "pdf-5-80",
+              "kind": "line",
+              "field_label": "Concept Paper \nDeadline",
+              "field_id": "cover:5:1927"
+            }
+          },
+          "fact_contract": "typed-notice-facts-1",
+          "source_authority": "machine_extracted_official_document",
+          "subject": "submission",
+          "parser_version": "submission-fields-21",
+          "deadline_kind": "concept_paper",
+          "date": "2026-11-20",
+          "time": null,
+          "timezone": null,
+          "required": true,
+          "obligation": "required",
+          "stage": "concept_paper",
+          "application_class": "unspecified",
+          "cycle": null,
+          "track": null,
+          "invitation_required": null,
+          "prerequisite": null,
+          "field_authority": "official_notice_field",
+          "requirement_citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355417",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355417#page=25",
+            "document_name": "FundOpp_DE-FOA-0003641.pdf",
+            "sha256": "1f31710884163f35b0882cf1783f0ed6a1e15eb21b07ec4de515803774b891e2",
+            "page": 25,
+            "section": null,
+            "location": "page 25",
+            "quote": "…to submit an application. Application Must be submitted by the specified due date and time to be eligible for comprehensive merit review. C. Concept Paper Requirements You must submit a concept paper by the specified due date and time to be eligible to submit a full application. If you do not submit a concept paper, you cannot submit an application. Each c…",
+            "extracted_at": "2026-11-01T21:54:24.538558Z",
+            "structural_reference": {
+              "block_id": "pdf-25-13",
+              "kind": "line"
+            }
+          }
+        }
+      ],
+      "containers": [
+        {
+          "text": "Financial Assistance \nNotice of Funding Opportunity \nPart 1 \nDepartment of Energy (DOE) \nOffice of Electricity \nGrid Supply Chain Alternatives to Lead Energy Dominance \n(SCALED)   \nNotice of Funding Opportunity Number:  DE-FOA-0003641 \nConcept Paper Due: November 20, 2026, 5:00 PM E.T. \nApplication Due:  February 8, 2027, 5:00 PM E.T.  \n\n\n",
+          "page": 1,
+          "section": null
+        },
+        {
+          "text": "Version 4.1 Page 5 of 51 \n \n \nNotice of Funding Opportunity, Part 1 \nI.  Basic Information \nA.  Key Facts \nIssuing Agency \n \nDepartment of Energy, Office of Electricity \n \nFunding \nOpportunity Title \nGrid Supply Chain Alternatives to Lead Energy Dominance \n(SCALED) \nAnnouncement \nVersion \nInitial \nFunding \nOpportunity \nNumber \nDE-FOA-0003641 \n \nFunding Instrument \n \nCooperative Agreements \nExpected Total \nAvailable Funding \n$237 million \nAssistance Listing \nNumber and Name \n81.122 Office of Electricity \nAnnouncement \nType \nNon-Research Demonstration \nFunding \nOpportunity \nDescription \nTo enhance the domestic supply chain for essential grid components. \nProgram Goals & \nObjectives \nThis initiative will deploy a multifaceted approach to bolster domestic \ncapabilities to withstand supply chain shocks, ensure a reliable energy \ninfrastructure, and position the U.S. as a global leader in foundational \ngrid technologies. \nTopic Areas \n \n• Topic Area 1:  Refurbishment and Reuse of Critical Grid \nEquipment will support efforts to mitigate supply chain \nconstraints by identifying opportunities (at a Technology \nReadiness Level [TRL] 8 or higher) to reclaim components and \nmaterials from retired equipment from projects, storm damage, \nor end-of-life circumstances. \n• Topic Area 2:  Alternative Materials and Subcomponents \nwill support U.S. suppliers and manufacturers in adopting \nexisting (TRL 6 or higher) domestically sourced alternative \nmaterials and subcomponents to enhance the resilience of the \nU.S. energy grid supply chain. \nEligible Applicants Domestic Entities: \n• Institutes of higher education; \n• For-profit entities; \n• Non-profit entities;  \n• State and local government entities; and \n• Indian Tribes \n See Section II. Eligibility for additional details. \n \nKEY DATES  \nAll deadlines are 5:00 \np.m. ET unless indicated \notherwise \n \n \n \nNotice of Funding \nOpportunity Issue \nDate:  \nOctober 30, 2026 \n \nConcept Paper \nDeadline: \nNovember 20, 2026 \n \nApplication \nDeadline:  \nFebruary 8, 2027 \n \nAnticipated \nSelection \nNotification Date: \nJune 25, 2027 \n \nAnticipated \nAward Date: \nSeptember 23, 2027 \n \nEstimated Period of \nPerformance: \n \nTopic Area One (1): \n \nOct. 2027 – Sept. \n2029 \n \nTopic Area Two (2): \n \nPhase 1: Oct. 2027 – \nSept. 2028 \n \nPhase 2: Oct. 2028 – \nSept. 2031 \n \n\n",
+          "page": 5,
+          "section": null
+        }
+      ]
+    },
+    {
+      "opportunity_id": "364033",
+      "record": {
+        "opportunity_id": "364033",
+        "opportunity_number": "DE-FOA-0003673",
+        "source": "Grants.gov",
+        "close_date": "2027-01-12",
+        "deadlines": [
+          {
+            "kind": "application",
+            "date": "2027-01-12",
+            "time": null,
+            "timezone": null,
+            "note": null,
+            "estimated": false,
+            "source": "Grants.gov XML extract",
+            "source_url": "https://www.grants.gov/search-results-detail/364033",
+            "source_field": "CloseDate",
+            "confidence": "official_structured",
+            "detail_checked_at": "2026-10-29T18:26:25.546336Z",
+            "document_evidence_id": "evidence-364033-8b08b42eca61",
+            "document_confidence": "machine_extracted_needs_verification",
+            "document_source_fields": {
+              "stage": {
+                "present": false,
+                "value": null
+              }
+            },
+            "stage": "application"
+          },
+          {
+            "kind": "letter_of_intent",
+            "date": "2026-11-09",
+            "time": "5:00 \nPM",
+            "timezone": "ET",
+            "estimated": false,
+            "source": "Official notice (machine extracted)",
+            "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355184",
+            "confidence": "machine_extracted_needs_verification",
+            "evidence_id": "evidence-364033-2e9dcb46e244",
+            "required": true,
+            "subject": "submission",
+            "stage": "letter_of_intent",
+            "application_class": "unspecified",
+            "cycle": null,
+            "track": null,
+            "obligation": "required",
+            "invitation_required": null,
+            "prerequisite": null,
+            "requirement_citation": {
+              "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355184",
+              "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355184#page=7",
+              "document_name": "DE-FOA-0003673.000001.pdf",
+              "sha256": "3b29efda7476f2fe1b2c9ee58be3f228c26b185dd50c949e5a2fc07d9cfc456f",
+              "page": 7,
+              "section": null,
+              "location": "page 7",
+              "quote": "…r to be proposed as subrecipients under another organization’s application. Note for all applicants: Applications that are submitted by applicants that have not submitted a required Letter of Intent may be declined without further review. 4. Ineligible Participants The following entities are ineligible for this NOFO as a recipient, subrecipient, or subcont…",
+              "extracted_at": "2026-11-01T21:54:24.538558Z",
+              "structural_reference": {
+                "block_id": "pdf-7-29",
+                "kind": "line"
+              }
+            },
+            "field_authority": "official_notice_field",
+            "parser_version": "submission-fields-21"
+          }
+        ],
+        "has_preliminary_stage": true,
+        "preliminary_stage_type": "letter_of_intent"
+      },
+      "document": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355184",
+        "name": "DE-FOA-0003673.000001.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/pdf",
+        "sha256": "3b29efda7476f2fe1b2c9ee58be3f228c26b185dd50c949e5a2fc07d9cfc456f",
+        "bytes": 1133527,
+        "etag": null,
+        "last_modified": null,
+        "version": 3,
+        "first_seen_at": "2026-11-01T21:54:27.403059+00:00",
+        "last_seen_at": "2026-11-01T21:54:27.403059+00:00",
+        "changed_since_previous": true
+      },
+      "checked_at": "2026-11-01T21:54:27.403059+00:00",
+      "facts": [
+        {
+          "id": "evidence-364033-8b08b42eca61",
+          "type": "deadline",
+          "label": "Full application deadline",
+          "value": "2027-01-12",
+          "display_value": "2027-01-12",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355184",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355184#page=5",
+            "document_name": "DE-FOA-0003673.000001.pdf",
+            "sha256": "3b29efda7476f2fe1b2c9ee58be3f228c26b185dd50c949e5a2fc07d9cfc456f",
+            "page": 5,
+            "section": null,
+            "location": "page 5",
+            "quote": "…PM ET Informational Webinar: November 4, 2026, 4:00 PM ET Register at https://sciencedoe.zoomgov.com/webin ar/register/WN_tVM2Iw eSRDWZlqeeynY6FA Application Deadline: January 12, 2027, 11:59 PM ET",
+            "extracted_at": "2026-11-01T21:54:24.538558Z",
+            "structural_reference": {
+              "block_id": "pdf-5-70",
+              "kind": "line",
+              "field_label": "Application Deadline",
+              "field_id": "pdf:5:2035"
+            }
+          },
+          "fact_contract": "typed-notice-facts-1",
+          "source_authority": "machine_extracted_official_document",
+          "subject": "submission",
+          "parser_version": "submission-fields-21",
+          "deadline_kind": "application",
+          "date": "2027-01-12",
+          "time": null,
+          "timezone": null,
+          "required": null,
+          "obligation": "unknown",
+          "stage": "application",
+          "application_class": "unspecified",
+          "cycle": null,
+          "track": null,
+          "invitation_required": null,
+          "prerequisite": null,
+          "field_authority": "official_notice_field",
+          "source_section": "key_dates_summary"
+        },
+        {
+          "id": "evidence-364033-2e9dcb46e244",
+          "type": "deadline",
+          "label": "Letter of intent deadline",
+          "value": "2026-11-09",
+          "display_value": "2026-11-09 · 5:00 \nPM ET",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355184",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355184#page=5",
+            "document_name": "DE-FOA-0003673.000001.pdf",
+            "sha256": "3b29efda7476f2fe1b2c9ee58be3f228c26b185dd50c949e5a2fc07d9cfc456f",
+            "page": 5,
+            "section": null,
+            "location": "page 5",
+            "quote": "…of the award. KEY DATES All deadlines are 5:00 p.m. ET unless indicated otherwise Notice of Funding Opportunity Issue Date: October 8, 2026 Letter of Intent Deadline: November 9, 2026, 5:00 PM ET Informational Webinar: November 4, 2026, 4:00 PM ET Register at https://sciencedoe.zoomgov.com/webin ar/register/WN_tVM2Iw eSRDWZlqeeynY6FA Application Dead…",
+            "extracted_at": "2026-11-01T21:54:24.538558Z",
+            "structural_reference": {
+              "block_id": "pdf-5-58",
+              "kind": "line",
+              "field_label": "Letter of Intent \nDeadline",
+              "field_id": "cover:5:1826"
+            }
+          },
+          "fact_contract": "typed-notice-facts-1",
+          "source_authority": "machine_extracted_official_document",
+          "subject": "submission",
+          "parser_version": "submission-fields-21",
+          "deadline_kind": "letter_of_intent",
+          "date": "2026-11-09",
+          "time": "5:00 \nPM",
+          "timezone": "ET",
+          "required": true,
+          "obligation": "required",
+          "stage": "letter_of_intent",
+          "application_class": "unspecified",
+          "cycle": null,
+          "track": null,
+          "invitation_required": null,
+          "prerequisite": null,
+          "field_authority": "official_notice_field",
+          "requirement_citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355184",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355184#page=7",
+            "document_name": "DE-FOA-0003673.000001.pdf",
+            "sha256": "3b29efda7476f2fe1b2c9ee58be3f228c26b185dd50c949e5a2fc07d9cfc456f",
+            "page": 7,
+            "section": null,
+            "location": "page 7",
+            "quote": "…r to be proposed as subrecipients under another organization’s application. Note for all applicants: Applications that are submitted by applicants that have not submitted a required Letter of Intent may be declined without further review. 4. Ineligible Participants The following entities are ineligible for this NOFO as a recipient, subrecipient, or subcont…",
+            "extracted_at": "2026-11-01T21:54:24.538558Z",
+            "structural_reference": {
+              "block_id": "pdf-7-29",
+              "kind": "line"
+            }
+          }
+        }
+      ],
+      "containers": [
+        {
+          "text": "Financial Assistance \nNotice of Funding Opportunity \nPart 1  \n \n \nU.S. Department of Energy (DOE) \nOffice of Science (SC) \nGenesis Mission Graduate Fellowship Pilot  \nNotice of Funding Opportunity Number:  DE-FOA-0003673 \nPre-application / Letter of Intent Due:  November 9, 2026, 5:00 PM ET \nPre-application Response Date:  November 23, 2026 \nApplication Due: January 12, 2027, 11:59 PM ET \n \nModifications \n \n \n \n \n \nMod.  \nNo. \nDate Description of Modification \n000001 October \n28, \n2026 \nModification 000001 is issued to note (page 32) that DOE may \nshare application and review materials with the Foundation for \nEnergy Security and Innovation (FESI); to update references to \nSuper Intelligence (SI); and to modify the program policy factors \n(page 38) \n\n\n",
+          "page": 1,
+          "section": null
+        },
+        {
+          "text": "Version 4.1 Page 5 of 40 \n \nNotice of Funding Opportunity, Part 1 \nI.  Basic Information \nKey Facts \nIssuing Agency Department of Energy, Office of Science \nFunding Opportunity \nTitle Genesis Mission Graduate Fellowship Pilot  \nAnnouncement \nVersion Amendment 000001 \nFunding Opportunity \nNumber DE-FOA-0003673 \nFunding Instrument \n Grants and National Laboratory Awards \nExpected Total \nAvailable Funding \n$100 million in current and future fiscal year funds, \nincluding $20 million in fiscal year (FY) 2027 \nfunding and $80 million in outyear funding, subject \nto the availability of future year appropriations \nAssistance Listing \nNumber and Name \n81.049, Office of Science Financial Assistance \nProgram \nAnnouncement Type Research and Development (R&D) \n \n1. Funding Details \n \nThe award size will depend on the number of meritorious applications \nand the availability of appropriated funds. \n• Approximate total available funding: $20,000,000 in FY 2027, \n$20,000,000 in FY 2028, $20,000,000 in FY 2029, $20,000,000 FY \n2030, $20,000,000 in FY 2031  \n• Approximate number of awards: 4–8 \n• Approximate dollar amount of individual awards: $12–25 million \n• Approximate award project period:  60 months  \n• Anticipated length of budget periods:  12 months  \n \n2. Period of Performance \n \nWe anticipate making awards with a project period of five years. \n \nContinuation funding (funding for the second and subsequent budget \nperiods) is contingent on availability of funds appropriated by Congress and \nfuture year budget authority, progress towards meeting the objectives of the \napproved application, submission of required reports, and compliance with the \nterms and conditions of the award. \n \nKEY DATES \nAll deadlines are 5:00 p.m. \nET unless indicated \notherwise \nNotice of Funding \nOpportunity Issue Date:  \nOctober 8, 2026 \nLetter of Intent \nDeadline: \nNovember 9, 2026, 5:00 \nPM ET \nInformational Webinar: \nNovember 4, 2026, 4:00 \nPM ET  \nRegister at \nhttps://science-\ndoe.zoomgov.com/webin\nar/register/WN_tVM2Iw\neSRDWZlqeeynY6FA \n \n \nApplication Deadline:  \nJanuary 12, 2027, 11:59 \nPM ET \n \n\n",
+          "page": 5,
+          "section": null
+        }
+      ]
+    }
+  ]
+}

@@ -11,9 +11,10 @@ from scripts.notice_semantics import clauses
 
 SCHEDULE_VERSION = "submission-fields-21"
 ARPA_SUMMARY_VERSION = "arpa-summary-fields-1"
+CLOCK_FIELDS_VERSION = 'native-submission-clocks-1'
 FIELD_LABEL = re.compile(r'^(?:Required\s+|Optional\s+)?(?:Full\s+(?:Application|Proposal)|Application|Proposal|'
     r'Concept\s+(?:Paper|Outline)|White\s+Paper|Letter\s+of\s+Intent|Pre[\s-]Application(?:\s*\([^)]{1,30}\))?)'
-    r'\s+(?:Submission\s+)?(?:Deadline|Due\s+Date)(?:\(s\)|s)?\s*(?:\([^)]{1,100}\))?\s*:', re.I)
+    r'\s+(?:Submission\s+)?(?:Deadline|Due(?:\s+Date)?)(?:\(s\)|s)?\s*(?:\([^)]{1,100}\))?\s*:', re.I)
 STAGES = [
     ("letter_of_intent", r"letters?\s+of\s+(?:intent|interest)|(?-i:LOIs?)"),
     ("concept_paper", r"concept\s+(?:papers?|outlines?)|(?-i:CPs?)"),
@@ -78,9 +79,48 @@ def value_only(api, text):
 def clock_key(clock, zone):
     clock = re.sub(r'[.\s]', '', clock or '').casefold()
     clock = re.sub(r'^(\d{1,2})(am|pm)$', r'\1:00\2', clock)
-    zone = (zone or '').casefold()
+    zone = re.sub(r'[.\s]', '', zone or '').casefold()
     zone = {'eastern': 'et', 'central': 'ct', 'mountain': 'mt', 'pacific': 'pt'}.get(zone, zone)
     return clock, zone
+
+
+def source_clock(api, text, match):
+    """Read the existing clock grammar plus the source's dotted E.T. alias."""
+    end, valid = api._clock_extent(text, match)
+    zone = api.deadline_timezone(match)
+    dotted = re.match(r'\s+E\.T\.(?!\w)|\s+E\.T(?!\w)', text[end:], re.I) if not zone else None
+    if dotted:
+        zone = 'ET'
+        end += dotted.end()
+        alias = re.match(r'\s*\(([A-Z]{2,4})\)', text[end:], re.I)
+        if alias:
+            valid = valid and alias[1].upper() == 'ET'
+            end += alias.end()
+    return api.clean_text(match[1]), zone, end, valid
+
+
+def _key_dates_default(api, container, position):
+    """One explicit default inside this Key Dates block, never document-wide."""
+    text = container['text']
+    declarations = []
+    for declaration in re.finditer(r'\bAll\s+deadlines\s+are\s+', text, re.I):
+        heading = list(re.finditer(r'\bKEY\s+DATES\b', text[:declaration.start()], re.I))
+        if not heading or text[heading[-1].end():declaration.start()].strip(' \t\r\n:'):
+            continue
+        tail = text[declaration.end():declaration.end() + 160]
+        match = api.TIME_RE.match(tail)
+        if not match:
+            continue
+        clock, zone, end, valid = source_clock(api, tail, match)
+        qualifier = re.match(r'\s+unless\s+indicated\s+otherwise\b', tail[end:], re.I)
+        if valid and zone and qualifier:
+            declarations.append((declaration.start(), declaration.end() + end + qualifier.end(), clock, zone))
+    if len(declarations) != 1 or declarations[0][0] >= position:
+        return None
+    start, end, clock, zone = declarations[0]
+    if re.search(r'\bKEY\s+DATES\b|(?m:^\s*(?:[IVX]+[.)]|[A-Z][.)])\s+)', text[end:position], re.I):
+        return None
+    return start, end, clock, zone
 
 
 def ambiguous_value_tail(api, text):
@@ -101,11 +141,10 @@ def field_events(api, opportunity_id, container, document, stamp, *, label, star
     unknown = not dates and bool(re.fullmatch(r'\s*(?:TBD|to be (?:determined|announced)|not (?:announced|listed)|unknown)\s*', text, re.I))
     if not dates and not unknown:
         return []
-    clocks = list(api.TIME_RE.finditer(text))
-    clocks += list(api.TIME_RE.finditer(clock_label or label))
-    invalid_alias = (any(not api._clock_extent(text, m)[1] for m in api.TIME_RE.finditer(text))
-                     or any(not api._clock_extent(clock_label or label, m)[1] for m in api.TIME_RE.finditer(clock_label or label)))
-    clock_values = {clock_key(m.group(1), api.deadline_timezone(m)): (m.group(1), api.deadline_timezone(m)) for m in clocks}
+    clocks = [source_clock(api, value, match) for value in (text, clock_label or label)
+              for match in api.TIME_RE.finditer(value)]
+    invalid_alias = any(not value[3] for value in clocks)
+    clock_values = {clock_key(value[0], value[1]): value[:2] for value in clocks}
     clock, zone = next(iter(clock_values.values())) if len(clock_values) == 1 and not invalid_alias else (None, None)
     if clock and re.search(r"submitting\s+organization.s\s+local\s+time|submitter.s\s+local\s+time|local\s+time\s+of\s+(?:the\s+)?applicant\s+organization", clock_label or label, re.I):
         zone = "applicant_local"
@@ -789,13 +828,13 @@ _LOCAL_FIELD = re.compile(
     r'|(?P<period>First|Second|Third)(?:\s+and\s+final)?\s+application\s+submission\s+period\s+due\s+date\s+is'
     r'|Deadline\s+for\s+Letter\s+of\s+Intent(?:\s*\(LOI\))?\s+submission'
     r'|Due\s+Date\s+for\s+(?:Letter\s+of\s+Intent(?:\s*\(LOI\))?|Applications|Informational\s+Conference\s+Call)'
-    r'|(?:(?:Not\s+required|Required|Optional)\s+)?(?:Letter\s+of\s+(?:Intent|Interest)|Concept\s+Paper|White\s+Paper)\s+(?:Submission\s+)?Deadline'
+    r'|(?:(?:Not\s+required|Required|Optional)\s+)?(?:Letter\s+of\s+(?:Intent|Interest)|Concept\s+Paper|White\s+Paper)\s+(?:Submission\s+)?(?:Deadline|Due(?:\s+Date)?)'
     r'|(?:(?:Full\s+)?Applications?|(?:Full\s+)?Proposals?|Solution\s+(?:Summary|Video)|'
     r'Pre[\s-]?Application(?:/Preproposal)?(?:\s*\((?:Letter of Intent|Preproposal)\))?)'
     r'\s+(?:Submission\s+)?(?:Deadline|Due(?:\s+Date)?|Requested\s+by)(?:\(s\))?'
     r'(?:\s*\((?P<scope>[^()\n]{1,160})\))?'
     r'|(?:Publication|NOFO\s+Issuance|Estimated\s+Project\s+Start|Expected\s+(?:Award|Start)|'
-    r'(?:Anticipated|Estimated)\s+(?:Award|Performance\s+Period\s+(?:Start|End)))\s+Date'
+    r'(?:Anticipated|Estimated)\s+(?:Award|Selection\s+Notification|Performance\s+Period\s+(?:Start|End)))\s+Date'
     r'|Application\s+Package\s+Available|Possible\s+Start\s+Dates|Informational\s+call'
     r'|Notification\s+of\s+Selection\s+for\s+Award|Start\s+Date\s+of\s+Grant'
     r')(?!\w)\s*:?[ \t\r\n]*', re.I)
@@ -876,7 +915,7 @@ def _local_cover_fields(api, opportunity_id, containers, document, stamp):
             tail = value[last.end():]
             clock = re.match(r'\s*[,;]?\s*\(?\s*(?:at\s+|by\s+)?' + api.TIME_RE.pattern, tail, re.I)
             if clock:
-                clock_end, valid = api._clock_extent(tail, clock)
+                _, _, clock_end, valid = source_clock(api, tail, clock)
                 if '(' in clock.group(0).split(clock.group(1), 1)[0]:
                     valid = valid and bool(re.match(r'\s*\)', tail[clock_end:]))
                 if valid:
@@ -884,6 +923,14 @@ def _local_cover_fields(api, opportunity_id, containers, document, stamp):
             found = field_events(api, opportunity_id, container, document, stamp,
                 label=field.group('label'), start=start, end=end,
                 field_id=f"cover:{container.get('page')}:{field.start()}")
+            default = _key_dates_default(api, container, field.start())
+            if default and not clock:
+                for fact in found:
+                    if not fact.get('time') and not fact.get('clock_conflict'):
+                        fact.update(time=default[2], timezone=default[3],
+                            display_value=fact['date'] + f' · {default[2]} {default[3]}',
+                            clock_citation=api.citation_for(container, document, default[0], default[1], stamp),
+                            clock_fields_version=CLOCK_FIELDS_VERSION, _clock_default=True)
             if arpa_separator:
                 for fact in found:
                     fact['arpa_summary_version'] = ARPA_SUMMARY_VERSION
@@ -914,6 +961,71 @@ def _local_cover_fields(api, opportunity_id, containers, document, stamp):
                                 max(0, field.start() - 420) + header.start(), max(0, field.start() - 420) + header.end(), stamp)
             facts.extend(found)
     return facts
+
+
+def repair_cached_submission_clocks(api, record, entry):
+    """Fill only proved DOE native-field clocks from retained bound quotes.
+
+    This is a partial metadata repair, not a reparse or a new source check.
+    Dates, requirements, fact IDs and original citations remain unchanged.
+    """
+    if (entry.get('status') != 'current'
+        or not re.fullmatch(r'DE-FOA-\d{7}', str(record.get('opportunity_number') or ''), re.I)):
+        return False
+    document = entry.get('document') or {}
+    if not document.get('url') or not document.get('sha256'):
+        return False
+    facts = entry.get('facts') or []
+    candidates = {}
+    for original in facts:
+        citation = original.get('citation') or {}
+        quote = citation.get('quote') or ''
+        if (original.get('type') != 'deadline' or not quote
+            or citation.get('document_url') != document['url']
+            or citation.get('sha256') != document['sha256']):
+            continue
+        container = {'text': quote, 'page': citation.get('page'), 'section': citation.get('section')}
+        for candidate in _local_cover_fields(api, str(record.get('opportunity_id') or ''), [container],
+                document, citation.get('extracted_at') or entry.get('checked_at')):
+            if candidate.get('time') and candidate.get('timezone') and not candidate.get('clock_conflict'):
+                key = (candidate['deadline_kind'], candidate['date'], candidate.get('application_class'),
+                       candidate.get('cycle'), candidate.get('track'))
+                candidates.setdefault(key, []).append((candidate, citation))
+    changed = []
+    for fact in facts:
+        citation = fact.get('citation') or {}
+        if (fact.get('type') != 'deadline' or (fact.get('time') and fact.get('timezone'))
+            or fact.get('field_authority') != 'official_notice_field'
+            or citation.get('document_url') != document['url'] or citation.get('sha256') != document['sha256']):
+            continue
+        key = (fact['deadline_kind'], fact['date'], fact.get('application_class'), fact.get('cycle'), fact.get('track'))
+        # An unclassified excerpt cannot choose among coincident source groups.
+        groups = {(other.get('application_class'), other.get('cycle'), other.get('track'))
+                  for other in facts if other.get('type') == 'deadline'
+                  and (other.get('deadline_kind'), other.get('date')) == key[:2]}
+        if len(groups) != 1:
+            continue
+        owned = candidates.get(key, [])
+        clocks = {clock_key(candidate['time'], candidate['timezone']) for candidate, _ in owned}
+        if len(clocks) != 1:
+            continue
+        candidate, citation = owned[0]
+        if fact.get('time') and clock_key(fact['time'], None)[0] != clock_key(candidate['time'], None)[0]:
+            continue
+        known_zone = clock_key(None, fact.get('timezone'))[1]
+        known_zone = {'america/new_york': 'et', 'america/chicago': 'ct',
+                      'america/denver': 'mt', 'america/los_angeles': 'pt'}.get(known_zone, known_zone)
+        if known_zone and known_zone != clock_key(None, candidate['timezone'])[1]:
+            continue
+        time, zone = fact.get('time') or candidate['time'], fact.get('timezone') or candidate['timezone']
+        fact.update(time=time, timezone=zone,
+            display_value=fact['date'] + f" · {time} {zone}",
+            clock_citation=deepcopy(citation), clock_fields_version=CLOCK_FIELDS_VERSION)
+        changed.append(fact['id'])
+    if changed:
+        entry['submission_clock_repair'] = {'version': CLOCK_FIELDS_VERSION, 'source_retrieved': False,
+            'document_url': document['url'], 'document_sha256': document['sha256'], 'fact_ids': changed}
+    return bool(changed)
 
 
 def _named_phase_and_delivery_fields(api, opportunity_id, containers, document, stamp):
@@ -1443,11 +1555,38 @@ def extract_native(api, opportunity_id, containers, document, stamp, review_queu
         facts.extend(f for f in _anticipated_cycle_table(api, opportunity_id, containers, document, stamp)
                      if (f['deadline_kind'], f['date']) not in owned)
     if has_pdf or host in {'arpa-h.gov', 'www.arpa-h.gov', 'simonsfoundation.org', 'www.simonsfoundation.org'}:
-        owned = {(f['deadline_kind'], f['date']) for f in facts}
         # The more specific table/row reader retains application class/cycle
-        # ownership. A cover-field fallback cannot create an unclassified copy.
-        facts.extend(f for f in _local_cover_fields(api, opportunity_id, containers, document, stamp)
-                     if (f['deadline_kind'], f['date']) not in owned)
+        # ownership. A matching cover may prove its missing clock, but cannot
+        # create an unclassified duplicate or bridge distinct source groups.
+        for field in _local_cover_fields(api, opportunity_id, containers, document, stamp):
+            prior = [fact for fact in facts if (fact['deadline_kind'], fact['date']) ==
+                     (field['deadline_kind'], field['date'])]
+            if not prior:
+                facts.append(field)
+                continue
+            groups = {(f.get('application_class'), f.get('cycle'), f.get('track')) for f in prior}
+            group = (field.get('application_class'), field.get('cycle'), field.get('track'))
+            if groups != {group} or not (field.get('time') or field.get('clock_conflict')):
+                continue
+            if field.get('_clock_default') and any(f.get('time') and not f.get('_clock_default') for f in prior):
+                continue  # The declared default explicitly allows local overrides.
+            for fact in prior:
+                if field.get('clock_conflict'):
+                    fact['clock_conflict'] = True
+                    continue
+                if fact.get('time') and not fact.get('_clock_default'):
+                    left, right = clock_key(fact['time'], fact.get('timezone')), clock_key(field['time'], field.get('timezone'))
+                    if left[0] != right[0] or (left[1] and right[1] and left[1] != right[1]):
+                        fact['clock_conflict'] = True
+                        continue
+                    if fact.get('timezone') or not field.get('timezone'):
+                        continue
+                fact.update(time=field['time'], timezone=field.get('timezone'),
+                    display_value=fact['date'] + f" · {field['time']}" +
+                                  (f" {field['timezone']}" if field.get('timezone') else ''),
+                    clock_citation=deepcopy(field.get('clock_citation') or field['citation']),
+                    clock_fields_version=CLOCK_FIELDS_VERSION,
+                    _clock_default=bool(field.get('_clock_default')))
     if host in {'arpa-h.gov', 'www.arpa-h.gov'}:
         _arpa_submission_fields(api, opportunity_id, containers, document, stamp, facts)
     for fact in facts:
@@ -1474,6 +1613,7 @@ def extract_native(api, opportunity_id, containers, document, stamp, review_queu
     unique = {}
     clock_conflicts = set()
     for fact in kept:
+        fact.pop('_clock_default', None)
         key = (fact['deadline_kind'], fact['date'], fact['application_class'], fact.get('cycle'), fact.get('track'))
         if fact.pop('clock_conflict', False):
             clock_conflicts.add(key)

@@ -22,7 +22,7 @@ PUBLIC_FIELDS = ('document_evidence_status', 'document_evidence', 'document_sear
     'topic_areas', 'document_program_areas',
     'deadlines', 'submission_requirements', 'document_status_signals',
     'limited_submission', 'limited_submission_review', 'has_preliminary_stage',
-    'preliminary_stage_type', 'preliminary_required', 'next_submission')
+    'preliminary_stage_type', 'preliminary_required', 'next_submission', 'award_ceiling', 'award_source')
 
 
 VALIDATOR_VERSION = 'notice-publication-6'
