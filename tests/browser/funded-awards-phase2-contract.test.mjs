@@ -291,7 +291,7 @@ test("the historical Phase 2 evidence remains authoritative while Phase 4 extend
 });
 
 test("Award service delivery follows the protected main and rollback pattern", () => {
-  assert.match(deployWorkflow, /push:\s*\n\s*branches:\s*\n\s*- main/);
+  assert.match(deployWorkflow, /workflow_run:\s+workflows: \["Funding Finder immutable release"\]\s+types: \[completed\]\s+branches: \[main\]/);
   assert.doesNotMatch(deployWorkflow, /pull_request:/);
   assert.match(deployWorkflow, /workflow_dispatch:/);
   assert.match(deployWorkflow, /deploy:\s*\n\s+if: github\.ref == 'refs\/heads\/main'/);

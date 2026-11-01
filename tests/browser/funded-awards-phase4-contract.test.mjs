@@ -126,7 +126,7 @@ test("Funding Finder claims only exact Office of Science FOA mappings", () => {
 
 test("release validation uses fixtures in PR checks and one bounded DOE production smoke", () => {
   assert.match(workflow, /funded-awards-phase4-contract\.test\.mjs/);
-  assert.match(workflow, /push:\s*\n\s*branches:\s*\n\s*- main/);
+  assert.match(workflow, /workflow_run:\s+workflows: \["Funding Finder immutable release"\]\s+types: \[completed\]\s+branches: \[main\]/);
   assert.doesNotMatch(workflow, /pull_request:/);
   assert.match(smoke, /sources: \["DOE"\].*award_id: "DE-SC0020230"/s);
   assert.match(smoke, /AbortSignal\.timeout\(45_000\)/);

@@ -362,13 +362,15 @@ test("Alerts workflow guards version capture, D1 migration, deployment, and roll
   assert.match(alertsWorkflow, /if: \$\{\{ always\(\) && steps\.worker-deploy\.outcome == 'success'/);
 });
 
-test("Alerts follows the completed immutable release and checks protected main instead of racing Pages", () => {
-  assert.match(alertsWorkflow, /workflow_run:\s+workflows: \["Funding Finder immutable release"\]\s+types: \[completed\]\s+branches: \[main\]/);
-  assert.doesNotMatch(alertsWorkflow, /^  push:/m);
-  assert.match(alertsWorkflow, /github\.event_name != 'workflow_run' \|\| github\.event\.workflow_run\.conclusion == 'success'/);
-  assert.match(alertsWorkflow, /ref: \$\{\{ github\.sha \}\}/);
-  assert.doesNotMatch(alertsWorkflow, /ref:.*workflow_run\.head_sha/);
-});
+for (const [name, workflow] of [["Alerts", alertsWorkflow], ["Awards", awardWorkflow]]) {
+  test(`${name} follows the completed immutable release and checks protected main instead of racing Pages`, () => {
+    assert.match(workflow, /workflow_run:\s+workflows: \["Funding Finder immutable release"\]\s+types: \[completed\]\s+branches: \[main\]/);
+    assert.doesNotMatch(workflow, /^  push:/m);
+    assert.match(workflow, /github\.event_name != 'workflow_run' \|\| github\.event\.workflow_run\.conclusion == 'success'/);
+    assert.match(workflow, /ref: \$\{\{ github\.sha \}\}/);
+    assert.doesNotMatch(workflow, /ref:.*workflow_run\.head_sha/);
+  });
+}
 
 test("standalone Worker retries stay on protected main and retain all release gates", () => {
   for (const workflow of [alertsWorkflow, awardWorkflow]) {
