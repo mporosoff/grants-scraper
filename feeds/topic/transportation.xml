@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/transportation.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/transportation.xml</id>
-  <updated>2026-10-29T22:20:09Z</updated>
+  <updated>2026-10-30T16:48:34Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Prevention and Treatment through a Comprehensive Care Continuum for HIV-affected Adolescents in Resource-Constrained Settings--Implementation Science Network (PATC3H-IN)</title>
@@ -195,6 +195,16 @@
     <summary>National Institutes of Health | Estimated Application 2027-07-02 | The National Institute of Arthritis and Musculoskeletal and Skin Diseases (NIAMS) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for the Clinical Trial Cooperative Agreement Program within the mission areas of the institute. This Notice of Funding Opportunity (NOFO) solicits cooperative agreement applications for implementation of investigator-initiated, single o…</summary>
   </entry>
   <entry>
+    <title>FY 2027 Crash Causal Factors Program</title>
+    <link href="https://www.grants.gov/search-results-detail/364171"/>
+    <id>urn:funding-finder:grants-gov:364171</id>
+    <updated>2026-10-29T00:00:00Z</updated>
+    <author><name>DOT-Federal Motor Carrier Safety Administration</name></author>
+    <category term="Transportation"/>
+    <category term="Cybersecurity"/>
+    <summary>DOT-Federal Motor Carrier Safety Administration | Application 2026-12-28 | The CCFP Cooperative Agreement Program will provide supplemental funding to eligible State and local law enforcement agencies to support the collection of advanced crash data to inform the Heavy-Duty Truck Study. FMCSA anticipates Congress, State and local law enforcement, industry stakeholders, and advocacy groups to support this action, as the results of the Heavy-Duty Truck Study will provide a…</summary>
+  </entry>
+  <entry>
     <title>FY27 National Network Cooperative Agreement to the National Railroad Passenger Corporation</title>
     <link href="https://www.grants.gov/search-results-detail/364167"/>
     <id>urn:funding-finder:grants-gov:364167</id>
@@ -293,16 +303,6 @@
     <category term="Transportation"/>
     <category term="Materials science"/>
     <summary>U.S. Department of Transportation - Pipeline and Hazardous Materials Safety Administration (PHMSA) | White Paper 2026-11-18 | Hazardous-materials transport research including energy-storage systems, packaging, emergency response, and rail safety; analytical studies and technology assessment. US prime; foreign entities permitted as subcontractors under conditions. Federal/state/local government bodies excluded, while accredited universities explicitly included. Contracts up to$2M, maximum36months including options; cost s…</summary>
-  </entry>
-  <entry>
-    <title>FTA Broad Agency Announcement (FY26) -- “Research Initiatives in Support of Safety, Accessibility, and Mobility in Public Transportation</title>
-    <link href="https://sam.gov/opp/4e98188266d74e73a6cede0b0bef0da0/view"/>
-    <id>urn:funding-finder:sam-gov:sam-gov%3A4e98188266d74e73a6cede0b0bef0da0</id>
-    <updated>2026-10-14T00:00:00Z</updated>
-    <author><name>U.S. Department of Transportation - Federal Transit Administration (FTA)</name></author>
-    <category term="Technology development"/>
-    <category term="Transportation"/>
-    <summary>U.S. Department of Transportation - Federal Transit Administration (FTA) | Concept Paper 2026-10-30 | Applied public transit research, technology development and demonstration to improve transit safety, efficiency and deployment readiness, generally TRL3-6. Cost sharing may be mandated under49USC5312(g); FTA determines applicability during concept review and communicates it in writing. Federal-government-owned businesses not eligible as direct recipients; teaming allowed. SAM registration before a…</summary>
   </entry>
   <entry>
     <title>Clinical Trials and Ancillary Studies Conducted within NIH-Funded Clinical Trial Research Networks (UG3/UH3 - Clinical Trial Required)</title>
@@ -453,15 +453,6 @@
     <summary>Dept of the Army -- Materiel Command | Application 2026-12-03 | The Department of War (DoW) seeks innovative applications to cooperatively partner with eligible entities in the implementation and execution of the SMART Scholarship-for-Service Program. The Department intends to award ONE (1) CA award, with a maximum award of up to $1,300M over a ten-year period of performance. The National Defense Education Program (NDEP) supports the Department's priorities to…</summary>
   </entry>
   <entry>
-    <title>Residential Services for Unaccompanied Alien Children</title>
-    <link href="https://www.grants.gov/search-results-detail/363790"/>
-    <id>urn:funding-finder:grants-gov:363790</id>
-    <updated>2026-09-30T00:00:00Z</updated>
-    <author><name>Administration for Children and Families - ORR</name></author>
-    <category term="Transportation"/>
-    <summary>Administration for Children and Families - ORR | Estimated Application 2026-12-08 | The Residential Services for Unaccompanied Alien Children funding opportunity is intended to support organizations that can provide high-quality, child-centered care that promotes children's safety and well-being. Funded providers must offer services 24 hours a day, 7 days a week, and have the capacity to accept children at any time, when it is safe to do so and consistent with state licensing req…</summary>
-  </entry>
-  <entry>
     <title>OJJDP FY 2026 Second Chance Act Youth Reentry Program</title>
     <link href="https://www.grants.gov/search-results-detail/363961"/>
     <id>urn:funding-finder:grants-gov:363961</id>
@@ -492,16 +483,6 @@
     <category term="Manufacturing"/>
     <category term="Transportation"/>
     <summary>National Institutes of Health | Application 2029-11-16 | The purpose of NEI's Translational Research program (TRP) is the rapid and efficient translation of innovative laboratory research findings into therapeutics for use by clinicians to treat visual system diseases or disorders. The TRP will support the product development of biological, pharmaceutical, medical device, and/or combination therapies for any disease or disorder of the visual system. The…</summary>
-  </entry>
-  <entry>
-    <title>BJA FY 2026 Veterans Treatment Court Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363900"/>
-    <id>urn:funding-finder:grants-gov:363900</id>
-    <updated>2026-09-21T00:00:00Z</updated>
-    <author><name>Bureau of Justice Assistance</name></author>
-    <category term="Neuroscience"/>
-    <category term="Transportation"/>
-    <summary>Bureau of Justice Assistance | Application 2026-10-29 | This is a notice of funding opportunity (NOFO) for the BJA FY2026 Veterans Treatment Court Program. This opportunity supports the implementation and enhancement of veterans’ treatment court (VTC) operations to reduce the use of opioids, stimulants, and other substances, including alcohol, by high-risk/high-need veterans in the criminal justice system. VTCs effectively integrate substance use disor…</summary>
   </entry>
   <entry>
     <title>BJA FY 2026 Rural Violent Crime Reduction Initiative</title>
@@ -630,5 +611,25 @@
     <category term="Environmental science"/>
     <category term="Transportation"/>
     <summary>National Institutes of Health | Application 2028-07-16 | The goal of the Grants for Early Medical/Surgical Specialists' Transition to Aging Research (GEMSSTAR) program is to provide support for early-career clinician-scientists trained in medical or surgical specialties to launch careers as future leaders in aging- or geriatric-focused research. In support of the program's goal, this GEMSSTAR Notice of Funding Opportunity (NOFO) invites applications tha…</summary>
+  </entry>
+  <entry>
+    <title>Glioblastoma Therapeutics Network (GTN) (U19 Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/360606"/>
+    <id>urn:funding-finder:grants-gov:360606</id>
+    <updated>2026-08-31T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Cancer"/>
+    <category term="Neuroscience"/>
+    <category term="Transportation"/>
+    <summary>National Institutes of Health | Application 2027-01-11 | Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) solicits applications for research on novel therapies for adult glioblastoma (GBM). The goal is to improve the treatment of adult GBM by developing novel effective agents that can cross the blood brain barrier (BBB) and testing them clinically. Successful early-stage trials of new drugs from this NOFO would tran…</summary>
+  </entry>
+  <entry>
+    <title>Family Unification Program (FUP) Multi-Year NOFO</title>
+    <link href="https://www.grants.gov/search-results-detail/362319"/>
+    <id>urn:funding-finder:grants-gov:362319</id>
+    <updated>2026-08-12T00:00:00Z</updated>
+    <author><name>Department of Housing and Urban Development</name></author>
+    <category term="Transportation"/>
+    <summary>Department of Housing and Urban Development | Estimated Application 2026-11-10 | The Family Unification Program (FUP) public housing authorities (PHAs) to partner with public child welfare agencies (PCWAs) to provide Housing Choice Voucher (HCV) assistance to two primary groups:1. Families: Those for whom the lack of adequate housing is a primary factor in the imminent placement of a child (or children) in out-of-home care, or a delay in the discharge of a child to the family …</summary>
   </entry>
 </feed>

@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml</id>
-  <updated>2026-10-29T22:20:09Z</updated>
+  <updated>2026-10-30T16:48:34Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Technology Development Program</title>
@@ -297,6 +297,19 @@
     <summary>National Institutes of Health | Estimated Application 2027-01-05 | The National Institutes of Health (NIH) and Centers for Disease Control and Prevention (CDC), including the participating Institutes, Centers and Offices, intend to publish a Notice of Funding Opportunity (NOFO) to invite eligible United States small business concerns (SBCs) to submit Small Business Innovation Research (SBIR) Phase I, and Fast-Track (NIH only) grant applications for the Small Busi…</summary>
   </entry>
   <entry>
+    <title>Unifying​ Imaging with​ Quantum​ Entanglement (UNIQUE)</title>
+    <link href="https://arpa-h.gov/explore-funding/programs/unique"/>
+    <id>urn:funding-finder:arpa-h:arpa-h%3Aunique</id>
+    <updated>2026-10-29T00:00:00Z</updated>
+    <author><name>Advanced Research Projects Agency for Health (ARPA-H)</name></author>
+    <category term="Quantum science"/>
+    <category term="Technology development"/>
+    <category term="Materials science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Advanced Research Projects Agency for Health (ARPA-H) | Preapplication 2026-10-30 | Current ARPA-H program. UNIQUE | ARPA-H (function(w, d, s, l, i){w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&amp;l='+l:''; j.async=true; j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j, f); })(window, document,'script','dataLayer','GTM-W5GM3DT9'); wind…</summary>
+  </entry>
+  <entry>
     <title>Climate Program Office FY 2027 - Super Intelligence/Machine Learning Innovation to Advance NOAA's Earth System Science and Support Hazard Resilience</title>
     <link href="https://www.grants.gov/search-results-detail/364160"/>
     <id>urn:funding-finder:grants-gov:364160</id>
@@ -388,16 +401,6 @@
     <author><name>Administration for Community Living</name></author>
     <category term="Technology development"/>
     <summary>Administration for Community Living | Estimated Application 2026-12-16 | The purpose of the Federal SBIR program is to stimulate technological innovation in the private sector, strengthen the role of small business in meeting Federal research or research and development (R/R&amp;D) needs, and improve the return on investment from Federally-funded research for economic and social benefits to the nation. The specific purpose of ACL's SBIR program is to improve the lives of p…</summary>
-  </entry>
-  <entry>
-    <title>FTA Broad Agency Announcement (FY26) -- “Research Initiatives in Support of Safety, Accessibility, and Mobility in Public Transportation</title>
-    <link href="https://sam.gov/opp/4e98188266d74e73a6cede0b0bef0da0/view"/>
-    <id>urn:funding-finder:sam-gov:sam-gov%3A4e98188266d74e73a6cede0b0bef0da0</id>
-    <updated>2026-10-14T00:00:00Z</updated>
-    <author><name>U.S. Department of Transportation - Federal Transit Administration (FTA)</name></author>
-    <category term="Technology development"/>
-    <category term="Transportation"/>
-    <summary>U.S. Department of Transportation - Federal Transit Administration (FTA) | Concept Paper 2026-10-30 | Applied public transit research, technology development and demonstration to improve transit safety, efficiency and deployment readiness, generally TRL3-6. Cost sharing may be mandated under49USC5312(g); FTA determines applicability during concept review and communicates it in writing. Federal-government-owned businesses not eligible as direct recipients; teaming allowed. SAM registration before a…</summary>
   </entry>
   <entry>
     <title>Alliance for Innovation on Maternal Health (AIM) Technical Assistance Center</title>
@@ -544,19 +547,6 @@
     <summary>Office of Naval Research (ONR) | White Paper 2027-07-16 | Applied research and technology development in advanced manufacturing and sustainment. Applied research and advanced technology development for naval manufacturing and sustainment, with transition value. Phase II selections depend on funding and current technical focus. FFRDCs and military universities cannot be prime offerors; no mandatory industry partner invented.</summary>
   </entry>
   <entry>
-    <title>Unifying​ Imaging with​ Quantum​ Entanglement (UNIQUE)</title>
-    <link href="https://arpa-h.gov/explore-funding/programs/unique"/>
-    <id>urn:funding-finder:arpa-h:arpa-h%3Aunique</id>
-    <updated>2026-09-11T00:00:00Z</updated>
-    <author><name>Advanced Research Projects Agency for Health (ARPA-H)</name></author>
-    <category term="Quantum science"/>
-    <category term="Technology development"/>
-    <category term="Materials science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Advanced Research Projects Agency for Health (ARPA-H) | Preapplication 2026-10-29 | Current ARPA-H program. UNIQUE | ARPA-H (function(w, d, s, l, i){w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&amp;l='+l:''; j.async=true; j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j, f); })(window, document,'script','dataLayer','GTM-W5GM3DT9'); wind…</summary>
-  </entry>
-  <entry>
     <title>Emerging Health Innovators (EHI)</title>
     <link href="https://arpa-h.gov/explore-funding/programs/ehi"/>
     <id>urn:funding-finder:arpa-h:arpa-h%3Aehi</id>
@@ -641,5 +631,16 @@
     <category term="Neuroscience"/>
     <category term="Technology development"/>
     <summary>National Institutes of Health | Application 2028-06-16 | This notice of funding opportunity (NOFO) uses a R61/R33 Phased Innovation Award activity code to support clinical research applications that are exploratory and developmental in nature and focus on understanding the neurobiological mechanisms underlying substance use disorders (SUD), including fundamental circuitry and behavior relevant to substance use. For projects not requiring a phased resear…</summary>
+  </entry>
+  <entry>
+    <title>Limited Competition: NIGMS Mature Synchrotron Resources (MSR) for Structural Biology (P30 - Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/360947"/>
+    <id>urn:funding-finder:grants-gov:360947</id>
+    <updated>2026-08-31T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Education and workforce"/>
+    <category term="Technology development"/>
+    <summary>National Institutes of Health | Application 2028-10-02 | This Notice of Funding Opportunity (NOFO) supports "mature" resources at synchrotron facilities that provide user access to X-ray beamlines for static and dynamic imaging of biological systems ranging from molecules to organs. "Mature" refers to the techniques made available at the resource beamlines, which must be well established and provide utility to the communities they serve without requirin…</summary>
   </entry>
 </feed>
