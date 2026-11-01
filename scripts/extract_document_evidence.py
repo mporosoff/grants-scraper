@@ -44,6 +44,7 @@ from scripts.build_catalog import (
 from scripts.enrich_catalog import read_catalog
 from scripts import program_areas, notice_semantics, notice_schedule, notice_structure_cache, notice_fact_guards
 from scripts.document_work_budget import WorkTimedOut
+from scripts.source_documents import is_doe_companion_document, DOE_PRIMARY_POLICY
 
 
 EVIDENCE_SCHEMA_VERSION = 1
@@ -1395,6 +1396,8 @@ _PROGRAM_AREA_NON_SCOPE_CONTEXT = [
         r"\bRepresentation of Limited Rights Data and Restricted Software.{0,50}\bCybersecurity Plan\b|"
         r"\btechnical risks.{0,220}\bIdentification of security risks,? including cybersecurity\b|"
         r"\bDHS Standard Terms and Conditions.{0,180}\bcybersecurity\b", re.I)),
+    ("non_applicable_award_requirement", re.compile(
+        r"\bCybersecurity Plan\s+(?:NOFO Part\s+1\s+)?Does not apply to awards made under this NOFO\b", re.I)),
 ]
 
 
@@ -1422,6 +1425,8 @@ def extract_program_areas(containers, document, extracted_at, maximum=MAX_PROGRA
     An excluded first mention must not hide a later scientific occurrence.
     These inferred discoverability signals remain separate from official facts.
     """
+    if is_doe_companion_document(document):
+        return []
     hits = []
     seen = set()
     for label, topics, pattern in program_areas.ENTRIES:
@@ -1490,6 +1495,8 @@ def extract_document_facts(
     enabled = set(parser_dependencies()) if families is None else set(families)
     if enabled - set(parser_dependencies()):
         raise ValueError("Unknown semantic extraction family")
+    if is_doe_companion_document(document):
+        return []
     if (urlparse(document.get('url') or '').hostname or '').lower() in {'nsf.gov', 'www.nsf.gov'}:
         # NSF program pages include linked *other* programs below the main
         # program. Their requirements cannot become this opportunity's facts.
@@ -1784,6 +1791,8 @@ def build_review_queue(record, facts, changed_since_previous, extraction):
 
 
 def source_for_record(record):
+    if is_doe_companion_document(record):
+        return None
     supplemental = bool(record.get("source") and record["source"] != "Grants.gov")
     if record.get("primary_document_url"):
         return {
@@ -1805,6 +1814,8 @@ def source_for_record(record):
     # scope. Every supported official route enters the same bounded queue.
     if agency_url:
         parsed = urlparse(agency_url)
+        if parsed.hostname == 'exchange.energy.gov' and parsed.path in {'', '/'}:
+            return None
         if parsed.hostname in {'eere-exchange.energy.gov', 'arpa-e-foa.energy.gov', 'netl-exchange.energy.gov'} and not re.fullmatch(
                 r'FoaId[0-9a-fA-F-]{36}', unquote(parsed.fragment), re.I):
             # A multi-notice inventory is not the canonical call's evidence.
@@ -2021,6 +2032,8 @@ def subtopic_fields(record, content, containers, document, fetched_at, enabled, 
     """
     if not enabled:
         return {}
+    if is_doe_companion_document(document or {}):
+        return {'subtopics': [], 'subtopic_reason': 'doe_generic_companion'}
     from scripts import (
         subtopic_cov4,
         subtopic_records,
@@ -3095,8 +3108,30 @@ def refine_administrative_close(record):
     return changed
 
 
+def withhold_doe_companion_entry(entry):
+    """A generic companion is not current evidence for one program's scope.
+
+    Preserve retrieval identity/history and record why derived claims were
+    withheld. Repeated zero-fetch projection cannot resurrect those claims.
+    """
+    document = entry.get('document') or {}
+    if not is_doe_companion_document(document):
+        return False
+    if (entry.get('primary_document_guard') or {}).get('version') != DOE_PRIMARY_POLICY:
+        entry['primary_document_guard'] = {'version': DOE_PRIMARY_POLICY,
+            'reason': 'doe_generic_companion', 'source_retrieved': False,
+            'document_url': document.get('url'), 'document_sha256': document.get('sha256'),
+            'withheld_fact_ids': [fact['id'] for fact in entry.get('facts') or []],
+            'withheld_program_areas': [hit.get('label') for hit in entry.get('program_areas') or []]}
+    entry.update(status='source_changed', facts=[], program_areas=[], review_queue=[])
+    if 'subtopics' in entry:
+        entry.update(subtopics=[], subtopic_reason='doe_generic_companion')
+    return True
+
+
 def merge_document_entry(record, entry):
     if entry:
+        withhold_doe_companion_entry(entry)
         notice_fact_guards.repair_entry(entry)
         notice_schedule.repair_cached_arpa_summary(sys.modules[__name__], record, entry)
         revalidate_cached_deadlines(entry)
@@ -3379,6 +3414,8 @@ def validated_program_area_hits(entry):
     discovered. Revalidating the cache as well as the browser record prevents
     a stale derived hit from returning on a later zero-fetch refresh.
     """
+    if is_doe_companion_document(entry.get('document') or {}):
+        return []
     patterns_by_label = {
         label: pattern for label, _, pattern in program_areas.ENTRIES
     }

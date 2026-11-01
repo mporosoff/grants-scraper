@@ -53,6 +53,7 @@ from scripts.nsf_funding import (
     extract_nsf_synopsis as parse_nsf_synopsis,
     parse_nsf_funding_page,
 )
+from scripts.source_documents import is_doe_companion_document, DOE_PRIMARY_POLICY
 
 
 CACHE_SCHEMA_VERSION = 2
@@ -391,7 +392,11 @@ def select_primary_document(attachments, document_urls=None):
 
     explicit_candidates = []
     folder_candidates = []
+    companion_urls = {item.get('download_url') for item in attachments or []
+                      if is_doe_companion_document(item)}
     for attachment in attachments or []:
+        if is_doe_companion_document(attachment):
+            continue
         content_text = attachment_content_text(attachment)
         folder_text = attachment_folder_text(attachment)
         all_text = f"{content_text} {folder_text}"
@@ -448,7 +453,7 @@ def select_primary_document(attachments, document_urls=None):
     document_candidates = [
         value
         for value in document_candidates
-        if value and re.search(r"\.pdf(?:[?#]|$)", value, re.I)
+        if value and value not in companion_urls and re.search(r"\.pdf(?:[?#]|$)", value, re.I)
     ]
     if len(document_candidates) == 1:
         return {
@@ -543,6 +548,7 @@ def compact_detail(record, detail, fetched_at):
             normalized.get("funding_opportunity_url")
         ),
         "primary_document": primary,
+        "primary_document_policy": DOE_PRIMARY_POLICY,
         "document_urls": document_urls,
         "attachment_count": len(attachments),
         "history": {
@@ -613,6 +619,10 @@ def suppress_future_sentinel_deadlines(record, as_of):
 
 def merge_detail(record, detail_entry, as_of):
     output = suppress_future_sentinel_deadlines(deepcopy(record), as_of)
+    if is_doe_companion_document(output):
+        for key in ('primary_document_url', 'primary_document_name',
+                    'primary_document_source', 'primary_document_confidence'):
+            output.pop(key, None)
     output.setdefault("contacts", [])
     if not detail_entry:
         output["detail_enrichment_status"] = "pending"
@@ -653,7 +663,7 @@ def merge_detail(record, detail_entry, as_of):
         )
 
     primary = detail_entry.get("primary_document") or {}
-    if primary.get("url"):
+    if primary.get("url") and not is_doe_companion_document(primary):
         output["primary_document_url"] = primary["url"]
         output["primary_document_name"] = primary.get("name")
         output["primary_document_source"] = primary.get("source")
@@ -896,6 +906,7 @@ def enrich_catalog(
                 "contact_version", 0
             )
             < CONTACT_SCHEMA_VERSION
+            or is_doe_companion_document(cached_records[str(record["opportunity_id"])].get("primary_document") or {})
         )
     ]
     candidates.sort(

@@ -231,6 +231,7 @@ def collect_attachments(detail):
             )
 
     def rank(attachment):
+        from scripts.source_documents import is_doe_companion_document
         name = (attachment["file_name"] or "").lower()
         description = (attachment["description"] or "").lower()
         text = name + " " + description
@@ -266,6 +267,7 @@ def collect_attachments(detail):
             )
         )
         return (
+            is_doe_companion_document(attachment),
             not is_pdf,
             not looks_like_nofo,
             looks_supplemental,
@@ -354,7 +356,8 @@ def normalize(stub, detail):
     cost_share_detail = first_match(COST_SHARE_RE, text_blob)
 
     attachments = collect_attachments(detail)
-    nofo = attachments[0] if attachments else None
+    from scripts.source_documents import is_doe_companion_document
+    nofo = next((item for item in attachments if not is_doe_companion_document(item)), None)
     funding_link = source_record.get("fundingDescLinkUrl") or None
     document_urls = detail.get("synopsisDocumentURLs") or []
 

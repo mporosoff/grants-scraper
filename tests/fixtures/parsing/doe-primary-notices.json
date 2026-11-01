@@ -1,0 +1,1192 @@
+{
+  "provenance": "Native candidate09d707, official exact Grants.gov metadata and short public citations; Part1/Part2 roles independently checked in official PDFs. No raw source documents included.",
+  "cases": [
+    {
+      "opportunity_id": "364174",
+      "record": {
+        "opportunity_id": "364174",
+        "opportunity_number": "DE-FOA-0003641",
+        "title": "Grid Supply Chain Alternatives to Lead Energy Dominance (SCALED)",
+        "agency": "National Energy Technology Laboratory",
+        "agency_code": "DOE-NETL",
+        "source": "Grants.gov",
+        "status": "posted",
+        "last_updated": "2026-10-30",
+        "version": "Synopsis 1",
+        "close_date": "2027-02-08",
+        "archive_date": "2027-03-10",
+        "has_preliminary_stage": false,
+        "limited_submission": false,
+        "status_verification_required": false,
+        "cost_share_required": true,
+        "award_floor": 1,
+        "award_ceiling": 237000000,
+        "total_program_funding": 237000000,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/355416",
+        "primary_document_name": "DE-FOA-0003641_SCALED_NOFO_Part 2.pdf",
+        "primary_document_source": "Grants.gov attachment",
+        "primary_document_confidence": "high",
+        "funding_opportunity_url": "https://exchange.energy.gov/",
+        "detail_page": "https://www.grants.gov/search-results-detail/364174",
+        "topic_areas": [
+          "Energy",
+          "Manufacturing",
+          "Artificial intelligence and machine learning",
+          "Data science",
+          "Cybersecurity"
+        ],
+        "document_program_areas": [
+          "artificial intelligence",
+          "cybersecurity"
+        ],
+        "document_evidence": {
+          "source_fields": {
+            "topic_areas": {
+              "present": true,
+              "value": [
+                "Energy",
+                "Manufacturing"
+              ]
+            }
+          }
+        },
+        "deadlines": [
+          {
+            "kind": "application",
+            "date": "2027-02-08",
+            "time": null,
+            "timezone": null,
+            "note": null,
+            "estimated": false,
+            "source": "Grants.gov XML extract",
+            "source_url": "https://www.grants.gov/search-results-detail/364174",
+            "source_field": "CloseDate",
+            "confidence": "official_structured",
+            "detail_checked_at": "2026-11-01T21:07:41.587732Z"
+          }
+        ]
+      },
+      "attachments": [
+        {
+          "id": 355416,
+          "file_name": "DE-FOA-0003641_SCALED_NOFO_Part 2.pdf",
+          "description": "DE-FOA-0003641_SCALED_NOFO_Part 2",
+          "mime_type": "application/octet-stream",
+          "size_bytes": 1048694,
+          "created_date": "Oct 30, 2026 10:13:08 AM EDT",
+          "folder_type": "Full Announcement",
+          "folder_name": "DE-FOA-0003641 (BASE)",
+          "download_url": "https://grants.gov/grantsws/rest/opportunity/att/download/355416"
+        },
+        {
+          "id": 355417,
+          "file_name": "FundOpp_DE-FOA-0003641.pdf",
+          "description": "DE-FOA-0003641",
+          "mime_type": "application/octet-stream",
+          "size_bytes": 1505176,
+          "created_date": "Oct 30, 2026 10:13:10 AM EDT",
+          "folder_type": "Full Announcement",
+          "folder_name": "DE-FOA-0003641 (BASE)",
+          "download_url": "https://grants.gov/grantsws/rest/opportunity/att/download/355417"
+        }
+      ],
+      "detail": {
+        "id": 364174,
+        "revision": 0,
+        "synopsisAttachmentFolders": [
+          {
+            "id": 81497,
+            "opportunityId": 364174,
+            "folderType": "Full Announcement",
+            "folderName": "DE-FOA-0003641 (BASE)",
+            "zipLobSize": 2425343,
+            "createdDate": "Oct 30, 2026 10:13:06 AM EDT",
+            "lastUpdatedDate": "Oct 30, 2026 10:13:10 AM EDT",
+            "synopsisAttachments": [
+              {
+                "id": 355417,
+                "opportunityId": 364174,
+                "mimeType": "application/octet-stream",
+                "fileName": "FundOpp_DE-FOA-0003641.pdf",
+                "fileDescription": "DE-FOA-0003641",
+                "fileLobSize": 1505176,
+                "createdDate": "Oct 30, 2026 10:13:10 AM EDT",
+                "synopsisAttFolderId": 81497
+              },
+              {
+                "id": 355416,
+                "opportunityId": 364174,
+                "mimeType": "application/octet-stream",
+                "fileName": "DE-FOA-0003641_SCALED_NOFO_Part 2.pdf",
+                "fileDescription": "DE-FOA-0003641_SCALED_NOFO_Part 2",
+                "fileLobSize": 1048694,
+                "createdDate": "Oct 30, 2026 10:13:08 AM EDT",
+                "synopsisAttFolderId": 81497
+              }
+            ]
+          }
+        ],
+        "synopsis": {
+          "version": 1,
+          "lastUpdatedDate": "Oct 30, 2026 10:13:04 AM EDT"
+        }
+      },
+      "expected_primary_id": 355417,
+      "cached_enrichment": {
+        "source_signature": "posted|2026-10-30|Synopsis 1|2027-02-08|2027-03-10",
+        "fetched_at": "2026-11-01T21:07:41.587732Z",
+        "contact_version": 1,
+        "primary_document": {
+          "url": "https://grants.gov/grantsws/rest/opportunity/att/download/355416",
+          "name": "DE-FOA-0003641_SCALED_NOFO_Part 2.pdf",
+          "source": "Grants.gov attachment",
+          "confidence": "high"
+        },
+        "deadline": {
+          "date": "2027-02-08",
+          "note": null,
+          "time": null,
+          "timezone": null
+        },
+        "award": {
+          "floor": 1,
+          "ceiling": 237000000,
+          "program_total": 237000000,
+          "expected_awards": 70
+        },
+        "document_urls": [],
+        "funding_opportunity_url": "https://exchange.energy.gov/",
+        "attachment_count": 2
+      },
+      "cached_evidence": {
+        "status": "current",
+        "document": {
+          "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355416",
+          "name": "DE-FOA-0003641_SCALED_NOFO_Part 2.pdf",
+          "source_kind": "primary_notice",
+          "content_type": "application/octet-stream",
+          "sha256": "ced1a9a2a341e6dcff2af1c0e3adb4c34c4b7e26c3cf054f53a36b5b4b86564e",
+          "bytes": 1048694,
+          "etag": null,
+          "last_modified": null,
+          "version": 1,
+          "first_seen_at": "2026-11-01T21:09:01.066353Z",
+          "last_seen_at": "2026-11-01T21:09:01.066353Z",
+          "changed_since_previous": false
+        },
+        "checked_at": "2026-11-01T21:09:01.066353Z",
+        "facts": [
+          {
+            "id": "evidence-364174-d93634b89243",
+            "type": "application_component",
+            "label": "Cover sheet",
+            "value": "Cover sheet",
+            "display_value": "Cover sheet (conditional)",
+            "confidence": "machine_extracted_needs_verification",
+            "citation": {
+              "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355416",
+              "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355416#page=12",
+              "document_name": "DE-FOA-0003641_SCALED_NOFO_Part 2.pdf",
+              "sha256": "ced1a9a2a341e6dcff2af1c0e3adb4c34c4b7e26c3cf054f53a36b5b4b86564e",
+              "page": 12,
+              "section": null,
+              "location": "page 12",
+              "quote": "…e in the footer of every page. Page Count Limitations If you exceed the maximum page limit, we will review only the authorized number of pages and disregard any additional pages. The specified maximum page limit includes the cover page, charts, graphs, maps, and photographs when printed using the formatting requirements set forth above and single spaced. T…",
+              "extracted_at": "2026-11-01T21:09:01.066353Z",
+              "structural_reference": {
+                "block_id": "pdf-12-19",
+                "kind": "line"
+              }
+            },
+            "fact_contract": "typed-notice-facts-1",
+            "source_authority": "machine_extracted_official_document",
+            "subject": "Cover sheet",
+            "parser_version": "component-owner-3",
+            "stage": "application",
+            "obligation": "conditional"
+          },
+          {
+            "id": "evidence-364174-a901dda3db48",
+            "type": "application_component",
+            "label": "Letters of support",
+            "value": "Letters of support",
+            "display_value": "Letters of support (required)",
+            "confidence": "machine_extracted_needs_verification",
+            "citation": {
+              "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355416",
+              "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355416#page=13",
+              "document_name": "DE-FOA-0003641_SCALED_NOFO_Part 2.pdf",
+              "sha256": "ced1a9a2a341e6dcff2af1c0e3adb4c34c4b7e26c3cf054f53a36b5b4b86564e",
+              "page": 13,
+              "section": null,
+              "location": "page 13",
+              "quote": "…) is the central repository for common Government-wide certifications and representations required to be eligible for a Federal award. You must update your registration annually. Federal agencies use SAM information to comply with award requirements and avoid increased burden and costs of separate requests for such information, unless you fail to meet a Fe…",
+              "extracted_at": "2026-11-01T21:09:01.066353Z",
+              "structural_reference": {
+                "block_id": "pdf-13-30",
+                "kind": "line"
+              }
+            },
+            "fact_contract": "typed-notice-facts-1",
+            "source_authority": "machine_extracted_official_document",
+            "subject": "Letters of support",
+            "parser_version": "component-owner-3",
+            "stage": "application",
+            "obligation": "required"
+          },
+          {
+            "id": "evidence-364174-43834ed8f78f",
+            "type": "application_component",
+            "label": "Biosketch or biographical sketch",
+            "value": "Biosketch or biographical sketch",
+            "display_value": "Biosketch or biographical sketch (conditional)",
+            "confidence": "machine_extracted_needs_verification",
+            "citation": {
+              "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355416",
+              "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355416#page=17",
+              "document_name": "DE-FOA-0003641_SCALED_NOFO_Part 2.pdf",
+              "sha256": "ced1a9a2a341e6dcff2af1c0e3adb4c34c4b7e26c3cf054f53a36b5b4b86564e",
+              "page": 17,
+              "section": null,
+              "location": "page 17",
+              "quote": "…foreign work is proposed to be performed • The name of the entity that would perform the foreign work We may require additional information before considering the waiver request. You cannot appeal DOE’s decision on a waiver request. 10. Digital Persistent Identifier (PID) For all Research and Development (R&D) NOFOs, if you are required to submit a Biograp…",
+              "extracted_at": "2026-11-01T21:09:01.066353Z",
+              "structural_reference": {
+                "block_id": "pdf-17-24",
+                "kind": "line"
+              }
+            },
+            "fact_contract": "typed-notice-facts-1",
+            "source_authority": "machine_extracted_official_document",
+            "subject": "Biosketch or biographical sketch",
+            "parser_version": "component-owner-3",
+            "stage": "application",
+            "obligation": "conditional"
+          },
+          {
+            "id": "evidence-364174-cdf500af14fa",
+            "type": "application_component",
+            "label": "Current and pending support",
+            "value": "Current and pending support",
+            "display_value": "Current and pending support (required)",
+            "confidence": "machine_extracted_needs_verification",
+            "citation": {
+              "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355416",
+              "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355416#page=18",
+              "document_name": "DE-FOA-0003641_SCALED_NOFO_Part 2.pdf",
+              "sha256": "ced1a9a2a341e6dcff2af1c0e3adb4c34c4b7e26c3cf054f53a36b5b4b86564e",
+              "page": 18,
+              "section": null,
+              "location": "page 18",
+              "quote": "Version 4.1 Page 18 of 47 Notice of Funding Opportunity, Part 2 Include this information for each covered individual with the Current and Pending Support submission as described above and in NOFO Part 1, Application Content Requirements—Covered Individual Definition, Designation, and Responsibility. 12. Transparency of Foreign Connections You must provide a…",
+              "extracted_at": "2026-11-01T21:09:01.066353Z"
+            },
+            "fact_contract": "typed-notice-facts-1",
+            "source_authority": "machine_extracted_official_document",
+            "subject": "Current and pending support",
+            "parser_version": "component-owner-3",
+            "stage": "application",
+            "obligation": "required"
+          },
+          {
+            "id": "evidence-364174-63a293f49754",
+            "type": "application_component",
+            "label": "Current and pending support",
+            "value": "Current and pending support",
+            "display_value": "Current and pending support (conditional)",
+            "confidence": "machine_extracted_needs_verification",
+            "citation": {
+              "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355416",
+              "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355416#page=34",
+              "document_name": "DE-FOA-0003641_SCALED_NOFO_Part 2.pdf",
+              "sha256": "ced1a9a2a341e6dcff2af1c0e3adb4c34c4b7e26c3cf054f53a36b5b4b86564e",
+              "page": 34,
+              "section": null,
+              "location": "page 34",
+              "quote": "…ore the award, you must submit a list of personnel who are proposed to work on the project, both recipients and subrecipients, and a list of proposed collaborating organizations. You have an ongoing responsibility to notify us of changes to personnel and collaborating organizations and to submit updated information during the life of the award. 9. Current…",
+              "extracted_at": "2026-11-01T21:09:01.066353Z",
+              "structural_reference": {
+                "block_id": "pdf-34-15",
+                "kind": "line"
+              }
+            },
+            "fact_contract": "typed-notice-facts-1",
+            "source_authority": "machine_extracted_official_document",
+            "subject": "Current and pending support",
+            "parser_version": "component-owner-3",
+            "stage": "application",
+            "obligation": "conditional"
+          },
+          {
+            "id": "evidence-364174-b8b5e698d0e4",
+            "type": "application_component",
+            "label": "Data management plan",
+            "value": "Data management plan",
+            "display_value": "Data management plan (required)",
+            "confidence": "machine_extracted_needs_verification",
+            "citation": {
+              "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355416",
+              "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355416#page=37",
+              "document_name": "DE-FOA-0003641_SCALED_NOFO_Part 2.pdf",
+              "sha256": "ced1a9a2a341e6dcff2af1c0e3adb4c34c4b7e26c3cf054f53a36b5b4b86564e",
+              "page": 37,
+              "section": null,
+              "location": "page 37",
+              "quote": "…r evaluating requests for access • Routine use of foreign facilities by awardee staff under the recipient’s standard policies and procedures 13. Data Management and Sharing Plan A Data Management and Sharing Plan (DMSP) is required for all R&D projects following DOE and DOE-sponsoring-office guidelines. NOFO Part 1, Application Content and Form—Application…",
+              "extracted_at": "2026-11-01T21:09:01.066353Z",
+              "structural_reference": {
+                "block_id": "pdf-37-20",
+                "kind": "line"
+              }
+            },
+            "fact_contract": "typed-notice-facts-1",
+            "source_authority": "machine_extracted_official_document",
+            "subject": "Data management plan",
+            "parser_version": "component-owner-3",
+            "stage": "application",
+            "obligation": "required"
+          },
+          {
+            "id": "evidence-364174-4972c968cf48",
+            "type": "cost_share",
+            "label": "Cost sharing",
+            "value": false,
+            "display_value": "Not required",
+            "confidence": "machine_extracted_needs_verification",
+            "citation": {
+              "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355416",
+              "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355416#page=7",
+              "document_name": "DE-FOA-0003641_SCALED_NOFO_Part 2.pdf",
+              "sha256": "ced1a9a2a341e6dcff2af1c0e3adb4c34c4b7e26c3cf054f53a36b5b4b86564e",
+              "page": 7,
+              "section": null,
+              "location": "page 7",
+              "quote": "…ed by 50% = $800,000 (Task 3 cost) • Task 3 cost minus Federal share = nonfederal share • $800,000 - $400,000 = $400,000 (nonfederal share) Task 4 • Federal share = $100,000 • Nonfederal cost share is not required for outreach = $0 (nonfederal share) Complete the calculation as follows. Tasks $ Federal Share % Federal Share $ Nonfederal Share % Nonfederal…",
+              "extracted_at": "2026-11-01T21:09:01.066353Z",
+              "structural_reference": {
+                "block_id": "pdf-7-33",
+                "kind": "line"
+              }
+            },
+            "fact_contract": "typed-notice-facts-1",
+            "source_authority": "machine_extracted_official_document",
+            "subject": "cost_share",
+            "parser_version": "cost-obligation-2",
+            "obligation": "not_required",
+            "negated": true
+          },
+          {
+            "id": "evidence-364174-017b77e3bd06",
+            "type": "eligibility_excerpt",
+            "label": "Eligibility evidence",
+            "value": "to each funding opportunity. Part 2 includes fixed DOE requirements that generally do not change from NOFO to NOFO. This document includes standard information for the application phase and describes requirements that applicants must review in conjunction with NOFO Part 1 before applying.",
+            "display_value": "to each funding opportunity. Part 2 includes fixed DOE requirements that generally do not change from NOFO to NOFO. This document includes standard information for the application phase and describes requirements that ap…",
+            "confidence": "machine_extracted_needs_verification",
+            "citation": {
+              "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355416",
+              "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355416#page=1",
+              "document_name": "DE-FOA-0003641_SCALED_NOFO_Part 2.pdf",
+              "sha256": "ced1a9a2a341e6dcff2af1c0e3adb4c34c4b7e26c3cf054f53a36b5b4b86564e",
+              "page": 1,
+              "section": null,
+              "location": "page 1",
+              "quote": "…The NOFO Part 2 is a companion document to the NOFO Part 1. The NOFO Part 1 describes DOE’s program goals and evaluation criteria, eligibility, and other components specific to each funding opportunity. Part 2 includes fixed DOE requirements that generally do not change from NOFO to NOFO. This document includes standard information for the application phas…",
+              "extracted_at": "2026-11-01T21:09:01.066353Z"
+            },
+            "fact_contract": "typed-notice-facts-1",
+            "source_authority": "machine_extracted_official_document",
+            "subject": "applicant_eligibility",
+            "parser_version": "substantive-section-2"
+          }
+        ],
+        "program_areas": [
+          {
+            "label": "artificial intelligence",
+            "topics": [
+              "Artificial intelligence and machine learning",
+              "Data science"
+            ],
+            "citation": {
+              "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355416",
+              "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355416#page=9",
+              "document_name": "DE-FOA-0003641_SCALED_NOFO_Part 2.pdf",
+              "sha256": "ced1a9a2a341e6dcff2af1c0e3adb4c34c4b7e26c3cf054f53a36b5b4b86564e",
+              "page": 9,
+              "section": null,
+              "location": "page 9",
+              "quote": "…ies and exclude those that encourage or support political activities, such as collecting and disseminating information related to potential, planned, or pending legislation. 4. Artificial Intelligence (AI) Application Use You must indicate in the project summary the extent to which, if any, you used generative artificial intelligence (AI) technology and ho…",
+              "extracted_at": "2026-11-01T21:09:01.066353Z",
+              "structural_reference": {
+                "block_id": "pdf-9-14",
+                "kind": "line"
+              }
+            }
+          },
+          {
+            "label": "cybersecurity",
+            "topics": [
+              "Cybersecurity"
+            ],
+            "citation": {
+              "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355416",
+              "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355416#page=46",
+              "document_name": "DE-FOA-0003641_SCALED_NOFO_Part 2.pdf",
+              "sha256": "ced1a9a2a341e6dcff2af1c0e3adb4c34c4b7e26c3cf054f53a36b5b4b86564e",
+              "page": 46,
+              "section": null,
+              "location": "page 46",
+              "quote": "…ogy Laboratory ANC Alaska Native Corporation NHPA National Historic Preservation Act BABA Build America, Buy America Act NOFO Notice of Funding Opportunity CESER Office of Cybersecurity, Energy Security, and Emergency Response NSF National Science Foundation C.F.R. Code of Federal Regulations NSPM National Security Policy Memorandum COI Conflict of Interes…",
+              "extracted_at": "2026-11-01T21:09:01.066353Z",
+              "structural_reference": {
+                "block_id": "pdf-46-16",
+                "kind": "line"
+              }
+            }
+          }
+        ],
+        "review_queue": [
+          {
+            "type": "structured_fact_conflict",
+            "status": "needs_review",
+            "label": "The official notice and structured record disagree; verify the cited field",
+            "evidence_ids": [
+              "evidence-364174-4972c968cf48"
+            ],
+            "conflicts": [
+              {
+                "field": "cost_share_required",
+                "structured_value": true,
+                "notice_value": false
+              }
+            ]
+          },
+          {
+            "type": "deadline_evidence_withheld",
+            "status": "needs_review",
+            "label": "Verify official submission dates; ambiguous narrative information was withheld",
+            "message": "Only locally owned submission dates and components are published."
+          }
+        ],
+        "version_history": [],
+        "parser_dependencies": {
+          "amounts": "award-basis-11:primary-program-context-1:substantive-boundaries-2",
+          "cost_share": "cost-obligation-2:primary-program-context-1:substantive-boundaries-2",
+          "sections": "substantive-section-2:primary-program-context-1:substantive-boundaries-2",
+          "components": "component-owner-3:primary-program-context-1:substantive-boundaries-2",
+          "limits": "submission-subject-1:primary-program-context-1:substantive-boundaries-2",
+          "status": "notice-subject-2:primary-program-context-1:substantive-boundaries-2",
+          "deadlines": "submission-date-6:submission-fields-21:primary-program-context-1:substantive-boundaries-2",
+          "award_context": "award-context-1:primary-program-context-1:substantive-boundaries-2"
+        },
+        "extractor_identity": "official-evidence-3",
+        "source_signature": "https://grants.gov/grantsws/rest/opportunity/att/download/355416|DE-FOA-0003641_SCALED_NOFO_Part 2.pdf||1|2026-10-30|2026-10-30",
+        "source_url": "https://grants.gov/grantsws/rest/opportunity/att/download/355416",
+        "subtopics": [],
+        "subtopic_reason": "no_layer_accepted"
+      }
+    },
+    {
+      "opportunity_id": "364033",
+      "record": {
+        "opportunity_id": "364033",
+        "opportunity_number": "DE-FOA-0003673",
+        "title": "Genesis Mission Graduate Fellowship Pilot",
+        "agency": "Office of Science",
+        "agency_code": "PAMS-SC",
+        "source": "Grants.gov",
+        "status": "posted",
+        "last_updated": "2026-10-28",
+        "version": "Synopsis 1",
+        "close_date": "2027-01-12",
+        "archive_date": "2027-04-12",
+        "has_preliminary_stage": false,
+        "limited_submission": false,
+        "status_verification_required": false,
+        "cost_share_required": false,
+        "award_floor": 20000000,
+        "award_ceiling": 20000000,
+        "total_program_funding": 100000000,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/355185",
+        "primary_document_name": "DE-FOA-0003673.000001 Part 2.pdf",
+        "primary_document_source": "Grants.gov attachment",
+        "primary_document_confidence": "high",
+        "funding_opportunity_url": "https://science.osti.gov",
+        "detail_page": "https://www.grants.gov/search-results-detail/364033",
+        "topic_areas": [
+          "Education and workforce",
+          "Technology development",
+          "Energy",
+          "Cybersecurity"
+        ],
+        "document_program_areas": [
+          "fusion energy",
+          "cybersecurity"
+        ],
+        "document_evidence": {
+          "source_fields": {
+            "topic_areas": {
+              "present": true,
+              "value": [
+                "Education and workforce",
+                "Technology development"
+              ]
+            }
+          }
+        },
+        "deadlines": [
+          {
+            "kind": "application",
+            "date": "2027-01-12",
+            "time": null,
+            "timezone": null,
+            "note": null,
+            "estimated": false,
+            "source": "Grants.gov XML extract",
+            "source_url": "https://www.grants.gov/search-results-detail/364033",
+            "source_field": "CloseDate",
+            "confidence": "official_structured",
+            "detail_checked_at": "2026-10-29T18:26:25.546336Z"
+          }
+        ]
+      },
+      "attachments": [
+        {
+          "id": 355185,
+          "file_name": "DE-FOA-0003673.000001 Part 2.pdf",
+          "description": "DE-FOA-0003673.000001 Part 2",
+          "mime_type": "application/pdf",
+          "size_bytes": 1186054,
+          "created_date": "Oct 07, 2026 02:08:24 PM EDT",
+          "folder_type": "Full Announcement",
+          "folder_name": "DE-FOA-0003673",
+          "download_url": "https://grants.gov/grantsws/rest/opportunity/att/download/355185"
+        },
+        {
+          "id": 355184,
+          "file_name": "DE-FOA-0003673.000001.pdf",
+          "description": "DE-FOA-0003673.000001",
+          "mime_type": "application/pdf",
+          "size_bytes": 1133527,
+          "created_date": "Oct 07, 2026 02:08:07 PM EDT",
+          "folder_type": "Full Announcement",
+          "folder_name": "DE-FOA-0003673",
+          "download_url": "https://grants.gov/grantsws/rest/opportunity/att/download/355184"
+        }
+      ],
+      "detail": {
+        "id": 364033,
+        "revision": 0,
+        "synopsisAttachmentFolders": [
+          {
+            "id": 81377,
+            "opportunityId": 364033,
+            "folderType": "Full Announcement",
+            "folderName": "DE-FOA-0003673",
+            "zipLobSize": 2225307,
+            "createdDate": "Oct 07, 2026 02:07:52 PM EDT",
+            "lastUpdatedDate": "Oct 28, 2026 02:23:36 PM EDT",
+            "synopsisAttachments": [
+              {
+                "id": 355184,
+                "opportunityId": 364033,
+                "mimeType": "application/pdf",
+                "fileName": "DE-FOA-0003673.000001.pdf",
+                "fileDescription": "DE-FOA-0003673.000001",
+                "fileLobSize": 1133527,
+                "createdDate": "Oct 07, 2026 02:08:07 PM EDT",
+                "lastUpdatedDate": "Oct 28, 2026 02:22:30 PM EDT",
+                "synopsisAttFolderId": 81377
+              },
+              {
+                "id": 355185,
+                "opportunityId": 364033,
+                "mimeType": "application/pdf",
+                "fileName": "DE-FOA-0003673.000001 Part 2.pdf",
+                "fileDescription": "DE-FOA-0003673.000001 Part 2",
+                "fileLobSize": 1186054,
+                "createdDate": "Oct 07, 2026 02:08:24 PM EDT",
+                "lastUpdatedDate": "Oct 28, 2026 02:23:36 PM EDT",
+                "synopsisAttFolderId": 81377
+              }
+            ]
+          }
+        ],
+        "synopsis": {
+          "version": 1,
+          "lastUpdatedDate": "Oct 07, 2026 02:07:37 PM EDT"
+        }
+      },
+      "expected_primary_id": 355184,
+      "cached_enrichment": {
+        "source_signature": "posted|2026-10-28|Synopsis 1|2027-01-12|2027-04-12",
+        "fetched_at": "2026-10-29T18:26:25.546336Z",
+        "contact_version": 1,
+        "primary_document": {
+          "url": "https://grants.gov/grantsws/rest/opportunity/att/download/355185",
+          "name": "DE-FOA-0003673.000001 Part 2.pdf",
+          "source": "Grants.gov attachment",
+          "confidence": "high"
+        },
+        "deadline": {
+          "date": "2027-01-12",
+          "note": null,
+          "time": null,
+          "timezone": null
+        },
+        "award": {
+          "floor": 20000000,
+          "ceiling": 20000000,
+          "program_total": 100000000,
+          "expected_awards": 5
+        },
+        "document_urls": [],
+        "funding_opportunity_url": "https://science.osti.gov",
+        "attachment_count": 2
+      },
+      "cached_evidence": {
+        "status": "current",
+        "document": {
+          "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355185",
+          "name": "DE-FOA-0003673.000001 Part 2.pdf",
+          "source_kind": "primary_notice",
+          "content_type": "application/pdf",
+          "sha256": "fa5115aaa2ab0be9268f6f9c3f378198efba1cce444874c3173bdf8771614a83",
+          "bytes": 1186054,
+          "etag": null,
+          "last_modified": null,
+          "version": 2,
+          "first_seen_at": "2026-10-29T18:27:54.648364Z",
+          "last_seen_at": "2026-10-29T18:27:54.648364Z",
+          "changed_since_previous": true
+        },
+        "checked_at": "2026-10-29T18:27:54.648364Z",
+        "facts": [
+          {
+            "id": "evidence-364033-b1f9ece2d7e2",
+            "type": "application_component",
+            "label": "Cover sheet",
+            "value": "Cover sheet",
+            "display_value": "Cover sheet (conditional)",
+            "confidence": "machine_extracted_needs_verification",
+            "citation": {
+              "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355185",
+              "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355185#page=11",
+              "document_name": "DE-FOA-0003673.000001 Part 2.pdf",
+              "sha256": "fa5115aaa2ab0be9268f6f9c3f378198efba1cce444874c3173bdf8771614a83",
+              "page": 11,
+              "section": null,
+              "location": "page 11",
+              "quote": "…d the maximum page requirement Page Count Limitations If you exceed the maximum page limit, we will review only the authorized number of pages and disregard any additional pages. The specified maximum page limit includes the cover page, charts, graphs, maps, and photographs when printed using the formatting requirements set forth above and single spaced. C…",
+              "extracted_at": "2026-10-29T18:27:54.648364Z",
+              "structural_reference": {
+                "block_id": "pdf-11-30",
+                "kind": "line"
+              }
+            },
+            "fact_contract": "typed-notice-facts-1",
+            "source_authority": "machine_extracted_official_document",
+            "subject": "Cover sheet",
+            "parser_version": "component-owner-3",
+            "stage": "application",
+            "obligation": "conditional"
+          },
+          {
+            "id": "evidence-364033-1b3916ae95bf",
+            "type": "application_component",
+            "label": "Cover sheet",
+            "value": "Cover sheet",
+            "display_value": "Cover sheet (required)",
+            "confidence": "machine_extracted_needs_verification",
+            "citation": {
+              "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355185",
+              "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355185#page=15",
+              "document_name": "DE-FOA-0003673.000001 Part 2.pdf",
+              "sha256": "fa5115aaa2ab0be9268f6f9c3f378198efba1cce444874c3173bdf8771614a83",
+              "page": 15,
+              "section": null,
+              "location": "page 15",
+              "quote": "…f Funding Opportunity, Part 2 complementary to the missions of the laboratory and will not adversely impact execution of the (insert agency) assigned programs at the laboratory. This laboratory is authorized to perform the work proposed in the application submitted under DOE Funding Opportunity Announcement <<Include the NOFO number on the cover page>> by…",
+              "extracted_at": "2026-10-29T18:27:54.648364Z",
+              "structural_reference": {
+                "block_id": "pdf-15-4",
+                "kind": "line"
+              }
+            },
+            "fact_contract": "typed-notice-facts-1",
+            "source_authority": "machine_extracted_official_document",
+            "subject": "Cover sheet",
+            "parser_version": "component-owner-3",
+            "stage": "application",
+            "obligation": "required"
+          },
+          {
+            "id": "evidence-364033-7d10df05e06d",
+            "type": "application_component",
+            "label": "Project narrative",
+            "value": "Project narrative",
+            "display_value": "Project narrative (conditional)",
+            "confidence": "machine_extracted_needs_verification",
+            "citation": {
+              "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355185",
+              "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355185#page=16",
+              "document_name": "DE-FOA-0003673.000001 Part 2.pdf",
+              "sha256": "fa5115aaa2ab0be9268f6f9c3f378198efba1cce444874c3173bdf8771614a83",
+              "page": 16,
+              "section": null,
+              "location": "page 16",
+              "quote": "…n 4.1 Page 16 of 67 Notice of Funding Opportunity, Part 2 Note that a consortium is applied for in one application and results in one award with subawards to consortia members. Multi-institutional teams may, if permitted under this NOFO, submit collaborative applications with each institution submitting its own application with an identical Project Narrati…",
+              "extracted_at": "2026-10-29T18:27:54.648364Z",
+              "structural_reference": {
+                "block_id": "pdf-16-4",
+                "kind": "line"
+              }
+            },
+            "fact_contract": "typed-notice-facts-1",
+            "source_authority": "machine_extracted_official_document",
+            "subject": "Project narrative",
+            "parser_version": "component-owner-3",
+            "stage": "application",
+            "obligation": "conditional"
+          },
+          {
+            "id": "evidence-364033-d4264a410561",
+            "type": "application_component",
+            "label": "Letters of support",
+            "value": "Letters of support",
+            "display_value": "Letters of support (prohibited)",
+            "confidence": "machine_extracted_needs_verification",
+            "citation": {
+              "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355185",
+              "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355185#page=24",
+              "document_name": "DE-FOA-0003673.000001 Part 2.pdf",
+              "sha256": "fa5115aaa2ab0be9268f6f9c3f378198efba1cce444874c3173bdf8771614a83",
+              "page": 24,
+              "section": null,
+              "location": "page 24",
+              "quote": "…ing social security numbers, birthdates, citizenship, marital status, or home addresses. Pay particular attention to the content of biographical sketches and curriculum vitae. • Do not include letters of support from Federal officials. • Do not include letters of support on Federal letterhead. Letters that are not letters of support (such as letters confir…",
+              "extracted_at": "2026-10-29T18:27:54.648364Z",
+              "structural_reference": {
+                "block_id": "pdf-24-7",
+                "kind": "line"
+              }
+            },
+            "fact_contract": "typed-notice-facts-1",
+            "source_authority": "machine_extracted_official_document",
+            "subject": "Letters of support",
+            "parser_version": "component-owner-3",
+            "stage": "application",
+            "obligation": "prohibited"
+          },
+          {
+            "id": "evidence-364033-a5e07d239f22",
+            "type": "application_component",
+            "label": "Biosketch or biographical sketch",
+            "value": "Biosketch or biographical sketch",
+            "display_value": "Biosketch or biographical sketch (required)",
+            "confidence": "machine_extracted_needs_verification",
+            "citation": {
+              "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355185",
+              "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355185#page=24",
+              "document_name": "DE-FOA-0003673.000001 Part 2.pdf",
+              "sha256": "fa5115aaa2ab0be9268f6f9c3f378198efba1cce444874c3173bdf8771614a83",
+              "page": 24,
+              "section": null,
+              "location": "page 24",
+              "quote": "…the transfer of the award to a new institution, the new institution must apply under the then-available SC “annual” or “open” NOFO. 9. How to Prepare a Biographical Sketch As part of the application, each covered individual at the applicant and subrecipient level must submit a biographical sketch (“Biosketch”). Use SciENcv (Science Experts Network Curricul…",
+              "extracted_at": "2026-10-29T18:27:54.648364Z",
+              "structural_reference": {
+                "block_id": "pdf-24-21",
+                "kind": "line"
+              }
+            },
+            "fact_contract": "typed-notice-facts-1",
+            "source_authority": "machine_extracted_official_document",
+            "subject": "Biosketch or biographical sketch",
+            "parser_version": "component-owner-3",
+            "stage": "application",
+            "obligation": "required"
+          },
+          {
+            "id": "evidence-364033-772b837c9617",
+            "type": "application_component",
+            "label": "Biosketch or biographical sketch",
+            "value": "Biosketch or biographical sketch",
+            "display_value": "Biosketch or biographical sketch (conditional)",
+            "confidence": "machine_extracted_needs_verification",
+            "citation": {
+              "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355185",
+              "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355185#page=24",
+              "document_name": "DE-FOA-0003673.000001 Part 2.pdf",
+              "sha256": "fa5115aaa2ab0be9268f6f9c3f378198efba1cce444874c3173bdf8771614a83",
+              "page": 24,
+              "section": null,
+              "location": "page 24",
+              "quote": "…the following: • With the exception of “covered individual”, which is defined here, all other definitions of terms used in the Biosketch are available at: NSPM-33 Definitions. • If there is any conflict between NSPM-33 Implementation Guidance Pre- and Post-award Disclosures Relating to the Biographical Sketch and Current and Pending (Other) Support and the…",
+              "extracted_at": "2026-10-29T18:27:54.648364Z",
+              "structural_reference": {
+                "block_id": "pdf-24-39",
+                "kind": "line"
+              }
+            },
+            "fact_contract": "typed-notice-facts-1",
+            "source_authority": "machine_extracted_official_document",
+            "subject": "Biosketch or biographical sketch",
+            "parser_version": "component-owner-3",
+            "stage": "application",
+            "obligation": "conditional"
+          },
+          {
+            "id": "evidence-364033-04ce7ff854b7",
+            "type": "application_component",
+            "label": "Current and pending support",
+            "value": "Current and pending support",
+            "display_value": "Current and pending support (required)",
+            "confidence": "machine_extracted_needs_verification",
+            "citation": {
+              "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355185",
+              "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355185#page=28",
+              "document_name": "DE-FOA-0003673.000001 Part 2.pdf",
+              "sha256": "fa5115aaa2ab0be9268f6f9c3f378198efba1cce444874c3173bdf8771614a83",
+              "page": 28,
+              "section": null,
+              "location": "page 28",
+              "quote": "…and Current and Pending (Other) Support. Current and Pending (Other) Support Addendum The Current and Pending (Other) Support Addendum is not required for this NOFO. Throughout the life of the award, the recipient has an ongoing responsibility to submit: 1) current and pending support disclosure statements and resumes/biosketches for any new covered indivi…",
+              "extracted_at": "2026-10-29T18:27:54.648364Z",
+              "structural_reference": {
+                "block_id": "pdf-28-20",
+                "kind": "line"
+              }
+            },
+            "fact_contract": "typed-notice-facts-1",
+            "source_authority": "machine_extracted_official_document",
+            "subject": "Current and pending support",
+            "parser_version": "component-owner-3",
+            "stage": "application",
+            "obligation": "required"
+          },
+          {
+            "id": "evidence-364033-b59e08472554",
+            "type": "application_component",
+            "label": "PI resume",
+            "value": "PI resume",
+            "display_value": "PI resume (conditional)",
+            "confidence": "machine_extracted_needs_verification",
+            "citation": {
+              "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355185",
+              "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355185#page=28",
+              "document_name": "DE-FOA-0003673.000001 Part 2.pdf",
+              "sha256": "fa5115aaa2ab0be9268f6f9c3f378198efba1cce444874c3173bdf8771614a83",
+              "page": 28,
+              "section": null,
+              "location": "page 28",
+              "quote": "…er) Support Addendum is not required for this NOFO. Throughout the life of the award, the recipient has an ongoing responsibility to submit: 1) current and pending support disclosure statements and resumes/biosketches for any new covered individuals, and 2) updated disclosures if there are changes to the current and pending support or resume/biosketch prev…",
+              "extracted_at": "2026-10-29T18:27:54.648364Z",
+              "structural_reference": {
+                "block_id": "pdf-28-21",
+                "kind": "line"
+              }
+            },
+            "fact_contract": "typed-notice-facts-1",
+            "source_authority": "machine_extracted_official_document",
+            "subject": "PI resume",
+            "parser_version": "component-owner-3",
+            "stage": "application",
+            "obligation": "conditional"
+          },
+          {
+            "id": "evidence-364033-92f589c2b7f8",
+            "type": "application_component",
+            "label": "Current and pending support",
+            "value": "Current and pending support",
+            "display_value": "Current and pending support (conditional)",
+            "confidence": "machine_extracted_needs_verification",
+            "citation": {
+              "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355185",
+              "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355185#page=28",
+              "document_name": "DE-FOA-0003673.000001 Part 2.pdf",
+              "sha256": "fa5115aaa2ab0be9268f6f9c3f378198efba1cce444874c3173bdf8771614a83",
+              "page": 28,
+              "section": null,
+              "location": "page 28",
+              "quote": "…red for this NOFO. Throughout the life of the award, the recipient has an ongoing responsibility to submit: 1) current and pending support disclosure statements and resumes/biosketches for any new covered individuals, and 2) updated disclosures if there are changes to the current and pending support or resume/biosketch previously submitted to DOE. Submissi…",
+              "extracted_at": "2026-10-29T18:27:54.648364Z",
+              "structural_reference": {
+                "block_id": "pdf-28-21",
+                "kind": "line"
+              }
+            },
+            "fact_contract": "typed-notice-facts-1",
+            "source_authority": "machine_extracted_official_document",
+            "subject": "Current and pending support",
+            "parser_version": "component-owner-3",
+            "stage": "application",
+            "obligation": "conditional"
+          },
+          {
+            "id": "evidence-364033-117581744deb",
+            "type": "cost_share",
+            "label": "Cost sharing",
+            "value": false,
+            "display_value": "Not required",
+            "confidence": "machine_extracted_needs_verification",
+            "citation": {
+              "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355185",
+              "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355185#page=7",
+              "document_name": "DE-FOA-0003673.000001 Part 2.pdf",
+              "sha256": "fa5115aaa2ab0be9268f6f9c3f378198efba1cce444874c3173bdf8771614a83",
+              "page": 7,
+              "section": null,
+              "location": "page 7",
+              "quote": "…ed by 50% = $800,000 (Task 3 cost) • Task 3 cost minus Federal share = nonfederal share • $800,000 - $400,000 = $400,000 (nonfederal share) Task 4 • Federal share = $100,000 • Nonfederal cost share is not required for outreach = $0 (nonfederal share) Complete the calculation as follows. Tasks $ Federal Share % Federal Share $ Nonfederal Share % Nonfederal…",
+              "extracted_at": "2026-10-29T18:27:54.648364Z",
+              "structural_reference": {
+                "block_id": "pdf-7-38",
+                "kind": "line"
+              }
+            },
+            "fact_contract": "typed-notice-facts-1",
+            "source_authority": "machine_extracted_official_document",
+            "subject": "cost_share",
+            "parser_version": "cost-obligation-2",
+            "obligation": "not_required",
+            "negated": true
+          },
+          {
+            "id": "evidence-364033-ba4cab816000",
+            "type": "eligibility_excerpt",
+            "label": "Eligibility evidence",
+            "value": "to each funding opportunity. Part 2 includes fixed DOE requirements that generally do not change from NOFO to NOFO. This document includes standard information for the application phase and describes expectations for award negotiations and post-award requirements for selected applications. You should review both the NO",
+            "display_value": "to each funding opportunity. Part 2 includes fixed DOE requirements that generally do not change from NOFO to NOFO. This document includes standard information for the application phase and describes expectations for awa…",
+            "confidence": "machine_extracted_needs_verification",
+            "citation": {
+              "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355185",
+              "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355185#page=1",
+              "document_name": "DE-FOA-0003673.000001 Part 2.pdf",
+              "sha256": "fa5115aaa2ab0be9268f6f9c3f378198efba1cce444874c3173bdf8771614a83",
+              "page": 1,
+              "section": null,
+              "location": "page 1",
+              "quote": "…The NOFO Part 2 is a companion document to the NOFO Part 1. The NOFO Part 1 describes DOE’s program goals and evaluation criteria, eligibility, and other components specific to each funding opportunity. Part 2 includes fixed DOE requirements that generally do not change from NOFO to NOFO. This document includes standard information for the application phas…",
+              "extracted_at": "2026-10-29T18:27:54.648364Z"
+            },
+            "fact_contract": "typed-notice-facts-1",
+            "source_authority": "machine_extracted_official_document",
+            "subject": "applicant_eligibility",
+            "parser_version": "substantive-section-2"
+          },
+          {
+            "id": "evidence-364033-20cfca1130ff",
+            "type": "review_criteria",
+            "label": "Review criteria",
+            "value": "process. Applicants are encouraged to consult the SC website for further information and suggestions for how to structure a DMSP: https://science.osti.gov/funding-opportunities/digitaldata-management. 13. How to Prepare a Research and Related Budget and Justification The following advice will improve the accuracy of yo",
+            "display_value": "process. Applicants are encouraged to consult the SC website for further information and suggestions for how to structure a DMSP: https://science.osti.gov/funding-opportunities/digitaldata-management. 13. How to Prepare …",
+            "confidence": "machine_extracted_needs_verification",
+            "citation": {
+              "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355185",
+              "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355185#page=30",
+              "document_name": "DE-FOA-0003673.000001 Part 2.pdf",
+              "sha256": "fa5115aaa2ab0be9268f6f9c3f378198efba1cce444874c3173bdf8771614a83",
+              "page": 30,
+              "section": null,
+              "location": "page 30",
+              "quote": "…record does not already have an associated DOI, OSTI will assign a DOI for the data record. DMSPs will be reviewed as part of the overall SC research application merit review process. Applicants are encouraged to consult the SC website for further information and suggestions for how to structure a DMSP: https://science.osti.gov/funding-opportunities/digita…",
+              "extracted_at": "2026-10-29T18:27:54.648364Z"
+            },
+            "fact_contract": "typed-notice-facts-1",
+            "source_authority": "machine_extracted_official_document",
+            "subject": "application_review",
+            "parser_version": "substantive-section-2"
+          }
+        ],
+        "program_areas": [
+          {
+            "label": "fusion energy",
+            "topics": [
+              "Energy"
+            ],
+            "citation": {
+              "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355185",
+              "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355185#page=13",
+              "document_name": "DE-FOA-0003673.000001 Part 2.pdf",
+              "sha256": "fa5115aaa2ab0be9268f6f9c3f378198efba1cce444874c3173bdf8771614a83",
+              "page": 13,
+              "section": null,
+              "location": "page 13",
+              "quote": "…ational Laboratory, Fermi National Accelerator Laboratory, Lawrence Berkeley National Laboratory, Oak Ridge National Laboratory, Pacific Northwest National Laboratory, Princeton Plasma Physics Laboratory, SLAC National Accelerator Laboratory, Thomas Jefferson National Accelerator Facility) DOE SC National Laboratories, if eligible either as a prime applica…",
+              "extracted_at": "2026-10-29T18:27:54.648364Z",
+              "structural_reference": {
+                "block_id": "pdf-13-19",
+                "kind": "line"
+              }
+            }
+          },
+          {
+            "label": "cybersecurity",
+            "topics": [
+              "Cybersecurity"
+            ],
+            "citation": {
+              "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355185",
+              "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355185#page=64",
+              "document_name": "DE-FOA-0003673.000001 Part 2.pdf",
+              "sha256": "fa5115aaa2ab0be9268f6f9c3f378198efba1cce444874c3173bdf8771614a83",
+              "page": 64,
+              "section": null,
+              "location": "page 64",
+              "quote": "…nym Spelled Out ANC Alaska Native Corporation NHPA National Historic Preservation Act BABA Build America, Buy America Act NOFO Notice of Funding Opportunity CESER Office of Cybersecurity, Energy Security, and Emergency Response NSF National Science Foundation C.F.R. Code of Federal Regulations NSPM National Security Policy Memorandum COI Conflict of Intere…",
+              "extracted_at": "2026-10-29T18:27:54.648364Z",
+              "structural_reference": {
+                "block_id": "pdf-64-15",
+                "kind": "line"
+              }
+            }
+          }
+        ],
+        "review_queue": [
+          {
+            "type": "amendment",
+            "label": "The official document changed; verify decisive facts",
+            "status": "needs_review",
+            "evidence_ids": []
+          },
+          {
+            "type": "deadline_evidence_withheld",
+            "status": "needs_review",
+            "label": "Verify official submission dates; ambiguous narrative information was withheld",
+            "message": "Only locally owned submission dates and components are published."
+          }
+        ],
+        "version_history": [
+          {
+            "sha256": "b823ede904bc419a642ad048194c42facc4453382d2dcef4bac07285ab9518d5",
+            "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355185",
+            "name": "DE-FOA-0003673 Part 2.pdf",
+            "first_seen_at": "2026-10-16T14:38:47.931407Z",
+            "last_seen_at": "2026-10-16T14:38:47.931407Z",
+            "version": 1
+          }
+        ],
+        "parser_dependencies": {
+          "amounts": "award-basis-11:primary-program-context-1:substantive-boundaries-2",
+          "cost_share": "cost-obligation-2:primary-program-context-1:substantive-boundaries-2",
+          "sections": "substantive-section-2:primary-program-context-1:substantive-boundaries-2",
+          "components": "component-owner-3:primary-program-context-1:substantive-boundaries-2",
+          "limits": "submission-subject-1:primary-program-context-1:substantive-boundaries-2",
+          "status": "notice-subject-2:primary-program-context-1:substantive-boundaries-2",
+          "deadlines": "submission-date-6:submission-fields-21:primary-program-context-1:substantive-boundaries-2",
+          "award_context": "award-context-1:primary-program-context-1:substantive-boundaries-2"
+        },
+        "extractor_identity": "official-evidence-3",
+        "source_signature": "https://grants.gov/grantsws/rest/opportunity/att/download/355185|DE-FOA-0003673.000001 Part 2.pdf||1|2026-10-07|2026-10-28",
+        "source_url": "https://grants.gov/grantsws/rest/opportunity/att/download/355185",
+        "subtopics": [],
+        "subtopic_reason": "no_layer_accepted"
+      }
+    }
+  ],
+  "program_context_controls": {
+    "364174:artificial intelligence": {
+      "label": "artificial intelligence",
+      "topics": [
+        "Artificial intelligence and machine learning",
+        "Data science"
+      ],
+      "citation": {
+        "document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/355417",
+        "citation_url": "https://grants.gov/grantsws/rest/opportunity/att/download/355417#page=19",
+        "document_name": "FundOpp_DE-FOA-0003641.pdf",
+        "sha256": "1f31710884163f35b0882cf1783f0ed6a1e15eb21b07ec4de515803774b891e2",
+        "page": 19,
+        "section": null,
+        "location": "page 19",
+        "quote": "Version 4.1 Page 19 of 51 Notice of Funding Opportunity, Part 1 needs, an increasing amount of load being added to the grid in the form of artificial intelligence (AI) data centers, reshoring manufacturing, and greater electrification. However, many critical components supporting the power grid have limited to no domestic manufacturing ca…",
+        "extracted_at": "2026-11-01T22:00:00Z",
+        "structural_reference": {
+          "block_id": "pdf-19-5",
+          "kind": "line"
+        }
+      }
+    },
+    "364174:cybersecurity": {
+      "label": "cybersecurity",
+      "topics": [
+        "Cybersecurity"
+      ],
+      "citation": {
+        "document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/355417",
+        "citation_url": "https://grants.gov/grantsws/rest/opportunity/att/download/355417#page=49",
+        "document_name": "FundOpp_DE-FOA-0003641.pdf",
+        "sha256": "1f31710884163f35b0882cf1783f0ed6a1e15eb21b07ec4de515803774b891e2",
+        "page": 49,
+        "section": null,
+        "location": "page 49",
+        "quote": "…inistration. Detailed descriptions of NOFOspecific requirements are provided below the table. Post Award Requirements and Administration Title Location Additional Information Cybersecurity Plan NOFO Part 1 Does not apply to awards made under this NOFO Government Rights in Data NOFO Part 1 Applies to awards made under this NOFO Real Property and Equipment C…",
+        "extracted_at": "2026-11-01T22:00:00Z",
+        "structural_reference": {
+          "block_id": "pdf-49-27",
+          "kind": "line"
+        }
+      }
+    },
+    "364033:artificial intelligence": {
+      "label": "artificial intelligence",
+      "topics": [
+        "Artificial intelligence and machine learning",
+        "Data science"
+      ],
+      "citation": {
+        "document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/355184",
+        "citation_url": "https://grants.gov/grantsws/rest/opportunity/att/download/355184#page=12",
+        "document_name": "DE-FOA-0003673.000001.pdf",
+        "sha256": "3b29efda7476f2fe1b2c9ee58be3f228c26b185dd50c949e5a2fc07d9cfc456f",
+        "page": 12,
+        "section": null,
+        "location": "page 12",
+        "quote": "…scovery o 13-A: SI-driven Accelerator Facilities o 13-B: Integration of Digital Twins for Fusion Systems and Actuators • 14. Unifying Physics from Quarks to the Cosmos o 14-A: Foundation Models of Particle Interactions and Cosmic Physics o 14-B: SI Accelerated DUNE Science o 14-C: Expedited Discovery from High Complexity and Petabyte-Scale Datasets • 15. P…",
+        "extracted_at": "2026-11-01T22:00:00Z",
+        "structural_reference": {
+          "block_id": "pdf-12-12",
+          "kind": "line"
+        }
+      }
+    },
+    "364033:cybersecurity": {
+      "label": "cybersecurity",
+      "topics": [
+        "Cybersecurity"
+      ],
+      "citation": {
+        "document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/355184",
+        "citation_url": "https://grants.gov/grantsws/rest/opportunity/att/download/355184#page=12",
+        "document_name": "DE-FOA-0003673.000001.pdf",
+        "sha256": "3b29efda7476f2fe1b2c9ee58be3f228c26b185dd50c949e5a2fc07d9cfc456f",
+        "page": 12,
+        "section": null,
+        "location": "page 12",
+        "quote": "…ic Reasoning o 19-A: Trustworthy Mathematical and Symbolic Reasoning o 19-B: Hypothesis Generation from Multi-Modal Data o 19-C: Composable and Modular Foundation Models • 20. Cybersecurity for SI-driven Science Workflows o 20-A: SI for Adversarial Robustness and Resilience o 20-B: Data Provenance and Integrity Verification o 20-C: Real-Time Attack Detecti…",
+        "extracted_at": "2026-11-01T22:00:00Z",
+        "structural_reference": {
+          "block_id": "pdf-12-40",
+          "kind": "line"
+        }
+      }
+    }
+  },
+  "owned_exchange_control": {
+    "opportunity_id": "363815",
+    "opportunity_number": "DE-FOA-0003647",
+    "source": "Grants.gov",
+    "primary_document_url": null,
+    "primary_document_name": null,
+    "funding_opportunity_url": null,
+    "official_document_candidates": [
+      {
+        "url": "https://exchange.energy.gov/FoaDetails.aspx?FoaId=4d0f9925-93dc-4997-b8f9-652937afbce3",
+        "name": null,
+        "role": "agency_notice",
+        "source": "DOE EERE Exchange",
+        "source_opportunity_id": "eere-exchange:DE-FOA-0003647"
+      }
+    ]
+  }
+}

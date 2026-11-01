@@ -1,0 +1,111 @@
+{
+  "version": "primary-document-recovery-1",
+  "parent_candidate_id": "09d707acac4d0cd1597b4f705a277de20f1b9b2a8fc53ea6c65f3add8b7cdc35",
+  "parent_run": "41350168738",
+  "parent_generation_sha": "da37d14444db6bda54a686ea1461aa79d8664ce8",
+  "parent_manifest_sha256": "1512c8a2f3a8e1a90e23f253be19758e648f52fa0090e379a3057f435bb03dfb",
+  "records": {
+    "364174": {
+      "opportunity_number": "DE-FOA-0003641",
+      "previous_primary": {
+        "url": "https://grants.gov/grantsws/rest/opportunity/att/download/355416",
+        "name": "DE-FOA-0003641_SCALED_NOFO_Part 2.pdf",
+        "sha256": "ced1a9a2a341e6dcff2af1c0e3adb4c34c4b7e26c3cf054f53a36b5b4b86564e"
+      },
+      "official_detail": {
+        "url": "https://api.grants.gov/v1/api/fetchOpportunity",
+        "opportunity_id": "364174",
+        "observed_at": "2026-11-01T21:32:15.617104+00:00",
+        "normalized_response_sha256": "0168c2d3e655614179acd5ced422acf92a7caf6dc9afb617c38b08b88372b0a1"
+      },
+      "attachments": [
+        {
+          "id": 355416,
+          "file_name": "DE-FOA-0003641_SCALED_NOFO_Part 2.pdf",
+          "description": "DE-FOA-0003641_SCALED_NOFO_Part 2",
+          "mime_type": "application/octet-stream",
+          "size_bytes": 1048694,
+          "created_date": "Oct 30, 2026 10:13:08 AM EDT",
+          "folder_type": "Full Announcement",
+          "folder_name": "DE-FOA-0003641 (BASE)",
+          "download_url": "https://grants.gov/grantsws/rest/opportunity/att/download/355416"
+        },
+        {
+          "id": 355417,
+          "file_name": "FundOpp_DE-FOA-0003641.pdf",
+          "description": "DE-FOA-0003641",
+          "mime_type": "application/octet-stream",
+          "size_bytes": 1505176,
+          "created_date": "Oct 30, 2026 10:13:10 AM EDT",
+          "folder_type": "Full Announcement",
+          "folder_name": "DE-FOA-0003641 (BASE)",
+          "download_url": "https://grants.gov/grantsws/rest/opportunity/att/download/355417"
+        }
+      ],
+      "selected_document": {
+        "attachment_id": 355417,
+        "url": "https://grants.gov/grantsws/rest/opportunity/att/download/355417",
+        "name": "FundOpp_DE-FOA-0003641.pdf",
+        "sha256": "1f31710884163f35b0882cf1783f0ed6a1e15eb21b07ec4de515803774b891e2",
+        "bytes": 1505176,
+        "content_type": "application/pdf"
+      },
+      "role_evidence": {
+        "page": 1,
+        "role": "program-specific Part 1",
+        "title": "Grid Supply Chain Alternatives to Lead Energy Dominance (SCALED)"
+      }
+    },
+    "364033": {
+      "opportunity_number": "DE-FOA-0003673",
+      "previous_primary": {
+        "url": "https://grants.gov/grantsws/rest/opportunity/att/download/355185",
+        "name": "DE-FOA-0003673.000001 Part 2.pdf",
+        "sha256": "fa5115aaa2ab0be9268f6f9c3f378198efba1cce444874c3173bdf8771614a83"
+      },
+      "official_detail": {
+        "url": "https://api.grants.gov/v1/api/fetchOpportunity",
+        "opportunity_id": "364033",
+        "observed_at": "2026-11-01T21:33:46.141407+00:00",
+        "normalized_response_sha256": "9167b743fc3d8b349e8d521a52fe6310ccbd6523fdad1fcdd4ad2923cc9d7e9a"
+      },
+      "attachments": [
+        {
+          "id": 355185,
+          "file_name": "DE-FOA-0003673.000001 Part 2.pdf",
+          "description": "DE-FOA-0003673.000001 Part 2",
+          "mime_type": "application/pdf",
+          "size_bytes": 1186054,
+          "created_date": "Oct 07, 2026 02:08:24 PM EDT",
+          "folder_type": "Full Announcement",
+          "folder_name": "DE-FOA-0003673",
+          "download_url": "https://grants.gov/grantsws/rest/opportunity/att/download/355185"
+        },
+        {
+          "id": 355184,
+          "file_name": "DE-FOA-0003673.000001.pdf",
+          "description": "DE-FOA-0003673.000001",
+          "mime_type": "application/pdf",
+          "size_bytes": 1133527,
+          "created_date": "Oct 07, 2026 02:08:07 PM EDT",
+          "folder_type": "Full Announcement",
+          "folder_name": "DE-FOA-0003673",
+          "download_url": "https://grants.gov/grantsws/rest/opportunity/att/download/355184"
+        }
+      ],
+      "selected_document": {
+        "attachment_id": 355184,
+        "url": "https://grants.gov/grantsws/rest/opportunity/att/download/355184",
+        "name": "DE-FOA-0003673.000001.pdf",
+        "sha256": "3b29efda7476f2fe1b2c9ee58be3f228c26b185dd50c949e5a2fc07d9cfc456f",
+        "bytes": 1133527,
+        "content_type": "application/pdf"
+      },
+      "role_evidence": {
+        "page": 1,
+        "role": "program-specific Part 1",
+        "title": "Genesis Mission Graduate Fellowship Pilot"
+      }
+    }
+  }
+}

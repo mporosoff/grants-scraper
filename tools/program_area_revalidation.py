@@ -48,7 +48,7 @@ MAX_SECONDS = 960
 PARENT_VECTOR_RECEIPT_SHA256 = '915c49a3da9e8c3a91421e9dac4d7011acc02ebd596a2f64c4391c95720ca660'
 DERIVED_KEYS = {'topic_areas', 'document_program_areas', 'document_search_text'}
 MODERN_VERSION = 'program-area-revalidation-modern-1'
-PROJECTION_KINDS = frozenset({'program_area', 'administrative_submission', 'document_facts'})
+PROJECTION_KINDS = frozenset({'program_area', 'administrative_submission', 'document_facts', 'primary_document'})
 MODERN_OPERATION_FILES = ('tools/program_area_revalidation.py', 'tools/program_area_release.py',
     'scripts/extract_document_evidence.py', 'scripts/build_feeds.py',
     'tools/build_search_release_package.mjs', 'tools/run_budgeted_vectors.mjs',
@@ -59,6 +59,12 @@ ADMINISTRATIVE_INPUTS = ('tools/administrative_submission_revalidation.py',
     'assets/submission-schedule.js', 'assets/search-retrieval.js', 'tools/run_search_diagnosis.mjs')
 DOCUMENT_FACT_INPUTS = ('tools/document_fact_revalidation.py',
     'scripts/notice_semantics.py', 'scripts/notice_fact_guards.py')
+PRIMARY_DOCUMENT_INPUTS = ('tools/primary_document_revalidation.py',
+    'config/primary_document_recovery.json', 'scripts/source_documents.py',
+    'scripts/pull_grants.py', 'scripts/enrich_catalog.py', 'scripts/subtopic_sources.py',
+    'scripts/notice_semantics.py')
+PRIMARY_DOCUMENT_OUTPUTS = ('data/opportunity_enrichment.json',)
+PREFIX_GUARDED_KINDS = frozenset({'administrative_submission', 'document_facts', 'primary_document'})
 
 
 def require(ok, reason):
@@ -80,8 +86,13 @@ def require_projection_kind(*values):
     return kinds.pop()
 
 
-def modern_projection(parent_root, audit_at, identifier, kind):
+def modern_projection(parent_root, audit_at, identifier, kind, *, checkpoint_directory=None, acquire=False):
     kind = projection_kind(kind)
+    if kind == 'primary_document':
+        from tools.primary_document_revalidation import projection as primary_projection
+        require(checkpoint_directory is not None, 'primary_document_checkpoint_required')
+        return primary_projection(parent_root, audit_at, identifier,
+            checkpoint_directory=checkpoint_directory, acquire=acquire)
     if kind == 'administrative_submission':
         from tools.administrative_submission_revalidation import projection as administrative_projection
         return administrative_projection(parent_root, audit_at, identifier)
@@ -97,7 +108,7 @@ def retained_requests(ledger):
 
 
 def require_administrative_budget(value, ledger):
-    if projection_kind(value) in {'administrative_submission', 'document_facts'}:
+    if projection_kind(value) in PREFIX_GUARDED_KINDS:
         saved = value.get('retained_requests') or {}
         rows = ledger.get('requests')
         count = saved.get('count')
@@ -142,7 +153,8 @@ def projection_names(receipt):
     values = receipt.get('projection_hashes')
     require(isinstance(values, dict) and set(PROJECTION) <= set(values) and len(values) <= 256,
         'complete_projection_inventory')
-    require(all(isinstance(name, str) and (name in PROJECTION or FACET_FEED.fullmatch(name))
+    allowed = PROJECTION + (PRIMARY_DOCUMENT_OUTPUTS if projection_kind(receipt) == 'primary_document' else ())
+    require(all(isinstance(name, str) and (name in allowed or FACET_FEED.fullmatch(name))
         and isinstance(value, str) and re.fullmatch('[a-f0-9]{64}', value) for name, value in values.items()),
         'projection_paths_and_hashes')
     return tuple(sorted(values))
@@ -560,6 +572,8 @@ def modern_contract(root, kind='program_area'):
         names += ADMINISTRATIVE_INPUTS
     elif projection_kind(kind) == 'document_facts':
         names += DOCUMENT_FACT_INPUTS
+    elif projection_kind(kind) == 'primary_document':
+        names += PRIMARY_DOCUMENT_INPUTS
     return hashes(root, names)
 
 
@@ -572,6 +586,9 @@ def modern_scope(root, original, kind='program_area'):
         allowed.update({'scripts/submission_schedule.py', 'scripts/currentness.py'})
     elif projection_kind(kind) == 'document_facts':
         allowed.update({'scripts/notice_semantics.py', 'scripts/notice_fact_guards.py'})
+    elif projection_kind(kind) == 'primary_document':
+        allowed.update({'scripts/source_documents.py', 'scripts/pull_grants.py',
+            'scripts/enrich_catalog.py', 'scripts/subtopic_sources.py', 'scripts/notice_semantics.py'})
     require(set(changes.get('source', [])) <= allowed
         and not changes.get('teams') and set(changes.get('semantic', [])) <= (
             {'assets/submission-schedule.js', 'assets/search-retrieval.js', 'tools/run_search_diagnosis.mjs'}
@@ -917,14 +934,45 @@ def modern_native_vectors(root, state, parent, original, value, packet):
 
 
 def _modern_receipt(value, original, outputs, changes, ledger, consumed):
-    projection_kind(value)
+    kind = projection_kind(value)
     require_administrative_budget(value, ledger)
+    document_requests = changes.get('document_requests', 0) if kind == 'primary_document' else 0
+    require(type(document_requests) is int and 0 <= document_requests <= 2,
+        'bounded_primary_document_requests')
+    if kind == 'primary_document':
+        require(changes.get('source_requests') == 0 and changes.get('document_ai_requests') == 0
+            and changes.get('team_requests') == 0, 'primary_document_unpaid_projection')
     return {k: v for k, v in value.items() if k != 'completed_candidate_id'} | {
         'projection': changes, 'projection_hashes': {n: sha(raw) for n, raw in outputs.items()},
         'retained_hashes': {n: h for n, h in original['generation_files'].items()
             if n not in outputs and n not in VECTORS and not FACET_FEED.fullmatch(n)},
         'consumed_checkpoints': consumed, 'ledger_sha256': identity(ledger),
-        'new_source_requests': 0, 'new_document_requests': 0, 'new_team_requests': 0}
+        'new_source_requests': 0, 'new_document_requests': document_requests, 'new_team_requests': 0}
+
+
+def _modern_reservation(state, value, current, kind):
+    """Expose recoverable accounting before the bounded unpaid document step."""
+    state = Path(state)
+    reservation = {'version': MODERN_VERSION, 'parent_candidate_id': value['parent_candidate_id'],
+        'operation_sha256': value['operation_sha256'], 'producer_run': str(current['id']),
+        'producer_attempt': str(current['run_attempt']), 'prior_ledger_sha256': identity(read(state/'ledger.json'))}
+    if kind in PREFIX_GUARDED_KINDS:
+        reservation['projection_kind'] = kind
+    atomic_json(state/'reservation.json', reservation)
+    reservation_path = state.parent/(state.name + '-reservation')/'reservation.json'
+    atomic_json(reservation_path, reservation)
+    suffix = str(current['id']) + '-' + str(current['run_attempt'])
+    return {'modern': 'true', 'vector_state': str(state), 'parent_run': value['parent_run'],
+        'reservation_artifact': modern_prefix(value['parent_candidate_id']) + '-reservation-' + suffix,
+        'reservation_path': str(reservation_path),
+        'state_artifact': modern_prefix(value['parent_candidate_id']) + '-state-' + suffix}
+
+
+def _write_outputs(outputs):
+    if os.environ.get('GITHUB_OUTPUT'):
+        with open(os.environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as stream:
+            for key, value in outputs.items():
+                stream.write(f'{key}={value}\n')
 
 
 def prepare_modern(parent_bundle, receipt_path, state, parent_run, parent_id, *, root=ROOT,
@@ -945,7 +993,7 @@ def prepare_modern(parent_bundle, receipt_path, state, parent_run, parent_id, *,
             'parent_manifest_sha256': sha((parent/'candidate.json').read_bytes()), 'parent_producer': producer,
             'parent_artifact': artifact, 'original_spend': spending, 'operation_contract': modern_contract(root, kind),
             'audit_at': datetime.now(timezone.utc).isoformat()}
-        if kind in {'administrative_submission', 'document_facts'}:
+        if kind in PREFIX_GUARDED_KINDS:
             value.update(projection_kind=kind, retained_requests=retained_requests(read(state/'ledger.json')))
         value['operation_sha256'] = identity(value)
         atomic_json(state/'reconciliation.json', value); atomic_json(state/'consumed-checkpoints.json', [])
@@ -959,9 +1007,11 @@ def prepare_modern(parent_bundle, receipt_path, state, parent_run, parent_id, *,
             try:
                 # This pure projection is a tools module, so ordinary source
                 # fingerprints alone cannot detect a corrected replay recipe.
-                require(kind != 'document_facts' or not any(
+                recipe_inputs = (DOCUMENT_FACT_INPUTS if kind == 'document_facts' else
+                    PRIMARY_DOCUMENT_INPUTS if kind == 'primary_document' else ())
+                require(not recipe_inputs or not any(
                     value['operation_contract'].get(name) != modern_contract(root, kind).get(name)
-                    for name in DOCUMENT_FACT_INPUTS), 'modern_completed_document_projection_changed')
+                    for name in recipe_inputs), 'modern_completed_document_projection_changed')
                 candidate.verify_dependencies(root, child)
             except ValueError:
                 sources = ('scripts/extract_document_evidence.py',)
@@ -969,6 +1019,8 @@ def prepare_modern(parent_bundle, receipt_path, state, parent_run, parent_id, *,
                     sources += ADMINISTRATIVE_INPUTS
                 elif kind == 'document_facts':
                     sources += DOCUMENT_FACT_INPUTS
+                elif kind == 'primary_document':
+                    sources += PRIMARY_DOCUMENT_INPUTS
                 require(any(value['operation_contract'].get(name) != modern_contract(root, kind).get(name)
                     for name in sources), 'modern_completed_use_named_runtime_resume')
                 receipt = child['program_area_revalidation']
@@ -994,7 +1046,16 @@ def prepare_modern(parent_bundle, receipt_path, state, parent_run, parent_id, *,
             value['operation_sha256'] = identity(value); atomic_json(state/'reconciliation.json', value)
     spend.import_history(state, parent, value['original_spend']['ledger_sha256'])
     require_administrative_budget(value, read(state/'ledger.json'))
-    outputs, changes = modern_projection(parent/'files', value['audit_at'], parent_id, kind)
+    current = modern_run(os.environ['GITHUB_RUN_ID'], os.environ['GITHUB_RUN_ATTEMPT'], api, current=True)
+    require(os.environ['GITHUB_SHA'] == current['head_sha'], 'modern_current_event')
+    if kind == 'primary_document':
+        # Even an acquisition/parser failure must expose the original paired
+        # state for always-upload; no provider credentials enter this step.
+        _write_outputs(_modern_reservation(state, value, current, kind))
+        outputs, changes = modern_projection(parent/'files', value['audit_at'], parent_id, kind,
+            checkpoint_directory=state/'primary-document-projection', acquire=True)
+    else:
+        outputs, changes = modern_projection(parent/'files', value['audit_at'], parent_id, kind)
     for name in managed_feed_names(root) - set(outputs):
         require(FACET_FEED.fullmatch(name), 'modern_obsolete_feed_scope'); candidate.checked_path(root, name).unlink()
     for name in original['generation_files']:
@@ -1010,20 +1071,7 @@ def prepare_modern(parent_bundle, receipt_path, state, parent_run, parent_id, *,
     ledger = read(state/'ledger.json')
     receipt = _modern_receipt(value, original, outputs, changes, ledger, read(state/'consumed-checkpoints.json'))
     atomic_json(receipt_path, receipt)
-    current = modern_run(os.environ['GITHUB_RUN_ID'], os.environ['GITHUB_RUN_ATTEMPT'], api, current=True)
-    require(os.environ['GITHUB_SHA'] == current['head_sha'], 'modern_current_event')
-    reservation = {'version': MODERN_VERSION, 'parent_candidate_id': parent_id,
-        'operation_sha256': value['operation_sha256'], 'producer_run': str(current['id']),
-        'producer_attempt': str(current['run_attempt']), 'prior_ledger_sha256': identity(ledger)}
-    if kind in {'administrative_submission', 'document_facts'}:
-        reservation['projection_kind'] = kind
-    atomic_json(state/'reservation.json', reservation)
-    reservation_path = state.parent/(state.name + '-reservation')/'reservation.json'
-    atomic_json(reservation_path, reservation)
-    suffix = str(current['id']) + '-' + str(current['run_attempt'])
-    return {'modern': 'true', 'vector_state': str(state), 'parent_run': str(parent_run),
-        'vector_reused': str(reused).lower(), 'reservation_artifact': modern_prefix(parent_id) + '-reservation-' + suffix,
-        'reservation_path': str(reservation_path), 'state_artifact': modern_prefix(parent_id) + '-state-' + suffix}
+    return _modern_reservation(state, value, current, kind) | {'vector_reused': str(reused).lower()}
 
 
 def checkpoint_modern(receipt_path, state, *, root=ROOT, write=True):
@@ -1075,7 +1123,11 @@ def verify_modern_inputs(root, original, receipt_path, *, api=auth.existing.api)
     saved = read(receipt_path)
     require(checkpoint_modern(receipt_path, state, root=root, write=False) == saved,
         'modern_constructor_receipt_sealed')
-    outputs, changes = modern_projection(parent/'files', value['audit_at'], value['parent_candidate_id'], kind)
+    if kind == 'primary_document':
+        outputs, changes = modern_projection(parent/'files', value['audit_at'], value['parent_candidate_id'], kind,
+            checkpoint_directory=state/'primary-document-projection', acquire=False)
+    else:
+        outputs, changes = modern_projection(parent/'files', value['audit_at'], value['parent_candidate_id'], kind)
     base = _modern_receipt(value, original, outputs, changes, read(state/'ledger.json'), read(state/'consumed-checkpoints.json'))
     require(all(saved.get(k) == v for k, v in base.items()), 'modern_deterministic_projection_receipt')
     require(hashes(root, outputs) == saved['projection_hashes']
@@ -1134,10 +1186,7 @@ def main():
         else:
             value = checkpoint_vectors(args.receipt, args.state, root=args.root)
             outputs.update(artifact_name=artifact_name('state', value['owner']), artifact_path=str(args.state))
-    if os.environ.get('GITHUB_OUTPUT'):
-        with open(os.environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as stream:
-            for key, value in outputs.items():
-                stream.write(f'{key}={value}\n')
+    _write_outputs(outputs)
     print(json.dumps(outputs, sort_keys=True))
 
 
