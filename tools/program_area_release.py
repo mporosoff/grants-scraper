@@ -35,7 +35,8 @@ def plan(root, environment):
         raise ValueError("Program-area revalidation cannot be combined with other recovery or team selectors")
     selector = environment.get("REQUESTED_STAGE") or "program-area-revalidation"
     projections = {"program-area-revalidation": "program_area",
-        "submission-revalidation": "administrative_submission", "document-fact-revalidation": "document_facts"}
+        "submission-revalidation": "administrative_submission", "document-fact-revalidation": "document_facts",
+        "primary-document-revalidation": "primary_document"}
     if selector not in projections:
         raise ValueError("Cached evidence revalidation requires a named supported projection")
     projection_kind = projections[selector]
@@ -52,7 +53,9 @@ def plan(root, environment):
         "stage": "program-area-revalidation", "release_sha": release.git(root, "rev-parse", "HEAD"),
         "candidate_run": run, "candidate_id": identifier, "program_area_mode": mode, "projection_kind": projection_kind,
         "openai": "false", "anthropic": "false", "team_mode": "maintenance",
-        "reason": ("Correct retained document facts; preserve source, document and team work, and use only the original vector allowance when required"
+        "reason": ("Repair the two pinned primary notices; retain unrelated source, document and team work and the original vector allowance"
+            if projection_kind == "primary_document" else
+            "Correct retained document facts; preserve source, document and team work, and use only the original vector allowance when required"
             if projection_kind == "document_facts" else
             "Correct retained administrative submission dates; preserve source, document and team work, and use only the original vector allowance when required"
             if projection_kind == "administrative_submission" else

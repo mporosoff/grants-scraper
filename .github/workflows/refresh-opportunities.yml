@@ -11,7 +11,7 @@ on:
       stage:
         description: Plan affected work automatically, bounded team maintenance/backfill, or resume exact evidence
         type: choice
-        options: [auto, generate, teams, backfill, reuse, catalog-reconcile, catalog-correction, catalog-projection, program-area-revalidation, submission-revalidation, document-fact-revalidation, catalog-source-recovery, catalog-access-correction, catalog-identity-correction, catalog-url-correction, validate, publish, verify]
+        options: [auto, generate, teams, backfill, reuse, catalog-reconcile, catalog-correction, catalog-projection, program-area-revalidation, submission-revalidation, document-fact-revalidation, primary-document-revalidation, catalog-source-recovery, catalog-access-correction, catalog-identity-correction, catalog-url-correction, validate, publish, verify]
         default: auto
         required: true
       pilot_team_scopes:
@@ -848,7 +848,7 @@ jobs:
           retention-days: 90
       - name: Persist the modern correction identity before vector dispatch
         id: modern-reservation-upload
-        if: steps.restore.outputs.candidate_id == '' && steps.prepare.outputs.candidate_id == '' && steps.prepare.outputs.modern == 'true'
+        if: always() && steps.restore.outputs.candidate_id == '' && steps.prepare.outputs.candidate_id == '' && steps.prepare.outputs.modern == 'true' && (steps.prepare.outcome == 'success' || needs.plan.outputs.projection_kind == 'primary_document')
         uses: actions/upload-artifact@v4
         with:
           name: ${{ steps.prepare.outputs.reservation_artifact }}
@@ -889,7 +889,7 @@ jobs:
           --state "$RUNNER_TEMP/program-area-modern"
       - name: Preserve modern completed and partial work after every vector outcome
         id: modern-state-upload
-        if: always() && steps.restore.outputs.candidate_id == '' && steps.prepare.outputs.modern == 'true' && steps.prepare.outcome == 'success'
+        if: always() && steps.restore.outputs.candidate_id == '' && steps.prepare.outputs.modern == 'true' && (steps.prepare.outcome == 'success' || needs.plan.outputs.projection_kind == 'primary_document')
         uses: actions/upload-artifact@v4
         with:
           name: ${{ steps.prepare.outputs.state_artifact }}
@@ -1620,7 +1620,7 @@ jobs:
             const needs = JSON.parse(process.env.RESULTS);
             const order = ['plan', 'sam-preflight', 'generate', 'assemble', 'catalog-reconcile', 'catalog-correction', 'program-area-revalidation', 'catalog-source-recovery', 'catalog-access-correction', 'catalog-identity-correction', 'catalog-url-correction', 'candidate', 'validate', 'publish', 'pages', 'verify-live'];
             const failed = order.find(stage => ['failure', 'cancelled'].includes(needs[stage].result));
-            const stages = new Set(['auto', 'generate', 'teams', 'backfill', 'reuse', 'catalog-reconcile', 'catalog-correction', 'catalog-projection', 'program-area-revalidation', 'submission-revalidation', 'document-fact-revalidation', 'catalog-source-recovery', 'catalog-access-correction', 'catalog-identity-correction', 'catalog-url-correction', 'validate', 'publish', 'verify']);
+            const stages = new Set(['auto', 'generate', 'teams', 'backfill', 'reuse', 'catalog-reconcile', 'catalog-correction', 'catalog-projection', 'program-area-revalidation', 'submission-revalidation', 'document-fact-revalidation', 'primary-document-revalidation', 'catalog-source-recovery', 'catalog-access-correction', 'catalog-identity-correction', 'catalog-url-correction', 'validate', 'publish', 'verify']);
             const planned = needs.plan.outputs.stage;
             const planReason = needs.plan.outputs.reason || 'not reported';
             const heldStage = needs.plan.outputs.held_stage || '';
@@ -1637,7 +1637,7 @@ jobs:
             const alreadyCurrent = context.eventName === 'schedule' && needs.plan.result === 'success' &&
               planned === 'noop' && dailyStatus === 'already_current' && fresh;
             const scheduledIncomplete = context.eventName === 'schedule' && !(alreadyCurrent || (liveComplete && fresh));
-            const typedProjectionStages = {administrative_submission: 'submission-revalidation', document_facts: 'document-fact-revalidation'};
+            const typedProjectionStages = {administrative_submission: 'submission-revalidation', document_facts: 'document-fact-revalidation', primary_document: 'primary-document-revalidation'};
             const originalStage = planned === 'program-area-revalidation' && typedProjectionStages[needs.plan.outputs.projection_kind] ?
               typedProjectionStages[needs.plan.outputs.projection_kind] : stages.has(planned) ? planned : stages.has(process.env.REQUESTED_STAGE) ? process.env.REQUESTED_STAGE : 'auto';
             let candidate = needs.candidate.outputs.candidate_id;

@@ -163,6 +163,17 @@ def _native_money_facts(api, opportunity_id, container, document, stamp):
 
     for begin, end in substantive_spans(container):
         text = container['text'][begin:end]
+        # DOE's individual-award field can share one trailing magnitude across
+        # both endpoints. Consume the complete field before generic dollar
+        # tokens can mistake the first endpoint for an unscaled ceiling.
+        shared_range = re.compile(
+            r'\bApproximate dollar amount of individual awards\s*:\s*'
+            r'\$\s*(?P<low>\d[\d,]*(?:\.\d+)?)\s*[-–—]\s*'
+            r'(?P<high>\d[\d,]*(?:\.\d+)?)\s+(?P<unit>thousand|million|billion)\b', re.I)
+        for row in shared_range.finditer(text):
+            lo, hi = [api.parse_money(row.group(key), row.group('unit')) for key in ('low', 'high')]
+            emit(lo, hi, begin + row.start(), begin + row.end(), estimated=True)
+            consumed.append((begin + row.start(), begin + row.end()))
         # Adjacent CDC floor/ceiling fields explicitly repeat the same project
         # period unit. Blank PDF lines do not turn these into unrelated awards.
         # An intervening track, different unit, or missing value prevents pairing.

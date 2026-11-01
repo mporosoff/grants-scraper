@@ -1,0 +1,15 @@
+{
+  "opportunity_id": "364033",
+  "source": {
+    "url": "https://grants.gov/grantsws/rest/opportunity/att/download/355184",
+    "name": "DE-FOA-0003673.000001.pdf",
+    "sha256": "3b29efda7476f2fe1b2c9ee58be3f228c26b185dd50c949e5a2fc07d9cfc456f"
+  },
+  "container": {
+    "page": 5,
+    "section": null,
+    "anchor": null,
+    "text": "Approximate number of awards: 4–8\n• Approximate dollar amount of individual awards: $12–25 million\n• Approximate award project period: 60 months\n• Anticipated length of budget periods: 12 months"
+  },
+  "expected": {"minimum": 12000000, "maximum": 25000000}
+}

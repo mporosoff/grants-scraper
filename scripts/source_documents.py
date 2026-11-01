@@ -4,6 +4,25 @@ These are retrieval candidates, not accepted scientific or administrative
 facts. Existing bounded fetch, redirect, scope, and evidence gates still run.
 """
 from copy import deepcopy
+import re
+
+
+DOE_PRIMARY_POLICY = 'doe-companion-primary-1'
+
+
+def is_doe_companion_document(document):
+    """Recognize DOE's separately named, generic NOFO Part 2 PDF.
+
+    Both the explicit DE-FOA identity and the part designation are needed;
+    another agency's scientific Part II is not this administrative companion.
+    """
+    name = str(document.get('file_name') or document.get('name')
+               or document.get('primary_document_name') or '')
+    normalized = re.sub(r'[_-]+', ' ', name)
+    identity = normalized + ' ' + re.sub(r'[_-]+', ' ', str(document.get('description') or ''))
+    return bool(name.lower().endswith('.pdf')
+        and re.search(r'\bDE\s*FOA\s*\d{7}\b', identity, re.I)
+        and re.search(r'\bPart\s*(?:2|II)\b', normalized, re.I))
 
 
 def permitted_url(value):
@@ -30,8 +49,11 @@ def document_candidates(record):
             candidates.append({'url': value.get('url') or value.get('download_url'),
                                'name': value.get('name') or value.get('file_name'), 'role': 'attachment_candidate'})
     candidates.extend(deepcopy(record.get('official_document_candidates') or []))
+    companion_urls = {candidate.get('url') for candidate in candidates if is_doe_companion_document(candidate)}
     seen, output = set(), []
     for candidate in candidates:
+        if candidate.get('url') in companion_urls:
+            continue
         url = permitted_url(candidate.get('url'))
         if not url or url in seen:
             continue

@@ -38,7 +38,7 @@ import hashlib
 from urllib.parse import urlparse
 
 from scripts.subtopic_segmentation import SegmentationResult, segment_document
-from scripts.source_documents import document_candidates
+from scripts.source_documents import document_candidates, is_doe_companion_document
 
 
 # How many attachments to try per record, best-ranked first. A record with more
@@ -136,7 +136,7 @@ def attachment_sources(opportunity_id, *, detail_fetcher, collector):
         url = attachment.get("download_url")
         name = attachment.get("file_name") or ""
         size = attachment.get("size_bytes")
-        if not url or _skippable(name) or _is_html_stub(name, size):
+        if not url or _skippable(name) or _is_html_stub(name, size) or is_doe_companion_document(attachment):
             continue
         sources.append({
             "url": url,
@@ -313,6 +313,9 @@ def best_segmentation(
     attempts = []
 
     def consider(content, document, label, containers=None):
+        if is_doe_companion_document(document or {}):
+            attempts.append({'source': label, 'outcome': 'doe_generic_companion'})
+            return None
         if not content:
             return None
         digest = hashlib.sha256(content).hexdigest()

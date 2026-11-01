@@ -81,7 +81,7 @@ def checkpoint(repository, run, rows, attempt, child, receipt, *, link=None, res
         required = ('version', 'parent_candidate_id', 'parent_run', 'parent_attempt', 'parent_generation_sha',
             'parent_manifest_sha256', 'parent_producer', 'parent_artifact', 'original_spend',
             'operation_contract', 'audit_at', 'operation_sha256')
-        if kind in {'administrative_submission', 'document_facts'}:
+        if kind in {'administrative_submission', 'document_facts', 'primary_document'}:
             required += ('projection_kind', 'retained_requests')
         require(all(key in context and context[key] == receipt.get(key) for key in required)
             and context.get('completed_candidate_id') == child['candidate_id']
