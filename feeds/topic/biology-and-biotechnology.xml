@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/biology-and-biotechnology.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/biology-and-biotechnology.xml</id>
-  <updated>2026-10-29T22:20:09Z</updated>
+  <updated>2026-10-30T16:48:34Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Development of Models, New Approach Methodologies, and Biological Materials for Studying Human Health and Diseases (R21 Clinical Trial Not Allowed)</title>
@@ -433,6 +433,27 @@
     <summary>National Institutes of Health | Estimated Application 2027-02-16 | The National Human Genome Research Institute (NHGRI) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications related to the ethical, legal, and social implications (ELSI) of genomics. Genomics has the potential to improve human health and well-being. Driven by advances in technology and analysis, genomics is being integrated into large swaths of biomedical research and me…</summary>
   </entry>
   <entry>
+    <title>Genomic Data Generation Center for the Gabriella Miller Kids First Pediatric Research Program (U24 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/358954"/>
+    <id>urn:funding-finder:grants-gov:358954</id>
+    <updated>2026-10-29T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Cancer"/>
+    <summary>National Institutes of Health | Application 2027-01-08 | The purpose of this Notice of Funding Opportunity (NOFO) is to support the Genomic Data Generation Center(s) for the Gabriella Miller Kids First Pediatric Research Program to support rapid generation of high quality sequence and variant data (e.g., genome-wide, RNA, and long-read DNA and RNA sequencing, genome-wide methylation profiling, and chromatin accessibility data) from a large number of hum…</summary>
+  </entry>
+  <entry>
+    <title>Single Source: Continued Development of the Gabriella Miller Kids First Pediatric Data Resource Center (U2C Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/358959"/>
+    <id>urn:funding-finder:grants-gov:358959</id>
+    <updated>2026-10-29T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Cancer"/>
+    <category term="Education and workforce"/>
+    <summary>National Institutes of Health | Application 2027-01-08 | invitation required | This is a Notice of Funding Opportunity (NOFO) for a Single Source that will invite application(s) from the eligible organization(s) to apply. Please see Section III. Eligibility for additional information. In accordance with NIH standard peer-review processes, the application(s) will be peer-reviewed, and only meritorious application(s) will be considered. This NOFO solicits applications for the …</summary>
+  </entry>
+  <entry>
     <title>Cooperative Agreement for Affiliated Partner with the Colorado Plateau Cooperative Ecosystem Studies Unit (CESU)</title>
     <link href="https://www.grants.gov/search-results-detail/364080"/>
     <id>urn:funding-finder:grants-gov:364080</id>
@@ -628,24 +649,5 @@
     <category term="Carbon management"/>
     <category term="Quantum science"/>
     <summary>Office of Science | Application 2027-09-30 | verify prerequisite | SC hereby announces its continuing interest in receiving applications for support of work in the following program areas: · Advanced Scientific Computing Research· Basic Energy Sciences· Biological and Environmental Research· Fusion Energy Sciences· High Energy and Nuclear Physics· Isotope R&amp;D and Production. On September 3, 1992, DOE published in the Federal Register the Office of Energy Research…</summary>
-  </entry>
-  <entry>
-    <title>BRAIN Initiative: Research Opportunities Using Invasive Neural Recording and Stimulating Technologies in the Human Brain (R01 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/360402"/>
-    <id>urn:funding-finder:grants-gov:360402</id>
-    <updated>2026-09-30T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Neuroscience"/>
-    <summary>National Institutes of Health | Application 2029-02-08 | This funding opportunity supports transformative, mechanistic research aimed at understanding how the human brain functions. Applications should seek to reveal how the dynamic activity of individual neurons and ensembles of neurons within spatially organized brain networks gives rise to internal experiences, such as sensations, perceptions, emotions, thoughts, and memories, as well as to observabl…</summary>
-  </entry>
-  <entry>
-    <title>HEAL Initiative: Whole Joint Health Program (R61/R33 Clinical Trial Required)</title>
-    <link href="https://www.grants.gov/search-results-detail/361304"/>
-    <id>urn:funding-finder:grants-gov:361304</id>
-    <updated>2026-09-28T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <summary>National Institutes of Health | Application 2026-10-30 | The NIH Helping to End Addiction Long-term® (HEAL) Initiative is releasing this Notice of Funding Opportunity (NOFO) to support a phased mechanistic clinical research program focusing on understudied biological mechanisms that drive joint pain. The phased projects supported by this program (of up to five years total in duration) will first identify and validate multi-tissue mechanisms underlying j…</summary>
   </entry>
 </feed>

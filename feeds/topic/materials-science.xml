@@ -4,8 +4,21 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml</id>
-  <updated>2026-10-29T22:20:09Z</updated>
+  <updated>2026-10-30T16:48:34Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>Unifying​ Imaging with​ Quantum​ Entanglement (UNIQUE)</title>
+    <link href="https://arpa-h.gov/explore-funding/programs/unique"/>
+    <id>urn:funding-finder:arpa-h:arpa-h%3Aunique</id>
+    <updated>2026-10-29T00:00:00Z</updated>
+    <author><name>Advanced Research Projects Agency for Health (ARPA-H)</name></author>
+    <category term="Quantum science"/>
+    <category term="Technology development"/>
+    <category term="Materials science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Advanced Research Projects Agency for Health (ARPA-H) | Preapplication 2026-10-30 | Current ARPA-H program. UNIQUE | ARPA-H (function(w, d, s, l, i){w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&amp;l='+l:''; j.async=true; j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j, f); })(window, document,'script','dataLayer','GTM-W5GM3DT9'); wind…</summary>
+  </entry>
   <entry>
     <title>AFRL/AFOSR-Taiwan NSTC Frontiers in Materials and Nanostructures: AI-Driven Discovery, Quantum Geometry, and Energy-Efficient Information Technologies 2027-2030</title>
     <link href="https://www.grants.gov/search-results-detail/364165"/>
@@ -184,19 +197,6 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Energy"/>
     <summary>Office of Naval Research | Application 2027-04-09 | Established in 1985, the Department of War Multidisciplinary University Research Initiative (MURI) program funds U.S. academic research teams to conduct high-impact basic research that addresses future challenges faced by the Department of War. The MURI program specifically supports U.S. university teams investigating complex, DoW-relevant problem sets at the intersection of multiple scientific di…</summary>
-  </entry>
-  <entry>
-    <title>Unifying​ Imaging with​ Quantum​ Entanglement (UNIQUE)</title>
-    <link href="https://arpa-h.gov/explore-funding/programs/unique"/>
-    <id>urn:funding-finder:arpa-h:arpa-h%3Aunique</id>
-    <updated>2026-09-11T00:00:00Z</updated>
-    <author><name>Advanced Research Projects Agency for Health (ARPA-H)</name></author>
-    <category term="Quantum science"/>
-    <category term="Technology development"/>
-    <category term="Materials science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Advanced Research Projects Agency for Health (ARPA-H) | Preapplication 2026-10-29 | Current ARPA-H program. UNIQUE | ARPA-H (function(w, d, s, l, i){w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&amp;l='+l:''; j.async=true; j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j, f); })(window, document,'script','dataLayer','GTM-W5GM3DT9'); wind…</summary>
   </entry>
   <entry>
     <title>Accelerating Scale-up and Pre-piloting of Emerging Chemical Technologies (ASPECT)</title>
@@ -579,6 +579,18 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <summary>U.S. National Science Foundation | Posted | Large-scale simulations and the ability to accumulate massive amounts of data have revolutionized science and engineering. The goal of the Computational and Data-enabled Science and Engineering (CDS&amp;E) meta-program is to identify and capitalize on opportunities for major scientific and engineering breakthroughs through new computational and data-analysis approaches and best practices. The CDS&amp;E me…</summary>
   </entry>
   <entry>
+    <title>ARMY APPLICATIONS LAB BROAD AGENCY ANNOUNCEMENT FOR DISRUPTIVE APPLICATIONS</title>
+    <link href="https://www.grants.gov/search-results-detail/355150"/>
+    <id>urn:funding-finder:grants-gov:355150</id>
+    <updated>2024-06-26T00:00:00Z</updated>
+    <author><name>Dept of the Army -- Materiel Command</name></author>
+    <category term="Materials science"/>
+    <category term="Quantum science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Dept of the Army -- Materiel Command | Application 2029-04-04 | This BAA sets forth research areas of interest to the Army Applications Lab (AAL). This BAA is issued under paragraph 6.102(d)(2) of the Federal Acquisition Regulation (FAR), which provides for the competitive selection of basic and applied research proposals, and 10 U.S.C. 2358, 10 U.S.C. 2371, and 10 U.S.C. 2371b, which provide the authorities for issuing awards under this announcement for basic…</summary>
+  </entry>
+  <entry>
     <title>Advanced Technological Education (ATE)</title>
     <link href="https://www.grants.gov/search-results-detail/355100"/>
     <id>urn:funding-finder:grants-gov:355100</id>
@@ -656,11 +668,9 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <updated>2023-09-29T00:00:00Z</updated>
     <author><name>National Institute of Standards and Technology</name></author>
     <category term="Manufacturing"/>
-    <category term="Quantum science"/>
     <category term="Materials science"/>
     <category term="Cybersecurity"/>
-    <category term="Water"/>
-    <summary>National Institute of Standards and Technology | Application 2026-11-01 | The CHIPS Incentives Program aims to catalyze long-term economically sustainable growth in the domestic semiconductor industry in support of U.S. economic and national security. This is the second Notice of Funding Opportunity under this program and seeks applications for projects for the construction, expansion, or modernization of commercial facilities for semiconductor materials and manufacturi…</summary>
+    <summary>National Institute of Standards and Technology | Application 2027-10-29 | The CHIPS Incentives Program aims to catalyze long-term economically sustainable growth in the domestic semiconductor industry in support of U.S. economic and national security. This is the second Notice of Funding Opportunity under this program and seeks applications for projects for the construction, expansion, or modernization of commercial facilities for semiconductor materials and manufacturi…</summary>
   </entry>
   <entry>
     <title>Plasma Physics</title>

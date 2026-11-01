@@ -10568,13 +10568,15 @@ globalThis.SUBTOPIC_CATALOG={
     {
      "child_type": "subject",
      "confidence": "low",
+     "cov4_approval_contract": "64743b563036db6ae34fb1fcb950ca501aca029643ff90ba639c7aaacaaba2db",
      "cov4_fundability": "accept",
      "cov4_ownership": "owned",
      "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "cov4_prompt_version": "cov4-subject-context-1",
      "evidence_anchor": "p4",
      "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
      "first_seen": "2026-08-20",
-     "last_verified": "2026-08-24",
+     "last_verified": "2026-10-30",
      "opportunity_id": "349554:t-1",
      "ordinal_label": "1",
      "own_deadline": null,
@@ -10649,13 +10651,15 @@ globalThis.SUBTOPIC_CATALOG={
     {
      "child_type": "subject",
      "confidence": "low",
+     "cov4_approval_contract": "38f57b7c890654a2c89ea2e939b9db79e568e8db45e48d3f8eb0d48586acb592",
      "cov4_fundability": "accept",
      "cov4_ownership": "owned",
      "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "cov4_prompt_version": "cov4-subject-context-1",
      "evidence_anchor": "p4",
      "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
      "first_seen": "2026-08-20",
-     "last_verified": "2026-08-24",
+     "last_verified": "2026-10-30",
      "opportunity_id": "349554:t-2",
      "ordinal_label": "2",
      "own_deadline": null,
@@ -10726,13 +10730,15 @@ globalThis.SUBTOPIC_CATALOG={
     {
      "child_type": "subject",
      "confidence": "low",
+     "cov4_approval_contract": "baea62bee80a1aab9c142f623e666f84cfcb159de13afbbb487508389aadc834",
      "cov4_fundability": "accept",
      "cov4_ownership": "owned",
      "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "cov4_prompt_version": "cov4-subject-context-1",
      "evidence_anchor": "p5",
      "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
      "first_seen": "2026-08-20",
-     "last_verified": "2026-08-24",
+     "last_verified": "2026-10-30",
      "opportunity_id": "349554:t-3",
      "ordinal_label": "3",
      "own_deadline": null,
@@ -10807,13 +10813,15 @@ globalThis.SUBTOPIC_CATALOG={
     {
      "child_type": "subject",
      "confidence": "low",
+     "cov4_approval_contract": "a2a8aaace2f05aee3b28de6f3808480dcde47bde52804ba52d6b0db7f59bf2c1",
      "cov4_fundability": "accept",
      "cov4_ownership": "owned",
      "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "cov4_prompt_version": "cov4-subject-context-1",
      "evidence_anchor": "p5",
      "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
      "first_seen": "2026-08-20",
-     "last_verified": "2026-08-24",
+     "last_verified": "2026-10-30",
      "opportunity_id": "349554:t-4",
      "ordinal_label": "4",
      "own_deadline": null,
@@ -10892,13 +10900,15 @@ globalThis.SUBTOPIC_CATALOG={
     {
      "child_type": "subject",
      "confidence": "low",
+     "cov4_approval_contract": "bcff1da539469937232d350632875c892778ebf56e3e8211ceed3d4cdef5af17",
      "cov4_fundability": "accept",
      "cov4_ownership": "owned",
      "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "cov4_prompt_version": "cov4-subject-context-1",
      "evidence_anchor": "p5",
      "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
      "first_seen": "2026-08-20",
-     "last_verified": "2026-08-24",
+     "last_verified": "2026-10-30",
      "opportunity_id": "349554:t-5",
      "ordinal_label": "5",
      "own_deadline": null,
@@ -10971,13 +10981,15 @@ globalThis.SUBTOPIC_CATALOG={
     {
      "child_type": "subject",
      "confidence": "low",
+     "cov4_approval_contract": "e2e24498fbd4216911f71ab900e40ce39f40f52f99986ae2dc982d08c1601bfd",
      "cov4_fundability": "accept",
      "cov4_ownership": "owned",
      "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "cov4_prompt_version": "cov4-subject-context-1",
      "evidence_anchor": "p5",
      "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
      "first_seen": "2026-08-20",
-     "last_verified": "2026-08-24",
+     "last_verified": "2026-10-30",
      "opportunity_id": "349554:t-6",
      "ordinal_label": "6",
      "own_deadline": null,
@@ -11033,13 +11045,15 @@ globalThis.SUBTOPIC_CATALOG={
     {
      "child_type": "subject",
      "confidence": "low",
+     "cov4_approval_contract": "e6671040b3b8b448e6161ec097d5df6aa6b24d8aeb49a229b672d48e3bbcba72",
      "cov4_fundability": "accept",
      "cov4_ownership": "owned",
      "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "cov4_prompt_version": "cov4-subject-context-1",
      "evidence_anchor": "p6",
      "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
      "first_seen": "2026-08-20",
-     "last_verified": "2026-08-24",
+     "last_verified": "2026-10-30",
      "opportunity_id": "349554:t-7",
      "ordinal_label": "7",
      "own_deadline": null,
@@ -11111,13 +11125,15 @@ globalThis.SUBTOPIC_CATALOG={
     {
      "child_type": "subject",
      "confidence": "low",
+     "cov4_approval_contract": "c7902fb87176b58fd9c8703caa3840d80692bb1d97458545a7552a699b3d39dd",
      "cov4_fundability": "accept",
      "cov4_ownership": "owned",
      "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "cov4_prompt_version": "cov4-subject-context-1",
      "evidence_anchor": "p6",
      "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
      "first_seen": "2026-08-20",
-     "last_verified": "2026-08-24",
+     "last_verified": "2026-10-30",
      "opportunity_id": "349554:t-8",
      "ordinal_label": "8",
      "own_deadline": null,
@@ -11200,13 +11216,15 @@ globalThis.SUBTOPIC_CATALOG={
     {
      "child_type": "subject",
      "confidence": "low",
+     "cov4_approval_contract": "bdf60b01dfbfa627baec696ee52df97d12e80af79f03e04b31f8a6b5e78192a4",
      "cov4_fundability": "accept",
      "cov4_ownership": "owned",
      "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "cov4_prompt_version": "cov4-subject-context-1",
      "evidence_anchor": "p6",
      "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
      "first_seen": "2026-08-20",
-     "last_verified": "2026-08-24",
+     "last_verified": "2026-10-30",
      "opportunity_id": "349554:t-9",
      "ordinal_label": "9",
      "own_deadline": null,
@@ -11280,13 +11298,15 @@ globalThis.SUBTOPIC_CATALOG={
     {
      "child_type": "subject",
      "confidence": "low",
+     "cov4_approval_contract": "9e22c371e2714a7400f2f6a41e0b4ee179571d6295cad82d5deb25fb86631624",
      "cov4_fundability": "accept",
      "cov4_ownership": "owned",
      "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "cov4_prompt_version": "cov4-subject-context-1",
      "evidence_anchor": "p6",
      "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
      "first_seen": "2026-08-20",
-     "last_verified": "2026-08-24",
+     "last_verified": "2026-10-30",
      "opportunity_id": "349554:t-10",
      "ordinal_label": "10",
      "own_deadline": null,
@@ -11343,13 +11363,15 @@ globalThis.SUBTOPIC_CATALOG={
     {
      "child_type": "subject",
      "confidence": "low",
+     "cov4_approval_contract": "ebf0b10035c2298acce8fa9e771ac3f1b30058ec0a425df73e8f7d815ae30e3c",
      "cov4_fundability": "accept",
      "cov4_ownership": "owned",
      "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "cov4_prompt_version": "cov4-subject-context-1",
      "evidence_anchor": "p7",
      "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
      "first_seen": "2026-08-20",
-     "last_verified": "2026-08-24",
+     "last_verified": "2026-10-30",
      "opportunity_id": "349554:t-11",
      "ordinal_label": "11",
      "own_deadline": null,
@@ -11418,13 +11440,15 @@ globalThis.SUBTOPIC_CATALOG={
     {
      "child_type": "subject",
      "confidence": "low",
+     "cov4_approval_contract": "0d896b0d39e1172673b51fe1ab946e0ac5ef7dfb0ea3a05990f1e9018a57f2a6",
      "cov4_fundability": "accept",
      "cov4_ownership": "owned",
      "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "cov4_prompt_version": "cov4-subject-context-1",
      "evidence_anchor": "p7",
      "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
      "first_seen": "2026-08-20",
-     "last_verified": "2026-08-24",
+     "last_verified": "2026-10-30",
      "opportunity_id": "349554:t-12",
      "ordinal_label": "12",
      "own_deadline": null,
@@ -11516,13 +11540,15 @@ globalThis.SUBTOPIC_CATALOG={
     {
      "child_type": "subject",
      "confidence": "low",
+     "cov4_approval_contract": "c3794650316c34ab8a21f5d5f46a1eaf361dc989f595be46830b23118f2b1d38",
      "cov4_fundability": "accept",
      "cov4_ownership": "owned",
      "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "cov4_prompt_version": "cov4-subject-context-1",
      "evidence_anchor": "p7",
      "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
      "first_seen": "2026-08-20",
-     "last_verified": "2026-08-24",
+     "last_verified": "2026-10-30",
      "opportunity_id": "349554:t-13",
      "ordinal_label": "13",
      "own_deadline": null,
@@ -11585,13 +11611,15 @@ globalThis.SUBTOPIC_CATALOG={
     {
      "child_type": "subject",
      "confidence": "low",
+     "cov4_approval_contract": "24eda71ef93011bad3f27415c6e12facfd02b5c697cd407c912ca15dfbbacb0f",
      "cov4_fundability": "accept",
      "cov4_ownership": "owned",
      "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "cov4_prompt_version": "cov4-subject-context-1",
      "evidence_anchor": "p7",
      "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
      "first_seen": "2026-08-20",
-     "last_verified": "2026-08-24",
+     "last_verified": "2026-10-30",
      "opportunity_id": "349554:t-14",
      "ordinal_label": "14",
      "own_deadline": null,
@@ -11680,13 +11708,15 @@ globalThis.SUBTOPIC_CATALOG={
     {
      "child_type": "subject",
      "confidence": "low",
+     "cov4_approval_contract": "07bc75fed7f882538ca0f02424aa9f8f8ac69a0522b8a44138540d5c3e8c8a84",
      "cov4_fundability": "accept",
      "cov4_ownership": "owned",
      "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "cov4_prompt_version": "cov4-subject-context-1",
      "evidence_anchor": "p8",
      "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
      "first_seen": "2026-08-20",
-     "last_verified": "2026-08-24",
+     "last_verified": "2026-10-30",
      "opportunity_id": "349554:t-15",
      "ordinal_label": "15",
      "own_deadline": null,
@@ -11754,13 +11784,15 @@ globalThis.SUBTOPIC_CATALOG={
     {
      "child_type": "subject",
      "confidence": "low",
+     "cov4_approval_contract": "b9209e2758cc8985b3aa4709a5c2075a2d0204c6e680d40f2c17dde12e66a9f1",
      "cov4_fundability": "accept",
      "cov4_ownership": "owned",
      "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "cov4_prompt_version": "cov4-subject-context-1",
      "evidence_anchor": "p8",
      "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
      "first_seen": "2026-08-20",
-     "last_verified": "2026-08-24",
+     "last_verified": "2026-10-30",
      "opportunity_id": "349554:t-16",
      "ordinal_label": "16",
      "own_deadline": null,
@@ -11830,13 +11862,15 @@ globalThis.SUBTOPIC_CATALOG={
     {
      "child_type": "subject",
      "confidence": "low",
+     "cov4_approval_contract": "9996a41af6cc83e0571635612e3faff20da343240f0582e820118d4654da8ef4",
      "cov4_fundability": "accept",
      "cov4_ownership": "owned",
      "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "cov4_prompt_version": "cov4-subject-context-1",
      "evidence_anchor": "p8",
      "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
      "first_seen": "2026-08-20",
-     "last_verified": "2026-08-24",
+     "last_verified": "2026-10-30",
      "opportunity_id": "349554:t-17",
      "ordinal_label": "17",
      "own_deadline": null,
@@ -11923,13 +11957,15 @@ globalThis.SUBTOPIC_CATALOG={
     {
      "child_type": "subject",
      "confidence": "low",
+     "cov4_approval_contract": "64be3a892345d2ea43797695ca7c6696c26429185016373780e957fbccdd1bd4",
      "cov4_fundability": "accept",
      "cov4_ownership": "owned",
      "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "cov4_prompt_version": "cov4-subject-context-1",
      "evidence_anchor": "p9",
      "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
      "first_seen": "2026-08-20",
-     "last_verified": "2026-08-24",
+     "last_verified": "2026-10-30",
      "opportunity_id": "349554:t-18",
      "ordinal_label": "18",
      "own_deadline": null,
@@ -15418,6 +15454,27 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "358938": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "358954": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "358959": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "358960": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -27136,6 +27193,13 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
+  "363111": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
   "363112": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -29774,12 +29838,6 @@ globalThis.SUBTOPIC_CATALOG={
     }
    ]
   },
-  "363790": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopics": []
-  },
   "363791": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -30044,13 +30102,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "363852": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "363855": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -30156,28 +30207,7 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "363887": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "363888": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363889": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363890": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -31409,41 +31439,6 @@ globalThis.SUBTOPIC_CATALOG={
      ]
     }
    ]
-  },
-  "363900": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363901": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363902": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363903": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363904": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
   },
   "363905": {
    "segmentation_method": "toc",
@@ -33852,27 +33847,6 @@ globalThis.SUBTOPIC_CATALOG={
    ]
   },
   "363908": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363909": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363910": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363911": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -40767,6 +40741,13 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
+  "364142": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
   "364143": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -40942,6 +40923,20 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
+  "364171": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "364172": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
   "39841": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -41034,6 +41029,20 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "arpa-h:unique": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "darpa-iarpa:darpa-darpapa250705": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "darpa-iarpa:darpa-darpapa260201": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -41355,13 +41364,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "nyserda:RFQL5937": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "nyserda:RFQL6152": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -41426,13 +41428,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "sam-gov:4180ee1405cc4aadbd14f5830c55e900": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "sam-gov:4e98188266d74e73a6cede0b0bef0da0": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -42600,13 +42595,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "vpr-email:infoready-2028504": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "vpr-email:vpr-02ca89881582e10d": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",

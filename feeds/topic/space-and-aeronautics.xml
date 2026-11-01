@@ -4,8 +4,21 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/space-and-aeronautics.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/space-and-aeronautics.xml</id>
-  <updated>2026-10-29T22:20:09Z</updated>
+  <updated>2026-10-30T16:48:34Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>AFRL/AFOSR Fiscal Year (FY) 2027 University Center for High-Speed Aerothermoelasticity</title>
+    <link href="https://www.grants.gov/search-results-detail/364172"/>
+    <id>urn:funding-finder:grants-gov:364172</id>
+    <updated>2026-10-29T00:00:00Z</updated>
+    <author><name>Air Force Office of Scientific Research</name></author>
+    <category term="Education and workforce"/>
+    <category term="Space and aeronautics"/>
+    <category term="Data science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Cybersecurity"/>
+    <summary>Air Force Office of Scientific Research | Application 2027-04-02 | verify prerequisite | The Air Force Office of Scientific Research, in partnership with the Air Force Research Lab (AFRL) Air Warfare Directorate (RA), intends to provide support for a multidisciplinary team of scientists and engineers at U.S. universities to establish a university-led Center for High-Speed Aerothermoelasticity. This multidisciplinary, basic research initiative focuses on investigating complex problem s…</summary>
+  </entry>
   <entry>
     <title>ROSES25: D.3F NuSTAR Cycle 13, Fermi Cycle 20, Swift Cycle 23, and TESS Cycle 10</title>
     <link href="https://nspires.nasaprs.com/external/solicitations/summary.do?solId={A952E51B-7AD4-B180-2F8C-4E8A79AFFAED}&amp;path=&amp;method=init"/>
@@ -338,6 +351,7 @@
     <updated>2023-07-26T00:00:00Z</updated>
     <author><name>Air Force -- Research Lab</name></author>
     <category term="Space and aeronautics"/>
+    <category term="Cybersecurity"/>
     <summary>Air Force -- Research Lab | Application 2043-05-10 | Pioneering Aerospace Capabilities, Engineering and Research (PACER)</summary>
   </entry>
   <entry>
