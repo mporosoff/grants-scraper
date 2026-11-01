@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/community-development.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/community-development.xml</id>
-  <updated>2026-10-30T16:48:34Z</updated>
+  <updated>2026-11-01T21:09:01Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Undiagnosed Diseases Network (UDN) Clinical and Data Coordinating Center</title>
@@ -114,6 +114,17 @@
     <category term="Community development"/>
     <category term="Education and workforce"/>
     <summary>Department of Housing and Urban Development | Estimated Application 2027-02-03 | The Community Compass Technical Assistance (CCTA) program awards competitive grants to eligible applicants. With these grants, you will provide technical assistance (TA) to the people and organizations HUD serves. Under this Notice of Funding Opportunity (NOFO), HUD will award up to $86,000,000 in 2026 funding for TA. We invite applications from organizations with deep experience and a commitment …</summary>
+  </entry>
+  <entry>
+    <title>Established Program to Stimulate Competitive Research (EPSCoR) Basic Research</title>
+    <link href="https://www.grants.gov/search-results-detail/364188"/>
+    <id>urn:funding-finder:grants-gov:364188</id>
+    <updated>2026-10-30T00:00:00Z</updated>
+    <author><name>National Aeronautics and Space Administration</name></author>
+    <category term="Community development"/>
+    <category term="Space and aeronautics"/>
+    <category term="Technology development"/>
+    <summary>National Aeronautics and Space Administration | Application 2027-02-01 | This solicitation seeks proposals that are expected to establish research activities that will makesignificant contributions to NASA’s strategic research and technology development priorities andcontribute to the overall research infrastructure, science and technology capabilities of highereducation and economic development of the jurisdiction receiving funding.</summary>
   </entry>
   <entry>
     <title>Gabriella Miller Kids First Training and Outreach Core (U24 Clinical Trial Not Allowed)</title>
