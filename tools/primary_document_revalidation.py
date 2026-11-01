@@ -25,7 +25,9 @@ VERSION = 'primary-document-recovery-1'
 ENRICHMENT = 'data/opportunity_enrichment.json'
 RECIPE_FILES = ('tools/primary_document_revalidation.py', 'scripts/extract_document_evidence.py',
     'scripts/source_documents.py', 'scripts/enrich_catalog.py', 'scripts/pull_grants.py',
-    'scripts/subtopic_sources.py', 'scripts/notice_semantics.py', 'scripts/notice_fact_guards.py')
+    'scripts/subtopic_sources.py', 'scripts/notice_semantics.py', 'scripts/notice_fact_guards.py',
+    'scripts/notice_schedule.py', 'scripts/submission_schedule.py', 'scripts/notice_awards.py',
+    'scripts/build_changes.py', 'scripts/build_feeds.py')
 PRIMARY_KEYS = {'primary_document_' + key for key in ('url', 'name', 'source', 'confidence')}
 DERIVED_KEYS = {'document_evidence', 'document_evidence_status', 'document_evidence_checked_at',
     'document_evidence_processing_reason', 'document_program_areas', 'document_search_text',
@@ -92,7 +94,7 @@ def response_identity(response, expected):
         and not parsed.query and not parsed.fragment, 'official_pdf_route')
 
 
-def acquire_pdf(directory, expected, *, acquire):
+def acquire_pdf(directory, expected, *, acquire, acquisition_binding=None):
     """Reuse completed public bytes even if parsing or a later step failed."""
     directory.mkdir(parents=True, exist_ok=True)
     meta_path = directory / 'acquisition.json'
@@ -132,6 +134,7 @@ def acquire_pdf(directory, expected, *, acquire):
     # cannot leave a completed PDF without the route needed to authenticate it.
     atomic_json(meta_path, {'input_sha256': pin, 'document_requests': 1, 'response': metadata,
         'source_checked_at': response['source_checked_at'],
+        'acquisition_binding': acquisition_binding,
         'content_base64': base64.b64encode(response['content']).decode('ascii')})
     return response
 
@@ -145,7 +148,8 @@ def safe_entry(row, previous, spec, directory, binding, audit_at, *, acquire, ac
             'safe_entry_checkpoint')
         return saved['entry']
     require(acquire, 'extraction_not_permitted')
-    response = acquire_pdf(acquisition_directory or directory, spec['selected_document'], acquire=acquire)
+    response = acquire_pdf(acquisition_directory or directory, spec['selected_document'], acquire=acquire,
+        acquisition_binding=binding)
     entry, _ = evidence.build_document_entry(row, evidence.source_for_record(row), response,
         deepcopy(previous), common.timestamp(audit_at), enable_subtopics=False, structure_cache=None)
     # A corrected recipe can reinterpret the same retrieved bytes. Its new
@@ -188,7 +192,15 @@ def project_catalog(before, cache, enrichment, packet, entries, audit_at):
         # Keep the existing catalog's evaluation day, not the recovery wall clock.
         as_of = (old.get('next_submission') or {}).get('as_of', before['generated_at'][:10])
         row = project(row, as_of)
-        require(unchanged(old, row, PRIMARY_KEYS | DERIVED_KEYS), 'source_scalar_firewall')
+        award_keys = set()
+        reconciliation = row['document_evidence'].get('award_reconciliation')
+        if identifier == '364174':
+            require(reconciliation and reconciliation['structured_value'] == 237000000
+                and reconciliation['notice_value'] == 25000000
+                and old['award_ceiling'] == 237000000 and row['award_ceiling'] == 25000000,
+                'reviewed_individual_award_ceiling')
+            award_keys = {'award_ceiling', 'award_source'}
+        require(unchanged(old, row, PRIMARY_KEYS | DERIVED_KEYS | award_keys), 'source_scalar_firewall')
         # Strip the projections with the production ownership logic to prove the
         # authoritative source values survive new deadlines, topics and flags.
         old_source = evidence.merge_document_entry(old, None)
@@ -248,7 +260,8 @@ def projection(parent_root, audit_at, candidate_id, *, checkpoint_directory=None
         require(sealed.get('binding') == binding and sealed.get('sha256') == identity({
             k: v for k, v in sealed.items() if k != 'sha256'}), 'projection_checkpoint_binding')
         common.projection_names({'projection_kind': 'primary_document', 'projection_hashes': sealed['files']})
-        require(ENRICHMENT in sealed['files'], 'complete_enrichment_projection')
+        require({ENRICHMENT, 'feeds/changes.json', 'feeds/changes.xml'} <= sealed['files'].keys(),
+            'complete_primary_projection')
         outputs = {name: (variant / 'files' / name).read_bytes() for name in sealed['files']}
         require(all(digest(raw) == sealed['files'][name] for name, raw in outputs.items()), 'projection_checkpoint_hashes')
         return outputs, sealed['changes']
@@ -269,18 +282,30 @@ def projection(parent_root, audit_at, candidate_id, *, checkpoint_directory=None
     outputs = {common.PROJECTION[0]: catalog_javascript_bytes(after),
         common.PROJECTION[1]: catalog_metadata_javascript_bytes(after),
         common.PROJECTION[2]: json_bytes(updated), ENRICHMENT: json_bytes(details)}
-    changes_path = parent_root / 'feeds/changes.xml'
-    outputs.update(common.feed_projection(after, changes_path.read_bytes() if changes_path.is_file() else None))
-    common.verify_feed_index(outputs, outputs, changes_present=changes_path.is_file())
+    from scripts.build_changes import refresh_current_generation_snapshots, render_change_feed
+    original_changes = read(parent_root / 'feeds/changes.json')
+    refreshed_changes = refresh_current_generation_snapshots(original_changes, after, affected_ids=entries)
+    rendered_changes = {'feeds/' + name: raw for name, raw in render_change_feed(refreshed_changes).items()}
+    outputs.update(common.feed_projection(after, rendered_changes['feeds/changes.xml']))
+    outputs.update(rendered_changes)
+    common.verify_feed_index(outputs, outputs, changes_present=True)
     changes = {'projection_kind': 'primary_document', 'affected_catalog_ids': sorted(entries),
         'affected_evidence_ids': sorted(entries), 'original_source_at': before['generated_at'],
         'original_evidence_at': before['document_evidence_generated_at'],
         'input_packet_sha256': identity(packet), 'document_requests': len(entries),
+        'new_document_requests': sum(read(checkpoint / 'documents' / identifier /
+            spec['selected_document']['sha256'] / 'acquisition.json').get('acquisition_binding') == binding
+            for identifier, spec in packet['records'].items()),
         'document_acquisition_attempts': sum(read(checkpoint / 'documents' / identifier /
             spec['selected_document']['sha256'] / 'attempts.json')['count']
             for identifier, spec in packet['records'].items()),
         'document_request_accounting': 'Completed authenticated inputs; attempted acquisitions reported separately',
         'source_requests': 0, 'document_ai_requests': 0, 'team_requests': 0,
+        'refreshed_change_event_ids': [new['id'] for old, new in zip(
+            original_changes['events'], refreshed_changes['events']) if old != new],
+        'award_reconciliations': {str(row['opportunity_id']): row['document_evidence']['award_reconciliation']
+            for row in after['opportunities'] if str(row['opportunity_id']) in entries
+            and row.get('document_evidence', {}).get('award_reconciliation')},
         'documents': {identifier: {'sha256': entry['document']['sha256'], 'url': entry['document']['url'],
             'checked_at': entry['checked_at']} for identifier, entry in entries.items()}}
     for name, raw in outputs.items():

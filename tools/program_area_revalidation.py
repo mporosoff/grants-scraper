@@ -62,8 +62,10 @@ DOCUMENT_FACT_INPUTS = ('tools/document_fact_revalidation.py',
 PRIMARY_DOCUMENT_INPUTS = ('tools/primary_document_revalidation.py',
     'config/primary_document_recovery.json', 'scripts/source_documents.py',
     'scripts/pull_grants.py', 'scripts/enrich_catalog.py', 'scripts/subtopic_sources.py',
-    'scripts/notice_semantics.py')
-PRIMARY_DOCUMENT_OUTPUTS = ('data/opportunity_enrichment.json',)
+    'scripts/notice_semantics.py', 'scripts/notice_schedule.py', 'scripts/notice_awards.py',
+    'scripts/submission_schedule.py', 'scripts/build_changes.py', 'scripts/build_feeds.py',
+    'tools/corpus_clock.mjs')
+PRIMARY_DOCUMENT_OUTPUTS = ('data/opportunity_enrichment.json', 'feeds/changes.json', 'feeds/changes.xml')
 PREFIX_GUARDED_KINDS = frozenset({'administrative_submission', 'document_facts', 'primary_document'})
 
 
@@ -588,11 +590,14 @@ def modern_scope(root, original, kind='program_area'):
         allowed.update({'scripts/notice_semantics.py', 'scripts/notice_fact_guards.py'})
     elif projection_kind(kind) == 'primary_document':
         allowed.update({'scripts/source_documents.py', 'scripts/pull_grants.py',
-            'scripts/enrich_catalog.py', 'scripts/subtopic_sources.py', 'scripts/notice_semantics.py'})
+            'scripts/enrich_catalog.py', 'scripts/subtopic_sources.py', 'scripts/notice_semantics.py',
+            'scripts/notice_schedule.py', 'scripts/notice_awards.py', 'scripts/submission_schedule.py',
+            'scripts/build_changes.py', 'scripts/build_feeds.py'})
     require(set(changes.get('source', [])) <= allowed
         and not changes.get('teams') and set(changes.get('semantic', [])) <= (
             {'assets/submission-schedule.js', 'assets/search-retrieval.js', 'tools/run_search_diagnosis.mjs'}
-            if administrative else set()), 'modern_extractor_only_change')
+            if administrative else {'tools/catalog_reconcile_spend.py'}
+            if projection_kind(kind) == 'primary_document' else set()), 'modern_extractor_only_change')
     candidate.git(root, 'merge-base', '--is-ancestor', original['generation_sha'], 'HEAD')
 
 
@@ -939,6 +944,9 @@ def _modern_receipt(value, original, outputs, changes, ledger, consumed):
     document_requests = changes.get('document_requests', 0) if kind == 'primary_document' else 0
     require(type(document_requests) is int and 0 <= document_requests <= 2,
         'bounded_primary_document_requests')
+    new_document_requests = changes.get('new_document_requests', document_requests)
+    require(type(new_document_requests) is int and 0 <= new_document_requests <= document_requests,
+        'bounded_new_primary_document_requests')
     if kind == 'primary_document':
         require(changes.get('source_requests') == 0 and changes.get('document_ai_requests') == 0
             and changes.get('team_requests') == 0, 'primary_document_unpaid_projection')
@@ -947,7 +955,7 @@ def _modern_receipt(value, original, outputs, changes, ledger, consumed):
         'retained_hashes': {n: h for n, h in original['generation_files'].items()
             if n not in outputs and n not in VECTORS and not FACET_FEED.fullmatch(n)},
         'consumed_checkpoints': consumed, 'ledger_sha256': identity(ledger),
-        'new_source_requests': 0, 'new_document_requests': document_requests, 'new_team_requests': 0}
+        'new_source_requests': 0, 'new_document_requests': new_document_requests, 'new_team_requests': 0}
 
 
 def _modern_reservation(state, value, current, kind):
@@ -973,6 +981,34 @@ def _write_outputs(outputs):
         with open(os.environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as stream:
             for key, value in outputs.items():
                 stream.write(f'{key}={value}\n')
+
+
+def retain_primary_vector_source(state, value, child, bundle):
+    """Keep the exact completed primary-document asset across recipe repairs."""
+    receipt = child.get('program_area_revalidation', {})
+    require(require_projection_kind(value, receipt) == 'primary_document', 'primary_vector_source_kind')
+    prior = value.get('retained_vector_source')
+    accounting = receipt.get('vector_accounting', {})
+    if accounting.get('classification') == 'retained_completed_asset':
+        proof = accounting.get('retention', {})
+        require(prior and receipt.get('retained_vector_source') == prior
+            and proof.get('source') == prior and proof.get('new_requests') == 0
+            and all(child['files'].get(name) == digest for name, digest in prior['outputs'].items()),
+            'primary_forwarded_vector_source')
+        return prior
+    # A native-parent retention is already handled by modern_native_vectors.
+    if accounting.get('classification') == 'retained_native_asset':
+        return None
+    require(accounting.get('classification') == 'budgeted'
+        and receipt.get('operation_sha256') == value['operation_sha256'], 'primary_completed_vector_source')
+    archived = Path(state)/'retained-vector-contexts'/(value['operation_sha256']+'.json')
+    if archived.exists():
+        require(read(archived) == value, 'primary_retained_vector_context_changed')
+    else:
+        atomic_json(archived, value)
+    return {'candidate_id': child['candidate_id'], 'manifest_sha256': sha((Path(bundle)/'candidate.json').read_bytes()),
+        'operation_sha256': value['operation_sha256'], 'context_sha256': identity(value),
+        'outputs': {name: child['files'][name] for name in VECTORS}}
 
 
 def prepare_modern(parent_bundle, receipt_path, state, parent_run, parent_id, *, root=ROOT,
@@ -1026,7 +1062,12 @@ def prepare_modern(parent_bundle, receipt_path, state, parent_run, parent_id, *,
                 receipt = child['program_area_revalidation']
                 require(receipt['affected_generation']['generation_run_id'] != os.environ['GITHUB_RUN_ID'],
                     'modern_changed_child_requires_new_dispatch')
+                retained_vectors = retain_primary_vector_source(state, value, child, complete) if kind == 'primary_document' else None
                 value = {k: v for k, v in value.items() if k not in {'completed_candidate_id', 'operation_sha256'}}
+                if retained_vectors:
+                    value['retained_vector_source'] = retained_vectors
+                elif kind == 'primary_document':
+                    value.pop('retained_vector_source', None)
                 value['operation_contract'] = modern_contract(root, kind); value['audit_at'] = datetime.now(timezone.utc).isoformat()
                 value['operation_sha256'] = identity(value); atomic_json(state/'reconciliation.json', value)
             else:
@@ -1092,9 +1133,16 @@ def checkpoint_modern(receipt_path, state, *, root=ROOT, write=True):
     else:
         binding = spend.vector_binding(packet)
         completed = spend.completed_outputs(state, value, binding, root)
-        require(completed is not None and completed['status'] == 'complete', 'modern_sealed_completed_vectors')
-        proof = {'classification': 'budgeted', 'accounting_origin': completed['accounting_origin'],
-            'completion_sha256': sha((state/'vector-completions'/(value['operation_sha256']+'.json')).read_bytes())}
+        retained = None if completed else spend.retained_reconciliation_outputs(state, value, binding, root)
+        if retained:
+            require(kind == 'primary_document' and retained['status'] == 'complete'
+                and read(state/'vector-stage.json') == retained['retention_proof'], 'modern_retained_completed_vectors')
+            proof = {'classification': 'retained_completed_asset', 'retention': retained['retention_proof'],
+                'accounting_origin': retained['accounting_origin'], 'new_requests': 0}
+        else:
+            require(completed is not None and completed['status'] == 'complete', 'modern_sealed_completed_vectors')
+            proof = {'classification': 'budgeted', 'accounting_origin': completed['accounting_origin'],
+                'completion_sha256': sha((state/'vector-completions'/(value['operation_sha256']+'.json')).read_bytes())}
     ledger = spend.ledger(state).read()
     require_administrative_budget(value, ledger)
     from tools.catalog_reconcile import request_identity

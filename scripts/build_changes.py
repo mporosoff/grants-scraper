@@ -8,6 +8,7 @@ weekly digest does not miss changes that occurred between mailings.
 from __future__ import annotations
 
 import argparse
+from copy import deepcopy
 from datetime import date, datetime, timedelta, timezone
 from hashlib import sha1
 from pathlib import Path
@@ -333,6 +334,50 @@ def build_atom(events: list[dict], updated: datetime) -> str:
     return "\n".join(lines) + "\n"
 
 
+def refresh_current_generation_snapshots(
+    feed: dict,
+    catalog: dict,
+    *,
+    affected_ids,
+) -> dict:
+    """Refresh selected unpublished snapshots without inventing change events.
+
+    A derived candidate keeps the original generation clock. Only events from
+    that exact generation may receive its corrected record; historical events
+    and all event identities, details, and timestamps remain intact.
+    """
+    stamp = catalog.get("generated_at")
+    if not isinstance(stamp, str) or not stamp:
+        raise ValueError("change_snapshot_generation_required")
+    if isinstance(affected_ids, (str, bytes)):
+        raise ValueError("change_snapshot_ids_required")
+    selected = {str(value) for value in affected_ids}
+    records = _records(catalog)
+    if selected - records.keys():
+        raise ValueError("change_snapshot_record_missing")
+    refreshed = deepcopy(feed)
+    for event in refreshed["events"]:
+        identifier = str(event.get("opportunity_id"))
+        if identifier in selected and event.get("changed_at") == stamp:
+            event["record"] = deepcopy(_snapshot(records[identifier]))
+    return refreshed
+
+
+def render_change_feed(feed: dict) -> dict[str, bytes]:
+    """Render a retained feed using its own clock and the normal Atom writer."""
+    updated = datetime.fromisoformat(feed["generated_at"].replace("Z", "+00:00"))
+    if updated.tzinfo is None:
+        raise ValueError("change_feed_timezone_required")
+    values = {
+        "changes.json": json.dumps(feed, ensure_ascii=False, indent=2) + "\n",
+        "changes.xml": build_atom(feed["events"], updated),
+    }
+    return {
+        name: value.replace("\u2014", "-").replace("\u2013", "-").encode("utf-8")
+        for name, value in values.items()
+    }
+
+
 def write_change_feed(
     previous: dict,
     current: dict,
@@ -358,14 +403,8 @@ def write_change_feed(
         "retention_days": RETENTION_DAYS,
         "events": events,
     }
-    json_path.write_text(
-        (json.dumps(payload, ensure_ascii=False, indent=2) + "\n").replace("\u2014", "-").replace("\u2013", "-"),
-        encoding="utf-8",
-    )
-    (out_dir / "changes.xml").write_text(
-        build_atom(events, generated).replace("\u2014", "-").replace("\u2013", "-"),
-        encoding="utf-8",
-    )
+    for name, raw in render_change_feed(payload).items():
+        (out_dir / name).write_bytes(raw)
     return {
         "new_event_count": len(new_events),
         "retained_event_count": len(events),

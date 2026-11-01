@@ -1,0 +1,434 @@
+{
+  "source": "Authenticated public candidate c3b755938cb2b59c47639399d87f1407aadb89f876ebb853745f03b8ac065d22; official Part 1 notice evidence",
+  "cases": [
+    {
+      "record": {
+        "opportunity_id": "364174",
+        "opportunity_number": "DE-FOA-0003641",
+        "source": "Grants.gov",
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/355417",
+        "award_ceiling": 237000000,
+        "award_floor": 1,
+        "total_program_funding": 237000000,
+        "expected_number_of_awards": 70,
+        "award_source": "Grants.gov XML extract",
+        "topic_areas": [
+          "Energy",
+          "Manufacturing",
+          "Materials science",
+          "Artificial intelligence and machine learning",
+          "Data science"
+        ]
+      },
+      "entry": {
+        "status": "current",
+        "document": {
+          "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355417",
+          "name": "FundOpp_DE-FOA-0003641.pdf",
+          "source_kind": "primary_notice",
+          "content_type": "application/octet-stream",
+          "sha256": "1f31710884163f35b0882cf1783f0ed6a1e15eb21b07ec4de515803774b891e2",
+          "bytes": 1505176,
+          "etag": null,
+          "last_modified": null,
+          "version": 2,
+          "first_seen_at": "2026-11-01T21:54:32.746705+00:00",
+          "last_seen_at": "2026-11-01T21:54:32.746705+00:00",
+          "changed_since_previous": true
+        },
+        "extractor_identity": "official-evidence-3",
+        "checked_at": "2026-11-01T21:54:32.746705+00:00",
+        "facts": [
+          {
+            "id": "evidence-364174-8e920e57fa28",
+            "type": "program_funding",
+            "label": "Program funding",
+            "value": 237000000,
+            "display_value": "$237,000,000",
+            "confidence": "machine_extracted_needs_verification",
+            "citation": {
+              "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355417",
+              "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355417#page=5",
+              "document_name": "FundOpp_DE-FOA-0003641.pdf",
+              "sha256": "1f31710884163f35b0882cf1783f0ed6a1e15eb21b07ec4de515803774b891e2",
+              "page": 5,
+              "section": null,
+              "location": "page 5",
+              "quote": "\u2026minance (SCALED) Announcement Version Initial Funding Opportunity Number DE-FOA-0003641 Funding Instrument Cooperative Agreements Expected Total Available Funding $237 million Assistance Listing Number and Name 81.122 Office of Electricity Announcement Type Non-Research Demonstration Funding Opportunity Description To enhance the domestic supp\u2026",
+              "extracted_at": "2026-11-01T21:54:24.538558Z",
+              "structural_reference": {
+                "block_id": "pdf-5-28",
+                "kind": "line"
+              }
+            },
+            "fact_contract": "typed-notice-facts-1",
+            "source_authority": "machine_extracted_official_document",
+            "subject": "program",
+            "parser_version": "award-basis-11",
+            "currency": "USD",
+            "basis": "program_total"
+          },
+          {
+            "id": "evidence-364174-81236cb67389",
+            "type": "program_funding",
+            "label": "Program funding",
+            "value": 237000000,
+            "display_value": "$237,000,000",
+            "confidence": "machine_extracted_needs_verification",
+            "citation": {
+              "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355417",
+              "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355417#page=7",
+              "document_name": "FundOpp_DE-FOA-0003641.pdf",
+              "sha256": "1f31710884163f35b0882cf1783f0ed6a1e15eb21b07ec4de515803774b891e2",
+              "page": 7,
+              "section": null,
+              "location": "page 7",
+              "quote": "Version 4.1 Page 7 of 51 Notice of Funding Opportunity, Part 1 1. Funding Details Multiple Topic Areas Approximate total available funding for all topic areas: $237,000,000 in fiscal year 2027 Topic Area 1: Refurbishment and Reuse of Critical Grid Equipment \u2022 Approximate total available funding: $50,000,000 \u2022 Approximate number of awards: 3\u201320\u2026",
+              "extracted_at": "2026-11-01T21:54:24.538558Z",
+              "structural_reference": {
+                "block_id": "pdf-7-7",
+                "kind": "line"
+              }
+            },
+            "fact_contract": "typed-notice-facts-1",
+            "source_authority": "machine_extracted_official_document",
+            "subject": "program",
+            "parser_version": "award-basis-11",
+            "currency": "USD",
+            "basis": "program_total"
+          },
+          {
+            "id": "evidence-364174-e0232bbc361c",
+            "type": "program_funding",
+            "label": "Program funding",
+            "value": 50000000,
+            "display_value": "Topic Area 1: $50,000,000",
+            "confidence": "machine_extracted_needs_verification",
+            "citation": {
+              "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355417",
+              "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355417#page=7",
+              "document_name": "FundOpp_DE-FOA-0003641.pdf",
+              "sha256": "1f31710884163f35b0882cf1783f0ed6a1e15eb21b07ec4de515803774b891e2",
+              "page": 7,
+              "section": null,
+              "location": "page 7",
+              "quote": "\u2026available funding for all topic areas: $237,000,000 in fiscal year 2027 Topic Area 1: Refurbishment and Reuse of Critical Grid Equipment \u2022 Approximate total available funding: $50,000,000 \u2022 Approximate number of awards: 3\u201320 \u2022 Approximate dollar amount of individual awards: $2,500,000\u2013$15,000,000 \u2022 Minimum cost share required: 50% \u2022 Approximate award proje\u2026",
+              "extracted_at": "2026-11-01T21:54:24.538558Z",
+              "structural_reference": {
+                "block_id": "pdf-7-10",
+                "kind": "line"
+              }
+            },
+            "fact_contract": "typed-notice-facts-1",
+            "source_authority": "machine_extracted_official_document",
+            "subject": "program",
+            "parser_version": "award-basis-11",
+            "currency": "USD",
+            "basis": "program_total",
+            "track": "Topic Area 1",
+            "track_citation": {
+              "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355417",
+              "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355417#page=7",
+              "document_name": "FundOpp_DE-FOA-0003641.pdf",
+              "sha256": "1f31710884163f35b0882cf1783f0ed6a1e15eb21b07ec4de515803774b891e2",
+              "page": 7,
+              "section": null,
+              "location": "page 7",
+              "quote": "\u2026Notice of Funding Opportunity, Part 1 1. Funding Details Multiple Topic Areas Approximate total available funding for all topic areas: $237,000,000 in fiscal year 2027 Topic Area 1: Refurbishment and Reuse of Critical Grid Equipment \u2022 Approximate total available funding: $50,000,000 \u2022 Approximate number of awards: 3\u201320 \u2022 Approximate dollar amount of indivi\u2026",
+              "extracted_at": "2026-11-01T21:54:24.538558Z",
+              "structural_reference": {
+                "block_id": "pdf-7-9",
+                "kind": "line"
+              }
+            }
+          },
+          {
+            "id": "evidence-364174-5ce01c5395a1",
+            "type": "award_range",
+            "label": "Per-award amount",
+            "value": {
+              "minimum": 2500000,
+              "maximum": 15000000
+            },
+            "display_value": "Topic Area 1: $2,500,000\u2013$15,000,000",
+            "confidence": "machine_extracted_needs_verification",
+            "citation": {
+              "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355417",
+              "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355417#page=7",
+              "document_name": "FundOpp_DE-FOA-0003641.pdf",
+              "sha256": "1f31710884163f35b0882cf1783f0ed6a1e15eb21b07ec4de515803774b891e2",
+              "page": 7,
+              "section": null,
+              "location": "page 7",
+              "quote": "\u2026t and Reuse of Critical Grid Equipment \u2022 Approximate total available funding: $50,000,000 \u2022 Approximate number of awards: 3\u201320 \u2022 Approximate dollar amount of individual awards: $2,500,000\u2013$15,000,000 \u2022 Minimum cost share required: 50% \u2022 Approximate award project period: up to 24 months \u2022 Anticipated length of budget periods: up to 24 months \u2022 Anticipated n\u2026",
+              "extracted_at": "2026-11-01T21:54:24.538558Z",
+              "structural_reference": {
+                "block_id": "pdf-7-12",
+                "kind": "line"
+              }
+            },
+            "fact_contract": "typed-notice-facts-1",
+            "source_authority": "machine_extracted_official_document",
+            "subject": "award",
+            "parser_version": "award-basis-11",
+            "currency": "USD",
+            "basis": "total_project",
+            "cost_basis": "unspecified",
+            "track": "Topic Area 1",
+            "estimated": false,
+            "track_citation": {
+              "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355417",
+              "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355417#page=7",
+              "document_name": "FundOpp_DE-FOA-0003641.pdf",
+              "sha256": "1f31710884163f35b0882cf1783f0ed6a1e15eb21b07ec4de515803774b891e2",
+              "page": 7,
+              "section": null,
+              "location": "page 7",
+              "quote": "\u2026Notice of Funding Opportunity, Part 1 1. Funding Details Multiple Topic Areas Approximate total available funding for all topic areas: $237,000,000 in fiscal year 2027 Topic Area 1: Refurbishment and Reuse of Critical Grid Equipment \u2022 Approximate total available funding: $50,000,000 \u2022 Approximate number of awards: 3\u201320 \u2022 Approximate dollar amount of indivi\u2026",
+              "extracted_at": "2026-11-01T21:54:24.538558Z",
+              "structural_reference": {
+                "block_id": "pdf-7-9",
+                "kind": "line"
+              }
+            }
+          },
+          {
+            "id": "evidence-364174-0e0177ce636e",
+            "type": "program_funding",
+            "label": "Program funding",
+            "value": 187000000,
+            "display_value": "Topic Area 2: $187,000,000",
+            "confidence": "machine_extracted_needs_verification",
+            "citation": {
+              "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355417",
+              "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355417#page=7",
+              "document_name": "FundOpp_DE-FOA-0003641.pdf",
+              "sha256": "1f31710884163f35b0882cf1783f0ed6a1e15eb21b07ec4de515803774b891e2",
+              "page": 7,
+              "section": null,
+              "location": "page 7",
+              "quote": "\u2026length of budget periods: up to 24 months \u2022 Anticipated number of budget periods: 1 Topic Area 2: Alternative Materials and Subcomponents \u2022 Approximate total available funding: $187,000,000 \u2022 Approximate number of awards: 7\u201350 \u2022 Approximate dollar amount of individual awards: $1,000,000\u2013$25,000,000 \u2022 Minimum cost share required: 50% \u2022 Approximate award pro\u2026",
+              "extracted_at": "2026-11-01T21:54:24.538558Z",
+              "structural_reference": {
+                "block_id": "pdf-7-18",
+                "kind": "line"
+              }
+            },
+            "fact_contract": "typed-notice-facts-1",
+            "source_authority": "machine_extracted_official_document",
+            "subject": "program",
+            "parser_version": "award-basis-11",
+            "currency": "USD",
+            "basis": "program_total",
+            "track": "Topic Area 2",
+            "track_citation": {
+              "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355417",
+              "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355417#page=7",
+              "document_name": "FundOpp_DE-FOA-0003641.pdf",
+              "sha256": "1f31710884163f35b0882cf1783f0ed6a1e15eb21b07ec4de515803774b891e2",
+              "page": 7,
+              "section": null,
+              "location": "page 7",
+              "quote": "\u2026cost share required: 50% \u2022 Approximate award project period: up to 24 months \u2022 Anticipated length of budget periods: up to 24 months \u2022 Anticipated number of budget periods: 1 Topic Area 2: Alternative Materials and Subcomponents \u2022 Approximate total available funding: $187,000,000 \u2022 Approximate number of awards: 7\u201350 \u2022 Approximate dollar amount of individua\u2026",
+              "extracted_at": "2026-11-01T21:54:24.538558Z",
+              "structural_reference": {
+                "block_id": "pdf-7-17",
+                "kind": "line"
+              }
+            }
+          },
+          {
+            "id": "evidence-364174-12133d3f2105",
+            "type": "award_range",
+            "label": "Per-award amount",
+            "value": {
+              "minimum": 1000000,
+              "maximum": 25000000
+            },
+            "display_value": "Topic Area 2: $1,000,000\u2013$25,000,000",
+            "confidence": "machine_extracted_needs_verification",
+            "citation": {
+              "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355417",
+              "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355417#page=7",
+              "document_name": "FundOpp_DE-FOA-0003641.pdf",
+              "sha256": "1f31710884163f35b0882cf1783f0ed6a1e15eb21b07ec4de515803774b891e2",
+              "page": 7,
+              "section": null,
+              "location": "page 7",
+              "quote": "\u2026ternative Materials and Subcomponents \u2022 Approximate total available funding: $187,000,000 \u2022 Approximate number of awards: 7\u201350 \u2022 Approximate dollar amount of individual awards: $1,000,000\u2013$25,000,000 \u2022 Minimum cost share required: 50% \u2022 Approximate award project period: up to 48 months \u2022 Anticipated number of budget periods: 1 \u2022 Anticipated length of budge\u2026",
+              "extracted_at": "2026-11-01T21:54:24.538558Z",
+              "structural_reference": {
+                "block_id": "pdf-7-20",
+                "kind": "line"
+              }
+            },
+            "fact_contract": "typed-notice-facts-1",
+            "source_authority": "machine_extracted_official_document",
+            "subject": "award",
+            "parser_version": "award-basis-11",
+            "currency": "USD",
+            "basis": "total_project",
+            "cost_basis": "unspecified",
+            "track": "Topic Area 2",
+            "estimated": false,
+            "track_citation": {
+              "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355417",
+              "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355417#page=7",
+              "document_name": "FundOpp_DE-FOA-0003641.pdf",
+              "sha256": "1f31710884163f35b0882cf1783f0ed6a1e15eb21b07ec4de515803774b891e2",
+              "page": 7,
+              "section": null,
+              "location": "page 7",
+              "quote": "\u2026cost share required: 50% \u2022 Approximate award project period: up to 24 months \u2022 Anticipated length of budget periods: up to 24 months \u2022 Anticipated number of budget periods: 1 Topic Area 2: Alternative Materials and Subcomponents \u2022 Approximate total available funding: $187,000,000 \u2022 Approximate number of awards: 7\u201350 \u2022 Approximate dollar amount of individua\u2026",
+              "extracted_at": "2026-11-01T21:54:24.538558Z",
+              "structural_reference": {
+                "block_id": "pdf-7-17",
+                "kind": "line"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "record": {
+        "opportunity_id": "364033",
+        "opportunity_number": "DE-FOA-0003673",
+        "source": "Grants.gov",
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/355184",
+        "award_ceiling": 20000000,
+        "award_floor": 20000000,
+        "total_program_funding": 100000000,
+        "expected_number_of_awards": 5,
+        "award_source": "Grants.gov XML extract",
+        "topic_areas": [
+          "Education and workforce",
+          "Technology development",
+          "Materials science",
+          "Quantum science",
+          "Energy",
+          "Data science",
+          "Artificial intelligence and machine learning",
+          "Manufacturing",
+          "Cybersecurity"
+        ]
+      },
+      "entry": {
+        "status": "current",
+        "document": {
+          "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355184",
+          "name": "DE-FOA-0003673.000001.pdf",
+          "source_kind": "primary_notice",
+          "content_type": "application/pdf",
+          "sha256": "3b29efda7476f2fe1b2c9ee58be3f228c26b185dd50c949e5a2fc07d9cfc456f",
+          "bytes": 1133527,
+          "etag": null,
+          "last_modified": null,
+          "version": 3,
+          "first_seen_at": "2026-11-01T21:54:27.403059+00:00",
+          "last_seen_at": "2026-11-01T21:54:27.403059+00:00",
+          "changed_since_previous": true
+        },
+        "extractor_identity": "official-evidence-3",
+        "checked_at": "2026-11-01T21:54:27.403059+00:00",
+        "facts": [
+          {
+            "id": "evidence-364033-01d59ad6be5b",
+            "type": "award_range",
+            "label": "Per-award amount",
+            "value": {
+              "minimum": 12000000,
+              "maximum": 25000000
+            },
+            "display_value": "$12,000,000\u2013$25,000,000",
+            "confidence": "machine_extracted_needs_verification",
+            "citation": {
+              "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355184",
+              "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355184#page=5",
+              "document_name": "DE-FOA-0003673.000001.pdf",
+              "sha256": "3b29efda7476f2fe1b2c9ee58be3f228c26b185dd50c949e5a2fc07d9cfc456f",
+              "page": 5,
+              "section": null,
+              "location": "page 5",
+              "quote": "\u2026al available funding: $20,000,000 in FY 2027, $20,000,000 in FY 2028, $20,000,000 in FY 2029, $20,000,000 FY 2030, $20,000,000 in FY 2031 \u2022 Approximate number of awards: 4\u20138 \u2022 Approximate dollar amount of individual awards: $12\u201325 million \u2022 Approximate award project period: 60 months \u2022 Anticipated length of budget periods: 12 months 2. Period of Performanc\u2026",
+              "extracted_at": "2026-11-01T21:54:24.538558Z",
+              "structural_reference": {
+                "block_id": "pdf-5-35",
+                "kind": "line"
+              }
+            },
+            "fact_contract": "typed-notice-facts-1",
+            "source_authority": "machine_extracted_official_document",
+            "subject": "award",
+            "parser_version": "award-basis-11",
+            "currency": "USD",
+            "basis": "total_project",
+            "cost_basis": "unspecified",
+            "track": null,
+            "estimated": true,
+            "field_authority": "official_notice_field"
+          },
+          {
+            "id": "evidence-364033-f7f94ee90da4",
+            "type": "program_funding",
+            "label": "Program funding",
+            "value": 100000000,
+            "display_value": "$100,000,000",
+            "confidence": "machine_extracted_needs_verification",
+            "citation": {
+              "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355184",
+              "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355184#page=5",
+              "document_name": "DE-FOA-0003673.000001.pdf",
+              "sha256": "3b29efda7476f2fe1b2c9ee58be3f228c26b185dd50c949e5a2fc07d9cfc456f",
+              "page": 5,
+              "section": null,
+              "location": "page 5",
+              "quote": "\u2026Announcement Version Amendment 000001 Funding Opportunity Number DE-FOA-0003673 Funding Instrument Grants and National Laboratory Awards Expected Total Available Funding $100 million in current and future fiscal year funds, including $20 million in fiscal year (FY) 2027 funding and $80 million in outyear funding, subject to the availability of future year\u2026",
+              "extracted_at": "2026-11-01T21:54:24.538558Z",
+              "structural_reference": {
+                "block_id": "pdf-5-17",
+                "kind": "line"
+              }
+            },
+            "fact_contract": "typed-notice-facts-1",
+            "source_authority": "machine_extracted_official_document",
+            "subject": "program",
+            "parser_version": "award-basis-11",
+            "currency": "USD",
+            "basis": "program_total"
+          },
+          {
+            "id": "evidence-364033-7a97298f0090",
+            "type": "program_funding",
+            "label": "Program funding",
+            "value": 20000000,
+            "display_value": "FY 2027: $20,000,000",
+            "confidence": "machine_extracted_needs_verification",
+            "citation": {
+              "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355184",
+              "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355184#page=5",
+              "document_name": "DE-FOA-0003673.000001.pdf",
+              "sha256": "3b29efda7476f2fe1b2c9ee58be3f228c26b185dd50c949e5a2fc07d9cfc456f",
+              "page": 5,
+              "section": null,
+              "location": "page 5",
+              "quote": "\u20261. Funding Details The award size will depend on the number of meritorious applications and the availability of appropriated funds. \u2022 Approximate total available funding: $20,000,000 in FY 2027, $20,000,000 in FY 2028, $20,000,000 in FY 2029, $20,000,000 FY 2030, $20,000,000 in FY 2031 \u2022 Approximate number of awards: 4\u20138 \u2022 Approximate dollar amount of indi\u2026",
+              "extracted_at": "2026-11-01T21:54:24.538558Z",
+              "structural_reference": {
+                "block_id": "pdf-5-31",
+                "kind": "line"
+              }
+            },
+            "fact_contract": "typed-notice-facts-1",
+            "source_authority": "machine_extracted_official_document",
+            "subject": "program",
+            "parser_version": "award-basis-11",
+            "currency": "USD",
+            "basis": "program_total",
+            "cycle": "FY 2027"
+          }
+        ]
+      }
+    }
+  ]
+}

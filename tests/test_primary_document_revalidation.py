@@ -68,6 +68,8 @@ class PrimaryDocumentCheckpointTests(unittest.TestCase):
             self.assertTrue((self.root / 'v2/entry.json').exists())
             self.assertEqual(first['checked_at'], second['checked_at'])
             self.assertEqual(first['document']['first_seen_at'], second['document']['first_seen_at'])
+            acquisition = json.loads((self.root / 'pdf/acquisition.json').read_bytes())
+            self.assertEqual(acquisition['acquisition_binding'], 'v1')
 
     def test_failure_of_second_document_keeps_first_complete(self):
         with patch.object(recovery.evidence, 'download_document', return_value=self.response) as fetch, \

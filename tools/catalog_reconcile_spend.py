@@ -252,17 +252,32 @@ def retained_reconciliation_outputs(state, value, binding, root):
     bundle = Path(state) / 'complete-candidates' / source['candidate_id']
     require(c.digest((bundle / 'candidate.json').read_bytes()) == source['manifest_sha256'], 'retained_source_manifest')
     manifest = c.load(bundle, source['candidate_id'])
-    receipt = manifest.get('source_reconciliation', {})
+    primary = value.get('version') == 'program-area-revalidation-modern-1'
+    if primary:
+        require(value.get('projection_kind') == prior.get('projection_kind') == 'primary_document'
+                and prior.get('version') == value['version'], 'retained_primary_projection_kind')
+        receipt = manifest.get('program_area_revalidation', {})
+        require(receipt.get('projection_kind') == 'primary_document'
+                and receipt.get('operation_contract') == prior['operation_contract'], 'retained_primary_receipt')
+        # The first primary checkpoint predates an explicit operation clock pin.
+        # Its authenticated public candidate already binds this semantic input.
+        old_clock = manifest.get('dependency_groups', {}).get('semantic', {}).get('files', {}).get('tools/corpus_clock.mjs')
+        require(prior['operation_contract'].get('tools/corpus_clock.mjs', old_clock) == old_clock,
+                'retained_primary_clock_identity')
+    else:
+        receipt = manifest.get('source_reconciliation', {})
+        require(receipt.get('cache_operation_contract') == prior['operation_contract'], 'retained_source_receipt')
+        old_clock = prior['operation_contract'].get('tools/corpus_clock.mjs')
+    current_clock = value['operation_contract'].get('tools/corpus_clock.mjs')
     require(receipt.get('operation_sha256') == prior['operation_sha256']
-            and receipt.get('cache_operation_contract') == prior['operation_contract']
             and all(manifest['files'].get(name) == digest for name, digest in source['outputs'].items()),
             'retained_source_receipt')
     old_binding = json.loads((Path(state) / 'vector-bindings' / (prior['operation_sha256'] + '.json')).read_bytes())
     require(all(re.fullmatch('[a-f0-9]{64}', str(old_binding.get('source_hashes', {}).get(name, '')))
                 and re.fullmatch('[a-f0-9]{64}', str(binding.get('source_hashes', {}).get(name, '')))
                 for name in VECTOR_PREPROCESSORS)
-            and re.fullmatch('[a-f0-9]{64}', str(prior['operation_contract'].get('tools/corpus_clock.mjs', '')))
-            and re.fullmatch('[a-f0-9]{64}', str(value['operation_contract'].get('tools/corpus_clock.mjs', ''))),
+            and re.fullmatch('[a-f0-9]{64}', str(old_clock))
+            and re.fullmatch('[a-f0-9]{64}', str(current_clock)),
             'retained_preprocessor_identity')
     old = completed_outputs(state, prior, old_binding, root)
     require(old is not None and old['outputs'] == source['outputs'], 'retained_source_completion')
@@ -272,8 +287,7 @@ def retained_reconciliation_outputs(state, value, binding, root):
             ('corpus_sha256', 'configuration_sha256', 'passage_count'))
             or any(old_binding['source_hashes'].get(name) != binding['source_hashes'].get(name)
                    for name in VECTOR_PREPROCESSORS)
-            or prior['operation_contract'].get('tools/corpus_clock.mjs') !=
-               value['operation_contract'].get('tools/corpus_clock.mjs')):
+            or old_clock != current_clock):
         return None
     require(receipt.get('ledger_sha256') == identity(ledger(state).read()), 'retained_source_receipt')
     proof = {'version': 'reconciliation-vector-retention-1', 'operation_sha256': value['operation_sha256'],

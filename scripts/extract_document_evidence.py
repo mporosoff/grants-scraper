@@ -9,8 +9,8 @@ Raw PDFs and HTML are never committed. The cache stores HTTP validators,
 document hashes, short evidence quotes, extracted facts, and a small version
 history so unchanged notices can be reused and amended notices can be detected.
 All prose-derived facts remain explicitly machine-extracted and
-verification-required; structured Grants.gov fields retain authority for
-filtering and sorting.
+verification-required. Structured Grants.gov fields retain authority except
+for a reversible, fully accounted program-total/per-award reconciliation.
 """
 
 import argparse
@@ -42,7 +42,7 @@ from scripts.build_catalog import (
     write_catalog,
 )
 from scripts.enrich_catalog import read_catalog
-from scripts import program_areas, notice_semantics, notice_schedule, notice_structure_cache, notice_fact_guards
+from scripts import program_areas, notice_semantics, notice_schedule, notice_structure_cache, notice_fact_guards, notice_awards
 from scripts.document_work_budget import WorkTimedOut
 from scripts.source_documents import is_doe_companion_document, DOE_PRIMARY_POLICY
 
@@ -3132,6 +3132,7 @@ def withhold_doe_companion_entry(entry):
 def merge_document_entry(record, entry):
     if entry:
         withhold_doe_companion_entry(entry)
+        notice_schedule.repair_cached_submission_clocks(sys.modules[__name__], record, entry)
         notice_fact_guards.repair_entry(entry)
         notice_schedule.repair_cached_arpa_summary(sys.modules[__name__], record, entry)
         revalidate_cached_deadlines(entry)
@@ -3145,7 +3146,8 @@ def merge_document_entry(record, entry):
             output.pop(key, None)
     source_fields = {key: {"present": key in output, "value": deepcopy(output.get(key))}
                      for key in ("has_preliminary_stage", "preliminary_stage_type", "limited_submission",
-                                 "status_verification_required", "actionability_status", "topic_areas")}
+                                 "status_verification_required", "actionability_status", "topic_areas",
+                                 "award_ceiling", "award_source")}
     # Reapplying evidence must remove the prior derived deadlines/citations,
     # including on amendment or failure. Source-listed facts keep authority.
     deadlines = []
@@ -3220,6 +3222,11 @@ def merge_document_entry(record, entry):
         "facts": facts,
         "review_queue": deepcopy(entry.get("review_queue") or []),
     }
+    award_reconciliation = notice_awards.reconcile_program_total(output, entry)
+    if award_reconciliation:
+        output['award_ceiling'] = award_reconciliation['notice_value']
+        output['award_source'] = 'Official notice: maximum individual award across topic areas'
+        output['document_evidence']['award_reconciliation'] = award_reconciliation
     if entry.get("extractor_identity"):
         output["document_evidence"]["dependency_version"] = 2
         output["document_evidence"]["review_queue"] = build_review_queue(

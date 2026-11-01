@@ -51,7 +51,9 @@ class PrimaryDocumentReleaseContract(unittest.TestCase):
         original = {'generation_sha': 'a' * 40, 'dependency_groups': base}
         selected = deepcopy(base)
         source_files = {'scripts/source_documents.py', 'scripts/pull_grants.py', 'scripts/enrich_catalog.py',
-            'scripts/extract_document_evidence.py', 'scripts/subtopic_sources.py', 'scripts/notice_semantics.py'}
+            'scripts/extract_document_evidence.py', 'scripts/subtopic_sources.py', 'scripts/notice_semantics.py',
+            'scripts/notice_schedule.py', 'scripts/notice_awards.py', 'scripts/submission_schedule.py',
+            'scripts/build_changes.py', 'scripts/build_feeds.py'}
         selected['source']['files'].update({name: 'b' for name in source_files})
         with patch('tools.release_dependencies.snapshot', return_value=selected), patch.object(c, 'git'):
             p.modern_scope(Path('.'), original, 'primary_document')
@@ -67,10 +69,27 @@ class PrimaryDocumentReleaseContract(unittest.TestCase):
             p.modern_contract(Path('.'), 'primary_document')
         self.assertIn('config/primary_document_recovery.json', hashes.call_args.args[1])
         self.assertIn('tools/primary_document_revalidation.py', hashes.call_args.args[1])
+        self.assertIn('tools/corpus_clock.mjs', hashes.call_args.args[1])
         self.assertTrue(source_files <= set(hashes.call_args.args[1]))
+
+    def test_only_primary_recipe_admits_its_bound_vector_accounting_helper_change(self):
+        base = {group: {'files': {}, 'fingerprint': 'a'} for group in ('source', 'teams', 'semantic')}
+        changed = deepcopy(base)
+        changed['semantic']['files']['tools/catalog_reconcile_spend.py'] = 'b'*64
+        original = {'generation_sha': 'a'*40, 'dependency_groups': base}
+        with patch('tools.release_dependencies.snapshot', return_value=changed), patch.object(c, 'git'):
+            p.modern_scope(Path('.'), original, 'primary_document')
+            for kind in ('program_area', 'document_facts', 'administrative_submission'):
+                with self.subTest(kind=kind), self.assertRaisesRegex(ValueError, 'extractor_only_change'):
+                    p.modern_scope(Path('.'), original, kind)
+            changed['semantic']['files']['assets/search-hybrid.js'] = 'c'*64
+            with self.assertRaisesRegex(ValueError, 'extractor_only_change'):
+                p.modern_scope(Path('.'), original, 'primary_document')
+        self.assertIn('tools/catalog_reconcile_spend.py', p.MODERN_OPERATION_FILES)
 
     def test_only_primary_projection_can_change_enrichment_and_child_cache_stays_retained(self):
         files = {name: 'a' * 64 for name in p.PROJECTION + p.PRIMARY_DOCUMENT_OUTPUTS}
+        self.assertTrue({'feeds/changes.json', 'feeds/changes.xml'} <= set(files))
         self.assertEqual(set(p.projection_names({'projection_kind': 'primary_document', 'projection_hashes': files})), set(files))
         for kind in ('program_area', 'document_facts', 'administrative_submission'):
             with self.subTest(kind=kind), self.assertRaises(ValueError):
@@ -205,6 +224,74 @@ class PrimaryDocumentCheckpointContract(unittest.TestCase):
         self.assertEqual(receipt['new_document_requests'], 2)
         self.assertEqual(receipt['retained_requests'], p.retained_requests(f.original))
         self.assertEqual(len(receipt['consumed_checkpoints']), 1)
+        f.http.assert_not_called()
+
+    def test_completed_changed_recipe_restores_paid_child_and_consumed_native_checkpoint(self):
+        f = self.f; state = f.root/'first'
+        outputs = {name: ('safe two-document projection '+name).encode() for name in p.PROJECTION}
+        changes = {'source_requests': 0, 'document_requests': 2, 'document_ai_requests': 0, 'team_requests': 0}
+        contract = {'tools/primary_document_revalidation.py': '1'*64}
+        packet = dict(f.packet, corpus_sha256='8'*64)
+        def projection(parent, audit, identifier, kind, *, checkpoint_directory, acquire):
+            self.assertTrue(acquire)
+            saved = checkpoint_directory/'completed-pdfs.json'
+            new_requests = 0 if saved.exists() else 2
+            if saved.exists(): self.assertEqual(p.read(saved), {'acquisitions': 2})
+            else: atomic_json(saved, {'acquisitions': 2})
+            return outputs, changes | {'new_document_requests': new_requests}
+        with self.environment(projection), patch.object(p, 'modern_contract', return_value=contract), \
+                patch.object(p, 'vector_packet', return_value=packet):
+            prepared = self.prepare('first')
+        spend.prepare(state, packet)
+        request = spend.reserve(state, {'url': spend.URL, 'body': json.dumps({'input': ['Corrected public passage'],
+            'model': spend.MODEL, 'input_type': 'document', 'truncation': True, 'output_dimension': 1024, 'output_dtype': 'float'})})
+        spend.finish(state, {'key': request['key'], 'token': request['token'], 'status': 200,
+            'request_id': '7'*32, 'payload': {'model': spend.MODEL, 'usage': {'total_tokens': 52},
+                'data': [{'index': 0, 'embedding': [.25]*1024}]}})
+        vector_raw = {name: ('corrected whole asset '+name).encode() for name in p.VECTORS}
+        vector_raw[p.VECTORS[-1]] = c.encoded({'status': 'written', 'model': spend.MODEL,
+            'API_request_count': 1, 'usage_total_tokens': 52, 'API_requests': [{'model': spend.MODEL,
+                'http_status': 200, 'usage_total_tokens': 52, 'passage_count': 1, 'request_id': '7'*32}]})
+        for name, raw in vector_raw.items(): (f.root/name).write_bytes(raw)
+        value = spend.context(state)
+        spend.checkpoint(state, {'operation_sha256': value['operation_sha256'], 'outputs': p.hashes(f.root, p.VECTORS)})
+        with patch.object(p, 'modern_contract', return_value=contract), \
+                patch.object(p, 'vector_packet', return_value=packet | {'retained_asset_eligible': True}):
+            sealed = p.checkpoint_modern(f.root/'receipt.json', state, root=f.root)
+        child_raw = f.raw | outputs | vector_raw
+        child = deepcopy(f.manifest); child.pop('candidate_id')
+        child.update(files={name: p.sha(raw) for name,raw in child_raw.items()}, derived_from_candidate=f.cid,
+            dependency_groups={'semantic': {'files': {'tools/corpus_clock.mjs': 'c'*64}}},
+            program_area_revalidation=sealed | {'affected_generation': {'generation_run_id': '456',
+                'generation_run_attempt': '1', 'generation_sha': 'e'*40, 'generation_timestamp': '2026-11-01T21:55:00Z'}})
+        child['candidate_id'] = c.digest(c.encoded(child)); bundle = f.root/'completed-child'
+        atomic_json(bundle/'candidate.json', child)
+        for name,raw in child_raw.items():
+            target=bundle/'files'/name; target.parent.mkdir(parents=True,exist_ok=True); target.write_bytes(raw)
+        p.record_modern_candidate(state, bundle)
+        f.add_artifact('candidate-'+child['candidate_id'], '456', {'candidate.json': c.encoded(child),
+            **{'files/'+name: raw for name,raw in child_raw.items()}})
+        f.add_artifact(prepared['reservation_artifact'], '456', {'reservation.json': Path(prepared['reservation_path']).read_bytes()})
+        f.add_artifact(prepared['state_artifact'], '456', f.state_files(state))
+        before = spend.ledger(state).read(); f.runs[('456','1')]['status']='completed'
+        f.runs[('789','1')]=f.run_meta('789','1','9'*40,current=True)
+        updated = {'tools/primary_document_revalidation.py': '2'*64, 'tools/corpus_clock.mjs': 'c'*64}
+        with self.environment(projection,current='789'), patch.object(p,'modern_contract',return_value=updated), \
+                patch.object(p,'vector_packet',return_value=packet):
+            resumed=self.prepare('cold')
+        cold=f.root/'cold'; context=spend.context(cold)
+        self.assertEqual(spend.ledger(cold).read(),before)
+        self.assertEqual(context['retained_vector_source']['candidate_id'],child['candidate_id'])
+        self.assertEqual(p.read(cold/'primary-document-projection/completed-pdfs.json'),{'acquisitions':2})
+        consumed=p.read(cold/'consumed-checkpoints.json')
+        self.assertEqual(consumed[-1]['request_count'],2)
+        self.assertEqual(consumed[-1]['candidate']['candidate_id'],child['candidate_id'])
+        self.assertEqual(p.read(resumed['reservation_path'])['prior_ledger_sha256'],identity(before))
+        self.assertEqual(p.read(f.root/'receipt.json')['new_document_requests'], 0)
+        restored=spend.prepare(cold,packet)
+        self.assertEqual(restored['status'],'restore')
+        self.assertEqual(restored['outputs'],{name:p.sha(raw) for name,raw in vector_raw.items()})
+        self.assertEqual(spend.ledger(cold).read(),before)
         f.http.assert_not_called()
 
 
