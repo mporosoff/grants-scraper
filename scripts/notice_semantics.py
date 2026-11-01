@@ -5,6 +5,7 @@ explicit funding-notice fields and clauses, not arbitrary English inference.
 Unknown qualifiers remain unknown rather than becoming an asserted obligation.
 """
 import re
+from scripts import notice_fact_guards
 
 SEMANTIC_VERSIONS = {
     "amounts": "award-basis-11", "cost_share": "cost-obligation-2",
@@ -416,6 +417,8 @@ def amount_facts(api, opportunity_id, containers, document, stamp):
         for n, token in enumerate(tokens):
             if any(lo <= start + token.start() < hi for lo, hi in consumed[id(container)]):
                 continue
+            if notice_fact_guards.personnel_rate(clause, token.start(), token.end()):
+                continue
             before = clause[tokens[n - 1].end() if n else 0:token.start()]
             after = clause[token.end():tokens[n + 1].start() if n + 1 < len(tokens) else len(clause)]
             prefix = before[-220:]
@@ -761,6 +764,7 @@ def institutional_limit_signal(text):
 def component_facts(api, opportunity_id, containers, document, stamp):
     facts, seen = [], set()
     names = {**{k: v.pattern for k, v in api.APPLICATION_COMPONENTS.items()}, **COMPONENTS}
+    names['Logic model'] = r'\blogic\s+models?\b'
     previous = None
     for container, start, end in clauses(containers):
         clause = container["text"][start:end]
@@ -789,10 +793,17 @@ def component_facts(api, opportunity_id, containers, document, stamp):
             elif re.search(r"\bdo\s+not\s+(?:submit|include)\s+(?:(?:an?|the)\s+)?"
                            r"(?:copy\s+of\s+(?:the\s+)?(?:[A-Z][a-z]*\s+){0,8}(?:\([A-Z]{2,12}\)\s+)?)?$", prefix, re.I):
                 obligation = "prohibited"
+            elif notice_fact_guards.component_not_required(prefix + local, name):
+                obligation = 'not_required'
             elif re.search(r"\boptional\b", local, re.I):
                 obligation = "optional"
             elif re.search(r'\b(?:if|when)\b|\bas\s+applicable\b', prefix + local, re.I):
                 obligation = 'conditional'
+            elif (re.search(r'\bnot\s+(?:required|mandatory|necessary)\b', local, re.I)
+                  or re.search(r'\bnot\s+required\s+to\s+(?:include|submit|provide)\s*$', prefix, re.I)):
+                obligation = 'unknown'
+            elif re.search(r'\bmay\s+(?:include|submit|provide)\b[^.!?;]{0,80}$', prefix, re.I):
+                obligation = 'optional'
             elif (re.search(r"\b(?:must|required)\b", local, re.I)
                   or (re.search(r"\b(?:must\s+include|include|submit)\b", prefix, re.I)
                       and not re.search(r'\bdo\s+not\s+(?:submit|include)\b', prefix, re.I))):

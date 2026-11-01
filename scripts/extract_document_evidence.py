@@ -42,7 +42,7 @@ from scripts.build_catalog import (
     write_catalog,
 )
 from scripts.enrich_catalog import read_catalog
-from scripts import program_areas, notice_semantics, notice_schedule, notice_structure_cache
+from scripts import program_areas, notice_semantics, notice_schedule, notice_structure_cache, notice_fact_guards
 from scripts.document_work_budget import WorkTimedOut
 
 
@@ -3097,6 +3097,7 @@ def refine_administrative_close(record):
 
 def merge_document_entry(record, entry):
     if entry:
+        notice_fact_guards.repair_entry(entry)
         notice_schedule.repair_cached_arpa_summary(sys.modules[__name__], record, entry)
         revalidate_cached_deadlines(entry)
     output = deepcopy(record)
