@@ -4,8 +4,21 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml</id>
-  <updated>2026-10-30T16:48:34Z</updated>
+  <updated>2026-11-01T21:09:01Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>Grid Supply Chain Alternatives to Lead Energy Dominance (SCALED)</title>
+    <link href="https://www.grants.gov/search-results-detail/364174"/>
+    <id>urn:funding-finder:grants-gov:364174</id>
+    <updated>2026-10-30T00:00:00Z</updated>
+    <author><name>National Energy Technology Laboratory</name></author>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Materials science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>National Energy Technology Laboratory | Concept Paper 2026-11-20 | Grid Supply Chain Alternatives to Lead Energy Dominance (SCALED) This initiative will deploy a multi-faceted approach to bolster domestic capabilities to withstand supply chain shocks, ensure a reliable energy infrastructure, and position the U.S. as a global leader in foundational grid technologies.</summary>
+  </entry>
   <entry>
     <title>Unifying​ Imaging with​ Quantum​ Entanglement (UNIQUE)</title>
     <link href="https://arpa-h.gov/explore-funding/programs/unique"/>
@@ -17,7 +30,7 @@
     <category term="Materials science"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
-    <summary>Advanced Research Projects Agency for Health (ARPA-H) | Preapplication 2026-10-30 | Current ARPA-H program. UNIQUE | ARPA-H (function(w, d, s, l, i){w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&amp;l='+l:''; j.async=true; j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j, f); })(window, document,'script','dataLayer','GTM-W5GM3DT9'); wind…</summary>
+    <summary>Advanced Research Projects Agency for Health (ARPA-H) | Application 2026-12-15 | prerequisite closed | Current ARPA-H program. UNIQUE | ARPA-H (function(w, d, s, l, i){w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&amp;l='+l:''; j.async=true; j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j, f); })(window, document,'script','dataLayer','GTM-W5GM3DT9'); wind…</summary>
   </entry>
   <entry>
     <title>AFRL/AFOSR-Taiwan NSTC Frontiers in Materials and Nanostructures: AI-Driven Discovery, Quantum Geometry, and Energy-Efficient Information Technologies 2027-2030</title>
@@ -112,6 +125,22 @@
     <category term="Materials science"/>
     <category term="Water"/>
     <summary>Geological Survey | Application 2026-11-14 | Robust and reliable quantitative method to correct for solution chemistry interferences in molecularly imprinted polymer - electrochemical sensor (MIP-ES) measurements of complex environmental water matricesThe goal of this research is to develop a robust and reliable quantitative method to correct for solution chemistry interferences in MIP-ES measurements of complex environmental water matrices.…</summary>
+  </entry>
+  <entry>
+    <title>Genesis Mission Graduate Fellowship Pilot</title>
+    <link href="https://www.grants.gov/search-results-detail/364033"/>
+    <id>urn:funding-finder:grants-gov:364033</id>
+    <updated>2026-10-08T00:00:00Z</updated>
+    <author><name>Office of Science</name></author>
+    <category term="Education and workforce"/>
+    <category term="Technology development"/>
+    <category term="Materials science"/>
+    <category term="Quantum science"/>
+    <category term="Energy"/>
+    <category term="Data science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Manufacturing"/>
+    <summary>Office of Science | Letter Of Intent 2026-11-09 | American scientists and engineers will power the super intelligence (SI) revolution in science and innovation through the Genesis Mission. DOE SC hereby invites applications from United States (U.S.) Institutions of Higher Education and domestic doctoral-granting institutions to develop and demonstrate the effectiveness of novel four-year doctoral training pilots with dual competency in SI and ano…</summary>
   </entry>
   <entry>
     <title>Small Business Innovation Research and Small Business Technology Transfer Programs Phase II</title>
@@ -806,34 +835,5 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Materials science"/>
     <category term="Technology development"/>
     <summary>Idaho Field Office | Application 2030-10-14 | A. STATEMENT OF OBJECTIVESThis Funding Opportunity Announcement (FOA) is to award multiple cooperative agreements to accredited United States (U.S.) two- and four-year colleges and universities (Institutions of Higher Education (IHEs)) to receive and administer scholarship and fellowship funding-provided through the University Nuclear Leadership Program (UNLP) and as administered by the Department…</summary>
-  </entry>
-  <entry>
-    <title>Science of Learning and Augmented Intelligence (SL)</title>
-    <link href="https://www.grants.gov/search-results-detail/320753"/>
-    <id>urn:funding-finder:grants-gov:320753</id>
-    <updated>2019-09-19T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Data science"/>
-    <category term="Education and workforce"/>
-    <category term="Materials science"/>
-    <category term="Neuroscience"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>U.S. National Science Foundation | Application 2027-02-10 | Science of Learning and Augmented Intelligence (SL) supports potentially transformative research that develops basic theoretical insights and fundamental knowledge about principles, processes and mechanisms of learning, and about augmented intelligence - how human cognitive function can be augmented through interactions with others or with technology, or through variations in context. The program …</summary>
-  </entry>
-  <entry>
-    <title>Crosscutting Activities in Materials Research</title>
-    <link href="https://www.grants.gov/search-results-detail/308873"/>
-    <id>urn:funding-finder:grants-gov:308873</id>
-    <updated>2018-09-08T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Data science"/>
-    <category term="Education and workforce"/>
-    <category term="Health equity"/>
-    <category term="Materials science"/>
-    <summary>U.S. National Science Foundation | Posted | Crosscutting Activities in Materials Research (XC) coordinates and supports crosscutting activities within the Division of Materials Research (DMR) and more broadly across NSF.
-The emphasis within XC is diversity and inclusion, international cooperation, and education (including experiential learning at REU/RET Sites). Additionally, activities that broadly engage the community, such as summer scho…</summary>
   </entry>
 </feed>

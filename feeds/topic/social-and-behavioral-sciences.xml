@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/social-and-behavioral-sciences.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/social-and-behavioral-sciences.xml</id>
-  <updated>2026-10-30T16:48:34Z</updated>
+  <updated>2026-11-01T21:09:01Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -328,18 +328,6 @@
     <summary>National Institutes of Health | Application 2027-02-08 | The National Institute on Drug Abuse (NIDA) invites applications to renew and expand the Collaboratory on Neural Ensembles and Used Substances (NExUS).NExUS is a collaborative research program to decode how substance use experiences and addictive neurobehavioral states are represented in the brain at the level of cell populations. This funding opportunity seeks applications that propose systematic…</summary>
   </entry>
   <entry>
-    <title>BJA FY 2026 National Center for Veterans Justice</title>
-    <link href="https://www.grants.gov/search-results-detail/363898"/>
-    <id>urn:funding-finder:grants-gov:363898</id>
-    <updated>2026-09-21T00:00:00Z</updated>
-    <author><name>Bureau of Justice Assistance</name></author>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Neuroscience"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>Bureau of Justice Assistance | Application 2026-10-30 | This is a notice of funding opportunity (NOFO) for the BJA FY 2026 National Center for Veterans Justice. This opportunity will establish a national center to provide specialized support to state, local, and tribal criminal justice agencies; treatment and service providers; courts; corrections systems; and community supervision agencies to effectively support and respond to the needs of veterans ac…</summary>
-  </entry>
-  <entry>
     <title>PFE: Research Initiation in Engineering Formation (PFE: RIEF)</title>
     <link href="https://www.grants.gov/search-results-detail/363764"/>
     <id>urn:funding-finder:grants-gov:363764</id>
@@ -434,18 +422,6 @@
     <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
     <category term="Social and behavioral sciences"/>
     <summary>Defense Health Agency Contracting Activity - DHACA | Application 2026-11-18 | invitation required | Summary: The Orthopaedic Research Program (ORP) Applied Research Award (ARA) seeks applied research applications focused on advancing optimal treatment and restoration of function for individuals with orthopaedic injuries sustained during combat or service-related activities. Distinctive Features: • Applied research is defined as work that refines concepts and ideas into potential solutions with a…</summary>
-  </entry>
-  <entry>
-    <title>HEAL Initiative: Optimization of Therapeutic Medical Devices through Team Science Mechanistic Research (RM1)</title>
-    <link href="https://www.grants.gov/search-results-detail/361520"/>
-    <id>urn:funding-finder:grants-gov:361520</id>
-    <updated>2026-06-11T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Neuroscience"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health | Estimated Application 2026-10-30 | The National Institute of Neurological Disorders and Stroke (NINDS), with other NIH Institutes and Centers (ICs), intends to publish a Notice of Funding Opportunity (NOFO) to investigate the mechanisms of action of therapeutic medical devices with the overall goal of improving clinical outcomes with device-based approaches. Medical devices are essential in managing health conditions, complementing…</summary>
   </entry>
   <entry>
     <title>NIH Research Education Program - Research Experiences (Parent R25 - Clinical Trial Not Allowed)</title>
@@ -650,5 +626,31 @@
     <category term="Education and workforce"/>
     <category term="Social and behavioral sciences"/>
     <summary>National Institutes of Health | Application 2027-05-26 | This Notice of Funding Opportunity (NOFO) invites R25 applications to support the development and implementation of summer research education programs for high school students, undergraduates, or science teachers from all backgrounds, including those from groups underrepresented in the biomedical and behavioral sciences. It is essential to expand and broaden the skilled Alzheimer's Disease (AD) an…</summary>
+  </entry>
+  <entry>
+    <title>Support for Research Excellence (SuRE) Award (R16 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/358829"/>
+    <id>urn:funding-finder:grants-gov:358829</id>
+    <updated>2025-06-13T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>National Institutes of Health | Application 2027-05-28 | The SuRE program supports research capacity building at eligible higher education institutions by funding investigator-initiated biomedical research inbasic, social, clinical, behavioral, or translational science that falls in the mission areas of the NIH. The purpose of SuRE awards is to provide support for investigator-initiated research at resource-limited institutions by full-time faculty who …</summary>
+  </entry>
+  <entry>
+    <title>Support for Research Excellence First Independent Research (SuRE-First) Award (R16 - Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/358875"/>
+    <id>urn:funding-finder:grants-gov:358875</id>
+    <updated>2025-06-13T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>National Institutes of Health | Application 2027-05-28 | The SuRE program supports research capacity building at eligible higher education institutions through funding investigator-initiated biomedical research inbasic, social, clinical, behavioral, or translational science that falls in the mission areas of the NIH. The purpose of SuRE-First awards is to provide support for investigator-initiated research at resource-limited institutions by full-time f…</summary>
   </entry>
 </feed>
