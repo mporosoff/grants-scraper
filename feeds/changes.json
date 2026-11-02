@@ -1,8 +1,1140 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-01T21:15:13Z",
+  "generated_at": "2026-11-02T20:31:37Z",
   "retention_days": 90,
   "events": [
+    {
+      "id": "f2d8c2ce2bb87f6b6673",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-11-02T20:28:07.902626Z",
+      "opportunity_id": "363240",
+      "detail": "Deadline 2026-12-02",
+      "record": {
+        "opportunity_id": "363240",
+        "opportunity_number": "NNH25ZDA001N-ATMOS",
+        "title": "ROSES25: A.14 Atmosphere",
+        "agency": "NASA Headquarters",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-07-20",
+        "close_date": "2026-12-02",
+        "deadlines": [
+          {
+            "kind": "application",
+            "date": "2026-12-02",
+            "time": "11:59:59 PM",
+            "timezone": "EST",
+            "note": null,
+            "estimated": false,
+            "source": "Grants.gov XML extract",
+            "source_url": "https://www.grants.gov/search-results-detail/363240",
+            "source_field": "CloseDate",
+            "confidence": "official_structured",
+            "detail_checked_at": "2026-09-23T15:03:20.342299Z",
+            "document_evidence_id": "evidence-363240-8132641fe2d5",
+            "document_confidence": "machine_extracted_needs_verification",
+            "document_source_fields": {
+              "time": {
+                "present": true,
+                "value": null
+              },
+              "timezone": {
+                "present": true,
+                "value": null
+              },
+              "stage": {
+                "present": false,
+                "value": null
+              }
+            },
+            "stage": "application"
+          }
+        ],
+        "submission_requirements": [],
+        "next_submission": {
+          "version": 2,
+          "as_of": "2026-11-02",
+          "application_class": "new",
+          "date": "2026-12-02",
+          "event": {
+            "kind": "application",
+            "date": "2026-12-02",
+            "time": "11:59:59 PM",
+            "timezone": "EST",
+            "note": null,
+            "estimated": false,
+            "source": "Grants.gov XML extract",
+            "source_url": "https://www.grants.gov/search-results-detail/363240",
+            "source_field": "CloseDate",
+            "confidence": "official_structured",
+            "detail_checked_at": "2026-09-23T15:03:20.342299Z",
+            "document_evidence_id": "evidence-363240-8132641fe2d5",
+            "citation": {
+              "citation_url": "https://nspires.nasaprs.com/external/solicitations/summary.do?solNum=NNH25ZDA001N-ATMOS",
+              "document_name": null,
+              "document_url": "https://nspires.nasaprs.com/external/solicitations/summary.do?solNum=NNH25ZDA001N-ATMOS",
+              "extracted_at": "2026-10-16T16:56:01.088916Z",
+              "location": "section “A.14 AtmosphereClose”",
+              "page": null,
+              "quote": "…irectorate Type: NASA Research Announcement Status: Open Dates Label | Date | Option Release | Jul 20, 2026 | ATMOS25 Mandatory NOIs Due | Aug 20, 2026 | ATMOS25 Proposals Due | Dec 02, 2026 11:59:59 PM Eastern Standard Time | Create",
+              "section": "A.14 AtmosphereClose",
+              "sha256": "36532adadb54d5f60bbc4a7013bfe7f5ee474a4be627426f500dbbfeed25b250",
+              "structural_reference": {
+                "block_id": "html-22",
+                "field_id": "table-1:3:1",
+                "field_label": "ATMOS25 Proposals Due",
+                "heading_path": [
+                  "Misconduct Policy",
+                  "A.14 AtmosphereClose"
+                ],
+                "kind": "table_row",
+                "row": 3,
+                "source_position": [
+                  365,
+                  11
+                ],
+                "table_id": "table-1"
+              }
+            },
+            "document_confidence": "machine_extracted_needs_verification",
+            "document_source_fields": {
+              "time": {
+                "present": true,
+                "value": null
+              },
+              "timezone": {
+                "present": true,
+                "value": null
+              },
+              "stage": {
+                "present": false,
+                "value": null
+              }
+            },
+            "stage": "application"
+          },
+          "access": "open",
+          "prerequisites": []
+        },
+        "source_aliases": null,
+        "last_updated": "2026-09-21",
+        "version": "Synopsis 4",
+        "topic_areas": [
+          "Artificial intelligence and machine learning",
+          "Education and workforce",
+          "Energy",
+          "Space and aeronautics"
+        ],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement",
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/363240",
+        "funding_opportunity_url": "https://solicitation.nasaprs.com/NNH25ZDA001N-ATMOS",
+        "primary_document_url": null
+      },
+      "deadline": "2026-12-02"
+    },
+    {
+      "id": "eb186cda58b74575f329",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-11-02T20:28:07.902626Z",
+      "opportunity_id": "nyserda:PON6239",
+      "detail": "Deadline 2026-12-02",
+      "record": {
+        "opportunity_id": "nyserda:PON6239",
+        "opportunity_number": "PON 6239",
+        "title": "Commercialization Cohort Programs",
+        "agency": "NYSERDA",
+        "source": "NYSERDA",
+        "source_type": "State",
+        "status": "posted",
+        "posted_date": null,
+        "close_date": "2026-12-02",
+        "deadlines": [
+          {
+            "kind": "application",
+            "date": "2026-12-02",
+            "time": null,
+            "timezone": null,
+            "note": null,
+            "estimated": false,
+            "source": "NYSERDA",
+            "source_url": "https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr00001L5iYZAAZ",
+            "source_field": "source listing",
+            "confidence": "source_listed"
+          }
+        ],
+        "submission_requirements": [],
+        "next_submission": {
+          "version": 2,
+          "as_of": "2026-11-02",
+          "application_class": "new",
+          "date": "2026-12-02",
+          "event": {
+            "kind": "application",
+            "date": "2026-12-02",
+            "time": null,
+            "timezone": null,
+            "note": null,
+            "estimated": false,
+            "source": "NYSERDA",
+            "source_url": "https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr00001L5iYZAAZ",
+            "source_field": "source listing",
+            "confidence": "source_listed"
+          },
+          "access": "open",
+          "prerequisites": []
+        },
+        "source_aliases": null,
+        "last_updated": null,
+        "version": null,
+        "topic_areas": [
+          "Technology development"
+        ],
+        "disciplines": [],
+        "applicant_types": [],
+        "funding_instruments": [],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr00001L5iYZAAZ",
+        "funding_opportunity_url": "https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr00001L5iYZAAZ",
+        "primary_document_url": null
+      },
+      "deadline": "2026-12-02"
+    },
+    {
+      "id": "9d175e229f66747a6b92",
+      "type": "deadline_changed",
+      "label": "Deadline changed",
+      "changed_at": "2026-11-02T20:28:07.902626Z",
+      "opportunity_id": "nyserda:PON6121",
+      "detail": "2026-11-23 → 2026-11-24",
+      "record": {
+        "opportunity_id": "nyserda:PON6121",
+        "opportunity_number": "PON 6121",
+        "title": "Clean Energy Career Pathways Training",
+        "agency": "NYSERDA",
+        "source": "NYSERDA",
+        "source_type": "State",
+        "status": "posted",
+        "posted_date": null,
+        "close_date": "2026-11-24",
+        "deadlines": [
+          {
+            "kind": "application",
+            "date": "2026-11-24",
+            "time": null,
+            "timezone": null,
+            "note": "Next of 7 future NYSERDA application rounds; later rounds are listed in the details.",
+            "estimated": false,
+            "source": "NYSERDA",
+            "source_url": "https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr000012uHhNAAU",
+            "source_field": "source listing",
+            "confidence": "source_listed"
+          },
+          {
+            "kind": "application",
+            "date": "2027-01-20",
+            "time": "3:00 PM",
+            "timezone": "ET",
+            "note": "Round 5",
+            "estimated": false,
+            "source": "NYSERDA",
+            "source_url": "https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr000012uHhNAAU",
+            "source_field": "source listing",
+            "confidence": "source_listed"
+          },
+          {
+            "kind": "application",
+            "date": "2027-03-24",
+            "time": "3:00 PM",
+            "timezone": "ET",
+            "note": "Round 6",
+            "estimated": false,
+            "source": "NYSERDA",
+            "source_url": "https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr000012uHhNAAU",
+            "source_field": "source listing",
+            "confidence": "source_listed"
+          },
+          {
+            "kind": "application",
+            "date": "2027-05-26",
+            "time": "3:00 PM",
+            "timezone": "ET",
+            "note": "Round 7",
+            "estimated": false,
+            "source": "NYSERDA",
+            "source_url": "https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr000012uHhNAAU",
+            "source_field": "source listing",
+            "confidence": "source_listed"
+          },
+          {
+            "kind": "application",
+            "date": "2027-07-21",
+            "time": "3:00 PM",
+            "timezone": "ET",
+            "note": "Round 8",
+            "estimated": false,
+            "source": "NYSERDA",
+            "source_url": "https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr000012uHhNAAU",
+            "source_field": "source listing",
+            "confidence": "source_listed"
+          },
+          {
+            "kind": "application",
+            "date": "2027-09-22",
+            "time": "3:00 PM",
+            "timezone": "ET",
+            "note": "Round 9",
+            "estimated": false,
+            "source": "NYSERDA",
+            "source_url": "https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr000012uHhNAAU",
+            "source_field": "source listing",
+            "confidence": "source_listed"
+          },
+          {
+            "kind": "application",
+            "date": "2027-11-23",
+            "time": "3:00 PM",
+            "timezone": "ET",
+            "note": "Round 10",
+            "estimated": false,
+            "source": "NYSERDA",
+            "source_url": "https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr000012uHhNAAU",
+            "source_field": "source listing",
+            "confidence": "source_listed"
+          }
+        ],
+        "submission_requirements": [],
+        "next_submission": {
+          "version": 2,
+          "as_of": "2026-11-02",
+          "application_class": "new",
+          "date": "2026-11-24",
+          "event": {
+            "kind": "application",
+            "date": "2026-11-24",
+            "time": null,
+            "timezone": null,
+            "note": "Next of 7 future NYSERDA application rounds; later rounds are listed in the details.",
+            "estimated": false,
+            "source": "NYSERDA",
+            "source_url": "https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr000012uHhNAAU",
+            "source_field": "source listing",
+            "confidence": "source_listed"
+          },
+          "access": "open",
+          "prerequisites": []
+        },
+        "source_aliases": null,
+        "last_updated": null,
+        "version": null,
+        "topic_areas": [
+          "Education and workforce",
+          "Energy"
+        ],
+        "disciplines": [],
+        "applicant_types": [],
+        "funding_instruments": [],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr000012uHhNAAU",
+        "funding_opportunity_url": "https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr000012uHhNAAU",
+        "primary_document_url": null
+      },
+      "old_deadline": "2026-11-23",
+      "new_deadline": "2026-11-24"
+    },
+    {
+      "id": "88ebe33b615ee575f672",
+      "type": "closed_or_removed",
+      "label": "Closed or removed",
+      "changed_at": "2026-11-02T20:28:07.902626Z",
+      "opportunity_id": "362454",
+      "detail": "No longer in the current catalog",
+      "record": {
+        "opportunity_id": "362454",
+        "opportunity_number": "RFA-AG-27-005",
+        "title": "The NIA Genetics of Alzheimer's Disease Data Storage Site (NIAGADS)",
+        "agency": "National Institutes of Health",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "forecasted",
+        "posted_date": "2026-09-01",
+        "close_date": "2026-11-01",
+        "deadlines": [
+          {
+            "kind": "estimated_application",
+            "date": "2026-11-01",
+            "time": null,
+            "timezone": null,
+            "note": null,
+            "estimated": true,
+            "source": "Grants.gov XML extract",
+            "source_url": "https://www.grants.gov/search-results-detail/362454",
+            "source_field": "EstimatedSynopsisCloseDate",
+            "confidence": "official_estimate",
+            "detail_checked_at": "2026-07-31T12:17:15.975581Z"
+          }
+        ],
+        "submission_requirements": null,
+        "next_submission": {
+          "version": 2,
+          "as_of": "2026-11-01",
+          "application_class": "new",
+          "date": "2026-11-01",
+          "event": {
+            "kind": "estimated_application",
+            "date": "2026-11-01",
+            "time": null,
+            "timezone": null,
+            "note": null,
+            "estimated": true,
+            "source": "Grants.gov XML extract",
+            "source_url": "https://www.grants.gov/search-results-detail/362454",
+            "source_field": "EstimatedSynopsisCloseDate",
+            "confidence": "official_estimate",
+            "detail_checked_at": "2026-07-31T12:17:15.975581Z"
+          },
+          "access": "open",
+          "prerequisites": []
+        },
+        "source_aliases": null,
+        "last_updated": "2026-05-18",
+        "version": "Forecast 1",
+        "topic_areas": [
+          "Artificial intelligence and machine learning",
+          "Biology and biotechnology",
+          "Community development",
+          "Education and workforce"
+        ],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Independent school districts",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Private institutions of higher education",
+          "For-profit organizations other than small businesses",
+          "Small businesses",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/362454",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "88ce6442a10a58cf30ca",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-11-02T20:28:07.902626Z",
+      "opportunity_id": "364122",
+      "detail": "Deadline 2026-12-02",
+      "record": {
+        "opportunity_id": "364122",
+        "opportunity_number": "O-BJA-2026-172716",
+        "title": "BJA FY 2026 Missing and Unidentified Human Remains (MUHR) Program",
+        "agency": "Bureau of Justice Assistance",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-10-19",
+        "close_date": "2026-12-02",
+        "deadlines": [
+          {
+            "kind": "application",
+            "date": "2026-12-02",
+            "time": null,
+            "timezone": null,
+            "note": null,
+            "estimated": false,
+            "source": "Grants.gov XML extract",
+            "source_url": "https://www.grants.gov/search-results-detail/364122",
+            "source_field": "CloseDate",
+            "confidence": "official_structured",
+            "detail_checked_at": "2026-10-20T15:26:47.632876Z"
+          }
+        ],
+        "submission_requirements": [],
+        "next_submission": {
+          "version": 2,
+          "as_of": "2026-11-02",
+          "application_class": "new",
+          "date": "2026-12-02",
+          "event": {
+            "kind": "application",
+            "date": "2026-12-02",
+            "time": null,
+            "timezone": null,
+            "note": null,
+            "estimated": false,
+            "source": "Grants.gov XML extract",
+            "source_url": "https://www.grants.gov/search-results-detail/364122",
+            "source_field": "CloseDate",
+            "confidence": "official_structured",
+            "detail_checked_at": "2026-10-20T15:26:47.632876Z"
+          },
+          "access": "open",
+          "prerequisites": []
+        },
+        "source_aliases": null,
+        "last_updated": "2026-10-19",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Transportation"
+        ],
+        "disciplines": [
+          "Community and Social Sciences"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Public and state institutions of higher education",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": 1000000,
+        "detail_page": "https://www.grants.gov/search-results-detail/364122",
+        "funding_opportunity_url": "https://bja.ojp.gov/funding/opportunities/o-bja-2026-172716",
+        "primary_document_url": null
+      },
+      "deadline": "2026-12-02"
+    },
+    {
+      "id": "75c26e799b4f6f231dec",
+      "type": "closed_or_removed",
+      "label": "Closed or removed",
+      "changed_at": "2026-11-02T20:28:07.902626Z",
+      "opportunity_id": "nyserda:PON6201",
+      "detail": "No longer in the current catalog",
+      "record": {
+        "opportunity_id": "nyserda:PON6201",
+        "opportunity_number": "PON 6201",
+        "title": "Energy Economy Planning and Growth Program",
+        "agency": "NYSERDA",
+        "source": "NYSERDA",
+        "source_type": "State",
+        "status": "posted",
+        "posted_date": null,
+        "close_date": "2026-11-02",
+        "deadlines": [
+          {
+            "kind": "application",
+            "date": "2026-11-02",
+            "time": null,
+            "timezone": null,
+            "note": "Next of 2 future NYSERDA application rounds; later rounds are listed in the details.",
+            "estimated": false,
+            "source": "NYSERDA",
+            "source_url": "https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr00001COlXwAAL",
+            "source_field": "source listing",
+            "confidence": "source_listed"
+          },
+          {
+            "kind": "application",
+            "date": "2027-02-24",
+            "time": "3:00 PM",
+            "timezone": "ET",
+            "note": "Round 2",
+            "estimated": false,
+            "source": "NYSERDA",
+            "source_url": "https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr00001COlXwAAL",
+            "source_field": "source listing",
+            "confidence": "source_listed"
+          }
+        ],
+        "submission_requirements": [],
+        "next_submission": {
+          "version": 2,
+          "as_of": "2026-11-01",
+          "application_class": "new",
+          "date": "2026-11-02",
+          "event": {
+            "kind": "application",
+            "date": "2026-11-02",
+            "time": null,
+            "timezone": null,
+            "note": "Next of 2 future NYSERDA application rounds; later rounds are listed in the details.",
+            "estimated": false,
+            "source": "NYSERDA",
+            "source_url": "https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr00001COlXwAAL",
+            "source_field": "source listing",
+            "confidence": "source_listed"
+          },
+          "access": "open",
+          "prerequisites": []
+        },
+        "source_aliases": null,
+        "last_updated": null,
+        "version": null,
+        "topic_areas": [
+          "Energy"
+        ],
+        "disciplines": [],
+        "applicant_types": [],
+        "funding_instruments": [],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr00001COlXwAAL",
+        "funding_opportunity_url": "https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr00001COlXwAAL",
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "6e7aa8ecd1cace42d61b",
+      "type": "closed_or_removed",
+      "label": "Closed or removed",
+      "changed_at": "2026-11-02T20:28:07.902626Z",
+      "opportunity_id": "360625",
+      "detail": "No longer in the current catalog",
+      "record": {
+        "opportunity_id": "360625",
+        "opportunity_number": "RFA-DK-27-117",
+        "title": "The NIDDK Disorders of Gastrointestinal Interoception Consortium Clinical Centers (DGIC)",
+        "agency": "National Institutes of Health",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "forecasted",
+        "posted_date": "2026-08-01",
+        "close_date": "2026-11-01",
+        "deadlines": [
+          {
+            "kind": "estimated_application",
+            "date": "2026-11-01",
+            "time": null,
+            "timezone": null,
+            "note": null,
+            "estimated": true,
+            "source": "Grants.gov XML extract",
+            "source_url": "https://www.grants.gov/search-results-detail/360625",
+            "source_field": "EstimatedSynopsisCloseDate",
+            "confidence": "official_estimate",
+            "detail_checked_at": "2026-07-31T12:17:15.975581Z"
+          }
+        ],
+        "submission_requirements": null,
+        "next_submission": {
+          "version": 2,
+          "as_of": "2026-11-01",
+          "application_class": "new",
+          "date": "2026-11-01",
+          "event": {
+            "kind": "estimated_application",
+            "date": "2026-11-01",
+            "time": null,
+            "timezone": null,
+            "note": null,
+            "estimated": true,
+            "source": "Grants.gov XML extract",
+            "source_url": "https://www.grants.gov/search-results-detail/360625",
+            "source_field": "EstimatedSynopsisCloseDate",
+            "confidence": "official_estimate",
+            "detail_checked_at": "2026-07-31T12:17:15.975581Z"
+          },
+          "access": "open",
+          "prerequisites": []
+        },
+        "source_aliases": null,
+        "last_updated": "2025-09-18",
+        "version": "Forecast 1",
+        "topic_areas": [
+          "Arts and culture"
+        ],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Independent school districts",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Private institutions of higher education",
+          "For-profit organizations other than small businesses",
+          "Small businesses",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/360625",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "65989ec475ef058919ac",
+      "type": "closed_or_removed",
+      "label": "Closed or removed",
+      "changed_at": "2026-11-02T20:28:07.902626Z",
+      "opportunity_id": "360623",
+      "detail": "No longer in the current catalog",
+      "record": {
+        "opportunity_id": "360623",
+        "opportunity_number": "RFA-DK-27-118",
+        "title": "The NIDDK Disorders of Gastrointestinal Interoception Consortium Clinical Centers (DGIC)",
+        "agency": "National Institutes of Health",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "forecasted",
+        "posted_date": "2026-08-01",
+        "close_date": "2026-11-01",
+        "deadlines": [
+          {
+            "kind": "estimated_application",
+            "date": "2026-11-01",
+            "time": null,
+            "timezone": null,
+            "note": null,
+            "estimated": true,
+            "source": "Grants.gov XML extract",
+            "source_url": "https://www.grants.gov/search-results-detail/360623",
+            "source_field": "EstimatedSynopsisCloseDate",
+            "confidence": "official_estimate",
+            "detail_checked_at": "2026-07-31T12:17:15.975581Z"
+          }
+        ],
+        "submission_requirements": null,
+        "next_submission": {
+          "version": 2,
+          "as_of": "2026-11-01",
+          "application_class": "new",
+          "date": "2026-11-01",
+          "event": {
+            "kind": "estimated_application",
+            "date": "2026-11-01",
+            "time": null,
+            "timezone": null,
+            "note": null,
+            "estimated": true,
+            "source": "Grants.gov XML extract",
+            "source_url": "https://www.grants.gov/search-results-detail/360623",
+            "source_field": "EstimatedSynopsisCloseDate",
+            "confidence": "official_estimate",
+            "detail_checked_at": "2026-07-31T12:17:15.975581Z"
+          },
+          "access": "open",
+          "prerequisites": []
+        },
+        "source_aliases": null,
+        "last_updated": "2025-09-18",
+        "version": "Forecast 1",
+        "topic_areas": [
+          "Arts and culture"
+        ],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Independent school districts",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Private institutions of higher education",
+          "For-profit organizations other than small businesses",
+          "Small businesses",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/360623",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "3d8959b9f5d68165ac37",
+      "type": "closed_or_removed",
+      "label": "Closed or removed",
+      "changed_at": "2026-11-02T20:28:07.902626Z",
+      "opportunity_id": "360622",
+      "detail": "No longer in the current catalog",
+      "record": {
+        "opportunity_id": "360622",
+        "opportunity_number": "RFA-DK-27-124",
+        "title": "The NIDDK Inflammatory Bowel Disease Genetics Consortium (IBDGC) Data Coordinating Center",
+        "agency": "National Institutes of Health",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "forecasted",
+        "posted_date": "2026-08-01",
+        "close_date": "2026-11-01",
+        "deadlines": [
+          {
+            "kind": "estimated_application",
+            "date": "2026-11-01",
+            "time": null,
+            "timezone": null,
+            "note": null,
+            "estimated": true,
+            "source": "Grants.gov XML extract",
+            "source_url": "https://www.grants.gov/search-results-detail/360622",
+            "source_field": "EstimatedSynopsisCloseDate",
+            "confidence": "official_estimate",
+            "detail_checked_at": "2026-07-31T12:17:15.975581Z"
+          }
+        ],
+        "submission_requirements": null,
+        "next_submission": {
+          "version": 2,
+          "as_of": "2026-11-01",
+          "application_class": "new",
+          "date": "2026-11-01",
+          "event": {
+            "kind": "estimated_application",
+            "date": "2026-11-01",
+            "time": null,
+            "timezone": null,
+            "note": null,
+            "estimated": true,
+            "source": "Grants.gov XML extract",
+            "source_url": "https://www.grants.gov/search-results-detail/360622",
+            "source_field": "EstimatedSynopsisCloseDate",
+            "confidence": "official_estimate",
+            "detail_checked_at": "2026-07-31T12:17:15.975581Z"
+          },
+          "access": "open",
+          "prerequisites": []
+        },
+        "source_aliases": null,
+        "last_updated": "2025-09-18",
+        "version": "Forecast 1",
+        "topic_areas": [
+          "Biology and biotechnology",
+          "Data science",
+          "Environmental science"
+        ],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Independent school districts",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Private institutions of higher education",
+          "For-profit organizations other than small businesses",
+          "Small businesses",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/360622",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "2ef87182ea6d2041bc02",
+      "type": "closed_or_removed",
+      "label": "Closed or removed",
+      "changed_at": "2026-11-02T20:28:07.902626Z",
+      "opportunity_id": "360621",
+      "detail": "No longer in the current catalog",
+      "record": {
+        "opportunity_id": "360621",
+        "opportunity_number": "RFA-DK-27-116",
+        "title": "The NIDDK Inflammatory Bowel Disease Genetics Consortium (IBDGC) Genomic Research Centers",
+        "agency": "National Institutes of Health",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "forecasted",
+        "posted_date": "2026-08-01",
+        "close_date": "2026-11-01",
+        "deadlines": [
+          {
+            "kind": "estimated_application",
+            "date": "2026-11-01",
+            "time": null,
+            "timezone": null,
+            "note": null,
+            "estimated": true,
+            "source": "Grants.gov XML extract",
+            "source_url": "https://www.grants.gov/search-results-detail/360621",
+            "source_field": "EstimatedSynopsisCloseDate",
+            "confidence": "official_estimate",
+            "detail_checked_at": "2026-07-31T12:17:15.975581Z"
+          }
+        ],
+        "submission_requirements": null,
+        "next_submission": {
+          "version": 2,
+          "as_of": "2026-11-01",
+          "application_class": "new",
+          "date": "2026-11-01",
+          "event": {
+            "kind": "estimated_application",
+            "date": "2026-11-01",
+            "time": null,
+            "timezone": null,
+            "note": null,
+            "estimated": true,
+            "source": "Grants.gov XML extract",
+            "source_url": "https://www.grants.gov/search-results-detail/360621",
+            "source_field": "EstimatedSynopsisCloseDate",
+            "confidence": "official_estimate",
+            "detail_checked_at": "2026-07-31T12:17:15.975581Z"
+          },
+          "access": "open",
+          "prerequisites": []
+        },
+        "source_aliases": null,
+        "last_updated": "2025-09-18",
+        "version": "Forecast 1",
+        "topic_areas": [
+          "Biology and biotechnology",
+          "Data science",
+          "Environmental science"
+        ],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Independent school districts",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Private institutions of higher education",
+          "For-profit organizations other than small businesses",
+          "Small businesses",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/360621",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "0b84c277ce706278d9ae",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-11-02T20:28:07.902626Z",
+      "opportunity_id": "vpr-email:26-522",
+      "detail": "Deadline 2026-12-02",
+      "record": {
+        "opportunity_id": "vpr-email:26-522",
+        "opportunity_number": "26-522",
+        "title": "New NSF MPS funding opportunities for core research programs",
+        "agency": "VPR funding digest (limited submissions & foundations)",
+        "source": "VPR funding digest (limited submissions & foundations)",
+        "source_type": "Internal",
+        "status": "posted",
+        "posted_date": null,
+        "close_date": "2026-12-02",
+        "deadlines": [
+          {
+            "kind": "application",
+            "date": "2026-12-02",
+            "time": null,
+            "timezone": null,
+            "note": null,
+            "estimated": false,
+            "source": "VPR funding digest (limited submissions & foundations)",
+            "source_url": "https://links-2.govdelivery.com/CL0/https:",
+            "source_field": "source listing",
+            "confidence": "source_listed"
+          }
+        ],
+        "submission_requirements": null,
+        "next_submission": {
+          "version": 2,
+          "as_of": "2026-11-02",
+          "application_class": "new",
+          "date": "2026-12-02",
+          "event": {
+            "kind": "application",
+            "date": "2026-12-02",
+            "time": null,
+            "timezone": null,
+            "note": null,
+            "estimated": false,
+            "source": "VPR funding digest (limited submissions & foundations)",
+            "source_url": "https://links-2.govdelivery.com/CL0/https:",
+            "source_field": "source listing",
+            "confidence": "source_listed"
+          },
+          "access": "open",
+          "prerequisites": []
+        },
+        "source_aliases": null,
+        "last_updated": null,
+        "version": null,
+        "topic_areas": [],
+        "disciplines": [],
+        "applicant_types": [],
+        "funding_instruments": [],
+        "award_floor": null,
+        "award_ceiling": 15000000,
+        "detail_page": "https://links-2.govdelivery.com/CL0/https:",
+        "funding_opportunity_url": "https://links-2.govdelivery.com/CL0/https:",
+        "primary_document_url": null
+      },
+      "deadline": "2026-12-02"
+    },
+    {
+      "id": "077cac392adc3b65e94f",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-11-02T20:28:07.902626Z",
+      "opportunity_id": "359150",
+      "detail": "Deadline 2026-12-02",
+      "record": {
+        "opportunity_id": "359150",
+        "opportunity_number": "RFA-OD-27-008",
+        "title": "Maximizing the Scientific Value of Data Generated by the Environmental Influences on Child Health Outcomes (ECHO) Program: Ruth L. Kirschstein National Research Service Award (NRSA) Individual Postdoctoral Fellowship (F32)",
+        "agency": "National Institutes of Health",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-05-28",
+        "close_date": "2026-12-02",
+        "deadlines": [
+          {
+            "kind": "application",
+            "date": "2026-12-02",
+            "time": null,
+            "timezone": null,
+            "note": null,
+            "estimated": false,
+            "source": "Grants.gov XML extract",
+            "source_url": "https://www.grants.gov/search-results-detail/359150",
+            "source_field": "CloseDate",
+            "confidence": "official_structured",
+            "detail_checked_at": "2026-09-02T06:01:24.461096Z"
+          }
+        ],
+        "submission_requirements": null,
+        "next_submission": {
+          "version": 2,
+          "as_of": "2026-11-02",
+          "application_class": "new",
+          "date": "2026-12-02",
+          "event": {
+            "kind": "application",
+            "date": "2026-12-02",
+            "time": null,
+            "timezone": null,
+            "note": null,
+            "estimated": false,
+            "source": "Grants.gov XML extract",
+            "source_url": "https://www.grants.gov/search-results-detail/359150",
+            "source_field": "CloseDate",
+            "confidence": "official_structured",
+            "detail_checked_at": "2026-09-02T06:01:24.461096Z"
+          },
+          "access": "open",
+          "prerequisites": []
+        },
+        "source_aliases": null,
+        "last_updated": "2026-08-28",
+        "version": "Synopsis 2",
+        "topic_areas": [
+          "Biology and biotechnology",
+          "Education and workforce",
+          "Environmental science",
+          "Social and behavioral sciences"
+        ],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Independent school districts",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Private institutions of higher education",
+          "For-profit organizations other than small businesses",
+          "Small businesses",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/359150",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      },
+      "deadline": "2026-12-02"
+    },
     {
       "id": "fdda22d31262cf86e75b",
       "type": "closing_soon",
@@ -307659,731 +308791,6 @@
         "version": "Synopsis 1"
       },
       "type": "new"
-    },
-    {
-      "changed_at": "2026-08-03T13:20:41.901991Z",
-      "deadline": "2026-09-02",
-      "detail": "Deadline 2026-09-02",
-      "id": "f9533400944b8cc3fb45",
-      "label": "Closing soon",
-      "opportunity_id": "363441",
-      "record": {
-        "agency": "U.S. Mission to Indonesia",
-        "applicant_types": [
-          "Other"
-        ],
-        "award_ceiling": 250000,
-        "award_floor": 200000,
-        "close_date": "2026-09-02",
-        "detail_page": "https://www.grants.gov/search-results-detail/363441",
-        "disciplines": [],
-        "funding_instruments": [
-          "Cooperative Agreement"
-        ],
-        "funding_opportunity_url": null,
-        "last_updated": "2026-08-03",
-        "opportunity_id": "363441",
-        "opportunity_number": "PAS-JAKARTA-FY26-11",
-        "posted_date": "2026-08-03",
-        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354307",
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "posted",
-        "title": "Media Literacy and Capacity Building Workshop Series",
-        "topic_areas": [
-          "Community development",
-          "Education and workforce",
-          "Environmental science",
-          "Transportation"
-        ],
-        "version": "Synopsis 1"
-      },
-      "type": "closing_soon"
-    },
-    {
-      "changed_at": "2026-08-03T13:20:41.901991Z",
-      "deadline": "2026-09-02",
-      "detail": "Deadline 2026-09-02",
-      "id": "ef6f428fe1ba96abd737",
-      "label": "Closing soon",
-      "opportunity_id": "363426",
-      "record": {
-        "agency": "Bureau of International Labor Affairs",
-        "applicant_types": [
-          "Other"
-        ],
-        "award_ceiling": 3000000,
-        "award_floor": 2000000,
-        "close_date": "2026-09-02",
-        "detail_page": "https://www.grants.gov/search-results-detail/363426",
-        "disciplines": [],
-        "funding_instruments": [
-          "Cooperative Agreement"
-        ],
-        "funding_opportunity_url": null,
-        "last_updated": "2026-07-31",
-        "opportunity_id": "363426",
-        "opportunity_number": "FOA-ILAB-26-43",
-        "posted_date": "2026-08-03",
-        "primary_document_url": null,
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "forecasted",
-        "title": "Fostering the Future Together: Empowering Youth for a Safe Digital World",
-        "topic_areas": [
-          "Education and workforce"
-        ],
-        "version": "Forecast 3"
-      },
-      "type": "closing_soon"
-    },
-    {
-      "changed_at": "2026-08-03T13:20:41.901991Z",
-      "deadline": "2026-09-02",
-      "detail": "Deadline 2026-09-02",
-      "id": "ed190c49b4f5dd599da8",
-      "label": "Closing soon",
-      "opportunity_id": "362260",
-      "record": {
-        "agency": "Defense Health Agency Contracting Activity - DHACA",
-        "applicant_types": [
-          "Unrestricted"
-        ],
-        "award_ceiling": null,
-        "award_floor": null,
-        "close_date": "2026-09-02",
-        "detail_page": "https://www.grants.gov/search-results-detail/362260",
-        "disciplines": [
-          "Engineering and Physical Sciences"
-        ],
-        "funding_instruments": [
-          "Grant"
-        ],
-        "funding_opportunity_url": null,
-        "last_updated": "2026-05-21",
-        "opportunity_id": "362260",
-        "opportunity_number": "HT942526PCRPEIRA",
-        "posted_date": "2026-05-21",
-        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/352355",
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "posted",
-        "title": "DoW Prostate Cancer, Early Investigator Research Award",
-        "topic_areas": [
-          "Arts and culture",
-          "Cancer",
-          "Education and workforce"
-        ],
-        "version": "Synopsis 1"
-      },
-      "type": "closing_soon"
-    },
-    {
-      "changed_at": "2026-08-03T13:20:41.901991Z",
-      "detail": "First appeared in the public catalog",
-      "id": "e518ba7a5f9fb374fc86",
-      "label": "New opportunity",
-      "opportunity_id": "363396",
-      "record": {
-        "agency": "Rural Utilities Service",
-        "applicant_types": [
-          "Other"
-        ],
-        "award_ceiling": 100000000,
-        "award_floor": 1000000,
-        "close_date": "2027-05-03",
-        "detail_page": "https://www.grants.gov/search-results-detail/363396",
-        "disciplines": [
-          "Engineering and Physical Sciences"
-        ],
-        "funding_instruments": [
-          "Other"
-        ],
-        "funding_opportunity_url": "https://www.rd.usda.gov/programs-services/electric-programs/powering-affordable-reliable-technology-program",
-        "last_updated": "2026-08-01",
-        "opportunity_id": "363396",
-        "opportunity_number": "RUS-PART-2026",
-        "posted_date": "2026-09-08",
-        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354275",
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "forecasted",
-        "title": "Powering Affordable Reliable Technology (PART) Energy Program",
-        "topic_areas": [
-          "Agriculture and food",
-          "Community development",
-          "Energy",
-          "Cybersecurity"
-        ],
-        "version": "Forecast 1"
-      },
-      "type": "new"
-    },
-    {
-      "changed_at": "2026-08-03T13:20:41.901991Z",
-      "detail": "No longer in the current catalog",
-      "id": "d6530eebe4618568b028",
-      "label": "Closed or removed",
-      "opportunity_id": "363080",
-      "record": {
-        "agency": "U.S. Mission to Vietnam",
-        "applicant_types": [
-          "Nonprofits with 501(c)(3) status"
-        ],
-        "award_ceiling": 20000,
-        "award_floor": 10000,
-        "close_date": "2026-08-02",
-        "detail_page": "https://www.grants.gov/search-results-detail/363080",
-        "disciplines": [],
-        "funding_instruments": [
-          "Cooperative Agreement"
-        ],
-        "funding_opportunity_url": null,
-        "last_updated": "2026-07-09",
-        "opportunity_id": "363080",
-        "opportunity_number": "SVM300-26-PDS-AS",
-        "posted_date": "2026-07-07",
-        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/353663",
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "posted",
-        "title": "FY26 American Spaces Vietnam Programming",
-        "topic_areas": [
-          "Artificial intelligence and machine learning",
-          "Arts and culture",
-          "Cybersecurity",
-          "Education and workforce",
-          "Technology development",
-          "Data science"
-        ],
-        "version": "Synopsis 1"
-      },
-      "type": "closed_or_removed"
-    },
-    {
-      "changed_at": "2026-08-03T13:20:41.901991Z",
-      "deadline": "2026-09-02",
-      "detail": "Deadline 2026-09-02",
-      "id": "ca4989876e45102a1047",
-      "label": "Closing soon",
-      "opportunity_id": "362262",
-      "record": {
-        "agency": "Defense Health Agency Contracting Activity - DHACA",
-        "applicant_types": [
-          "Unrestricted"
-        ],
-        "award_ceiling": null,
-        "award_floor": null,
-        "close_date": "2026-09-02",
-        "detail_page": "https://www.grants.gov/search-results-detail/362262",
-        "disciplines": [
-          "Engineering and Physical Sciences"
-        ],
-        "funding_instruments": [
-          "Grant"
-        ],
-        "funding_opportunity_url": null,
-        "last_updated": "2026-05-21",
-        "opportunity_id": "362262",
-        "opportunity_number": "HT942526PCRPPRA",
-        "posted_date": "2026-05-21",
-        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/352351",
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "posted",
-        "title": "DoW Prostate Cancer, Physician Research Award",
-        "topic_areas": [
-          "Arts and culture",
-          "Cancer"
-        ],
-        "version": "Synopsis 1"
-      },
-      "type": "closing_soon"
-    },
-    {
-      "changed_at": "2026-08-03T13:20:41.901991Z",
-      "detail": "No longer in the current catalog",
-      "id": "c2c80f1089e3d67aec34",
-      "label": "Closed or removed",
-      "opportunity_id": "362408",
-      "record": {
-        "agency": "U.S. Mission to Zimbabwe",
-        "applicant_types": [
-          "Other"
-        ],
-        "award_ceiling": 54000,
-        "award_floor": 50000,
-        "close_date": "2026-08-02",
-        "detail_page": "https://www.grants.gov/search-results-detail/362408",
-        "disciplines": [],
-        "funding_instruments": [
-          "Grant"
-        ],
-        "funding_opportunity_url": null,
-        "last_updated": "2026-05-15",
-        "opportunity_id": "362408",
-        "opportunity_number": "AF-HAR-FY26-02",
-        "posted_date": "2026-05-15",
-        "primary_document_url": null,
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "posted",
-        "title": "EducationUSA Opportunity Funds Program",
-        "topic_areas": [
-          "Education and workforce"
-        ],
-        "version": "Synopsis 1"
-      },
-      "type": "closed_or_removed"
-    },
-    {
-      "changed_at": "2026-08-03T13:20:41.901991Z",
-      "deadline": "2026-09-02",
-      "detail": "Deadline 2026-09-02",
-      "id": "be0750de85bc95954dd8",
-      "label": "Closing soon",
-      "opportunity_id": "362243",
-      "record": {
-        "agency": "Defense Health Agency Contracting Activity - DHACA",
-        "applicant_types": [
-          "Unrestricted"
-        ],
-        "award_ceiling": null,
-        "award_floor": null,
-        "close_date": "2026-09-02",
-        "detail_page": "https://www.grants.gov/search-results-detail/362243",
-        "disciplines": [
-          "Engineering and Physical Sciences"
-        ],
-        "funding_instruments": [
-          "Grant"
-        ],
-        "funding_opportunity_url": null,
-        "last_updated": "2026-05-06",
-        "opportunity_id": "362243",
-        "opportunity_number": "HT942526LCRPIDA",
-        "posted_date": "2026-05-05",
-        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/351788",
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "posted",
-        "title": "DoW Lung Cancer Idea Development Award",
-        "topic_areas": [
-          "Cancer"
-        ],
-        "version": "Synopsis 1"
-      },
-      "type": "closing_soon"
-    },
-    {
-      "changed_at": "2026-08-03T13:20:41.901991Z",
-      "detail": "First appeared in the public catalog",
-      "id": "b647fa225b504ab02005",
-      "label": "New opportunity",
-      "opportunity_id": "363441",
-      "record": {
-        "agency": "U.S. Mission to Indonesia",
-        "applicant_types": [
-          "Other"
-        ],
-        "award_ceiling": 250000,
-        "award_floor": 200000,
-        "close_date": "2026-09-02",
-        "detail_page": "https://www.grants.gov/search-results-detail/363441",
-        "disciplines": [],
-        "funding_instruments": [
-          "Cooperative Agreement"
-        ],
-        "funding_opportunity_url": null,
-        "last_updated": "2026-08-03",
-        "opportunity_id": "363441",
-        "opportunity_number": "PAS-JAKARTA-FY26-11",
-        "posted_date": "2026-08-03",
-        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354307",
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "posted",
-        "title": "Media Literacy and Capacity Building Workshop Series",
-        "topic_areas": [
-          "Community development",
-          "Education and workforce",
-          "Environmental science",
-          "Transportation"
-        ],
-        "version": "Synopsis 1"
-      },
-      "type": "new"
-    },
-    {
-      "changed_at": "2026-08-03T13:20:41.901991Z",
-      "deadline": "2026-09-02",
-      "detail": "Deadline 2026-09-02",
-      "id": "9c02d8b54003b340f37e",
-      "label": "Closing soon",
-      "opportunity_id": "362261",
-      "record": {
-        "agency": "Defense Health Agency Contracting Activity - DHACA",
-        "applicant_types": [
-          "Unrestricted"
-        ],
-        "award_ceiling": null,
-        "award_floor": null,
-        "close_date": "2026-09-02",
-        "detail_page": "https://www.grants.gov/search-results-detail/362261",
-        "disciplines": [
-          "Engineering and Physical Sciences"
-        ],
-        "funding_instruments": [
-          "Grant"
-        ],
-        "funding_opportunity_url": null,
-        "last_updated": "2026-05-21",
-        "opportunity_id": "362261",
-        "opportunity_number": "HT942526PCRPIDA",
-        "posted_date": "2026-05-21",
-        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/352350",
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "posted",
-        "title": "DoW Prostate Cancer, Idea Development Award",
-        "topic_areas": [
-          "Cancer"
-        ],
-        "version": "Synopsis 1"
-      },
-      "type": "closing_soon"
-    },
-    {
-      "changed_at": "2026-08-03T13:20:41.901991Z",
-      "deadline": "2026-09-02",
-      "detail": "Deadline 2026-09-02",
-      "id": "9aa704849f28f9f2c680",
-      "label": "Closing soon",
-      "opportunity_id": "363280",
-      "record": {
-        "agency": "Bureau of Justice Assistance",
-        "applicant_types": [
-          "State governments",
-          "County governments",
-          "City or township governments",
-          "Special district governments",
-          "Federally recognized Native American tribal governments",
-          "Other Native American tribal organizations",
-          "Other"
-        ],
-        "award_ceiling": 200000,
-        "award_floor": null,
-        "close_date": "2026-09-02",
-        "detail_page": "https://www.grants.gov/search-results-detail/363280",
-        "disciplines": [
-          "Community and Social Sciences"
-        ],
-        "funding_instruments": [
-          "Cooperative Agreement"
-        ],
-        "funding_opportunity_url": "https://bja.ojp.gov/funding/opportunities/o-bja-2026-172658",
-        "last_updated": "2026-07-22",
-        "opportunity_id": "363280",
-        "opportunity_number": "O-BJA-2026-172658",
-        "posted_date": "2026-07-22",
-        "primary_document_url": null,
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "posted",
-        "title": "BJA FY 2026 Enhancing Security Measures for Houses of Worship",
-        "topic_areas": [],
-        "version": "Synopsis 1"
-      },
-      "type": "closing_soon"
-    },
-    {
-      "changed_at": "2026-08-03T13:20:41.901991Z",
-      "deadline": "2026-09-02",
-      "detail": "Deadline 2026-09-02",
-      "id": "951aa2f79524e874ed4a",
-      "label": "Closing soon",
-      "opportunity_id": "362259",
-      "record": {
-        "agency": "Defense Health Agency Contracting Activity - DHACA",
-        "applicant_types": [
-          "Unrestricted"
-        ],
-        "award_ceiling": null,
-        "award_floor": null,
-        "close_date": "2026-09-02",
-        "detail_page": "https://www.grants.gov/search-results-detail/362259",
-        "disciplines": [
-          "Engineering and Physical Sciences"
-        ],
-        "funding_instruments": [
-          "Grant"
-        ],
-        "funding_opportunity_url": null,
-        "last_updated": "2026-05-21",
-        "opportunity_id": "362259",
-        "opportunity_number": "HT942526PCRPDSA",
-        "posted_date": "2026-05-21",
-        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/352354",
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "posted",
-        "title": "DoW Prostate Cancer, Data Science Award",
-        "topic_areas": [
-          "Artificial intelligence and machine learning",
-          "Arts and culture",
-          "Biology and biotechnology",
-          "Cancer",
-          "Data science",
-          "Public health"
-        ],
-        "version": "Synopsis 1"
-      },
-      "type": "closing_soon"
-    },
-    {
-      "changed_at": "2026-08-03T13:20:41.901991Z",
-      "deadline": "2026-09-02",
-      "detail": "Deadline 2026-09-02",
-      "id": "6113c529d8ae0317a372",
-      "label": "Closing soon",
-      "opportunity_id": "362250",
-      "record": {
-        "agency": "Defense Health Agency Contracting Activity - DHACA",
-        "applicant_types": [
-          "Unrestricted"
-        ],
-        "award_ceiling": null,
-        "award_floor": null,
-        "close_date": "2026-09-02",
-        "detail_page": "https://www.grants.gov/search-results-detail/362250",
-        "disciplines": [
-          "Engineering and Physical Sciences"
-        ],
-        "funding_instruments": [
-          "Grant"
-        ],
-        "funding_opportunity_url": null,
-        "last_updated": "2026-05-06",
-        "opportunity_id": "362250",
-        "opportunity_number": "HT942526LCRPTRA",
-        "posted_date": "2026-05-05",
-        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/351793",
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "posted",
-        "title": "DoW Lung Cancer Translational Research Award",
-        "topic_areas": [
-          "Cancer"
-        ],
-        "version": "Synopsis 2"
-      },
-      "type": "closing_soon"
-    },
-    {
-      "changed_at": "2026-08-03T13:20:41.901991Z",
-      "deadline": "2026-09-02",
-      "detail": "Deadline 2026-09-02",
-      "id": "5bdc797b272694f2df99",
-      "label": "Closing soon",
-      "opportunity_id": "362247",
-      "record": {
-        "agency": "Defense Health Agency Contracting Activity - DHACA",
-        "applicant_types": [
-          "Unrestricted"
-        ],
-        "award_ceiling": null,
-        "award_floor": null,
-        "close_date": "2026-09-02",
-        "detail_page": "https://www.grants.gov/search-results-detail/362247",
-        "disciplines": [
-          "Engineering and Physical Sciences"
-        ],
-        "funding_instruments": [
-          "Grant"
-        ],
-        "funding_opportunity_url": null,
-        "last_updated": "2026-05-06",
-        "opportunity_id": "362247",
-        "opportunity_number": "HT942526LCRPPCOSA",
-        "posted_date": "2026-05-05",
-        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/351791",
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "posted",
-        "title": "DoW Lung Cancer Patient-Centered Outcomes and Survivorship Award",
-        "topic_areas": [
-          "Cancer"
-        ],
-        "version": "Synopsis 2"
-      },
-      "type": "closing_soon"
-    },
-    {
-      "changed_at": "2026-08-03T13:20:41.901991Z",
-      "detail": "No longer in the current catalog",
-      "id": "55eab598e936fcfec048",
-      "label": "Closed or removed",
-      "opportunity_id": "355317",
-      "record": {
-        "agency": "National Institutes of Health",
-        "applicant_types": [
-          "State governments",
-          "County governments",
-          "City or township governments",
-          "Special district governments",
-          "Independent school districts",
-          "Public and state institutions of higher education",
-          "Federally recognized Native American tribal governments",
-          "Public and Indian housing authorities",
-          "Other Native American tribal organizations",
-          "Nonprofits with 501(c)(3) status",
-          "Nonprofits without 501(c)(3) status",
-          "Private institutions of higher education",
-          "For-profit organizations other than small businesses",
-          "Small businesses",
-          "Other"
-        ],
-        "award_ceiling": 850000,
-        "award_floor": null,
-        "close_date": "2026-08-02",
-        "detail_page": "https://www.grants.gov/search-results-detail/355317",
-        "disciplines": [
-          "Medical and Health"
-        ],
-        "funding_instruments": [
-          "Cooperative Agreement"
-        ],
-        "funding_opportunity_url": "https://grants.nih.gov/grants/guide/rfa-files/RFA-HG-24-026.html",
-        "last_updated": "2024-07-10",
-        "opportunity_id": "355317",
-        "opportunity_number": "RFA-HG-24-026",
-        "posted_date": "2024-07-10",
-        "primary_document_url": null,
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "posted",
-        "title": "Limited Competition: Building Partnerships and Broadening Perspectives to Advance Ethical, Legal, and Social Implications (ELSI) Research (BBAER) Program (UM1), Clinical Trial Optional",
-        "topic_areas": [
-          "Biology and biotechnology",
-          "Education and workforce"
-        ],
-        "version": "Synopsis 1"
-      },
-      "type": "closed_or_removed"
-    },
-    {
-      "changed_at": "2026-08-03T13:20:41.901991Z",
-      "detail": "No longer in the current catalog",
-      "id": "549643b1b7c690673b60",
-      "label": "Closed or removed",
-      "opportunity_id": "363062",
-      "record": {
-        "agency": "U.S. Mission to Vietnam",
-        "applicant_types": [
-          "Other"
-        ],
-        "award_ceiling": 35633,
-        "award_floor": null,
-        "close_date": "2026-08-02",
-        "detail_page": "https://www.grants.gov/search-results-detail/363062",
-        "disciplines": [
-          "Engineering and Physical Sciences"
-        ],
-        "funding_instruments": [
-          "Grant"
-        ],
-        "funding_opportunity_url": null,
-        "last_updated": "2026-07-06",
-        "opportunity_id": "363062",
-        "opportunity_number": "FY26-PDS-HCMC-01",
-        "posted_date": "2026-07-06",
-        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/353607",
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "posted",
-        "title": "Vietnam CyberSafe Hacks 2026",
-        "topic_areas": [
-          "Cybersecurity",
-          "Education and workforce"
-        ],
-        "version": "Synopsis 1"
-      },
-      "type": "closed_or_removed"
-    },
-    {
-      "changed_at": "2026-08-03T13:20:41.901991Z",
-      "detail": "No longer in the current catalog",
-      "id": "41100f2403ff7dac4bb4",
-      "label": "Closed or removed",
-      "opportunity_id": "363227",
-      "record": {
-        "agency": "Bureau of South and Central Asian Affairs",
-        "applicant_types": [
-          "For-profit organizations other than small businesses"
-        ],
-        "award_ceiling": 5000000,
-        "award_floor": 2000000,
-        "close_date": "2026-08-02",
-        "detail_page": "https://www.grants.gov/search-results-detail/363227",
-        "disciplines": [],
-        "funding_instruments": [
-          "Cooperative Agreement"
-        ],
-        "funding_opportunity_url": "https://mygrants.servicenowservices.com/mygrants?id=mygrants_form&table=x_g_usd4_d_grant_funding_opportunity&sys_id=ec7a8a3693d50754d114b7986cba1030&view=Default",
-        "last_updated": "2026-07-17",
-        "opportunity_id": "363227",
-        "opportunity_number": "DFOP0018586",
-        "posted_date": "2026-07-17",
-        "primary_document_url": null,
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "posted",
-        "title": "Artificial Intelligence for American Competitiveness and Economic Security (AI-ACES) in South Asia",
-        "topic_areas": [
-          "Artificial intelligence and machine learning",
-          "Arts and culture"
-        ],
-        "version": "Synopsis 1"
-      },
-      "type": "closed_or_removed"
-    },
-    {
-      "changed_at": "2026-08-03T13:20:41.901991Z",
-      "detail": "No longer in the current catalog",
-      "id": "40fd549ce82273e917a8",
-      "label": "Closed or removed",
-      "opportunity_id": "362864",
-      "record": {
-        "agency": "U.S. Mission to Zimbabwe",
-        "applicant_types": [
-          "Other"
-        ],
-        "award_ceiling": 14000,
-        "award_floor": 10000,
-        "close_date": "2026-08-02",
-        "detail_page": "https://www.grants.gov/search-results-detail/362864",
-        "disciplines": [],
-        "funding_instruments": [
-          "Cooperative Agreement"
-        ],
-        "funding_opportunity_url": null,
-        "last_updated": "2026-06-18",
-        "opportunity_id": "362864",
-        "opportunity_number": "AF-HAR-FY26-04",
-        "posted_date": "2026-06-18",
-        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/353151",
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "posted",
-        "title": "American Spaces Support Funds Program",
-        "topic_areas": [
-          "Arts and culture",
-          "Education and workforce",
-          "Technology development"
-        ],
-        "version": "Synopsis 1"
-      },
-      "type": "closed_or_removed"
     }
   ]
 }

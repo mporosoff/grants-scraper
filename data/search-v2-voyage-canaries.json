@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-01T21:55:04.820Z",
+  "generated_at": "2026-11-02T20:31:58.474Z",
   "canary_set_version": 1,
   "model_alias": "voyage-4-lite",
   "response_model": "voyage-4-lite",
@@ -21,7 +21,7 @@
     },
     {
       "exact_match": false,
-      "minimum_cosine": 0.99997,
+      "minimum_cosine": 0.999967,
       "mean_cosine": 0.999974,
       "gross_discontinuity": false
     },
@@ -33,20 +33,20 @@
     },
     {
       "exact_match": false,
-      "minimum_cosine": 0.999962,
-      "mean_cosine": 0.999971,
+      "minimum_cosine": 0.999967,
+      "mean_cosine": 0.999974,
       "gross_discontinuity": false
     },
     {
       "exact_match": false,
       "minimum_cosine": 0.99997,
-      "mean_cosine": 0.999987,
+      "mean_cosine": 0.999974,
       "gross_discontinuity": false
     },
     {
       "exact_match": false,
-      "minimum_cosine": 0.999968,
-      "mean_cosine": 0.999986,
+      "minimum_cosine": 0.999959,
+      "mean_cosine": 0.999971,
       "gross_discontinuity": false
     }
   ],
