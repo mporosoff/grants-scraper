@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/transportation.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/transportation.xml</id>
-  <updated>2026-11-01T21:09:01Z</updated>
+  <updated>2026-11-02T20:29:35Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Prevention and Treatment through a Comprehensive Care Continuum for HIV-affected Adolescents in Resource-Constrained Settings--Implementation Science Network (PATC3H-IN)</title>
@@ -292,17 +292,6 @@
     <author><name>Bureau of Justice Assistance</name></author>
     <category term="Transportation"/>
     <summary>Bureau of Justice Assistance | Application 2026-12-02 | This is a notice of funding opportunity (NOFO) for the BJA FY 2026 Missing and Unidentified Human Remains (MUHR) Program. This opportunity supports efforts to improve reporting, transportation, forensic processing, and identification of missing persons (MP) and unidentified human remains (UHR) cases, including those involving migrants as authorized by Public Law 116-277. This program increases pub…</summary>
-  </entry>
-  <entry>
-    <title>Office of Hazardous Materials Safety Research Initiative - FY2026 BROAD AGENCY ANNOUNCEMENT (BAA)</title>
-    <link href="https://sam.gov/opp/f1d0665939c74ffa86ffc40e73985cc1/view"/>
-    <id>urn:funding-finder:sam-gov:sam-gov%3Af1d0665939c74ffa86ffc40e73985cc1</id>
-    <updated>2026-10-15T00:00:00Z</updated>
-    <author><name>U.S. Department of Transportation - Pipeline and Hazardous Materials Safety Administration (PHMSA)</name></author>
-    <category term="Energy"/>
-    <category term="Transportation"/>
-    <category term="Materials science"/>
-    <summary>U.S. Department of Transportation - Pipeline and Hazardous Materials Safety Administration (PHMSA) | White Paper 2026-11-18 | Hazardous-materials transport research including energy-storage systems, packaging, emergency response, and rail safety; analytical studies and technology assessment. US prime; foreign entities permitted as subcontractors under conditions. Federal/state/local government bodies excluded, while accredited universities explicitly included. Contracts up to$2M, maximum36months including options; cost s…</summary>
   </entry>
   <entry>
     <title>Clinical Trials and Ancillary Studies Conducted within NIH-Funded Clinical Trial Research Networks (UG3/UH3 - Clinical Trial Required)</title>
@@ -635,5 +624,21 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Transportation"/>
     <summary>National Institutes of Health | Application 2029-03-16 | The purpose of this notice of funding opportunity (NOFO) is to facilitate the entry of investigators into multiple high-priority areas of substance use research, including comorbidity with HIV. The Science Track Award for Research Transition (START) Program aims to provide investigators with the opportunity to gather preliminary data that will assist them in securing future research grants and adv…</summary>
+  </entry>
+  <entry>
+    <title>Research Interests of the Air Force Office of Scientific Research</title>
+    <link href="https://www.grants.gov/search-results-detail/362681"/>
+    <id>urn:funding-finder:grants-gov:362681</id>
+    <updated>2026-06-04T00:00:00Z</updated>
+    <author><name>Air Force Office of Scientific Research</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Transportation"/>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Materials science"/>
+    <category term="Quantum science"/>
+    <category term="Energy"/>
+    <category term="Data science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <summary>Air Force Office of Scientific Research | Posted | AFOSR plans, coordinates, and executes the Air Force Research Laboratory’s (AFRL) basic research program in response to technical guidance from AFRL and requirements of the Air Force. Additionally, the office fosters, supports, and conducts research within Air Force, university, and industry laboratories; and ensures transition of research results to support U.S. Air Force needs. The focus of AFOS…</summary>
   </entry>
 </feed>

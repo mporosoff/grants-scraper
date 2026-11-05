@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml</id>
-  <updated>2026-11-01T21:09:01Z</updated>
+  <updated>2026-11-02T20:29:35Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Grid Supply Chain Alternatives to Lead Energy Dominance (SCALED)</title>
@@ -103,17 +103,6 @@
     <category term="Manufacturing"/>
     <category term="Cybersecurity"/>
     <summary>DARPA - Defense Sciences Office | Application 2027-01-13 | The Defense Advanced Research Projects Agency (DARPA) Young Faculty Award (YFA) program aims to identify and engage rising stars in junior research positions in academia and equivalent positions at non-profit research institutions, particularly those without prior DARPA funding, to expose them to Department of War (DoW) needs and DARPA’s mission to create and prevent technological surprise for nat…</summary>
-  </entry>
-  <entry>
-    <title>Office of Hazardous Materials Safety Research Initiative - FY2026 BROAD AGENCY ANNOUNCEMENT (BAA)</title>
-    <link href="https://sam.gov/opp/f1d0665939c74ffa86ffc40e73985cc1/view"/>
-    <id>urn:funding-finder:sam-gov:sam-gov%3Af1d0665939c74ffa86ffc40e73985cc1</id>
-    <updated>2026-10-15T00:00:00Z</updated>
-    <author><name>U.S. Department of Transportation - Pipeline and Hazardous Materials Safety Administration (PHMSA)</name></author>
-    <category term="Energy"/>
-    <category term="Transportation"/>
-    <category term="Materials science"/>
-    <summary>U.S. Department of Transportation - Pipeline and Hazardous Materials Safety Administration (PHMSA) | White Paper 2026-11-18 | Hazardous-materials transport research including energy-storage systems, packaging, emergency response, and rail safety; analytical studies and technology assessment. US prime; foreign entities permitted as subcontractors under conditions. Federal/state/local government bodies excluded, while accredited universities explicitly included. Contracts up to$2M, maximum36months including options; cost s…</summary>
   </entry>
   <entry>
     <title>Cooperative Agreement for affiliated Partner with Northern Great Plains Cooperative Ecosystem Studies Unit</title>
@@ -835,5 +824,21 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Materials science"/>
     <category term="Technology development"/>
     <summary>Idaho Field Office | Application 2030-10-14 | A. STATEMENT OF OBJECTIVESThis Funding Opportunity Announcement (FOA) is to award multiple cooperative agreements to accredited United States (U.S.) two- and four-year colleges and universities (Institutions of Higher Education (IHEs)) to receive and administer scholarship and fellowship funding-provided through the University Nuclear Leadership Program (UNLP) and as administered by the Department…</summary>
+  </entry>
+  <entry>
+    <title>Science of Learning and Augmented Intelligence (SL)</title>
+    <link href="https://www.grants.gov/search-results-detail/320753"/>
+    <id>urn:funding-finder:grants-gov:320753</id>
+    <updated>2019-09-19T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Data science"/>
+    <category term="Education and workforce"/>
+    <category term="Materials science"/>
+    <category term="Neuroscience"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>U.S. National Science Foundation | Application 2027-02-10 | Science of Learning and Augmented Intelligence (SL) supports potentially transformative research that develops basic theoretical insights and fundamental knowledge about principles, processes and mechanisms of learning, and about augmented intelligence - how human cognitive function can be augmented through interactions with others or with technology, or through variations in context. The program …</summary>
   </entry>
 </feed>
