@@ -472,7 +472,7 @@ def amount_facts(api, opportunity_id, containers, document, stamp):
                 and re.match(r'\s*(?:per\s+award\s+)?(?:combined\s+)?for\s+', suffix, re.I)
                 and not re.search(r'\b(?:of\s+which|base\s+award|total\s+funding|allot)\b', before, re.I))
             if not (owned_after or owned_before or range_endpoint or track_endpoint):
-                if program:
+                if program and not notice_fact_guards.applicant_budget_request(clause, token.start(), token.end()):
                     program_basis = 'program_per_budget_period' if re.search(r'\bper budget period\b', prefix, re.I) else 'program_total'
                     heading = funding_track(container, start + token.start())
                     track = heading.group('label') if heading else None

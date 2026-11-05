@@ -9,10 +9,19 @@ BOT = 'chatgpt-codex-connector[bot]'
 
 
 class ReviewPending(ValueError):
-    """A preserved approval boundary, not a clean review or a service failure."""
+    """An exact-head review that has yet to complete."""
+    status = 'awaiting_review'
+    message = 'Review remains pending; preserve candidate and continue the same review without regeneration or duplicate requests'
+
     def __init__(self, repository, number, head):
-        super().__init__('Review remains pending; preserve candidate and continue the same review without regeneration or duplicate requests')
+        super().__init__(self.message)
         self.repository, self.number, self.head = repository, number, head
+
+
+class ReviewFailed(ReviewPending):
+    """The reviewer reported failure for this exact head."""
+    status = 'review_failed'
+    message = 'Codex reported a failed review; check the PR and obtain a clean review before resuming publication'
 
 
 class ReviewFindings(ValueError):
@@ -99,6 +108,21 @@ def reviewed_head(repository, body, head):
     return api(f'repos/{repository}/commits/{match[1]}').get('sha') == head
 
 
+def failed_code_review(comment, head, boundary):
+    summary = re.search(r'^<!-- codex-review-state:v1 ([^\r\n]+) -->$', comment.get('body', ''), re.MULTILINE)
+    if not summary:
+        return False
+    try:
+        state = json.loads(summary[1])
+    except json.JSONDecodeError:
+        return False
+    code_review = state.get('code_review') if isinstance(state, dict) else None
+    observed_at = comment.get('updated_at') or comment.get('created_at')
+    return (isinstance(code_review, dict) and code_review.get('commit_sha') == head
+            and code_review.get('status') == 'failed' and observed_at is not None
+            and parsed_time(observed_at) >= parsed_time(boundary))
+
+
 def review_state(repository, number, head, created_at=None):
     pr = api(f'repos/{repository}/pulls/{number}')
     if pr['head']['sha'] != head or pr['base']['ref'] != 'main':
@@ -121,6 +145,8 @@ def review_state(repository, number, head, created_at=None):
                 and re.search(r'\bP[012]\b', row.get('body', ''))]
     findings += [row for row in terminal_reviews + terminal_comments
                  if row.get('state') == 'CHANGES_REQUESTED' or re.search(r'\bP[012]\b', row.get('body', ''))]
+    if not completed and any(bot(row) and failed_code_review(row, head, created_at) for row in comments):
+        raise ReviewFailed(repository, number, head)
     return completed, findings
 
 

@@ -175,7 +175,7 @@ def pending_publication(root, repository, destination):
             continue
         if pending.get('status') == 'review_findings':
             continue  # A source/code repair must produce new reviewed bytes.
-        awaiting = (pending.get('status') == 'awaiting_review'
+        awaiting = (pending.get('status') in ('awaiting_review', 'review_failed')
                     and pending.get('repository') == repository
                     and pending.get('pr_number') == pr['number']
                     and pending.get('production_mutated') is False)

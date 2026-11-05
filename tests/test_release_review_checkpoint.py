@@ -164,7 +164,7 @@ class ReviewCheckpoint(unittest.TestCase):
             self.assertIs(saved['production_mutated'], False)
             self.assertFalse((root / 'review-ready.json').exists())
 
-    def test_only_pending_review_can_defer_and_never_produces_ready_receipt(self):
+    def test_pending_review_can_defer_and_never_produces_ready_receipt(self):
         with TemporaryDirectory() as d:
             root=Path(d);manifest={'candidate_id':'a'*64}
             with patch.object(preparation.c,'load',return_value=manifest), \
@@ -174,15 +174,61 @@ class ReviewCheckpoint(unittest.TestCase):
                 self.assertEqual(result['status'],'awaiting_review')
                 self.assertFalse(result['production_mutated'])
                 self.assertFalse((root/'review-ready.json').exists())
-                self.assertEqual((root/'outputs').read_text(),'review_ready=false\n')
+                outputs = 'review_ready=false\nreview_status=awaiting_review\nreview_pr=10\n'
+                self.assertEqual((root/'outputs').read_text(), outputs)
                 for failure in (ValueError('P1 finding'),RuntimeError('review service outage')):
                     with patch.object(preparation,'prepare',side_effect=failure):
                         with self.assertRaises(type(failure)):
                             preparation.prepare_or_defer('bundle','receipt',root,'123')
-                self.assertEqual((root/'outputs').read_text(),'review_ready=false\n')
+                self.assertEqual((root/'outputs').read_text(), outputs)
                 with patch.object(preparation,'prepare',return_value={'head_sha':'b'*40}):
                     preparation.prepare_or_defer('bundle','receipt',root,'123')
                 self.assertTrue((root/'outputs').read_text().endswith('review_ready=true\n'))
+
+    def test_exact_bot_review_failure_defers_immediately_and_clean_evidence_allows_resume(self):
+        head = '1f89f8163231830f4b42c910dabe150c2aa15e06'
+        pr = {'head': {'sha': head}, 'base': {'ref': 'main'}, 'created_at': '2026-11-02T20:41:00Z',
+              'body': f'Review head: `{head}`', 'user': {'login': 'github-actions[bot]'}}
+        state = {'code_review': {'commit_sha': head, 'status': 'failed', 'has_any_findings': True}}
+        summary = {'user': {'login': reviews.BOT}, 'updated_at': '2026-11-02T20:41:17Z',
+                   'body': f'<!-- codex-review-state:v1 {json.dumps(state)} -->\n\n## Codex Review Summary'}
+        comments = [summary]
+        with TemporaryDirectory() as directory, patch.object(reviews, 'api', return_value=pr), \
+                patch.object(reviews, 'all_pages', side_effect=lambda path: comments if '/issues/' in path and
+                             path.endswith('/comments') else []), \
+                patch.object(reviews, 'all_threads', return_value=[]), \
+                patch.object(reviews.time, 'sleep', side_effect=AssertionError('Terminal review failure should not poll')), \
+                patch.object(preparation, 'prepare', side_effect=lambda *args, **kwargs:
+                             reviews.wait_for_review('owner/repo', 393, head)), \
+                patch.object(preparation.c, 'load', return_value={'candidate_id': 'a' * 64}), \
+                patch.dict(os.environ, {'GITHUB_OUTPUT': str(Path(directory) / 'outputs')}):
+            root = Path(directory)
+            result = preparation.prepare_or_defer('bundle', 'receipt', root, '123')
+            self.assertEqual(planner.c.read_json(root / 'review-pending.json'), result)
+            self.assertEqual((result['status'], result['head_sha'], result['pr_number']), ('review_failed', head, 393))
+            self.assertIs(result['production_mutated'], False)
+            self.assertFalse((root / 'review-ready.json').exists())
+            self.assertEqual((root / 'outputs').read_text(),
+                             'review_ready=false\nreview_status=review_failed\nreview_pr=393\n')
+            comments.append({'user': {'login': reviews.BOT}, 'body': f'Codex Review completed. Reviewed commit: {head}'})
+            reviews.wait_for_review('owner/repo', 393, head)
+
+    def test_untrusted_stale_or_different_head_failure_does_not_terminate_review(self):
+        head = 'a' * 40
+        pr = {'head': {'sha': head}, 'base': {'ref': 'main'}}
+        for login, commit, status, date in (
+                ('someone-else', head, 'failed', '2026-11-02T20:41:17Z'),
+                (reviews.BOT, 'b' * 40, 'failed', '2026-11-02T20:41:17Z'),
+                (reviews.BOT, head, 'running', '2026-11-02T20:41:17Z'),
+                (reviews.BOT, head, 'failed', '2026-11-02T20:40:00Z')):
+            with self.subTest(login=login, commit=commit, status=status, date=date):
+                state = {'code_review': {'commit_sha': commit, 'status': status}}
+                comment = {'user': {'login': login}, 'updated_at': date,
+                           'body': f'<!-- codex-review-state:v1 {json.dumps(state)} -->\n\n## Codex Review Summary'}
+                with patch.object(reviews, 'api', return_value=pr), patch.object(reviews, 'all_threads', return_value=[]), \
+                        patch.object(reviews, 'all_pages', side_effect=lambda path:
+                                     [comment] if '/issues/' in path and path.endswith('/comments') else []):
+                    self.assertEqual(reviews.review_state('owner/repo', 393, head, '2026-11-02T20:41:00Z'), (False, []))
 
     def test_wait_exhaustion_is_pending_but_findings_and_outage_are_failures(self):
         with patch.object(reviews.time,'monotonic',side_effect=[0,1]):
@@ -211,6 +257,9 @@ class ReviewCheckpoint(unittest.TestCase):
             self.assertEqual(planner.pending_publication('.', 'owner/repo', d),
                 {'REQUESTED_STAGE':'publish','CANDIDATE_RUN':'123','CANDIDATE_ID':candidate})
             fetch.assert_called_once();verify.assert_called_once()
+            pending['status'] = 'review_failed'
+            self.assertEqual(planner.pending_publication('.', 'owner/repo', d),
+                {'REQUESTED_STAGE':'publish','CANDIDATE_RUN':'123','CANDIDATE_ID':candidate})
             changed.return_value={'source':['parser.py']}
             self.assertIsNone(planner.pending_publication('.', 'owner/repo', d))
             changed.return_value={};pending['head_sha']='c'*40

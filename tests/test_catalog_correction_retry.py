@@ -397,6 +397,23 @@ class CloseoutRetry(unittest.TestCase):
         self.assertIn('awaiting_review', result['failures'][0])
         self.assertEqual(len(result['writes']), 1)
 
+    def test_review_failure_reports_the_blocked_pr_and_retains_the_candidate(self):
+        jobs = {
+            'candidate': {'result': 'success', 'outputs': {'candidate_id': 'retained-id', 'candidate_run': '600'}},
+            'validate': {'result': 'success'},
+            'publish': {'result': 'success', 'outputs': {
+                'review_ready': 'false', 'review_status': 'review_failed', 'review_pr': '393'}}}
+        for event, failure in (('schedule', 'review_failed'), ('workflow_dispatch', 'Codex review failed')):
+            with self.subTest(event=event):
+                result = self.run_script(stage='publish', event=event, jobs=jobs)
+                self.assertIn('Candidate: retained-id\nArtifact run: 600\nStage: review_failed\n', result['body'])
+                self.assertIn('/pull/393\n', result['body'])
+                self.assertIn('Production mutation: none\n', result['body'])
+                self.assert_route(result, 'resolve the reviewer failure, then publish after clean review of the same head')
+                self.assertEqual(len(result['failures']), 1)
+                self.assertIn(failure, result['failures'][0])
+                self.assertEqual(len(result['writes']), 1)
+
     def test_scheduled_missing_live_verification_fails_without_claiming_completion(self):
         result = self.run_script(stage='generate', event='schedule', jobs={
             'candidate': {'result': 'success', 'outputs': {'candidate_id': 'retained-id', 'candidate_run': '600'}},
