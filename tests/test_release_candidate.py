@@ -682,13 +682,17 @@ class CandidateLifecycleTests(unittest.TestCase):
         c.verify_files(self.root, manifest['files'])
         self.assertEqual(c.load(self.bundle)['generation_sha'], self.source_sha)
 
-    def test_review_request_covers_first_publication_without_duplicating_existing_review(self):
+    def test_review_request_leaves_initial_review_to_automation_and_covers_a_later_head(self):
         from tools import publish_release_candidate as publisher, wait_release_review as review
         head = 'a' * 40
         with patch.object(review, 'review_state', return_value=(False, [])), \
              patch.object(review, 'all_pages', return_value=[]) as pages, \
-             patch.object(review, 'api', return_value={'user': {'login': 'owner'}}), \
+             patch.object(review, 'api', return_value={
+                 'user': {'login': 'owner'}, 'body': f'Review head: `{head}`'}) as api, \
              patch.object(publisher, 'run') as run:
+            publisher.request_verification('owner/repo', 10, head, self.reports, c.timestamp())
+            run.assert_not_called()
+            api.return_value['body'] = f'Review head: `{"b" * 40}`'
             publisher.request_verification('owner/repo', 10, head, self.reports, c.timestamp())
             self.assertIn('@codex review', (self.reports / 'verification-review.md').read_text())
             run.assert_called_once()

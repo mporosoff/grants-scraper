@@ -9,10 +9,10 @@ from tools import release_candidate as c
 
 
 def prepare_or_defer(bundle, receipt, reports, artifact_run):
-    """Only missing review is a non-serving checkpoint; all other errors fail."""
+    """Retain a non-serving checkpoint when review is pending or failed to run."""
     try:
         # Repository-wide automatic review now covers bot-created candidates.
-        # Allow the established bounded review window inside the 45-minute job;
+        # Allow the established bounded review window inside the publication job;
         # a slower review still preserves the non-serving pending checkpoint.
         result = prepare(bundle, receipt, reports, artifact_run, review_timeout=1800)
     except ReviewFindings as blocked:
@@ -26,13 +26,14 @@ def prepare_or_defer(bundle, receipt, reports, artifact_run):
         raise
     except ReviewPending as pending:
         manifest = c.load(bundle)
-        result = {'schema_version': 1, 'status': 'awaiting_review',
+        result = {'schema_version': 1, 'status': pending.status,
             'candidate_id': manifest['candidate_id'], 'artifact_run': str(artifact_run),
             'head_sha': pending.head, 'pr_number': pending.number,
             'repository': pending.repository, 'production_mutated': False,
             'next_retry_stage': 'publish', 'timestamp': c.timestamp()}
         c.write_json(Path(reports) / 'review-pending.json', result)
-        message = (f"Awaiting exact-head review of PR #{pending.number}. No publication or serving change. "
+        message = (f"{pending}. Review PR https://github.com/{pending.repository}/pull/{pending.number} "
+                   f"at {pending.head}. "
                    f"Retained candidate {manifest['candidate_id']} from run {artifact_run}; resume publish after review.\n")
         print(message)
         if os.environ.get('GITHUB_STEP_SUMMARY'):
@@ -40,7 +41,10 @@ def prepare_or_defer(bundle, receipt, reports, artifact_run):
                 out.write(message)
     if os.environ.get('GITHUB_OUTPUT'):
         with open(os.environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as out:
-            out.write('review_ready=' + ('false' if result.get('status') == 'awaiting_review' else 'true') + '\n')
+            status = result.get('status')
+            out.write('review_ready=' + ('false' if status else 'true') + '\n')
+            if status:
+                out.write(f"review_status={status}\nreview_pr={result['pr_number']}\n")
     return result
 
 

@@ -1282,6 +1282,8 @@ jobs:
     outputs:
       merge_sha: ${{ steps.publication.outputs.merge_sha }}
       review_ready: ${{ steps.review.outputs.review_ready }}
+      review_status: ${{ steps.review.outputs.review_status }}
+      review_pr: ${{ steps.review.outputs.review_pr }}
     env:
       GH_TOKEN: ${{ github.token }}
       CANDIDATE_ID: ${{ needs.candidate.outputs.candidate_id }}
@@ -1659,6 +1661,8 @@ jobs:
             const hasCheckpoint = Boolean(candidate && generationRun);
             if (!hasCheckpoint) { candidate = 'not persisted'; generationRun = 'none'; identitySource = 'no complete checkpoint selector'; }
             const awaiting = needs.publish.outputs.review_ready === 'false';
+            const reviewFailed = awaiting && needs.publish.outputs.review_status === 'review_failed';
+            const reviewCheckpoint = awaiting ? (reviewFailed ? 'review_failed' : 'awaiting_review') : '';
             const next = failed === 'pages' ? 'publish' : failed === 'verify-live' ? 'verify' :
               ['publish', 'validate'].includes(failed) ? failed : failed === 'candidate' && hasCheckpoint ?
               (['publish', 'verify'].includes(originalStage) ? originalStage : 'validate') : originalStage;
@@ -1671,15 +1675,18 @@ jobs:
             const publicationAttempt = publicationRun === String(context.runId) ? process.env.GITHUB_RUN_ATTEMPT || 'unknown' :
               sameRequested ? needs.plan.outputs.publication_attempt || process.env.REQUESTED_PUBLICATION_ATTEMPT || 'latest retained' : 'none';
             const runUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
-            const checkpoint = failed || (awaiting ? 'awaiting_review' : alreadyCurrent ? 'already_current' : planned === 'noop' ?
+            const checkpoint = failed || reviewCheckpoint || (alreadyCurrent ? 'already_current' : planned === 'noop' ?
               (heldStage || scheduledIncomplete ? 'held' : 'noop') : scheduledIncomplete ?
               (liveComplete ? 'stale_catalog' : 'incomplete_verification') : 'completed');
             const refreshFailure = scheduledIncomplete ?
               `Scheduled catalog refresh did not establish a fresh verified catalog: ${checkpoint}. Planner reason: ${planReason}` : '';
-            const retry = failed ? next : awaiting ? 'publish after exact-head review' :
+            const retry = failed ? next : reviewFailed ? 'resolve the reviewer failure, then publish after clean review of the same head' :
+              awaiting ? 'publish after exact-head review' :
               scheduledIncomplete ? planned === 'noop' ? 'resolve the reported hold before resuming auto' :
               'inspect the retained checkpoint before retry' : 'none';
             const body = `Candidate: ${candidate}\nArtifact run: ${generationRun}\nStage: ${checkpoint}\n` +
+              (/^[1-9][0-9]*$/.test(needs.publish.outputs.review_pr || '') ?
+                `Review PR: ${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/pull/${needs.publish.outputs.review_pr}\n` : '') +
               `Planned lifecycle stage: ${planned || 'not reported'}\nHeld lifecycle stage: ${heldStage || 'none'}\nPlanner reason: ${planReason}\n` +
               `Daily state: ${dailyStatus || 'not scheduled'}\nDaily window start: ${dailyWindow || 'not applicable'}\nCatalog source timestamp: ${catalogDate || 'unknown'}\nRecovery run: ${needs.plan.outputs.recovery_run || 'none'}\n` +
               `Source completeness: ${sourceCompleteness}\n` +
@@ -1693,8 +1700,9 @@ jobs:
               `Resume the same workflow for pre-candidate failures so its persisted generation checkpoint can be recovered; do not repeat completed expensive work.\n` +
               `A persisted candidate must be reused after downstream failure. Authenticate candidate and receipt artifacts before retry; reported selectors alone are not proof. Caches are not release evidence.`;
             await core.summary.addRaw(body).write();
-            if (failed || scheduledIncomplete) {
+            if (failed || scheduledIncomplete || reviewFailed) {
               if (scheduledIncomplete) core.setFailed(refreshFailure);
+              else if (reviewFailed) core.setFailed('Codex review failed. See the release summary for the blocked PR and retained candidate.');
               const title = 'Funding Finder release checkpoint failed';
               const {data: issues} = await github.rest.issues.listForRepo({...context.repo, state:'open', per_page:100});
               const existing = issues.find(issue => !issue.pull_request && issue.title === title);

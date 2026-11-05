@@ -77,6 +77,36 @@ class NoticeFactGuardTests(unittest.TestCase):
         self.assertEqual([f['value'] for f in facts if f['type'] == 'program_funding'], [2000000])
         self.assertEqual([f['value']['maximum'] for f in facts if f['type'] == 'award_range'], [55000])
 
+    def test_imls_applicant_budget_range_is_not_program_funding(self):
+        # IMLS FY27 Native Hawaiian and Native American Library Services Grants.
+        cases = (
+            ('363763', '354914', 'b08835a01ff5e8024fee95f7ace64316eea6e5b6a9043fb4fcbc6161c74e2028',
+             'the', 9, '342ffc4d7db4', 750000),
+            ('363762', '354913', '46b5013f529b272ad22921e9e925efdbccfc5e341ec9e7cbfe1c1c557dd14d51',
+             'your', 11, 'd71c7ceab759', 3500000),
+        )
+        for identifier, attachment, sha, determiner, page, suffix, total in cases:
+            with self.subTest(identifier=identifier):
+                url = f'https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/{attachment}'
+                document = {'url': url, 'sha256': sha}
+                request = f'The total funding request on {determiner} IMLS Budget Form must be between $50,000 - $150,000.'
+                retained = {'id': f'evidence-{identifier}-{suffix}', 'type': 'program_funding', 'value': 50000,
+                            'citation': {'document_url': url, 'sha256': sha, 'quote': request}}
+                self.assertEqual(guard.repair_facts([retained], document), ([], [
+                    {'fact_id': retained['id'], 'reason': 'applicant_budget_request_not_program_funding'}]))
+
+                overview = f'Total program funding is ${total:,}.\n\nAward amount range $50,000 - $150,000.'
+                facts = extractor.extract_document_facts({'opportunity_id': identifier},
+                    [{'text': overview, 'page': 6}, {'text': request, 'page': page}], document, '2026-11-02T20:29:35Z',
+                    families={'amounts'})
+                self.assertEqual([f['value'] for f in facts if f['type'] == 'program_funding'], [total])
+                self.assertEqual([f['value'] for f in facts if f['type'] == 'award_range'],
+                                 [{'minimum': 50000, 'maximum': 150000}])
+
+                for quote in (request.split(' - ')[0] + '…', request + ' Total program funding is $50,000.'):
+                    ambiguous = {**retained, 'citation': {**retained['citation'], 'quote': quote}}
+                    self.assertEqual(guard.repair_facts([ambiguous], document), ([ambiguous], []))
+
     def test_wrong_document_binding_and_ambiguous_scope_keep_existing_evidence_exact(self):
         case = FIXTURE['cases'][0]
         for key in ('url', 'sha256'):

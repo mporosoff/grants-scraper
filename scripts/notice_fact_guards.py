@@ -5,6 +5,10 @@ import re
 from scripts import notice_duration
 
 VERSION = 'notice-fact-guards-1'
+IMLS_BUDGET_REQUEST = re.compile(
+    r'\btotal\s+funding\s+request\s+on\s+(?:(?:the|your)\s+)?IMLS\s+Budget\s+Form\s+must\s+be\s+between\s+'
+    r'(\$\s*\d[\d,]*(?:\.\d+)?)\s*(?:and|to|[-–—])\s*'
+    r'(\$\s*\d[\d,]*(?:\.\d+)?)(?=\s*(?:[.!?;]|$))', re.I)
 COMPONENT_NAMES = {
     'Letters of support': r'letters?\s+of\s+(?:support(?:\s*/\s*commitment)?|commitment)(?:\s+or\s+collaboration)?',
     'Data management plan': r'data\s+management(?:\s+and\s+sharing)?\s+plan',
@@ -62,6 +66,11 @@ def personnel_rate(text, start, end):
                          prefix[headers[-1].end():], re.I)
 
 
+def applicant_budget_request(text, start, end):
+    """A dollar token within the IMLS form's explicit applicant range."""
+    return any((start, end) in (match.span(1), match.span(2)) for match in IMLS_BUDGET_REQUEST.finditer(text))
+
+
 def repair_facts(facts, document):
     """Withhold only demonstrably false assertions bound to this document.
 
@@ -85,14 +94,21 @@ def repair_facts(facts, document):
         if bound and notice_duration.unscoped_duration(fact):
             reason = 'project_duration_scope_missing'
         if bound and fact.get('type') == 'program_funding':
+            cited_amounts = []
             for token in re.finditer(r'\$\s*(\d[\d,]*(?:\.\d+)?)', quote):
                 try:
                     same = Decimal(token[1].replace(',', '')) == Decimal(str(fact.get('value')))
                 except InvalidOperation:
                     same = False
-                if same and personnel_rate(quote, token.start(), token.end()):
+                if not same:
+                    continue
+                cited_amounts.append(token)
+                if personnel_rate(quote, token.start(), token.end()):
                     reason = 'personnel_rate_not_program_funding'
                     break
+            # A repeated amount could instead refer to a genuine program total.
+            if not reason and len(cited_amounts) == 1 and applicant_budget_request(quote, *cited_amounts[0].span()):
+                reason = 'applicant_budget_request_not_program_funding'
         if reason:
             changes.append({'fact_id': fact['id'], 'reason': reason})
         else:

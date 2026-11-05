@@ -55,9 +55,14 @@ def request_verification(repository, number, head, reports, boundary):
         if findings:
             raise ReviewFindings(repository, number, head, len(findings))
         return
-    # A synchronized automatic review, if configured later, owns this round.
+    pr = api(f'repos/{repository}/pulls/{number}')
+    # The PR opening triggers the initial review. Only a later head can need an
+    # explicit verification request, including a retry after reconciliation.
+    if f'Review head: `{head}`' in (pr.get('body') or ''):
+        return
+    # A synchronized automatic review, if configured, owns the later round.
     comments = all_pages(f'repos/{repository}/issues/{number}/comments')
-    creator = api(f'repos/{repository}/pulls/{number}')['user']['login']
+    creator = pr['user']['login']
     if any(f'<!-- funding-finder-review:{head} -->' in row.get('body', '') and row.get('user', {}).get('login') == creator for row in comments):
         return
     automatic = any(row.get('user', {}).get('login') == 'chatgpt-codex-connector[bot]'
