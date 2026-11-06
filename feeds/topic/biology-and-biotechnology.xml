@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/biology-and-biotechnology.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/biology-and-biotechnology.xml</id>
-  <updated>2026-11-02T20:29:35Z</updated>
+  <updated>2026-11-05T23:46:57Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Development of Models, New Approach Methodologies, and Biological Materials for Studying Human Health and Diseases (R21 Clinical Trial Not Allowed)</title>
@@ -368,6 +368,17 @@
     <summary>National Institutes of Health | Estimated Application 2027-01-05 | The purpose of this funding opportunity is to support mechanistic research to understand how exposure to metals and metal-containing compounds alters biological processes relevant to human health. Of particular interest are studies that elucidate the absorption, distribution, transport, cellular trafficking, biological interactions, and mechanisms of action of metals, including mechanisms through …</summary>
   </entry>
   <entry>
+    <title>Identify and Evaluate Potential Risk Factors for Amyotrophic Lateral Sclerosis (ALS)</title>
+    <link href="https://www.grants.gov/search-results-detail/363115"/>
+    <id>urn:funding-finder:grants-gov:363115</id>
+    <updated>2026-12-01T00:00:00Z</updated>
+    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Environmental science"/>
+    <category term="Neuroscience"/>
+    <summary>Centers for Disease Control and Prevention - ERA | Estimated Application 2027-02-01 | CDC/ATSDR is inviting research proposals to study risk factors for Amyotrophic Lateral Sclerosis (ALS). Studies on military service, contact sports, traumatic brain injury, neuroinflammation, and infections agents and exposures are encouraged. Funding will be for four funding options: Option A - Support research with strong existing evidence such as studies on known environmental or genetic risk f…</summary>
+  </entry>
+  <entry>
     <title>Opportunities for Collaborative Research with the NIH Intramural Research Program (U01 Clinical Trial Optional)</title>
     <link href="https://www.grants.gov/search-results-detail/363204"/>
     <id>urn:funding-finder:grants-gov:363204</id>
@@ -410,18 +421,49 @@
     <summary>National Institutes of Health | Estimated Application 2027-06-16 | The NIH Blueprint for Neuroscience Research is interested in continuing to support the BluePrint Neurotherapeutics Network for Small Molecules (BPN-SM)- a program designed to help investigators advance promising small-molecule therapeutics toward clinical testing. The BPN-SM program supports drug discovery and development activities in investigators’ own laboratories while also providing access to…</summary>
   </entry>
   <entry>
-    <title>Precision and Systems Biology to Uncover the Link Between Chronic and Infectious Diseases</title>
+    <title>Systems Biology of Infection and Inflammation in Chronic Diseases (U19 Clinical Trial Not Allowed)</title>
     <link href="https://www.grants.gov/search-results-detail/362952"/>
     <id>urn:funding-finder:grants-gov:362952</id>
-    <updated>2026-11-06T00:00:00Z</updated>
+    <updated>2026-11-04T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Biology and biotechnology"/>
-    <category term="Data science"/>
-    <category term="Environmental science"/>
     <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <summary>National Institutes of Health | Estimated Application 2027-01-22 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting multidisciplinary, consortium-based research using precision systems biology approaches to uncover links among chronic illnesses, infectious diseases and microbiomes. There is an urgent scientific and clinical need to understand the pathways by which infections lead to chronic lifelong heal…</summary>
+    <summary>National Institutes of Health | Application 2027-02-18 | The purpose of this notice of funding opportunity (NOFO) is to support the advancement of systems-level understanding of the link between infectious pathogens and inflammatory pathways that result in predisposition, onset and progression of chronic diseases. The NOFO will stimulate integration of clinical and patient data, large-scale omics datasets, advanced Artificial Intelligence (AI) and compu…</summary>
+  </entry>
+  <entry>
+    <title>Genomic and Biologic Therapies for ADRD (U01 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/361287"/>
+    <id>urn:funding-finder:grants-gov:361287</id>
+    <updated>2026-11-03T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Manufacturing"/>
+    <category term="Neuroscience"/>
+    <summary>National Institutes of Health | Application 2028-10-10 | This Notice of Funding Opportunity (NOFO) supports the translation of genome editing and other biologic therapies for Alzheimer's Disease-Related Dementias (ADRD). The program spans the full translational pipeline, from therapeutic lead optimization and drug product development through IND-enabling studies and early clinical evaluation. Supported activities may include optimization of editing cons…</summary>
+  </entry>
+  <entry>
+    <title>Assay Validation of High Quality Markers for Clinical Studies in Cancer (UH2/UH3 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/360946"/>
+    <id>urn:funding-finder:grants-gov:360946</id>
+    <updated>2026-11-03T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Cancer"/>
+    <summary>National Institutes of Health | Application 2029-11-16 | The purpose of the Notice of Funding Opportunity (NOFO) is to support the analytical and clinical validation of molecular, cellular, and imaging biomarkers and assays for cancer detection, diagnosis, prognosis, monitoring, prediction of response or resistance to treatment, cancer prevention and control, as well as pharmacodynamic markers and markers of toxicity. Utilizing either a phased UH2/UH3 o…</summary>
+  </entry>
+  <entry>
+    <title>Cooperative Agreement for affiliated Partner with the Californian Cooperative Ecosystem Studies Unit</title>
+    <link href="https://www.grants.gov/search-results-detail/364194"/>
+    <id>urn:funding-finder:grants-gov:364194</id>
+    <updated>2026-11-02T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Transportation"/>
+    <summary>Geological Survey | Application 2026-12-23 | The USGS is offering a funding opportunity to a CESU partner for research in carbon cycling in seabed mineral environments. Seabed minerals may contain economically significant concentrations of valuable metals and rare earth elements which are essential to transportation, technological products, and defense and national security applications (i.e., critical minerals; Energy Act, 2020; U.S. Geolog…</summary>
   </entry>
   <entry>
     <title>Research on the Ethical, Legal and Social Implications (ELSI) of Genomics</title>
@@ -605,48 +647,5 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Biology and biotechnology"/>
     <summary>National Institutes of Health | Application 2026-12-14 | The National Human Genome Research Institute (NHGRI) is publishing a Notice of Funding Opportunity (NOFO) to solicit applications for the Impact of Genomic Variation on Function (IGVF) Data and Coordinating Center (DACC). The DACC will serve as the coordinating center for the IGVF Consortium and will be responsible for expanding and further developing a broadly accessible set of resources, includi…</summary>
-  </entry>
-  <entry>
-    <title>Systematic Characterization of Genomic Variation to Assess Effects of Individual Variants on Genome Function and Phenotype (UM1 Clinical Trials Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/358854"/>
-    <id>urn:funding-finder:grants-gov:358854</id>
-    <updated>2026-10-09T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <summary>National Institutes of Health | Application 2026-12-14 | The purpose of this Notice of Funding Opportunity (NOFO) is to solicit applications to characterize genomic variation to assess the impact of individual variants on genome function. This will be accomplished by systematically perturbing variants or elements using one or more high-throughput methods; collecting data on the effects of variants in DNA, RNA, or protein-coding elements on molecular, ce…</summary>
-  </entry>
-  <entry>
-    <title>NIAMS P30 Centers Program (P30 - Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/359152"/>
-    <id>urn:funding-finder:grants-gov:359152</id>
-    <updated>2026-10-09T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Data science"/>
-    <category term="Education and workforce"/>
-    <summary>National Institutes of Health | Application 2029-03-01 | The overall goal of this program is to accelerate scientific discovery, improve research efficiency, and enhance the translation of research findings into improved health outcomes. Centers funded under this program will also foster multidisciplinary collaboration, support workforce development across career stages, and promote training in emerging areas such as data science, artificial intelligenc…</summary>
-  </entry>
-  <entry>
-    <title>Limited Competition: Supporting Programs to Advance Research Knowledge in Environmental Health Sciences (SPARK-EHS) (UE5/T32 - Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/362977"/>
-    <id>urn:funding-finder:grants-gov:362977</id>
-    <updated>2026-10-05T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <summary>National Institutes of Health | Estimated Application 2026-12-07 | The goal of the Supporting Programs to Advance Research Knowledge in Environmental Health Sciences (SPARK-EHS) initiative is to extend the institutional, geographical, and research reach of NIEHS training. This initiative proposes to launch new and innovative environmental health training programs for research-focused predoctoral trainees at institutions that have not had a funded NIEHS T32 during…</summary>
-  </entry>
-  <entry>
-    <title>Centers for Structural Biology of HIV and Other Infectious Diseases (U54 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/361050"/>
-    <id>urn:funding-finder:grants-gov:361050</id>
-    <updated>2026-10-02T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Infectious disease"/>
-    <summary>National Institutes of Health | Application 2027-05-28 | The purpose of this notice of funding opportunity (NOFO) is to support multidisciplinary consortia of structural biologists, microbiologists, and associated experts to solve complex biological structures related to the prevention, treatment, and cure of HIV and other infectious diseases. Centers are expected to facilitate new collaborations, leverage shared resources, offer services and resources …</summary>
   </entry>
 </feed>

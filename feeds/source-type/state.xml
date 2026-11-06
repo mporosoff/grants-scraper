@@ -4,8 +4,29 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/source-type/state.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/source-type/state.xml</id>
-  <updated>2026-11-02T20:29:35Z</updated>
+  <updated>2026-11-05T23:46:57Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>Energy Economy Planning and Growth Program</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr00001COlXwAAL"/>
+    <id>urn:funding-finder:nyserda:nyserda%3APON6201</id>
+    <updated>2026-11-02T00:00:00Z</updated>
+    <author><name>NYSERDA</name></author>
+    <category term="Energy"/>
+    <summary>NYSERDA | Application 2027-02-24 | Provides funding for projects in three categories: Category A) Regional Planning - technical assistance for Regional Energy Economy strategies; Category B) Industry Plans- funding for plans designed to attract and grow a specific industry across several regions in New York; and Category C) Implementation Support - targeted investment for implementation activities. NYSERDA has prequalified firms ca…</summary>
+  </entry>
+  <entry>
+    <title>Drop in Alternative Fuels Innovation Projects</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr00001OT3UFAA1"/>
+    <id>urn:funding-finder:nyserda:nyserda%3APON6189</id>
+    <updated>2026-11-02T00:00:00Z</updated>
+    <author><name>NYSERDA</name></author>
+    <category term="Climate change"/>
+    <category term="Technology development"/>
+    <category term="Transportation"/>
+    <category term="Carbon management"/>
+    <summary>NYSERDA | Application 2029-12-31 | Supports pilot, demonstration, and first-of-a-kind (FOAK) commercial development projects that produce drop-in alternative fuels from New York State waste, residues, biogenic feedstocks, and captured CO₂. NYSERDA Program Opportunity Notice (PON) 6189 seeks the most viable pathways to produce sustainable aviation fuel, renewable natural gas, renewable diesel, low-carbon methanol, and renewable prop…</summary>
+  </entry>
   <entry>
     <title>Engineering Services for the West Valley Site Management Program</title>
     <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr000019AZ6rAAG"/>

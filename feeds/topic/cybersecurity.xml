@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml</id>
-  <updated>2026-11-02T20:29:35Z</updated>
+  <updated>2026-11-05T23:46:57Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>FY 2027 Crash Causal Factors Program</title>
@@ -15,34 +15,6 @@
     <category term="Transportation"/>
     <category term="Cybersecurity"/>
     <summary>DOT-Federal Motor Carrier Safety Administration | Application 2026-12-28 | The CCFP Cooperative Agreement Program will provide supplemental funding to eligible State and local law enforcement agencies to support the collection of advanced crash data to inform the Heavy-Duty Truck Study. FMCSA anticipates Congress, State and local law enforcement, industry stakeholders, and advocacy groups to support this action, as the results of the Heavy-Duty Truck Study will provide a…</summary>
-  </entry>
-  <entry>
-    <title>AFRL/AFOSR Fiscal Year (FY) 2027 University Center for High-Speed Aerothermoelasticity</title>
-    <link href="https://www.grants.gov/search-results-detail/364172"/>
-    <id>urn:funding-finder:grants-gov:364172</id>
-    <updated>2026-10-29T00:00:00Z</updated>
-    <author><name>Air Force Office of Scientific Research</name></author>
-    <category term="Education and workforce"/>
-    <category term="Space and aeronautics"/>
-    <category term="Data science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Cybersecurity"/>
-    <summary>Air Force Office of Scientific Research | Application 2027-04-02 | verify prerequisite | The Air Force Office of Scientific Research, in partnership with the Air Force Research Lab (AFRL) Air Warfare Directorate (RA), intends to provide support for a multidisciplinary team of scientists and engineers at U.S. universities to establish a university-led Center for High-Speed Aerothermoelasticity. This multidisciplinary, basic research initiative focuses on investigating complex problem s…</summary>
-  </entry>
-  <entry>
-    <title>AFRL/AFOSR-Taiwan NSTC Frontiers in Materials and Nanostructures: AI-Driven Discovery, Quantum Geometry, and Energy-Efficient Information Technologies 2027-2030</title>
-    <link href="https://www.grants.gov/search-results-detail/364165"/>
-    <id>urn:funding-finder:grants-gov:364165</id>
-    <updated>2026-10-28T00:00:00Z</updated>
-    <author><name>Air Force Office of Scientific Research</name></author>
-    <category term="Arts and culture"/>
-    <category term="Energy"/>
-    <category term="Quantum science"/>
-    <category term="Materials science"/>
-    <category term="Data science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Cybersecurity"/>
-    <summary>Air Force Office of Scientific Research | Application 2027-02-19 | verify prerequisite | This is a special Notice of Funding Opportunity Announcement (NOFO) sponsored by the Air Force Office of Scientific Research (AFOSR) and Taiwan’s National Science and Technology Council (NSTC), which will hereafter generally be referred to as “we, us, our, or AFOSR.” We announce the solicitation for a three-year program entitled “Frontiers in Materials and Nanostructures: AI-Driven Discovery, Quan…</summary>
   </entry>
   <entry>
     <title>Fiscal Year 2026 Flood Mitigation Assistance</title>
@@ -163,18 +135,6 @@
     <category term="Data science"/>
     <category term="Cybersecurity"/>
     <summary>U.S. National Science Foundation | Posted | The U.S. National Science Foundation Directorate for Mathematical and Physical Sciences (NSF MPS) supports multiple research programs at the frontiers of discovery in theoretical and applied mathematical sciences. Programs include: Algebra and Number TheoryAnalysisApplied MathematicsCombinatoricsComputational MathematicsFoundationsGeometric AnalysisMathematical BiologyProbabilityStatisticsTopology…</summary>
-  </entry>
-  <entry>
-    <title>U.S. National Science Foundation State and Regional Artificial Intelligence Infrastructure Hubs:</title>
-    <link href="https://www.grants.gov/search-results-detail/363481"/>
-    <id>urn:funding-finder:grants-gov:363481</id>
-    <updated>2026-08-06T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Education and workforce"/>
-    <category term="Data science"/>
-    <category term="Cybersecurity"/>
-    <summary>U.S. National Science Foundation | Application 2026-11-04 | The NSF State and Regional AI Infrastructure Hubs program aims to expand access to the compute required for AI-enabled scientific discovery and to transform the research, education, and training opportunities offered by institutions of higher education. AI Infrastructure Hubs will connect researchers to new compute infrastructure that leverages contributions from state governments, research instit…</summary>
   </entry>
   <entry>
     <title>Fiscal Year 2026 Flood Mitigation Assistance Swift Current</title>

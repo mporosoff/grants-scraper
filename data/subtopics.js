@@ -11,8 +11,8 @@ globalThis.SUBTOPIC_CATALOG={
   "frame_evidence_cache_sha256": "2e5196fceba24921b486dce76a29f5759f642ce207fa65fc9bb9a11632a1a71c",
   "top_level_fetch_failure_count": 51
  },
- "parent_count": 30,
- "record_count": 464,
+ "parent_count": 31,
+ "record_count": 465,
  "records": {
   "103313": {
    "segmentation_method": null,
@@ -2660,20 +2660,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "340544": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "340545": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "340828": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -2738,13 +2724,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "343875": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "343980": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -14844,20 +14823,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "357602": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "357604": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "357606": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -15482,6 +15447,13 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "359004": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "359019": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -19271,13 +19243,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "360296": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "360350": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -19404,6 +19369,13 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
+  "360551": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
   "360553": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -19474,6 +19446,20 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
+  "360623": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "360625": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
   "360626": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -19489,20 +19475,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "360633": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "360643": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "360644": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -26556,13 +26528,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "362551": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "362562": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -26606,13 +26571,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "362597": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "362607": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -26767,27 +26725,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "362850": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "362854": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "362855": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "362856": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -27171,13 +27108,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "363159": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "363160": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -27527,13 +27457,6 @@ globalThis.SUBTOPIC_CATALOG={
     }
    ]
   },
-  "363268": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "363272": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -27556,13 +27479,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "363277": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363281": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -27932,13 +27848,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "363455": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "363473": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -27961,13 +27870,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "363476": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363481": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -29275,13 +29177,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "363712": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "363713": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -29303,7 +29198,7 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "363728": {
+  "363725": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -29453,7 +29348,7 @@ globalThis.SUBTOPIC_CATALOG={
      "evidence_anchor": null,
      "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
      "first_seen": "2026-10-16",
-     "last_verified": "2026-10-16",
+     "last_verified": "2026-11-05",
      "native_deadline_text": "10/16/2026 (Mandatory NOI) | 12/04/2026",
      "native_status": "dated",
      "opportunity_id": "363759:a-16",
@@ -29470,11 +29365,11 @@ globalThis.SUBTOPIC_CATALOG={
      "publication_state": "publishable",
      "record_type": "subtopic",
      "segmentation_method": null,
-     "source_document_hash": "08b6d52ae04d93b370cc7f134680e955e9dfa2d8a4cff59692dd262ee5b693ea",
-     "source_document_url": "https://nspires.nasaprs.com/external/viewrepositorydocument/cmdocumentid=1041498/solicitationId=%7B2A1D139B-B9C7-CE8C-2E81-223FD08460F9%7D/viewSolicitationDocument=1/Table 3 ROSES-2025_Amend 79.html",
+     "source_document_hash": "4f6ab9bdc06df991bcdba70cdd5b8531fb48612dd55bb357571f0ce27a0acde2",
+     "source_document_url": "https://nspires.nasaprs.com/external/viewrepositorydocument/cmdocumentid=1041498/solicitationId=%7B2A1D139B-B9C7-CE8C-2E81-223FD08460F9%7D/viewSolicitationDocument=1/Table 3 ROSES-2025_Amend 81.html",
      "source_role": "authoritative_announcement",
      "source_version": {
-      "amendment": 79,
+      "amendment": 81,
       "year": 2025
      },
      "status": "posted",
@@ -29635,20 +29530,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "363784": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363785": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "363786": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -29729,13 +29610,6 @@ globalThis.SUBTOPIC_CATALOG={
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopics": []
-  },
-  "363796": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
   "363799": {
@@ -30075,20 +29949,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "363877": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363891": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363893": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -33991,13 +33851,6 @@ globalThis.SUBTOPIC_CATALOG={
     }
    ]
   },
-  "363924": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "363926": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -34406,21 +34259,7 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "363957": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "363958": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363961": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -34526,13 +34365,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "363976": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363977": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -39879,13 +39711,6 @@ globalThis.SUBTOPIC_CATALOG={
     }
    ]
   },
-  "364024": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "364026": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -40503,6 +40328,13 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
+  "364134": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
   "364135": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -40839,6 +40671,132 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
+  "364190": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "364191": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "364192": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "364193": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "364194": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "364195": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "364196": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "364197": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "364198": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "364199": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "364200": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "364201": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "364202": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "364205": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "364212": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "364213": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "364217": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "364218": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
   "39841": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -40937,13 +40895,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "darpa-iarpa:darpa-darpapa250705": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "darpa-iarpa:darpa-darpapa260201": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -40958,6 +40909,66 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
+  "nasa-roses:25-D.10-6c8cc7896f": {
+   "segmentation_method": "nasa_roses_table",
+   "subtopic_count": 1,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopics": [
+    {
+     "amended": true,
+     "child_source_url": "https://nspires.nasaprs.com/external/solicitations/summary.do?solNum=NNH25ZDA001N-ATP",
+     "child_type": "subject",
+     "confidence": "high",
+     "division": "D",
+     "evidence_anchor": null,
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-11-05",
+     "last_verified": "2026-11-05",
+     "native_deadline_text": "N/A | 02/03/2027",
+     "native_status": "dated",
+     "opportunity_id": "nasa-roses:25-D.10-6c8cc7896f:d-10",
+     "ordinal_label": "D.10",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": null,
+     "page_start": null,
+     "parent_id": "nasa-roses:25-D.10-6c8cc7896f",
+     "parent_opportunity_number": "NNH25ZDA001N-ATP",
+     "pattern_family": null,
+     "program_area_labels": [],
+     "publication_reason": "high_confidence",
+     "publication_state": "publishable",
+     "record_type": "subtopic",
+     "segmentation_method": null,
+     "source_document_hash": "4f6ab9bdc06df991bcdba70cdd5b8531fb48612dd55bb357571f0ce27a0acde2",
+     "source_document_url": "https://nspires.nasaprs.com/external/viewrepositorydocument/cmdocumentid=1041498/solicitationId=%7B2A1D139B-B9C7-CE8C-2E81-223FD08460F9%7D/viewSolicitationDocument=1/Table 3 ROSES-2025_Amend 81.html",
+     "source_role": "authoritative_announcement",
+     "source_version": {
+      "amendment": 81,
+      "year": 2025
+     },
+     "status": "posted",
+     "subtopic_code": "D.10",
+     "subtopic_code_norm": "d-10",
+     "subtopic_id": "nasa-roses:25-D.10-6c8cc7896f:d-10",
+     "subtopic_ordinal": 54,
+     "subtopic_source": "native",
+     "summary": "NASA ROSES program element D.10: Astrophysics Theory Program.",
+     "term_display": {
+      "02": "02",
+      "03": "03",
+      "2027": "2027",
+      "astrophysic": "Astrophysics",
+      "division": "division",
+      "rose": "ROSES",
+      "theory": "Theory"
+     },
+     "title": "Astrophysics Theory Program",
+     "title_fingerprint": "7137fa0b",
+     "topic_areas": []
+    }
+   ]
+  },
   "nasa-roses:25-D.3F-a0947606d9": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -40966,13 +40977,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "nsf-cbet:PD-26-370Y": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "nsf-funding:https://www.nsf.gov/funding/opportunities/small-business-innovation-research-small-business-technology/nsf26-510": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -41140,7 +41144,21 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
+  "nyserda:PON6189": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
   "nyserda:PON6195": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "nyserda:PON6201": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -41350,13 +41368,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "sam-gov:5f75330f42ee4145990fe6a51a3dc84e": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "sam-gov:7b28c18c42cf4d44b6b65709148ec8e0": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -41386,13 +41397,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "sam-gov:88bd6e35ec6742b6b1e94fb4aadc706b": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "sam-gov:897e1427461540d792897c599373758b": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -42548,8 +42552,8 @@ globalThis.SUBTOPIC_CATALOG={
  },
  "schema_version": 1,
  "search_index": {
-  "average_document_length": 140.94690265486724,
-  "document_count": 226,
+  "average_document_length": 140.3568281938326,
+  "document_count": 227,
   "document_lengths": [
    836,
    401,
@@ -42776,7 +42780,8 @@ globalThis.SUBTOPIC_CATALOG={
    10,
    11,
    14,
-   14
+   14,
+   7
   ],
   "postings": {
    "0.001-10": [
@@ -42795,12 +42800,16 @@ globalThis.SUBTOPIC_CATALOG={
     217,
     1,
     225,
+    1,
+    226,
     1
    ],
    "03": [
     220,
     1,
     224,
+    1,
+    226,
     1
    ],
    "04": [
@@ -43587,6 +43596,8 @@ globalThis.SUBTOPIC_CATALOG={
     224,
     1,
     225,
+    1,
+    226,
     1
    ],
    "21": [
@@ -48615,6 +48626,8 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "astrophysic": [
     220,
+    1,
+    226,
     1
    ],
    "asymptotic": [
@@ -57589,6 +57602,8 @@ globalThis.SUBTOPIC_CATALOG={
     224,
     1,
     225,
+    1,
+    226,
     1
    ],
    "dmitry": [
@@ -80761,6 +80776,8 @@ globalThis.SUBTOPIC_CATALOG={
     224,
     1,
     225,
+    1,
+    226,
     1
    ],
    "rotary-w": [
@@ -86037,6 +86054,8 @@ globalThis.SUBTOPIC_CATALOG={
     76,
     1,
     83,
+    1,
+    226,
     1
    ],
    "theory-guid": [
@@ -90416,8 +90435,9 @@ globalThis.SUBTOPIC_CATALOG={
    "363789:a-17",
    "364021:a-18",
    "364032:b-7",
-   "364039:b-8"
+   "364039:b-8",
+   "nasa-roses:25-D.10-6c8cc7896f:d-10"
   ]
  },
- "searchable_record_count": 226
+ "searchable_record_count": 227
 };

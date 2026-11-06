@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml</id>
-  <updated>2026-11-02T20:29:35Z</updated>
+  <updated>2026-11-05T23:46:57Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Healthy Lifestyles in Youth</title>
@@ -97,6 +97,41 @@
     <author><name>Health Resources and Services Administration</name></author>
     <category term="Agriculture and food"/>
     <summary>Health Resources and Services Administration | Estimated Application 2027-02-11 | Fiscal Year (FY) 2027 Regional Nutrition Hubs (RNH) will support region-specific technical assistance (TA) on expanding high-quality nutrition services to the Health Resources and Services Administration's (HRSA) Health Center Program (H80) award recipients and look-alikes (health centers). Nutrition services prevent, manage, and treat diseases and conditions through nutritional and food-based int…</summary>
+  </entry>
+  <entry>
+    <title>Development and Maintenance of Human and Animal Food Rapid Response Teams</title>
+    <link href="https://www.grants.gov/search-results-detail/364217"/>
+    <id>urn:funding-finder:grants-gov:364217</id>
+    <updated>2026-11-04T00:00:00Z</updated>
+    <author><name>Food and Drug Administration</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Public health"/>
+    <category term="Technology development"/>
+    <summary>Food and Drug Administration | Letter Of Intent 2026-12-04 | The purpose of this Notice of Funding Opportunity (NOFO) is to develop and maintain Rapid Response Teams (RRTs) to facilitate long-term improvements and innovation within the national integrated food safety system by unifying and coordinating federal, state, and local human and animal food (HAF) emergency response efforts including:1) Strengthening the link among epidemiology, lab, and environment…</summary>
+  </entry>
+  <entry>
+    <title>National Produce Safety Partnership Program</title>
+    <link href="https://www.grants.gov/search-results-detail/364218"/>
+    <id>urn:funding-finder:grants-gov:364218</id>
+    <updated>2026-11-04T00:00:00Z</updated>
+    <author><name>Food and Drug Administration</name></author>
+    <category term="Agriculture and food"/>
+    <summary>Food and Drug Administration | Letter Of Intent 2026-12-18 | This funding opportunity aims to improve the safety of fresh produce and prevent produce-related illnesses.</summary>
+  </entry>
+  <entry>
+    <title>Cooperative Agreement for affiliated Partner with the Californian Cooperative Ecosystem Studies Unit</title>
+    <link href="https://www.grants.gov/search-results-detail/364194"/>
+    <id>urn:funding-finder:grants-gov:364194</id>
+    <updated>2026-11-02T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Transportation"/>
+    <summary>Geological Survey | Application 2026-12-23 | The USGS is offering a funding opportunity to a CESU partner for research in carbon cycling in seabed mineral environments. Seabed minerals may contain economically significant concentrations of valuable metals and rare earth elements which are essential to transportation, technological products, and defense and national security applications (i.e., critical minerals; Energy Act, 2020; U.S. Geolog…</summary>
   </entry>
   <entry>
     <title>Cooperative Agreement for affiliated Partner with the Chesapeake Watershed Cooperative Ecosystem Studies Unit</title>
@@ -271,41 +306,6 @@
     <category term="Agriculture and food"/>
     <category term="Community development"/>
     <summary>Rural Business-Cooperative Service | Application 2026-12-07 | The Meat and Poultry Processing Expansion Program (MPPEP) provides grants to help eligible meat and poultry processors expand their capacity, which creates new, better and more processing options for meat and poultry producers. The goal for MPPEP Phase 3 Round 2 is to support Processors of Invasive, Wild-Caught Catfish species by increasing Processing capacity and providing greater opportunity in …</summary>
-  </entry>
-  <entry>
-    <title>1890 Institution Teaching, Research, and Extension Capacity Building Grants Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363796"/>
-    <id>urn:funding-finder:grants-gov:363796</id>
-    <updated>2026-09-03T00:00:00Z</updated>
-    <author><name>National Institute of Food and Agriculture</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Technology development"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>National Institute of Food and Agriculture | Application 2026-11-04 | The 1890 CBG program, under Assistance Listing Number 10.216 is designed specifically to build the institutional teaching, research, and extension capacities of the eligible institutions through cooperative programs with Federal and non-Federal entities. The 1890 CBG Program supports Executive Order 14283, “White House Initiative to Promote Excellence and Innovation at Historically Black Colleges …</summary>
-  </entry>
-  <entry>
-    <title>Emergency Citrus Disease Research and Extension Pre-Applications</title>
-    <link href="https://www.grants.gov/search-results-detail/363785"/>
-    <id>urn:funding-finder:grants-gov:363785</id>
-    <updated>2026-09-02T00:00:00Z</updated>
-    <author><name>National Institute of Food and Agriculture</name></author>
-    <category term="Agriculture and food"/>
-    <summary>National Institute of Food and Agriculture | Application 2026-11-02 | In FY 2026, the ECDRE program, under Assistance Listing 10.309, is soliciting proposals to develop effective tactics and strategies to control HLB and its disease complex for financially sustainable citrus production in the United States. All projects funded by the ECDRE program will incorporate collaborative approaches that integrate available knowledge to develop new solutions that can be deploy…</summary>
-  </entry>
-  <entry>
-    <title>Tribal Colleges Extension Program Special Emphasis</title>
-    <link href="https://www.grants.gov/search-results-detail/363784"/>
-    <id>urn:funding-finder:grants-gov:363784</id>
-    <updated>2026-09-02T00:00:00Z</updated>
-    <author><name>National Institute of Food and Agriculture</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Community development"/>
-    <category term="Education and workforce"/>
-    <category term="Public health"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>National Institute of Food and Agriculture | Application 2026-11-02 | The TCEP-SE under assistance listing 10.517, provides informal, community-focused extension pilot projects at 1994 Institutions. Pilot projects may focus on community needs that address emerging issues such as agricultural productivity, improving food systems, community vitality, workforce and economic development, public health and well-being, engaging Tribal youths, and preparing the next genera…</summary>
   </entry>
   <entry>
     <title>Fiscal Year (FY) 2027 AmeriCorps State and National Competitive Grants</title>
