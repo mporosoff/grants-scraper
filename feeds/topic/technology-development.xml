@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml</id>
-  <updated>2026-11-05T23:46:57Z</updated>
+  <updated>2026-11-06T17:36:44Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Technology Development Program</title>
@@ -296,6 +296,18 @@
     <summary>Centers for Disease Control - NCHHSTP | Estimated Application 2027-01-11 | CDC is funding programs that track, prevent, and control sexually transmitted infections (STI) in state, district, territorial, and city or county health departments. The purpose of this NOFO is to track, prevent, and control three common STIs: syphilis, gonorrhea, and chlamydia. The NOFO supports the goals of the Sexually Transmitted Infections National Strategic Plan 2021-2025: Prevent new STIs.…</summary>
   </entry>
   <entry>
+    <title>Cooperative Agreement for affiliated Partner with Chesapeake Watershed Cooperative Ecosystem Studies Unit</title>
+    <link href="https://www.grants.gov/search-results-detail/364229"/>
+    <id>urn:funding-finder:grants-gov:364229</id>
+    <updated>2026-11-05T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
+    <category term="Environmental science"/>
+    <category term="Technology development"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Geological Survey | Application 2026-12-07 | The U.S. Geological Survey (USGS) is offering a funding opportunity to a CESU partner to support research and technology development that advances automated fish detection, enumeration, and risk assessment at Brandon Road Lock and Dam through the use of the Live Imaging Sonar Surveillance Array (LISSA). This work directly contributes to federal efforts to prevent the upstream movement of invasive …</summary>
+  </entry>
+  <entry>
     <title>Small Business Transition Grant for New Entrepreneurs (Parent R43/R44 Clinical Trial Optional)</title>
     <link href="https://www.grants.gov/search-results-detail/362576"/>
     <id>urn:funding-finder:grants-gov:362576</id>
@@ -532,7 +544,7 @@
     <author><name>Agricultural Marketing Service</name></author>
     <category term="Agriculture and food"/>
     <category term="Technology development"/>
-    <summary>Agricultural Marketing Service | Application 2026-12-01 | The U.S. Department of Agriculture (USDA), Agricultural Marketing Service (AMS), requests applications for fiscal year (FY) 2026 from existing initiatives of the Dairy Business Innovation (DBI) Initiatives Program: the California State University Fresno Foundation, the University of Tennessee, the Vermont Agency of Agriculture, Food and Markets, and the University of Wisconsin. These initiatives s…</summary>
+    <summary>Agricultural Marketing Service | Application 2027-01-04 | The U.S. Department of Agriculture (USDA), Agricultural Marketing Service (AMS), requests applications for fiscal year (FY) 2026 from existing initiatives of the Dairy Business Innovation (DBI) Initiatives Program: the California State University Fresno Foundation, the University of Tennessee, the Vermont Agency of Agriculture, Food and Markets, and the University of Wisconsin. These initiatives s…</summary>
   </entry>
   <entry>
     <title>Simulation-augmented, real-time Platform Adaptive Seamless Trials (SURPASS)</title>
@@ -639,16 +651,5 @@
     <category term="Public health"/>
     <category term="Technology development"/>
     <summary>National Institutes of Health | Estimated Application 2027-01-25 | The Clinical and Translational Science Awards Program Trial Innovation Network (TIN) is a collaborative initiative aimed at addressing critical roadblocks in the design and implementation of multi-center clinical trials. The goal of the TIN is to execute trials better, faster, and more cost-efficiently, as well as serve as a national laboratory to study, understand, and innovate the process of con…</summary>
-  </entry>
-  <entry>
-    <title>IUSE: Innovation in Two-Year College STEM Education (ITYC)</title>
-    <link href="https://www.grants.gov/search-results-detail/363752"/>
-    <id>urn:funding-finder:grants-gov:363752</id>
-    <updated>2026-08-31T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Education and workforce"/>
-    <category term="Social and behavioral sciences"/>
-    <category term="Technology development"/>
-    <summary>U.S. National Science Foundation | Application 2026-12-09 | The National Science Foundation (NSF) plays a prominent role in the improvement of undergraduate STEM education at the Nation’s colleges and universities. Through the IUSE: Innovation in Two-Year College STEM Education (ITYC) program, the agency seeks to extend this effort by making an intentional investment in the country’s two-year institutions of higher education, or two-year colleges. The twin…</summary>
   </entry>
 </feed>

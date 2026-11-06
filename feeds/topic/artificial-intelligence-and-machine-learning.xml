@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml</id>
-  <updated>2026-11-05T23:46:57Z</updated>
+  <updated>2026-11-06T17:36:44Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Single Source: Scalable and Systematic Neurobiology of Psychiatric and Neurodevelopmental Disorder Risk Genes: Data Resource and Administrative Coordination Center (U24 Clinical Trial Not Allowed)</title>
@@ -97,6 +97,41 @@
     <category term="Technology development"/>
     <category term="Transportation"/>
     <summary>Centers for Disease Control and Prevention - ERA | Estimated Application 2027-02-26 | PURPOSENIOSH intends to support the Centers of Excellence in Total Worker Health® (TWH). These Centers will conduct rigorous research and translation activities to prevent harmful exposures, improve working conditions, and advance worker well-being. The Centers will develop practical, scalable solutions for employers and workers. All projects must use the NIOSH Worker Well-Being Questionnaire (Wel…</summary>
+  </entry>
+  <entry>
+    <title>Cooperative Agreement for affiliated Partner with Chesapeake Watershed Cooperative Ecosystem Studies Unit</title>
+    <link href="https://www.grants.gov/search-results-detail/364229"/>
+    <id>urn:funding-finder:grants-gov:364229</id>
+    <updated>2026-11-05T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
+    <category term="Environmental science"/>
+    <category term="Technology development"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Geological Survey | Application 2026-12-07 | The U.S. Geological Survey (USGS) is offering a funding opportunity to a CESU partner to support research and technology development that advances automated fish detection, enumeration, and risk assessment at Brandon Road Lock and Dam through the use of the Live Imaging Sonar Surveillance Array (LISSA). This work directly contributes to federal efforts to prevent the upstream movement of invasive …</summary>
+  </entry>
+  <entry>
+    <title>Cooperative Agreement for affiliated Partner with Colorado Plateau Cooperative Ecosystem Studies Unit</title>
+    <link href="https://www.grants.gov/search-results-detail/364238"/>
+    <id>urn:funding-finder:grants-gov:364238</id>
+    <updated>2026-11-05T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
+    <category term="Environmental science"/>
+    <category term="Water"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Geological Survey | Application 2026-12-07 | The U.S. Geological Survey (USGS) Arizona Water Science Center (AZWSC) is offering a funding opportunity to a CESU partner for research related to water quality modeling in reservoirs and free-flowing sections of the Colorado River from Lake Powell to the delta. Harmful algal blooms (HABs) are increasingly affecting freshwater systems across the western United States, and the Lower Colorado River …</summary>
+  </entry>
+  <entry>
+    <title>Cooperative Agreement for affiliated Partner with Rocky Mountain Cooperative Ecosystem Studies Unit</title>
+    <link href="https://www.grants.gov/search-results-detail/364237"/>
+    <id>urn:funding-finder:grants-gov:364237</id>
+    <updated>2026-11-05T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
+    <category term="Environmental science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Geological Survey | Application 2026-12-07 | The USGS is offering a funding opportunity to a CESU partner for research focused on improving the efficiency and standardization of Real-Time Quaking Induced Conversion (RT-QuIC) assay data analysis for Chronic Wasting Disease (CWD) surveillance, research, and management. CWD continues to expand geographically and intensify in prevalence, placing growing strain on wildlife management agencies. RT…</summary>
   </entry>
   <entry>
     <title>Systems Biology of Infection and Inflammation in Chronic Diseases (U19 Clinical Trial Not Allowed)</title>
@@ -700,48 +735,15 @@
 Successful candidates for a Fellowship generally have a strong record of significant independent research accomplishments that demonstrate creativity and the potential to become future leaders in the scientific community. While Fellows are exp…</summary>
   </entry>
   <entry>
-    <title>RESEARCH AND DEVELOPMENT OF NAVAL POWER AND ENERGY SYSTEMS (N00024-19-R-4145 Broad Agency Announcement (BAA))</title>
-    <link href="https://sam.gov/opp/fac0dcbe5eff43ab92e3dadb319daed1/view"/>
-    <id>urn:funding-finder:sam-gov:sam-gov%3Afac0dcbe5eff43ab92e3dadb319daed1</id>
-    <updated>2026-08-05T00:00:00Z</updated>
-    <author><name>Naval Sea Systems Command (NAVSEA)</name></author>
-    <category term="Energy"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Naval Sea Systems Command (NAVSEA) | White Paper 2028-02-06 | Naval power and energy system research: power generation, storage, distribution, controls, advanced conductors, thermal management and modeling. Required white paper before invited full proposal. The current description extends receipt to February 6, 2033, while current SAM deadline metadata remains February 6, 2028. This entry deliberately uses the earlier 2028 deadline conservatively and retains…</summary>
-  </entry>
-  <entry>
-    <title>Innovative Traffic Safety Enforcement (ITSE) Grant Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363446"/>
-    <id>urn:funding-finder:grants-gov:363446</id>
-    <updated>2026-08-03T00:00:00Z</updated>
-    <author><name>National Highway Traffic Safety Administration</name></author>
-    <category term="Transportation"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>National Highway Traffic Safety Administration | Application 2027-09-01 | While the agency will consider innovative enhancements to existing countermeasures, the goal is to develop evidence-based projects that are scalable and transferable for use by State and local law enforcement agencies. The primary intent of this of the ITSE Grant Program is to 1) develop innovative traffic safety enforcement programs that demonstrate effectiveness by reducing the number of motor v…</summary>
-  </entry>
-  <entry>
-    <title>ROSES25: A.14 Atmosphere</title>
-    <link href="https://www.grants.gov/search-results-detail/363240"/>
-    <id>urn:funding-finder:grants-gov:363240</id>
-    <updated>2026-07-20T00:00:00Z</updated>
-    <author><name>NASA Headquarters</name></author>
+    <title>U.S. National Science Foundation State and Regional Artificial Intelligence Infrastructure Hubs:</title>
+    <link href="https://www.grants.gov/search-results-detail/363481"/>
+    <id>urn:funding-finder:grants-gov:363481</id>
+    <updated>2026-08-06T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Space and aeronautics"/>
-    <summary>NASA Headquarters | Application 2026-12-02 | PLEASE NOTE: this program has MANDATORY Notices of Intent, which are due via NSPIRES by 8/20/2026. See the full posting on NSPIRES for details. NOTICE: September 18, 2026. Section 3.1 on participation of NASA ISFM scientists has been improved. Details on the redacted and anonymized budget requirements have been added to Table A.14-1 to be consistent with Section 4.3.2. The instructions regarding B…</summary>
-  </entry>
-  <entry>
-    <title>DoW Rare Cancers Idea Development Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362849"/>
-    <id>urn:funding-finder:grants-gov:362849</id>
-    <updated>2026-06-17T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Cancer"/>
-    <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA | Application 2026-11-18 | invitation required | Summary: The fiscal year 2026 (FY26) Rare Cancers Research Program (RCRP) Idea Development Award (IDA) promotes ideas that are ready for further development and have the potential to yield high-impact findings and new avenues of investigation. Distinctive Features: The RCRP encourages applicants to include an exploratory aim or sub-aim to support any necessary discovery-driven research. Preliminar…</summary>
+    <category term="Cybersecurity"/>
+    <summary>U.S. National Science Foundation | Application 2027-11-03 | The NSF State and Regional AI Infrastructure Hubs program aims to expand access to the compute required for AI-enabled scientific discovery and to transform the research, education, and training opportunities offered by institutions of higher education. AI Infrastructure Hubs will connect researchers to new compute infrastructure that leverages contributions from state governments, research instit…</summary>
   </entry>
 </feed>

@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/biology-and-biotechnology.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/biology-and-biotechnology.xml</id>
-  <updated>2026-11-05T23:46:57Z</updated>
+  <updated>2026-11-06T17:36:44Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Development of Models, New Approach Methodologies, and Biological Materials for Studying Human Health and Diseases (R21 Clinical Trial Not Allowed)</title>
@@ -368,6 +368,16 @@
     <summary>National Institutes of Health | Estimated Application 2027-01-05 | The purpose of this funding opportunity is to support mechanistic research to understand how exposure to metals and metal-containing compounds alters biological processes relevant to human health. Of particular interest are studies that elucidate the absorption, distribution, transport, cellular trafficking, biological interactions, and mechanisms of action of metals, including mechanisms through …</summary>
   </entry>
   <entry>
+    <title>Continuation and Expansion of the National Mesothelioma Virtual Bank for Translational Research (U24)</title>
+    <link href="https://www.grants.gov/search-results-detail/363281"/>
+    <id>urn:funding-finder:grants-gov:363281</id>
+    <updated>2026-12-01T00:00:00Z</updated>
+    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Cancer"/>
+    <summary>Centers for Disease Control and Prevention - ERA | Estimated Application 2027-02-01 | The National Mesothelioma Virtual Bank (NMVB) was established in 2006 to serve as a resource for malignant mesothelioma research. This funding opportunity will advance biomedical research for malignant mesothelioma by adding more biospecimens together with demographic data and clinical data. Examples of biospecimens include fresh frozen tumor and control tissues, paraffin embedded tissues, blood, …</summary>
+  </entry>
+  <entry>
     <title>Identify and Evaluate Potential Risk Factors for Amyotrophic Lateral Sclerosis (ALS)</title>
     <link href="https://www.grants.gov/search-results-detail/363115"/>
     <id>urn:funding-finder:grants-gov:363115</id>
@@ -386,6 +396,16 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Biology and biotechnology"/>
     <summary>National Institutes of Health | Estimated Application 2027-02-05 | The goal of this program is to support collaborative translational research projects aligned with NIH efforts to enhance the translation of basic biological discoveries into clinical applications that improve health. It encourages high quality science demonstrating the potential to result in understanding an important disease process or lead to new therapeutic interventions, diagnostics, or preven…</summary>
+  </entry>
+  <entry>
+    <title>Leveraging NAMs to understand disease triggers, discover early biomarkers and develop new classes of therapeutic strategies for Type 1 Diabetes (U01 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/364219"/>
+    <id>urn:funding-finder:grants-gov:364219</id>
+    <updated>2026-12-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Environmental science"/>
+    <summary>National Institutes of Health | Estimated Application 2027-02-10 | This NOFO will support research using human-relevant New Approach Methodologies (NAMs) to advance understanding of the earliest events that initiate and drive Type 1 Diabetes (T1D). Projects will use human cells and tissues and innovative experimental and computational approaches-including organoids, microphysiological systems, and other advanced human-relevant models-to investigate cellular and m…</summary>
   </entry>
   <entry>
     <title>Multimodal AI to Accelerate Precision Medicine for Type 1 Diabetes (U01- Clinical Trials Not Allowed)</title>
@@ -419,6 +439,18 @@
     <category term="Manufacturing"/>
     <category term="Neuroscience"/>
     <summary>National Institutes of Health | Estimated Application 2027-06-16 | The NIH Blueprint for Neuroscience Research is interested in continuing to support the BluePrint Neurotherapeutics Network for Small Molecules (BPN-SM)- a program designed to help investigators advance promising small-molecule therapeutics toward clinical testing. The BPN-SM program supports drug discovery and development activities in investigators’ own laboratories while also providing access to…</summary>
+  </entry>
+  <entry>
+    <title>Cooperative Agreement for affiliated Partner with Gulf Coast Cooperative Ecosystem Studies Unit</title>
+    <link href="https://www.grants.gov/search-results-detail/364231"/>
+    <id>urn:funding-finder:grants-gov:364231</id>
+    <updated>2026-11-05T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Environmental science"/>
+    <category term="Infectious disease"/>
+    <summary>Geological Survey | Application 2027-01-05 | The Eastern Ecological Science Center of the U.S. Geological Survey (USGS) is soliciting applications from CESU partners for research focused on the bioinformatic analysis of existing and upcoming avian microbiome metatranscriptomic datasets. These datasets have already been generated or are in the process of being generated under ongoing projects conducted in collaboration with the U.S. Fish and …</summary>
   </entry>
   <entry>
     <title>Systems Biology of Infection and Inflammation in Chronic Diseases (U19 Clinical Trial Not Allowed)</title>
@@ -619,33 +651,5 @@
     <category term="Environmental science"/>
     <category term="Transportation"/>
     <summary>National Institutes of Health | Application 2026-11-23 | The purpose of this Notice of Funding Opportunity (NOFO) is to solicit the development of innovative senescence technologies (SenTecs), or the adaptation of existing technologies focused on identification, characterization and understanding the biological consequences of senescent cell (SnC) heterogeneity in the context of the tissue environments and secretomes to facilitate novel strategies for m…</summary>
-  </entry>
-  <entry>
-    <title>Computational Modeling and Analysis of the Impact of Genomic Variation on Function (UM1, Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/359170"/>
-    <id>urn:funding-finder:grants-gov:359170</id>
-    <updated>2026-10-09T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <summary>National Institutes of Health | Application 2026-12-14 | The purpose of this Notice of Funding Opportunity (NOFO) is to solicit applications to develop, apply, and test predictive models and perform integrative analyses to determine the impact of genomic variation on genome function. Centers funded through this initiative will become a part of the Impact of Genomic Variation on Function (IGVF) Consortium. As consortium members, centers will work togethe…</summary>
-  </entry>
-  <entry>
-    <title>Genomic Variant Interactions With Other Variants Or The Environment (UM1 Clinical Trials Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/359277"/>
-    <id>urn:funding-finder:grants-gov:359277</id>
-    <updated>2026-10-09T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Environmental science"/>
-    <summary>National Institutes of Health | Application 2026-12-14 | The purpose of this Notice of Funding Opportunity (NOFO) is to solicit applications to study the effects of genetic or environmental interactions on genomic variant impact. To accomplish this, interaction centers will first propose a research framework to investigate whether interactions with effects beyond additive are important modifiers of the impact of variants. Centers will apply their framew…</summary>
-  </entry>
-  <entry>
-    <title>IGVF Data and Coordinating Center (U24 Clinical trials Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/358855"/>
-    <id>urn:funding-finder:grants-gov:358855</id>
-    <updated>2026-10-09T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <summary>National Institutes of Health | Application 2026-12-14 | The National Human Genome Research Institute (NHGRI) is publishing a Notice of Funding Opportunity (NOFO) to solicit applications for the Impact of Genomic Variation on Function (IGVF) Data and Coordinating Center (DACC). The DACC will serve as the coordinating center for the IGVF Consortium and will be responsible for expanding and further developing a broadly accessible set of resources, includi…</summary>
   </entry>
 </feed>

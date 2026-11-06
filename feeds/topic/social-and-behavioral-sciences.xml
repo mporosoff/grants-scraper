@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/social-and-behavioral-sciences.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/social-and-behavioral-sciences.xml</id>
-  <updated>2026-11-05T23:46:57Z</updated>
+  <updated>2026-11-06T17:36:44Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -307,6 +307,17 @@
     <category term="Public health"/>
     <category term="Social and behavioral sciences"/>
     <summary>National Institutes of Health | Estimated Application 2027-02-23 | The National Institutes of Health intends to publish a Notice of Funding Opportunity (NOFO), Pragmatic and Implementation Trials Conducted in Health Care SettingsThis funding opportunity will support large-scale pragmatic trials that test intervention effectiveness in routine clinical care and/or implementation trials that evaluate strategies for delivering interventions within health care setting…</summary>
+  </entry>
+  <entry>
+    <title>Cooperative Agreement for affiliated Partner with Great Rivers Cooperative Ecosystem Studies Unit</title>
+    <link href="https://www.grants.gov/search-results-detail/364230"/>
+    <id>urn:funding-finder:grants-gov:364230</id>
+    <updated>2026-11-05T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
+    <category term="Arts and culture"/>
+    <category term="Environmental science"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>Geological Survey | Application 2026-12-07 | The U.S. Geological Survey (USGS) is offering a funding opportunity to a CESU partner for research addressing the ecology, behavior, population dynamics, and resource management of fish across the Great Lakes basin and their tributary systems. The Great Lakes constitute the largest system of freshwater lakes on Earth and support exceptionally diverse native fish assemblages of significant ecologic…</summary>
   </entry>
   <entry>
     <title>Assessing the Feasibility of Incorporating Mechanisms in Multi-site Clinical Trials of Mind and Body Interventions on Whole Person Health Restoration (R33 Clinical Trial Required)</title>
@@ -639,18 +650,5 @@
     <category term="Environmental science"/>
     <category term="Social and behavioral sciences"/>
     <summary>National Institutes of Health | Application 2027-05-28 | The SuRE program supports research capacity building at eligible higher education institutions by funding investigator-initiated biomedical research inbasic, social, clinical, behavioral, or translational science that falls in the mission areas of the NIH. The purpose of SuRE awards is to provide support for investigator-initiated research at resource-limited institutions by full-time faculty who …</summary>
-  </entry>
-  <entry>
-    <title>Support for Research Excellence First Independent Research (SuRE-First) Award (R16 - Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/358875"/>
-    <id>urn:funding-finder:grants-gov:358875</id>
-    <updated>2025-06-13T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health | Application 2027-05-28 | The SuRE program supports research capacity building at eligible higher education institutions through funding investigator-initiated biomedical research inbasic, social, clinical, behavioral, or translational science that falls in the mission areas of the NIH. The purpose of SuRE-First awards is to provide support for investigator-initiated research at resource-limited institutions by full-time f…</summary>
   </entry>
 </feed>

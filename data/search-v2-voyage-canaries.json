@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-05T23:54:45.445Z",
+  "generated_at": "2026-11-06T17:42:51.709Z",
   "canary_set_version": 1,
   "model_alias": "voyage-4-lite",
   "response_model": "voyage-4-lite",
@@ -15,7 +15,13 @@
   "batch_space_checks": [
     {
       "exact_match": false,
-      "minimum_cosine": 0.999959,
+      "minimum_cosine": 0.999965,
+      "mean_cosine": 0.999971,
+      "gross_discontinuity": false
+    },
+    {
+      "exact_match": false,
+      "minimum_cosine": 0.999962,
       "mean_cosine": 0.99997,
       "gross_discontinuity": false
     },
@@ -27,35 +33,35 @@
     },
     {
       "exact_match": false,
-      "minimum_cosine": 0.999968,
-      "mean_cosine": 0.999991,
-      "gross_discontinuity": false
-    },
-    {
-      "exact_match": false,
-      "minimum_cosine": 0.999964,
-      "mean_cosine": 0.999972,
+      "minimum_cosine": 0.999962,
+      "mean_cosine": 0.99997,
       "gross_discontinuity": false
     },
     {
       "exact_match": false,
       "minimum_cosine": 0.999968,
-      "mean_cosine": 0.999991,
+      "mean_cosine": 0.999983,
+      "gross_discontinuity": false
+    },
+    {
+      "exact_match": false,
+      "minimum_cosine": 0.999965,
+      "mean_cosine": 0.999971,
       "gross_discontinuity": false
     }
   ],
   "comparison_to_prior_generation": {
-    "prior_fingerprint": "243e59c7a5c2db0cb1e9de04e455bf417d6b875557cb8223146fcf5b8d23037c",
-    "drift_detected": true,
-    "minimum_cosine": 0.999968,
-    "mean_cosine": 0.999991,
+    "prior_fingerprint": "2928ada07773a1dd1cc8861fe8f416046893217e9335a7104f04a9d5f85f6fb3",
+    "drift_detected": false,
+    "minimum_cosine": 1,
+    "mean_cosine": 1,
     "per_canary_cosine": {
       "carbon-catalysis": 1,
       "critical-minerals": 1,
       "rural-health": 1,
       "quantum-sensing": 1,
-      "maritime-autonomy": 0.999977,
-      "ecosystem-resilience": 0.999968
+      "maritime-autonomy": 1,
+      "ecosystem-resilience": 1
     },
     "minimum_cosine_gate": 0.95,
     "mean_cosine_gate": 0.98,

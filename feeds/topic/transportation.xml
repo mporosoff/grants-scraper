@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/transportation.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/transportation.xml</id>
-  <updated>2026-11-05T23:46:57Z</updated>
+  <updated>2026-11-06T17:36:44Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Prevention and Treatment through a Comprehensive Care Continuum for HIV-affected Adolescents in Resource-Constrained Settings--Implementation Science Network (PATC3H-IN)</title>
@@ -599,18 +599,6 @@
     <summary>Department of Housing and Urban Development | Estimated Application 2026-11-10 | The Family Unification Program (FUP) public housing authorities (PHAs) to partner with public child welfare agencies (PCWAs) to provide Housing Choice Voucher (HCV) assistance to two primary groups:1. Families: Those for whom the lack of adequate housing is a primary factor in the imminent placement of a child (or children) in out-of-home care, or a delay in the discharge of a child to the family …</summary>
   </entry>
   <entry>
-    <title>Emerging Infections Network - Research for Preventing, Detecting, and Managing Travel-associated Infectious Diseases</title>
-    <link href="https://www.grants.gov/search-results-detail/360199"/>
-    <id>urn:funding-finder:grants-gov:360199</id>
-    <updated>2026-08-03T00:00:00Z</updated>
-    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <category term="Transportation"/>
-    <summary>Centers for Disease Control and Prevention - ERA | Application 2026-11-05 | prerequisite closed | The focus of this notice of funding opportunity (NOFO) is to produce insights into disease detection and prevention strategies, burden, severity, diagnostics, treatment, and outcomes of infectious diseases in international travelers. Timely surveillance and sentinel detection are essential for collecting actionable data. The research should: Address public health questions that improve the speed o…</summary>
-  </entry>
-  <entry>
     <title>Innovative Traffic Safety Enforcement (ITSE) Grant Program</title>
     <link href="https://www.grants.gov/search-results-detail/363446"/>
     <id>urn:funding-finder:grants-gov:363446</id>
@@ -642,5 +630,15 @@
     <category term="Environmental science"/>
     <category term="Transportation"/>
     <summary>Office of Naval Research | Application 2026-11-16 | The proposed topic will develop and mature Communications and Networking technologies for Naval operations. Background: A Design for Maritime Superiority (2018) describes an operational architecture for distributed maritime operations (DMO) that "... will provide accurate, timely, and analyzed information to units, warfighting groups, and fleets." A critical component of this architecture is the N…</summary>
+  </entry>
+  <entry>
+    <title>Predoctoral to Postdoctoral Transition Award (Parent F99/K00 - Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/359702"/>
+    <id>urn:funding-finder:grants-gov:359702</id>
+    <updated>2026-06-16T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Education and workforce"/>
+    <category term="Transportation"/>
+    <summary>National Institutes of Health | Application 2029-04-08 | The purpose of this award is to support promising graduate students as they complete their doctoral research training and transition into mentored postdoctoral career development opportunities in research areas relevant to the missions of participating NIH Institutes and Centers. This Notice of Funding Opportunity (NOFO) does not allow candidates to propose to lead an independent clinical trial, b…</summary>
   </entry>
 </feed>

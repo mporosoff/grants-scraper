@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/manufacturing.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/manufacturing.xml</id>
-  <updated>2026-11-05T23:46:57Z</updated>
+  <updated>2026-11-06T17:36:44Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>BRAIN Initiative: Clinical Studies to Advance Next-Generation Devices for Recording and Modulation in the Human Central Nervous System</title>
@@ -26,6 +26,17 @@
     <category term="Manufacturing"/>
     <category term="Neuroscience"/>
     <summary>National Institutes of Health | Estimated Application 2027-06-16 | The NIH Blueprint for Neuroscience Research is interested in continuing to support the BluePrint Neurotherapeutics Network for Small Molecules (BPN-SM)- a program designed to help investigators advance promising small-molecule therapeutics toward clinical testing. The BPN-SM program supports drug discovery and development activities in investigators’ own laboratories while also providing access to…</summary>
+  </entry>
+  <entry>
+    <title>Flexible Funding Model - Advancing Domestic Mutual Reliance Through Strengthened Infrastructure Development and Maintenance for Manufactured Food Regulatory Programs</title>
+    <link href="https://www.grants.gov/search-results-detail/364223"/>
+    <id>urn:funding-finder:grants-gov:364223</id>
+    <updated>2026-11-05T00:00:00Z</updated>
+    <author><name>Food and Drug Administration</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Education and workforce"/>
+    <category term="Manufacturing"/>
+    <summary>Food and Drug Administration | Letter Of Intent 2026-12-14 | The purpose of this Notice of Funding Opportunity (NOFO) is to advance manufactured food regulatory program infrastructure capacity and capability to achieve and maintain conformance with the Manufactured Food Regulatory Program Standards (MFRPS) and advance mutual reliance in food safety. The primary objectives will assist new programs in developing foundational infrastructure necessary for effec…</summary>
   </entry>
   <entry>
     <title>Genomic and Biologic Therapies for ADRD (U01 Clinical Trial Optional)</title>
@@ -784,17 +795,5 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Materials science"/>
     <category term="Energy"/>
     <summary>U.S. National Science Foundation | Posted | Large-scale simulations and the ability to accumulate massive amounts of data have revolutionized science and engineering. The goal of the Computational and Data-enabled Science and Engineering (CDS&amp;E) meta-program is to identify and capitalize on opportunities for major scientific and engineering breakthroughs through new computational and data-analysis approaches and best practices. The CDS&amp;E me…</summary>
-  </entry>
-  <entry>
-    <title>Experiments, Prototypes, Research, and Evaluation Supporting Systems (EXPRESS)</title>
-    <link href="https://sam.gov/opp/4177337919ca4c9db8d9ddf1e58c24aa/view"/>
-    <id>urn:funding-finder:sam-gov:sam-gov%3A4177337919ca4c9db8d9ddf1e58c24aa</id>
-    <updated>2024-07-19T00:00:00Z</updated>
-    <author><name>Air Force Research Laboratory</name></author>
-    <category term="Education and workforce"/>
-    <category term="Manufacturing"/>
-    <category term="Technology development"/>
-    <category term="Transportation"/>
-    <summary>Air Force Research Laboratory | White Paper 2027-02-14 | Experimental evaluation, prototyping and transition of structural materials and manufacturing processes for Air Force and Space Force systems; emphasizes operational utility and demonstration rather than basic or applied research. US academic offerors are inferred eligible from the unrestricted solicitation and the expressly included educational-institution offeror certifications. This entry cover…</summary>
   </entry>
 </feed>

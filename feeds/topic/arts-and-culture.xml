@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/arts-and-culture.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/arts-and-culture.xml</id>
-  <updated>2026-11-05T23:46:57Z</updated>
+  <updated>2026-11-06T17:36:44Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Public Health Nursing</title>
@@ -174,6 +174,29 @@
     <author><name>Administration for Children and Families</name></author>
     <category term="Arts and culture"/>
     <summary>Administration for Children and Families | Estimated Application 2027-03-02 | The Office of Early Childhood Development (ECD) within the Administration for Children and Families (ACF) will be soliciting applications for the Fiscal Year 2027 Tribal Maternal, Infant, and Early Childhood Home Visiting (MIECHV) Program: Development and Implementation Grants. Funds will support 5-year cooperative agreements between ACF and federally recognized Indian tribes (or a consortium of I…</summary>
+  </entry>
+  <entry>
+    <title>Cooperative Agreement for affiliated Partner with Great Lakes Northern Forest Cooperative Ecosystem Studies Unit</title>
+    <link href="https://www.grants.gov/search-results-detail/364227"/>
+    <id>urn:funding-finder:grants-gov:364227</id>
+    <updated>2026-11-05T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Arts and culture"/>
+    <category term="Environmental science"/>
+    <category term="Public health"/>
+    <summary>Geological Survey | Application 2026-12-07 | This project investigates PFAS bioaccumulation and partitioning in two culturally significant harvestable plants, wild rice (Manoomin) and arrowhead (Wapato), at up to four PFAS-impacted aquatic sites within the Ceded Territories. The study measures PFAS in surface water, sediment, plant tissues, and finished/cooked traditional food products, using EPA Method 1633 (40 PFAS analytes). Results will …</summary>
+  </entry>
+  <entry>
+    <title>Cooperative Agreement for affiliated Partner with Great Rivers Cooperative Ecosystem Studies Unit</title>
+    <link href="https://www.grants.gov/search-results-detail/364230"/>
+    <id>urn:funding-finder:grants-gov:364230</id>
+    <updated>2026-11-05T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
+    <category term="Arts and culture"/>
+    <category term="Environmental science"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>Geological Survey | Application 2026-12-07 | The U.S. Geological Survey (USGS) is offering a funding opportunity to a CESU partner for research addressing the ecology, behavior, population dynamics, and resource management of fish across the Great Lakes basin and their tributary systems. The Great Lakes constitute the largest system of freshwater lakes on Earth and support exceptionally diverse native fish assemblages of significant ecologic…</summary>
   </entry>
   <entry>
     <title>Fiscal Year 2027 Teams Engaging Affiliated Museums and Informal Institutions (TEAM II) STEM Innovator</title>
@@ -627,28 +650,5 @@
     <category term="Education and workforce"/>
     <category term="Social and behavioral sciences"/>
     <summary>National Institutes of Health | Application 2029-01-26 | The Instrumentation Grant Program for Resource-Limited Institutions supports the purchase of state-of-the-art scientific instruments to enhance the research and educational missions of resource-limited institutions. Requested instruments may support biomedical research and education in basic, translational, biomedically-related behavioral or clinical fields. This is a Notice of Funding Opportunity…</summary>
-  </entry>
-  <entry>
-    <title>Austrian-American Partnership Fund (AAPF)</title>
-    <link href="https://www.grants.gov/search-results-detail/362489"/>
-    <id>urn:funding-finder:grants-gov:362489</id>
-    <updated>2026-05-20T00:00:00Z</updated>
-    <author><name>U.S. Mission to Austria</name></author>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Technology development"/>
-    <summary>U.S. Mission to Austria | Posted | This is an Annual Program Statement, outlining our funding priorities, the strategic themes we focus on, and the procedures for submitting requests for funding. Purpose of Small Grants: The Austrian-American Partnership Fund (AAPF) is organized to fund projects advancing collaboration and dialogue and expand cooperation between Austria and the United States. AAPF accepts applications for funding f…</summary>
-  </entry>
-  <entry>
-    <title>Arctic Doctoral Dissertation Research Improvement Grants (Arctic DDRIG) Arctic Social Sciences, Arctic System Sciences, and Arctic Observing Network (DDRIG)</title>
-    <link href="https://www.grants.gov/search-results-detail/361896"/>
-    <id>urn:funding-finder:grants-gov:361896</id>
-    <updated>2026-04-14T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>U.S. National Science Foundation | Application 2026-12-15 | The National Science Foundation (NSF) invites investigators at U.S. organizations to submit proposals for Doctoral Dissertation Research Improvement Grants (DDRIGs) to the Arctic Sciences Section, Office of Polar Programs (OPP) to conduct dissertation-level research about and related to the Arctic region. The Programs that are currently accepting DDRIG proposals are the Arctic Social Sciences (ASS…</summary>
   </entry>
 </feed>
