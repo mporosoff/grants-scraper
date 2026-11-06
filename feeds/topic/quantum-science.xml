@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/quantum-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/quantum-science.xml</id>
-  <updated>2026-11-02T20:29:35Z</updated>
+  <updated>2026-11-05T23:46:57Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Unifying​ Imaging with​ Quantum​ Entanglement (UNIQUE)</title>
@@ -28,10 +28,6 @@
     <category term="Arts and culture"/>
     <category term="Energy"/>
     <category term="Quantum science"/>
-    <category term="Materials science"/>
-    <category term="Data science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Cybersecurity"/>
     <summary>Air Force Office of Scientific Research | Application 2027-02-19 | verify prerequisite | This is a special Notice of Funding Opportunity Announcement (NOFO) sponsored by the Air Force Office of Scientific Research (AFOSR) and Taiwan’s National Science and Technology Council (NSTC), which will hereafter generally be referred to as “we, us, our, or AFOSR.” We announce the solicitation for a three-year program entitled “Frontiers in Materials and Nanostructures: AI-Driven Discovery, Quan…</summary>
   </entry>
   <entry>
@@ -492,30 +488,6 @@
     <category term="Manufacturing"/>
     <category term="Materials science"/>
     <summary>Dept of the Army -- Materiel Command | Application 2027-11-20 | The purpose of this combined Broad Agency Announcement (BAA) under Federal Acquisition Regulation (FAR) Part 35 and Funding Opportunity Announcement (FOA) under 2 Code of Federal Regulations (CFR) 200.204 (henceforth referred to as “BAA”) is to solicit research proposals for submission to the U.S. Army Combat Capabilities Development Command (DEVCOM) Army Research Laboratory (ARL) for funding cons…</summary>
-  </entry>
-  <entry>
-    <title>Topology</title>
-    <link href="https://www.grants.gov/search-results-detail/340544"/>
-    <id>urn:funding-finder:grants-gov:340544</id>
-    <updated>2022-05-20T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Quantum science"/>
-    <summary>U.S. National Science Foundation | Application 2026-11-03 | Research supported by the Topology program includes the areas listed below. This is not a comprehensive list. Proposals on other relevant topics will also be considered. Contact the program if you have questions.
-•
-algebraic topology,
-•
-contact and symplectic structures,
-•
-differential topology,
-•
-geometric topology,
-•
-low-dimensional topology,
-•
-quantum topology, and
-•
-topological data analysis.
-…</summary>
   </entry>
   <entry>
     <title>Tribal Colleges and Universities Program (TCUP)</title>

@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/cancer.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/cancer.xml</id>
-  <updated>2026-11-02T20:29:35Z</updated>
+  <updated>2026-11-05T23:46:57Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Advanced Development and Sustainment of Informatics Technologies for Cancer Research and Management (U24 Clinical Trial Optional)</title>
@@ -145,6 +145,25 @@
     <summary>National Institutes of Health | Estimated Application 2027-01-25 | invitation required | Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) intends to continue to support the Coordinating Center (CC) for the Small Cell Lung Cancer (SCLC) Consortium, which coordinates research on prevention, diagnosis, treatment, and mechanisms of resistance in SCLC. The CC manages administrative activities, centralized databases, tissue banking and a virtual biospec…</summary>
   </entry>
   <entry>
+    <title>NCI Research Specialist (Clinician Scientist) Award (R50 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/362277"/>
+    <id>urn:funding-finder:grants-gov:362277</id>
+    <updated>2026-11-03T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Cancer"/>
+    <summary>National Institutes of Health | Application 2029-02-20 | Through this notice of funding opportunity (NOFO), the National Cancer Institute (NCI) invites applications for the Research Specialist Award (R50) specifically for clinician scientists supporting NCI-funded clinical trials research. The Research Specialist Award is designed to encourage the development of stable research career opportunities for exceptional clinician scientists who want to contin…</summary>
+  </entry>
+  <entry>
+    <title>Assay Validation of High Quality Markers for Clinical Studies in Cancer (UH2/UH3 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/360946"/>
+    <id>urn:funding-finder:grants-gov:360946</id>
+    <updated>2026-11-03T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Cancer"/>
+    <summary>National Institutes of Health | Application 2029-11-16 | The purpose of the Notice of Funding Opportunity (NOFO) is to support the analytical and clinical validation of molecular, cellular, and imaging biomarkers and assays for cancer detection, diagnosis, prognosis, monitoring, prediction of response or resistance to treatment, cancer prevention and control, as well as pharmacodynamic markers and markers of toxicity. Utilizing either a phased UH2/UH3 o…</summary>
+  </entry>
+  <entry>
     <title>Cancer Center Support Grants (CCSGs) for NCI-designated Cancer Centers (P30 Clinical Trial Optional)</title>
     <link href="https://www.grants.gov/search-results-detail/361439"/>
     <id>urn:funding-finder:grants-gov:361439</id>
@@ -272,7 +291,7 @@
     <updated>2026-09-03T00:00:00Z</updated>
     <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
     <category term="Cancer"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA | Letter Of Intent 2026-11-04 | Summary: The fiscal year 2026 (FY26) Breast Cancer Research Program (BCRP) Breakthrough Award mechanism supports promising research with high potential to lead to or make breakthroughs in breast cancer. All applications must address at least one of the FY26 BCRP overarching challenges or provide adequate justification for exception. Applications must address the challenge in a way that can lead to…</summary>
+    <summary>Defense Health Agency Contracting Activity - DHACA | Application 2026-11-18 | verify prerequisite | Summary: The fiscal year 2026 (FY26) Breast Cancer Research Program (BCRP) Breakthrough Award mechanism supports promising research with high potential to lead to or make breakthroughs in breast cancer. All applications must address at least one of the FY26 BCRP overarching challenges or provide adequate justification for exception. Applications must address the challenge in a way that can lead to…</summary>
   </entry>
   <entry>
     <title>DoW Breast Cancer, Clinical Research Extension Award</title>
@@ -281,17 +300,7 @@
     <updated>2026-09-03T00:00:00Z</updated>
     <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
     <category term="Cancer"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA | Letter Of Intent 2026-11-04 | Summary: The fiscal year 2026 (FY26) Breast Cancer Research Program (BCRP) Clinical Research Extension Award supports research that extends the data collection, follow-up, and analysis of breast cancer clinical studies. The intent of this award mechanism is to increase the clinically relevant impact of breast cancer patient participation in clinical studies by addressing the knowledge lost due to …</summary>
-  </entry>
-  <entry>
-    <title>Continuation and Expansion of the National Mesothelioma Virtual Bank for Translational Research (U24)</title>
-    <link href="https://www.grants.gov/search-results-detail/363281"/>
-    <id>urn:funding-finder:grants-gov:363281</id>
-    <updated>2026-09-02T00:00:00Z</updated>
-    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Cancer"/>
-    <summary>Centers for Disease Control and Prevention - ERA | Estimated Application 2026-11-02 | The National Mesothelioma Virtual Bank (NMVB) was established in 2006 to serve as a resource for malignant mesothelioma research. This funding opportunity will advance biomedical research for malignant mesothelioma by adding more biospecimens together with demographic data and clinical data. Examples of biospecimens include fresh frozen tumor and control tissues, paraffin embedded tissues, blood, …</summary>
+    <summary>Defense Health Agency Contracting Activity - DHACA | Application 2026-11-18 | verify prerequisite | Summary: The fiscal year 2026 (FY26) Breast Cancer Research Program (BCRP) Clinical Research Extension Award supports research that extends the data collection, follow-up, and analysis of breast cancer clinical studies. The intent of this award mechanism is to increase the clinically relevant impact of breast cancer patient participation in clinical studies by addressing the knowledge lost due to …</summary>
   </entry>
   <entry>
     <title>Glioblastoma Therapeutics Network (GTN) (U19 Clinical Trial Required)</title>
@@ -313,15 +322,6 @@
     <category term="Cancer"/>
     <category term="Education and workforce"/>
     <summary>National Institutes of Health | Application 2027-01-25 | This is a Notice of Funding Opportunity (NOFO) for a Limited Competition that invites applications from eligible organizations to apply. Please see Section III. Eligibility for additional information. In accordance with NIH standard peer-review processes, the applications will be peer-reviewed, and only meritorious applications will be considered for funding. This funding opportunity seeks to supp…</summary>
-  </entry>
-  <entry>
-    <title>NCI Research Specialist (Clinician Scientist) Award (R50 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/362277"/>
-    <id>urn:funding-finder:grants-gov:362277</id>
-    <updated>2026-08-25T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Cancer"/>
-    <summary>National Institutes of Health | Estimated Application 2026-11-02 | This notice of funding opportunity (NOFO) invites grant applications for the Research Specialist Award (R50) specifically for clinician scientists supporting NCI-funded clinical trials research. The Research Specialist Award is designed to encourage the development of stable research career opportunities for exceptional clinician scientists who want to continue to participate in the NCI clinical t…</summary>
   </entry>
   <entry>
     <title>Radiation Oncology-Biology Integration Network (ROBIN) Centers (U54 Clinical Trial Required)</title>
@@ -461,17 +461,6 @@ a high level of innovation and creativity. The goal is to support the best young
     <category term="Cancer"/>
     <category term="Public health"/>
     <summary>National Institutes of Health | Application 2029-07-05 | Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) encourages grant applications to support research in cancer epidemiology cohort studies that address specific knowledge gaps in cancer etiology and survivorship. Applications should include hypothesis-based research, support for cohort infrastructure and/or maintenance, continued follow-up, and sharing of data a…</summary>
-  </entry>
-  <entry>
-    <title>Assay Validation of High Quality Markers for Clinical Studies in Cancer (UH2/UH3 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/360946"/>
-    <id>urn:funding-finder:grants-gov:360946</id>
-    <updated>2026-02-16T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Cancer"/>
-    <category term="Transportation"/>
-    <summary>National Institutes of Health | Estimated Application 2027-02-08 | Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) solicits applications to support the validation of molecular/cellular/imaging markers (referred to as "markers" or "biomarkers") and assays for cancer detection, diagnosis, prognosis, monitoring, and prediction of response or resistance to treatment, as well as markers for cancer prevention and control. The appl…</summary>
   </entry>
   <entry>
     <title>The Metastasis Research Network (MetNet): MetNet Research Projects (U01 Clinical Trial Not Allowed)</title>
@@ -646,6 +635,16 @@ a high level of innovation and creativity. The goal is to support the best young
     <title>Mechanisms that Impact Cancer Risk with Use of Incretin Mimetics (R01 Clinical Trial Optional)</title>
     <link href="https://www.grants.gov/search-results-detail/357202"/>
     <id>urn:funding-finder:grants-gov:357202</id>
+    <updated>2024-11-18T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Cancer"/>
+    <category term="Education and workforce"/>
+    <summary>National Institutes of Health | Application 2027-01-07 | The goal of the proposed funding announcement is twofold, to promote preclinical and patient based studies examining the mechanism(s) through which incretin mimetics (including agonists or antagonists of GLP-1, GIP-1, or dual GLP-1/GIP-1 agents) impact cancer risk, and to draw talented scientists who understand the dynamic changes caused by these agents to investigate the mechanisms of how these a…</summary>
+  </entry>
+  <entry>
+    <title>Mechanisms that Impact Cancer Risk with Use of Incretin Mimetics (R21 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/357203"/>
+    <id>urn:funding-finder:grants-gov:357203</id>
     <updated>2024-11-18T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <category term="Cancer"/>

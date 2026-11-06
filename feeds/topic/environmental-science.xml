@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/environmental-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/environmental-science.xml</id>
-  <updated>2026-11-02T20:29:35Z</updated>
+  <updated>2026-11-05T23:46:57Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Limited Competition: Biomedical Research Environment &amp; Sponsored Programs Administration Development (BRE-SPAD) Program</title>
@@ -223,6 +223,17 @@
     <summary>Centers for Disease Control and Prevention - ERA | Estimated Application 2027-03-03 | The National Institute for Occupational Safety and Health (NIOSH) is committed to addressing a wide range of occupational health and safety hazards affecting those who work in the agriculture, forestry, and fishing (AgFF) sector. Children and adolescents ("youth") are consistently more likely to be fatally injured working in agriculture compared to other industries. While many steps have been take…</summary>
   </entry>
   <entry>
+    <title>Identify and Evaluate Potential Risk Factors for Amyotrophic Lateral Sclerosis (ALS)</title>
+    <link href="https://www.grants.gov/search-results-detail/363115"/>
+    <id>urn:funding-finder:grants-gov:363115</id>
+    <updated>2026-12-01T00:00:00Z</updated>
+    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Environmental science"/>
+    <category term="Neuroscience"/>
+    <summary>Centers for Disease Control and Prevention - ERA | Estimated Application 2027-02-01 | CDC/ATSDR is inviting research proposals to study risk factors for Amyotrophic Lateral Sclerosis (ALS). Studies on military service, contact sports, traumatic brain injury, neuroinflammation, and infections agents and exposures are encouraged. Funding will be for four funding options: Option A - Support research with strong existing evidence such as studies on known environmental or genetic risk f…</summary>
+  </entry>
+  <entry>
     <title>Establishing a Research Network to Guide Foundational Research on Human Consciousness</title>
     <link href="https://www.grants.gov/search-results-detail/362097"/>
     <id>urn:funding-finder:grants-gov:362097</id>
@@ -314,18 +325,17 @@
     <summary>Health Resources and Services Administration | Estimated Application 2027-01-20 | The purpose of this funding is to build the capacity of ADAPs through tools and technical assistance to maximize the impact of ADAPs in improving the health outcomes of people with HIV in a changing health care environment.</summary>
   </entry>
   <entry>
-    <title>Precision and Systems Biology to Uncover the Link Between Chronic and Infectious Diseases</title>
-    <link href="https://www.grants.gov/search-results-detail/362952"/>
-    <id>urn:funding-finder:grants-gov:362952</id>
-    <updated>2026-11-06T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Data science"/>
+    <title>Development and Maintenance of Human and Animal Food Rapid Response Teams</title>
+    <link href="https://www.grants.gov/search-results-detail/364217"/>
+    <id>urn:funding-finder:grants-gov:364217</id>
+    <updated>2026-11-04T00:00:00Z</updated>
+    <author><name>Food and Drug Administration</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Education and workforce"/>
     <category term="Environmental science"/>
-    <category term="Infectious disease"/>
     <category term="Public health"/>
-    <summary>National Institutes of Health | Estimated Application 2027-01-22 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting multidisciplinary, consortium-based research using precision systems biology approaches to uncover links among chronic illnesses, infectious diseases and microbiomes. There is an urgent scientific and clinical need to understand the pathways by which infections lead to chronic lifelong heal…</summary>
+    <category term="Technology development"/>
+    <summary>Food and Drug Administration | Letter Of Intent 2026-12-04 | The purpose of this Notice of Funding Opportunity (NOFO) is to develop and maintain Rapid Response Teams (RRTs) to facilitate long-term improvements and innovation within the national integrated food safety system by unifying and coordinating federal, state, and local human and animal food (HAF) emergency response efforts including:1) Strengthening the link among epidemiology, lab, and environment…</summary>
   </entry>
   <entry>
     <title>Collaborative Centers in Children’s Environmental Health Research and Translation (P2C Clinical Trial Optional)</title>
@@ -336,6 +346,104 @@
     <category term="Environmental science"/>
     <category term="Public health"/>
     <summary>National Institutes of Health | Estimated Application 2027-03-02 | The overall goal of this NOFO is to solicit applications to create a national network of Children's Environmental Health Research Translation Centers (CEHRT). Through external collaboration with the children's environmental health community, the Centers will protect and improve children's health by developing and testing new scientific questions and public health interventions/strategies with an e…</summary>
+  </entry>
+  <entry>
+    <title>Cooperative Agreement for affiliated Partner with Californian Cooperative Ecosystem Studies Unit</title>
+    <link href="https://www.grants.gov/search-results-detail/364193"/>
+    <id>urn:funding-finder:grants-gov:364193</id>
+    <updated>2026-11-02T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
+    <category term="Environmental science"/>
+    <summary>Geological Survey | Application 2026-12-02 | The U.S. Geological Survey's (USGS) Pacific Coastal and Marine Science Center is offering a funding opportunity to a participating partner of the California Cooperative Ecosystem Studies Unit (CESU) for research to improve understanding of seabed mineral formation, including interactions with fundamental ocean processes, element enrichment, growth timescales, and submarine geohazards. The cooperat…</summary>
+  </entry>
+  <entry>
+    <title>Cooperative Agreement for affiliated Partner with Rocky Mountain Cooperative Ecosystem Studies Unit</title>
+    <link href="https://www.grants.gov/search-results-detail/364190"/>
+    <id>urn:funding-finder:grants-gov:364190</id>
+    <updated>2026-11-02T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
+    <category term="Environmental science"/>
+    <summary>Geological Survey | Application 2026-12-02 | The U.S. Geological Survey is offering a funding opportunity to a CESU partner to develop scientific tools to collaborative research that evaluates ecological and population risks across western rangelands and alpine ecosystems. This research to understanding animal-habitat relationships, assessing resource selection and population demography of birds and ungulates within grassland, shrubland, and…</summary>
+  </entry>
+  <entry>
+    <title>Cooperative Agreement for affiliated Partner with the Great Lakes Northern Forrest Cooperative Ecosystem Studies Unit</title>
+    <link href="https://www.grants.gov/search-results-detail/364192"/>
+    <id>urn:funding-finder:grants-gov:364192</id>
+    <updated>2026-11-02T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <summary>Geological Survey | Application 2026-12-02 | The USGS is offering a funding opportunity to a CESU partner for research in improving accuracy assessment and area estimation for use in annual remote-sensing based land-cover monitoring. The Earth Resources Observation and Science (EROS) Center is a remotely sensed data management, systems development, and science center for the U.S. Geological Survey's (USGS) National Land Imaging Program. The …</summary>
+  </entry>
+  <entry>
+    <title>Cooperative Agreement for affiliated Partner with the Rocky Mountain Cooperative Ecosystem Studies Unit</title>
+    <link href="https://www.grants.gov/search-results-detail/364191"/>
+    <id>urn:funding-finder:grants-gov:364191</id>
+    <updated>2026-11-02T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
+    <category term="Environmental science"/>
+    <summary>Geological Survey | Application 2026-12-02 | U.S. Geological Survey is offering a funding opportunity to a CESU partner for research to advance co-produced science aimed at improving decision support capabilities for natural resource managers across western rangelands and alpine ecosystems. The research conducted on this project will builds upon long standing collaborations between USGS and university partners, which have demonstrated the va…</summary>
+  </entry>
+  <entry>
+    <title>Cooperative Agreement for affiliated Partner with the Californian Cooperative Ecosystem Studies Unit</title>
+    <link href="https://www.grants.gov/search-results-detail/364194"/>
+    <id>urn:funding-finder:grants-gov:364194</id>
+    <updated>2026-11-02T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Transportation"/>
+    <summary>Geological Survey | Application 2026-12-23 | The USGS is offering a funding opportunity to a CESU partner for research in carbon cycling in seabed mineral environments. Seabed minerals may contain economically significant concentrations of valuable metals and rare earth elements which are essential to transportation, technological products, and defense and national security applications (i.e., critical minerals; Energy Act, 2020; U.S. Geolog…</summary>
+  </entry>
+  <entry>
+    <title>FY27 Guidelines for Brownfield Assessment Grants (Assessment Coalition Grants)</title>
+    <link href="https://www.grants.gov/search-results-detail/364199"/>
+    <id>urn:funding-finder:grants-gov:364199</id>
+    <updated>2026-11-02T00:00:00Z</updated>
+    <author><name>Environmental Protection Agency</name></author>
+    <category term="Environmental science"/>
+    <summary>Environmental Protection Agency | Application 2027-01-21 | This notice announces the availability of funds and solicits applications from eligible entities to prevent, inventory, assess, and plan for the cleanup and reuse of brownfield sites. Eligible entities include government organizations, Federally recognized Tribes, and 501(c)(3) nonprofit organizations. Please see Section 2. A. for the complete list of eligible entities. Applications must meet all …</summary>
+  </entry>
+  <entry>
+    <title>FY27 Guidelines for Brownfield Assessment Grants (Community-wide Assessment Grants for States and Tribes)</title>
+    <link href="https://www.grants.gov/search-results-detail/364200"/>
+    <id>urn:funding-finder:grants-gov:364200</id>
+    <updated>2026-11-02T00:00:00Z</updated>
+    <author><name>Environmental Protection Agency</name></author>
+    <category term="Environmental science"/>
+    <category term="Transportation"/>
+    <summary>Environmental Protection Agency | Application 2027-01-21 | This notice announces the availability of funds and solicits applications from eligible entities to prevent, inventory, assess, and plan for the cleanup and reuse of brownfield sites. Eligible entities for Community-wide Assessment Grants for States and Tribes include:• States (i.e., State agencies that are subject to the direct control of the governor or other elected executive officials such as …</summary>
+  </entry>
+  <entry>
+    <title>FY27 Guidelines for Brownfield Assessment Grants (Community-wide Assessment Grants)</title>
+    <link href="https://www.grants.gov/search-results-detail/364198"/>
+    <id>urn:funding-finder:grants-gov:364198</id>
+    <updated>2026-11-02T00:00:00Z</updated>
+    <author><name>Environmental Protection Agency</name></author>
+    <category term="Environmental science"/>
+    <summary>Environmental Protection Agency | Application 2027-01-21 | This notice announces the availability of funds and solicits applications from eligible entities to prevent, inventory, assess, and plan for the cleanup and reuse of brownfield sites. Eligible entities include government organizations, Federally recognized Tribes, and 501(c)(3) nonprofit organizations. Please see Section 2. A. for the complete list of eligible entities. Applications must meet all …</summary>
+  </entry>
+  <entry>
+    <title>FY27 Guidelines for Brownfield Cleanup Grants</title>
+    <link href="https://www.grants.gov/search-results-detail/364202"/>
+    <id>urn:funding-finder:grants-gov:364202</id>
+    <updated>2026-11-02T00:00:00Z</updated>
+    <author><name>Environmental Protection Agency</name></author>
+    <category term="Environmental science"/>
+    <summary>Environmental Protection Agency | Application 2027-01-21 | This notice announces the availability of funds and solicits applications from eligible entities to carry out cleanup activities at brownfield sites owned by the applicant. Eligible entities include government organizations, Federally recognized Tribes, and nonprofit organizations. Please see Section 2. A. for the complete list of eligible entities. Applications must meet all threshold eligibility…</summary>
+  </entry>
+  <entry>
+    <title>FY27 Guidelines for Brownfield Revolving Loan Fund Grants</title>
+    <link href="https://www.grants.gov/search-results-detail/364201"/>
+    <id>urn:funding-finder:grants-gov:364201</id>
+    <updated>2026-11-02T00:00:00Z</updated>
+    <author><name>Environmental Protection Agency</name></author>
+    <category term="Environmental science"/>
+    <summary>Environmental Protection Agency | Application 2027-01-21 | This notice announces the availability of funds and solicits applications from eligible entities to capitalize a revolving loan fund (RLF) to provide loans and subgrants to carry out cleanup activities at brownfield sites. Eligible entities include government organizations, Federally recognized Tribes, and 501(c)(3) nonprofit organizations. Please see Section 2. A. for the complete list of eligibl…</summary>
   </entry>
   <entry>
     <title>Cooperative Agreement for affiliated Partner with Chesapeake Watershed Cooperative Ecosystem Studies Unit</title>
@@ -547,130 +655,6 @@
     <category term="Technology development"/>
     <category term="Transportation"/>
     <category term="Data science"/>
-    <summary>DOC NOAA - ERA Production | Application 2027-02-09 | Through this Notice of Federal Funding Opportunity, the NOAA Climate Program Office (https://cpo.noaa.gov/funding-opportunities/) is soliciting proposals for a FY 2027 grants competition focused on Super Intelligence/Machine Learning Innovation to Advance NOAA's Earth System Science and Support Hazard Resilience. The NOAA Office of Oceanic and Atmospheric Research (OAR), or "NOAA Research," provid…</summary>
-  </entry>
-  <entry>
-    <title>Unlocking New Levels of Output and Capacity for Key Subsurface Resources (UNLOCK)</title>
-    <link href="https://www.grants.gov/search-results-detail/364136"/>
-    <id>urn:funding-finder:grants-gov:364136</id>
-    <updated>2026-10-21T00:00:00Z</updated>
-    <author><name>Advanced Research Projects Agency Energy</name></author>
-    <category term="Carbon management"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Manufacturing"/>
-    <category term="Materials science"/>
-    <category term="Technology development"/>
-    <category term="Water"/>
-    <category term="Separations and membranes"/>
-    <summary>Advanced Research Projects Agency Energy | Application 2026-11-20 | NOFO Number: DE-FOA-0003630 - Unlocking New Levels of Output and Capacity for Key Subsurface Resources (UNLOCK) To obtain a copy of the Notice of Funding Opportunity (NOFO) please go to DOE eXCHANGE at https://exchange.energy.gov/. To apply to this NOFO, Applicants must register with and submit application materials through DOE eXCHANGE (https://exchange.energy.gov/Registration.aspx). For detailed…</summary>
-  </entry>
-  <entry>
-    <title>Unlocking New Levels of Output and Capacity for Key Subsurface Resources SBIR/STTR (UNLOCK SBIR/STTR)</title>
-    <link href="https://www.grants.gov/search-results-detail/364135"/>
-    <id>urn:funding-finder:grants-gov:364135</id>
-    <updated>2026-10-21T00:00:00Z</updated>
-    <author><name>Advanced Research Projects Agency Energy</name></author>
-    <category term="Carbon management"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Manufacturing"/>
-    <category term="Materials science"/>
-    <category term="Technology development"/>
-    <category term="Water"/>
-    <category term="Separations and membranes"/>
-    <summary>Advanced Research Projects Agency Energy | Application 2026-11-20 | NOFO Number: DE-FOA-0003631 - Unlocking New Levels of Output and Capacity for Key Subsurface Resources SBIR/STTR (UNLOCK SBIR/STTR) To obtain a copy of the Notice of Funding Opportunity (NOFO) please go to DOE eXCHANGE at https://exchange.energy.gov/. To apply to this NOFO, Applicants must register with and submit application materials through DOE eXCHANGE (https://exchange.energy.gov/Registration…</summary>
-  </entry>
-  <entry>
-    <title>F26AS00088 Endangered Species Conservation - Wolf Livestock Loss Compensation and Prevention</title>
-    <link href="https://www.grants.gov/search-results-detail/364133"/>
-    <id>urn:funding-finder:grants-gov:364133</id>
-    <updated>2026-10-21T00:00:00Z</updated>
-    <author><name>Fish and Wildlife Service</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Environmental science"/>
-    <category term="Cybersecurity"/>
-    <summary>Fish and Wildlife Service | Application 2027-01-15 | The Wolf Livestock Loss Demonstration Project Grant Program, authorized under Subtitle C of the Omnibus Public Lands Management Act of 2009, provides federal financial assistance to states and tribes for two primary purposes: depredation prevention and depredation compensation. Depredation prevention funding supports livestock producers in implementing proactive, nonlethal strategies to reduce the…</summary>
-  </entry>
-  <entry>
-    <title>Southeast New England Program (SNEP) Innovative Restoration Grants</title>
-    <link href="https://www.grants.gov/search-results-detail/364125"/>
-    <id>urn:funding-finder:grants-gov:364125</id>
-    <updated>2026-10-20T00:00:00Z</updated>
-    <author><name>Environmental Protection Agency</name></author>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <summary>Environmental Protection Agency | Application 2026-12-11 | This announcement requests full proposals from Indian Tribes, State &amp; Local Governments, Institutions of Higher Education (IHEs), Interstate Agencies and Nonprofit organizations to support priorities of the Southeast New England Program (SNEP) for coastal watershed restoration. Priorities of the funding opportunity include advancing coastal and riverine restoration and connectivity across southeas…</summary>
-  </entry>
-  <entry>
-    <title>FY 2027 - 2029 Broad Agency Announcement (BAA), Oceanic and Atmospheric Research (OAR)</title>
-    <link href="https://www.grants.gov/search-results-detail/364130"/>
-    <id>urn:funding-finder:grants-gov:364130</id>
-    <updated>2026-10-20T00:00:00Z</updated>
-    <author><name>DOC NOAA - ERA Production</name></author>
-    <category term="Arts and culture"/>
-    <category term="Environmental science"/>
-    <summary>DOC NOAA - ERA Production | Application 2029-09-30 | A description of NOAA Line and Staff Offices is found at https://www.noaa.gov/about/organization, and applicants may contact the Agency Contacts in Section VII. below for more information. If you submit the same application to more than one Line or Staff Office, mention this in your application and notify the relevant contacts in Section VII. so that NOAA may coordinate internally. This notice als…</summary>
-  </entry>
-  <entry>
-    <title>FY 2027 - 2029 Broad Agency Announcement (BAA), National Marine Fisheries Service</title>
-    <link href="https://www.grants.gov/search-results-detail/364099"/>
-    <id>urn:funding-finder:grants-gov:364099</id>
-    <updated>2026-10-16T00:00:00Z</updated>
-    <author><name>DOC NOAA - ERA Production</name></author>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <summary>DOC NOAA - ERA Production | Application 2028-09-30 | This Broad Agency Announcement is a mechanism to encourage research, education, outreach, innovative projects, or sponsorships that are not addressed through NOAA’s competitive discretionary programs. This announcement is not soliciting goods or services for the direct benefit of NOAA. Funding for activities described in this notice is contingent upon the availability of appropriations in the fisc…</summary>
-  </entry>
-  <entry>
-    <title>Cooperative Agreement for affiliated Partner with Californian Cooperative Ecosystem Studies Unit</title>
-    <link href="https://www.grants.gov/search-results-detail/364074"/>
-    <id>urn:funding-finder:grants-gov:364074</id>
-    <updated>2026-10-14T00:00:00Z</updated>
-    <author><name>Geological Survey</name></author>
-    <category term="Environmental science"/>
-    <category term="Public health"/>
-    <summary>Geological Survey | Application 2026-11-14 | The USGS is offering a funding opportunity to a CESU partner for research to develop an enhanced gene expression panel with the ability to differentiate among several unique stressors that can potentially affect population and ecosystem health. This research will contribute to the development of ecosystem monitoring programs. Focal species include Californian sea lions, sea otters, salmon, longfin…</summary>
-  </entry>
-  <entry>
-    <title>Cooperative Agreement for affiliated Partner with Chesapeake Watershed Cooperative Ecosystem Studies Unit</title>
-    <link href="https://www.grants.gov/search-results-detail/364076"/>
-    <id>urn:funding-finder:grants-gov:364076</id>
-    <updated>2026-10-14T00:00:00Z</updated>
-    <author><name>Geological Survey</name></author>
-    <category term="Environmental science"/>
-    <summary>Geological Survey | Application 2026-11-14 | The USGS is offering a funding opportunity to a CESU partner for research for meeting partner needs for quantifying current status and trends of North American amphibian populations and outcomes of management interventions. The research will be conducted in collaboration with USGS partners at the USGS Eastern Ecological Research Center and the USGS Amphibian Research and Monitoring Initiative. Spe…</summary>
-  </entry>
-  <entry>
-    <title>Cooperative Agreement for affiliated Partner with Great Lakes-Northern Forest Cooperative Ecosystem Studies Unit</title>
-    <link href="https://www.grants.gov/search-results-detail/364077"/>
-    <id>urn:funding-finder:grants-gov:364077</id>
-    <updated>2026-10-14T00:00:00Z</updated>
-    <author><name>Geological Survey</name></author>
-    <category term="Environmental science"/>
-    <summary>Geological Survey | Application 2026-11-14 | The U.S. Geological Survey (USGS) is offering a funding opportunity to a CESU partner for research that supports cisco restoration priorities in Lakes Huron and Erie by hiring a structured decision-making expert and convening a structured decision-making workshop to help fisheries managers develop a restoration plan and by hiring a scientist to conduct experiments to determine what environmental c…</summary>
-  </entry>
-  <entry>
-    <title>Cooperative Agreement for affiliated Partner with Northern Great Plains Cooperative Ecosystem Studies Unit</title>
-    <link href="https://www.grants.gov/search-results-detail/364078"/>
-    <id>urn:funding-finder:grants-gov:364078</id>
-    <updated>2026-10-14T00:00:00Z</updated>
-    <author><name>Geological Survey</name></author>
-    <category term="Environmental science"/>
-    <category term="Materials science"/>
-    <category term="Water"/>
-    <summary>Geological Survey | Application 2026-11-14 | Robust and reliable quantitative method to correct for solution chemistry interferences in molecularly imprinted polymer - electrochemical sensor (MIP-ES) measurements of complex environmental water matricesThe goal of this research is to develop a robust and reliable quantitative method to correct for solution chemistry interferences in MIP-ES measurements of complex environmental water matrices.…</summary>
-  </entry>
-  <entry>
-    <title>Cooperative Agreement for affiliated Partner with Rocky Mountain Cooperative Ecosystem Studies Unit</title>
-    <link href="https://www.grants.gov/search-results-detail/364079"/>
-    <id>urn:funding-finder:grants-gov:364079</id>
-    <updated>2026-10-14T00:00:00Z</updated>
-    <author><name>Geological Survey</name></author>
-    <category term="Environmental science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Geological Survey | Application 2026-11-14 | U.S. Geological Survey's (USGS) Powell Center solicits research on "A spatially explicit framework to assess the risk of aquatic contaminants to insectivorous birds." This project will predict how contaminant and nutrient fluxes by adult aquatic insects contribute to a landscape of risk for aerial insectivorous birds. The research synthesis project will map areas of elevated risk for aerial insect…</summary>
+    <summary>DOC NOAA - ERA Production | Application 2027-02-09 | verify prerequisite | Through this Notice of Federal Funding Opportunity, the NOAA Climate Program Office (https://cpo.noaa.gov/funding-opportunities/) is soliciting proposals for a FY 2027 grants competition focused on Super Intelligence/Machine Learning Innovation to Advance NOAA's Earth System Science and Support Hazard Resilience. The NOAA Office of Oceanic and Atmospheric Research (OAR), or "NOAA Research," provid…</summary>
   </entry>
 </feed>

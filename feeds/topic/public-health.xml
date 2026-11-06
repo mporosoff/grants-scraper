@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/public-health.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/public-health.xml</id>
-  <updated>2026-11-02T20:29:35Z</updated>
+  <updated>2026-11-05T23:46:57Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Public Health Nursing</title>
@@ -506,6 +506,16 @@
     <summary>Substance Abuse and Mental Health Services Adminis | Forecasted | The purpose of this program is to strengthen and expand the state system’s ability to provide integrated, evidence-based substance used disorder and maternal mental health services for pregnant and post-partum women and their families.</summary>
   </entry>
   <entry>
+    <title>Capacity Building for Global, Regional, and National Immunization Programs</title>
+    <link href="https://www.grants.gov/search-results-detail/363591"/>
+    <id>urn:funding-finder:grants-gov:363591</id>
+    <updated>2026-12-14T00:00:00Z</updated>
+    <author><name>Centers for Disease Control-GHC</name></author>
+    <category term="Public health"/>
+    <category term="Technology development"/>
+    <summary>Centers for Disease Control-GHC | Estimated Application 2027-02-12 | This notice of funding opportunity (NOFO) will support eradicating polio globally, eliminating measles and rubella, and vaccination in public health emergencies by: Improving vaccination performance in routine immunization and supplementary immunization activities (SIAs) (PREVENT)Improving vaccine-preventable disease (VPD) surveillance performance (DETECT)Improving outbreak response performance (R…</summary>
+  </entry>
+  <entry>
     <title>Capacity Building for National Immunization Programs in the Eastern Mediterranean Region</title>
     <link href="https://www.grants.gov/search-results-detail/363749"/>
     <id>urn:funding-finder:grants-gov:363749</id>
@@ -524,6 +534,15 @@
     <category term="Education and workforce"/>
     <category term="Public health"/>
     <summary>Centers for Disease Control-GHC | Estimated Application 2027-02-12 | This NOFO will provide critical disease modeling to inform decision making on the development of strategies for cVDPV2 outbreak response, optimal surveillance upon global WPV eradication, and surveillance to detect containment breaches. It will also build capacity for a diverse public health workforce of statistical and mathematical modelers. Additionally, models will assess economic implications …</summary>
+  </entry>
+  <entry>
+    <title>Improving Linkage to Care for People with Opioid Use Disorder (U01)</title>
+    <link href="https://www.grants.gov/search-results-detail/363058"/>
+    <id>urn:funding-finder:grants-gov:363058</id>
+    <updated>2026-12-01T00:00:00Z</updated>
+    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
+    <category term="Public health"/>
+    <summary>Centers for Disease Control and Prevention - ERA | Estimated Application 2027-02-01 | The Centers for Disease Control and Prevention’s (CDC) National Center for Injury Prevention and Control (NCIPC, Injury Center) is soliciting investigator-initiated research to develop, implement, and rigorously evaluate strategies to address and overcome barriers to implementing evidence-based linkage to care services in health care settings. Strategies should focus on individuals with opioid use…</summary>
   </entry>
   <entry>
     <title>National Urban Indian Health Program (Education and Research)</title>
@@ -623,28 +642,5 @@
     <category term="Education and workforce"/>
     <category term="Public health"/>
     <summary>Health Resources and Services Administration | Estimated Application 2027-01-20 | The purpose of the Healthy Tomorrows Partnership for Children Program (HTPCP) is to support community-based projects that promote access to preventive clinical and public health services for children. The projects should address mental health, nutrition/health education, and/or physical activity to improve childhood chronic disease prevention in rural areas and communities with limited access to c…</summary>
-  </entry>
-  <entry>
-    <title>Precision and Systems Biology to Uncover the Link Between Chronic and Infectious Diseases</title>
-    <link href="https://www.grants.gov/search-results-detail/362952"/>
-    <id>urn:funding-finder:grants-gov:362952</id>
-    <updated>2026-11-06T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Data science"/>
-    <category term="Environmental science"/>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <summary>National Institutes of Health | Estimated Application 2027-01-22 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting multidisciplinary, consortium-based research using precision systems biology approaches to uncover links among chronic illnesses, infectious diseases and microbiomes. There is an urgent scientific and clinical need to understand the pathways by which infections lead to chronic lifelong heal…</summary>
-  </entry>
-  <entry>
-    <title>Centers of Excellence in Healthcare Quality and Safety</title>
-    <link href="https://www.grants.gov/search-results-detail/361997"/>
-    <id>urn:funding-finder:grants-gov:361997</id>
-    <updated>2026-11-05T00:00:00Z</updated>
-    <author><name>Centers for Disease Control - NCEZID</name></author>
-    <category term="Public health"/>
-    <summary>Centers for Disease Control - NCEZID | Estimated Application 2027-01-04 | This Program will create a collaborative network of healthcare systems, facilities and public health partners to rapidly detect, respond to, and prevent threats to patient and healthcare worker safety. This Program will support work that improves the safety, quality and resilience of U.S. healthcare delivery. The Program will be made up of healthcare systems inclusive of multiple facilities in a v…</summary>
   </entry>
 </feed>

@@ -4,8 +4,28 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/space-and-aeronautics.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/space-and-aeronautics.xml</id>
-  <updated>2026-11-02T20:29:35Z</updated>
+  <updated>2026-11-05T23:46:57Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>Fiscal Year 2027 Teams Engaging Affiliated Museums and Informal Institutions (TEAM II) STEM Innovator</title>
+    <link href="https://www.grants.gov/search-results-detail/364205"/>
+    <id>urn:funding-finder:grants-gov:364205</id>
+    <updated>2026-11-03T00:00:00Z</updated>
+    <author><name>National Aeronautics and Space Administration</name></author>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Space and aeronautics"/>
+    <summary>National Aeronautics and Space Administration | Application 2027-02-01 | NASA's Office of STEM Engagement (OSTEM), through the Next Gen STEM Project, invites proposals for the FY 2027 Teams Engaging Affiliated Museums and Informal Institutions (TEAM II) STEM Innovator opportunity. TEAM II supports informal education programs that connect learners to NASA missions and aerospace careers through immersive, mission-connected experiences that build STEM identity, technical …</summary>
+  </entry>
+  <entry>
+    <title>ROSES25: D.10 Astrophysics Theory Program</title>
+    <link href="https://nspires.nasaprs.com/external/solicitations/summary.do?solNum=NNH25ZDA001N-ATP"/>
+    <id>urn:funding-finder:nasa-roses:nasa-roses%3A25-D.10-6c8cc7896f</id>
+    <updated>2026-11-02T00:00:00Z</updated>
+    <author><name>NASA Headquarters</name></author>
+    <category term="Space and aeronautics"/>
+    <summary>NASA Headquarters | Application 2027-02-03 | NASA ROSES-2025 program element D.10, appendix division D. Published status: dated; due dates as printed: N/A | 02/03/2027. Source: ROSES Table 3 (SOLICITED RESEARCH PROGRAMS).</summary>
+  </entry>
   <entry>
     <title>Cooperative Agreement for affiliated Partner with the Californian Cooperative Ecosystem Studies Unit</title>
     <link href="https://www.grants.gov/search-results-detail/364178"/>
@@ -93,10 +113,7 @@
     <author><name>Air Force Office of Scientific Research</name></author>
     <category term="Education and workforce"/>
     <category term="Space and aeronautics"/>
-    <category term="Data science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Cybersecurity"/>
-    <summary>Air Force Office of Scientific Research | Application 2027-04-02 | verify prerequisite | The Air Force Office of Scientific Research, in partnership with the Air Force Research Lab (AFRL) Air Warfare Directorate (RA), intends to provide support for a multidisciplinary team of scientists and engineers at U.S. universities to establish a university-led Center for High-Speed Aerothermoelasticity. This multidisciplinary, basic research initiative focuses on investigating complex problem s…</summary>
+    <summary>Air Force Office of Scientific Research | Application 2027-04-02 | The Air Force Office of Scientific Research, in partnership with the Air Force Research Lab (AFRL) Air Warfare Directorate (RA), intends to provide support for a multidisciplinary team of scientists and engineers at U.S. universities to establish a university-led Center for High-Speed Aerothermoelasticity. This multidisciplinary, basic research initiative focuses on investigating complex problem s…</summary>
   </entry>
   <entry>
     <title>ROSES25: D.3F NuSTAR Cycle 13, Fermi Cycle 20, Swift Cycle 23, and TESS Cycle 10</title>
@@ -180,17 +197,6 @@
     <summary>NASA Headquarters | Application 2027-03-16 | The close date above is the date for the Step-2 proposal due date. The Step-1 proposal due date is November 20, 2026. Step-2 proposals cannot be submitted if a Step-1 proposal was not submitted. NOTICE: Corrected October 16, 2026: In the first paragraph of the introduction a vestigial reference to cubesats was replaced with "airborne platforms". New text is in bold and deleted text is struck throu…</summary>
   </entry>
   <entry>
-    <title>Space Technology Research Institutes</title>
-    <link href="https://www.grants.gov/search-results-detail/364024"/>
-    <id>urn:funding-finder:grants-gov:364024</id>
-    <updated>2026-10-05T00:00:00Z</updated>
-    <author><name>NASA Headquarters</name></author>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Space and aeronautics"/>
-    <summary>NASA Headquarters | Preproposal 2026-11-03 | The National Aeronautics and Space Administration (NASA) Headquarters has released the solicitation “Space Technology Research Institutes (STRI26),” as an appendix to the Research and Technology Mission Directorate (RTMD) umbrella NASA Research Announcement (NRA) titled "Space Technology Research, Development, Demonstration, and Infusion 2026 (SpaceTech REDDI 2026).”. The solicitation is available…</summary>
-  </entry>
-  <entry>
     <title>ROSES 2025: A.18 Geosphere</title>
     <link href="https://www.grants.gov/search-results-detail/364021"/>
     <id>urn:funding-finder:grants-gov:364021</id>
@@ -227,7 +233,7 @@
     <author><name>NASA Headquarters</name></author>
     <category term="Energy"/>
     <category term="Space and aeronautics"/>
-    <summary>NASA Headquarters | Application 2026-12-04 | PLEASE NOTE: this program has MANDATORY Notices of Intent, which are due via NSPIRES by October 16, 2026. See the full posting on NSPIRES for details. ﻿NOTICE: September 18, 2026. Details on the redacted and anonymized budget requirements have been added to Table A.16-1. and instructions regarding Biographical Sketches and Current and Pending Support in Table A.16-2 have been improved. New text is…</summary>
+    <summary>NASA Headquarters | Application 2026-12-04 | verify prerequisite | PLEASE NOTE: this program has MANDATORY Notices of Intent, which are due via NSPIRES by October 16, 2026. See the full posting on NSPIRES for details. NOTICE: November 2, 2026. Detail was added to Section 2.2 about the location of the Program Meetings and the expected participants. Section 3.7 "Use of Generative Super Intelligence" was added. An erroneous reference in Table A.16-1 was removed. Den…</summary>
   </entry>
   <entry>
     <title>Solar System Exploration Research Virtual Institute Cooperative Agreement Notice-5 (SSERVI CAN-5)</title>

@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml</id>
-  <updated>2026-11-02T20:29:35Z</updated>
+  <updated>2026-11-05T23:46:57Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Grid Supply Chain Alternatives to Lead Energy Dominance (SCALED)</title>
@@ -31,21 +31,6 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <summary>Advanced Research Projects Agency for Health (ARPA-H) | Application 2026-12-15 | prerequisite closed | Current ARPA-H program. UNIQUE | ARPA-H (function(w, d, s, l, i){w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&amp;l='+l:''; j.async=true; j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j, f); })(window, document,'script','dataLayer','GTM-W5GM3DT9'); wind…</summary>
-  </entry>
-  <entry>
-    <title>AFRL/AFOSR-Taiwan NSTC Frontiers in Materials and Nanostructures: AI-Driven Discovery, Quantum Geometry, and Energy-Efficient Information Technologies 2027-2030</title>
-    <link href="https://www.grants.gov/search-results-detail/364165"/>
-    <id>urn:funding-finder:grants-gov:364165</id>
-    <updated>2026-10-28T00:00:00Z</updated>
-    <author><name>Air Force Office of Scientific Research</name></author>
-    <category term="Arts and culture"/>
-    <category term="Energy"/>
-    <category term="Quantum science"/>
-    <category term="Materials science"/>
-    <category term="Data science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Cybersecurity"/>
-    <summary>Air Force Office of Scientific Research | Application 2027-02-19 | verify prerequisite | This is a special Notice of Funding Opportunity Announcement (NOFO) sponsored by the Air Force Office of Scientific Research (AFOSR) and Taiwan’s National Science and Technology Council (NSTC), which will hereafter generally be referred to as “we, us, our, or AFOSR.” We announce the solicitation for a three-year program entitled “Frontiers in Materials and Nanostructures: AI-Driven Discovery, Quan…</summary>
   </entry>
   <entry>
     <title>U.S. Jordan Private Sector Innovation Fund APS</title>
@@ -840,5 +825,18 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Neuroscience"/>
     <category term="Social and behavioral sciences"/>
     <summary>U.S. National Science Foundation | Application 2027-02-10 | Science of Learning and Augmented Intelligence (SL) supports potentially transformative research that develops basic theoretical insights and fundamental knowledge about principles, processes and mechanisms of learning, and about augmented intelligence - how human cognitive function can be augmented through interactions with others or with technology, or through variations in context. The program …</summary>
+  </entry>
+  <entry>
+    <title>Crosscutting Activities in Materials Research</title>
+    <link href="https://www.grants.gov/search-results-detail/308873"/>
+    <id>urn:funding-finder:grants-gov:308873</id>
+    <updated>2018-09-08T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Data science"/>
+    <category term="Education and workforce"/>
+    <category term="Health equity"/>
+    <category term="Materials science"/>
+    <summary>U.S. National Science Foundation | Posted | Crosscutting Activities in Materials Research (XC) coordinates and supports crosscutting activities within the Division of Materials Research (DMR) and more broadly across NSF.
+The emphasis within XC is diversity and inclusion, international cooperation, and education (including experiential learning at REU/RET Sites). Additionally, activities that broadly engage the community, such as summer scho…</summary>
   </entry>
 </feed>

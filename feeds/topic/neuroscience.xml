@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/neuroscience.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/neuroscience.xml</id>
-  <updated>2026-11-02T20:29:35Z</updated>
+  <updated>2026-11-05T23:46:57Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIH Stroke Clinical Trials Network (StrokeNet) Infrastructure - National Coordinating Center (NCC) and National Data Management Center (NDMC)</title>
@@ -246,6 +246,17 @@
     <summary>National Institutes of Health | Estimated Application 2027-01-28 | The Brain Research through Advancing Innovative Neurotechnologies® (BRAIN) Initiative along with other NIH Institutes and Centers (ICs) intends to publish a Notice of Funding Opportunity (NOFO) to encourage investigators to pursue first-in-human or early-stage clinical studies for recording and/or stimulating devices to treat central nervous system disorders and better understand the human brain. …</summary>
   </entry>
   <entry>
+    <title>Identify and Evaluate Potential Risk Factors for Amyotrophic Lateral Sclerosis (ALS)</title>
+    <link href="https://www.grants.gov/search-results-detail/363115"/>
+    <id>urn:funding-finder:grants-gov:363115</id>
+    <updated>2026-12-01T00:00:00Z</updated>
+    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Environmental science"/>
+    <category term="Neuroscience"/>
+    <summary>Centers for Disease Control and Prevention - ERA | Estimated Application 2027-02-01 | CDC/ATSDR is inviting research proposals to study risk factors for Amyotrophic Lateral Sclerosis (ALS). Studies on military service, contact sports, traumatic brain injury, neuroinflammation, and infections agents and exposures are encouraged. Funding will be for four funding options: Option A - Support research with strong existing evidence such as studies on known environmental or genetic risk f…</summary>
+  </entry>
+  <entry>
     <title>Establishing a Research Network to Guide Foundational Research on Human Consciousness</title>
     <link href="https://www.grants.gov/search-results-detail/362097"/>
     <id>urn:funding-finder:grants-gov:362097</id>
@@ -284,6 +295,17 @@
     <summary>National Institutes of Health | Estimated Application 2027-06-16 | The NIH Blueprint for Neuroscience Research is interested in continuing to support the BluePrint Neurotherapeutics Network for Small Molecules (BPN-SM)- a program designed to help investigators advance promising small-molecule therapeutics toward clinical testing. The BPN-SM program supports drug discovery and development activities in investigators’ own laboratories while also providing access to…</summary>
   </entry>
   <entry>
+    <title>Genomic and Biologic Therapies for ADRD (U01 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/361287"/>
+    <id>urn:funding-finder:grants-gov:361287</id>
+    <updated>2026-11-03T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Manufacturing"/>
+    <category term="Neuroscience"/>
+    <summary>National Institutes of Health | Application 2028-10-10 | This Notice of Funding Opportunity (NOFO) supports the translation of genome editing and other biologic therapies for Alzheimer's Disease-Related Dementias (ADRD). The program spans the full translational pipeline, from therapeutic lead optimization and drug product development through IND-enabling studies and early clinical evaluation. Supported activities may include optimization of editing cons…</summary>
+  </entry>
+  <entry>
     <title>NextTech: Translational Development of Next-Generation Diagnostic and Therapeutic Devices (R18 Clinical Trial Not Allowed)</title>
     <link href="https://www.grants.gov/search-results-detail/361380"/>
     <id>urn:funding-finder:grants-gov:361380</id>
@@ -312,17 +334,6 @@
     <category term="Neuroscience"/>
     <category term="Social and behavioral sciences"/>
     <summary>National Institutes of Health | Application 2027-02-08 | The National Institute on Drug Abuse (NIDA) invites applications to renew and expand the Collaboratory on Neural Ensembles and Used Substances (NExUS).NExUS is a collaborative research program to decode how substance use experiences and addictive neurobehavioral states are represented in the brain at the level of cell populations. This funding opportunity seeks applications that propose systematic…</summary>
-  </entry>
-  <entry>
-    <title>Identify and Evaluate Potential Risk Factors for Amyotrophic Lateral Sclerosis (ALS)</title>
-    <link href="https://www.grants.gov/search-results-detail/363115"/>
-    <id>urn:funding-finder:grants-gov:363115</id>
-    <updated>2026-10-01T00:00:00Z</updated>
-    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Environmental science"/>
-    <category term="Neuroscience"/>
-    <summary>Centers for Disease Control and Prevention - ERA | Estimated Application 2026-12-01 | CDC/ATSDR is inviting research proposals to study risk factors for Amyotrophic Lateral Sclerosis (ALS). Studies on military service, contact sports, traumatic brain injury, neuroinflammation, and infections agents and exposures are encouraged. Funding will be for four funding options: Option A - Support research with strong existing evidence such as studies on known environmental or genetic risk f…</summary>
   </entry>
   <entry>
     <title>BRAIN Initiative: Research Opportunities Using Invasive Neural Recording and Stimulating Technologies in the Human Brain (R01 Clinical Trial Not Allowed)</title>
@@ -441,39 +452,6 @@ we will not consider for support include Covid-19 relat…</summary>
     <category term="Neuroscience"/>
     <category term="Social and behavioral sciences"/>
     <summary>National Institutes of Health | Estimated Application 2026-11-15 | The Fogarty International Center, with NINDS, NIMH, NIA, NIEHS, NICHD, NEI, NIDCD, and NCCIH, intends to continue support of neuro-health research through the Global Brain and Nervous System Disorders Research Across the Lifespan program. Awards will catalyze and strengthen collaborative research on the brain and nervous system that leverages the unique scientific contexts of low- and middle-incom…</summary>
-  </entry>
-  <entry>
-    <title>Autism Centers of Excellence P50</title>
-    <link href="https://www.grants.gov/search-results-detail/360644"/>
-    <id>urn:funding-finder:grants-gov:360644</id>
-    <updated>2026-07-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Environmental science"/>
-    <category term="Neuroscience"/>
-    <category term="Public health"/>
-    <summary>National Institutes of Health | Estimated Application 2026-11-02 | The Eunice Kennedy Shriver National Institute for Child Health and Human Development (NICHD), with the National Institute on Deafness and Other Communication Disorders (NIDCD), National Institute of Environmental Health Sciences (NIEHS), National Institute of Mental Health (NIMH), and National Institute of Neurological Disorders and Stroke (NINDS), intends to publish a Notice of Funding Opportunit…</summary>
-  </entry>
-  <entry>
-    <title>Autism Centers of Excellence R01</title>
-    <link href="https://www.grants.gov/search-results-detail/360643"/>
-    <id>urn:funding-finder:grants-gov:360643</id>
-    <updated>2026-07-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Environmental science"/>
-    <category term="Neuroscience"/>
-    <category term="Public health"/>
-    <summary>National Institutes of Health | Estimated Application 2026-11-02 | The Eunice Kennedy Shriver National Institute for Child Health and Human Development (NICHD), with the National Institute on Deafness and Other Communication Disorders (NIDCD), National Institute of Environmental Health Sciences (NIEHS), National Institute of Mental Health (NIMH), and National Institute of Neurological Disorders and Stroke (NINDS), intends to publish a Notice of Funding Opportunit…</summary>
-  </entry>
-  <entry>
-    <title>Genomic and Biologic Therapies for ADRD (U01 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/361287"/>
-    <id>urn:funding-finder:grants-gov:361287</id>
-    <updated>2026-07-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Manufacturing"/>
-    <category term="Neuroscience"/>
-    <summary>National Institutes of Health | Estimated Application 2026-11-10 | The National Institutes of Neurological Disorders and Stroke (NINDS) is interested in supporting research projects proposing the optimization and translational development of genomic and biologic therapeutic candidates for Alzheimer’s Disease-Related Dementias (ADRD). Breakthroughs in genomic and biologic therapies are creating new opportunities to treat, prevent, and potentially modify the course…</summary>
   </entry>
   <entry>
     <title>Causal Hypotheses on the Oral-Systemic Health Impacts of Human Behaviors among People with Chronic Conditions (U01 Clinical Trial Not Allowed)</title>
@@ -645,5 +623,29 @@ we will not consider for support include Covid-19 relat…</summary>
     <category term="Biology and biotechnology"/>
     <category term="Neuroscience"/>
     <summary>National Institutes of Health | Application 2027-10-15 | The purpose of this Notice of Funding Opportunity (NOFO) is to encourage cooperative agreement applications to support early stage clinical trials of novel mechanism of action, investigational drugs, or novel neuromodulatory devices for the treatment of psychiatric disorders in areas of unmet medical need. The NOFO will support milestone-driven early stage trials in pediatric and adult populations…</summary>
+  </entry>
+  <entry>
+    <title>New Approaches for Measuring Brain Changes Across Longer Timespans (R01 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/357378"/>
+    <id>urn:funding-finder:grants-gov:357378</id>
+    <updated>2024-11-25T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Education and workforce"/>
+    <category term="Neuroscience"/>
+    <category term="Technology development"/>
+    <summary>National Institutes of Health | Application 2027-05-07 | The purpose of this funding opportunity is to encourage multidisciplinary investigators to develop new approaches or apply existing approaches in novel ways to measure brain activity, connectivity, genomics, or other aspects across the age spectrum of neurodevelopment. The overarching goal is to extend our understanding of brain development and aging, including studies of the neurodevelopmental or…</summary>
+  </entry>
+  <entry>
+    <title>New Approaches for Measuring Brain Changes Across Longer Timespans (R21 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/357377"/>
+    <id>urn:funding-finder:grants-gov:357377</id>
+    <updated>2024-11-25T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Education and workforce"/>
+    <category term="Neuroscience"/>
+    <category term="Technology development"/>
+    <summary>National Institutes of Health | Application 2027-05-07 | The purpose of this funding opportunity is to encourage multidisciplinary investigators to submit applications developing exploratory, highly novel new approaches, or innovative applications of existing approaches to measure brain activity, connectivity, genomics, or other aspects across the age spectrum of neurodevelopment. The overarching goal is to extend our understanding of brain development …</summary>
   </entry>
 </feed>
