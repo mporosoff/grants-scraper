@@ -4,8 +4,21 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml</id>
-  <updated>2026-11-05T23:46:57Z</updated>
+  <updated>2026-11-06T17:36:44Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>Cooperative Agreement for affiliated Partner with Californian Cooperative Ecosystem Studies Unit</title>
+    <link href="https://www.grants.gov/search-results-detail/364235"/>
+    <id>urn:funding-finder:grants-gov:364235</id>
+    <updated>2026-11-05T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Space and aeronautics"/>
+    <category term="Water"/>
+    <category term="Materials science"/>
+    <summary>Geological Survey | Application 2026-12-07 | Projects supported under this cooperative agreement should advance Administration priorities, including, but not limited to, American energy dominance, critical mineral development, water security, infrastructure resilience, and natural hazard preparedness. Research and activities may incorporate scientific expertise in areas such as hydrology, geology, geospatial science, biosecurity, and near-ea…</summary>
+  </entry>
   <entry>
     <title>Grid Supply Chain Alternatives to Lead Energy Dominance (SCALED)</title>
     <link href="https://www.grants.gov/search-results-detail/364174"/>
@@ -825,18 +838,5 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Neuroscience"/>
     <category term="Social and behavioral sciences"/>
     <summary>U.S. National Science Foundation | Application 2027-02-10 | Science of Learning and Augmented Intelligence (SL) supports potentially transformative research that develops basic theoretical insights and fundamental knowledge about principles, processes and mechanisms of learning, and about augmented intelligence - how human cognitive function can be augmented through interactions with others or with technology, or through variations in context. The program …</summary>
-  </entry>
-  <entry>
-    <title>Crosscutting Activities in Materials Research</title>
-    <link href="https://www.grants.gov/search-results-detail/308873"/>
-    <id>urn:funding-finder:grants-gov:308873</id>
-    <updated>2018-09-08T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Data science"/>
-    <category term="Education and workforce"/>
-    <category term="Health equity"/>
-    <category term="Materials science"/>
-    <summary>U.S. National Science Foundation | Posted | Crosscutting Activities in Materials Research (XC) coordinates and supports crosscutting activities within the Division of Materials Research (DMR) and more broadly across NSF.
-The emphasis within XC is diversity and inclusion, international cooperation, and education (including experiential learning at REU/RET Sites). Additionally, activities that broadly engage the community, such as summer scho…</summary>
   </entry>
 </feed>

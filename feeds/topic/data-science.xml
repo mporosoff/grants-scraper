@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml</id>
-  <updated>2026-11-05T23:46:57Z</updated>
+  <updated>2026-11-06T17:36:44Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>ancient DNA for Modern Genomics (aDMG) Research Projects (U01 Clinical Trials Not Allowed)</title>
@@ -133,6 +133,41 @@
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
     <summary>National Institutes of Health | Estimated Application 2027-01-29 | The National Institute of Environmental Health Sciences (NIEHS) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for research coordination and data support for the Health and Extreme Weather (HEW) initiative. This solicitation will include two closely aligned components: research coordination and data support. The coordinating component will be responsible for faci…</summary>
+  </entry>
+  <entry>
+    <title>Cooperative Agreement for affiliated Partner with Chesapeake Watershed Cooperative Ecosystem Studies Unit</title>
+    <link href="https://www.grants.gov/search-results-detail/364229"/>
+    <id>urn:funding-finder:grants-gov:364229</id>
+    <updated>2026-11-05T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
+    <category term="Environmental science"/>
+    <category term="Technology development"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Geological Survey | Application 2026-12-07 | The U.S. Geological Survey (USGS) is offering a funding opportunity to a CESU partner to support research and technology development that advances automated fish detection, enumeration, and risk assessment at Brandon Road Lock and Dam through the use of the Live Imaging Sonar Surveillance Array (LISSA). This work directly contributes to federal efforts to prevent the upstream movement of invasive …</summary>
+  </entry>
+  <entry>
+    <title>Cooperative Agreement for affiliated Partner with Colorado Plateau Cooperative Ecosystem Studies Unit</title>
+    <link href="https://www.grants.gov/search-results-detail/364238"/>
+    <id>urn:funding-finder:grants-gov:364238</id>
+    <updated>2026-11-05T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
+    <category term="Environmental science"/>
+    <category term="Water"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Geological Survey | Application 2026-12-07 | The U.S. Geological Survey (USGS) Arizona Water Science Center (AZWSC) is offering a funding opportunity to a CESU partner for research related to water quality modeling in reservoirs and free-flowing sections of the Colorado River from Lake Powell to the delta. Harmful algal blooms (HABs) are increasingly affecting freshwater systems across the western United States, and the Lower Colorado River …</summary>
+  </entry>
+  <entry>
+    <title>Cooperative Agreement for affiliated Partner with Rocky Mountain Cooperative Ecosystem Studies Unit</title>
+    <link href="https://www.grants.gov/search-results-detail/364237"/>
+    <id>urn:funding-finder:grants-gov:364237</id>
+    <updated>2026-11-05T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
+    <category term="Environmental science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Geological Survey | Application 2026-12-07 | The USGS is offering a funding opportunity to a CESU partner for research focused on improving the efficiency and standardization of Real-Time Quaking Induced Conversion (RT-QuIC) assay data analysis for Chronic Wasting Disease (CWD) surveillance, research, and management. CWD continues to expand geographically and intensify in prevalence, placing growing strain on wildlife management agencies. RT…</summary>
   </entry>
   <entry>
     <title>USGS Cooperative Landslide Hazard Mapping and Assessment Program Announcement for Fiscal Year 2027</title>
@@ -716,38 +751,5 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <summary>VPR funding digest (limited submissions &amp; foundations) | Application 2026-11-16</summary>
-  </entry>
-  <entry>
-    <title>Sloan Research Fellowships</title>
-    <link href="http://www.sloan.org/sloan-research-fellowships/"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-aed7d81578b24028</id>
-    <updated>2026-08-09T00:00:00Z</updated>
-    <author><name>Alfred P. Sloan Foundation</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Alfred P. Sloan Foundation | Posted | The Sloan Research Fellowship Program recognizes and rewards outstanding early-career faculty who have the potential to revolutionize their fields of study.
-Successful candidates for a Fellowship generally have a strong record of significant independent research accomplishments that demonstrate creativity and the potential to become future leaders in the scientific community. While Fellows are exp…</summary>
-  </entry>
-  <entry>
-    <title>RESEARCH AND DEVELOPMENT OF NAVAL POWER AND ENERGY SYSTEMS (N00024-19-R-4145 Broad Agency Announcement (BAA))</title>
-    <link href="https://sam.gov/opp/fac0dcbe5eff43ab92e3dadb319daed1/view"/>
-    <id>urn:funding-finder:sam-gov:sam-gov%3Afac0dcbe5eff43ab92e3dadb319daed1</id>
-    <updated>2026-08-05T00:00:00Z</updated>
-    <author><name>Naval Sea Systems Command (NAVSEA)</name></author>
-    <category term="Energy"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Naval Sea Systems Command (NAVSEA) | White Paper 2028-02-06 | Naval power and energy system research: power generation, storage, distribution, controls, advanced conductors, thermal management and modeling. Required white paper before invited full proposal. The current description extends receipt to February 6, 2033, while current SAM deadline metadata remains February 6, 2028. This entry deliberately uses the earlier 2028 deadline conservatively and retains…</summary>
-  </entry>
-  <entry>
-    <title>Innovative Traffic Safety Enforcement (ITSE) Grant Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363446"/>
-    <id>urn:funding-finder:grants-gov:363446</id>
-    <updated>2026-08-03T00:00:00Z</updated>
-    <author><name>National Highway Traffic Safety Administration</name></author>
-    <category term="Transportation"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>National Highway Traffic Safety Administration | Application 2027-09-01 | While the agency will consider innovative enhancements to existing countermeasures, the goal is to develop evidence-based projects that are scalable and transferable for use by State and local law enforcement agencies. The primary intent of this of the ITSE Grant Program is to 1) develop innovative traffic safety enforcement programs that demonstrate effectiveness by reducing the number of motor v…</summary>
   </entry>
 </feed>

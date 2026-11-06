@@ -4,8 +4,31 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/energy.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/energy.xml</id>
-  <updated>2026-11-05T23:46:57Z</updated>
+  <updated>2026-11-06T17:36:44Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>Cooperative Agreement for affiliated Partner with Californian Cooperative Ecosystem Studies Unit</title>
+    <link href="https://www.grants.gov/search-results-detail/364235"/>
+    <id>urn:funding-finder:grants-gov:364235</id>
+    <updated>2026-11-05T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Space and aeronautics"/>
+    <category term="Water"/>
+    <category term="Materials science"/>
+    <summary>Geological Survey | Application 2026-12-07 | Projects supported under this cooperative agreement should advance Administration priorities, including, but not limited to, American energy dominance, critical mineral development, water security, infrastructure resilience, and natural hazard preparedness. Research and activities may incorporate scientific expertise in areas such as hydrology, geology, geospatial science, biosecurity, and near-ea…</summary>
+  </entry>
+  <entry>
+    <title>ROSES 2025: D.10 Astrophysics Theory</title>
+    <link href="https://www.grants.gov/search-results-detail/364221"/>
+    <id>urn:funding-finder:grants-gov:364221</id>
+    <updated>2026-11-05T00:00:00Z</updated>
+    <author><name>NASA Headquarters</name></author>
+    <category term="Energy"/>
+    <category term="Space and aeronautics"/>
+    <summary>NASA Headquarters | Application 2027-02-03 | NOTICE: Amended November 5, 2026. This amendment presents a new program element in ROSES-2025. Neither NOIs nor Step-1 Proposals are requested. Proposals are due February 3, 2027. Proposals submitted to this program will be evaluated using dual-anonymous peer review (DAPR). Proposals must be prepared according to the guidelines in Section 5 and in the associated "Guidelines for Anonymous Proposals…</summary>
+  </entry>
   <entry>
     <title>Cooperative Agreement for affiliated Partner with the Californian Cooperative Ecosystem Studies Unit</title>
     <link href="https://www.grants.gov/search-results-detail/364194"/>
@@ -182,15 +205,6 @@
     <category term="Community development"/>
     <category term="Energy"/>
     <summary>Rural Utilities Service | Application 2026-11-20 | The Rural Utilities Service (RUS or the Agency), a Rural Development (RD) agency of the United States Department of Agriculture (USDA), is soliciting Letters of Interest (LOI) for applications under the Affordable Rural Cooperative (ARC) Program. In addition, the Agency is announcing the eligibility requirements, application process and deadlines, and the criteria that will be used by RUS to asses…</summary>
-  </entry>
-  <entry>
-    <title>A Study on Vessel Design Challenge</title>
-    <link href="https://sam.gov/opp/7d63d061eb82403c8b6b4afb9afca040/view"/>
-    <id>urn:funding-finder:sam-gov:sam-gov%3A7d63d061eb82403c8b6b4afb9afca040</id>
-    <updated>2026-10-16T00:00:00Z</updated>
-    <author><name>U.S. Department of Transportation - Maritime Administration (MARAD)</name></author>
-    <category term="Energy"/>
-    <summary>U.S. Department of Transportation - Maritime Administration (MARAD) | Full Application 2027-01-10 | Scientific and engineering vessel-design study combining hydrodynamics, propulsion, energy efficiency, cost analysis, and underwater radiated-noise reduction. Domestic institutions eligible; preference for US-company/US-flag team leads is evaluative, not an exclusion. An organization can join multiple teams but may lead only one proposal; no identical teams rotating leads. SAM registration/current…</summary>
   </entry>
   <entry>
     <title>Cooperative Agreement for Affiliated Partner with the Hawaiʻi-Pacific Islands Cooperative Ecosystem Studies Unit (CESU)</title>
@@ -685,17 +699,5 @@
     <category term="Energy"/>
     <category term="Space and aeronautics"/>
     <summary>NASA Headquarters | Application 2027-01-28 | The close date above is the date for the Step-2 proposal due date. The Step-1 proposal due date is October 8, 2026. Step-2 proposals cannot be submitted if a Step-1 proposal was not submitted. ﻿NOTICE: September 18, 2026. Several corrections have been made: (1) Information about the 2027-2028 winter field campaign has been updated in Section 5, (2) Details on the redacted and anonymized budget req…</summary>
-  </entry>
-  <entry>
-    <title>Egypt Annual Program Statement</title>
-    <link href="https://www.grants.gov/search-results-detail/363786"/>
-    <id>urn:funding-finder:grants-gov:363786</id>
-    <updated>2026-09-02T00:00:00Z</updated>
-    <author><name>Bureau of Near Eastern Affairs</name></author>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Manufacturing"/>
-    <category term="Transportation"/>
-    <summary>Bureau of Near Eastern Affairs | Posted | The Bureau of Near Eastern Affairs’ Office of Assistance Coordination (NEA/AC) seeks proposals for projects in Egypt that advance U.S. commercial diplomacy and put American interests first. Proposals must demonstrate how projects will leverage assistance as a tool of statecraft to advance U.S. economic, security, and diplomatic objectives. Programming should promote trade, not aid, by leveraging a…</summary>
   </entry>
 </feed>

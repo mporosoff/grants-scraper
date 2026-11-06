@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/infectious-disease.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/infectious-disease.xml</id>
-  <updated>2026-11-05T23:46:57Z</updated>
+  <updated>2026-11-06T17:36:44Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Prevention and Treatment through a Comprehensive Care Continuum for HIV-affected Adolescents in Resource-Constrained Settings--Implementation Science Network (PATC3H-IN)</title>
@@ -237,6 +237,28 @@
     <summary>National Institutes of Health | Estimated Application 2027-01-25 | This NOFO is issued during a period of accelerating development, validation, and adoption of human new approach methodologies (NAMs). Accordingly, it has two integrated priorities for NIH-funded HIV/AIDS research: (1) implementation of a NAMs-enabled stewardship framework, including optional HIV-relevant human in vitro testing support and pilot benchmarking activities, to reduce or replace specifi…</summary>
   </entry>
   <entry>
+    <title>Cooperative Agreement for affiliated Partner with Gulf Coast Cooperative Ecosystem Studies Unit</title>
+    <link href="https://www.grants.gov/search-results-detail/364231"/>
+    <id>urn:funding-finder:grants-gov:364231</id>
+    <updated>2026-11-05T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Environmental science"/>
+    <category term="Infectious disease"/>
+    <summary>Geological Survey | Application 2027-01-05 | The Eastern Ecological Science Center of the U.S. Geological Survey (USGS) is soliciting applications from CESU partners for research focused on the bioinformatic analysis of existing and upcoming avian microbiome metatranscriptomic datasets. These datasets have already been generated or are in the process of being generated under ongoing projects conducted in collaboration with the U.S. Fish and …</summary>
+  </entry>
+  <entry>
+    <title>National Animal Disease Preparedness and Response Program (NADPRP) FY 2027 State Preparedness Funding Opportunity</title>
+    <link href="https://www.grants.gov/search-results-detail/364215"/>
+    <id>urn:funding-finder:grants-gov:364215</id>
+    <updated>2026-11-05T00:00:00Z</updated>
+    <author><name>Animal and Plant Health Inspection Service</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Infectious disease"/>
+    <summary>Animal and Plant Health Inspection Service | Application 2027-01-07 | The USDA Animal and Plant Health Inspection Service (APHIS) Veterinary Services (VS) announces the availability of up to $40,000,000 in funding through the One Big Beautiful Bill Act (OBBBA) and the 2018 Farm Bill for the National Animal Disease Preparedness and Response Program FY 2027 State Preparedness Funding Opportunity. Through NADPRP, APHIS partners with eligible entities to provide financi…</summary>
+  </entry>
+  <entry>
     <title>Systems Biology of Infection and Inflammation in Chronic Diseases (U19 Clinical Trial Not Allowed)</title>
     <link href="https://www.grants.gov/search-results-detail/362952"/>
     <id>urn:funding-finder:grants-gov:362952</id>
@@ -393,18 +415,6 @@
 supports basic science, ideally with potential translational applications. Examples of current research areas we support include
 immunology, microbiome, structural biology, cellular physiology, cancer biology, genetics, genomics, microbiology and infectious diseases, stem cell biology, and neuroscience. Research areas
 we will not consider for support include Covid-19 relat…</summary>
-  </entry>
-  <entry>
-    <title>Emerging Infections Network - Research for Preventing, Detecting, and Managing Travel-associated Infectious Diseases</title>
-    <link href="https://www.grants.gov/search-results-detail/360199"/>
-    <id>urn:funding-finder:grants-gov:360199</id>
-    <updated>2026-08-03T00:00:00Z</updated>
-    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <category term="Transportation"/>
-    <summary>Centers for Disease Control and Prevention - ERA | Application 2026-11-05 | prerequisite closed | The focus of this notice of funding opportunity (NOFO) is to produce insights into disease detection and prevention strategies, burden, severity, diagnostics, treatment, and outcomes of infectious diseases in international travelers. Timely surveillance and sentinel detection are essential for collecting actionable data. The research should: Address public health questions that improve the speed o…</summary>
   </entry>
   <entry>
     <title>Avant Garde/Avenir Awards for Investigators Conducting High Risk/High Reward Research on HIV and Substance Use (or Substance Use Disorders) (DP1 Clinical Trial Optional)</title>

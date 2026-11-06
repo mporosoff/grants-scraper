@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/all.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/all.xml</id>
-  <updated>2026-11-05T23:46:57Z</updated>
+  <updated>2026-11-06T17:36:44Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -576,6 +576,14 @@
     <summary>Centers for Disease Control - NCHHSTP | Estimated Application 2027-06-01 | In alignment with CDC's viral hepatitis strategic goals and current epidemiology, this Notice of Funding Opportunity (NOFO) will address the need for increasing awareness of viral hepatitis prevention, testing, and treatment options among populations disproportionately affected by hepatitis B and/or hepatitis C virus infections. The priority populations' needs will also be addressed by increasing …</summary>
   </entry>
   <entry>
+    <title>The National Rural Health Information Technology Assessment Program</title>
+    <link href="https://www.grants.gov/search-results-detail/364232"/>
+    <id>urn:funding-finder:grants-gov:364232</id>
+    <updated>2027-03-29T00:00:00Z</updated>
+    <author><name>Health Resources and Services Administration</name></author>
+    <summary>Health Resources and Services Administration | Estimated Application 2027-05-28 | The purpose of this program is to help rural communities address emerging challenges and gaps in leveraging health information technology to improve health and wellness.</summary>
+  </entry>
+  <entry>
     <title>Holistic and Evidence-Informed Wellness for STI Prevention</title>
     <link href="https://www.grants.gov/search-results-detail/363519"/>
     <id>urn:funding-finder:grants-gov:363519</id>
@@ -953,14 +961,5 @@
     <category term="Social and behavioral sciences"/>
     <category term="Technology development"/>
     <summary>National Institutes of Health | Estimated Application 2027-05-25 | The National Institute of Mental Health (NIMH) seeks research applications to support the NIMH HIV/AIDS Research Centers (ARC) program, including Developmental Centers (D-ARCs) and full AIDS Research Centers (ARCs). These Research Centers aim to capitalize on the coordinated infrastructure to advance high-impact, interdisciplinary HIV/AIDS research. The ARC program supports innovative research acr…</summary>
-  </entry>
-  <entry>
-    <title>Rehabilitation Engineering Research Center on Technologies for People Who are Blind or have Low Vision</title>
-    <link href="https://www.grants.gov/search-results-detail/363974"/>
-    <id>urn:funding-finder:grants-gov:363974</id>
-    <updated>2027-02-22T00:00:00Z</updated>
-    <author><name>Administration for Community Living</name></author>
-    <category term="Environmental science"/>
-    <summary>Administration for Community Living | Estimated Application 2027-04-22 | The purpose of the Rehabilitation Engineering Research Centers (RERC) program is to improve the effectiveness of services authorized under the Rehabilitation Act by conducting advanced engineering research on and development of innovative technologies that are designed to solve particular rehabilitation problems or to remove environmental barriers. The purpose of this RERC is to conduct research a…</summary>
   </entry>
 </feed>

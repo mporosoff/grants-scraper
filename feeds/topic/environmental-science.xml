@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/environmental-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/environmental-science.xml</id>
-  <updated>2026-11-05T23:46:57Z</updated>
+  <updated>2026-11-06T17:36:44Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Limited Competition: Biomedical Research Environment &amp; Sponsored Programs Administration Development (BRE-SPAD) Program</title>
@@ -258,6 +258,16 @@
     <summary>National Institutes of Health | Estimated Application 2027-02-09 | This initiative will provide salary and research support to advanced U.S. postdoctoral researchers and junior faculty for intensive mentored research and career development activities focused on biomedical, behavioral, and/or clinical research in low- and middle-income countries (LMICs). Proposals will leverage special opportunities not present in the U.S. and result in generalizable knowledge app…</summary>
   </entry>
   <entry>
+    <title>Leveraging NAMs to understand disease triggers, discover early biomarkers and develop new classes of therapeutic strategies for Type 1 Diabetes (U01 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/364219"/>
+    <id>urn:funding-finder:grants-gov:364219</id>
+    <updated>2026-12-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Environmental science"/>
+    <summary>National Institutes of Health | Estimated Application 2027-02-10 | This NOFO will support research using human-relevant New Approach Methodologies (NAMs) to advance understanding of the earliest events that initiate and drive Type 1 Diabetes (T1D). Projects will use human cells and tissues and innovative experimental and computational approaches-including organoids, microphysiological systems, and other advanced human-relevant models-to investigate cellular and m…</summary>
+  </entry>
+  <entry>
     <title>Multimodal AI to Accelerate Precision Medicine for Type 1 Diabetes (U01- Clinical Trials Not Allowed)</title>
     <link href="https://www.grants.gov/search-results-detail/363678"/>
     <id>urn:funding-finder:grants-gov:363678</id>
@@ -323,6 +333,146 @@
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
     <summary>Health Resources and Services Administration | Estimated Application 2027-01-20 | The purpose of this funding is to build the capacity of ADAPs through tools and technical assistance to maximize the impact of ADAPs in improving the health outcomes of people with HIV in a changing health care environment.</summary>
+  </entry>
+  <entry>
+    <title>Cooperative Agreement for affiliated Partner with Alaska Cooperative Ecosystem Studies Unit</title>
+    <link href="https://www.grants.gov/search-results-detail/364239"/>
+    <id>urn:funding-finder:grants-gov:364239</id>
+    <updated>2026-11-05T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
+    <category term="Environmental science"/>
+    <summary>Geological Survey | Application 2026-12-07 | The U.S. Geological Survey (USGS) is offering a funding opportunity to a CESU partner for research to develop an integrated population model (IPM) and conduct a Bayesian Population Viability Analysis (BPVA) for the Atlantic Coast population of Piping Plovers. Listed as threatened under the Endangered Species Act in 1986, the Atlantic Coast population comprises four recovery units (Atlantic Canada,…</summary>
+  </entry>
+  <entry>
+    <title>Cooperative Agreement for affiliated Partner with Californian Cooperative Ecosystem Studies Unit</title>
+    <link href="https://www.grants.gov/search-results-detail/364235"/>
+    <id>urn:funding-finder:grants-gov:364235</id>
+    <updated>2026-11-05T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Space and aeronautics"/>
+    <category term="Water"/>
+    <category term="Materials science"/>
+    <summary>Geological Survey | Application 2026-12-07 | Projects supported under this cooperative agreement should advance Administration priorities, including, but not limited to, American energy dominance, critical mineral development, water security, infrastructure resilience, and natural hazard preparedness. Research and activities may incorporate scientific expertise in areas such as hydrology, geology, geospatial science, biosecurity, and near-ea…</summary>
+  </entry>
+  <entry>
+    <title>Cooperative Agreement for affiliated Partner with Chesapeake Watershed Cooperative Ecosystem Studies Unit</title>
+    <link href="https://www.grants.gov/search-results-detail/364229"/>
+    <id>urn:funding-finder:grants-gov:364229</id>
+    <updated>2026-11-05T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
+    <category term="Environmental science"/>
+    <category term="Technology development"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Geological Survey | Application 2026-12-07 | The U.S. Geological Survey (USGS) is offering a funding opportunity to a CESU partner to support research and technology development that advances automated fish detection, enumeration, and risk assessment at Brandon Road Lock and Dam through the use of the Live Imaging Sonar Surveillance Array (LISSA). This work directly contributes to federal efforts to prevent the upstream movement of invasive …</summary>
+  </entry>
+  <entry>
+    <title>Cooperative Agreement for affiliated Partner with Colorado Plateau Cooperative Ecosystem Studies Unit</title>
+    <link href="https://www.grants.gov/search-results-detail/364238"/>
+    <id>urn:funding-finder:grants-gov:364238</id>
+    <updated>2026-11-05T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
+    <category term="Environmental science"/>
+    <category term="Water"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Geological Survey | Application 2026-12-07 | The U.S. Geological Survey (USGS) Arizona Water Science Center (AZWSC) is offering a funding opportunity to a CESU partner for research related to water quality modeling in reservoirs and free-flowing sections of the Colorado River from Lake Powell to the delta. Harmful algal blooms (HABs) are increasingly affecting freshwater systems across the western United States, and the Lower Colorado River …</summary>
+  </entry>
+  <entry>
+    <title>Cooperative Agreement for affiliated Partner with Great Basin Cooperative Ecosystem Studies Unit</title>
+    <link href="https://www.grants.gov/search-results-detail/364228"/>
+    <id>urn:funding-finder:grants-gov:364228</id>
+    <updated>2026-11-05T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
+    <category term="Environmental science"/>
+    <category term="Water"/>
+    <summary>Geological Survey | Application 2026-12-07 | The USGS Nevada Water Science Center is offering a funding opportunity to a CESU partner for research on improving discharge measurements and streamgage operations in the South Elko field area. As new streamgaging technologies emerge and the need to apply operational efficiencies increases, the USGS aims to identify solutions that are effective in extremely remote and hydrologically dynamic waters…</summary>
+  </entry>
+  <entry>
+    <title>Cooperative Agreement for affiliated Partner with Great Lakes Northern Forest Cooperative Ecosystem Studies Unit</title>
+    <link href="https://www.grants.gov/search-results-detail/364227"/>
+    <id>urn:funding-finder:grants-gov:364227</id>
+    <updated>2026-11-05T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Arts and culture"/>
+    <category term="Environmental science"/>
+    <category term="Public health"/>
+    <summary>Geological Survey | Application 2026-12-07 | This project investigates PFAS bioaccumulation and partitioning in two culturally significant harvestable plants, wild rice (Manoomin) and arrowhead (Wapato), at up to four PFAS-impacted aquatic sites within the Ceded Territories. The study measures PFAS in surface water, sediment, plant tissues, and finished/cooked traditional food products, using EPA Method 1633 (40 PFAS analytes). Results will …</summary>
+  </entry>
+  <entry>
+    <title>Cooperative Agreement for affiliated Partner with Great Rivers Cooperative Ecosystem Studies Unit</title>
+    <link href="https://www.grants.gov/search-results-detail/364230"/>
+    <id>urn:funding-finder:grants-gov:364230</id>
+    <updated>2026-11-05T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
+    <category term="Arts and culture"/>
+    <category term="Environmental science"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>Geological Survey | Application 2026-12-07 | The U.S. Geological Survey (USGS) is offering a funding opportunity to a CESU partner for research addressing the ecology, behavior, population dynamics, and resource management of fish across the Great Lakes basin and their tributary systems. The Great Lakes constitute the largest system of freshwater lakes on Earth and support exceptionally diverse native fish assemblages of significant ecologic…</summary>
+  </entry>
+  <entry>
+    <title>Cooperative Agreement for affiliated Partner with Great Rivers Cooperative Ecosystem Studies Unit</title>
+    <link href="https://www.grants.gov/search-results-detail/364233"/>
+    <id>urn:funding-finder:grants-gov:364233</id>
+    <updated>2026-11-05T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
+    <category term="Environmental science"/>
+    <category term="Water"/>
+    <summary>Geological Survey | Application 2026-12-07 | The USGS is offering a funding opportunity to a Great Rivers CESU partner for research to assess the efficacy of using in-situ fluorometry for detection of milt (seminal fluid) from invasive carp in rivers downstream from spawning sites. Invasive carp-bighead (Hypophthalmichthys nobilis) silver (H. molitrix), grass(Ctenopharyngodon idella), and black (Mylopharyngodon piceus) carp-are native to Sou…</summary>
+  </entry>
+  <entry>
+    <title>Cooperative Agreement for affiliated Partner with Great Rivers Cooperative Ecosystem Studies Unit</title>
+    <link href="https://www.grants.gov/search-results-detail/364234"/>
+    <id>urn:funding-finder:grants-gov:364234</id>
+    <updated>2026-11-05T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
+    <category term="Environmental science"/>
+    <category term="Water"/>
+    <summary>Geological Survey | Application 2026-12-07 | The USGS is offering a funding opportunity to a Great Rivers CESU partner for research to develop and test hydrodynamically based, passive ichthyoplankton samplers for capture of downstream-drifting invasive carp eggs and larvae in rivers. Invasive carp-bighead (Hypophthalmichthys nobilis) silver (H. molitrix), grass (Ctenopharyngodon idella), and black (Mylopharyngodon piceus) carp-are native to …</summary>
+  </entry>
+  <entry>
+    <title>Cooperative Agreement for affiliated Partner with Hawai-Pacific Islands (HPI) Cooperative Ecosystem Studies Unit</title>
+    <link href="https://www.grants.gov/search-results-detail/364236"/>
+    <id>urn:funding-finder:grants-gov:364236</id>
+    <updated>2026-11-05T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
+    <category term="Environmental science"/>
+    <summary>Geological Survey | Application 2026-12-07 | The USGS is offering a funding opportunity to a CESU partner for research in identifying how wind influences the incursion of mosquitoes into Hakalau Forest National Wildlife Refuge (hereafter, Hakalau). Hakalau provides habitat for the most intact community of native Hawaiian birds remaining in Hawaiʻi, at least partly due to the lack of disease-carrying Culex mosquitoes in the higher elevation p…</summary>
+  </entry>
+  <entry>
+    <title>Cooperative Agreement for affiliated Partner with Rocky Mountain Cooperative Ecosystem Studies Unit</title>
+    <link href="https://www.grants.gov/search-results-detail/364226"/>
+    <id>urn:funding-finder:grants-gov:364226</id>
+    <updated>2026-11-05T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
+    <category term="Environmental science"/>
+    <summary>Geological Survey | Application 2026-12-07 | The U.S. Geological Survey (USGS) Forest and Rangeland Ecosystem Science Center (FRESC) is offering a Cooperative Agreement funding opportunity to a Cooperative Ecosystems Studies Unit (CESU) partner to conduct research on the tradeoffs among hydropower dam operations, multispecies conservation, recreation, flood control, and electricity generation in the Skagit River, WA. Specifically, the resear…</summary>
+  </entry>
+  <entry>
+    <title>Cooperative Agreement for affiliated Partner with Rocky Mountain Cooperative Ecosystem Studies Unit</title>
+    <link href="https://www.grants.gov/search-results-detail/364237"/>
+    <id>urn:funding-finder:grants-gov:364237</id>
+    <updated>2026-11-05T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
+    <category term="Environmental science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Geological Survey | Application 2026-12-07 | The USGS is offering a funding opportunity to a CESU partner for research focused on improving the efficiency and standardization of Real-Time Quaking Induced Conversion (RT-QuIC) assay data analysis for Chronic Wasting Disease (CWD) surveillance, research, and management. CWD continues to expand geographically and intensify in prevalence, placing growing strain on wildlife management agencies. RT…</summary>
+  </entry>
+  <entry>
+    <title>Cooperative Agreement for affiliated Partner with Gulf Coast Cooperative Ecosystem Studies Unit</title>
+    <link href="https://www.grants.gov/search-results-detail/364231"/>
+    <id>urn:funding-finder:grants-gov:364231</id>
+    <updated>2026-11-05T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Environmental science"/>
+    <category term="Infectious disease"/>
+    <summary>Geological Survey | Application 2027-01-05 | The Eastern Ecological Science Center of the U.S. Geological Survey (USGS) is soliciting applications from CESU partners for research focused on the bioinformatic analysis of existing and upcoming avian microbiome metatranscriptomic datasets. These datasets have already been generated or are in the process of being generated under ongoing projects conducted in collaboration with the U.S. Fish and …</summary>
   </entry>
   <entry>
     <title>Development and Maintenance of Human and Animal Food Rapid Response Teams</title>
@@ -492,169 +642,5 @@
     <author><name>Geological Survey</name></author>
     <category term="Environmental science"/>
     <summary>Geological Survey | Application 2026-11-30 | The USGS is offering a funding opportunity to a CESU partner for research to characterize stable isotopes in mosquitoes collected in and around Hakalau Forest National Wildlife Refuge (hereafter, Hakalau). Hakalau provides habitat for the most intact community of native Hawaiian birds remaining in Hawaiʻi, at least partly due to the lack of disease-carrying Culex quinquefasciatus mosquitoes (herea…</summary>
-  </entry>
-  <entry>
-    <title>Cooperative Agreement for affiliated Partner with the Californian Cooperative Ecosystem Studies Unit</title>
-    <link href="https://www.grants.gov/search-results-detail/364178"/>
-    <id>urn:funding-finder:grants-gov:364178</id>
-    <updated>2026-10-30T00:00:00Z</updated>
-    <author><name>Geological Survey</name></author>
-    <category term="Data science"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Space and aeronautics"/>
-    <category term="Water"/>
-    <summary>Geological Survey | Application 2026-11-30 | This Notice of Funding Opportunity (NOFO) is for a U.S. Geological Survey (USGS) National and Regional Climate Adaptation Science Center (NRCASC) competitive research award to a CESU partner. Projects supported under this cooperative agreement should advance Administration priorities, including, but not limited to, American energy dominance, critical mineral development, water security, infrastruc…</summary>
-  </entry>
-  <entry>
-    <title>Cooperative Agreement for affiliated Partner with the Chesapeake Watershed Cooperative Ecosystem Studies Unit</title>
-    <link href="https://www.grants.gov/search-results-detail/364179"/>
-    <id>urn:funding-finder:grants-gov:364179</id>
-    <updated>2026-10-30T00:00:00Z</updated>
-    <author><name>Geological Survey</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Space and aeronautics"/>
-    <category term="Water"/>
-    <summary>Geological Survey | Application 2026-11-30 | This Notice of Funding Opportunity (NOFO) is for a U.S. Geological Survey (USGS) National and Regional Climate Adaptation Science Center (NRCASC) competitive research financial assistance award to a CESU partner. Projects supported under this cooperative agreement should advance Administration priorities, including, but not limited to, American energy dominance, critical mineral development, water…</summary>
-  </entry>
-  <entry>
-    <title>Cooperative Agreement for affiliated Partner with the Colorado Plateau Cooperative Ecosystem Studies Unit</title>
-    <link href="https://www.grants.gov/search-results-detail/364181"/>
-    <id>urn:funding-finder:grants-gov:364181</id>
-    <updated>2026-10-30T00:00:00Z</updated>
-    <author><name>Geological Survey</name></author>
-    <category term="Arts and culture"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Infectious disease"/>
-    <category term="Space and aeronautics"/>
-    <category term="Water"/>
-    <summary>Geological Survey | Application 2026-11-30 | This Notice of Funding Opportunity (NOFO) is for a U.S. Geological Survey (USGS) National and Regional Climate Adaptation Science Center (NRCASC) competitive financial assistance research award to a CESU partner. Projects supported under this cooperative agreement should advance Administration priorities, including, but not limited to, American energy dominance, critical mineral development, water…</summary>
-  </entry>
-  <entry>
-    <title>Cooperative Agreement for affiliated Partner with the Great Lakes-Northern Forest Cooperative Ecosystem Studies Unit</title>
-    <link href="https://www.grants.gov/search-results-detail/364180"/>
-    <id>urn:funding-finder:grants-gov:364180</id>
-    <updated>2026-10-30T00:00:00Z</updated>
-    <author><name>Geological Survey</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Arts and culture"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Space and aeronautics"/>
-    <category term="Water"/>
-    <summary>Geological Survey | Application 2026-11-30 | This Notice of Funding Opportunity (NOFO) is for a U.S. Geological Survey (USGS) National and Regional Climate Adaptation Science Center (NRCASC) competitive research financial assistance award to a CESU partner. Projects supported under this cooperative agreement should advance Administration priorities, including, but not limited to, American energy dominance, critical mineral development, water…</summary>
-  </entry>
-  <entry>
-    <title>Cooperative Agreement for affiliated Partner with the Great Plains Cooperative Ecosystem Studies Unit</title>
-    <link href="https://www.grants.gov/search-results-detail/364177"/>
-    <id>urn:funding-finder:grants-gov:364177</id>
-    <updated>2026-10-30T00:00:00Z</updated>
-    <author><name>Geological Survey</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Space and aeronautics"/>
-    <category term="Water"/>
-    <summary>Geological Survey | Application 2026-11-30 | This Notice of Funding Opportunity (NOFO) is for a U.S. Geological Survey (USGS) National and Regional Climate Adaptation Science Center (NRCASC) competitive research award to a CESU partner. Projects supported under this cooperative agreement should advance Administration priorities, including, but not limited to, American energy dominance, critical mineral development, water security, infrastruc…</summary>
-  </entry>
-  <entry>
-    <title>Cooperative Agreement for affiliated Partner with the Pacific Northwest Cooperative Ecosystem Studies Unit</title>
-    <link href="https://www.grants.gov/search-results-detail/364182"/>
-    <id>urn:funding-finder:grants-gov:364182</id>
-    <updated>2026-10-30T00:00:00Z</updated>
-    <author><name>Geological Survey</name></author>
-    <category term="Environmental science"/>
-    <category term="Water"/>
-    <summary>Geological Survey | Application 2026-11-30 | The U.S. Geological Survey (USGS) is offering a funding opportunity to a CESU partner for research to analyze, synthesize, and interpret the latest aquatic monitoring data to quantify management-related changes in in-stream and upslope indicators of instream and watershed condition within the Northwest Forest Plan (NWFP) area. This project will use the best available science and reproducible analy…</summary>
-  </entry>
-  <entry>
-    <title>Cooperative Agreement for affiliated Partner with the Great Rivers Cooperative Ecosystem Studies Unit</title>
-    <link href="https://www.grants.gov/search-results-detail/364176"/>
-    <id>urn:funding-finder:grants-gov:364176</id>
-    <updated>2026-10-30T00:00:00Z</updated>
-    <author><name>Geological Survey</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Environmental science"/>
-    <summary>Geological Survey | Application 2026-12-04 | The U.S. Geological Survey (USGS) invites proposals from Cooperative Ecosystem Studies Unit (CESU) Great Rivers network partners for novel research focusing on the development and application of Bayesian statistical methods. This funding opportunity seeks to advance methodologies for analyzing passive bat acoustic monitoring data, specifically for estimating species occurrence and relative abundan…</summary>
-  </entry>
-  <entry>
-    <title>FY 2026 - 2028 Broad Agency Announcement (BAA), National Ocean Service</title>
-    <link href="https://www.grants.gov/search-results-detail/364142"/>
-    <id>urn:funding-finder:grants-gov:364142</id>
-    <updated>2026-10-29T00:00:00Z</updated>
-    <author><name>DOC NOAA - ERA Production</name></author>
-    <category term="Arts and culture"/>
-    <category term="Environmental science"/>
-    <summary>DOC NOAA - ERA Production | Application 2028-09-30 | A description of NOAA Line and Staff Offices is found at https://www.noaa.gov/about/organization, and applicants may contact the Agency Contacts in Section VII. below for more information. If you submit the same application to more than one Line or Staff Office, mention this in your application and notify the relevant contacts in Section VII. so that NOAA may coordinate internally. This notice als…</summary>
-  </entry>
-  <entry>
-    <title>Landscape Scale Restoration Grant Program for Non-Federal Lands</title>
-    <link href="https://www.grants.gov/search-results-detail/364144"/>
-    <id>urn:funding-finder:grants-gov:364144</id>
-    <updated>2026-10-28T00:00:00Z</updated>
-    <author><name>Forest Service</name></author>
-    <category term="Environmental science"/>
-    <category term="Water"/>
-    <summary>Forest Service | Application 2027-01-26 | The Forest Service is offering this one LSR non-federal lands Notice of Funding Opportunity (NOFO) which replaces the three regional (Southern/IITF, Western, and Northeast/Midwestern) NOFOs. The purpose of the Landscape Scale Restoration (LSR) Program is to encourage collaborative, science-based restoration of priority forest landscapes. This competitive grant program supports collaborative high i…</summary>
-  </entry>
-  <entry>
-    <title>Landscape Scale Restoration Grant Program for Tribes</title>
-    <link href="https://www.grants.gov/search-results-detail/364145"/>
-    <id>urn:funding-finder:grants-gov:364145</id>
-    <updated>2026-10-28T00:00:00Z</updated>
-    <author><name>Forest Service</name></author>
-    <category term="Environmental science"/>
-    <category term="Water"/>
-    <summary>Forest Service | Application 2027-01-26 | The purpose of the Landscape Scale Restoration (LSR) Program is to encourage collaborative, science-based restoration of priority forest landscapes. This competitive grant program supports collaborative high impact projects that lead to measurable outcomes on priority forest landscapes, leverage public and private resources, and further priorities identified in a science-based restoration strategy…</summary>
-  </entry>
-  <entry>
-    <title>RESTORE Act Centers of Excellence Research Grants Program</title>
-    <link href="https://www.grants.gov/search-results-detail/364170"/>
-    <id>urn:funding-finder:grants-gov:364170</id>
-    <updated>2026-10-28T00:00:00Z</updated>
-    <author><name>U.S. Dept. of Treasury RESTORE Act Program</name></author>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <summary>U.S. Dept. of Treasury RESTORE Act Program | Application 2027-10-31 | Treasury is publishing multiple funding opportunity notices for its RESTORE Act grant programs. This announcement applies only to the Centers of Excellence Research Grants Program. Trust Fund amounts are available to establish one or more Centers of Excellence through competitive subawards to nongovernmental entities and consortia in the Gulf Coast Region, including institutions of higher educatio…</summary>
-  </entry>
-  <entry>
-    <title>RESTORE Act Direct Component - Non-Construction Activities</title>
-    <link href="https://www.grants.gov/search-results-detail/364169"/>
-    <id>urn:funding-finder:grants-gov:364169</id>
-    <updated>2026-10-28T00:00:00Z</updated>
-    <author><name>U.S. Dept. of Treasury RESTORE Act Program</name></author>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <summary>U.S. Dept. of Treasury RESTORE Act Program | Application 2027-10-31 | Treasury is publishing multiple funding opportunity announcements (FOAs) for its RESTORE Act grant programs. This announcement applies only to the Direct Component and is only for applications for eligible non-construction activities, including projects with or without a non-federal cost-share for another federally funded project or program. This announcement also includes planning assistance need…</summary>
-  </entry>
-  <entry>
-    <title>NIOSH Miner Safety and Health Training Program - Western United States - U60</title>
-    <link href="https://www.grants.gov/search-results-detail/363232"/>
-    <id>urn:funding-finder:grants-gov:363232</id>
-    <updated>2026-10-27T00:00:00Z</updated>
-    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <summary>Centers for Disease Control and Prevention - ERA | Estimated Application 2027-01-26 | Background: Despite advances in technology and improvements in work environments, mining remains one of the most challenging and hazardous occupations in the United States. The industry continues to experience a fatality rate nearly three times higher than the national average for all industries, according to the U.S. Bureau of Labor Statistics (BLS). Public MSHA data show that in 2025, the U.S. m…</summary>
-  </entry>
-  <entry>
-    <title>Climate Program Office FY 2027 - Super Intelligence/Machine Learning Innovation to Advance NOAA's Earth System Science and Support Hazard Resilience</title>
-    <link href="https://www.grants.gov/search-results-detail/364160"/>
-    <id>urn:funding-finder:grants-gov:364160</id>
-    <updated>2026-10-27T00:00:00Z</updated>
-    <author><name>DOC NOAA - ERA Production</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Environmental science"/>
-    <category term="Technology development"/>
-    <category term="Transportation"/>
-    <category term="Data science"/>
-    <summary>DOC NOAA - ERA Production | Application 2027-02-09 | verify prerequisite | Through this Notice of Federal Funding Opportunity, the NOAA Climate Program Office (https://cpo.noaa.gov/funding-opportunities/) is soliciting proposals for a FY 2027 grants competition focused on Super Intelligence/Machine Learning Innovation to Advance NOAA's Earth System Science and Support Hazard Resilience. The NOAA Office of Oceanic and Atmospheric Research (OAR), or "NOAA Research," provid…</summary>
   </entry>
 </feed>
