@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/neuroscience.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/neuroscience.xml</id>
-  <updated>2026-11-06T17:36:44Z</updated>
+  <updated>2026-11-07T16:34:52Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIH Stroke Clinical Trials Network (StrokeNet) Infrastructure - National Coordinating Center (NCC) and National Data Management Center (NDMC)</title>
@@ -475,16 +475,6 @@ we will not consider for support include Covid-19 relat…</summary>
     <summary>National Institutes of Health | Application 2027-10-04 | This funding announcement, issued by the Brain Research through Advancing Innovative Neurotechnologies® (BRAIN) Initiative, seeks transformative, cutting-edge, and innovative research that embraces new technologies, ideas, and approaches to understand brain circuit function and contributions to behavior. It is a component of the BRAIN Initiative Connectivity Across Scales (BRAIN CONNECTS) Program,…</summary>
   </entry>
   <entry>
-    <title>Functional Target Validation for Alzheimer's Disease-Related Dementias</title>
-    <link href="https://www.grants.gov/search-results-detail/361450"/>
-    <id>urn:funding-finder:grants-gov:361450</id>
-    <updated>2026-05-05T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Neuroscience"/>
-    <category term="Transportation"/>
-    <summary>National Institutes of Health | Estimated Application 2026-11-06 | The National Institute of Neurological Disorders and Stroke (NINDS) is interested in supporting ambitious research projects that propose comprehensive functional validation of newly identified therapeutic target candidates for Alzheimer’s Disease-Related Dementias (ADRD). A major barrier to the development of effective treatments for ADRD, as well as other complex central nervous system disorders,…</summary>
-  </entry>
-  <entry>
     <title>BRAIN Initiative: Exploratory Research Opportunities Using Invasive Neural Recording and Stimulating Technologies in the Human Brain (R61 Clinical Trial Not Allowed)</title>
     <link href="https://www.grants.gov/search-results-detail/359649"/>
     <id>urn:funding-finder:grants-gov:359649</id>
@@ -647,5 +637,15 @@ we will not consider for support include Covid-19 relat…</summary>
     <category term="Neuroscience"/>
     <category term="Technology development"/>
     <summary>National Institutes of Health | Application 2027-05-07 | The purpose of this funding opportunity is to encourage multidisciplinary investigators to submit applications developing exploratory, highly novel new approaches, or innovative applications of existing approaches to measure brain activity, connectivity, genomics, or other aspects across the age spectrum of neurodevelopment. The overarching goal is to extend our understanding of brain development …</summary>
+  </entry>
+  <entry>
+    <title>Seamless Early-Stage Clinical Drug Development (Phase 1 to 2a) for Novel therapeutic Agents for the Spectrum of Alzheimer's Disease (AD) and AD-related Dementias (ADRD) (UG3/UH3 Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/357343"/>
+    <id>urn:funding-finder:grants-gov:357343</id>
+    <updated>2024-11-22T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Neuroscience"/>
+    <summary>National Institutes of Health | Application 2026-11-19 | The purpose of this Notice of Funding Opportunity (NOFO) is to invite applications that bundle independent protocols for phase 1 clinical trials with phase 1b/phase 2a clinical trials to streamline the early-stage evaluation of promising pharmacological interventions for Alzheimer's disease (AD) and Alzheimer's disease-related Dementias (ADRD). Candidate interventions evaluated through this progra…</summary>
   </entry>
 </feed>

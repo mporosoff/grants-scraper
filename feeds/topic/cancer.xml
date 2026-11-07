@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/cancer.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/cancer.xml</id>
-  <updated>2026-11-06T17:36:44Z</updated>
+  <updated>2026-11-07T16:34:52Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Advanced Development and Sustainment of Informatics Technologies for Cancer Research and Management (U24 Clinical Trial Optional)</title>
@@ -614,20 +614,6 @@ a high level of innovation and creativity. The goal is to support the best young
     <summary>National Institutes of Health | Application 2027-10-08 | This Funding Opportunity Announcement (FOA) encourages the submission of applications that propose to advance research in cancer etiology and early detection biomarkers, utilizing the advantages of the unique biorepository resources of the NCI-sponsored Prostate, Lung, Colorectal, and Ovarian Cancer (PLCO) Screening Trial. The PLCO Biorepository offers high-quality, prospectively collected, serial…</summary>
   </entry>
   <entry>
-    <title>Secondary Analysis and Integration of Existing Data to Elucidate Cancer Risk and Related Outcomes (R01 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/357204"/>
-    <id>urn:funding-finder:grants-gov:357204</id>
-    <updated>2024-11-18T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Cancer"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Public health"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health | Application 2026-11-06 | Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) along with other participating Institutes encourages submission of applications proposing to conduct secondary data analysis and integration of existing datasets and database resources, with the ultimate aim to elucidate cancer risk and related outcomes (e.g., risk prediction or reduction, survival, or response …</summary>
-  </entry>
-  <entry>
     <title>Secondary Analysis and Integration of Existing Data to Elucidate Cancer Risk and Related Outcomes (R21 Clinical Trials Not Allowed)</title>
     <link href="https://www.grants.gov/search-results-detail/357205"/>
     <id>urn:funding-finder:grants-gov:357205</id>
@@ -645,6 +631,16 @@ a high level of innovation and creativity. The goal is to support the best young
     <title>Mechanisms that Impact Cancer Risk with Use of Incretin Mimetics (R01 Clinical Trial Optional)</title>
     <link href="https://www.grants.gov/search-results-detail/357202"/>
     <id>urn:funding-finder:grants-gov:357202</id>
+    <updated>2024-11-18T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Cancer"/>
+    <category term="Education and workforce"/>
+    <summary>National Institutes of Health | Application 2027-01-07 | The goal of the proposed funding announcement is twofold, to promote preclinical and patient based studies examining the mechanism(s) through which incretin mimetics (including agonists or antagonists of GLP-1, GIP-1, or dual GLP-1/GIP-1 agents) impact cancer risk, and to draw talented scientists who understand the dynamic changes caused by these agents to investigate the mechanisms of how these a…</summary>
+  </entry>
+  <entry>
+    <title>Mechanisms that Impact Cancer Risk with Use of Incretin Mimetics (R21 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/357203"/>
+    <id>urn:funding-finder:grants-gov:357203</id>
     <updated>2024-11-18T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <category term="Cancer"/>
