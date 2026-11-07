@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml</id>
-  <updated>2026-11-06T17:36:44Z</updated>
+  <updated>2026-11-07T16:34:52Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Single Source: Scalable and Systematic Neurobiology of Psychiatric and Neurodevelopmental Disorder Risk Genes: Data Resource and Administrative Coordination Center (U24 Clinical Trial Not Allowed)</title>
@@ -97,6 +97,18 @@
     <category term="Technology development"/>
     <category term="Transportation"/>
     <summary>Centers for Disease Control and Prevention - ERA | Estimated Application 2027-02-26 | PURPOSENIOSH intends to support the Centers of Excellence in Total Worker Health® (TWH). These Centers will conduct rigorous research and translation activities to prevent harmful exposures, improve working conditions, and advance worker well-being. The Centers will develop practical, scalable solutions for employers and workers. All projects must use the NIOSH Worker Well-Being Questionnaire (Wel…</summary>
+  </entry>
+  <entry>
+    <title>Major Research Instrumentation Program: (MRI)</title>
+    <link href="https://www.grants.gov/search-results-detail/364243"/>
+    <id>urn:funding-finder:grants-gov:364243</id>
+    <updated>2026-11-06T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Education and workforce"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Energy"/>
+    <summary>U.S. National Science Foundation | Application 2027-01-29 | The Major Research Instrumentation (MRI) Program (MRI Website) increases access to multi-user scientific and engineering instrumentation for research and training in the operation of the proposed equipment. An MRI award supports the acquisition of a multi-user research instrument through direct purchase from a vendor, or for the personnel and components required to develop an instrument with new c…</summary>
   </entry>
   <entry>
     <title>Cooperative Agreement for affiliated Partner with Chesapeake Watershed Cooperative Ecosystem Studies Unit</title>
@@ -733,17 +745,5 @@
     <category term="Data science"/>
     <summary>Alfred P. Sloan Foundation | Posted | The Sloan Research Fellowship Program recognizes and rewards outstanding early-career faculty who have the potential to revolutionize their fields of study.
 Successful candidates for a Fellowship generally have a strong record of significant independent research accomplishments that demonstrate creativity and the potential to become future leaders in the scientific community. While Fellows are exp…</summary>
-  </entry>
-  <entry>
-    <title>U.S. National Science Foundation State and Regional Artificial Intelligence Infrastructure Hubs:</title>
-    <link href="https://www.grants.gov/search-results-detail/363481"/>
-    <id>urn:funding-finder:grants-gov:363481</id>
-    <updated>2026-08-06T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Education and workforce"/>
-    <category term="Data science"/>
-    <category term="Cybersecurity"/>
-    <summary>U.S. National Science Foundation | Application 2027-11-03 | The NSF State and Regional AI Infrastructure Hubs program aims to expand access to the compute required for AI-enabled scientific discovery and to transform the research, education, and training opportunities offered by institutions of higher education. AI Infrastructure Hubs will connect researchers to new compute infrastructure that leverages contributions from state governments, research instit…</summary>
   </entry>
 </feed>

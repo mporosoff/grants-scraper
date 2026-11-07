@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml</id>
-  <updated>2026-11-06T17:36:44Z</updated>
+  <updated>2026-11-07T16:34:52Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>ancient DNA for Modern Genomics (aDMG) Research Projects (U01 Clinical Trials Not Allowed)</title>
@@ -133,6 +133,18 @@
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
     <summary>National Institutes of Health | Estimated Application 2027-01-29 | The National Institute of Environmental Health Sciences (NIEHS) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for research coordination and data support for the Health and Extreme Weather (HEW) initiative. This solicitation will include two closely aligned components: research coordination and data support. The coordinating component will be responsible for faci…</summary>
+  </entry>
+  <entry>
+    <title>Major Research Instrumentation Program: (MRI)</title>
+    <link href="https://www.grants.gov/search-results-detail/364243"/>
+    <id>urn:funding-finder:grants-gov:364243</id>
+    <updated>2026-11-06T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Education and workforce"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Energy"/>
+    <summary>U.S. National Science Foundation | Application 2027-01-29 | The Major Research Instrumentation (MRI) Program (MRI Website) increases access to multi-user scientific and engineering instrumentation for research and training in the operation of the proposed equipment. An MRI award supports the acquisition of a multi-user research instrument through direct purchase from a vendor, or for the personnel and components required to develop an instrument with new c…</summary>
   </entry>
   <entry>
     <title>Cooperative Agreement for affiliated Partner with Chesapeake Watershed Cooperative Ecosystem Studies Unit</title>
@@ -739,17 +751,5 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <summary>Advanced Research Projects Agency for Health (ARPA-H) | Application 2026-11-10 | prerequisite closed | Current ARPA-H program. FASTPASS | ARPA-H (function(w, d, s, l, i){w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&amp;l='+l:''; j.async=true; j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j, f); })(window, document,'script','dataLayer','GTM-W5GM3DT9'); wi…</summary>
-  </entry>
-  <entry>
-    <title>NSF Plasma Physics</title>
-    <link href="https://beta.nsf.gov/funding/opportunities/plasma-physics"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-bd193799390f4580</id>
-    <updated>2026-08-14T00:00:00Z</updated>
-    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <category term="Materials science"/>
-    <category term="Energy"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Application 2026-11-16</summary>
   </entry>
 </feed>

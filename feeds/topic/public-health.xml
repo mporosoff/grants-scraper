@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/public-health.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/public-health.xml</id>
-  <updated>2026-11-06T17:36:44Z</updated>
+  <updated>2026-11-07T16:34:52Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Public Health Nursing</title>
@@ -634,13 +634,13 @@
     <summary>National Institutes of Health | Estimated Application 2027-01-11 | Through this Notice of Funding Opportunity (NOFO), the participating NIH Institutes, Centers, and Offices (ICOs) encourage pursuit of the NIH’s mission through the submission of investigator-initiated Specialized Center (P50) applications. With this Parent P50 NOFO, the NIH ICOs intend to support a broadly based, multidisciplinary, often long-term research program with a specific major scientific …</summary>
   </entry>
   <entry>
-    <title>Healthy Tomorrows Partnership for Children Program (HTPCP)</title>
-    <link href="https://www.grants.gov/search-results-detail/363533"/>
-    <id>urn:funding-finder:grants-gov:363533</id>
+    <title>Women's Initiative for Screening and Health (WISH)</title>
+    <link href="https://www.grants.gov/search-results-detail/363546"/>
+    <id>urn:funding-finder:grants-gov:363546</id>
     <updated>2026-11-06T00:00:00Z</updated>
     <author><name>Health Resources and Services Administration</name></author>
-    <category term="Education and workforce"/>
     <category term="Public health"/>
-    <summary>Health Resources and Services Administration | Estimated Application 2027-01-20 | The purpose of the Healthy Tomorrows Partnership for Children Program (HTPCP) is to support community-based projects that promote access to preventive clinical and public health services for children. The projects should address mental health, nutrition/health education, and/or physical activity to improve childhood chronic disease prevention in rural areas and communities with limited access to c…</summary>
+    <category term="Cybersecurity"/>
+    <summary>Health Resources and Services Administration | Application 2027-01-08 | The purpose of Women's Initiative for Screening and Health (WISH) is to improve women’s health across the lifespan by increasing access to and availability of preventive health services. Through a multidisciplinary coalition of healthcare providers, academic institutions, and patient-centered organizations, WISH drives a comprehensive strategy to: (1) review and recommend evidence-based updates to…</summary>
   </entry>
 </feed>

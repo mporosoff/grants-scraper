@@ -4,8 +4,30 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/energy.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/energy.xml</id>
-  <updated>2026-11-06T17:36:44Z</updated>
+  <updated>2026-11-07T16:34:52Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>Strengthening Moldova’s Energy and Trade Security</title>
+    <link href="https://www.grants.gov/search-results-detail/364240"/>
+    <id>urn:funding-finder:grants-gov:364240</id>
+    <updated>2026-11-06T00:00:00Z</updated>
+    <author><name>Bureau of European and Eurasian Affairs</name></author>
+    <category term="Energy"/>
+    <category term="Cybersecurity"/>
+    <summary>Bureau of European and Eurasian Affairs | Application 2026-12-06 | The Bureau of European and Eurasian Affairs, Office of the Coordinator of U.S. Assistance to Europe, Eurasia, and Central Asia (EUR/ACE) of the U.S. Department of State announces an open competition for organizations to submit a statement of interest (SOI) to carry out a project (or projects) to drive economic opportunities for U.S. energy, logistics, and infrastructure businesses and investors in…</summary>
+  </entry>
+  <entry>
+    <title>Major Research Instrumentation Program: (MRI)</title>
+    <link href="https://www.grants.gov/search-results-detail/364243"/>
+    <id>urn:funding-finder:grants-gov:364243</id>
+    <updated>2026-11-06T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Education and workforce"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Energy"/>
+    <summary>U.S. National Science Foundation | Application 2027-01-29 | The Major Research Instrumentation (MRI) Program (MRI Website) increases access to multi-user scientific and engineering instrumentation for research and training in the operation of the proposed equipment. An MRI award supports the acquisition of a multi-user research instrument through direct purchase from a vendor, or for the personnel and components required to develop an instrument with new c…</summary>
+  </entry>
   <entry>
     <title>Cooperative Agreement for affiliated Partner with Californian Cooperative Ecosystem Studies Unit</title>
     <link href="https://www.grants.gov/search-results-detail/364235"/>
@@ -676,28 +698,5 @@
     <category term="Quantum science"/>
     <category term="Energy"/>
     <summary>VPR funding digest (limited submissions &amp; foundations) | Posted</summary>
-  </entry>
-  <entry>
-    <title>Accelerating Scale-up and Pre-piloting of Emerging Chemical Technologies (ASPECT)</title>
-    <link href="https://www.grants.gov/search-results-detail/363815"/>
-    <id>urn:funding-finder:grants-gov:363815</id>
-    <updated>2026-09-04T00:00:00Z</updated>
-    <author><name>Golden Field Office</name></author>
-    <category term="Energy"/>
-    <category term="Manufacturing"/>
-    <category term="Carbon management"/>
-    <category term="Climate change"/>
-    <category term="Materials science"/>
-    <summary>Golden Field Office | Application 2026-12-01 | prerequisite closed | Modification 000002: Updated Appendix A and the definition of “Construction and demolition waste”, also denoted as “C&amp;D Waste”, to align with the programmatic authorizing statute for the Alternative Fuels and Feedstocks Office listed in NOFO Part 1, Section III.G. Statutory Authority. • “Construction and demolition waste,” for the purposes of this NOFO and consistent with the statutory authorities…</summary>
-  </entry>
-  <entry>
-    <title>ROSES 2025: A.17 Hydrosphere</title>
-    <link href="https://www.grants.gov/search-results-detail/363789"/>
-    <id>urn:funding-finder:grants-gov:363789</id>
-    <updated>2026-09-02T00:00:00Z</updated>
-    <author><name>NASA Headquarters</name></author>
-    <category term="Energy"/>
-    <category term="Space and aeronautics"/>
-    <summary>NASA Headquarters | Application 2027-01-28 | The close date above is the date for the Step-2 proposal due date. The Step-1 proposal due date is October 8, 2026. Step-2 proposals cannot be submitted if a Step-1 proposal was not submitted. ﻿NOTICE: September 18, 2026. Several corrections have been made: (1) Information about the 2027-2028 winter field campaign has been updated in Section 5, (2) Details on the redacted and anonymized budget req…</summary>
   </entry>
 </feed>

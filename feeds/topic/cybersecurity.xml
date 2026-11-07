@@ -4,8 +4,28 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml</id>
-  <updated>2026-11-06T17:36:44Z</updated>
+  <updated>2026-11-07T16:34:52Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>Strengthening Moldova’s Energy and Trade Security</title>
+    <link href="https://www.grants.gov/search-results-detail/364240"/>
+    <id>urn:funding-finder:grants-gov:364240</id>
+    <updated>2026-11-06T00:00:00Z</updated>
+    <author><name>Bureau of European and Eurasian Affairs</name></author>
+    <category term="Energy"/>
+    <category term="Cybersecurity"/>
+    <summary>Bureau of European and Eurasian Affairs | Application 2026-12-06 | The Bureau of European and Eurasian Affairs, Office of the Coordinator of U.S. Assistance to Europe, Eurasia, and Central Asia (EUR/ACE) of the U.S. Department of State announces an open competition for organizations to submit a statement of interest (SOI) to carry out a project (or projects) to drive economic opportunities for U.S. energy, logistics, and infrastructure businesses and investors in…</summary>
+  </entry>
+  <entry>
+    <title>Women's Initiative for Screening and Health (WISH)</title>
+    <link href="https://www.grants.gov/search-results-detail/363546"/>
+    <id>urn:funding-finder:grants-gov:363546</id>
+    <updated>2026-11-06T00:00:00Z</updated>
+    <author><name>Health Resources and Services Administration</name></author>
+    <category term="Public health"/>
+    <category term="Cybersecurity"/>
+    <summary>Health Resources and Services Administration | Application 2027-01-08 | The purpose of Women's Initiative for Screening and Health (WISH) is to improve women’s health across the lifespan by increasing access to and availability of preventive health services. Through a multidisciplinary coalition of healthcare providers, academic institutions, and patient-centered organizations, WISH drives a comprehensive strategy to: (1) review and recommend evidence-based updates to…</summary>
+  </entry>
   <entry>
     <title>FY 2027 Crash Causal Factors Program</title>
     <link href="https://www.grants.gov/search-results-detail/364171"/>
@@ -269,7 +289,7 @@
     <category term="Biology and biotechnology"/>
     <category term="Energy"/>
     <category term="Cybersecurity"/>
-    <summary>National Institute of Food and Agriculture | Application 2026-12-31 | The AFRI Foundational and Applied Science Program supports grants in six AFRI priority areas to advance knowledge in both fundamental and applied sciences important to agriculture. The six priority areas are: Plant Health and Production and Plant Products; Animal Health and Production and Animal Products; Food Safety, Nutrition, and Health; Bioenergy, Natural Resources, and Environment; Agricultur…</summary>
+    <summary>National Institute of Food and Agriculture | Application 2026-12-31 | verify prerequisite | The AFRI Foundational and Applied Science Program supports grants in six AFRI priority areas to advance knowledge in both fundamental and applied sciences important to agriculture. The six priority areas are: Plant Health and Production and Plant Products; Animal Health and Production and Animal Products; Food Safety, Nutrition, and Health; Bioenergy, Natural Resources, and Environment; Agricultur…</summary>
   </entry>
   <entry>
     <title>Computer and Information Science and Engineering (CISE): Future Computing Research (Future CoRe)</title>
@@ -466,7 +486,7 @@
     <category term="Data science"/>
     <category term="Energy"/>
     <category term="Cybersecurity"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA | Application 2027-09-30 | verify prerequisite | The USAMRDC’s mission is to provide solutions to medical problems of importance to the American Service Member at home and abroad, as well as to the general public at large. The scope of this effort and the priorities attached to specific projects are influenced by changes in military and civilian medical science and technology (S&amp;T), operational requirements, military threat assessments, and nati…</summary>
+    <summary>Defense Health Agency Contracting Activity - DHACA | Application 2027-09-30 | verify prerequisite | The Defense Health Agency (DHA) Science and Technology (S&amp;T) mission is to provide solutions to medical problems of importance to the American Service Member at home and abroad, as well as to the general public at large. The scope of this effort and the priorities attached to specific projects are influenced by changes in military and civilian medical science and technology (S&amp;T), operational requ…</summary>
   </entry>
   <entry>
     <title>Department of Defense HIV/AIDS Prevention Program</title>

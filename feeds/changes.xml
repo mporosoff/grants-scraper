@@ -4,8 +4,376 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/changes.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/changes.xml</id>
-  <updated>2026-11-06T17:42:32Z</updated>
+  <updated>2026-11-07T16:40:14Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>Closing soon: NEA Arts and Artifacts Domestic Indemnity Program 1, FY2027 (12/26)</title>
+    <link href="https://www.grants.gov/search-results-detail/362982"/>
+    <id>urn:funding-finder:change:fca149df23b6e13454b7</id>
+    <updated>2026-11-07T16:32:21.594638Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-12-07</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: OVW Fiscal Year 2026 Grants to Tribal Domestic Violence and Sexual Assault Coalitions Program</title>
+    <link href="https://www.grants.gov/search-results-detail/364222"/>
+    <id>urn:funding-finder:change:fa6a1d818c7fe04ed93e</id>
+    <updated>2026-11-07T16:32:21.594638Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-12-07</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Cooperative Agreement for affiliated Partner with Rocky Mountain Cooperative Ecosystem Studies Unit</title>
+    <link href="https://www.grants.gov/search-results-detail/364237"/>
+    <id>urn:funding-finder:change:f7b0b7137131d3ad518d</id>
+    <updated>2026-11-07T16:32:21.594638Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-12-07</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: Secondary Analysis and Integration of Existing Data to Elucidate Cancer Risk and Related Outcomes (R01 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/357204"/>
+    <id>urn:funding-finder:change:f4c188e9fdfb3a53b396</id>
+    <updated>2026-11-07T16:32:21.594638Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Cooperative Agreement for affiliated Partner with Great Rivers Cooperative Ecosystem Studies Unit</title>
+    <link href="https://www.grants.gov/search-results-detail/364234"/>
+    <id>urn:funding-finder:change:f3496a170cbfed5bb552</id>
+    <updated>2026-11-07T16:32:21.594638Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-12-07</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: DoW Parkinson’s, Investigator-Initiated Research Award</title>
+    <link href="https://www.grants.gov/search-results-detail/362868"/>
+    <id>urn:funding-finder:change:f3269d189e8d7c67e0f9</id>
+    <updated>2026-11-07T16:32:21.594638Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Strengthening Moldova’s Energy and Trade Security</title>
+    <link href="https://www.grants.gov/search-results-detail/364240"/>
+    <id>urn:funding-finder:change:f1769edd5d30c1035f39</id>
+    <updated>2026-11-07T16:32:21.594638Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-12-06</summary>
+  </entry>
+  <entry>
+    <title>New opportunity: Women's Initiative for Screening and Health (WISH)</title>
+    <link href="https://www.grants.gov/search-results-detail/363546"/>
+    <id>urn:funding-finder:change:f11a5d0abf69bcf2964b</id>
+    <updated>2026-11-07T16:32:21.594638Z</updated>
+    <category term="new"/>
+    <summary>First appeared in the public catalog</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: MPPEP Phase 3 Invasive Wild-Caught Catfish</title>
+    <link href="https://www.grants.gov/search-results-detail/363804"/>
+    <id>urn:funding-finder:change:e79115c008db189be7e5</id>
+    <updated>2026-11-07T16:32:21.594638Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-12-07</summary>
+  </entry>
+  <entry>
+    <title>Deadline changed: NIH Research Project Grant (Parent R01 Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/357813"/>
+    <id>urn:funding-finder:change:e3f6029e5503a94abbf5</id>
+    <updated>2026-11-07T16:32:21.594638Z</updated>
+    <category term="deadline_changed"/>
+    <summary>2028-01-07 → 2027-02-05</summary>
+  </entry>
+  <entry>
+    <title>Opportunity amended: Silcon Carbide Cladding Lead Test Rod Development-Phase 1</title>
+    <link href="https://www.grants.gov/search-results-detail/364026"/>
+    <id>urn:funding-finder:change:e337714a3264a2857e38</id>
+    <updated>2026-11-07T16:32:21.594638Z</updated>
+    <category term="amended"/>
+    <summary>Official source record changed</summary>
+  </entry>
+  <entry>
+    <title>Opportunity amended: Fiscal Year (FY) 2027 Department of War Multidisciplinary Research Program of the University Research Initiative (MURI)</title>
+    <link href="https://www.grants.gov/search-results-detail/363906"/>
+    <id>urn:funding-finder:change:d6e6a95802e1addf3785</id>
+    <updated>2026-11-07T16:32:21.594638Z</updated>
+    <category term="amended"/>
+    <summary>Official source record changed</summary>
+  </entry>
+  <entry>
+    <title>Opportunity amended: APEX Accelerator-Option Period for Existing Award Recipients</title>
+    <link href="https://www.grants.gov/search-results-detail/364213"/>
+    <id>urn:funding-finder:change:cfa1cfdf67c0819ebe8e</id>
+    <updated>2026-11-07T16:32:21.594638Z</updated>
+    <category term="amended"/>
+    <summary>Official source record changed</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Cooperative Agreement for affiliated Partner with Great Basin Cooperative Ecosystem Studies Unit</title>
+    <link href="https://www.grants.gov/search-results-detail/364228"/>
+    <id>urn:funding-finder:change:cc2ffda5161b1454f6b2</id>
+    <updated>2026-11-07T16:32:21.594638Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-12-07</summary>
+  </entry>
+  <entry>
+    <title>Opportunity amended: DOD Defense Health Agency (DHA) Research &amp; Development FY23-FY27 BROAD AGENCY ANNOUNCEMENT for Extramural Medical Research</title>
+    <link href="https://www.grants.gov/search-results-detail/343725"/>
+    <id>urn:funding-finder:change:c9b6519f7715c0ff10d7</id>
+    <updated>2026-11-07T16:32:21.594638Z</updated>
+    <category term="amended"/>
+    <summary>Official source record changed</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Limited Competition: Supporting Programs to Advance Research Knowledge in Environmental Health Sciences (SPARK-EHS) (UE5/T32 - Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/362977"/>
+    <id>urn:funding-finder:change:c8c0d9281404385171de</id>
+    <updated>2026-11-07T16:32:21.594638Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-12-07</summary>
+  </entry>
+  <entry>
+    <title>New opportunity: Major Research Instrumentation Program: (MRI)</title>
+    <link href="https://www.grants.gov/search-results-detail/364243"/>
+    <id>urn:funding-finder:change:c79d623f7fc6cc2a0900</id>
+    <updated>2026-11-07T16:32:21.594638Z</updated>
+    <category term="new"/>
+    <summary>First appeared in the public catalog</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Cooperative Agreement for affiliated Partner with Alaska Cooperative Ecosystem Studies Unit</title>
+    <link href="https://www.grants.gov/search-results-detail/364239"/>
+    <id>urn:funding-finder:change:c546ea6bf58840c859e0</id>
+    <updated>2026-11-07T16:32:21.594638Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-12-07</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Advanced Rehabilitation Research Training (ARRT) Program - Employment</title>
+    <link href="https://www.grants.gov/search-results-detail/363964"/>
+    <id>urn:funding-finder:change:be77dc6c9c1178ec83f0</id>
+    <updated>2026-11-07T16:32:21.594638Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-12-07</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: Fiscal Year (FY) 2027 Department of War (DoW) Defense University Research Instrumentation Program (DURIP)</title>
+    <link href="https://www.grants.gov/search-results-detail/363378"/>
+    <id>urn:funding-finder:change:bd7febdecb62f8348c40</id>
+    <updated>2026-11-07T16:32:21.594638Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Opportunity amended: National Science Foundation Translation to Practice (NSF TTP)</title>
+    <link href="https://www.grants.gov/search-results-detail/359966"/>
+    <id>urn:funding-finder:change:bc5546c366c70c3ccda0</id>
+    <updated>2026-11-07T16:32:21.594638Z</updated>
+    <category term="amended"/>
+    <summary>Official source record changed</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Advanced Rehabilitation Research Training (ARRT) Program - Health and Function</title>
+    <link href="https://www.grants.gov/search-results-detail/363965"/>
+    <id>urn:funding-finder:change:b57b325f752457977a87</id>
+    <updated>2026-11-07T16:32:21.594638Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-12-07</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: Fiscal Year (FY) 2027 Department of War (DoW) Defense University Research Instrumentation Program (DURIP)</title>
+    <link href="https://www.grants.gov/search-results-detail/363379"/>
+    <id>urn:funding-finder:change:aebbc7dfb5ebd7b61939</id>
+    <updated>2026-11-07T16:32:21.594638Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: BJA FY 2026 Byrne State Crisis Intervention Formula Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363725"/>
+    <id>urn:funding-finder:change:ade6b7a01d9b0d94cf1f</id>
+    <updated>2026-11-07T16:32:21.594638Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: BJA FY 2026 John R. Justice (JRJ) Formula Grant Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363957"/>
+    <id>urn:funding-finder:change:ac2f2ceaf899b5a6e6b9</id>
+    <updated>2026-11-07T16:32:21.594638Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Cooperative Agreement for affiliated Partner with Rocky Mountain Cooperative Ecosystem Studies Unit</title>
+    <link href="https://www.grants.gov/search-results-detail/364226"/>
+    <id>urn:funding-finder:change:a7baecf0ad5a2ac0f0a1</id>
+    <updated>2026-11-07T16:32:21.594638Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-12-07</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Cooperative Agreement for affiliated Partner with Great Rivers Cooperative Ecosystem Studies Unit</title>
+    <link href="https://www.grants.gov/search-results-detail/364233"/>
+    <id>urn:funding-finder:change:a79adc8508be79bdce7b</id>
+    <updated>2026-11-07T16:32:21.594638Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-12-07</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: BJA FY 2026 Tribal Civil and Criminal Legal Assistance</title>
+    <link href="https://www.grants.gov/search-results-detail/364036"/>
+    <id>urn:funding-finder:change:9f3eeaac4c6c9710bb86</id>
+    <updated>2026-11-07T16:32:21.594638Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: ROSES25: A.15 Biosphere</title>
+    <link href="https://www.grants.gov/search-results-detail/363241"/>
+    <id>urn:funding-finder:change:9dde8615e82cce7f3897</id>
+    <updated>2026-11-07T16:32:21.594638Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Cooperative Agreement for affiliated Partner with Californian Cooperative Ecosystem Studies Unit</title>
+    <link href="https://www.grants.gov/search-results-detail/364235"/>
+    <id>urn:funding-finder:change:9b642f391a377caa13cf</id>
+    <updated>2026-11-07T16:32:21.594638Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-12-07</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Cooperative Agreement for affiliated Partner with Colorado Plateau Cooperative Ecosystem Studies Unit</title>
+    <link href="https://www.grants.gov/search-results-detail/364238"/>
+    <id>urn:funding-finder:change:99c1bed56b06bf48d5a4</id>
+    <updated>2026-11-07T16:32:21.594638Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-12-07</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Cooperative Agreement for affiliated Partner with Chesapeake Watershed Cooperative Ecosystem Studies Unit</title>
+    <link href="https://www.grants.gov/search-results-detail/364229"/>
+    <id>urn:funding-finder:change:973b4fcf6962eb85c1fd</id>
+    <updated>2026-11-07T16:32:21.594638Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-12-07</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Cooperative Agreement for affiliated Partner with Great Rivers Cooperative Ecosystem Studies Unit</title>
+    <link href="https://www.grants.gov/search-results-detail/364230"/>
+    <id>urn:funding-finder:change:908aa06570b47a491706</id>
+    <updated>2026-11-07T16:32:21.594638Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-12-07</summary>
+  </entry>
+  <entry>
+    <title>Opportunity amended: NIJ FY 2026 Research and Evaluation on Drones as First Responders</title>
+    <link href="https://www.grants.gov/search-results-detail/364139"/>
+    <id>urn:funding-finder:change:8c95e8cb0e311de77582</id>
+    <updated>2026-11-07T16:32:21.594638Z</updated>
+    <category term="amended"/>
+    <summary>Official source record changed</summary>
+  </entry>
+  <entry>
+    <title>New opportunity: Strengthening Moldova’s Energy and Trade Security</title>
+    <link href="https://www.grants.gov/search-results-detail/364240"/>
+    <id>urn:funding-finder:change:87b228f54d4085350339</id>
+    <updated>2026-11-07T16:32:21.594638Z</updated>
+    <category term="new"/>
+    <summary>First appeared in the public catalog</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: FY26 DRL/IRF Global Request for Statements of Interest</title>
+    <link href="https://www.grants.gov/search-results-detail/364149"/>
+    <id>urn:funding-finder:change:41dd7dad1090e8f22e22</id>
+    <updated>2026-11-07T16:32:21.594638Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-12-07</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Cooperative Agreement for affiliated Partner with Hawai-Pacific Islands (HPI) Cooperative Ecosystem Studies Unit</title>
+    <link href="https://www.grants.gov/search-results-detail/364236"/>
+    <id>urn:funding-finder:change:3c3963e344aa83e1632b</id>
+    <updated>2026-11-07T16:32:21.594638Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-12-07</summary>
+  </entry>
+  <entry>
+    <title>Opportunity amended: NIH Research Project Grant (Parent R01 Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/357813"/>
+    <id>urn:funding-finder:change:381bc14ca3276a529f72</id>
+    <updated>2026-11-07T16:32:21.594638Z</updated>
+    <category term="amended"/>
+    <summary>Official source record changed</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Advanced Rehabilitation Research Training (ARRT) Program - Community Living and Participation</title>
+    <link href="https://www.grants.gov/search-results-detail/363963"/>
+    <id>urn:funding-finder:change:35fa7b5e8529d76eacc8</id>
+    <updated>2026-11-07T16:32:21.594638Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-12-07</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: DoW Parkinson’s, Early Investigator Research Award</title>
+    <link href="https://www.grants.gov/search-results-detail/362866"/>
+    <id>urn:funding-finder:change:2c9f45050a49db91c3d5</id>
+    <updated>2026-11-07T16:32:21.594638Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Cooperative Agreement for affiliated Partner with Great Lakes Northern Forest Cooperative Ecosystem Studies Unit</title>
+    <link href="https://www.grants.gov/search-results-detail/364227"/>
+    <id>urn:funding-finder:change:2b8d9d634375378e56ca</id>
+    <updated>2026-11-07T16:32:21.594638Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-12-07</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Silcon Carbide Cladding Lead Test Rod Development-Phase 1</title>
+    <link href="https://www.grants.gov/search-results-detail/364026"/>
+    <id>urn:funding-finder:change:2961b7b1f79d0f3505b5</id>
+    <updated>2026-11-07T16:32:21.594638Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-12-07</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: Limited Competition for the Continuation of the Caring for OutPatiEnts after Acute Kidney Injury (COPE-AKI) Clinical Centers (U01 Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/360679"/>
+    <id>urn:funding-finder:change:19cb64b7958f33ccea12</id>
+    <updated>2026-11-07T16:32:21.594638Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: Fiscal Year 2027 Defense University Research Instrumentation Program (DURIP)</title>
+    <link href="https://www.grants.gov/search-results-detail/363374"/>
+    <id>urn:funding-finder:change:12fd6b6e2eb44607bae2</id>
+    <updated>2026-11-07T16:32:21.594638Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: Functional Target Validation for Alzheimer's Disease-Related Dementias</title>
+    <link href="https://www.grants.gov/search-results-detail/361450"/>
+    <id>urn:funding-finder:change:03b8b5b2b4d76abe094a</id>
+    <updated>2026-11-07T16:32:21.594638Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: BJA FY 2026 Second Chance Act Improving Reentry Education and Employment Outcomes</title>
+    <link href="https://www.grants.gov/search-results-detail/363637"/>
+    <id>urn:funding-finder:change:020f1af4dcfc942e0386</id>
+    <updated>2026-11-07T16:32:21.594638Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
   <entry>
     <title>New opportunity: Project Rental Assistance Program of Section 811 Supportive Housing for Persons with Disabilities FY 2027</title>
     <link href="https://www.grants.gov/search-results-detail/364220"/>
@@ -1237,373 +1605,5 @@
     <updated>2026-11-02T20:28:07.902626Z</updated>
     <category term="closed_or_removed"/>
     <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: The NIDDK Inflammatory Bowel Disease Genetics Consortium (IBDGC) Genomic Research Centers</title>
-    <link href="https://www.grants.gov/search-results-detail/360621"/>
-    <id>urn:funding-finder:change:2ef87182ea6d2041bc02</id>
-    <updated>2026-11-02T20:28:07.902626Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: New NSF MPS funding opportunities for core research programs</title>
-    <link href="https://links-2.govdelivery.com/CL0/https:"/>
-    <id>urn:funding-finder:change:0b84c277ce706278d9ae</id>
-    <updated>2026-11-02T20:28:07.902626Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-12-02</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: Maximizing the Scientific Value of Data Generated by the Environmental Influences on Child Health Outcomes (ECHO) Program: Ruth L. Kirschstein National Research Service Award (NRSA) Individual Postdoctoral Fellowship (F32)</title>
-    <link href="https://www.grants.gov/search-results-detail/359150"/>
-    <id>urn:funding-finder:change:077cac392adc3b65e94f</id>
-    <updated>2026-11-02T20:28:07.902626Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-12-02</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: Cooperative Agreement for affiliated Partner with Chesapeake Watershed Cooperative Ecosystem Studies Unit</title>
-    <link href="https://www.grants.gov/search-results-detail/364184"/>
-    <id>urn:funding-finder:change:fdda22d31262cf86e75b</id>
-    <updated>2026-11-01T21:07:21.809150Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-11-30</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: Infrastructure Innovation for Biological Research (Innovation)</title>
-    <link href="https://www.grants.gov/search-results-detail/347680"/>
-    <id>urn:funding-finder:change:fbece31c31a4d408af7a</id>
-    <updated>2026-11-01T21:07:21.809150Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: Cooperative Agreement for affiliated Partner with the Chesapeake Watershed Cooperative Ecosystem Studies Unit</title>
-    <link href="https://www.grants.gov/search-results-detail/364179"/>
-    <id>urn:funding-finder:change:f376ad20aad7ef7e0c15</id>
-    <updated>2026-11-01T21:07:21.809150Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: Cooperative Agreement for affiliated Partner with the Pacific Northwest Cooperative Ecosystem Studies Unit</title>
-    <link href="https://www.grants.gov/search-results-detail/364182"/>
-    <id>urn:funding-finder:change:ed88131557daf617f419</id>
-    <updated>2026-11-01T21:07:21.809150Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: F25AS00332 Highlands Conservation Act - Competitive Funding Round</title>
-    <link href="https://www.grants.gov/search-results-detail/362484"/>
-    <id>urn:funding-finder:change:ece54dc51fa5ee91a85f</id>
-    <updated>2026-11-01T21:07:21.809150Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: Cooperative Agreement for affiliated Partner with Great Basin Cooperative Ecosystem Studies Unit</title>
-    <link href="https://www.grants.gov/search-results-detail/364185"/>
-    <id>urn:funding-finder:change:e0ee39cdaac10a9951b5</id>
-    <updated>2026-11-01T21:07:21.809150Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: New Investigator Grants to Conduct Research to Prevent Interpersonal Violence and Suicide Among Children and Adolescents (K01)</title>
-    <link href="https://www.grants.gov/search-results-detail/363059"/>
-    <id>urn:funding-finder:change:e0c5f1b39a088af5e37c</id>
-    <updated>2026-11-01T21:07:21.809150Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-12-01</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: RESTORE Act Direct Component - Non-Construction Activities</title>
-    <link href="https://www.grants.gov/search-results-detail/356561"/>
-    <id>urn:funding-finder:change:dcb2af78c2e331abc720</id>
-    <updated>2026-11-01T21:07:21.809150Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: Cooperative Agreement for affiliated Partner with the Californian Cooperative Ecosystem Studies Unit</title>
-    <link href="https://www.grants.gov/search-results-detail/364178"/>
-    <id>urn:funding-finder:change:d9c1608cc1853a97deef</id>
-    <updated>2026-11-01T21:07:21.809150Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-11-30</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Small Business Transportation Technical Assistance Center (Region 3)</title>
-    <link href="https://www.grants.gov/search-results-detail/363998"/>
-    <id>urn:funding-finder:change:d35d894aa057ed6091a7</id>
-    <updated>2026-11-01T21:07:21.809150Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: Grid Supply Chain Alternatives to Lead Energy Dominance (SCALED)</title>
-    <link href="https://www.grants.gov/search-results-detail/364174"/>
-    <id>urn:funding-finder:change:d14ef23da1bd1d2e753f</id>
-    <updated>2026-11-01T21:07:21.809150Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: Cooperative Agreement for affiliated Partner with the Great Plains Cooperative Ecosystem Studies Unit</title>
-    <link href="https://www.grants.gov/search-results-detail/364177"/>
-    <id>urn:funding-finder:change:cfb26836636b80bb65c5</id>
-    <updated>2026-11-01T21:07:21.809150Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: Cooperative Agreement for affiliated Partner with the Great Lakes-Northern Forest Cooperative Ecosystem Studies Unit</title>
-    <link href="https://www.grants.gov/search-results-detail/364180"/>
-    <id>urn:funding-finder:change:cf7b659548fda6648425</id>
-    <updated>2026-11-01T21:07:21.809150Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: Simons Foundation: Utilizing the Full Power of Empire AI (2026 RFA)</title>
-    <link href="https://www.simonsfoundation.org/grant/utilizing-the-full-power-of-empire-ai-request-for-applications/?utm_source=Simons"/>
-    <id>urn:funding-finder:change:ce419c798272494e6716</id>
-    <updated>2026-11-01T21:07:21.809150Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-12-01</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Small Business Transportation Technical Assistance Center (Region 1)</title>
-    <link href="https://www.grants.gov/search-results-detail/363996"/>
-    <id>urn:funding-finder:change:cd38a1a440cddda5b0ee</id>
-    <updated>2026-11-01T21:07:21.809150Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: Cooperative Agreement for affiliated Partner with the Californian Cooperative Ecosystem Studies Unit</title>
-    <link href="https://www.grants.gov/search-results-detail/364178"/>
-    <id>urn:funding-finder:change:c9c85262627564df8f32</id>
-    <updated>2026-11-01T21:07:21.809150Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: Restoring Joint Health and Function to Reduce Pain (RE-JOIN) 2.0</title>
-    <link href="https://www.grants.gov/search-results-detail/361186"/>
-    <id>urn:funding-finder:change:c6e3fd86ef79eb3fb3a4</id>
-    <updated>2026-11-01T21:07:21.809150Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-12-01</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: Cooperative Agreement for affiliated Partner with the Great Plains Cooperative Ecosystem Studies Unit</title>
-    <link href="https://www.grants.gov/search-results-detail/364177"/>
-    <id>urn:funding-finder:change:b6f84993f962a3696580</id>
-    <updated>2026-11-01T21:07:21.809150Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-11-30</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: Cooperative Agreement for affiliated Partner with the Pacific Northwest Cooperative Ecosystem Studies Unit</title>
-    <link href="https://www.grants.gov/search-results-detail/364182"/>
-    <id>urn:funding-finder:change:b62ebcfbc563d644e97d</id>
-    <updated>2026-11-01T21:07:21.809150Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-11-30</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: OJP FY 2026 Integrity in American Elections Grant Program</title>
-    <link href="https://www.grants.gov/search-results-detail/364097"/>
-    <id>urn:funding-finder:change:b06b7a69824c4c1a9257</id>
-    <updated>2026-11-01T21:07:21.809150Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-12-01</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: Infrastructure Capacity for Biological Research (Capacity)</title>
-    <link href="https://www.grants.gov/search-results-detail/347679"/>
-    <id>urn:funding-finder:change:abfd6d2eceecf3111f00</id>
-    <updated>2026-11-01T21:07:21.809150Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: Established Program to Stimulate Competitive Research (EPSCoR) Basic Research</title>
-    <link href="https://www.grants.gov/search-results-detail/364188"/>
-    <id>urn:funding-finder:change:a25017851a874a1a8b06</id>
-    <updated>2026-11-01T21:07:21.809150Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: First Responders-Comprehensive Addiction and Recovery Act</title>
-    <link href="https://www.grants.gov/search-results-detail/364173"/>
-    <id>urn:funding-finder:change:9e826026579c4df71827</id>
-    <updated>2026-11-01T21:07:21.809150Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: NSF Small Business Innovation Research / Small Business Technology Transfer Phase I, Phase II, Fast-Track Programs: A Pilot Emphasis on Scientific Instrumentation</title>
-    <link href="https://www.grants.gov/search-results-detail/362551"/>
-    <id>urn:funding-finder:change:9d67aaf962af891dfa5c</id>
-    <updated>2026-11-01T21:07:21.809150Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: Cooperative Agreement for affiliated Partner with the Colorado Plateau Cooperative Ecosystem Studies Unit</title>
-    <link href="https://www.grants.gov/search-results-detail/364181"/>
-    <id>urn:funding-finder:change:983d355b7725e9c841e2</id>
-    <updated>2026-11-01T21:07:21.809150Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: Research Grants to Rigorously Evaluate Innovative and Promising Approaches to Prevent Firearm-Related Violence and Injuries</title>
-    <link href="https://www.grants.gov/search-results-detail/363137"/>
-    <id>urn:funding-finder:change:94ab2fe293d1f873f729</id>
-    <updated>2026-11-01T21:07:21.809150Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-12-01</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: Cooperative Agreement for affiliated Partner with Great Basin Cooperative Ecosystem Studies Unit</title>
-    <link href="https://www.grants.gov/search-results-detail/364183"/>
-    <id>urn:funding-finder:change:948443ac6de4a32f072f</id>
-    <updated>2026-11-01T21:07:21.809150Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-11-30</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: Identify and Evaluate Potential Risk Factors for Amyotrophic Lateral Sclerosis (ALS)</title>
-    <link href="https://www.grants.gov/search-results-detail/363115"/>
-    <id>urn:funding-finder:change:942b91e41b97356030ef</id>
-    <updated>2026-11-01T21:07:21.809150Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-12-01</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: Cooperative Agreement for affiliated Partner with the Great Rivers Cooperative Ecosystem Studies Unit</title>
-    <link href="https://www.grants.gov/search-results-detail/364176"/>
-    <id>urn:funding-finder:change:935f1658d6ede4d4fc05</id>
-    <updated>2026-11-01T21:07:21.809150Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: John H. Prescott Marine Mammal Rescue Assistance Grant</title>
-    <link href="https://www.grants.gov/search-results-detail/363929"/>
-    <id>urn:funding-finder:change:9142e67ab5eb46309139</id>
-    <updated>2026-11-01T21:07:21.809150Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-12-01</summary>
-  </entry>
-  <entry>
-    <title>Status changed: Residential Services for Unaccompanied Alien Children</title>
-    <link href="https://www.grants.gov/search-results-detail/364134"/>
-    <id>urn:funding-finder:change:8dd438e3fc704ee52bb9</id>
-    <updated>2026-11-01T21:07:21.809150Z</updated>
-    <category term="status_changed"/>
-    <summary>forecasted → posted</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: Cooperative Agreement for affiliated Partner with Hawaiʻi-Pacific Islands Cooperative Ecosystem Studies Unit</title>
-    <link href="https://www.grants.gov/search-results-detail/364186"/>
-    <id>urn:funding-finder:change:8d62436855b34c49aa94</id>
-    <updated>2026-11-01T21:07:21.809150Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-11-30</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: Cooperative Agreement for affiliated Partner with the Colorado Plateau Cooperative Ecosystem Studies Unit</title>
-    <link href="https://www.grants.gov/search-results-detail/364181"/>
-    <id>urn:funding-finder:change:80712951851f98f4ff85</id>
-    <updated>2026-11-01T21:07:21.809150Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-11-30</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: WATER RESOURCES RESEARCH ACT PROGRAM NATIONAL COMPETITIVE GRANTS FY2026 (104g General)</title>
-    <link href="https://www.grants.gov/search-results-detail/364012"/>
-    <id>urn:funding-finder:change:7bc95fb44128e0b20b2c</id>
-    <updated>2026-11-01T21:07:21.809150Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: Cooperative Agreement for affiliated Partner with Great Basin Cooperative Ecosystem Studies Unit</title>
-    <link href="https://www.grants.gov/search-results-detail/364183"/>
-    <id>urn:funding-finder:change:791a5a46d32dc2993887</id>
-    <updated>2026-11-01T21:07:21.809150Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: Improving Linkage to Care for People with Opioid Use Disorder (U01)</title>
-    <link href="https://www.grants.gov/search-results-detail/363058"/>
-    <id>urn:funding-finder:change:75c03db81a34e7089bff</id>
-    <updated>2026-11-01T21:07:21.809150Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-12-01</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: CDC National Centers of Excellence in Youth Violence Prevention (YVPCs): Rigorous Evaluation of Prevention Approaches to Prevent and Reduce Youth Violence</title>
-    <link href="https://www.grants.gov/search-results-detail/363055"/>
-    <id>urn:funding-finder:change:736197004d035802b8fd</id>
-    <updated>2026-11-01T21:07:21.809150Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-12-01</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: Cooperative Agreement for affiliated Partner with Chesapeake Watershed Cooperative Ecosystem Studies Unit</title>
-    <link href="https://www.grants.gov/search-results-detail/364184"/>
-    <id>urn:funding-finder:change:6d4bb817cfd0f3278c26</id>
-    <updated>2026-11-01T21:07:21.809150Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: Preventing Suicide and Interpersonal Violence Among Youth and Young Adults</title>
-    <link href="https://www.grants.gov/search-results-detail/363141"/>
-    <id>urn:funding-finder:change:692fd33f023132503a5b</id>
-    <updated>2026-11-01T21:07:21.809150Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-12-01</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: Computational Mathematics</title>
-    <link href="https://www.grants.gov/search-results-detail/278447"/>
-    <id>urn:funding-finder:change:64f5a03f36dad3b1d78a</id>
-    <updated>2026-11-01T21:07:21.809150Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-12-01</summary>
-  </entry>
-  <entry>
-    <title>Deadline changed: Residential Services for Unaccompanied Alien Children</title>
-    <link href="https://www.grants.gov/search-results-detail/364134"/>
-    <id>urn:funding-finder:change:62e2c4d4bd13f8b71448</id>
-    <updated>2026-11-01T21:07:21.809150Z</updated>
-    <category term="deadline_changed"/>
-    <summary>2027-01-12 → 2026-12-29</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Region 4 Small Business Transportation Technical Assistance Center (SBTTAC)</title>
-    <link href="https://www.grants.gov/search-results-detail/364004"/>
-    <id>urn:funding-finder:change:5bb6b4c953d72f9fb00b</id>
-    <updated>2026-11-01T21:07:21.809150Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: Cooperative Agreement for affiliated Partner with Great Basin Cooperative Ecosystem Studies Unit</title>
-    <link href="https://www.grants.gov/search-results-detail/364185"/>
-    <id>urn:funding-finder:change:5a361fa27237d969c47c</id>
-    <updated>2026-11-01T21:07:21.809150Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-11-30</summary>
   </entry>
 </feed>
