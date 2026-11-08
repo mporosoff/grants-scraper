@@ -1,8 +1,782 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-07T16:40:14Z",
+  "generated_at": "2026-11-08T16:48:51Z",
   "retention_days": 90,
   "events": [
+    {
+      "id": "b7551426b813449f3b75",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-11-08T16:45:23.673309Z",
+      "opportunity_id": "nyserda:PON5437",
+      "detail": "Deadline 2026-12-08",
+      "record": {
+        "opportunity_id": "nyserda:PON5437",
+        "opportunity_number": "PON 5437",
+        "title": "Apprenticeship and Pre-apprenticeship Clean Energy Training",
+        "agency": "NYSERDA",
+        "source": "NYSERDA",
+        "source_type": "State",
+        "status": "posted",
+        "posted_date": null,
+        "close_date": "2026-12-08",
+        "deadlines": [
+          {
+            "kind": "application",
+            "date": "2026-12-08",
+            "time": null,
+            "timezone": null,
+            "note": null,
+            "estimated": false,
+            "source": "NYSERDA",
+            "source_url": "https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0r8z000000FOEyAAO",
+            "source_field": "source listing",
+            "confidence": "source_listed"
+          }
+        ],
+        "submission_requirements": [],
+        "next_submission": {
+          "version": 2,
+          "as_of": "2026-11-08",
+          "application_class": "new",
+          "date": "2026-12-08",
+          "event": {
+            "kind": "application",
+            "date": "2026-12-08",
+            "time": null,
+            "timezone": null,
+            "note": null,
+            "estimated": false,
+            "source": "NYSERDA",
+            "source_url": "https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0r8z000000FOEyAAO",
+            "source_field": "source listing",
+            "confidence": "source_listed"
+          },
+          "access": "open",
+          "prerequisites": []
+        },
+        "source_aliases": null,
+        "last_updated": null,
+        "version": null,
+        "topic_areas": [
+          "Education and workforce",
+          "Energy",
+          "Carbon management",
+          "Climate change"
+        ],
+        "disciplines": [],
+        "applicant_types": [],
+        "funding_instruments": [],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0r8z000000FOEyAAO",
+        "funding_opportunity_url": "https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0r8z000000FOEyAAO",
+        "primary_document_url": null
+      },
+      "deadline": "2026-12-08"
+    },
+    {
+      "id": "9c8c8e5916ce35ecc44e",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-11-08T16:45:23.673309Z",
+      "opportunity_id": "361418",
+      "detail": "Deadline 2026-12-08",
+      "record": {
+        "opportunity_id": "361418",
+        "opportunity_number": "USDA-FS-2026-GLRI-CFP",
+        "title": "Great Lakes Restoration Initiative: Community Forest and Open Space Conservation Program",
+        "agency": "Forest Service",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-07-22",
+        "close_date": "2026-12-08",
+        "deadlines": [
+          {
+            "kind": "application",
+            "date": "2026-12-08",
+            "time": "11:59PM",
+            "timezone": "Eastern Time",
+            "note": "11:59PM Eastern Time",
+            "estimated": false,
+            "source": "Grants.gov XML extract",
+            "source_url": "https://www.grants.gov/search-results-detail/361418",
+            "source_field": "CloseDate",
+            "confidence": "official_structured",
+            "detail_checked_at": "2026-07-31T12:17:15.975581Z"
+          }
+        ],
+        "submission_requirements": null,
+        "next_submission": {
+          "version": 2,
+          "as_of": "2026-11-08",
+          "application_class": "new",
+          "date": "2026-12-08",
+          "event": {
+            "kind": "application",
+            "date": "2026-12-08",
+            "time": "11:59PM",
+            "timezone": "Eastern Time",
+            "note": "11:59PM Eastern Time",
+            "estimated": false,
+            "source": "Grants.gov XML extract",
+            "source_url": "https://www.grants.gov/search-results-detail/361418",
+            "source_field": "CloseDate",
+            "confidence": "official_structured",
+            "detail_checked_at": "2026-07-31T12:17:15.975581Z"
+          },
+          "access": "open",
+          "prerequisites": []
+        },
+        "source_aliases": null,
+        "last_updated": "2026-07-27",
+        "version": "Synopsis 4",
+        "topic_areas": [
+          "Community development",
+          "Education and workforce",
+          "Environmental science"
+        ],
+        "disciplines": [
+          "Community and Social Sciences",
+          "Environmental and Life Sciences"
+        ],
+        "applicant_types": [
+          "County governments",
+          "City or township governments",
+          "Federally recognized Native American tribal governments",
+          "Nonprofits with 501(c)(3) status"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": 1000000,
+        "detail_page": "https://www.grants.gov/search-results-detail/361418",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      },
+      "deadline": "2026-12-08"
+    },
+    {
+      "id": "988ff45efe4eeaf88fb8",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-11-08T16:45:23.673309Z",
+      "opportunity_id": "360753",
+      "detail": "Deadline 2026-12-08",
+      "record": {
+        "opportunity_id": "360753",
+        "opportunity_number": "RFA-OH-26-015",
+        "title": "Exploratory/Developmental Grants Related to the World Trade Center Health Program (R21)",
+        "agency": "Centers for Disease Control and Prevention - ERA",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-05-08",
+        "close_date": "2026-12-08",
+        "deadlines": [
+          {
+            "kind": "application",
+            "date": "2026-12-08",
+            "time": "11:59 pm",
+            "timezone": "local time",
+            "note": "December 8, 2026; October 26, 2027. All applications must be submitted no later than 11:59 pm local time of the applicant organization.",
+            "estimated": false,
+            "source": "Grants.gov XML extract",
+            "source_url": "https://www.grants.gov/search-results-detail/360753",
+            "source_field": "CloseDate",
+            "confidence": "official_structured",
+            "detail_checked_at": "2026-10-08T19:04:02.960563Z",
+            "document_evidence_id": "evidence-360753-473b162fe7a7",
+            "document_confidence": "machine_extracted_needs_verification",
+            "document_source_fields": {
+              "stage": {
+                "present": false,
+                "value": null
+              }
+            },
+            "stage": "application"
+          },
+          {
+            "kind": "application",
+            "date": "2026-06-23",
+            "time": null,
+            "timezone": null,
+            "estimated": false,
+            "source": "Official notice (machine extracted)",
+            "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/351906",
+            "confidence": "machine_extracted_needs_verification",
+            "evidence_id": "evidence-360753-0f4fcf19daaf",
+            "required": null,
+            "subject": "submission",
+            "stage": "application",
+            "application_class": "unspecified",
+            "cycle": null,
+            "track": null,
+            "obligation": "unknown",
+            "invitation_required": null,
+            "prerequisite": null,
+            "field_authority": "official_notice_field",
+            "parser_version": "submission-fields-21"
+          },
+          {
+            "kind": "application",
+            "date": "2027-10-26",
+            "time": null,
+            "timezone": null,
+            "estimated": false,
+            "source": "Official notice (machine extracted)",
+            "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/351906",
+            "confidence": "machine_extracted_needs_verification",
+            "evidence_id": "evidence-360753-51eec32b077c",
+            "required": null,
+            "subject": "submission",
+            "stage": "application",
+            "application_class": "unspecified",
+            "cycle": null,
+            "track": null,
+            "obligation": "unknown",
+            "invitation_required": null,
+            "prerequisite": null,
+            "field_authority": "official_notice_field",
+            "parser_version": "submission-fields-21"
+          },
+          {
+            "kind": "letter_of_intent",
+            "date": "2026-05-29",
+            "time": null,
+            "timezone": null,
+            "estimated": false,
+            "source": "Official notice (machine extracted)",
+            "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/351906",
+            "confidence": "machine_extracted_needs_verification",
+            "evidence_id": "evidence-360753-d6793618673f",
+            "required": false,
+            "subject": "submission",
+            "stage": "letter_of_intent",
+            "application_class": "unspecified",
+            "cycle": null,
+            "track": null,
+            "obligation": "optional",
+            "invitation_required": null,
+            "prerequisite": null,
+            "field_authority": "official_notice_field",
+            "parser_version": "submission-fields-21"
+          },
+          {
+            "kind": "letter_of_intent",
+            "date": "2026-11-06",
+            "time": null,
+            "timezone": null,
+            "estimated": false,
+            "source": "Official notice (machine extracted)",
+            "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/351906",
+            "confidence": "machine_extracted_needs_verification",
+            "evidence_id": "evidence-360753-f0d83e56f4ae",
+            "required": false,
+            "subject": "submission",
+            "stage": "letter_of_intent",
+            "application_class": "unspecified",
+            "cycle": null,
+            "track": null,
+            "obligation": "optional",
+            "invitation_required": null,
+            "prerequisite": null,
+            "field_authority": "official_notice_field",
+            "parser_version": "submission-fields-21"
+          },
+          {
+            "kind": "letter_of_intent",
+            "date": "2027-09-24",
+            "time": null,
+            "timezone": null,
+            "estimated": false,
+            "source": "Official notice (machine extracted)",
+            "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/351906",
+            "confidence": "machine_extracted_needs_verification",
+            "evidence_id": "evidence-360753-9b5202cbbff4",
+            "required": false,
+            "subject": "submission",
+            "stage": "letter_of_intent",
+            "application_class": "unspecified",
+            "cycle": null,
+            "track": null,
+            "obligation": "optional",
+            "invitation_required": null,
+            "prerequisite": null,
+            "field_authority": "official_notice_field",
+            "parser_version": "submission-fields-21"
+          }
+        ],
+        "submission_requirements": [],
+        "next_submission": {
+          "version": 2,
+          "as_of": "2026-11-08",
+          "application_class": "new",
+          "date": "2026-12-08",
+          "event": {
+            "kind": "application",
+            "date": "2026-12-08",
+            "time": "11:59 pm",
+            "timezone": "local time",
+            "note": "December 8, 2026; October 26, 2027. All applications must be submitted no later than 11:59 pm local time of the applicant organization.",
+            "estimated": false,
+            "source": "Grants.gov XML extract",
+            "source_url": "https://www.grants.gov/search-results-detail/360753",
+            "source_field": "CloseDate",
+            "confidence": "official_structured",
+            "detail_checked_at": "2026-10-08T19:04:02.960563Z",
+            "document_evidence_id": "evidence-360753-473b162fe7a7",
+            "citation": {
+              "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/351906#page=1",
+              "document_name": "rfa-oh-26-015_rev6.pdf",
+              "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/351906",
+              "extracted_at": "2026-10-14T15:15:41.684142Z",
+              "location": "page 1",
+              "page": 1,
+              "quote": "Notice of Funding Opportunity Application due June 23, 2026; December 8, 2026; October 26, 2027 National Institute for Occupational Safety and Health (NIOSH) Exploratory/Developmental Grants Related to the World Trade Center Health Program (R21) Oppor…",
+              "section": null,
+              "sha256": "da489568bd2ce4ce2bd5b26876919ee1a6fb78914e2444a1d63cd452e2b1b610",
+              "structural_reference": {
+                "block_id": "pdf-1-2",
+                "field_id": "pdf-submission-list:1:31",
+                "field_label": "Application due dates",
+                "kind": "line"
+              }
+            },
+            "document_confidence": "machine_extracted_needs_verification",
+            "document_source_fields": {
+              "stage": {
+                "present": false,
+                "value": null
+              }
+            },
+            "stage": "application"
+          },
+          "access": "open",
+          "prerequisites": []
+        },
+        "source_aliases": null,
+        "last_updated": "2026-10-07",
+        "version": "Synopsis 2",
+        "topic_areas": [],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Independent school districts",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Private institutions of higher education",
+          "For-profit organizations other than small businesses",
+          "Small businesses",
+          "Unrestricted"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": 365000,
+        "detail_page": "https://www.grants.gov/search-results-detail/360753",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/351906"
+      },
+      "deadline": "2026-12-08"
+    },
+    {
+      "id": "914f60ccb4dab87d69c7",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-11-08T16:45:23.673309Z",
+      "opportunity_id": "364163",
+      "detail": "Deadline 2026-12-08",
+      "record": {
+        "opportunity_id": "364163",
+        "opportunity_number": "O-BJA-2026-172771",
+        "title": "BJA FY 2026 Postconviction Testing of DNA Evidence",
+        "agency": "Bureau of Justice Assistance",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-10-28",
+        "close_date": "2026-12-08",
+        "deadlines": [
+          {
+            "kind": "application",
+            "date": "2026-12-08",
+            "time": null,
+            "timezone": null,
+            "note": null,
+            "estimated": false,
+            "source": "Grants.gov XML extract",
+            "source_url": "https://www.grants.gov/search-results-detail/364163",
+            "source_field": "CloseDate",
+            "confidence": "official_structured",
+            "detail_checked_at": "2026-10-29T18:26:25.546336Z"
+          }
+        ],
+        "submission_requirements": [],
+        "next_submission": {
+          "version": 2,
+          "as_of": "2026-11-08",
+          "application_class": "new",
+          "date": "2026-12-08",
+          "event": {
+            "kind": "application",
+            "date": "2026-12-08",
+            "time": null,
+            "timezone": null,
+            "note": null,
+            "estimated": false,
+            "source": "Grants.gov XML extract",
+            "source_url": "https://www.grants.gov/search-results-detail/364163",
+            "source_field": "CloseDate",
+            "confidence": "official_structured",
+            "detail_checked_at": "2026-10-29T18:26:25.546336Z"
+          },
+          "access": "open",
+          "prerequisites": []
+        },
+        "source_aliases": null,
+        "last_updated": "2026-10-28",
+        "version": "Synopsis 1",
+        "topic_areas": [],
+        "disciplines": [
+          "Community and Social Sciences"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Public and state institutions of higher education",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": 1000000,
+        "detail_page": "https://www.grants.gov/search-results-detail/364163",
+        "funding_opportunity_url": "https://bja.ojp.gov/funding/opportunities/o-bja-2026-172771",
+        "primary_document_url": null
+      },
+      "deadline": "2026-12-08"
+    },
+    {
+      "id": "619035790ca375bba6f2",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-11-08T16:45:23.673309Z",
+      "opportunity_id": "363054",
+      "detail": "Deadline 2026-12-08",
+      "record": {
+        "opportunity_id": "363054",
+        "opportunity_number": "RFA-OH-27-031",
+        "title": "World Trade Center Health Program Mentored Research Scientist Career Development Award (K01)",
+        "agency": "Centers for Disease Control and Prevention - ERA",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "forecasted",
+        "posted_date": "2026-10-07",
+        "close_date": "2026-12-08",
+        "deadlines": [
+          {
+            "kind": "estimated_application",
+            "date": "2026-12-08",
+            "time": "11:59 pm",
+            "timezone": "ET",
+            "note": "October 26, 2027; October 31, 2028; October 30, 2029; and October 29, 2030. Electronically submitted applications must be submitted no later than 11:59 pm ET on the listed application due date.",
+            "estimated": true,
+            "source": "Grants.gov XML extract",
+            "source_url": "https://www.grants.gov/search-results-detail/363054",
+            "source_field": "EstimatedSynopsisCloseDate",
+            "confidence": "official_estimate",
+            "detail_checked_at": "2026-07-31T12:17:15.975581Z"
+          }
+        ],
+        "submission_requirements": null,
+        "next_submission": {
+          "version": 2,
+          "as_of": "2026-11-08",
+          "application_class": "new",
+          "date": "2026-12-08",
+          "event": {
+            "kind": "estimated_application",
+            "date": "2026-12-08",
+            "time": "11:59 pm",
+            "timezone": "ET",
+            "note": "October 26, 2027; October 31, 2028; October 30, 2029; and October 29, 2030. Electronically submitted applications must be submitted no later than 11:59 pm ET on the listed application due date.",
+            "estimated": true,
+            "source": "Grants.gov XML extract",
+            "source_url": "https://www.grants.gov/search-results-detail/363054",
+            "source_field": "EstimatedSynopsisCloseDate",
+            "confidence": "official_estimate",
+            "detail_checked_at": "2026-07-31T12:17:15.975581Z"
+          },
+          "access": "open",
+          "prerequisites": []
+        },
+        "source_aliases": null,
+        "last_updated": "2026-07-02",
+        "version": "Forecast 1",
+        "topic_areas": [
+          "Public health"
+        ],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Independent school districts",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Private institutions of higher education",
+          "For-profit organizations other than small businesses",
+          "Small businesses",
+          "Unrestricted"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": 189000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363054",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      },
+      "deadline": "2026-12-08"
+    },
+    {
+      "id": "18ce14a50dfc267c7eee",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-11-08T16:45:23.673309Z",
+      "opportunity_id": "356163",
+      "detail": "Deadline 2026-12-08",
+      "record": {
+        "opportunity_id": "356163",
+        "opportunity_number": "RFA-OH-26-001",
+        "title": "Cooperative Research Agreements Related to the World Trade Center Health Program (U01)",
+        "agency": "Centers for Disease Control and Prevention - ERA",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-05-08",
+        "close_date": "2026-12-08",
+        "deadlines": [
+          {
+            "kind": "application",
+            "date": "2026-12-08",
+            "time": "11:59 pm",
+            "timezone": "local time",
+            "note": "December 8, 2026; October 26, 2027. All applications must be submitted no later than 11:59 pm local time of the applicant institution.",
+            "estimated": false,
+            "source": "Grants.gov XML extract",
+            "source_url": "https://www.grants.gov/search-results-detail/356163",
+            "source_field": "CloseDate",
+            "confidence": "official_structured",
+            "detail_checked_at": "2026-10-08T19:04:02.960563Z",
+            "document_evidence_id": "evidence-356163-fac4ac06ab34",
+            "document_confidence": "machine_extracted_needs_verification",
+            "document_source_fields": {
+              "stage": {
+                "present": false,
+                "value": null
+              }
+            },
+            "stage": "application"
+          },
+          {
+            "kind": "application",
+            "date": "2026-06-23",
+            "time": null,
+            "timezone": null,
+            "estimated": false,
+            "source": "Official notice (machine extracted)",
+            "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/351905",
+            "confidence": "machine_extracted_needs_verification",
+            "evidence_id": "evidence-356163-8f0b3acaf86e",
+            "required": null,
+            "subject": "submission",
+            "stage": "application",
+            "application_class": "unspecified",
+            "cycle": null,
+            "track": null,
+            "obligation": "unknown",
+            "invitation_required": null,
+            "prerequisite": null,
+            "field_authority": "official_notice_field",
+            "parser_version": "submission-fields-21"
+          },
+          {
+            "kind": "letter_of_intent",
+            "date": "2026-05-29",
+            "time": null,
+            "timezone": null,
+            "estimated": false,
+            "source": "Official notice (machine extracted)",
+            "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/351905",
+            "confidence": "machine_extracted_needs_verification",
+            "evidence_id": "evidence-356163-a85fb2c5e206",
+            "required": false,
+            "subject": "submission",
+            "stage": "letter_of_intent",
+            "application_class": "unspecified",
+            "cycle": null,
+            "track": null,
+            "obligation": "optional",
+            "invitation_required": null,
+            "prerequisite": null,
+            "field_authority": "official_notice_field",
+            "parser_version": "submission-fields-21"
+          },
+          {
+            "kind": "letter_of_intent",
+            "date": "2026-11-06",
+            "time": null,
+            "timezone": null,
+            "estimated": false,
+            "source": "Official notice (machine extracted)",
+            "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/351905",
+            "confidence": "machine_extracted_needs_verification",
+            "evidence_id": "evidence-356163-38841f779dba",
+            "required": false,
+            "subject": "submission",
+            "stage": "letter_of_intent",
+            "application_class": "unspecified",
+            "cycle": null,
+            "track": null,
+            "obligation": "optional",
+            "invitation_required": null,
+            "prerequisite": null,
+            "field_authority": "official_notice_field",
+            "parser_version": "submission-fields-21"
+          },
+          {
+            "kind": "letter_of_intent",
+            "date": "2027-09-24",
+            "time": null,
+            "timezone": null,
+            "estimated": false,
+            "source": "Official notice (machine extracted)",
+            "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/351905",
+            "confidence": "machine_extracted_needs_verification",
+            "evidence_id": "evidence-356163-cdb39ca2f098",
+            "required": false,
+            "subject": "submission",
+            "stage": "letter_of_intent",
+            "application_class": "unspecified",
+            "cycle": null,
+            "track": null,
+            "obligation": "optional",
+            "invitation_required": null,
+            "prerequisite": null,
+            "field_authority": "official_notice_field",
+            "parser_version": "submission-fields-21"
+          }
+        ],
+        "submission_requirements": [],
+        "next_submission": {
+          "version": 2,
+          "as_of": "2026-11-08",
+          "application_class": "new",
+          "date": "2026-12-08",
+          "event": {
+            "kind": "application",
+            "date": "2026-12-08",
+            "time": "11:59 pm",
+            "timezone": "local time",
+            "note": "December 8, 2026; October 26, 2027. All applications must be submitted no later than 11:59 pm local time of the applicant institution.",
+            "estimated": false,
+            "source": "Grants.gov XML extract",
+            "source_url": "https://www.grants.gov/search-results-detail/356163",
+            "source_field": "CloseDate",
+            "confidence": "official_structured",
+            "detail_checked_at": "2026-10-08T19:04:02.960563Z",
+            "document_evidence_id": "evidence-356163-fac4ac06ab34",
+            "citation": {
+              "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/351905#page=1",
+              "document_name": "rfa-oh-26-001_rev7.pdf",
+              "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/351905",
+              "extracted_at": "2026-10-14T15:15:41.684142Z",
+              "location": "page 1",
+              "page": 1,
+              "quote": "Notice of Funding Opportunity Application due June 23, 2026; December 8, 2026; and October 26, 2027 National Institute for Occupational Safety and Health (NIOSH) Cooperative Research Agreements Related to the World Trade Center Health Program (U01) Op…",
+              "section": null,
+              "sha256": "46689ba3fb12fe30b7d612c0a2153532d30f9fd82dbcf954e60f1dfc285bc1f9",
+              "structural_reference": {
+                "block_id": "pdf-1-2",
+                "field_id": "pdf-submission-list:1:31",
+                "field_label": "Application due dates",
+                "kind": "line"
+              }
+            },
+            "document_confidence": "machine_extracted_needs_verification",
+            "document_source_fields": {
+              "stage": {
+                "present": false,
+                "value": null
+              }
+            },
+            "stage": "application"
+          },
+          "access": "open",
+          "prerequisites": []
+        },
+        "source_aliases": null,
+        "last_updated": "2026-10-07",
+        "version": "Synopsis 2",
+        "topic_areas": [
+          "Public health"
+        ],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Independent school districts",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Private institutions of higher education",
+          "For-profit organizations other than small businesses",
+          "Small businesses",
+          "Unrestricted"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": null,
+        "award_ceiling": 550000,
+        "detail_page": "https://www.grants.gov/search-results-detail/356163",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/351905"
+      },
+      "deadline": "2026-12-08"
+    },
     {
       "id": "fca149df23b6e13454b7",
       "type": "closing_soon",
@@ -318721,1065 +319495,6 @@
           "Technology development"
         ],
         "version": "Synopsis 2"
-      },
-      "type": "closed_or_removed"
-    },
-    {
-      "changed_at": "2026-08-09T10:52:23.700254Z",
-      "deadline": "2026-09-08",
-      "detail": "Deadline 2026-09-08",
-      "id": "e9d1a7b7ded08f39c5da",
-      "label": "Closing soon",
-      "opportunity_id": "363400",
-      "record": {
-        "agency": "Rural Housing Service",
-        "applicant_types": [
-          "State governments",
-          "County governments",
-          "City or township governments",
-          "Federally recognized Native American tribal governments",
-          "Other Native American tribal organizations",
-          "Nonprofits with 501(c)(3) status",
-          "Nonprofits without 501(c)(3) status",
-          "Other"
-        ],
-        "award_ceiling": null,
-        "award_floor": null,
-        "close_date": "2026-09-08",
-        "detail_page": "https://www.grants.gov/search-results-detail/363400",
-        "disciplines": [
-          "Community and Social Sciences"
-        ],
-        "funding_instruments": [
-          "Grant"
-        ],
-        "funding_opportunity_url": "https://www.rd.usda.gov/programs-services/single-family-housing-programs/housing-preservation-grants#overview",
-        "last_updated": "2026-08-05",
-        "opportunity_id": "363400",
-        "opportunity_number": "USDA-RD-HCFP-HPG-2026",
-        "posted_date": "2026-08-06",
-        "primary_document_url": null,
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "posted",
-        "title": "Rural Housing Preservation Grant",
-        "topic_areas": [
-          "Community development"
-        ],
-        "version": "Synopsis 4"
-      },
-      "type": "closing_soon"
-    },
-    {
-      "changed_at": "2026-08-09T10:52:23.700254Z",
-      "deadline": "2026-09-08",
-      "detail": "Deadline 2026-09-08",
-      "id": "dba038e92d1aa5601a88",
-      "label": "Closing soon",
-      "opportunity_id": "356119",
-      "record": {
-        "agency": "U.S. National Science Foundation",
-        "applicant_types": [
-          "Other"
-        ],
-        "award_ceiling": 3000000,
-        "award_floor": 2000000,
-        "close_date": "2026-09-08",
-        "detail_page": "https://www.grants.gov/search-results-detail/356119",
-        "disciplines": [
-          "Engineering and Physical Sciences"
-        ],
-        "funding_instruments": [
-          "Grant"
-        ],
-        "funding_opportunity_url": "https://www.nsf.gov/publications/pub_summ.jsp?ods_key=nsf24597",
-        "last_updated": "2025-09-16",
-        "opportunity_id": "356119",
-        "opportunity_number": "24-597",
-        "posted_date": "2024-08-17",
-        "primary_document_url": null,
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "posted",
-        "title": "U.S. National Science Foundation Research Traineeship (NRT) Program",
-        "topic_areas": [
-          "Education and workforce"
-        ],
-        "version": "Synopsis 4"
-      },
-      "type": "closing_soon"
-    },
-    {
-      "changed_at": "2026-08-09T10:52:23.700254Z",
-      "deadline": "2026-09-08",
-      "detail": "Deadline 2026-09-08",
-      "id": "d12485f6885330fdc4b2",
-      "label": "Closing soon",
-      "opportunity_id": "363065",
-      "record": {
-        "agency": "National Energy Technology Laboratory",
-        "applicant_types": [
-          "Unrestricted"
-        ],
-        "award_ceiling": 150000000,
-        "award_floor": 1,
-        "close_date": "2026-09-08",
-        "detail_page": "https://www.grants.gov/search-results-detail/363065",
-        "disciplines": [
-          "Engineering and Physical Sciences",
-          "Environmental and Life Sciences"
-        ],
-        "funding_instruments": [
-          "Cooperative Agreement"
-        ],
-        "funding_opportunity_url": null,
-        "last_updated": "2026-07-24",
-        "opportunity_id": "363065",
-        "opportunity_number": "DE-FOA-0003627",
-        "posted_date": "2026-07-06",
-        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354135",
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "posted",
-        "title": "Improved Oil and Gas Recovery and Produced Water Management Technologies",
-        "topic_areas": [
-          "Energy",
-          "Environmental science",
-          "Water",
-          "Artificial intelligence and machine learning",
-          "Data science",
-          "Materials science",
-          "Manufacturing",
-          "Cybersecurity"
-        ],
-        "version": "Synopsis 4"
-      },
-      "type": "closing_soon"
-    },
-    {
-      "changed_at": "2026-08-09T10:52:23.700254Z",
-      "deadline": "2026-09-08",
-      "detail": "Deadline 2026-09-08",
-      "id": "72dcac9f9091356bd040",
-      "label": "Closing soon",
-      "opportunity_id": "363199",
-      "record": {
-        "agency": "Office on Violence Against Women",
-        "applicant_types": [
-          "County governments",
-          "City or township governments",
-          "Independent school districts",
-          "Federally recognized Native American tribal governments",
-          "Other Native American tribal organizations",
-          "Nonprofits with 501(c)(3) status",
-          "Nonprofits without 501(c)(3) status",
-          "Other"
-        ],
-        "award_ceiling": 500000,
-        "award_floor": 350000,
-        "close_date": "2026-09-08",
-        "detail_page": "https://www.grants.gov/search-results-detail/363199",
-        "disciplines": [
-          "Community and Social Sciences"
-        ],
-        "funding_instruments": [
-          "Grant"
-        ],
-        "funding_opportunity_url": "https://www.justice.gov/ovw/media/1452571/dl?inline",
-        "last_updated": "2026-07-15",
-        "opportunity_id": "363199",
-        "opportunity_number": "O-OVW-2026-172652",
-        "posted_date": "2026-07-15",
-        "primary_document_url": null,
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "posted",
-        "title": "OVW Fiscal Year 2026 Consolidated Grant Program to Assist Children and Youth Affected by and to Engage Men and Youth in Preventing Domestic Violence, Dating Violence, Sexual Assault, and Stalking",
-        "topic_areas": [],
-        "version": "Synopsis 1"
-      },
-      "type": "closing_soon"
-    },
-    {
-      "changed_at": "2026-08-09T10:52:23.700254Z",
-      "deadline": "2026-09-08",
-      "detail": "Deadline 2026-09-08",
-      "id": "5c112db27abaa90f8db9",
-      "label": "Closing soon",
-      "opportunity_id": "362754",
-      "record": {
-        "agency": "National Park Service",
-        "applicant_types": [
-          "State governments",
-          "County governments",
-          "City or township governments",
-          "Special district governments",
-          "Independent school districts",
-          "Public and state institutions of higher education",
-          "Federally recognized Native American tribal governments",
-          "Other Native American tribal organizations",
-          "Nonprofits with 501(c)(3) status",
-          "Private institutions of higher education"
-        ],
-        "award_ceiling": 50000,
-        "award_floor": 15000,
-        "close_date": "2026-09-08",
-        "detail_page": "https://www.grants.gov/search-results-detail/362754",
-        "disciplines": [
-          "Environmental and Life Sciences"
-        ],
-        "funding_instruments": [
-          "Cooperative Agreement"
-        ],
-        "funding_opportunity_url": null,
-        "last_updated": "2026-06-16",
-        "opportunity_id": "362754",
-        "opportunity_number": "P26AS00060",
-        "posted_date": "2026-06-10",
-        "primary_document_url": null,
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "posted",
-        "title": "Southwest Border Resource Protection Program",
-        "topic_areas": [
-          "Arts and culture",
-          "Climate change",
-          "Education and workforce",
-          "Environmental science"
-        ],
-        "version": "Synopsis 1"
-      },
-      "type": "closing_soon"
-    },
-    {
-      "changed_at": "2026-08-09T10:52:23.700254Z",
-      "deadline": "2026-09-08",
-      "detail": "Deadline 2026-09-08",
-      "id": "4069ef91a84815001f53",
-      "label": "Closing soon",
-      "opportunity_id": "353413",
-      "record": {
-        "agency": "U.S. National Science Foundation",
-        "applicant_types": [
-          "Other"
-        ],
-        "award_ceiling": 2000000,
-        "award_floor": 50000,
-        "close_date": "2026-09-08",
-        "detail_page": "https://www.grants.gov/search-results-detail/353413",
-        "disciplines": [
-          "Engineering and Physical Sciences"
-        ],
-        "funding_instruments": [
-          "Grant"
-        ],
-        "funding_opportunity_url": "https://www.nsf.gov/publications/pub_summ.jsp?ods_key=nsf24564",
-        "last_updated": "2026-07-20",
-        "opportunity_id": "353413",
-        "opportunity_number": "24-564",
-        "posted_date": "2024-04-05",
-        "primary_document_url": null,
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "posted",
-        "title": "IUSE/Professional Formation of Engineers: Revolutionizing Engineering Departments",
-        "topic_areas": [
-          "Artificial intelligence and machine learning",
-          "Arts and culture",
-          "Biology and biotechnology",
-          "Education and workforce",
-          "Manufacturing",
-          "Quantum science",
-          "Technology development"
-        ],
-        "version": "Synopsis 8"
-      },
-      "type": "closing_soon"
-    },
-    {
-      "changed_at": "2026-08-09T10:52:23.700254Z",
-      "deadline": "2026-09-08",
-      "detail": "Deadline 2026-09-08",
-      "id": "3daeea263d526ee42f5a",
-      "label": "Closing soon",
-      "opportunity_id": "363315",
-      "record": {
-        "agency": "U.S. Mission to Saudi Arabia",
-        "applicant_types": [
-          "Other"
-        ],
-        "award_ceiling": 250000,
-        "award_floor": 150000,
-        "close_date": "2026-09-08",
-        "detail_page": "https://www.grants.gov/search-results-detail/363315",
-        "disciplines": [],
-        "funding_instruments": [
-          "Cooperative Agreement"
-        ],
-        "funding_opportunity_url": null,
-        "last_updated": "2026-07-28",
-        "opportunity_id": "363315",
-        "opportunity_number": "DOS-SAU-2602",
-        "posted_date": "2026-07-26",
-        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354160",
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "posted",
-        "title": "AI Partnership & Exchange for Tech Leaders (APEX)",
-        "topic_areas": [
-          "Artificial intelligence and machine learning",
-          "Arts and culture",
-          "Data science",
-          "Education and workforce"
-        ],
-        "version": "Synopsis 1"
-      },
-      "type": "closing_soon"
-    },
-    {
-      "changed_at": "2026-08-09T10:52:23.700254Z",
-      "deadline": "2026-09-08",
-      "detail": "Deadline 2026-09-08",
-      "id": "1f94ce934eb978825f2d",
-      "label": "Closing soon",
-      "opportunity_id": "360554",
-      "record": {
-        "agency": "National Institutes of Health",
-        "applicant_types": [
-          "State governments",
-          "County governments",
-          "City or township governments",
-          "Special district governments",
-          "Independent school districts",
-          "Public and state institutions of higher education",
-          "Federally recognized Native American tribal governments",
-          "Public and Indian housing authorities",
-          "Other Native American tribal organizations",
-          "Nonprofits with 501(c)(3) status",
-          "Nonprofits without 501(c)(3) status",
-          "Private institutions of higher education",
-          "Other"
-        ],
-        "award_ceiling": null,
-        "award_floor": null,
-        "close_date": "2026-09-08",
-        "detail_page": "https://www.grants.gov/search-results-detail/360554",
-        "disciplines": [
-          "Medical and Health"
-        ],
-        "funding_instruments": [
-          "Grant"
-        ],
-        "funding_opportunity_url": null,
-        "last_updated": "2025-09-10",
-        "opportunity_id": "360554",
-        "opportunity_number": "PAR-26-051",
-        "posted_date": "2026-05-01",
-        "primary_document_url": null,
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "forecasted",
-        "title": "NIH Brain Development Cohorts (NBDC) and Population Assessment of Tobacco and Health (PATH) Study Biospecimen Access",
-        "topic_areas": [
-          "Environmental science",
-          "Neuroscience",
-          "Public health"
-        ],
-        "version": "Forecast 1"
-      },
-      "type": "closing_soon"
-    },
-    {
-      "changed_at": "2026-08-09T10:52:23.700254Z",
-      "deadline": "2026-09-08",
-      "detail": "Deadline 2026-09-08",
-      "id": "01f5a87283b029ba6b5b",
-      "label": "Closing soon",
-      "opportunity_id": "363288",
-      "record": {
-        "agency": "Natural Resources Conservation Service",
-        "applicant_types": [
-          "State governments",
-          "County governments",
-          "City or township governments",
-          "Special district governments",
-          "Public and state institutions of higher education",
-          "Federally recognized Native American tribal governments",
-          "Other Native American tribal organizations",
-          "Nonprofits with 501(c)(3) status",
-          "Nonprofits without 501(c)(3) status",
-          "Private institutions of higher education",
-          "For-profit organizations other than small businesses",
-          "Small businesses"
-        ],
-        "award_ceiling": 1000000,
-        "award_floor": 100000,
-        "close_date": "2026-09-08",
-        "detail_page": "https://www.grants.gov/search-results-detail/363288",
-        "disciplines": [
-          "Environmental and Life Sciences"
-        ],
-        "funding_instruments": [
-          "Grant"
-        ],
-        "funding_opportunity_url": null,
-        "last_updated": "2026-07-24",
-        "opportunity_id": "363288",
-        "opportunity_number": "USDA-NRCS-NHQ-WMBP-NOFO0001458",
-        "posted_date": "2026-07-23",
-        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354092",
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "posted",
-        "title": "Wetland Mitigation Banking Program Fiscal Year (FY) 2026",
-        "topic_areas": [
-          "Agriculture and food",
-          "Environmental science"
-        ],
-        "version": "Synopsis 2"
-      },
-      "type": "closing_soon"
-    },
-    {
-      "changed_at": "2026-08-09T01:09:28.346011Z",
-      "detail": "First appeared in the public catalog",
-      "id": "ffb060aa5a5f2271902e",
-      "label": "New opportunity",
-      "opportunity_id": "vpr-email:NSF26-512",
-      "record": {
-        "agency": "VPR funding digest (limited submissions & foundations)",
-        "applicant_types": [],
-        "award_ceiling": null,
-        "award_floor": null,
-        "close_date": "2026-11-04",
-        "detail_page": "https://www.nsf.gov/funding/opportunities/ai-datasets-unlocking-dataset-value-ai-enabled-scientific-discovery",
-        "disciplines": [],
-        "funding_instruments": [],
-        "funding_opportunity_url": "https://www.nsf.gov/funding/opportunities/ai-datasets-unlocking-dataset-value-ai-enabled-scientific-discovery",
-        "last_updated": null,
-        "opportunity_id": "vpr-email:NSF26-512",
-        "opportunity_number": "NSF26-512",
-        "posted_date": null,
-        "primary_document_url": null,
-        "source": "VPR funding digest (limited submissions & foundations)",
-        "source_type": "Internal",
-        "status": "posted",
-        "title": "NSF Unlocking Dataset Value for AI-Enabled Scientific Discovery (AI Datasets) | NSF 26-512",
-        "topic_areas": [],
-        "version": null
-      },
-      "type": "new"
-    },
-    {
-      "changed_at": "2026-08-09T01:09:28.346011Z",
-      "detail": "First appeared in the public catalog",
-      "id": "f860409b20b483ff5cc3",
-      "label": "New opportunity",
-      "opportunity_id": "vpr-email:NSF26-510",
-      "record": {
-        "agency": "VPR funding digest (limited submissions & foundations)",
-        "applicant_types": [],
-        "award_ceiling": null,
-        "award_floor": null,
-        "close_date": "2026-11-04",
-        "detail_page": "https://www.nsf.gov/funding/opportunities/small-business-innovation-research-small-business-technology",
-        "disciplines": [],
-        "funding_instruments": [],
-        "funding_opportunity_url": "https://www.nsf.gov/funding/opportunities/small-business-innovation-research-small-business-technology",
-        "last_updated": null,
-        "opportunity_id": "vpr-email:NSF26-510",
-        "opportunity_number": "NSF26-510",
-        "posted_date": null,
-        "primary_document_url": null,
-        "source": "VPR funding digest (limited submissions & foundations)",
-        "source_type": "Internal",
-        "status": "posted",
-        "title": "Small Business Innovation Research / Small Business Technology Transfer Phase I, Phase II, Fast-Track Programs SBIR/STTR: Developing Deep Technologies that Advance U.S. Competitiveness and Security | NSF 26-510",
-        "topic_areas": [
-          "Technology development"
-        ],
-        "version": null
-      },
-      "type": "new"
-    },
-    {
-      "changed_at": "2026-08-09T01:09:28.346011Z",
-      "detail": "First appeared in the public catalog",
-      "id": "f0b7cb88a000c6d14b03",
-      "label": "New opportunity",
-      "opportunity_id": "vpr-email:NSF26-015",
-      "record": {
-        "agency": "VPR funding digest (limited submissions & foundations)",
-        "applicant_types": [],
-        "award_ceiling": null,
-        "award_floor": null,
-        "close_date": "2026-09-01",
-        "detail_page": "https://www.nsf.gov/funding/opportunities/dcl-advancing-artificial-intelligence-ai-agent-ecosystems",
-        "disciplines": [],
-        "funding_instruments": [],
-        "funding_opportunity_url": "https://www.nsf.gov/funding/opportunities/dcl-advancing-artificial-intelligence-ai-agent-ecosystems",
-        "last_updated": null,
-        "opportunity_id": "vpr-email:NSF26-015",
-        "opportunity_number": "NSF26-015",
-        "posted_date": null,
-        "primary_document_url": null,
-        "source": "VPR funding digest (limited submissions & foundations)",
-        "source_type": "Internal",
-        "status": "posted",
-        "title": "NSF DCL Advancing Artificial Intelligence (AI) Agent Ecosystems through the National Science Foundation Pathways to Enable Secure Open-Source Ecosystems (NSF PESOSE) Program | NSF 26-015",
-        "topic_areas": [
-          "Artificial intelligence and machine learning",
-          "Arts and culture",
-          "Environmental science"
-        ],
-        "version": null
-      },
-      "type": "new"
-    },
-    {
-      "changed_at": "2026-08-09T01:09:28.346011Z",
-      "detail": "First appeared in the public catalog",
-      "id": "ed5b67f83e22613d17b7",
-      "label": "New opportunity",
-      "opportunity_id": "vpr-email:vpr-63cc8866673bd1a1",
-      "record": {
-        "agency": "VPR funding digest (limited submissions & foundations)",
-        "applicant_types": [],
-        "award_ceiling": 400000,
-        "award_floor": null,
-        "close_date": null,
-        "detail_page": "https://seed.nih.gov/small-business-funding/find-funding/sbir-sttr-funding-opportunities",
-        "disciplines": [],
-        "funding_instruments": [],
-        "funding_opportunity_url": "https://seed.nih.gov/small-business-funding/find-funding/sbir-sttr-funding-opportunities",
-        "last_updated": null,
-        "opportunity_id": "vpr-email:vpr-63cc8866673bd1a1",
-        "opportunity_number": null,
-        "posted_date": null,
-        "primary_document_url": null,
-        "source": "VPR funding digest (limited submissions & foundations)",
-        "source_type": "Internal",
-        "status": "posted",
-        "title": "NIH https://seed.nih.gov/small-business-funding/find-funding/sbir-sttr-funding-opportunities New PA posted June 1, 2026.",
-        "topic_areas": [],
-        "version": null
-      },
-      "type": "new"
-    },
-    {
-      "changed_at": "2026-08-09T01:09:28.346011Z",
-      "detail": "First appeared in the public catalog",
-      "id": "e599192a36b2c665b6ee",
-      "label": "New opportunity",
-      "opportunity_id": "vpr-email:vpr-167136617b79dc5d",
-      "record": {
-        "agency": "VPR funding digest (limited submissions & foundations)",
-        "applicant_types": [],
-        "award_ceiling": null,
-        "award_floor": null,
-        "close_date": "2026-09-14",
-        "detail_page": "https://www.acs.org/funding/grants/petroleum-research-fund/programs.html",
-        "disciplines": [],
-        "funding_instruments": [],
-        "funding_opportunity_url": "https://www.acs.org/funding/grants/petroleum-research-fund/programs.html",
-        "last_updated": null,
-        "opportunity_id": "vpr-email:vpr-167136617b79dc5d",
-        "opportunity_number": null,
-        "posted_date": null,
-        "primary_document_url": null,
-        "source": "VPR funding digest (limited submissions & foundations)",
-        "source_type": "Internal",
-        "status": "posted",
-        "title": "ACS Petroleum Research Fund - 2 programs",
-        "topic_areas": [],
-        "version": null
-      },
-      "type": "new"
-    },
-    {
-      "changed_at": "2026-08-09T01:09:28.346011Z",
-      "detail": "First appeared in the public catalog",
-      "id": "db258cd0128e17c852c1",
-      "label": "New opportunity",
-      "opportunity_id": "vpr-email:vpr-e4ce54abf9b529bf",
-      "record": {
-        "agency": "VPR funding digest (limited submissions & foundations)",
-        "applicant_types": [],
-        "award_ceiling": 125000,
-        "award_floor": null,
-        "close_date": "2026-09-14",
-        "detail_page": "https://www.acs.org/funding/grants/petroleum-research-fund/programs/new-directions-grants.html",
-        "disciplines": [],
-        "funding_instruments": [],
-        "funding_opportunity_url": "https://www.acs.org/funding/grants/petroleum-research-fund/programs/new-directions-grants.html",
-        "last_updated": null,
-        "opportunity_id": "vpr-email:vpr-e4ce54abf9b529bf",
-        "opportunity_number": null,
-        "posted_date": null,
-        "primary_document_url": null,
-        "source": "VPR funding digest (limited submissions & foundations)",
-        "source_type": "Internal",
-        "status": "posted",
-        "title": "American Chemical Society, petroleum Research Fund New Directions (ND) Grants",
-        "topic_areas": [],
-        "version": null
-      },
-      "type": "new"
-    },
-    {
-      "changed_at": "2026-08-09T01:09:28.346011Z",
-      "detail": "First appeared in the public catalog",
-      "id": "d1ae6f6af3b791a030cf",
-      "label": "New opportunity",
-      "opportunity_id": "vpr-email:infoready-2024058",
-      "record": {
-        "agency": "VPR funding digest (limited submissions & foundations)",
-        "applicant_types": [],
-        "award_ceiling": null,
-        "award_floor": null,
-        "close_date": "2027-01-19",
-        "detail_page": "http://rochester.infoready4.com/CompetitionSpace/",
-        "disciplines": [],
-        "funding_instruments": [],
-        "funding_opportunity_url": "http://rochester.infoready4.com/CompetitionSpace/",
-        "last_updated": null,
-        "opportunity_id": "vpr-email:infoready-2024058",
-        "opportunity_number": null,
-        "posted_date": null,
-        "primary_document_url": null,
-        "source": "VPR funding digest (limited submissions & foundations)",
-        "source_type": "Internal",
-        "status": "posted",
-        "title": "Damon Runyon Cancer Research Foundation Clinical Investigator Award 2027",
-        "topic_areas": [
-          "Cancer",
-          "Public health",
-          "Technology development"
-        ],
-        "version": null
-      },
-      "type": "new"
-    },
-    {
-      "changed_at": "2026-08-09T01:09:28.346011Z",
-      "detail": "First appeared in the public catalog",
-      "id": "b6ea34591ab22152856f",
-      "label": "New opportunity",
-      "opportunity_id": "vpr-email:vpr-122b30a8725e40bf",
-      "record": {
-        "agency": "VPR funding digest (limited submissions & foundations)",
-        "applicant_types": [],
-        "award_ceiling": 150000,
-        "award_floor": null,
-        "close_date": "2026-09-15",
-        "detail_page": "https://www.sony.com/en/SonyInfo/research-award-program/",
-        "disciplines": [],
-        "funding_instruments": [],
-        "funding_opportunity_url": "https://www.sony.com/en/SonyInfo/research-award-program/",
-        "last_updated": null,
-        "opportunity_id": "vpr-email:vpr-122b30a8725e40bf",
-        "opportunity_number": null,
-        "posted_date": null,
-        "primary_document_url": null,
-        "source": "VPR funding digest (limited submissions & foundations)",
-        "source_type": "Internal",
-        "status": "posted",
-        "title": "SONY RESEARCH AWARD PROGRAM",
-        "topic_areas": [],
-        "version": null
-      },
-      "type": "new"
-    },
-    {
-      "changed_at": "2026-08-09T01:09:28.346011Z",
-      "detail": "First appeared in the public catalog",
-      "id": "b3c428bfa67b1c93a66a",
-      "label": "New opportunity",
-      "opportunity_id": "vpr-email:vpr-0f186b990288c021",
-      "record": {
-        "agency": "VPR funding digest (limited submissions & foundations)",
-        "applicant_types": [],
-        "award_ceiling": 300000,
-        "award_floor": null,
-        "close_date": null,
-        "detail_page": "https://new.nsf.gov/policies/pappg/24-1",
-        "disciplines": [],
-        "funding_instruments": [],
-        "funding_opportunity_url": "https://new.nsf.gov/policies/pappg/24-1",
-        "last_updated": null,
-        "opportunity_id": "vpr-email:vpr-0f186b990288c021",
-        "opportunity_number": null,
-        "posted_date": null,
-        "primary_document_url": null,
-        "source": "VPR funding digest (limited submissions & foundations)",
-        "source_type": "Internal",
-        "status": "posted",
-        "title": "NSF Ongoing - New requirement for providing e-mail documentation of Program Officer approval for the submission of RAPID and EAGER proposals",
-        "topic_areas": [],
-        "version": null
-      },
-      "type": "new"
-    },
-    {
-      "changed_at": "2026-08-09T01:09:28.346011Z",
-      "detail": "First appeared in the public catalog",
-      "id": "9f00d614231c656c77a3",
-      "label": "New opportunity",
-      "opportunity_id": "vpr-email:vpr-ca54a2886f6fb184",
-      "record": {
-        "agency": "VPR funding digest (limited submissions & foundations)",
-        "applicant_types": [],
-        "award_ceiling": null,
-        "award_floor": null,
-        "close_date": "2026-09-15",
-        "detail_page": "https://new.nsf.gov/funding/opportunities/computational-data-enabled-science-engineering-0",
-        "disciplines": [],
-        "funding_instruments": [],
-        "funding_opportunity_url": "https://new.nsf.gov/funding/opportunities/computational-data-enabled-science-engineering-0",
-        "last_updated": null,
-        "opportunity_id": "vpr-email:vpr-ca54a2886f6fb184",
-        "opportunity_number": null,
-        "posted_date": null,
-        "primary_document_url": null,
-        "source": "VPR funding digest (limited submissions & foundations)",
-        "source_type": "Internal",
-        "status": "posted",
-        "title": "NSF Computational and Data-Enabled Science and Engineering (CDS&E) | NSF - National Science Foundation PD 24-8084",
-        "topic_areas": [],
-        "version": null
-      },
-      "type": "new"
-    },
-    {
-      "changed_at": "2026-08-09T01:09:28.346011Z",
-      "detail": "First appeared in the public catalog",
-      "id": "892335349d6cbdb7e5ce",
-      "label": "New opportunity",
-      "opportunity_id": "vpr-email:vpr-e1612e2acba631d2",
-      "record": {
-        "agency": "VPR funding digest (limited submissions & foundations)",
-        "applicant_types": [],
-        "award_ceiling": 110000,
-        "award_floor": null,
-        "close_date": null,
-        "detail_page": "https://www.acs.org/funding/grants/petroleum-research-fund/programs/doctoral-new-investigator-grants.html",
-        "disciplines": [],
-        "funding_instruments": [],
-        "funding_opportunity_url": "https://www.acs.org/funding/grants/petroleum-research-fund/programs/doctoral-new-investigator-grants.html",
-        "last_updated": null,
-        "opportunity_id": "vpr-email:vpr-e1612e2acba631d2",
-        "opportunity_number": null,
-        "posted_date": null,
-        "primary_document_url": null,
-        "source": "VPR funding digest (limited submissions & foundations)",
-        "source_type": "Internal",
-        "status": "posted",
-        "title": "Doctoral New Investigator (DNI) Grants",
-        "topic_areas": [],
-        "version": null
-      },
-      "type": "new"
-    },
-    {
-      "changed_at": "2026-08-09T01:09:28.346011Z",
-      "detail": "First appeared in the public catalog",
-      "id": "87f1a69fccfe278b183e",
-      "label": "New opportunity",
-      "opportunity_id": "vpr-email:vpr-36e6aed03b0511a5",
-      "record": {
-        "agency": "VPR funding digest (limited submissions & foundations)",
-        "applicant_types": [],
-        "award_ceiling": 100000,
-        "award_floor": null,
-        "close_date": "2027-02-04",
-        "detail_page": "https://rochester.infoready4.com/",
-        "disciplines": [],
-        "funding_instruments": [],
-        "funding_opportunity_url": "https://rochester.infoready4.com/",
-        "last_updated": null,
-        "opportunity_id": "vpr-email:vpr-36e6aed03b0511a5",
-        "opportunity_number": null,
-        "posted_date": null,
-        "primary_document_url": null,
-        "source": "VPR funding digest (limited submissions & foundations)",
-        "source_type": "Internal",
-        "status": "posted",
-        "title": "Camille & Henry Dreyfus Foundation - Camille Dreyfus Teacher-Scholar Award (2027)",
-        "topic_areas": [
-          "Education and workforce"
-        ],
-        "version": null
-      },
-      "type": "new"
-    },
-    {
-      "changed_at": "2026-08-09T01:09:28.346011Z",
-      "deadline": "2026-09-01",
-      "detail": "Deadline 2026-09-01",
-      "id": "861ca7fb356c18a9fd69",
-      "label": "Closing soon",
-      "opportunity_id": "vpr-email:NSF26-015",
-      "record": {
-        "agency": "VPR funding digest (limited submissions & foundations)",
-        "applicant_types": [],
-        "award_ceiling": null,
-        "award_floor": null,
-        "close_date": "2026-09-01",
-        "detail_page": "https://www.nsf.gov/funding/opportunities/dcl-advancing-artificial-intelligence-ai-agent-ecosystems",
-        "disciplines": [],
-        "funding_instruments": [],
-        "funding_opportunity_url": "https://www.nsf.gov/funding/opportunities/dcl-advancing-artificial-intelligence-ai-agent-ecosystems",
-        "last_updated": null,
-        "opportunity_id": "vpr-email:NSF26-015",
-        "opportunity_number": "NSF26-015",
-        "posted_date": null,
-        "primary_document_url": null,
-        "source": "VPR funding digest (limited submissions & foundations)",
-        "source_type": "Internal",
-        "status": "posted",
-        "title": "NSF DCL Advancing Artificial Intelligence (AI) Agent Ecosystems through the National Science Foundation Pathways to Enable Secure Open-Source Ecosystems (NSF PESOSE) Program | NSF 26-015",
-        "topic_areas": [
-          "Artificial intelligence and machine learning",
-          "Arts and culture",
-          "Environmental science"
-        ],
-        "version": null
-      },
-      "type": "closing_soon"
-    },
-    {
-      "changed_at": "2026-08-09T01:09:28.346011Z",
-      "detail": "First appeared in the public catalog",
-      "id": "3f0fe2b734ecfe77e1df",
-      "label": "New opportunity",
-      "opportunity_id": "vpr-email:vpr-c3bbadc4b31b4e1c",
-      "record": {
-        "agency": "VPR funding digest (limited submissions & foundations)",
-        "applicant_types": [],
-        "award_ceiling": null,
-        "award_floor": null,
-        "close_date": "2026-09-10",
-        "detail_page": "https://beta.nsf.gov/funding/opportunities/computer-information-science-engineering-core",
-        "disciplines": [],
-        "funding_instruments": [],
-        "funding_opportunity_url": "https://beta.nsf.gov/funding/opportunities/computer-information-science-engineering-core",
-        "last_updated": null,
-        "opportunity_id": "vpr-email:vpr-c3bbadc4b31b4e1c",
-        "opportunity_number": null,
-        "posted_date": null,
-        "primary_document_url": null,
-        "source": "VPR funding digest (limited submissions & foundations)",
-        "source_type": "Internal",
-        "status": "posted",
-        "title": "NSF Computer and Information Science and Engineering : Core Programs 25-543",
-        "topic_areas": [],
-        "version": null
-      },
-      "type": "new"
-    },
-    {
-      "changed_at": "2026-08-09T01:09:28.346011Z",
-      "detail": "First appeared in the public catalog",
-      "id": "3d542af12bd408db0e41",
-      "label": "New opportunity",
-      "opportunity_id": "vpr-email:vpr-93df7a9faf5e4c37",
-      "record": {
-        "agency": "VPR funding digest (limited submissions & foundations)",
-        "applicant_types": [],
-        "award_ceiling": null,
-        "award_floor": null,
-        "close_date": "2026-09-11",
-        "detail_page": "https://airtable.com/appDCapaPF9M0iLQO/pagRxgvY9pCkOeaxx/form",
-        "disciplines": [],
-        "funding_instruments": [],
-        "funding_opportunity_url": "https://airtable.com/appDCapaPF9M0iLQO/pagRxgvY9pCkOeaxx/form",
-        "last_updated": null,
-        "opportunity_id": "vpr-email:vpr-93df7a9faf5e4c37",
-        "opportunity_number": null,
-        "posted_date": null,
-        "primary_document_url": null,
-        "source": "VPR funding digest (limited submissions & foundations)",
-        "source_type": "Internal",
-        "status": "posted",
-        "title": "Schmidt Sciences",
-        "topic_areas": [],
-        "version": null
-      },
-      "type": "new"
-    },
-    {
-      "changed_at": "2026-08-09T01:09:28.346011Z",
-      "detail": "First appeared in the public catalog",
-      "id": "1598e0506d5672c5db1d",
-      "label": "New opportunity",
-      "opportunity_id": "vpr-email:vpr-dda9003b9def7103",
-      "record": {
-        "agency": "VPR funding digest (limited submissions & foundations)",
-        "applicant_types": [],
-        "award_ceiling": null,
-        "award_floor": null,
-        "close_date": null,
-        "detail_page": "https://nysmarticorridor.com/new-funding-available-to-connect-businesses-with-cutting-edge-research-assets/",
-        "disciplines": [],
-        "funding_instruments": [],
-        "funding_opportunity_url": "https://nysmarticorridor.com/new-funding-available-to-connect-businesses-with-cutting-edge-research-assets/",
-        "last_updated": null,
-        "opportunity_id": "vpr-email:vpr-dda9003b9def7103",
-        "opportunity_number": null,
-        "posted_date": null,
-        "primary_document_url": null,
-        "source": "VPR funding digest (limited submissions & foundations)",
-        "source_type": "Internal",
-        "status": "posted",
-        "title": "NY THRIVE",
-        "topic_areas": [],
-        "version": null
-      },
-      "type": "new"
-    },
-    {
-      "changed_at": "2026-08-09T01:09:28.346011Z",
-      "detail": "First appeared in the public catalog",
-      "id": "0756d1fdb592016e611f",
-      "label": "New opportunity",
-      "opportunity_id": "vpr-email:NSF26-511",
-      "record": {
-        "agency": "VPR funding digest (limited submissions & foundations)",
-        "applicant_types": [],
-        "award_ceiling": 305000,
-        "award_floor": null,
-        "close_date": "2026-11-04",
-        "detail_page": "https://www.nsf.gov/funding/opportunities/small-business-innovation-research-small-business-technology-0",
-        "disciplines": [],
-        "funding_instruments": [],
-        "funding_opportunity_url": "https://www.nsf.gov/funding/opportunities/small-business-innovation-research-small-business-technology-0",
-        "last_updated": null,
-        "opportunity_id": "vpr-email:NSF26-511",
-        "opportunity_number": "NSF26-511",
-        "posted_date": null,
-        "primary_document_url": null,
-        "source": "VPR funding digest (limited submissions & foundations)",
-        "source_type": "Internal",
-        "status": "posted",
-        "title": "NEW NSF Small Business Innovation Research / Small Business Technology Transfer Phase I, Phase II, Fast-Track Programs : A Pilot Emphasis on Scientific Instrumentation. | NSF 26-511",
-        "topic_areas": [
-          "Technology development"
-        ],
-        "version": null
-      },
-      "type": "new"
-    },
-    {
-      "changed_at": "2026-08-09T01:09:28.346011Z",
-      "detail": "First appeared in the public catalog",
-      "id": "022b53c699fb2b6dcc80",
-      "label": "New opportunity",
-      "opportunity_id": "vpr-email:vpr-aed7d81578b24028",
-      "record": {
-        "agency": "VPR funding digest (limited submissions & foundations)",
-        "applicant_types": [],
-        "award_ceiling": 75000,
-        "award_floor": null,
-        "close_date": "2026-09-15",
-        "detail_page": "http://www.sloan.org/sloan-research-fellowships/",
-        "disciplines": [
-          "chemistry, computer science, earth systems science, economics, mathematics, neuroscience, physics, or a related field"
-        ],
-        "funding_instruments": [],
-        "funding_opportunity_url": "http://www.sloan.org/sloan-research-fellowships/",
-        "last_updated": null,
-        "opportunity_id": "vpr-email:vpr-aed7d81578b24028",
-        "opportunity_number": null,
-        "posted_date": null,
-        "primary_document_url": null,
-        "source": "VPR funding digest (limited submissions & foundations)",
-        "source_type": "Internal",
-        "status": "posted",
-        "title": "Sloan Research Fellowships",
-        "topic_areas": [],
-        "version": null
-      },
-      "type": "new"
-    },
-    {
-      "changed_at": "2026-08-09T00:40:50.892173Z",
-      "detail": "No longer in the current catalog",
-      "id": "e8dafa1952f32deb4747",
-      "label": "Closed or removed",
-      "opportunity_id": "362903",
-      "record": {
-        "agency": "U.S. Mission to Algeria",
-        "applicant_types": [
-          "Nonprofits with 501(c)(3) status"
-        ],
-        "award_ceiling": 100000,
-        "award_floor": 5000,
-        "close_date": "2026-08-08",
-        "detail_page": "https://www.grants.gov/search-results-detail/362903",
-        "disciplines": [
-          "Engineering and Physical Sciences"
-        ],
-        "funding_instruments": [
-          "Other"
-        ],
-        "funding_opportunity_url": "https://mygrants.servicenowservices.com/mygrants?id=mygrants_form&table=x_g_usd4_o_grant_funding_opportunity&sys_id=465d1dd447cd075067358810326d4326&view=Default",
-        "last_updated": "2026-06-22",
-        "opportunity_id": "362903",
-        "opportunity_number": "OFOP0002813",
-        "posted_date": "2026-06-22",
-        "primary_document_url": null,
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "posted",
-        "title": "Prosperity through Partnership: Catalyzing U.S.-Algerian Collaboration in Innovation, Commerce and English Language",
-        "topic_areas": [
-          "Artificial intelligence and machine learning",
-          "Arts and culture",
-          "Education and workforce",
-          "Environmental science",
-          "Social and behavioral sciences",
-          "Technology development"
-        ],
-        "version": "Synopsis 2"
-      },
-      "type": "closed_or_removed"
-    },
-    {
-      "changed_at": "2026-08-09T00:40:50.892173Z",
-      "detail": "No longer in the current catalog",
-      "id": "5ae0fcadc87a88f3f091",
-      "label": "Closed or removed",
-      "opportunity_id": "363104",
-      "record": {
-        "agency": "U.S. Mission to Fiji",
-        "applicant_types": [
-          "Other"
-        ],
-        "award_ceiling": 24000,
-        "award_floor": 5000,
-        "close_date": "2026-08-08",
-        "detail_page": "https://www.grants.gov/search-results-detail/363104",
-        "disciplines": [],
-        "funding_instruments": [
-          "Cooperative Agreement",
-          "Grant"
-        ],
-        "funding_opportunity_url": null,
-        "last_updated": "2026-07-07",
-        "opportunity_id": "363104",
-        "opportunity_number": "PDS-SUVA-FY26-02",
-        "posted_date": "2026-07-08",
-        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/353707",
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "posted",
-        "title": "U.S. Embassy Suva Annual Program Statement for Fiji, Kiribati, Nauru, and Tuvalu",
-        "topic_areas": [
-          "Arts and culture",
-          "Education and workforce",
-          "Technology development"
-        ],
-        "version": "Synopsis 1"
       },
       "type": "closed_or_removed"
     }

@@ -285,7 +285,7 @@ Self-service Alerts is deployed through [the Alerts Worker](workers/alerts/), D1
 
 <!-- catalog-stats:start -->
 This replaces the former 48-record Chemical and Sustainability Engineering feed. The
-November 7, 2026 build contains 1,301 current funding opportunities (966 posted and 335
+November 8, 2026 build contains 1,301 current funding opportunities (966 posted and 335
 forecasted) from ARPA-H (10), DARPA / IARPA research solicitations (1), Grants.gov
 (1,198), NASA ROSES (2), NYSERDA (43), SAM.gov (32), U.S. National Science Foundation
 (1), VPR funding digest (limited submissions & foundations) (14), with no deadline
