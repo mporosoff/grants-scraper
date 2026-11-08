@@ -4,8 +4,56 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/changes.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/changes.xml</id>
-  <updated>2026-11-07T16:40:14Z</updated>
+  <updated>2026-11-08T16:48:51Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>Closing soon: Apprenticeship and Pre-apprenticeship Clean Energy Training</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0r8z000000FOEyAAO"/>
+    <id>urn:funding-finder:change:b7551426b813449f3b75</id>
+    <updated>2026-11-08T16:45:23.673309Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-12-08</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Great Lakes Restoration Initiative: Community Forest and Open Space Conservation Program</title>
+    <link href="https://www.grants.gov/search-results-detail/361418"/>
+    <id>urn:funding-finder:change:9c8c8e5916ce35ecc44e</id>
+    <updated>2026-11-08T16:45:23.673309Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-12-08</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Exploratory/Developmental Grants Related to the World Trade Center Health Program (R21)</title>
+    <link href="https://www.grants.gov/search-results-detail/360753"/>
+    <id>urn:funding-finder:change:988ff45efe4eeaf88fb8</id>
+    <updated>2026-11-08T16:45:23.673309Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-12-08</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: BJA FY 2026 Postconviction Testing of DNA Evidence</title>
+    <link href="https://www.grants.gov/search-results-detail/364163"/>
+    <id>urn:funding-finder:change:914f60ccb4dab87d69c7</id>
+    <updated>2026-11-08T16:45:23.673309Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-12-08</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: World Trade Center Health Program Mentored Research Scientist Career Development Award (K01)</title>
+    <link href="https://www.grants.gov/search-results-detail/363054"/>
+    <id>urn:funding-finder:change:619035790ca375bba6f2</id>
+    <updated>2026-11-08T16:45:23.673309Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-12-08</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Cooperative Research Agreements Related to the World Trade Center Health Program (U01)</title>
+    <link href="https://www.grants.gov/search-results-detail/356163"/>
+    <id>urn:funding-finder:change:18ce14a50dfc267c7eee</id>
+    <updated>2026-11-08T16:45:23.673309Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-12-08</summary>
+  </entry>
   <entry>
     <title>Closing soon: NEA Arts and Artifacts Domestic Indemnity Program 1, FY2027 (12/26)</title>
     <link href="https://www.grants.gov/search-results-detail/362982"/>
@@ -1557,53 +1605,5 @@
     <updated>2026-11-02T20:28:07.902626Z</updated>
     <category term="deadline_changed"/>
     <summary>2026-11-23 → 2026-11-24</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: The NIA Genetics of Alzheimer's Disease Data Storage Site (NIAGADS)</title>
-    <link href="https://www.grants.gov/search-results-detail/362454"/>
-    <id>urn:funding-finder:change:88ebe33b615ee575f672</id>
-    <updated>2026-11-02T20:28:07.902626Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: BJA FY 2026 Missing and Unidentified Human Remains (MUHR) Program</title>
-    <link href="https://www.grants.gov/search-results-detail/364122"/>
-    <id>urn:funding-finder:change:88ce6442a10a58cf30ca</id>
-    <updated>2026-11-02T20:28:07.902626Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-12-02</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Energy Economy Planning and Growth Program</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr00001COlXwAAL"/>
-    <id>urn:funding-finder:change:75c26e799b4f6f231dec</id>
-    <updated>2026-11-02T20:28:07.902626Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: The NIDDK Disorders of Gastrointestinal Interoception Consortium Clinical Centers (DGIC)</title>
-    <link href="https://www.grants.gov/search-results-detail/360625"/>
-    <id>urn:funding-finder:change:6e7aa8ecd1cace42d61b</id>
-    <updated>2026-11-02T20:28:07.902626Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: The NIDDK Disorders of Gastrointestinal Interoception Consortium Clinical Centers (DGIC)</title>
-    <link href="https://www.grants.gov/search-results-detail/360623"/>
-    <id>urn:funding-finder:change:65989ec475ef058919ac</id>
-    <updated>2026-11-02T20:28:07.902626Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: The NIDDK Inflammatory Bowel Disease Genetics Consortium (IBDGC) Data Coordinating Center</title>
-    <link href="https://www.grants.gov/search-results-detail/360622"/>
-    <id>urn:funding-finder:change:3d8959b9f5d68165ac37</id>
-    <updated>2026-11-02T20:28:07.902626Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
   </entry>
 </feed>
