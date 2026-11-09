@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml</id>
-  <updated>2026-11-08T16:46:53Z</updated>
+  <updated>2026-11-09T20:58:47Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Cooperative Agreement for affiliated Partner with Californian Cooperative Ecosystem Studies Unit</title>
@@ -714,6 +714,19 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <summary>U.S. National Science Foundation | Application 2027-08-18 | The Research Experiences for Undergraduates (REU) program supports active research participation by undergraduate students in any of the areas of research funded by the National Science Foundation. REU projects involve students in meaningful ways in ongoing research programs or in research projects specifically designed for the REU program. This solicitation features two mechanisms for supporting …</summary>
   </entry>
   <entry>
+    <title>DoW’s Energy, Installations, and Environment Innovation Partners Programs</title>
+    <link href="https://www.grants.gov/search-results-detail/348830"/>
+    <id>urn:funding-finder:grants-gov:348830</id>
+    <updated>2023-06-21T00:00:00Z</updated>
+    <author><name>Washington Headquarters Services</name></author>
+    <category term="Arts and culture"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Technology development"/>
+    <category term="Materials science"/>
+    <summary>Washington Headquarters Services | Application 2028-01-08 | The Office of the Under Secretary of War (OUSW), intends to award non-research cooperative agreements (CA) to help manage and sustain Department of War (DoW) land in the United States. The DoW Strategic Environmental Research and Development Program (SERDP), Environmental Security Technology Certification Program (ESTCP), Readiness and Environmental Protection Integration (REPI) Program, and Legac…</summary>
+  </entry>
+  <entry>
     <title>Centers of Research Excellence in Science and Technology (CREST)</title>
     <link href="https://www.grants.gov/search-results-detail/348375"/>
     <id>urn:funding-finder:grants-gov:348375</id>
@@ -822,21 +835,5 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Materials science"/>
     <category term="Technology development"/>
     <summary>Idaho Field Office | Application 2030-10-14 | A. STATEMENT OF OBJECTIVESThis Funding Opportunity Announcement (FOA) is to award multiple cooperative agreements to accredited United States (U.S.) two- and four-year colleges and universities (Institutions of Higher Education (IHEs)) to receive and administer scholarship and fellowship funding-provided through the University Nuclear Leadership Program (UNLP) and as administered by the Department…</summary>
-  </entry>
-  <entry>
-    <title>Science of Learning and Augmented Intelligence (SL)</title>
-    <link href="https://www.grants.gov/search-results-detail/320753"/>
-    <id>urn:funding-finder:grants-gov:320753</id>
-    <updated>2019-09-19T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Data science"/>
-    <category term="Education and workforce"/>
-    <category term="Materials science"/>
-    <category term="Neuroscience"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>U.S. National Science Foundation | Application 2027-02-10 | Science of Learning and Augmented Intelligence (SL) supports potentially transformative research that develops basic theoretical insights and fundamental knowledge about principles, processes and mechanisms of learning, and about augmented intelligence - how human cognitive function can be augmented through interactions with others or with technology, or through variations in context. The program …</summary>
   </entry>
 </feed>

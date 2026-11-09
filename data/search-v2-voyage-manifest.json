@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-07T16:40:33.065Z",
+  "generated_at": "2026-11-09T21:03:57.441Z",
   "model": "voyage-4-lite",
   "provider_revision": "not exposed by the real-time embedding API",
   "response_model": "voyage-4-lite",
@@ -12,8 +12,8 @@
   "passage_count": 1512,
   "parent_passage_count": 1286,
   "child_passage_count": 226,
-  "corpus_sha256": "1c8b5c2065ee2893e7d463ac6141a29cefb6bd04ce7f2fa735a37ebb50f62884",
-  "vector_sha256": "9489ae040b33aebaed43dbfe0a261441ccd49636fe4bdbff7592d2258b748f2e",
+  "corpus_sha256": "db2f0d8674571fcf321a9247f8086a163671200426f76fd70dc22e345a924cef",
+  "vector_sha256": "763aed882bbbc18a643c56aafd43778e9ce89fe21fb873248bc405a37d2bba65",
   "vector_bytes": 3096576,
   "model_space_fingerprint": "243e59c7a5c2db0cb1e9de04e455bf417d6b875557cb8223146fcf5b8d23037c",
   "model_space": {
@@ -21,17 +21,17 @@
     "canary_count": 6,
     "fingerprint_method": "sha256 of exact unrounded canaries and complete embedding configuration",
     "comparison_to_prior_generation": {
-      "prior_fingerprint": "2928ada07773a1dd1cc8861fe8f416046893217e9335a7104f04a9d5f85f6fb3",
-      "drift_detected": true,
-      "minimum_cosine": 0.999968,
-      "mean_cosine": 0.999991,
+      "prior_fingerprint": "243e59c7a5c2db0cb1e9de04e455bf417d6b875557cb8223146fcf5b8d23037c",
+      "drift_detected": false,
+      "minimum_cosine": 1,
+      "mean_cosine": 1,
       "per_canary_cosine": {
         "carbon-catalysis": 1,
         "critical-minerals": 1,
         "rural-health": 1,
         "quantum-sensing": 1,
-        "maritime-autonomy": 0.999977,
-        "ecosystem-resilience": 0.999968
+        "maritime-autonomy": 1,
+        "ecosystem-resilience": 1
       },
       "minimum_cosine_gate": 0.95,
       "mean_cosine_gate": 0.98,
@@ -55,7 +55,7 @@
   },
   "configuration_sha256": "2df16f187fa8c688c436522ae3be762f64a85cde06b992497e1e9fa2216f47b6",
   "reuse_space_identity": "243e59c7a5c2db0cb1e9de04e455bf417d6b875557cb8223146fcf5b8d23037c",
-  "canary_sha256": "d50eadd6bdeeea6a491f4b28a5ee6327b4422a6c1576b00c81452f1b5951d167",
+  "canary_sha256": "b18ca00781500ffe1379b38ab20f33def5212c298f10efc0e3de1db0e9434146",
   "stable_passage_id_contract": "parent:<opportunity_id> or child:<subtopic_id>",
   "passages": [
     {
@@ -2023,7 +2023,7 @@
       "parent_id": "328902",
       "passage_kind": "parent",
       "record_id": "328902",
-      "text_sha256": "662faf5d848ca036e6176f3ec3e7b9f5034aa3938b049e9a8b2ca566f4b5fac8",
+      "text_sha256": "1573686ac5d8f6ddc5b78c13013792472c996dca18651160a2961a17dcd2049b",
       "vector_row": 245
     },
     {
@@ -2079,7 +2079,7 @@
       "parent_id": "334971",
       "passage_kind": "parent",
       "record_id": "334971",
-      "text_sha256": "afd68b7ea5a5fe4df3036822cca319eb6134dbd28a64c2717eb2191306b0b95c",
+      "text_sha256": "0ad2a421ab05f79c329ad143efce0a7089ee74c39e285b23dad6ba0f9173cee2",
       "vector_row": 252
     },
     {
@@ -2087,7 +2087,7 @@
       "parent_id": "334972",
       "passage_kind": "parent",
       "record_id": "334972",
-      "text_sha256": "259ac6360032db491e839ae1ed0df007f606a1955779090f2543bb43b5a6e36e",
+      "text_sha256": "543c217279a9eb3db6560ba32bba92d53ec6c4d51fd7b25019173ff9101c62d9",
       "vector_row": 253
     },
     {
@@ -2095,7 +2095,7 @@
       "parent_id": "337086",
       "passage_kind": "parent",
       "record_id": "337086",
-      "text_sha256": "e97625d2cdaa544f16dd51b913d917ba3f7ff5e72979651c83f3375382be5537",
+      "text_sha256": "38346f05a7f1fb070ba3196ca11b8c6381cea6769b5b6989522743045249dd91",
       "vector_row": 254
     },
     {
@@ -2399,7 +2399,7 @@
       "parent_id": "348830",
       "passage_kind": "parent",
       "record_id": "348830",
-      "text_sha256": "7fd799ed43315e06b53cb71e191ffe32f46f2017d57166d3b6b4e40057458b74",
+      "text_sha256": "744edf45649be30c6bebc881815da46a1158a82d09445e25cca4c89c90960aeb",
       "vector_row": 292
     },
     {
@@ -6591,7 +6591,7 @@
       "parent_id": "362034",
       "passage_kind": "parent",
       "record_id": "362034",
-      "text_sha256": "87165ec52d8bf856351e6a7b8845b0218ecc9c6fc7823fcc1ca900e934c71825",
+      "text_sha256": "466f88dafe8b6276b6aa239ecb2346baad9240eb7873d69f8f1154fb5e5f333f",
       "vector_row": 816
     },
     {
@@ -6831,7 +6831,7 @@
       "parent_id": "362394",
       "passage_kind": "parent",
       "record_id": "362394",
-      "text_sha256": "231d6f632d955470fc8cb3a7dc7833acc489d64e4807c19daa727dc2450e92a1",
+      "text_sha256": "3696e606fd0f2449884df882419a13cf56c5606058f3871a988b692482c41160",
       "vector_row": 846
     },
     {
@@ -6839,7 +6839,7 @@
       "parent_id": "362395",
       "passage_kind": "parent",
       "record_id": "362395",
-      "text_sha256": "8f336e0fa3116ad8aa377dbd731e458bcc91e28de905cd7cbfc9e670036ab788",
+      "text_sha256": "4f8549b26a7d1260359d5e1e90d12ee63b51bbe28b3f6073bcc21f9c03ce0bc5",
       "vector_row": 847
     },
     {
@@ -6847,7 +6847,7 @@
       "parent_id": "362396",
       "passage_kind": "parent",
       "record_id": "362396",
-      "text_sha256": "51f0f2495963e7edfbdf371c33346891408b2aaf47444b961dd39bc2b2757f5c",
+      "text_sha256": "9ff364e1225224416106e027526db84b2bc74e66681d2efe2ed6b976dea6ad38",
       "vector_row": 848
     },
     {
@@ -7087,7 +7087,7 @@
       "parent_id": "362755",
       "passage_kind": "parent",
       "record_id": "362755",
-      "text_sha256": "46bd5760b70e1077c06c8b40ae73298132133600d1792e490a9a14899a8a31f8",
+      "text_sha256": "71abf122abe1024a348e25d79ddd7b32bff9e221f77ec79ffa36d045c6b5d88a",
       "vector_row": 878
     },
     {
@@ -8175,7 +8175,7 @@
       "parent_id": "363446",
       "passage_kind": "parent",
       "record_id": "363446",
-      "text_sha256": "16901de372d794bc33d96928b0939951df65425af18faad3b88bf683bbc8547f",
+      "text_sha256": "237b421b397ad58dba706938e9b8009cc5c0c3b8f13ffe2fb07d771c65cf58b0",
       "vector_row": 1014
     },
     {
@@ -8863,7 +8863,7 @@
       "parent_id": "363699",
       "passage_kind": "parent",
       "record_id": "363699",
-      "text_sha256": "9c9531363d07c1be6402e826105aaba0a09309ab7c4aaeb890874e55f2dffdc9",
+      "text_sha256": "d624f557f05527c655bbcb26ccc7d42954a58bd2a69600f6534b2b7e34ab1f91",
       "vector_row": 1100
     },
     {
@@ -12155,5 +12155,5 @@
       "vector_row": 1511
     }
   ],
-  "integrity_sha256": "36e58dd36bc9c8ed60fad7ea0f602ba51ef2fe57ca9d84a9275139613b6441a9"
+  "integrity_sha256": "cf055276c66f70fd252dba57d2343f38c33245baac98b5eba47eac73757a7f54"
 }

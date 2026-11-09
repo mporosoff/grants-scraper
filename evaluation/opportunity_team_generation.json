@@ -1,14 +1,14 @@
 {
-  "run_id": "42501260780",
+  "run_id": "42696513708",
   "run_attempt": "1",
   "generation_requested": true,
-  "started_at": "2026-11-08T16:48:47.370539+00:00",
+  "started_at": "2026-11-09T21:03:15.272578+00:00",
   "response_contract": "team-response-1",
-  "input_generation": "1567e8203dd0ad943846b3429d6df8aa5ff265422ba7310df9ddf7e5a8b54a8f",
+  "input_generation": "75228591def9636dd4947e5c5a83b645580f42e47d28902f484fa8d185fdfc9d",
   "mode": "maintenance",
   "queue_counts": {
-    "maintenance": 1002,
-    "backfill": 402
+    "maintenance": 1010,
+    "backfill": 394
   },
   "queue_reasons": {
     "363830": "retryable_maintenance_failure",
@@ -589,7 +589,7 @@
     "361134": "retryable_maintenance_failure",
     "356018": "retryable_maintenance_failure",
     "361318": "retryable_maintenance_failure",
-    "337086": "historical_unassessed_backfill",
+    "337086": "source_changed",
     "363958": "retryable_maintenance_failure",
     "363591": "retryable_maintenance_failure",
     "363749": "historical_unassessed_backfill",
@@ -736,7 +736,7 @@
     "353821": "retryable_maintenance_failure",
     "364055": "retryable_maintenance_failure",
     "364120": "retryable_maintenance_failure",
-    "363699": "historical_unassessed_backfill",
+    "363699": "source_changed",
     "332894": "retryable_maintenance_failure",
     "363592": "historical_unassessed_backfill",
     "363277": "historical_unassessed_backfill",
@@ -861,18 +861,18 @@
     "356610": "historical_unassessed_backfill",
     "348985": "retryable_maintenance_failure",
     "363799": "historical_unassessed_backfill",
-    "362396": "historical_unassessed_backfill",
-    "362395": "historical_unassessed_backfill",
-    "363446": "retryable_maintenance_failure",
+    "362396": "source_changed",
+    "362395": "source_changed",
+    "363446": "source_changed",
     "363802": "historical_unassessed_backfill",
     "357186": "stale_published_team",
     "357187": "retryable_maintenance_failure",
     "357019": "retryable_maintenance_failure",
-    "328902": "historical_unassessed_backfill",
+    "328902": "source_changed",
     "364013": "retryable_maintenance_failure",
     "357572": "retryable_maintenance_failure",
     "356617": "retryable_maintenance_failure",
-    "362394": "historical_unassessed_backfill",
+    "362394": "source_changed",
     "363801": "historical_unassessed_backfill",
     "359325": "retryable_maintenance_failure",
     "357712": "retryable_maintenance_failure",
@@ -1138,7 +1138,7 @@
     "357379": "retryable_maintenance_failure",
     "357346": "stale_published_team",
     "357345": "stale_published_team",
-    "348830": "historical_unassessed_backfill",
+    "348830": "source_changed",
     "359130": "retryable_maintenance_failure",
     "358411": "retryable_maintenance_failure",
     "359701": "historical_unassessed_backfill",
@@ -1148,19 +1148,19 @@
     "364066": "retryable_maintenance_failure",
     "362562": "historical_unassessed_backfill",
     "358823": "historical_unassessed_backfill",
-    "334971": "retryable_maintenance_failure",
-    "334972": "retryable_maintenance_failure",
+    "334971": "source_changed",
+    "334972": "source_changed",
     "363151": "retryable_maintenance_failure",
     "362639": "historical_unassessed_backfill",
     "363876": "retryable_maintenance_failure",
     "345938": "retryable_maintenance_failure",
     "360007": "retryable_maintenance_failure",
-    "362755": "historical_unassessed_backfill",
+    "362755": "source_changed",
     "363877": "retryable_maintenance_failure",
     "359154": "retryable_maintenance_failure",
     "359019": "retryable_maintenance_failure",
     "358967": "historical_unassessed_backfill",
-    "362034": "retryable_maintenance_failure",
+    "362034": "source_changed",
     "363495": "historical_unassessed_backfill",
     "357140": "retryable_maintenance_failure",
     "358816": "retryable_maintenance_failure",
@@ -1615,7 +1615,7 @@
   },
   "eligible_scopes": 1418,
   "pending_scopes": 1404,
-  "due_scopes": 1002,
+  "due_scopes": 1010,
   "eligibility": [
     {
       "scope_id": "360004:c-2",
@@ -2994,7 +2994,7 @@
       }
     ],
     "recovery_only": false,
-    "selected_pending_scopes": 1002
+    "selected_pending_scopes": 1010
   },
   "coverage_before": {
     "scopes": 14,
@@ -3017,7 +3017,7 @@
   },
   "embedding_reuse_permitted": true,
   "llm_usage": {
-    "logical_id": "offline-42501260780",
+    "logical_id": "offline-42696513708",
     "limit_usd": 2.0,
     "charged_usd": 0.0,
     "by_provider_model_stage": {},
@@ -8248,7 +8248,7 @@
       "scope_id": "337086",
       "parent_id": "337086",
       "stage": "queue",
-      "input_fingerprint": "8d23d022e879c67fb6c1a98cc31ec136e84247cb81905e130d64f7745043dd63",
+      "input_fingerprint": "8c2fe6b85337255ddd8f61b3e3b9c33ab7b57e40c4c9b369a9c6bf96b6af559e",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -9571,7 +9571,7 @@
       "scope_id": "363699",
       "parent_id": "363699",
       "stage": "queue",
-      "input_fingerprint": "db6ca95af3e27ec0b31d9431f90753f04c1d6a5836df6ccb7b74464b21d89a7b",
+      "input_fingerprint": "14122a28150110d03ad91e85fc7d233d60895a074bdf7b33db33ba6c71efeec0",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -10696,7 +10696,7 @@
       "scope_id": "362396",
       "parent_id": "362396",
       "stage": "queue",
-      "input_fingerprint": "13dbf1318cd6b93a27d5262cf56a20898e199313274935e20729d27cef4c7dfb",
+      "input_fingerprint": "9eb1ae0211b14af88d08a2f90cdb9b97f44d9aa34044123c339b4e4a532df497",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -10705,7 +10705,7 @@
       "scope_id": "362395",
       "parent_id": "362395",
       "stage": "queue",
-      "input_fingerprint": "120c19a1eb066768121e2e1f1e4a6a4831bc0b883d27f521f7628a372194ac42",
+      "input_fingerprint": "ac397fa8e82e900c41efaff6f52ebea96d8dc2257bb502adfa37d46cf8ba5dd2",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -10714,7 +10714,7 @@
       "scope_id": "363446",
       "parent_id": "363446",
       "stage": "queue",
-      "input_fingerprint": "519891d21a7f61e72f025d22082f32aa2392b4fb7482f367d4f3724a7148618d",
+      "input_fingerprint": "5a58bd501ae6c9aeb8f3aa5afe1d4685ac6f6d7cd46885e47a0ebbbb4300d705",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -10759,7 +10759,7 @@
       "scope_id": "328902",
       "parent_id": "328902",
       "stage": "queue",
-      "input_fingerprint": "2c73fc348b852a649e6709c7d1edf3d277e80ab26e396726acc0db55eb424363",
+      "input_fingerprint": "942d1362f24557bad89977bfb829e2d4469bc753a5b16542b92f092d192fdf51",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -10795,7 +10795,7 @@
       "scope_id": "362394",
       "parent_id": "362394",
       "stage": "queue",
-      "input_fingerprint": "526a7150b7b029577cd98a5604befbde76cd2322cc615d67e716efccdf409321",
+      "input_fingerprint": "5f42f5ecec22a45bc489dad389a1d142a7259f9038eeed35bad04e682c84c1e0",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -13189,7 +13189,7 @@
       "scope_id": "348830",
       "parent_id": "348830",
       "stage": "queue",
-      "input_fingerprint": "ba5d5a565edae7d9ab5bef65c72885db1e4f47b2e0ef4bcba907296332205de2",
+      "input_fingerprint": "4a3969dfa903a3a90e011409d16914f46133cf468ae9b6e8ea555410c45e1aa7",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -13279,7 +13279,7 @@
       "scope_id": "334971",
       "parent_id": "334971",
       "stage": "queue",
-      "input_fingerprint": "945a66ca55792dbf9efabc88110a2b18bb771f6cdc4e2490b694cfae9251bb06",
+      "input_fingerprint": "4ba3f47f0f628c1a8e32ab308f3ef2204d779a6274f0e6fd0dd9d834d372604e",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -13288,7 +13288,7 @@
       "scope_id": "334972",
       "parent_id": "334972",
       "stage": "queue",
-      "input_fingerprint": "e064344700dcff2e807a653836fd55b1243f646114e6165424803b9cbab2c6ab",
+      "input_fingerprint": "f22310ed814181cb2b8dba50c039ab639a4640aba34ba8d23cc23682b4f9c8dd",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -13342,7 +13342,7 @@
       "scope_id": "362755",
       "parent_id": "362755",
       "stage": "queue",
-      "input_fingerprint": "77b3493f3ad34836bfed36cc66f74598e93e1fc23f56a2b45f70fb02f9d46654",
+      "input_fingerprint": "905117742935ca7ab1ff64ded476a47b737b71d4f6d5e9e067827f0393018258",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -13387,7 +13387,7 @@
       "scope_id": "362034",
       "parent_id": "362034",
       "stage": "queue",
-      "input_fingerprint": "acd5b5fdda24880d56c7ca22b8f58f98d3fdd9341adb92427c372f93a2ab989e",
+      "input_fingerprint": "933b560ded4382ae8fe8e0f38a436248a09072528aa2b8aa9c5bca8de66d36fb",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -15681,6 +15681,6 @@
   ],
   "assessed_scopes": 0,
   "outcomes": {},
-  "elapsed_seconds": 3.232,
+  "elapsed_seconds": 4.139,
   "status": "completed"
 }
