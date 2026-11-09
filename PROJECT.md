@@ -76,7 +76,7 @@ verified. Degradation exits visibly and opens or updates an owner-facing GitHub
 issue. UR InfoReady is a disabled shell pending a stable permissioned route.
 
 <!-- catalog-summary:start -->
-The November 8, 2026 build contains 1,301 open or current forecasted funding
+The November 9, 2026 build contains 1,301 open or current forecasted funding
 opportunities (966 posted and 335 forecasted) rather than the former 48-record
 engineering shortlist. It contains no record with a deadline before the catalog date.
 Current published sources are ARPA-H (10), DARPA / IARPA research solicitations (1),
@@ -603,15 +603,15 @@ presented as the FOA.
 ### Current evidence baseline
 
 <!-- catalog-evidence:start -->
-The November 8, 2026 catalog contains 1,301 current posted or forecasted opportunities:
+The November 9, 2026 catalog contains 1,301 current posted or forecasted opportunities:
 
 - 204 have a defensible direct announcement attachment (167 high confidence, 37 medium
   confidence);
 - another 593 use an official source page as their primary route;
 - the remaining 504 use the official Grants.gov record as their primary route;
 - 683 contain an agency notice URL across all route types;
-- 383 preserve an official deadline time or timezone;
-- 97 carry a preliminary-stage signal, including 1 narrative dates visibly marked for
+- 385 preserve an official deadline time or timezone;
+- 99 carry a preliminary-stage signal, including 1 narrative dates visibly marked for
   verification;
 - 610 (46.9%) have an official per-award floor or ceiling;
 - 796 (61.2%) have at least one structured funding amount; and

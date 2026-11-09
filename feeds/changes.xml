@@ -4,8 +4,64 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/changes.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/changes.xml</id>
-  <updated>2026-11-08T16:48:51Z</updated>
+  <updated>2026-11-09T21:03:21Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>Source interpretation corrected: Commercial Fishing Occupational Safety Training Project Grants (T03)</title>
+    <link href="https://www.grants.gov/search-results-detail/334972"/>
+    <id>urn:funding-finder:change:f8bd9a757d978e213a55</id>
+    <updated>2026-11-09T20:52:15.111265Z</updated>
+    <category term="source_correction"/>
+    <summary>2027-01-29 → 2026-12-31</summary>
+  </entry>
+  <entry>
+    <title>Source interpretation corrected: 2026 Alaska Marine Education and Training Mini-Grant Program</title>
+    <link href="https://www.grants.gov/search-results-detail/362034"/>
+    <id>urn:funding-finder:change:ee6ea71428868e88b17c</id>
+    <updated>2026-11-09T20:52:15.111265Z</updated>
+    <category term="source_correction"/>
+    <summary>2028-05-01 → 2027-05-03</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Landmarks of History and Culture and Summer Institutes</title>
+    <link href="https://www.grants.gov/search-results-detail/363880"/>
+    <id>urn:funding-finder:change:b90ed45d679fb92748bb</id>
+    <updated>2026-11-09T20:52:15.111265Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-12-09</summary>
+  </entry>
+  <entry>
+    <title>Source interpretation corrected: WaterSMART Cooperative Watershed Management Program</title>
+    <link href="https://www.grants.gov/search-results-detail/362755"/>
+    <id>urn:funding-finder:change:9ad608674ebeddab3baf</id>
+    <updated>2026-11-09T20:52:15.111265Z</updated>
+    <category term="source_correction"/>
+    <summary>2028-02-15 → 2027-02-24</summary>
+  </entry>
+  <entry>
+    <title>Source interpretation corrected: Commercial Fishing Occupational Safety Research Cooperative Agreement (U01)</title>
+    <link href="https://www.grants.gov/search-results-detail/334971"/>
+    <id>urn:funding-finder:change:4980d84893db404e9714</id>
+    <updated>2026-11-09T20:52:15.111265Z</updated>
+    <category term="source_correction"/>
+    <summary>2028-01-31 → 2026-12-31</summary>
+  </entry>
+  <entry>
+    <title>Source interpretation corrected: Innovative Traffic Safety Enforcement (ITSE) Grant Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363446"/>
+    <id>urn:funding-finder:change:3d6f4f9dd3aac61ab18d</id>
+    <updated>2026-11-09T20:52:15.111265Z</updated>
+    <category term="source_correction"/>
+    <summary>2027-09-01 → 2027-03-01</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: IUSE: Innovation in Two-Year College STEM Education (ITYC)</title>
+    <link href="https://www.grants.gov/search-results-detail/363752"/>
+    <id>urn:funding-finder:change:354276ae8e68c8d64b03</id>
+    <updated>2026-11-09T20:52:15.111265Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-12-09</summary>
+  </entry>
   <entry>
     <title>Closing soon: Apprenticeship and Pre-apprenticeship Clean Energy Training</title>
     <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0r8z000000FOEyAAO"/>
@@ -1549,61 +1605,5 @@
     <updated>2026-11-05T23:45:04.802098Z</updated>
     <category term="deadline_changed"/>
     <summary>2026-12-01 → 2027-02-01</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: Assay Validation of High Quality Markers for Clinical Studies in Cancer (UH2/UH3 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/360946"/>
-    <id>urn:funding-finder:change:0e9e810ca91ef492276b</id>
-    <updated>2026-11-05T23:45:04.802098Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: APEX Accelerator-Option Period for Existing Award Recipients</title>
-    <link href="https://www.grants.gov/search-results-detail/364213"/>
-    <id>urn:funding-finder:change:0b8ff849ec2e001a715d</id>
-    <updated>2026-11-05T23:45:04.802098Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: FY27 Guidelines for Brownfield Assessment Grants (Community-wide Assessment Grants)</title>
-    <link href="https://www.grants.gov/search-results-detail/364198"/>
-    <id>urn:funding-finder:change:0852a8662b1223269b77</id>
-    <updated>2026-11-05T23:45:04.802098Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: OJP FY 2026 Special Attorneys Program Round 11</title>
-    <link href="https://www.grants.gov/search-results-detail/364197"/>
-    <id>urn:funding-finder:change:061d8ebf2f12de9a2d36</id>
-    <updated>2026-11-05T23:45:04.802098Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-11-17</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: ROSES25: A.14 Atmosphere</title>
-    <link href="https://www.grants.gov/search-results-detail/363240"/>
-    <id>urn:funding-finder:change:f2d8c2ce2bb87f6b6673</id>
-    <updated>2026-11-02T20:28:07.902626Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-12-02</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: Commercialization Cohort Programs</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr00001L5iYZAAZ"/>
-    <id>urn:funding-finder:change:eb186cda58b74575f329</id>
-    <updated>2026-11-02T20:28:07.902626Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-12-02</summary>
-  </entry>
-  <entry>
-    <title>Deadline changed: Clean Energy Career Pathways Training</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr000012uHhNAAU"/>
-    <id>urn:funding-finder:change:9d175e229f66747a6b92</id>
-    <updated>2026-11-02T20:28:07.902626Z</updated>
-    <category term="deadline_changed"/>
-    <summary>2026-11-23 → 2026-11-24</summary>
   </entry>
 </feed>

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-08T16:46:53Z",
+  "generated_at": "2026-11-09T20:58:47Z",
   "excluded_noncurrent": 1,
   "feeds": [
     {
@@ -110,7 +110,7 @@
     {
       "title": "Funding Finder | Materials science",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml",
-      "count": 61
+      "count": 62
     },
     {
       "title": "Funding Finder | Neuroscience",
