@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/all.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/all.xml</id>
-  <updated>2026-11-09T20:58:47Z</updated>
+  <updated>2026-11-10T17:59:42Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -844,6 +844,14 @@
     <summary>Centers for Disease Control - NCCDPHP | Estimated Application 2027-05-03 | The purpose of this multi-component NOFO is to improve the health of pregnant and postpartum women and their newborns through quality improvement. CDC will fund two components. Component A will support state Perinatal Quality Collaboratives (PQCs). PQCs are state-based organizations that support quality improvement (QI) efforts in health facilities and whose approach has been successful in improvi…</summary>
   </entry>
   <entry>
+    <title>Fetal, Infant, and Child Death Review Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363409"/>
+    <id>urn:funding-finder:grants-gov:363409</id>
+    <updated>2027-03-04T00:00:00Z</updated>
+    <author><name>Health Resources and Services Administration</name></author>
+    <summary>Health Resources and Services Administration | Estimated Application 2027-06-01 | This program will support coordinated leadership and technical assistance to state, local, and tribal fetal infant and child death review (FICDR) teams to ensure a standardized and coordinated approach for quality fatality reviews, data collection, and dissemination of findings to inform review team practice and local prevention strategies.</summary>
+  </entry>
+  <entry>
     <title>Preventing Violence Affecting Young Lives (PREVAYL 2.0)</title>
     <link href="https://www.grants.gov/search-results-detail/363634"/>
     <id>urn:funding-finder:grants-gov:363634</id>
@@ -950,16 +958,5 @@
     <category term="Data science"/>
     <category term="Public health"/>
     <summary>Centers for Disease Control - NCBDDD | Estimated Application 2027-04-26 | CDC proposes to allocate funds to implement Notice of Funding Opportunity (NOFO) DD-27-0028, Maternal Child Surveillance and Partnerships for Action, Results, and Knowledge. This NOFO will integrate maternal child health surveillance with national partnership activities to address key public health challenges including alcohol use during pregnancy, fetal alcohol spectrum disorders (FASDs), neonata…</summary>
-  </entry>
-  <entry>
-    <title>AIDS Research Center on Mental Health and HIV/AIDS (P30 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/362945"/>
-    <id>urn:funding-finder:grants-gov:362945</id>
-    <updated>2027-02-25T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Data science"/>
-    <category term="Social and behavioral sciences"/>
-    <category term="Technology development"/>
-    <summary>National Institutes of Health | Estimated Application 2027-05-25 | The National Institute of Mental Health (NIMH) seeks research applications to support the NIMH HIV/AIDS Research Centers (ARC) program, including Developmental Centers (D-ARCs) and full AIDS Research Centers (ARCs). These Research Centers aim to capitalize on the coordinated infrastructure to advance high-impact, interdisciplinary HIV/AIDS research. The ARC program supports innovative research acr…</summary>
   </entry>
 </feed>

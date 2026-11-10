@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml</id>
-  <updated>2026-11-09T20:58:47Z</updated>
+  <updated>2026-11-10T17:59:42Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Cooperative Agreement for affiliated Partner with Californian Cooperative Ecosystem Studies Unit</title>
@@ -127,7 +127,7 @@
     <category term="Data science"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Manufacturing"/>
-    <summary>Office of Science | Letter Of Intent 2026-11-09 | American scientists and engineers will power the super intelligence (SI) revolution in science and innovation through the Genesis Mission. DOE SC hereby invites applications from United States (U.S.) Institutions of Higher Education and domestic doctoral-granting institutions to develop and demonstrate the effectiveness of novel four-year doctoral training pilots with dual competency in SI and ano…</summary>
+    <summary>Office of Science | Application 2027-01-12 | prerequisite closed | American scientists and engineers will power the super intelligence (SI) revolution in science and innovation through the Genesis Mission. DOE SC hereby invites applications from United States (U.S.) Institutions of Higher Education and domestic doctoral-granting institutions to develop and demonstrate the effectiveness of novel four-year doctoral training pilots with dual competency in SI and ano…</summary>
   </entry>
   <entry>
     <title>Small Business Innovation Research and Small Business Technology Transfer Programs Phase II</title>
@@ -700,6 +700,8 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Manufacturing"/>
     <category term="Materials science"/>
     <category term="Technology development"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
     <summary>U.S. National Science Foundation | Application 2026-11-16 | Proposals in the area of plasma physics submitted to the Division of Physics that are not governed by another solicitation (such as CAREER), should be submitted to the Division-wide solicitation: Division of Physics: Investigator-Initiated Research Projects. The Plasma Physics program participates in multiple NSF meta-programs such as the ECosytem for Leading Innovation in Plasma Science and Engin…</summary>
   </entry>
   <entry>

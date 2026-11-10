@@ -4,8 +4,18 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/energy.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/energy.xml</id>
-  <updated>2026-11-09T20:58:47Z</updated>
+  <updated>2026-11-10T17:59:42Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>NYSERDA’s New York Business-Research Innovation &amp; Development Growth Exchange</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr00001FcKkYAAV"/>
+    <id>urn:funding-finder:nyserda:nyserda%3ARFP6157</id>
+    <updated>2026-11-09T00:00:00Z</updated>
+    <author><name>NYSERDA</name></author>
+    <category term="Energy"/>
+    <category term="Technology development"/>
+    <summary>NYSERDA | Application 2027-01-06 | Supporting a statewide university-industry collaboration program, New York Business-Research Innovation &amp; Development Growth Exchange (NY BRIDGE) Request for Proposals (RFP) 6157 seeks a Program Administrator. The selected contractor will recruit and support participating businesses and universities, organize convenings and partnership activities, and administer a competitive grant process for par…</summary>
+  </entry>
   <entry>
     <title>Strengthening Moldova’s Energy and Trade Security</title>
     <link href="https://www.grants.gov/search-results-detail/364240"/>
@@ -294,7 +304,7 @@
     <category term="Data science"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Manufacturing"/>
-    <summary>Office of Science | Letter Of Intent 2026-11-09 | American scientists and engineers will power the super intelligence (SI) revolution in science and innovation through the Genesis Mission. DOE SC hereby invites applications from United States (U.S.) Institutions of Higher Education and domestic doctoral-granting institutions to develop and demonstrate the effectiveness of novel four-year doctoral training pilots with dual competency in SI and ano…</summary>
+    <summary>Office of Science | Application 2027-01-12 | prerequisite closed | American scientists and engineers will power the super intelligence (SI) revolution in science and innovation through the Genesis Mission. DOE SC hereby invites applications from United States (U.S.) Institutions of Higher Education and domestic doctoral-granting institutions to develop and demonstrate the effectiveness of novel four-year doctoral training pilots with dual competency in SI and ano…</summary>
   </entry>
   <entry>
     <title>ROSES 2025: B.8 Heliophysics Spaceflight Science Foundations</title>
@@ -688,15 +698,5 @@
     <category term="Climate change"/>
     <category term="Energy"/>
     <summary>NYSERDA | Application 2030-12-31 | The New York State Energy Research and Development Authority (NYSERDA) requests applications from qualified contractors to utilize the Department of Energy - Energy Efficiency Revolving Loan Fund (DOE-EERLF) funds for projects financed by single family residential customers. NYSERDA has established a new revolving loan fund intended to spur investment in energy efficiency and decarbonization measu…</summary>
-  </entry>
-  <entry>
-    <title>NSF Division of Physics: Investigator-Initiated Research Projects (PHY) 23-615</title>
-    <link href="https://new.nsf.gov/funding/opportunities/division-physics-investigator-initiated-research"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3A23-615</id>
-    <updated>2026-09-07T00:00:00Z</updated>
-    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <category term="Quantum science"/>
-    <category term="Energy"/>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Posted</summary>
   </entry>
 </feed>

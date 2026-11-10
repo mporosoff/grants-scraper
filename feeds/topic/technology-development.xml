@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml</id>
-  <updated>2026-11-09T20:58:47Z</updated>
+  <updated>2026-11-10T17:59:42Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Technology Development Program</title>
@@ -296,6 +296,27 @@
     <summary>Centers for Disease Control - NCHHSTP | Estimated Application 2027-01-11 | CDC is funding programs that track, prevent, and control sexually transmitted infections (STI) in state, district, territorial, and city or county health departments. The purpose of this NOFO is to track, prevent, and control three common STIs: syphilis, gonorrhea, and chlamydia. The NOFO supports the goals of the Sexually Transmitted Infections National Strategic Plan 2021-2025: Prevent new STIs.…</summary>
   </entry>
   <entry>
+    <title>NYSERDA’s New York Business-Research Innovation &amp; Development Growth Exchange</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr00001FcKkYAAV"/>
+    <id>urn:funding-finder:nyserda:nyserda%3ARFP6157</id>
+    <updated>2026-11-09T00:00:00Z</updated>
+    <author><name>NYSERDA</name></author>
+    <category term="Energy"/>
+    <category term="Technology development"/>
+    <summary>NYSERDA | Application 2027-01-06 | Supporting a statewide university-industry collaboration program, New York Business-Research Innovation &amp; Development Growth Exchange (NY BRIDGE) Request for Proposals (RFP) 6157 seeks a Program Administrator. The selected contractor will recruit and support participating businesses and universities, organize convenings and partnership activities, and administer a competitive grant process for par…</summary>
+  </entry>
+  <entry>
+    <title>DHS S&amp;T Center of Excellence Supplemement Applications</title>
+    <link href="https://www.grants.gov/search-results-detail/364244"/>
+    <id>urn:funding-finder:grants-gov:364244</id>
+    <updated>2026-11-09T00:00:00Z</updated>
+    <author><name>Office of Procurement Operations - Grants Division</name></author>
+    <category term="Education and workforce"/>
+    <category term="Manufacturing"/>
+    <category term="Technology development"/>
+    <summary>Office of Procurement Operations - Grants Division | Application 2027-05-21 | The DHS Centers of Excellence (COE) are multi-disciplinary, university-based, research and education Centers that conduct rigorous, innovative and useful research. DHS expects the COEs to break new theoretical and empirical ground as well as adapt existing approaches to homeland security missions and technology gaps. Research methods proposed under these funding continuations should be rooted in r…</summary>
+  </entry>
+  <entry>
     <title>Cooperative Agreement for affiliated Partner with Chesapeake Watershed Cooperative Ecosystem Studies Unit</title>
     <link href="https://www.grants.gov/search-results-detail/364229"/>
     <id>urn:funding-finder:grants-gov:364229</id>
@@ -511,7 +532,7 @@
     <category term="Data science"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Manufacturing"/>
-    <summary>Office of Science | Letter Of Intent 2026-11-09 | American scientists and engineers will power the super intelligence (SI) revolution in science and innovation through the Genesis Mission. DOE SC hereby invites applications from United States (U.S.) Institutions of Higher Education and domestic doctoral-granting institutions to develop and demonstrate the effectiveness of novel four-year doctoral training pilots with dual competency in SI and ano…</summary>
+    <summary>Office of Science | Application 2027-01-12 | prerequisite closed | American scientists and engineers will power the super intelligence (SI) revolution in science and innovation through the Genesis Mission. DOE SC hereby invites applications from United States (U.S.) Institutions of Higher Education and domestic doctoral-granting institutions to develop and demonstrate the effectiveness of novel four-year doctoral training pilots with dual competency in SI and ano…</summary>
   </entry>
   <entry>
     <title>HEAL Initiative: Integrative Management of chronic Pain and OUD for Whole Recovery (IMPOWR) - Building Engagement, Assistance, Capacity, Outreach, and Networks (BEACON) Center (U2C Clinical Trial Not Allowed)</title>
@@ -628,28 +649,5 @@
     <category term="Agriculture and food"/>
     <category term="Technology development"/>
     <summary>Rural Business-Cooperative Service | Application 2027-01-31 | The primary objective of the program is to provide grants to Agriculture Innovation Centers that will provide technical assistance to agricultural producers to market value-added agricultural products.</summary>
-  </entry>
-  <entry>
-    <title>Limited Competition: High Impact Specialized Innovation Programs in Clinical and Translational Science</title>
-    <link href="https://www.grants.gov/search-results-detail/363250"/>
-    <id>urn:funding-finder:grants-gov:363250</id>
-    <updated>2026-09-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Education and workforce"/>
-    <category term="Public health"/>
-    <category term="Technology development"/>
-    <summary>National Institutes of Health | Estimated Application 2027-01-25 | The purpose of the Congressionally mandated Clinical and Translational Science Award (CTSA) Program is to accelerate the translation of scientific discoveries into treatments, diagnostics, and health interventions that improve patient and public health by funding and coordinating a national network of academic medical centers that provide the infrastructure, expertise, training, and collaboration …</summary>
-  </entry>
-  <entry>
-    <title>The Next Generation of the Clinical and Translational Science Awards Program Trial Innovation Network</title>
-    <link href="https://www.grants.gov/search-results-detail/363253"/>
-    <id>urn:funding-finder:grants-gov:363253</id>
-    <updated>2026-09-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Education and workforce"/>
-    <category term="Public health"/>
-    <category term="Technology development"/>
-    <summary>National Institutes of Health | Estimated Application 2027-01-25 | The Clinical and Translational Science Awards Program Trial Innovation Network (TIN) is a collaborative initiative aimed at addressing critical roadblocks in the design and implementation of multi-center clinical trials. The goal of the TIN is to execute trials better, faster, and more cost-efficiently, as well as serve as a national laboratory to study, understand, and innovate the process of con…</summary>
   </entry>
 </feed>
