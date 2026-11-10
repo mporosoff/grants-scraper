@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/source-type/internal.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/source-type/internal.xml</id>
-  <updated>2026-11-09T20:58:47Z</updated>
+  <updated>2026-11-10T17:59:42Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>New NSF MPS funding opportunities for core research programs</title>
@@ -125,6 +125,8 @@ a high level of innovation and creativity. The goal is to support the best young
     <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-63cc8866673bd1a1</id>
     <updated>2026-08-09T00:00:00Z</updated>
     <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
     <summary>VPR funding digest (limited submissions &amp; foundations) | Posted</summary>
   </entry>
   <entry>
@@ -141,8 +143,6 @@ a high level of innovation and creativity. The goal is to support the best young
     <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-aed7d81578b24028</id>
     <updated>2026-08-09T00:00:00Z</updated>
     <author><name>Alfred P. Sloan Foundation</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
     <summary>Alfred P. Sloan Foundation | Posted | The Sloan Research Fellowship Program recognizes and rewards outstanding early-career faculty who have the potential to revolutionize their fields of study.
 Successful candidates for a Fellowship generally have a strong record of significant independent research accomplishments that demonstrate creativity and the potential to become future leaders in the scientific community. While Fellows are exp…</summary>
   </entry>

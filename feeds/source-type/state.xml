@@ -4,8 +4,18 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/source-type/state.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/source-type/state.xml</id>
-  <updated>2026-11-09T20:58:47Z</updated>
+  <updated>2026-11-10T17:59:42Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>NYSERDA’s New York Business-Research Innovation &amp; Development Growth Exchange</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr00001FcKkYAAV"/>
+    <id>urn:funding-finder:nyserda:nyserda%3ARFP6157</id>
+    <updated>2026-11-09T00:00:00Z</updated>
+    <author><name>NYSERDA</name></author>
+    <category term="Energy"/>
+    <category term="Technology development"/>
+    <summary>NYSERDA | Application 2027-01-06 | Supporting a statewide university-industry collaboration program, New York Business-Research Innovation &amp; Development Growth Exchange (NY BRIDGE) Request for Proposals (RFP) 6157 seeks a Program Administrator. The selected contractor will recruit and support participating businesses and universities, organize convenings and partnership activities, and administer a competitive grant process for par…</summary>
+  </entry>
   <entry>
     <title>Energy Economy Planning and Growth Program</title>
     <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr00001COlXwAAL"/>
