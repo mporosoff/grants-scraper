@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml</id>
-  <updated>2026-11-10T17:59:42Z</updated>
+  <updated>2026-11-11T22:12:52Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Technology Development Program</title>
@@ -579,16 +579,6 @@
     <summary>Advanced Research Projects Agency for Health (ARPA-H) | Preapplication 2026-11-30 | Current ARPA-H program. SURPASS | ARPA-H (function(w, d, s, l, i){w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&amp;l='+l:''; j.async=true; j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j, f); })(window, document,'script','dataLayer','GTM-W5GM3DT9'); win…</summary>
   </entry>
   <entry>
-    <title>Limited Competition: NIH Research Evaluation and Commercialization Hubs (REACH) (SB0 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/362965"/>
-    <id>urn:funding-finder:grants-gov:362965</id>
-    <updated>2026-09-24T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Public health"/>
-    <category term="Technology development"/>
-    <summary>National Institutes of Health | Application 2026-11-10 | This Notice of Funding Opportunity (NOFO) announces the renewal of the NIH Research Evaluation and Commercialization Hub (REACH) program, established to facilitate and accelerate the translation of academic biomedical discoveries into products that improve patient care and public health. Through this program, NIH will provide the qualifying institutions with the funds to seed the creation of acade…</summary>
-  </entry>
-  <entry>
     <title>Deployed Warfighter Protection FY27</title>
     <link href="https://www.grants.gov/search-results-detail/363946"/>
     <id>urn:funding-finder:grants-gov:363946</id>
@@ -649,5 +639,16 @@
     <category term="Agriculture and food"/>
     <category term="Technology development"/>
     <summary>Rural Business-Cooperative Service | Application 2027-01-31 | The primary objective of the program is to provide grants to Agriculture Innovation Centers that will provide technical assistance to agricultural producers to market value-added agricultural products.</summary>
+  </entry>
+  <entry>
+    <title>Limited Competition: High Impact Specialized Innovation Programs in Clinical and Translational Science</title>
+    <link href="https://www.grants.gov/search-results-detail/363250"/>
+    <id>urn:funding-finder:grants-gov:363250</id>
+    <updated>2026-09-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Education and workforce"/>
+    <category term="Public health"/>
+    <category term="Technology development"/>
+    <summary>National Institutes of Health | Estimated Application 2027-01-25 | The purpose of the Congressionally mandated Clinical and Translational Science Award (CTSA) Program is to accelerate the translation of scientific discoveries into treatments, diagnostics, and health interventions that improve patient and public health by funding and coordinating a national network of academic medical centers that provide the infrastructure, expertise, training, and collaboration …</summary>
   </entry>
 </feed>

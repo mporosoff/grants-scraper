@@ -1,32 +1,17 @@
 {
-  "run_id": "42869748262",
-  "run_attempt": "1",
+  "run_id": "43072732313",
+  "run_attempt": "2",
   "generation_requested": true,
-  "started_at": "2026-11-10T18:06:59.089159+00:00",
+  "started_at": "2026-11-11T22:14:53.094325+00:00",
   "response_contract": "team-response-1",
-  "input_generation": "e09d8116365cc0daf106a338143ba3a5ab059e796b4e336d47680c651ba466e7",
+  "input_generation": "3d4791a7f783c37510a2477ffef4d9d4658ba2bccd199676da720223971fd991",
   "mode": "maintenance",
   "queue_counts": {
-    "maintenance": 1026,
-    "backfill": 376
+    "maintenance": 1034,
+    "backfill": 358
   },
   "queue_reasons": {
-    "360400": "historical_unassessed_backfill",
-    "363908": "retryable_maintenance_failure",
-    "363720": "retryable_maintenance_failure",
-    "361065": "retryable_maintenance_failure",
-    "361522": "historical_unassessed_backfill",
-    "359740": "retryable_maintenance_failure",
-    "360536": "historical_unassessed_backfill",
-    "362319": "retryable_maintenance_failure",
-    "arpa-h:fastpass": "source_changed",
-    "364148": "retryable_maintenance_failure",
-    "nyserda:PON6240": "retryable_maintenance_failure",
-    "363825": "retryable_maintenance_failure",
-    "360875": "historical_unassessed_backfill",
-    "362965": "retryable_maintenance_failure",
-    "363764": "retryable_maintenance_failure",
-    "363258:c-4": "retryable_maintenance_failure",
+    "363637": "new_since_accepted_snapshot",
     "362225": "retryable_maintenance_failure",
     "362224": "retryable_maintenance_failure",
     "362226": "retryable_maintenance_failure",
@@ -37,7 +22,7 @@
     "nyserda:PON6195": "retryable_maintenance_failure",
     "364012": "retryable_maintenance_failure",
     "363769": "retryable_maintenance_failure",
-    "363875": "retryable_maintenance_failure",
+    "363875": "source_changed",
     "363532": "historical_unassessed_backfill",
     "363988": "retryable_maintenance_failure",
     "363771": "retryable_maintenance_failure",
@@ -70,8 +55,8 @@
     "364082": "retryable_maintenance_failure",
     "363242": "historical_unassessed_backfill",
     "360660": "historical_unassessed_backfill",
-    "358569": "source_changed",
-    "342959": "source_changed",
+    "358569": "retryable_maintenance_failure",
+    "342959": "retryable_maintenance_failure",
     "362464": "retryable_maintenance_failure",
     "362857": "retryable_maintenance_failure",
     "358179": "retryable_maintenance_failure",
@@ -90,20 +75,21 @@
     "364057": "retryable_maintenance_failure",
     "364056": "retryable_maintenance_failure",
     "364143": "retryable_maintenance_failure",
-    "350018": "source_changed",
+    "350018": "retryable_maintenance_failure",
     "362836": "retryable_maintenance_failure",
     "363324": "historical_unassessed_backfill",
-    "357305": "source_changed",
-    "357303": "source_changed",
+    "357305": "retryable_maintenance_failure",
+    "357303": "retryable_maintenance_failure",
     "359966": "retryable_maintenance_failure",
     "362842": "retryable_maintenance_failure",
     "357301": "retryable_maintenance_failure",
     "364197": "retryable_maintenance_failure",
-    "357375": "source_changed",
+    "357375": "retryable_maintenance_failure",
     "357205": "retryable_maintenance_failure",
     "360627": "retryable_maintenance_failure",
     "364020": "retryable_maintenance_failure",
     "362843": "retryable_maintenance_failure",
+    "363712": "new_since_accepted_snapshot",
     "363758": "retryable_maintenance_failure",
     "363670": "retryable_maintenance_failure",
     "363671": "retryable_maintenance_failure",
@@ -112,17 +98,17 @@
     "362524": "retryable_maintenance_failure",
     "362849": "retryable_maintenance_failure",
     "362850": "retryable_maintenance_failure",
-    "358176": "source_changed",
-    "358181": "source_changed",
-    "361604": "source_changed",
+    "358176": "retryable_maintenance_failure",
+    "358181": "retryable_maintenance_failure",
+    "361604": "retryable_maintenance_failure",
     "362302": "retryable_maintenance_failure",
     "362304": "retryable_maintenance_failure",
     "362305": "retryable_maintenance_failure",
     "363920": "retryable_maintenance_failure",
     "364132": "retryable_maintenance_failure",
     "364047": "retryable_maintenance_failure",
-    "357256": "source_changed",
-    "357343": "retryable_maintenance_failure",
+    "357256": "retryable_maintenance_failure",
+    "357343": "source_changed",
     "363779": "retryable_maintenance_failure",
     "364037": "retryable_maintenance_failure",
     "364043": "retryable_maintenance_failure",
@@ -145,7 +131,7 @@
     "364048": "retryable_maintenance_failure",
     "364062": "retryable_maintenance_failure",
     "nyserda:PON6121": "retryable_maintenance_failure",
-    "351124": "historical_unassessed_backfill",
+    "351124": "source_changed",
     "364063": "retryable_maintenance_failure",
     "364167": "retryable_maintenance_failure",
     "364166": "retryable_maintenance_failure",
@@ -167,8 +153,8 @@
     "364139": "retryable_maintenance_failure",
     "364140": "retryable_maintenance_failure",
     "364138": "retryable_maintenance_failure",
-    "363815": "retryable_maintenance_failure",
-    "358689": "retryable_maintenance_failure",
+    "363815": "source_changed",
+    "358689": "source_changed",
     "347331": "retryable_maintenance_failure",
     "278447": "retryable_maintenance_failure",
     "363929": "retryable_maintenance_failure",
@@ -178,7 +164,6 @@
     "363059": "historical_unassessed_backfill",
     "364097": "retryable_maintenance_failure",
     "364029": "retryable_maintenance_failure",
-    "vpr-email:vpr-779bd2ee55b34b8e": "retryable_maintenance_failure",
     "364122": "retryable_maintenance_failure",
     "nyserda:PON6239": "retryable_maintenance_failure",
     "364193": "retryable_maintenance_failure",
@@ -186,16 +171,15 @@
     "364192": "retryable_maintenance_failure",
     "364191": "retryable_maintenance_failure",
     "359150": "historical_unassessed_backfill",
-    "356723": "historical_unassessed_backfill",
-    "356724": "retryable_maintenance_failure",
+    "356723": "source_changed",
+    "356724": "source_changed",
     "nyserda:RFP6125": "retryable_maintenance_failure",
     "363846": "retryable_maintenance_failure",
     "363747:d-4": "retryable_maintenance_failure",
     "364008": "retryable_maintenance_failure",
-    "363829": "retryable_maintenance_failure",
-    "348375": "source_changed",
+    "348375": "retryable_maintenance_failure",
     "364176": "retryable_maintenance_failure",
-    "355439": "historical_unassessed_backfill",
+    "355439": "source_changed",
     "363734": "retryable_maintenance_failure",
     "361876": "retryable_maintenance_failure",
     "364240": "retryable_maintenance_failure",
@@ -226,10 +210,11 @@
     "360753": "retryable_maintenance_failure",
     "361418": "historical_unassessed_backfill",
     "363054": "historical_unassessed_backfill",
-    "363752": "retryable_maintenance_failure",
+    "363752": "source_changed",
     "363880": "retryable_maintenance_failure",
     "nyserda:PON6206": "retryable_maintenance_failure",
-    "362871": "source_changed",
+    "363829": "source_changed",
+    "362871": "retryable_maintenance_failure",
     "364087": "retryable_maintenance_failure",
     "364086": "retryable_maintenance_failure",
     "364125": "retryable_maintenance_failure",
@@ -241,7 +226,7 @@
     "358855": "retryable_maintenance_failure",
     "nyserda:IEDRRFI26": "retryable_maintenance_failure",
     "358854": "retryable_maintenance_failure",
-    "361896": "retryable_maintenance_failure",
+    "361896": "source_changed",
     "364224": "retryable_maintenance_failure",
     "361480": "retryable_maintenance_failure",
     "363792": "retryable_maintenance_failure",
@@ -249,8 +234,8 @@
     "361282": "historical_unassessed_backfill",
     "361284": "historical_unassessed_backfill",
     "361281": "historical_unassessed_backfill",
-    "302271": "retryable_maintenance_failure",
-    "arpa-h:unique": "retryable_maintenance_failure",
+    "302271": "source_changed",
+    "arpa-h:unique": "source_changed",
     "362718": "retryable_maintenance_failure",
     "364098": "retryable_maintenance_failure",
     "363966": "retryable_maintenance_failure",
@@ -402,31 +387,29 @@
     "362029": "retryable_maintenance_failure",
     "362880": "retryable_maintenance_failure",
     "362827": "retryable_maintenance_failure",
-    "361997": "historical_unassessed_backfill",
     "364006": "retryable_maintenance_failure",
-    "363985": "retryable_maintenance_failure",
     "364231": "retryable_maintenance_failure",
     "363861": "retryable_maintenance_failure",
     "361994": "retryable_maintenance_failure",
     "362577": "historical_unassessed_backfill",
     "362576": "historical_unassessed_backfill",
-    "nyserda:RFP6157": "new_since_accepted_snapshot",
+    "nyserda:RFP6157": "retryable_maintenance_failure",
     "354081": "retryable_maintenance_failure",
     "357018": "retryable_maintenance_failure",
-    "357524": "retryable_maintenance_failure",
-    "357074": "retryable_maintenance_failure",
-    "357136": "retryable_maintenance_failure",
-    "358375": "retryable_maintenance_failure",
-    "358373": "retryable_maintenance_failure",
-    "356690": "historical_unassessed_backfill",
-    "357202": "retryable_maintenance_failure",
-    "357203": "retryable_maintenance_failure",
+    "357524": "source_changed",
+    "357074": "source_changed",
+    "357136": "source_changed",
+    "358375": "source_changed",
+    "358373": "source_changed",
+    "356690": "source_changed",
+    "357202": "source_changed",
+    "357203": "source_changed",
     "364214": "retryable_maintenance_failure",
     "364215": "retryable_maintenance_failure",
     "357075": "retryable_maintenance_failure",
     "357273": "stale_published_team",
-    "357021": "retryable_maintenance_failure",
-    "357376": "historical_unassessed_backfill",
+    "357021": "source_changed",
+    "357376": "source_changed",
     "363421": "historical_unassessed_backfill",
     "363777": "historical_unassessed_backfill",
     "358960": "retryable_maintenance_failure",
@@ -446,7 +429,8 @@
     "364030": "retryable_maintenance_failure",
     "364129": "retryable_maintenance_failure",
     "348260": "retryable_maintenance_failure",
-    "357826": "retryable_maintenance_failure",
+    "364245": "new_since_accepted_snapshot",
+    "357826": "source_changed",
     "349724": "retryable_maintenance_failure",
     "356659": "retryable_maintenance_failure",
     "356460": "retryable_maintenance_failure",
@@ -454,9 +438,9 @@
     "45812": "retryable_maintenance_failure",
     "344634": "retryable_maintenance_failure",
     "363167": "historical_unassessed_backfill",
-    "vpr-email:infoready-2024058": "retryable_maintenance_failure",
+    "vpr-email:infoready-2024058": "source_changed",
     "348058": "retryable_maintenance_failure",
-    "355219": "retryable_maintenance_failure",
+    "355219": "source_changed",
     "nyserda:RFP3928-Rd7": "retryable_maintenance_failure",
     "358004": "retryable_maintenance_failure",
     "363533": "retryable_maintenance_failure",
@@ -477,7 +461,7 @@
     "361815": "historical_unassessed_backfill",
     "361816": "historical_unassessed_backfill",
     "363692": "retryable_maintenance_failure",
-    "arpa-h:surpass": "retryable_maintenance_failure",
+    "arpa-h:surpass": "source_changed",
     "360393": "historical_unassessed_backfill",
     "361439": "historical_unassessed_backfill",
     "361532": "historical_unassessed_backfill",
@@ -488,7 +472,7 @@
     "363217": "historical_unassessed_backfill",
     "363248": "historical_unassessed_backfill",
     "363246": "historical_unassessed_backfill",
-    "352810": "historical_unassessed_backfill",
+    "352810": "source_changed",
     "362353": "historical_unassessed_backfill",
     "362722": "historical_unassessed_backfill",
     "362647": "historical_unassessed_backfill",
@@ -497,8 +481,8 @@
     "357554": "retryable_maintenance_failure",
     "361606": "historical_unassessed_backfill",
     "363253": "historical_unassessed_backfill",
-    "356309": "historical_unassessed_backfill",
-    "356310": "historical_unassessed_backfill",
+    "356309": "source_changed",
+    "356310": "source_changed",
     "354269": "retryable_maintenance_failure",
     "360366": "retryable_maintenance_failure",
     "360048": "retryable_maintenance_failure",
@@ -509,7 +493,7 @@
     "356902": "retryable_maintenance_failure",
     "359145": "historical_unassessed_backfill",
     "361216": "retryable_maintenance_failure",
-    "355987": "historical_unassessed_backfill",
+    "355987": "source_changed",
     "363840": "retryable_maintenance_failure",
     "353055": "retryable_maintenance_failure",
     "314743": "retryable_maintenance_failure",
@@ -529,6 +513,7 @@
     "363715": "historical_unassessed_backfill",
     "344001": "retryable_maintenance_failure",
     "363055": "historical_unassessed_backfill",
+    "361997": "historical_unassessed_backfill",
     "350561": "retryable_maintenance_failure",
     "363281": "retryable_maintenance_failure",
     "352455": "retryable_maintenance_failure",
@@ -549,7 +534,7 @@
     "363501": "historical_unassessed_backfill",
     "364196": "retryable_maintenance_failure",
     "363272": "historical_unassessed_backfill",
-    "328573": "retryable_maintenance_failure",
+    "328573": "source_changed",
     "363415": "historical_unassessed_backfill",
     "343285": "retryable_maintenance_failure",
     "363113": "historical_unassessed_backfill",
@@ -562,10 +547,10 @@
     "363289": "historical_unassessed_backfill",
     "363204": "historical_unassessed_backfill",
     "364039:b-8": "retryable_maintenance_failure",
-    "arpa-h:tigar": "retryable_maintenance_failure",
+    "arpa-h:tigar": "source_changed",
     "357137": "stale_published_team",
     "362097": "historical_unassessed_backfill",
-    "364174": "retryable_maintenance_failure",
+    "364174": "source_changed",
     "351889": "retryable_maintenance_failure",
     "356129": "retryable_maintenance_failure",
     "360562": "retryable_maintenance_failure",
@@ -583,14 +568,14 @@
     "363450": "retryable_maintenance_failure",
     "363392": "historical_unassessed_backfill",
     "361134": "retryable_maintenance_failure",
-    "356018": "retryable_maintenance_failure",
+    "356018": "source_changed",
     "361318": "retryable_maintenance_failure",
     "337086": "retryable_maintenance_failure",
     "363958": "retryable_maintenance_failure",
     "363591": "retryable_maintenance_failure",
     "363749": "historical_unassessed_backfill",
     "363245": "historical_unassessed_backfill",
-    "vpr-email:infoready-2028504": "historical_unassessed_backfill",
+    "vpr-email:infoready-2028504": "source_changed",
     "363912": "retryable_maintenance_failure",
     "sam-gov:4177337919ca4c9db8d9ddf1e58c24aa": "retryable_maintenance_failure",
     "363475": "historical_unassessed_backfill",
@@ -606,7 +591,7 @@
     "362666": "historical_unassessed_backfill",
     "363148": "historical_unassessed_backfill",
     "362952": "retryable_maintenance_failure",
-    "353633": "historical_unassessed_backfill",
+    "353633": "source_changed",
     "364165": "retryable_maintenance_failure",
     "363356": "historical_unassessed_backfill",
     "362108": "historical_unassessed_backfill",
@@ -615,7 +600,7 @@
     "nyserda:PON6201": "retryable_maintenance_failure",
     "364124": "retryable_maintenance_failure",
     "363369": "historical_unassessed_backfill",
-    "357744": "retryable_maintenance_failure",
+    "357744": "source_changed",
     "361104": "historical_unassessed_backfill",
     "363650": "historical_unassessed_backfill",
     "363107": "historical_unassessed_backfill",
@@ -623,25 +608,26 @@
     "363653": "historical_unassessed_backfill",
     "363940": "retryable_maintenance_failure",
     "357498": "retryable_maintenance_failure",
-    "361333": "retryable_maintenance_failure",
+    "361333": "source_changed",
     "363222": "historical_unassessed_backfill",
     "364113": "retryable_maintenance_failure",
     "363195": "historical_unassessed_backfill",
     "363189": "historical_unassessed_backfill",
     "362752": "historical_unassessed_backfill",
-    "357606": "historical_unassessed_backfill",
-    "362551": "retryable_maintenance_failure",
+    "357606": "source_changed",
+    "362551": "source_changed",
     "363555": "historical_unassessed_backfill",
     "363556": "historical_unassessed_backfill",
     "361208": "retryable_maintenance_failure",
     "360676": "retryable_maintenance_failure",
     "351847": "retryable_maintenance_failure",
     "364156": "retryable_maintenance_failure",
+    "363985": "source_changed",
     "360625": "retryable_maintenance_failure",
     "360623": "retryable_maintenance_failure",
-    "355867": "historical_unassessed_backfill",
+    "355867": "source_changed",
     "359659": "historical_unassessed_backfill",
-    "357713": "retryable_maintenance_failure",
+    "357713": "source_changed",
     "363398": "historical_unassessed_backfill",
     "362983": "retryable_maintenance_failure",
     "363986": "retryable_maintenance_failure",
@@ -665,6 +651,7 @@
     "363694": "historical_unassessed_backfill",
     "363412": "historical_unassessed_backfill",
     "363516": "historical_unassessed_backfill",
+    "364247": "new_since_accepted_snapshot",
     "364121": "retryable_maintenance_failure",
     "363508": "historical_unassessed_backfill",
     "363509": "historical_unassessed_backfill",
@@ -702,7 +689,7 @@
     "363526": "retryable_maintenance_failure",
     "359757": "historical_unassessed_backfill",
     "359671": "historical_unassessed_backfill",
-    "355196": "retryable_maintenance_failure",
+    "355196": "source_changed",
     "363601": "historical_unassessed_backfill",
     "363782": "historical_unassessed_backfill",
     "363899": "retryable_maintenance_failure",
@@ -713,15 +700,15 @@
     "363781": "retryable_maintenance_failure",
     "363290": "historical_unassessed_backfill",
     "363291": "historical_unassessed_backfill",
-    "351923": "retryable_maintenance_failure",
-    "353413": "retryable_maintenance_failure",
-    "358036": "retryable_maintenance_failure",
+    "351923": "source_changed",
+    "353413": "source_changed",
+    "358036": "source_changed",
     "356888": "stale_published_team",
     "363973": "retryable_maintenance_failure",
     "363329": "historical_unassessed_backfill",
-    "353623": "historical_unassessed_backfill",
+    "353623": "source_changed",
     "363917": "retryable_maintenance_failure",
-    "357121": "retryable_maintenance_failure",
+    "357121": "source_changed",
     "364220": "retryable_maintenance_failure",
     "363582": "historical_unassessed_backfill",
     "363511": "historical_unassessed_backfill",
@@ -772,7 +759,7 @@
     "360633": "historical_unassessed_backfill",
     "363448": "historical_unassessed_backfill",
     "362953": "historical_unassessed_backfill",
-    "364244": "new_since_accepted_snapshot",
+    "364244": "retryable_maintenance_failure",
     "363323": "historical_unassessed_backfill",
     "363956": "retryable_maintenance_failure",
     "362958": "historical_unassessed_backfill",
@@ -799,6 +786,7 @@
     "363842": "retryable_maintenance_failure",
     "361521": "historical_unassessed_backfill",
     "359142": "retryable_maintenance_failure",
+    "364251": "new_since_accepted_snapshot",
     "361050": "stale_published_team",
     "362950": "historical_unassessed_backfill",
     "362948": "stale_published_team",
@@ -810,6 +798,7 @@
     "357893": "retryable_maintenance_failure",
     "361448": "historical_unassessed_backfill",
     "362957": "historical_unassessed_backfill",
+    "364252": "new_since_accepted_snapshot",
     "355270": "retryable_maintenance_failure",
     "363409": "historical_unassessed_backfill",
     "363142": "historical_unassessed_backfill",
@@ -1171,8 +1160,8 @@
     "357996": "retryable_maintenance_failure",
     "357943": "retryable_maintenance_failure",
     "359942": "historical_unassessed_backfill",
-    "355044": "source_changed",
-    "360008": "source_changed",
+    "355044": "retryable_maintenance_failure",
+    "360008": "retryable_maintenance_failure",
     "360574": "historical_unassessed_backfill",
     "358935": "historical_unassessed_backfill",
     "359862": "historical_unassessed_backfill",
@@ -1210,7 +1199,7 @@
     "361287": "stale_published_team",
     "359676": "retryable_maintenance_failure",
     "359945": "historical_unassessed_backfill",
-    "355417": "source_changed",
+    "355417": "retryable_maintenance_failure",
     "355722": "historical_unassessed_backfill",
     "358851": "historical_unassessed_backfill",
     "358938": "historical_unassessed_backfill",
@@ -1221,7 +1210,7 @@
     "358864": "historical_unassessed_backfill",
     "359725": "historical_unassessed_backfill",
     "360368": "historical_unassessed_backfill",
-    "362325": "source_changed",
+    "362325": "retryable_maintenance_failure",
     "360364": "historical_unassessed_backfill",
     "360446": "historical_unassessed_backfill",
     "360593": "retryable_maintenance_failure",
@@ -1286,9 +1275,9 @@
     "361099": "retryable_maintenance_failure",
     "358380": "historical_unassessed_backfill",
     "nyserda:RFP18": "retryable_maintenance_failure",
-    "359236": "source_changed",
+    "359236": "retryable_maintenance_failure",
     "nyserda:PON6122": "retryable_maintenance_failure",
-    "329436": "source_changed",
+    "329436": "retryable_maintenance_failure",
     "362715": "retryable_maintenance_failure",
     "362717": "retryable_maintenance_failure",
     "361380": "retryable_maintenance_failure",
@@ -1310,7 +1299,7 @@
     "320098": "retryable_maintenance_failure",
     "331306": "historical_unassessed_backfill",
     "363225": "historical_unassessed_backfill",
-    "361554": "source_changed",
+    "361554": "retryable_maintenance_failure",
     "363811": "historical_unassessed_backfill",
     "332052": "retryable_maintenance_failure",
     "343875": "retryable_maintenance_failure",
@@ -1319,7 +1308,7 @@
     "363810": "historical_unassessed_backfill",
     "362061": "retryable_maintenance_failure",
     "332125": "retryable_maintenance_failure",
-    "363383": "source_changed",
+    "363383": "retryable_maintenance_failure",
     "363812": "historical_unassessed_backfill",
     "103313": "retryable_maintenance_failure",
     "361008": "stale_published_team",
@@ -1329,7 +1318,7 @@
     "353475": "retryable_maintenance_failure",
     "332126": "retryable_maintenance_failure",
     "364217": "retryable_maintenance_failure",
-    "vpr-email:vpr-e1612e2acba631d2": "source_changed",
+    "vpr-email:vpr-e1612e2acba631d2": "retryable_maintenance_failure",
     "348164": "retryable_maintenance_failure",
     "359225": "retryable_maintenance_failure",
     "363786": "historical_unassessed_backfill",
@@ -1345,7 +1334,7 @@
     "358403": "retryable_maintenance_failure",
     "364173": "retryable_maintenance_failure",
     "364223": "retryable_maintenance_failure",
-    "324369": "retryable_maintenance_failure",
+    "324369": "source_changed",
     "334079": "retryable_maintenance_failure",
     "347414": "retryable_maintenance_failure",
     "346815": "historical_unassessed_backfill",
@@ -1355,6 +1344,7 @@
     "arpa-h:ARPA-H-SOL-24-104": "retryable_maintenance_failure",
     "314126": "retryable_maintenance_failure",
     "347679": "retryable_maintenance_failure",
+    "356537": "new_since_accepted_snapshot",
     "347680": "retryable_maintenance_failure",
     "39841": "historical_unassessed_backfill",
     "329432": "retryable_maintenance_failure",
@@ -1366,15 +1356,15 @@
     "363612": "retryable_maintenance_failure",
     "363621": "retryable_maintenance_failure",
     "356425": "retryable_maintenance_failure",
-    "362393": "source_changed",
+    "362393": "retryable_maintenance_failure",
     "275109": "retryable_maintenance_failure",
     "364218": "retryable_maintenance_failure",
     "360664": "retryable_maintenance_failure",
     "318918": "retryable_maintenance_failure",
-    "vpr-email:vpr-63cc8866673bd1a1": "source_changed",
+    "vpr-email:vpr-63cc8866673bd1a1": "retryable_maintenance_failure",
     "360223": "historical_unassessed_backfill",
-    "vpr-email:23-615": "source_changed",
-    "vpr-email:vpr-0f186b990288c021": "source_changed",
+    "vpr-email:23-615": "retryable_maintenance_failure",
+    "vpr-email:vpr-0f186b990288c021": "retryable_maintenance_failure",
     "360350": "retryable_maintenance_failure",
     "359499": "retryable_maintenance_failure",
     "254073": "retryable_maintenance_failure",
@@ -1383,10 +1373,10 @@
     "352500": "retryable_maintenance_failure",
     "arpa-h:ARPA-H-SOL-24-106": "retryable_maintenance_failure",
     "361952": "retryable_maintenance_failure",
-    "363381": "source_changed",
+    "363381": "retryable_maintenance_failure",
     "363806": "historical_unassessed_backfill",
     "310029": "historical_unassessed_backfill",
-    "350230": "retryable_maintenance_failure",
+    "350230": "source_changed",
     "350469": "retryable_maintenance_failure",
     "363807": "historical_unassessed_backfill",
     "arpa-h:ARPA-H-SOL-24-103": "retryable_maintenance_failure",
@@ -1397,7 +1387,7 @@
     "358882": "retryable_maintenance_failure",
     "332127": "retryable_maintenance_failure",
     "320087": "retryable_maintenance_failure",
-    "vpr-email:vpr-aed7d81578b24028": "source_changed",
+    "vpr-email:vpr-aed7d81578b24028": "retryable_maintenance_failure",
     "326733": "historical_unassessed_backfill",
     "364003": "retryable_maintenance_failure",
     "45810": "retryable_maintenance_failure",
@@ -1407,12 +1397,12 @@
     "arpa-h:spectra": "source_changed",
     "339728": "retryable_maintenance_failure",
     "358684": "retryable_maintenance_failure",
-    "363384": "source_changed",
+    "363384": "retryable_maintenance_failure",
     "362063": "retryable_maintenance_failure",
     "325599": "historical_unassessed_backfill",
-    "355211": "source_changed",
+    "355211": "retryable_maintenance_failure",
     "290351": "historical_unassessed_backfill",
-    "344437": "source_changed"
+    "344437": "retryable_maintenance_failure"
   },
   "provider_contract": {
     "decomposition": {
@@ -1611,9 +1601,9 @@
     "max_seconds": 900,
     "max_provider_requests": 300
   },
-  "eligible_scopes": 1416,
-  "pending_scopes": 1402,
-  "due_scopes": 1026,
+  "eligible_scopes": 1405,
+  "pending_scopes": 1392,
+  "due_scopes": 1034,
   "eligibility": [
     {
       "scope_id": "360004:c-2",
@@ -1626,6 +1616,14 @@
     {
       "scope_id": "vpr-email:vpr-bd193799390f4580",
       "parent_id": "vpr-email:vpr-bd193799390f4580",
+      "stage": "source_eligibility",
+      "state": "skipped",
+      "reason_code": "missing_source_text",
+      "retry_eligible": true
+    },
+    {
+      "scope_id": "vpr-email:vpr-779bd2ee55b34b8e",
+      "parent_id": "vpr-email:vpr-779bd2ee55b34b8e",
       "stage": "source_eligibility",
       "state": "skipped",
       "reason_code": "missing_source_text",
@@ -2446,6 +2444,7 @@
     "357308",
     "361287",
     "362954",
+    "360534",
     "357346",
     "356903",
     "356874",
@@ -2841,6 +2840,12 @@
         "reason": "source_changed"
       },
       {
+        "scope_id": "360534",
+        "state": "pending",
+        "provider_requests": 0,
+        "reason": "source_ineligible"
+      },
+      {
         "scope_id": "356903",
         "state": "pending",
         "provider_requests": 0,
@@ -2992,12 +2997,12 @@
       }
     ],
     "recovery_only": false,
-    "selected_pending_scopes": 1026
+    "selected_pending_scopes": 1034
   },
   "coverage_before": {
-    "scopes": 14,
-    "parent_calls": 14,
-    "team_combinations": 37
+    "scopes": 13,
+    "parent_calls": 13,
+    "team_combinations": 34
   },
   "results": [],
   "processing_failure": {
@@ -3015,11 +3020,985 @@
   },
   "embedding_reuse_permitted": true,
   "llm_usage": {
-    "logical_id": "offline-42869748262",
+    "logical_id": "offline-43072732313",
     "limit_usd": 2.0,
-    "charged_usd": 0.0,
-    "by_provider_model_stage": {},
+    "charged_usd": 0.380682,
+    "by_provider_model_stage": {
+      "anthropic/claude-sonnet-5/cov4": {
+        "attempts": 64,
+        "retries": 0,
+        "valid_completions": 63,
+        "failures": 1,
+        "unknown_usage_requests": 0,
+        "charged_microusd": 380682,
+        "latency_ms": 152110,
+        "input_tokens": 153686,
+        "cached_input_tokens": 0,
+        "cache_write_tokens": 0,
+        "output_tokens": 7331,
+        "reasoning_tokens": null,
+        "reasoning_usage_unknown": 64,
+        "known_usage_totals": {
+          "input_tokens": 153686,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 7331,
+          "reasoning_tokens": 0
+        }
+      }
+    },
     "events": [
+      {
+        "event": "cache_miss",
+        "key": "41dfbcc19f5d4a04a799ab9175663e9d3e58a01585509433a119eb2162f9e02e",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "reason": "missing_or_invalid_exact_contract",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_miss",
+        "key": "34c616616f27e928377fdf8fb9b841f1d248a8bfe720269371f5607003c9e690",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "reason": "missing_or_invalid_exact_contract",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_miss",
+        "key": "6ec374bbcc2ca679683f6bd42128fba7d92bc5a7131f251f9b92421199cca558",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "reason": "missing_or_invalid_exact_contract",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_miss",
+        "key": "b2cb690d307a0736e524bc0e6f2f331312ac7f4187f7ba6dae8e91031a1c7aea",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "reason": "missing_or_invalid_exact_contract",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_miss",
+        "key": "fa4b8e38ab35f65aa855b881f395029342c9f4e5b6e1d995b9845ff3a117c30b",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "reason": "missing_or_invalid_exact_contract",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_miss",
+        "key": "b268513ab39ba5f764ab4f5dbd72442327b59250453d3ce9abb7332453951b07",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "reason": "missing_or_invalid_exact_contract",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_miss",
+        "key": "9f3e71fa84edb619e04429d178d387cc421c267be9a262f657d3257c4947d2bd",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "reason": "missing_or_invalid_exact_contract",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_miss",
+        "key": "c60b6b6e55dd892424a15b8aef71b1bb2aebc4e1bc7473064913597fd65df140",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "reason": "missing_or_invalid_exact_contract",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_miss",
+        "key": "584b77cbc37f9949f763ca699b79e13167c40090a50e4a5f1176b52a0557f127",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "reason": "missing_or_invalid_exact_contract",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_miss",
+        "key": "b887a71cc7ef6574a8d57e08b33017470bc340af40f5b67ed35c3a82c0198b1c",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "reason": "missing_or_invalid_exact_contract",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_miss",
+        "key": "571798eaa21d3045fec30148b7a6fb15b3133964cb96f8578e95703b564340f8",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "reason": "missing_or_invalid_exact_contract",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_miss",
+        "key": "035f060746043a706633a821ccbfe9ff3d94728a8f0ea554cb160bd37ab894ae",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "reason": "missing_or_invalid_exact_contract",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_miss",
+        "key": "11fe012e95cd531a8cde116aa9016d4457e1233a019d65619a34771014875ee7",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "reason": "missing_or_invalid_exact_contract",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_miss",
+        "key": "b00419895116c3b13690e614f3ac6973775f8ff75d52cbf4a67a43835b913fbb",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "reason": "missing_or_invalid_exact_contract",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_miss",
+        "key": "bc6d5979f6c7bcfea4038aa59c7c924ab579579aa0d022808b5300fe4b13d478",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "reason": "missing_or_invalid_exact_contract",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_miss",
+        "key": "3fbb3c5170d1e820fce45c1c67ff18c26ed5e2a01c17795279fbcea95c66dd02",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "reason": "missing_or_invalid_exact_contract",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_miss",
+        "key": "7ae523148f2de1f1550996c6c6fe44aa53eda00b3f6d3624d90206aaa5cf4f4a",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "reason": "missing_or_invalid_exact_contract",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_miss",
+        "key": "40828dcddfa6b88e4786ffcb72c50d0baa0f3a3de3fdfe870bd223bc174142a9",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "reason": "missing_or_invalid_exact_contract",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_miss",
+        "key": "a88d23e0aca53a074ff1297a8d851a045f56c7090ef04202fe1576c0036d4de7",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "reason": "missing_or_invalid_exact_contract",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_miss",
+        "key": "82d09e3ea97b6bdc227876fd5e7a321b33b00dc94ccdfa9ad4dbe40aa61e4117",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "reason": "missing_or_invalid_exact_contract",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_miss",
+        "key": "8d2d4a5384b29feaff8ff8797f1c5f2ee2427e6cab2f174242fd7d9591709ec2",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "reason": "missing_or_invalid_exact_contract",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_miss",
+        "key": "1035105c98ec9a18dc957544f183ff834bac41af761c6ce09c6656eb2ec0142a",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "reason": "missing_or_invalid_exact_contract",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_miss",
+        "key": "c9650ed136aec8a6ced82c361491ef14fadd31cf3361f6c91c797d4549b79e50",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "reason": "missing_or_invalid_exact_contract",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_miss",
+        "key": "7adf8502f4befbd5cb4d0ba68a65addf1741b931c6632886a0714e7354279310",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "reason": "missing_or_invalid_exact_contract",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_miss",
+        "key": "ae62449d6167da18d7035aa3d31df5f860d567fc46d4740edb20d83cf976548e",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "reason": "missing_or_invalid_exact_contract",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_miss",
+        "key": "815f26e1c1f25fe16c3ed3f0b8ec18ea858bf09fca4975153f449d0d4588dd1c",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "reason": "missing_or_invalid_exact_contract",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_miss",
+        "key": "aa408a6415278a6698f64b819e96f25fd0505005cdc049dd3eb10edbf383f178",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "reason": "missing_or_invalid_exact_contract",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_miss",
+        "key": "e7b6b035a066ae3f1858311584b99c54d02384c134ee118a79d9721b247c8bd8",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "reason": "missing_or_invalid_exact_contract",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_miss",
+        "key": "353599821d625b3abc9080f840d2083d1a426c30b57b92afc71805c092931fd2",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "reason": "missing_or_invalid_exact_contract",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_miss",
+        "key": "b89c66391f963163d4a948301d23b83403a84b19717a94a236d79d2be36d7912",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "reason": "missing_or_invalid_exact_contract",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_miss",
+        "key": "a78655b3bb8389b9f98b86274430d39d6d116253752a374c2a65f5c855f12140",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "reason": "missing_or_invalid_exact_contract",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_miss",
+        "key": "b68dc7e7d2cb55ad205373d16a0ca54267a1259a0c1b3f60b542e9dd9627ff94",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "reason": "missing_or_invalid_exact_contract",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_miss",
+        "key": "7018259dd84973215702656add15574c1a630112b05942a2f21cfd225c0f078e",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "reason": "missing_or_invalid_exact_contract",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_miss",
+        "key": "9ac4eef816b9a01ace7981761e93508ea110c02d02b7883d3cbe539f78720f91",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "reason": "missing_or_invalid_exact_contract",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_miss",
+        "key": "59f9745d3108691e83e3330c549ba23db21d9dcc1ca80dbbda4a358f0ebed774",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "reason": "missing_or_invalid_exact_contract",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_miss",
+        "key": "3044168dfff5aafd25d6f3042bcb7f6e9c64cefcf68dcdd7e9989373885bffcc",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "reason": "missing_or_invalid_exact_contract",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_miss",
+        "key": "9fe7a6c306a7e65fef6c6b3801d873b8af591e061216fefe44d6d98aa47a6ddb",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "reason": "missing_or_invalid_exact_contract",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_miss",
+        "key": "9bd1a23bfd7cb714369e33839982f5865a52091fd55ecd341b6df077039175e8",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "reason": "missing_or_invalid_exact_contract",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_miss",
+        "key": "afe0b0e5418e2c744bbe375160f48eebcdeec3d8961659bf7f9123e9b1d745c4",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "reason": "missing_or_invalid_exact_contract",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_miss",
+        "key": "f771532565ae85287131d5c1eb12782ce5f63b143b98a66cb0ef863f5c716386",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "reason": "missing_or_invalid_exact_contract",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_miss",
+        "key": "113a1a224ece5d038b3bceb1de59bc98feb9d2050e91eea6524354157379eced",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "reason": "missing_or_invalid_exact_contract",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_miss",
+        "key": "1a75884747b022c4a7fb8a22343125291174fd682f18f8396922da9b02bfa99d",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "reason": "missing_or_invalid_exact_contract",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_miss",
+        "key": "7e9c900125e83f5b8bd16e85bbbc71cfedb17c17f6dbe7e6116863161c2b1029",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "reason": "missing_or_invalid_exact_contract",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_miss",
+        "key": "cd6908b4209e1e97010d7079271349143d4f860263cb07472a6ffd48575decc2",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "reason": "missing_or_invalid_exact_contract",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_miss",
+        "key": "ee5e0ae32d68a4444f44373e219779252e34a9d3e4067a48467eecab62aa3717",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "reason": "missing_or_invalid_exact_contract",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_miss",
+        "key": "39691bf9125afe04ffa0164c7bdc938b57f5c23b52b6f2fbc6fb0f9de3ef9c86",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "reason": "missing_or_invalid_exact_contract",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_miss",
+        "key": "55bd83f72771bd2b8b29ac83184011d78be32fbf6506930ff894aa4defc4e760",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "reason": "missing_or_invalid_exact_contract",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_miss",
+        "key": "c26050fedd6fc1079f82d0b328325db8a52e8881bd79b02e113ba8c9b1b317aa",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "reason": "missing_or_invalid_exact_contract",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_miss",
+        "key": "4aa5afe8fec45a6cb1d6d1bc9b03e793e685d1c803fc2ce89f9f65ddfbb60509",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "reason": "missing_or_invalid_exact_contract",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_miss",
+        "key": "6ae442e09ab18177435021fd77f4c7da28c50b968608a8fd85d767b244b4cd05",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "reason": "missing_or_invalid_exact_contract",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_miss",
+        "key": "b8e94a11aa7797ceb0e905042508c1fca0d71dac1ee723084031e3b482fd6335",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "reason": "missing_or_invalid_exact_contract",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_miss",
+        "key": "867b3318f947fd84f46d25328ef9b7bcfe32a718484e0ae4c9c621f713de9298",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "reason": "missing_or_invalid_exact_contract",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_miss",
+        "key": "5aa4d837611eca39f34a9cd5c2c6ffcf085e58702886b89cfc7e054cfd6d2608",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "reason": "missing_or_invalid_exact_contract",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_miss",
+        "key": "ccbd3c3c235e58609a4e46da78c31d651bc07b75225c7c6836edb0b9cf230b3f",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "reason": "missing_or_invalid_exact_contract",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_miss",
+        "key": "c0039a7a982f098805b3efe9cd1053efe4c01d5468a9c2eaed508c92e565652d",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "reason": "missing_or_invalid_exact_contract",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_miss",
+        "key": "afe040faa039733e3d76a77cae700ead275e135e30ac5bd5ccdfe130dc3441c8",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "reason": "missing_or_invalid_exact_contract",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_miss",
+        "key": "e3576bdf6ec66705d907cb955699daef3f06ff7afdf1ff50c1c56fa581a15a7e",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "reason": "missing_or_invalid_exact_contract",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_miss",
+        "key": "79612550b29318114a97fcf1099fbee7007456ae4a7513a383a5fe52e368a4a4",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "reason": "missing_or_invalid_exact_contract",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_miss",
+        "key": "c99508f1eb2230b417d5da821f4e3289237c36a9eb0b52045058a4edc31edc90",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "reason": "missing_or_invalid_exact_contract",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_miss",
+        "key": "4ea4b3a284a6f047aa4a447c4273da20f3aee34e02dfd9ef8df1cd232fa1e1fc",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "reason": "missing_or_invalid_exact_contract",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_miss",
+        "key": "199be3e7bacdeb90d388d57553ff00a72754b4609d0fee1fe295a5826d33170e",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "reason": "missing_or_invalid_exact_contract",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_miss",
+        "key": "556699a086fa4ac7fbd87473b77c78de1ffdac2365c94587b28888ba2108d222",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "reason": "missing_or_invalid_exact_contract",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_miss",
+        "key": "6c546bc4a76ef68dca6fd899f3853857fc48a5488913fb5efb3acdb2c03461df",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "reason": "missing_or_invalid_exact_contract",
+        "stage": "cov4"
+      },
+      {
+        "kind": "service_stop",
+        "reason": "quality_gate_pending",
+        "service": "teams"
+      },
+      {
+        "event": "cache_hit",
+        "key": "41dfbcc19f5d4a04a799ab9175663e9d3e58a01585509433a119eb2162f9e02e",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_hit",
+        "key": "34c616616f27e928377fdf8fb9b841f1d248a8bfe720269371f5607003c9e690",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_hit",
+        "key": "6ec374bbcc2ca679683f6bd42128fba7d92bc5a7131f251f9b92421199cca558",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_hit",
+        "key": "b2cb690d307a0736e524bc0e6f2f331312ac7f4187f7ba6dae8e91031a1c7aea",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_hit",
+        "key": "fa4b8e38ab35f65aa855b881f395029342c9f4e5b6e1d995b9845ff3a117c30b",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_hit",
+        "key": "b268513ab39ba5f764ab4f5dbd72442327b59250453d3ce9abb7332453951b07",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_hit",
+        "key": "9f3e71fa84edb619e04429d178d387cc421c267be9a262f657d3257c4947d2bd",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_hit",
+        "key": "c60b6b6e55dd892424a15b8aef71b1bb2aebc4e1bc7473064913597fd65df140",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_hit",
+        "key": "584b77cbc37f9949f763ca699b79e13167c40090a50e4a5f1176b52a0557f127",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_hit",
+        "key": "b887a71cc7ef6574a8d57e08b33017470bc340af40f5b67ed35c3a82c0198b1c",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_hit",
+        "key": "571798eaa21d3045fec30148b7a6fb15b3133964cb96f8578e95703b564340f8",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_hit",
+        "key": "035f060746043a706633a821ccbfe9ff3d94728a8f0ea554cb160bd37ab894ae",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_hit",
+        "key": "11fe012e95cd531a8cde116aa9016d4457e1233a019d65619a34771014875ee7",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_hit",
+        "key": "b00419895116c3b13690e614f3ac6973775f8ff75d52cbf4a67a43835b913fbb",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_hit",
+        "key": "bc6d5979f6c7bcfea4038aa59c7c924ab579579aa0d022808b5300fe4b13d478",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_hit",
+        "key": "3fbb3c5170d1e820fce45c1c67ff18c26ed5e2a01c17795279fbcea95c66dd02",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_hit",
+        "key": "7ae523148f2de1f1550996c6c6fe44aa53eda00b3f6d3624d90206aaa5cf4f4a",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_hit",
+        "key": "40828dcddfa6b88e4786ffcb72c50d0baa0f3a3de3fdfe870bd223bc174142a9",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_hit",
+        "key": "a88d23e0aca53a074ff1297a8d851a045f56c7090ef04202fe1576c0036d4de7",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_hit",
+        "key": "82d09e3ea97b6bdc227876fd5e7a321b33b00dc94ccdfa9ad4dbe40aa61e4117",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_hit",
+        "key": "8d2d4a5384b29feaff8ff8797f1c5f2ee2427e6cab2f174242fd7d9591709ec2",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_hit",
+        "key": "1035105c98ec9a18dc957544f183ff834bac41af761c6ce09c6656eb2ec0142a",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_hit",
+        "key": "c9650ed136aec8a6ced82c361491ef14fadd31cf3361f6c91c797d4549b79e50",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_hit",
+        "key": "7adf8502f4befbd5cb4d0ba68a65addf1741b931c6632886a0714e7354279310",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_hit",
+        "key": "ae62449d6167da18d7035aa3d31df5f860d567fc46d4740edb20d83cf976548e",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_hit",
+        "key": "815f26e1c1f25fe16c3ed3f0b8ec18ea858bf09fca4975153f449d0d4588dd1c",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_hit",
+        "key": "aa408a6415278a6698f64b819e96f25fd0505005cdc049dd3eb10edbf383f178",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_hit",
+        "key": "e7b6b035a066ae3f1858311584b99c54d02384c134ee118a79d9721b247c8bd8",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_hit",
+        "key": "353599821d625b3abc9080f840d2083d1a426c30b57b92afc71805c092931fd2",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_hit",
+        "key": "b89c66391f963163d4a948301d23b83403a84b19717a94a236d79d2be36d7912",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_hit",
+        "key": "a78655b3bb8389b9f98b86274430d39d6d116253752a374c2a65f5c855f12140",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_hit",
+        "key": "b68dc7e7d2cb55ad205373d16a0ca54267a1259a0c1b3f60b542e9dd9627ff94",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_hit",
+        "key": "7018259dd84973215702656add15574c1a630112b05942a2f21cfd225c0f078e",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_hit",
+        "key": "9ac4eef816b9a01ace7981761e93508ea110c02d02b7883d3cbe539f78720f91",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_hit",
+        "key": "59f9745d3108691e83e3330c549ba23db21d9dcc1ca80dbbda4a358f0ebed774",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_hit",
+        "key": "3044168dfff5aafd25d6f3042bcb7f6e9c64cefcf68dcdd7e9989373885bffcc",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_hit",
+        "key": "9fe7a6c306a7e65fef6c6b3801d873b8af591e061216fefe44d6d98aa47a6ddb",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_hit",
+        "key": "9bd1a23bfd7cb714369e33839982f5865a52091fd55ecd341b6df077039175e8",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_hit",
+        "key": "afe0b0e5418e2c744bbe375160f48eebcdeec3d8961659bf7f9123e9b1d745c4",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_hit",
+        "key": "f771532565ae85287131d5c1eb12782ce5f63b143b98a66cb0ef863f5c716386",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_hit",
+        "key": "113a1a224ece5d038b3bceb1de59bc98feb9d2050e91eea6524354157379eced",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_hit",
+        "key": "1a75884747b022c4a7fb8a22343125291174fd682f18f8396922da9b02bfa99d",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_hit",
+        "key": "7e9c900125e83f5b8bd16e85bbbc71cfedb17c17f6dbe7e6116863161c2b1029",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_hit",
+        "key": "cd6908b4209e1e97010d7079271349143d4f860263cb07472a6ffd48575decc2",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_hit",
+        "key": "ee5e0ae32d68a4444f44373e219779252e34a9d3e4067a48467eecab62aa3717",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_hit",
+        "key": "39691bf9125afe04ffa0164c7bdc938b57f5c23b52b6f2fbc6fb0f9de3ef9c86",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_hit",
+        "key": "55bd83f72771bd2b8b29ac83184011d78be32fbf6506930ff894aa4defc4e760",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_hit",
+        "key": "c26050fedd6fc1079f82d0b328325db8a52e8881bd79b02e113ba8c9b1b317aa",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_hit",
+        "key": "4aa5afe8fec45a6cb1d6d1bc9b03e793e685d1c803fc2ce89f9f65ddfbb60509",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_hit",
+        "key": "6ae442e09ab18177435021fd77f4c7da28c50b968608a8fd85d767b244b4cd05",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_hit",
+        "key": "b8e94a11aa7797ceb0e905042508c1fca0d71dac1ee723084031e3b482fd6335",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_hit",
+        "key": "867b3318f947fd84f46d25328ef9b7bcfe32a718484e0ae4c9c621f713de9298",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_hit",
+        "key": "5aa4d837611eca39f34a9cd5c2c6ffcf085e58702886b89cfc7e054cfd6d2608",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_hit",
+        "key": "ccbd3c3c235e58609a4e46da78c31d651bc07b75225c7c6836edb0b9cf230b3f",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_miss",
+        "key": "c0039a7a982f098805b3efe9cd1053efe4c01d5468a9c2eaed508c92e565652d",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "reason": "missing_or_invalid_exact_contract",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_hit",
+        "key": "afe040faa039733e3d76a77cae700ead275e135e30ac5bd5ccdfe130dc3441c8",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_hit",
+        "key": "e3576bdf6ec66705d907cb955699daef3f06ff7afdf1ff50c1c56fa581a15a7e",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_hit",
+        "key": "79612550b29318114a97fcf1099fbee7007456ae4a7513a383a5fe52e368a4a4",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_hit",
+        "key": "c99508f1eb2230b417d5da821f4e3289237c36a9eb0b52045058a4edc31edc90",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_hit",
+        "key": "4ea4b3a284a6f047aa4a447c4273da20f3aee34e02dfd9ef8df1cd232fa1e1fc",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_hit",
+        "key": "199be3e7bacdeb90d388d57553ff00a72754b4609d0fee1fe295a5826d33170e",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_hit",
+        "key": "556699a086fa4ac7fbd87473b77c78de1ffdac2365c94587b28888ba2108d222",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "stage": "cov4"
+      },
+      {
+        "event": "cache_hit",
+        "key": "6c546bc4a76ef68dca6fd899f3853857fc48a5488913fb5efb3acdb2c03461df",
+        "model": "claude-sonnet-5",
+        "provider": "anthropic",
+        "stage": "cov4"
+      },
       {
         "kind": "service_stop",
         "reason": "quality_gate_pending",
@@ -3034,152 +4013,17 @@
     "llm": 0
   },
   "coverage_after": {
-    "scopes": 14,
-    "parent_calls": 14,
-    "team_combinations": 37
+    "scopes": 13,
+    "parent_calls": 13,
+    "team_combinations": 34
   },
-  "pending_after": 1402,
+  "pending_after": 1392,
   "deferred": [
     {
-      "scope_id": "360400",
-      "parent_id": "360400",
+      "scope_id": "363637",
+      "parent_id": "363637",
       "stage": "queue",
-      "input_fingerprint": "d440fa9c32a5975d8c0c6a1c054071b7a880b7b360cb19d8c60a6f2f56fd3989",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "363908",
-      "parent_id": "363908",
-      "stage": "queue",
-      "input_fingerprint": "d0f1501147da0cc98c57a3d131eb796b8be1a4b34f6eaffcfb92b07042d38640",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "363720",
-      "parent_id": "363720",
-      "stage": "queue",
-      "input_fingerprint": "f5ac5d8039ff64937c52161bc068c56ef509479f2baf6dd1d670f962bcf81785",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "361065",
-      "parent_id": "361065",
-      "stage": "queue",
-      "input_fingerprint": "263cc642930b90bdfcec0e2f3fb0aee845228966b8173062cef64909ec8a7ddd",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "361522",
-      "parent_id": "361522",
-      "stage": "queue",
-      "input_fingerprint": "c87c0a7f4ba691d70e91b45e22c43d1a11f9108eec17c12ffb4badfb3c3fe282",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "359740",
-      "parent_id": "359740",
-      "stage": "queue",
-      "input_fingerprint": "18bf8aac25127a2bf424910444d7b62ec526d201726dfc5361f63b911d479e62",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "360536",
-      "parent_id": "360536",
-      "stage": "queue",
-      "input_fingerprint": "7927140ed8a235cb129bf06501925ab8f74b751f1f269fd33be7c97b4873bda5",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "362319",
-      "parent_id": "362319",
-      "stage": "queue",
-      "input_fingerprint": "d01c9dae7ab48a30563ee3dc38c006f72d42efaa1cb278eef95882cc640a22d6",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "arpa-h:fastpass",
-      "parent_id": "arpa-h:fastpass",
-      "stage": "queue",
-      "input_fingerprint": "ca785af0adbcd465bdfd66135c5bf1bb6e98a17b6f42c5b86dc7e5ee069d203d",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "364148",
-      "parent_id": "364148",
-      "stage": "queue",
-      "input_fingerprint": "f6d15d0f4bc8eda9142076bbf3db097cc46fdc3228ee31f129124dc8cfd38e09",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "nyserda:PON6240",
-      "parent_id": "nyserda:PON6240",
-      "stage": "queue",
-      "input_fingerprint": "b907f41e57e3de5fa06b6c0c829f0302919f3f871c418e0e7dcb1ac725b00a56",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "363825",
-      "parent_id": "363825",
-      "stage": "queue",
-      "input_fingerprint": "2e63efb0c0a2f43bd999950ba857cfc8fdf937821e0e377b2619482e9436ecd2",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "360875",
-      "parent_id": "360875",
-      "stage": "queue",
-      "input_fingerprint": "dd03bae4e482dc58a5889e030ad7539c9444472b57592bf76c52c43f403b626c",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "362965",
-      "parent_id": "362965",
-      "stage": "queue",
-      "input_fingerprint": "f0ffa0348cb099f5e452bb7655a100e7e5408c7a13334e70f8b5e342c4acdfff",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "363764",
-      "parent_id": "363764",
-      "stage": "queue",
-      "input_fingerprint": "a8087427f434fc92dc300a341588e6020186602cfb89ba9282be520e60369bdb",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "363258:c-4",
-      "parent_id": "363258",
-      "stage": "queue",
-      "input_fingerprint": "4d0e94bb6e38ab4cfc88d450e483e53e629810c7da773721911cd8b1fe129fb1",
+      "input_fingerprint": "919a7a1a8700ddc9a3a0407c5f5371feadb637fe1c693b71b128326119013aa8",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -3278,7 +4122,7 @@
       "scope_id": "363875",
       "parent_id": "363875",
       "stage": "queue",
-      "input_fingerprint": "ec742ddbec8340980e092404b5dd80cf3b5081ee030138ed75e5c6fd69be4f36",
+      "input_fingerprint": "c9f16d30526de5102ed46731ab9b69a3b5ed61530bb0490aecaf591dcf7fe332",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -3878,6 +4722,15 @@
       "reason_code": "pending_work"
     },
     {
+      "scope_id": "363712",
+      "parent_id": "363712",
+      "stage": "queue",
+      "input_fingerprint": "031d413c87a04033cf315335307841987adec5a591b1512f0d2374348cc97037",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
       "scope_id": "363758",
       "parent_id": "363758",
       "stage": "queue",
@@ -4043,7 +4896,7 @@
       "scope_id": "357343",
       "parent_id": "357343",
       "stage": "queue",
-      "input_fingerprint": "b6bd4848324dbae3124fd9dbe944c5efb8bfdfff3405f7befd2c05be437e5468",
+      "input_fingerprint": "a42c5f3af32e6f7da4b0bc61daf5d80f75e05f8b1143f0345139af76c85201a1",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -4250,7 +5103,7 @@
       "scope_id": "351124",
       "parent_id": "351124",
       "stage": "queue",
-      "input_fingerprint": "32eb39ad4ba08343971a5a75c4d117b44333cad75ff6201bd8e9f695b6127bb5",
+      "input_fingerprint": "540489f06f657dd7bb080122dd724f0b80ab46bd5c4169452c95e1684bded952",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -4448,7 +5301,7 @@
       "scope_id": "363815",
       "parent_id": "363815",
       "stage": "queue",
-      "input_fingerprint": "54eb95341db4e32b2fe1b6b37ad3d6e1aecb55b9c389297098ef65cb9d390001",
+      "input_fingerprint": "ee09d168be4b30fc461fa29c275ff9ce408878a4d533a49b40bcd558ec549a09",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -4457,7 +5310,7 @@
       "scope_id": "358689",
       "parent_id": "358689",
       "stage": "queue",
-      "input_fingerprint": "64763fd8a4c2eeac77c49a31de307e4327f3366b9269385296ac8bf8017c5280",
+      "input_fingerprint": "55b665b6f7d585f2996af6e5758dcf932a1821324555aad0b911fd4002cd5ffe",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -4544,15 +5397,6 @@
       "reason_code": "pending_work"
     },
     {
-      "scope_id": "vpr-email:vpr-779bd2ee55b34b8e",
-      "parent_id": "vpr-email:vpr-779bd2ee55b34b8e",
-      "stage": "queue",
-      "input_fingerprint": "2cb20bfb624ced9f43708cd0feffd2fd1b27d62f60b4413608de7ae8de48f26f",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
       "scope_id": "364122",
       "parent_id": "364122",
       "stage": "queue",
@@ -4619,7 +5463,7 @@
       "scope_id": "356723",
       "parent_id": "356723",
       "stage": "queue",
-      "input_fingerprint": "b742d26d85aee155331dab320517dc26b4957659cf85cf903d3709c7eed52496",
+      "input_fingerprint": "2c45cdf514c8f25fe877b1c3eda457ae46c92b7f9f1cc80f3873862c36d3b100",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -4628,7 +5472,7 @@
       "scope_id": "356724",
       "parent_id": "356724",
       "stage": "queue",
-      "input_fingerprint": "42579a058a0e2b202a37b69617ce44c21ae39a6d3722c35b8a547076a95311f2",
+      "input_fingerprint": "08a2118315332bfad48c0f79bd1c3e6e988c4e3e7163046904b9e21308a7986b",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -4670,15 +5514,6 @@
       "reason_code": "pending_work"
     },
     {
-      "scope_id": "363829",
-      "parent_id": "363829",
-      "stage": "queue",
-      "input_fingerprint": "f39869c0704b49e440dc585f55e358ac98b3d5d65af0c68f7d39c653638cf137",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
       "scope_id": "348375",
       "parent_id": "348375",
       "stage": "queue",
@@ -4700,7 +5535,7 @@
       "scope_id": "355439",
       "parent_id": "355439",
       "stage": "queue",
-      "input_fingerprint": "537ff6a5d9548b78cfcbdd51bf81a2c43e1f59e3cfc86f3fe4b51ec8267af770",
+      "input_fingerprint": "3ba02689a9eb9ab8ca2fcdafe13bb749909696fee85f417070699f8d65e57892",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -4979,7 +5814,7 @@
       "scope_id": "363752",
       "parent_id": "363752",
       "stage": "queue",
-      "input_fingerprint": "1d6de7d48a6b3ecb32e114f308b38099b16422eacb7f980bdc2aed2827fd1029",
+      "input_fingerprint": "d6d6175c8e926c1cabd0d3102d0df70ea0ae1179ec7b6a43d91081f94cf2e94a",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -4998,6 +5833,15 @@
       "parent_id": "nyserda:PON6206",
       "stage": "queue",
       "input_fingerprint": "9b11b79a7c368f15389a4cae8a385707b5c2609a06ee1a0a78a44134c744a2fc",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
+      "scope_id": "363829",
+      "parent_id": "363829",
+      "stage": "queue",
+      "input_fingerprint": "2edef40c6c2dc5631d5ed16b3cb4389ee6c07d4d12cc5eac6fab53b196c96395",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -5114,7 +5958,7 @@
       "scope_id": "361896",
       "parent_id": "361896",
       "stage": "queue",
-      "input_fingerprint": "3e52cf739c456dd8bebd22332564178042a42a2fa91656e586f31b5a5fcbac6d",
+      "input_fingerprint": "280ac8f4ad2b40b9f7c3d460fecbe96a06d7ad48cd90f6be0e61adbd93c05ed8",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -5186,7 +6030,7 @@
       "scope_id": "302271",
       "parent_id": "302271",
       "stage": "queue",
-      "input_fingerprint": "bc2d89d8819b02091213c733d1462489868b236f03c57044403b4616ff73b4e2",
+      "input_fingerprint": "6461a0ea681469dfdc601689c90a1c122d3c8a4de1d242ba5a31d753d33a9fda",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -5195,7 +6039,7 @@
       "scope_id": "arpa-h:unique",
       "parent_id": "arpa-h:unique",
       "stage": "queue",
-      "input_fingerprint": "3a41a6b7076977d819ce6743d73090344383023f18067cb8f01486cdd79f4ce5",
+      "input_fingerprint": "36ac32431865b14b0294b5329622767a01a69a79e19ae193e0e92a72ade6e685",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -6560,28 +7404,10 @@
       "reason_code": "pending_work"
     },
     {
-      "scope_id": "361997",
-      "parent_id": "361997",
-      "stage": "queue",
-      "input_fingerprint": "67a96ff56dcf79aa1883b92943d84e270cc6160a80ea81ac8b947fd0021f7a2c",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
       "scope_id": "364006",
       "parent_id": "364006",
       "stage": "queue",
       "input_fingerprint": "02e3650926a66b975ae497988a5c520e9c30c4fe802c8cc2b48a84e0aea1f4c7",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "363985",
-      "parent_id": "363985",
-      "stage": "queue",
-      "input_fingerprint": "608feadc340c8e5eb535728b3c8051fc99c79c657f26ad62405403e74cd0e87b",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -6662,7 +7488,7 @@
       "scope_id": "357524",
       "parent_id": "357524",
       "stage": "queue",
-      "input_fingerprint": "57109e8a9c1567b26fdfbbe05adc8bd0447aa5d841b30693f5981d2cf3feee68",
+      "input_fingerprint": "a4d61a89232fb4874be8b033106f498caa97440150fe6437d512839b209a6f5c",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -6671,7 +7497,7 @@
       "scope_id": "357074",
       "parent_id": "357074",
       "stage": "queue",
-      "input_fingerprint": "04b7983adc98399071f119c0e74e84c912165f5e9b94e3f175a948f11a2e931b",
+      "input_fingerprint": "64b431d8f0fb3e0d445d2295df41aa844b9a18e8c3b53238be2c5d7cfc0324ac",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -6680,7 +7506,7 @@
       "scope_id": "357136",
       "parent_id": "357136",
       "stage": "queue",
-      "input_fingerprint": "d1590dd3976f81ef18285566eaa187e1328376f741510633a96a0d8dc42737fb",
+      "input_fingerprint": "e2d0c45ead00907334569dc311fd55d611695195f3bb80c7f29f8b32b2f39ce0",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -6689,7 +7515,7 @@
       "scope_id": "358375",
       "parent_id": "358375",
       "stage": "queue",
-      "input_fingerprint": "77c4e9abee8d42d756b0ee6223ca55f25bc6c06167682bd2c320bba30450af5d",
+      "input_fingerprint": "de3a40d20da6149f9bbc696fec85857a138fb8735b82cb0aa546623fabdd4cce",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -6698,7 +7524,7 @@
       "scope_id": "358373",
       "parent_id": "358373",
       "stage": "queue",
-      "input_fingerprint": "843e162a5dcd41760ca706575ee1a9d3f68ae447952ec827df045e864dab230c",
+      "input_fingerprint": "596b781db0b6787aa837e1b9dfeb81d024a53462ef0cc8e73446069da6f5291f",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -6707,7 +7533,7 @@
       "scope_id": "356690",
       "parent_id": "356690",
       "stage": "queue",
-      "input_fingerprint": "351c02541395ab78ee38bfe429a9f82246c224fe17cb3b48ba551f7db77a5018",
+      "input_fingerprint": "43f23a1fea3c12e7cc3409d632f2b5cb127280d0625e227b45fd8a0be8122961",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -6716,7 +7542,7 @@
       "scope_id": "357202",
       "parent_id": "357202",
       "stage": "queue",
-      "input_fingerprint": "6236e84300eb125ab0650081649685590196687d5f1734f94e787f6eaa09a980",
+      "input_fingerprint": "62ebd7f95d888369add9adae6d190b5338c13a5fa4abeb81de3a2036da7ae62c",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -6725,7 +7551,7 @@
       "scope_id": "357203",
       "parent_id": "357203",
       "stage": "queue",
-      "input_fingerprint": "4630dca5beaad18f997d6b7c79393aeda7d8ad4675477f8ba477acd22e98800f",
+      "input_fingerprint": "c6dee267829e53328c154f80930724c9fc133d2f30207a9fb090d61e1bb769a9",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -6770,7 +7596,7 @@
       "scope_id": "357021",
       "parent_id": "357021",
       "stage": "queue",
-      "input_fingerprint": "16253924cbb64e32c3a015552152c43dee76cba4a0ae4b8978410e0f6d19b426",
+      "input_fingerprint": "a1cbc13d4fb3314daa210dd410a2375a66a775a8b554fb1e87ac5469e8f55287",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -6779,7 +7605,7 @@
       "scope_id": "357376",
       "parent_id": "357376",
       "stage": "queue",
-      "input_fingerprint": "90a1d555ca0b1ff85d5d77b16efb4f71969807d457a614189c7c4626b523a4e5",
+      "input_fingerprint": "b8dfa3dd8ddbdb892dc905ade2a4e064bf213f1e7b2a9e95111282d6299aa3d5",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -6956,10 +7782,19 @@
       "reason_code": "pending_work"
     },
     {
+      "scope_id": "364245",
+      "parent_id": "364245",
+      "stage": "queue",
+      "input_fingerprint": "d38ac5aaa3bd11a654f1f81fd4474edecd648a033c9dcf2fd3f914dd62e217a9",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
       "scope_id": "357826",
       "parent_id": "357826",
       "stage": "queue",
-      "input_fingerprint": "a08dbbd2fb5a0243e3ff99417d909d3b2dbd6259ae716e443c6d9b5b4eed8a95",
+      "input_fingerprint": "9df60d0a5429cc69ae964c3c5df38e0dafdf43597c78445da7bda1be3a4cff0a",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -7031,7 +7866,7 @@
       "scope_id": "vpr-email:infoready-2024058",
       "parent_id": "vpr-email:infoready-2024058",
       "stage": "queue",
-      "input_fingerprint": "5f9387fa5fe788c0bfab3a9cfffebaad13ec2e7a003963874557c02690d474a5",
+      "input_fingerprint": "f2221d4605c0d69ba78e0a2694195221bbfa80bdabbab7c51040c2ee5c64af3e",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -7049,7 +7884,7 @@
       "scope_id": "355219",
       "parent_id": "355219",
       "stage": "queue",
-      "input_fingerprint": "77bdcaf480781c6afa3976724214a799083647a2b3f0e76f574c7b287e2baab9",
+      "input_fingerprint": "e1174fb417e5affd13d8c6e8192bdfcc6d480e982e2ee7dae7f41d326d68d1ae",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -7238,7 +8073,7 @@
       "scope_id": "arpa-h:surpass",
       "parent_id": "arpa-h:surpass",
       "stage": "queue",
-      "input_fingerprint": "39673bdfa526a12adc0618df43044000a1db2fc3417a4373475673b705025afb",
+      "input_fingerprint": "05b7d151637ffb1740643cc49b238f4ac5ee2f48504a08655b1fe01405129c83",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -7337,7 +8172,7 @@
       "scope_id": "352810",
       "parent_id": "352810",
       "stage": "queue",
-      "input_fingerprint": "67d80b999f3493b51bf35743716c2742b121f989d663e6936a5ac8896b36f942",
+      "input_fingerprint": "c7496dc3d79b75706cc41bb413d17b4e62b7cee8a23e5b151fe82128fa1634ee",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -7418,7 +8253,7 @@
       "scope_id": "356309",
       "parent_id": "356309",
       "stage": "queue",
-      "input_fingerprint": "b19d61ffeba429b6759d5ddfad4c2579b76bc012e8e3b921db71ad1717ad7635",
+      "input_fingerprint": "81a030208d46e965ebd21145784bfa08c28af45cfcd85c378ff991f6a65446eb",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -7427,7 +8262,7 @@
       "scope_id": "356310",
       "parent_id": "356310",
       "stage": "queue",
-      "input_fingerprint": "963ca4341eb46df733cb9249655a24051cafcabeb8a27473df820a5bb80a7885",
+      "input_fingerprint": "d8d0bee35aab2737a5f9777a049d0311edeed8e47a9872a782957d18cb0211e4",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -7526,7 +8361,7 @@
       "scope_id": "355987",
       "parent_id": "355987",
       "stage": "queue",
-      "input_fingerprint": "ba4cd7462760cefa523bda5afb5f67be9eba433c39865f7e9bad4b853c4e29c6",
+      "input_fingerprint": "f0cb90a3867c8194c97be2b784408369dabb9b01c198818ee465668031ab3a4a",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -7580,7 +8415,7 @@
       "scope_id": "356903",
       "parent_id": "356903",
       "stage": "queue",
-      "input_fingerprint": "4b931e572d64e5f9b7a816bece6746d56eadd5733d9e1a82d130e51c50310e13",
+      "input_fingerprint": "b60afda6463793f964a896881228224f3c700452e60966e2f1ebb21eee357d25",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -7698,6 +8533,15 @@
       "parent_id": "363055",
       "stage": "queue",
       "input_fingerprint": "c4177b2250e3b417ce184140614f404fbabe99711383a443c951c480518cc904",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
+      "scope_id": "361997",
+      "parent_id": "361997",
+      "stage": "queue",
+      "input_fingerprint": "67a96ff56dcf79aa1883b92943d84e270cc6160a80ea81ac8b947fd0021f7a2c",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -7886,7 +8730,7 @@
       "scope_id": "328573",
       "parent_id": "328573",
       "stage": "queue",
-      "input_fingerprint": "995c47c091784601303d29670be66efce68850147455a171846385395488fe23",
+      "input_fingerprint": "a0abc98fe202cc893199efc8243faee849e8aaca84fe97b11ee40011081bb5ca",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -8003,7 +8847,7 @@
       "scope_id": "arpa-h:tigar",
       "parent_id": "arpa-h:tigar",
       "stage": "queue",
-      "input_fingerprint": "d3bb033400e167e9086d6d524bea869d3be53a2c2e85b58e37d6df63fc90f3cc",
+      "input_fingerprint": "89c6a06ff9539830890fb91d3e67c9e620adffb2cdfbd01ad65fd09e30263528",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -8012,7 +8856,7 @@
       "scope_id": "357137",
       "parent_id": "357137",
       "stage": "queue",
-      "input_fingerprint": "44651a17b8b18fc18587f0f5adff743ae13c7372fdc70a1fabe35040347f0123",
+      "input_fingerprint": "a989b4d25f82414af13e38958d427441ea23fbd1fd4bb133ee80bc96d74de17f",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -8030,7 +8874,7 @@
       "scope_id": "364174",
       "parent_id": "364174",
       "stage": "queue",
-      "input_fingerprint": "f5c83acf6ad1ec8af6007e806373de6f386f6bfee56199fe259179f8dc6a85bf",
+      "input_fingerprint": "1713ae89bc09e11c2db857da69e3a9283db38061e0a0dd8741f7bc56ef3306ac",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -8156,7 +9000,7 @@
       "scope_id": "363622",
       "parent_id": "363622",
       "stage": "queue",
-      "input_fingerprint": "175418b02f3b71e32fa4b42dee159e41d19c75f1bbe615ecbe84201248c9e99c",
+      "input_fingerprint": "b13554c9ab94daa903a47aae08c59e507ac2a7ae21674956c6ecec253d334dff",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -8192,7 +9036,7 @@
       "scope_id": "356018",
       "parent_id": "356018",
       "stage": "queue",
-      "input_fingerprint": "3230eaabb920f3cc007deb9138078543551e0403d16320e025cf0a06e3ae4d70",
+      "input_fingerprint": "9f982cc435ff07a3f588951528acb2a28307d02344b9a03d10ffb0ff45256c2f",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -8255,7 +9099,7 @@
       "scope_id": "vpr-email:infoready-2028504",
       "parent_id": "vpr-email:infoready-2028504",
       "stage": "queue",
-      "input_fingerprint": "c64700fecf87f896f646724b74c2aceec9bc841ebc3cefc31dbefd7c3d953e22",
+      "input_fingerprint": "e0a07852cea3ff0f9c39f198c00faf0e83e743fc5f5734dac20fc3b312413768",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -8399,7 +9243,7 @@
       "scope_id": "353633",
       "parent_id": "353633",
       "stage": "queue",
-      "input_fingerprint": "7b702f21e5c6456a8510c6c8cffb335f8e092389b185e90605972e328a8741c9",
+      "input_fingerprint": "d2c32ef2e24d018dd12bf17c582b20babb692eb0053011632bc48a86e7c8e6e0",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -8480,7 +9324,7 @@
       "scope_id": "357744",
       "parent_id": "357744",
       "stage": "queue",
-      "input_fingerprint": "6d478be50c3d8eff7c300a4b6aeb3879b17da4f8f133082232c6895487560ffe",
+      "input_fingerprint": "07cd24698e935b7507094ddb4e0a255ff591fef584b687769bffe641f106ea95",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -8552,7 +9396,7 @@
       "scope_id": "361333",
       "parent_id": "361333",
       "stage": "queue",
-      "input_fingerprint": "437b2d026787a03a7e33b105409d3309cb716131af3abb0b020ff37522fa1e6b",
+      "input_fingerprint": "cde10a4c21c77507516a39d5ee486fb4bc93e154b28bbda91d53bb6c3e6d36c9",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -8606,7 +9450,7 @@
       "scope_id": "357606",
       "parent_id": "357606",
       "stage": "queue",
-      "input_fingerprint": "ccf3a5898ca5156a27e1a90e99061af81ac59365402b1c4d30fad54cedc562c3",
+      "input_fingerprint": "15778beccfa38378c966e94b4b90a82f14be0af5d94672caaa2a2afbf14342c6",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -8615,7 +9459,7 @@
       "scope_id": "362551",
       "parent_id": "362551",
       "stage": "queue",
-      "input_fingerprint": "ee4a36089abc1b484c4e803e149e98f2026688ad0a9ad69b5ca055b06c62331d",
+      "input_fingerprint": "142f04b59abf7e32fb65658cbce3cd68c67e5275e135278981ab330d3ba7f903",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -8675,6 +9519,15 @@
       "reason_code": "pending_work"
     },
     {
+      "scope_id": "363985",
+      "parent_id": "363985",
+      "stage": "queue",
+      "input_fingerprint": "97dd7737904c1b953b1daebe235779e932b760b6a60f9bea0c455c85ebeb2e36",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
       "scope_id": "360625",
       "parent_id": "360625",
       "stage": "queue",
@@ -8696,7 +9549,7 @@
       "scope_id": "355867",
       "parent_id": "355867",
       "stage": "queue",
-      "input_fingerprint": "12270418ae5cbe980e50345a6c589a05909eb9ad2faf70cb5631aaa6dc5c7d5f",
+      "input_fingerprint": "d75497dc7801b5060ecc1f3ce1eb1da98f1ef300fcae1728f840e3ccc3af9e83",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -8714,7 +9567,7 @@
       "scope_id": "357713",
       "parent_id": "357713",
       "stage": "queue",
-      "input_fingerprint": "199e61040212ffac269f630970a0a8dc9bafe3d503f12e9ac8856d496ab770b0",
+      "input_fingerprint": "4081a3bb36bf67cfa759638482f4a3ab1385bf1032edb11b45ac64f8045e823d",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -8922,6 +9775,15 @@
       "parent_id": "363516",
       "stage": "queue",
       "input_fingerprint": "6c70b91c55a91f83fb3083967ca718a95ac9612fac6e3c4aeb04a7545d60e3ee",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
+      "scope_id": "364247",
+      "parent_id": "364247",
+      "stage": "queue",
+      "input_fingerprint": "386019cc8cac29ee2679651e66dd5c7b844b606bbb2f3364b3b2506897b77150",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -9263,7 +10125,7 @@
       "scope_id": "355196",
       "parent_id": "355196",
       "stage": "queue",
-      "input_fingerprint": "5c5cc67d049237580df640f9a51a5b985e6c4420bafd885179511b669c834432",
+      "input_fingerprint": "027d9e8e5d78dd829b99834aeb79bc4cb5776362a26b5b39d0165fc2b68c9315",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -9362,7 +10224,7 @@
       "scope_id": "351923",
       "parent_id": "351923",
       "stage": "queue",
-      "input_fingerprint": "e05c5134c60b961f576750b385e274cbbfdbf810ada7417e3bac7ebbc02d30c7",
+      "input_fingerprint": "63f8b32751c8c92702e6478056d629b11659a0fbf753b7d17854e16472e67cb8",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -9371,7 +10233,7 @@
       "scope_id": "353413",
       "parent_id": "353413",
       "stage": "queue",
-      "input_fingerprint": "fb8459275fdd8eb272d99f57a9f008ca9884694aa1dc79249f4106a322a3b41c",
+      "input_fingerprint": "26b2cbec0569dccbaaac5d76fa3c5b8b59349cebb1d692425840c8e09118cafc",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -9380,7 +10242,7 @@
       "scope_id": "358036",
       "parent_id": "358036",
       "stage": "queue",
-      "input_fingerprint": "5763680eae7e7fd4878f39f761bbd7cf94817260a8e3c815faa4d91a96cfb0b9",
+      "input_fingerprint": "f8cb183a11aebab46be66e01bc878a0d1ee73cdc42b3ddf22440ee076edfbb57",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -9416,7 +10278,7 @@
       "scope_id": "353623",
       "parent_id": "353623",
       "stage": "queue",
-      "input_fingerprint": "557c3729daa2bca7ffb7d230d0baa19823856b0f7cb2121d236f7b848c3ed5ce",
+      "input_fingerprint": "1ce78e247f28ee6bf7794eb4a831b75d0e34c93e48e76ef369c7a60787044f14",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -9434,7 +10296,7 @@
       "scope_id": "357121",
       "parent_id": "357121",
       "stage": "queue",
-      "input_fingerprint": "290b6c48130f2f49b608e3660e418a8dfc960c9f748d3b24c1aabc7c41f95a48",
+      "input_fingerprint": "ea3e6b5387149ef1f0b97475954be213e34ee11cc4beff963154836f33825007",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -10133,6 +10995,15 @@
       "reason_code": "pending_work"
     },
     {
+      "scope_id": "364251",
+      "parent_id": "364251",
+      "stage": "queue",
+      "input_fingerprint": "cccd2dd132d240016dbfd33b239fd4fa80340c04997e9797816ca88680b05a8b",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
       "scope_id": "361050",
       "parent_id": "361050",
       "stage": "queue",
@@ -10227,6 +11098,15 @@
       "parent_id": "362957",
       "stage": "queue",
       "input_fingerprint": "4528be3086b2b03c9eecaf65c572be02725ff996f3e305bad0e8489ede213be4",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
+      "scope_id": "364252",
+      "parent_id": "364252",
+      "stage": "queue",
+      "input_fingerprint": "3b1095a1969689172c1fee067091b5c3ea3987125ef98328e4bbf97716035e41",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -14951,7 +15831,7 @@
       "scope_id": "arpa-h:ehi",
       "parent_id": "arpa-h:ehi",
       "stage": "queue",
-      "input_fingerprint": "6e8c9c1df38205c26706f2c976b70bb3727c928149ab8203328082b6c65e073a",
+      "input_fingerprint": "2de19cb383d8ae3bd402ebce53b4c78dc790ca743acdcf81448554f94a7a586f",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -15050,7 +15930,7 @@
       "scope_id": "324369",
       "parent_id": "324369",
       "stage": "queue",
-      "input_fingerprint": "93f5882982f636e09c88e3f959be283c53b7dbb0f327cf445ac707fbc504dd1c",
+      "input_fingerprint": "3cd4f259112344b17736df4a9f5a1bb3fc182c9ee378910a1df0b036d1bf3777",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -15132,6 +16012,15 @@
       "parent_id": "347679",
       "stage": "queue",
       "input_fingerprint": "bdacc59192a490c3e67f3ef9614aa413369e71c8b64a8e4cf179eb83c774bf11",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
+      "scope_id": "356537",
+      "parent_id": "356537",
+      "stage": "queue",
+      "input_fingerprint": "881f8d4aa718a59d72a52794f24601103711174591161edb58ba01c7aae2f0e3",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -15419,7 +16308,7 @@
       "scope_id": "350230",
       "parent_id": "350230",
       "stage": "queue",
-      "input_fingerprint": "5733320b42b7a776abc14d18889ee9fdb8d3816a4ad65b831b0124e44e39f1ce",
+      "input_fingerprint": "45635ae87838c0c85ad34ccb095c0d27b09b105b5baff44339c6cdc23a54c5a9",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -15581,7 +16470,7 @@
       "scope_id": "arpa-h:spectra",
       "parent_id": "arpa-h:spectra",
       "stage": "queue",
-      "input_fingerprint": "dba67656fa4180eb7a64600978cc3ea497930d3b3235b96c15ac51f6f2a6a7f5",
+      "input_fingerprint": "2981caffc282922e165601b9c5825265bce66c70a0efcdc2a9250cace4f8bbe7",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -15661,6 +16550,6 @@
   ],
   "assessed_scopes": 0,
   "outcomes": {},
-  "elapsed_seconds": 4.119,
+  "elapsed_seconds": 3.274,
   "status": "completed"
 }

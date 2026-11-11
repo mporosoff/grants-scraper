@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/health-equity.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/health-equity.xml</id>
-  <updated>2026-11-10T17:59:42Z</updated>
+  <updated>2026-11-11T22:12:52Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Limited Competition: John Lewis NIMHD Research Endowment Program (S21 Clinical Trial Not Allowed)</title>
@@ -204,7 +204,7 @@
     <summary>U.S. National Science Foundation | Application 2027-02-01 | Developmental Sciences supports basic research that increases our understanding of perceptual, cognitive, linguistic, social, cultural, and biological processes related to human development across the lifespan. Research supported by this program will add to our knowledge of the underlying developmental processes that support social, cognitive, and behavioral functioning, thereby illuminating ways …</summary>
   </entry>
   <entry>
-    <title>Research in the Formation of Engineers</title>
+    <title>Research in the Formation of Engineers (RFE)</title>
     <link href="https://www.grants.gov/search-results-detail/350230"/>
     <id>urn:funding-finder:grants-gov:350230</id>
     <updated>2023-09-17T00:00:00Z</updated>
@@ -216,6 +216,7 @@
     <category term="Health equity"/>
     <category term="Technology development"/>
     <category term="Transportation"/>
+    <category term="Data science"/>
     <summary>U.S. National Science Foundation | Posted | The NSF Engineering Directorate (ENG) has launched a multi-year initiative, the Professional Formation of Engineers, to create and support an innovative and inclusive engineering profession for the 21st century. Professional Formation of Engineers (PFE) refers to the formal and informal processes and value systems by which people become engineers. It also includes the ethical responsibility of pra…</summary>
   </entry>
   <entry>

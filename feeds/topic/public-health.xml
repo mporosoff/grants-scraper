@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/public-health.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/public-health.xml</id>
-  <updated>2026-11-10T17:59:42Z</updated>
+  <updated>2026-11-11T22:12:52Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Public Health Nursing</title>
@@ -536,6 +536,15 @@
     <summary>Centers for Disease Control-GHC | Estimated Application 2027-02-12 | This NOFO will provide critical disease modeling to inform decision making on the development of strategies for cVDPV2 outbreak response, optimal surveillance upon global WPV eradication, and surveillance to detect containment breaches. It will also build capacity for a diverse public health workforce of statistical and mathematical modelers. Additionally, models will assess economic implications …</summary>
   </entry>
   <entry>
+    <title>Centers of Excellence in Healthcare Quality and Safety</title>
+    <link href="https://www.grants.gov/search-results-detail/361997"/>
+    <id>urn:funding-finder:grants-gov:361997</id>
+    <updated>2026-12-01T00:00:00Z</updated>
+    <author><name>Centers for Disease Control - NCEZID</name></author>
+    <category term="Public health"/>
+    <summary>Centers for Disease Control - NCEZID | Estimated Application 2027-02-01 | This Program will create a collaborative network of healthcare systems, facilities and public health partners to rapidly detect, respond to, and prevent threats to patient and healthcare worker safety. This Program will support work that improves the safety, quality and resilience of U.S. healthcare delivery. The Program will be made up of healthcare systems inclusive of multiple facilities in a v…</summary>
+  </entry>
+  <entry>
     <title>Improving Linkage to Care for People with Opioid Use Disorder (U01)</title>
     <link href="https://www.grants.gov/search-results-detail/363058"/>
     <id>urn:funding-finder:grants-gov:363058</id>
@@ -632,15 +641,5 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Public health"/>
     <summary>National Institutes of Health | Estimated Application 2027-01-11 | Through this Notice of Funding Opportunity (NOFO), the participating NIH Institutes, Centers, and Offices (ICOs) encourage pursuit of the NIH’s mission through the submission of investigator-initiated Specialized Center (P50) applications. With this Parent P50 NOFO, the NIH ICOs intend to support a broadly based, multidisciplinary, often long-term research program with a specific major scientific …</summary>
-  </entry>
-  <entry>
-    <title>Women's Initiative for Screening and Health (WISH)</title>
-    <link href="https://www.grants.gov/search-results-detail/363546"/>
-    <id>urn:funding-finder:grants-gov:363546</id>
-    <updated>2026-11-06T00:00:00Z</updated>
-    <author><name>Health Resources and Services Administration</name></author>
-    <category term="Public health"/>
-    <category term="Cybersecurity"/>
-    <summary>Health Resources and Services Administration | Application 2027-01-08 | The purpose of Women's Initiative for Screening and Health (WISH) is to improve women’s health across the lifespan by increasing access to and availability of preventive health services. Through a multidisciplinary coalition of healthcare providers, academic institutions, and patient-centered organizations, WISH drives a comprehensive strategy to: (1) review and recommend evidence-based updates to…</summary>
   </entry>
 </feed>
