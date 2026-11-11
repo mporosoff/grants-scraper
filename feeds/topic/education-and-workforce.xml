@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/education-and-workforce.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/education-and-workforce.xml</id>
-  <updated>2026-11-10T17:59:42Z</updated>
+  <updated>2026-11-11T22:12:52Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -442,6 +442,17 @@
     <summary>National Institutes of Health | Estimated Application 2027-05-25 | The National Human Genome Research Institute (NHGRI) intends to issue a Notice of Funding Opportunity (NOFO) to support a limited competition renewal of the Analysis, Visualization, and Informatics Lab-space (AnVIL) program. AnVIL is a secure, cloud-based platform that enables researchers to access, share, and analyze large-scale genomic datasets without relying on local infrastructure. Currently,…</summary>
   </entry>
   <entry>
+    <title>Broadening Opportunities for Computational Genomics and Data Science Education (UE5 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/364251"/>
+    <id>urn:funding-finder:grants-gov:364251</id>
+    <updated>2027-02-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Data science"/>
+    <category term="Education and workforce"/>
+    <summary>National Institutes of Health | Estimated Application 2027-05-28 | The National Human Genome Research Institute (NHGRI) intends to issue a Notice of Funding Opportunity (NOFO) in 2027 to renew the Broadening Opportunities for Computational Genomics and Data Science Education program (UE5 activity code). This program supports emerging research institutions (ERIs)-institutions with less than $50M in Federal research expenditures per 42 USC 18901, to teach computati…</summary>
+  </entry>
+  <entry>
     <title>Homeless Veterans’ Reintegration Program (HVRP), Incarcerated Veterans’ Transition Program (IVTP), and the Homeless Women Veterans' and Homeless Veterans' with Children Reintegration Grant Program (HWVHVWC) (referred to collectively</title>
     <link href="https://www.grants.gov/search-results-detail/363845"/>
     <id>urn:funding-finder:grants-gov:363845</id>
@@ -596,14 +607,5 @@
     <category term="Public health"/>
     <category term="Social and behavioral sciences"/>
     <summary>Substance Abuse and Mental Health Services Adminis | Forecasted | The purpose of this program is to support a comprehensive, public health, and evidence-based approach for colleges and universities that: improves access to behavioral health services for all college students, including those at risk for suicide, depression, serious mental illness, and substance use disorders that can lead to school failure; prevents and mitigates suicide, mental health conditions…</summary>
-  </entry>
-  <entry>
-    <title>Providers Clinical Support System - Universities</title>
-    <link href="https://www.grants.gov/search-results-detail/363806"/>
-    <id>urn:funding-finder:grants-gov:363806</id>
-    <updated>2026-12-15T00:00:00Z</updated>
-    <author><name>Substance Abuse and Mental Health Services Adminis</name></author>
-    <category term="Education and workforce"/>
-    <summary>Substance Abuse and Mental Health Services Adminis | Forecasted | The purpose of this program is to fully prepare graduate-level health professional students to understand, identify, intervene, and treat patients with a substance use, misuse and substance use disorder upon becoming licensed practitioners.</summary>
   </entry>
 </feed>

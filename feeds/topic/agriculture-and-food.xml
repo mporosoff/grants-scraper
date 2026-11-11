@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml</id>
-  <updated>2026-11-10T17:59:42Z</updated>
+  <updated>2026-11-11T22:12:52Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Healthy Lifestyles in Youth</title>
@@ -374,18 +374,6 @@
     <summary>AmeriCorps | Application 2027-01-13 | AmeriCorps improves lives, strengthens communities, and fosters civic engagement through service and volunteering. AmeriCorps brings people together to tackle some of the country’s most pressing challenges through national service and volunteerism. AmeriCorps members serve with organizations dedicated to the improvement of communities and those serving. AmeriCorps grants are awarded to eligible or…</summary>
   </entry>
   <entry>
-    <title>Capacity Building Grants for Non-Land-Grant Colleges of Agriculture Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363720"/>
-    <id>urn:funding-finder:grants-gov:363720</id>
-    <updated>2026-08-26T00:00:00Z</updated>
-    <author><name>National Institute of Food and Agriculture</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Education and workforce"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>National Institute of Food and Agriculture | Application 2026-11-10 | The NLGCA Program, under assistance listing number 10.326, will assist NLGCA institutions in maintaining and expanding their capacity to conduct education, research, outreach, and integrated activities relating to agriculture, renewable resources, and other similar disciplines. NLGCA institutions may use the funds to maintain and expand capacity: 1. to successfully compete for funds from Federal g…</summary>
-  </entry>
-  <entry>
     <title>WaterSMART Enhancing Water Resources Projects</title>
     <link href="https://www.grants.gov/search-results-detail/362394"/>
     <id>urn:funding-finder:grants-gov:362394</id>
@@ -396,16 +384,6 @@
     <category term="Environmental science"/>
     <category term="Water"/>
     <summary>Bureau of Reclamation | Application 2027-09-08 | The objective of the WaterSMART Enhancing Water Resources Projects funding opportunity is to invite eligible entities to apply for funding to implement projects per the authorizing language referenced above that benefit water resource management for multiple uses, including water conservation and efficiency projects, water infrastructure improvements, and river and watershed restoration. Projects …</summary>
-  </entry>
-  <entry>
-    <title>Amyotrophic Lateral Sclerosis (ALS) Intermediate Patient Population Expanded Access (U01 Clinical Trial Required)</title>
-    <link href="https://www.grants.gov/search-results-detail/360400"/>
-    <id>urn:funding-finder:grants-gov:360400</id>
-    <updated>2026-05-04T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Biology and biotechnology"/>
-    <summary>National Institutes of Health | Application 2026-11-10 | The purpose of this Notice of Funding Opportunity (NOFO) is to solicit applications for the conduct of scientific research utilizing data from expanded access (EA) for investigational drugs or biological products as described in section 561 of the Federal Food, Drug, and Cosmetic Act (21 U.S.C. 360bbb). These applications will target intermediate size populations of patients living with amyotrophi…</summary>
   </entry>
   <entry>
     <title>Chemical Process Systems (CPS)</title>
@@ -697,5 +675,26 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Separations and membranes"/>
     <category term="Water"/>
     <summary>Food and Drug Administration | Letter Of Intent 2026-12-14 | This cooperative agreement is intended to enhance the capacity and capabilities of state human and animal food testing laboratories in support of an integrated food safety system (IFSS). This is achieved through prioritized sample testing and food defense preparedness in the areas of microbiology, chemistry, and radiochemistry, as well as method development and capacity/capability development proj…</summary>
+  </entry>
+  <entry>
+    <title>Intervention Research to Improve Native American Health (R01 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/358375"/>
+    <id>urn:funding-finder:grants-gov:358375</id>
+    <updated>2025-01-22T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <summary>National Institutes of Health | Application 2027-01-07 | Not available</summary>
+  </entry>
+  <entry>
+    <title>Limited Competition: Small Grant Program for NIDDK K01/K08/K23/K25 Recipients (R03 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/358116"/>
+    <id>urn:funding-finder:grants-gov:358116</id>
+    <updated>2025-01-10T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Transportation"/>
+    <summary>National Institutes of Health | Application 2027-02-16 | The National Institute of Diabetes and Digestive and Kidney Diseases (NIDDK) announces a program that provides NIDDK-supported K01, K08, K23, and K25 recipients the opportunity to apply for Small Grant (R03) support at some point during the latter years of their award period of their K award. Through the use of this mechanism, the NIDDK is seeking to enhance the capability of its K01, K08, K23, an…</summary>
   </entry>
 </feed>

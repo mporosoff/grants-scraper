@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/arts-and-culture.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/arts-and-culture.xml</id>
-  <updated>2026-11-10T17:59:42Z</updated>
+  <updated>2026-11-11T22:12:52Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Public Health Nursing</title>
@@ -174,6 +174,16 @@
     <author><name>Administration for Children and Families</name></author>
     <category term="Arts and culture"/>
     <summary>Administration for Children and Families | Estimated Application 2027-03-02 | The Office of Early Childhood Development (ECD) within the Administration for Children and Families (ACF) will be soliciting applications for the Fiscal Year 2027 Tribal Maternal, Infant, and Early Childhood Home Visiting (MIECHV) Program: Development and Implementation Grants. Funds will support 5-year cooperative agreements between ACF and federally recognized Indian tribes (or a consortium of I…</summary>
+  </entry>
+  <entry>
+    <title>National Services for State Arts Agencies and Regional Arts Organizations</title>
+    <link href="https://www.grants.gov/search-results-detail/364245"/>
+    <id>urn:funding-finder:grants-gov:364245</id>
+    <updated>2026-11-10T00:00:00Z</updated>
+    <author><name>National Endowment for the Arts</name></author>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <summary>National Endowment for the Arts | Application 2027-01-14 | Funding is available to support national services and activities that benefit State Arts Agencies (SAAs) and Regional Arts Organizations (RAOs). Projects may include leadership development, training, strategic planning, program coordination, information sharing, and other activities that strengthen accountability, transparency, and organizational effectiveness. Eligibility for this grant is limite…</summary>
   </entry>
   <entry>
     <title>Cooperative Agreement for affiliated Partner with Great Lakes Northern Forest Cooperative Ecosystem Studies Unit</title>
@@ -639,16 +649,5 @@
     <category term="Arts and culture"/>
     <category term="Biology and biotechnology"/>
     <summary>National Institutes of Health | Application 2029-05-07 | The purpose of this notice of funding opportunity (NOFO) is to provide investigators with a mechanism to request services from the state-of-the-art Biological Testing Facility that would advance their contraceptive development or reproductive health programs. This NOFO aims to position innovative and validated methods for future regulatory submission and/or clinical development. Applicants do not …</summary>
-  </entry>
-  <entry>
-    <title>Limited Competition: Instrumentation Grant Program for Resource-Limited Institutions (S10 - Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/360364"/>
-    <id>urn:funding-finder:grants-gov:360364</id>
-    <updated>2026-05-27T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health | Application 2029-01-26 | The Instrumentation Grant Program for Resource-Limited Institutions supports the purchase of state-of-the-art scientific instruments to enhance the research and educational missions of resource-limited institutions. Requested instruments may support biomedical research and education in basic, translational, biomedically-related behavioral or clinical fields. This is a Notice of Funding Opportunity…</summary>
   </entry>
 </feed>
