@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/cancer.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/cancer.xml</id>
-  <updated>2026-11-11T22:12:52Z</updated>
+  <updated>2026-11-12T18:27:29Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Advanced Development and Sustainment of Informatics Technologies for Cancer Research and Management (U24 Clinical Trial Optional)</title>
@@ -417,16 +417,6 @@ a high level of innovation and creativity. The goal is to support the best young
     <summary>National Institutes of Health | Application 2029-03-12 | The goal of the Paul Calabresi Career Development Award for Clinical Oncology (PCACO) is to increase the number of clinician-scientists trained in clinical and translational cancer research, and to promote their career development as cancer researchers. This Notice of Funding Opportunity (NOFO) does not allow Scholars to propose to lead an independent clinical trial, but does allow Scholars to pro…</summary>
   </entry>
   <entry>
-    <title>Precision Approaches in Radiation Synthetic Combinations (PAIRS, RP1 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/361399"/>
-    <id>urn:funding-finder:grants-gov:361399</id>
-    <updated>2026-06-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Cancer"/>
-    <summary>National Institutes of Health | Estimated Application 2026-11-11 | Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) solicits research projects that investigate actionable synthetic vulnerabilities that can be conditionally paired with tumor responses to radiation therapy. The goal of the Precision Approaches in Radiation Synthetic Combinations (PAIRS) program is to develop radiation-synthetic combination strategies and facili…</summary>
-  </entry>
-  <entry>
     <title>Early-Stage Development of Informatics Technologies for Cancer Research and Management (U01 Clinical Trial Optional)</title>
     <link href="https://www.grants.gov/search-results-detail/359892"/>
     <id>urn:funding-finder:grants-gov:359892</id>
@@ -647,5 +637,16 @@ a high level of innovation and creativity. The goal is to support the best young
     <category term="Education and workforce"/>
     <category term="Health equity"/>
     <summary>National Institutes of Health | Application 2028-01-07 | This Notice of Funding Opportunity (NOFO) encourages grant applications from investigators interested in conducting basic, mechanistic research into the biological/genetic causes of cancer health disparities. These research project grants will support innovative studies designed to investigate biological/genetic bases of cancer disparities, such as (1) mechanistic studies of biological factors ass…</summary>
+  </entry>
+  <entry>
+    <title>Cancer Prevention and Control Clinical Trials Grant Program (R01 Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/357074"/>
+    <id>urn:funding-finder:grants-gov:357074</id>
+    <updated>2024-11-12T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Cancer"/>
+    <category term="Education and workforce"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health | Application 2027-01-07 | Through this notice of funding opportunity (NOFO), the National Cancer Institute (NCI) invites applications for support of investigator-initiated clinical trials that have the potential to reduce the burden of cancer through improvements in early detection, screening, prevention and interception, healthcare delivery, quality of life, and/or survivorship related to cancer; with such attributes, the…</summary>
   </entry>
 </feed>

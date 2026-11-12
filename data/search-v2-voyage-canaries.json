@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-11T22:15:15.852Z",
+  "generated_at": "2026-11-12T18:29:45.998Z",
   "canary_set_version": 1,
   "model_alias": "voyage-4-lite",
   "response_model": "voyage-4-lite",
@@ -15,25 +15,13 @@
   "batch_space_checks": [
     {
       "exact_match": false,
-      "minimum_cosine": 0.999963,
-      "mean_cosine": 0.999974,
+      "minimum_cosine": 0.999956,
+      "mean_cosine": 0.999967,
       "gross_discontinuity": false
     },
     {
       "exact_match": false,
       "minimum_cosine": 0.999967,
-      "mean_cosine": 0.999973,
-      "gross_discontinuity": false
-    },
-    {
-      "exact_match": false,
-      "minimum_cosine": 0.999967,
-      "mean_cosine": 0.999973,
-      "gross_discontinuity": false
-    },
-    {
-      "exact_match": false,
-      "minimum_cosine": 0.99997,
       "mean_cosine": 0.999973,
       "gross_discontinuity": false
     },
@@ -42,20 +30,32 @@
       "minimum_cosine": 0.999962,
       "mean_cosine": 0.99997,
       "gross_discontinuity": false
+    },
+    {
+      "exact_match": false,
+      "minimum_cosine": 0.999967,
+      "mean_cosine": 0.99997,
+      "gross_discontinuity": false
+    },
+    {
+      "exact_match": false,
+      "minimum_cosine": 1,
+      "mean_cosine": 1,
+      "gross_discontinuity": false
     }
   ],
   "comparison_to_prior_generation": {
-    "prior_fingerprint": "243e59c7a5c2db0cb1e9de04e455bf417d6b875557cb8223146fcf5b8d23037c",
-    "drift_detected": true,
-    "minimum_cosine": 0.999963,
-    "mean_cosine": 0.999974,
+    "prior_fingerprint": "146f598251cda23bf02314ddc8f05a4bfa8a6f918644c20736258dc2c979638d",
+    "drift_detected": false,
+    "minimum_cosine": 1,
+    "mean_cosine": 1,
     "per_canary_cosine": {
-      "carbon-catalysis": 0.999978,
-      "critical-minerals": 0.999963,
-      "rural-health": 0.999975,
-      "quantum-sensing": 0.999977,
-      "maritime-autonomy": 0.999978,
-      "ecosystem-resilience": 0.999971
+      "carbon-catalysis": 1,
+      "critical-minerals": 1,
+      "rural-health": 1,
+      "quantum-sensing": 1,
+      "maritime-autonomy": 1,
+      "ecosystem-resilience": 1
     },
     "minimum_cosine_gate": 0.95,
     "mean_cosine_gate": 0.98,
