@@ -1,16 +1,16 @@
 {
-  "generated_at": "2026-11-11T22:12:52Z",
+  "generated_at": "2026-11-12T18:27:29Z",
   "excluded_noncurrent": 1,
   "feeds": [
     {
       "title": "All new opportunities",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/all.xml",
-      "count": 1289
+      "count": 1286
     },
     {
       "title": "Funding Finder | Federal",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/source-type/federal.xml",
-      "count": 1232
+      "count": 1229
     },
     {
       "title": "Funding Finder | Internal",
@@ -40,12 +40,12 @@
     {
       "title": "Funding Finder | Biology and biotechnology",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/biology-and-biotechnology.xml",
-      "count": 178
+      "count": 177
     },
     {
       "title": "Funding Finder | Cancer",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/cancer.xml",
-      "count": 76
+      "count": 75
     },
     {
       "title": "Funding Finder | Carbon management",
@@ -80,7 +80,7 @@
     {
       "title": "Funding Finder | Education and workforce",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/education-and-workforce.xml",
-      "count": 469
+      "count": 468
     },
     {
       "title": "Funding Finder | Energy",
