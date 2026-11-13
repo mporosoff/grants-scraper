@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml</id>
-  <updated>2026-11-12T18:27:29Z</updated>
+  <updated>2026-11-13T17:53:58Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>ancient DNA for Modern Genomics (aDMG) Research Projects (U01 Clinical Trials Not Allowed)</title>
@@ -340,17 +340,6 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Data science"/>
     <summary>National Institutes of Health | Estimated Application 2026-12-01 | The National Institute of Arthritis and Musculoskeletal and Skin Diseases (NIAMS), in conjunction with other NIH Institutes and Centers (ICs) as a part of the congressionally mandated NIH Helping to End Addiction Long Term (HEAL) initiative intends to publish a Notice of Funding Opportunity (NOFO) to leverage and accelerate the progress achieved in the Restoring Joint Health and Function to Reduce…</summary>
-  </entry>
-  <entry>
-    <title>WATER RESOURCES RESEARCH ACT PROGRAM NATIONAL COMPETITIVE GRANTS FY2026 (104g General)</title>
-    <link href="https://www.grants.gov/search-results-detail/364012"/>
-    <id>urn:funding-finder:grants-gov:364012</id>
-    <updated>2026-09-30T00:00:00Z</updated>
-    <author><name>Geological Survey</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Water"/>
-    <summary>Geological Survey | Application 2026-11-12 | This Program Announcement is issued under the provisions of section 104 of the Water Resources Research Act of 1984 (Public Law 98-242), as amended by Public Laws 101-397, 104-147, 106-374, 109-471, and 117-58. Section 104 of the Water Resources Research Act directs the Secretary of the Interior to administer program grants to Institutes established under the provisions of section 104(a) of the Ac…</summary>
   </entry>
   <entry>
     <title>Simulation-augmented, real-time Platform Adaptive Seamless Trials (SURPASS)</title>
@@ -749,5 +738,16 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <summary>Naval Sea Systems Command (NAVSEA) | White Paper 2028-02-06 | Naval power and energy system research: power generation, storage, distribution, controls, advanced conductors, thermal management and modeling. Required white paper before invited full proposal. The current description extends receipt to February 6, 2033, while current SAM deadline metadata remains February 6, 2028. This entry deliberately uses the earlier 2028 deadline conservatively and retains…</summary>
+  </entry>
+  <entry>
+    <title>Innovative Traffic Safety Enforcement (ITSE) Grant Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363446"/>
+    <id>urn:funding-finder:grants-gov:363446</id>
+    <updated>2026-08-03T00:00:00Z</updated>
+    <author><name>National Highway Traffic Safety Administration</name></author>
+    <category term="Transportation"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>National Highway Traffic Safety Administration | Application 2027-03-01 | While the agency will consider innovative enhancements to existing countermeasures, the goal is to develop evidence-based projects that are scalable and transferable for use by State and local law enforcement agencies. The primary intent of this of the ITSE Grant Program is to 1) develop innovative traffic safety enforcement programs that demonstrate effectiveness by reducing the number of motor v…</summary>
   </entry>
 </feed>

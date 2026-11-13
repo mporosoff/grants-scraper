@@ -4,8 +4,18 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/space-and-aeronautics.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/space-and-aeronautics.xml</id>
-  <updated>2026-11-12T18:27:29Z</updated>
+  <updated>2026-11-13T17:53:58Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>ROSES25: C.2 Solar System Science</title>
+    <link href="https://nspires.nasaprs.com/external/solicitations/summary.do?solId={C92A28D2-9E30-4149-24B7-8A40ED4F564B}&amp;path=&amp;method=init"/>
+    <id>urn:funding-finder:nasa-roses:nasa-roses%3A25-C.2-e5e8e39f99</id>
+    <updated>2026-11-12T00:00:00Z</updated>
+    <author><name>NASA Headquarters</name></author>
+    <category term="Energy"/>
+    <category term="Space and aeronautics"/>
+    <summary>NASA Headquarters | Posted | NASA ROSES-2025 program element C.2, appendix division C. Published status: no_due_date; due dates as printed: N/A | No Due Date [5]. Source: ROSES Table 3 (SOLICITED RESEARCH PROGRAMS).</summary>
+  </entry>
   <entry>
     <title>NASA SPACE TECHNOLOGY GRADUATE RESEARCH OPPORTUNITIES - FALL 2027 (NSTGRO27)</title>
     <link href="https://www.grants.gov/search-results-detail/364247"/>
@@ -355,17 +365,6 @@
     <category term="Space and aeronautics"/>
     <category term="Transportation"/>
     <summary>Air Force -- Research Lab | Application 2027-09-30 | The Air Force Research Laboratory, Human Effectiveness Directorate (RH) and the United States Air Force School of Aerospace Medicine (USAFSAM), is soliciting white papers (and potentially later technical and cost proposals) on the research located in the Continuing Enabling, Enhancing, Restoring and Sustaining (CHEERS) Multiple Authority Announcement (MAA) Statements of Objectives, FA238424S2233. …</summary>
-  </entry>
-  <entry>
-    <title>ROSES 2025: C.2 Solar System Science</title>
-    <link href="https://www.grants.gov/search-results-detail/360004"/>
-    <id>urn:funding-finder:grants-gov:360004</id>
-    <updated>2025-07-11T00:00:00Z</updated>
-    <author><name>NASA Headquarters</name></author>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Space and aeronautics"/>
-    <summary>NASA Headquarters | Application 2026-11-12 | This program element does not have a proposal due date. Proposals may be submitted at any time, pending certain eligibility timing issues related to resubmissions and duplicate proposal avoidance, see the program element text and appropriate overview appendix (e.g., B.1 or C.1). The date shown of 8/1/2026 is the last day that proposals may be submitted subject to the ROSES-25 rules and the current…</summary>
   </entry>
   <entry>
     <title>ROSES 2025: A.4 Rapid Response and Novel Research in Earth Science</title>

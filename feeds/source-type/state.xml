@@ -4,8 +4,17 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/source-type/state.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/source-type/state.xml</id>
-  <updated>2026-11-12T18:27:29Z</updated>
+  <updated>2026-11-13T17:53:58Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>Long-Term Contracts to Purchase Index Storage Credits (ISCs)</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr00001ScHx7AAF"/>
+    <id>urn:funding-finder:nyserda:nyserda%3AISCRFP26-1</id>
+    <updated>2026-11-12T00:00:00Z</updated>
+    <author><name>NYSERDA</name></author>
+    <category term="Energy"/>
+    <summary>NYSERDA | Application 2026-12-15 | Procures Index Storage Credits (ISCs) from bulk energy storage projects that meet the eligibility requirements described in NYSERDA’s Request for Proposals (RFP) ISCRFP26-1. This RFP will be implemented through a two-step process, Step One Eligibility Application and Step Two Bid Proposal.</summary>
+  </entry>
   <entry>
     <title>NYSERDA’s New York Business-Research Innovation &amp; Development Growth Exchange</title>
     <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr00001FcKkYAAV"/>
@@ -61,15 +70,6 @@
     <updated>2026-10-25T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
     <summary>NYSERDA | Application 2027-01-22 | NYSERDA is seeking to expand the existing pool of qualified Community-Based Organizations (CBOs) and other entities, including Indigenous Nations and Indigenous-led Organizations, that represent New York State’s disadvantaged communities (DAC), herein referred to “DAC Consultants.” DAC Consultants participating in this pool will execute contracts with NYSERDA to provide support across multiple pro…</summary>
-  </entry>
-  <entry>
-    <title>Transit Tech Lab Partnership Program</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr00001MsJ0XAAV"/>
-    <id>urn:funding-finder:nyserda:nyserda%3APON6195</id>
-    <updated>2026-10-20T00:00:00Z</updated>
-    <author><name>NYSERDA</name></author>
-    <category term="Transportation"/>
-    <summary>NYSERDA | Application 2026-11-12 | Provides an opportunity for technology companies that have been competitively selected as finalists in the New York Metropolitan Transportation Authority’s (MTA) 2026 Transit Tech Lab (TTL) to seek NYSERDA funding. Finalists from the 2026 TTL that demonstrate innovative public transportation technologies and strategies with the potential to advance clean transportation solutions for existing trans…</summary>
   </entry>
   <entry>
     <title>Commercialization Cohort Programs</title>
