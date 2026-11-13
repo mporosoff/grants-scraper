@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/environmental-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/environmental-science.xml</id>
-  <updated>2026-11-12T18:27:29Z</updated>
+  <updated>2026-11-13T17:53:58Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Limited Competition: Biomedical Research Environment &amp; Sponsored Programs Administration Development (BRE-SPAD) Program</title>
@@ -181,6 +181,19 @@
     <summary>National Institutes of Health | Estimated Application 2027-05-25 | The NIH Office of Strategic Coordination (Common Fund) has generated many valuable and widely available datasets. The Common Fund Data Ecosystem is helping to ensure that all Common Fund (CF) data are Findable, Accessible, Interoperable, and Reusable (FAIR). The purpose of this Notice of Funding Opportunity (NOFO) is to announce the availability of funds for projects that involve collaboration bet…</summary>
   </entry>
   <entry>
+    <title>World Trade Center Youth Research Coordinating Center (U54)</title>
+    <link href="https://www.grants.gov/search-results-detail/363417"/>
+    <id>urn:funding-finder:grants-gov:363417</id>
+    <updated>2026-12-22T00:00:00Z</updated>
+    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
+    <category term="Community development"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Neuroscience"/>
+    <category term="Public health"/>
+    <summary>Centers for Disease Control and Prevention - ERA | Estimated Application 2027-03-23 | The National Institute for Occupational Safety and Health (NIOSH), World Trade Center (WTC) Health Program, plans to establish a WTC Youth Research Coordinating Center ("Center") through a U54 cooperative agreement. In December 2022, Congress amended the Public Health Service Act (42 U.S.C. § 300mm-51(c)) to direct the WTC Health Program Administrator to establish a research cohort for emerging he…</summary>
+  </entry>
+  <entry>
     <title>Maternal and Child Health Encounters Networks (MCHEK)</title>
     <link href="https://www.grants.gov/search-results-detail/363412"/>
     <id>urn:funding-finder:grants-gov:363412</id>
@@ -232,6 +245,17 @@
     <category term="Environmental science"/>
     <category term="Neuroscience"/>
     <summary>Centers for Disease Control and Prevention - ERA | Estimated Application 2027-02-01 | CDC/ATSDR is inviting research proposals to study risk factors for Amyotrophic Lateral Sclerosis (ALS). Studies on military service, contact sports, traumatic brain injury, neuroinflammation, and infections agents and exposures are encouraged. Funding will be for four funding options: Option A - Support research with strong existing evidence such as studies on known environmental or genetic risk f…</summary>
+  </entry>
+  <entry>
+    <title>NIOSH Miner Safety and Health Training Program - Western United States - U60</title>
+    <link href="https://www.grants.gov/search-results-detail/363232"/>
+    <id>urn:funding-finder:grants-gov:363232</id>
+    <updated>2026-12-01T00:00:00Z</updated>
+    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <summary>Centers for Disease Control and Prevention - ERA | Estimated Application 2027-02-01 | Background: Despite advances in technology and improvements in work environments, mining remains one of the most challenging and hazardous occupations in the United States. The industry continues to experience a fatality rate nearly three times higher than the national average for all industries, according to the U.S. Bureau of Labor Statistics (BLS). Public MSHA data show that in 2025, the U.S. m…</summary>
   </entry>
   <entry>
     <title>Establishing a Research Network to Guide Foundational Research on Human Consciousness</title>
@@ -310,19 +334,6 @@
     <category term="Environmental science"/>
     <category term="Public health"/>
     <summary>National Institutes of Health | Estimated Application 2027-01-29 | The National Institute of Environmental Health Sciences (NIEHS) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications that propose translational research hubs with multiple highly integrated components focused on research, capacity building, and community/public health translation for regionally relevant topics related to the health impacts of extreme weather and cumula…</summary>
-  </entry>
-  <entry>
-    <title>World Trade Center Youth Research Coordinating Center (U54)</title>
-    <link href="https://www.grants.gov/search-results-detail/363417"/>
-    <id>urn:funding-finder:grants-gov:363417</id>
-    <updated>2026-11-24T00:00:00Z</updated>
-    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
-    <category term="Community development"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Neuroscience"/>
-    <category term="Public health"/>
-    <summary>Centers for Disease Control and Prevention - ERA | Estimated Application 2027-02-23 | The National Institute for Occupational Safety and Health (NIOSH), World Trade Center (WTC) Health Program, plans to establish a WTC Youth Research Coordinating Center ("Center") through a U54 cooperative agreement. In December 2022, Congress amended the Public Health Service Act (42 U.S.C. § 300mm-51(c)) to direct the WTC Health Program Administrator to establish a research cohort for emerging he…</summary>
   </entry>
   <entry>
     <title>Ryan White HIV/AIDS Program Part B AIDS Drug Assistance Program Training and Technical Assistance</title>
@@ -633,14 +644,5 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Environmental science"/>
     <summary>Geological Survey | Application 2026-11-30 | The U.S. Geological Survey (USGS) is offering a funding opportunity to a CESU partner for research in species barcoding. Environmental DNA (eDNA) is potentially a powerful new tool to monitor and assess the status of aquatic ecosystems and the societal values they support such as recreational fishing and species protection. Assessments based on metabarcoding can detect a wide array of species from…</summary>
-  </entry>
-  <entry>
-    <title>Cooperative Agreement for affiliated Partner with Hawaiʻi-Pacific Islands Cooperative Ecosystem Studies Unit</title>
-    <link href="https://www.grants.gov/search-results-detail/364186"/>
-    <id>urn:funding-finder:grants-gov:364186</id>
-    <updated>2026-10-30T00:00:00Z</updated>
-    <author><name>Geological Survey</name></author>
-    <category term="Environmental science"/>
-    <summary>Geological Survey | Application 2026-11-30 | The USGS is offering a funding opportunity to a CESU partner for research to characterize stable isotopes in mosquitoes collected in and around Hakalau Forest National Wildlife Refuge (hereafter, Hakalau). Hakalau provides habitat for the most intact community of native Hawaiian birds remaining in Hawaiʻi, at least partly due to the lack of disease-carrying Culex quinquefasciatus mosquitoes (herea…</summary>
   </entry>
 </feed>

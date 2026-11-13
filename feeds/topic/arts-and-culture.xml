@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/arts-and-culture.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/arts-and-culture.xml</id>
-  <updated>2026-11-12T18:27:29Z</updated>
+  <updated>2026-11-13T17:53:58Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Public Health Nursing</title>
@@ -167,6 +167,17 @@
     <summary>Indian Health Service | Estimated Application 2027-02-01 | The purpose of the NUIBH program is to strengthen behavioral health services for Urban Indian communities by increasing awareness, advocacy, education, and collaboration nationwide. The program supports Urban Indian Organizations (UIOs) through technical assistance, training, information sharing, strategic planning, and quality improvement to expand culturally appropriate behavioral health service…</summary>
   </entry>
   <entry>
+    <title>NIOSH Miner Safety and Health Training Program - Western United States - U60</title>
+    <link href="https://www.grants.gov/search-results-detail/363232"/>
+    <id>urn:funding-finder:grants-gov:363232</id>
+    <updated>2026-12-01T00:00:00Z</updated>
+    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <summary>Centers for Disease Control and Prevention - ERA | Estimated Application 2027-02-01 | Background: Despite advances in technology and improvements in work environments, mining remains one of the most challenging and hazardous occupations in the United States. The industry continues to experience a fatality rate nearly three times higher than the national average for all industries, according to the U.S. Bureau of Labor Statistics (BLS). Public MSHA data show that in 2025, the U.S. m…</summary>
+  </entry>
+  <entry>
     <title>Tribal Maternal, Infant, and Early Childhood Home Visiting Program: Development and Implementation Grants</title>
     <link href="https://www.grants.gov/search-results-detail/363222"/>
     <id>urn:funding-finder:grants-gov:363222</id>
@@ -174,6 +185,15 @@
     <author><name>Administration for Children and Families</name></author>
     <category term="Arts and culture"/>
     <summary>Administration for Children and Families | Estimated Application 2027-03-02 | The Office of Early Childhood Development (ECD) within the Administration for Children and Families (ACF) will be soliciting applications for the Fiscal Year 2027 Tribal Maternal, Infant, and Early Childhood Home Visiting (MIECHV) Program: Development and Implementation Grants. Funds will support 5-year cooperative agreements between ACF and federally recognized Indian tribes (or a consortium of I…</summary>
+  </entry>
+  <entry>
+    <title>US-Greece &amp; US-UK Artist Exchange, FY 2027</title>
+    <link href="https://www.grants.gov/search-results-detail/364253"/>
+    <id>urn:funding-finder:grants-gov:364253</id>
+    <updated>2026-11-12T00:00:00Z</updated>
+    <author><name>National Endowment for the Arts</name></author>
+    <category term="Arts and culture"/>
+    <summary>National Endowment for the Arts | Application 2026-12-14 | This Program Solicitation seeks an organization (the Cooperator) to develop and administer two concurrent international artist exchanges that celebrate the connections between arts and sports in the lead-up to the 2028 Olympic and Paralympic Games in Los Angeles, California. Both the arts and sports demand skill and dedication, offer powerful forms of physical and emotional expression, and bring p…</summary>
   </entry>
   <entry>
     <title>National Services for State Arts Agencies and Regional Arts Organizations</title>
@@ -328,17 +348,6 @@
     <category term="Energy"/>
     <category term="Quantum science"/>
     <summary>Air Force Office of Scientific Research | Application 2027-02-19 | verify prerequisite | This is a special Notice of Funding Opportunity Announcement (NOFO) sponsored by the Air Force Office of Scientific Research (AFOSR) and Taiwan’s National Science and Technology Council (NSTC), which will hereafter generally be referred to as “we, us, our, or AFOSR.” We announce the solicitation for a three-year program entitled “Frontiers in Materials and Nanostructures: AI-Driven Discovery, Quan…</summary>
-  </entry>
-  <entry>
-    <title>NIOSH Miner Safety and Health Training Program - Western United States - U60</title>
-    <link href="https://www.grants.gov/search-results-detail/363232"/>
-    <id>urn:funding-finder:grants-gov:363232</id>
-    <updated>2026-10-27T00:00:00Z</updated>
-    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <summary>Centers for Disease Control and Prevention - ERA | Estimated Application 2027-01-26 | Background: Despite advances in technology and improvements in work environments, mining remains one of the most challenging and hazardous occupations in the United States. The industry continues to experience a fatality rate nearly three times higher than the national average for all industries, according to the U.S. Bureau of Labor Statistics (BLS). Public MSHA data show that in 2025, the U.S. m…</summary>
   </entry>
   <entry>
     <title>FY 2027 - 2029 Broad Agency Announcement (BAA), Oceanic and Atmospheric Research (OAR)</title>
@@ -639,15 +648,5 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Arts and culture"/>
     <summary>National Institutes of Health | Application 2028-07-01 | This Notice of Funding Opportunity (NOFO) announces the restructured Shared Instrumentation Grant (SIG) Program that consolidates three existing shared-use instrumentation programs, i.e., the Shared Instrumentation Grant program, the High-End Instrumentation Grant program, and the Basic Instrumentation Grant program. The NOFO invites applications from groups of NIH-supported investigators to purch…</summary>
-  </entry>
-  <entry>
-    <title>Biological Testing Facility for Contraception &amp; Reproductive Health (X01 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/360583"/>
-    <id>urn:funding-finder:grants-gov:360583</id>
-    <updated>2026-06-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Arts and culture"/>
-    <category term="Biology and biotechnology"/>
-    <summary>National Institutes of Health | Application 2029-05-07 | The purpose of this notice of funding opportunity (NOFO) is to provide investigators with a mechanism to request services from the state-of-the-art Biological Testing Facility that would advance their contraceptive development or reproductive health programs. This NOFO aims to position innovative and validated methods for future regulatory submission and/or clinical development. Applicants do not …</summary>
   </entry>
 </feed>

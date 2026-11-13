@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml</id>
-  <updated>2026-11-12T18:27:29Z</updated>
+  <updated>2026-11-13T17:53:58Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Single Source: Scalable and Systematic Neurobiology of Psychiatric and Neurodevelopmental Disorder Risk Genes: Data Resource and Administrative Coordination Center (U24 Clinical Trial Not Allowed)</title>
@@ -67,6 +67,18 @@
     <summary>Health Resources and Services Administration | Estimated Application 2027-03-18 | The purpose of this program is to improve maternal and infant outcomes by preventing contact with harmful materials before, during, and after pregnancy. This program aims to improve maternal and infant health outcomes by preventing harmful exposures before, during, and after pregnancy. It supports a national expert-staffed call center that provides timely, evidence-based information and personaliz…</summary>
   </entry>
   <entry>
+    <title>NIOSH Centers of Excellence for Total Worker Health® (U19)</title>
+    <link href="https://www.grants.gov/search-results-detail/363369"/>
+    <id>urn:funding-finder:grants-gov:363369</id>
+    <updated>2026-12-16T00:00:00Z</updated>
+    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Education and workforce"/>
+    <category term="Technology development"/>
+    <category term="Transportation"/>
+    <summary>Centers for Disease Control and Prevention - ERA | Estimated Application 2027-02-26 | PURPOSENIOSH intends to support the Centers of Excellence in Total Worker Health® (TWH). These Centers will conduct rigorous research and translation activities to prevent harmful exposures, improve working conditions, and advance worker well-being. The Centers will develop practical, scalable solutions for employers and workers. All projects must use the NIOSH Worker Well-Being Questionnaire (Wel…</summary>
+  </entry>
+  <entry>
     <title>Rigorously Evaluating Approaches to Prevent Child Sexual Abuse and Problematic Sexual Behavior among Youth</title>
     <link href="https://www.grants.gov/search-results-detail/363147"/>
     <id>urn:funding-finder:grants-gov:363147</id>
@@ -85,18 +97,6 @@
     <category term="Biology and biotechnology"/>
     <category term="Environmental science"/>
     <summary>National Institutes of Health | Estimated Application 2027-02-10 | Type 1 diabetes (T1D) is a complex disease involving interactions among many different cell types, tissues, organs and biological processes. Genetics, the environment, and lifestyle all play a role in disease development and progression. Over the past two decades, the National Institute of Diabetes and Digestive and Kidney Diseases (NIDDK) has supported major T1D research consortia covering basic,…</summary>
-  </entry>
-  <entry>
-    <title>NIOSH Centers of Excellence for Total Worker Health® (U19)</title>
-    <link href="https://www.grants.gov/search-results-detail/363369"/>
-    <id>urn:funding-finder:grants-gov:363369</id>
-    <updated>2026-11-16T00:00:00Z</updated>
-    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Education and workforce"/>
-    <category term="Technology development"/>
-    <category term="Transportation"/>
-    <summary>Centers for Disease Control and Prevention - ERA | Estimated Application 2027-02-26 | PURPOSENIOSH intends to support the Centers of Excellence in Total Worker Health® (TWH). These Centers will conduct rigorous research and translation activities to prevent harmful exposures, improve working conditions, and advance worker well-being. The Centers will develop practical, scalable solutions for employers and workers. All projects must use the NIOSH Worker Well-Being Questionnaire (Wel…</summary>
   </entry>
   <entry>
     <title>Major Research Instrumentation Program: (MRI)</title>
@@ -314,17 +314,6 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Manufacturing"/>
     <summary>Office of Science | Application 2027-01-12 | prerequisite closed | American scientists and engineers will power the super intelligence (SI) revolution in science and innovation through the Genesis Mission. DOE SC hereby invites applications from United States (U.S.) Institutions of Higher Education and domestic doctoral-granting institutions to develop and demonstrate the effectiveness of novel four-year doctoral training pilots with dual competency in SI and ano…</summary>
-  </entry>
-  <entry>
-    <title>WATER RESOURCES RESEARCH ACT PROGRAM NATIONAL COMPETITIVE GRANTS FY2026 (104g General)</title>
-    <link href="https://www.grants.gov/search-results-detail/364012"/>
-    <id>urn:funding-finder:grants-gov:364012</id>
-    <updated>2026-09-30T00:00:00Z</updated>
-    <author><name>Geological Survey</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Water"/>
-    <summary>Geological Survey | Application 2026-11-12 | This Program Announcement is issued under the provisions of section 104 of the Water Resources Research Act of 1984 (Public Law 98-242), as amended by Public Laws 101-397, 104-147, 106-374, 109-471, and 117-58. Section 104 of the Water Resources Research Act directs the Secretary of the Interior to administer program grants to Institutes established under the provisions of section 104(a) of the Ac…</summary>
   </entry>
   <entry>
     <title>Simulation-augmented, real-time Platform Adaptive Seamless Trials (SURPASS)</title>
@@ -743,5 +732,16 @@
     <category term="Energy"/>
     <category term="Space and aeronautics"/>
     <summary>NASA Headquarters | Application 2026-12-02 | PLEASE NOTE: this program has MANDATORY Notices of Intent, which are due via NSPIRES by 8/20/2026. See the full posting on NSPIRES for details. NOTICE: September 18, 2026. Section 3.1 on participation of NASA ISFM scientists has been improved. Details on the redacted and anonymized budget requirements have been added to Table A.14-1 to be consistent with Section 4.3.2. The instructions regarding B…</summary>
+  </entry>
+  <entry>
+    <title>DoW Rare Cancers Idea Development Award</title>
+    <link href="https://www.grants.gov/search-results-detail/362849"/>
+    <id>urn:funding-finder:grants-gov:362849</id>
+    <updated>2026-06-17T00:00:00Z</updated>
+    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
+    <category term="Cancer"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Defense Health Agency Contracting Activity - DHACA | Application 2026-11-18 | invitation required | Summary: The fiscal year 2026 (FY26) Rare Cancers Research Program (RCRP) Idea Development Award (IDA) promotes ideas that are ready for further development and have the potential to yield high-impact findings and new avenues of investigation. Distinctive Features: The RCRP encourages applicants to include an exploratory aim or sub-aim to support any necessary discovery-driven research. Preliminar…</summary>
   </entry>
 </feed>

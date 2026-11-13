@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/public-health.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/public-health.xml</id>
-  <updated>2026-11-12T18:27:29Z</updated>
+  <updated>2026-11-13T17:53:58Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Public Health Nursing</title>
@@ -466,6 +466,19 @@
     <summary>Centers for Disease Control - NCEZID | Estimated Application 2027-03-27 | The CDC announces the availability of FY 2027 funds for a cooperative agreement to continue enhanced national surveillance for human prion diseases, also known as transmissible spongiform encephalopathies (TSEs), in the United States. The purpose is to continue an active surveillance program to help confirm suspected and clinically diagnosed cases of human prion disease and to monitor the occurren…</summary>
   </entry>
   <entry>
+    <title>World Trade Center Youth Research Coordinating Center (U54)</title>
+    <link href="https://www.grants.gov/search-results-detail/363417"/>
+    <id>urn:funding-finder:grants-gov:363417</id>
+    <updated>2026-12-22T00:00:00Z</updated>
+    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
+    <category term="Community development"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Neuroscience"/>
+    <category term="Public health"/>
+    <summary>Centers for Disease Control and Prevention - ERA | Estimated Application 2027-03-23 | The National Institute for Occupational Safety and Health (NIOSH), World Trade Center (WTC) Health Program, plans to establish a WTC Youth Research Coordinating Center ("Center") through a U54 cooperative agreement. In December 2022, Congress amended the Public Health Service Act (42 U.S.C. § 300mm-51(c)) to direct the WTC Health Program Administrator to establish a research cohort for emerging he…</summary>
+  </entry>
+  <entry>
     <title>Community Development Block Grant Program for Indian Tribes and Alaska Native Villages</title>
     <link href="https://www.grants.gov/search-results-detail/364031"/>
     <id>urn:funding-finder:grants-gov:364031</id>
@@ -566,6 +579,17 @@
     <summary>Indian Health Service | Estimated Application 2027-02-01 | The purpose of the NUIBH program is to strengthen behavioral health services for Urban Indian communities by increasing awareness, advocacy, education, and collaboration nationwide. The program supports Urban Indian Organizations (UIOs) through technical assistance, training, information sharing, strategic planning, and quality improvement to expand culturally appropriate behavioral health service…</summary>
   </entry>
   <entry>
+    <title>State Occupational Safety and Health Surveillance Program (U60)</title>
+    <link href="https://www.grants.gov/search-results-detail/363431"/>
+    <id>urn:funding-finder:grants-gov:363431</id>
+    <updated>2026-12-01T00:00:00Z</updated>
+    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
+    <category term="Cancer"/>
+    <category term="Education and workforce"/>
+    <category term="Public health"/>
+    <summary>Centers for Disease Control and Prevention - ERA | Estimated Application 2027-02-01 | NIOSH has provided financial and technical assistance to develop or expand state-level OSH surveillance capacity and infrastructure since the 1970s. From 2021-2026, NIOSH funded cooperative agreements in 23 states under announcement PAR-20-312. These programs varied in scope and focus, each providing a level of occupational health expertise to the public health system in their state. Grantees incl…</summary>
+  </entry>
+  <entry>
     <title>Establishing a Research Network to Guide Foundational Research on Human Consciousness</title>
     <link href="https://www.grants.gov/search-results-detail/362097"/>
     <id>urn:funding-finder:grants-gov:362097</id>
@@ -619,27 +643,5 @@
     <category term="Public health"/>
     <category term="Social and behavioral sciences"/>
     <summary>National Institutes of Health | Estimated Application 2027-02-23 | The National Institutes of Health intends to publish a Notice of Funding Opportunity (NOFO), Pragmatic and Implementation Trials Conducted in Health Care SettingsThis funding opportunity will support large-scale pragmatic trials that test intervention effectiveness in routine clinical care and/or implementation trials that evaluate strategies for delivering interventions within health care setting…</summary>
-  </entry>
-  <entry>
-    <title>World Trade Center Youth Research Coordinating Center (U54)</title>
-    <link href="https://www.grants.gov/search-results-detail/363417"/>
-    <id>urn:funding-finder:grants-gov:363417</id>
-    <updated>2026-11-24T00:00:00Z</updated>
-    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
-    <category term="Community development"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Neuroscience"/>
-    <category term="Public health"/>
-    <summary>Centers for Disease Control and Prevention - ERA | Estimated Application 2027-02-23 | The National Institute for Occupational Safety and Health (NIOSH), World Trade Center (WTC) Health Program, plans to establish a WTC Youth Research Coordinating Center ("Center") through a U54 cooperative agreement. In December 2022, Congress amended the Public Health Service Act (42 U.S.C. § 300mm-51(c)) to direct the WTC Health Program Administrator to establish a research cohort for emerging he…</summary>
-  </entry>
-  <entry>
-    <title>NIH Specialized Center Grant (Parent P50)</title>
-    <link href="https://www.grants.gov/search-results-detail/361769"/>
-    <id>urn:funding-finder:grants-gov:361769</id>
-    <updated>2026-11-09T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Public health"/>
-    <summary>National Institutes of Health | Estimated Application 2027-01-11 | Through this Notice of Funding Opportunity (NOFO), the participating NIH Institutes, Centers, and Offices (ICOs) encourage pursuit of the NIH’s mission through the submission of investigator-initiated Specialized Center (P50) applications. With this Parent P50 NOFO, the NIH ICOs intend to support a broadly based, multidisciplinary, often long-term research program with a specific major scientific …</summary>
   </entry>
 </feed>
