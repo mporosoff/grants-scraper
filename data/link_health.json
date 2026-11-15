@@ -1,885 +1,13 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-13T17:58:18.124582Z",
-  "url_count": 1991,
+  "generated_at": "2026-11-15T19:58:39.406901Z",
+  "url_count": 1928,
   "checked_this_run": 150,
-  "healthy_this_run": 142,
-  "broken_this_run": 4,
-  "restricted_this_run": 4,
-  "redirected_this_run": 16,
+  "healthy_this_run": 149,
+  "broken_this_run": 1,
+  "restricted_this_run": 0,
+  "redirected_this_run": 19,
   "records": {
-    "https://grants.gov/grantsws/rest/opportunity/att/download/354919": {
-      "ok": true,
-      "status": 200,
-      "final_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354919",
-      "content_type": "application/octet-stream",
-      "redirected": true,
-      "access_restricted": false,
-      "checked_at": "2026-11-10T18:07:06.117039Z",
-      "error": null,
-      "record_ids": [
-        "363769"
-      ]
-    },
-    "https://www.imls.gov/find-funding/funding-opportunities/grant-programs/21st-century-museum-professionals-program": {
-      "ok": true,
-      "status": 200,
-      "final_url": "https://www.imls.gov/find-funding/funding-opportunities/grant-programs/21st-century-museum-professionals-program",
-      "content_type": "text/html",
-      "redirected": false,
-      "access_restricted": false,
-      "checked_at": "2026-11-10T18:07:07.957705Z",
-      "error": null,
-      "record_ids": [
-        "363769"
-      ]
-    },
-    "https://www.grants.gov/search-results-detail/363769": {
-      "ok": true,
-      "status": 200,
-      "final_url": "https://www.grants.gov/search-results-detail/363769",
-      "content_type": "text/html",
-      "redirected": false,
-      "access_restricted": false,
-      "checked_at": "2026-11-10T18:07:07.432207Z",
-      "error": null,
-      "record_ids": [
-        "363769"
-      ]
-    },
-    "https://mchb.hrsa.gov/programs-impact/programs/alliance-innovation-maternal-health": {
-      "ok": null,
-      "status": 403,
-      "final_url": "https://mchb.hrsa.gov/programs-impact/programs/alliance-innovation-maternal-health",
-      "content_type": "text/html",
-      "redirected": false,
-      "access_restricted": true,
-      "checked_at": "2026-11-10T18:07:08.692005Z",
-      "error": null,
-      "record_ids": [
-        "363407",
-        "363532"
-      ]
-    },
-    "https://www.grants.gov/search-results-detail/363532": {
-      "ok": true,
-      "status": 200,
-      "final_url": "https://www.grants.gov/search-results-detail/363532",
-      "content_type": "text/html",
-      "redirected": false,
-      "access_restricted": false,
-      "checked_at": "2026-11-13T17:58:08.414113Z",
-      "error": null,
-      "record_ids": [
-        "363532"
-      ]
-    },
-    "https://bja.ojp.gov/funding/opportunities/o-bja-2026-172773": {
-      "ok": true,
-      "status": 200,
-      "final_url": "https://bja.ojp.gov/funding/opportunities/o-bja-2026-172773",
-      "content_type": "text/html",
-      "redirected": false,
-      "access_restricted": false,
-      "checked_at": "2026-11-01T21:15:14.743945Z",
-      "error": null,
-      "record_ids": [
-        "363988"
-      ]
-    },
-    "https://www.grants.gov/search-results-detail/363988": {
-      "ok": true,
-      "status": 200,
-      "final_url": "https://www.grants.gov/search-results-detail/363988",
-      "content_type": "text/html",
-      "redirected": false,
-      "access_restricted": false,
-      "checked_at": "2026-11-01T21:15:14.699647Z",
-      "error": null,
-      "record_ids": [
-        "363988"
-      ]
-    },
-    "https://grants.gov/grantsws/rest/opportunity/att/download/354921": {
-      "ok": true,
-      "status": 200,
-      "final_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354921",
-      "content_type": "application/octet-stream",
-      "redirected": true,
-      "access_restricted": false,
-      "checked_at": "2026-11-10T18:07:06.110076Z",
-      "error": null,
-      "record_ids": [
-        "363771"
-      ]
-    },
-    "https://www.imls.gov/find-funding/funding-opportunities/grant-programs/inspire-grants-for-small-museums": {
-      "ok": true,
-      "status": 200,
-      "final_url": "https://www.imls.gov/find-funding/funding-opportunities/grant-programs/inspire-grants-for-small-museums",
-      "content_type": "text/html",
-      "redirected": false,
-      "access_restricted": false,
-      "checked_at": "2026-11-10T18:07:07.930481Z",
-      "error": null,
-      "record_ids": [
-        "363771"
-      ]
-    },
-    "https://www.grants.gov/search-results-detail/363771": {
-      "ok": true,
-      "status": 200,
-      "final_url": "https://www.grants.gov/search-results-detail/363771",
-      "content_type": "text/html",
-      "redirected": false,
-      "access_restricted": false,
-      "checked_at": "2026-11-10T18:07:07.430824Z",
-      "error": null,
-      "record_ids": [
-        "363771"
-      ]
-    },
-    "https://grants.gov/grantsws/rest/opportunity/att/download/354915": {
-      "ok": true,
-      "status": 200,
-      "final_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354915",
-      "content_type": "application/octet-stream",
-      "redirected": true,
-      "access_restricted": false,
-      "checked_at": "2026-11-10T18:07:07.760722Z",
-      "error": null,
-      "record_ids": [
-        "363765"
-      ]
-    },
-    "https://www.imls.gov/find-funding/funding-opportunities/grant-programs/laura-bush-21st-century-librarian-program": {
-      "ok": true,
-      "status": 200,
-      "final_url": "https://www.imls.gov/find-funding/funding-opportunities/grant-programs/laura-bush-21st-century-librarian-program",
-      "content_type": "text/html",
-      "redirected": false,
-      "access_restricted": false,
-      "checked_at": "2026-11-10T18:07:07.953489Z",
-      "error": null,
-      "record_ids": [
-        "363765"
-      ]
-    },
-    "https://www.grants.gov/search-results-detail/363765": {
-      "ok": true,
-      "status": 200,
-      "final_url": "https://www.grants.gov/search-results-detail/363765",
-      "content_type": "text/html",
-      "redirected": false,
-      "access_restricted": false,
-      "checked_at": "2026-11-10T18:07:07.314922Z",
-      "error": null,
-      "record_ids": [
-        "363765"
-      ]
-    },
-    "https://grants.gov/grantsws/rest/opportunity/att/download/354920": {
-      "ok": true,
-      "status": 200,
-      "final_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354920",
-      "content_type": "application/octet-stream",
-      "redirected": true,
-      "access_restricted": false,
-      "checked_at": "2026-11-10T18:07:07.797455Z",
-      "error": null,
-      "record_ids": [
-        "363770"
-      ]
-    },
-    "https://www.imls.gov/find-funding/funding-opportunities/grant-programs/museum-grants-for-african-american-history-and-culture": {
-      "ok": true,
-      "status": 200,
-      "final_url": "https://www.imls.gov/find-funding/funding-opportunities/grant-programs/museum-grants-for-african-american-history-and-culture",
-      "content_type": "text/html",
-      "redirected": false,
-      "access_restricted": false,
-      "checked_at": "2026-11-10T18:07:07.942018Z",
-      "error": null,
-      "record_ids": [
-        "363770"
-      ]
-    },
-    "https://www.grants.gov/search-results-detail/363770": {
-      "ok": true,
-      "status": 200,
-      "final_url": "https://www.grants.gov/search-results-detail/363770",
-      "content_type": "text/html",
-      "redirected": false,
-      "access_restricted": false,
-      "checked_at": "2026-11-10T18:07:07.513037Z",
-      "error": null,
-      "record_ids": [
-        "363770"
-      ]
-    },
-    "https://grants.gov/grantsws/rest/opportunity/att/download/354922": {
-      "ok": true,
-      "status": 200,
-      "final_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354922",
-      "content_type": "application/octet-stream",
-      "redirected": true,
-      "access_restricted": false,
-      "checked_at": "2026-11-10T18:07:08.224081Z",
-      "error": null,
-      "record_ids": [
-        "363772"
-      ]
-    },
-    "https://www.imls.gov/find-funding/funding-opportunities/grant-programs/museum-grants-for-american-latino-history-and-culture": {
-      "ok": true,
-      "status": 200,
-      "final_url": "https://www.imls.gov/find-funding/funding-opportunities/grant-programs/museum-grants-for-american-latino-history-and-culture",
-      "content_type": "text/html",
-      "redirected": false,
-      "access_restricted": false,
-      "checked_at": "2026-11-10T18:07:07.851416Z",
-      "error": null,
-      "record_ids": [
-        "363772"
-      ]
-    },
-    "https://www.grants.gov/search-results-detail/363772": {
-      "ok": true,
-      "status": 200,
-      "final_url": "https://www.grants.gov/search-results-detail/363772",
-      "content_type": "text/html",
-      "redirected": false,
-      "access_restricted": false,
-      "checked_at": "2026-11-10T18:07:07.684384Z",
-      "error": null,
-      "record_ids": [
-        "363772"
-      ]
-    },
-    "https://grants.gov/grantsws/rest/opportunity/att/download/354925": {
-      "ok": true,
-      "status": 200,
-      "final_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354925",
-      "content_type": "application/octet-stream",
-      "redirected": true,
-      "access_restricted": false,
-      "checked_at": "2026-11-10T18:07:07.122447Z",
-      "error": null,
-      "record_ids": [
-        "363776"
-      ]
-    },
-    "https://www.imls.gov/find-funding/funding-opportunities/grant-programs/museums-empowered": {
-      "ok": true,
-      "status": 200,
-      "final_url": "https://www.imls.gov/find-funding/funding-opportunities/grant-programs/museums-empowered",
-      "content_type": "text/html",
-      "redirected": false,
-      "access_restricted": false,
-      "checked_at": "2026-11-10T18:07:07.870067Z",
-      "error": null,
-      "record_ids": [
-        "363776"
-      ]
-    },
-    "https://www.grants.gov/search-results-detail/363776": {
-      "ok": true,
-      "status": 200,
-      "final_url": "https://www.grants.gov/search-results-detail/363776",
-      "content_type": "text/html",
-      "redirected": false,
-      "access_restricted": false,
-      "checked_at": "2026-11-10T18:07:07.580309Z",
-      "error": null,
-      "record_ids": [
-        "363776"
-      ]
-    },
-    "https://grants.gov/grantsws/rest/opportunity/att/download/354918": {
-      "ok": true,
-      "status": 200,
-      "final_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354918",
-      "content_type": "application/octet-stream",
-      "redirected": true,
-      "access_restricted": false,
-      "checked_at": "2026-11-10T18:07:07.539184Z",
-      "error": null,
-      "record_ids": [
-        "363768"
-      ]
-    },
-    "https://www.imls.gov/find-funding/funding-opportunities/grant-programs/museums-for-america": {
-      "ok": true,
-      "status": 200,
-      "final_url": "https://www.imls.gov/find-funding/funding-opportunities/grant-programs/museums-for-america",
-      "content_type": "text/html",
-      "redirected": false,
-      "access_restricted": false,
-      "checked_at": "2026-11-10T18:07:07.853073Z",
-      "error": null,
-      "record_ids": [
-        "363768"
-      ]
-    },
-    "https://www.grants.gov/search-results-detail/363768": {
-      "ok": true,
-      "status": 200,
-      "final_url": "https://www.grants.gov/search-results-detail/363768",
-      "content_type": "text/html",
-      "redirected": false,
-      "access_restricted": false,
-      "checked_at": "2026-11-10T18:07:07.421374Z",
-      "error": null,
-      "record_ids": [
-        "363768"
-      ]
-    },
-    "https://grants.gov/grantsws/rest/opportunity/att/download/354916": {
-      "ok": true,
-      "status": 200,
-      "final_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354916",
-      "content_type": "application/octet-stream",
-      "redirected": true,
-      "access_restricted": false,
-      "checked_at": "2026-11-10T18:07:07.477688Z",
-      "error": null,
-      "record_ids": [
-        "363766"
-      ]
-    },
-    "https://imls.gov/find-funding/funding-opportunities/grant-programs/national-leadership-grants-for-libraries": {
-      "ok": true,
-      "status": 200,
-      "final_url": "https://www.imls.gov/find-funding/funding-opportunities/grant-programs/national-leadership-grants-for-libraries",
-      "content_type": "text/html",
-      "redirected": true,
-      "access_restricted": false,
-      "checked_at": "2026-11-10T18:07:07.641116Z",
-      "error": null,
-      "record_ids": [
-        "363766"
-      ]
-    },
-    "https://www.grants.gov/search-results-detail/363766": {
-      "ok": true,
-      "status": 200,
-      "final_url": "https://www.grants.gov/search-results-detail/363766",
-      "content_type": "text/html",
-      "redirected": false,
-      "access_restricted": false,
-      "checked_at": "2026-11-10T18:07:07.320095Z",
-      "error": null,
-      "record_ids": [
-        "363766"
-      ]
-    },
-    "https://grants.gov/grantsws/rest/opportunity/att/download/354928": {
-      "ok": true,
-      "status": 200,
-      "final_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354928",
-      "content_type": "application/octet-stream",
-      "redirected": true,
-      "access_restricted": false,
-      "checked_at": "2026-11-10T18:07:07.293911Z",
-      "error": null,
-      "record_ids": [
-        "363773"
-      ]
-    },
-    "https://www.imls.gov/find-funding/funding-opportunities/grant-programs/national-leadership-grants-for-museums": {
-      "ok": true,
-      "status": 200,
-      "final_url": "https://www.imls.gov/find-funding/funding-opportunities/grant-programs/national-leadership-grants-for-museums",
-      "content_type": "text/html",
-      "redirected": false,
-      "access_restricted": false,
-      "checked_at": "2026-11-10T18:07:08.039263Z",
-      "error": null,
-      "record_ids": [
-        "363773"
-      ]
-    },
-    "https://www.grants.gov/search-results-detail/363773": {
-      "ok": true,
-      "status": 200,
-      "final_url": "https://www.grants.gov/search-results-detail/363773",
-      "content_type": "text/html",
-      "redirected": false,
-      "access_restricted": false,
-      "checked_at": "2026-11-10T18:07:07.619443Z",
-      "error": null,
-      "record_ids": [
-        "363773"
-      ]
-    },
-    "https://grants.gov/grantsws/rest/opportunity/att/download/354917": {
-      "ok": true,
-      "status": 200,
-      "final_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354917",
-      "content_type": "application/octet-stream",
-      "redirected": true,
-      "access_restricted": false,
-      "checked_at": "2026-11-10T18:07:08.349519Z",
-      "error": null,
-      "record_ids": [
-        "363767"
-      ]
-    },
-    "https://www.imls.gov/find-funding/funding-opportunities/grant-programs/native-american-library-services-basic-grants": {
-      "ok": true,
-      "status": 200,
-      "final_url": "https://www.imls.gov/find-funding/funding-opportunities/grant-programs/native-american-library-services-basic-grants",
-      "content_type": "text/html",
-      "redirected": false,
-      "access_restricted": false,
-      "checked_at": "2026-11-10T18:07:08.118000Z",
-      "error": null,
-      "record_ids": [
-        "363767"
-      ]
-    },
-    "https://www.grants.gov/search-results-detail/363767": {
-      "ok": true,
-      "status": 200,
-      "final_url": "https://www.grants.gov/search-results-detail/363767",
-      "content_type": "text/html",
-      "redirected": false,
-      "access_restricted": false,
-      "checked_at": "2026-11-10T18:07:07.407421Z",
-      "error": null,
-      "record_ids": [
-        "363767"
-      ]
-    },
-    "https://grants.gov/grantsws/rest/opportunity/att/download/354913": {
-      "ok": true,
-      "status": 200,
-      "final_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354913",
-      "content_type": "application/octet-stream",
-      "redirected": true,
-      "access_restricted": false,
-      "checked_at": "2026-11-10T18:07:07.114619Z",
-      "error": null,
-      "record_ids": [
-        "363762"
-      ]
-    },
-    "https://www.imls.gov/find-funding/funding-opportunities/grant-programs/native-american-library-services-enhancement-grants": {
-      "ok": true,
-      "status": 200,
-      "final_url": "https://www.imls.gov/find-funding/funding-opportunities/grant-programs/native-american-library-services-enhancement-grants",
-      "content_type": "text/html",
-      "redirected": false,
-      "access_restricted": false,
-      "checked_at": "2026-11-10T18:07:08.104499Z",
-      "error": null,
-      "record_ids": [
-        "363762"
-      ]
-    },
-    "https://www.grants.gov/search-results-detail/363762": {
-      "ok": true,
-      "status": 200,
-      "final_url": "https://www.grants.gov/search-results-detail/363762",
-      "content_type": "text/html",
-      "redirected": false,
-      "access_restricted": false,
-      "checked_at": "2026-11-10T18:07:07.321751Z",
-      "error": null,
-      "record_ids": [
-        "363762"
-      ]
-    },
-    "https://grants.gov/grantsws/rest/opportunity/att/download/354924": {
-      "ok": true,
-      "status": 200,
-      "final_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354924",
-      "content_type": "application/octet-stream",
-      "redirected": true,
-      "access_restricted": false,
-      "checked_at": "2026-11-10T18:07:06.431285Z",
-      "error": null,
-      "record_ids": [
-        "363775"
-      ]
-    },
-    "https://www.imls.gov/find-funding/funding-opportunities/grant-programs/native-american-native-hawaiian-museum-services": {
-      "ok": true,
-      "status": 200,
-      "final_url": "https://www.imls.gov/find-funding/funding-opportunities/grant-programs/native-american-native-hawaiian-museum-services",
-      "content_type": "text/html",
-      "redirected": false,
-      "access_restricted": false,
-      "checked_at": "2026-11-10T18:07:08.510729Z",
-      "error": null,
-      "record_ids": [
-        "363775"
-      ]
-    },
-    "https://www.grants.gov/search-results-detail/363775": {
-      "ok": true,
-      "status": 200,
-      "final_url": "https://www.grants.gov/search-results-detail/363775",
-      "content_type": "text/html",
-      "redirected": false,
-      "access_restricted": false,
-      "checked_at": "2026-11-10T18:07:07.725303Z",
-      "error": null,
-      "record_ids": [
-        "363775"
-      ]
-    },
-    "https://grants.gov/grantsws/rest/opportunity/att/download/354914": {
-      "ok": true,
-      "status": 200,
-      "final_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354914",
-      "content_type": "application/octet-stream",
-      "redirected": true,
-      "access_restricted": false,
-      "checked_at": "2026-11-10T18:07:06.090247Z",
-      "error": null,
-      "record_ids": [
-        "363763"
-      ]
-    },
-    "https://www.imls.gov/find-funding/funding-opportunities/grant-programs/native-hawaiian-library-services": {
-      "ok": true,
-      "status": 200,
-      "final_url": "https://www.imls.gov/find-funding/funding-opportunities/grant-programs/native-hawaiian-library-services",
-      "content_type": "text/html",
-      "redirected": false,
-      "access_restricted": false,
-      "checked_at": "2026-11-10T18:07:08.906916Z",
-      "error": null,
-      "record_ids": [
-        "363763"
-      ]
-    },
-    "https://www.grants.gov/search-results-detail/363763": {
-      "ok": true,
-      "status": 200,
-      "final_url": "https://www.grants.gov/search-results-detail/363763",
-      "content_type": "text/html",
-      "redirected": false,
-      "access_restricted": false,
-      "checked_at": "2026-11-10T18:07:07.171095Z",
-      "error": null,
-      "record_ids": [
-        "363763"
-      ]
-    },
-    "https://grants.nih.gov/grants/guide/pa-files/PAR-25-270.html": {
-      "ok": true,
-      "status": 200,
-      "final_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-270.html",
-      "content_type": "text/html",
-      "redirected": false,
-      "access_restricted": false,
-      "checked_at": "2026-11-11T22:15:01.002576Z",
-      "error": null,
-      "record_ids": [
-        "357492"
-      ]
-    },
-    "https://www.grants.gov/search-results-detail/357492": {
-      "ok": true,
-      "status": 200,
-      "final_url": "https://www.grants.gov/search-results-detail/357492",
-      "content_type": "text/html",
-      "redirected": false,
-      "access_restricted": false,
-      "checked_at": "2026-10-30T16:54:19.623041Z",
-      "error": null,
-      "record_ids": [
-        "357492"
-      ]
-    },
-    "https://grants.nih.gov/grants/guide/pa-files/PAR-25-269.html": {
-      "ok": true,
-      "status": 200,
-      "final_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-269.html",
-      "content_type": "text/html",
-      "redirected": false,
-      "access_restricted": false,
-      "checked_at": "2026-11-12T18:29:28.377831Z",
-      "error": null,
-      "record_ids": [
-        "357490"
-      ]
-    },
-    "https://www.grants.gov/search-results-detail/357490": {
-      "ok": true,
-      "status": 200,
-      "final_url": "https://www.grants.gov/search-results-detail/357490",
-      "content_type": "text/html",
-      "redirected": false,
-      "access_restricted": false,
-      "checked_at": "2026-10-30T16:54:19.516156Z",
-      "error": null,
-      "record_ids": [
-        "357490"
-      ]
-    },
-    "https://grants.nih.gov/grants/guide/pa-files/PAR-25-271.html": {
-      "ok": true,
-      "status": 200,
-      "final_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-271.html",
-      "content_type": "text/html",
-      "redirected": false,
-      "access_restricted": false,
-      "checked_at": "2026-11-11T22:15:00.949222Z",
-      "error": null,
-      "record_ids": [
-        "357493"
-      ]
-    },
-    "https://www.grants.gov/search-results-detail/357493": {
-      "ok": true,
-      "status": 200,
-      "final_url": "https://www.grants.gov/search-results-detail/357493",
-      "content_type": "text/html",
-      "redirected": false,
-      "access_restricted": false,
-      "checked_at": "2026-10-30T16:54:19.570744Z",
-      "error": null,
-      "record_ids": [
-        "357493"
-      ]
-    },
-    "https://grants.nih.gov/grants/guide/pa-files/PAR-24-089.html": {
-      "ok": true,
-      "status": 200,
-      "final_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-24-089.html",
-      "content_type": "text/html",
-      "redirected": false,
-      "access_restricted": false,
-      "checked_at": "2026-11-11T22:14:59.206919Z",
-      "error": null,
-      "record_ids": [
-        "351679"
-      ]
-    },
-    "https://www.grants.gov/search-results-detail/351679": {
-      "ok": true,
-      "status": 200,
-      "final_url": "https://www.grants.gov/search-results-detail/351679",
-      "content_type": "text/html",
-      "redirected": false,
-      "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:29.019365Z",
-      "error": null,
-      "record_ids": [
-        "351679"
-      ]
-    },
-    "https://www.grants.gov/search-results-detail/364074": {
-      "ok": true,
-      "status": 200,
-      "final_url": "https://www.grants.gov/search-results-detail/364074",
-      "content_type": "text/html",
-      "redirected": false,
-      "access_restricted": false,
-      "checked_at": "2026-11-07T16:40:17.855714Z",
-      "error": null,
-      "record_ids": [
-        "364074"
-      ]
-    },
-    "https://grants.gov/grantsws/rest/opportunity/att/download/355233": {
-      "ok": true,
-      "status": 200,
-      "final_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355233",
-      "content_type": "application/pdf",
-      "redirected": true,
-      "access_restricted": false,
-      "checked_at": "2026-11-07T16:40:19.111401Z",
-      "error": null,
-      "record_ids": [
-        "364076"
-      ]
-    },
-    "https://www.grants.gov/search-results-detail/364076": {
-      "ok": true,
-      "status": 200,
-      "final_url": "https://www.grants.gov/search-results-detail/364076",
-      "content_type": "text/html",
-      "redirected": false,
-      "access_restricted": false,
-      "checked_at": "2026-11-07T16:40:17.902402Z",
-      "error": null,
-      "record_ids": [
-        "364076"
-      ]
-    },
-    "https://grants.gov/grantsws/rest/opportunity/att/download/355238": {
-      "ok": true,
-      "status": 200,
-      "final_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355238",
-      "content_type": "application/pdf",
-      "redirected": true,
-      "access_restricted": false,
-      "checked_at": "2026-11-08T16:48:53.351024Z",
-      "error": null,
-      "record_ids": [
-        "364077"
-      ]
-    },
-    "https://www.grants.gov/search-results-detail/364077": {
-      "ok": true,
-      "status": 200,
-      "final_url": "https://www.grants.gov/search-results-detail/364077",
-      "content_type": "text/html",
-      "redirected": false,
-      "access_restricted": false,
-      "checked_at": "2026-11-07T16:40:17.938781Z",
-      "error": null,
-      "record_ids": [
-        "364077"
-      ]
-    },
-    "https://grants.gov/grantsws/rest/opportunity/att/download/355243": {
-      "ok": true,
-      "status": 200,
-      "final_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355243",
-      "content_type": "application/pdf",
-      "redirected": true,
-      "access_restricted": false,
-      "checked_at": "2026-11-07T16:40:18.074745Z",
-      "error": null,
-      "record_ids": [
-        "364078"
-      ]
-    },
-    "https://www.grants.gov/search-results-detail/364078": {
-      "ok": true,
-      "status": 200,
-      "final_url": "https://www.grants.gov/search-results-detail/364078",
-      "content_type": "text/html",
-      "redirected": false,
-      "access_restricted": false,
-      "checked_at": "2026-11-07T16:40:17.979661Z",
-      "error": null,
-      "record_ids": [
-        "364078"
-      ]
-    },
-    "https://grants.gov/grantsws/rest/opportunity/att/download/355248": {
-      "ok": true,
-      "status": 200,
-      "final_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355248",
-      "content_type": "application/pdf",
-      "redirected": true,
-      "access_restricted": false,
-      "checked_at": "2026-11-07T16:40:18.046008Z",
-      "error": null,
-      "record_ids": [
-        "364079"
-      ]
-    },
-    "https://www.grants.gov/search-results-detail/364079": {
-      "ok": true,
-      "status": 200,
-      "final_url": "https://www.grants.gov/search-results-detail/364079",
-      "content_type": "text/html",
-      "redirected": false,
-      "access_restricted": false,
-      "checked_at": "2026-11-07T16:40:18.023859Z",
-      "error": null,
-      "record_ids": [
-        "364079"
-      ]
-    },
-    "https://www.grants.gov/search-results-detail/364080": {
-      "ok": true,
-      "status": 200,
-      "final_url": "https://www.grants.gov/search-results-detail/364080",
-      "content_type": "text/html",
-      "redirected": false,
-      "access_restricted": false,
-      "checked_at": "2026-11-07T16:40:17.986111Z",
-      "error": null,
-      "record_ids": [
-        "364080"
-      ]
-    },
-    "https://www.grants.gov/search-results-detail/364075": {
-      "ok": true,
-      "status": 200,
-      "final_url": "https://www.grants.gov/search-results-detail/364075",
-      "content_type": "text/html",
-      "redirected": false,
-      "access_restricted": false,
-      "checked_at": "2026-11-07T16:40:17.894904Z",
-      "error": null,
-      "record_ids": [
-        "364075"
-      ]
-    },
-    "https://www.grants.gov/search-results-detail/364083": {
-      "ok": true,
-      "status": 200,
-      "final_url": "https://www.grants.gov/search-results-detail/364083",
-      "content_type": "text/html",
-      "redirected": false,
-      "access_restricted": false,
-      "checked_at": "2026-11-07T16:40:18.062018Z",
-      "error": null,
-      "record_ids": [
-        "364083"
-      ]
-    },
-    "https://www.grants.gov/search-results-detail/364085": {
-      "ok": true,
-      "status": 200,
-      "final_url": "https://www.grants.gov/search-results-detail/364085",
-      "content_type": "text/html",
-      "redirected": false,
-      "access_restricted": false,
-      "checked_at": "2026-11-07T16:40:18.131015Z",
-      "error": null,
-      "record_ids": [
-        "364085"
-      ]
-    },
-    "https://www.grants.gov/search-results-detail/364084": {
-      "ok": true,
-      "status": 200,
-      "final_url": "https://www.grants.gov/search-results-detail/364084",
-      "content_type": "text/html",
-      "redirected": false,
-      "access_restricted": false,
-      "checked_at": "2026-11-07T16:40:18.110858Z",
-      "error": null,
-      "record_ids": [
-        "364084"
-      ]
-    },
-    "https://www.grants.gov/search-results-detail/364081": {
-      "ok": true,
-      "status": 200,
-      "final_url": "https://www.grants.gov/search-results-detail/364081",
-      "content_type": "text/html",
-      "redirected": false,
-      "access_restricted": false,
-      "checked_at": "2026-11-07T16:40:18.034657Z",
-      "error": null,
-      "record_ids": [
-        "364081"
-      ]
-    },
-    "https://www.grants.gov/search-results-detail/364082": {
-      "ok": true,
-      "status": 200,
-      "final_url": "https://www.grants.gov/search-results-detail/364082",
-      "content_type": "text/html",
-      "redirected": false,
-      "access_restricted": false,
-      "checked_at": "2026-11-07T16:40:18.083512Z",
-      "error": null,
-      "record_ids": [
-        "364082"
-      ]
-    },
     "https://www.grants.gov/search-results-detail/363242": {
       "ok": true,
       "status": 200,
@@ -1427,33 +555,6 @@
         "364056"
       ]
     },
-    "https://ovc.ojp.gov/funding/current-funding-opportunities": {
-      "ok": true,
-      "status": 200,
-      "final_url": "https://ovc.ojp.gov/funding/current-funding-opportunities",
-      "content_type": "text/html",
-      "redirected": false,
-      "access_restricted": false,
-      "checked_at": "2026-11-08T16:48:54.531072Z",
-      "error": null,
-      "record_ids": [
-        "364029",
-        "364143"
-      ]
-    },
-    "https://www.grants.gov/search-results-detail/364143": {
-      "ok": true,
-      "status": 200,
-      "final_url": "https://www.grants.gov/search-results-detail/364143",
-      "content_type": "text/html",
-      "redirected": false,
-      "access_restricted": false,
-      "checked_at": "2026-11-13T17:58:06.994402Z",
-      "error": null,
-      "record_ids": [
-        "364143"
-      ]
-    },
     "https://www.nsf.gov/funding/pgm_summ.jsp?pims_id=503252": {
       "ok": true,
       "status": 200,
@@ -1474,7 +575,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:27.053559Z",
+      "checked_at": "2026-11-15T19:58:35.491467Z",
       "error": null,
       "record_ids": [
         "350018"
@@ -1879,7 +980,7 @@
       "content_type": "application/pdf",
       "redirected": true,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:27.500024Z",
+      "checked_at": "2026-11-15T19:58:36.121513Z",
       "error": null,
       "record_ids": [
         "363670"
@@ -2217,7 +1318,7 @@
       "content_type": "application/pdf",
       "redirected": true,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:28.927210Z",
+      "checked_at": "2026-11-15T19:58:37.275318Z",
       "error": null,
       "record_ids": [
         "363920"
@@ -2230,7 +1331,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:27.998158Z",
+      "checked_at": "2026-11-15T19:58:36.150618Z",
       "error": null,
       "record_ids": [
         "363920"
@@ -2516,7 +1617,7 @@
       "content_type": "application/pdf",
       "redirected": true,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:27.881642Z",
+      "checked_at": "2026-11-15T19:58:36.170648Z",
       "error": null,
       "record_ids": [
         "363047"
@@ -2533,6 +1634,32 @@
       "error": null,
       "record_ids": [
         "363047"
+      ]
+    },
+    "https://grants.gov/grantsws/rest/opportunity/att/download/355017": {
+      "ok": true,
+      "status": 200,
+      "final_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355017",
+      "content_type": "application/pdf",
+      "redirected": true,
+      "access_restricted": false,
+      "checked_at": "2026-11-15T19:58:35.375622Z",
+      "error": null,
+      "record_ids": [
+        "363847"
+      ]
+    },
+    "https://www.grants.gov/search-results-detail/363847": {
+      "ok": true,
+      "status": 200,
+      "final_url": "https://www.grants.gov/search-results-detail/363847",
+      "content_type": "text/html",
+      "redirected": false,
+      "access_restricted": false,
+      "checked_at": "2026-11-15T19:58:35.274781Z",
+      "error": null,
+      "record_ids": [
+        "363847"
       ]
     },
     "https://grants.gov/grantsws/rest/opportunity/att/download/355335": {
@@ -2609,7 +1736,7 @@
       "content_type": "application/pdf",
       "redirected": true,
       "access_restricted": false,
-      "checked_at": "2026-10-29T18:33:37.840611Z",
+      "checked_at": "2026-11-15T19:58:38.380710Z",
       "error": null,
       "record_ids": [
         "364154"
@@ -2843,7 +1970,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:28.900367Z",
+      "checked_at": "2026-11-15T19:58:36.860622Z",
       "error": null,
       "record_ids": [
         "351124"
@@ -2963,8 +2090,7 @@
       "checked_at": "2026-11-08T16:48:53.473916Z",
       "error": null,
       "record_ids": [
-        "362014",
-        "364220"
+        "362014"
       ]
     },
     "https://www.grants.gov/search-results-detail/362014": {
@@ -3338,7 +2464,7 @@
       "content_type": "application/pdf",
       "redirected": true,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:29.069142Z",
+      "checked_at": "2026-11-15T19:58:37.431129Z",
       "error": null,
       "record_ids": [
         "363929"
@@ -3351,7 +2477,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:28.117980Z",
+      "checked_at": "2026-11-15T19:58:36.273185Z",
       "error": null,
       "record_ids": [
         "363929"
@@ -3459,6 +2585,20 @@
       "error": null,
       "record_ids": [
         "364097"
+      ]
+    },
+    "https://ovc.ojp.gov/funding/current-funding-opportunities": {
+      "ok": true,
+      "status": 200,
+      "final_url": "https://ovc.ojp.gov/funding/current-funding-opportunities",
+      "content_type": "text/html",
+      "redirected": false,
+      "access_restricted": false,
+      "checked_at": "2026-11-08T16:48:54.531072Z",
+      "error": null,
+      "record_ids": [
+        "364029",
+        "364143"
       ]
     },
     "https://www.grants.gov/search-results-detail/364029": {
@@ -3702,7 +2842,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-29T18:33:38.290163Z",
+      "checked_at": "2026-11-15T19:58:39.037055Z",
       "error": null,
       "record_ids": [
         "nyserda:RFP6125"
@@ -3845,7 +2985,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:29.776066Z",
+      "checked_at": "2026-11-15T19:58:37.857227Z",
       "error": null,
       "record_ids": [
         "355439"
@@ -3977,7 +3117,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:27.739064Z",
+      "checked_at": "2026-11-15T19:58:36.054530Z",
       "error": null,
       "record_ids": [
         "363962",
@@ -4009,7 +3149,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:28.455085Z",
+      "checked_at": "2026-11-15T19:58:36.522268Z",
       "error": null,
       "record_ids": [
         "363963"
@@ -4022,7 +3162,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:28.411574Z",
+      "checked_at": "2026-11-15T19:58:36.525653Z",
       "error": null,
       "record_ids": [
         "363964"
@@ -4035,7 +3175,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:28.462165Z",
+      "checked_at": "2026-11-15T19:58:36.547705Z",
       "error": null,
       "record_ids": [
         "363965"
@@ -4321,7 +3461,7 @@
       "content_type": "application/pdf",
       "redirected": true,
       "access_restricted": false,
-      "checked_at": "2026-10-29T18:33:37.783085Z",
+      "checked_at": "2026-11-15T19:58:38.336234Z",
       "error": null,
       "record_ids": [
         "364149"
@@ -4492,7 +3632,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-29T18:33:37.692159Z",
+      "checked_at": "2026-11-15T19:58:38.034359Z",
       "error": null,
       "record_ids": [
         "364163"
@@ -4856,7 +3996,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:28.927700Z",
+      "checked_at": "2026-11-15T19:58:36.913568Z",
       "error": null,
       "record_ids": [
         "351404"
@@ -4882,7 +4022,7 @@
       "content_type": "text/html",
       "redirected": true,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:28.538228Z",
+      "checked_at": "2026-11-15T19:58:37.176851Z",
       "error": null,
       "record_ids": [
         "363966",
@@ -4904,7 +4044,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:28.596004Z",
+      "checked_at": "2026-11-15T19:58:36.643921Z",
       "error": null,
       "record_ids": [
         "363971"
@@ -4917,7 +4057,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:28.637081Z",
+      "checked_at": "2026-11-15T19:58:36.648513Z",
       "error": null,
       "record_ids": [
         "363972"
@@ -4956,10 +4096,36 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-29T18:33:38.281559Z",
+      "checked_at": "2026-11-15T19:58:38.719259Z",
       "error": null,
       "record_ids": [
         "nyserda:IEDRRFI26"
+      ]
+    },
+    "https://grants.gov/grantsws/rest/opportunity/att/download/355659": {
+      "ok": true,
+      "status": 200,
+      "final_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355659",
+      "content_type": "application/pdf",
+      "redirected": true,
+      "access_restricted": false,
+      "checked_at": "2026-11-15T19:58:35.380187Z",
+      "error": null,
+      "record_ids": [
+        "364267"
+      ]
+    },
+    "https://www.grants.gov/search-results-detail/364267": {
+      "ok": true,
+      "status": 200,
+      "final_url": "https://www.grants.gov/search-results-detail/364267",
+      "content_type": "text/html",
+      "redirected": false,
+      "access_restricted": false,
+      "checked_at": "2026-11-15T19:58:35.298711Z",
+      "error": null,
+      "record_ids": [
+        "364267"
       ]
     },
     "https://www.grants.gov/search-results-detail/358854": {
@@ -5321,7 +4487,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:28.482544Z",
+      "checked_at": "2026-11-15T19:58:36.552185Z",
       "error": null,
       "record_ids": [
         "363966"
@@ -5582,7 +4748,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:29.580212Z",
+      "checked_at": "2026-11-15T19:58:37.683802Z",
       "error": null,
       "record_ids": [
         "354620"
@@ -5621,7 +4787,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:29.161084Z",
+      "checked_at": "2026-11-15T19:58:37.243548Z",
       "error": null,
       "record_ids": [
         "352741"
@@ -6356,6 +5522,19 @@
         "nyserda:RFP6157"
       ]
     },
+    "https://www.grants.gov/search-results-detail/364143": {
+      "ok": true,
+      "status": 200,
+      "final_url": "https://www.grants.gov/search-results-detail/364143",
+      "content_type": "text/html",
+      "redirected": false,
+      "access_restricted": false,
+      "checked_at": "2026-11-13T17:58:06.994402Z",
+      "error": null,
+      "record_ids": [
+        "364143"
+      ]
+    },
     "https://grants.nih.gov/grants/guide/pa-files/PAR-24-214.html": {
       "ok": true,
       "status": 200,
@@ -6376,7 +5555,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:29.506320Z",
+      "checked_at": "2026-11-15T19:58:37.608374Z",
       "error": null,
       "record_ids": [
         "354081"
@@ -7548,7 +6727,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:29.645958Z",
+      "checked_at": "2026-11-15T19:58:37.748210Z",
       "error": null,
       "record_ids": [
         "355219"
@@ -7834,7 +7013,7 @@
       "content_type": "application/pdf",
       "redirected": true,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:27.873617Z",
+      "checked_at": "2026-11-15T19:58:36.197096Z",
       "error": null,
       "record_ids": [
         "363936"
@@ -7847,7 +7026,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:28.133301Z",
+      "checked_at": "2026-11-15T19:58:36.286520Z",
       "error": null,
       "record_ids": [
         "363936"
@@ -8107,7 +7286,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:29.191144Z",
+      "checked_at": "2026-11-15T19:58:37.250609Z",
       "error": null,
       "record_ids": [
         "352810"
@@ -8315,7 +7494,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:29.531872Z",
+      "checked_at": "2026-11-15T19:58:37.653502Z",
       "error": null,
       "record_ids": [
         "354269"
@@ -8354,7 +7533,7 @@
       "content_type": "application/pdf",
       "redirected": true,
       "access_restricted": false,
-      "checked_at": "2026-10-29T18:33:37.689512Z",
+      "checked_at": "2026-11-15T19:58:39.350271Z",
       "error": null,
       "record_ids": [
         "364144"
@@ -8394,7 +7573,7 @@
       "content_type": "application/pdf",
       "redirected": true,
       "access_restricted": false,
-      "checked_at": "2026-10-29T18:33:37.686376Z",
+      "checked_at": "2026-11-15T19:58:38.309173Z",
       "error": null,
       "record_ids": [
         "364145"
@@ -8498,7 +7677,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:29.817689Z",
+      "checked_at": "2026-11-15T19:58:37.888494Z",
       "error": null,
       "record_ids": [
         "355987"
@@ -8537,7 +7716,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:29.240029Z",
+      "checked_at": "2026-11-15T19:58:37.338453Z",
       "error": null,
       "record_ids": [
         "353055"
@@ -8732,7 +7911,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:29.553379Z",
+      "checked_at": "2026-11-15T19:58:37.662683Z",
       "error": null,
       "record_ids": [
         "354573"
@@ -9135,7 +8314,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:27.273623Z",
+      "checked_at": "2026-11-15T19:58:35.641177Z",
       "error": null,
       "record_ids": [
         "363476"
@@ -9148,7 +8327,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:27.203344Z",
+      "checked_at": "2026-11-15T19:58:35.584608Z",
       "error": null,
       "record_ids": [
         "363473"
@@ -9161,7 +8340,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:28.573574Z",
+      "checked_at": "2026-11-15T19:58:36.624539Z",
       "error": null,
       "record_ids": [
         "363967"
@@ -9642,7 +8821,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:29.037750Z",
+      "checked_at": "2026-11-15T19:58:37.005508Z",
       "error": null,
       "record_ids": [
         "351889"
@@ -9733,7 +8912,7 @@
       "content_type": "application/pdf",
       "redirected": true,
       "access_restricted": false,
-      "checked_at": "2026-10-29T18:33:37.848922Z",
+      "checked_at": "2026-11-15T19:58:39.404015Z",
       "error": null,
       "record_ids": [
         "364160"
@@ -9981,7 +9160,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:29.805446Z",
+      "checked_at": "2026-11-15T19:58:37.884657Z",
       "error": null,
       "record_ids": [
         "356018"
@@ -10033,7 +9212,7 @@
       "content_type": "application/pdf",
       "redirected": true,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:27.871298Z",
+      "checked_at": "2026-11-15T19:58:37.150564Z",
       "error": null,
       "record_ids": [
         "363958"
@@ -10046,7 +9225,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:28.361297Z",
+      "checked_at": "2026-11-15T19:58:36.479957Z",
       "error": null,
       "record_ids": [
         "363958"
@@ -10150,7 +9329,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:27.272293Z",
+      "checked_at": "2026-11-15T19:58:35.623105Z",
       "error": null,
       "record_ids": [
         "363475"
@@ -10163,7 +9342,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:27.259060Z",
+      "checked_at": "2026-11-15T19:58:35.606147Z",
       "error": null,
       "record_ids": [
         "363474"
@@ -10338,6 +9517,32 @@
         "363148"
       ]
     },
+    "https://grants.gov/grantsws/rest/opportunity/att/download/355657": {
+      "ok": true,
+      "status": 200,
+      "final_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355657",
+      "content_type": "application/pdf",
+      "redirected": true,
+      "access_restricted": false,
+      "checked_at": "2026-11-15T19:58:36.426464Z",
+      "error": null,
+      "record_ids": [
+        "364265"
+      ]
+    },
+    "https://www.grants.gov/search-results-detail/364265": {
+      "ok": true,
+      "status": 200,
+      "final_url": "https://www.grants.gov/search-results-detail/364265",
+      "content_type": "text/html",
+      "redirected": false,
+      "access_restricted": false,
+      "checked_at": "2026-11-15T19:58:35.275107Z",
+      "error": null,
+      "record_ids": [
+        "364265"
+      ]
+    },
     "https://www.grants.gov/search-results-detail/362952": {
       "ok": true,
       "status": 200,
@@ -10371,7 +9576,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:29.309835Z",
+      "checked_at": "2026-11-15T19:58:37.378160Z",
       "error": null,
       "record_ids": [
         "353633"
@@ -10605,7 +9810,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:28.158640Z",
+      "checked_at": "2026-11-15T19:58:36.317448Z",
       "error": null,
       "record_ids": [
         "363940"
@@ -10891,7 +10096,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:28.994674Z",
+      "checked_at": "2026-11-15T19:58:36.969878Z",
       "error": null,
       "record_ids": [
         "351847"
@@ -11206,7 +10411,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:28.563873Z",
+      "checked_at": "2026-11-15T19:58:36.613173Z",
       "error": null,
       "record_ids": [
         "363969"
@@ -11316,6 +10521,19 @@
         "363166"
       ]
     },
+    "https://mchb.hrsa.gov/programs-impact/programs/alliance-innovation-maternal-health": {
+      "ok": null,
+      "status": 403,
+      "final_url": "https://mchb.hrsa.gov/programs-impact/programs/alliance-innovation-maternal-health",
+      "content_type": "text/html",
+      "redirected": false,
+      "access_restricted": true,
+      "checked_at": "2026-11-10T18:07:08.692005Z",
+      "error": null,
+      "record_ids": [
+        "363407"
+      ]
+    },
     "https://www.grants.gov/search-results-detail/363407": {
       "ok": true,
       "status": 200,
@@ -11336,7 +10554,7 @@
       "content_type": "application/pdf",
       "redirected": true,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:28.006249Z",
+      "checked_at": "2026-11-15T19:58:37.665974Z",
       "error": null,
       "record_ids": [
         "363946"
@@ -11349,7 +10567,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:28.266732Z",
+      "checked_at": "2026-11-15T19:58:36.414821Z",
       "error": null,
       "record_ids": [
         "363946"
@@ -11596,7 +10814,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:29.070776Z",
+      "checked_at": "2026-11-15T19:58:37.061316Z",
       "error": null,
       "record_ids": [
         "351947"
@@ -11609,7 +10827,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:28.770957Z",
+      "checked_at": "2026-11-15T19:58:36.762122Z",
       "error": null,
       "record_ids": [
         "363978"
@@ -11622,7 +10840,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:28.710762Z",
+      "checked_at": "2026-11-15T19:58:36.746673Z",
       "error": null,
       "record_ids": [
         "363975"
@@ -11882,7 +11100,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:28.645209Z",
+      "checked_at": "2026-11-15T19:58:36.664728Z",
       "error": null,
       "record_ids": [
         "363970"
@@ -12078,7 +11296,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:29.629446Z",
+      "checked_at": "2026-11-15T19:58:37.716363Z",
       "error": null,
       "record_ids": [
         "355196"
@@ -12156,7 +11374,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:28.508573Z",
+      "checked_at": "2026-11-15T19:58:36.571319Z",
       "error": null,
       "record_ids": [
         "363968"
@@ -12242,14 +11460,14 @@
       ]
     },
     "https://www.onr.navy.mil/work-with-us/funding-opportunities/announcements": {
-      "ok": true,
-      "status": 200,
+      "ok": false,
+      "status": null,
       "final_url": "https://www.onr.navy.mil/work-with-us/funding-opportunities/announcements",
-      "content_type": "text/html",
+      "content_type": "",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:27.842164Z",
-      "error": null,
+      "checked_at": "2026-11-15T19:58:35.964114Z",
+      "error": "ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",
       "record_ids": [
         "363906"
       ]
@@ -12378,7 +11596,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:28.957423Z",
+      "checked_at": "2026-11-15T19:58:36.945648Z",
       "error": null,
       "record_ids": [
         "351923"
@@ -12404,7 +11622,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:29.250030Z",
+      "checked_at": "2026-11-15T19:58:37.345664Z",
       "error": null,
       "record_ids": [
         "353413"
@@ -12469,7 +11687,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:28.666643Z",
+      "checked_at": "2026-11-15T19:58:36.712170Z",
       "error": null,
       "record_ids": [
         "363973"
@@ -12521,7 +11739,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:29.383954Z",
+      "checked_at": "2026-11-15T19:58:37.511157Z",
       "error": null,
       "record_ids": [
         "353623"
@@ -12564,19 +11782,6 @@
       "error": null,
       "record_ids": [
         "357121"
-      ]
-    },
-    "https://www.grants.gov/search-results-detail/364220": {
-      "ok": true,
-      "status": 200,
-      "final_url": "https://www.grants.gov/search-results-detail/364220",
-      "content_type": "text/html",
-      "redirected": false,
-      "access_restricted": false,
-      "checked_at": "2026-11-06T17:42:34.183854Z",
-      "error": null,
-      "record_ids": [
-        "364220"
       ]
     },
     "https://www.grants.gov/search-results-detail/363582": {
@@ -12625,7 +11830,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:28.674168Z",
+      "checked_at": "2026-11-15T19:58:36.719382Z",
       "error": null,
       "record_ids": [
         "363974"
@@ -12664,7 +11869,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:29.524114Z",
+      "checked_at": "2026-11-15T19:58:37.638855Z",
       "error": null,
       "record_ids": [
         "353822"
@@ -12690,7 +11895,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:29.514294Z",
+      "checked_at": "2026-11-15T19:58:37.625092Z",
       "error": null,
       "record_ids": [
         "353821"
@@ -12833,7 +12038,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:28.383619Z",
+      "checked_at": "2026-11-15T19:58:36.505948Z",
       "error": null,
       "record_ids": [
         "363962"
@@ -12911,7 +12116,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:29.478638Z",
+      "checked_at": "2026-11-15T19:58:37.585269Z",
       "error": null,
       "record_ids": [
         "353758"
@@ -12937,7 +12142,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:29.453050Z",
+      "checked_at": "2026-11-15T19:58:37.559378Z",
       "error": null,
       "record_ids": [
         "353756"
@@ -12963,7 +12168,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:29.264839Z",
+      "checked_at": "2026-11-15T19:58:37.369594Z",
       "error": null,
       "record_ids": [
         "353461"
@@ -12989,7 +12194,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:29.322169Z",
+      "checked_at": "2026-11-15T19:58:37.412806Z",
       "error": null,
       "record_ids": [
         "353710"
@@ -13015,7 +12220,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:29.334916Z",
+      "checked_at": "2026-11-15T19:58:37.436853Z",
       "error": null,
       "record_ids": [
         "353709"
@@ -13041,7 +12246,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:29.414432Z",
+      "checked_at": "2026-11-15T19:58:37.530243Z",
       "error": null,
       "record_ids": [
         "353751"
@@ -13067,7 +12272,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:29.349189Z",
+      "checked_at": "2026-11-15T19:58:37.445471Z",
       "error": null,
       "record_ids": [
         "353749"
@@ -13093,7 +12298,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:29.466943Z",
+      "checked_at": "2026-11-15T19:58:37.568602Z",
       "error": null,
       "record_ids": [
         "353793"
@@ -13119,7 +12324,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:29.491753Z",
+      "checked_at": "2026-11-15T19:58:37.591549Z",
       "error": null,
       "record_ids": [
         "353792"
@@ -13197,7 +12402,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:29.135696Z",
+      "checked_at": "2026-11-15T19:58:37.190190Z",
       "error": null,
       "record_ids": [
         "352635"
@@ -13223,7 +12428,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:29.197475Z",
+      "checked_at": "2026-11-15T19:58:37.269827Z",
       "error": null,
       "record_ids": [
         "352636"
@@ -13249,7 +12454,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:29.130676Z",
+      "checked_at": "2026-11-15T19:58:37.154851Z",
       "error": null,
       "record_ids": [
         "352273"
@@ -13275,7 +12480,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:29.039786Z",
+      "checked_at": "2026-11-15T19:58:37.039377Z",
       "error": null,
       "record_ids": [
         "352270"
@@ -13301,7 +12506,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:29.428438Z",
+      "checked_at": "2026-11-15T19:58:37.542322Z",
       "error": null,
       "record_ids": [
         "353762"
@@ -13327,7 +12532,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:29.350971Z",
+      "checked_at": "2026-11-15T19:58:37.469855Z",
       "error": null,
       "record_ids": [
         "353763"
@@ -13366,7 +12571,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:28.248012Z",
+      "checked_at": "2026-11-15T19:58:36.410482Z",
       "error": null,
       "record_ids": [
         "363945"
@@ -13392,7 +12597,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:29.381515Z",
+      "checked_at": "2026-11-15T19:58:37.478938Z",
       "error": null,
       "record_ids": [
         "353746"
@@ -13418,7 +12623,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:29.370938Z",
+      "checked_at": "2026-11-15T19:58:37.468483Z",
       "error": null,
       "record_ids": [
         "353745"
@@ -13444,7 +12649,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:29.205757Z",
+      "checked_at": "2026-11-15T19:58:37.319247Z",
       "error": null,
       "record_ids": [
         "353458"
@@ -13587,7 +12792,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:28.317106Z",
+      "checked_at": "2026-11-15T19:58:36.457444Z",
       "error": null,
       "record_ids": [
         "363956"
@@ -13652,7 +12857,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:28.061081Z",
+      "checked_at": "2026-11-15T19:58:36.249506Z",
       "error": null,
       "record_ids": [
         "363926"
@@ -13730,7 +12935,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:28.134855Z",
+      "checked_at": "2026-11-15T19:58:36.314765Z",
       "error": null,
       "record_ids": [
         "363939"
@@ -13743,7 +12948,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:27.945545Z",
+      "checked_at": "2026-11-15T19:58:35.819513Z",
       "error": null,
       "record_ids": [
         "361276"
@@ -14042,36 +13247,10 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:28.738904Z",
+      "checked_at": "2026-11-15T19:58:36.744108Z",
       "error": null,
       "record_ids": [
         "363976"
-      ]
-    },
-    "https://mygrants.servicenowservices.com/mygrants?id=mygrants_form&table=x_g_usd4_d_grant_funding_opportunity&sys_id=9b532e8f1b0e87502405ea85624bcbf0&view=Default": {
-      "ok": true,
-      "status": 200,
-      "final_url": "https://mygrants.servicenowservices.com/mygrants?id=mygrants_form&table=x_g_usd4_d_grant_funding_opportunity&sys_id=9b532e8f1b0e87502405ea85624bcbf0&view=Default",
-      "content_type": "",
-      "redirected": false,
-      "access_restricted": false,
-      "checked_at": "2026-11-12T18:29:30.206971Z",
-      "error": null,
-      "record_ids": [
-        "363660"
-      ]
-    },
-    "https://www.grants.gov/search-results-detail/363660": {
-      "ok": true,
-      "status": 200,
-      "final_url": "https://www.grants.gov/search-results-detail/363660",
-      "content_type": "text/html",
-      "redirected": false,
-      "access_restricted": false,
-      "checked_at": "2026-11-08T16:48:54.220403Z",
-      "error": null,
-      "record_ids": [
-        "363660"
       ]
     },
     "https://www.nsf.gov/publications/pub_summ.jsp?ods_key=nsf25525": {
@@ -14432,7 +13611,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:28.174259Z",
+      "checked_at": "2026-11-15T19:58:36.346006Z",
       "error": null,
       "record_ids": [
         "363942"
@@ -14887,7 +14066,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:29.697737Z",
+      "checked_at": "2026-11-15T19:58:37.787562Z",
       "error": null,
       "record_ids": [
         "355354"
@@ -14913,7 +14092,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:29.750238Z",
+      "checked_at": "2026-11-15T19:58:37.818329Z",
       "error": null,
       "record_ids": [
         "355399"
@@ -14939,7 +14118,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:29.720151Z",
+      "checked_at": "2026-11-15T19:58:37.831747Z",
       "error": null,
       "record_ids": [
         "355395"
@@ -14978,7 +14157,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:29.696268Z",
+      "checked_at": "2026-11-15T19:58:37.788704Z",
       "error": null,
       "record_ids": [
         "355353"
@@ -15212,7 +14391,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:26.941902Z",
+      "checked_at": "2026-11-15T19:58:35.426441Z",
       "error": null,
       "record_ids": [
         "348985"
@@ -16162,7 +15341,7 @@
       "content_type": "application/pdf",
       "redirected": true,
       "access_restricted": false,
-      "checked_at": "2026-10-29T18:33:37.651619Z",
+      "checked_at": "2026-11-15T19:58:38.304706Z",
       "error": null,
       "record_ids": [
         "364147"
@@ -16175,7 +15354,7 @@
       "content_type": "",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-29T18:33:37.858435Z",
+      "checked_at": "2026-11-15T19:58:38.266798Z",
       "error": null,
       "record_ids": [
         "364147"
@@ -16357,7 +15536,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:29.672186Z",
+      "checked_at": "2026-11-15T19:58:37.764822Z",
       "error": null,
       "record_ids": [
         "355100"
@@ -16526,7 +15705,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:28.884620Z",
+      "checked_at": "2026-11-15T19:58:36.845517Z",
       "error": null,
       "record_ids": [
         "350802"
@@ -16539,7 +15718,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:28.219845Z",
+      "checked_at": "2026-11-15T19:58:36.363638Z",
       "error": null,
       "record_ids": [
         "363943"
@@ -16604,7 +15783,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:28.239146Z",
+      "checked_at": "2026-11-15T19:58:36.386472Z",
       "error": null,
       "record_ids": [
         "363944"
@@ -16955,7 +16134,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:28.274280Z",
+      "checked_at": "2026-11-15T19:58:36.440887Z",
       "error": null,
       "record_ids": [
         "363948"
@@ -17020,7 +16199,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:26.920357Z",
+      "checked_at": "2026-11-15T19:58:35.250841Z",
       "error": null,
       "record_ids": [
         "348599"
@@ -17384,7 +16563,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:27.081423Z",
+      "checked_at": "2026-11-15T19:58:35.497254Z",
       "error": null,
       "record_ids": [
         "350338"
@@ -20557,7 +19736,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:29.590501Z",
+      "checked_at": "2026-11-15T19:58:37.687244Z",
       "error": null,
       "record_ids": [
         "355044"
@@ -20921,7 +20100,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:27.066307Z",
+      "checked_at": "2026-11-15T19:58:35.475001Z",
       "error": null,
       "record_ids": [
         "349804"
@@ -21402,7 +20581,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:29.755342Z",
+      "checked_at": "2026-11-15T19:58:37.827927Z",
       "error": null,
       "record_ids": [
         "355417"
@@ -21441,7 +20620,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:29.772576Z",
+      "checked_at": "2026-11-15T19:58:37.842424Z",
       "error": null,
       "record_ids": [
         "355722"
@@ -21792,7 +20971,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:29.199145Z",
+      "checked_at": "2026-11-15T19:58:37.283737Z",
       "error": null,
       "record_ids": [
         "352845"
@@ -21844,7 +21023,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:26.930402Z",
+      "checked_at": "2026-11-15T19:58:35.346101Z",
       "error": null,
       "record_ids": [
         "349343"
@@ -21896,7 +21075,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:29.637425Z",
+      "checked_at": "2026-11-15T19:58:37.734618Z",
       "error": null,
       "record_ids": [
         "355150"
@@ -22026,7 +21205,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:29.608595Z",
+      "checked_at": "2026-11-15T19:58:37.709232Z",
       "error": null,
       "record_ids": [
         "354445"
@@ -22312,7 +21491,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:29.790412Z",
+      "checked_at": "2026-11-15T19:58:37.863069Z",
       "error": null,
       "record_ids": [
         "355499"
@@ -22533,7 +21712,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:28.008707Z",
+      "checked_at": "2026-11-15T19:58:36.216486Z",
       "error": null,
       "record_ids": [
         "361275"
@@ -22572,7 +21751,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:27.996649Z",
+      "checked_at": "2026-11-15T19:58:36.060700Z",
       "error": null,
       "record_ids": [
         "360545"
@@ -22663,7 +21842,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:29.017151Z",
+      "checked_at": "2026-11-15T19:58:36.958862Z",
       "error": null,
       "record_ids": [
         "351547"
@@ -22858,7 +22037,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:27.378333Z",
+      "checked_at": "2026-11-15T19:58:35.697691Z",
       "error": null,
       "record_ids": [
         "350653"
@@ -22871,7 +22050,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:28.895164Z",
+      "checked_at": "2026-11-15T19:58:36.843222Z",
       "error": null,
       "record_ids": [
         "350654"
@@ -22884,7 +22063,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:27.329081Z",
+      "checked_at": "2026-11-15T19:58:35.680631Z",
       "error": null,
       "record_ids": [
         "350650"
@@ -22897,7 +22076,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:27.313582Z",
+      "checked_at": "2026-11-15T19:58:35.665130Z",
       "error": null,
       "record_ids": [
         "350648"
@@ -22910,7 +22089,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:27.197124Z",
+      "checked_at": "2026-11-15T19:58:35.576158Z",
       "error": null,
       "record_ids": [
         "350582"
@@ -22923,7 +22102,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:27.321473Z",
+      "checked_at": "2026-11-15T19:58:35.674872Z",
       "error": null,
       "record_ids": [
         "350649"
@@ -22936,7 +22115,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:27.386201Z",
+      "checked_at": "2026-11-15T19:58:35.721496Z",
       "error": null,
       "record_ids": [
         "350651"
@@ -22949,7 +22128,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:27.085204Z",
+      "checked_at": "2026-11-15T19:58:35.512940Z",
       "error": null,
       "record_ids": [
         "350584"
@@ -22962,7 +22141,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:27.205625Z",
+      "checked_at": "2026-11-15T19:58:35.595725Z",
       "error": null,
       "record_ids": [
         "350647"
@@ -22975,7 +22154,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:28.859263Z",
+      "checked_at": "2026-11-15T19:58:36.815090Z",
       "error": null,
       "record_ids": [
         "350656"
@@ -22988,7 +22167,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:28.822236Z",
+      "checked_at": "2026-11-15T19:58:36.807704Z",
       "error": null,
       "record_ids": [
         "350655"
@@ -23001,7 +22180,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:27.169093Z",
+      "checked_at": "2026-11-15T19:58:35.571200Z",
       "error": null,
       "record_ids": [
         "350645"
@@ -23014,7 +22193,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:27.068366Z",
+      "checked_at": "2026-11-15T19:58:35.481198Z",
       "error": null,
       "record_ids": [
         "350630"
@@ -23027,7 +22206,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:27.330357Z",
+      "checked_at": "2026-11-15T19:58:35.687146Z",
       "error": null,
       "record_ids": [
         "350652"
@@ -23040,7 +22219,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:27.147704Z",
+      "checked_at": "2026-11-15T19:58:35.546648Z",
       "error": null,
       "record_ids": [
         "350628"
@@ -23417,7 +22596,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:26.932055Z",
+      "checked_at": "2026-11-15T19:58:35.432841Z",
       "error": null,
       "record_ids": [
         "349554"
@@ -23864,7 +23043,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:29.826641Z",
+      "checked_at": "2026-11-15T19:58:37.916683Z",
       "error": null,
       "record_ids": [
         "356055"
@@ -23942,7 +23121,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:29.262932Z",
+      "checked_at": "2026-11-15T19:58:37.364992Z",
       "error": null,
       "record_ids": [
         "353475"
@@ -24293,7 +23472,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:29.094922Z",
+      "checked_at": "2026-11-15T19:58:37.133745Z",
       "error": null,
       "record_ids": [
         "352339"
@@ -24699,7 +23878,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:29.075645Z",
+      "checked_at": "2026-11-15T19:58:37.100408Z",
       "error": null,
       "record_ids": [
         "352238"
@@ -25102,7 +24281,7 @@
       "content_type": "text/html",
       "redirected": true,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:27.961963Z",
+      "checked_at": "2026-11-15T19:58:36.223475Z",
       "error": null,
       "record_ids": [
         "vpr-email:vpr-0f186b990288c021"
@@ -25258,7 +24437,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:29.152691Z",
+      "checked_at": "2026-11-15T19:58:37.228245Z",
       "error": null,
       "record_ids": [
         "352500"
@@ -25375,7 +24554,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:27.041442Z",
+      "checked_at": "2026-11-15T19:58:35.414426Z",
       "error": null,
       "record_ids": [
         "350230"
@@ -25401,7 +24580,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:27.136945Z",
+      "checked_at": "2026-11-15T19:58:35.526627Z",
       "error": null,
       "record_ids": [
         "350469"
@@ -25882,7 +25061,7 @@
       "content_type": "text/html",
       "redirected": false,
       "access_restricted": false,
-      "checked_at": "2026-10-25T14:40:29.647413Z",
+      "checked_at": "2026-11-15T19:58:37.761400Z",
       "error": null,
       "record_ids": [
         "355211"

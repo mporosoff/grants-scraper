@@ -1,16 +1,16 @@
 {
-  "generated_at": "2026-11-15T19:30:20Z",
-  "excluded_noncurrent": 32,
+  "generated_at": "2026-11-15T20:37:53Z",
+  "excluded_noncurrent": 1,
   "feeds": [
     {
       "title": "All new opportunities",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/all.xml",
-      "count": 1248
+      "count": 1249
     },
     {
       "title": "Funding Finder | Federal",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/source-type/federal.xml",
-      "count": 1191
+      "count": 1192
     },
     {
       "title": "Funding Finder | Internal",
@@ -25,7 +25,7 @@
     {
       "title": "Funding Finder | Agriculture and food",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml",
-      "count": 89
+      "count": 90
     },
     {
       "title": "Funding Finder | Artificial intelligence and machine learning",
@@ -65,7 +65,7 @@
     {
       "title": "Funding Finder | Community development",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/community-development.xml",
-      "count": 50
+      "count": 51
     },
     {
       "title": "Funding Finder | Cybersecurity",
@@ -85,12 +85,12 @@
     {
       "title": "Funding Finder | Energy",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/energy.xml",
-      "count": 120
+      "count": 121
     },
     {
       "title": "Funding Finder | Environmental science",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/environmental-science.xml",
-      "count": 239
+      "count": 238
     },
     {
       "title": "Funding Finder | Health equity",
@@ -110,7 +110,7 @@
     {
       "title": "Funding Finder | Materials science",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml",
-      "count": 61
+      "count": 62
     },
     {
       "title": "Funding Finder | Neuroscience",
@@ -120,7 +120,7 @@
     {
       "title": "Funding Finder | Public health",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/public-health.xml",
-      "count": 129
+      "count": 130
     },
     {
       "title": "Funding Finder | Quantum science",

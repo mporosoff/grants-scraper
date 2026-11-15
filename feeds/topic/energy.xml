@@ -4,8 +4,19 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/energy.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/energy.xml</id>
-  <updated>2026-11-15T19:30:20Z</updated>
+  <updated>2026-11-15T20:37:53Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>The State Component of the National Cooperative Geologic Mapping Program</title>
+    <link href="https://www.grants.gov/search-results-detail/364265"/>
+    <id>urn:funding-finder:grants-gov:364265</id>
+    <updated>2026-11-13T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
+    <category term="Community development"/>
+    <category term="Energy"/>
+    <category term="Materials science"/>
+    <summary>Geological Survey | Application 2027-02-17 | The primary objective of the STATEMAP component of the National Cooperative Geologic Mapping Program (NCGMP) is to establish the geologic framework of areas determined to be vital to the economic, social, or scientific welfare of individual states and the nation. The state Geologist/Survey Director/Chief Scientist (or similar position) shall determine mapping priorities in consultation with a mult…</summary>
+  </entry>
   <entry>
     <title>Long-Term Contracts to Purchase Index Storage Credits (ISCs)</title>
     <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr00001ScHx7AAF"/>
@@ -676,17 +687,5 @@
     <category term="Energy"/>
     <category term="Space and aeronautics"/>
     <summary>NASA Headquarters | Application 2027-01-28 | The close date above is the date for the Step-2 proposal due date. The Step-1 proposal due date is October 8, 2026. Step-2 proposals cannot be submitted if a Step-1 proposal was not submitted. ﻿NOTICE: September 18, 2026. Several corrections have been made: (1) Information about the 2027-2028 winter field campaign has been updated in Section 5, (2) Details on the redacted and anonymized budget req…</summary>
-  </entry>
-  <entry>
-    <title>Egypt Annual Program Statement</title>
-    <link href="https://www.grants.gov/search-results-detail/363786"/>
-    <id>urn:funding-finder:grants-gov:363786</id>
-    <updated>2026-09-02T00:00:00Z</updated>
-    <author><name>Bureau of Near Eastern Affairs</name></author>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Manufacturing"/>
-    <category term="Transportation"/>
-    <summary>Bureau of Near Eastern Affairs | Posted | The Bureau of Near Eastern Affairs’ Office of Assistance Coordination (NEA/AC) seeks proposals for projects in Egypt that advance U.S. commercial diplomacy and put American interests first. Proposals must demonstrate how projects will leverage assistance as a tool of statecraft to advance U.S. economic, security, and diplomatic objectives. Programming should promote trade, not aid, by leveraging a…</summary>
   </entry>
 </feed>
