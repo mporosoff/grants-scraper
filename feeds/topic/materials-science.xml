@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml</id>
-  <updated>2026-11-12T18:27:29Z</updated>
+  <updated>2026-11-15T19:30:20Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Cooperative Agreement for affiliated Partner with Californian Cooperative Ecosystem Studies Unit</title>
@@ -101,17 +101,6 @@
     <category term="Manufacturing"/>
     <category term="Cybersecurity"/>
     <summary>DARPA - Defense Sciences Office | Application 2027-01-13 | The Defense Advanced Research Projects Agency (DARPA) Young Faculty Award (YFA) program aims to identify and engage rising stars in junior research positions in academia and equivalent positions at non-profit research institutions, particularly those without prior DARPA funding, to expose them to Department of War (DoW) needs and DARPA’s mission to create and prevent technological surprise for nat…</summary>
-  </entry>
-  <entry>
-    <title>Cooperative Agreement for affiliated Partner with Northern Great Plains Cooperative Ecosystem Studies Unit</title>
-    <link href="https://www.grants.gov/search-results-detail/364078"/>
-    <id>urn:funding-finder:grants-gov:364078</id>
-    <updated>2026-10-14T00:00:00Z</updated>
-    <author><name>Geological Survey</name></author>
-    <category term="Environmental science"/>
-    <category term="Materials science"/>
-    <category term="Water"/>
-    <summary>Geological Survey | Application 2026-11-14 | Robust and reliable quantitative method to correct for solution chemistry interferences in molecularly imprinted polymer - electrochemical sensor (MIP-ES) measurements of complex environmental water matricesThe goal of this research is to develop a robust and reliable quantitative method to correct for solution chemistry interferences in MIP-ES measurements of complex environmental water matrices.…</summary>
   </entry>
   <entry>
     <title>Genesis Mission Graduate Fellowship Pilot</title>
@@ -837,5 +826,21 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Materials science"/>
     <category term="Technology development"/>
     <summary>Idaho Field Office | Application 2030-10-14 | A. STATEMENT OF OBJECTIVESThis Funding Opportunity Announcement (FOA) is to award multiple cooperative agreements to accredited United States (U.S.) two- and four-year colleges and universities (Institutions of Higher Education (IHEs)) to receive and administer scholarship and fellowship funding-provided through the University Nuclear Leadership Program (UNLP) and as administered by the Department…</summary>
+  </entry>
+  <entry>
+    <title>Science of Learning and Augmented Intelligence (SL)</title>
+    <link href="https://www.grants.gov/search-results-detail/320753"/>
+    <id>urn:funding-finder:grants-gov:320753</id>
+    <updated>2019-09-19T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Data science"/>
+    <category term="Education and workforce"/>
+    <category term="Materials science"/>
+    <category term="Neuroscience"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>U.S. National Science Foundation | Application 2027-02-10 | Science of Learning and Augmented Intelligence (SL) supports potentially transformative research that develops basic theoretical insights and fundamental knowledge about principles, processes and mechanisms of learning, and about augmented intelligence - how human cognitive function can be augmented through interactions with others or with technology, or through variations in context. The program …</summary>
   </entry>
 </feed>

@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml</id>
-  <updated>2026-11-12T18:27:29Z</updated>
+  <updated>2026-11-15T19:30:20Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Healthy Lifestyles in Youth</title>
@@ -258,34 +258,6 @@
     <category term="Community development"/>
     <category term="Energy"/>
     <summary>Rural Utilities Service | Application 2026-11-20 | The Rural Utilities Service (RUS or the Agency), a Rural Development (RD) agency of the United States Department of Agriculture (USDA), is soliciting Letters of Interest (LOI) for applications under the Affordable Rural Cooperative (ARC) Program. In addition, the Agency is announcing the eligibility requirements, application process and deadlines, and the criteria that will be used by RUS to asses…</summary>
-  </entry>
-  <entry>
-    <title>Cooperative Agreement for Affiliated Partner with the Pacific Northwest Cooperative Ecosystem Studies Unit (CESU)</title>
-    <link href="https://www.grants.gov/search-results-detail/364084"/>
-    <id>urn:funding-finder:grants-gov:364084</id>
-    <updated>2026-10-14T00:00:00Z</updated>
-    <author><name>Geological Survey</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Arts and culture"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Space and aeronautics"/>
-    <category term="Water"/>
-    <summary>Geological Survey | Application 2026-11-14 | Freshwater aquatic habitats in the Northwest sustain native fish such as bull trout, salmon, and lamprey that are important to the region's food economy, outdoor recreation, and as Tribal resources. However, increasing water temperatures and fluctuating precipitation can increase the vulnerability of these habitats and native species to biological invasions. Among non-native species that are known…</summary>
-  </entry>
-  <entry>
-    <title>Cooperative Agreement for Affiliated Partner with the Rocky Mountains Cooperative Ecosystem Studies Unit (CESU)</title>
-    <link href="https://www.grants.gov/search-results-detail/364082"/>
-    <id>urn:funding-finder:grants-gov:364082</id>
-    <updated>2026-10-14T00:00:00Z</updated>
-    <author><name>Geological Survey</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Space and aeronautics"/>
-    <category term="Water"/>
-    <summary>Geological Survey | Application 2026-11-14 | The spread of invasive grasses, such as cheatgrass, adds fine fuels to the landscape that increase wildfire occurrence and frequency. Following a fire, invasive grasses regrow quickly, typically outcompeting native plants and perpetuating what is known as the invasive grass-fire cycle. This cycle has been well documented in western portions of the sagebrush biome, such as the Great Basin, but ther…</summary>
   </entry>
   <entry>
     <title>Small Business Innovation Research and Small Business Technology Transfer Programs Phase II</title>
@@ -696,5 +668,27 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Agriculture and food"/>
     <category term="Transportation"/>
     <summary>National Institutes of Health | Application 2027-02-16 | The National Institute of Diabetes and Digestive and Kidney Diseases (NIDDK) announces a program that provides NIDDK-supported K01, K08, K23, and K25 recipients the opportunity to apply for Small Grant (R03) support at some point during the latter years of their award period of their K award. Through the use of this mechanism, the NIDDK is seeking to enhance the capability of its K01, K08, K23, an…</summary>
+  </entry>
+  <entry>
+    <title>Priority HIV/AIDS Research within the Mission of NIDDK (R01 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/358086"/>
+    <id>urn:funding-finder:grants-gov:358086</id>
+    <updated>2025-01-08T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Agriculture and food"/>
+    <summary>National Institutes of Health | Application 2027-11-05 | This Notice of Funding Opportunity (NOFO) seeks to stimulate HIV/AIDS research within the mission of the National Institute of Diabetes and Digestive and Kidney Diseases (NIDDK) that align with the HIV/AIDS research priorities outlined by the NIH Office of AIDS Research (OAR). These priorities were most recently described in NOT-OD-20-018 UPDATE: NIH HIV/AIDS Research Priorities and Guidelines for…</summary>
+  </entry>
+  <entry>
+    <title>Pilot Studies of Biological, Behavioral and Social Mechanisms Contributing to HIV Pathogenesis Within the Mission of NIDDK (R21 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/358082"/>
+    <id>urn:funding-finder:grants-gov:358082</id>
+    <updated>2025-01-08T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Health equity"/>
+    <category term="Infectious disease"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>National Institutes of Health | Application 2027-11-16 | This Notice of Funding Opportunity (NOFO) invites applications for innovative basic and translational pilot research projects within the mission of the NIDDK that are aligned with NIH HIV/AIDS research priorities. These priorities were most recently outlined by the NIH Office of AIDS Research (OAR) in NOT-20-018, UPDATE: NIH HIV/AIDS Research Priorities and Guidelines for Determining HIV/AIDS Fund…</summary>
   </entry>
 </feed>
