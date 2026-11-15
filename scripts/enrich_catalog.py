@@ -53,7 +53,7 @@ from scripts.nsf_funding import (
     extract_nsf_synopsis as parse_nsf_synopsis,
     parse_nsf_funding_page,
 )
-from scripts.source_documents import is_doe_companion_document, DOE_PRIMARY_POLICY
+from scripts.source_documents import DOE_PRIMARY_POLICY, nonprimary_document_reason
 
 
 CACHE_SCHEMA_VERSION = 2
@@ -381,6 +381,14 @@ def attachment_date_rank(attachment):
     return value or ""
 
 
+def allowed_document_urls(document_urls, nonprimary_urls):
+    for item in document_urls or []:
+        document = item if isinstance(item, dict) else {"url": item}
+        url = safe_http_url(document.get("url"))
+        if url and url not in nonprimary_urls and not nonprimary_document_reason(document):
+            yield url
+
+
 def select_primary_document(attachments, document_urls=None):
     """Select only a document with defensible primary-FOA evidence.
 
@@ -392,10 +400,10 @@ def select_primary_document(attachments, document_urls=None):
 
     explicit_candidates = []
     folder_candidates = []
-    companion_urls = {item.get('download_url') for item in attachments or []
-                      if is_doe_companion_document(item)}
+    nonprimary_urls = set()
     for attachment in attachments or []:
-        if is_doe_companion_document(attachment):
+        if nonprimary_document_reason(attachment):
+            nonprimary_urls.add(safe_http_url(attachment.get("download_url")))
             continue
         content_text = attachment_content_text(attachment)
         folder_text = attachment_folder_text(attachment)
@@ -443,17 +451,8 @@ def select_primary_document(attachments, document_urls=None):
         }
 
     document_candidates = [
-        safe_http_url(
-            item.get("url")
-            if isinstance(item, dict)
-            else item
-        )
-        for item in (document_urls or [])
-    ]
-    document_candidates = [
-        value
-        for value in document_candidates
-        if value and value not in companion_urls and re.search(r"\.pdf(?:[?#]|$)", value, re.I)
+        url for url in allowed_document_urls(document_urls, nonprimary_urls)
+        if re.search(r"\.pdf(?:[?#]|$)", url, re.I)
     ]
     if len(document_candidates) == 1:
         return {
@@ -505,18 +504,9 @@ def compact_detail(record, detail, fetched_at):
     synopsis = detail.get("synopsis") or {}
     forecast = detail.get("forecast") or {}
     source_record = synopsis or forecast
-    document_urls = [
-        value
-        for value in (
-            safe_http_url(
-                item.get("url")
-                if isinstance(item, dict)
-                else item
-            )
-            for item in (normalized.get("document_urls") or [])
-        )
-        if value
-    ][:12]
+    nonprimary_urls = {safe_http_url(item.get("download_url")) for item in attachments
+                       if nonprimary_document_reason(item)}
+    document_urls = list(allowed_document_urls(normalized.get("document_urls"), nonprimary_urls))[:12]
 
     return {
         "source_signature": record_signature(record),
@@ -619,23 +609,34 @@ def suppress_future_sentinel_deadlines(record, as_of):
 
 def merge_detail(record, detail_entry, as_of):
     output = suppress_future_sentinel_deadlines(deepcopy(record), as_of)
-    if is_doe_companion_document(output):
+    nonprimary_urls = set()
+    if nonprimary_document_reason(output):
+        nonprimary_urls.add(safe_http_url(output.get("primary_document_url")))
         for key in ('primary_document_url', 'primary_document_name',
                     'primary_document_source', 'primary_document_confidence'):
             output.pop(key, None)
     output.setdefault("contacts", [])
     if not detail_entry:
+        if nonprimary_urls:
+            if safe_http_url(output.get("funding_opportunity_url")) in nonprimary_urls:
+                output["funding_opportunity_url"] = None
+            if "document_urls" in output:
+                output["document_urls"] = list(allowed_document_urls(output["document_urls"], nonprimary_urls))
         output["detail_enrichment_status"] = "pending"
         output.setdefault("award_source", "Grants.gov XML extract")
         return output
 
+    primary = detail_entry.get("primary_document") or {}
+    rejected_primary = nonprimary_document_reason(primary)
+    if rejected_primary:
+        nonprimary_urls.add(safe_http_url(primary.get("url")))
     output["detail_enrichment_status"] = "current"
     output["detail_enriched_at"] = detail_entry.get("fetched_at")
     output["api_revision"] = detail_entry.get("api_revision")
     output["api_version"] = detail_entry.get("api_version")
     output["api_last_updated"] = detail_entry.get("api_last_updated")
     output["attachment_count"] = detail_entry.get("attachment_count") or 0
-    output["document_urls"] = detail_entry.get("document_urls") or []
+    output["document_urls"] = list(allowed_document_urls(detail_entry.get("document_urls"), nonprimary_urls))
     output["history"] = detail_entry.get("history") or {}
     output["contacts"] = deepcopy(detail_entry.get("contacts") or [])
 
@@ -643,7 +644,7 @@ def merge_detail(record, detail_entry, as_of):
         detail_entry.get("funding_opportunity_url")
         or output.get("funding_opportunity_url")
     )
-    output["funding_opportunity_url"] = agency_url
+    output["funding_opportunity_url"] = None if agency_url in nonprimary_urls else agency_url
     agency_page = detail_entry.get("agency_funding_page") or {}
     agency_synopsis = detail_entry.get("agency_synopsis") or {}
     agency_description_source = agency_page or agency_synopsis
@@ -662,8 +663,7 @@ def merge_detail(record, detail_entry, as_of):
             "fetched_at"
         )
 
-    primary = detail_entry.get("primary_document") or {}
-    if primary.get("url") and not is_doe_companion_document(primary):
+    if primary.get("url") and not rejected_primary and primary["url"] not in nonprimary_urls:
         output["primary_document_url"] = primary["url"]
         output["primary_document_name"] = primary.get("name")
         output["primary_document_source"] = primary.get("source")
@@ -906,7 +906,7 @@ def enrich_catalog(
                 "contact_version", 0
             )
             < CONTACT_SCHEMA_VERSION
-            or is_doe_companion_document(cached_records[str(record["opportunity_id"])].get("primary_document") or {})
+            or nonprimary_document_reason(cached_records[str(record["opportunity_id"])].get("primary_document") or {})
         )
     ]
     candidates.sort(

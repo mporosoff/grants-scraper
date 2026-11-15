@@ -28,6 +28,7 @@ from zipfile import ZipFile
 import requests
 from scripts.notice_semantics import institutional_limit_signal
 from scripts.notice_schedule import preliminary_requirement
+from scripts.source_documents import is_verified_grants_closure
 
 
 EXTRACT_PAGE = "https://www.grants.gov/xml-extract"
@@ -576,7 +577,10 @@ def normalize_element(element, as_of):
     opportunity_id = first(values, "OpportunityID")
     title = clean_text(first(values, "OpportunityTitle"))
     number = clean_text(first(values, "OpportunityNumber"))
+    agency_code = clean_text(first(values, "AgencyCode"))
     if not title or not (opportunity_id or number):
+        return None
+    if is_verified_grants_closure(opportunity_id, number, agency_code, as_of):
         return None
 
     description = clean_text(first(values, "Description"))
@@ -669,7 +673,7 @@ def normalize_element(element, as_of):
         "opportunity_number": number,
         "title": title,
         "agency": clean_text(first(values, "AgencyName")),
-        "agency_code": clean_text(first(values, "AgencyCode")),
+        "agency_code": agency_code,
         "status": status,
         "source": "Grants.gov",
         "source_type": "Federal",

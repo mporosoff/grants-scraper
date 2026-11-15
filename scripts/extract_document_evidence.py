@@ -44,7 +44,10 @@ from scripts.build_catalog import (
 from scripts.enrich_catalog import read_catalog
 from scripts import program_areas, notice_semantics, notice_schedule, notice_structure_cache, notice_fact_guards, notice_awards, notice_duration
 from scripts.document_work_budget import WorkTimedOut
-from scripts.source_documents import is_doe_companion_document, DOE_PRIMARY_POLICY
+from scripts.source_documents import (
+    CLOSURE_PRIMARY_POLICY, DOE_PRIMARY_POLICY, is_closure_notice_document,
+    is_doe_companion_document, nonprimary_document_reason,
+)
 
 
 EVIDENCE_SCHEMA_VERSION = 1
@@ -1418,7 +1421,7 @@ def extract_program_areas(containers, document, extracted_at, maximum=MAX_PROGRA
     An excluded first mention must not hide a later scientific occurrence.
     These inferred discoverability signals remain separate from official facts.
     """
-    if is_doe_companion_document(document):
+    if nonprimary_document_reason(document):
         return []
     hits = []
     seen = set()
@@ -1488,7 +1491,7 @@ def extract_document_facts(
     enabled = set(parser_dependencies()) if families is None else set(families)
     if enabled - set(parser_dependencies()):
         raise ValueError("Unknown semantic extraction family")
-    if is_doe_companion_document(document):
+    if nonprimary_document_reason(document):
         return []
     if (urlparse(document.get('url') or '').hostname or '').lower() in {'nsf.gov', 'www.nsf.gov'}:
         # NSF program pages include linked *other* programs below the main
@@ -1771,7 +1774,8 @@ def source_for_record(record):
     if is_doe_companion_document(record):
         return None
     supplemental = bool(record.get("source") and record["source"] != "Grants.gov")
-    if record.get("primary_document_url"):
+    rejected = record.get("primary_document_url") if is_closure_notice_document(record) else None
+    if record.get("primary_document_url") and not rejected:
         return {
             "url": record["primary_document_url"],
             "name": record.get("primary_document_name"),
@@ -1784,6 +1788,8 @@ def source_for_record(record):
     if duplicate_primary:
         return {'url': duplicate_primary['url'], 'name': duplicate_primary.get('name'), 'kind': 'agency_notice'}
     agency_url = record.get("funding_opportunity_url") or (record.get("detail_page") if supplemental else None)
+    if agency_url == rejected or is_closure_notice_document({"url": agency_url}):
+        agency_url = None
     if not agency_url:
         agency_url = next((candidate['url'] for candidate in document_candidates(record)
                            if candidate.get('role') == 'agency_notice'), None)
@@ -2009,8 +2015,8 @@ def subtopic_fields(record, content, containers, document, fetched_at, enabled, 
     """
     if not enabled:
         return {}
-    if is_doe_companion_document(document or {}):
-        return {'subtopics': [], 'subtopic_reason': 'doe_generic_companion'}
+    if reason := nonprimary_document_reason(document or {}):
+        return {'subtopics': [], 'subtopic_reason': reason}
     from scripts import (
         subtopic_cov4,
         subtopic_records,
@@ -3085,30 +3091,32 @@ def refine_administrative_close(record):
     return changed
 
 
-def withhold_doe_companion_entry(entry):
-    """A generic companion is not current evidence for one program's scope.
+def withhold_nonprimary_entry(entry):
+    """Withhold retained claims from a document outside the program's scope.
 
     Preserve retrieval identity/history and record why derived claims were
     withheld. Repeated zero-fetch projection cannot resurrect those claims.
     """
     document = entry.get('document') or {}
-    if not is_doe_companion_document(document):
+    reason = nonprimary_document_reason(document)
+    if not reason:
         return False
-    if (entry.get('primary_document_guard') or {}).get('version') != DOE_PRIMARY_POLICY:
-        entry['primary_document_guard'] = {'version': DOE_PRIMARY_POLICY,
-            'reason': 'doe_generic_companion', 'source_retrieved': False,
+    policy = DOE_PRIMARY_POLICY if reason == 'doe_generic_companion' else CLOSURE_PRIMARY_POLICY
+    if (entry.get('primary_document_guard') or {}).get('version') != policy:
+        entry['primary_document_guard'] = {'version': policy,
+            'reason': reason, 'source_retrieved': False,
             'document_url': document.get('url'), 'document_sha256': document.get('sha256'),
             'withheld_fact_ids': [fact['id'] for fact in entry.get('facts') or []],
             'withheld_program_areas': [hit.get('label') for hit in entry.get('program_areas') or []]}
     entry.update(status='source_changed', facts=[], program_areas=[], review_queue=[])
     if 'subtopics' in entry:
-        entry.update(subtopics=[], subtopic_reason='doe_generic_companion')
+        entry.update(subtopics=[], subtopic_reason=reason)
     return True
 
 
 def merge_document_entry(record, entry):
     if entry:
-        withhold_doe_companion_entry(entry)
+        withhold_nonprimary_entry(entry)
         notice_schedule.repair_cached_submission_clocks(sys.modules[__name__], record, entry)
         notice_fact_guards.repair_entry(entry)
         notice_schedule.repair_cached_arpa_summary(sys.modules[__name__], record, entry)
@@ -3398,7 +3406,7 @@ def validated_program_area_hits(entry):
     discovered. Revalidating the cache as well as the browser record prevents
     a stale derived hit from returning on a later zero-fetch refresh.
     """
-    if is_doe_companion_document(entry.get('document') or {}):
+    if nonprimary_document_reason(entry.get('document') or {}):
         return []
     patterns_by_label = {
         label: pattern for label, _, pattern in program_areas.ENTRIES

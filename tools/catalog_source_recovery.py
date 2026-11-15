@@ -6,6 +6,7 @@ only unchanged vector rows. Publication still requires new exact-byte gates.
 """
 from __future__ import annotations
 import argparse
+from dataclasses import dataclass
 from datetime import datetime, timezone
 import json
 import os
@@ -63,6 +64,23 @@ ROSES_REJECTED_RECOVERY = {
         'review': (14176162839, '3ea987b6d68489ba47985aec74fa36430675bc09f81d577c928bf179b7d42b06'),
     },
 }
+FOA_VERSION = 'catalog-source-recovery-20261115-v1'
+FOA_PARENT = 'e8bd098f1aca899ff496006f93b1b6648e88029b63d06c8f78c985ba77a8199e'
+FOA_RUN = 43754874937
+FOA_EVENT_SHA = 'b84e974d4110a9ec1913019872cb242c931c5863'
+FOA_MANIFEST_SHA = '1901e7b34963869df707ce8421f2de7cb692534d9c8b7eafc1d566b07b694125'
+FOA_ARTIFACTS = {
+    'candidate': (14177807889, 'candidate-' + FOA_PARENT,
+        '5670303ef0ade2580a19a66d7a897ee499789dcb38b31eafc2b282250ea369ea'),
+    'state': (14177533075, 'generation-spend-state-43754874937-1',
+        '52c1af59b850e8cfb006393fef463fe57eb297706323015d89d8d88cf2059e55'),
+    'reservation': (14177527690, 'generation-spend-reservation-43754874937-1',
+        '757e922703389db47c51a352c4e4f304c568008383d5118776f4acde2810cc06'),
+    'plan': (14178121734, 'release-plan-1',
+        'e4035509c996f5d3eacc81c572a77d108c652f113b42512c94ccf56f0e94c99b'),
+    'review': (14178218809, 'publication-' + FOA_PARENT + '-1',
+        'ca83dbb606218d4afc1a32654621d9eb7c95168f2b103e58d7aca84fde0be92e'),
+}
 STAGE = 'catalog-source-recovery'
 VECTOR_OUTPUTS = ('data/search-v2-voyage-manifest.json', 'data/search-v2-voyage-vectors.f16',
     'data/search-v2-release.json', 'workers/search-voyage-proxy/generated/corpus-allowlist.json')
@@ -71,6 +89,45 @@ SOURCE_REPAIR_FILES = {'scripts/solicitation_identity.py', 'scripts/sources/merg
     'scripts/sources/intake.py',
     'scripts/sources/official_identity.py', 'scripts/sources/nsf_identity.py', 'scripts/sources/validate.py',
     'scripts/sources/adapters/doe_exchange.py', 'scripts/sources/adapters/doe_exchange_listing.py'}
+FOA_SOURCE_REPAIR_FILES = {'scripts/build_catalog.py', 'scripts/source_documents.py',
+    'scripts/enrich_catalog.py', 'scripts/pull_grants.py', 'scripts/extract_document_evidence.py',
+    'scripts/subtopic_sources.py'}
+
+
+@dataclass(frozen=True)
+class RecoveryPolicy:
+    version: str
+    candidate: str
+    run: int
+    attempt: int
+    event_sha: str
+    generation_sha: str
+    manifest_sha: str
+    artifacts: dict
+    event: str
+    conclusion: str
+    ledger_sha: str
+    requests: int
+    charged: int
+    prior_ledger: str
+    vector_tokens: int
+    predecessor: str | None = None
+
+
+def recovery_policies():
+    return {
+        PARENT: RecoveryPolicy(VERSION, PARENT, RUN, ATTEMPT, EVENT_SHA, GENERATION_SHA, MANIFEST_SHA,
+            ARTIFACTS, 'schedule', 'cancelled', LEDGER_SHA, 66, 441023,
+            'eac564e5caed08887a815aaa64ae19e0e0e01c430b77ef7abde684a5bea8370e', 298906),
+        ROSES_PARENT: RecoveryPolicy(ROSES_VERSION, ROSES_PARENT, ROSES_RUN, ROSES_ATTEMPT, ROSES_EVENT_SHA,
+            ROSES_EVENT_SHA, ROSES_MANIFEST_SHA, ROSES_ARTIFACTS, 'schedule', 'failure', ROSES_LEDGER_SHA, 6, 6523,
+            '4404c1f0a1ef1452809c436e636e41c9c82cd32ff54dcf7ff25b61c4ef1dac91', 325974, ROSES_PREDECESSOR),
+        FOA_PARENT: RecoveryPolicy(FOA_VERSION, FOA_PARENT, FOA_RUN, 1, FOA_EVENT_SHA,
+            FOA_EVENT_SHA, FOA_MANIFEST_SHA, FOA_ARTIFACTS, 'workflow_dispatch', 'failure',
+            'c0ecdb506e02b4341936c29c391a8db76f9abd16cf6af900812f4d070351bf6f', 6, 6366,
+            '028e3803ea18754a4c054f68459dd16f9417dd26b92a1ac59b96e9a3d4817c26', 318161,
+            '513d9ec3279e395d1b2352d732aa3988a27f5a8b177535b00bd98ed1cf896961'),
+    }
 
 
 def require(ok, reason):
@@ -79,7 +136,7 @@ def require(ok, reason):
 
 
 def reject_quarantined(manifest):
-    require(manifest.get('candidate_id') not in (PARENT, ROSES_PARENT, ROSES_REJECTED_RECOVERY['candidate_id']),
+    require(manifest.get('candidate_id') not in (*recovery_policies(), ROSES_REJECTED_RECOVERY['candidate_id']),
         'rejected_candidate_requires_exact_source_recovery')
 
 
@@ -88,8 +145,9 @@ def plan(root, environment):
         'GITHUB_EVENT_NAME': 'workflow_dispatch',
         'GITHUB_WORKFLOW_REF': 'mporosoff/grants-scraper/.github/workflows/refresh-opportunities.yml@refs/heads/main'}
     parent, run = environment.get('CANDIDATE_ID'), environment.get('CANDIDATE_RUN')
+    selected = recovery_policies().get(parent)
     require(all(environment.get(k) == v for k, v in expected.items())
-        and (parent, run) in ((PARENT, str(RUN)), (ROSES_PARENT, str(ROSES_RUN))), 'exact_protected_manual_selector')
+        and selected is not None and run == str(selected.run), 'exact_protected_manual_selector')
     require(not any(environment.get(k) for k in ('RECEIPT_RUN', 'PUBLICATION_RUN', 'PUBLICATION_ATTEMPT'))
         and environment.get('QUALIFICATION_PILOT') != 'true', 'no_other_generation_or_recovery')
     return {'stage': STAGE, 'release_sha': c.git(root, 'rev-parse', 'HEAD'),
@@ -108,62 +166,63 @@ def archive_files(raw):
 
 def authenticate(parent_bundle, *, api=auth.existing.api):
     bundle = Path(parent_bundle)
-    roses = c.read_json(bundle/'candidate.json').get('candidate_id') == ROSES_PARENT
-    parent, run_id, attempt, event_sha, generation_sha, manifest_sha, pins, conclusion = (
-        (ROSES_PARENT, ROSES_RUN, ROSES_ATTEMPT, ROSES_EVENT_SHA, ROSES_EVENT_SHA,
-         ROSES_MANIFEST_SHA, ROSES_ARTIFACTS, 'failure') if roses else
-        (PARENT, RUN, ATTEMPT, EVENT_SHA, GENERATION_SHA, MANIFEST_SHA, ARTIFACTS, 'cancelled'))
-    run = auth.json_value(api(f'actions/runs/{run_id}/attempts/{attempt}'))
-    require(run.get('id') == run_id and run.get('run_attempt') == attempt
-        and run.get('head_sha') == event_sha and run.get('head_branch') == 'main'
-        and run.get('path') == auth.REFRESH and run.get('event') == 'schedule'
-        and run.get('status') == 'completed' and run.get('conclusion') == conclusion, 'original_run')
+    selected = recovery_policies().get(c.read_json(bundle/'candidate.json').get('candidate_id'))
+    require(selected is not None, 'known_parent_identity')
+    run = auth.json_value(api(f'actions/runs/{selected.run}/attempts/{selected.attempt}'))
+    require(run.get('id') == selected.run and run.get('run_attempt') == selected.attempt
+        and run.get('head_sha') == selected.event_sha and run.get('head_branch') == 'main'
+        and run.get('path') == auth.REFRESH and run.get('event') == selected.event
+        and run.get('status') == 'completed' and run.get('conclusion') == selected.conclusion, 'original_run')
     packets = {}
-    for role, (identifier, name, digest) in pins.items():
+    for role, (identifier, name, digest) in selected.artifacts.items():
         raw, _ = auth.authenticated_zip(identifier, name, run, 'sha256:' + digest, api=api)
         packets[role] = archive_files(raw)
-    original = c.load(bundle, parent)
-    require(c.digest((bundle/'candidate.json').read_bytes()) == manifest_sha, 'manifest_pin')
+    original = c.load(bundle, selected.candidate)
+    require(c.digest((bundle/'candidate.json').read_bytes()) == selected.manifest_sha, 'manifest_pin')
     require(packets['candidate'] == {'candidate.json': (bundle/'candidate.json').read_bytes(),
         **{'files/' + n: (bundle/'files'/n).read_bytes() for n in original['files']}}, 'complete_parent')
-    require(original['generation_sha'] == generation_sha and original['generation_run_id'] == str(run_id)
-        and original['generation_run_attempt'] == str(attempt), 'original_generation')
-    if roses:
+    require(original['generation_sha'] == selected.generation_sha
+        and original['generation_run_id'] == str(selected.run)
+        and original['generation_run_attempt'] == str(selected.attempt), 'original_generation')
+    if selected.predecessor:
         original_plan = auth.json_value(packets['plan']['release-plan.json'])
-        require(original_plan['stage'] == 'generate' and original_plan['release_sha'] == generation_sha
-                and original_plan['candidate_id'] == ROSES_PREDECESSOR,
+        require(original_plan['stage'] == 'generate' and original_plan['release_sha'] == selected.generation_sha
+                and original_plan['candidate_id'] == selected.predecessor,
                 'protected_generation_plan')
-    ledger_sha, requests, charged, prior_ledger, vector_tokens = (
-        (ROSES_LEDGER_SHA, 6, 6523, '4404c1f0a1ef1452809c436e636e41c9c82cd32ff54dcf7ff25b61c4ef1dac91',
-         325974) if roses else
-        (LEDGER_SHA, 66, 441023, 'eac564e5caed08887a815aaa64ae19e0e0e01c430b77ef7abde684a5bea8370e', 298906))
+    if selected.candidate == FOA_PARENT:
+        blocked = auth.json_value(packets['review']['review-blocked.json'])
+        expected = {'schema_version': 1, 'status': 'review_findings', 'candidate_id': FOA_PARENT,
+            'artifact_run': str(FOA_RUN), 'head_sha': '204ba70394b5a0f0a166f2ccd606d1875ebf3116',
+            'pr_number': 412, 'repository': 'mporosoff/grants-scraper',
+            'production_mutated': False, 'finding_count': 1}
+        require(all(blocked.get(key) == value for key, value in expected.items()), 'exact_parent_rejection')
     state = packets['state']; ledger = auth.json_value(state['ledger.json'])
-    require(c.digest(state['ledger.json']) == ledger_sha and ledger['logical_id'] == 'offline-' + str(run_id)
+    require(c.digest(state['ledger.json']) == selected.ledger_sha and ledger['logical_id'] == 'offline-' + str(selected.run)
         and ledger['limit_microusd'] == 2_000_000 and ledger['max_requests'] == 300
-        and len(ledger['requests']) == requests
-        and sum(r['charged_microusd'] for r in ledger['requests']) == charged, 'original_ledger')
+        and len(ledger['requests']) == selected.requests
+        and sum(r['charged_microusd'] for r in ledger['requests']) == selected.charged, 'original_ledger')
     require(set(packets['reservation']) == {'spend-reservation.json'} and
         auth.json_value(packets['reservation']['spend-reservation.json']) == {
-            'attempt': str(attempt), 'maximum_logical_spend_usd': 2, 'mode': 'maintenance',
-            'prior_ledger_hash': prior_ledger, 'run_id': str(run_id)}, 'original_reservation')
+            'attempt': str(selected.attempt), 'maximum_logical_spend_usd': 2, 'mode': 'maintenance',
+            'prior_ledger_hash': selected.prior_ledger, 'run_id': str(selected.run)}, 'original_reservation')
     vector = c.read_json(bundle/'files/evaluation/search_v2_hybrid_vector_build.json')
-    require(vector['API_request_count'] == 6 and vector['usage_total_tokens'] == vector_tokens,
+    require(vector['API_request_count'] == 6 and vector['usage_total_tokens'] == selected.vector_tokens,
         'original_vector_accounting')
-    ledger_evidence = {'ledger_sha256': ledger_sha} if roses else {
+    ledger_evidence = {'ledger_sha256': selected.ledger_sha} if selected.predecessor else {
         'state_hashes': {n: c.digest(raw) for n, raw in sorted(state.items())}}
     return original, {'original_logical_id': ledger['logical_id'], 'limit_microusd': 2_000_000,
-        'max_requests': 300, 'requests_used': requests, 'charged_microusd': charged,
+        'max_requests': 300, 'requests_used': selected.requests, 'charged_microusd': selected.charged,
         'new_document_ai_requests': 0, 'new_vector_requests': 0, 'new_team_requests': 0,
         **ledger_evidence,
-        'prior_vector_requests': 6, 'prior_vector_tokens': vector_tokens,
+        'prior_vector_requests': 6, 'prior_vector_tokens': selected.vector_tokens,
         'artifacts': {role: {'id': item[0], 'name': item[1], 'sha256': item[2]}
-            for role, item in pins.items()}}
+            for role, item in selected.artifacts.items()}}
 
 
 def dependency_scope(root, original):
     verify_source_scope(root, original)
-    generation = ROSES_EVENT_SHA if original.get('candidate_id') == ROSES_PARENT else GENERATION_SHA
-    c.git(root, 'merge-base', '--is-ancestor', generation, 'HEAD')
+    selected = recovery_policies()[original.get('candidate_id', PARENT)]
+    c.git(root, 'merge-base', '--is-ancestor', selected.generation_sha, 'HEAD')
     # Source correction cannot silently replace the retained runtime.
     c.verify_files(root, original['runtime_baseline'])
 
@@ -171,20 +230,25 @@ def dependency_scope(root, original):
 def verify_source_scope(root, original):
     from tools.release_dependencies import snapshot, changed_groups
     changes = changed_groups(original['dependency_groups'], snapshot(root))
-    roses = original.get('candidate_id') == ROSES_PARENT
-    allowed = {'scripts/sources/adapters/nasa_roses.py'} if roses else SOURCE_REPAIR_FILES
+    parent = original.get('candidate_id')
+    required = {'scripts/sources/adapters/nasa_roses.py'} if parent == ROSES_PARENT else (
+        {'scripts/build_catalog.py'} if parent == FOA_PARENT else set())
+    allowed = FOA_SOURCE_REPAIR_FILES if parent == FOA_PARENT else required or SOURCE_REPAIR_FILES
     require(set(changes.get('source', [])) <= allowed
         and not changes.get('teams') and not changes.get('semantic'), 'bounded_dependency_changes')
-    if roses:
-        require(allowed <= set(changes.get('source', [])), 'roses_source_repair_required')
+    if required:
+        require(required <= set(changes.get('source', [])), 'source_repair_required')
 
 
 def derive(parent_bundle, audit_at):
     from scripts.update_catalog_docs import load_catalog, render_docs, catalog_stats, update_catalog_asset_reference
     bundle = Path(parent_bundle)
     parent = bundle/'files'
-    if c.read_json(bundle/'candidate.json')['candidate_id'] == ROSES_PARENT:
+    parent_id = c.read_json(bundle/'candidate.json')['candidate_id']
+    if parent_id == ROSES_PARENT:
         from tools.catalog_roses_withdrawal import projection
+    elif parent_id == FOA_PARENT:
+        from tools.catalog_foa_withdrawal import projection
     else:
         from tools.catalog_record_withdrawal import projection
     outputs, proof = projection(parent, audit_at)
@@ -212,14 +276,14 @@ def derive(parent_bundle, audit_at):
 
 
 def receipt_for(original, spending, outputs, proof, audit_at):
-    roses = original.get('candidate_id') == ROSES_PARENT
-    receipt = {'version': ROSES_VERSION if roses else VERSION, 'parent_candidate': ROSES_PARENT if roses else PARENT,
-        'parent_manifest_sha256': ROSES_MANIFEST_SHA if roses else MANIFEST_SHA,
-        'parent_run': ROSES_RUN if roses else RUN, 'audit_at': audit_at, 'spending': spending, 'projection': proof,
+    selected = recovery_policies()[original.get('candidate_id', PARENT)]
+    receipt = {'version': selected.version, 'parent_candidate': selected.candidate,
+        'parent_manifest_sha256': selected.manifest_sha,
+        'parent_run': selected.run, 'audit_at': audit_at, 'spending': spending, 'projection': proof,
         'output_hashes': {n: c.digest(raw) for n, raw in sorted(outputs.items())},
         'retained_hashes': {n: h for n, h in original['files'].items() if n not in outputs
             and not c.FACET_FEED_NAME.fullmatch(n)}}
-    if roses:
+    if selected.candidate == ROSES_PARENT:
         receipt['superseded_recovery_run'] = ROSES_REJECTED_RECOVERY['run']
         receipt['superseded_recovery_candidate'] = ROSES_REJECTED_RECOVERY['candidate_id']
     return receipt

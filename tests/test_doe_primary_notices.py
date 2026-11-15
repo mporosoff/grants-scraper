@@ -99,7 +99,7 @@ class DoePrimaryNoticeTests(unittest.TestCase):
                     self.assertEqual(entry.get(key), before.get(key))
                 self.assertFalse(entry['primary_document_guard']['source_retrieved'])
                 repaired = deepcopy(entry)
-                evidence.withhold_doe_companion_entry(entry)
+                evidence.withhold_nonprimary_entry(entry)
                 self.assertEqual(entry, repaired)
                 text = 'Program funding is $1 million. Cost sharing is not required. Artificial intelligence and cybersecurity.'
                 containers = [{'text': text, 'page': 1}]
