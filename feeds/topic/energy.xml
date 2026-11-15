@@ -4,8 +4,17 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/energy.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/energy.xml</id>
-  <updated>2026-11-12T18:27:29Z</updated>
+  <updated>2026-11-13T17:53:58Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>Long-Term Contracts to Purchase Index Storage Credits (ISCs)</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr00001ScHx7AAF"/>
+    <id>urn:funding-finder:nyserda:nyserda%3AISCRFP26-1</id>
+    <updated>2026-11-12T00:00:00Z</updated>
+    <author><name>NYSERDA</name></author>
+    <category term="Energy"/>
+    <summary>NYSERDA | Application 2026-12-15 | Procures Index Storage Credits (ISCs) from bulk energy storage projects that meet the eligibility requirements described in NYSERDA’s Request for Proposals (RFP) ISCRFP26-1. This RFP will be implemented through a two-step process, Step One Eligibility Application and Step Two Bid Proposal.</summary>
+  </entry>
   <entry>
     <title>NYSERDA’s New York Business-Research Innovation &amp; Development Growth Exchange</title>
     <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr00001FcKkYAAV"/>
@@ -686,15 +695,5 @@
     <category term="Climate change"/>
     <category term="Energy"/>
     <summary>NYSERDA | Application 2030-12-31 | The New York State Energy Research and Development Authority (NYSERDA) requests applications from qualified contractors to utilize the Department of Energy - Energy Efficiency Revolving Loan Fund (DOE-EERLF) funds for projects financed by single family residential customers. NYSERDA has established a new revolving loan fund intended to spur investment in energy efficiency and decarbonization measu…</summary>
-  </entry>
-  <entry>
-    <title>NSF Division of Physics: Investigator-Initiated Research Projects (PHY) 23-615</title>
-    <link href="https://new.nsf.gov/funding/opportunities/division-physics-investigator-initiated-research"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3A23-615</id>
-    <updated>2026-09-07T00:00:00Z</updated>
-    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <category term="Quantum science"/>
-    <category term="Energy"/>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Posted</summary>
   </entry>
 </feed>

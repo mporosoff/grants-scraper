@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/transportation.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/transportation.xml</id>
-  <updated>2026-11-12T18:27:29Z</updated>
+  <updated>2026-11-13T17:53:58Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Prevention and Treatment through a Comprehensive Care Continuum for HIV-affected Adolescents in Resource-Constrained Settings--Implementation Science Network (PATC3H-IN)</title>
@@ -80,6 +80,18 @@
     <summary>Centers for Disease Control - NCIPC | Estimated Application 2027-03-08 | This forecast is for CDC's Core State Injury Prevention Program (Core SIPP), a cooperative agreement to support public health infrastructure, data, and partnerships to use data to identify potential risk and inform the implementation of strategies to prevent unintentional injury. Actions using the best available evidence are intended to increase protective factors and reduce risk factors for injur…</summary>
   </entry>
   <entry>
+    <title>NIOSH Centers of Excellence for Total Worker Health® (U19)</title>
+    <link href="https://www.grants.gov/search-results-detail/363369"/>
+    <id>urn:funding-finder:grants-gov:363369</id>
+    <updated>2026-12-16T00:00:00Z</updated>
+    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Education and workforce"/>
+    <category term="Technology development"/>
+    <category term="Transportation"/>
+    <summary>Centers for Disease Control and Prevention - ERA | Estimated Application 2027-02-26 | PURPOSENIOSH intends to support the Centers of Excellence in Total Worker Health® (TWH). These Centers will conduct rigorous research and translation activities to prevent harmful exposures, improve working conditions, and advance worker well-being. The Centers will develop practical, scalable solutions for employers and workers. All projects must use the NIOSH Worker Well-Being Questionnaire (Wel…</summary>
+  </entry>
+  <entry>
     <title>NIOSH Centers for Agriculture, Forestry, and Fishing Safety and Health (U54)</title>
     <link href="https://www.grants.gov/search-results-detail/363195"/>
     <id>urn:funding-finder:grants-gov:363195</id>
@@ -134,16 +146,13 @@
     <summary>National Institutes of Health | Estimated Application 2027-02-16 | The NIH intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to develop and implement investigator-initiated multi-site clinical trials, including efficacy, effectiveness, pragmatic, and/or implementation research clinical trials. Applications that propose a large and/or complex clinical trial conducted at either a single site or at multiple locations but without physi…</summary>
   </entry>
   <entry>
-    <title>NIOSH Centers of Excellence for Total Worker Health® (U19)</title>
-    <link href="https://www.grants.gov/search-results-detail/363369"/>
-    <id>urn:funding-finder:grants-gov:363369</id>
-    <updated>2026-11-16T00:00:00Z</updated>
-    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Education and workforce"/>
-    <category term="Technology development"/>
+    <title>Fiscal Year 2026 Great American Digital Corridors (GADC) Program</title>
+    <link href="https://www.grants.gov/search-results-detail/364263"/>
+    <id>urn:funding-finder:grants-gov:364263</id>
+    <updated>2026-11-12T00:00:00Z</updated>
+    <author><name>DOT Federal Highway Administration</name></author>
     <category term="Transportation"/>
-    <summary>Centers for Disease Control and Prevention - ERA | Estimated Application 2027-02-26 | PURPOSENIOSH intends to support the Centers of Excellence in Total Worker Health® (TWH). These Centers will conduct rigorous research and translation activities to prevent harmful exposures, improve working conditions, and advance worker well-being. The Centers will develop practical, scalable solutions for employers and workers. All projects must use the NIOSH Worker Well-Being Questionnaire (Wel…</summary>
+    <summary>DOT Federal Highway Administration | Application 2026-12-28 | The FY 2026 GADC Program provides funding to support States in modernizing Digital Infrastructure[1] on the Federal-aid highway system[2], including the Interstate System, to improve safety and efficiency, reduce congestion, and optimize freight movement. Digital Infrastructure supports the modernization of the transportation systems by enabling the exchange of precise, accurate and reliable digit…</summary>
   </entry>
   <entry>
     <title>Regional Excellence for Access to Comprehensive Care for Hemophilia Networks (REACH Networks)</title>
@@ -320,15 +329,6 @@
     <author><name>U.S. Department of Transportation - Federal Railroad Administration (FRA)</name></author>
     <category term="Transportation"/>
     <summary>U.S. Department of Transportation - Federal Railroad Administration (FRA) | Concept Paper 2027-09-30 | Applied rail transportation research in remaining FY26-27 track, rolling-stock, and train-control topics. Only current Appendix C research topics in the October 22 second revision. Amendment 2 closes FRA-TR-003 and FRA-TR-004 in addition to the previously closed FRA-TR-005, FRA-TR-006, FRA-TR-007, and FRA-TR-009; these six topics are excluded. Remaining track topics are FRA-TR-001, FRA-TR-002, FRA…</summary>
-  </entry>
-  <entry>
-    <title>Transit Tech Lab Partnership Program</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr00001MsJ0XAAV"/>
-    <id>urn:funding-finder:nyserda:nyserda%3APON6195</id>
-    <updated>2026-10-20T00:00:00Z</updated>
-    <author><name>NYSERDA</name></author>
-    <category term="Transportation"/>
-    <summary>NYSERDA | Application 2026-11-12 | Provides an opportunity for technology companies that have been competitively selected as finalists in the New York Metropolitan Transportation Authority’s (MTA) 2026 Transit Tech Lab (TTL) to seek NYSERDA funding. Finalists from the 2026 TTL that demonstrate innovative public transportation technologies and strategies with the potential to advance clean transportation solutions for existing trans…</summary>
   </entry>
   <entry>
     <title>BJA FY 2026 Missing and Unidentified Human Remains (MUHR) Program</title>

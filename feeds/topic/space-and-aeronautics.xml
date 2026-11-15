@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/space-and-aeronautics.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/space-and-aeronautics.xml</id>
-  <updated>2026-11-12T18:27:29Z</updated>
+  <updated>2026-11-13T17:53:58Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NASA SPACE TECHNOLOGY GRADUATE RESEARCH OPPORTUNITIES - FALL 2027 (NSTGRO27)</title>
@@ -281,15 +281,6 @@
     <summary>NASA Headquarters | Application 2026-12-03 | PLEASE NOTE: this program has MANDATORY Notices of Intent, which are due via NSPIRES by October 15, 2026. See the full posting on NSPIRES for details. NOTICE: September 18, 2026. The instructions regarding biographical sketches and Current and Pending Support in Table D.4-2 have been improved. New text is in bold and deleted text is struck through. NOTICE: Amended August 31, 2026. This amendment r…</summary>
   </entry>
   <entry>
-    <title>ROSES25: A.10 INNOVATE</title>
-    <link href="https://nspires.nasaprs.com/external/solicitations/summary.do?solId={9E3216E9-ADB7-B72A-A1D7-12EC8050DC3F}&amp;path=&amp;method=init"/>
-    <id>urn:funding-finder:nasa-roses:nasa-roses%3A25-A.10-87da4095c3</id>
-    <updated>2026-08-28T00:00:00Z</updated>
-    <author><name>NASA Headquarters</name></author>
-    <category term="Space and aeronautics"/>
-    <summary>NASA Headquarters | Posted | NASA ROSES-2025 program element A.10, appendix division A. Published status: no_due_date; due dates as printed: N/A | No Due Date [4]. Source: ROSES Table 3 (SOLICITED RESEARCH PROGRAMS).</summary>
-  </entry>
-  <entry>
     <title>Strategic Materials Research &amp; Development (R&amp;D) Program</title>
     <link href="https://sam.gov/opp/3510fb2e9dbd4c89bd826b06dd2ea284/view"/>
     <id>urn:funding-finder:sam-gov:sam-gov%3A3510fb2e9dbd4c89bd826b06dd2ea284</id>
@@ -355,17 +346,6 @@
     <category term="Space and aeronautics"/>
     <category term="Transportation"/>
     <summary>Air Force -- Research Lab | Application 2027-09-30 | The Air Force Research Laboratory, Human Effectiveness Directorate (RH) and the United States Air Force School of Aerospace Medicine (USAFSAM), is soliciting white papers (and potentially later technical and cost proposals) on the research located in the Continuing Enabling, Enhancing, Restoring and Sustaining (CHEERS) Multiple Authority Announcement (MAA) Statements of Objectives, FA238424S2233. …</summary>
-  </entry>
-  <entry>
-    <title>ROSES 2025: C.2 Solar System Science</title>
-    <link href="https://www.grants.gov/search-results-detail/360004"/>
-    <id>urn:funding-finder:grants-gov:360004</id>
-    <updated>2025-07-11T00:00:00Z</updated>
-    <author><name>NASA Headquarters</name></author>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Space and aeronautics"/>
-    <summary>NASA Headquarters | Application 2026-11-12 | This program element does not have a proposal due date. Proposals may be submitted at any time, pending certain eligibility timing issues related to resubmissions and duplicate proposal avoidance, see the program element text and appropriate overview appendix (e.g., B.1 or C.1). The date shown of 8/1/2026 is the last day that proposals may be submitted subject to the ROSES-25 rules and the current…</summary>
   </entry>
   <entry>
     <title>ROSES 2025: A.4 Rapid Response and Novel Research in Earth Science</title>
