@@ -234,6 +234,52 @@ class ReconciliationTests(unittest.TestCase):
         self.assertEqual(len(ids), len(set(ids)))
         self.assertTrue(all(i.startswith("nasa-roses:") for i in ids))
 
+    def test_rolling_footnotes_supply_finite_cutoffs_after_grants_record_disappears(self):
+        catalog = [catalog_record("X-1", "Unrelated")]
+        cutoff_day, open_opportunities = reconciled(catalog, today=date(2026, 11, 12))
+        open_rows = {record["title"]: record for record in records_of(cutoff_day, open_opportunities)}
+        self.assertEqual(open_rows["ROSES25: C.2 Solar System Science"]["close_date"], "2026-11-12")
+        self.assertEqual(
+            open_rows["ROSES25: A.4 Rapid Response and Novel Research in Earth Science"]["close_date"],
+            "2026-12-31",
+        )
+
+        after_cutoff, remaining = reconciled(catalog, today=date(2026, 11, 13))
+        closed = {item["appendix_code"] for item in after_cutoff.diagnostics["inactive_inventory"]
+                  if item["derived_currentness"] == nasa_roses.DERIVED_CLOSED}
+        self.assertLessEqual({"A.10", "C.2"}, closed)
+        self.assertTrue(all(not row.title.startswith(("ROSES25: A.10 ", "ROSES25: C.2 "))
+                            for row in remaining))
+
+    def test_rolling_cutoff_follows_current_named_note(self):
+        catalog = [catalog_record("X-1", "Unrelated")]
+        data = payload()
+        data["table3_html"] = data["table3_html"].replace("November 12, 2026", "December 12, 2026")
+        instance, opportunities = reconciled(catalog, today=date(2026, 11, 13), data=data)
+        row = next(record for record in records_of(instance, opportunities)
+                   if record["title"] == "ROSES25: C.2 Solar System Science")
+        self.assertEqual(row["close_date"], "2026-12-12")
+
+    def test_mismatched_rolling_note_never_supplies_another_programs_cutoff(self):
+        catalog = [catalog_record("X-1", "Unrelated")]
+        data = payload()
+        data["table3_html"] = data["table3_html"].replace(
+            "[5] Proposals for C.2 Solar System Science", "[5] Proposals for C.3 Some Other Program",
+        )
+        instance, opportunities = reconciled(catalog, today=date(2026, 11, 12), data=data)
+        self.assertTrue(all(row.title != "ROSES25: C.2 Solar System Science" for row in opportunities))
+        c2 = next(item for item in instance.diagnostics["inactive_inventory"] if item["appendix_code"] == "C.2")
+        self.assertEqual(c2["derived_currentness"], nasa_roses.DERIVED_UNDATED)
+
+    def test_bare_no_due_date_still_means_rolling(self):
+        catalog = [catalog_record("X-1", "Unrelated")]
+        data = payload()
+        data["table3_html"] = data["table3_html"].replace("<b>[5]</b>", "", 1)
+        instance, opportunities = reconciled(catalog, today=date(2026, 11, 13), data=data)
+        row = next(record for record in records_of(instance, opportunities)
+                   if record["title"] == "ROSES25: C.2 Solar System Science")
+        self.assertIsNone(row["close_date"])
+
     def test_a_duplicate_source_code_alone_suppresses_nothing(self):
         """Corrected 2026-08-20 against the source, and this test was the defect.
 

@@ -15,6 +15,19 @@ export const REMOVED_PARENTS = Object.freeze(['eere-exchange:DE-TA1-0003589',
   'vpr-email:vpr-e4cc1ac2aa40787d', 'vpr-email:NSF25-544']);
 export const PARENT_CANDIDATE = '5801e4912b642ad70e4383b0f805adc95aad7d892b85f8b7638aeca958da85e6';
 const PARENT_MANIFEST_SHA = '13c34c94b4ca1fc76d67e07ee0271cdcfccd392b45f6d66786abf02d5215dee2';
+const ROSES_PARENT = 'cf3f76587bd136588a8b86ceb149224b34a10580a4a3fa64677df29a126d3487';
+const ROSES_WITHDRAWAL = Object.freeze({
+  version: 'catalog-terminal-roses-subset-20261113-v1',
+  manifestSha: '04ff87ae51e717d115228a2bf1fb19ad8b03ec9363a203e649dbe31973f9f97c',
+  removedParents: Object.freeze(['nasa-roses:25-A.10-87da4095c3', 'nasa-roses:25-C.2-e5e8e39f99']),
+  accounting: {API_request_count:6, usage_total_tokens:325974, estimated_cost_at_published_paid_pricing_usd:0.006519},
+});
+const OCTOBER_WITHDRAWAL = Object.freeze({
+  version: VERSION,
+  manifestSha: PARENT_MANIFEST_SHA,
+  removedParents: REMOVED_PARENTS,
+  accounting: {API_request_count:6, usage_total_tokens:298906, estimated_cost_at_published_paid_pricing_usd:0.005978},
+});
 const MANIFEST = 'data/search-v2-voyage-manifest.json';
 const BINARY = 'data/search-v2-voyage-vectors.f16';
 const CANARIES = 'data/search-v2-voyage-canaries.json';
@@ -40,19 +53,19 @@ function checkCorpus(corpus, manifest) {
 }
 
 /** Project only already-authenticated rows; false reuse permission stays false. */
-export function projectSubset({originalCorpus, corpus, manifest, binary, canaries}) {
+export function projectSubset({originalCorpus, corpus, manifest, binary, canaries, removedParents = REMOVED_PARENTS}) {
   validateAsset(manifest, binary, canaries, {requireReusable:true});
   require(manifest.reuse_permitted === false, 'fixed_nonreusable_parent');
   checkCorpus(originalCorpus, manifest);
-  const removed = new Set(REMOVED_PARENTS);
-  require(REMOVED_PARENTS.every(id => originalCorpus.some(row => row.passage_id === 'parent:' + id)),
+  const removed = new Set(removedParents);
+  require(removedParents.every(id => originalCorpus.some(row => row.passage_id === 'parent:' + id)),
     'all_withdrawn_parents_present');
   const retained = originalCorpus.filter(row => !removed.has(row.parent_id));
   // Full passage objects include title, field labels, values, and exact input
   // text. A changed passage is never authorized by a merely matching ID.
   require(same(corpus, retained), 'exact_ordered_corpus_subset');
   const removedRows = manifest.passages.filter(row => removed.has(row.parent_id));
-  require(removedRows.length === REMOVED_PARENTS.length && removedRows.every(row => row.passage_kind === 'parent'),
+  require(removedRows.length === removedParents.length && removedRows.every(row => row.passage_kind === 'parent'),
     'fixed_parent_rows_without_children');
   const priorRows = manifest.passages.filter(row => !removed.has(row.parent_id));
   const width = manifest.dimension * 2;
@@ -116,9 +129,10 @@ export async function prepareProjection(parent, root) {
   parent = resolve(parent); root = resolve(root);
   require(!within(parent, root) && !within(root, parent), 'separate_materialized_root');
   const rawCandidate = await readFile(join(parent, '..', 'candidate.json'));
-  require(digest(rawCandidate) === PARENT_MANIFEST_SHA, 'pinned_parent_manifest');
   const candidate = JSON.parse(rawCandidate);
-  require(candidate.candidate_id === PARENT_CANDIDATE, 'pinned_parent_candidate');
+  const scope = candidate.candidate_id === ROSES_PARENT ? ROSES_WITHDRAWAL : OCTOBER_WITHDRAWAL;
+  require(digest(rawCandidate) === scope.manifestSha, 'pinned_parent_manifest');
+  require([PARENT_CANDIDATE, ROSES_PARENT].includes(candidate.candidate_id), 'pinned_parent_candidate');
   const originals = {};
   // Authenticate the full immutable parent, not only the selected vector rows.
   for (const [name, hash] of Object.entries(candidate.files)) {
@@ -126,23 +140,32 @@ export async function prepareProjection(parent, root) {
     require(digest(raw) === hash, 'parent_payload_hash');
     originals[name] = raw;
   }
-  const unchanged = [...RUNTIME, SUBTOPICS, CANARIES, BUILD_RECEIPT];
+  const unchanged = [...RUNTIME, CANARIES, BUILD_RECEIPT];
+  if (scope === OCTOBER_WITHDRAWAL) unchanged.push(SUBTOPICS);
   for (const name of unchanged) require((await readFile(checked(root, name))).equals(originals[name]), 'unchanged_projection_input');
   for (const name of [MANIFEST, BINARY, ALLOWLIST, RELEASE])
     require((await readFile(checked(root, name))).equals(originals[name]), 'original_projection_destination');
   const beforeCatalog = assignment(originals[CATALOG]);
   const afterCatalog = assignment(await readFile(checked(root, CATALOG)));
-  const removed = new Set(REMOVED_PARENTS);
-  require(REMOVED_PARENTS.every(id => beforeCatalog.opportunities.filter(row => row.opportunity_id === id).length === 1), 'fixed_catalog_parents');
+  const removed = new Set(scope.removedParents);
+  require(scope.removedParents.every(id => beforeCatalog.opportunities.filter(row => row.opportunity_id === id).length === 1), 'fixed_catalog_parents');
   require(same(afterCatalog.opportunities.map(row => row.opportunity_id),
     beforeCatalog.opportunities.filter(row => !removed.has(row.opportunity_id)).map(row => row.opportunity_id)),
     'catalog_withdrawal_membership');
   const subtopics = assignment(originals[SUBTOPICS]);
+  const projectedSubtopics = scope === OCTOBER_WITHDRAWAL ? subtopics :
+    assignment(await readFile(checked(root, SUBTOPICS)));
+  if (scope === ROSES_WITHDRAWAL) {
+    for (const id of removed) require(same(subtopics.records[id]?.subtopics, []), 'withdrawn_subtopics_were_empty');
+    const expected = {...subtopics, records:Object.fromEntries(Object.entries(subtopics.records)
+      .filter(([id]) => !removed.has(id)))};
+    require(same(projectedSubtopics, expected), 'exact_empty_subtopic_withdrawal');
+  }
   const sourceManifest = JSON.parse(originals[MANIFEST]);
   const originalCorpus = makeCorpus(beforeCatalog, subtopics, originals, sourceManifest.generated_at);
-  const corpus = makeCorpus(afterCatalog, subtopics, originals, sourceManifest.generated_at);
+  const corpus = makeCorpus(afterCatalog, projectedSubtopics, originals, sourceManifest.generated_at);
   const projection = projectSubset({originalCorpus, corpus, manifest:sourceManifest,
-    binary:originals[BINARY], canaries:JSON.parse(originals[CANARIES])});
+    binary:originals[BINARY], canaries:JSON.parse(originals[CANARIES]), removedParents:scope.removedParents});
   const parentRelease = JSON.parse(originals[RELEASE]);
   const allowlist = projectCompatibility(projection.manifest, JSON.parse(originals[ALLOWLIST]), parentRelease);
   const allowlistBytes = bytes(allowlist);
@@ -155,14 +178,13 @@ export async function prepareProjection(parent, root) {
     worker_allowlist_sha256:digest(allowlistBytes), source_hashes:sourceHashes};
   output.set(RELEASE, bytes(release));
   const accounting = JSON.parse(originals[BUILD_RECEIPT]);
-  require(accounting.API_request_count === 6 && accounting.usage_total_tokens === 298906
-    && accounting.estimated_cost_at_published_paid_pricing_usd === 0.005978
+  require(Object.entries(scope.accounting).every(([field, value]) => accounting[field] === value)
     && accounting.reuse_reason === 'homogeneous_unstable_identity' && accounting.reuse_permitted === false,
     'original_generation_accounting');
-  const proof = {version:VERSION, parent_candidate_id:PARENT_CANDIDATE, parent_manifest_sha256:PARENT_MANIFEST_SHA,
+  const proof = {version:scope.version, parent_candidate_id:candidate.candidate_id, parent_manifest_sha256:scope.manifestSha,
     parent_corpus_sha256:sourceManifest.corpus_sha256, corpus_sha256:projection.manifest.corpus_sha256,
     parent_vector_sha256:sourceManifest.vector_sha256, vector_sha256:projection.manifest.vector_sha256,
-    removed_parent_ids:[...REMOVED_PARENTS], removed_rows:projection.removed_rows, retained_rows:projection.retained_rows,
+    removed_parent_ids:[...scope.removedParents], removed_rows:projection.removed_rows, retained_rows:projection.retained_rows,
     retained_passage_count:corpus.length, reuse_permitted:false,
     model_space_fingerprint:sourceManifest.model_space_fingerprint,
     original_vector_build:{path:BUILD_RECEIPT, sha256:digest(originals[BUILD_RECEIPT]),
@@ -196,7 +218,7 @@ async function main() {
     entries.push([pathToFileURL(receipt), bytes(proof)]);
     await writeCoherentFiles(entries);
     for (const [name, raw] of output) require((await readFile(checked(root, name))).equals(raw), 'written_output_hash');
-    console.log(JSON.stringify({version:VERSION, modified_paths:[...output.keys()], retained_passages:proof.retained_passage_count,
+    console.log(JSON.stringify({version:proof.version, modified_paths:[...output.keys()], retained_passages:proof.retained_passage_count,
       corpus_sha256:proof.corpus_sha256, vector_sha256:proof.vector_sha256, new_provider_requests:0}));
   });
 }

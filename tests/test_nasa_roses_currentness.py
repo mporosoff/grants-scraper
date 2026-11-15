@@ -125,7 +125,7 @@ class DerivedCurrentnessTests(unittest.TestCase):
 
     def test_rolling_submission_is_open(self):
         self.assertEqual(
-            derive_currentness(element("No Due Date [3]"), TODAY),
+            derive_currentness(element("No Due Date"), TODAY),
             nasa_roses.DERIVED_OPEN,
         )
 
@@ -137,6 +137,7 @@ class DerivedCurrentnessTests(unittest.TestCase):
             ("TBD", "TBD"),
             ("Follow link from title",),
             ("N/A", "N/A"),
+            ("No Due Date [3]",),
         ):
             with self.subTest(cells=cells):
                 self.assertEqual(
@@ -154,11 +155,11 @@ class DerivedCurrentnessTests(unittest.TestCase):
 class EmissionFollowsCurrentnessTests(unittest.TestCase):
     """DEC-13 in one table: which states reach the public catalog, and which do not."""
 
-    EMITTED = [("N/A", "12/03 /2026"), ("No Due Date [3]",),
+    EMITTED = [("N/A", "12/03 /2026"), ("No Due Date",),
                ("06/01/2026 (Step-1)", "11/30/2026 (Step-2)")]
     WITHHELD = [("N/A", "02/27/2026"), ("Not Solicited This Year",),
                 ("Not Solicited see C.2 and F.3",), ("TBD", "TBD"),
-                ("Follow link from title",), ("N/A", "N/A")]
+                ("Follow link from title",), ("N/A", "N/A"), ("No Due Date [3]",)]
 
     def _reconcile(self, cells):
         instance = NasaRosesAdapter()
