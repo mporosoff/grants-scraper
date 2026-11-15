@@ -33,7 +33,7 @@ ARTIFACTS = {
     'reservation': (11572916212, 'generation-spend-reservation-36896442720-4',
         '16547cd734ad029ffa73e3dad1098cab7cf9faf3cec9558f61c6c5529bff2c13'),
 }
-ROSES_VERSION = 'catalog-source-recovery-20261113-v1'
+ROSES_VERSION = 'catalog-source-recovery-20261113-v2'
 ROSES_PARENT = 'cf3f76587bd136588a8b86ceb149224b34a10580a4a3fa64677df29a126d3487'
 ROSES_RUN = 43476458676
 ROSES_ATTEMPT = 1
@@ -51,6 +51,18 @@ ROSES_ARTIFACTS = {
     'plan': (14062542364, 'release-plan-1',
         'f12122501f4c68e84dceb73404ec4da1aae9eedadc425e764293fd0dd08f409d'),
 }
+# The first recovery passed validation but review rejected its stale feeds.
+# Retire this exact zero-generation derivation after its replacement publishes.
+ROSES_REJECTED_RECOVERY = {
+    'run': 43749185636,
+    'head': '94e4f05a4df212c6a84401b6f4f578aca0af046e',
+    'candidate_id': '5efe6b1191539cc22e191b3c97efd4bcdb6e4c2b1417c526aa26976894d68165',
+    'artifacts': {
+        'candidate': (14175601896, 'a2aa8b0ad838235f6b65541cf9824b3838821fd52bfcd372bb641998dcaf9275'),
+        'projection': (14175457224, '9a06f2098e1e79a195de7f8f382a573f3f6ab58b96bf17f6c3913c6f70c21a76'),
+        'review': (14176162839, '3ea987b6d68489ba47985aec74fa36430675bc09f81d577c928bf179b7d42b06'),
+    },
+}
 STAGE = 'catalog-source-recovery'
 VECTOR_OUTPUTS = ('data/search-v2-voyage-manifest.json', 'data/search-v2-voyage-vectors.f16',
     'data/search-v2-release.json', 'workers/search-voyage-proxy/generated/corpus-allowlist.json')
@@ -67,7 +79,7 @@ def require(ok, reason):
 
 
 def reject_quarantined(manifest):
-    require(manifest.get('candidate_id') not in (PARENT, ROSES_PARENT),
+    require(manifest.get('candidate_id') not in (PARENT, ROSES_PARENT, ROSES_REJECTED_RECOVERY['candidate_id']),
         'rejected_candidate_requires_exact_source_recovery')
 
 
@@ -201,12 +213,16 @@ def derive(parent_bundle, audit_at):
 
 def receipt_for(original, spending, outputs, proof, audit_at):
     roses = original.get('candidate_id') == ROSES_PARENT
-    return {'version': ROSES_VERSION if roses else VERSION, 'parent_candidate': ROSES_PARENT if roses else PARENT,
+    receipt = {'version': ROSES_VERSION if roses else VERSION, 'parent_candidate': ROSES_PARENT if roses else PARENT,
         'parent_manifest_sha256': ROSES_MANIFEST_SHA if roses else MANIFEST_SHA,
         'parent_run': ROSES_RUN if roses else RUN, 'audit_at': audit_at, 'spending': spending, 'projection': proof,
         'output_hashes': {n: c.digest(raw) for n, raw in sorted(outputs.items())},
         'retained_hashes': {n: h for n, h in original['files'].items() if n not in outputs
             and not c.FACET_FEED_NAME.fullmatch(n)}}
+    if roses:
+        receipt['superseded_recovery_run'] = ROSES_REJECTED_RECOVERY['run']
+        receipt['superseded_recovery_candidate'] = ROSES_REJECTED_RECOVERY['candidate_id']
+    return receipt
 
 
 def verify_inputs(root, original, parent_bundle, receipt_path):

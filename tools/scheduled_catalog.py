@@ -239,6 +239,53 @@ def _published_url_supersedes(root, run, artifacts):
     return False
 
 
+def _published_roses_supersedes(root, run, artifacts):
+    """Retire the rejected provider-free ROSES recovery after its repair publishes."""
+    from tools import catalog_source_recovery as roses
+    rejected = roses.ROSES_REJECTED_RECOVERY
+    run_id, rejected_id = rejected['run'], rejected['candidate_id']
+    expected = {'id': run_id, 'run_attempt': 1, 'head_sha': rejected['head'], 'head_branch': 'main',
+                'path': WORKFLOW, 'event': 'workflow_dispatch', 'status': 'completed', 'conclusion': 'failure'}
+    if type(run.get('run_attempt')) is not int or any(run.get(key) != value for key, value in expected.items()):
+        return False
+    names = {'candidate': 'candidate-' + rejected_id, 'projection': f'source-recovery-{run_id}-1',
+             'review': f'publication-{rejected_id}-1'}
+    if (sum(row['name'].startswith('candidate-') for row in artifacts) != 1
+            or any('-reservation-' in row['name'] or '-state-' in row['name'] for row in artifacts)):
+        return False
+    for role, (identifier, digest) in rejected['artifacts'].items():
+        rows = [row for row in artifacts if row.get('id') == identifier or row.get('name') == names[role]]
+        if (len(rows) != 1 or rows[0].get('id') != identifier or rows[0].get('name') != names[role]
+                or rows[0].get('digest') != 'sha256:' + digest or rows[0].get('expired') is not False):
+            return False
+    revisions = c.git(root, 'log', '--first-parent', '--format=%H', '-100', '--',
+                      'release/candidate-source.json').splitlines()
+    for sha in revisions:
+        child = json.loads(c.git(root, 'show', sha + ':release/candidate.json'))
+        receipt = child.get('source_recovery') or {}
+        if (receipt.get('superseded_recovery_candidate') != rejected_id
+                or child.get('derived_from_candidate') != roses.ROSES_PARENT):
+            continue
+        pointer = json.loads(c.git(root, 'show', sha + ':release/candidate-source.json'))
+        producer = receipt.get('affected_generation') or {}
+        producer_run = str(producer.get('generation_run_id', ''))
+        if not (child.get('candidate_id') == pointer.get('candidate_id')
+                == c.digest(c.encoded({key: value for key, value in child.items() if key != 'candidate_id'}))
+                and receipt.get('parent_candidate') == roses.ROSES_PARENT
+                and child.get('generation_run_id') == str(roses.ROSES_RUN)
+                and child.get('generation_run_attempt') == str(roses.ROSES_ATTEMPT)
+                and child.get('generation_sha') == roses.ROSES_EVENT_SHA
+                and receipt.get('version') == roses.ROSES_VERSION and receipt.get('parent_run') == roses.ROSES_RUN
+                and receipt.get('parent_manifest_sha256') == roses.ROSES_MANIFEST_SHA
+                and receipt.get('superseded_recovery_run') == run_id
+                and producer_run == str(pointer.get('artifact_run'))
+                and re.fullmatch('[1-9][0-9]*', producer_run) and int(producer_run) > run_id
+                and producer.get('generation_sha') == child.get('assembly_sha')):
+            raise Hold('Published ROSES recovery does not authenticate the superseded candidate', run_id)
+        return True
+    return False
+
+
 def _require_reconciliation_history(repository, run, producers, artifacts, *, allowed_candidate_ids=None):
     """Original artifact producers remain distinct from downstream retries."""
     latest = run['run_attempt']
@@ -812,6 +859,7 @@ def prior_generation(root, environment, manifest):
                     continue
                 if (_published_access_supersedes(root, run, artifacts)
                         or _published_url_supersedes(root, run, artifacts)
+                        or _published_roses_supersedes(root, run, artifacts)
                         or _published_reconciliation_supersedes(root, run, artifacts, repository=repository)):
                     continue
                 if artifact.get('expired') or not re.fullmatch('[a-f0-9]{64}', candidate_id):
