@@ -4,8 +4,19 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml</id>
-  <updated>2026-11-15T19:30:20Z</updated>
+  <updated>2026-11-15T19:56:10Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>The State Component of the National Cooperative Geologic Mapping Program</title>
+    <link href="https://www.grants.gov/search-results-detail/364265"/>
+    <id>urn:funding-finder:grants-gov:364265</id>
+    <updated>2026-11-13T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
+    <category term="Community development"/>
+    <category term="Energy"/>
+    <category term="Materials science"/>
+    <summary>Geological Survey | Application 2027-02-17 | The primary objective of the STATEMAP component of the National Cooperative Geologic Mapping Program (NCGMP) is to establish the geologic framework of areas determined to be vital to the economic, social, or scientific welfare of individual states and the nation. The state Geologist/Survey Director/Chief Scientist (or similar position) shall determine mapping priorities in consultation with a mult…</summary>
+  </entry>
   <entry>
     <title>Cooperative Agreement for affiliated Partner with Californian Cooperative Ecosystem Studies Unit</title>
     <link href="https://www.grants.gov/search-results-detail/364235"/>
@@ -826,21 +837,5 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Materials science"/>
     <category term="Technology development"/>
     <summary>Idaho Field Office | Application 2030-10-14 | A. STATEMENT OF OBJECTIVESThis Funding Opportunity Announcement (FOA) is to award multiple cooperative agreements to accredited United States (U.S.) two- and four-year colleges and universities (Institutions of Higher Education (IHEs)) to receive and administer scholarship and fellowship funding-provided through the University Nuclear Leadership Program (UNLP) and as administered by the Department…</summary>
-  </entry>
-  <entry>
-    <title>Science of Learning and Augmented Intelligence (SL)</title>
-    <link href="https://www.grants.gov/search-results-detail/320753"/>
-    <id>urn:funding-finder:grants-gov:320753</id>
-    <updated>2019-09-19T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Data science"/>
-    <category term="Education and workforce"/>
-    <category term="Materials science"/>
-    <category term="Neuroscience"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>U.S. National Science Foundation | Application 2027-02-10 | Science of Learning and Augmented Intelligence (SL) supports potentially transformative research that develops basic theoretical insights and fundamental knowledge about principles, processes and mechanisms of learning, and about augmented intelligence - how human cognitive function can be augmented through interactions with others or with technology, or through variations in context. The program …</summary>
   </entry>
 </feed>
