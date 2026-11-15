@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml</id>
-  <updated>2026-11-12T18:27:29Z</updated>
+  <updated>2026-11-15T19:30:20Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Technology Development Program</title>
@@ -227,6 +227,18 @@
     <summary>National Institutes of Health | Estimated Application 2027-05-25 | The NIH Office of Strategic Coordination (Common Fund) has generated many valuable and widely available datasets. The Common Fund Data Ecosystem is helping to ensure that all Common Fund (CF) data are Findable, Accessible, Interoperable, and Reusable (FAIR). The purpose of this Notice of Funding Opportunity (NOFO) is to announce the availability of funds for projects that involve collaboration bet…</summary>
   </entry>
   <entry>
+    <title>NIOSH Centers of Excellence for Total Worker Health® (U19)</title>
+    <link href="https://www.grants.gov/search-results-detail/363369"/>
+    <id>urn:funding-finder:grants-gov:363369</id>
+    <updated>2026-12-16T00:00:00Z</updated>
+    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Education and workforce"/>
+    <category term="Technology development"/>
+    <category term="Transportation"/>
+    <summary>Centers for Disease Control and Prevention - ERA | Estimated Application 2027-02-26 | PURPOSENIOSH intends to support the Centers of Excellence in Total Worker Health® (TWH). These Centers will conduct rigorous research and translation activities to prevent harmful exposures, improve working conditions, and advance worker well-being. The Centers will develop practical, scalable solutions for employers and workers. All projects must use the NIOSH Worker Well-Being Questionnaire (Wel…</summary>
+  </entry>
+  <entry>
     <title>Capacity Building for Global, Regional, and National Immunization Programs</title>
     <link href="https://www.grants.gov/search-results-detail/363591"/>
     <id>urn:funding-finder:grants-gov:363591</id>
@@ -275,16 +287,14 @@
     <summary>National Institutes of Health | Estimated Application 2027-01-25 | The National Biomedical Research Centers (NBRCs) are expected to provide scientific expertise, advanced equipment, infrastructure, and a range of well-characterized research models to researchers across the nation. Research at the NBRCs is supported by almost all NIH Institutes, as well as other federal agencies, including those that safeguard US national security interests. This NOFO emphasizes d…</summary>
   </entry>
   <entry>
-    <title>NIOSH Centers of Excellence for Total Worker Health® (U19)</title>
-    <link href="https://www.grants.gov/search-results-detail/363369"/>
-    <id>urn:funding-finder:grants-gov:363369</id>
-    <updated>2026-11-16T00:00:00Z</updated>
-    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
-    <category term="Artificial intelligence and machine learning"/>
+    <title>Small Business Innovation Research / Small Business Technology Transfer Phase I, Phase II, Fast-Track Programs: Developing Deep Technologies that Advance U.S. Competitiveness and Security</title>
+    <link href="https://www.grants.gov/search-results-detail/364255"/>
+    <id>urn:funding-finder:grants-gov:364255</id>
+    <updated>2026-11-12T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
     <category term="Education and workforce"/>
     <category term="Technology development"/>
-    <category term="Transportation"/>
-    <summary>Centers for Disease Control and Prevention - ERA | Estimated Application 2027-02-26 | PURPOSENIOSH intends to support the Centers of Excellence in Total Worker Health® (TWH). These Centers will conduct rigorous research and translation activities to prevent harmful exposures, improve working conditions, and advance worker well-being. The Centers will develop practical, scalable solutions for employers and workers. All projects must use the NIOSH Worker Well-Being Questionnaire (Wel…</summary>
+    <summary>U.S. National Science Foundation | Application 2027-03-04 | NSF invests in scientific discoveries, technological breakthroughs, and transformative innovations that strengthen economic growth, enhance security, and improve the lives of Americans and people around the world. In support of this mission, NSF is relaunching its SBIR/STTR programs (also known as America’s Seed Fund powered by NSF) following enactment of the Small Business Innovation and Economic…</summary>
   </entry>
   <entry>
     <title>Controlling and Preventing STIs in US Health Departments (CAP-STIs)</title>
@@ -480,15 +490,6 @@
     <author><name>Administration for Community Living</name></author>
     <category term="Technology development"/>
     <summary>Administration for Community Living | Estimated Application 2026-12-16 | The purpose of the Federal SBIR program is to stimulate technological innovation in the private sector, strengthen the role of small business in meeting Federal research or research and development (R/R&amp;D) needs, and improve the return on investment from Federally-funded research for economic and social benefits to the nation. The specific purpose of ACL's SBIR program is to improve the lives of p…</summary>
-  </entry>
-  <entry>
-    <title>Alliance for Innovation on Maternal Health (AIM) Technical Assistance Center</title>
-    <link href="https://www.grants.gov/search-results-detail/363532"/>
-    <id>urn:funding-finder:grants-gov:363532</id>
-    <updated>2026-10-14T00:00:00Z</updated>
-    <author><name>Health Resources and Services Administration</name></author>
-    <category term="Technology development"/>
-    <summary>Health Resources and Services Administration | Estimated Application 2026-11-13 | The purpose of the Alliance for Innovation on Maternal Health (AIM) program is to provide technical assistance to support all 50 states, the District of Columbia (D.C.), jurisdictions, U.S. territories, tribal communities, and birthing facilities that are participating in the AIM program. AIM is a quality improvement initiative to support best practices that make birth safer, improve maternal heal…</summary>
   </entry>
   <entry>
     <title>Commercialization Cohort Programs</title>

@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/cancer.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/cancer.xml</id>
-  <updated>2026-11-12T18:27:29Z</updated>
+  <updated>2026-11-15T19:30:20Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Advanced Development and Sustainment of Informatics Technologies for Cancer Research and Management (U24 Clinical Trial Optional)</title>
@@ -128,6 +128,17 @@
     <summary>Centers for Disease Control and Prevention - ERA | Estimated Application 2027-02-01 | The National Mesothelioma Virtual Bank (NMVB) was established in 2006 to serve as a resource for malignant mesothelioma research. This funding opportunity will advance biomedical research for malignant mesothelioma by adding more biospecimens together with demographic data and clinical data. Examples of biospecimens include fresh frozen tumor and control tissues, paraffin embedded tissues, blood, …</summary>
   </entry>
   <entry>
+    <title>State Occupational Safety and Health Surveillance Program (U60)</title>
+    <link href="https://www.grants.gov/search-results-detail/363431"/>
+    <id>urn:funding-finder:grants-gov:363431</id>
+    <updated>2026-12-01T00:00:00Z</updated>
+    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
+    <category term="Cancer"/>
+    <category term="Education and workforce"/>
+    <category term="Public health"/>
+    <summary>Centers for Disease Control and Prevention - ERA | Estimated Application 2027-02-01 | NIOSH has provided financial and technical assistance to develop or expand state-level OSH surveillance capacity and infrastructure since the 1970s. From 2021-2026, NIOSH funded cooperative agreements in 23 states under announcement PAR-20-312. These programs varied in scope and focus, each providing a level of occupational health expertise to the public health system in their state. Grantees incl…</summary>
+  </entry>
+  <entry>
     <title>Canine Cancer Immunotherapy Network (K9CIN; U01 Clinical Trial Not Allowed)</title>
     <link href="https://www.grants.gov/search-results-detail/361532"/>
     <id>urn:funding-finder:grants-gov:361532</id>
@@ -181,17 +192,6 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Cancer"/>
     <summary>National Institutes of Health | Estimated Application 2027-01-25 | This Notice of Funding Opportunity (NOFO) invites applications for P30 Cancer Center Support Grants (CCSGs) to support NCI-Designated Cancer Centers. CCSGs support three types of Cancer Centers: 1) Comprehensive Cancer Centers, which demonstrate reasonable depth and breadth of research activities in each of three major areas: basic laboratory; clinical; and prevention, control and population-based…</summary>
-  </entry>
-  <entry>
-    <title>State Occupational Safety and Health Surveillance Program (U60)</title>
-    <link href="https://www.grants.gov/search-results-detail/363431"/>
-    <id>urn:funding-finder:grants-gov:363431</id>
-    <updated>2026-10-30T00:00:00Z</updated>
-    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
-    <category term="Cancer"/>
-    <category term="Education and workforce"/>
-    <category term="Public health"/>
-    <summary>Centers for Disease Control and Prevention - ERA | Estimated Application 2026-12-30 | NIOSH has provided financial and technical assistance to develop or expand state-level OSH surveillance capacity and infrastructure since the 1970s. From 2021-2026, NIOSH funded cooperative agreements in 23 states under announcement PAR-20-312. These programs varied in scope and focus, each providing a level of occupational health expertise to the public health system in their state. Grantees incl…</summary>
   </entry>
   <entry>
     <title>Genomic Data Generation Center for the Gabriella Miller Kids First Pediatric Research Program (U24 Clinical Trial Not Allowed)</title>
@@ -562,15 +562,6 @@ a high level of innovation and creativity. The goal is to support the best young
     <summary>National Institutes of Health | Application 2028-01-07 | This initiative will support multi-level and/or multi-domain intervention research to reduce disparities in liver diseases and liver cancer among populations who experience health disparities in the United States (U.S.). This NOFO is being reissued in accordance with the simplified review criteria in effect for application due dates after January 25, 2025.</summary>
   </entry>
   <entry>
-    <title>NCCIH Natural Product Mid Phase Clinical Trial (R01 Clinical Trial Required)</title>
-    <link href="https://www.grants.gov/search-results-detail/357493"/>
-    <id>urn:funding-finder:grants-gov:357493</id>
-    <updated>2024-12-02T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Cancer"/>
-    <summary>National Institutes of Health | Application 2026-11-13 | This Notice of Funding Opportunity (NOFO) encourages applications for investigator-initiated mid-phase clinical trials of natural products(i.e., botanicals, dietary supplements, and probiotics), which have a strong scientific premise to justify further clinical testing. For this NOFO, natural products include promising nutritional regimens that standardize the amount of a specific naturally occurr…</summary>
-  </entry>
-  <entry>
     <title>Utilizing the PLCO Biospecimens Resource to Bridge Gaps in Cancer Etiology and Early Detection Research (U01 Clinical Trial Not Allowed)</title>
     <link href="https://www.grants.gov/search-results-detail/357307"/>
     <id>urn:funding-finder:grants-gov:357307</id>
@@ -648,5 +639,15 @@ a high level of innovation and creativity. The goal is to support the best young
     <category term="Education and workforce"/>
     <category term="Public health"/>
     <summary>National Institutes of Health | Application 2027-01-07 | Through this notice of funding opportunity (NOFO), the National Cancer Institute (NCI) invites applications for support of investigator-initiated clinical trials that have the potential to reduce the burden of cancer through improvements in early detection, screening, prevention and interception, healthcare delivery, quality of life, and/or survivorship related to cancer; with such attributes, the…</summary>
+  </entry>
+  <entry>
+    <title>National Cancer Institute's Investigator-Initiated Early Phase Clinical Trials for Cancer Treatment and Diagnosis (R01 Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/357075"/>
+    <id>urn:funding-finder:grants-gov:357075</id>
+    <updated>2024-11-12T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Cancer"/>
+    <category term="Education and workforce"/>
+    <summary>National Institutes of Health | Application 2027-01-07 | Through this Notice of Funding Opportunity, the National Cancer Institute (NCI) seeks research projects that implement early phase (Phase 0, I, and II) investigator-initiated clinical trials focused on cancer-targeted diagnostic and therapeutic interventions of direct relevance to the research mission of DCTD and OHAM. The proposed project must involve at least 1 clinical trial related to the scie…</summary>
   </entry>
 </feed>

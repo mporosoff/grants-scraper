@@ -4,8 +4,17 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/energy.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/energy.xml</id>
-  <updated>2026-11-12T18:27:29Z</updated>
+  <updated>2026-11-15T19:30:20Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>Long-Term Contracts to Purchase Index Storage Credits (ISCs)</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr00001ScHx7AAF"/>
+    <id>urn:funding-finder:nyserda:nyserda%3AISCRFP26-1</id>
+    <updated>2026-11-12T00:00:00Z</updated>
+    <author><name>NYSERDA</name></author>
+    <category term="Energy"/>
+    <summary>NYSERDA | Application 2026-12-15 | Procures Index Storage Credits (ISCs) from bulk energy storage projects that meet the eligibility requirements described in NYSERDA’s Request for Proposals (RFP) ISCRFP26-1. This RFP will be implemented through a two-step process, Step One Eligibility Application and Step Two Bid Proposal.</summary>
+  </entry>
   <entry>
     <title>NYSERDA’s New York Business-Research Innovation &amp; Development Growth Exchange</title>
     <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr00001FcKkYAAV"/>
@@ -237,58 +246,6 @@
     <category term="Community development"/>
     <category term="Energy"/>
     <summary>Rural Utilities Service | Application 2026-11-20 | The Rural Utilities Service (RUS or the Agency), a Rural Development (RD) agency of the United States Department of Agriculture (USDA), is soliciting Letters of Interest (LOI) for applications under the Affordable Rural Cooperative (ARC) Program. In addition, the Agency is announcing the eligibility requirements, application process and deadlines, and the criteria that will be used by RUS to asses…</summary>
-  </entry>
-  <entry>
-    <title>Cooperative Agreement for Affiliated Partner with the Hawaiʻi-Pacific Islands Cooperative Ecosystem Studies Unit (CESU)</title>
-    <link href="https://www.grants.gov/search-results-detail/364083"/>
-    <id>urn:funding-finder:grants-gov:364083</id>
-    <updated>2026-10-14T00:00:00Z</updated>
-    <author><name>Geological Survey</name></author>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Space and aeronautics"/>
-    <category term="Water"/>
-    <summary>Geological Survey | Application 2026-11-14 | Invasive species are one of the greatest threats to biodiversity, biosecurity, ecosystem functioning, and human well-being in Hawaiʻi. Managers are increasingly concerned about the horticultural trade because it is the predominant pathway for non-native plant introduction in the state. However, they currently lack information about which species pose the greatest risk now and in the future. By ana…</summary>
-  </entry>
-  <entry>
-    <title>Cooperative Agreement for Affiliated Partner with the North Atlantic Coast Cooperative Ecosystem Studies Unit (CESU)</title>
-    <link href="https://www.grants.gov/search-results-detail/364085"/>
-    <id>urn:funding-finder:grants-gov:364085</id>
-    <updated>2026-10-14T00:00:00Z</updated>
-    <author><name>Geological Survey</name></author>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Space and aeronautics"/>
-    <category term="Water"/>
-    <summary>Geological Survey | Application 2026-11-14 | Invasive plants harm ecosystems by outcompeting native plants and destabilizing natural communities. To reduce harm, practitioners use control methods such as herbicides or mowing. Rising temperatures can create a fertilization effect that boosts plant growth, an impact that is even stronger in invasive species, which tend to grow much faster than non-invasive plants. As a result, the recommended …</summary>
-  </entry>
-  <entry>
-    <title>Cooperative Agreement for Affiliated Partner with the Pacific Northwest Cooperative Ecosystem Studies Unit (CESU)</title>
-    <link href="https://www.grants.gov/search-results-detail/364084"/>
-    <id>urn:funding-finder:grants-gov:364084</id>
-    <updated>2026-10-14T00:00:00Z</updated>
-    <author><name>Geological Survey</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Arts and culture"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Space and aeronautics"/>
-    <category term="Water"/>
-    <summary>Geological Survey | Application 2026-11-14 | Freshwater aquatic habitats in the Northwest sustain native fish such as bull trout, salmon, and lamprey that are important to the region's food economy, outdoor recreation, and as Tribal resources. However, increasing water temperatures and fluctuating precipitation can increase the vulnerability of these habitats and native species to biological invasions. Among non-native species that are known…</summary>
-  </entry>
-  <entry>
-    <title>Cooperative Agreement for Affiliated Partner with the Rocky Mountains Cooperative Ecosystem Studies Unit (CESU)</title>
-    <link href="https://www.grants.gov/search-results-detail/364082"/>
-    <id>urn:funding-finder:grants-gov:364082</id>
-    <updated>2026-10-14T00:00:00Z</updated>
-    <author><name>Geological Survey</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Space and aeronautics"/>
-    <category term="Water"/>
-    <summary>Geological Survey | Application 2026-11-14 | The spread of invasive grasses, such as cheatgrass, adds fine fuels to the landscape that increase wildfire occurrence and frequency. Following a fire, invasive grasses regrow quickly, typically outcompeting native plants and perpetuating what is known as the invasive grass-fire cycle. This cycle has been well documented in western portions of the sagebrush biome, such as the Great Basin, but ther…</summary>
   </entry>
   <entry>
     <title>Genesis Mission Graduate Fellowship Pilot</title>
@@ -696,5 +653,40 @@
     <category term="Quantum science"/>
     <category term="Energy"/>
     <summary>VPR funding digest (limited submissions &amp; foundations) | Posted</summary>
+  </entry>
+  <entry>
+    <title>Accelerating Scale-up and Pre-piloting of Emerging Chemical Technologies (ASPECT)</title>
+    <link href="https://www.grants.gov/search-results-detail/363815"/>
+    <id>urn:funding-finder:grants-gov:363815</id>
+    <updated>2026-09-04T00:00:00Z</updated>
+    <author><name>Golden Field Office</name></author>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Carbon management"/>
+    <category term="Climate change"/>
+    <category term="Materials science"/>
+    <summary>Golden Field Office | Application 2026-12-01 | prerequisite closed | Modification 000002: Updated Appendix A and the definition of “Construction and demolition waste”, also denoted as “C&amp;D Waste”, to align with the programmatic authorizing statute for the Alternative Fuels and Feedstocks Office listed in NOFO Part 1, Section III.G. Statutory Authority. • “Construction and demolition waste,” for the purposes of this NOFO and consistent with the statutory authorities…</summary>
+  </entry>
+  <entry>
+    <title>ROSES 2025: A.17 Hydrosphere</title>
+    <link href="https://www.grants.gov/search-results-detail/363789"/>
+    <id>urn:funding-finder:grants-gov:363789</id>
+    <updated>2026-09-02T00:00:00Z</updated>
+    <author><name>NASA Headquarters</name></author>
+    <category term="Energy"/>
+    <category term="Space and aeronautics"/>
+    <summary>NASA Headquarters | Application 2027-01-28 | The close date above is the date for the Step-2 proposal due date. The Step-1 proposal due date is October 8, 2026. Step-2 proposals cannot be submitted if a Step-1 proposal was not submitted. ﻿NOTICE: September 18, 2026. Several corrections have been made: (1) Information about the 2027-2028 winter field campaign has been updated in Section 5, (2) Details on the redacted and anonymized budget req…</summary>
+  </entry>
+  <entry>
+    <title>Egypt Annual Program Statement</title>
+    <link href="https://www.grants.gov/search-results-detail/363786"/>
+    <id>urn:funding-finder:grants-gov:363786</id>
+    <updated>2026-09-02T00:00:00Z</updated>
+    <author><name>Bureau of Near Eastern Affairs</name></author>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Transportation"/>
+    <summary>Bureau of Near Eastern Affairs | Posted | The Bureau of Near Eastern Affairs’ Office of Assistance Coordination (NEA/AC) seeks proposals for projects in Egypt that advance U.S. commercial diplomacy and put American interests first. Proposals must demonstrate how projects will leverage assistance as a tool of statecraft to advance U.S. economic, security, and diplomatic objectives. Programming should promote trade, not aid, by leveraging a…</summary>
   </entry>
 </feed>

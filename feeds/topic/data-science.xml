@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml</id>
-  <updated>2026-11-12T18:27:29Z</updated>
+  <updated>2026-11-15T19:30:20Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>ancient DNA for Modern Genomics (aDMG) Research Projects (U01 Clinical Trials Not Allowed)</title>
@@ -293,17 +293,6 @@
     <summary>National Institutes of Health | Application 2027-02-11 | The National Library of Medicine (NLM) invites applications for innovative predoctoral and postdoctoral training programs that prepare the next generation of researchers in biomedical informatics, data science, and artificial intelligence/machine learning (AI/ML). NLM emphasizes cutting-edge, forward-looking training experiences that equip trainees to address complex health and biomedical challeng…</summary>
   </entry>
   <entry>
-    <title>Cooperative Agreement for affiliated Partner with Rocky Mountain Cooperative Ecosystem Studies Unit</title>
-    <link href="https://www.grants.gov/search-results-detail/364079"/>
-    <id>urn:funding-finder:grants-gov:364079</id>
-    <updated>2026-10-14T00:00:00Z</updated>
-    <author><name>Geological Survey</name></author>
-    <category term="Environmental science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Geological Survey | Application 2026-11-14 | U.S. Geological Survey's (USGS) Powell Center solicits research on "A spatially explicit framework to assess the risk of aquatic contaminants to insectivorous birds." This project will predict how contaminant and nutrient fluxes by adult aquatic insects contribute to a landscape of risk for aerial insectivorous birds. The research synthesis project will map areas of elevated risk for aerial insect…</summary>
-  </entry>
-  <entry>
     <title>NIAMS P30 Centers Program (P30 - Clinical Trial Not Allowed)</title>
     <link href="https://www.grants.gov/search-results-detail/359152"/>
     <id>urn:funding-finder:grants-gov:359152</id>
@@ -340,17 +329,6 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Data science"/>
     <summary>National Institutes of Health | Estimated Application 2026-12-01 | The National Institute of Arthritis and Musculoskeletal and Skin Diseases (NIAMS), in conjunction with other NIH Institutes and Centers (ICs) as a part of the congressionally mandated NIH Helping to End Addiction Long Term (HEAL) initiative intends to publish a Notice of Funding Opportunity (NOFO) to leverage and accelerate the progress achieved in the Restoring Joint Health and Function to Reduce…</summary>
-  </entry>
-  <entry>
-    <title>WATER RESOURCES RESEARCH ACT PROGRAM NATIONAL COMPETITIVE GRANTS FY2026 (104g General)</title>
-    <link href="https://www.grants.gov/search-results-detail/364012"/>
-    <id>urn:funding-finder:grants-gov:364012</id>
-    <updated>2026-09-30T00:00:00Z</updated>
-    <author><name>Geological Survey</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Water"/>
-    <summary>Geological Survey | Application 2026-11-12 | This Program Announcement is issued under the provisions of section 104 of the Water Resources Research Act of 1984 (Public Law 98-242), as amended by Public Laws 101-397, 104-147, 106-374, 109-471, and 117-58. Section 104 of the Water Resources Research Act directs the Secretary of the Interior to administer program grants to Institutes established under the provisions of section 104(a) of the Ac…</summary>
   </entry>
   <entry>
     <title>Simulation-augmented, real-time Platform Adaptive Seamless Trials (SURPASS)</title>
@@ -461,112 +439,6 @@
     <category term="Data science"/>
     <category term="Artificial intelligence and machine learning"/>
     <summary>Air Force Office of Scientific Research | Application 2026-12-11 | verify prerequisite | This is a special Notice of Funding Opportunity Announcement (NOFO) sponsored by the Air Force Office of Scientific Research (AFOSR), which will hereafter generally be referred to as “we”, “us”, “our”, or “AFOSR.” The Fiscal Year 2027 Air Force Young Investigator Research Program (YIP) intends to support individual early career scientists and engineers who have received their Ph. D. or equivalent …</summary>
-  </entry>
-  <entry>
-    <title>21st Century Museum Professionals Program (2027)</title>
-    <link href="https://www.grants.gov/search-results-detail/363769"/>
-    <id>urn:funding-finder:grants-gov:363769</id>
-    <updated>2026-09-01T00:00:00Z</updated>
-    <author><name>Institute of Museum and Library Services</name></author>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Institute of Museum and Library Services | Application 2026-11-13 | The 21st Century Museum Professionals (21MP) grant program supports projects that build career pathways, strengthen professional networks, and identify and share effective workforce education and training practices in the museum field.</summary>
-  </entry>
-  <entry>
-    <title>Inspire Grants for Small Museums (2027)</title>
-    <link href="https://www.grants.gov/search-results-detail/363771"/>
-    <id>urn:funding-finder:grants-gov:363771</id>
-    <updated>2026-09-01T00:00:00Z</updated>
-    <author><name>Institute of Museum and Library Services</name></author>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Institute of Museum and Library Services | Application 2026-11-13 | Inspire Grants for Small Museums (Inspire) is a special initiative of the Museums for America grant program designed to support small museums of all disciplines, including small rural or small remote institutions and small museums that have not previously received federal funding. The program funds project-based efforts to serve the public through educational programs and exhibits, community partn…</summary>
-  </entry>
-  <entry>
-    <title>Laura Bush 21st Century Librarian Program (2027)</title>
-    <link href="https://www.grants.gov/search-results-detail/363765"/>
-    <id>urn:funding-finder:grants-gov:363765</id>
-    <updated>2026-09-01T00:00:00Z</updated>
-    <author><name>Institute of Museum and Library Services</name></author>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Institute of Museum and Library Services | Application 2026-11-13 | Laura Bush 21st Century Librarian (LB21) projects build a library and archival workforce that can meet the information needs of communities of all types and sizes and increase the institutional capacity of libraries, archives, and library and information science graduate programs across the country.</summary>
-  </entry>
-  <entry>
-    <title>Museum Grants for African American History and Culture (2027)</title>
-    <link href="https://www.grants.gov/search-results-detail/363770"/>
-    <id>urn:funding-finder:grants-gov:363770</id>
-    <updated>2026-09-01T00:00:00Z</updated>
-    <author><name>Institute of Museum and Library Services</name></author>
-    <category term="Arts and culture"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Institute of Museum and Library Services | Application 2026-11-13 | The Museum Grants for African American History and Culture (AAHC) program builds the capacity of African American museums and supports the growth and development of museum professionals at African American museums. The program supports projects that nurture museum professionals, build institutional capacity, and increase access to museum and archival collections at African American museums and His…</summary>
-  </entry>
-  <entry>
-    <title>Museum Grants for American Latino History and Culture (2027)</title>
-    <link href="https://www.grants.gov/search-results-detail/363772"/>
-    <id>urn:funding-finder:grants-gov:363772</id>
-    <updated>2026-09-01T00:00:00Z</updated>
-    <author><name>Institute of Museum and Library Services</name></author>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Institute of Museum and Library Services | Application 2026-11-13 | The Museum Grants for American Latino History and Culture (ALHC) program supports projects that build the capacity of American Latino history and culture museums to serve their communities and advance the growth and development of a professional workforce in American Latino cultural institutions.</summary>
-  </entry>
-  <entry>
-    <title>Museums Empowered (2027)</title>
-    <link href="https://www.grants.gov/search-results-detail/363776"/>
-    <id>urn:funding-finder:grants-gov:363776</id>
-    <updated>2026-09-01T00:00:00Z</updated>
-    <author><name>Institute of Museum and Library Services</name></author>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Institute of Museum and Library Services | Application 2026-11-13 | Museums Empowered: Professional Development Opportunities for Museum Staff is a special initiative of the Museums for America grant program, designed to support projects that use learning and training to generate change and growth within museums of all types and sizes.</summary>
-  </entry>
-  <entry>
-    <title>Museums for America (2027)</title>
-    <link href="https://www.grants.gov/search-results-detail/363768"/>
-    <id>urn:funding-finder:grants-gov:363768</id>
-    <updated>2026-09-01T00:00:00Z</updated>
-    <author><name>Institute of Museum and Library Services</name></author>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Institute of Museum and Library Services | Application 2026-11-13 | he Museums for America (MFA) program invests in museums of all sizes - from small to large - and disciplines in project-based efforts to serve the public through educational programs and exhibits, community partnerships, and collections stewardship activities.</summary>
-  </entry>
-  <entry>
-    <title>National Leadership Grants for Libraries (2027)</title>
-    <link href="https://www.grants.gov/search-results-detail/363766"/>
-    <id>urn:funding-finder:grants-gov:363766</id>
-    <updated>2026-09-01T00:00:00Z</updated>
-    <author><name>Institute of Museum and Library Services</name></author>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Institute of Museum and Library Services | Application 2026-11-13 | National Leadership Grants for Libraries (NLG-L) projects enhance the quality of library services nationwide. The program supports projects that: promote adult reading, and health and financial literacies; focus on programming and archival practices related to our shared American history; manage and preserve the national information infrastructure; serve the public’s information and education need…</summary>
-  </entry>
-  <entry>
-    <title>National Leadership Grants for Museums (2027)</title>
-    <link href="https://www.grants.gov/search-results-detail/363773"/>
-    <id>urn:funding-finder:grants-gov:363773</id>
-    <updated>2026-09-01T00:00:00Z</updated>
-    <author><name>Institute of Museum and Library Services</name></author>
-    <category term="Arts and culture"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Institute of Museum and Library Services | Application 2026-11-13 | The National Leadership Grants for Museums program (NLG-M) invests in projects that address critical needs of the museum field. NLG-M projects have the potential to advance practice in the profession to strengthen museum services for the public through the development and replication of model practices, tools, research findings, and collaborations, including through the creative and effective use …</summary>
   </entry>
   <entry>
     <title>Radiation Oncology-Biology Integration Network (ROBIN) Centers (U54 Clinical Trial Required)</title>
@@ -749,5 +621,138 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <summary>Naval Sea Systems Command (NAVSEA) | White Paper 2028-02-06 | Naval power and energy system research: power generation, storage, distribution, controls, advanced conductors, thermal management and modeling. Required white paper before invited full proposal. The current description extends receipt to February 6, 2033, while current SAM deadline metadata remains February 6, 2028. This entry deliberately uses the earlier 2028 deadline conservatively and retains…</summary>
+  </entry>
+  <entry>
+    <title>Innovative Traffic Safety Enforcement (ITSE) Grant Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363446"/>
+    <id>urn:funding-finder:grants-gov:363446</id>
+    <updated>2026-08-03T00:00:00Z</updated>
+    <author><name>National Highway Traffic Safety Administration</name></author>
+    <category term="Transportation"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>National Highway Traffic Safety Administration | Application 2027-03-01 | While the agency will consider innovative enhancements to existing countermeasures, the goal is to develop evidence-based projects that are scalable and transferable for use by State and local law enforcement agencies. The primary intent of this of the ITSE Grant Program is to 1) develop innovative traffic safety enforcement programs that demonstrate effectiveness by reducing the number of motor v…</summary>
+  </entry>
+  <entry>
+    <title>Unlocking Dataset Value for AI-Enabled Scientific Discovery (AI Datasets)</title>
+    <link href="https://www.grants.gov/search-results-detail/363268"/>
+    <id>urn:funding-finder:grants-gov:363268</id>
+    <updated>2026-07-21T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Technology development"/>
+    <category term="Data science"/>
+    <summary>U.S. National Science Foundation | Application 2027-11-03 | This program will advance scientific community datasets to enable scientific discovery and innovation using artificial intelligence (AI) and other methods. Its goal is to increase the value that can be derived from existing scientific datasets by leveraging novel methods and artificial intelligence (AI). This will unlock new AI-driven insights. It can enable interdisciplinary research. It also ena…</summary>
+  </entry>
+  <entry>
+    <title>DoW Rare Cancers Idea Development Award</title>
+    <link href="https://www.grants.gov/search-results-detail/362849"/>
+    <id>urn:funding-finder:grants-gov:362849</id>
+    <updated>2026-06-17T00:00:00Z</updated>
+    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
+    <category term="Cancer"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Defense Health Agency Contracting Activity - DHACA | Application 2026-11-18 | invitation required | Summary: The fiscal year 2026 (FY26) Rare Cancers Research Program (RCRP) Idea Development Award (IDA) promotes ideas that are ready for further development and have the potential to yield high-impact findings and new avenues of investigation. Distinctive Features: The RCRP encourages applicants to include an exploratory aim or sub-aim to support any necessary discovery-driven research. Preliminar…</summary>
+  </entry>
+  <entry>
+    <title>DoW Rare Cancers Resource and Community Development Award</title>
+    <link href="https://www.grants.gov/search-results-detail/362850"/>
+    <id>urn:funding-finder:grants-gov:362850</id>
+    <updated>2026-06-17T00:00:00Z</updated>
+    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
+    <category term="Cancer"/>
+    <category term="Community development"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Defense Health Agency Contracting Activity - DHACA | Application 2026-11-18 | invitation required | Summary: The fiscal year 2026 (FY26) Rare Cancers Research Program (RCRP) Resource and Community Development Award (RCDA) supports the development of research resources and clinical or preclinical datasets that will advance the field of rare cancers research and ultimately improve outcomes for individuals with rare cancers. Research supporting this funding opportunity should fill one of the follow…</summary>
+  </entry>
+  <entry>
+    <title>WaterSMART Cooperative Watershed Management Program</title>
+    <link href="https://www.grants.gov/search-results-detail/362755"/>
+    <id>urn:funding-finder:grants-gov:362755</id>
+    <updated>2026-06-10T00:00:00Z</updated>
+    <author><name>Bureau of Reclamation</name></author>
+    <category term="Energy"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Water"/>
+    <summary>Bureau of Reclamation | Application 2027-02-24 | The WaterSMART Cooperative Watershed Management Program funding opportunity invites eligible entities to apply for funding to develop local solutions to address their water management needs. This opportunity provides funding for watershed group development, restoration planning, and watershed management project planning and design. By providing this funding, Reclamation promotes water reliability …</summary>
+  </entry>
+  <entry>
+    <title>HEAL Initiative: Translating Addiction Epidemiology, Prevention, Treatment, and Recovery Research into Practice (R61/R33 - Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/362672"/>
+    <id>urn:funding-finder:grants-gov:362672</id>
+    <updated>2026-06-04T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Data science"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health | Application 2029-02-09 | The goal of this notice of funding opportunity (NOFO) is to address the opioid crisis and/or overdose events by supporting action-oriented research, accelerating the translation of addiction epidemiology, prevention, treatment services, and recovery research to practice. Proposed studies may target the individual, provider, organizational, community, or system level. This initiative prioritizes re…</summary>
+  </entry>
+  <entry>
+    <title>Research Interests of the Air Force Office of Scientific Research</title>
+    <link href="https://www.grants.gov/search-results-detail/362681"/>
+    <id>urn:funding-finder:grants-gov:362681</id>
+    <updated>2026-06-04T00:00:00Z</updated>
+    <author><name>Air Force Office of Scientific Research</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Transportation"/>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Materials science"/>
+    <category term="Quantum science"/>
+    <category term="Energy"/>
+    <category term="Data science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <summary>Air Force Office of Scientific Research | Posted | AFOSR plans, coordinates, and executes the Air Force Research Laboratory’s (AFRL) basic research program in response to technical guidance from AFRL and requirements of the Air Force. Additionally, the office fosters, supports, and conducts research within Air Force, university, and industry laboratories; and ensures transition of research results to support U.S. Air Force needs. The focus of AFOS…</summary>
+  </entry>
+  <entry>
+    <title>Native American Affairs: Fiscal Year 2025 Colorado River Basin Tribal Drought Resiliency Program</title>
+    <link href="https://www.grants.gov/search-results-detail/362644"/>
+    <id>urn:funding-finder:grants-gov:362644</id>
+    <updated>2026-06-02T00:00:00Z</updated>
+    <author><name>Bureau of Reclamation</name></author>
+    <category term="Energy"/>
+    <category term="Water"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Bureau of Reclamation | Application 2026-11-20 | The objectives of this NAA/TAP funding opportunity are to provide funding for drought relief actions/projects that mitigate drought impacts for designated federally recognized tribes within the Colorado River Basin (see Eligibility section for list of tribes), and which advance Presidential and Department of the Interior Priorities within the Basin. Proposals should meet one or more of the followi…</summary>
+  </entry>
+  <entry>
+    <title>DLA Emergent IV Research and Development Program</title>
+    <link href="https://sam.gov/opp/f727147c651f4d63b6ebb629d3feb37a/view"/>
+    <id>urn:funding-finder:sam-gov:sam-gov%3Af727147c651f4d63b6ebb629d3feb37a</id>
+    <updated>2026-06-02T00:00:00Z</updated>
+    <author><name>Defense Logistics Agency (DLA)</name></author>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Defense Logistics Agency (DLA) | White Paper 2027-06-12 | Emergent logistics research; current Amendment 40includes advanced/additive manufacturing, materials, energy and logistics technology. Open non-IDIQ white paper entry; technical/cost proposals follow a government request. Educational organizations may be prime offerors, subject to financial, accounting and other FAR responsibility standards. No small-business set-aside. Use only the current BAA ar…</summary>
+  </entry>
+  <entry>
+    <title>Early-Stage Development of Informatics Technologies for Cancer Research and Management (U01 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/359892"/>
+    <id>urn:funding-finder:grants-gov:359892</id>
+    <updated>2026-05-21T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Cancer"/>
+    <category term="Data science"/>
+    <category term="Public health"/>
+    <category term="Technology development"/>
+    <summary>National Institutes of Health | Application 2027-10-19 | This Notice of Funding Opportunity (NOFO) solicits applications for the development of enabling informatics technologies to improve the acquisition, management, analysis, and dissemination of data and knowledge across the cancer research continuum including cancer biology, cancer treatment and diagnosis, early cancer detection, risk assessment and prevention, cancer control and epidemiology. As a …</summary>
+  </entry>
+  <entry>
+    <title>Title XVI Water Reclamation and Reuse Projects</title>
+    <link href="https://www.grants.gov/search-results-detail/362396"/>
+    <id>urn:funding-finder:grants-gov:362396</id>
+    <updated>2026-05-14T00:00:00Z</updated>
+    <author><name>Bureau of Reclamation</name></author>
+    <category term="Energy"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Water"/>
+    <summary>Bureau of Reclamation | Application 2027-08-26 | Through WaterSMART, the Bureau of Reclamation (Reclamation) leverages Federal and non- Federal funding to work cooperatively with States, Tribes, and other entities as they plan for and implement actions to increase water supply and hydropower reliability. The WaterSMART Program demonstrably advances Trump administration priorities, such as those identified in Presidential Executive Order 14154 (J…</summary>
   </entry>
 </feed>
