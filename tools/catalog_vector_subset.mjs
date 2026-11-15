@@ -16,6 +16,13 @@ export const REMOVED_PARENTS = Object.freeze(['eere-exchange:DE-TA1-0003589',
 export const PARENT_CANDIDATE = '5801e4912b642ad70e4383b0f805adc95aad7d892b85f8b7638aeca958da85e6';
 const PARENT_MANIFEST_SHA = '13c34c94b4ca1fc76d67e07ee0271cdcfccd392b45f6d66786abf02d5215dee2';
 const ROSES_PARENT = 'cf3f76587bd136588a8b86ceb149224b34a10580a4a3fa64677df29a126d3487';
+const FOA_PARENT = 'e8bd098f1aca899ff496006f93b1b6648e88029b63d06c8f78c985ba77a8199e';
+const FOA_WITHDRAWAL = Object.freeze({
+  version: 'catalog-terminal-foa-subset-20261115-v1',
+  manifestSha: '1901e7b34963869df707ce8421f2de7cb692534d9c8b7eafc1d566b07b694125',
+  removedParents: Object.freeze(['363660']),
+  accounting: {API_request_count:6, usage_total_tokens:318161, estimated_cost_at_published_paid_pricing_usd:0.006363},
+});
 const ROSES_WITHDRAWAL = Object.freeze({
   version: 'catalog-terminal-roses-subset-20261113-v1',
   manifestSha: '04ff87ae51e717d115228a2bf1fb19ad8b03ec9363a203e649dbe31973f9f97c',
@@ -28,6 +35,8 @@ const OCTOBER_WITHDRAWAL = Object.freeze({
   removedParents: REMOVED_PARENTS,
   accounting: {API_request_count:6, usage_total_tokens:298906, estimated_cost_at_published_paid_pricing_usd:0.005978},
 });
+const POLICIES = new Map([[PARENT_CANDIDATE, OCTOBER_WITHDRAWAL],
+  [ROSES_PARENT, ROSES_WITHDRAWAL], [FOA_PARENT, FOA_WITHDRAWAL]]);
 const MANIFEST = 'data/search-v2-voyage-manifest.json';
 const BINARY = 'data/search-v2-voyage-vectors.f16';
 const CANARIES = 'data/search-v2-voyage-canaries.json';
@@ -130,9 +139,9 @@ export async function prepareProjection(parent, root) {
   require(!within(parent, root) && !within(root, parent), 'separate_materialized_root');
   const rawCandidate = await readFile(join(parent, '..', 'candidate.json'));
   const candidate = JSON.parse(rawCandidate);
-  const scope = candidate.candidate_id === ROSES_PARENT ? ROSES_WITHDRAWAL : OCTOBER_WITHDRAWAL;
+  const scope = POLICIES.get(candidate.candidate_id) || OCTOBER_WITHDRAWAL;
   require(digest(rawCandidate) === scope.manifestSha, 'pinned_parent_manifest');
-  require([PARENT_CANDIDATE, ROSES_PARENT].includes(candidate.candidate_id), 'pinned_parent_candidate');
+  require(POLICIES.has(candidate.candidate_id), 'pinned_parent_candidate');
   const originals = {};
   // Authenticate the full immutable parent, not only the selected vector rows.
   for (const [name, hash] of Object.entries(candidate.files)) {
@@ -155,7 +164,7 @@ export async function prepareProjection(parent, root) {
   const subtopics = assignment(originals[SUBTOPICS]);
   const projectedSubtopics = scope === OCTOBER_WITHDRAWAL ? subtopics :
     assignment(await readFile(checked(root, SUBTOPICS)));
-  if (scope === ROSES_WITHDRAWAL) {
+  if (scope !== OCTOBER_WITHDRAWAL) {
     for (const id of removed) require(same(subtopics.records[id]?.subtopics, []), 'withdrawn_subtopics_were_empty');
     const expected = {...subtopics, records:Object.fromEntries(Object.entries(subtopics.records)
       .filter(([id]) => !removed.has(id)))};

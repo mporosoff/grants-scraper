@@ -207,6 +207,7 @@ def fetch_detail(opp_id):
 
 def collect_attachments(detail):
     """Walk attachment folders and return likely primary NOFO PDFs first."""
+    from scripts.source_documents import nonprimary_document_reason
     attachments = []
     for folder in detail.get("synopsisAttachmentFolders") or []:
         for attachment in folder.get("synopsisAttachments", []) or []:
@@ -231,7 +232,6 @@ def collect_attachments(detail):
             )
 
     def rank(attachment):
-        from scripts.source_documents import is_doe_companion_document
         name = (attachment["file_name"] or "").lower()
         description = (attachment["description"] or "").lower()
         text = name + " " + description
@@ -267,7 +267,7 @@ def collect_attachments(detail):
             )
         )
         return (
-            is_doe_companion_document(attachment),
+            bool(nonprimary_document_reason(attachment)),
             not is_pdf,
             not looks_like_nofo,
             looks_supplemental,
@@ -356,8 +356,8 @@ def normalize(stub, detail):
     cost_share_detail = first_match(COST_SHARE_RE, text_blob)
 
     attachments = collect_attachments(detail)
-    from scripts.source_documents import is_doe_companion_document
-    nofo = next((item for item in attachments if not is_doe_companion_document(item)), None)
+    from scripts.source_documents import nonprimary_document_reason
+    nofo = next((item for item in attachments if not nonprimary_document_reason(item)), None)
     funding_link = source_record.get("fundingDescLinkUrl") or None
     document_urls = detail.get("synopsisDocumentURLs") or []
 
@@ -562,10 +562,17 @@ def is_closed(record, as_of):
 
 def prepare_records(records, as_of=None):
     """Deduplicate records and remove posted notices whose due date passed."""
+    from scripts.source_documents import is_verified_grants_closure
+
     as_of = as_of or utc_now().date()
     unique = {}
     unidentifiable = 0
+    closed_count = 0
     for record in records:
+        if is_verified_grants_closure(record.get('opportunity_id'), record.get('opportunity_number'),
+                                      record.get('agency_code'), as_of):
+            closed_count += 1
+            continue
         identity = record_identity(record)
         if not identity:
             unidentifiable += 1
@@ -574,9 +581,8 @@ def prepare_records(records, as_of=None):
         if current is None or record_rank(record) > record_rank(current):
             unique[identity] = record
 
-    deduplicated_count = len(records) - len(unique) - unidentifiable
+    deduplicated_count = len(records) - len(unique) - unidentifiable - closed_count
     current_records = []
-    closed_count = 0
     for record in unique.values():
         if is_closed(record, as_of):
             closed_count += 1

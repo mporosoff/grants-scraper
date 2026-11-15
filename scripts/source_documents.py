@@ -4,10 +4,21 @@ These are retrieval candidates, not accepted scientific or administrative
 facts. Existing bounded fetch, redirect, scope, and evidence gates still run.
 """
 from copy import deepcopy
+from datetime import date
 import re
+from urllib.parse import unquote
 
 
 DOE_PRIMARY_POLICY = 'doe-companion-primary-1'
+CLOSURE_PRIMARY_POLICY = 'closure-notice-primary-1'
+
+
+def is_verified_grants_closure(opportunity_id, opportunity_number, agency_code, as_of):
+    """Suppress the exact DOS-AF issuance after its verified closure."""
+    # Official Grants.gov closure attachment 355655, SHA-256
+    # bdc24d9315298a1e5bdf333accdaf499c1025f3fdb242c3ca5708a7145dad82a.
+    return (str(opportunity_id), opportunity_number, agency_code) == (
+        '363660', 'DFOP0019410', 'DOS-AF') and as_of >= date(2026, 11, 13)
 
 
 def is_doe_companion_document(document):
@@ -23,6 +34,25 @@ def is_doe_companion_document(document):
     return bool(name.lower().endswith('.pdf')
         and re.search(r'\bDE\s*FOA\s*\d{7}\b', identity, re.I)
         and re.search(r'\bPart\s*(?:2|II)\b', normalized, re.I))
+
+
+def is_closure_notice_document(document):
+    name = document.get('file_name') or document.get('name') or document.get('primary_document_name')
+    if not name:
+        url = document.get('download_url') or document.get('url') or document.get('primary_document_url') or ''
+        name = unquote(re.split(r'[?#]', str(url), maxsplit=1)[0].rsplit('/', 1)[-1])
+    normalized = re.sub(r'[\s_-]+', ' ', str(name).strip())
+    return bool(re.fullmatch(
+        r'(?:annual program statement|funding opportunity announcement|solicitation|nofo|foa) (?:closed|withdrawn)\.pdf',
+        normalized, re.I))
+
+
+def nonprimary_document_reason(document):
+    if is_doe_companion_document(document):
+        return 'doe_generic_companion'
+    if is_closure_notice_document(document):
+        return 'closure_notice'
+    return None
 
 
 def permitted_url(value):
@@ -49,10 +79,10 @@ def document_candidates(record):
             candidates.append({'url': value.get('url') or value.get('download_url'),
                                'name': value.get('name') or value.get('file_name'), 'role': 'attachment_candidate'})
     candidates.extend(deepcopy(record.get('official_document_candidates') or []))
-    companion_urls = {candidate.get('url') for candidate in candidates if is_doe_companion_document(candidate)}
+    nonprimary_urls = {candidate.get('url') for candidate in candidates if nonprimary_document_reason(candidate)}
     seen, output = set(), []
     for candidate in candidates:
-        if candidate.get('url') in companion_urls:
+        if candidate.get('url') in nonprimary_urls:
             continue
         url = permitted_url(candidate.get('url'))
         if not url or url in seen:

@@ -205,6 +205,32 @@ class SelectorAndLifecycleContracts(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, 'rejected_candidate_requires_exact_source_recovery'):
                 recovery.reject_quarantined({'candidate_id': recovery.ROSES_PARENT})
 
+    def test_foa_selector_and_quarantine_require_the_exact_rejected_run(self):
+        with patch.object(candidate, 'git', return_value='c' * 40):
+            env = self.environment() | {'CANDIDATE_ID': recovery.FOA_PARENT, 'CANDIDATE_RUN': str(recovery.FOA_RUN)}
+            result = recovery.plan(Path('.'), env)
+            self.assertEqual((result['stage'], result['candidate_run'], result['candidate_id'],
+                              result['openai'], result['anthropic']),
+                             (recovery.STAGE, str(recovery.FOA_RUN), recovery.FOA_PARENT, 'false', 'false'))
+            with self.assertRaisesRegex(ValueError, 'exact_protected_manual_selector'):
+                recovery.plan(Path('.'), env | {'CANDIDATE_RUN': str(recovery.ROSES_RUN)})
+            with self.assertRaisesRegex(ValueError, 'rejected_candidate_requires_exact_source_recovery'):
+                recovery.reject_quarantined({'candidate_id': recovery.FOA_PARENT})
+
+    def test_foa_source_scope_requires_the_closure_guard_and_rejects_unrelated_changes(self):
+        original = {'candidate_id': recovery.FOA_PARENT, 'dependency_groups': groups(), 'runtime_baseline': {}}
+        allowed = changed_group(original['dependency_groups'], 'source', 'scripts/build_catalog.py')
+        with patch.object(dependencies, 'snapshot', return_value=allowed), patch.object(candidate, 'git') as git:
+            recovery.dependency_scope(Path('.'), original)
+            git.assert_called_once_with(Path('.'), 'merge-base', '--is-ancestor', recovery.FOA_EVENT_SHA, 'HEAD')
+        with patch.object(dependencies, 'snapshot', return_value=original['dependency_groups']):
+            with self.assertRaisesRegex(ValueError, 'source_repair_required'):
+                recovery.verify_source_scope(Path('.'), original)
+        bad = changed_group(allowed, 'source', 'scripts/sources/adapters/nasa_roses.py')
+        with patch.object(dependencies, 'snapshot', return_value=bad):
+            with self.assertRaisesRegex(ValueError, 'bounded_dependency_changes'):
+                recovery.verify_source_scope(Path('.'), original)
+
     def test_workflow_stage_has_no_provider_secret_or_generation_allowance(self):
         workflow = yaml.safe_load((candidate.ROOT/'.github/workflows/refresh-opportunities.yml').read_text(encoding='utf8'))
         job = workflow['jobs'][recovery.STAGE]
