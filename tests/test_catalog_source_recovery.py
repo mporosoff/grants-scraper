@@ -194,6 +194,17 @@ class SelectorAndLifecycleContracts(unittest.TestCase):
                     env = self.environment(); env[key] = 'true' if key == 'QUALIFICATION_PILOT' else '17'
                     with self.assertRaisesRegex(ValueError, 'no_other_generation_or_recovery'): recovery.plan(Path('.'), env)
 
+    def test_roses_selector_only_accepts_its_pinned_run_and_candidate(self):
+        with patch.object(candidate, 'git', return_value='c' * 40):
+            env = self.environment() | {'CANDIDATE_ID': recovery.ROSES_PARENT, 'CANDIDATE_RUN': str(recovery.ROSES_RUN)}
+            result = recovery.plan(Path('.'), env)
+            self.assertEqual((result['stage'], result['candidate_run'], result['candidate_id']),
+                             (recovery.STAGE, str(recovery.ROSES_RUN), recovery.ROSES_PARENT))
+            with self.assertRaisesRegex(ValueError, 'exact_protected_manual_selector'):
+                recovery.plan(Path('.'), env | {'CANDIDATE_RUN': str(recovery.RUN)})
+            with self.assertRaisesRegex(ValueError, 'rejected_candidate_requires_exact_source_recovery'):
+                recovery.reject_quarantined({'candidate_id': recovery.ROSES_PARENT})
+
     def test_workflow_stage_has_no_provider_secret_or_generation_allowance(self):
         workflow = yaml.safe_load((candidate.ROOT/'.github/workflows/refresh-opportunities.yml').read_text(encoding='utf8'))
         job = workflow['jobs'][recovery.STAGE]
@@ -254,11 +265,47 @@ class SelectorAndLifecycleContracts(unittest.TestCase):
 
 
 class ProjectionIntegrationContracts(unittest.TestCase):
+    def test_roses_projection_rejects_changed_identity_and_keeps_the_canonical_closure(self):
+        from tools import catalog_roses_withdrawal as roses
+
+        cases = deepcopy(roses.CASES)
+        rows, events = [], []
+        for identifier, case in cases.items():
+            row = {'opportunity_id': identifier, 'agency': 'NASA Headquarters', 'source': 'NASA ROSES',
+                   'status': 'posted', 'close_date': None, 'next_submission': {'access': case['access']},
+                   'funding_opportunity_url': roses.NSPIRES % case['guid']}
+            event = {'id': case['event'], 'opportunity_id': identifier,
+                     'type': 'new', 'changed_at': roses.PARENT_CLOCK}
+            case.update(record=roses.record_hash(row), cache=roses.record_hash(row),
+                        event_hash=roses.record_hash(event))
+            rows.append(row)
+            events.append(event)
+        c2 = cases[roses.SOLAR_SYSTEM_ALIAS]
+        closure = {'id': roses.CANONICAL_EVENT, 'opportunity_id': '360004', 'type': 'closed_or_removed',
+                   'record': {'agency': 'NASA Headquarters', 'funding_opportunity_url': roses.NSPIRES % c2['guid'],
+                              'close_date': c2['deadline'], 'next_submission': {'event': {
+                                  'date': c2['deadline'], 'source_field': 'CloseDate', 'confidence': 'official_structured'}}}}
+        catalog = {'generated_at': roses.PARENT_CLOCK, 'opportunities': rows}
+        cache = {'sources': {'nasa-roses': {'records': deepcopy(rows)}}}
+        changes = {'events': events + [closure]}
+        audit_at = '2026-11-15T18:00:00+00:00'
+        with patch.object(roses, 'CASES', cases), patch.object(roses, 'CANONICAL_EVENT_SHA', roses.record_hash(closure)), \
+                patch.object(roses, 'withdraw_catalog_records', return_value={'opportunities': []}):
+            wrong = deepcopy(changes)
+            wrong['events'][-1]['record']['funding_opportunity_url'] = rows[0]['funding_opportunity_url']
+            with self.assertRaisesRegex(ValueError, 'exact_canonical_closure'):
+                roses.project_membership(catalog, cache, wrong, audit_at)
+            _, removals = roses.project_membership(catalog, cache, changes, audit_at)
+        self.assertEqual({entry['opportunity_id'] for entry in removals}, set(cases))
+        self.assertEqual(cache['sources']['nasa-roses']['records'], [])
+        self.assertEqual(changes['events'], [closure])
+
     def test_vector_proof_is_outside_materialized_root_and_historical_bytes_are_retained(self):
         from tools import catalog_record_withdrawal as withdrawal
         from scripts import update_catalog_docs as docs
         with tempfile.TemporaryDirectory(prefix='source-derive-') as temporary:
             bundle = Path(temporary)/'parent'; files = bundle/'files'; files.mkdir(parents=True)
+            candidate.write_json(bundle/'candidate.json', {'candidate_id': recovery.PARENT})
             original = {'README.md': b'Readme', 'PROJECT.md': b'Project', 'match_explorer.html': b'match', 'team_match.html': b'team',
                 'evaluation/search_v2_hybrid_vector_build.json': b'historical six requests',
                 'data/search-v2-voyage-canaries.json': b'original canaries'}

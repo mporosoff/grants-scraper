@@ -31,7 +31,6 @@ def policy():
 
 
 def corrected_catalog(before, evidence, audit_at):
-    from scripts.build_catalog import facet_counts, quality_metrics, build_search_index
     require({r['opportunity_id'] for r in evidence['removals']} == REMOVED
         and len(evidence['removals']) == len(REMOVED), 'fixed_withdrawal_set')
     audit = datetime.fromisoformat(audit_at.replace('Z', '+00:00'))
@@ -48,9 +47,16 @@ def corrected_catalog(before, evidence, audit_at):
         else:
             require(row['reason'] == 'officially_closed' and row['official_status'] == 'Closed'
                 and row['opportunity_id'] == 'eere-exchange:DE-TA1-0003589', 'official_terminal_evidence')
+    return withdraw_catalog_records(before, evidence['removals'], audit_at)
+
+
+def withdraw_catalog_records(before, removals, audit_at):
+    from scripts.build_catalog import facet_counts, quality_metrics, build_search_index
+
+    removed = {row['opportunity_id'] for row in removals}
     after = deepcopy(before)
-    after['opportunities'] = [r for r in after['opportunities'] if str(r['opportunity_id']) not in REMOVED]
-    require(len(before['opportunities']) - len(after['opportunities']) == len(REMOVED), 'exact_removal_count')
+    after['opportunities'] = [r for r in after['opportunities'] if str(r['opportunity_id']) not in removed]
+    require(len(before['opportunities']) - len(after['opportunities']) == len(removed), 'exact_removal_count')
     after['record_count'] = len(after['opportunities'])
     after['status_counts'] = dict(sorted(Counter(r['status'] for r in after['opportunities']).items()))
     after['facets'] = facet_counts(after['opportunities'])
@@ -63,7 +69,7 @@ def corrected_catalog(before, evidence, audit_at):
     # exact withdrawals, not a successful refresh of a whole migrated source.
     after['diagnostics']['record_withdrawal'] = {'audited_at': audit_at,
         'records': [{k: row[k] for k in ('opportunity_id', 'reason', 'official_evidence_url')}
-            for row in evidence['removals']], 'new_provider_requests': 0}
+            for row in removals], 'new_provider_requests': 0}
     after['catalog_audit_generated_at'] = audit_at
     return after
 

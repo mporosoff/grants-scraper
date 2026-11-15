@@ -131,6 +131,12 @@ _ROW_RE = re.compile(r"(?is)<tr[^>]*>(.*?)</tr>")
 _CELL_RE = re.compile(r"(?is)<t[hd][^>]*>(.*?)</t[hd]>")
 _HREF_RE = re.compile(r'href="([^"]+)"')
 _AMEND_RE = re.compile(r"Amend[%\s_]*(\d+)", re.IGNORECASE)
+_ROLLING_REFERENCE_RE = re.compile(r"\bNo Due Date\s*\[(\d+)\]", re.IGNORECASE)
+_ROLLING_NOTE_RE = re.compile(
+    r"\[(\d+)\]\s+Proposals for ([^\[\]]+?) may be submitted at any time up to "
+    r"([A-Za-z]+ \d{1,2}, \d{4})\b",
+    re.IGNORECASE,
+)
 
 
 def _text(fragment: str) -> str:
@@ -181,13 +187,18 @@ def classify_native_status(date_cells, is_overview: bool) -> str:
 def derive_currentness(element, today=None) -> str:
     """DERIVED, not native (§18.1 D⅝ S1). Kept separate on purpose.
 
-    `No Due Date` is rolling submission and counts as open; a dated element is
-    open until its last date passes. Everything else is undated -- not closed,
-    because NASA has not said so.
+    Rolling submissions stay open through the cutoff in their cited note.
+    A bare `No Due Date` is open. A dated element stays open until its last
+    date passes. Other elements have no resolved date.
     """
     today = today or _dt.date.today()
     status = element["native_status"]
     if status == NATIVE_NO_DUE_DATE:
+        cutoff = element.get("rolling_cutoff")
+        if cutoff is not None:
+            return DERIVED_OPEN if cutoff >= today else DERIVED_CLOSED
+        if _ROLLING_REFERENCE_RE.search(element.get("native_deadline_text") or ""):
+            return DERIVED_UNDATED
         return DERIVED_OPEN
     if status != NATIVE_DATED:
         return DERIVED_UNDATED
@@ -270,12 +281,26 @@ def catalog_roses_index(records) -> dict:
     return {"by_code": by_code, "unresolved": unresolved}
 
 
+def _rolling_notes(html: str) -> dict:
+    """Read the measured rolling-submission cutoff wording in Table 3's notes."""
+    notes = _text(re.split(r"</table\s*>", html, flags=re.IGNORECASE)[-1])
+    found = {}
+    for ref, title, stamp in _ROLLING_NOTE_RE.findall(notes):
+        try:
+            cutoff = _dt.datetime.strptime(stamp, "%B %d, %Y").date()
+        except ValueError:
+            continue
+        found.setdefault(ref, []).append((title.casefold(), cutoff))
+    return {ref: matches[0] for ref, matches in found.items() if len(matches) == 1}
+
+
 def parse_table(html: str) -> list[dict]:
     """Every Table 3 row, in NASA's appendix order, overview rows included.
 
     Order is preserved rather than sorted: appendix order *is* the hierarchy.
     """
     rows = []
+    rolling_notes = _rolling_notes(html or "")
     for position, match in enumerate(_ROW_RE.finditer(html or "")):
         fragment = match.group(1)
         cells = [_text(cell) for cell in _CELL_RE.findall(fragment)]
@@ -288,14 +313,21 @@ def parse_table(html: str) -> list[dict]:
         # Measured: 53 rows carry 4 cells and 17 carry 3, of which 16 colspan a
         # single status across both date columns and one simply omits a cell.
         date_cells = cells[2:] if len(cells) > 2 else []
+        title = cells[1] if len(cells) > 1 else ""
+        deadline_text = " | ".join(date_cells)
+        ref = _ROLLING_REFERENCE_RE.search(deadline_text)
+        note_title, cutoff = rolling_notes.get(ref[1], (None, None)) if ref else (None, None)
+        if note_title not in {title.casefold(), f"{cells[0]} {title}".casefold()}:
+            cutoff = None
         is_overview = bool(url and OVERVIEW_LINK in url)
         rows.append({
             "appendix_code": cells[0],
-            "title": cells[1] if len(cells) > 1 else "",
+            "title": title,
             "due_date_cells": date_cells,
             # NASA's own wording, before any normalisation, including the
             # (Step-1)/(Mandatory NOI)/(Phase-1 via ARK RPS) qualifiers.
-            "native_deadline_text": " | ".join(date_cells),
+            "native_deadline_text": deadline_text,
+            "rolling_cutoff": cutoff,
             "element_url": url,
             "is_overview": is_overview,
             "appendix_order": position,
@@ -504,7 +536,7 @@ class NasaRosesAdapter(SourceAdapter):
         framework's normalised-title test as well as on the code (§18.1 P8.3).
         """
         dates = [d for cell in element["due_date_cells"] for d in parse_dates(cell)]
-        close_date = max(dates) if dates else None
+        close_date = element.get("rolling_cutoff") or max(dates, default=None)
         return CanonicalOpportunity(
             title=(
                 f"ROSES{cycle_of(year)}: {element['appendix_code']} "
