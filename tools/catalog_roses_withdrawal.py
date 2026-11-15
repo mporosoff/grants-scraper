@@ -1,5 +1,5 @@
 """Replay two official ROSES closures against one retained catalog."""
-from datetime import datetime
+from datetime import datetime, timezone
 import json
 from pathlib import Path
 import tempfile
@@ -128,10 +128,26 @@ def project_sidecars(parent):
     }
 
 
+def current_feed_outputs(catalog, changes_xml, audit_at):
+    from scripts.build_feeds import build_feeds
+
+    audit = datetime.fromisoformat(audit_at).astimezone(timezone.utc)
+    # This projection has its own clock. The catalog and its history retain
+    # the original source timestamps used for search and release provenance.
+    feed_catalog = {'opportunities': catalog['opportunities'], 'generated_at': audit.isoformat()}
+    with tempfile.TemporaryDirectory(prefix='roses-withdrawal-feeds-') as directory:
+        root = Path(directory)
+        feeds = root / 'feeds'
+        feeds.mkdir()
+        (feeds / 'changes.xml').write_bytes(changes_xml)
+        build_feeds(feed_catalog, feeds, as_of=audit.date())
+        return {path.relative_to(root).as_posix(): path.read_bytes()
+                for path in feeds.rglob('*') if path.is_file()}
+
+
 def projection(parent, audit_at):
     from scripts.build_catalog import catalog_javascript_bytes, catalog_metadata_javascript_bytes
     from scripts.build_changes import build_atom
-    from scripts.build_feeds import build_feeds
     from scripts.sources.merge import load_catalog
 
     parent = Path(parent)
@@ -145,16 +161,9 @@ def projection(parent, audit_at):
         'data/catalog-metadata.js': catalog_metadata_javascript_bytes(catalog),
         'data/source_records.json': c.encoded(source),
         'feeds/changes.json': (json.dumps(changes, ensure_ascii=False, indent=2) + '\n').encode(),
-        'feeds/changes.xml': build_atom(changes['events'], datetime.fromisoformat(changes['generated_at'])).encode(),
     })
-    with tempfile.TemporaryDirectory(prefix='roses-withdrawal-feeds-') as directory:
-        root = Path(directory)
-        feeds = root / 'feeds'
-        feeds.mkdir()
-        (feeds / 'changes.xml').write_bytes(outputs['feeds/changes.xml'])
-        build_feeds(catalog, feeds, as_of=datetime.fromisoformat(PARENT_CLOCK).date())
-        outputs.update({path.relative_to(root).as_posix(): path.read_bytes()
-                        for path in feeds.rglob('*') if path.is_file()})
+    changes_xml = build_atom(changes['events'], datetime.fromisoformat(changes['generated_at'])).encode()
+    outputs.update(current_feed_outputs(catalog, changes_xml, audit_at))
     require(all(identifier.encode() not in raw for name, raw in outputs.items() for identifier in CASES
                 if name not in ('data/opportunities.js', 'data/catalog-metadata.js')),
             'no_withdrawn_record_in_current_projections')

@@ -520,6 +520,52 @@ class ScheduledHistory(unittest.TestCase):
         self.assertEqual(self.api.call_count, 2)
 
 
+class RosesRecoverySupersession(unittest.TestCase):
+    def test_only_the_published_replacement_can_retire_the_exact_rejected_recovery(self):
+        from tools import catalog_source_recovery as roses
+
+        rejected = roses.ROSES_REJECTED_RECOVERY
+        rejected_id, run_id = rejected['candidate_id'], rejected['run']
+        run = {'id': run_id, 'run_attempt': 1, 'head_sha': rejected['head'], 'head_branch': 'main',
+               'path': scheduled.WORKFLOW, 'event': 'workflow_dispatch', 'status': 'completed',
+               'conclusion': 'failure'}
+        names = {'candidate': 'candidate-' + rejected_id, 'projection': f'source-recovery-{run_id}-1',
+                 'review': f'publication-{rejected_id}-1'}
+        artifacts = [{'id': ident, 'name': names[role], 'digest': 'sha256:' + digest, 'expired': False}
+                     for role, (ident, digest) in rejected['artifacts'].items()]
+        repaired_run = str(run_id + 1)
+        repaired_sha = 'a' * 40
+        child = {'generation_run_id': str(roses.ROSES_RUN), 'generation_run_attempt': str(roses.ROSES_ATTEMPT),
+                 'generation_sha': roses.ROSES_EVENT_SHA, 'derived_from_candidate': roses.ROSES_PARENT,
+                 'assembly_sha': repaired_sha, 'source_recovery': {
+                     'version': roses.ROSES_VERSION, 'parent_candidate': roses.ROSES_PARENT,
+                     'parent_run': roses.ROSES_RUN, 'parent_manifest_sha256': roses.ROSES_MANIFEST_SHA,
+                     'superseded_recovery_candidate': rejected_id, 'superseded_recovery_run': run_id,
+                     'affected_generation': {'generation_run_id': repaired_run, 'generation_sha': repaired_sha}}}
+        child['candidate_id'] = c.digest(c.encoded(child))
+        pointer = {'candidate_id': child['candidate_id'], 'artifact_run': repaired_run}
+        revisions = 'published-revision'
+
+        def git_read(root, *args):
+            if args[0] == 'log':
+                return revisions
+            return json.dumps(pointer if args[-1].endswith('candidate-source.json') else child)
+
+        with patch.object(c, 'git', side_effect=git_read):
+            root = Path('unused')
+            self.assertTrue(scheduled._published_roses_supersedes(root, run, artifacts))
+            self.assertFalse(scheduled._published_roses_supersedes(root, run | {'run_attempt': 2}, artifacts))
+            self.assertFalse(scheduled._published_roses_supersedes(root, run, artifacts[:-1]))
+            self.assertFalse(scheduled._published_roses_supersedes(root, run,
+                artifacts + [{'name': f'generation-spend-reservation-{run_id}-2'}]))
+            revisions = ''
+            self.assertFalse(scheduled._published_roses_supersedes(root, run, artifacts))
+            revisions = 'published-revision'
+            pointer['artifact_run'] = str(run_id)
+            with self.assertRaisesRegex(scheduled.Hold, 'superseded candidate'):
+                scheduled._published_roses_supersedes(root, run, artifacts)
+
+
 class AccessParentSupersession(unittest.TestCase):
     def setUp(self):
         patch('tools.runtime_assembly_history.no_generation_allowance', return_value=False).start()

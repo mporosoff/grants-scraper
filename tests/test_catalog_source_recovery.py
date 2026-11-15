@@ -265,6 +265,30 @@ class SelectorAndLifecycleContracts(unittest.TestCase):
 
 
 class ProjectionIntegrationContracts(unittest.TestCase):
+    def test_roses_projection_uses_audit_clock_for_current_feeds(self):
+        from xml.etree import ElementTree
+        from tools import catalog_roses_withdrawal as roses
+
+        atom = '{http://www.w3.org/2005/Atom}'
+        opportunities = [
+            {'opportunity_id': identifier, 'title': identifier, 'source': 'Grants.gov', 'source_type': 'Federal',
+             'topic_areas': ['Arts and culture'], 'status': 'posted', 'close_date': deadline}
+            for identifier, deadline in [('363769', '2026-11-13'), ('364084', '2026-11-14'), ('open', '2026-11-15')]
+        ]
+        catalog = {'generated_at': roses.PARENT_CLOCK, 'opportunities': opportunities}
+        original = deepcopy(catalog)
+        history = b'<feed><id>Closing announcements</id></feed>\n'
+        outputs = roses.current_feed_outputs(catalog, history, '2026-11-15T18:30:00+00:00')
+        for path in ('feeds/all.xml', 'feeds/topic/arts-and-culture.xml', 'feeds/source-type/federal.xml'):
+            feed = ElementTree.fromstring(outputs[path])
+            self.assertEqual(feed.findtext(f'{atom}updated'), '2026-11-15T18:30:00Z')
+            self.assertEqual([entry.findtext(f'{atom}title') for entry in feed.findall(f'{atom}entry')], ['open'])
+        index = json.loads(outputs['feeds/index.json'])
+        self.assertEqual(index['generated_at'], '2026-11-15T18:30:00Z')
+        self.assertEqual(index['excluded_noncurrent'], 2)
+        self.assertEqual(outputs['feeds/changes.xml'], history)
+        self.assertEqual(catalog, original)
+
     def test_roses_projection_rejects_changed_identity_and_keeps_the_canonical_closure(self):
         from tools import catalog_roses_withdrawal as roses
 
