@@ -1714,14 +1714,18 @@ jobs:
               const marker = `<!-- funding-finder-checkpoint:${key} -->`;
               const previous = existing?.body || '';
               const previousMarker = previous.match(/^<!-- funding-finder-checkpoint:[A-Za-z0-9_-]+ -->\n\n/);
+              const initialBody = marker + '\n\n## First observed failure\n\n' + body;
               if (!existing) {
-                await github.rest.issues.create({...context.repo, title, body: marker + '\n\n## First observed failure\n\n' + body});
+                await github.rest.issues.create({...context.repo, title, body: initialBody});
               } else if (previousMarker?.[0].trim() !== marker) {
-                const separator = '\n\n<!-- funding-finder-latest-checkpoint -->\n';
-                const first = previousMarker ? previous.slice(previousMarker[0].length).split(separator, 1)[0] :
-                  '## First observed failure\n\n' + (previous || body);
-                await github.rest.issues.update({...context.repo, issue_number:existing.number,
-                  body: marker + '\n\n' + first + separator + '## Latest checkpoint\n\n' + body});
+                let updated = initialBody;
+                if (previous) {
+                  const separator = '\n\n<!-- funding-finder-latest-checkpoint -->\n';
+                  const first = previousMarker ? previous.slice(previousMarker[0].length).split(separator, 1)[0] :
+                    '## First observed failure\n\n' + previous;
+                  updated = marker + '\n\n' + first + separator + '## Latest checkpoint\n\n' + body;
+                }
+                await github.rest.issues.update({...context.repo, issue_number:existing.number, body: updated});
               }
             } else if (liveComplete || alreadyCurrent) {
               const {data: issues} = await github.rest.issues.listForRepo({...context.repo, state:'open', per_page:100});
@@ -1729,6 +1733,7 @@ jobs:
               if (needs.generate.outputs.sources_healthy === 'true') recovered.add('External funding source refresh degraded');
               for (const issue of issues.filter(issue => !issue.pull_request && recovered.has(issue.title))) {
                 await github.rest.issues.update({...context.repo, issue_number:issue.number, state:'closed', state_reason:'completed',
-                  body: (issue.body ? issue.body + '\n\n' : '') + '## Recovery after exact live verification\n\n' + body});
+                  body: (issue.body ? issue.body + '\n\n' : '') + '## Recovery after exact live verification\n\n' + body +
+                    '\n\nA source disabled for documented upstream unavailability is not represented as healthy.'});
               }
             }
