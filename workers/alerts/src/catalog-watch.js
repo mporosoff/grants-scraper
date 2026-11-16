@@ -28,7 +28,7 @@ async function readAsset(path, limit, key, fetchImpl) {
       "Cache-Control": "no-cache",
       "User-Agent": "FundingFinder-CatalogWatch/1.0 (+https://github.com/mporosoff/grants-scraper)",
     },
-    redirect: "error",
+    redirect: "manual",
     signal: AbortSignal.timeout(8_000),
   });
   if (!response.ok || !response.body) throw new Error("asset_unavailable");

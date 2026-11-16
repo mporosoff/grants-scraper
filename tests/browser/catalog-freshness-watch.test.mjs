@@ -39,7 +39,7 @@ async function publicAssets(sourceTime, { hash = null, stamp = RELEASE, fail = f
   ]);
   return async (url, options) => {
     assert.equal(url.hostname, "mporosoff.github.io");
-    assert.equal(options.redirect, "error");
+    assert.equal(options.redirect, "manual");
     assert.ok(assets.has(url.pathname));
     return fail ? new Response("", { status: 503 }) : new Response(assets.get(url.pathname));
   };
@@ -70,6 +70,28 @@ test("mixed public releases and HTTP failures cannot establish freshness", async
     assert.equal(result.freshness, "unknown");
     assert.equal(result.candidate_id, null);
   }
+});
+
+test("Workers-compatible manual redirects never follow a catalog asset redirect", async () => {
+  const now = new Date("2026-11-16T23:00:00Z");
+  const assets = await publicAssets("2026-11-16T20:00:00Z");
+  const requests = [];
+  const redirected = async (url, options) => {
+    requests.push(url.href);
+    assert.equal(options.redirect, "manual");
+    if (url.pathname.endsWith("/pages-release-sha.txt")) {
+      return new Response("Found", { status: 302, headers: {
+        Location: "https://example.invalid/replacement-marker.txt",
+      } });
+    }
+    return assets(url, options);
+  };
+  const result = await observeCatalog(now, redirected);
+  assert.equal(result.availability, "unavailable");
+  assert.equal(result.publication_sha, null);
+  assert.equal(requests.length, 3);
+  assert.ok(requests.every(url => new URL(url).hostname === "mporosoff.github.io"));
+  assert.equal((await observeCatalog(now, assets)).availability, "verified");
 });
 
 test("independent cron observations alert once per open problem and reject out-of-order writes", async () => {
