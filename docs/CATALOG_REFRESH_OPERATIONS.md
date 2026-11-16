@@ -10,6 +10,14 @@ Daily reporting distinguishes an already-current catalog, work due, recovery, an
 
 Team generation remains controlled separately by `config/offline_ai.json`; the schedule does not enable it or change any provider spending limit.
 
+## Independent public freshness check
+
+The Alerts Worker observes the public Pages marker, publication receipt, and exact catalog metadata once per hour on its existing Cloudflare retry schedule. Its read-only `/catalog-health` endpoint reports public publication availability, source freshness, and the age of the observation independently of Alerts delivery health. The source clock must fall in the current day's 10:17 UTC window by 6 p.m. Eastern. Before 6 p.m. the previous daily window is acceptable.
+
+The watcher records the first observation of each ongoing availability or freshness problem and emits one structured Worker log event when it opens. Freshness remains unresolved during a failed publication probe. A confirmed recovery clears the incident, and duplicate or out-of-order observations cannot reopen it. The endpoint returns HTTP 503 for an unverified, stale, or overdue observation. Its response contains only public release identifiers, source time, and record count.
+
+Deploy this check through the existing protected Alerts release. The first cron observation will populate the endpoint. It uses the additive `0008_catalog_watch.sql` migration and the existing Alerts database binding. A monitoring service can check the endpoint independently and group notifications by `publication_problem_since` or `stale_since`. Source coverage exceptions continue to be reported by the catalog workflow.
+
 ## September 28, 2026 incident
 
 At 17:37 UTC, GitHub had created no September 28 repository workflow runs despite the active 10:17 UTC schedule. The public catalog and current main agreed on the September 27 source timestamp. Cache-busted reads and exact public asset hashes ruled out a stale browser/CDN copy. Previous daily events had arrived several hours late. GitHub reported no current Actions outage; the exact provider-side reason for this missing event was not established.

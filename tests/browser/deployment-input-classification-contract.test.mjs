@@ -354,12 +354,24 @@ test("Alerts workflow guards version capture, D1 migration, deployment, and roll
     "Wait for the Alerts Worker health contract",
     "Run bounded Alerts Worker smokes",
   ]);
-  assert.doesNotMatch(workflowStep(alertsWorkflow, "Verify Pages serves the committed alert surfaces"), /deploy_required/);
+  assert.match(workflowStep(alertsWorkflow, "Select required Alerts release verification"),
+    /if \[ "\$ROUTE" != 'worker' \] \|\| \[ "\$DEPLOY_REQUIRED" = 'true' \]; then/);
+  for (const name of ["Verify the committed notice publication projection", "Verify Pages serves the committed alert surfaces"]) {
+    assert.match(workflowStep(alertsWorkflow, name), /steps\.verification\.outputs\.required == 'true'/);
+  }
   assert.equal(
     alertsWorkflow.indexOf("\n      - name: Apply committed D1 migrations"),
     alertsWorkflow.indexOf("\n      - name:", alertsWorkflow.indexOf("Reconfirm protected main immediately before Alerts Worker mutation")),
   );
   assert.match(alertsWorkflow, /if: \$\{\{ always\(\) && steps\.worker-deploy\.outcome == 'success'/);
+});
+
+test("Alerts only runs the deployment gates after an authenticated or manual handoff", () => {
+  assert.match(alertsWorkflow, /workflow_run\.head_repository\.full_name == github\.repository/);
+  assert.match(alertsWorkflow, /python -m tools\.alerts_release_handoff/);
+  assert.match(alertsWorkflow, /deploy:\s+if: .*needs\.handoff\.outputs\.route\)\s+needs: handoff/);
+  assert.match(workflowStep(alertsWorkflow, "Select the manual protected-main deployment"),
+    /if: github\.event_name == 'workflow_dispatch'[\s\S]*route=manual/);
 });
 
 for (const [name, workflow] of [["Alerts", alertsWorkflow], ["Awards", awardWorkflow]]) {

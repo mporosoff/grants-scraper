@@ -11,6 +11,7 @@ import {
   baselineIds, dispatchNotifications, dispatchVerificationDeliveries, evaluateSubscriptions,
 } from "./evaluator.js";
 import { ALERT_EMAIL_TEMPLATE_VERSION } from "./email.js";
+import { catalogWatchHealth, isCatalogWatchSlot, runCatalogWatch } from "./catalog-watch.js";
 import { createEmailProvider } from "./provider.js";
 import { D1AlertStore } from "./store.js";
 import { loadPublicAssets } from "./strong-match.js";
@@ -204,6 +205,15 @@ export function createHandler({
     if (request.method === "OPTIONS") return new Response(null, { status: 204, headers: headers(origin) });
     const path = url.pathname.replace(/\/+$/, "") || "/";
     const current = now();
+    if (path === "/catalog-health" && request.method === "GET") {
+      try {
+        const observation = await catalogWatchHealth(env.ALERTS_DB, current);
+        const healthy = observation.availability === "verified" && observation.freshness === "current";
+        return json(origin, healthy ? 200 : 503, observation);
+      } catch {
+        return json(origin, 503, { status: "catalog_watch_unavailable" });
+      }
+    }
     const config = serviceConfig(env);
     let store;
     try { store = storeFactory(env); }
@@ -859,5 +869,12 @@ const scheduled = createScheduledHandler();
 
 export default {
   fetch(request, env) { return handle(request, env); },
-  scheduled(controller, env, context) { context.waitUntil(scheduled(controller, env)); },
+  scheduled(controller, env, context) {
+    context.waitUntil(scheduled(controller, env));
+    if (isCatalogWatchSlot(controller)) {
+      context.waitUntil(runCatalogWatch(controller, env.ALERTS_DB).catch(() => {
+        console.warn(JSON.stringify({ event: "catalog_watch_storage_failed" }));
+      }));
+    }
+  },
 };
