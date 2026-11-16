@@ -1,6 +1,7 @@
 """Summarize an authenticated release attempt for observation only."""
 
 import argparse
+import base64
 import hashlib
 import os
 from pathlib import Path
@@ -141,26 +142,50 @@ def observe_review(name, report, repository, identifier):
     if type(report.get('schema_version')) is not int or report['schema_version'] != 1 or report.get('candidate_id') != identifier:
         raise ValueError('Lifecycle review checkpoint has conflicting identity')
     if name == 'review-ready.json':
-        match = re.fullmatch(rf'https://github\.com/{re.escape(repository)}/pull/({NUMBER})', str(report.get('pr_url')))
-        if not match:
-            raise ValueError('Untrusted lifecycle review PR')
-        status, number = 'review_ready', match[1]
+        if 'pr_url' in report and report['pr_url'] is None:
+            status, number = 'protected_publication_resume', None
+        else:
+            match = re.fullmatch(rf'https://github\.com/{re.escape(repository)}/pull/({NUMBER})', str(report.get('pr_url')))
+            if not match:
+                raise ValueError('Untrusted lifecycle review PR')
+            status, number = 'review_ready', match[1]
     else:
         status, number = report.get('status'), report.get('pr_number')
         allowed = {'review_findings'} if name == 'review-blocked.json' else {'awaiting_review', 'review_failed'}
         if status not in allowed or report.get('repository') != repository or report.get('production_mutated') is not False:
             raise ValueError('Invalid lifecycle review state')
-    return {
+    observed = {
         'status': status, 'candidate_id': identifier,
         'artifact_run': binding(report.get('artifact_run'), NUMBER, 'review candidate run'),
         'head_sha': binding(report.get('head_sha'), SHA, 'review head'),
-        'pr_number': binding(number, NUMBER, 'review PR'),
     }
+    if status != 'protected_publication_resume':
+        observed['pr_number'] = binding(number, NUMBER, 'review PR')
+    return observed
 
 
-def checkpoints(directory, origin, artifacts):
+def verify_protected_resume(read, review, readiness, release_sha, validation_digest):
+    base = binding(readiness.get('base_sha'), SHA, 'review base')
+    expected_digest = binding(readiness.get('validation_receipt_sha256'), DIGEST, 'review validation digest')
+    if base != review['head_sha'] or base != release_sha or expected_digest != validation_digest:
+        raise ValueError('Lifecycle protected resume disagrees with the plan or validation receipt')
+    path = 'release/candidate.json'
+    marker = archive._decode(read(f'contents/{path}?ref={base}'))
+    size = marker.get('size')
+    if (marker.get('path') != path or marker.get('encoding') != 'base64'
+            or type(size) is not int or not 0 < size <= MAX_REPORT_BYTES
+            or not isinstance(marker.get('content'), str) or len(marker['content']) > 2 * MAX_REPORT_BYTES):
+        raise ValueError('Untrusted lifecycle protected candidate marker')
+    raw = base64.b64decode(marker['content'].replace('\n', ''), validate=True)
+    if len(raw) != size:
+        raise ValueError('Lifecycle protected candidate marker size differs')
+    observe_candidate(archive._decode(raw), review['candidate_id'])
+
+
+def checkpoints(directory, origin, artifacts, read):
     attempt, repository = origin['run_attempt'], origin['repository']
     observed = {}
+    readiness, validation_digest = None, None
     for artifact in artifacts:
         label = artifact['name']
         if label == f'release-plan-{attempt}':
@@ -178,6 +203,7 @@ def checkpoints(directory, origin, artifacts):
                         raise ValueError('Lifecycle validation checkpoint has conflicting identity')
                     observed['validation'] = {'candidate_id': identifier,
                         'validation_sha': binding(report.get('validation_sha'), SHA, 'validation SHA')}
+                    validation_digest = candidate.digest(candidate.encoded(report))
             elif kind == 'publication':
                 reports = members(directory, artifact, {
                     'review-ready.json', 'review-pending.json', 'review-blocked.json', 'publication.json'})
@@ -187,6 +213,8 @@ def checkpoints(directory, origin, artifacts):
                 if reviews:
                     name, report = reviews[0]
                     observed['review'] = observe_review(name, report, repository, identifier)
+                    if observed['review']['status'] == 'protected_publication_resume':
+                        readiness = report
                 if 'publication.json' in reports:
                     report = reports['publication.json']
                     if report.get('candidate_id') != identifier:
@@ -210,6 +238,13 @@ def checkpoints(directory, origin, artifacts):
             expected_run = None
         if expected_run is not None and review['artifact_run'] != expected_run:
             raise ValueError('Lifecycle review names a different candidate artifact run')
+        if readiness is not None:
+            if expected_run is None:
+                raise ValueError('Lifecycle protected resume needs an exact candidate artifact run')
+            verify_protected_resume(read, review, readiness, plan.get('release_sha'), validation_digest)
+            for stage in ('publication', 'live'):
+                if stage in observed and observed[stage]['publication_sha'] != review['head_sha']:
+                    raise ValueError('Lifecycle protected resume changed publication SHA')
     if 'live' in observed and 'publication' in observed and observed['live'] != observed['publication']:
         raise ValueError('Lifecycle publication and live observations differ')
     return observed
@@ -226,7 +261,7 @@ def observe(repository, run, attempt, directory, *, api=None):
     if not jobs and (attempt != 1 or conclusion != 'cancelled' or inventory):
         raise ValueError('Missing native lifecycle jobs for completed release attempt')
     artifacts = observe_artifacts(Path(directory), source, conclusion, inventory)
-    summary = checkpoints(Path(directory), source, artifacts)
+    summary = checkpoints(Path(directory), source, artifacts, read)
     latest = archive._decode(read(f'actions/runs/{run}'))
     if archive._run_identity(repository, latest, run, attempt) != source or latest['conclusion'] != conclusion:
         raise ValueError('Native release attempt changed during observation')
@@ -251,8 +286,10 @@ def main():
                 f"Shadow observation for release run {source['run_id']} attempt {source['run_attempt']}. "
                 f"Run conclusion `{result['source_conclusion']}`, artifact status `{result['artifact_visibility']}`.\n")
             if review:
+                review_location = (f"review PR #{review['pr_number']}" if 'pr_number' in review
+                                   else 'protected main')
                 output.write(
-                    f"Observed `{review['status']}` for review PR #{review['pr_number']} "
+                    f"Observed `{review['status']}` for {review_location} "
                     f"at `{review['head_sha']}`, candidate `{review['candidate_id']}` "
                     f"from run {review['artifact_run']}.\n")
 

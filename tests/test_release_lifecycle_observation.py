@@ -1,6 +1,7 @@
 """Shadow observation binds exact attempts and never runs release operations."""
 
 from copy import deepcopy
+import base64
 import json
 from pathlib import Path
 import tempfile
@@ -13,6 +14,14 @@ from tools import release_lifecycle_observation as observer
 
 
 class ReleaseLifecycleObservation(unittest.TestCase):
+    def test_pending_review_cannot_omit_pr_number(self):
+        identifier = 'b' * 64
+        report = {'schema_version': 1, 'repository': REPOSITORY, 'candidate_id': identifier,
+                  'status': 'awaiting_review', 'production_mutated': False,
+                  'artifact_run': RUN, 'head_sha': SHA}
+        with self.assertRaisesRegex(ValueError, 'Invalid lifecycle review PR'):
+            observer.observe_review('review-pending.json', report, REPOSITORY, identifier)
+
     def setUp(self):
         temporary = tempfile.TemporaryDirectory()
         self.addCleanup(temporary.cleanup)
@@ -58,6 +67,26 @@ class ReleaseLifecycleObservation(unittest.TestCase):
                   'unpublished_details': 'must not appear in observation'} | overrides
         name = 'review-blocked.json' if status == 'review_findings' else 'review-pending.json'
         self.add(f'publication-{self.identifier}-{ATTEMPT}', **{name: report})
+
+    def add_protected_resume(self, *, publication_sha=None, **overrides):
+        self.add(f'release-plan-{ATTEMPT}', **{'release-plan.json': {
+            'release_sha': SHA, 'stage': 'publish', 'candidate_id': self.identifier, 'candidate_run': '77'}})
+        validation = {'candidate_id': self.identifier, 'validation_sha': 'b' * 40}
+        self.add(f'validation-{self.identifier}-{ATTEMPT}', **{'validation.json': validation})
+        ready = {'schema_version': 1, 'candidate_id': self.identifier, 'artifact_run': '77', 'head_sha': SHA,
+                 'base_sha': SHA, 'pr_url': None,
+                 'validation_receipt_sha256': candidate.digest(candidate.encoded(validation))} | overrides
+        reports = {'review-ready.json': ready}
+        if publication_sha:
+            publication = {'candidate_id': self.identifier, 'publication_sha': publication_sha}
+            reports['publication.json'] = publication
+            self.add(f'live-{self.identifier}-{ATTEMPT}',
+                     **{'live-verification.json': publication | {'verified': True}})
+        self.add(f'publication-{self.identifier}-{ATTEMPT}', **reports)
+        path = 'release/candidate.json'
+        content = candidate.encoded(self.manifest)
+        self.values[f'contents/{path}?ref={SHA}'] = {
+            'path': path, 'encoding': 'base64', 'size': len(content), 'content': base64.encodebytes(content).decode()}
 
     def test_exact_review_failure_retains_candidate_lineage_without_report_text(self):
         self.add(f'candidate-{self.identifier}', **{'candidate.json': self.manifest})
@@ -113,6 +142,68 @@ class ReleaseLifecycleObservation(unittest.TestCase):
         self.assertEqual(checkpoints['validation']['validation_sha'], SHA)
         self.assertEqual(checkpoints['publication'], publication)
         self.assertEqual(checkpoints['live'], publication)
+
+    def test_protected_publication_resume_verifies_without_a_new_review_pr(self):
+        self.add_protected_resume(publication_sha=SHA)
+        self.capture()
+        checkpoints = self.observe()['checkpoints']
+        self.assertEqual(checkpoints['review'], {'status': 'protected_publication_resume',
+                         'candidate_id': self.identifier, 'artifact_run': '77', 'head_sha': SHA})
+        self.assertEqual(checkpoints['live'], checkpoints['publication'])
+
+    def test_protected_resume_readiness_can_precede_a_publication_or_live_receipt(self):
+        self.add_protected_resume()
+        self.capture()
+        checkpoints = self.observe()['checkpoints']
+        self.assertEqual(checkpoints['review']['status'], 'protected_publication_resume')
+        self.assertNotIn('publication', checkpoints)
+        self.assertNotIn('live', checkpoints)
+
+    def test_protected_resume_is_not_inferred_when_the_path_is_not_explicitly_null(self):
+        report = {'schema_version': 1, 'candidate_id': self.identifier, 'head_sha': SHA,
+                  'artifact_run': '77'}
+        for url in ({}, {'pr_url': ''}, {'pr_url': 'https://github.com/other/repository/pull/1'}):
+            with self.subTest(url=url), self.assertRaisesRegex(ValueError, 'Untrusted lifecycle review PR'):
+                observer.observe_review('review-ready.json', report | url, REPOSITORY, self.identifier)
+
+    def test_protected_resume_rejects_a_different_candidate_run(self):
+        self.add_protected_resume(artifact_run='999')
+        self.capture()
+        with self.assertRaisesRegex(ValueError, 'different candidate artifact run'):
+            self.observe()
+
+    def test_protected_resume_rejects_a_wrong_validation_digest(self):
+        self.add_protected_resume(validation_receipt_sha256='c' * 64)
+        self.capture()
+        with self.assertRaisesRegex(ValueError, 'disagrees with the plan or validation receipt'):
+            self.observe()
+
+    def test_protected_resume_rejects_a_different_head(self):
+        self.add_protected_resume(head_sha='c' * 40)
+        self.capture()
+        with self.assertRaisesRegex(ValueError, 'disagrees with the plan or validation receipt'):
+            self.observe()
+
+    def test_protected_resume_rejects_a_base_outside_the_pinned_plan(self):
+        self.add_protected_resume(head_sha='c' * 40, base_sha='c' * 40)
+        self.capture()
+        with self.assertRaisesRegex(ValueError, 'disagrees with the plan or validation receipt'):
+            self.observe()
+
+    def test_protected_resume_rejects_a_different_published_sha(self):
+        self.add_protected_resume(publication_sha='c' * 40)
+        self.capture()
+        with self.assertRaisesRegex(ValueError, 'changed publication SHA'):
+            self.observe()
+
+    def test_protected_resume_rejects_marker_for_different_candidate(self):
+        self.add_protected_resume()
+        self.capture()
+        raw = candidate.encoded(self.manifest | {'candidate_id': 'f' * 64})
+        self.values[f'contents/release/candidate.json?ref={SHA}'].update(
+            size=len(raw), content=base64.b64encode(raw).decode())
+        with self.assertRaisesRegex(ValueError, 'candidate manifest has conflicting identity'):
+            self.observe()
 
     def test_changed_artifact_is_rejected(self):
         self.add_review('awaiting_review')
