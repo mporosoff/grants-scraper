@@ -10,14 +10,50 @@ on:
     branches: [main]
 permissions:
   contents: read
+  actions: read
 
 concurrency:
   group: funding-finder-alerts-release
   cancel-in-progress: false
 
 jobs:
+  handoff:
+    if: >-
+      github.ref == 'refs/heads/main' &&
+      (github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success') &&
+      (github.event_name != 'workflow_run' || github.event.workflow_run.head_repository.full_name == github.repository)
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    outputs:
+      route: ${{ steps.manual.outputs.route || steps.automatic.outputs.route }}
+    steps:
+      - name: Select the manual protected-main deployment
+        if: github.event_name == 'workflow_dispatch'
+        id: manual
+        run: echo 'route=manual' >> "$GITHUB_OUTPUT"
+      - uses: actions/checkout@v6
+        if: github.event_name == 'workflow_run'
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        if: github.event_name == 'workflow_run'
+        with:
+          python-version: "3.13"
+          cache: pip
+      - if: github.event_name == 'workflow_run'
+        run: python -m pip install -r requirements.txt
+      - name: Authenticate the exact immutable release handoff
+        if: github.event_name == 'workflow_run'
+        id: automatic
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python -m tools.alerts_release_handoff
+
   deploy:
-    if: github.ref == 'refs/heads/main' && (github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success')
+    if: github.ref == 'refs/heads/main' && contains(fromJSON('["catalog", "worker", "manual"]'), needs.handoff.outputs.route)
+    needs: handoff
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
@@ -28,37 +64,6 @@ jobs:
       - uses: actions/setup-node@v6
         with:
           node-version: "22"
-      - uses: actions/setup-python@v6
-        with:
-          python-version: "3.13"
-          cache: pip
-      - run: python -m pip install -r requirements.txt
-      - name: Verify the committed notice publication projection
-        run: python -m tools.verify_notice_publication
-      - name: Verify the bounded alert and Phase 5 release contracts
-        run: >-
-          node --check tools/classify_worker_deployment.mjs &&
-          node --check tools/validate_alert_capability_rotation.mjs &&
-          node --check assets/alerts-config.js &&
-          node --check assets/alerts.js &&
-          node --check assets/award-links.js &&
-          node --check assets/saved.js &&
-          node --check assets/app.js &&
-          node --check assets/match-explain.js &&
-          node --check assets/search-query.js &&
-          node --check assets/search-retrieval.js &&
-          node --check assets/search-v2-config.js &&
-          node --check assets/funded-awards.js &&
-          node --check workers/alerts/src/contract.js &&
-          node --check workers/alerts/src/crypto.js &&
-          node --check workers/alerts/src/email.js &&
-          node --check workers/alerts/src/evaluator.js &&
-          node --check workers/alerts/src/notification-families.js &&
-          node --check workers/alerts/src/index.js &&
-          node --check workers/alerts/src/provider.js &&
-          node --check workers/alerts/src/scheduler-budget.js &&
-          node --check workers/alerts/src/store.js &&
-          node --test tests/browser/alerts-phase2-contract.test.mjs tests/browser/alerts-phase3-contract.test.mjs tests/browser/deployment-input-classification-contract.test.mjs tests/browser/saved-contract.test.mjs tests/browser/phase5-release-contract.test.mjs
       - name: Capture and verify the protected main release base
         id: release-base
         shell: bash
@@ -82,6 +87,51 @@ jobs:
           set -euo pipefail
           npx --yes wrangler@4.125.0 deployments list --config workers/alerts/wrangler.jsonc --json > /tmp/alerts-worker-deployments.json
           node tools/classify_worker_deployment.mjs alerts /tmp/alerts-worker-deployments.json "$GITHUB_SHA"
+      - name: Select required Alerts release verification
+        id: verification
+        env:
+          ROUTE: ${{ needs.handoff.outputs.route }}
+          DEPLOY_REQUIRED: ${{ steps.worker-inputs.outputs.deploy_required }}
+        run: |
+          if [ "$ROUTE" != 'worker' ] || [ "$DEPLOY_REQUIRED" = 'true' ]; then
+            echo 'required=true' >> "$GITHUB_OUTPUT"
+          fi
+      - uses: actions/setup-python@v6
+        if: steps.verification.outputs.required == 'true'
+        with:
+          python-version: "3.13"
+          cache: pip
+      - if: steps.verification.outputs.required == 'true'
+        run: python -m pip install -r requirements.txt
+      - name: Verify the committed notice publication projection
+        if: steps.verification.outputs.required == 'true'
+        run: python -m tools.verify_notice_publication
+      - name: Verify the bounded alert and Phase 5 release contracts
+        if: steps.verification.outputs.required == 'true'
+        run: >-
+          node --check tools/classify_worker_deployment.mjs &&
+          node --check tools/validate_alert_capability_rotation.mjs &&
+          node --check assets/alerts-config.js &&
+          node --check assets/alerts.js &&
+          node --check assets/award-links.js &&
+          node --check assets/saved.js &&
+          node --check assets/app.js &&
+          node --check assets/match-explain.js &&
+          node --check assets/search-query.js &&
+          node --check assets/search-retrieval.js &&
+          node --check assets/search-v2-config.js &&
+          node --check assets/funded-awards.js &&
+          node --check workers/alerts/src/contract.js &&
+          node --check workers/alerts/src/crypto.js &&
+          node --check workers/alerts/src/email.js &&
+          node --check workers/alerts/src/evaluator.js &&
+          node --check workers/alerts/src/notification-families.js &&
+          node --check workers/alerts/src/index.js &&
+          node --check workers/alerts/src/catalog-watch.js &&
+          node --check workers/alerts/src/provider.js &&
+          node --check workers/alerts/src/scheduler-budget.js &&
+          node --check workers/alerts/src/store.js &&
+          node --test tests/browser/alerts-phase2-contract.test.mjs tests/browser/alerts-phase3-contract.test.mjs tests/browser/catalog-freshness-watch.test.mjs tests/browser/deployment-input-classification-contract.test.mjs tests/browser/saved-contract.test.mjs tests/browser/phase5-release-contract.test.mjs
       - name: Capture the active Alerts Worker version for rollback
         id: prior-worker
         if: ${{ steps.worker-inputs.outputs.deploy_required == 'true' }}
@@ -104,6 +154,7 @@ jobs:
           ' <<<"$deployments" 2>/dev/null || true)"
           echo "version_id=$prior_version" >> "$GITHUB_OUTPUT"
       - name: Verify Pages serves the committed alert surfaces and catalog
+        if: steps.verification.outputs.required == 'true'
         id: pages-verify
         shell: bash
         run: |
@@ -243,6 +294,32 @@ jobs:
           done
           echo "::error::The Alerts Worker health contract did not become available."
           exit 1
+      - name: Verify the independent catalog monitor route
+        id: catalog-watch-smoke
+        if: steps.worker-inputs.outputs.deploy_required == 'true'
+        shell: bash
+        run: |
+          report="$(mktemp)"
+          trap 'rm -f "$report"' EXIT
+          for attempt in $(seq 1 6); do
+            status="$(curl --silent --show-error --max-time 8 --output "$report" --write-out '%{http_code}' \
+              --header 'Accept: application/json' --header 'Cache-Control: no-cache' \
+              --user-agent 'FundingFinder-ReleaseVerifier/1.0 (+https://github.com/mporosoff/grants-scraper)' \
+              'https://funding-finder-alerts.urochestercheme.workers.dev/catalog-health')" || status=""
+            if jq -e --arg status "$status" '
+              if $status == "200" then
+                .status == "observed" and .availability == "verified" and .freshness == "current"
+              elif $status == "503" then
+                .status == "unobserved" or .status == "observation_overdue" or
+                  (.status == "observed" and (.freshness == "stale" or .freshness == "unknown"))
+              else false end
+            ' "$report" >/dev/null 2>&1; then
+              exit 0
+            fi
+            if [ "$attempt" -lt 6 ]; then sleep 5; fi
+          done
+          echo "::error::The catalog monitor route could not read its observation state."
+          exit 1
       - name: Run bounded Alerts Worker smokes
         id: worker-smoke
         if: ${{ steps.worker-inputs.outputs.deploy_required == 'true' && steps.worker-health.outputs.recovery_required != 'true' }}
@@ -266,7 +343,7 @@ jobs:
             echo "Existing deployed Alerts Worker version retained because deployment inputs were unchanged."
           } >> "$GITHUB_STEP_SUMMARY"
       - name: Restore the prior Alerts Worker after a failed release smoke
-        if: ${{ always() && steps.worker-deploy.outcome == 'success' && steps.prior-worker.outputs.version_id != '' && (steps.worker-health.outcome == 'failure' || steps.worker-smoke.outcome == 'failure' || steps.pages-verify.outcome == 'failure') }}
+        if: ${{ always() && steps.worker-deploy.outcome == 'success' && steps.prior-worker.outputs.version_id != '' && (steps.worker-health.outcome == 'failure' || steps.catalog-watch-smoke.outcome == 'failure' || steps.worker-smoke.outcome == 'failure' || steps.pages-verify.outcome == 'failure') }}
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
