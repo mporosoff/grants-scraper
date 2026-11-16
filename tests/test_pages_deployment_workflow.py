@@ -18,7 +18,8 @@ class PagesDeploymentWorkflowTests(unittest.TestCase):
 
     def test_owner_packages_exact_candidate_only_after_validation_worker_and_protected_merge(self):
         workflow = (ROOT / '.github/workflows/refresh-opportunities.yml').read_text()
-        ordered = ['tools.validate_release_candidate', 'Deploy changed Worker inputs',
+        ordered = ['tools.validate_release_candidate', 'Recheck feed freshness before changing the serving Worker',
+                   'Deploy changed Worker inputs', 'Recheck feed freshness at protected publication',
                    'tools.publish_release_candidate', 'tools.verify_release_live stage',
                    'actions/upload-pages-artifact@v5', 'uses: ./.github/workflows/pages.yml']
         positions = [workflow.index(value) for value in ordered]

@@ -47,3 +47,25 @@ jobs:
           if-no-files-found: error
           compression-level: 0
           retention-days: 90
+      - name: Observe the completed release and exact review checkpoint
+        id: observe
+        if: ${{ !cancelled() }}
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SOURCE_RUN: ${{ github.event.workflow_run.id }}
+          SOURCE_ATTEMPT: ${{ github.event.workflow_run.run_attempt }}
+        run: >-
+          python -m tools.release_lifecycle_observation
+          --run "$SOURCE_RUN" --attempt "$SOURCE_ATTEMPT"
+          --archive "$RUNNER_TEMP/release-checkpoint"
+          --output "$RUNNER_TEMP/release-observation.json"
+      - name: Retain the shadow lifecycle observation
+        if: ${{ !cancelled() && steps.observe.outcome == 'success' }}
+        continue-on-error: true
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-observation-${{ github.event.workflow_run.id }}-${{ github.event.workflow_run.run_attempt }}
+          path: ${{ runner.temp }}/release-observation.json
+          if-no-files-found: error
+          retention-days: 90
