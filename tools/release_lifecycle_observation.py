@@ -9,6 +9,7 @@ import re
 import zipfile
 
 from tools import release_candidate as candidate
+from tools.release_attempt_history import MAX_ATTEMPTS
 from tools import release_checkpoint_archive as archive
 
 
@@ -182,15 +183,46 @@ def verify_protected_resume(read, review, readiness, release_sha, validation_dig
     observe_candidate(archive._decode(raw), review['candidate_id'])
 
 
-def checkpoints(directory, origin, artifacts, read):
+def retained_checkpoint(directory, artifacts, prefix, member, through):
+    """Use the most recent applicable attempt, matching the release's selectors."""
+    pattern = re.compile(rf'{re.escape(prefix)}-({NUMBER})')
+    matches = [(int(match[1]), entry) for entry in artifacts if (match := pattern.fullmatch(entry['name']))]
+    if any(number > through for number, _ in matches):
+        raise ValueError('Future lifecycle checkpoint cannot belong to this attempt')
+    if not matches:
+        return None, None
+    producer, artifact = max(matches, key=lambda entry: entry[0])
+    return producer, members(directory, artifact, {member}).get(member)
+
+
+def verify_inherited_producer(read, origin, history, stage, producer):
+    current = origin['run_attempt']
+    if producer is None or not 0 <= current - producer < MAX_ATTEMPTS:
+        raise ValueError(f'Lifecycle protected resume needs a bounded {stage} producer')
+    for attempt in range(current, producer - 1, -1):
+        if attempt not in history:
+            run = origin['run_id']
+            meta = archive._decode(read(f'actions/runs/{run}/attempts/{attempt}'))
+            source = archive._run_identity(origin['repository'], meta, run, attempt)
+            if source != (origin | {'run_attempt': attempt}):
+                raise ValueError('Inherited lifecycle checkpoint belongs to a different protected run')
+            history[attempt] = observe_jobs(read, source)
+        if stage in history[attempt]:
+            if attempt == producer and history[attempt][stage]['conclusion'] == 'success':
+                return
+            break
+    raise ValueError(f'Lifecycle protected resume did not inherit its latest successful {stage} producer')
+
+
+def checkpoints(directory, origin, artifacts, jobs, read):
     attempt, repository = origin['run_attempt'], origin['repository']
     observed = {}
-    readiness, validation_digest = None, None
+    readiness, publication_validation = None, None
     for artifact in artifacts:
         label = artifact['name']
         if label == f'release-plan-{attempt}':
             report = members(directory, artifact, {'release-plan.json'})['release-plan.json']
-            observed['plan'] = observe_plan(report)
+            observed['plan'] = observe_plan(report) | {'producer_attempt': attempt}
         elif label.startswith('candidate-'):
             report = members(directory, artifact, {'candidate.json'})['candidate.json']
             observed['persisted_candidate'] = observe_candidate(report, label.removeprefix('candidate-'))
@@ -202,11 +234,12 @@ def checkpoints(directory, origin, artifacts, read):
                     if report.get('candidate_id') != identifier:
                         raise ValueError('Lifecycle validation checkpoint has conflicting identity')
                     observed['validation'] = {'candidate_id': identifier,
-                        'validation_sha': binding(report.get('validation_sha'), SHA, 'validation SHA')}
-                    validation_digest = candidate.digest(candidate.encoded(report))
+                        'validation_sha': binding(report.get('validation_sha'), SHA, 'validation SHA'),
+                        'producer_attempt': attempt}
             elif kind == 'publication':
                 reports = members(directory, artifact, {
-                    'review-ready.json', 'review-pending.json', 'review-blocked.json', 'publication.json'})
+                    'review-ready.json', 'review-pending.json', 'review-blocked.json',
+                    'publication.json', 'validation.json'})
                 reviews = [(name, report) for name, report in reports.items() if name.startswith('review-')]
                 if len(reviews) > 1:
                     raise ValueError('Conflicting lifecycle review checkpoints for the attempt')
@@ -215,6 +248,7 @@ def checkpoints(directory, origin, artifacts, read):
                     observed['review'] = observe_review(name, report, repository, identifier)
                     if observed['review']['status'] == 'protected_publication_resume':
                         readiness = report
+                        publication_validation = reports.get('validation.json')
                 if 'publication.json' in reports:
                     report = reports['publication.json']
                     if report.get('candidate_id') != identifier:
@@ -228,6 +262,13 @@ def checkpoints(directory, origin, artifacts, read):
                         raise ValueError('Lifecycle live checkpoint has conflicting identity')
                     observed['live'] = {'candidate_id': identifier,
                         'publication_sha': binding(report.get('publication_sha'), SHA, 'live publication SHA')}
+    if readiness is not None:
+        history = {attempt: jobs}
+        plan_attempt, plan_report = retained_checkpoint(directory, artifacts, 'release-plan', 'release-plan.json', attempt)
+        verify_inherited_producer(read, origin, history, 'plan', plan_attempt)
+        if plan_report is None:
+            raise ValueError('Lifecycle protected resume has no retained plan report')
+        observed['plan'] = observe_plan(plan_report) | {'producer_attempt': plan_attempt}
     review, plan = observed.get('review'), observed.get('plan', {})
     if review:
         if 'persisted_candidate' in observed:
@@ -241,6 +282,18 @@ def checkpoints(directory, origin, artifacts, read):
         if readiness is not None:
             if expected_run is None:
                 raise ValueError('Lifecycle protected resume needs an exact candidate artifact run')
+            identifier = review['candidate_id']
+            validation_attempt, validation = retained_checkpoint(
+                directory, artifacts, f'validation-{identifier}', 'validation.json', attempt)
+            verify_inherited_producer(read, origin, history, 'validate', validation_attempt)
+            if (validation is None or validation.get('candidate_id') != identifier
+                    or publication_validation is None
+                    or candidate.encoded(publication_validation) != candidate.encoded(validation)):
+                raise ValueError('Lifecycle protected resume did not consume the retained validation receipt')
+            validation_digest = candidate.digest(candidate.encoded(validation))
+            observed['validation'] = {'candidate_id': identifier,
+                'validation_sha': binding(validation.get('validation_sha'), SHA, 'validation SHA'),
+                'producer_attempt': validation_attempt}
             verify_protected_resume(read, review, readiness, plan.get('release_sha'), validation_digest)
             for stage in ('publication', 'live'):
                 if stage in observed and observed[stage]['publication_sha'] != review['head_sha']:
@@ -261,7 +314,7 @@ def observe(repository, run, attempt, directory, *, api=None):
     if not jobs and (attempt != 1 or conclusion != 'cancelled' or inventory):
         raise ValueError('Missing native lifecycle jobs for completed release attempt')
     artifacts = observe_artifacts(Path(directory), source, conclusion, inventory)
-    summary = checkpoints(Path(directory), source, artifacts, read)
+    summary = checkpoints(Path(directory), source, artifacts, jobs, read)
     latest = archive._decode(read(f'actions/runs/{run}'))
     if archive._run_identity(repository, latest, run, attempt) != source or latest['conclusion'] != conclusion:
         raise ValueError('Native release attempt changed during observation')

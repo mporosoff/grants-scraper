@@ -27,6 +27,7 @@ class ReleaseLifecycleObservation(unittest.TestCase):
         self.addCleanup(temporary.cleanup)
         self.directory = Path(temporary.name) / 'archive'
         self.artifacts = []
+        self.attempt = ATTEMPT
         job = {'name': 'publish', 'id': 8, 'run_id': int(RUN), 'run_attempt': ATTEMPT,
                'head_sha': SHA, 'head_branch': 'main', 'status': 'completed', 'conclusion': 'failure'}
         self.jobs = f'actions/runs/{RUN}/attempts/{ATTEMPT}/jobs?per_page=100&page=1'
@@ -56,10 +57,24 @@ class ReleaseLifecycleObservation(unittest.TestCase):
         self.values[f'actions/artifacts/{identifier}/zip'] = raw
 
     def capture(self):
-        archive.capture(REPOSITORY, RUN, ATTEMPT, self.directory, api=self.read)
+        archive.capture(REPOSITORY, RUN, self.attempt, self.directory, api=self.read)
 
     def observe(self):
-        return observer.observe(REPOSITORY, RUN, ATTEMPT, self.directory, api=self.read)
+        return observer.observe(REPOSITORY, RUN, self.attempt, self.directory, api=self.read)
+
+    def record_jobs(self, attempt, **stages):
+        metadata = run_metadata() | {'run_attempt': attempt}
+        self.values[f'actions/runs/{RUN}/attempts/{attempt}'] = metadata
+        if attempt == self.attempt:
+            self.values[f'actions/runs/{RUN}'] = metadata
+        path = f'actions/runs/{RUN}/attempts/{attempt}/jobs?per_page=100&page=1'
+        jobs = {row['name']: row for row in self.values.get(path, {}).get('jobs', [])}
+        first_id = max([100 * attempt] + [job['id'] for job in jobs.values()]) + 1
+        for identifier, (name, conclusion) in enumerate(stages.items(), start=first_id):
+            jobs[name] = {'name': name, 'id': identifier, 'run_id': int(RUN),
+                          'run_attempt': attempt, 'head_sha': SHA, 'head_branch': 'main',
+                          'status': 'completed', 'conclusion': conclusion}
+        self.values[path] = {'jobs': list(jobs.values()), 'total_count': len(jobs)}
 
     def add_review(self, status, **overrides):
         report = {'schema_version': 1, 'status': status, 'candidate_id': self.identifier, 'artifact_run': RUN,
@@ -68,21 +83,26 @@ class ReleaseLifecycleObservation(unittest.TestCase):
         name = 'review-blocked.json' if status == 'review_findings' else 'review-pending.json'
         self.add(f'publication-{self.identifier}-{ATTEMPT}', **{name: report})
 
-    def add_protected_resume(self, *, publication_sha=None, **overrides):
-        self.add(f'release-plan-{ATTEMPT}', **{'release-plan.json': {
+    def add_protected_resume(self, *, publication_sha=None, plan_attempt=None, validation_attempt=None,
+                             consumed_validation=None, **overrides):
+        plan_attempt = plan_attempt or self.attempt
+        validation_attempt = validation_attempt or self.attempt
+        self.record_jobs(plan_attempt, plan='success')
+        self.record_jobs(validation_attempt, validate='success')
+        self.add(f'release-plan-{plan_attempt}', **{'release-plan.json': {
             'release_sha': SHA, 'stage': 'publish', 'candidate_id': self.identifier, 'candidate_run': '77'}})
         validation = {'candidate_id': self.identifier, 'validation_sha': 'b' * 40}
-        self.add(f'validation-{self.identifier}-{ATTEMPT}', **{'validation.json': validation})
+        self.add(f'validation-{self.identifier}-{validation_attempt}', **{'validation.json': validation})
         ready = {'schema_version': 1, 'candidate_id': self.identifier, 'artifact_run': '77', 'head_sha': SHA,
                  'base_sha': SHA, 'pr_url': None,
                  'validation_receipt_sha256': candidate.digest(candidate.encoded(validation))} | overrides
-        reports = {'review-ready.json': ready}
+        reports = {'review-ready.json': ready, 'validation.json': consumed_validation or validation}
         if publication_sha:
             publication = {'candidate_id': self.identifier, 'publication_sha': publication_sha}
             reports['publication.json'] = publication
-            self.add(f'live-{self.identifier}-{ATTEMPT}',
+            self.add(f'live-{self.identifier}-{self.attempt}',
                      **{'live-verification.json': publication | {'verified': True}})
-        self.add(f'publication-{self.identifier}-{ATTEMPT}', **reports)
+        self.add(f'publication-{self.identifier}-{self.attempt}', **reports)
         path = 'release/candidate.json'
         content = candidate.encoded(self.manifest)
         self.values[f'contents/{path}?ref={SHA}'] = {
@@ -158,6 +178,74 @@ class ReleaseLifecycleObservation(unittest.TestCase):
         self.assertEqual(checkpoints['review']['status'], 'protected_publication_resume')
         self.assertNotIn('publication', checkpoints)
         self.assertNotIn('live', checkpoints)
+
+    def test_failed_jobs_rerun_binds_prior_plan_and_latest_validation_producers(self):
+        self.attempt = 3
+        self.record_jobs(self.attempt, publish='success', **{'verify-live': 'success'})
+        self.record_jobs(1, validate='success', publish='failure')
+        self.record_jobs(2, publish='failure')
+        self.add(f'validation-{self.identifier}-1', **{'validation.json': {
+            'candidate_id': self.identifier, 'validation_sha': 'c' * 40}})
+        self.add_protected_resume(plan_attempt=1, validation_attempt=2, publication_sha=SHA)
+        self.capture()
+        receipt = self.observe()
+        self.assertEqual(receipt['checkpoints']['review']['status'], 'protected_publication_resume')
+        self.assertEqual(receipt['checkpoints']['plan']['producer_attempt'], 1)
+        self.assertEqual(receipt['checkpoints']['validation']['producer_attempt'], 2)
+        self.assertEqual(receipt['checkpoints']['validation']['validation_sha'], 'b' * 40)
+        self.assertEqual(set(receipt['stages']), {'publish', 'verify-live'})
+
+    def test_current_or_intervening_failed_validation_supersedes_old_success(self):
+        self.attempt = 3
+        self.record_jobs(self.attempt, publish='failure')
+        self.record_jobs(2, validate='failure')
+        self.add_protected_resume(plan_attempt=1, validation_attempt=1)
+        self.capture()
+        with self.assertRaisesRegex(ValueError, 'latest successful validate producer'):
+            self.observe()
+        self.record_jobs(2, publish='failure', validate='skipped')
+        self.record_jobs(self.attempt, validate='failure')
+        with self.assertRaisesRegex(ValueError, 'latest successful validate producer'):
+            self.observe()
+
+    def test_protected_resume_does_not_substitute_older_passing_validation_for_latest_report(self):
+        self.add_protected_resume(plan_attempt=1, validation_attempt=1)
+        self.record_jobs(ATTEMPT, validate='failure')
+        self.add(f'validation-{self.identifier}-{ATTEMPT}', **{'validation-report.json': {'failed': True}})
+        self.capture()
+        with self.assertRaisesRegex(ValueError, 'latest successful validate producer'):
+            self.observe()
+
+    def test_protected_resume_rejects_future_plan_or_validation_artifact(self):
+        self.add_protected_resume(plan_attempt=1, validation_attempt=1)
+        self.add('release-plan-3', **{'release-plan.json': {'candidate_id': self.identifier}})
+        self.capture()
+        with self.assertRaisesRegex(ValueError, 'Future lifecycle checkpoint'):
+            self.observe()
+
+    def test_protected_resume_rejects_prior_attempt_from_another_protected_event(self):
+        self.add_protected_resume(plan_attempt=1, validation_attempt=1)
+        self.values[f'actions/runs/{RUN}/attempts/1']['event'] = 'push'
+        self.capture()
+        with self.assertRaisesRegex(ValueError, 'different protected run'):
+            self.observe()
+
+    def test_protected_resume_rejects_the_receipt_from_an_unrelated_validation(self):
+        self.add_protected_resume(plan_attempt=1, validation_attempt=1, consumed_validation={
+            'candidate_id': 'e' * 64, 'validation_sha': SHA})
+        self.capture()
+        with self.assertRaisesRegex(ValueError, 'did not consume the retained validation receipt'):
+            self.observe()
+
+    def test_pages_and_live_retry_does_not_relabel_the_prior_publication(self):
+        self.record_jobs(ATTEMPT, pages='success', **{'verify-live': 'success'})
+        publication = {'candidate_id': self.identifier, 'publication_sha': SHA}
+        self.add(f'publication-{self.identifier}-1', **{'publication.json': publication})
+        self.add(f'live-{self.identifier}-{ATTEMPT}', **{'publication.json': publication,
+                     'live-verification.json': publication | {'verified': True}})
+        self.capture()
+        checkpoints = self.observe()['checkpoints']
+        self.assertEqual(checkpoints, {'live': publication})
 
     def test_protected_resume_is_not_inferred_when_the_path_is_not_explicitly_null(self):
         report = {'schema_version': 1, 'candidate_id': self.identifier, 'head_sha': SHA,
