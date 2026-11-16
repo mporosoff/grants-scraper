@@ -23,6 +23,8 @@ class AlertsHandoffTests(unittest.TestCase):
                       'head_sha': self.control_sha, 'event': 'schedule',
                       'status': 'completed', 'conclusion': 'success'}
         self.jobs = {'plan': 'success', 'verify-live': 'success', 'closeout': 'success'}
+        self.prior_jobs = {}
+        self.latest_attempt = None
         self.artifacts = [{'name': f'live-{self.candidate_id}-{self.attempt}'}]
         self.files = dict.fromkeys(handoff.ALERTS_PAGES_FILES, 'd' * 64)
         self.manifest = {'candidate_id': self.candidate_id, 'files': self.files}
@@ -42,13 +44,18 @@ class AlertsHandoffTests(unittest.TestCase):
 
     def api(self, path):
         run_path = f'actions/runs/{self.run_id}'
-        attempt_path = f'{run_path}/attempts/{self.attempt}'
-        if path in {run_path, attempt_path}:
-            return json.dumps(self.event)
-        if path == f'{attempt_path}/jobs?per_page=100&page=1':
-            jobs = [dict(self.event, id=index, name=name, run_id=self.run_id, conclusion=conclusion)
-                    for index, (name, conclusion) in enumerate(self.jobs.items(), 1)]
-            return json.dumps({'total_count': len(jobs), 'jobs': jobs})
+        if path == run_path:
+            return json.dumps(dict(self.event, run_attempt=self.latest_attempt or self.attempt))
+        for number, outcomes in {**self.prior_jobs, self.attempt: self.jobs}.items():
+            attempt_path = f'{run_path}/attempts/{number}'
+            metadata = dict(self.event, run_attempt=number,
+                            conclusion='success' if number == self.attempt else 'failure')
+            if path == attempt_path:
+                return json.dumps(metadata)
+            if path == f'{attempt_path}/jobs?per_page=100&page=1':
+                jobs = [dict(metadata, id=index, name=name, run_id=self.run_id, conclusion=conclusion)
+                        for index, (name, conclusion) in enumerate(outcomes.items(), 1)]
+                return json.dumps({'total_count': len(jobs), 'jobs': jobs})
         if path == f'{run_path}/artifacts?per_page=100&page=1':
             return json.dumps({'total_count': len(self.artifacts), 'artifacts': self.artifacts})
         self.fail(f'Unexpected evidence request {path}')
@@ -62,6 +69,41 @@ class AlertsHandoffTests(unittest.TestCase):
         self.assertEqual(self.download.call_args.args[:3],
                          (self.repository, self.run_id, f'live-{self.candidate_id}-{self.attempt}'))
         self.assertEqual(self.verify_live.call_args.args[-2:], (self.manifest, self.head))
+
+    def test_closeout_only_retry_inherits_exact_live_receipt(self):
+        self.prior_jobs[1] = dict(self.jobs, closeout='failure')
+        self.jobs = {'closeout': 'success'}
+        self.artifacts = [{'name': f'live-{self.candidate_id}-1'}]
+        self.assertEqual(self.route(), 'catalog')
+        self.assertEqual(self.download.call_args.args[:3],
+                         (self.repository, self.run_id, f'live-{self.candidate_id}-1'))
+
+    def test_closeout_only_retry_of_worker_push_inherits_successful_plan_and_skipped_verify(self):
+        self.event.update(event='push', head_sha=self.head)
+        self.prior_jobs[1] = {'plan': 'success', 'verify-live': 'skipped', 'closeout': 'failure'}
+        self.jobs = {'closeout': 'success'}
+        with (patch.object(handoff, 'candidate_groups'), patch.object(handoff, 'snapshot'),
+              patch.object(handoff, 'changed_groups', return_value={})):
+            self.assertEqual(self.route(), 'worker')
+        self.verify_files.assert_called_once_with(self.root, self.files)
+        self.download.assert_not_called()
+
+    def test_newer_explicit_live_attempt_never_inherits_prior_success(self):
+        self.attempt = 3
+        self.event['run_attempt'] = self.attempt
+        self.prior_jobs[1] = dict(self.jobs, closeout='failure')
+        self.jobs = {'closeout': 'success'}
+        self.artifacts = [{'name': f'live-{self.candidate_id}-1'}]
+        for conclusion in ('failure', 'cancelled', 'skipped'):
+            self.prior_jobs[2] = {'verify-live': conclusion, 'closeout': 'failure'}
+            with self.subTest(conclusion=conclusion):
+                self.assertEqual(self.route(), 'skip')
+        self.download.assert_not_called()
+
+    def test_older_completion_does_not_launch_while_a_newer_attempt_exists(self):
+        self.latest_attempt = self.attempt + 1
+        self.assertEqual(self.route(), 'skip')
+        self.download.assert_not_called()
 
     def test_noop_schedule_and_unrelated_push_skip_catalog_gates(self):
         self.jobs['verify-live'] = 'skipped'

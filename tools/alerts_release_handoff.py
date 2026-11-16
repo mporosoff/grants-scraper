@@ -16,6 +16,23 @@ from tools.verify_release_live import validate_publication
 ALERTS_PAGES_FILES = ('match_explorer.html', 'funded_awards.html', 'data/opportunities.js')
 
 
+def inherited_jobs(repository, run, completed, *, api):
+    needed = {'plan', 'verify-live', 'closeout'}
+    outcomes = {}
+    for attempt in range(completed['run_attempt'], 0, -1):
+        if attempt != completed['run_attempt']:
+            completed_attempt = history.authenticate_attempt(repository, run, attempt, api=api)
+        else:
+            completed_attempt = completed
+        jobs = history._jobs(run, completed_attempt, api=api, full=False)
+        # Failed-job retries omit successful prerequisites. An explicit outcome,
+        # including a failure or a skip, supersedes all older evidence for that job.
+        outcomes.update({name: jobs[name] for name in needed - outcomes.keys() if name in jobs})
+        if needed == outcomes.keys():
+            break
+    return outcomes
+
+
 def verify_live_receipt(root, reports, manifest, head):
     publication = candidate.read_json(reports / 'publication.json')
     validation = candidate.read_json(reports / 'validation.json')
@@ -47,22 +64,26 @@ def automatic_handoff(root, repository, source, *, api, download=fetch):
     if (completed['conclusion'] != 'success' or completed['head_sha'] != source.get('head_sha')
             or completed['event'] != source.get('event')):
         raise ValueError('Alerts handoff recorded a different release attempt')
-    jobs = history._jobs(current, completed, api=api, full=False)
-    live_verified = (jobs.get('verify-live') or {}).get('conclusion') == 'success'
+    if current['run_attempt'] != attempt:
+        return 'skip'  # A newer retry now owns the handoff for this workflow run.
+    jobs = inherited_jobs(repository, current, completed, api=api)
+    live = jobs.get('verify-live', {})
+    live_verified = live.get('conclusion') == 'success'
     head = candidate.git(root, 'rev-parse', 'HEAD')
     direct_push = (completed['event'] == 'push' and completed['head_sha'] == head
-                   and (jobs.get('verify-live') or {}).get('conclusion') == 'skipped'
+                   and live.get('conclusion') == 'skipped'
                    and all((jobs.get(name) or {}).get('conclusion') == 'success' for name in ('plan', 'closeout')))
     if not live_verified and not direct_push:
         return 'skip'
 
     manifest = candidate.read_json(root / 'release/candidate.json')
     if live_verified:
+        producer = live['run_attempt']
         archives = [entry['name'] for entry in run_artifacts(run, api)
-                    if re.fullmatch(rf'live-[a-f0-9]{{64}}-{attempt}', entry['name'])]
+                    if re.fullmatch(rf'live-[a-f0-9]{{64}}-{producer}', entry['name'])]
         if len(archives) != 1:
             raise ValueError('Alerts handoff requires the exact attempt’s live verification artifact')
-        name = f'live-{manifest["candidate_id"]}-{attempt}'
+        name = f'live-{manifest["candidate_id"]}-{producer}'
         if archives[0] != name:
             return 'skip'  # A newer publication already superseded this completion.
         with TemporaryDirectory(prefix='alerts-release-') as directory:
