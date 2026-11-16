@@ -321,7 +321,8 @@ class CloseoutRetry(unittest.TestCase):
                 self.assertEqual(len(result['failures']), 1)
                 self.assertIn(reason, result['failures'][0])
                 self.assertEqual(len(result['writes']), 1)
-                self.assertEqual(result['writes'][0]['body'], result['body'])
+                self.assertIn('## First observed failure\n\n' + result['body'], result['writes'][0]['body'])
+                self.assertEqual(result['writes'][0]['body'].count(result['body']), 1)
                 if existing:
                     self.assertEqual(result['writes'][0]['issue_number'], 296)
                     self.assertNotIn('state', result['writes'][0])

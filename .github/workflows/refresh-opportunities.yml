@@ -1717,14 +1717,34 @@ jobs:
               const title = 'Funding Finder release checkpoint failed';
               const {data: issues} = await github.rest.issues.listForRepo({...context.repo, state:'open', per_page:100});
               const existing = issues.find(issue => !issue.pull_request && issue.title === title);
-              if (existing) await github.rest.issues.update({...context.repo, issue_number:existing.number, body});
-              else await github.rest.issues.create({...context.repo, title, body});
+              // Run URLs and attempts change on each schedule. The blocker
+              // identity and checkpoint should only notify when they change.
+              const subject = needs.plan.outputs.recovery_run || (hasCheckpoint ? candidate : originalStage);
+              const holdReason = checkpoint === 'held' ? planReason : '';
+              const key = Buffer.from(JSON.stringify([subject, checkpoint, heldStage, reviewCheckpoint, holdReason])).toString('base64url');
+              const marker = `<!-- funding-finder-checkpoint:${key} -->`;
+              const previous = existing?.body || '';
+              const previousMarker = previous.match(/^<!-- funding-finder-checkpoint:[A-Za-z0-9_-]+ -->\n\n/);
+              const initialBody = marker + '\n\n## First observed failure\n\n' + body;
+              if (!existing) {
+                await github.rest.issues.create({...context.repo, title, body: initialBody});
+              } else if (previousMarker?.[0].trim() !== marker) {
+                let updated = initialBody;
+                if (previous) {
+                  const separator = '\n\n<!-- funding-finder-latest-checkpoint -->\n';
+                  const first = previousMarker ? previous.slice(previousMarker[0].length).split(separator, 1)[0] :
+                    '## First observed failure\n\n' + previous;
+                  updated = marker + '\n\n' + first + separator + '## Latest checkpoint\n\n' + body;
+                }
+                await github.rest.issues.update({...context.repo, issue_number:existing.number, body: updated});
+              }
             } else if (liveComplete || alreadyCurrent) {
               const {data: issues} = await github.rest.issues.listForRepo({...context.repo, state:'open', per_page:100});
               const recovered = new Set(['Funding Finder release checkpoint failed', 'Automated Grants.gov refresh failed']);
               if (needs.generate.outputs.sources_healthy === 'true') recovered.add('External funding source refresh degraded');
               for (const issue of issues.filter(issue => !issue.pull_request && recovered.has(issue.title))) {
                 await github.rest.issues.update({...context.repo, issue_number:issue.number, state:'closed', state_reason:'completed',
-                  body: body + '\n\nRecovered after exact live verification. A source disabled for documented upstream unavailability is not represented as healthy.'});
+                  body: (issue.body ? issue.body + '\n\n' : '') + '## Recovery after exact live verification\n\n' + body +
+                    '\n\nA source disabled for documented upstream unavailability is not represented as healthy.'});
               }
             }
