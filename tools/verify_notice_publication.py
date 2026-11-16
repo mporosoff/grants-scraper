@@ -25,7 +25,7 @@ PUBLIC_FIELDS = ('document_evidence_status', 'document_evidence', 'document_sear
     'preliminary_stage_type', 'preliminary_required', 'next_submission', 'award_ceiling', 'award_source')
 
 
-VALIDATOR_VERSION = 'notice-publication-6'
+VALIDATOR_VERSION = 'notice-publication-7'
 
 
 def bounded_public_value(value, limit=2048):
@@ -261,17 +261,58 @@ def main():
     parser.add_argument('--catalog', type=Path, default=Path('data/opportunities.js'))
     parser.add_argument('--cache', type=Path, default=Path('data/document_evidence.json'))
     parser.add_argument('--subtopics', type=Path, default=Path('data/subtopics.js'))
+    parser.add_argument('--feeds', type=Path, default=Path('feeds'))
+    parser.add_argument('--as-of', type=date.fromisoformat, help='Explicit UTC audit day')
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument('--check-publication', action='store_true', help='Audit retained official evidence and public feeds')
+    mode.add_argument('--feeds-only', action='store_true', help='Recheck static feeds before serving mutation')
+    parser.add_argument('--allow-protected-baseline', action='store_true',
+                        help='Use the original day on a non-publishing audit of the exact protected candidate')
     parser.add_argument('--output', type=Path)
     parser.add_argument('--candidate-id', default='committed-working-copy')
     parser.add_argument('--detect', action='store_true', help='Report whether a coordinated manual checkpoint is needed; never authorize publication')
     args = parser.parse_args()
+    from tools.catalog_publication_evidence import (
+        change_snapshot_findings, changed_record_findings, is_protected_catalog,
+        protected_catalog, static_feed_findings)
     from scripts.subtopic_records import read_cache
-    report = verify(read_catalog(args.catalog), json.loads(args.cache.read_bytes()), read_cache(args.subtopics), candidate_id=args.candidate_id)
+    catalog = read_catalog(args.catalog)
+    if args.feeds_only:
+        report = {'schema_version': 2, 'candidate_id': args.candidate_id,
+                  'validator': 'static-feed-freshness', 'validator_version': VALIDATOR_VERSION,
+                  'source_requests': 0, 'provider_requests': 0, 'changes': []}
+    else:
+        cache = json.loads(args.cache.read_bytes())
+        report = verify(catalog, cache, read_cache(args.subtopics), candidate_id=args.candidate_id)
+    if args.check_publication or args.feeds_only:
+        as_of = args.as_of or datetime.now(timezone.utc).date()
+        report['audit_day'] = as_of.isoformat()
+        feed_day = as_of
+        if (args.check_publication and args.allow_protected_baseline
+                and is_protected_catalog(args.catalog, args.candidate_id)):
+            feed_day = date.fromisoformat(catalog['generated_at'][:10])
+        report['feed_audit_day'] = feed_day.isoformat()
+        report['changes'].extend(static_feed_findings(catalog, args.feeds, feed_day))
+        if args.check_publication:
+            report['changes'].extend(changed_record_findings(catalog, cache, protected_catalog(), as_of))
+            report['changes'].extend(
+                change_snapshot_findings(catalog, json.loads((args.feeds / 'changes.json').read_bytes())))
+        if report['changes'] and all(row.get('reason') in (
+                'static_feed_entry_is_not_current', 'static_feed_entry_has_stale_submission')
+                for row in report['changes']):
+            report['feed_recovery'] = {
+                'candidate_id': args.candidate_id, 'audit_day': feed_day.isoformat(),
+                'required_work': 'Derive updated static feeds from the exact retained catalog and revalidate the child candidate',
+                'source_requests': 0, 'provider_requests': 0}
+        report['changed_records'] = len({row['opportunity_id'] for row in report['changes']})
+        report['publication_ready'] = not report['changes']
     if args.output:
         args.output.parent.mkdir(parents=True, exist_ok=True)
         args.output.write_text(json.dumps(report, indent=2) + '\n', encoding='utf-8', newline='\n')
     print(json.dumps(report, sort_keys=True, ensure_ascii=False))
     if not report['publication_ready'] and not args.detect:
+        if args.feeds_only:
+            raise SystemExit('Static feeds need a retained-candidate correction before publication')
         raise SystemExit('Notice projection needs a coordinated generated package; retain the current release')
 
 

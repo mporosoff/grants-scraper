@@ -68,7 +68,8 @@ def final_integration(root, bundle, reports, previous=None, *, execute=subproces
     return report
 
 
-def validate(root, bundle, reports, previous=None, *, execute=subprocess.run, require_final_integration=False):
+def validate(root, bundle, reports, previous=None, *, execute=subprocess.run,
+             require_final_integration=False, release_stage=None):
     root, bundle, reports = Path(root), Path(bundle), Path(reports)
     if previous and not Path(previous).exists() and Path(previous).with_name('validation-report.json').exists():
         previous = Path(previous).with_name('validation-report.json')
@@ -98,9 +99,11 @@ def validate(root, bundle, reports, previous=None, *, execute=subprocess.run, re
         'frozen-query': ['node', 'tools/query_baseline.mjs', '--check'],
         'scoring': ['node', 'tools/p9_scoring_probe.mjs', '--check'],
         'no-drift': ['bash', 'tools/verify_no_drift.sh'],
-        'notice-projection': ['python', '-m', 'tools.verify_notice_publication', '--candidate-id', manifest['candidate_id'],
+        'notice-projection': ['python', '-m', 'tools.verify_notice_publication', '--check-publication', '--candidate-id', manifest['candidate_id'],
                               '--output', str(reports.resolve() / 'notice-projection.json')],
     }
+    if release_stage in ('validate', 'verify'):
+        commands['notice-projection'].append('--allow-protected-baseline')
     report = {'candidate_id': manifest['candidate_id'], 'generation_sha': manifest['generation_sha'],
               'validation_sha': candidate.git(root, 'rev-parse', 'HEAD'), 'timestamp': candidate.timestamp(),
               'identity': identity, 'gates': {}, 'production_mutated': False, 'next_retry_stage': 'validate'}
@@ -147,7 +150,8 @@ def main():
             final_integration(candidate.ROOT, args.bundle, args.reports, args.previous, recover_history=True)
         else:
             validate(candidate.ROOT, args.bundle, args.reports, args.previous,
-                     require_final_integration=args.require_final_integration)
+                     require_final_integration=args.require_final_integration,
+                     release_stage=os.environ.get('RELEASE_STAGE'))
     except Exception as error:
         # Dependency/provenance failures also need retained evidence even when
         # they precede the first gate. No provider credentials exist here.
