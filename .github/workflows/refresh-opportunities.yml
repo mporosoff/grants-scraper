@@ -1255,6 +1255,7 @@ jobs:
       - name: Validate a working copy of the persisted candidate or reuse its exact receipt
         env:
           FINAL_INTEGRATION_REQUIRED: ${{ github.event_name == 'workflow_dispatch' && inputs.final_integration && 'true' || 'false' }}
+          RELEASE_STAGE: ${{ needs.plan.outputs.stage }}
         run: >-
           python -m tools.validate_release_candidate --bundle "$RUNNER_TEMP/candidate"
           --reports "$RUNNER_TEMP/reports" --previous "$RUNNER_TEMP/previous-validation/validation.json"
@@ -1330,6 +1331,11 @@ jobs:
         run: |
           npx --yes wrangler@4.125.0 deployments list --config workers/search-voyage-proxy/wrangler.jsonc --json > "$RUNNER_TEMP/deployments.json"
           node tools/search_worker_checkpoint.mjs "$RUNNER_TEMP/candidate" "$RUNNER_TEMP/deployments.json" "$RUNNER_TEMP/reports/worker-checkpoint.json"
+      - name: Recheck feed freshness before changing the serving Worker
+        if: steps.review.outputs.review_ready == 'true'
+        run: >-
+          python -m tools.verify_notice_publication --feeds-only --candidate-id "$CANDIDATE_ID"
+          --output "$RUNNER_TEMP/reports/worker-feed-evidence.json"
       - name: Deploy changed Worker inputs before publishing Pages assets
         id: worker-deploy
         if: steps.worker-inputs.outputs.deploy_required == 'true'
@@ -1435,6 +1441,11 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: python -m tools.catalog_correction_release reuse-smoke --bundle "$RUNNER_TEMP/candidate" --reports "$RUNNER_TEMP/reports" --work "$RUNNER_TEMP/catalog-smokes"
+      - name: Recheck feed freshness at protected publication
+        if: steps.review.outputs.review_ready == 'true'
+        run: >-
+          python -m tools.verify_notice_publication --feeds-only --candidate-id "$CANDIDATE_ID"
+          --output "$RUNNER_TEMP/reports/publish-feed-evidence.json"
       - name: Materialize exact candidate bytes through protected publication and verify merged hashes
         if: steps.review.outputs.review_ready == 'true'
         id: publication
