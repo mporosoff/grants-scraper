@@ -169,3 +169,26 @@ class CatalogPublicationEvidenceTests(unittest.TestCase):
                              [('364174', 'static_feed_entry_has_stale_submission')])
             build_feeds(candidate, root, as_of=after_concept_paper)
             self.assertEqual(static_feed_findings(candidate, root, after_concept_paper), [])
+
+    def test_already_refreshed_atom_still_requires_audit_day_submission(self):
+        # The retained FDA 359816 record stays current through its April portal
+        # close. Jan 31 feeds show the March round, which is stale on March 2.
+        record = {'opportunity_id': '359816', 'source': 'Grants.gov', 'status': 'posted',
+                  'agency': 'Food and Drug Administration', 'close_date': '2027-04-01',
+                  'deadlines': [{'kind': 'letter_of_intent', 'date': '2027-01-30'},
+                                {'kind': 'application', 'date': '2027-03-01'},
+                                {'kind': 'application', 'date': '2027-04-01'}]}
+        candidate = catalog(record)
+        intermediate = date(2027, 1, 31)
+        later = date(2027, 3, 2)
+        with TemporaryDirectory() as directory:
+            root = Path(directory)
+            build_feeds(candidate, root, as_of=intermediate)
+            self.assertIn('Application 2027-03-01', (root / 'all.xml').read_text())
+            self.assertEqual(static_feed_findings(candidate, root, intermediate), [])
+            findings = static_feed_findings(candidate, root, later)
+            self.assertEqual([(item['opportunity_id'], item['reason']) for item in findings],
+                             [('359816', 'static_feed_entry_has_stale_submission')])
+            build_feeds(candidate, root, as_of=later)
+            self.assertIn('Application 2027-04-01', (root / 'all.xml').read_text())
+            self.assertEqual(static_feed_findings(candidate, root, later), [])

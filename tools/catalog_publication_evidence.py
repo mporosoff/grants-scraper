@@ -1,6 +1,5 @@
 """Release checks that compare retained official evidence with public surfaces."""
 from copy import deepcopy
-from datetime import date
 import hashlib
 import json
 import subprocess
@@ -159,10 +158,9 @@ def change_snapshot_findings(catalog, feed):
     return findings
 
 
-def static_feed_findings(catalog, feed_dir, as_of):
+def static_feed_findings(catalog, feed_dir, as_of, *, check_summaries=True):
     """Check actual Atom entries against canonical membership and the audit day."""
     records = {entry_id(row): row for row in catalog['opportunities']}
-    generation_day = date.fromisoformat(catalog['generated_at'][:10])
     paths = [feed_dir / 'all.xml', *sorted((feed_dir / 'source-type').glob('*.xml')),
              *sorted((feed_dir / 'topic').glob('*.xml'))]
     findings = []
@@ -179,11 +177,9 @@ def static_feed_findings(catalog, feed_dir, as_of):
                 findings.append(_finding(record_id(record), 'static_feed_entry_is_not_current', ('feed',),
                                          feed=name, currentness_reason=reason))
                 continue
-            if generation_day < as_of:
+            if check_summaries:
                 expected = summarize(record, as_of).replace('\u2014', '-').replace('\u2013', '-')
                 if entry.findtext(f'{ATOM}summary') != expected:
-                    before = summarize(record, generation_day).replace('\u2014', '-').replace('\u2013', '-')
-                    if expected != before and entry.findtext(f'{ATOM}summary') == before:
-                        findings.append(_finding(record_id(record), 'static_feed_entry_has_stale_submission',
-                                                 ('feed', 'next_submission'), feed=name))
+                    findings.append(_finding(record_id(record), 'static_feed_entry_has_stale_submission',
+                                             ('feed', 'next_submission'), feed=name))
     return findings

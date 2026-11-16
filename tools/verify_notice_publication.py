@@ -25,7 +25,7 @@ PUBLIC_FIELDS = ('document_evidence_status', 'document_evidence', 'document_sear
     'preliminary_stage_type', 'preliminary_required', 'next_submission', 'award_ceiling', 'award_source')
 
 
-VALIDATOR_VERSION = 'notice-publication-7'
+VALIDATOR_VERSION = 'notice-publication-8'
 
 
 def bounded_public_value(value, limit=2048):
@@ -288,11 +288,15 @@ def main():
         as_of = args.as_of or datetime.now(timezone.utc).date()
         report['audit_day'] = as_of.isoformat()
         feed_day = as_of
-        if (args.check_publication and args.allow_protected_baseline
-                and is_protected_catalog(args.catalog, args.candidate_id)):
+        protected_baseline = (args.check_publication and args.allow_protected_baseline
+                              and is_protected_catalog(args.catalog, args.candidate_id))
+        if protected_baseline:
             feed_day = date.fromisoformat(catalog['generated_at'][:10])
         report['feed_audit_day'] = feed_day.isoformat()
-        report['changes'].extend(static_feed_findings(catalog, args.feeds, feed_day))
+        # A non-publishing audit of the protected candidate retains its
+        # historical frame. Every new publication must match today's summary.
+        report['changes'].extend(static_feed_findings(
+            catalog, args.feeds, feed_day, check_summaries=not protected_baseline))
         if args.check_publication:
             report['changes'].extend(changed_record_findings(catalog, cache, protected_catalog(), as_of))
             report['changes'].extend(
