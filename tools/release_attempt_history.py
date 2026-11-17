@@ -332,6 +332,26 @@ def require_preflight_only_before_allocation(repository, run_meta, current_attem
             'prior_allowance_reserved': False, 'prior_provider_dispatch': False}
 
 
+def require_no_generation(repository, run_meta, artifacts, *, api):
+    """Prove every attempt only continued an existing candidate downstream."""
+    _trusted_meta(run_meta)
+    require(run_meta.get('status') == 'completed' and run_meta.get('conclusion') in TERMINAL,
+            'latest downstream attempt is not terminal')
+    _inventory(repository, run_meta, artifacts, api=api)
+    require(len({item['name'] for item in artifacts}) == len(artifacts),
+            'conflicting downstream artifact names')
+    for artifact in artifacts:
+        match = re.fullmatch(r'(?:release-plan|(?:validation|publication|live)-[a-f0-9]{64})-([1-9][0-9]*)',
+                             artifact['name'])
+        require(match is not None and int(match[1]) <= run_meta['run_attempt'],
+                'generation accounting or unknown artifact in downstream history')
+    for number in range(1, run_meta['run_attempt'] + 1):
+        attempt = authenticate_attempt(repository, run_meta, number, api=api)
+        jobs = _jobs(run_meta, attempt, api=api, full=number == 1)
+        require(all(job['conclusion'] == 'skipped' or name in DOWNSTREAM for name, job in jobs.items()),
+                'generation, correction or preflight work started')
+
+
 def require_downstream_only(repository, run_meta, producer_attempt, artifacts, *, api, allowed_candidate_ids=None):
     """Keep the original producer identity across later downstream-only retries."""
     original = authenticate_attempt(repository, run_meta, producer_attempt, api=api)

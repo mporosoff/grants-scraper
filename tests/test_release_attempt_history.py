@@ -63,6 +63,25 @@ class AttemptHistoryContracts(unittest.TestCase):
         return history.require_downstream_only(REPOSITORY, self.meta, 1, self.artifacts,
                                                api=self.api, allowed_candidate_ids=allowed)
 
+    def prepare_downstream_history(self):
+        self.meta.update(status='completed', conclusion='success')
+        self.attempts[2]['conclusion'] = 'success'
+        for job in self.jobs[1]:
+            job['conclusion'] = 'skipped'
+            if job['name'] in {'plan', 'candidate', 'closeout'}:
+                job['conclusion'] = 'success'
+            elif job['name'] == 'validate':
+                job['conclusion'] = 'failure'
+        self.jobs[2] = jobs(2, {'validate', 'closeout'})
+        for job in self.jobs[2]:
+            job['conclusion'] = 'success'
+        self.artifacts = [{'id': 10, 'name': 'release-plan-1', 'expired': False, 'digest': 'sha256:' + 'b' * 64},
+                          {'id': 11, 'name': 'validation-' + 'a' * 64 + '-2', 'expired': False,
+                           'digest': 'sha256:' + 'c' * 64}]
+
+    def no_generation(self):
+        return history.require_no_generation(REPOSITORY, self.meta, self.artifacts, api=self.api)
+
     def public_prefix_failure(self, attempt=1, *, failed_id='verify-sam-preflight'):
         raw = (history.candidate.ROOT / history.WORKFLOW).read_text(encoding='utf8')
         declared = yaml.safe_load(raw)['jobs']['generate']['steps']
@@ -239,6 +258,80 @@ class AttemptHistoryContracts(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'competing candidate'): self.downstream()
         self.downstream(allowed={98, 99})
         with self.assertRaises(ValueError): self.downstream(allowed={98})
+
+    def test_downstream_retry_authenticates_every_attempt_without_a_generation_owner(self):
+        self.prepare_downstream_history()
+        self.no_generation()
+        for attempt in (1, 2):
+            self.assertTrue(any(call.args[0] == f'actions/runs/200/attempts/{attempt}'
+                                for call in self.api.call_args_list))
+            self.assertTrue(any(f'/attempts/{attempt}/jobs?' in call.args[0]
+                                for call in self.api.call_args_list))
+
+    def test_retried_publication_of_an_existing_candidate_has_no_generation_owner(self):
+        self.prepare_downstream_history()
+        for job in self.jobs[1]:
+            if job['name'] == 'validate':
+                job['conclusion'] = 'success'
+            elif job['name'] == 'publish':
+                job['conclusion'] = 'failure'
+        self.jobs[2] = jobs(2, {'publish', 'pages', 'verify-live', 'closeout'})
+        for job in self.jobs[2]:
+            job['conclusion'] = 'success'
+            if job['name'] == 'pages':
+                job['name'] = 'pages / deploy'
+        self.artifacts.append({'id': 12, 'name': 'publication-' + 'a' * 64 + '-2'})
+        self.no_generation()
+
+    def test_downstream_history_rejects_any_started_producer_or_preflight_in_every_attempt(self):
+        self.prepare_downstream_history()
+        for attempt in (1, 2):
+            original = deepcopy(self.jobs[attempt])
+            for name in history.PRODUCERS | {'sam-preflight'}:
+                with self.subTest(attempt=attempt, name=name):
+                    self.jobs[attempt] = [job for job in deepcopy(original) if job['name'] != name]
+                    row = jobs(attempt, {name})[0]
+                    row.update(id=9000, conclusion='failure')
+                    self.jobs[attempt].append(row)
+                    with self.assertRaisesRegex(ValueError, 'work started'):
+                        self.no_generation()
+            self.jobs[attempt] = original
+
+    def test_downstream_history_rejects_missing_or_mismatched_attempt_evidence(self):
+        self.prepare_downstream_history()
+        original = deepcopy(self.attempts[1])
+        for field, value in (('run_attempt', 2), ('head_sha', 'b' * 40), ('status', 'in_progress')):
+            self.attempts[1] = original | {field: value}
+            with self.subTest(field=field), self.assertRaises(ValueError):
+                self.no_generation()
+        self.attempts[1] = original
+        self.jobs[1].pop()
+        with self.assertRaisesRegex(ValueError, 'missing declared'):
+            self.no_generation()
+
+    def test_downstream_history_allows_only_existing_bounded_lifecycle_reports(self):
+        self.prepare_downstream_history()
+        for prefix in ('publication', 'live'):
+            self.artifacts.append({'id': len(self.artifacts) + 20, 'name': prefix + '-' + 'a' * 64 + '-2'})
+        self.no_generation()
+        for name in ('generation-spend-reservation-200-1', 'generation-spend-state-200-1',
+                     'offline-ai-economical-ai-20260908-state-200-1', 'candidate-' + 'a' * 64,
+                     'offline-ai-reconcile-' + 'a' * 64 + '-reservation-200-2', 'unknown',
+                     'release-plan-3', 'validation-' + 'a' * 64 + '-3'):
+            self.artifacts.append({'id': 99, 'name': name})
+            with self.subTest(name=name), self.assertRaisesRegex(ValueError, 'accounting or unknown artifact'):
+                self.no_generation()
+            self.artifacts.pop()
+
+    def test_downstream_history_rejects_changed_or_duplicate_artifact_inventory(self):
+        self.prepare_downstream_history()
+        for replacement in (self.artifacts[:-1], self.artifacts + [deepcopy(self.artifacts[0])]):
+            with self.subTest(replacement=replacement), \
+                    patch.object(history, 'run_artifacts', return_value=replacement), self.assertRaises(ValueError):
+                self.no_generation()
+        self.artifacts.append(self.artifacts[0] | {'id': 99})
+        with self.assertRaisesRegex(ValueError, 'conflicting downstream artifact names'):
+            self.no_generation()
 
     def test_first_reservation_retains_new_zero_dispatch_proof_without_provider_requests(self):
         with tempfile.TemporaryDirectory() as directory:

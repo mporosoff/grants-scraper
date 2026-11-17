@@ -432,6 +432,37 @@ class ScheduledHistory(unittest.TestCase):
         with self.assertRaises(scheduled.Hold):
             self.discover()
 
+    def test_authenticated_downstream_retry_does_not_own_the_next_daily_generation(self):
+        from tools import release_attempt_history as history
+        self.runs[0].update(run_attempt=2, conclusion='success')
+        attempts = {number: self.workflow_run(200, run_attempt=number,
+                    conclusion='failure' if number == 1 else 'success') for number in (1, 2)}
+        attempt_jobs = {}
+        for number in (1, 2):
+            names = history.KNOWN_JOBS if number == 1 else {'validate', 'closeout'}
+            attempt_jobs[number] = [{'id': number * 100 + index, 'name': name, 'run_id': 200,
+                'run_attempt': number, 'head_sha': 'a' * 40, 'head_branch': 'main', 'status': 'completed',
+                'conclusion': 'success' if name in {'plan', 'candidate', 'validate', 'closeout'} else 'skipped'}
+                for index, name in enumerate(sorted(names), 1)]
+        next(job for job in attempt_jobs[1] if job['name'] == 'validate')['conclusion'] = 'failure'
+        self.jobs['200'] = attempt_jobs[2]
+        self.artifacts['200'] = [{'id': 10, 'name': 'release-plan-1', 'expired': False},
+                                {'id': 11, 'name': 'validation-' + 'a' * 64 + '-2', 'expired': False}]
+        original = self.response
+        def response(repository, path):
+            if path.startswith('actions/runs/200/attempts/'):
+                number = int(path.split('/')[4])
+                return json.dumps({'jobs': attempt_jobs[number], 'total_count': len(attempt_jobs[number])}
+                                  if '/jobs?' in path else attempts[number])
+            return original(repository, path)
+        self.api.side_effect = response
+        with patch.object(history, 'workflow_job_names', return_value=history.KNOWN_JOBS):
+            self.assertIsNone(self.discover())
+            self.assertEqual(self.guard_push()['stage'], 'generate')
+            attempt_jobs[1][0]['conclusion'] = 'failure'
+            with self.assertRaisesRegex(scheduled.Hold, 'no complete accounting'):
+                self.discover()
+
     def test_ambiguous_candidate_or_multiple_owners_hold(self):
         self.artifacts['200'] = [{'name': 'candidate-' + char * 64, 'expired': False} for char in ('c', 'd')]
         with self.assertRaises(scheduled.Hold):
