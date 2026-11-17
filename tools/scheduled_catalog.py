@@ -880,9 +880,17 @@ def prior_generation(root, environment, manifest):
                 jobs = [job for batch in _pages(repository, f'actions/runs/{identifier}/jobs', 'jobs') for job in batch]
                 if _only_preflight_stops(repository, run, jobs):
                     continue
+                if int(run.get('run_attempt', 1)) > 1:
+                    from tools.release_attempt_history import require_no_generation
+                    try:
+                        require_no_generation(repository, run, artifacts, api=lambda path: api(repository, path))
+                    except (ValueError, KeyError, TypeError, OSError, subprocess.SubprocessError) as error:
+                        raise Hold('Prior generation has no complete accounting/candidate evidence; '
+                                   'inspect its original run: ' + str(error), identifier) from error
+                    continue
                 producers = [job for job in jobs if job.get('name') in ('generate', 'assemble')]
                 corrections = [job for job in jobs if job.get('name') in ('catalog-correction', 'catalog-reconcile', 'program-area-revalidation', 'catalog-source-recovery', 'catalog-access-correction', 'catalog-identity-correction', 'catalog-url-correction')]
-                if (int(run.get('run_attempt', 1)) > 1 or len(producers) != 2 or len(corrections) > 7
+                if (len(producers) != 2 or len(corrections) > 7
                         or any(job.get('conclusion') != 'skipped' for job in producers + corrections)):
                     raise Hold('Prior generation has no complete accounting/candidate evidence; inspect its original run', identifier)
             else:
