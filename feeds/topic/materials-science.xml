@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml</id>
-  <updated>2026-11-15T20:37:53Z</updated>
+  <updated>2026-11-17T20:03:56Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>The State Component of the National Cooperative Geologic Mapping Program</title>
@@ -354,18 +354,6 @@
     <summary>U.S. National Science Foundation | Posted | The U.S. National Science Foundation Directorate for Mathematical and Physical Sciences (NSF MPS) supports multiple research programs at the frontiers of discovery in physics. Physics research supported by NSF MPS enables understanding of the fundamental aspects of nature at all scales, from the quantum effects inside atoms to the mysterious dark energy spanning the entire universe. The core resea…</summary>
   </entry>
   <entry>
-    <title>NSF Plasma Physics</title>
-    <link href="https://beta.nsf.gov/funding/opportunities/plasma-physics"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-bd193799390f4580</id>
-    <updated>2026-08-14T00:00:00Z</updated>
-    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <category term="Materials science"/>
-    <category term="Energy"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Application 2026-11-16</summary>
-  </entry>
-  <entry>
     <title>Doctoral New Investigator (DNI) Grants</title>
     <link href="https://www.acs.org/funding/grants/petroleum-research-fund/programs/doctoral-new-investigator-grants.html"/>
     <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-e1612e2acba631d2</id>
@@ -689,22 +677,6 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <summary>National Institute of Standards and Technology | Application 2027-10-29 | The CHIPS Incentives Program aims to catalyze long-term economically sustainable growth in the domestic semiconductor industry in support of U.S. economic and national security. This is the second Notice of Funding Opportunity under this program and seeks applications for projects for the construction, expansion, or modernization of commercial facilities for semiconductor materials and manufacturi…</summary>
   </entry>
   <entry>
-    <title>Plasma Physics</title>
-    <link href="https://www.grants.gov/search-results-detail/350018"/>
-    <id>urn:funding-finder:grants-gov:350018</id>
-    <updated>2023-08-29T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Catalysis and reaction engineering"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Manufacturing"/>
-    <category term="Materials science"/>
-    <category term="Technology development"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>U.S. National Science Foundation | Application 2026-11-16 | Proposals in the area of plasma physics submitted to the Division of Physics that are not governed by another solicitation (such as CAREER), should be submitted to the Division-wide solicitation: Division of Physics: Investigator-Initiated Research Projects. The Plasma Physics program participates in multiple NSF meta-programs such as the ECosytem for Leading Innovation in Plasma Science and Engin…</summary>
-  </entry>
-  <entry>
     <title>Research Experiences for Undergraduates (REU)</title>
     <link href="https://www.grants.gov/search-results-detail/348985"/>
     <id>urn:funding-finder:grants-gov:348985</id>
@@ -837,5 +809,34 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Materials science"/>
     <category term="Technology development"/>
     <summary>Idaho Field Office | Application 2030-10-14 | A. STATEMENT OF OBJECTIVESThis Funding Opportunity Announcement (FOA) is to award multiple cooperative agreements to accredited United States (U.S.) two- and four-year colleges and universities (Institutions of Higher Education (IHEs)) to receive and administer scholarship and fellowship funding-provided through the University Nuclear Leadership Program (UNLP) and as administered by the Department…</summary>
+  </entry>
+  <entry>
+    <title>Science of Learning and Augmented Intelligence (SL)</title>
+    <link href="https://www.grants.gov/search-results-detail/320753"/>
+    <id>urn:funding-finder:grants-gov:320753</id>
+    <updated>2019-09-19T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Data science"/>
+    <category term="Education and workforce"/>
+    <category term="Materials science"/>
+    <category term="Neuroscience"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>U.S. National Science Foundation | Application 2027-02-10 | Science of Learning and Augmented Intelligence (SL) supports potentially transformative research that develops basic theoretical insights and fundamental knowledge about principles, processes and mechanisms of learning, and about augmented intelligence - how human cognitive function can be augmented through interactions with others or with technology, or through variations in context. The program …</summary>
+  </entry>
+  <entry>
+    <title>Crosscutting Activities in Materials Research</title>
+    <link href="https://www.grants.gov/search-results-detail/308873"/>
+    <id>urn:funding-finder:grants-gov:308873</id>
+    <updated>2018-09-08T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Data science"/>
+    <category term="Education and workforce"/>
+    <category term="Health equity"/>
+    <category term="Materials science"/>
+    <summary>U.S. National Science Foundation | Posted | Crosscutting Activities in Materials Research (XC) coordinates and supports crosscutting activities within the Division of Materials Research (DMR) and more broadly across NSF.
+The emphasis within XC is diversity and inclusion, international cooperation, and education (including experiential learning at REU/RET Sites). Additionally, activities that broadly engage the community, such as summer scho…</summary>
   </entry>
 </feed>

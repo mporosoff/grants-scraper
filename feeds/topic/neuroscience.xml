@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/neuroscience.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/neuroscience.xml</id>
-  <updated>2026-11-15T20:37:53Z</updated>
+  <updated>2026-11-17T20:03:56Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIH Stroke Clinical Trials Network (StrokeNet) Infrastructure - National Coordinating Center (NCC) and National Data Management Center (NDMC)</title>
@@ -425,16 +425,6 @@ immunology, microbiome, structural biology, cellular physiology, cancer biology,
 we will not consider for support include Covid-19 relat…</summary>
   </entry>
   <entry>
-    <title>Global Brain and Nervous System Disorders Research Across the Lifespan - Exploratory Grants</title>
-    <link href="https://www.grants.gov/search-results-detail/360660"/>
-    <id>urn:funding-finder:grants-gov:360660</id>
-    <updated>2026-08-14T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Neuroscience"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health | Estimated Application 2026-11-15 | The Fogarty International Center, with NINDS, NIMH, NIA, NIEHS, NICHD, NEI, NIDCD, and NCCIH, intends to continue support of neuro-health research through the Global Brain and Nervous System Disorders Research Across the Lifespan program. Awards will catalyze and strengthen collaborative research on the brain and nervous system that leverages the unique scientific contexts of low- and middle-incom…</summary>
-  </entry>
-  <entry>
     <title>Causal Hypotheses on the Oral-Systemic Health Impacts of Human Behaviors among People with Chronic Conditions (U01 Clinical Trial Not Allowed)</title>
     <link href="https://www.grants.gov/search-results-detail/360160"/>
     <id>urn:funding-finder:grants-gov:360160</id>
@@ -650,5 +640,17 @@ we will not consider for support include Covid-19 relat…</summary>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <summary>National Institutes of Health | Application 2027-02-16 | Reissue of RFA-20-351. The purpose of this Notice of Funding Opportunity (NOFO) is to encourage applications to pursue invasive neural recording studies focused on mental health-relevant questions. Invasive neural recordings provide an unparalleled window into the human brain to explore the neural circuitry and neural dynamics underlying complex moods, emotions, cognitive functions, and behaviors …</summary>
+  </entry>
+  <entry>
+    <title>Neuromodulation/Neurostimulation Device Development for Mental Health Applications (R01 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/357309"/>
+    <id>urn:funding-finder:grants-gov:357309</id>
+    <updated>2024-11-21T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Neuroscience"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>National Institutes of Health | Application 2028-01-07 | The purpose of this Notice of Funding Opportunity (NOFO) is to encourage applications seeking to develop the next generation of brain stimulation devices for treating mental health disorders. Applications are sought that will either 1) develop novel brain stimulation devices or 2) significantly enhance, by means of hardware/software improvements, the effectiveness of brain stimulation devices that…</summary>
   </entry>
 </feed>

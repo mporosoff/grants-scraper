@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-15T19:58:50.879Z",
+  "generated_at": "2026-11-17T20:06:50.004Z",
   "status": "written",
   "build_mode": "production_full_rebuild",
   "reuse_reason": "homogeneous_unstable_identity",
@@ -8,20 +8,8 @@
   "batch_space_checks": [
     {
       "exact_match": false,
-      "minimum_cosine": 0.999967,
+      "minimum_cosine": 0.999966,
       "mean_cosine": 0.99997,
-      "gross_discontinuity": false
-    },
-    {
-      "exact_match": false,
-      "minimum_cosine": 0.999968,
-      "mean_cosine": 0.999973,
-      "gross_discontinuity": false
-    },
-    {
-      "exact_match": false,
-      "minimum_cosine": 0.999999,
-      "mean_cosine": 0.999999,
       "gross_discontinuity": false
     },
     {
@@ -32,8 +20,20 @@
     },
     {
       "exact_match": false,
-      "minimum_cosine": 0.999967,
-      "mean_cosine": 0.99997,
+      "minimum_cosine": 0.999963,
+      "mean_cosine": 0.999974,
+      "gross_discontinuity": false
+    },
+    {
+      "exact_match": false,
+      "minimum_cosine": 0.999963,
+      "mean_cosine": 0.999974,
+      "gross_discontinuity": false
+    },
+    {
+      "exact_match": false,
+      "minimum_cosine": 0.999968,
+      "mean_cosine": 0.999971,
       "gross_discontinuity": false
     }
   ],
@@ -46,15 +46,15 @@
   "response_model": "voyage-4-lite",
   "input_type": "document",
   "API_key_printed_or_persisted": false,
-  "passage_count": 1459,
+  "passage_count": 1437,
   "reused_passage_count": 0,
-  "embedded_passage_count": 1459,
-  "removed_prior_passage_count": 32,
-  "corpus_sha256": "c7d870de138107b179158e5bda8aa6beebaa2800ee077ddf0eff05d893c48aac",
-  "vector_sha256": "4ca53d79a97e1f0b00274e172aa2b947c0f00ebeff81e25b5572bc9d9c238cf8",
+  "embedded_passage_count": 1437,
+  "removed_prior_passage_count": 25,
+  "corpus_sha256": "9eda124e6cf7c9011465da60a59705c30e87f2c27c45236275c203a1f3282332",
+  "vector_sha256": "302beb4c37a3197b64b50066a32a567414fb427e3a4e80b4b929a0b908d1984d",
   "vector_format": "float16-le",
-  "vector_bytes": 2988032,
-  "build_timestamp": "2026-11-15T19:58:50.879Z",
+  "vector_bytes": 2942976,
+  "build_timestamp": "2026-11-17T20:06:50.004Z",
   "model_space_fingerprint": "37d9ac1cd65a58d876d8c25324c1e6d2fba361cc088c87b987c0ccc1658d1865",
   "model_space": {
     "canary_set_version": 1,
@@ -81,20 +81,20 @@
   },
   "source_hashes": {
     "assets/search-hybrid.js": "ed418efea1ed6eaf68eda8476361e96a9adaf8d35c523c08b05f41bdb99ff229",
-    "data/opportunities.js": "122025906e5f943a202b64ca823a61185baee3c7bde07537cc5cab5a8ee31080",
-    "data/subtopics.js": "1b9f12d03296284b1904acf2ecb2a81dce8935beb3856ce677e362f575f3ceac"
+    "data/opportunities.js": "e295591b8797e89dbeacdab90ff19cca895d644548be091b6bb381b981c9f501",
+    "data/subtopics.js": "a825d381f1eb06b37d987696275c97eb4912e45504e8209153b5f30da61d978f"
   },
   "API_requests": [
     {
       "batch_index": "model-space-canaries",
       "passage_count": 256,
       "http_status": 200,
-      "request_id": "dd7fff8ee8578d5ea101c9b836341104",
+      "request_id": "d2f47d487b280c1bbe1c4838fb4290db",
       "model": "voyage-4-lite",
       "usage_total_tokens": 27310,
       "request_payload_bytes": 152201,
       "response_payload_bytes": 3257583,
-      "latency_ms": 910.13228,
+      "latency_ms": 900.204931,
       "request_kind": "model_space_canaries",
       "canary_input_count": 6,
       "corpus_passage_count": 250
@@ -103,12 +103,12 @@
       "batch_index": 1,
       "passage_count": 256,
       "http_status": 200,
-      "request_id": "14f0c24afe61b272edb6a3e892dcdff1",
+      "request_id": "c156c680550fb979ee64580781e8022d",
       "model": "voyage-4-lite",
-      "usage_total_tokens": 66791,
-      "request_payload_bytes": 365322,
-      "response_payload_bytes": 3257597,
-      "latency_ms": 918.477289,
+      "usage_total_tokens": 66848,
+      "request_payload_bytes": 365607,
+      "response_payload_bytes": 3257544,
+      "latency_ms": 865.478533,
       "request_kind": "corpus_passages",
       "corpus_passage_count": 250,
       "canary_input_count": 6
@@ -117,12 +117,12 @@
       "batch_index": 2,
       "passage_count": 256,
       "http_status": 200,
-      "request_id": "53f2fc1fa5a947268274b6d92c93b83e",
+      "request_id": "90719b2c2cce696fbe1c4838fb429fd6",
       "model": "voyage-4-lite",
-      "usage_total_tokens": 59256,
-      "request_payload_bytes": 321693,
-      "response_payload_bytes": 3257402,
-      "latency_ms": 1027.402934,
+      "usage_total_tokens": 59126,
+      "request_payload_bytes": 321150,
+      "response_payload_bytes": 3257034,
+      "latency_ms": 726.792361,
       "request_kind": "corpus_passages",
       "corpus_passage_count": 250,
       "canary_input_count": 6
@@ -131,12 +131,12 @@
       "batch_index": 3,
       "passage_count": 256,
       "http_status": 200,
-      "request_id": "2e926ef4847ac9c4edb6a3e892dcd24d",
+      "request_id": "4c90c7c4578135a453b7cb5ce87c36f9",
       "model": "voyage-4-lite",
-      "usage_total_tokens": 62573,
-      "request_payload_bytes": 339228,
-      "response_payload_bytes": 3257562,
-      "latency_ms": 743.535964,
+      "usage_total_tokens": 60791,
+      "request_payload_bytes": 330200,
+      "response_payload_bytes": 3257492,
+      "latency_ms": 781.955759,
       "request_kind": "corpus_passages",
       "corpus_passage_count": 250,
       "canary_input_count": 6
@@ -145,36 +145,36 @@
       "batch_index": 4,
       "passage_count": 256,
       "http_status": 200,
-      "request_id": "fb67f4f72932f2e78274b6d92c93b969",
+      "request_id": "e71427c625d3d6fbea52ac2892f8de09",
       "model": "voyage-4-lite",
-      "usage_total_tokens": 57385,
-      "request_payload_bytes": 310557,
-      "response_payload_bytes": 3256874,
-      "latency_ms": 808.473858,
+      "usage_total_tokens": 60092,
+      "request_payload_bytes": 323109,
+      "response_payload_bytes": 3256947,
+      "latency_ms": 737.503614,
       "request_kind": "corpus_passages",
       "corpus_passage_count": 250,
       "canary_input_count": 6
     },
     {
       "batch_index": 5,
-      "passage_count": 215,
+      "passage_count": 193,
       "http_status": 200,
-      "request_id": "1f6c461df9c2b4ddedb6a3e892dcd923",
+      "request_id": "4827dff378b0bba053b7cb5ce87c3019",
       "model": "voyage-4-lite",
-      "usage_total_tokens": 44846,
-      "request_payload_bytes": 240431,
-      "response_payload_bytes": 2736913,
-      "latency_ms": 693.48064,
+      "usage_total_tokens": 38233,
+      "request_payload_bytes": 206293,
+      "response_payload_bytes": 2457015,
+      "latency_ms": 593.542126,
       "request_kind": "corpus_passages",
-      "corpus_passage_count": 209,
+      "corpus_passage_count": 187,
       "canary_input_count": 6
     }
   ],
   "API_request_count": 6,
-  "usage_total_tokens": 318161,
-  "estimated_cost_at_published_paid_pricing_usd": 0.006363,
+  "usage_total_tokens": 312400,
+  "estimated_cost_at_published_paid_pricing_usd": 0.006248,
   "float16_quantization": {
-    "vectors_checked": 1459,
+    "vectors_checked": 1437,
     "minimum_cosine_to_float32": 1,
     "mean_cosine_to_float32": 1,
     "spent_set_candidate_recall_validation_required": true

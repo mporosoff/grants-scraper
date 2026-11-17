@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/transportation.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/transportation.xml</id>
-  <updated>2026-11-15T20:37:53Z</updated>
+  <updated>2026-11-17T20:03:56Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Prevention and Treatment through a Comprehensive Care Continuum for HIV-affected Adolescents in Resource-Constrained Settings--Implementation Science Network (PATC3H-IN)</title>
@@ -340,15 +340,6 @@
     <summary>Bureau of Justice Assistance | Application 2026-12-02 | This is a notice of funding opportunity (NOFO) for the BJA FY 2026 Missing and Unidentified Human Remains (MUHR) Program. This opportunity supports efforts to improve reporting, transportation, forensic processing, and identification of missing persons (MP) and unidentified human remains (UHR) cases, including those involving migrants as authorized by Public Law 116-277. This program increases pub…</summary>
   </entry>
   <entry>
-    <title>NIJ FY 2026 Research and Evaluation on Justice System Responses to Illegal Immigration</title>
-    <link href="https://www.grants.gov/search-results-detail/364060"/>
-    <id>urn:funding-finder:grants-gov:364060</id>
-    <updated>2026-10-09T00:00:00Z</updated>
-    <author><name>National Institute of Justice</name></author>
-    <category term="Transportation"/>
-    <summary>National Institute of Justice | Application 2026-11-16 | This is a notice of funding opportunity (NOFO) for the NIJ FY 2026 Research and Evaluation on Justice System Responses to Illegal Immigration. This opportunity supports proposals for rigorous, applied research and evaluations examining the adult criminal justice system (courts, law enforcement, jails, prisons, and community supervision) challenges and responses to illegal immigration and crimes co…</summary>
-  </entry>
-  <entry>
     <title>Cellular Senescence Network (SenNet): SenNet Technology Projects (SenTecs) (UG3/UH3 Clinical Trial Not Allowed)</title>
     <link href="https://www.grants.gov/search-results-detail/359168"/>
     <id>urn:funding-finder:grants-gov:359168</id>
@@ -405,16 +396,6 @@
     <summary>National Institutes of Health | Estimated Application 2027-02-15 | The NIH Common Fund, in partnership with other NIH Institutes and Centers, plans to issue Notices of Funding Opportunity (NOFOs) for the RNomics program, which seeks to develop tools for studying the full set of RNA molecules (the RNome) in cells and tissues. The program will support technologies and resources that enable integrated analysis of RNA sequences, modifications, structures, locations, …</summary>
   </entry>
   <entry>
-    <title>Fiscal Year 2026 Wildlife Crossings Pilot Program</title>
-    <link href="https://www.grants.gov/search-results-detail/364009"/>
-    <id>urn:funding-finder:grants-gov:364009</id>
-    <updated>2026-09-30T00:00:00Z</updated>
-    <author><name>DOT Federal Highway Administration</name></author>
-    <category term="Transportation"/>
-    <category term="Cybersecurity"/>
-    <summary>DOT Federal Highway Administration | Application 2026-11-16 | The purpose of the WCPP is to provide funding to eligible entities for projects seeking to improve safety of the traveling public by reducing the number of wildlife-vehicle collisions (WVC) and, in doing so, improve habitat connectivity for terrestrial and aquatic species. This NOFO will award approximately $80 million in Fiscal Year (FY) 2026 funding via cost reimbursable grants. DOT may also awa…</summary>
-  </entry>
-  <entry>
     <title>The Science, Mathematics and Research for Transformation (SMART) Scholarship for Service Program Cooperative Agreement</title>
     <link href="https://www.grants.gov/search-results-detail/364008"/>
     <id>urn:funding-finder:grants-gov:364008</id>
@@ -458,17 +439,6 @@
     <category term="Technology development"/>
     <category term="Transportation"/>
     <summary>Office of Naval Research (ONR) | White Paper 2027-07-16 | Applied research and technology development in advanced manufacturing and sustainment. Applied research and advanced technology development for naval manufacturing and sustainment, with transition value. Phase II selections depend on funding and current technical focus. FFRDCs and military universities cannot be prime offerors; no mandatory industry partner invented.</summary>
-  </entry>
-  <entry>
-    <title>FY26 US DOT Drone Infrastructure Inspection Grants (DIIG) Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363242"/>
-    <id>urn:funding-finder:grants-gov:363242</id>
-    <updated>2026-09-15T00:00:00Z</updated>
-    <author><name>69A345 Office of the Under Secretary for Policy</name></author>
-    <category term="Community development"/>
-    <category term="Education and workforce"/>
-    <category term="Transportation"/>
-    <summary>69A345 Office of the Under Secretary for Policy | Estimated Application 2026-11-15 | The Drone Infrastructure Inspection Grants (DIIG) Program will provide grants to eligible government entities to facilitate the use of small Unmanned Aircraft Systems (UAS), referred to herein as drones, in critical infrastructure inspection. The objective is to increase the widespread adoption of drones and relevant technologies in support of more efficient Inspection, Operation, Construction, Ma…</summary>
   </entry>
   <entry>
     <title>Charge Ready NY 2.0 Equipment and Network Qualification Process</title>
@@ -590,17 +560,6 @@
     <summary>National Institutes of Health | Application 2029-07-12 | The National Institutes of Health (NIH) will award Institutional Mentored Career Development grants to eligible domestic institutions to support career development programs designed to prepare later stage postdoctoral fellows and junior faculty scholars who have made a commitment to an independent research career for their career advancement and transition to independence. Supported scholars will …</summary>
   </entry>
   <entry>
-    <title>Special Program Announcement for Office of Naval Research Research Opportunity: FY27 Communications and Networking Applied Research</title>
-    <link href="https://www.grants.gov/search-results-detail/362836"/>
-    <id>urn:funding-finder:grants-gov:362836</id>
-    <updated>2026-06-16T00:00:00Z</updated>
-    <author><name>Office of Naval Research</name></author>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Transportation"/>
-    <summary>Office of Naval Research | Application 2026-11-16 | The proposed topic will develop and mature Communications and Networking technologies for Naval operations. Background: A Design for Maritime Superiority (2018) describes an operational architecture for distributed maritime operations (DMO) that "... will provide accurate, timely, and analyzed information to units, warfighting groups, and fleets." A critical component of this architecture is the N…</summary>
-  </entry>
-  <entry>
     <title>Predoctoral to Postdoctoral Transition Award (Parent F99/K00 - Clinical Trial Not Allowed)</title>
     <link href="https://www.grants.gov/search-results-detail/359702"/>
     <id>urn:funding-finder:grants-gov:359702</id>
@@ -643,5 +602,50 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Transportation"/>
     <summary>National Institutes of Health | Application 2029-07-16 | The National Institute of Arthritis and Musculoskeletal and Skin Diseases (NIAMS) announces a program that provides NIAMS-supported K01, K08, K23, and K25 recipients the opportunity to apply for the Small Grant (R03) during the second to fourth year of their K award, as well as to provide support to recipients of significant career development awards from federal or non-federal organizations that …</summary>
+  </entry>
+  <entry>
+    <title>NASA Innovative Advanced Concepts (NIAC) Phase II</title>
+    <link href="https://www.grants.gov/search-results-detail/362393"/>
+    <id>urn:funding-finder:grants-gov:362393</id>
+    <updated>2026-05-14T00:00:00Z</updated>
+    <author><name>NASA Headquarters</name></author>
+    <category term="Space and aeronautics"/>
+    <category term="Transportation"/>
+    <summary>NASA Headquarters | Posted | The National Aeronautics and Space Administration (NASA) Headquarters anticipates release of a solicitation, titled “NASA Innovative Advanced Concepts (NIAC), Phase II,” as an Appendix to the Space Technology Mission Directorate (STMD) NASA Research Announcement (NRA), titled “Space Technology Research, Development, Demonstration, and Infusion - 2026 (SpaceTech-REDDI-2026),” on or about May 11, 20…</summary>
+  </entry>
+  <entry>
+    <title>INCLUDE Project: Clinical Trials Phased Awards for Down syndrome Research (R61/R33 Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/360655"/>
+    <id>urn:funding-finder:grants-gov:360655</id>
+    <updated>2026-05-13T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Technology development"/>
+    <category term="Transportation"/>
+    <summary>National Institutes of Health | Application 2028-06-15 | The NIH INvestigation of Co-occurring conditions across the Lifespan to Understand Down syndromE (INCLUDE) Project seeks to improve health and quality-of-life for individuals with Down syndrome. The purpose of this Notice of Funding Opportunity (NOFO) encourages Exploratory/Developmental Phased Innovation (R61/R33) grant applications to support development of clinical trials to treat critical and …</summary>
+  </entry>
+  <entry>
+    <title>Limited Competition: Small Grant Program for NHLBI K01/K08/K23/K25 Recipients (R03 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/359675"/>
+    <id>urn:funding-finder:grants-gov:359675</id>
+    <updated>2026-05-12T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Transportation"/>
+    <summary>National Institutes of Health | Application 2028-11-07 | This is a Notice of Funding Opportunity (NOFO) for a Limited Competition that invites applications from eligible organizations to apply. Please see Section III. Eligibility for additional information. In accordance with NIH standard peer-review processes, the applications will be peer-reviewed, and only meritorious applications will be considered. The purpose of this NOFO is to solicit current or …</summary>
+  </entry>
+  <entry>
+    <title>Transport Phenomena (TP)</title>
+    <link href="https://www.grants.gov/search-results-detail/362063"/>
+    <id>urn:funding-finder:grants-gov:362063</id>
+    <updated>2026-04-24T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Quantum science"/>
+    <category term="Separations and membranes"/>
+    <category term="Technology development"/>
+    <category term="Transportation"/>
+    <summary>U.S. National Science Foundation | Posted | The Transport Phenomena (TP) program supports fundamental research to understand, model, and control the transport of mass, momentum, energy, and species across multiple scales. Innovative TP research supports advances in artificial intelligence; manufacturing; biotechnology; microelectronics; energy generation, extraction, and utilization; nuclear energy; quantum science and engineering; and othe…</summary>
   </entry>
 </feed>

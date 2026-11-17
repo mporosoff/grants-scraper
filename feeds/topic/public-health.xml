@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/public-health.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/public-health.xml</id>
-  <updated>2026-11-15T20:37:53Z</updated>
+  <updated>2026-11-17T20:03:56Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Public Health Nursing</title>
@@ -165,6 +165,15 @@
     <category term="Health equity"/>
     <category term="Public health"/>
     <summary>National Institutes of Health | Estimated Application 2027-05-25 | As authorized under section 464z-3(h) of the Public Health Service Act, the purpose of the John Lewis NIMHD Research Endowment Program is to strengthen the research infrastructure and training capacity at eligible institutions of higher education to facilitate health disparities research. Specific strategic objectives include: 1) improving the institutional physical infrastructure and acquisition …</summary>
+  </entry>
+  <entry>
+    <title>NIH Research Center Core Grants</title>
+    <link href="https://www.grants.gov/search-results-detail/364268"/>
+    <id>urn:funding-finder:grants-gov:364268</id>
+    <updated>2027-03-25T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Public health"/>
+    <summary>National Institutes of Health | Estimated Application 2027-05-25 | The NIH seeks to advance its mission by supporting multidisciplinary research centers aligned with the scientific priorities of participating NIH Institutes, Centers, and Offices. These Parent Center Core Grants will support integrated research programs organized around a major scientific objective or theme, with shared infrastructure and resources that foster collaboration, advance innovative and…</summary>
   </entry>
   <entry>
     <title>Centers for Research on Neglected Infectious Diseases</title>
@@ -400,6 +409,16 @@
     <summary>Centers for Disease Control - NCHHSTP | Estimated Application 2027-03-15 | The purpose of this demonstration project is to support coordinated Clinic and Community Collaboratives (CCCs) to integrate HIV care with broader women's health services in jurisdictions with disproportionately high HIV disease burden to improve HIV-related outcomes, overall health, and quality of life among WWH. Organizations will be funded to implement 4 strategies: (1) Integrate HIV care with b…</summary>
   </entry>
   <entry>
+    <title>Strengthening U.S. Public Health Infrastructure, Workforce, and Data Systems</title>
+    <link href="https://www.grants.gov/search-results-detail/364270"/>
+    <id>urn:funding-finder:grants-gov:364270</id>
+    <updated>2027-01-10T00:00:00Z</updated>
+    <author><name>Centers for Disease Control-PHIC</name></author>
+    <category term="Education and workforce"/>
+    <category term="Public health"/>
+    <summary>Centers for Disease Control-PHIC | Estimated Application 2027-03-11 | Public health agencies across the United States continue to face persistent infrastructure gaps while responding to increasingly complex and evolving public health challenges. Strengthening public health infrastructure is essential to ensuring communities receive the foundational public health services they depend on and that health agencies are equipped to address current and emerging threats. Th…</summary>
+  </entry>
+  <entry>
     <title>Childhood Asthma in Urban Settings Clinical Research Network</title>
     <link href="https://www.grants.gov/search-results-detail/362950"/>
     <id>urn:funding-finder:grants-gov:362950</id>
@@ -624,24 +643,5 @@
     <category term="Environmental science"/>
     <category term="Public health"/>
     <summary>National Institutes of Health | Estimated Application 2027-01-29 | The National Institute of Environmental Health Sciences (NIEHS) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications that propose translational research hubs with multiple highly integrated components focused on research, capacity building, and community/public health translation for regionally relevant topics related to the health impacts of extreme weather and cumula…</summary>
-  </entry>
-  <entry>
-    <title>Feasibility Studies to Inform the Design of Future Clinical Trials</title>
-    <link href="https://www.grants.gov/search-results-detail/362101"/>
-    <id>urn:funding-finder:grants-gov:362101</id>
-    <updated>2026-11-24T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Public health"/>
-    <summary>National Institutes of Health | Estimated Application 2027-02-16 | The National Institutes of Health intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications that propose feasibility studies that could inform the design and conduct of subsequent definitive clinical trials (e.g., efficacy, effectiveness, pragmatic, dissemination and implementation, phase/stage II or later trials). Applications to this NOFO should demonstrate that the propo…</summary>
-  </entry>
-  <entry>
-    <title>NIH Pragmatic Trials Conducted in Health Care Systems</title>
-    <link href="https://www.grants.gov/search-results-detail/362108"/>
-    <id>urn:funding-finder:grants-gov:362108</id>
-    <updated>2026-11-24T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Public health"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health | Estimated Application 2027-02-23 | The National Institutes of Health intends to publish a Notice of Funding Opportunity (NOFO), Pragmatic and Implementation Trials Conducted in Health Care SettingsThis funding opportunity will support large-scale pragmatic trials that test intervention effectiveness in routine clinical care and/or implementation trials that evaluate strategies for delivering interventions within health care setting…</summary>
   </entry>
 </feed>

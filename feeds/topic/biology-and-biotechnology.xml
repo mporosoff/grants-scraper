@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/biology-and-biotechnology.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/biology-and-biotechnology.xml</id>
-  <updated>2026-11-15T20:37:53Z</updated>
+  <updated>2026-11-17T20:03:56Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Development of Models, New Approach Methodologies, and Biological Materials for Studying Human Health and Diseases (R21 Clinical Trial Not Allowed)</title>
@@ -311,6 +311,18 @@
     <category term="Data science"/>
     <category term="Education and workforce"/>
     <summary>National Institutes of Health | Estimated Application 2027-05-28 | The National Human Genome Research Institute (NHGRI) intends to issue a Notice of Funding Opportunity (NOFO) in 2027 to renew the Broadening Opportunities for Computational Genomics and Data Science Education program (UE5 activity code). This program supports emerging research institutions (ERIs)-institutions with less than $50M in Federal research expenditures per 42 USC 18901, to teach computati…</summary>
+  </entry>
+  <entry>
+    <title>Educational Hub for Expanding the Computational Genomics and Data Science Workforce (U24 Clinical Trials Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/364269"/>
+    <id>urn:funding-finder:grants-gov:364269</id>
+    <updated>2027-02-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Data science"/>
+    <category term="Education and workforce"/>
+    <summary>National Institutes of Health | Estimated Application 2027-06-01 | The National Human Genome Research Institute (NHGRI) intends to publish a Notice of Funding Opportunity (NOFO) in 2027 to support the Computational Genomics and Data Science Educational Hub (Hub) (U24 activity code).The Hub leverages cloud platforms like NHGRI's Genomic Data Science Analysis, Visualization, and Informatics Lab-space (AnVIL) and the All of Us Researcher Workbench to enable students…</summary>
   </entry>
   <entry>
     <title>Single Cell Opioid Responses in the Context of HIV (SCORCH) Program: Phase 2</title>
@@ -637,14 +649,5 @@
     <category term="Environmental science"/>
     <category term="Transportation"/>
     <summary>National Institutes of Health | Application 2026-11-23 | The purpose of this Notice of Funding Opportunity (NOFO) is to solicit the development of innovative senescence technologies (SenTecs), or the adaptation of existing technologies focused on identification, characterization and understanding the biological consequences of senescent cell (SnC) heterogeneity in the context of the tissue environments and secretomes to facilitate novel strategies for m…</summary>
-  </entry>
-  <entry>
-    <title>Computational Modeling and Analysis of the Impact of Genomic Variation on Function (UM1, Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/359170"/>
-    <id>urn:funding-finder:grants-gov:359170</id>
-    <updated>2026-10-09T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <summary>National Institutes of Health | Application 2026-12-14 | The purpose of this Notice of Funding Opportunity (NOFO) is to solicit applications to develop, apply, and test predictive models and perform integrative analyses to determine the impact of genomic variation on genome function. Centers funded through this initiative will become a part of the Impact of Genomic Variation on Function (IGVF) Consortium. As consortium members, centers will work togethe…</summary>
   </entry>
 </feed>
