@@ -74,19 +74,22 @@ class PrimaryDocumentReleaseContract(unittest.TestCase):
         self.assertIn('tools/document_fact_revalidation.py', hashes.call_args.args[1])
         self.assertTrue(source_files <= set(hashes.call_args.args[1]))
 
-    def test_only_primary_recipe_admits_its_bound_vector_accounting_helper_change(self):
+    def test_compatible_recovery_recipes_admit_the_bound_vector_accounting_helper_change(self):
         base = {group: {'files': {}, 'fingerprint': 'a'} for group in ('source', 'teams', 'semantic')}
         changed = deepcopy(base)
         changed['semantic']['files']['tools/catalog_reconcile_spend.py'] = 'b'*64
         original = {'generation_sha': 'a'*40, 'dependency_groups': base}
         with patch('tools.release_dependencies.snapshot', return_value=changed), patch.object(c, 'git'):
-            p.modern_scope(Path('.'), original, 'primary_document')
-            for kind in ('program_area', 'document_facts', 'administrative_submission'):
+            for kind in ('primary_document', 'administrative_submission'):
+                with self.subTest(allowed_kind=kind):
+                    p.modern_scope(Path('.'), original, kind)
+            for kind in ('program_area', 'document_facts'):
                 with self.subTest(kind=kind), self.assertRaisesRegex(ValueError, 'extractor_only_change'):
                     p.modern_scope(Path('.'), original, kind)
             changed['semantic']['files']['assets/search-hybrid.js'] = 'c'*64
-            with self.assertRaisesRegex(ValueError, 'extractor_only_change'):
-                p.modern_scope(Path('.'), original, 'primary_document')
+            for kind in ('primary_document', 'administrative_submission'):
+                with self.subTest(rejected_kind=kind), self.assertRaisesRegex(ValueError, 'extractor_only_change'):
+                    p.modern_scope(Path('.'), original, kind)
         self.assertIn('tools/catalog_reconcile_spend.py', p.MODERN_OPERATION_FILES)
 
     def test_only_primary_projection_can_change_enrichment_and_child_cache_stays_retained(self):
