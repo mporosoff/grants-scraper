@@ -13,6 +13,9 @@ from tools.offline_spend import Ledger, atomic_json, identity
 
 
 class PrimaryDocumentVectorRetention(unittest.TestCase):
+    projection_kind = 'primary_document'
+    recipe = 'tools/primary_document_revalidation.py'
+
     def setUp(self):
         temporary = tempfile.TemporaryDirectory(); self.addCleanup(temporary.cleanup)
         self.root = Path(temporary.name); self.state = self.root/'state'
@@ -28,13 +31,13 @@ class PrimaryDocumentVectorRetention(unittest.TestCase):
         self.book.complete(prior, status='valid', charged_microusd=2, usage=spend.vector_usage(51),
             response_sha256='2'*64, provider_request_id='3'*32)
         self.book.event(kind='authenticated_vector_history', candidate_id=parent['candidate_id'])
-        self.value = {'version': p.MODERN_VERSION, 'projection_kind': 'primary_document', 'parent_run': '123',
+        self.value = {'version': p.MODERN_VERSION, 'projection_kind': self.projection_kind, 'parent_run': '123',
             'parent_candidate_id': parent['candidate_id'], 'parent_manifest_sha256': c.digest(c.encoded(parent)),
             'original_spend': {'ledger_sha256': identity(self.book.read())},
             'retained_requests': p.retained_requests(self.book.read()),
-            # Match the first native primary checkpoint: clock is in the public
+            # Match early native checkpoints: clock is in the public
             # semantic dependency receipt, not yet the private operation recipe.
-            'operation_contract': {'tools/primary_document_revalidation.py': 'a'*64}}
+            'operation_contract': {self.recipe: 'a'*64}}
         self.value['operation_sha256'] = identity(self.value)
         atomic_json(self.state/'reconciliation.json', self.value)
         stack = ExitStack(); self.addCleanup(stack.close)
@@ -84,7 +87,7 @@ class PrimaryDocumentVectorRetention(unittest.TestCase):
         bundle = self.state/'complete-candidates'/source['candidate_id']
         retained = p.retain_primary_vector_source(self.state, prior, source, bundle)
         value = {k: deepcopy(v) for k,v in prior.items() if k not in ('operation_sha256', 'completed_candidate_id')}
-        value['operation_contract'].update({'tools/primary_document_revalidation.py': revision*64,
+        value['operation_contract'].update({self.recipe: revision*64,
             'tools/corpus_clock.mjs': 'c'*64})
         value['retained_vector_source'] = retained; value['operation_sha256'] = identity(value)
         atomic_json(self.state/'reconciliation.json', value); self.current = value
@@ -155,6 +158,17 @@ class PrimaryDocumentVectorRetention(unittest.TestCase):
 
     def test_other_projection_kind_cannot_consume_primary_asset(self):
         changed = deepcopy(self.current); changed['projection_kind'] = 'document_facts'
+        with self.assertRaisesRegex(ValueError, 'retained_primary_projection_kind'):
+            spend.retained_reconciliation_outputs(self.state, changed, spend.vector_binding(self.packet), self.root)
+
+
+class AdministrativeSubmissionVectorRetention(PrimaryDocumentVectorRetention):
+    projection_kind = 'administrative_submission'
+    recipe = 'tools/administrative_submission_revalidation.py'
+
+    def test_admin_and_primary_assets_keep_distinct_projection_provenance(self):
+        changed = deepcopy(self.current)
+        changed['projection_kind'] = 'primary_document'
         with self.assertRaisesRegex(ValueError, 'retained_primary_projection_kind'):
             spend.retained_reconciliation_outputs(self.state, changed, spend.vector_binding(self.packet), self.root)
 

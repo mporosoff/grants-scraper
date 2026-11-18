@@ -115,6 +115,12 @@ class AdministrativeApplicationCycleReplay(unittest.TestCase):
         self.assertIn(b'Research Facilities Act Program', outputs['feeds/all.xml'])
         self.assertEqual(outputs[common.PROJECTION[2]], cache_bytes)
         projected_catalog = json.loads(outputs[common.PROJECTION[0]].decode().split('=', 1)[1].strip().removesuffix(';'))
+        from tools.catalog_publication_evidence import change_snapshot_findings
+        self.assertEqual(projected['events'][0]['record']['deadlines'],
+            projected_catalog['opportunities'][0]['deadlines'])
+        self.assertTrue(all('citation' not in deadline and 'note' not in deadline
+            for deadline in projected['events'][0]['record']['deadlines']))
+        self.assertEqual(change_snapshot_findings(projected_catalog, projected), [])
         self.assertEqual(projected_catalog['generated_at'], GENERATED)
         self.assertEqual(projected_catalog['document_evidence_generated_at'], EVIDENCE_AT)
         self.assertEqual(projected_catalog['catalog_audit_generated_at'], AUDIT_AT)

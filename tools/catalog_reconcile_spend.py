@@ -252,14 +252,15 @@ def retained_reconciliation_outputs(state, value, binding, root):
     bundle = Path(state) / 'complete-candidates' / source['candidate_id']
     require(c.digest((bundle / 'candidate.json').read_bytes()) == source['manifest_sha256'], 'retained_source_manifest')
     manifest = c.load(bundle, source['candidate_id'])
-    primary = value.get('version') == 'program-area-revalidation-modern-1'
-    if primary:
-        require(value.get('projection_kind') == prior.get('projection_kind') == 'primary_document'
+    modern = value.get('version') == 'program-area-revalidation-modern-1'
+    if modern:
+        kind = value.get('projection_kind')
+        require(kind in ('primary_document', 'administrative_submission') and prior.get('projection_kind') == kind
                 and prior.get('version') == value['version'], 'retained_primary_projection_kind')
         receipt = manifest.get('program_area_revalidation', {})
-        require(receipt.get('projection_kind') == 'primary_document'
+        require(receipt.get('projection_kind') == kind
                 and receipt.get('operation_contract') == prior['operation_contract'], 'retained_primary_receipt')
-        # The first primary checkpoint predates an explicit operation clock pin.
+        # Early modern checkpoints predate an explicit operation clock pin.
         # Its authenticated public candidate already binds this semantic input.
         old_clock = manifest.get('dependency_groups', {}).get('semantic', {}).get('files', {}).get('tools/corpus_clock.mjs')
         require(prior['operation_contract'].get('tools/corpus_clock.mjs', old_clock) == old_clock,

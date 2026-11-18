@@ -89,7 +89,7 @@ class AdministrativeSubmissionBudget(unittest.TestCase):
                  'scripts/build_catalog.py', 'scripts/currentness.py', 'assets/submission-schedule.js',
                  'assets/search-retrieval.js', 'tools/run_search_diagnosis.mjs',
                  'scripts/notice_schedule.py', 'workers/alerts/src/contract.js', 'scripts/build_changes.py',
-                 'tools/release_dependencies.py'})
+                 'tools/release_dependencies.py', 'tools/corpus_clock.mjs'})
 
     def test_cold_checkpoint_rejects_other_projection_kind_before_projection(self):
         f = self.f; state = f.root / 'first'
@@ -229,9 +229,11 @@ class AdministrativeSubmissionBudget(unittest.TestCase):
         selected['source']['files']['scripts/notice_schedule.py'] = 'b'
         selected['source']['files']['scripts/currentness.py'] = 'b'
         selected['source']['files']['scripts/build_catalog.py'] = 'b'
+        selected['source']['files']['scripts/build_changes.py'] = 'b'
         selected['semantic']['files']['assets/submission-schedule.js'] = 'b'
         selected['semantic']['files']['assets/search-retrieval.js'] = 'b'
         selected['semantic']['files']['tools/run_search_diagnosis.mjs'] = 'b'
+        selected['semantic']['files']['tools/catalog_reconcile_spend.py'] = 'b'
         with patch('tools.release_dependencies.snapshot', return_value=selected):
             p.modern_scope(self.f.root, original, 'administrative_submission')
             with self.assertRaisesRegex(ValueError, 'extractor_only_change'):
