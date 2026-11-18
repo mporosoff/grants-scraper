@@ -9,6 +9,8 @@ from scripts.build_changes import (
     render_change_feed,
 )
 from scripts.submission_schedule import next_submission, project
+from scripts.build_catalog import catalog_javascript_bytes
+from tools.catalog_publication_evidence import change_snapshot_findings
 
 
 GENERATION = "2026-11-01T21:07:21.809150Z"
@@ -58,6 +60,27 @@ def scaled_projection():
 
 
 class ChangeSnapshotReprojectionTests(unittest.TestCase):
+    def test_current_snapshots_use_the_same_compact_deadlines_as_the_public_catalog(self):
+        feed, catalog = scaled_projection()
+        catalog['opportunities'].append(deepcopy(feed['events'][1]['record']))
+        record = catalog['opportunities'][0]
+        citation = {'document_url': record['primary_document_url'],
+            'quote': 'Required concept papers are due November 20, 2026.'}
+        record['document_evidence'] = {'facts': [{'id': 'evidence-364174-03d5dd02e03c',
+            'citation': deepcopy(citation)}]}
+        record['deadlines'][-1].update(citation=deepcopy(citation), note=citation['quote'])
+        originals = deepcopy((feed, catalog))
+        repaired = refresh_current_generation_snapshots(feed, catalog, affected_ids=['364174'])
+        canonical = json.loads(catalog_javascript_bytes(catalog).decode().split('=', 1)[1].strip().removesuffix(';'))
+        self.assertEqual(repaired['events'][0]['record']['deadlines'], canonical['opportunities'][0]['deadlines'])
+        self.assertNotIn('citation', repaired['events'][0]['record']['deadlines'][-1])
+        self.assertNotIn('note', repaired['events'][0]['record']['deadlines'][-1])
+        self.assertEqual(change_snapshot_findings(canonical, repaired), [])
+        self.assertEqual(repaired['events'][1:], feed['events'][1:])
+        self.assertEqual({key: value for key, value in repaired['events'][0].items() if key != 'record'},
+                         {key: value for key, value in feed['events'][0].items() if key != 'record'})
+        self.assertEqual((feed, catalog), originals)
+
     def test_scaled_current_event_exposes_required_concept_without_rewriting_history(self):
         feed, catalog = scaled_projection()
         old_event = feed["events"][0]

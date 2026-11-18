@@ -57,7 +57,8 @@ MODERN_OPERATION_FILES = ('tools/program_area_revalidation.py', 'tools/program_a
 ADMINISTRATIVE_INPUTS = ('tools/administrative_submission_revalidation.py',
     'scripts/submission_schedule.py', 'scripts/notice_schedule.py', 'scripts/build_catalog.py', 'scripts/currentness.py',
     'assets/submission-schedule.js', 'assets/search-retrieval.js', 'workers/alerts/src/contract.js',
-    'scripts/build_changes.py', 'tools/run_search_diagnosis.mjs', 'tools/release_dependencies.py')
+    'scripts/build_changes.py', 'tools/run_search_diagnosis.mjs', 'tools/release_dependencies.py',
+    'tools/corpus_clock.mjs')
 ADMINISTRATIVE_OUTPUTS = ('feeds/changes.json', 'feeds/changes.xml')
 DOCUMENT_FACT_INPUTS = ('tools/document_fact_revalidation.py',
     'scripts/notice_semantics.py', 'scripts/notice_fact_guards.py')
@@ -591,7 +592,7 @@ def modern_scope(root, original, kind='program_area'):
     administrative = projection_kind(kind) == 'administrative_submission'
     if administrative:
         allowed.update({'scripts/submission_schedule.py', 'scripts/notice_schedule.py',
-            'scripts/currentness.py', 'scripts/build_catalog.py'})
+            'scripts/currentness.py', 'scripts/build_catalog.py', 'scripts/build_changes.py'})
         if '@generation_invocations' in changes.get('source', []):
             import yaml
             workflow = yaml.safe_load((Path(root)/'.github/workflows/refresh-opportunities.yml').read_bytes())
@@ -616,7 +617,8 @@ def modern_scope(root, original, kind='program_area'):
             'scripts/build_changes.py', 'scripts/build_feeds.py'})
     require(set(changes.get('source', [])) <= allowed
         and not changes.get('teams') and set(changes.get('semantic', [])) <= (
-            {'assets/submission-schedule.js', 'assets/search-retrieval.js', 'tools/run_search_diagnosis.mjs'}
+            {'assets/submission-schedule.js', 'assets/search-retrieval.js', 'tools/run_search_diagnosis.mjs',
+             'tools/catalog_reconcile_spend.py'}
             if administrative else {'tools/catalog_reconcile_spend.py'}
             if projection_kind(kind) == 'primary_document' else set()), 'modern_extractor_only_change')
     candidate.git(root, 'merge-base', '--is-ancestor', original['generation_sha'], 'HEAD')
@@ -1005,9 +1007,10 @@ def _write_outputs(outputs):
 
 
 def retain_primary_vector_source(state, value, child, bundle):
-    """Keep the exact completed primary-document asset across recipe repairs."""
+    """Keep the exact accounted vector asset across a compatible recipe repair."""
     receipt = child.get('program_area_revalidation', {})
-    require(require_projection_kind(value, receipt) == 'primary_document', 'primary_vector_source_kind')
+    require(require_projection_kind(value, receipt) in ('primary_document', 'administrative_submission'),
+        'primary_vector_source_kind')
     prior = value.get('retained_vector_source')
     accounting = receipt.get('vector_accounting', {})
     if accounting.get('classification') == 'retained_completed_asset':
@@ -1084,11 +1087,12 @@ def prepare_modern(parent_bundle, receipt_path, state, parent_run, parent_id, *,
                 receipt = child['program_area_revalidation']
                 require(receipt['affected_generation']['generation_run_id'] != os.environ['GITHUB_RUN_ID'],
                     'modern_changed_child_requires_new_dispatch')
-                retained_vectors = retain_primary_vector_source(state, value, child, complete) if kind == 'primary_document' else None
+                retained_vectors = (retain_primary_vector_source(state, value, child, complete)
+                    if kind in ('primary_document', 'administrative_submission') else None)
                 value = {k: v for k, v in value.items() if k not in {'completed_candidate_id', 'operation_sha256'}}
                 if retained_vectors:
                     value['retained_vector_source'] = retained_vectors
-                elif kind == 'primary_document':
+                elif kind in ('primary_document', 'administrative_submission'):
                     value.pop('retained_vector_source', None)
                 value['operation_contract'] = modern_contract(root, kind); value['audit_at'] = datetime.now(timezone.utc).isoformat()
                 value['operation_sha256'] = identity(value); atomic_json(state/'reconciliation.json', value)
@@ -1157,7 +1161,7 @@ def checkpoint_modern(receipt_path, state, *, root=ROOT, write=True):
         completed = spend.completed_outputs(state, value, binding, root)
         retained = None if completed else spend.retained_reconciliation_outputs(state, value, binding, root)
         if retained:
-            require(kind == 'primary_document' and retained['status'] == 'complete'
+            require(kind in ('primary_document', 'administrative_submission') and retained['status'] == 'complete'
                 and read(state/'vector-stage.json') == retained['retention_proof'], 'modern_retained_completed_vectors')
             proof = {'classification': 'retained_completed_asset', 'retention': retained['retention_proof'],
                 'accounting_origin': retained['accounting_origin'], 'new_requests': 0}

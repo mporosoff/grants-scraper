@@ -23,7 +23,7 @@ from scripts.build_feeds import (
     rfc3339,
 )
 from scripts.currentness import parse_date, record_is_current
-from scripts.build_catalog import record_identity
+from scripts.build_catalog import compact_catalog_payload, record_identity
 from scripts.submission_schedule import events as submission_events, next_submission
 
 SCHEMA_VERSION = 1
@@ -352,7 +352,7 @@ def refresh_current_generation_snapshots(
     if isinstance(affected_ids, (str, bytes)):
         raise ValueError("change_snapshot_ids_required")
     selected = {str(value) for value in affected_ids}
-    records = _records(catalog)
+    records = _records(compact_catalog_payload(catalog))
     if selected - records.keys():
         raise ValueError("change_snapshot_record_missing")
     refreshed = deepcopy(feed)
