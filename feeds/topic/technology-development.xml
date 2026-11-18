@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml</id>
-  <updated>2026-11-17T20:03:56Z</updated>
+  <updated>2026-11-18T18:58:27Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Technology Development Program</title>
@@ -287,6 +287,15 @@
     <summary>National Institutes of Health | Estimated Application 2027-01-25 | The National Biomedical Research Centers (NBRCs) are expected to provide scientific expertise, advanced equipment, infrastructure, and a range of well-characterized research models to researchers across the nation. Research at the NBRCs is supported by almost all NIH Institutes, as well as other federal agencies, including those that safeguard US national security interests. This NOFO emphasizes d…</summary>
   </entry>
   <entry>
+    <title>Controlling and Preventing STIs in US Health Departments (CAP-STIs)</title>
+    <link href="https://www.grants.gov/search-results-detail/362349"/>
+    <id>urn:funding-finder:grants-gov:362349</id>
+    <updated>2026-11-20T00:00:00Z</updated>
+    <author><name>Centers for Disease Control - NCHHSTP</name></author>
+    <category term="Technology development"/>
+    <summary>Centers for Disease Control - NCHHSTP | Estimated Application 2027-01-04 | CDC is funding programs that track, prevent, and control sexually transmitted infections (STI) in state, district, territorial, and city or county health departments. The purpose of this NOFO is to track, prevent, and control three common STIs: primary &amp; secondary syphilis, gonorrhea, and chlamydia. The NOFO supports the goals of the Sexually Transmitted Infections National Strategic Plan 2021-202…</summary>
+  </entry>
+  <entry>
     <title>Small Business Innovation Research / Small Business Technology Transfer Phase I, Phase II, Fast-Track Programs: Developing Deep Technologies that Advance U.S. Competitiveness and Security</title>
     <link href="https://www.grants.gov/search-results-detail/364255"/>
     <id>urn:funding-finder:grants-gov:364255</id>
@@ -295,15 +304,6 @@
     <category term="Education and workforce"/>
     <category term="Technology development"/>
     <summary>U.S. National Science Foundation | Application 2027-03-04 | NSF invests in scientific discoveries, technological breakthroughs, and transformative innovations that strengthen economic growth, enhance security, and improve the lives of Americans and people around the world. In support of this mission, NSF is relaunching its SBIR/STTR programs (also known as America’s Seed Fund powered by NSF) following enactment of the Small Business Innovation and Economic…</summary>
-  </entry>
-  <entry>
-    <title>Controlling and Preventing STIs in US Health Departments (CAP-STIs)</title>
-    <link href="https://www.grants.gov/search-results-detail/362349"/>
-    <id>urn:funding-finder:grants-gov:362349</id>
-    <updated>2026-11-10T00:00:00Z</updated>
-    <author><name>Centers for Disease Control - NCHHSTP</name></author>
-    <category term="Technology development"/>
-    <summary>Centers for Disease Control - NCHHSTP | Estimated Application 2027-01-11 | CDC is funding programs that track, prevent, and control sexually transmitted infections (STI) in state, district, territorial, and city or county health departments. The purpose of this NOFO is to track, prevent, and control three common STIs: syphilis, gonorrhea, and chlamydia. The NOFO supports the goals of the Sexually Transmitted Infections National Strategic Plan 2021-2025: Prevent new STIs.…</summary>
   </entry>
   <entry>
     <title>NYSERDA’s New York Business-Research Innovation &amp; Development Growth Exchange</title>

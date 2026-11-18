@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/social-and-behavioral-sciences.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/social-and-behavioral-sciences.xml</id>
-  <updated>2026-11-17T20:03:56Z</updated>
+  <updated>2026-11-18T18:58:27Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -307,6 +307,18 @@
     <category term="Public health"/>
     <category term="Social and behavioral sciences"/>
     <summary>National Institutes of Health | Estimated Application 2027-02-23 | The National Institutes of Health intends to publish a Notice of Funding Opportunity (NOFO), Pragmatic and Implementation Trials Conducted in Health Care SettingsThis funding opportunity will support large-scale pragmatic trials that test intervention effectiveness in routine clinical care and/or implementation trials that evaluate strategies for delivering interventions within health care setting…</summary>
+  </entry>
+  <entry>
+    <title>Evidence-Informed Practices in the Management of Women’s Prisons</title>
+    <link href="https://www.grants.gov/search-results-detail/364276"/>
+    <id>urn:funding-finder:grants-gov:364276</id>
+    <updated>2026-11-17T00:00:00Z</updated>
+    <author><name>National Institute of Corrections</name></author>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Public health"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>National Institute of Corrections | Application 2026-12-16 | The expansion of women’s incarceration, accelerated largely by the war on drugs, exposed long-standing weaknesses in correctional systems built around male-centered assumptions. Prior to this growth, women represented a small and slowly rising portion of the criminal justice population, allowing gaps in gender-responsive policy, facility design, medical and behavioral health services, staffing mod…</summary>
   </entry>
   <entry>
     <title>Cooperative Agreement for affiliated Partner with Great Rivers Cooperative Ecosystem Studies Unit</title>
@@ -641,16 +653,5 @@
     <category term="Environmental science"/>
     <category term="Social and behavioral sciences"/>
     <summary>National Institutes of Health | Application 2027-05-28 | The SuRE program supports research capacity building at eligible higher education institutions through funding investigator-initiated biomedical research inbasic, social, clinical, behavioral, or translational science that falls in the mission areas of the NIH. The purpose of SuRE-First awards is to provide support for investigator-initiated research at resource-limited institutions by full-time f…</summary>
-  </entry>
-  <entry>
-    <title>Science of Science: Discovery, Communication and Impact (SoS: DCI)</title>
-    <link href="https://www.grants.gov/search-results-detail/358882"/>
-    <id>urn:funding-finder:grants-gov:358882</id>
-    <updated>2025-05-09T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Education and workforce"/>
-    <category term="Social and behavioral sciences"/>
-    <category term="Technology development"/>
-    <summary>U.S. National Science Foundation | Posted | The Science of Science: Discovery, Communication and Impact (SoS: DCI) program is designed to advance theory and knowledge about increasing the public value of scientific activity. Science of Science draws from multiple disciplinary and field perspectives to advance theory and research about scientific discovery, communication and impact. SoS: DCI welcomes proposals applying rigorous empirical res…</summary>
   </entry>
 </feed>

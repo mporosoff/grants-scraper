@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/transportation.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/transportation.xml</id>
-  <updated>2026-11-17T20:03:56Z</updated>
+  <updated>2026-11-18T18:58:27Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Prevention and Treatment through a Comprehensive Care Continuum for HIV-affected Adolescents in Resource-Constrained Settings--Implementation Science Network (PATC3H-IN)</title>
@@ -135,6 +135,16 @@
     <category term="Education and workforce"/>
     <category term="Transportation"/>
     <summary>Centers for Disease Control and Prevention - ERA | Estimated Application 2027-01-29 | The National Institute for Occupational Safety and Health (NIOSH) K01 grant provides "protected time" for a supervised career development experience in occupational health and safety research. NIOSH supports the mentoring of junior investigators during the critical transition from postdoctoral training to securing independent R01 funding. We hope to foster investigators' careers, who are vital for…</summary>
+  </entry>
+  <entry>
+    <title>Fiscal Years 2025 and 2026 Congestion Relief Program</title>
+    <link href="https://www.grants.gov/search-results-detail/364277"/>
+    <id>urn:funding-finder:grants-gov:364277</id>
+    <updated>2026-11-17T00:00:00Z</updated>
+    <author><name>DOT Federal Highway Administration</name></author>
+    <category term="Transportation"/>
+    <category term="Cybersecurity"/>
+    <summary>DOT Federal Highway Administration | Application 2026-12-17 | The purpose of the Congestion Relief Competitive Grant Program is to provide competitive grants to eligible entities to advance innovative, integrated, and multimodal solutions to highway congestion in the most congested metropolitan areas of the United States.</summary>
   </entry>
   <entry>
     <title>Multi-Site Investigator-Initiated Clinical Trials (Collaborative UG3/UH3 Clinical Trial Required)</title>
@@ -631,21 +641,5 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Transportation"/>
     <summary>National Institutes of Health | Application 2028-11-07 | This is a Notice of Funding Opportunity (NOFO) for a Limited Competition that invites applications from eligible organizations to apply. Please see Section III. Eligibility for additional information. In accordance with NIH standard peer-review processes, the applications will be peer-reviewed, and only meritorious applications will be considered. The purpose of this NOFO is to solicit current or …</summary>
-  </entry>
-  <entry>
-    <title>Transport Phenomena (TP)</title>
-    <link href="https://www.grants.gov/search-results-detail/362063"/>
-    <id>urn:funding-finder:grants-gov:362063</id>
-    <updated>2026-04-24T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Energy"/>
-    <category term="Manufacturing"/>
-    <category term="Quantum science"/>
-    <category term="Separations and membranes"/>
-    <category term="Technology development"/>
-    <category term="Transportation"/>
-    <summary>U.S. National Science Foundation | Posted | The Transport Phenomena (TP) program supports fundamental research to understand, model, and control the transport of mass, momentum, energy, and species across multiple scales. Innovative TP research supports advances in artificial intelligence; manufacturing; biotechnology; microelectronics; energy generation, extraction, and utilization; nuclear energy; quantum science and engineering; and othe…</summary>
   </entry>
 </feed>
