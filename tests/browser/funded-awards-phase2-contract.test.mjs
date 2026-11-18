@@ -318,7 +318,9 @@ test("Award service delivery follows the protected main and rollback pattern", (
   const pagesClientGate = deployWorkflow.indexOf("Wait for Pages to publish the browser-first DoD client");
   const workerDeploy = deployWorkflow.indexOf("Deploy the committed Award Worker");
   assert.ok(pagesClientGate > -1 && workerDeploy > pagesClientGate);
-  assert.match(deployWorkflow, /pages-release-sha\.txt\?pre-worker=\$\{GITHUB_SHA\}-\$\{attempt\}[\s\S]*published_pages_sha[\s\S]*"\$GITHUB_SHA"[\s\S]*The existing Worker was left unchanged/);
+  assert.match(deployWorkflow, /expected_pages_sha="\$GITHUB_SHA"[\s\S]*if \[ "\$HANDOFF_ROUTE" = 'worker' \]; then[\s\S]*expected_pages_sha="\$RETAINED_PUBLICATION_SHA"/);
+  assert.match(deployWorkflow, /RETAINED_PUBLICATION_SHA: \$\{\{ needs\.handoff\.outputs\.pages_publication_sha \}\}/);
+  assert.match(deployWorkflow, /pages-release-sha\.txt\?pre-worker=\$\{GITHUB_SHA\}-\$\{attempt\}[\s\S]*"\$published_pages_sha" = "\$expected_pages_sha"[\s\S]*The existing Worker was left unchanged/);
   assert.doesNotMatch(deployWorkflow, /candidate_client_hash|candidate_page_hash/);
   assert.match(workerSmoke, /source\?\.source[\s\S]*source\?\.status[\s\S]*source\?\.error\?\.code/);
   assert.match(workerSmoke, /failureDetail\(payload\)/);

@@ -366,13 +366,19 @@ test("Alerts workflow guards version capture, D1 migration, deployment, and roll
   assert.match(alertsWorkflow, /if: \$\{\{ always\(\) && steps\.worker-deploy\.outcome == 'success'/);
 });
 
-test("Alerts only runs the deployment gates after an authenticated or manual handoff", () => {
-  assert.match(alertsWorkflow, /workflow_run\.head_repository\.full_name == github\.repository/);
-  assert.match(alertsWorkflow, /python -m tools\.alerts_release_handoff/);
-  assert.match(alertsWorkflow, /deploy:\s+if: .*needs\.handoff\.outputs\.route\)\s+needs: handoff/);
-  assert.match(workflowStep(alertsWorkflow, "Select the manual protected-main deployment"),
-    /if: github\.event_name == 'workflow_dispatch'[\s\S]*route=manual/);
-});
+for (const [name, workflow, serviceArgument] of [
+  ["Alerts", alertsWorkflow, ""],
+  ["Awards", awardWorkflow, " --service award-api"],
+]) {
+  test(`${name} only runs deployment gates after its authenticated or manual handoff`, () => {
+    assert.match(workflow, /workflow_run\.head_repository\.full_name == github\.repository/);
+    assert.match(workflow, /actions: read/);
+    assert.ok(workflow.includes(`run: python -m tools.alerts_release_handoff${serviceArgument}\n`));
+    assert.match(workflow, /deploy:\s+if: .*contains\(fromJSON\('\["catalog", "worker", "manual"\]'\), needs\.handoff\.outputs\.route\)\s+needs: handoff/);
+    assert.match(workflowStep(workflow, "Select the manual protected-main deployment"),
+      /if: github\.event_name == 'workflow_dispatch'[\s\S]*route=manual/);
+  });
+}
 
 for (const [name, workflow] of [["Alerts", alertsWorkflow], ["Awards", awardWorkflow]]) {
   test(`${name} follows the completed immutable release and checks protected main instead of racing Pages`, () => {
