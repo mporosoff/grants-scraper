@@ -89,7 +89,8 @@ class AdministrativeSubmissionBudget(unittest.TestCase):
                  'scripts/build_catalog.py', 'scripts/currentness.py', 'assets/submission-schedule.js',
                  'assets/search-retrieval.js', 'tools/run_search_diagnosis.mjs',
                  'scripts/notice_schedule.py', 'workers/alerts/src/contract.js', 'scripts/build_changes.py',
-                 'tools/release_dependencies.py', 'tools/corpus_clock.mjs'})
+                 'tools/release_dependencies.py', 'tools/corpus_clock.mjs',
+                 'tools/catalog_publication_evidence.py'})
 
     def test_cold_checkpoint_rejects_other_projection_kind_before_projection(self):
         f = self.f; state = f.root / 'first'

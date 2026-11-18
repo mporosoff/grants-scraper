@@ -58,7 +58,7 @@ ADMINISTRATIVE_INPUTS = ('tools/administrative_submission_revalidation.py',
     'scripts/submission_schedule.py', 'scripts/notice_schedule.py', 'scripts/build_catalog.py', 'scripts/currentness.py',
     'assets/submission-schedule.js', 'assets/search-retrieval.js', 'workers/alerts/src/contract.js',
     'scripts/build_changes.py', 'tools/run_search_diagnosis.mjs', 'tools/release_dependencies.py',
-    'tools/corpus_clock.mjs')
+    'tools/corpus_clock.mjs', 'tools/catalog_publication_evidence.py')
 ADMINISTRATIVE_OUTPUTS = ('feeds/changes.json', 'feeds/changes.xml')
 DOCUMENT_FACT_INPUTS = ('tools/document_fact_revalidation.py',
     'scripts/notice_semantics.py', 'scripts/notice_fact_guards.py')
