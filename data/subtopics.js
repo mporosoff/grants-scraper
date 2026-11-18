@@ -11,8 +11,8 @@ globalThis.SUBTOPIC_CATALOG={
   "frame_evidence_cache_sha256": "2e5196fceba24921b486dce76a29f5759f642ce207fa65fc9bb9a11632a1a71c",
   "top_level_fetch_failure_count": 51
  },
- "parent_count": 28,
- "record_count": 468,
+ "parent_count": 29,
+ "record_count": 469,
  "records": {
   "103313": {
    "segmentation_method": null,
@@ -13364,6 +13364,27 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
+  "356559": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "356561": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "356562": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
   "356605": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -15011,13 +15032,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "357205": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "357206": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -15061,27 +15075,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "357288": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "357301": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "357303": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "357305": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -15173,13 +15166,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "357346": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "357375": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -19705,13 +19691,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "360626": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "360627": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -27083,20 +27062,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "362842": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "362843": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "362849": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -33654,6 +33619,13 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
+  "363913": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
   "363915": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -39625,13 +39597,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "364020": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "364021": {
    "segmentation_method": "nasa_roses_table",
    "subtopic_count": 1,
@@ -40334,20 +40299,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "364169": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "364170": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "364171": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -40510,13 +40461,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "364196": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "364197": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -40905,6 +40849,34 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
+  "364275": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "364276": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "364277": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "364278": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
   "39841": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -41002,6 +40974,73 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
+  },
+  "nasa-roses:25-D.11-1872bf67cd": {
+   "segmentation_method": "nasa_roses_table",
+   "subtopic_count": 1,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopics": [
+    {
+     "amended": true,
+     "child_source_url": "https://solicitation.nasaprs.com/NNH25ZDA001N-USCAPS",
+     "child_type": "subject",
+     "confidence": "high",
+     "division": "D",
+     "evidence_anchor": null,
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-11-18",
+     "last_verified": "2026-11-18",
+     "native_deadline_text": "12/18/2026 (Mandatory NOI) | 02/18/2027",
+     "native_status": "dated",
+     "opportunity_id": "nasa-roses:25-D.11-1872bf67cd:d-11",
+     "ordinal_label": "D.11",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": null,
+     "page_start": null,
+     "parent_id": "nasa-roses:25-D.11-1872bf67cd",
+     "parent_opportunity_number": "NNH25ZDA001N-USCAPS",
+     "pattern_family": null,
+     "program_area_labels": [],
+     "publication_reason": "high_confidence",
+     "publication_state": "publishable",
+     "record_type": "subtopic",
+     "segmentation_method": null,
+     "source_document_hash": "a66edbf860b54dbb83a4c4fcbc757656fbb51d91f1d1c8d282ddbd14b2e20639",
+     "source_document_url": "https://nspires.nasaprs.com/external/viewrepositorydocument/cmdocumentid=1041498/solicitationId=%7B2A1D139B-B9C7-CE8C-2E81-223FD08460F9%7D/viewSolicitationDocument=1/Table 3 ROSES-2025_Amend 82.html",
+     "source_role": "authoritative_announcement",
+     "source_version": {
+      "amendment": 82,
+      "year": 2025
+     },
+     "status": "posted",
+     "subtopic_code": "D.11",
+     "subtopic_code_norm": "d-11",
+     "subtopic_id": "nasa-roses:25-D.11-1872bf67cd:d-11",
+     "subtopic_ordinal": 55,
+     "subtopic_source": "native",
+     "summary": "NASA ROSES program element D.11: U.S. Contributions to Ariel Preparatory Science.",
+     "term_display": {
+      "02": "02",
+      "12": "12",
+      "18": "18",
+      "2026": "2026",
+      "2027": "2027",
+      "ariel": "Ariel",
+      "contribution": "Contributions",
+      "division": "division",
+      "mandatory": "Mandatory",
+      "noi": "NOI",
+      "preparatory": "Preparatory",
+      "rose": "ROSES",
+      "science": "Science",
+      "u.s": "U.S"
+     },
+     "title": "U.S. Contributions to Ariel Preparatory Science",
+     "title_fingerprint": "32baad27",
+     "topic_areas": []
+    }
+   ]
   },
   "nasa-roses:25-D.3F-a0947606d9": {
    "segmentation_method": null,
@@ -41319,13 +41358,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "sam-gov:02d98fba28de4a70b82ebe638954f5d4": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "sam-gov:2b5fd12340a642e4ac3d1f5c21ecaeed": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -42572,8 +42604,8 @@ globalThis.SUBTOPIC_CATALOG={
  },
  "schema_version": 1,
  "search_index": {
-  "average_document_length": 142.11160714285714,
-  "document_count": 224,
+  "average_document_length": 141.54666666666665,
+  "document_count": 225,
   "document_lengths": [
    836,
    401,
@@ -42798,7 +42830,8 @@ globalThis.SUBTOPIC_CATALOG={
    11,
    14,
    14,
-   7
+   7,
+   15
   ],
   "postings": {
    "0.001-10": [
@@ -42819,6 +42852,8 @@ globalThis.SUBTOPIC_CATALOG={
     222,
     1,
     223,
+    1,
+    224,
     1
    ],
    "03": [
@@ -43307,6 +43342,8 @@ globalThis.SUBTOPIC_CATALOG={
     217,
     1,
     218,
+    1,
+    224,
     1
    ],
    "120": [
@@ -43371,6 +43408,8 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "18": [
     6,
+    2,
+    224,
     2
    ],
    "19": [
@@ -43585,6 +43624,8 @@ globalThis.SUBTOPIC_CATALOG={
     221,
     1,
     222,
+    1,
+    224,
     1
    ],
    "2027": [
@@ -43597,6 +43638,8 @@ globalThis.SUBTOPIC_CATALOG={
     222,
     1,
     223,
+    1,
+    224,
     1
    ],
    "21": [
@@ -47601,6 +47644,10 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "argonne": [
     61,
+    1
+   ],
+   "ariel": [
+    224,
     1
    ],
    "aris": [
@@ -53715,6 +53762,10 @@ globalThis.SUBTOPIC_CATALOG={
     29,
     2
    ],
+   "contribution": [
+    224,
+    1
+   ],
    "control": [
     1,
     1,
@@ -57593,6 +57644,8 @@ globalThis.SUBTOPIC_CATALOG={
     222,
     1,
     223,
+    1,
+    224,
     1
    ],
    "dmitry": [
@@ -70201,6 +70254,8 @@ globalThis.SUBTOPIC_CATALOG={
     218,
     1,
     220,
+    1,
+    224,
     1
    ],
    "maneuver": [
@@ -73737,6 +73792,8 @@ globalThis.SUBTOPIC_CATALOG={
     218,
     1,
     220,
+    1,
+    224,
     1
    ],
    "noise": [
@@ -77319,6 +77376,10 @@ globalThis.SUBTOPIC_CATALOG={
     47,
     1
    ],
+   "preparatory": [
+    224,
+    1
+   ],
    "prepare": [
     47,
     1
@@ -80749,6 +80810,8 @@ globalThis.SUBTOPIC_CATALOG={
     222,
     1,
     223,
+    1,
+    224,
     1
    ],
    "rotary-w": [
@@ -81327,6 +81390,8 @@ globalThis.SUBTOPIC_CATALOG={
     212,
     1,
     222,
+    1,
+    224,
     1
    ],
    "scientific": [
@@ -87693,6 +87758,8 @@ globalThis.SUBTOPIC_CATALOG={
     192,
     1,
     193,
+    1,
+    224,
     1
    ],
    "uas": [
@@ -90390,8 +90457,9 @@ globalThis.SUBTOPIC_CATALOG={
    "364021:a-18",
    "364032:b-7",
    "364039:b-8",
-   "364221:d-10"
+   "364221:d-10",
+   "nasa-roses:25-D.11-1872bf67cd:d-11"
   ]
  },
- "searchable_record_count": 224
+ "searchable_record_count": 225
 };

@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml</id>
-  <updated>2026-11-17T20:03:56Z</updated>
+  <updated>2026-11-18T18:58:27Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>ancient DNA for Modern Genomics (aDMG) Research Projects (U01 Clinical Trials Not Allowed)</title>
@@ -156,6 +156,18 @@
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
     <summary>National Institutes of Health | Estimated Application 2027-01-29 | The National Institute of Environmental Health Sciences (NIEHS) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for research coordination and data support for the Health and Extreme Weather (HEW) initiative. This solicitation will include two closely aligned components: research coordination and data support. The coordinating component will be responsible for faci…</summary>
+  </entry>
+  <entry>
+    <title>WATER RESOURCES RESEARCH ACT PROGRAM ANNUAL BASE GRANTS</title>
+    <link href="https://www.grants.gov/search-results-detail/364278"/>
+    <id>urn:funding-finder:grants-gov:364278</id>
+    <updated>2026-11-17T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
+    <category term="Education and workforce"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Water"/>
+    <summary>Geological Survey | Application 2026-12-30 | This Program Announcement is issued under the provisions of section 104 of the Water Resources Research Act of 1984 (codified at 42 USC 10301 et seq.) and amended by Public Laws 101-397, 104-147, 106-374, 109-471, and 117-58. The Water Resources Research Act directs the Secretary of the Interior to administer program grants to Institutes established under the provisions of section (a) of the Act. …</summary>
   </entry>
   <entry>
     <title>Major Research Instrumentation Program: (MRI)</title>
@@ -742,17 +754,5 @@
     <category term="Public health"/>
     <category term="Technology development"/>
     <summary>National Institutes of Health | Application 2027-10-19 | This Notice of Funding Opportunity (NOFO) solicits applications for the development of enabling informatics technologies to improve the acquisition, management, analysis, and dissemination of data and knowledge across the cancer research continuum including cancer biology, cancer treatment and diagnosis, early cancer detection, risk assessment and prevention, cancer control and epidemiology. As a …</summary>
-  </entry>
-  <entry>
-    <title>Title XVI Water Reclamation and Reuse Projects</title>
-    <link href="https://www.grants.gov/search-results-detail/362396"/>
-    <id>urn:funding-finder:grants-gov:362396</id>
-    <updated>2026-05-14T00:00:00Z</updated>
-    <author><name>Bureau of Reclamation</name></author>
-    <category term="Energy"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Water"/>
-    <summary>Bureau of Reclamation | Application 2027-08-26 | Through WaterSMART, the Bureau of Reclamation (Reclamation) leverages Federal and non- Federal funding to work cooperatively with States, Tribes, and other entities as they plan for and implement actions to increase water supply and hydropower reliability. The WaterSMART Program demonstrably advances Trump administration priorities, such as those identified in Presidential Executive Order 14154 (J…</summary>
   </entry>
 </feed>

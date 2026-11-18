@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/energy.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/energy.xml</id>
-  <updated>2026-11-17T20:03:56Z</updated>
+  <updated>2026-11-18T18:58:27Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>The State Component of the National Cooperative Geologic Mapping Program</title>
@@ -43,7 +43,6 @@
     <updated>2026-11-06T00:00:00Z</updated>
     <author><name>Bureau of European and Eurasian Affairs</name></author>
     <category term="Energy"/>
-    <category term="Cybersecurity"/>
     <summary>Bureau of European and Eurasian Affairs | Application 2026-12-06 | The Bureau of European and Eurasian Affairs, Office of the Coordinator of U.S. Assistance to Europe, Eurasia, and Central Asia (EUR/ACE) of the U.S. Department of State announces an open competition for organizations to submit a statement of interest (SOI) to carry out a project (or projects) to drive economic opportunities for U.S. energy, logistics, and infrastructure businesses and investors in…</summary>
   </entry>
   <entry>
@@ -194,17 +193,6 @@
     <category term="Energy"/>
     <category term="Quantum science"/>
     <summary>Air Force Office of Scientific Research | Application 2027-02-19 | verify prerequisite | This is a special Notice of Funding Opportunity Announcement (NOFO) sponsored by the Air Force Office of Scientific Research (AFOSR) and Taiwan’s National Science and Technology Council (NSTC), which will hereafter generally be referred to as “we, us, our, or AFOSR.” We announce the solicitation for a three-year program entitled “Frontiers in Materials and Nanostructures: AI-Driven Discovery, Quan…</summary>
-  </entry>
-  <entry>
-    <title>RESTORE Act Centers of Excellence Research Grants Program</title>
-    <link href="https://www.grants.gov/search-results-detail/364170"/>
-    <id>urn:funding-finder:grants-gov:364170</id>
-    <updated>2026-10-28T00:00:00Z</updated>
-    <author><name>U.S. Dept. of Treasury RESTORE Act Program</name></author>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <summary>U.S. Dept. of Treasury RESTORE Act Program | Application 2027-10-31 | Treasury is publishing multiple funding opportunity notices for its RESTORE Act grant programs. This announcement applies only to the Centers of Excellence Research Grants Program. Trust Fund amounts are available to establish one or more Centers of Excellence through competitive subawards to nongovernmental entities and consortia in the Gulf Coast Region, including institutions of higher educatio…</summary>
   </entry>
   <entry>
     <title>Integrated Energy Data Resource</title>
@@ -687,5 +675,17 @@
     <category term="Energy"/>
     <category term="Space and aeronautics"/>
     <summary>NASA Headquarters | Application 2027-01-28 | The close date above is the date for the Step-2 proposal due date. The Step-1 proposal due date is October 8, 2026. Step-2 proposals cannot be submitted if a Step-1 proposal was not submitted. ﻿NOTICE: September 18, 2026. Several corrections have been made: (1) Information about the 2027-2028 winter field campaign has been updated in Section 5, (2) Details on the redacted and anonymized budget req…</summary>
+  </entry>
+  <entry>
+    <title>Egypt Annual Program Statement</title>
+    <link href="https://www.grants.gov/search-results-detail/363786"/>
+    <id>urn:funding-finder:grants-gov:363786</id>
+    <updated>2026-09-02T00:00:00Z</updated>
+    <author><name>Bureau of Near Eastern Affairs</name></author>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Transportation"/>
+    <summary>Bureau of Near Eastern Affairs | Posted | The Bureau of Near Eastern Affairs’ Office of Assistance Coordination (NEA/AC) seeks proposals for projects in Egypt that advance U.S. commercial diplomacy and put American interests first. Proposals must demonstrate how projects will leverage assistance as a tool of statecraft to advance U.S. economic, security, and diplomatic objectives. Programming should promote trade, not aid, by leveraging a…</summary>
   </entry>
 </feed>

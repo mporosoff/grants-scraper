@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml</id>
-  <updated>2026-11-17T20:03:56Z</updated>
+  <updated>2026-11-18T18:58:27Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Healthy Lifestyles in Youth</title>
@@ -536,6 +536,22 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <summary>Food and Drug Administration | Letter Of Intent 2027-09-20 | The purpose of this Notice of Funding Opportunity (NOFO) is to fund clinical trials of products evaluating efficacy and/or safety in support of a new indication or change in labeling to address unmet needs in rare diseases or conditions. Additionally, through the funding of collaborative, efficient, and/or innovative clinical trials, FDA expects to increase the number of approved treatments for ra…</summary>
   </entry>
   <entry>
+    <title>National Science Foundation Translation to Practice (NSF TTP)</title>
+    <link href="https://www.grants.gov/search-results-detail/359966"/>
+    <id>urn:funding-finder:grants-gov:359966</id>
+    <updated>2025-07-09T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Space and aeronautics"/>
+    <category term="Technology development"/>
+    <category term="Transportation"/>
+    <category term="Manufacturing"/>
+    <summary>U.S. National Science Foundation | Application 2027-05-18 | The U.S. NSF Directorate for Technology, Innovation and Partnerships (NSF TIP) partners across sectors to advance three primary focus areas - accelerating technology translation and development, fostering regional innovation and economic growth, and preparing the American workforce for future high-wage jobs in STEM fields. The translation of research to practice ensures that the insights and innov…</summary>
+  </entry>
+  <entry>
     <title>Animal Food Regulatory Program Standards Implementation Development and Maintenance, with Mutual Reliance Initiatives Clinical Trials Not Allowed</title>
     <link href="https://www.grants.gov/search-results-detail/359816"/>
     <id>urn:funding-finder:grants-gov:359816</id>
@@ -668,18 +684,5 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <author><name>National Institutes of Health</name></author>
     <category term="Agriculture and food"/>
     <summary>National Institutes of Health | Application 2027-11-05 | This Notice of Funding Opportunity (NOFO) seeks to stimulate HIV/AIDS research within the mission of the National Institute of Diabetes and Digestive and Kidney Diseases (NIDDK) that align with the HIV/AIDS research priorities outlined by the NIH Office of AIDS Research (OAR). These priorities were most recently described in NOT-OD-20-018 UPDATE: NIH HIV/AIDS Research Priorities and Guidelines for…</summary>
-  </entry>
-  <entry>
-    <title>Pilot Studies of Biological, Behavioral and Social Mechanisms Contributing to HIV Pathogenesis Within the Mission of NIDDK (R21 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/358082"/>
-    <id>urn:funding-finder:grants-gov:358082</id>
-    <updated>2025-01-08T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Health equity"/>
-    <category term="Infectious disease"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health | Application 2027-11-16 | This Notice of Funding Opportunity (NOFO) invites applications for innovative basic and translational pilot research projects within the mission of the NIDDK that are aligned with NIH HIV/AIDS research priorities. These priorities were most recently outlined by the NIH Office of AIDS Research (OAR) in NOT-20-018, UPDATE: NIH HIV/AIDS Research Priorities and Guidelines for Determining HIV/AIDS Fund…</summary>
   </entry>
 </feed>
