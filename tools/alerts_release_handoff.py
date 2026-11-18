@@ -1,5 +1,6 @@
-"""Select the protected catalog or Worker-only input for Alerts deployment."""
+"""Select the protected catalog or service-only input for Worker deployment."""
 
+import argparse
 import json
 import os
 from pathlib import Path
@@ -14,6 +15,15 @@ from tools.verify_release_live import validate_publication
 
 
 ALERTS_PAGES_FILES = ('match_explorer.html', 'funded_awards.html', 'data/opportunities.js')
+SERVICES = ('alerts', 'award-api')
+
+
+def protected_publication(root):
+    publication_sha = candidate.git(root, 'log', '--first-parent', '-1', '--format=%H', '--',
+                                    'release/candidate-source.json')
+    if not re.fullmatch(r'[a-f0-9]{40}', publication_sha):
+        raise ValueError('Alerts handoff requires a protected catalog publication')
+    return publication_sha
 
 
 def inherited_jobs(repository, run, completed, *, api):
@@ -52,7 +62,9 @@ def verify_live_receipt(root, reports, manifest, head):
     return True
 
 
-def automatic_handoff(root, repository, source, *, api, download=fetch):
+def automatic_handoff(root, repository, source, *, api, download=fetch, service='alerts'):
+    if service not in SERVICES:
+        raise ValueError('Unknown Worker release handoff service')
     run, attempt = source.get('id'), source.get('run_attempt')
     if (type(run) is not int or run <= 0 or type(attempt) is not int or attempt <= 0
             or source.get('head_branch') != 'main'
@@ -94,12 +106,9 @@ def automatic_handoff(root, repository, source, *, api, download=fetch):
     # A service-only push can deploy while Pages keeps serving the same package.
     # Classifying changed Worker bytes against the serving version remains with
     # the existing deploy job, followed by its ordinary Pages and smoke gates.
-    publication_sha = candidate.git(root, 'log', '--first-parent', '-1', '--format=%H', '--',
-                                    'release/candidate-source.json')
-    if not re.fullmatch(r'[a-f0-9]{40}', publication_sha):
-        raise ValueError('Alerts handoff requires a protected catalog publication')
+    publication_sha = protected_publication(root)
     changed = candidate.git(root, 'diff', '--name-only', '--no-renames', publication_sha, head, '--').splitlines()
-    if not any(path.startswith('workers/alerts/') for path in changed):
+    if not any(path.startswith(f'workers/{service}/') for path in changed):
         return 'skip'
     expected = candidate_groups(root, manifest)
     if set(changed_groups(expected, snapshot(root))) - {'validation'}:
@@ -108,14 +117,19 @@ def automatic_handoff(root, repository, source, *, api, download=fetch):
     return 'worker'
 
 
-def main():
+def main(argv=None):
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--service', choices=SERVICES, default='alerts')
+    args = parser.parse_args(argv)
     repository = os.environ['GITHUB_REPOSITORY']
     event = candidate.read_json(Path(os.environ['GITHUB_EVENT_PATH']))
     route = automatic_handoff(candidate.ROOT, repository, event['workflow_run'],
-                              api=lambda path: get(repository, path))
+                              api=lambda path: get(repository, path), service=args.service)
     with open(os.environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as output:
         output.write(f'route={route}\n')
-    print(f'Alerts release handoff: {route}')
+        if route == 'worker':
+            output.write(f'pages_publication_sha={protected_publication(candidate.ROOT)}\n')
+    print(f'{args.service} release handoff: {route}')
 
 
 if __name__ == '__main__':

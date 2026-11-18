@@ -1,5 +1,7 @@
 from pathlib import Path
 import json
+import os
+from tempfile import TemporaryDirectory
 import unittest
 from unittest.mock import Mock, patch
 
@@ -8,6 +10,7 @@ from tools import release_candidate as candidate
 
 
 class AlertsHandoffTests(unittest.TestCase):
+    service = None  # Existing callers retain the default Alerts contract.
     repository = 'owner/repo'
     publication_sha = 'a' * 40
     control_sha = 'b' * 40
@@ -29,7 +32,7 @@ class AlertsHandoffTests(unittest.TestCase):
         self.files = dict.fromkeys(handoff.ALERTS_PAGES_FILES, 'd' * 64)
         self.manifest = {'candidate_id': self.candidate_id, 'files': self.files}
         self.head = self.publication_sha
-        self.changed = 'workers/alerts/src/index.js\ntests/browser/alerts-phase2-contract.test.mjs'
+        self.changed = f'workers/{self.service or "alerts"}/src/index.js\ntests/browser/worker.test.mjs'
         self.download = Mock()
         self.addCleanup(patch.stopall)
         patch.object(handoff.history, 'workflow_job_names', return_value=set(self.jobs)).start()
@@ -62,7 +65,8 @@ class AlertsHandoffTests(unittest.TestCase):
 
     def route(self, event=None):
         return handoff.automatic_handoff(self.root, self.repository, event or self.event,
-                                         api=self.api, download=self.download)
+                                         api=self.api, download=self.download,
+                                         **({'service': self.service} if self.service else {}))
 
     def test_exact_completed_attempt_hands_off_the_published_catalog(self):
         self.assertEqual(self.route(), 'catalog')
@@ -140,6 +144,59 @@ class AlertsHandoffTests(unittest.TestCase):
             changes.return_value = {'source': ['scripts/source.py']}
             self.assertEqual(self.route(), 'skip')
         self.download.assert_not_called()
+
+    def test_another_service_only_push_does_not_launch_this_worker(self):
+        self.event.update(event='push', head_sha=self.head)
+        self.jobs['verify-live'] = 'skipped'
+        other = 'alerts' if self.service == 'award-api' else 'award-api'
+        self.changed = f'workers/{other}/src/index.js'
+        self.assertEqual(self.route(), 'skip')
+        self.verify_files.assert_not_called()
+        self.download.assert_not_called()
+
+
+class AwardsHandoffTests(AlertsHandoffTests):
+    service = 'award-api'
+
+
+class HandoffCommandTests(unittest.TestCase):
+    def test_command_selects_awards_explicitly_and_preserves_default_alerts(self):
+        event = {'workflow_run': {'id': 101}}
+        with TemporaryDirectory() as directory:
+            output = Path(directory) / 'output'
+            environment = {'GITHUB_REPOSITORY': 'owner/repo', 'GITHUB_EVENT_PATH': 'event.json',
+                           'GITHUB_OUTPUT': str(output)}
+            with (patch.dict(os.environ, environment),
+                  patch.object(candidate, 'read_json', return_value=event),
+                  patch.object(handoff, 'automatic_handoff', return_value='skip') as route):
+                for arguments, service in (([], 'alerts'), (['--service', 'award-api'], 'award-api')):
+                    with self.subTest(service=service):
+                        handoff.main(arguments)
+                        self.assertEqual(route.call_args.kwargs['service'], service)
+                        self.assertEqual(route.call_args.args, (candidate.ROOT, 'owner/repo', event['workflow_run']))
+            self.assertEqual(output.read_text(encoding='utf-8'), 'route=skip\nroute=skip\n')
+
+    def test_worker_handoff_exports_the_retained_protected_pages_publication(self):
+        event = {'workflow_run': {'id': 101}}
+        publication = 'a' * 40
+        with TemporaryDirectory() as directory:
+            output = Path(directory) / 'output'
+            environment = {'GITHUB_REPOSITORY': 'owner/repo', 'GITHUB_EVENT_PATH': 'event.json',
+                           'GITHUB_OUTPUT': str(output)}
+            with (patch.dict(os.environ, environment),
+                  patch.object(candidate, 'read_json', return_value=event),
+                  patch.object(handoff, 'automatic_handoff', return_value='worker'),
+                  patch.object(handoff, 'protected_publication', return_value=publication) as protected):
+                handoff.main(['--service', 'award-api'])
+                protected.assert_called_once_with(candidate.ROOT)
+            self.assertEqual(output.read_text(encoding='utf-8'),
+                             f'route=worker\npages_publication_sha={publication}\n')
+
+    def test_unknown_service_is_rejected_before_reading_release_evidence(self):
+        api = Mock()
+        with self.assertRaisesRegex(ValueError, 'Unknown Worker'):
+            handoff.automatic_handoff(Path('checkout'), 'owner/repo', {}, api=api, service='search')
+        api.assert_not_called()
 
 
 class AlertsLiveReceiptTests(unittest.TestCase):

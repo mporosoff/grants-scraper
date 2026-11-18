@@ -10,14 +10,51 @@ on:
     branches: [main]
 permissions:
   contents: read
+  actions: read
 
 concurrency:
   group: funding-finder-award-api-release
   cancel-in-progress: false
 
 jobs:
+  handoff:
+    if: >-
+      github.ref == 'refs/heads/main' &&
+      (github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success') &&
+      (github.event_name != 'workflow_run' || github.event.workflow_run.head_repository.full_name == github.repository)
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    outputs:
+      route: ${{ steps.manual.outputs.route || steps.automatic.outputs.route }}
+      pages_publication_sha: ${{ steps.automatic.outputs.pages_publication_sha }}
+    steps:
+      - name: Select the manual protected-main deployment
+        if: github.event_name == 'workflow_dispatch'
+        id: manual
+        run: echo 'route=manual' >> "$GITHUB_OUTPUT"
+      - uses: actions/checkout@v6
+        if: github.event_name == 'workflow_run'
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        if: github.event_name == 'workflow_run'
+        with:
+          python-version: "3.13"
+          cache: pip
+      - if: github.event_name == 'workflow_run'
+        run: python -m pip install -r requirements.txt
+      - name: Authenticate the exact immutable release handoff
+        if: github.event_name == 'workflow_run'
+        id: automatic
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python -m tools.alerts_release_handoff --service award-api
+
   deploy:
-    if: github.ref == 'refs/heads/main' && (github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success')
+    if: github.ref == 'refs/heads/main' && contains(fromJSON('["catalog", "worker", "manual"]'), needs.handoff.outputs.route)
+    needs: handoff
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
@@ -110,14 +147,25 @@ jobs:
       - name: Wait for Pages to publish the browser-first DoD client
         id: pages-client-ready
         if: ${{ steps.worker-inputs.outputs.deploy_required == 'true' }}
+        env:
+          HANDOFF_ROUTE: ${{ needs.handoff.outputs.route }}
+          RETAINED_PUBLICATION_SHA: ${{ needs.handoff.outputs.pages_publication_sha }}
         shell: bash
         run: |
+          expected_pages_sha="$GITHUB_SHA"
+          if [ "$HANDOFF_ROUTE" = 'worker' ]; then
+            expected_pages_sha="$RETAINED_PUBLICATION_SHA"
+            if ! [[ "$expected_pages_sha" =~ ^[a-f0-9]{40}$ ]]; then
+              echo "::error::The authenticated retained Pages publication is missing. The existing Worker was left unchanged."
+              exit 1
+            fi
+          fi
           verified=false
           for attempt in $(seq 1 24); do
             rm -f -- /tmp/pages-release-sha.txt
             curl --fail --silent --show-error --connect-timeout 5 --max-time 10 "https://mporosoff.github.io/grants-scraper/pages-release-sha.txt?pre-worker=${GITHUB_SHA}-${attempt}" -o /tmp/pages-release-sha.txt || true
             published_pages_sha="$(tr -d '\r\n' < /tmp/pages-release-sha.txt 2>/dev/null || true)"
-            if [ "$published_pages_sha" = "$GITHUB_SHA" ]; then
+            if [ "$published_pages_sha" = "$expected_pages_sha" ]; then
               verified=true
               break
             fi
