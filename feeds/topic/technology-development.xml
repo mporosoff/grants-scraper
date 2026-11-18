@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml</id>
-  <updated>2026-11-15T20:37:53Z</updated>
+  <updated>2026-11-17T20:03:56Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Technology Development Program</title>
@@ -547,18 +547,6 @@
     <summary>National Institutes of Health | Application 2027-01-26 | The National Institutes of Health (NIH) intends to renew the Integrative Management of chronic Pain and OUD for Whole Recovery (IMPOWR) research network. This renewal consists of individual research projects, which will be supported by a single Coordination Center. This network is intended to test new innovations that integrate evidence based treatments for chronic pain (CP) and opioid use disorde…</summary>
   </entry>
   <entry>
-    <title>Small Business Innovation Research and Small Business Technology Transfer Programs Phase II</title>
-    <link href="https://www.grants.gov/search-results-detail/364020"/>
-    <id>urn:funding-finder:grants-gov:364020</id>
-    <updated>2026-10-01T00:00:00Z</updated>
-    <author><name>National Institute of Food and Agriculture</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Technology development"/>
-    <category term="Materials science"/>
-    <category term="Manufacturing"/>
-    <summary>National Institute of Food and Agriculture | Application 2026-11-17 | The USDA SBIR/STTR programs, Assistance Listing number 10.212, support scientific excellence and technological innovation through investment of Federal research funds to build a strong national economy by stimulating technological innovation in the private sector; strengthening the role of small business in meeting Federal research and development needs; and increasing the commercial application o…</summary>
-  </entry>
-  <entry>
     <title>Dairy Business Innovation Initiatives Program (DBI) Fiscal Year 2026</title>
     <link href="https://www.grants.gov/search-results-detail/364006"/>
     <id>urn:funding-finder:grants-gov:364006</id>
@@ -651,5 +639,17 @@
     <category term="Public health"/>
     <category term="Technology development"/>
     <summary>National Institutes of Health | Estimated Application 2027-01-25 | The purpose of the Congressionally mandated Clinical and Translational Science Award (CTSA) Program is to accelerate the translation of scientific discoveries into treatments, diagnostics, and health interventions that improve patient and public health by funding and coordinating a national network of academic medical centers that provide the infrastructure, expertise, training, and collaboration …</summary>
+  </entry>
+  <entry>
+    <title>The Next Generation of the Clinical and Translational Science Awards Program Trial Innovation Network</title>
+    <link href="https://www.grants.gov/search-results-detail/363253"/>
+    <id>urn:funding-finder:grants-gov:363253</id>
+    <updated>2026-09-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Education and workforce"/>
+    <category term="Public health"/>
+    <category term="Technology development"/>
+    <summary>National Institutes of Health | Estimated Application 2027-01-25 | The Clinical and Translational Science Awards Program Trial Innovation Network (TIN) is a collaborative initiative aimed at addressing critical roadblocks in the design and implementation of multi-center clinical trials. The goal of the TIN is to execute trials better, faster, and more cost-efficiently, as well as serve as a national laboratory to study, understand, and innovate the process of con…</summary>
   </entry>
 </feed>

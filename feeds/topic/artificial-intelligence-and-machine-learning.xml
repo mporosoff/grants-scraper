@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml</id>
-  <updated>2026-11-15T20:37:53Z</updated>
+  <updated>2026-11-17T20:03:56Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Single Source: Scalable and Systematic Neurobiology of Psychiatric and Neurodevelopmental Disorder Risk Genes: Data Resource and Administrative Coordination Center (U24 Clinical Trial Not Allowed)</title>
@@ -54,6 +54,18 @@
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
     <summary>National Institutes of Health | Estimated Application 2027-05-08 | The National Institute on Aging (NIA) intends to publish a Notice of Funding Opportunity (NOFO) to support the continued operation and expansion of the Exceptional Longevity Data Management and Coordinating Center (EL DMCC) through a single U24 cooperative agreement award. The NOFO will be open to all eligible applicants. Established in 2022, the EL DMCC serves as the central hub for NIA’s human l…</summary>
+  </entry>
+  <entry>
+    <title>Educational Hub for Expanding the Computational Genomics and Data Science Workforce (U24 Clinical Trials Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/364269"/>
+    <id>urn:funding-finder:grants-gov:364269</id>
+    <updated>2027-02-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Data science"/>
+    <category term="Education and workforce"/>
+    <summary>National Institutes of Health | Estimated Application 2027-06-01 | The National Human Genome Research Institute (NHGRI) intends to publish a Notice of Funding Opportunity (NOFO) in 2027 to support the Computational Genomics and Data Science Educational Hub (Hub) (U24 activity code).The Hub leverages cloud platforms like NHGRI's Genomic Data Science Analysis, Visualization, and Informatics Lab-space (AnVIL) and the All of Us Researcher Workbench to enable students…</summary>
   </entry>
   <entry>
     <title>Maternal and Child Health Encounters Networks (MCHEK)</title>
@@ -526,18 +538,6 @@
     <category term="Materials science"/>
     <category term="Manufacturing"/>
     <summary>U.S. National Science Foundation | Posted | The U.S. National Science Foundation Directorate for Mathematical and Physical Sciences (NSF MPS) supports multiple research programs at the frontiers of discovery in physics. Physics research supported by NSF MPS enables understanding of the fundamental aspects of nature at all scales, from the quantum effects inside atoms to the mysterious dark energy spanning the entire universe. The core resea…</summary>
-  </entry>
-  <entry>
-    <title>NSF Plasma Physics</title>
-    <link href="https://beta.nsf.gov/funding/opportunities/plasma-physics"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-bd193799390f4580</id>
-    <updated>2026-08-14T00:00:00Z</updated>
-    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <category term="Materials science"/>
-    <category term="Energy"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Application 2026-11-16</summary>
   </entry>
   <entry>
     <title>NIH https://seed.nih.gov/small-business-funding/find-funding/sbir-sttr-funding-opportunities New PA posted June 1, 2026.</title>
