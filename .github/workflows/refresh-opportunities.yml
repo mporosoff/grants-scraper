@@ -237,6 +237,7 @@ jobs:
         run: >-
           python -m scripts.build_catalog
           --output data/opportunities.js
+          --retained-catalog "$RUNNER_TEMP/opportunities.previous.js"
           --min-records 1000
           --max-record-count 5000
       - name: Enrich new or changed records with official detail evidence

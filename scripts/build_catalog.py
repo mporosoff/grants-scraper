@@ -486,7 +486,29 @@ def numeric(value):
         return None
 
 
-def is_current(values, status, as_of):
+def retained_application_cycle_current(values, status, as_of, retained):
+    """Admit a still-present source row for its proved later application cycle."""
+    if status != "posted" or not retained or retained.get("source") != "Grants.gov":
+        return False
+    source_identity = {
+        "opportunity_id": first(values, "OpportunityID"),
+        "opportunity_number": first(values, "OpportunityNumber"),
+        "title": clean_text(first(values, "OpportunityTitle")),
+        "agency_code": clean_text(first(values, "AgencyCode")),
+        "close_date": iso_date(first(values, "CloseDate")),
+        "archive_date": iso_date(first(values, "ArchiveDate")),
+        "last_updated": iso_date(first(values, "LastUpdatedDate")),
+        "version": clean_text(first(values, "Version")),
+    }
+    if any(retained.get(name) != value for name, value in source_identity.items()):
+        return False
+    from scripts.currentness import record_is_current
+    from scripts.submission_schedule import application_cycle_end
+
+    return bool(application_cycle_end(retained) and record_is_current(retained, as_of)[0])
+
+
+def is_current(values, status, as_of, retained_schedule=None):
     title = clean_text(first(values, "OpportunityTitle")) or ""
     if NON_FUNDING_TITLE_RE.search(title):
         return False
@@ -515,7 +537,9 @@ def is_current(values, status, as_of):
     )
     close = parse_extract_date(first(values, close_field))
     if close:
-        return close >= as_of
+        return close >= as_of or retained_application_cycle_current(
+            values, status, as_of, retained_schedule
+        )
     if archive:
         return archive >= as_of
 
@@ -563,7 +587,7 @@ def topic_areas(title, description, categories):
     ]
 
 
-def normalize_element(element, as_of):
+def normalize_element(element, as_of, retained_schedules=None):
     tag = element.tag.rsplit("}", 1)[-1]
     status = (
         "forecasted"
@@ -571,7 +595,8 @@ def normalize_element(element, as_of):
         else "posted"
     )
     values = values_by_tag(element)
-    if not is_current(values, status, as_of):
+    retained = (retained_schedules or {}).get(first(values, "OpportunityID"))
+    if not is_current(values, status, as_of, retained):
         return None
 
     opportunity_id = first(values, "OpportunityID")
@@ -755,7 +780,7 @@ def normalize_element(element, as_of):
     }
 
 
-def iter_catalog_records(xml_stream, as_of):
+def iter_catalog_records(xml_stream, as_of, retained_schedules=None):
     root = None
     record_tags = {
         "OpportunitySynopsisDetail_1_0",
@@ -766,7 +791,7 @@ def iter_catalog_records(xml_stream, as_of):
             root = element
         tag = element.tag.rsplit("}", 1)[-1]
         if event == "end" and tag in record_tags:
-            record = normalize_element(element, as_of)
+            record = normalize_element(element, as_of, retained_schedules)
             if record:
                 yield record
             element.clear()
@@ -792,7 +817,7 @@ def record_rank(record):
     )
 
 
-def read_archive(archive_path, as_of):
+def read_archive(archive_path, as_of, retained_schedules=None):
     with ZipFile(archive_path) as archive:
         xml_names = [
             name for name in archive.namelist() if name.lower().endswith(".xml")
@@ -802,7 +827,7 @@ def read_archive(archive_path, as_of):
                 f"Expected one XML file in {archive_path}, found {len(xml_names)}."
             )
         with archive.open(xml_names[0]) as xml_stream:
-            records = list(iter_catalog_records(xml_stream, as_of))
+            records = list(iter_catalog_records(xml_stream, as_of, retained_schedules))
 
     deduplicated = {}
     for record in records:
@@ -1238,6 +1263,11 @@ def parse_args(argv=None):
         help="Catalog date in YYYY-MM-DD form (default: today UTC).",
     )
     parser.add_argument(
+        "--retained-catalog",
+        type=Path,
+        help="Prior published catalog supplying owned future application cycles.",
+    )
+    parser.add_argument(
         "--min-records",
         type=int,
         default=1000,
@@ -1261,17 +1291,27 @@ def main(argv=None):
     args = parse_args(argv)
     generated_at = utc_now()
     as_of = args.as_of or generated_at.date()
+    retained_schedules = {}
+    if args.retained_catalog:
+        from scripts.enrich_catalog import read_catalog
+        from scripts.submission_schedule import application_cycle_end
+
+        retained_schedules = {
+            str(record["opportunity_id"]): record
+            for record in read_catalog(args.retained_catalog)["opportunities"]
+            if application_cycle_end(record)
+        }
 
     if args.archive:
         archive_path = args.archive
         source_file = archive_path.name
-        records, deduplicated = read_archive(archive_path, as_of)
+        records, deduplicated = read_archive(archive_path, as_of, retained_schedules)
     else:
         with tempfile.TemporaryDirectory(prefix="grant-catalog-") as directory:
             archive_path = Path(directory) / "grants-db-extract.zip"
             extract_url = download_latest_extract(archive_path)
             source_file = extract_url.rsplit("/", 1)[-1]
-            records, deduplicated = read_archive(archive_path, as_of)
+            records, deduplicated = read_archive(archive_path, as_of, retained_schedules)
 
     validate_catalog(records, args.min_records, args.max_record_count)
     catalog = build_catalog(

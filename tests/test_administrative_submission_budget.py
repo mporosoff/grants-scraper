@@ -87,7 +87,9 @@ class AdministrativeSubmissionBudget(unittest.TestCase):
             self.assertEqual(set(hashed.call_args.args[1]) - set(p.MODERN_OPERATION_FILES),
                 {'tools/administrative_submission_revalidation.py', 'scripts/submission_schedule.py',
                  'scripts/build_catalog.py', 'scripts/currentness.py', 'assets/submission-schedule.js',
-                 'assets/search-retrieval.js', 'tools/run_search_diagnosis.mjs'})
+                 'assets/search-retrieval.js', 'tools/run_search_diagnosis.mjs',
+                 'scripts/notice_schedule.py', 'workers/alerts/src/contract.js', 'scripts/build_changes.py',
+                 'tools/release_dependencies.py'})
 
     def test_cold_checkpoint_rejects_other_projection_kind_before_projection(self):
         f = self.f; state = f.root / 'first'
@@ -224,7 +226,9 @@ class AdministrativeSubmissionBudget(unittest.TestCase):
         original = {'generation_sha': 'a' * 40, 'dependency_groups': base}
         selected = deepcopy(base)
         selected['source']['files']['scripts/submission_schedule.py'] = 'b'
+        selected['source']['files']['scripts/notice_schedule.py'] = 'b'
         selected['source']['files']['scripts/currentness.py'] = 'b'
+        selected['source']['files']['scripts/build_catalog.py'] = 'b'
         selected['semantic']['files']['assets/submission-schedule.js'] = 'b'
         selected['semantic']['files']['assets/search-retrieval.js'] = 'b'
         selected['semantic']['files']['tools/run_search_diagnosis.mjs'] = 'b'
@@ -232,7 +236,7 @@ class AdministrativeSubmissionBudget(unittest.TestCase):
             p.modern_scope(self.f.root, original, 'administrative_submission')
             with self.assertRaisesRegex(ValueError, 'extractor_only_change'):
                 p.modern_scope(self.f.root, original)
-        for group, name in [('source', 'scripts/notice_schedule.py'), ('semantic', 'assets/search-hybrid.js'),
+        for group, name in [('source', 'scripts/enrich_catalog.py'), ('semantic', 'assets/search-hybrid.js'),
                             ('teams', 'scripts/build_opportunity_teams.py')]:
             changed = deepcopy(selected); changed[group]['files'][name] = 'b'
             with self.subTest(group=group), patch('tools.release_dependencies.snapshot', return_value=changed):

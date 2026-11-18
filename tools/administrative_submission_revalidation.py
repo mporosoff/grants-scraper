@@ -14,6 +14,8 @@ RECORD_FIELDS = frozenset({'deadlines', 'close_date_kind', 'document_evidence',
     'document_search_text', 'next_submission'})
 QUALIFICATION_FIELDS = frozenset({'label', 'kind', 'deadline_kind', 'stage',
     'date_qualifier', 'date_qualifier_citation'})
+CYCLE_FIELDS = frozenset({'cycle', 'cycle_citation', 'field_authority', 'parser_version',
+    'stage', 'application_class', 'track', 'invitation_required', 'prerequisite', 'obligation'})
 
 
 def require(ok, reason):
@@ -48,7 +50,38 @@ def qualified_items(before, after, *, facts=False):
 
 
 def record_firewall(before, after):
+    from scripts.extract_document_evidence import refine_application_cycles
+
     require(unchanged_fields(before, after, RECORD_FIELDS), 'unchanged_non_deadline_facts')
+    cycle_baseline = deepcopy(before)
+    if refine_application_cycles(cycle_baseline):
+        old_document = before.get('document_evidence') or {}
+        cycle_document = cycle_baseline.get('document_evidence') or {}
+        require(unchanged_fields(old_document, cycle_document, {'facts'}),
+            'retained_cycle_document_identity_and_clock')
+        old_facts = old_document.get('facts', [])
+        cycle_facts = cycle_document.get('facts', [])
+        require([fact for fact in old_facts if fact.get('type') != 'deadline'] ==
+            [fact for fact in cycle_facts if fact.get('type') != 'deadline'],
+            'retained_non_deadline_cycle_facts')
+        by_id = {fact.get('id'): fact for fact in cycle_facts}
+        require(len(by_id) == len(cycle_facts), 'unique_cycle_fact_ids')
+        citation_fields = {'structural_reference'}
+        retained_citations = [{k: v for k, v in fact.get('citation', {}).items() if k not in citation_fields}
+            for fact in old_facts if fact.get('type') == 'deadline']
+        for fact in old_facts:
+            if fact.get('type') != 'deadline':
+                continue
+            retained = by_id.get(fact.get('id'), {})
+            require(unchanged_fields(fact, retained, CYCLE_FIELDS | {'citation'}),
+                'retained_cycle_fact_values')
+            require(unchanged_fields(fact.get('citation', {}), retained.get('citation', {}), citation_fields),
+                'retained_cycle_fact_citation')
+        old_ids = {fact.get('id') for fact in old_facts}
+        require(all(fact.get('type') == 'deadline' and
+            {k: v for k, v in fact.get('citation', {}).items() if k not in citation_fields} in retained_citations
+            for fact in cycle_facts if fact.get('id') not in old_ids), 'owned_cited_cycle_additions')
+        before = cycle_baseline
     qualified_items(before.get('deadlines', []), after.get('deadlines', []))
     old, new = before.get('document_evidence') or {}, after.get('document_evidence') or {}
     require(unchanged_fields(old, new, {'facts'}), 'retained_document_identity_and_clock')
@@ -66,7 +99,7 @@ def record_firewall(before, after):
 
 
 def project_catalog(catalog, cache):
-    from scripts.extract_document_evidence import refine_administrative_close
+    from scripts.extract_document_evidence import refine_administrative_close, refine_application_cycles
     from scripts.submission_schedule import project
     before, after = deepcopy(catalog), deepcopy(catalog)
     rows = after['opportunities']; changed = []
@@ -74,7 +107,9 @@ def project_catalog(catalog, cache):
     as_of = common.timestamp(before['generated_at']).date()
     for index, old in enumerate(before['opportunities']):
         row = rows[index]
-        if not refine_administrative_close(row):
+        cycle_changed = refine_application_cycles(row)
+        administrative_changed = refine_administrative_close(row)
+        if not (cycle_changed or administrative_changed):
             require(row == old, 'unaffected_row')
             continue
         row = project(row, as_of)
@@ -109,8 +144,21 @@ def projection(parent_root, audit_at, candidate_id):
         common.PROJECTION[1]: catalog_metadata_javascript_bytes(after),
         common.PROJECTION[2]: cache_raw}
     changes_path = parent_root / 'feeds/changes.xml'
-    outputs.update(common.feed_projection(after, changes_path.read_bytes() if changes_path.is_file() else None))
-    common.verify_feed_index(outputs, outputs, changes_present=changes_path.is_file())
+    original_changes_path = parent_root / 'feeds/changes.json'
+    refreshed_event_ids = []
+    changes_xml = changes_path.read_bytes() if changes_path.is_file() else None
+    if original_changes_path.is_file():
+        from scripts.build_changes import refresh_current_generation_snapshots, render_change_feed
+        original_changes = json.loads(original_changes_path.read_bytes())
+        refreshed = refresh_current_generation_snapshots(original_changes, after, affected_ids=changed)
+        refreshed_event_ids = [new['id'] for old, new in zip(original_changes['events'], refreshed['events'])
+            if old != new]
+        rendered_changes = {'feeds/' + name: raw for name, raw in render_change_feed(refreshed).items()}
+        changes_xml = rendered_changes['feeds/changes.xml']
+        outputs.update(rendered_changes)
+    outputs.update(common.feed_projection(after, changes_xml, as_of=common.timestamp(audit_at).date()))
+    common.verify_feed_index(outputs, outputs, changes_present=changes_xml is not None)
     return outputs, {'projection_kind': 'administrative_submission', 'affected_catalog_ids': changed,
         'affected_evidence_ids': [], 'original_source_at': before['generated_at'],
-        'original_evidence_at': stamp, 'source_requests': 0, 'document_ai_requests': 0, 'team_requests': 0}
+        'original_evidence_at': stamp, 'source_requests': 0, 'document_ai_requests': 0, 'team_requests': 0,
+        'refreshed_change_event_ids': refreshed_event_ids}

@@ -142,7 +142,8 @@ export function recordIsCurrent(record, asOf) {
   if (instruments.length && instruments.every(value => value === "other") && /\bnot accepting applications?\b/i.test(note)) return false;
   if (globalThis.FUNDING_SUBMISSION_SCHEDULE.administrativeSubmissionClosed(record, asOf)) return false;
   const closeDate = clean(record?.close_date, 10);
-  return !closeDate || (/^\d{4}-\d{2}-\d{2}$/.test(closeDate) && closeDate >= asOf);
+  const cycleEnd = globalThis.FUNDING_SUBMISSION_SCHEDULE.applicationCycleEnd(record);
+  return !closeDate || (/^\d{4}-\d{2}-\d{2}$/.test(closeDate) && (closeDate >= asOf || cycleEnd >= asOf));
 }
 
 function classifyAudience(record) {

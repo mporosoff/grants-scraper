@@ -11,12 +11,23 @@ export function preservedMatcherBytes(path, bytes) {
       + '      || new Date(`${reviewAfter}T00:00:00Z`).toISOString().slice(0, 10) !== reviewAfter\n'
       + '      || reviewAfter < today)) return false;\n';
     const currentSource = bytes.toString('utf8');
-    assert.equal(currentSource.split(sourceReview).length, 2,
+    const cycleArchive = '    const cycleEnd = ["posted", "forecasted"].includes(status)\n'
+      + '      ? globalThis.FUNDING_SUBMISSION_SCHEDULE?.applicationCycleEnd?.(record) : null;\n'
+      + '    if (cycleEnd && cycleEnd >= today) return false;\n';
+    const cycleClose = '      const cycleEnd = schedule?.applicationCycleEnd?.(record);\n'
+      + '      if (closeDate < today && (!cycleEnd || cycleEnd < today)) return false;\n';
+    assert.equal(currentSource.split(cycleArchive).length, 2,
+      'The cited application-cycle archive correction must appear exactly once');
+    assert.equal(currentSource.split(cycleClose).length, 2,
+      'The cited application-cycle close correction must appear exactly once');
+    const priorCurrentness = currentSource.replace(cycleArchive, '')
+      .replace(cycleClose, '      if (closeDate < today) return false;\n');
+    assert.equal(priorCurrentness.split(sourceReview).length, 2,
       'The bounded source-review expiry correction must appear exactly once');
-    const source = currentSource.replace(sourceReview, '');
+    const source = priorCurrentness.replace(sourceReview, '');
     assert.equal(createHash('sha256').update(source).digest('hex'),
       '26d8f814b7f6a21d5c14272da28565d4513b2b1b632d8c68968245ca58ed732d',
-      'Every byte outside the exact source-review expiry correction remains preserved');
+      'Every byte outside the exact qualified-currentness corrections remains preserved');
     const currentness = '    const schedule = globalThis.FUNDING_SUBMISSION_SCHEDULE;\n'
       + '    if (typeof schedule?.administrativeSubmissionClosed === "function") {\n'
       + '      if (schedule.administrativeSubmissionClosed(record, today)) return false;\n'

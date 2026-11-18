@@ -1,10 +1,14 @@
 from datetime import date, datetime, timezone
+from contextlib import redirect_stdout
+from copy import deepcopy
 from io import BytesIO
+from io import StringIO
 import json
 from pathlib import Path
 from tempfile import TemporaryDirectory
 import unittest
 from zipfile import ZipFile
+from xml.etree.ElementTree import Element, SubElement, tostring
 
 from scripts.build_catalog import (
     build_catalog,
@@ -17,6 +21,7 @@ from scripts.build_catalog import (
     discover_latest_extract,
     is_current,
     iter_catalog_records,
+    main,
     normalize_disciplines,
     read_archive,
     safe_http_url,
@@ -356,6 +361,98 @@ class TokenTests(unittest.TestCase):
                 [],
             ),
         )
+
+
+class RetainedApplicationCycleIntakeTests(unittest.TestCase):
+    def inputs(self):
+        from tests.test_application_cycles import corrected_record
+
+        retained = corrected_record()
+        retained.update(
+            opportunity_number="USDA-NIFA-OP-012541",
+            title="Research Facilities Act Program",
+            agency_code="USDA-NIFA",
+            archive_date="2027-04-14",
+            last_updated="2026-11-16",
+            version="1",
+            source="Grants.gov",
+        )
+        root = Element("Grants")
+        element = SubElement(root, "OpportunitySynopsisDetail_1_0")
+        fields = {
+            "OpportunityID": retained["opportunity_id"],
+            "OpportunityNumber": retained["opportunity_number"],
+            "OpportunityTitle": retained["title"],
+            "AgencyCode": retained["agency_code"],
+            "CloseDate": "03152027",
+            "ArchiveDate": "04142027",
+            "LastUpdatedDate": "11162026",
+            "Version": "1",
+        }
+        for name, value in fields.items():
+            SubElement(element, name).text = str(value)
+        return retained, root
+
+    def records(self, retained, root, as_of):
+        return list(iter_catalog_records(
+            BytesIO(tostring(root)), as_of,
+            {str(retained["opportunity_id"]): retained},
+        ))
+
+    def test_owned_later_cycle_survives_source_intake_without_rewriting_source_dates(self):
+        retained, root = self.inputs()
+        original = deepcopy(retained)
+        for as_of in (date(2027, 3, 16), date(2027, 5, 1), date(2028, 3, 15)):
+            with self.subTest(as_of=as_of):
+                rows = self.records(retained, root, as_of)
+                self.assertEqual(len(rows), 1)
+                self.assertEqual(rows[0]["close_date"], "2027-03-15")
+                self.assertEqual(rows[0]["archive_date"], "2027-04-14")
+        self.assertEqual(retained, original)
+        self.assertEqual(self.records(retained, root, date(2028, 3, 16)), [])
+        self.assertEqual(list(iter_catalog_records(BytesIO(tostring(root)), date(2027, 3, 16))), [])
+
+    def test_changed_source_identity_or_unavailable_retained_evidence_cannot_reopen(self):
+        retained, root = self.inputs()
+        for field, value in (
+            ("version", "2"), ("last_updated", "2026-11-17"),
+            ("opportunity_number", "DIFFERENT"), ("source", "Other source"),
+            ("status", "closed"), ("status", "archived"),
+            ("source_review_after", "2027-03-15"),
+            ("document_evidence_status", "failed"),
+        ):
+            with self.subTest(field=field, value=value):
+                changed = deepcopy(retained)
+                changed[field] = value
+                self.assertEqual(self.records(changed, root, date(2027, 3, 16)), [])
+        empty = Element("Grants")
+        self.assertEqual(self.records(retained, empty, date(2027, 3, 16)), [])
+
+    def test_normal_cli_uses_explicit_retained_catalog_for_the_same_fresh_xml_row(self):
+        retained, root = self.inputs()
+        with TemporaryDirectory() as directory:
+            directory = Path(directory)
+            archive = directory / "extract.zip"
+            with ZipFile(archive, "w") as stored:
+                stored.writestr("extract.xml", tostring(root))
+            prior = directory / "prior.js"
+            prior.write_text(
+                "globalThis.GRANT_CATALOG=" + json.dumps({
+                    "record_count": 1, "opportunities": [retained],
+                }) + ";\n", encoding="utf-8",
+            )
+            output = directory / "current.js"
+            with redirect_stdout(StringIO()):
+                main([
+                    "--archive", str(archive), "--retained-catalog", str(prior),
+                    "--output", str(output), "--as-of", "2027-03-16",
+                    "--min-records", "1", "--max-record-count", "5",
+                ])
+            from scripts.enrich_catalog import read_catalog
+
+            current = read_catalog(output)
+            self.assertEqual(current["record_count"], 1)
+            self.assertEqual(current["opportunities"][0]["close_date"], "2027-03-15")
 
 
 if __name__ == "__main__":

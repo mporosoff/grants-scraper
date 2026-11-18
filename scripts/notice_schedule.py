@@ -6,12 +6,19 @@ keeps its independent, conservative local-ownership contract.
 from copy import deepcopy
 import hashlib
 import re
+from datetime import date
 from urllib.parse import urlparse
 from scripts.notice_semantics import clauses
 
 SCHEDULE_VERSION = "submission-fields-21"
 ARPA_SUMMARY_VERSION = "arpa-summary-fields-1"
 CLOCK_FIELDS_VERSION = 'native-submission-clocks-1'
+APPLICATION_CYCLES_VERSION = 'fiscal-application-cycles-1'
+APPLICATION_CYCLE_MONTHS = ('January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December')
+APPLICATION_CYCLE_ROW = re.compile(r'\s*FY\s*(?P<cycle>20\d{2})\s+'
+    r'(?P<date>(?P<month>' + '|'.join(APPLICATION_CYCLE_MONTHS) + r')\s+'
+    r'(?P<day>\d{1,2}),?\s+(?P<year>20\d{2}))\b', re.I)
 FIELD_LABEL = re.compile(r'^(?:Required\s+|Optional\s+)?(?:Full\s+(?:Application|Proposal)|Application|Proposal|'
     r'Concept\s+(?:Paper|Outline)|White\s+Paper|Letter\s+of\s+Intent|Pre[\s-]Application(?:\s*\([^)]{1,30}\))?)'
     r'\s+(?:Submission\s+)?(?:Deadline|Due(?:\s+Date)?)(?:\(s\)|s)?\s*(?:\([^)]{1,100}\))?\s*:', re.I)
@@ -32,6 +39,64 @@ def stage_for(label):
         if re.search(rf"\b(?:{pattern})\b", label, re.I):
             return stage
     return None
+
+
+def application_cycle_fields(text):
+    """Read complete fiscal-year/date rows under one application-deadline field."""
+    fields = []
+    for header in re.finditer(r'(?<![\w-])APPLICATION\s+DEADLINES?\s*:', text, re.I):
+        if re.search(r'\b(?:ANTICIPATED|ESTIMATED|RECOMMENDED|EXPECTED|PLANNED|PRE|CONCEPT|'
+                     r'RESUBMISSION|RENEWAL|INVITED)\s+$', text[max(0, header.start() - 40):header.start()], re.I):
+            continue
+        position, rows = header.end(), []
+        for _ in range(8):
+            match = APPLICATION_CYCLE_ROW.match(text, position)
+            if not match:
+                break
+            try:
+                month = next(index for index, name in enumerate(APPLICATION_CYCLE_MONTHS, 1)
+                             if name.casefold() == match['month'].casefold())
+                value = date(int(match['year']), month, int(match['day'])).isoformat()
+            except ValueError:
+                rows = []
+                break
+            rows.append({'cycle': 'FY' + match['cycle'], 'date': value,
+                         'start': match.start('date'), 'end': match.end('date')})
+            position = match.end()
+        tail = text[position:]
+        if (len(rows) < 2 or len({row['cycle'] for row in rows}) != len(rows)
+                or [row['cycle'] for row in rows] != sorted(row['cycle'] for row in rows)
+                or any(left['date'] >= right['date'] for left, right in zip(rows, rows[1:]))
+                or tail.strip() and not re.match(r'\s*[A-Z][A-Z /()&-]{2,100}\s*:', tail)):
+            continue
+        fields.append({'start': header.start(), 'end': position, 'rows': rows})
+    return fields
+
+
+def fiscal_application_cycles(api, opportunity_id, containers, document, stamp):
+    """Retain each explicitly listed annual cycle without inferring recurrence."""
+    facts = []
+    for container in containers:
+        if container.get('page') is None:
+            continue
+        for field in application_cycle_fields(container['text']):
+            field_text = api.clean_text(container['text'][field['start']:field['end']])
+            field_id = 'fiscal-application:' + str(container['page']) + ':' + hashlib.sha256(
+                field_text.encode('utf-8')).hexdigest()[:16]
+            cycle_citation = api.citation_for(container, document, field['start'], field['end'], stamp)
+            cycle_citation['quote'] = field_text
+            cycle_citation.setdefault('structural_reference', {}).update(
+                field_label='APPLICATION DEADLINE', field_id=field_id)
+            for row in field['rows']:
+                found = field_events(api, opportunity_id, container, document, stamp,
+                    label='APPLICATION DEADLINE:', start=row['start'], end=row['end'],
+                    field_id=field_id)
+                for fact in found:
+                    fact.update(cycle=row['cycle'], cycle_citation=deepcopy(cycle_citation),
+                                parser_version=APPLICATION_CYCLES_VERSION)
+                    fact['citation']['structural_reference']['field_label'] = 'APPLICATION DEADLINE'
+                facts.extend(found)
+    return facts
 
 
 def conditional_requirement(text):
@@ -1539,6 +1604,7 @@ def extract_native(api, opportunity_id, containers, document, stamp, review_queu
         facts.extend(_nsf_concept_cycles(api, opportunity_id, containers, document, stamp))
     has_pdf = any(c.get('page') is not None for c in containers)
     if has_pdf:
+        facts.extend(fiscal_application_cycles(api, opportunity_id, containers, document, stamp))
         facts.extend(_noaa_annual_dates(api, opportunity_id, containers, document, stamp))
         facts.extend(_pdf_submission_lists(api, opportunity_id, containers, document, stamp))
         facts.extend(_pdf_application_rounds(api, opportunity_id, containers, document, stamp))

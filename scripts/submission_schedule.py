@@ -7,6 +7,7 @@ infer applicant eligibility. It explains explicitly owned prerequisites.
 from copy import deepcopy
 from datetime import date
 import re
+from urllib.parse import urlparse
 
 VERSION = 2
 PRELIMINARY = {'letter_of_intent', 'concept_paper', 'white_paper', 'preapplication', 'preproposal', 'abstract'}
@@ -21,6 +22,100 @@ def valid_date(value):
         return date.fromisoformat(value).isoformat() == value
     except ValueError:
         return False
+
+
+def _same_application_document(requested, served):
+    if requested == served and isinstance(requested, str) and requested:
+        return True
+    if not isinstance(requested, str) or not isinstance(served, str):
+        return False
+    if any('?' in value or '#' in value for value in (requested, served)):
+        return False
+    try:
+        urls = [urlparse(value) for value in (requested, served)]
+        if any(url.scheme != 'https' or url.username or url.password or url.port not in (None, 443)
+               or url.hostname not in {'grants.gov', 'www.grants.gov', 'apply07.grants.gov'}
+               or url.query or url.fragment for url in urls):
+            return False
+    except ValueError:
+        return False
+    return bool(re.fullmatch(r'/grantsws/rest/opportunity/att/download/[1-9][0-9]*', urls[0].path)
+                and urls[0].path == urls[1].path)
+
+
+def application_cycle_end(record):
+    """Return the final application date proved by one owned fiscal-year field."""
+    from scripts.notice_schedule import APPLICATION_CYCLES_VERSION, application_cycle_fields
+
+    evidence = record.get('document_evidence') or {}
+    document = evidence.get('document') or {}
+    url, digest = document.get('url'), document.get('sha256')
+    if (record.get('document_evidence_status') != 'current'
+            or document.get('source_kind') != 'primary_notice'
+            or not url or not _same_application_document(record.get('primary_document_url'), url)
+            or not isinstance(digest, str) or not re.fullmatch('[a-f0-9]{64}', digest)):
+        return None
+    deadlines = record.get('deadlines') or []
+    source = [event for event in deadlines if isinstance(event, dict)
+              and event.get('kind') == 'application' and not event.get('evidence_id')
+              and event.get('confidence') == 'official_structured'
+              and event.get('source_field') == 'CloseDate'
+              and event.get('date') == record.get('close_date')]
+    if len(source) != 1:
+        return None
+
+    def owned(citation):
+        return (isinstance(citation, dict) and citation.get('document_url') == url
+                and citation.get('sha256') == digest and type(citation.get('page')) is int
+                and citation['page'] > 0)
+
+    groups = {}
+    for fact in evidence.get('facts') or []:
+        if (not isinstance(fact, dict) or fact.get('type') != 'deadline'
+                or not isinstance(fact.get('id'), str) or not fact['id']
+                or fact.get('deadline_kind') != 'application'
+                or fact.get('parser_version') != APPLICATION_CYCLES_VERSION
+                or fact.get('field_authority') != 'official_notice_field'
+                or fact.get('application_class') not in ('new', 'unspecified') or fact.get('track')
+                or fact.get('estimated') or fact.get('date_qualifier')
+                or not owned(fact.get('citation')) or not owned(fact.get('cycle_citation'))):
+            continue
+        citation, cycle_citation = fact['citation'], fact['cycle_citation']
+        reference = citation.get('structural_reference') or {}
+        cycle_reference = cycle_citation.get('structural_reference') or {}
+        quote = cycle_citation.get('quote')
+        if (not isinstance(quote, str) or len(quote) > 500
+                or citation['page'] != cycle_citation['page']
+                or reference.get('field_label') != 'APPLICATION DEADLINE'
+                or not reference.get('field_id')
+                or reference.get('field_id') != cycle_reference.get('field_id')
+                or cycle_reference.get('field_label') != 'APPLICATION DEADLINE'):
+            continue
+        key = (reference['field_id'], citation['page'], quote)
+        groups.setdefault(key, []).append(fact)
+
+    proved = set()
+    for (_, _, quote), facts in groups.items():
+        fields = application_cycle_fields(quote)
+        if len(fields) != 1 or quote[:fields[0]['start']].strip() or quote[fields[0]['end']:].strip():
+            continue
+        pairs = [(row['cycle'], row['date']) for row in fields[0]['rows']]
+        if (pairs[0][1] != record.get('close_date') or len(facts) != len(pairs)
+                or len({fact['id'] for fact in facts}) != len(facts)
+                or {(fact.get('cycle'), fact.get('date')) for fact in facts} != set(pairs)):
+            continue
+        first = next(fact for fact in facts if fact.get('cycle') == pairs[0][0])
+        if source[0].get('document_evidence_id') != first.get('id'):
+            continue
+        if not all(any(event.get('evidence_id') == fact.get('id')
+                       and event.get('kind') == 'application' and event.get('date') == fact.get('date')
+                       and event.get('cycle') == fact.get('cycle')
+                       and not event.get('estimated') and not event.get('date_qualifier')
+                       for event in deadlines if isinstance(event, dict))
+                   for fact in facts if fact is not first):
+            continue
+        proved.add(tuple(pairs))
+    return next(iter(proved))[-1][1] if len(proved) == 1 else None
 
 
 def events(record):

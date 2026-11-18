@@ -3091,6 +3091,81 @@ def refine_administrative_close(record):
     return changed
 
 
+def refine_application_cycles(record):
+    """Recover a complete annual application field from its retained citation."""
+    from scripts.submission_schedule import application_cycle_end
+    if application_cycle_end(record):
+        return False
+    evidence = record.get('document_evidence') or {}
+    document = evidence.get('document') or {}
+    if (record.get('document_evidence_status') != 'current'
+            or document.get('source_kind') != 'primary_notice'
+            or not document.get('url') or not re.fullmatch('[a-f0-9]{64}', str(document.get('sha256') or ''))):
+        return False
+    facts, deadlines = evidence.get('facts') or [], record.get('deadlines') or []
+    source = [event for event in deadlines if event.get('kind') == 'application'
+        and event.get('confidence') == 'official_structured' and event.get('source_field') == 'CloseDate'
+        and event.get('date') == record.get('close_date') and not event.get('evidence_id')
+        and event.get('application_class') in (None, 'unspecified', 'new') and not event.get('track')
+        and not event.get('estimated') and not event.get('date_qualifier')]
+    if len(source) != 1:
+        return False
+    choices = []
+    for index, fact in enumerate(facts):
+        citation = fact.get('citation') or {}
+        if (fact.get('type') != 'deadline' or fact.get('deadline_kind') != 'application'
+                or fact.get('date') != record.get('close_date') or fact.get('track')
+                or fact.get('application_class') not in (None, 'unspecified', 'new')
+                or fact.get('estimated') or fact.get('date_qualifier')
+                or citation.get('document_url') != document['url'] or citation.get('sha256') != document['sha256']
+                or not isinstance(citation.get('quote'), str) or len(citation['quote']) > 800):
+            continue
+        container = {'text': citation['quote'], 'page': citation.get('page'), 'section': citation.get('section')}
+        recovered = notice_schedule.fiscal_application_cycles(sys.modules[__name__], record['opportunity_id'],
+            [container], document, citation.get('extracted_at'))
+        if recovered and recovered[0]['date'] == record.get('close_date'):
+            choices.append((index, fact, recovered))
+    if len(choices) != 1:
+        return False
+    before = deepcopy(record)
+    index, original, recovered = choices[0]
+    first = deepcopy(original)
+    metadata = ('stage', 'application_class', 'cycle', 'track', 'obligation',
+                'field_authority', 'parser_version', 'cycle_citation')
+    first.update({key: deepcopy(recovered[0][key]) for key in metadata})
+    first['citation'] = deepcopy(original['citation'])
+    first['citation'].setdefault('structural_reference', {}).update(
+        recovered[0]['citation']['structural_reference'])
+    additions = [first]
+    for fact in recovered[1:]:
+        fact['citation'] = deepcopy(original['citation'])
+        fact['citation'].setdefault('structural_reference', {}).update(
+            first['citation']['structural_reference'])
+        fact['id'] = evidence_id(record['opportunity_id'], fact['type'], fact['label'],
+            {key: fact.get(key) for key in ('date', 'deadline_kind', 'application_class', 'cycle', 'track')}, fact['citation'])
+        additions.append(fact)
+    facts[index:index + 1] = additions
+    event = source[0]
+    for key in metadata:
+        value = first[key]
+        if event.get(key) != value:
+            event.setdefault('document_source_fields', {}).setdefault(key,
+                {'present': key in event, 'value': deepcopy(event.get(key))})
+            event[key] = deepcopy(value)
+    event.update(document_evidence_id=first['id'], citation=deepcopy(first['citation']),
+                 document_confidence=first['confidence'])
+    deadlines.extend(citation_deadline(fact) for fact in additions[1:])
+    values = [value for fact in facts for value in
+              (fact.get('label'), fact.get('display_value'), (fact.get('citation') or {}).get('quote'))]
+    values.extend(record.get('document_program_areas') or [])
+    record['document_search_text'] = clean_text(' '.join(str(value) for value in values if value))
+    if not application_cycle_end(record):
+        record.clear()
+        record.update(before)
+        return False
+    return record != before
+
+
 def withhold_nonprimary_entry(entry):
     """Withhold retained claims from a document outside the program's scope.
 
@@ -3396,6 +3471,7 @@ def merge_document_entry(record, entry):
             if key == "topic_areas" or output.get(key) != value["value"] or (key in output) != value["present"]
         }
     refine_administrative_close(output)
+    refine_application_cycles(output)
     return output
 
 

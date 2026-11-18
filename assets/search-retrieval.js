@@ -73,6 +73,9 @@
     const today = runtimeDateIso(now);
     const archiveDate = String(record?.archive_date || "").trim();
     if (!archiveDate) return false;
+    const cycleEnd = ["posted", "forecasted"].includes(status)
+      ? globalThis.FUNDING_SUBMISSION_SCHEDULE?.applicationCycleEnd?.(record) : null;
+    if (cycleEnd && cycleEnd >= today) return false;
     return /^\d{4}-\d{2}-\d{2}$/.test(archiveDate) && Boolean(today) && archiveDate <= today;
   }
 
@@ -101,7 +104,8 @@
     const closeDate = String(record.close_date || "").trim();
     if (closeDate) {
       if (!/^\d{4}-\d{2}-\d{2}$/.test(closeDate)) return false;
-      if (closeDate < today) return false;
+      const cycleEnd = schedule?.applicationCycleEnd?.(record);
+      if (closeDate < today && (!cycleEnd || cycleEnd < today)) return false;
     }
     const instant = runtimeDate(now);
     return !staleUndatedOpportunity(record, instant?.getTime());

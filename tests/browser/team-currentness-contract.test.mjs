@@ -224,7 +224,8 @@ test("Funding Finder and Team Match delegate to one shared currentness contract"
   assert.match(appSource, /return RETRIEVAL_API\.recordIsArchived\(record, asOf\)/);
   assert.match(appSource, /return RETRIEVAL_API\.recordIsCurrent\(record, asOf\)/);
   assert.match(matcherSource, /FUNDING_RETRIEVAL\?\.recordIsCurrent/);
-  assert.match(retrievalSource, /if \(closeDate < today\) return false/);
+  const { retrieval } = loadApis();
+  assert.equal(retrieval.recordIsCurrent(record("expired-source-close", {close_date: "2026-08-29"}), FIXED_NOW), false);
   assert.doesNotMatch(retrievalSource, /closeDate < today && !record\.rolling/);
   assert.doesNotMatch(appSource, /function recordIsCurrent[\s\S]{0,600}\["closed", "archived"/);
 });

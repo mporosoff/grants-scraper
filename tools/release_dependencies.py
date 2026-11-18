@@ -32,21 +32,8 @@ def matches(name, pattern):
     return re.fullmatch(expression, name) is not None
 
 
-def snapshot(root, revision=None):
-    policy = c.read_json(Path(root) / c.POLICY)
-    if revision:
-        archive = tarfile.open(fileobj=io.BytesIO(subprocess.check_output(['git', '-C', str(root), 'archive', revision])))
-        inventory = [item.name for item in archive if item.isfile()]
-        def read(name):
-            return archive.extractfile(name).read()
-    else:
-        inventory = c.git(root, 'ls-files', '--cached', '--others', '--exclude-standard').splitlines()
-        def read(name):
-            return c.checked_path(root, name).read_bytes()
-    generated = policy['generated'] + policy['package']
-    result = {}
-    workflow = yaml.safe_load(read('.github/workflows/refresh-opportunities.yml'))
-    recorded_policy = json.loads(read(c.POLICY)) if revision else policy
+def generation_invocations(workflow):
+    """Canonical commands and public settings used by generation fingerprints."""
     invocations = {'source': [], 'semantic': []}
     team_commands = ('scripts.build_opportunity_teams', 'scripts.faculty_match')
     for step in workflow['jobs']['generate']['steps']:
@@ -64,6 +51,25 @@ def snapshot(root, revision=None):
                            and k not in ('OFFLINE_AI_STATE', 'TEAM_MODE',
                                          'SAM_PREFLIGHT_RECEIPT', 'SAM_PREFLIGHT_RELEASE_SHA')}
             invocations[group].append({'command': ' '.join(command.split()), 'environment': environment})
+    return invocations
+
+
+def snapshot(root, revision=None):
+    policy = c.read_json(Path(root) / c.POLICY)
+    if revision:
+        archive = tarfile.open(fileobj=io.BytesIO(subprocess.check_output(['git', '-C', str(root), 'archive', revision])))
+        inventory = [item.name for item in archive if item.isfile()]
+        def read(name):
+            return archive.extractfile(name).read()
+    else:
+        inventory = c.git(root, 'ls-files', '--cached', '--others', '--exclude-standard').splitlines()
+        def read(name):
+            return c.checked_path(root, name).read_bytes()
+    generated = policy['generated'] + policy['package']
+    result = {}
+    workflow = yaml.safe_load(read('.github/workflows/refresh-opportunities.yml'))
+    recorded_policy = json.loads(read(c.POLICY)) if revision else policy
+    invocations = generation_invocations(workflow)
     for group, rule in policy['dependency_groups'].items():
         selected = [name for name in inventory if not any(matches(name, p) for p in generated) and name not in rule['excluded']
                     and any(matches(name, pattern) for pattern in rule['patterns'])]
