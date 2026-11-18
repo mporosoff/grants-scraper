@@ -11,7 +11,7 @@ from __future__ import annotations
 from datetime import date, datetime
 import re
 
-from scripts.submission_schedule import administrative_submission_closed
+from scripts.submission_schedule import administrative_submission_closed, application_cycle_end
 
 
 NON_FUNDING_TITLE_RE = re.compile(
@@ -105,6 +105,9 @@ def record_is_current(
         close_date = parse_date(close_value)
         if close_date is None:
             return False, "invalid_close_date"
+        cycle_end = application_cycle_end(record)
+        if cycle_end:
+            close_date = max(close_date, date.fromisoformat(cycle_end))
         if close_date < as_of:
             return False, "expired"
         return True, "current_by_close_date"

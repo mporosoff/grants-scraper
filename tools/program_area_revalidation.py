@@ -55,8 +55,10 @@ MODERN_OPERATION_FILES = ('tools/program_area_revalidation.py', 'tools/program_a
     'tools/catalog_reconcile_spend.py', 'tools/embedding_contract.mjs',
     '.github/workflows/refresh-opportunities.yml')
 ADMINISTRATIVE_INPUTS = ('tools/administrative_submission_revalidation.py',
-    'scripts/submission_schedule.py', 'scripts/build_catalog.py', 'scripts/currentness.py',
-    'assets/submission-schedule.js', 'assets/search-retrieval.js', 'tools/run_search_diagnosis.mjs')
+    'scripts/submission_schedule.py', 'scripts/notice_schedule.py', 'scripts/build_catalog.py', 'scripts/currentness.py',
+    'assets/submission-schedule.js', 'assets/search-retrieval.js', 'workers/alerts/src/contract.js',
+    'scripts/build_changes.py', 'tools/run_search_diagnosis.mjs', 'tools/release_dependencies.py')
+ADMINISTRATIVE_OUTPUTS = ('feeds/changes.json', 'feeds/changes.xml')
 DOCUMENT_FACT_INPUTS = ('tools/document_fact_revalidation.py',
     'scripts/notice_semantics.py', 'scripts/notice_fact_guards.py')
 PRIMARY_DOCUMENT_INPUTS = ('tools/primary_document_revalidation.py',
@@ -156,7 +158,9 @@ def projection_names(receipt):
     values = receipt.get('projection_hashes')
     require(isinstance(values, dict) and set(PROJECTION) <= set(values) and len(values) <= 256,
         'complete_projection_inventory')
-    allowed = PROJECTION + (PRIMARY_DOCUMENT_OUTPUTS if projection_kind(receipt) == 'primary_document' else ())
+    kind = projection_kind(receipt)
+    allowed = PROJECTION + (PRIMARY_DOCUMENT_OUTPUTS if kind == 'primary_document' else
+        ADMINISTRATIVE_OUTPUTS if kind == 'administrative_submission' else ())
     require(all(isinstance(name, str) and (name in allowed or FACET_FEED.fullmatch(name))
         and isinstance(value, str) and re.fullmatch('[a-f0-9]{64}', value) for name, value in values.items()),
         'projection_paths_and_hashes')
@@ -180,7 +184,7 @@ def managed_feed_names(root):
     return names
 
 
-def feed_projection(catalog, changes_xml=None):
+def feed_projection(catalog, changes_xml=None, *, as_of=None):
     """Use the normal feed writer and retain every generated feed, with stable LF bytes."""
     from scripts.build_feeds import build_feeds
     stamp = catalog['document_evidence_generated_at']
@@ -189,7 +193,7 @@ def feed_projection(catalog, changes_xml=None):
         # Historical events are untouched. Their presence controls the index link.
         if changes_xml is not None:
             (feeds/'changes.xml').write_bytes(changes_xml)
-        build_feeds(catalog, feeds, as_of=timestamp(stamp).date())
+        build_feeds(catalog, feeds, as_of=as_of or timestamp(stamp).date())
         return {name: (root/name).read_text(encoding='utf-8').encode('utf-8')
             for name in sorted(managed_feed_names(root))}
 
@@ -581,12 +585,27 @@ def modern_contract(root, kind='program_area'):
 
 
 def modern_scope(root, original, kind='program_area'):
-    from tools.release_dependencies import snapshot, changed_groups
+    from tools.release_dependencies import snapshot, changed_groups, generation_invocations
     changes = changed_groups(original['dependency_groups'], snapshot(root))
     allowed = {'scripts/extract_document_evidence.py'}
     administrative = projection_kind(kind) == 'administrative_submission'
     if administrative:
-        allowed.update({'scripts/submission_schedule.py', 'scripts/currentness.py'})
+        allowed.update({'scripts/submission_schedule.py', 'scripts/notice_schedule.py',
+            'scripts/currentness.py', 'scripts/build_catalog.py'})
+        if '@generation_invocations' in changes.get('source', []):
+            import yaml
+            workflow = yaml.safe_load((Path(root)/'.github/workflows/refresh-opportunities.yml').read_bytes())
+            invocations = generation_invocations(workflow)['source']
+            builders = [row for row in invocations
+                if row['command'].startswith('python -m scripts.build_catalog ')]
+            argument = ' --retained-catalog "$RUNNER_TEMP/opportunities.previous.js"'
+            require(len(builders) == 1 and builders[0]['command'].count(argument) == 1,
+                'administrative_retained_catalog_invocation')
+            builders[0]['command'] = builders[0]['command'].replace(argument, '', 1)
+            require(candidate.digest(candidate.encoded(invocations)) ==
+                original['dependency_groups']['source']['files'].get('@generation_invocations'),
+                'administrative_other_generation_invocation_changed')
+            allowed.add('@generation_invocations')
     elif projection_kind(kind) == 'document_facts':
         allowed.update({'scripts/notice_semantics.py', 'scripts/notice_fact_guards.py'})
     elif projection_kind(kind) == 'primary_document':
@@ -1045,7 +1064,8 @@ def prepare_modern(parent_bundle, receipt_path, state, parent_run, parent_id, *,
             try:
                 # This pure projection is a tools module, so ordinary source
                 # fingerprints alone cannot detect a corrected replay recipe.
-                recipe_inputs = (DOCUMENT_FACT_INPUTS if kind == 'document_facts' else
+                recipe_inputs = (ADMINISTRATIVE_INPUTS if kind == 'administrative_submission' else
+                    DOCUMENT_FACT_INPUTS if kind == 'document_facts' else
                     PRIMARY_DOCUMENT_INPUTS if kind == 'primary_document' else ())
                 require(not recipe_inputs or not any(
                     value['operation_contract'].get(name) != modern_contract(root, kind).get(name)
