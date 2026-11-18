@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/all.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/all.xml</id>
-  <updated>2026-11-15T20:37:53Z</updated>
+  <updated>2026-11-17T20:03:56Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -620,6 +620,15 @@
     <summary>National Institutes of Health | Estimated Application 2027-05-25 | The Tribal Institutional Review Board Establishment and Enhancement (TIRBEE) Notice of Funding Opportunity will enable federally-recognized Tribes or Tribal Entities to establish or enhance Institutional Review Boards. TIRBEE builds the capacity and infrastructure for biomedical research involving human participants in federally-recognized Tribal communities by expanding their Institutional Review…</summary>
   </entry>
   <entry>
+    <title>NIH Research Center Core Grants</title>
+    <link href="https://www.grants.gov/search-results-detail/364268"/>
+    <id>urn:funding-finder:grants-gov:364268</id>
+    <updated>2027-03-25T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Public health"/>
+    <summary>National Institutes of Health | Estimated Application 2027-05-25 | The NIH seeks to advance its mission by supporting multidisciplinary research centers aligned with the scientific priorities of participating NIH Institutes, Centers, and Offices. These Parent Center Core Grants will support integrated research programs organized around a major scientific objective or theme, with shared infrastructure and resources that foster collaboration, advance innovative and…</summary>
+  </entry>
+  <entry>
     <title>Single Source: Resource Center for the Support for Research Excellence (SuRE) Program</title>
     <link href="https://www.grants.gov/search-results-detail/362575"/>
     <id>urn:funding-finder:grants-gov:362575</id>
@@ -948,15 +957,5 @@
     <category term="Infectious disease"/>
     <category term="Public health"/>
     <summary>National Institutes of Health | Estimated Application 2027-06-11 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission through the continued support of the Immune Drivers of Autoimmune Disease (IDAD) network. This network aims to understand the earliest steps and triggers leading to autoimmunity and flare in humans, with the vision of ultimately preventing autoimmune disease. Priorities include discovering pre-clinical i…</summary>
-  </entry>
-  <entry>
-    <title>Maternal-Child Surveillance and Partnerships for Action, Results, and Knowledge</title>
-    <link href="https://www.grants.gov/search-results-detail/363313"/>
-    <id>urn:funding-finder:grants-gov:363313</id>
-    <updated>2027-02-25T00:00:00Z</updated>
-    <author><name>Centers for Disease Control - NCBDDD</name></author>
-    <category term="Data science"/>
-    <category term="Public health"/>
-    <summary>Centers for Disease Control - NCBDDD | Estimated Application 2027-04-26 | CDC proposes to allocate funds to implement Notice of Funding Opportunity (NOFO) DD-27-0028, Maternal Child Surveillance and Partnerships for Action, Results, and Knowledge. This NOFO will integrate maternal child health surveillance with national partnership activities to address key public health challenges including alcohol use during pregnancy, fetal alcohol spectrum disorders (FASDs), neonata…</summary>
   </entry>
 </feed>

@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/education-and-workforce.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/education-and-workforce.xml</id>
-  <updated>2026-11-15T20:37:53Z</updated>
+  <updated>2026-11-17T20:03:56Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -453,6 +453,18 @@
     <summary>National Institutes of Health | Estimated Application 2027-05-28 | The National Human Genome Research Institute (NHGRI) intends to issue a Notice of Funding Opportunity (NOFO) in 2027 to renew the Broadening Opportunities for Computational Genomics and Data Science Education program (UE5 activity code). This program supports emerging research institutions (ERIs)-institutions with less than $50M in Federal research expenditures per 42 USC 18901, to teach computati…</summary>
   </entry>
   <entry>
+    <title>Educational Hub for Expanding the Computational Genomics and Data Science Workforce (U24 Clinical Trials Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/364269"/>
+    <id>urn:funding-finder:grants-gov:364269</id>
+    <updated>2027-02-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Data science"/>
+    <category term="Education and workforce"/>
+    <summary>National Institutes of Health | Estimated Application 2027-06-01 | The National Human Genome Research Institute (NHGRI) intends to publish a Notice of Funding Opportunity (NOFO) in 2027 to support the Computational Genomics and Data Science Educational Hub (Hub) (U24 activity code).The Hub leverages cloud platforms like NHGRI's Genomic Data Science Analysis, Visualization, and Informatics Lab-space (AnVIL) and the All of Us Researcher Workbench to enable students…</summary>
+  </entry>
+  <entry>
     <title>Homeless Veterans’ Reintegration Program (HVRP), Incarcerated Veterans’ Transition Program (IVTP), and the Homeless Women Veterans' and Homeless Veterans' with Children Reintegration Grant Program (HWVHVWC) (referred to collectively</title>
     <link href="https://www.grants.gov/search-results-detail/363845"/>
     <id>urn:funding-finder:grants-gov:363845</id>
@@ -500,6 +512,16 @@
     <author><name>Health Resources and Services Administration</name></author>
     <category term="Education and workforce"/>
     <summary>Health Resources and Services Administration | Estimated Application 2027-04-21 | The Infant-Toddler Court Program (ITCP) State Awards allow states and communities to support and expand use of enhanced child welfare practices in communities across the country that bring together courts, social services, and families to improve the safety, healthy development, and nurturing relationships of families with young children involved with child welfare. The ITCP State Awards support i…</summary>
+  </entry>
+  <entry>
+    <title>Strengthening U.S. Public Health Infrastructure, Workforce, and Data Systems</title>
+    <link href="https://www.grants.gov/search-results-detail/364270"/>
+    <id>urn:funding-finder:grants-gov:364270</id>
+    <updated>2027-01-10T00:00:00Z</updated>
+    <author><name>Centers for Disease Control-PHIC</name></author>
+    <category term="Education and workforce"/>
+    <category term="Public health"/>
+    <summary>Centers for Disease Control-PHIC | Estimated Application 2027-03-11 | Public health agencies across the United States continue to face persistent infrastructure gaps while responding to increasingly complex and evolving public health challenges. Strengthening public health infrastructure is essential to ensuring communities receive the foundational public health services they depend on and that health agencies are equipped to address current and emerging threats. Th…</summary>
   </entry>
   <entry>
     <title>Human Trafficking Youth Prevention Education (HTYPE) Demonstration Program</title>
@@ -591,23 +613,5 @@
     <category term="Neuroscience"/>
     <category term="Public health"/>
     <summary>Centers for Disease Control and Prevention - ERA | Estimated Application 2027-03-23 | The National Institute for Occupational Safety and Health (NIOSH), World Trade Center (WTC) Health Program, plans to establish a WTC Youth Research Coordinating Center ("Center") through a U54 cooperative agreement. In December 2022, Congress amended the Public Health Service Act (42 U.S.C. § 300mm-51(c)) to direct the WTC Health Program Administrator to establish a research cohort for emerging he…</summary>
-  </entry>
-  <entry>
-    <title>The National Network of STI Prevention Training Centers (NNPTC)</title>
-    <link href="https://www.grants.gov/search-results-detail/363356"/>
-    <id>urn:funding-finder:grants-gov:363356</id>
-    <updated>2026-12-20T00:00:00Z</updated>
-    <author><name>Centers for Disease Control - NCHHSTP</name></author>
-    <category term="Education and workforce"/>
-    <summary>Centers for Disease Control - NCHHSTP | Estimated Application 2027-02-20 | This NOFO will support the development and dissemination of education, training and technical assistance-emphasizing prevention strategies-for clinicians and disease intervention specialists to improve sexually transmitted infection (STI) patient care. The NOFO aims to improve the capacity of providers, clinical sites, and healthcare systems to diagnose, manage, treat and counsel individuals with …</summary>
-  </entry>
-  <entry>
-    <title>Rural Residency Planning and Development Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363508"/>
-    <id>urn:funding-finder:grants-gov:363508</id>
-    <updated>2026-12-18T00:00:00Z</updated>
-    <author><name>Health Resources and Services Administration</name></author>
-    <category term="Education and workforce"/>
-    <summary>Health Resources and Services Administration | Estimated Application 2027-03-18 | The Rural Residency Planning and Development (RRPD) program improves and expands rural health care access. It does this by developing new, accredited, sustainable rural residency programs, including rural track programs (RTPs). Newly created rural physician residency programs increase training and ultimately practice in rural areas to address physician shortages. The RRPD program provides start-up…</summary>
   </entry>
 </feed>

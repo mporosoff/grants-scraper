@@ -4,8 +4,480 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/changes.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/changes.xml</id>
-  <updated>2026-11-15T19:58:34Z</updated>
+  <updated>2026-11-17T20:06:35Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>Closed or removed: Teaching Health Center Graduate Medical Education (THCGME) Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363324"/>
+    <id>urn:funding-finder:change:fd440ad1d2c893b6b1b8</id>
+    <updated>2026-11-17T20:01:41.830673Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>New opportunity: Research Facilities Act Program</title>
+    <link href="https://www.grants.gov/search-results-detail/364271"/>
+    <id>urn:funding-finder:change:f878efac0bd999c2b2ff</id>
+    <updated>2026-11-17T20:01:41.830673Z</updated>
+    <category term="new"/>
+    <summary>First appeared in the public catalog</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: OJJDP FY 2026 Internet Crimes Against Children On-Line Child Protection System (ICACCOPS)</title>
+    <link href="https://www.grants.gov/search-results-detail/364042"/>
+    <id>urn:funding-finder:change:f282ef811ac618bc0fc2</id>
+    <updated>2026-11-17T20:01:41.830673Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Opportunity amended: Mentored Research Scientist Development Award (Parent K01 - Independent Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/353749"/>
+    <id>urn:funding-finder:change:ed0df6515adc848c5bbb</id>
+    <updated>2026-11-17T20:01:41.830673Z</updated>
+    <category term="amended"/>
+    <summary>Official source record changed</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: OJJDP FY 2026 Family Treatment Court Program</title>
+    <link href="https://www.grants.gov/search-results-detail/364041"/>
+    <id>urn:funding-finder:change:e55c42f5196416387414</id>
+    <updated>2026-11-17T20:01:41.830673Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Deadline changed: Mentored Patient-Oriented Research Career Development Award (Parent K23 Independent Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/353458"/>
+    <id>urn:funding-finder:change:e2bbc6880c373e051c9b</id>
+    <updated>2026-11-17T20:01:41.830673Z</updated>
+    <category term="deadline_changed"/>
+    <summary>2027-02-12 → 2027-11-13</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: OJJDP FY 2026 Mentoring for Youth Impacted by Opioids and Other Substance Use</title>
+    <link href="https://www.grants.gov/search-results-detail/364058"/>
+    <id>urn:funding-finder:change:dd96e19ffcb6b25728b7</id>
+    <updated>2026-11-17T20:01:41.830673Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Deadline changed: Independent Scientist Award (Parent K02 - Independent Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/353758"/>
+    <id>urn:funding-finder:change:da9a29c1ea215991fc33</id>
+    <updated>2026-11-17T20:01:41.830673Z</updated>
+    <category term="deadline_changed"/>
+    <summary>2027-02-12 → 2027-11-13</summary>
+  </entry>
+  <entry>
+    <title>Deadline changed: Mentored Quantitative Research Development Award (Parent K25 Independent Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/353709"/>
+    <id>urn:funding-finder:change:cf648157382db4c1bd7c</id>
+    <updated>2026-11-17T20:01:41.830673Z</updated>
+    <category term="deadline_changed"/>
+    <summary>2027-02-12 → 2027-11-13</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: Astronomy and Astrophysics Research Grants</title>
+    <link href="https://www.grants.gov/search-results-detail/342959"/>
+    <id>urn:funding-finder:change:c9af5b63c4725f545402</id>
+    <updated>2026-11-17T20:01:41.830673Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Deadline changed: Midcareer Investigator Award in Patient-Oriented Research (Parent K24 Independent Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/353792"/>
+    <id>urn:funding-finder:change:c93fefb1a48ccd01cc94</id>
+    <updated>2026-11-17T20:01:41.830673Z</updated>
+    <category term="deadline_changed"/>
+    <summary>2027-02-12 → 2027-11-13</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: OJJDP FY 2026 Opioid Affected Youth Initiative</title>
+    <link href="https://www.grants.gov/search-results-detail/364057"/>
+    <id>urn:funding-finder:change:c5e1d9c9c708544206aa</id>
+    <updated>2026-11-17T20:01:41.830673Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: Plasma Physics</title>
+    <link href="https://www.grants.gov/search-results-detail/350018"/>
+    <id>urn:funding-finder:change:c1636e99d0a0e87979bb</id>
+    <updated>2026-11-17T20:01:41.830673Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Deadline changed: Midcareer Investigator Award in Patient-Oriented Research (Parent K24 Independent Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/353793"/>
+    <id>urn:funding-finder:change:bdd85e411e8c820738e9</id>
+    <updated>2026-11-17T20:01:41.830673Z</updated>
+    <category term="deadline_changed"/>
+    <summary>2027-02-12 → 2027-11-13</summary>
+  </entry>
+  <entry>
+    <title>Deadline changed: Mentored Patient-Oriented Research Career Development Award (Parent K23 Independent Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/353461"/>
+    <id>urn:funding-finder:change:ba7f18ed3e76ae002482</id>
+    <updated>2026-11-17T20:01:41.830673Z</updated>
+    <category term="deadline_changed"/>
+    <summary>2027-02-12 → 2027-11-13</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: OJJDP FY 2026 Strategies to Support Children Exposed to Violence</title>
+    <link href="https://www.grants.gov/search-results-detail/364056"/>
+    <id>urn:funding-finder:change:ae1b2c9854bbb8faee1e</id>
+    <updated>2026-11-17T20:01:41.830673Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Deadline changed: Mentored Clinical Scientist Research Career Development Award (Parent K08 Independent Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/353745"/>
+    <id>urn:funding-finder:change:a3e02834398be8d691fb</id>
+    <updated>2026-11-17T20:01:41.830673Z</updated>
+    <category term="deadline_changed"/>
+    <summary>2027-02-12 → 2027-11-13</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: Fiscal Year 2026 Wildlife Crossings Pilot Program</title>
+    <link href="https://www.grants.gov/search-results-detail/364009"/>
+    <id>urn:funding-finder:change:a1baa80f71fb61a23435</id>
+    <updated>2026-11-17T20:01:41.830673Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: Community Development Block Grant Program for Indian Tribes and Alaska Native Villages</title>
+    <link href="https://www.grants.gov/search-results-detail/362464"/>
+    <id>urn:funding-finder:change:9c25186d32586cf9b0b5</id>
+    <updated>2026-11-17T20:01:41.830673Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>New opportunity: Strengthening U.S. Public Health Infrastructure, Workforce, and Data Systems</title>
+    <link href="https://www.grants.gov/search-results-detail/364270"/>
+    <id>urn:funding-finder:change:9bfc35ce846474b8fbd5</id>
+    <updated>2026-11-17T20:01:41.830673Z</updated>
+    <category term="new"/>
+    <summary>First appeared in the public catalog</summary>
+  </entry>
+  <entry>
+    <title>Opportunity amended: Independent Scientist Award (Parent K02 - Independent Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/353758"/>
+    <id>urn:funding-finder:change:9b0eb736f0b8dec46d64</id>
+    <updated>2026-11-17T20:01:41.830673Z</updated>
+    <category term="amended"/>
+    <summary>Official source record changed</summary>
+  </entry>
+  <entry>
+    <title>Opportunity amended: UNITED STATES ARMY RESEARCH INSTITUTE FOR THE BEHAVIORAL AND SOCIAL SCIENCES (ARI) BROAD AGENCY ANNOUNCEMENT FOR BASIC, APPLIED, AND ADVANCED SCIENTIFIC RESEARCH</title>
+    <link href="https://www.grants.gov/search-results-detail/347858"/>
+    <id>urn:funding-finder:change:993a3857b27410f9bccd</id>
+    <updated>2026-11-17T20:01:41.830673Z</updated>
+    <category term="amended"/>
+    <summary>Official source record changed</summary>
+  </entry>
+  <entry>
+    <title>New opportunity: Educational Hub for Expanding the Computational Genomics and Data Science Workforce (U24 Clinical Trials Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/364269"/>
+    <id>urn:funding-finder:change:9890ac6736079ca5b61d</id>
+    <updated>2026-11-17T20:01:41.830673Z</updated>
+    <category term="new"/>
+    <summary>First appeared in the public catalog</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: Ethical, Legal and Social Implications (ELSI) Small Research Grant (R03 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/358179"/>
+    <id>urn:funding-finder:change:972e5fcdef5dfb0e6c68</id>
+    <updated>2026-11-17T20:01:41.830673Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Opportunity amended: Mentored Research Scientist Development Award (Parent K01 - Independent Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/353751"/>
+    <id>urn:funding-finder:change:91a2941c6d530a6c785b</id>
+    <updated>2026-11-17T20:01:41.830673Z</updated>
+    <category term="amended"/>
+    <summary>Official source record changed</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: NSF Plasma Physics</title>
+    <link href="https://beta.nsf.gov/funding/opportunities/plasma-physics"/>
+    <id>urn:funding-finder:change:8baa3201bc9f6aa5ae2a</id>
+    <updated>2026-11-17T20:01:41.830673Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: NIJ FY 2026 Evaluation of the Effectiveness of the Bureau of Justice Assistance (BJA) Byrne State Crisis Intervention Program (SCIP)</title>
+    <link href="https://www.grants.gov/search-results-detail/364049"/>
+    <id>urn:funding-finder:change:889140ca546b6417fa30</id>
+    <updated>2026-11-17T20:01:41.830673Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Opportunity amended: Midcareer Investigator Award in Patient-Oriented Research (Parent K24 Independent Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/353792"/>
+    <id>urn:funding-finder:change:8821e649da6572b5cce1</id>
+    <updated>2026-11-17T20:01:41.830673Z</updated>
+    <category term="amended"/>
+    <summary>Official source record changed</summary>
+  </entry>
+  <entry>
+    <title>Opportunity amended: Advancing Global Health</title>
+    <link href="https://www.grants.gov/search-results-detail/363912"/>
+    <id>urn:funding-finder:change:87988e60eab76b3c4993</id>
+    <updated>2026-11-17T20:01:41.830673Z</updated>
+    <category term="amended"/>
+    <summary>Official source record changed</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: Fiscal Year 2027 Counter Unmanned Aircraft Systems (C-UAS) Grant Program</title>
+    <link href="https://www.grants.gov/search-results-detail/364067"/>
+    <id>urn:funding-finder:change:878df4d057b948bd3312</id>
+    <updated>2026-11-17T20:01:41.830673Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: OJJDP FY 2026 Expanding Youth Access to Community-Based Treatment</title>
+    <link href="https://www.grants.gov/search-results-detail/364040"/>
+    <id>urn:funding-finder:change:83acf2df082ae1c92eed</id>
+    <updated>2026-11-17T20:01:41.830673Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Opportunity amended: NIH Pathway to Independence Award (Parent K99/R00 Independent Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/353762"/>
+    <id>urn:funding-finder:change:82df9501239a64d1f90d</id>
+    <updated>2026-11-17T20:01:41.830673Z</updated>
+    <category term="amended"/>
+    <summary>Official source record changed</summary>
+  </entry>
+  <entry>
+    <title>Deadline changed: Mentored Clinical Scientist Research Career Development Award (Parent K08 Independent Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/353746"/>
+    <id>urn:funding-finder:change:7e40ca2bbade0c889e66</id>
+    <updated>2026-11-17T20:01:41.830673Z</updated>
+    <category term="deadline_changed"/>
+    <summary>2027-02-12 → 2027-11-13</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: NIJ FY 2026 Research and Evaluation on Human Trafficking</title>
+    <link href="https://www.grants.gov/search-results-detail/364059"/>
+    <id>urn:funding-finder:change:7b2a58dcf480e4774974</id>
+    <updated>2026-11-17T20:01:41.830673Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Deadline changed: NIH Pathway to Independence Award (Parent K99/R00 Independent Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/353763"/>
+    <id>urn:funding-finder:change:7b0453f6a2082481fb7c</id>
+    <updated>2026-11-17T20:01:41.830673Z</updated>
+    <category term="deadline_changed"/>
+    <summary>2027-02-12 → 2027-11-13</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: DoW Joint Warfighter Medical, Military Medical Research and Development Award</title>
+    <link href="https://www.grants.gov/search-results-detail/362857"/>
+    <id>urn:funding-finder:change:709c02b6c83c52e39790</id>
+    <updated>2026-11-17T20:01:41.830673Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Opportunity amended: Mentored Clinical Scientist Research Career Development Award (Parent K08 Independent Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/353745"/>
+    <id>urn:funding-finder:change:700c7303ac5591bde5fb</id>
+    <updated>2026-11-17T20:01:41.830673Z</updated>
+    <category term="amended"/>
+    <summary>Official source record changed</summary>
+  </entry>
+  <entry>
+    <title>Deadline changed: NIH Pathway to Independence Award (Parent K99/R00 Independent Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/353762"/>
+    <id>urn:funding-finder:change:5fe89909199564f77117</id>
+    <updated>2026-11-17T20:01:41.830673Z</updated>
+    <category term="deadline_changed"/>
+    <summary>2027-02-12 → 2027-11-13</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: Special Program Announcement for Office of Naval Research Research Opportunity: FY27 Communications and Networking Applied Research</title>
+    <link href="https://www.grants.gov/search-results-detail/362836"/>
+    <id>urn:funding-finder:change:5286b1eda5e43db1a2b5</id>
+    <updated>2026-11-17T20:01:41.830673Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Deadline changed: Mentored Quantitative Research Development Award (Parent K25 Independent Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/353710"/>
+    <id>urn:funding-finder:change:51aa905a0ad020022d51</id>
+    <updated>2026-11-17T20:01:41.830673Z</updated>
+    <category term="deadline_changed"/>
+    <summary>2027-02-12 → 2027-11-13</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: OJJDP FY 2026 Emergency Planning for Juvenile Justice Residential Facilities</title>
+    <link href="https://www.grants.gov/search-results-detail/364035"/>
+    <id>urn:funding-finder:change:4af7e9c8e64f76df31d2</id>
+    <updated>2026-11-17T20:01:41.830673Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Opportunity amended: Mentored Patient-Oriented Research Career Development Award (Parent K23 Independent Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/353458"/>
+    <id>urn:funding-finder:change:4abee9e4bfa674623fc3</id>
+    <updated>2026-11-17T20:01:41.830673Z</updated>
+    <category term="amended"/>
+    <summary>Official source record changed</summary>
+  </entry>
+  <entry>
+    <title>Opportunity amended: Community Development Block Grant Program for Indian Tribes and Alaska Native Villages</title>
+    <link href="https://www.grants.gov/search-results-detail/364031"/>
+    <id>urn:funding-finder:change:49f18e060da1c07f9f2b</id>
+    <updated>2026-11-17T20:01:41.830673Z</updated>
+    <category term="amended"/>
+    <summary>Official source record changed</summary>
+  </entry>
+  <entry>
+    <title>Opportunity amended: Mentored Patient-Oriented Research Career Development Award (Parent K23 Independent Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/353461"/>
+    <id>urn:funding-finder:change:470f8a6e187725e4462a</id>
+    <updated>2026-11-17T20:01:41.830673Z</updated>
+    <category term="amended"/>
+    <summary>Official source record changed</summary>
+  </entry>
+  <entry>
+    <title>Opportunity amended: Midcareer Investigator Award in Patient-Oriented Research (Parent K24 Independent Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/353793"/>
+    <id>urn:funding-finder:change:460bc45b64675adaba1a</id>
+    <updated>2026-11-17T20:01:41.830673Z</updated>
+    <category term="amended"/>
+    <summary>Official source record changed</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: Applied Mathematics</title>
+    <link href="https://www.grants.gov/search-results-detail/358569"/>
+    <id>urn:funding-finder:change:45b4b611b9ac188aa9de</id>
+    <updated>2026-11-17T20:01:41.830673Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Opportunity amended: Independent Scientist Award (Parent K02 - Independent Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/353756"/>
+    <id>urn:funding-finder:change:45943e527a8f887cb6f0</id>
+    <updated>2026-11-17T20:01:41.830673Z</updated>
+    <category term="amended"/>
+    <summary>Official source record changed</summary>
+  </entry>
+  <entry>
+    <title>Opportunity amended: NIH Pathway to Independence Award (Parent K99/R00 Independent Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/353763"/>
+    <id>urn:funding-finder:change:40a4174b15afadcb6fc4</id>
+    <updated>2026-11-17T20:01:41.830673Z</updated>
+    <category term="amended"/>
+    <summary>Official source record changed</summary>
+  </entry>
+  <entry>
+    <title>Deadline changed: Independent Scientist Award (Parent K02 - Independent Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/353756"/>
+    <id>urn:funding-finder:change:3224481d65d6a5e9de20</id>
+    <updated>2026-11-17T20:01:41.830673Z</updated>
+    <category term="deadline_changed"/>
+    <summary>2027-02-12 → 2027-11-13</summary>
+  </entry>
+  <entry>
+    <title>Opportunity amended: Mentored Clinical Scientist Research Career Development Award (Parent K08 Independent Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/353746"/>
+    <id>urn:funding-finder:change:2af3f22aa71f3417b4fc</id>
+    <updated>2026-11-17T20:01:41.830673Z</updated>
+    <category term="amended"/>
+    <summary>Official source record changed</summary>
+  </entry>
+  <entry>
+    <title>Deadline changed: Mentored Research Scientist Development Award (Parent K01 - Independent Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/353749"/>
+    <id>urn:funding-finder:change:2896c7d453d1c59e92ce</id>
+    <updated>2026-11-17T20:01:41.830673Z</updated>
+    <category term="deadline_changed"/>
+    <summary>2027-02-12 → 2027-11-13</summary>
+  </entry>
+  <entry>
+    <title>New opportunity: NIH Research Center Core Grants</title>
+    <link href="https://www.grants.gov/search-results-detail/364268"/>
+    <id>urn:funding-finder:change:279acfde2c3db352ca15</id>
+    <updated>2026-11-17T20:01:41.830673Z</updated>
+    <category term="new"/>
+    <summary>First appeared in the public catalog</summary>
+  </entry>
+  <entry>
+    <title>Opportunity amended: FY27 Small Business Development Center State of Kansas Network Rebid</title>
+    <link href="https://www.grants.gov/search-results-detail/364132"/>
+    <id>urn:funding-finder:change:24e871fb9661148108ab</id>
+    <updated>2026-11-17T20:01:41.830673Z</updated>
+    <category term="amended"/>
+    <summary>Official source record changed</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: OJJDP FY 2026 Juvenile Justice System Enhancements</title>
+    <link href="https://www.grants.gov/search-results-detail/364044"/>
+    <id>urn:funding-finder:change:1a4d4b718a8974bab936</id>
+    <updated>2026-11-17T20:01:41.830673Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Opportunity amended: Mentored Quantitative Research Development Award (Parent K25 Independent Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/353709"/>
+    <id>urn:funding-finder:change:194da96d5cab2118d414</id>
+    <updated>2026-11-17T20:01:41.830673Z</updated>
+    <category term="amended"/>
+    <summary>Official source record changed</summary>
+  </entry>
+  <entry>
+    <title>Deadline changed: Mentored Research Scientist Development Award (Parent K01 - Independent Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/353751"/>
+    <id>urn:funding-finder:change:139cba55d8bd55572936</id>
+    <updated>2026-11-17T20:01:41.830673Z</updated>
+    <category term="deadline_changed"/>
+    <summary>2027-02-12 → 2027-11-13</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: NIJ FY 2026 Research and Evaluation on Justice System Responses to Illegal Immigration</title>
+    <link href="https://www.grants.gov/search-results-detail/364060"/>
+    <id>urn:funding-finder:change:0f8966b9d5dfc883fc58</id>
+    <updated>2026-11-17T20:01:41.830673Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: NIJ FY 2026 Crime and Justice Research</title>
+    <link href="https://www.grants.gov/search-results-detail/364061"/>
+    <id>urn:funding-finder:change:0376d337beab5367c0c1</id>
+    <updated>2026-11-17T20:01:41.830673Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Opportunity amended: Mentored Quantitative Research Development Award (Parent K25 Independent Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/353710"/>
+    <id>urn:funding-finder:change:0140c534b066d2d0fbf7</id>
+    <updated>2026-11-17T20:01:41.830673Z</updated>
+    <category term="amended"/>
+    <summary>Official source record changed</summary>
+  </entry>
   <entry>
     <title>Opportunity amended: OVC and OVW FY 2026 Victim Services for Angel Families Program - Invited Notice of Funding Opportunity</title>
     <link href="https://www.grants.gov/search-results-detail/364143"/>
@@ -1133,477 +1605,5 @@
     <updated>2026-11-11T22:11:33.184819Z</updated>
     <category term="new"/>
     <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: Accelerating Scale-up and Pre-piloting of Emerging Chemical Technologies (ASPECT)</title>
-    <link href="https://www.grants.gov/search-results-detail/363815"/>
-    <id>urn:funding-finder:change:e83f5330c4329f6d3d28</id>
-    <updated>2026-11-11T22:11:33.184819Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: Air Force Fiscal Year 2027 Young Investigator Program (YIP)</title>
-    <link href="https://www.grants.gov/search-results-detail/363829"/>
-    <id>urn:funding-finder:change:de7c583f54e249553335</id>
-    <updated>2026-11-11T22:11:33.184819Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: Archaeology Program Senior Research Awards</title>
-    <link href="https://www.grants.gov/search-results-detail/358689"/>
-    <id>urn:funding-finder:change:dc224f89f73972be0351</id>
-    <updated>2026-11-11T22:11:33.184819Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Early-Stage Innovative Technology Development for Basic and Clinical Cancer Research (R61 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/360536"/>
-    <id>urn:funding-finder:change:db356e5d699dfe177464</id>
-    <updated>2026-11-11T22:11:33.184819Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Data Coordinating Center for the Aging and Alzheimer’s Disease Mouse Brain Atlas (AD-MBA) (U24 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/359740"/>
-    <id>urn:funding-finder:change:daeb8eb2ec32ef53d2c2</id>
-    <updated>2026-11-11T22:11:33.184819Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: Translational Neural Devices (R61/R33 - Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/356903"/>
-    <id>urn:funding-finder:change:d20a2cc829ac63d13c0d</id>
-    <updated>2026-11-11T22:11:33.184819Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: Tribal Undergraduate to Graduate Research Training and Leadership Experiences (TURTLE) Program (UE5/T32)</title>
-    <link href="https://www.grants.gov/search-results-detail/356309"/>
-    <id>urn:funding-finder:change:cf549da3479fd792d0b1</id>
-    <updated>2026-11-11T22:11:33.184819Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: NIDA Animal Genomics Program (U01 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/356018"/>
-    <id>urn:funding-finder:change:ce5767363a9b28c4cc85</id>
-    <updated>2026-11-11T22:11:33.184819Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: Environmental Health Sciences Core Centers Program (P30 Clinical Trials Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/357121"/>
-    <id>urn:funding-finder:change:ce47fddc8003e8c0d80e</id>
-    <updated>2026-11-11T22:11:33.184819Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: Advancing Real-World Effectiveness Evidence for Rapid-Acting Psychotropic Interventional Drugs (RAPIDs) (UM1 Clinical Trial Required)</title>
-    <link href="https://www.grants.gov/search-results-detail/363875"/>
-    <id>urn:funding-finder:change:cd8c607dea6cb9055bfb</id>
-    <updated>2026-11-11T22:11:33.184819Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: Defense Advanced Research Projects Agency (DARPA)</title>
-    <link href="https://sam.gov/workspace/contract/opp/4bafe32bf3e14551b8164db3e8a4b990/view"/>
-    <id>urn:funding-finder:change:c7754764bc35f4cb4387</id>
-    <updated>2026-11-11T22:11:33.184819Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: Tribal Undergraduate to Graduate Research Training and Leadership Experiences (TURTLE) Program (UE5/T34)</title>
-    <link href="https://www.grants.gov/search-results-detail/356310"/>
-    <id>urn:funding-finder:change:c168aaa8e99ab0238a06</id>
-    <updated>2026-11-11T22:11:33.184819Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: EMERGING FRONTIERS IN RESEARCH AND INNOVATION (EFRI-2026/27): Wave-Based Computing ( EFRI-WBC)</title>
-    <link href="https://www.grants.gov/search-results-detail/363622"/>
-    <id>urn:funding-finder:change:be3d46f33222a7909479</id>
-    <updated>2026-11-11T22:11:33.184819Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: Research in the Formation of Engineers (RFE)</title>
-    <link href="https://www.grants.gov/search-results-detail/350230"/>
-    <id>urn:funding-finder:change:b892cd9eb423118f3d17</id>
-    <updated>2026-11-11T22:11:33.184819Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: Institute of Education Sciences (IES): National Center on Education Research (NCER): From Seedlings to Scale, Assistance Listing Number (ALN) 84.305J</title>
-    <link href="https://www.grants.gov/search-results-detail/364086"/>
-    <id>urn:funding-finder:change:b752b6b68614be786f5b</id>
-    <updated>2026-11-11T22:11:33.184819Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-12-11</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Fast Assessment of Solutions, Therapeutics, Pharmaceuticals, and Supplies (FASTPASS)</title>
-    <link href="https://arpa-h.gov/explore-funding/programs/fastpass"/>
-    <id>urn:funding-finder:change:b6f99d344066c9be6578</id>
-    <updated>2026-11-11T22:11:33.184819Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: FY 2027 Continuation of Solicitation for the Office of Science Financial Assistance Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363993"/>
-    <id>urn:funding-finder:change:b2b196aa401eb03f7f72</id>
-    <updated>2026-11-11T22:11:33.184819Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: Antarctic Research Not Requiring U.S. Antarctic Program (USAP) Field Support</title>
-    <link href="https://www.grants.gov/search-results-detail/357826"/>
-    <id>urn:funding-finder:change:add460704e110978b964</id>
-    <updated>2026-11-11T22:11:33.184819Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: Drug Development Infrastructure Supporting the Research Community in Medication Repurposing for Substance Use Disorders</title>
-    <link href="https://www.grants.gov/search-results-detail/364252"/>
-    <id>urn:funding-finder:change:a5e42216e4c262f7793b</id>
-    <updated>2026-11-11T22:11:33.184819Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: Medical Scientist Training Program (MSTP) (T32)</title>
-    <link href="https://www.grants.gov/search-results-detail/352810"/>
-    <id>urn:funding-finder:change:a5c200b22f35964e5664</id>
-    <updated>2026-11-11T22:11:33.184819Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: BJA FY 2026 Edward Byrne Memorial Justice Assistance Grant (JAG) Program-Local Formula</title>
-    <link href="https://www.grants.gov/search-results-detail/363712"/>
-    <id>urn:funding-finder:change:a4d82c4e95e102fcbc0b</id>
-    <updated>2026-11-11T22:11:33.184819Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-11-18</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: Risk and Protective Factors of Family Health and Family Level Interventions (R01 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/357713"/>
-    <id>urn:funding-finder:change:a43aee89ba27e754e7fa</id>
-    <updated>2026-11-11T22:11:33.184819Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: Competing Revisions to Existing NIH Single Project Research Grants and Cooperative Agreements (Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/351124"/>
-    <id>urn:funding-finder:change:a3811b596cd713d7d21e</id>
-    <updated>2026-11-11T22:11:33.184819Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: Mathematical Sciences Infrastructure Program</title>
-    <link href="https://www.grants.gov/search-results-detail/328573"/>
-    <id>urn:funding-finder:change:a3138aeee7f6177c0bef</id>
-    <updated>2026-11-11T22:11:33.184819Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: Intervention Research to Improve Native American Health (R01 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/358375"/>
-    <id>urn:funding-finder:change:a13b7a9442ffcbcd364a</id>
-    <updated>2026-11-11T22:11:33.184819Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: BJA FY26 Paul Coverdell Forensic Science Improvement - Formula Grants Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363908"/>
-    <id>urn:funding-finder:change:a12da44b7f1e43fdaa39</id>
-    <updated>2026-11-11T22:11:33.184819Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: Damon Runyon Cancer Research Foundation Clinical Investigator Award 2027</title>
-    <link href="http://rochester.infoready4.com/CompetitionSpace/"/>
-    <id>urn:funding-finder:change:951121f3f28ef7931d44</id>
-    <updated>2026-11-11T22:11:33.184819Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: BRAIN Initiative: Development and Validation of Novel Tools to Probe Cell-Specific and Circuit-Specific Processes in the Brain (R01 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/357137"/>
-    <id>urn:funding-finder:change:94b87a8b862535ccbee6</id>
-    <updated>2026-11-11T22:11:33.184819Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: PFE: Research Initiation in Engineering Formation (PFE: RIEF)</title>
-    <link href="https://www.grants.gov/search-results-detail/363764"/>
-    <id>urn:funding-finder:change:944ad199ca9a55ec21b6</id>
-    <updated>2026-11-11T22:11:33.184819Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Clinical Research Network on Antimicrobial Resistance (UM1 Clinical Trial Required)</title>
-    <link href="https://www.grants.gov/search-results-detail/361065"/>
-    <id>urn:funding-finder:change:8cbad1a7de7aa746d033</id>
-    <updated>2026-11-11T22:11:33.184819Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: Statistics</title>
-    <link href="https://www.grants.gov/search-results-detail/302271"/>
-    <id>urn:funding-finder:change:8a546643705065b39ec4</id>
-    <updated>2026-11-11T22:11:33.184819Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: Tribal Institutional Review Board Establishment and Enhancement (TIRBEE) (R24 - Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/355987"/>
-    <id>urn:funding-finder:change:83951856e46bddde0ab5</id>
-    <updated>2026-11-11T22:11:33.184819Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Amyotrophic Lateral Sclerosis (ALS) Intermediate Patient Population Expanded Access (U01 Clinical Trial Required)</title>
-    <link href="https://www.grants.gov/search-results-detail/360400"/>
-    <id>urn:funding-finder:change:834cad90be08b3ccf53f</id>
-    <updated>2026-11-11T22:11:33.184819Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: Pathways to Enable Secure Open-Source Ecosystems (PESOSE)</title>
-    <link href="https://www.grants.gov/search-results-detail/361333"/>
-    <id>urn:funding-finder:change:82b2e21c92f0426acf41</id>
-    <updated>2026-11-11T22:11:33.184819Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: Seamless Early-Stage Clinical Drug Development (Phase 1 to 2a) for Novel therapeutic Agents for the Spectrum of Alzheimer's Disease (AD) and AD-related Dementias (ADRD) (UG3/UH3 Clinical Trial Required)</title>
-    <link href="https://www.grants.gov/search-results-detail/357343"/>
-    <id>urn:funding-finder:change:813b0d4da1d7576e4106</id>
-    <updated>2026-11-11T22:11:33.184819Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: Findable Accessible Interoperable Reusable Open Science (FAIROS)</title>
-    <link href="https://www.grants.gov/search-results-detail/358036"/>
-    <id>urn:funding-finder:change:7aeba87901ce00c1fe4f</id>
-    <updated>2026-11-11T22:11:33.184819Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: Arctic Doctoral Dissertation Research Improvement Grants (Arctic DDRIG) Arctic Social Sciences, Arctic System Sciences, and Arctic Observing Network (DDRIG)</title>
-    <link href="https://www.grants.gov/search-results-detail/361896"/>
-    <id>urn:funding-finder:change:7abbf6ad731be8f8b20b</id>
-    <updated>2026-11-11T22:11:33.184819Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: BJA FY 2026 Second Chance Act Improving Reentry Education and Employment Outcomes</title>
-    <link href="https://www.grants.gov/search-results-detail/363637"/>
-    <id>urn:funding-finder:change:79ec1733e786c890147a</id>
-    <updated>2026-11-11T22:11:33.184819Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-11-11</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Impact Aid Discretionary Construction Grant Program - 84.041C</title>
-    <link href="https://www.grants.gov/search-results-detail/363825"/>
-    <id>urn:funding-finder:change:7909b3cd2de93ca16ed9</id>
-    <updated>2026-11-11T22:11:33.184819Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: High Priority HIV and Substance Use Research (R01 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/355867"/>
-    <id>urn:funding-finder:change:7760e889f4fea3258ee7</id>
-    <updated>2026-11-11T22:11:33.184819Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: Mechanisms that Impact Cancer Risk with Use of Incretin Mimetics (R21 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/357203"/>
-    <id>urn:funding-finder:change:730485ebe935ee216544</id>
-    <updated>2026-11-11T22:11:33.184819Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: Population Approaches to Reducing Alcohol-related Cancer Risk (R01 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/357021"/>
-    <id>urn:funding-finder:change:715a27b17a8783132876</id>
-    <updated>2026-11-11T22:11:33.184819Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Infectious Diseases Clinical Trials Network (IDCTN) (UM1 Clinical Trial Required)</title>
-    <link href="https://www.grants.gov/search-results-detail/360875"/>
-    <id>urn:funding-finder:change:7129e0a75cace798f681</id>
-    <updated>2026-11-11T22:11:33.184819Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: ROSES25: C.4 Planetary Science Enabling Facilities</title>
-    <link href="https://www.grants.gov/search-results-detail/363258"/>
-    <id>urn:funding-finder:change:6fd37d15790c00d5bb48</id>
-    <updated>2026-11-11T22:11:33.184819Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: Emerging Global Leader Award (K43 Independent Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/356723"/>
-    <id>urn:funding-finder:change:6e91437769cb26ed349b</id>
-    <updated>2026-11-11T22:11:33.184819Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: Developing novel theory and methods for understanding the genetic architecture of complex human traits (R21 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/357136"/>
-    <id>urn:funding-finder:change:6669c0d916e9d0a592d3</id>
-    <updated>2026-11-11T22:11:33.184819Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Grid Modernization Utility Challenge - National Grid</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page?SolicitationId=a0rcr00001L7CxyAAF"/>
-    <id>urn:funding-finder:change:660f9a31e6361bb66113</id>
-    <updated>2026-11-11T22:11:33.184819Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Clinical Trials and Ancillary Studies Conducted within NIH-Funded Clinical Trial Research Networks (UG3/UH3 - Clinical Trial Required)</title>
-    <link href="https://www.grants.gov/search-results-detail/361522"/>
-    <id>urn:funding-finder:change:6518241434362adefe6f</id>
-    <updated>2026-11-11T22:11:33.184819Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: Unifying​ Imaging with​ Quantum​ Entanglement (UNIQUE)</title>
-    <link href="https://arpa-h.gov/explore-funding/programs/unique"/>
-    <id>urn:funding-finder:change:6426e4f88056bb91fc23</id>
-    <updated>2026-11-11T22:11:33.184819Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: Interventions to expand cancer screening and preventive services to ADVANCE health in populations that experience health disparities (R01, Clinical Trial Required)</title>
-    <link href="https://www.grants.gov/search-results-detail/356690"/>
-    <id>urn:funding-finder:change:64160a27d810a31b699f</id>
-    <updated>2026-11-11T22:11:33.184819Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: Teaching Health Center Graduate Medical Education (THCGME) Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363111"/>
-    <id>urn:funding-finder:change:5f83094762e3037a72b9</id>
-    <updated>2026-11-11T22:11:33.184819Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-12-11</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: FY 2027 COPS-OJP Constitutional Protections for Parents - A NASRO SRO TTA Invitational Program</title>
-    <link href="https://www.grants.gov/search-results-detail/364148"/>
-    <id>urn:funding-finder:change:5cbee313b010a4da93c0</id>
-    <updated>2026-11-11T22:11:33.184819Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: Infrastructure Cluster (AGS-IC)</title>
-    <link href="https://www.grants.gov/search-results-detail/356537"/>
-    <id>urn:funding-finder:change:5bc2e4fc7274a4e9d015</id>
-    <updated>2026-11-11T22:11:33.184819Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: Limited Submission Opportunity: $700,000 - The G. Harold and Leila Y. Mathers Foundation - Research Grant (Spring 2027 Cycle)</title>
-    <link href="http://rochester.infoready4.com/CompetitionSpace/"/>
-    <id>urn:funding-finder:change:5a1d1b34ea2a721d7074</id>
-    <updated>2026-11-11T22:11:33.184819Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: Supporting Talented Early Career Researchers in Genomics (R01 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/357744"/>
-    <id>urn:funding-finder:change:56c5a015fdd5cc1ed393</id>
-    <updated>2026-11-11T22:11:33.184819Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: NSF Small Business Innovation Research / Small Business Technology Transfer Phase I, Phase II, Fast-Track Programs: A Pilot Emphasis on Scientific Instrumentation</title>
-    <link href="https://www.grants.gov/search-results-detail/362551"/>
-    <id>urn:funding-finder:change:55fa47fb9bccc3fc70cb</id>
-    <updated>2026-11-11T22:11:33.184819Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: Intervention Research to Improve Native American Health (R34 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/358373"/>
-    <id>urn:funding-finder:change:508deb1cf760d1d95ddb</id>
-    <updated>2026-11-11T22:11:33.184819Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Deadline changed: Air Force Fiscal Year 2027 Young Investigator Program (YIP)</title>
-    <link href="https://www.grants.gov/search-results-detail/363829"/>
-    <id>urn:funding-finder:change:5071bfad90f59ba8c6df</id>
-    <updated>2026-11-11T22:11:33.184819Z</updated>
-    <category term="deadline_changed"/>
-    <summary>2026-12-04 → 2026-12-11</summary>
-  </entry>
-  <entry>
-    <title>Deadline changed: Centers of Excellence in Healthcare Quality and Safety</title>
-    <link href="https://www.grants.gov/search-results-detail/361997"/>
-    <id>urn:funding-finder:change:4c3d9a1f8bdb9d987a6f</id>
-    <updated>2026-11-11T22:11:33.184819Z</updated>
-    <category term="deadline_changed"/>
-    <summary>2027-01-04 → 2027-02-01</summary>
   </entry>
 </feed>
