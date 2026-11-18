@@ -1,10 +1,15 @@
+from copy import deepcopy
 from datetime import date
+import json
 import tempfile
 import unittest
 from pathlib import Path
 from xml.etree import ElementTree
 
 from scripts.build_changes import diff_catalogs, write_change_feed
+from scripts.build_catalog import catalog_javascript_bytes
+from scripts.submission_schedule import project
+from tools.catalog_publication_evidence import change_snapshot_findings
 
 
 AS_OF = date(2026, 7, 30)
@@ -36,6 +41,47 @@ def catalog(records):
 
 
 class ChangeFeedTests(unittest.TestCase):
+    def test_normal_writer_preserves_invitation_quotes_and_retained_history(self):
+        # Native candidate 5f30d210 failed publication when the writer changed
+        # this official title's en dash inside both invitation-evidence fields.
+        as_of = date(2026, 11, 18)
+        title = "DOJ FY 2026 Invited to Apply \u2013 Model Cities Initiative (MCI)"
+        record = project(rec("364275", title=title, close_date="2026-11-30",
+            opportunity_number="O-BJA-2026-172814",
+            deadlines=[{"kind": "application", "date": "2026-11-30",
+                "source_field": "CloseDate", "confidence": "official_structured",
+                "invitation_required": True, "prerequisite": "invitation",
+                "invitation_evidence": {"source_field": "title", "quote": title,
+                    "source_url": "https://www.grants.gov/search-results-detail/364275"}}]), as_of)
+        current = catalog([record])
+        current["generated_at"] = "2026-11-18T18:56:51.080828Z"
+        canonical = json.loads(catalog_javascript_bytes(current).decode().split("=", 1)[1].strip().removesuffix(";"))
+        previous = catalog([])
+        expected = diff_catalogs(previous, canonical, as_of=as_of)[0]
+        self.assertEqual(expected["id"], "ea1602cf180474dde010")
+        historical = deepcopy(expected)
+        historical.update(id="retained-history", changed_at="2026-11-17T18:56:51Z",
+            detail="Previously recorded \u2014 keep this wording")
+        originals = deepcopy((previous, canonical, historical))
+        with tempfile.TemporaryDirectory() as directory:
+            out = Path(directory)
+            (out / "changes.json").write_text(json.dumps({"events": [historical]}, ensure_ascii=False), encoding="utf-8")
+            summary = write_change_feed(previous, canonical, out, as_of=as_of)
+            feed = json.loads((out / "changes.json").read_bytes())
+            self.assertEqual(summary, {"new_event_count": 1, "retained_event_count": 2})
+            self.assertEqual(feed["events"], [expected, historical])
+            snapshot = feed["events"][0]["record"]
+            self.assertEqual(snapshot["deadlines"], canonical["opportunities"][0]["deadlines"])
+            self.assertEqual(snapshot["next_submission"], canonical["opportunities"][0]["next_submission"])
+            self.assertEqual(snapshot["next_submission"]["event"]["invitation_evidence"]["quote"], title)
+            self.assertEqual(change_snapshot_findings(canonical, feed), [])
+            atom = ElementTree.parse(out / "changes.xml")
+            ns = {"a": "http://www.w3.org/2005/Atom"}
+            entries = atom.findall("a:entry", ns)
+            self.assertEqual(entries[0].findtext("a:title", namespaces=ns), "New opportunity: " + title.replace("\u2013", "-"))
+            self.assertEqual(entries[1].findtext("a:summary", namespaces=ns), "Previously recorded - keep this wording")
+        self.assertEqual((previous, canonical, historical), originals)
+
     def test_detects_new_deadline_amendment_closing_and_removal(self):
         previous = catalog([
             rec("1"),

@@ -125,7 +125,7 @@ def project_catalog(catalog, cache):
 
 
 def projection(parent_root, audit_at, candidate_id):
-    from scripts.build_catalog import catalog_javascript_bytes, catalog_metadata_javascript_bytes
+    from scripts.build_catalog import catalog_javascript_bytes, catalog_metadata_javascript_bytes, compact_catalog_payload
     from scripts.enrich_catalog import read_catalog
     from scripts.subtopic_records import read_cache
     from tools.verify_notice_publication import verify
@@ -149,11 +149,21 @@ def projection(parent_root, audit_at, candidate_id):
     changes_xml = changes_path.read_bytes() if changes_path.is_file() else None
     if original_changes_path.is_file():
         from scripts.build_changes import refresh_current_generation_snapshots, render_change_feed
+        from tools.catalog_publication_evidence import change_snapshot_findings
         original_changes = json.loads(original_changes_path.read_bytes())
-        refreshed = refresh_current_generation_snapshots(original_changes, after, affected_ids=changed)
+        canonical = compact_catalog_payload(after)
+        snapshot_ids = {row['opportunity_id'] for row in change_snapshot_findings(canonical, original_changes)}
+        refreshed = refresh_current_generation_snapshots(original_changes, canonical,
+            affected_ids=sorted(set(changed) | snapshot_ids))
+        for old, new in zip(original_changes['events'], refreshed['events'], strict=True):
+            if old.get('type') == 'closed_or_removed':
+                new.clear()
+                new.update(deepcopy(old))
         refreshed_event_ids = [new['id'] for old, new in zip(original_changes['events'], refreshed['events'])
             if old != new]
         rendered_changes = {'feeds/' + name: raw for name, raw in render_change_feed(refreshed).items()}
+        require(not change_snapshot_findings(canonical, json.loads(rendered_changes['feeds/changes.json'])),
+            'serialized_change_snapshot_gate')
         changes_xml = rendered_changes['feeds/changes.xml']
         outputs.update(rendered_changes)
     outputs.update(common.feed_projection(after, changes_xml, as_of=common.timestamp(audit_at).date()))

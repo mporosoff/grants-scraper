@@ -370,10 +370,12 @@ def render_change_feed(feed: dict) -> dict[str, bytes]:
         raise ValueError("change_feed_timezone_required")
     values = {
         "changes.json": json.dumps(feed, ensure_ascii=False, indent=2) + "\n",
-        "changes.xml": build_atom(feed["events"], updated),
+        # JSON retains canonical records and evidence quotes; normalize only
+        # the punctuation displayed by the Atom feed.
+        "changes.xml": build_atom(feed["events"], updated).replace("\u2014", "-").replace("\u2013", "-"),
     }
     return {
-        name: value.replace("\u2014", "-").replace("\u2013", "-").encode("utf-8")
+        name: value.encode("utf-8")
         for name, value in values.items()
     }
 
