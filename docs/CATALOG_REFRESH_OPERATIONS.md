@@ -4,11 +4,51 @@ The catalog release workflow requests starts at 10:17, 14:17, 18:17, and 22:17 U
 
 A daily window begins at 10:17 UTC. Before that time, the previous window remains active. A scheduled run skips generation only after authenticating the current candidate, its completed publication and live-verification evidence, and its catalog source `generated_at` within that window. Pipeline, assembly, and verification times do not advance source freshness.
 
-The existing coordinated release lock serializes refresh, publication, and live checks. A retained unfinished candidate is recovered with its original artifact and spending owner. An unchanged failed validation is reported without repeating its complete gate. If spending was reserved but no complete candidate remains, the workflow reports the original run and holds: inspect its retained ledger and resume that logical run instead of allocating another allowance.
+The existing coordinated release lock serializes refresh, publication, and live checks. A retained unfinished candidate is recovered with its original artifact and spending owner. An unchanged failed validation is reported without repeating its complete gate. A reservation without a candidate never authorizes a replacement allowance. The narrow automatic source-retry route below can resume a proved zero-provider transport stop; other incomplete owners remain held for diagnosis and recovery of that logical run.
 
 Daily reporting distinguishes an already-current catalog, work due, recovery, and a hold. Publishing an older candidate does not satisfy the daily freshness check. Incomplete scheduled refreshes update the existing release incident. Email delivery depends on GitHub notification settings. If GitHub delivers none of the scheduled events, no Actions-based check can run or send an incident during that gap.
 
 Team generation remains controlled separately by `config/offline_ai.json`; the schedule does not enable it or change any provider spending limit.
+
+## Recovery before a complete source catalog exists
+
+A scheduled planner can queue recovery only after authenticating the original
+failed generation job, every completed attempt, paired spending reservations and
+state, and the exact source failure. The ledger must contain no provider requests
+or events; no source stage, candidate, enrichment or document/team/vector output
+may have completed. Source, team and semantic inputs and the generation job
+contract must still match protected main. A changed source implementation needs
+an operator's retry of the original plan job and its dependents so the new plan
+selects the repaired protected code.
+
+The separate `recover-generation.yml` workflow starts after the queueing release
+has completed and released the coordinated lock. It reauthenticates the queue and
+owner, saves durable intent and request artifacts, and submits one retry of the
+exact failed generation job. There are at most two automatic requests per owner.
+Missing evidence, an uncertain acknowledgement, provider work, changed inputs or
+an already completed candidate prevent another request. The same logical ledger
+and original allowance survive every admitted retry. Queuing a retry does not
+claim freshness or close the release incident.
+
+Do not rerun the retry executor itself: it rejects later attempts so a lost
+acknowledgement cannot produce another request. Diagnose and resume the original
+release owner through its authenticated checkpoints instead.
+
+Grants.gov collection verifies HTTPS certificates and hostnames. Its scoped
+transport supplies the missing public issuer certificate while requiring the
+chain to terminate at an existing trusted root. Transient GET failures receive
+bounded retries; archives are replaced only after a complete stream. Terminal
+transport diagnostics distinguish incomplete collection from completed work.
+
+The November 19, 2026 failure was a certificate verification error. Subsequent
+inspection found Grants.gov serving a new leaf certificate without its required
+HydrantID intermediate. Run `44593967977`, attempt 1, failed verification
+before collection or any paid request. Seven later scheduled runs preserved its
+reservation and held. The previous release audit had proved the retained
+candidate, publication and same-day monitoring; it had not exercised the next
+daily source handshake or unattended recovery from this early stop. Regression
+coverage now exercises the downloader failure boundary and the original-owner
+retry admission and dispatch boundaries.
 
 ## Independent public freshness check
 

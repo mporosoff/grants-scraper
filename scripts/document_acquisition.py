@@ -54,14 +54,22 @@ def acquisition_identity(url):
     return NASA_POLICY if parsed and parsed.hostname in NASA_HOSTS else None
 
 
+def requires_session_profile(url):
+    from scripts.source_http import GRANTS_HOSTS
+    parsed = _public_https(url)
+    return bool(parsed and parsed.hostname in NASA_HOSTS | GRANTS_HOSTS)
+
+
 def configure_session(session):
-    """Add the measured NASA suite only on the two exact HTTPS origins.
+    """Add measured source profiles only on their exact HTTPS origins.
 
     Other hosts, including cross-origin redirect targets, retain the session's
     default adapter. Certificate/hostname verification and security level stay
     unchanged in the existing compatibility adapter.
     """
     from scripts.sources.http import _LegacyCipherAdapter
+    from scripts.source_http import configure_grants_session
+    configure_grants_session(session)
     adapter = _LegacyCipherAdapter()
     for host in NASA_HOSTS:
         session.mount('https://' + host + '/', adapter)

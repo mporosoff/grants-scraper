@@ -1687,13 +1687,14 @@ jobs:
             const publicationAttempt = publicationRun === String(context.runId) ? process.env.GITHUB_RUN_ATTEMPT || 'unknown' :
               sameRequested ? needs.plan.outputs.publication_attempt || process.env.REQUESTED_PUBLICATION_ATTEMPT || 'latest retained' : 'none';
             const runUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
-            const checkpoint = failed || reviewCheckpoint || (alreadyCurrent ? 'already_current' : planned === 'noop' ?
+            const checkpoint = failed || reviewCheckpoint || (planned === 'queued-recovery' ? 'queued_recovery' : alreadyCurrent ? 'already_current' : planned === 'noop' ?
               (heldStage || scheduledIncomplete ? 'held' : 'noop') : scheduledIncomplete ?
               (liveComplete ? 'stale_catalog' : 'incomplete_verification') : 'completed');
             const refreshFailure = scheduledIncomplete ?
               `Scheduled catalog refresh did not establish a fresh verified catalog: ${checkpoint}. Planner reason: ${planReason}` : '';
             const retry = failed ? next : reviewFailed ? 'resolve the reviewer failure, then publish after clean review of the same head' :
-              awaiting ? 'publish after exact-head review' :
+              awaiting ? 'publish after exact-head review' : planned === 'queued-recovery' ?
+              'the separate recovery workflow will authenticate and request the original job after this run completes; live recovery is still pending' :
               scheduledIncomplete ? planned === 'noop' ? 'resolve the reported hold before resuming auto' :
               'inspect the retained checkpoint before retry' : 'none';
             const body = `Candidate: ${candidate}\nArtifact run: ${generationRun}\nStage: ${checkpoint}\n` +
