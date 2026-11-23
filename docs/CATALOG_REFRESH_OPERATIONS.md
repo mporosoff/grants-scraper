@@ -50,6 +50,21 @@ daily source handshake or unattended recovery from this early stop. Regression
 coverage now exercises the downloader failure boundary and the original-owner
 retry admission and dispatch boundaries.
 
+The resumed attempt 2 passed collection and document extraction, then the link
+checker reported 142 of 150 links broken. Its separate Grants.gov caller still
+failed on the incomplete server chain. Its per-URL session now uses the same scoped
+verified Grants.gov profile, including redirects, while retaining public-target
+checks, HEAD/range-GET handling, confirmed-missing annotations and the systemic
+failure threshold. The supported Grants.gov HTTP caller family was inspected
+before this follow-up repair.
+
+Attempt 2 retained the original zero-request ledger and complete public document
+and subtopic checkpoint, but no complete catalog/source/enrichment output or
+candidate. A retry restores those extraction inputs and original accounting.
+Collection must run again when no complete safe source output survives; its new
+source clock and generation SHA must remain truthful. Never infer retained
+catalog bytes from a successful step, a source summary, or document cache alone.
+
 ## Independent public freshness check
 
 The Alerts Worker observes the public Pages marker, publication receipt, and exact catalog metadata once per hour on its existing Cloudflare retry schedule. Its read-only `/catalog-health` endpoint reports public publication availability, source freshness, and the age of the observation independently of Alerts delivery health. The source clock must fall in the current day's 10:17 UTC window by 6 p.m. Eastern. Before 6 p.m. the previous daily window is acceptable.

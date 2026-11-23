@@ -21,6 +21,7 @@ import requests
 
 from scripts.build_catalog import USER_AGENT, safe_http_url, write_catalog
 from scripts.build_feeds import load_catalog
+from scripts.source_http import grants_session
 
 
 SCHEMA_VERSION = 1
@@ -78,7 +79,8 @@ def public_target(url: str) -> tuple[bool, str | None]:
     """Reject local/private targets, including every resolved address."""
     parsed = urlparse(url)
     hostname = (parsed.hostname or "").casefold().rstrip(".")
-    if parsed.scheme not in {"http", "https"} or not hostname:
+    if (parsed.scheme not in {"http", "https"} or not hostname
+            or parsed.username or parsed.password):
         return False, "invalid HTTP URL"
     if hostname == "localhost" or hostname.endswith((".localhost", ".local")):
         return False, "local hostname"
@@ -104,6 +106,11 @@ def public_target(url: str) -> tuple[bool, str | None]:
 
 
 def check_url(url: str, timeout: float = 12.0) -> dict:
+    with grants_session() as session:
+        return _check_url(url, timeout, session)
+
+
+def _check_url(url: str, timeout: float, session) -> dict:
     headers = {"User-Agent": USER_AGENT}
     target = url
     redirected = False
@@ -122,13 +129,20 @@ def check_url(url: str, timeout: float = 12.0) -> dict:
                 if used_get
                 else headers
             )
-            response = requests.request(
+            # Each old standalone request was anonymous. Reusing the strict
+            # session must not carry response cookies into a later hop/retry.
+            session.cookies.clear()
+            session.auth = None
+            session.headers.pop("Authorization", None)
+            session.headers.pop("Cookie", None)
+            response = session.request(
                 method,
                 target,
                 allow_redirects=False,
                 timeout=timeout,
                 headers=request_headers,
                 stream=used_get,
+                verify=True,
             )
             if response.status_code in {403, 405} and not used_get:
                 response.close()
