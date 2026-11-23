@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/cancer.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/cancer.xml</id>
-  <updated>2026-11-18T18:58:27Z</updated>
+  <updated>2026-11-23T18:07:22Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Advanced Development and Sustainment of Informatics Technologies for Cancer Research and Management (U24 Clinical Trial Optional)</title>
@@ -286,33 +286,6 @@
     <summary>National Institutes of Health | Application 2029-11-05 | Through this Notice of Funding Opportunity (NOFO), NCI solicits applications for the Research Units (RUs), one of the two scientific components of the Pancreatic Cancer Detection Consortium (PCDC), to conduct research on early detection of pancreatic ductal adenocarcinoma (PDAC) and characterization of its precursor lesions to identify patients who are at high risk of progression to cancer. The PC…</summary>
   </entry>
   <entry>
-    <title>NCI Research Specialist Award for Core and Laboratory-based Scientists (R50 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/362276"/>
-    <id>urn:funding-finder:grants-gov:362276</id>
-    <updated>2026-09-17T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Cancer"/>
-    <summary>National Institutes of Health | Estimated Application 2026-11-20 | This notice of funding opportunity (NOFO) will invite applications for the Research Specialist Award (R50), which provides salary support for exceptional, non-tenure track scientists working in research laboratories and core facilities who make essential contributions to cancer research. The R50 is intended to support stable, long-term research careers for highly skilled scientists who contribute …</summary>
-  </entry>
-  <entry>
-    <title>DoW Breast Cancer, Breakthrough Award Levels 1 and 2</title>
-    <link href="https://www.grants.gov/search-results-detail/363670"/>
-    <id>urn:funding-finder:grants-gov:363670</id>
-    <updated>2026-09-03T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Cancer"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA | Application 2026-11-18 | verify prerequisite | Summary: The fiscal year 2026 (FY26) Breast Cancer Research Program (BCRP) Breakthrough Award mechanism supports promising research with high potential to lead to or make breakthroughs in breast cancer. All applications must address at least one of the FY26 BCRP overarching challenges or provide adequate justification for exception. Applications must address the challenge in a way that can lead to…</summary>
-  </entry>
-  <entry>
-    <title>DoW Breast Cancer, Clinical Research Extension Award</title>
-    <link href="https://www.grants.gov/search-results-detail/363671"/>
-    <id>urn:funding-finder:grants-gov:363671</id>
-    <updated>2026-09-03T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Cancer"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA | Application 2026-11-18 | verify prerequisite | Summary: The fiscal year 2026 (FY26) Breast Cancer Research Program (BCRP) Clinical Research Extension Award supports research that extends the data collection, follow-up, and analysis of breast cancer clinical studies. The intent of this award mechanism is to increase the clinically relevant impact of breast cancer patient participation in clinical studies by addressing the knowledge lost due to …</summary>
-  </entry>
-  <entry>
     <title>Glioblastoma Therapeutics Network (GTN) (U19 Clinical Trial Required)</title>
     <link href="https://www.grants.gov/search-results-detail/360606"/>
     <id>urn:funding-finder:grants-gov:360606</id>
@@ -383,29 +356,6 @@ a high level of innovation and creativity. The goal is to support the best young
     <category term="Biology and biotechnology"/>
     <category term="Cancer"/>
     <summary>National Institutes of Health | Application 2027-01-11 | As part of the Gabriella Miller Kids First Pediatric Research Program (Kids First Program), the NIH invites applications to submit samples from pediatric cohorts for whole genome sequencing at a Kids First Program supported genomic data generating centers. Applicants are encouraged to propose sequencing of existing pediatric cancer or congenital anomaly cohorts to elucidate the genetic contributio…</summary>
-  </entry>
-  <entry>
-    <title>DoW Rare Cancers Idea Development Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362849"/>
-    <id>urn:funding-finder:grants-gov:362849</id>
-    <updated>2026-06-17T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Cancer"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA | Application 2026-11-18 | invitation required | Summary: The fiscal year 2026 (FY26) Rare Cancers Research Program (RCRP) Idea Development Award (IDA) promotes ideas that are ready for further development and have the potential to yield high-impact findings and new avenues of investigation. Distinctive Features: The RCRP encourages applicants to include an exploratory aim or sub-aim to support any necessary discovery-driven research. Preliminar…</summary>
-  </entry>
-  <entry>
-    <title>DoW Rare Cancers Resource and Community Development Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362850"/>
-    <id>urn:funding-finder:grants-gov:362850</id>
-    <updated>2026-06-17T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Cancer"/>
-    <category term="Community development"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA | Application 2026-11-18 | invitation required | Summary: The fiscal year 2026 (FY26) Rare Cancers Research Program (RCRP) Resource and Community Development Award (RCDA) supports the development of research resources and clinical or preclinical datasets that will advance the field of rare cancers research and ultimately improve outcomes for individuals with rare cancers. Research supporting this funding opportunity should fill one of the follow…</summary>
   </entry>
   <entry>
     <title>Paul Calabresi Career Development Award for Clinical Oncology (K12 Clinical Trial Not Allowed)</title>
@@ -649,5 +599,62 @@ a high level of innovation and creativity. The goal is to support the best young
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <summary>National Institutes of Health | Application 2028-09-07 | This funding opportunity announcement (FOA) encourages the submission of exploratory/developmental research grant (R21) applications that focus on different aspects of cancer control by modifying behavior, screening, and understanding etiologic factors contributing to the development of cancer, and developing ways to control cancer. The overarching goal is to provide support to promote the early a…</summary>
+  </entry>
+  <entry>
+    <title>Modular R01s in Cancer Control and Population Sciences (R01 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/357030"/>
+    <id>urn:funding-finder:grants-gov:357030</id>
+    <updated>2024-11-07T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Cancer"/>
+    <category term="Data science"/>
+    <category term="Education and workforce"/>
+    <category term="Public health"/>
+    <category term="Social and behavioral sciences"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <summary>National Institutes of Health | Application 2028-01-07 | This Notice of Funding Opportunity (NOFO) encourages applications for research in cancer control and population sciences. The overarching goal is to provide support to promote research efforts on novel scientific ideas that have the potential to substantially advance cancer research in statistical and analytic methods, epidemiology, cancer survivorship, cancer-related behaviors and behavioral inte…</summary>
+  </entry>
+  <entry>
+    <title>Academic-Industrial Partnerships (AIP) to Translate and Validate In Vivo Imaging Systems (R01 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/357018"/>
+    <id>urn:funding-finder:grants-gov:357018</id>
+    <updated>2024-11-06T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Cancer"/>
+    <category term="Data science"/>
+    <category term="Education and workforce"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <summary>National Institutes of Health | Application 2027-01-07 | Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) intends to stimulate translation of scientific discoveries and engineering developments in imaging, data science and/or spectroscopic technologies into methods or tools that address contemporary problems in understanding the fundamental biology, potential risk of development, diagnosis, treatment, and/or disease…</summary>
+  </entry>
+  <entry>
+    <title>Population Approaches to Reducing Alcohol-related Cancer Risk (R01 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/357021"/>
+    <id>urn:funding-finder:grants-gov:357021</id>
+    <updated>2024-11-06T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Cancer"/>
+    <category term="Education and workforce"/>
+    <summary>National Institutes of Health | Application 2027-01-07 | This Notice of Funding Opportunity (NOFO) aims to support research on interdisciplinary population approaches to increasing awareness of the relationship between alcohol and cancer risk, understanding and changing social norms related to alcohol consumption, developing and/or evaluating alcohol policy approaches, and the development, testing, and implementation of population-level interventions to…</summary>
+  </entry>
+  <entry>
+    <title>Clinical Characterization of Cancer Therapy-induced Adverse Sequelae and Mechanism-based Interventional Strategies (R01 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/357015"/>
+    <id>urn:funding-finder:grants-gov:357015</id>
+    <updated>2024-11-06T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Cancer"/>
+    <category term="Education and workforce"/>
+    <summary>National Institutes of Health | Application 2028-01-07 | The purpose of this Funding Opportunity Announcement (FOA) is to support collaborative research projects designed to address adverse sequelae of cancer therapies that persist and become chronic comorbidities or develop as delayed posttreatment effects. This FOA supports basic, translational, and clinical research projects that seek to identify the mechanisms of therapy-induced adverse sequelae, cl…</summary>
+  </entry>
+  <entry>
+    <title>Integration of Imaging and Fluid-Based Tumor Monitoring in Cancer Therapy (R01 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/357003"/>
+    <id>urn:funding-finder:grants-gov:357003</id>
+    <updated>2024-11-06T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Cancer"/>
+    <category term="Education and workforce"/>
+    <summary>National Institutes of Health | Application 2027-02-05 | Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) seeks research project (R01) grant applications describing projects that integrate imaging and fluid-based tumor monitoring (liquid biopsy) assays during cancer therapy in patients to determine the optimal use of those modalities in the characterization of therapy response and/or emergence of resistance.</summary>
   </entry>
 </feed>

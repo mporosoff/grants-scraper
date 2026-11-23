@@ -285,13 +285,13 @@ Self-service Alerts is deployed through [the Alerts Worker](workers/alerts/), D1
 
 <!-- catalog-stats:start -->
 This replaces the former 48-record Chemical and Sustainability Engineering feed. The
-November 18, 2026 build contains 1,224 current funding opportunities (894 posted and 330
-forecasted) from ARPA-H (9), DARPA / IARPA research solicitations (1), Grants.gov
-(1,124), NASA ROSES (2), NYSERDA (43), SAM.gov (31), U.S. National Science Foundation
+November 23, 2026 build contains 1,202 current funding opportunities (875 posted and 327
+forecasted) from ARPA-H (8), DARPA / IARPA research solicitations (1), Grants.gov
+(1,104), NASA ROSES (2), NYSERDA (43), SAM.gov (30), U.S. National Science Foundation
 (1), VPR funding digest (limited submissions & foundations) (13), with no deadline
-before the catalog date. It provides a direct official announcement for 177 records, an
-official source-page route for another 561, and the official Grants.gov record for the
-remaining 486. Across all route types, 636 records also contain an official source URL.
+before the catalog date. It provides a direct official announcement for 161 records, an
+official source-page route for another 554, and the official Grants.gov record for the
+remaining 487. Across all route types, 627 records also contain an official source URL.
 <!-- catalog-stats:end -->
 
 Funding values are intentionally not conflated: award floor/ceiling drive

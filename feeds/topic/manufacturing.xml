@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/manufacturing.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/manufacturing.xml</id>
-  <updated>2026-11-18T18:58:27Z</updated>
+  <updated>2026-11-23T18:07:22Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>BRAIN Initiative: Clinical Studies to Advance Next-Generation Devices for Recording and Modulation in the Human Central Nervous System</title>
@@ -15,6 +15,36 @@
     <category term="Manufacturing"/>
     <category term="Neuroscience"/>
     <summary>National Institutes of Health | Estimated Application 2027-01-28 | The Brain Research through Advancing Innovative Neurotechnologies® (BRAIN) Initiative along with other NIH Institutes and Centers (ICs) intends to publish a Notice of Funding Opportunity (NOFO) to encourage investigators to pursue first-in-human or early-stage clinical studies for recording and/or stimulating devices to treat central nervous system disorders and better understand the human brain. …</summary>
+  </entry>
+  <entry>
+    <title>FY 2027 Build to Scale Notice of Funding Opportunity</title>
+    <link href="https://www.grants.gov/search-results-detail/364206"/>
+    <id>urn:funding-finder:grants-gov:364206</id>
+    <updated>2026-11-20T00:00:00Z</updated>
+    <author><name>Economic Development Administration</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Community development"/>
+    <category term="Education and workforce"/>
+    <category term="Technology development"/>
+    <category term="Materials science"/>
+    <category term="Quantum science"/>
+    <category term="Data science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <summary>Economic Development Administration | Application 2027-02-26 | The Build to Scale (B2S) program strengthens America’s economic and technological leadership and increases the success of innovation-driven industry by turning U.S. breakthroughs into U.S.-built companies that attract private capital, create jobs, and keep the industries of the future anchored on American soil. Build to Scale aims to support technology- and innovation-based economic development in…</summary>
+  </entry>
+  <entry>
+    <title>Foundational Research in Robotics (FRR)</title>
+    <link href="https://www.grants.gov/search-results-detail/364294"/>
+    <id>urn:funding-finder:grants-gov:364294</id>
+    <updated>2026-11-19T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <category term="Transportation"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Materials science"/>
+    <summary>U.S. National Science Foundation | Posted | Advances in robotics directly contribute to the nation's long-term reindustrialization, competitiveness and security, as robotics is increasingly a major driver of productivity across a range of economic sectors such as manufacturing, logistics, transportation, defense, and healthcare. These general-purpose autonomous systems are capable of dexterous manipulation, mobility, and reliable operation …</summary>
   </entry>
   <entry>
     <title>Blueprint Neurotherapeutics Network (BPN): Small Molecule Drug Discovery and Development</title>
@@ -71,7 +101,7 @@
     <category term="Materials science"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
-    <summary>National Energy Technology Laboratory | Concept Paper 2026-11-20 | Grid Supply Chain Alternatives to Lead Energy Dominance (SCALED) This initiative will deploy a multi-faceted approach to bolster domestic capabilities to withstand supply chain shocks, ensure a reliable energy infrastructure, and position the U.S. as a global leader in foundational grid technologies. Modification 000001: Issued to update NOFO, Part 1 Section II.A. Eligibility - Participant Limitat…</summary>
+    <summary>National Energy Technology Laboratory | Application 2027-02-08 | prerequisite closed | Grid Supply Chain Alternatives to Lead Energy Dominance (SCALED) This initiative will deploy a multi-faceted approach to bolster domestic capabilities to withstand supply chain shocks, ensure a reliable energy infrastructure, and position the U.S. as a global leader in foundational grid technologies. Modification 000001: Issued to update NOFO, Part 1 Section II.A. Eligibility - Participant Limitat…</summary>
   </entry>
   <entry>
     <title>Harvest to Hallways: National School Lunch Program, Equipment Assistance Grants</title>
@@ -94,38 +124,6 @@
     <category term="Materials science"/>
     <category term="Manufacturing"/>
     <summary>Bureau of Near Eastern Affairs | Application 2027-09-30 | The Regional Foreign Assistance Office RFA in Amman, Jordan announces an open competition to organizations to submit one or more statements of interest, SOIs, for funding from the U.S. Jordan Private Sector Innovation Fund. SOIs should propose projects that advance commercial deals, support innovation driven bilateral commercial cooperation and market expansion, and promote U.S. exports in Jordan.</summary>
-  </entry>
-  <entry>
-    <title>Unlocking New Levels of Output and Capacity for Key Subsurface Resources (UNLOCK)</title>
-    <link href="https://www.grants.gov/search-results-detail/364136"/>
-    <id>urn:funding-finder:grants-gov:364136</id>
-    <updated>2026-10-21T00:00:00Z</updated>
-    <author><name>Advanced Research Projects Agency Energy</name></author>
-    <category term="Carbon management"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Manufacturing"/>
-    <category term="Materials science"/>
-    <category term="Technology development"/>
-    <category term="Water"/>
-    <category term="Separations and membranes"/>
-    <summary>Advanced Research Projects Agency Energy | Application 2026-11-20 | NOFO Number: DE-FOA-0003630 - Unlocking New Levels of Output and Capacity for Key Subsurface Resources (UNLOCK) To obtain a copy of the Notice of Funding Opportunity (NOFO) please go to DOE eXCHANGE at https://exchange.energy.gov/. To apply to this NOFO, Applicants must register with and submit application materials through DOE eXCHANGE (https://exchange.energy.gov/Registration.aspx). For detailed…</summary>
-  </entry>
-  <entry>
-    <title>Unlocking New Levels of Output and Capacity for Key Subsurface Resources SBIR/STTR (UNLOCK SBIR/STTR)</title>
-    <link href="https://www.grants.gov/search-results-detail/364135"/>
-    <id>urn:funding-finder:grants-gov:364135</id>
-    <updated>2026-10-21T00:00:00Z</updated>
-    <author><name>Advanced Research Projects Agency Energy</name></author>
-    <category term="Carbon management"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Manufacturing"/>
-    <category term="Materials science"/>
-    <category term="Technology development"/>
-    <category term="Water"/>
-    <category term="Separations and membranes"/>
-    <summary>Advanced Research Projects Agency Energy | Application 2026-11-20 | NOFO Number: DE-FOA-0003631 - Unlocking New Levels of Output and Capacity for Key Subsurface Resources SBIR/STTR (UNLOCK SBIR/STTR) To obtain a copy of the Notice of Funding Opportunity (NOFO) please go to DOE eXCHANGE at https://exchange.energy.gov/. To apply to this NOFO, Applicants must register with and submit application materials through DOE eXCHANGE (https://exchange.energy.gov/Registration…</summary>
   </entry>
   <entry>
     <title>Young Faculty Award (YFA) 2027</title>
@@ -177,7 +175,7 @@
     <category term="Education and workforce"/>
     <category term="Manufacturing"/>
     <category term="Transportation"/>
-    <summary>Dept of the Army -- Materiel Command | Application 2026-12-03 | The Department of War (DoW) seeks innovative applications to cooperatively partner with eligible entities in the implementation and execution of the SMART Scholarship-for-Service Program. The Department intends to award ONE (1) CA award, with a maximum award of up to $1,300M over a ten-year period of performance. The National Defense Education Program (NDEP) supports the Department's priorities to…</summary>
+    <summary>Dept of the Army -- Materiel Command | Application 2026-12-17 | The Department of War (DoW) seeks innovative applications to cooperatively partner with eligible entities in the implementation and execution of the SMART Scholarship-for-Service Program. The Department intends to award ONE (1) CA award, with a maximum award of up to $1,300M over a ten-year period of performance. The National Defense Education Program (NDEP) supports the Department's priorities to…</summary>
   </entry>
   <entry>
     <title>FY 2027 Continuation of Solicitation for the Office of Science Financial Assistance Program</title>

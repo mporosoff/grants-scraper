@@ -4,8 +4,34 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/energy.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/energy.xml</id>
-  <updated>2026-11-18T18:58:27Z</updated>
+  <updated>2026-11-23T18:07:22Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>FY 2027 Build to Scale Notice of Funding Opportunity</title>
+    <link href="https://www.grants.gov/search-results-detail/364206"/>
+    <id>urn:funding-finder:grants-gov:364206</id>
+    <updated>2026-11-20T00:00:00Z</updated>
+    <author><name>Economic Development Administration</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Community development"/>
+    <category term="Education and workforce"/>
+    <category term="Technology development"/>
+    <category term="Materials science"/>
+    <category term="Quantum science"/>
+    <category term="Data science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <summary>Economic Development Administration | Application 2027-02-26 | The Build to Scale (B2S) program strengthens America’s economic and technological leadership and increases the success of innovation-driven industry by turning U.S. breakthroughs into U.S.-built companies that attract private capital, create jobs, and keep the industries of the future anchored on American soil. Build to Scale aims to support technology- and innovation-based economic development in…</summary>
+  </entry>
+  <entry>
+    <title>ROSES 2025: D.11 U.S. Contributions to Ariel Preparatory Science</title>
+    <link href="https://www.grants.gov/search-results-detail/364280"/>
+    <id>urn:funding-finder:grants-gov:364280</id>
+    <updated>2026-11-18T00:00:00Z</updated>
+    <author><name>NASA Headquarters</name></author>
+    <category term="Energy"/>
+    <category term="Space and aeronautics"/>
+    <summary>NASA Headquarters | Application 2027-02-18 | Please note that this program requests optional Notices of Intent, which are due via NSPIRES by January 4th 2027. See the full posting on NSPIRES for details. ﻿NOTICE: Amended November 18, 2026. This amendment presents a new program element in ROSES-2025. Mandatory NOIs (see Section 3.1) are due by January 4, 2027, and full proposals are due by February 18, 2027. A videoconference for prospective …</summary>
+  </entry>
   <entry>
     <title>The State Component of the National Cooperative Geologic Mapping Program</title>
     <link href="https://www.grants.gov/search-results-detail/364265"/>
@@ -181,7 +207,7 @@
     <category term="Materials science"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
-    <summary>National Energy Technology Laboratory | Concept Paper 2026-11-20 | Grid Supply Chain Alternatives to Lead Energy Dominance (SCALED) This initiative will deploy a multi-faceted approach to bolster domestic capabilities to withstand supply chain shocks, ensure a reliable energy infrastructure, and position the U.S. as a global leader in foundational grid technologies. Modification 000001: Issued to update NOFO, Part 1 Section II.A. Eligibility - Participant Limitat…</summary>
+    <summary>National Energy Technology Laboratory | Application 2027-02-08 | prerequisite closed | Grid Supply Chain Alternatives to Lead Energy Dominance (SCALED) This initiative will deploy a multi-faceted approach to bolster domestic capabilities to withstand supply chain shocks, ensure a reliable energy infrastructure, and position the U.S. as a global leader in foundational grid technologies. Modification 000001: Issued to update NOFO, Part 1 Section II.A. Eligibility - Participant Limitat…</summary>
   </entry>
   <entry>
     <title>AFRL/AFOSR-Taiwan NSTC Frontiers in Materials and Nanostructures: AI-Driven Discovery, Quantum Geometry, and Energy-Efficient Information Technologies 2027-2030</title>
@@ -202,49 +228,6 @@
     <author><name>NYSERDA</name></author>
     <category term="Energy"/>
     <summary>NYSERDA | Application 2026-12-14 | Transforming New York’s electricity system to one that is cleaner, more resilient, and more affordable requires access to useful energy data. The New York State Public Service Commission (Commission) authorized the creation of an Integrated Energy Data Resource (IEDR) by NYSERDA that will securely collect, integrate, and provide access to a large and diverse set of energy-related information on on…</summary>
-  </entry>
-  <entry>
-    <title>Unlocking New Levels of Output and Capacity for Key Subsurface Resources (UNLOCK)</title>
-    <link href="https://www.grants.gov/search-results-detail/364136"/>
-    <id>urn:funding-finder:grants-gov:364136</id>
-    <updated>2026-10-21T00:00:00Z</updated>
-    <author><name>Advanced Research Projects Agency Energy</name></author>
-    <category term="Carbon management"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Manufacturing"/>
-    <category term="Materials science"/>
-    <category term="Technology development"/>
-    <category term="Water"/>
-    <category term="Separations and membranes"/>
-    <summary>Advanced Research Projects Agency Energy | Application 2026-11-20 | NOFO Number: DE-FOA-0003630 - Unlocking New Levels of Output and Capacity for Key Subsurface Resources (UNLOCK) To obtain a copy of the Notice of Funding Opportunity (NOFO) please go to DOE eXCHANGE at https://exchange.energy.gov/. To apply to this NOFO, Applicants must register with and submit application materials through DOE eXCHANGE (https://exchange.energy.gov/Registration.aspx). For detailed…</summary>
-  </entry>
-  <entry>
-    <title>Unlocking New Levels of Output and Capacity for Key Subsurface Resources SBIR/STTR (UNLOCK SBIR/STTR)</title>
-    <link href="https://www.grants.gov/search-results-detail/364135"/>
-    <id>urn:funding-finder:grants-gov:364135</id>
-    <updated>2026-10-21T00:00:00Z</updated>
-    <author><name>Advanced Research Projects Agency Energy</name></author>
-    <category term="Carbon management"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Manufacturing"/>
-    <category term="Materials science"/>
-    <category term="Technology development"/>
-    <category term="Water"/>
-    <category term="Separations and membranes"/>
-    <summary>Advanced Research Projects Agency Energy | Application 2026-11-20 | NOFO Number: DE-FOA-0003631 - Unlocking New Levels of Output and Capacity for Key Subsurface Resources SBIR/STTR (UNLOCK SBIR/STTR) To obtain a copy of the Notice of Funding Opportunity (NOFO) please go to DOE eXCHANGE at https://exchange.energy.gov/. To apply to this NOFO, Applicants must register with and submit application materials through DOE eXCHANGE (https://exchange.energy.gov/Registration…</summary>
-  </entry>
-  <entry>
-    <title>Affordable Rural Cooperative (ARC) Energy Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363779"/>
-    <id>urn:funding-finder:grants-gov:363779</id>
-    <updated>2026-10-19T00:00:00Z</updated>
-    <author><name>Rural Utilities Service</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Community development"/>
-    <category term="Energy"/>
-    <summary>Rural Utilities Service | Application 2026-11-20 | The Rural Utilities Service (RUS or the Agency), a Rural Development (RD) agency of the United States Department of Agriculture (USDA), is soliciting Letters of Interest (LOI) for applications under the Affordable Rural Cooperative (ARC) Program. In addition, the Agency is announcing the eligibility requirements, application process and deadlines, and the criteria that will be used by RUS to asses…</summary>
   </entry>
   <entry>
     <title>Genesis Mission Graduate Fellowship Pilot</title>
@@ -687,5 +670,15 @@
     <category term="Manufacturing"/>
     <category term="Transportation"/>
     <summary>Bureau of Near Eastern Affairs | Posted | The Bureau of Near Eastern Affairs’ Office of Assistance Coordination (NEA/AC) seeks proposals for projects in Egypt that advance U.S. commercial diplomacy and put American interests first. Proposals must demonstrate how projects will leverage assistance as a tool of statecraft to advance U.S. economic, security, and diplomatic objectives. Programming should promote trade, not aid, by leveraging a…</summary>
+  </entry>
+  <entry>
+    <title>ROSES 2025: A.16 Cryosphere</title>
+    <link href="https://www.grants.gov/search-results-detail/363759"/>
+    <id>urn:funding-finder:grants-gov:363759</id>
+    <updated>2026-09-01T00:00:00Z</updated>
+    <author><name>NASA Headquarters</name></author>
+    <category term="Energy"/>
+    <category term="Space and aeronautics"/>
+    <summary>NASA Headquarters | Application 2026-12-04 | verify prerequisite | PLEASE NOTE: this program has MANDATORY Notices of Intent, which are due via NSPIRES by October 16, 2026. See the full posting on NSPIRES for details. NOTICE: November 2, 2026. Detail was added to Section 2.2 about the location of the Program Meetings and the expected participants. Section 3.7 "Use of Generative Super Intelligence" was added. An erroneous reference in Table A.16-1 was removed. Den…</summary>
   </entry>
 </feed>

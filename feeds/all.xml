@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/all.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/all.xml</id>
-  <updated>2026-11-18T18:58:27Z</updated>
+  <updated>2026-11-23T18:07:22Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -389,6 +389,16 @@
     <updated>2027-05-27T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <summary>National Institutes of Health | Estimated Application 2027-10-04 | The National Institutes of Health intends to publish a Parent R35 "Investigator-Focused Award" Notice of Funding Opportunity (NOFO) to fund research programs for investigators at all career stages, including Early Stage Investigators (ESIs). The Parent R35 Investigator-Focused Award is intended to provide support for an investigator's program of research within the mission of the awarding Institut…</summary>
+  </entry>
+  <entry>
+    <title>Single Source Competition for Biostatistical and Coordinating Center Renewal of the NIDDK CLEAR Study Consortium (Closed-Loop and Education for Hypoglycemia Awareness Restoration) (U24- Resource-Related Research Project, Cooperative Agreements)</title>
+    <link href="https://www.grants.gov/search-results-detail/364279"/>
+    <id>urn:funding-finder:grants-gov:364279</id>
+    <updated>2027-05-10T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <summary>National Institutes of Health | Estimated Application 2027-06-10 | This NOFO invites a single source application for the continuation of the Biostatistics and Coordinating Center (BCC) at Pennsylvania State University-Hershey Medical Center during a 3-year continuation of the CLEAR (Closed Loop and Education for Hypglycemia Awareness Restoration) Study Consortium. This BCC team has provided extensive logistical and statistical support for the CLEAR-Study Consorti…</summary>
   </entry>
   <entry>
     <title>Native American Research Centers for Health (NARCH)</title>
@@ -945,17 +955,5 @@
     <category term="Biology and biotechnology"/>
     <category term="Neuroscience"/>
     <summary>National Institutes of Health | Estimated Application 2027-06-01 | invitation required | The National Institute of Mental Health (NIMH) intends to issue a single-source cooperative agreement award to the University of California, Santa Cruz. The award will renew the Data Resource and Administrative Coordination Center (DRACC), a component of the Scalable and Systematic Neurobiology of Psychiatric and Neurodevelopmental Disorder Risk Genes (SSPsyGene) Consortium. The long-term goal of …</summary>
-  </entry>
-  <entry>
-    <title>Immune Drivers of Autoimmune Disease</title>
-    <link href="https://www.grants.gov/search-results-detail/363942"/>
-    <id>urn:funding-finder:grants-gov:363942</id>
-    <updated>2027-02-26T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <summary>National Institutes of Health | Estimated Application 2027-06-11 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission through the continued support of the Immune Drivers of Autoimmune Disease (IDAD) network. This network aims to understand the earliest steps and triggers leading to autoimmunity and flare in humans, with the vision of ultimately preventing autoimmune disease. Priorities include discovering pre-clinical i…</summary>
   </entry>
 </feed>
