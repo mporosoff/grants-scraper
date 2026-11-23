@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml</id>
-  <updated>2026-11-18T18:58:27Z</updated>
+  <updated>2026-11-23T18:07:22Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Technology Development Program</title>
@@ -89,6 +89,7 @@
     <updated>2027-07-07T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <category term="Technology development"/>
+    <category term="Infectious disease"/>
     <summary>National Institutes of Health | Estimated Application 2027-09-07 | This Notice of Funding Opportunity (NOFO) uses a R61/R33 Phased Innovation Award to support milestone-driven research that advances innovative HIV prevention interventions from development and feasibility testing to larger-scale efficacy, effectiveness, implementation, and dissemination studies. The R61 phase will support the development, refinement, adaptation, and pilot testing of novel or enhan…</summary>
   </entry>
   <entry>
@@ -152,6 +153,7 @@
     <category term="Data science"/>
     <category term="Social and behavioral sciences"/>
     <category term="Technology development"/>
+    <category term="Infectious disease"/>
     <summary>National Institutes of Health | Estimated Application 2027-05-25 | The National Institute of Mental Health (NIMH) seeks research applications to support the NIMH HIV/AIDS Research Centers (ARC) program, including Developmental Centers (D-ARCs) and full AIDS Research Centers (ARCs). These Research Centers aim to capitalize on the coordinated infrastructure to advance high-impact, interdisciplinary HIV/AIDS research. The ARC program supports innovative research acr…</summary>
   </entry>
   <entry>
@@ -179,6 +181,7 @@
     <updated>2027-01-15T00:00:00Z</updated>
     <author><name>Health Resources and Services Administration</name></author>
     <category term="Technology development"/>
+    <category term="Infectious disease"/>
     <summary>Health Resources and Services Administration | Estimated Application 2027-03-16 | The purpose of the program is to strengthen the capacity of community-based organizations to improve health outcomes and reduce HIV transmission, especially for people not yet in regular HIV care. The activities fall under two categories: HIV Care Innovation and Infrastructure Development.</summary>
   </entry>
   <entry>
@@ -255,6 +258,7 @@
     <updated>2026-12-04T00:00:00Z</updated>
     <author><name>Health Resources and Services Administration</name></author>
     <category term="Technology development"/>
+    <category term="Infectious disease"/>
     <summary>Health Resources and Services Administration | Estimated Application 2027-02-02 | The purpose of this supplemental funding is to strengthen organizational infrastructure and increase capacity to develop, enhance, or expand access to high quality family-centered HIV care services. The activities fall under two categories: HIV Care Innovation and Infrastructure Development.</summary>
   </entry>
   <entry>
@@ -294,6 +298,22 @@
     <author><name>Centers for Disease Control - NCHHSTP</name></author>
     <category term="Technology development"/>
     <summary>Centers for Disease Control - NCHHSTP | Estimated Application 2027-01-04 | CDC is funding programs that track, prevent, and control sexually transmitted infections (STI) in state, district, territorial, and city or county health departments. The purpose of this NOFO is to track, prevent, and control three common STIs: primary &amp; secondary syphilis, gonorrhea, and chlamydia. The NOFO supports the goals of the Sexually Transmitted Infections National Strategic Plan 2021-202…</summary>
+  </entry>
+  <entry>
+    <title>FY 2027 Build to Scale Notice of Funding Opportunity</title>
+    <link href="https://www.grants.gov/search-results-detail/364206"/>
+    <id>urn:funding-finder:grants-gov:364206</id>
+    <updated>2026-11-20T00:00:00Z</updated>
+    <author><name>Economic Development Administration</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Community development"/>
+    <category term="Education and workforce"/>
+    <category term="Technology development"/>
+    <category term="Materials science"/>
+    <category term="Quantum science"/>
+    <category term="Data science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <summary>Economic Development Administration | Application 2027-02-26 | The Build to Scale (B2S) program strengthens America’s economic and technological leadership and increases the success of innovation-driven industry by turning U.S. breakthroughs into U.S.-built companies that attract private capital, create jobs, and keep the industries of the future anchored on American soil. Build to Scale aims to support technology- and innovation-based economic development in…</summary>
   </entry>
   <entry>
     <title>Small Business Innovation Research / Small Business Technology Transfer Phase I, Phase II, Fast-Track Programs: Developing Deep Technologies that Advance U.S. Competitiveness and Security</title>
@@ -431,56 +451,6 @@
     <category term="Neuroscience"/>
     <category term="Technology development"/>
     <summary>National Institutes of Health | Application 2030-12-01 | This Notice of Funding Opportunity (NOFO) is to encourage applications from investigators to advance the development and translation of next-generation technologies to prevent, monitor, diagnose, and treat disorders within the missions of the NIH Brain Research through Advancing Innovative Neurotechnologies (BRAIN) and The Helping to End Addiction Long-term (HEAL) Initiatives. Awarded activities w…</summary>
-  </entry>
-  <entry>
-    <title>Unlocking New Levels of Output and Capacity for Key Subsurface Resources (UNLOCK)</title>
-    <link href="https://www.grants.gov/search-results-detail/364136"/>
-    <id>urn:funding-finder:grants-gov:364136</id>
-    <updated>2026-10-21T00:00:00Z</updated>
-    <author><name>Advanced Research Projects Agency Energy</name></author>
-    <category term="Carbon management"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Manufacturing"/>
-    <category term="Materials science"/>
-    <category term="Technology development"/>
-    <category term="Water"/>
-    <category term="Separations and membranes"/>
-    <summary>Advanced Research Projects Agency Energy | Application 2026-11-20 | NOFO Number: DE-FOA-0003630 - Unlocking New Levels of Output and Capacity for Key Subsurface Resources (UNLOCK) To obtain a copy of the Notice of Funding Opportunity (NOFO) please go to DOE eXCHANGE at https://exchange.energy.gov/. To apply to this NOFO, Applicants must register with and submit application materials through DOE eXCHANGE (https://exchange.energy.gov/Registration.aspx). For detailed…</summary>
-  </entry>
-  <entry>
-    <title>Unlocking New Levels of Output and Capacity for Key Subsurface Resources SBIR/STTR (UNLOCK SBIR/STTR)</title>
-    <link href="https://www.grants.gov/search-results-detail/364135"/>
-    <id>urn:funding-finder:grants-gov:364135</id>
-    <updated>2026-10-21T00:00:00Z</updated>
-    <author><name>Advanced Research Projects Agency Energy</name></author>
-    <category term="Carbon management"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Manufacturing"/>
-    <category term="Materials science"/>
-    <category term="Technology development"/>
-    <category term="Water"/>
-    <category term="Separations and membranes"/>
-    <summary>Advanced Research Projects Agency Energy | Application 2026-11-20 | NOFO Number: DE-FOA-0003631 - Unlocking New Levels of Output and Capacity for Key Subsurface Resources SBIR/STTR (UNLOCK SBIR/STTR) To obtain a copy of the Notice of Funding Opportunity (NOFO) please go to DOE eXCHANGE at https://exchange.energy.gov/. To apply to this NOFO, Applicants must register with and submit application materials through DOE eXCHANGE (https://exchange.energy.gov/Registration…</summary>
-  </entry>
-  <entry>
-    <title>FY27 Small Business Development Center State of Kansas Network Rebid</title>
-    <link href="https://www.grants.gov/search-results-detail/364132"/>
-    <id>urn:funding-finder:grants-gov:364132</id>
-    <updated>2026-10-20T00:00:00Z</updated>
-    <author><name>Small Business Administration</name></author>
-    <category term="Technology development"/>
-    <summary>Small Business Administration | Application 2026-11-19 | Eligible organizations, as defined in Section 3.2, may apply to SBA for an award of financial assistance under this Funding Opportunity to fund an SBDC Program. SBDC Programs deliver professional, high quality, individualized business advising and technical assistance to existing small businesses and pre- venture entrepreneurs. SBDCs shall provide problem solving assistance to help small businesse…</summary>
-  </entry>
-  <entry>
-    <title>Technology InteGrator and AcceleratoR (TIGAR) Exploratory Topic</title>
-    <link href="https://arpa-h.gov/explore-funding/initiatives-and-sprints/tigar"/>
-    <id>urn:funding-finder:arpa-h:arpa-h%3Atigar</id>
-    <updated>2026-10-20T00:00:00Z</updated>
-    <author><name>Advanced Research Projects Agency for Health (ARPA-H)</name></author>
-    <category term="Technology development"/>
-    <summary>Advanced Research Projects Agency for Health (ARPA-H) | Application 2027-02-05 | Current ARPA-H initiative. TIGAR Exploratory Topic | ARPA-H (function(w, d, s, l, i){w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&amp;l='+l:''; j.async=true; j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j, f); })(window, document,'script','dataLayer','…</summary>
   </entry>
   <entry>
     <title>Small Business Innovation Research (SBIR) program, Phase I</title>
@@ -651,5 +621,37 @@
     <category term="Public health"/>
     <category term="Technology development"/>
     <summary>National Institutes of Health | Estimated Application 2027-01-25 | The Clinical and Translational Science Awards Program Trial Innovation Network (TIN) is a collaborative initiative aimed at addressing critical roadblocks in the design and implementation of multi-center clinical trials. The goal of the TIN is to execute trials better, faster, and more cost-efficiently, as well as serve as a national laboratory to study, understand, and innovate the process of con…</summary>
+  </entry>
+  <entry>
+    <title>IUSE: Innovation in Two-Year College STEM Education (ITYC)</title>
+    <link href="https://www.grants.gov/search-results-detail/363752"/>
+    <id>urn:funding-finder:grants-gov:363752</id>
+    <updated>2026-08-31T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Education and workforce"/>
+    <category term="Social and behavioral sciences"/>
+    <category term="Technology development"/>
+    <summary>U.S. National Science Foundation | Application 2026-12-09 | The National Science Foundation (NSF) plays a prominent role in the improvement of undergraduate STEM education at the Nation’s colleges and universities. Through the IUSE: Innovation in Two-Year College STEM Education (ITYC) program, the agency seeks to extend this effort by making an intentional investment in the country’s two-year institutions of higher education, or two-year colleges. The twin…</summary>
+  </entry>
+  <entry>
+    <title>Exploratory Clinical Neuroscience Research on Substance Use Disorders (R61/R33 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/361518"/>
+    <id>urn:funding-finder:grants-gov:361518</id>
+    <updated>2026-08-31T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Neuroscience"/>
+    <category term="Technology development"/>
+    <summary>National Institutes of Health | Application 2028-06-16 | This notice of funding opportunity (NOFO) uses a R61/R33 Phased Innovation Award activity code to support clinical research applications that are exploratory and developmental in nature and focus on understanding the neurobiological mechanisms underlying substance use disorders (SUD), including fundamental circuitry and behavior relevant to substance use. For projects not requiring a phased resear…</summary>
+  </entry>
+  <entry>
+    <title>Limited Competition: NIGMS Mature Synchrotron Resources (MSR) for Structural Biology (P30 - Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/360947"/>
+    <id>urn:funding-finder:grants-gov:360947</id>
+    <updated>2026-08-31T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Education and workforce"/>
+    <category term="Technology development"/>
+    <summary>National Institutes of Health | Application 2028-10-02 | This Notice of Funding Opportunity (NOFO) supports "mature" resources at synchrotron facilities that provide user access to X-ray beamlines for static and dynamic imaging of biological systems ranging from molecules to organs. "Mature" refers to the techniques made available at the resource beamlines, which must be well established and provide utility to the communities they serve without requirin…</summary>
   </entry>
 </feed>

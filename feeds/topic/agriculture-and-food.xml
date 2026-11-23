@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml</id>
-  <updated>2026-11-18T18:58:27Z</updated>
+  <updated>2026-11-23T18:07:22Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Healthy Lifestyles in Youth</title>
@@ -97,6 +97,22 @@
     <author><name>Health Resources and Services Administration</name></author>
     <category term="Agriculture and food"/>
     <summary>Health Resources and Services Administration | Estimated Application 2027-02-11 | Fiscal Year (FY) 2027 Regional Nutrition Hubs (RNH) will support region-specific technical assistance (TA) on expanding high-quality nutrition services to the Health Resources and Services Administration's (HRSA) Health Center Program (H80) award recipients and look-alikes (health centers). Nutrition services prevent, manage, and treat diseases and conditions through nutritional and food-based int…</summary>
+  </entry>
+  <entry>
+    <title>FY 2027 Build to Scale Notice of Funding Opportunity</title>
+    <link href="https://www.grants.gov/search-results-detail/364206"/>
+    <id>urn:funding-finder:grants-gov:364206</id>
+    <updated>2026-11-20T00:00:00Z</updated>
+    <author><name>Economic Development Administration</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Community development"/>
+    <category term="Education and workforce"/>
+    <category term="Technology development"/>
+    <category term="Materials science"/>
+    <category term="Quantum science"/>
+    <category term="Data science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <summary>Economic Development Administration | Application 2027-02-26 | The Build to Scale (B2S) program strengthens America’s economic and technological leadership and increases the success of innovation-driven industry by turning U.S. breakthroughs into U.S.-built companies that attract private capital, create jobs, and keep the industries of the future anchored on American soil. Build to Scale aims to support technology- and innovation-based economic development in…</summary>
   </entry>
   <entry>
     <title>Research Facilities Act Program</title>
@@ -268,17 +284,6 @@
     <summary>Fish and Wildlife Service | Application 2027-01-15 | The Wolf Livestock Loss Demonstration Project Grant Program, authorized under Subtitle C of the Omnibus Public Lands Management Act of 2009, provides federal financial assistance to states and tribes for two primary purposes: depredation prevention and depredation compensation. Depredation prevention funding supports livestock producers in implementing proactive, nonlethal strategies to reduce the…</summary>
   </entry>
   <entry>
-    <title>Affordable Rural Cooperative (ARC) Energy Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363779"/>
-    <id>urn:funding-finder:grants-gov:363779</id>
-    <updated>2026-10-19T00:00:00Z</updated>
-    <author><name>Rural Utilities Service</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Community development"/>
-    <category term="Energy"/>
-    <summary>Rural Utilities Service | Application 2026-11-20 | The Rural Utilities Service (RUS or the Agency), a Rural Development (RD) agency of the United States Department of Agriculture (USDA), is soliciting Letters of Interest (LOI) for applications under the Affordable Rural Cooperative (ARC) Program. In addition, the Agency is announcing the eligibility requirements, application process and deadlines, and the criteria that will be used by RUS to asses…</summary>
-  </entry>
-  <entry>
     <title>Dairy Business Innovation Initiatives Program (DBI) Fiscal Year 2026</title>
     <link href="https://www.grants.gov/search-results-detail/364006"/>
     <id>urn:funding-finder:grants-gov:364006</id>
@@ -287,17 +292,6 @@
     <category term="Agriculture and food"/>
     <category term="Technology development"/>
     <summary>Agricultural Marketing Service | Application 2027-01-04 | The U.S. Department of Agriculture (USDA), Agricultural Marketing Service (AMS), requests applications for fiscal year (FY) 2026 from existing initiatives of the Dairy Business Innovation (DBI) Initiatives Program: the California State University Fresno Foundation, the University of Tennessee, the Vermont Agency of Agriculture, Food and Markets, and the University of Wisconsin. These initiatives s…</summary>
-  </entry>
-  <entry>
-    <title>Easement Restoration and Stewardship</title>
-    <link href="https://www.grants.gov/search-results-detail/363920"/>
-    <id>urn:funding-finder:grants-gov:363920</id>
-    <updated>2026-09-25T00:00:00Z</updated>
-    <author><name>Natural Resources Conservation Service</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Environmental science"/>
-    <category term="Water"/>
-    <summary>Natural Resources Conservation Service | Application 2026-11-19 | The opportunities associated with this NOFO are for lands protected through the Wetland Reserve Easements (WRE) component of the Agricultural Conservation Easement Program (ACEP) and the Floodplain Easement (FPE) component of the Emergency Watershed Protection Program (EWPP). The types of work available through this opportunity fall into three primary categories: 1) restoration of wetland and floo…</summary>
   </entry>
   <entry>
     <title>Sun and Soil Program</title>
@@ -683,6 +677,20 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <updated>2025-01-08T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <category term="Agriculture and food"/>
+    <category term="Infectious disease"/>
     <summary>National Institutes of Health | Application 2027-11-05 | This Notice of Funding Opportunity (NOFO) seeks to stimulate HIV/AIDS research within the mission of the National Institute of Diabetes and Digestive and Kidney Diseases (NIDDK) that align with the HIV/AIDS research priorities outlined by the NIH Office of AIDS Research (OAR). These priorities were most recently described in NOT-OD-20-018 UPDATE: NIH HIV/AIDS Research Priorities and Guidelines for…</summary>
+  </entry>
+  <entry>
+    <title>Pilot Studies of Biological, Behavioral and Social Mechanisms Contributing to HIV Pathogenesis Within the Mission of NIDDK (R21 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/358082"/>
+    <id>urn:funding-finder:grants-gov:358082</id>
+    <updated>2025-01-08T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Health equity"/>
+    <category term="Infectious disease"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>National Institutes of Health | Application 2027-11-16 | This Notice of Funding Opportunity (NOFO) invites applications for innovative basic and translational pilot research projects within the mission of the NIDDK that are aligned with NIH HIV/AIDS research priorities. These priorities were most recently outlined by the NIH Office of AIDS Research (OAR) in NOT-20-018, UPDATE: NIH HIV/AIDS Research Priorities and Guidelines for Determining HIV/AIDS Fund…</summary>
   </entry>
 </feed>

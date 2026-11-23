@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/environmental-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/environmental-science.xml</id>
-  <updated>2026-11-18T18:58:27Z</updated>
+  <updated>2026-11-23T18:07:22Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Limited Competition: Biomedical Research Environment &amp; Sponsored Programs Administration Development (BRE-SPAD) Program</title>
@@ -343,7 +343,56 @@
     <author><name>Health Resources and Services Administration</name></author>
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
+    <category term="Infectious disease"/>
     <summary>Health Resources and Services Administration | Estimated Application 2027-01-20 | The purpose of this funding is to build the capacity of ADAPs through tools and technical assistance to maximize the impact of ADAPs in improving the health outcomes of people with HIV in a changing health care environment.</summary>
+  </entry>
+  <entry>
+    <title>Addressing Uncertainties in the Evidence for Health Effects of Lower Air Pollution Exposures</title>
+    <link href="https://www.grants.gov/search-results-detail/364291"/>
+    <id>urn:funding-finder:grants-gov:364291</id>
+    <updated>2026-11-19T00:00:00Z</updated>
+    <author><name>Environmental Protection Agency</name></author>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Public health"/>
+    <summary>Environmental Protection Agency | Application 2027-01-20 | The U.S. Environmental Protection Agency (EPA) is announcing this Science to Achieve Results (STAR) Notice of Funding Opportunity (NOFO) to support research that will address substantial scientific uncertainty on the human health effects associated with exposures to typical U.S. ambient air pollutant concentrations. EPA is particularly interested in experimental and quasi-experimental research des…</summary>
+  </entry>
+  <entry>
+    <title>Research for PFAS Destruction in Environmental Media</title>
+    <link href="https://www.grants.gov/search-results-detail/364290"/>
+    <id>urn:funding-finder:grants-gov:364290</id>
+    <updated>2026-11-19T00:00:00Z</updated>
+    <author><name>Environmental Protection Agency</name></author>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Separations and membranes"/>
+    <category term="Materials science"/>
+    <summary>Environmental Protection Agency | Application 2027-01-20 | The U.S. Environmental Protection Agency (EPA) is announcing this Science to Achieve Results (STAR) Notice of Funding Opportunity (NOFO) to support applied research that improves, tests, and implements technologies, methods, and approaches for destroying per- and polyfluoroalkyl substances (PFAS) in environmental media. Research should focus on solutions with strong potential for real-world PFAS d…</summary>
+  </entry>
+  <entry>
+    <title>Foundational Research in Robotics (FRR)</title>
+    <link href="https://www.grants.gov/search-results-detail/364294"/>
+    <id>urn:funding-finder:grants-gov:364294</id>
+    <updated>2026-11-19T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <category term="Transportation"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Materials science"/>
+    <summary>U.S. National Science Foundation | Posted | Advances in robotics directly contribute to the nation's long-term reindustrialization, competitiveness and security, as robotics is increasingly a major driver of productivity across a range of economic sectors such as manufacturing, logistics, transportation, defense, and healthcare. These general-purpose autonomous systems are capable of dexterous manipulation, mobility, and reliable operation …</summary>
+  </entry>
+  <entry>
+    <title>Cooperative Agreement for affiliated Partner with Californian Cooperative Ecosystem Studies Unit</title>
+    <link href="https://www.grants.gov/search-results-detail/364288"/>
+    <id>urn:funding-finder:grants-gov:364288</id>
+    <updated>2026-11-18T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Transportation"/>
+    <summary>Geological Survey | Application 2026-12-18 | The Western Ecological Research Center of the U.S. Geological Survey (USGS) is offering a funding opportunity to a CESU partner to assess and monitor ecological integrity in southern California across habitats, species and their drivers. In collaboration with the recipient, USGS scientists are investigating multiple endangered and threatened species and how their habitat conditions affect the dist…</summary>
   </entry>
   <entry>
     <title>Evidence-Informed Practices in the Management of Women’s Prisons</title>
@@ -608,43 +657,5 @@
     <author><name>Environmental Protection Agency</name></author>
     <category term="Environmental science"/>
     <summary>Environmental Protection Agency | Application 2027-01-21 | This notice announces the availability of funds and solicits applications from eligible entities to carry out cleanup activities at brownfield sites owned by the applicant. Eligible entities include government organizations, Federally recognized Tribes, and nonprofit organizations. Please see Section 2. A. for the complete list of eligible entities. Applications must meet all threshold eligibility…</summary>
-  </entry>
-  <entry>
-    <title>FY27 Guidelines for Brownfield Revolving Loan Fund Grants</title>
-    <link href="https://www.grants.gov/search-results-detail/364201"/>
-    <id>urn:funding-finder:grants-gov:364201</id>
-    <updated>2026-11-02T00:00:00Z</updated>
-    <author><name>Environmental Protection Agency</name></author>
-    <category term="Environmental science"/>
-    <summary>Environmental Protection Agency | Application 2027-01-21 | This notice announces the availability of funds and solicits applications from eligible entities to capitalize a revolving loan fund (RLF) to provide loans and subgrants to carry out cleanup activities at brownfield sites. Eligible entities include government organizations, Federally recognized Tribes, and 501(c)(3) nonprofit organizations. Please see Section 2. A. for the complete list of eligibl…</summary>
-  </entry>
-  <entry>
-    <title>Cooperative Agreement for affiliated Partner with Chesapeake Watershed Cooperative Ecosystem Studies Unit</title>
-    <link href="https://www.grants.gov/search-results-detail/364184"/>
-    <id>urn:funding-finder:grants-gov:364184</id>
-    <updated>2026-10-30T00:00:00Z</updated>
-    <author><name>Geological Survey</name></author>
-    <category term="Environmental science"/>
-    <summary>Geological Survey | Application 2026-11-30 | USGS Chesapeake Bay studies seeks to collaborate with the Chesapeake Watershed CESU to strengthen science communication to support decision-making in the Chesapeake Bay watershed. The CESU partner will work closely with the USGS to collect and translate peer-reviewed publications (including journal articles and USGS reports) into communication products (such as USGS approved fact sheets) that addr…</summary>
-  </entry>
-  <entry>
-    <title>Cooperative Agreement for affiliated Partner with Colorado Plateau Cooperative Ecosystem Studies Unit</title>
-    <link href="https://www.grants.gov/search-results-detail/364187"/>
-    <id>urn:funding-finder:grants-gov:364187</id>
-    <updated>2026-10-30T00:00:00Z</updated>
-    <author><name>Geological Survey</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Environmental science"/>
-    <summary>Geological Survey | Application 2026-11-30 | The Southwest Biological Science Center of the U.S. Geological Survey (USGS) is offering a Cooperative Agreement to one member of the Colorado Plateau CESU Program. The goal of this project is to promote continued cooperation between the USGS and a university partner of the Colorado Plateau CESU to support ecological research along the Colorado River in the Grand Canyon, Arizona. This project will…</summary>
-  </entry>
-  <entry>
-    <title>Cooperative Agreement for affiliated Partner with Great Basin Cooperative Ecosystem Studies Unit</title>
-    <link href="https://www.grants.gov/search-results-detail/364183"/>
-    <id>urn:funding-finder:grants-gov:364183</id>
-    <updated>2026-10-30T00:00:00Z</updated>
-    <author><name>Geological Survey</name></author>
-    <category term="Environmental science"/>
-    <category term="Water"/>
-    <summary>Geological Survey | Application 2026-11-30 | The U.S. Geological Survey (USGS) is offering a funding opportunity to a CESU partner for research to analyze, synthesize, and interpret the latest stream temperature monitoring data in the Lake Tahoe Basin. This project will use the best available science and reproducible analytical methods to evaluate long-term trends, identify ecological thresholds, and support adaptive management. Project acti…</summary>
   </entry>
 </feed>

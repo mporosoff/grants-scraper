@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/infectious-disease.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/infectious-disease.xml</id>
-  <updated>2026-11-18T18:58:27Z</updated>
+  <updated>2026-11-23T18:07:22Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Prevention and Treatment through a Comprehensive Care Continuum for HIV-affected Adolescents in Resource-Constrained Settings--Implementation Science Network (PATC3H-IN)</title>
@@ -52,6 +52,16 @@
     <category term="Infectious disease"/>
     <category term="Public health"/>
     <summary>National Institutes of Health | Estimated Application 2027-10-13 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance the National Institutes of Health (NIH) mission by utilizing Special Statutory Funding Program for Type 1 Diabetes Research funds to support studies focused on the involvement of the innate immune system in the initiation of Type 1 diabetes (T1D). This initiative directly aligns with the first goal of the congressio…</summary>
+  </entry>
+  <entry>
+    <title>HIV Prevention and Alcohol (R61/R33 Clinical Trials Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/364013"/>
+    <id>urn:funding-finder:grants-gov:364013</id>
+    <updated>2027-07-07T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Technology development"/>
+    <category term="Infectious disease"/>
+    <summary>National Institutes of Health | Estimated Application 2027-09-07 | This Notice of Funding Opportunity (NOFO) uses a R61/R33 Phased Innovation Award to support milestone-driven research that advances innovative HIV prevention interventions from development and feasibility testing to larger-scale efficacy, effectiveness, implementation, and dissemination studies. The R61 phase will support the development, refinement, adaptation, and pilot testing of novel or enhan…</summary>
   </entry>
   <entry>
     <title>Limited Competition: Resources and Workforce Development for the Regional Biocontainment Laboratories</title>
@@ -107,6 +117,15 @@
     <summary>Centers for Disease Control - NCHHSTP | Estimated Application 2027-05-24 | This NOFO aims to strengthen services to prevent the infectious disease consequences of drug use in high impact settings serving people who use drugs (PWUD) through two components. Component 1 will improve service data by conducting a biennial survey of high-impact settings that serve PWUD to document capacity, needs, access, and service gaps. It will also improve timely local data on infectious d…</summary>
   </entry>
   <entry>
+    <title>Direct-to-Consumer Distribution of HIV and other STI Self-Tests</title>
+    <link href="https://www.grants.gov/search-results-detail/363323"/>
+    <id>urn:funding-finder:grants-gov:363323</id>
+    <updated>2027-03-22T00:00:00Z</updated>
+    <author><name>Centers for Disease Control - NCHHSTP</name></author>
+    <category term="Infectious disease"/>
+    <summary>Centers for Disease Control - NCHHSTP | Estimated Application 2027-05-21 | The purpose of this notice of funding opportunity (NOFO) is to optimize the recipient's existing web-based ordering portal and distribution program to provide at least 1.5 million HIV and other STI self-tests to communities with a high burden of HIV. The use of the program's HIV and other STI self-tests and of resources for treatment and preventive services will increase awareness of HIV and other…</summary>
+  </entry>
+  <entry>
     <title>DHQP Global NOFO</title>
     <link href="https://www.grants.gov/search-results-detail/363448"/>
     <id>urn:funding-finder:grants-gov:363448</id>
@@ -140,6 +159,18 @@
     <summary>National Institutes of Health | Estimated Application 2027-06-11 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission through the continued support of the Immune Drivers of Autoimmune Disease (IDAD) network. This network aims to understand the earliest steps and triggers leading to autoimmunity and flare in humans, with the vision of ultimately preventing autoimmune disease. Priorities include discovering pre-clinical i…</summary>
   </entry>
   <entry>
+    <title>AIDS Research Center on Mental Health and HIV/AIDS (P30 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/362945"/>
+    <id>urn:funding-finder:grants-gov:362945</id>
+    <updated>2027-02-25T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Data science"/>
+    <category term="Social and behavioral sciences"/>
+    <category term="Technology development"/>
+    <category term="Infectious disease"/>
+    <summary>National Institutes of Health | Estimated Application 2027-05-25 | The National Institute of Mental Health (NIMH) seeks research applications to support the NIMH HIV/AIDS Research Centers (ARC) program, including Developmental Centers (D-ARCs) and full AIDS Research Centers (ARCs). These Research Centers aim to capitalize on the coordinated infrastructure to advance high-impact, interdisciplinary HIV/AIDS research. The ARC program supports innovative research acr…</summary>
+  </entry>
+  <entry>
     <title>Implementation and Evaluation of Databases to Examine AIDS</title>
     <link href="https://www.grants.gov/search-results-detail/359142"/>
     <id>urn:funding-finder:grants-gov:359142</id>
@@ -163,6 +194,18 @@
     <summary>National Institutes of Health | Estimated Application 2027-06-01 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission through the support of the Clinical Data, Safety and Statistical Centers program. The overall objective of this program is to provide coordination and oversight for multiple activities in service to clinical research and mechanistic studies supported by NIAID, including all Division of Allergy, Immunolog…</summary>
   </entry>
   <entry>
+    <title>Single Cell Opioid Responses in the Context of HIV (SCORCH) Program: Phase 2</title>
+    <link href="https://www.grants.gov/search-results-detail/363680"/>
+    <id>urn:funding-finder:grants-gov:363680</id>
+    <updated>2027-02-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Neuroscience"/>
+    <category term="Infectious disease"/>
+    <summary>National Institutes of Health | Estimated Application 2027-06-08 | NIDA seeks to further advance its mission in the area of single cell biology. Since 2020, the NIDA-funded Single Cell Opioid Responses in the Context of HIV (SCORCH) consortium has generated single-nucleus datasets from human and animal postmortem brain tissue under conditions of HIV infection, antiretroviral therapy (ART), and/or substance exposure (e.g. opioids, cocaine, methamphetamine, and can…</summary>
+  </entry>
+  <entry>
     <title>Translational Transplantation Tolerance Cooperative Study Group</title>
     <link href="https://www.grants.gov/search-results-detail/362958"/>
     <id>urn:funding-finder:grants-gov:362958</id>
@@ -171,6 +214,16 @@
     <category term="Infectious disease"/>
     <category term="Public health"/>
     <summary>National Institutes of Health | Estimated Application 2027-05-21 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission through the support of the Translational Transplantation Tolerance Cooperative Study Group (TTTCSG) program. The overarching goal of this program is to facilitate clinical translation of safe and effective transplant tolerance regimens that achieve long-term graft survival without the need for life-long …</summary>
+  </entry>
+  <entry>
+    <title>Ryan White HIV/AIDS Program Part C Capacity Development Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363166"/>
+    <id>urn:funding-finder:grants-gov:363166</id>
+    <updated>2027-01-15T00:00:00Z</updated>
+    <author><name>Health Resources and Services Administration</name></author>
+    <category term="Technology development"/>
+    <category term="Infectious disease"/>
+    <summary>Health Resources and Services Administration | Estimated Application 2027-03-16 | The purpose of the program is to strengthen the capacity of community-based organizations to improve health outcomes and reduce HIV transmission, especially for people not yet in regular HIV care. The activities fall under two categories: HIV Care Innovation and Infrastructure Development.</summary>
   </entry>
   <entry>
     <title>Demonstration Projects for Whole-Person Health Models for Women Living with HIV in the South</title>
@@ -184,6 +237,15 @@
     <category term="Public health"/>
     <category term="Social and behavioral sciences"/>
     <summary>Centers for Disease Control - NCHHSTP | Estimated Application 2027-03-15 | The purpose of this demonstration project is to support coordinated Clinic and Community Collaboratives (CCCs) to integrate HIV care with broader women's health services in jurisdictions with disproportionately high HIV disease burden to improve HIV-related outcomes, overall health, and quality of life among WWH. Organizations will be funded to implement 4 strategies: (1) Integrate HIV care with b…</summary>
+  </entry>
+  <entry>
+    <title>Ryan White HIV/AIDS Program Part B States/Territories Supplemental Grant Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363163"/>
+    <id>urn:funding-finder:grants-gov:363163</id>
+    <updated>2027-01-14T00:00:00Z</updated>
+    <author><name>Health Resources and Services Administration</name></author>
+    <category term="Infectious disease"/>
+    <summary>Health Resources and Services Administration | Estimated Application 2027-03-15 | The purpose of this program is to supplement formula-based funding provided through the HIV Care Grant Program - RWHAP Part B States/Territories Formula and AIDS Drug Assistance Program (ADAP) Formula and ADAP Supplemental Awards Notice of Funding Opportunity.</summary>
   </entry>
   <entry>
     <title>Childhood Asthma in Urban Settings Clinical Research Network</title>
@@ -206,6 +268,16 @@
     <category term="Infectious disease"/>
     <category term="Public health"/>
     <summary>National Institutes of Health | Estimated Application 2027-05-21 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission through the continued support of the Asthma and Allergic Diseases Cooperative Research Centers (AADCRC). The AADCRC program serves as the cornerstone of NIAID's efforts to promote clinical and basic research in diseases including asthma, upper airway allergic/inflammatory diseases, food and drug allergie…</summary>
+  </entry>
+  <entry>
+    <title>Ryan White HIV/AIDS Program Part D - Women, Infants, Children and Youth Grant Supplemental Funding</title>
+    <link href="https://www.grants.gov/search-results-detail/363415"/>
+    <id>urn:funding-finder:grants-gov:363415</id>
+    <updated>2026-12-04T00:00:00Z</updated>
+    <author><name>Health Resources and Services Administration</name></author>
+    <category term="Technology development"/>
+    <category term="Infectious disease"/>
+    <summary>Health Resources and Services Administration | Estimated Application 2027-02-02 | The purpose of this supplemental funding is to strengthen organizational infrastructure and increase capacity to develop, enhance, or expand access to high quality family-centered HIV care services. The activities fall under two categories: HIV Care Innovation and Infrastructure Development.</summary>
   </entry>
   <entry>
     <title>Integrated Viral Hepatitis Surveillance, Testing, Treatment, and Prevention Programs for Health Departments (IVH-STTP)</title>
@@ -235,6 +307,57 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Infectious disease"/>
     <summary>National Institutes of Health | Estimated Application 2027-01-25 | This NOFO is issued during a period of accelerating development, validation, and adoption of human new approach methodologies (NAMs). Accordingly, it has two integrated priorities for NIH-funded HIV/AIDS research: (1) implementation of a NAMs-enabled stewardship framework, including optional HIV-relevant human in vitro testing support and pilot benchmarking activities, to reduce or replace specifi…</summary>
+  </entry>
+  <entry>
+    <title>Ryan White HIV/AIDS Program Part B AIDS Drug Assistance Program Training and Technical Assistance</title>
+    <link href="https://www.grants.gov/search-results-detail/363414"/>
+    <id>urn:funding-finder:grants-gov:363414</id>
+    <updated>2026-11-21T00:00:00Z</updated>
+    <author><name>Health Resources and Services Administration</name></author>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Infectious disease"/>
+    <summary>Health Resources and Services Administration | Estimated Application 2027-01-20 | The purpose of this funding is to build the capacity of ADAPs through tools and technical assistance to maximize the impact of ADAPs in improving the health outcomes of people with HIV in a changing health care environment.</summary>
+  </entry>
+  <entry>
+    <title>HIV/AIDS Clinical Trials Network Clinical Trials Units (UM1 Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/361821"/>
+    <id>urn:funding-finder:grants-gov:361821</id>
+    <updated>2026-11-20T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health | Application 2027-03-09 | The purpose of this notice of funding opportunity (NOFO) is to support HIV/AIDS Clinical Trials Network Clinical Trials Units (CTUs). CTUs will provide the infrastructure, as well as the scientific and administrative expertise to conduct clinical studies developed by NIH HIV/AIDS Clinical Trials Networks to advance research in the prevention and treatment of HIV and HIV-associated diseases. CTUs w…</summary>
+  </entry>
+  <entry>
+    <title>HIV/AIDS Clinical Trials Network Laboratory Centers (UM1 Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/361820"/>
+    <id>urn:funding-finder:grants-gov:361820</id>
+    <updated>2026-11-20T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health | Application 2027-03-09 | The purpose of the notice of funding opportunity (NOFO) is to support HIV/AIDS Clinical Trials Network Laboratory Centers (LCs). The LCs will provide a framework for laboratory leadership, structure and activities that contribute to the HIV/AIDS Clinical Trials Networks research agendas and execute the laboratory component of Network trials, in compliance with applicable regulatory standards.</summary>
+  </entry>
+  <entry>
+    <title>HIV/AIDS Clinical Trials Network Leadership and Operations Centers (UM1 Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/361815"/>
+    <id>urn:funding-finder:grants-gov:361815</id>
+    <updated>2026-11-20T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health | Application 2027-03-09 | The purpose of this notice of funding opportunity (NOFO) is to support HIV/AIDS Clinical Trials Network Leadership and Operations Centers (LOCs). Each LOC will oversee research prioritization, planning, and conduct of studies in a HIV/AIDS Clinical Trials Network to advance research in the prevention and treatment of HIV and HIV-associated diseases.</summary>
+  </entry>
+  <entry>
+    <title>HIV/AIDS Clinical Trials Network Statistical and Data Management Centers (UM1 Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/361816"/>
+    <id>urn:funding-finder:grants-gov:361816</id>
+    <updated>2026-11-20T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health | Application 2027-03-09 | The purpose of this notice of funding opportunity (NOFO) is to support HIV/AIDS Clinical Trials Network Statistical and Data Management Centers (SDMCs). The SDMCs will be responsible for the statistical and data management leadership and coordination critical to the HIV/AIDS Clinical Trials Networks.</summary>
   </entry>
   <entry>
     <title>Cooperative Agreement for affiliated Partner with Gulf Coast Cooperative Ecosystem Studies Unit</title>
@@ -268,6 +391,24 @@
     <category term="Biology and biotechnology"/>
     <category term="Infectious disease"/>
     <summary>National Institutes of Health | Application 2027-02-18 | The purpose of this notice of funding opportunity (NOFO) is to support the advancement of systems-level understanding of the link between infectious pathogens and inflammatory pathways that result in predisposition, onset and progression of chronic diseases. The NOFO will stimulate integration of clinical and patient data, large-scale omics datasets, advanced Artificial Intelligence (AI) and compu…</summary>
+  </entry>
+  <entry>
+    <title>HIV Care Grant Program - Part B States/Territories Formula and AIDS Drug Assistance Program Formula and AIDS Drug Assistance Program Supplemental Awards</title>
+    <link href="https://www.grants.gov/search-results-detail/363160"/>
+    <id>urn:funding-finder:grants-gov:363160</id>
+    <updated>2026-10-31T00:00:00Z</updated>
+    <author><name>Health Resources and Services Administration</name></author>
+    <category term="Infectious disease"/>
+    <summary>Health Resources and Services Administration | Estimated Application 2026-12-31 | The purpose of this program is to provide funding to states and territories to develop and/or enhance access to a comprehensive system of high-quality HIV care and treatment for low-income people with HIV.</summary>
+  </entry>
+  <entry>
+    <title>HIV Care Grant Program - Part B States/Territories Formula and AIDS Drug Assistance Program Formula and AIDS Drug Assistance Program Supplemental Awards: Pacific Islands Jurisdictions</title>
+    <link href="https://www.grants.gov/search-results-detail/363275"/>
+    <id>urn:funding-finder:grants-gov:363275</id>
+    <updated>2026-10-31T00:00:00Z</updated>
+    <author><name>Health Resources and Services Administration</name></author>
+    <category term="Infectious disease"/>
+    <summary>Health Resources and Services Administration | Estimated Application 2026-12-31 | The purpose of this program is to provide funding to states and territories to develop and/or enhance access to a comprehensive system of high-quality HIV care and treatment for low-income people with HIV.</summary>
   </entry>
   <entry>
     <title>Cooperative Agreement for affiliated Partner with the Colorado Plateau Cooperative Ecosystem Studies Unit</title>
@@ -312,6 +453,34 @@
     <summary>National Institutes of Health | Application 2027-01-29 | The purpose of this notice of funding opportunity (NOFO) is to support a consortium of Translational Centers using Microphysiological Systems (MPS) for Infectious Diseases (TCMID). Recent efforts in the MPS fields are moving towards validation and regulatory use but have not focused upon models studying infectious diseases and testing of medical interventions. The NIH and FDA have recently issued …</summary>
   </entry>
   <entry>
+    <title>Ryan White HIV/AIDS Program (RWHAP) Integrated HIV/AIDS Planning Resource Allocation Cooperative Agreement</title>
+    <link href="https://www.grants.gov/search-results-detail/363167"/>
+    <id>urn:funding-finder:grants-gov:363167</id>
+    <updated>2026-10-19T00:00:00Z</updated>
+    <author><name>Health Resources and Services Administration</name></author>
+    <category term="Education and workforce"/>
+    <category term="Infectious disease"/>
+    <summary>Health Resources and Services Administration | Estimated Application 2027-01-18 | The purpose of this cooperative agreement is to provide tools, training and technical assistance (TA) to RWHAP Parts A and B recipients and their planning bodies to support integrated HIV prevention and care planning, maximizing resources and stregthening the system of HIV care and treatment.</summary>
+  </entry>
+  <entry>
+    <title>Pilot and Feasibility Studies in Preparation for Substance Use and HIV Prevention Intervention and Services Research Trials (R34 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/361204"/>
+    <id>urn:funding-finder:grants-gov:361204</id>
+    <updated>2026-10-19T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Infectious disease"/>
+    <summary>National Institutes of Health | Application 2029-07-16 | The purpose of this notice of funding opportunity (NOFO) is to support pilot and feasibility studies to inform the design and conduct of efficacy, effectiveness, and/or services research trials. Topics may include: 1) developing interventions to prevent substance use, misuse, or progression to substance use disorder; 2) prevention, treatment, or recovery services research, including research addre…</summary>
+  </entry>
+  <entry>
+    <title>Centers for AIDS Research (CFAR) and Developmental Centers for AIDS Research (D-CFAR) (P30 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/360869"/>
+    <id>urn:funding-finder:grants-gov:360869</id>
+    <updated>2026-10-16T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Infectious disease"/>
+    <summary>National Institutes of Health | Application 2029-05-25 | The purpose of this notice of funding opportunity (NOFO) is to invite applications for the Centers for AIDS Research (CFAR) and Developmental Centers for AIDS Research (D-CFAR) programs to provide administrative and shared research support to enhance HIV/AIDS research. CFARs provide infrastructure, expertise, resources, and services not readily obtained through other funding mechanisms. The progra…</summary>
+  </entry>
+  <entry>
     <title>Pilot Projects to Enhance the Human Virome Program (R03 Clinical Trials Not Allowed)</title>
     <link href="https://www.grants.gov/search-results-detail/361431"/>
     <id>urn:funding-finder:grants-gov:361431</id>
@@ -319,6 +488,16 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Infectious disease"/>
     <summary>National Institutes of Health | Application 2027-10-22 | The Common Fund Human Virome Program (HVP) aims to extensively and comprehensively characterize the "healthy" human virome (the collection of viruses that normally reside inside the human body without evidence of disease) and create tools, models, and methods that will enable an in-depth study of its variation and composition in relation to host factors and its influence on health and disease. The…</summary>
+  </entry>
+  <entry>
+    <title>Implementation Science to Advance HIV Prevention, Treatment, and Care (R61/R33 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/360873"/>
+    <id>urn:funding-finder:grants-gov:360873</id>
+    <updated>2026-10-06T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Public health"/>
+    <category term="Infectious disease"/>
+    <summary>National Institutes of Health | Application 2029-06-20 | The purpose of this notice of funding opportunity (NOFO) is to support implementation research on strategies to improve the uptake, implementation, sustainment, scale and/or spread of evidence-based prevention, treatment, and care interventions in communities in the U.S. significantly impacted by HIV. Projects should be large in scale with high potential for research and public health impact. Spec…</summary>
   </entry>
   <entry>
     <title>Centers for Structural Biology of HIV and Other Infectious Diseases (U54 Clinical Trial Not Allowed)</title>
@@ -350,47 +529,6 @@
     <summary>ACC-APG-Detrick | Application 2027-03-17 | The DWFP Program’s mission is to protect deployed military personnel from arthropod vectors of medically relevant disease pathogens, including (but not limited to) arthropod disease vectors of tick-borne pathogens and mosquito-borne arboviruses, as well as nuisance biting arthropods and emerging arthropod threats such as the New World Screwworm fly. The DWFP Program seeks to fund original and inno…</summary>
   </entry>
   <entry>
-    <title>HIV/AIDS Clinical Trials Network Clinical Trials Units</title>
-    <link href="https://www.grants.gov/search-results-detail/361821"/>
-    <id>urn:funding-finder:grants-gov:361821</id>
-    <updated>2026-08-25T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <summary>National Institutes of Health | Estimated Application 2027-01-22 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance the National Institutes of Health (NIH) mission by supporting four Clinical Trials Networks (CTNs) each comprised of a Leadership and Operations Center, Statistical and Data Management Center, and Laboratory Center working with Clinical Trials Units (CTUs), to advance prevention and treatment research on HIV and HIV…</summary>
-  </entry>
-  <entry>
-    <title>HIV/AIDS Clinical Trials Network Laboratory Centers</title>
-    <link href="https://www.grants.gov/search-results-detail/361820"/>
-    <id>urn:funding-finder:grants-gov:361820</id>
-    <updated>2026-08-25T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Arts and culture"/>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <summary>National Institutes of Health | Estimated Application 2027-01-22 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting four Clinical Trials Networks (CTNs) each comprised of a Leadership and Operations Center, Statistical and Data Management Center, and Laboratory Center (LC) working with Clinical Trials Units, to test prevention and treatment strategies and conduct implementation research designed to end t…</summary>
-  </entry>
-  <entry>
-    <title>HIV/AIDS Clinical Trials Network Leadership and Operations Centers</title>
-    <link href="https://www.grants.gov/search-results-detail/361815"/>
-    <id>urn:funding-finder:grants-gov:361815</id>
-    <updated>2026-08-25T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <summary>National Institutes of Health | Estimated Application 2027-01-22 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance the National Institutes of Health (NIH) mission by supporting four Clinical Trials Networks (CTNs) each comprised of a Leadership and Operations Center (LOC), Statistical and Data Management Center, and Laboratory Center working with Clinical Trials Units to advance prevention, treatment, and implementation research…</summary>
-  </entry>
-  <entry>
-    <title>HIV/AIDS Clinical Trials Network Statistical and Data Management Centers</title>
-    <link href="https://www.grants.gov/search-results-detail/361816"/>
-    <id>urn:funding-finder:grants-gov:361816</id>
-    <updated>2026-08-25T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <summary>National Institutes of Health | Estimated Application 2027-01-22 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance the National Institutes of Health (NIH) mission by supporting four Clinical Trials Networks (CTNs) each comprised of a Leadership and Operations Center, Statistical and Data Management Center (SDMC), and Laboratory Center (LC) working with Clinical Trials Units (CTUs), to advance prevention, treatment, and implement…</summary>
-  </entry>
-  <entry>
     <title>Limited Submission Opportunity: $700,000 - The G. Harold and Leila Y. Mathers Foundation - Research Grant (Spring 2027 Cycle)</title>
     <link href="http://rochester.infoready4.com/CompetitionSpace/"/>
     <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Ainfoready-2028504</id>
@@ -415,6 +553,16 @@ we will not consider for support include Covid-19 relat…</summary>
     <author><name>National Institutes of Health</name></author>
     <category term="Infectious disease"/>
     <summary>National Institutes of Health | Application 2028-09-25 | The purpose of this notice of funding opportunity (NOFO) is to support innovative basic, clinical, translational, and implementation science research relevant to HIV and substance use. This initiative encourages high risk high impact transformative studies that advance knowledge and strategies for HIV prevention, diagnosis, treatment and virus suppression in people who use substances and/or have a…</summary>
+  </entry>
+  <entry>
+    <title>Science Track Award for Research Transition (START) Program (R03, Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/360553"/>
+    <id>urn:funding-finder:grants-gov:360553</id>
+    <updated>2026-06-09T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Transportation"/>
+    <category term="Infectious disease"/>
+    <summary>National Institutes of Health | Application 2029-03-16 | The purpose of this notice of funding opportunity (NOFO) is to facilitate the entry of investigators into multiple high-priority areas of substance use research, including comorbidity with HIV. The Science Track Award for Research Transition (START) Program aims to provide investigators with the opportunity to gather preliminary data that will assist them in securing future research grants and adv…</summary>
   </entry>
   <entry>
     <title>Using Archived Data and Specimen Collections to Advance Maternal and Pediatric HIV/AIDS Research (R21 CT Not Allowed)</title>
@@ -463,6 +611,18 @@ we will not consider for support include Covid-19 relat…</summary>
 EWRE supports research that creates domestic sources of energy, advances water management, and recovers resources using c…</summary>
   </entry>
   <entry>
+    <title>Title X Family Planning Services Grants</title>
+    <link href="https://www.grants.gov/search-results-detail/361754"/>
+    <id>urn:funding-finder:grants-gov:361754</id>
+    <updated>2026-04-03T00:00:00Z</updated>
+    <author><name>Office of the Assistant Secretary for Health</name></author>
+    <category term="Education and workforce"/>
+    <category term="Public health"/>
+    <category term="Social and behavioral sciences"/>
+    <category term="Infectious disease"/>
+    <summary>Office of the Assistant Secretary for Health | Application 2027-01-11 | The Office of Population Affairs (OPA) announces the anticipated availability of funds for Fiscal Year (FY) 2027 grants under the authority of Title X of the Public Health Service Act, Section 1001 (42 U.S.C. §300).This notice solicits applications for projects to provide Title X services throughout the 50 United States, District of Columbia, Guam, the Commonwealth of Puerto Rico, the Northern Mar…</summary>
+  </entry>
+  <entry>
     <title>Biomedical Advanced Research and Development Authority (BARDA) Broad Agency Announcement (BAA)</title>
     <link href="https://sam.gov/opp/8170c4735df64714adb2d1f8ce8671b1/view"/>
     <id>urn:funding-finder:sam-gov:sam-gov%3A8170c4735df64714adb2d1f8ce8671b1</id>
@@ -473,117 +633,13 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <summary>Biomedical Advanced Research and Development Authority (BARDA) | Full Application 2028-09-25 | Advanced development of medical countermeasures against chemical, biological, radiological and nuclear threats, pandemic influenza, and emerging infectious diseases. Follow the currently open areas of interest and their maturity requirements. AOI-specific deadlines override the umbrella date. Preliminary assessment is recommended; direct proposals are permitted. Submit unclassified material and ma…</summary>
   </entry>
   <entry>
-    <title>NARMS Cooperative Agreement Program to Strengthen Antibiotic Resistance Surveillance in Retail Food Specimens</title>
-    <link href="https://www.grants.gov/search-results-detail/360006"/>
-    <id>urn:funding-finder:grants-gov:360006</id>
-    <updated>2025-07-11T00:00:00Z</updated>
-    <author><name>Food and Drug Administration</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <summary>Food and Drug Administration | Letter Of Intent 2027-03-01 | This Funding Opportunity Announcement (FOA) issued by the Food and Drug Administration (FDA), Center for Veterinary Medicine (CVM), builds upon the National Antimicrobial Resistance Monitoring System (NARMS) which was initiated in 1996 as one of the key activities in a national action plan to combat antibiotic resistance threats. The purpose of this FOA is to protect and promote public health by e…</summary>
-  </entry>
-  <entry>
-    <title>Pilot Studies of Biological, Behavioral and Social Mechanisms Contributing to HIV Pathogenesis Within the Mission of NIDDK (R21 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/358082"/>
-    <id>urn:funding-finder:grants-gov:358082</id>
-    <updated>2025-01-08T00:00:00Z</updated>
+    <title>Development of Collaborative Research Facilities or Research-Resource Facilities (C06 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/359701"/>
+    <id>urn:funding-finder:grants-gov:359701</id>
+    <updated>2026-03-06T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Health equity"/>
-    <category term="Infectious disease"/>
     <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health | Application 2027-11-16 | This Notice of Funding Opportunity (NOFO) invites applications for innovative basic and translational pilot research projects within the mission of the NIDDK that are aligned with NIH HIV/AIDS research priorities. These priorities were most recently outlined by the NIH Office of AIDS Research (OAR) in NOT-20-018, UPDATE: NIH HIV/AIDS Research Priorities and Guidelines for Determining HIV/AIDS Fund…</summary>
-  </entry>
-  <entry>
-    <title>Translational Efforts to Advance Gene-based Therapies for Ultra-Rare Neurological and Neuromuscular Disorders (U01 - Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/357817"/>
-    <id>urn:funding-finder:grants-gov:357817</id>
-    <updated>2024-12-18T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
     <category term="Infectious disease"/>
-    <category term="Neuroscience"/>
-    <summary>National Institutes of Health | Application 2027-10-08 | The Ultra-Rare Gene-Based Therapy (URGenT) network supports Investigational New Drug (IND)-enabling studies and planning activities for First-in-Human (FIH) clinical testing of gene-based or transcript-directed therapeutics, such as oligonucleotides and viral-based gene therapies, for ultra-rare neurological or neuromuscular disorders. The goal of this announcement is to accelerate the development…</summary>
-  </entry>
-  <entry>
-    <title>Dissemination and Implementation Research in Health (R01 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/356893"/>
-    <id>urn:funding-finder:grants-gov:356893</id>
-    <updated>2024-10-29T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>National Institutes of Health | Application 2028-01-07 | The purpose of this Notice of Funding Opportunity (NOFO) is to support studies that will identify, develop, and/or test strategies for overcoming barriers to the adoption, adaptation, integration, sustainability, scale-up, and spread of evidence-based interventions, practices, programs, tools, treatments, guidelines, and policies (hereafter referred to as evidence-based interventions). Conversely,…</summary>
-  </entry>
-  <entry>
-    <title>Blueprint Neurotherapeutics Network (BPN): Biologic-based Drug Discovery and Development for Disorders of the Nervous System (UG3/UH3 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/356610"/>
-    <id>urn:funding-finder:grants-gov:356610</id>
-    <updated>2024-10-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Infectious disease"/>
-    <category term="Manufacturing"/>
-    <summary>National Institutes of Health | Application 2027-08-18 | The Blueprint Neurotherapeutics Network for Biologics (BPN-Biologics) provides support for biologic-based therapeutic discovery and development, from lead optimization through phase I clinical testing. This Funding Opportunity Announcement (FOA) supports preclinical discovery and development of potential therapeutic Biotechnology Products and Biologics including, but not limited to, large biologic…</summary>
-  </entry>
-  <entry>
-    <title>BRAIN Initiative: Reagent Resources for Brain Cell Type-Specific Access to Broaden Distribution of Enabling Technologies for Neuroscience (U24 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/356530"/>
-    <id>urn:funding-finder:grants-gov:356530</id>
-    <updated>2024-09-25T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Education and workforce"/>
-    <category term="Infectious disease"/>
-    <category term="Manufacturing"/>
-    <category term="Neuroscience"/>
-    <summary>National Institutes of Health | Application 2027-06-15 | This Notice of Funding Opportunity Announcement (NOFO) from the NIH Brain Research through Advancing Innovative Neurotechnologies (BRAIN) Initiative is intended to support establishment of facilities at minority-serving institutions (MSIs) and Institutional Development Award (IDeA)-eligible institutions for scaled production and distribution of brain cell type-specific access and manipulation reag…</summary>
-  </entry>
-  <entry>
-    <title>Animal and Veterinary Innovation Centers (U18)</title>
-    <link href="https://www.grants.gov/search-results-detail/355044"/>
-    <id>urn:funding-finder:grants-gov:355044</id>
-    <updated>2024-06-20T00:00:00Z</updated>
-    <author><name>Food and Drug Administration</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Environmental science"/>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <category term="Technology development"/>
-    <summary>Food and Drug Administration | Letter Of Intent 2027-04-14 | The purpose of this Funding Opportunity Announcement (FOA) is to solicit applications for inclusion as Animal and Veterinary Innovation Centers, which are intended to form long-term partnerships to address priority areas for FDA's Center for Veterinary Medicine (CVM). This includes CVM developing cooperative agreement(s) with academic research institutions (public and private) to: 1. Drive researc…</summary>
-  </entry>
-  <entry>
-    <title>Department of Defense HIV/AIDS Prevention Program</title>
-    <link href="https://www.grants.gov/search-results-detail/343653"/>
-    <id>urn:funding-finder:grants-gov:343653</id>
-    <updated>2022-09-19T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Cancer"/>
-    <category term="Infectious disease"/>
-    <category term="Social and behavioral sciences"/>
-    <category term="Transportation"/>
-    <category term="Cybersecurity"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA | Application 2027-09-18 | ATTENTION: This announcement will be revised regularly to incorporate country specific narratives (Attachment 1 of the announcement) with information vital to the content of application. Potential applicants interested in applying to this announcement should click 'Subscribe' to be notified of future revisions. DoD HIV/AID Prevention Program's (DHAPP) objective, through the PEPFAR program, is to s…</summary>
-  </entry>
-  <entry>
-    <title>Plant Biotic Interactions</title>
-    <link href="https://www.grants.gov/search-results-detail/327047"/>
-    <id>urn:funding-finder:grants-gov:327047</id>
-    <updated>2020-05-14T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Environmental science"/>
-    <category term="Infectious disease"/>
-    <summary>U.S. National Science Foundation | Posted | The Plant Biotic Interactions (PBI) program supports research on the processes that mediate beneficial and antagonistic interactions between plants and their viral, bacterial, oomycete, fungal, plant, and invertebrate symbionts, pathogens and pests. This joint NSF/NIFA program supports projects focused on current and emerging model and non-model systems, and agriculturally relevant plants. The pro…</summary>
+    <summary>National Institutes of Health | Application 2028-01-25 | This Notice of Funding Opportunity (NOFO) solicits applications to develop shared-use research facilities or research-supporting facilities that enable collaborative research and benefit broad research communities at large. The NOFO supports two existing construction programs: the Biomedical Research Facilities (BRF) program and the HIV/AIDS Research Facilities (HRF) program. The BRF program suppo…</summary>
   </entry>
 </feed>
