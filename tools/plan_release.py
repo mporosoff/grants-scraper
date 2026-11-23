@@ -7,6 +7,7 @@ import re
 import tempfile
 
 from tools import release_candidate as c
+from tools.artifact_chronology import ordered
 from tools.release_dependencies import snapshot, candidate_groups, changed_groups, unpublished_input_changes
 
 
@@ -62,9 +63,11 @@ def latest_report(repository, candidate, kind, destination):
     from tools.offline_ai_checkpoint import api
     rows = repository_artifacts(repository, lambda path: api(repository, path), candidate=candidate)
     artifact_kind = 'validation' if kind == 'browser' else 'publication' if kind == 'review' else kind
-    matches = [a for a in rows if re.fullmatch(f'{artifact_kind}-{candidate}-[1-9][0-9]*', a['name']) and not a['expired']]
-    for artifact in sorted(matches, key=lambda a: a['id'], reverse=True):
+    matches = [a for a in rows if re.fullmatch(f'{artifact_kind}-{candidate}-[1-9][0-9]*', a['name'])]
+    for artifact in ordered(matches, newest_first=True):
         run = str(artifact['workflow_run']['id'])
+        if artifact.get('expired') is not False:
+            return run, None  # Unavailable latest evidence cannot revive an older pass.
         target = Path(destination) / str(artifact['id'])
         fetch(repository, run, artifact['name'], target)
         report = target / {'live': 'live-verification.json', 'validation': 'validation.json',

@@ -1,6 +1,7 @@
 """Modern program-area continuation: native provenance and one shared allowance."""
 from contextlib import ExitStack
 from copy import deepcopy
+from datetime import datetime, timedelta, timezone
 import io
 import json
 from pathlib import Path
@@ -97,6 +98,7 @@ class ModernProgramAreaBudget(unittest.TestCase):
         raw = zipped(files); identifier = len(self.artifacts)+1
         meta = self.runs[(run,'1')]
         row = {'id': identifier, 'name': name, 'expired': False, 'digest': 'sha256:'+p.sha(raw),
+            'created_at': (datetime(2026, 10, 19, tzinfo=timezone.utc) + timedelta(seconds=identifier)).isoformat(),
             'workflow_run': {'id': int(run), 'head_sha': meta['head_sha'], 'head_branch': 'main'}}
         self.artifacts.append(row); self.archives[identifier] = raw
         return row
@@ -112,6 +114,10 @@ class ModernProgramAreaBudget(unittest.TestCase):
         if route.startswith('actions/artifacts/') and route.endswith('/zip'):
             return self.archives[int(route.split('/')[2])]
         self.fail('unexpected API '+route)
+
+    def reidentify(self, row, identifier):
+        self.archives[identifier] = self.archives.pop(row['id'])
+        row['id'] = identifier
 
     def authenticate(self, name='restored'):
         state = self.root/name
@@ -242,6 +248,7 @@ class ModernProgramAreaBudget(unittest.TestCase):
 
     def test_paired_cold_resume_keeps_measured_prefix_and_accepted_response_without_dispatch(self):
         state = self.root/'program-state'; prepared = self.prepare(state)
+        older_files = self.state_files(state)
         changed = dict(self.packet, corpus_sha256='8'*64)
         spend.prepare(state, changed)
         body = {'url': spend.URL, 'body': json.dumps({'input': ['Corrected public facet'], 'model': spend.MODEL,
@@ -254,6 +261,17 @@ class ModernProgramAreaBudget(unittest.TestCase):
         self.runs[('456','1')]['status'] = 'completed'
         self.add_artifact(prepared['reservation_artifact'], '456', {'reservation.json': Path(prepared['reservation_path']).read_bytes()})
         self.add_artifact(prepared['state_artifact'], '456', self.state_files(state))
+        # The older complete pair has larger opaque IDs but an earlier creation
+        # time. Restoring it would discard the second measured request/cache.
+        self.runs[('111','1')] = self.run_meta('111','1','1'*40)
+        older_voucher = json.loads(older_files['reservation.json'])
+        older_voucher['producer_run'] = '111'
+        older_files['reservation.json'] = c.encoded(older_voucher)
+        older_name = prepared['reservation_artifact'].replace('-456-1', '-111-1')
+        older_reservation = self.add_artifact(older_name, '111', {'reservation.json': c.encoded(older_voucher)})
+        older_reservation['created_at'] = '2026-10-18T00:00:01Z'
+        older_state = self.add_artifact(older_name.replace('-reservation-', '-state-'), '111', older_files)
+        older_state['created_at'] = '2026-10-18T00:00:02Z'
         self.runs[('789','1')] = self.run_meta('789','1','9'*40, current=True)
         restored = self.root/'cold-program-state'; second = self.prepare(restored, current='789')
         self.assertEqual(second['vector_reused'], 'false')
@@ -282,6 +300,24 @@ class ModernProgramAreaBudget(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'operation_identity'):
             p.modern_history(self.bundle, self.root/'cold2', self.root, 'owner/repo', '123', self.cid, self.api)
         self.assertFalse((self.root/'cold/reservation.json').exists())
+
+    def test_lower_id_unpaired_new_reservation_or_state_does_not_restore_older_accounting(self):
+        state = self.root/'program-state'; prepared = self.prepare(state)
+        self.runs[('456','1')]['status'] = 'completed'
+        first = self.add_artifact(prepared['reservation_artifact'], '456',
+                                  {'reservation.json': Path(prepared['reservation_path']).read_bytes()})
+        second = self.add_artifact(prepared['state_artifact'], '456', self.state_files(state))
+        self.reidentify(first, 900); self.reidentify(second, 901)
+        self.runs[('789','1')] = self.run_meta('789','1','9'*40)
+        reservation = self.add_artifact(prepared['reservation_artifact'].replace('-456-1', '-789-1'),
+                                        '789', {'reservation.json': b'{}'})
+        with self.assertRaisesRegex(ValueError, 'newest_paired_checkpoint'):
+            p.modern_history(self.bundle, self.root/'missing-pair', self.root, 'owner/repo', '123', self.cid, self.api)
+        self.artifacts.remove(reservation)
+        self.add_artifact(prepared['state_artifact'].replace('-456-1', '-789-1'), '789', self.state_files(state))
+        with self.assertRaisesRegex(ValueError, 'state_only_requires_completed_child'):
+            p.modern_history(self.bundle, self.root/'orphan-state', self.root, 'owner/repo', '123', self.cid, self.api)
+        self.http.assert_not_called()
 
     def seal_and_verify(self, state, packet):
         receipt = self.root/'receipt.json'
@@ -355,8 +391,9 @@ class ModernProgramAreaBudget(unittest.TestCase):
         p.record_modern_candidate(state, bundle)
         payload = {'candidate.json': c.encoded(child), **{'files/'+n: raw for n, raw in self.raw.items()}}
         self.add_artifact('candidate-'+child['candidate_id'], '456', payload)
-        self.add_artifact(prepared['reservation_artifact'], '456', {'reservation.json': Path(prepared['reservation_path']).read_bytes()})
-        self.add_artifact(prepared['state_artifact'], '456', self.state_files(state))
+        original_reservation = self.add_artifact(prepared['reservation_artifact'], '456', {'reservation.json': Path(prepared['reservation_path']).read_bytes()})
+        original_state = self.add_artifact(prepared['state_artifact'], '456', self.state_files(state))
+        self.reidentify(original_reservation, 900); self.reidentify(original_state, 901)
         self.runs[('456','1')]['status'] = 'completed'
         self.runs[('789','1')] = self.run_meta('789','1','9'*40, current=True)
         with patch.object(c, 'verify_dependencies'), patch('tools.program_area_history.completed_restore') as proof:

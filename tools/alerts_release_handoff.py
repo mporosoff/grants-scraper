@@ -10,6 +10,7 @@ from tempfile import TemporaryDirectory
 import time
 
 from tools import release_attempt_history as history, release_candidate as candidate
+from tools.artifact_chronology import latest
 from tools.fetch_release_artifact import fetch, repository_artifacts, run_artifacts
 from tools.github_read import get
 from tools.release_dependencies import candidate_groups, changed_groups, snapshot
@@ -42,11 +43,14 @@ def latest_receipt_artifact(rows, candidate_id, kind):
     matches = [row for row in rows if re.fullmatch(rf'{kind}-{candidate_id}-[1-9][0-9]*', row['name'])]
     if not matches:
         raise ValueError('Worker handoff is missing retained ' + kind + ' evidence')
-    newest = max(row['id'] for row in matches)
-    selected = [row for row in matches if row['id'] == newest]
-    if len(selected) != 1 or selected[0].get('expired') is not False:
+    try:
+        selected = latest(matches)
+    except ValueError as error:
+        raise ValueError('Worker handoff has conflicting or unavailable latest ' + kind +
+                         ' evidence: ' + str(error)) from None
+    if selected.get('expired') is not False:
         raise ValueError('Worker handoff has conflicting or expired latest ' + kind + ' evidence')
-    return selected[0]
+    return selected
 
 
 def authenticate_receipt_producer(repository, artifact, job, *, api):

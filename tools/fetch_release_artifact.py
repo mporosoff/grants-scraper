@@ -8,6 +8,7 @@ import subprocess
 import zipfile
 
 from tools.release_candidate import checked_path
+from tools.artifact_chronology import created
 
 
 class ArtifactUnavailable(ValueError):
@@ -54,6 +55,9 @@ def merge_artifacts(native, preserved):
         previous = result[index]
         if any(previous.get(key) != artifact.get(key) for key in ('name', 'digest', 'workflow_run')):
             raise ValueError('Native and preserved artifact identities disagree')
+        if any(row.get(key) is not None for row in (previous, artifact)
+               for key in ('created_at', 'createdAt')) and created(previous) != created(artifact):
+            raise ValueError('Native and preserved original creation times disagree')
         if previous.get('expired') is not False:
             result[index] = artifact
     return result

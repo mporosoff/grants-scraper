@@ -1,5 +1,6 @@
 """Independent ZIP transport contracts, entirely offline and credential-free."""
 from copy import deepcopy
+from datetime import datetime, timedelta, timezone
 import hashlib
 import io
 import json
@@ -42,7 +43,10 @@ def run_metadata(identifier=RUN, *, backup=False):
 
 
 def artifact(identifier, name, raw, run=RUN):
+    attempt = int(name.rsplit('-', 1)[-1]) if name.rsplit('-', 1)[-1].isdigit() else 0
+    moment = datetime(2026, 11, 1, tzinfo=timezone.utc) + timedelta(seconds=int(run) * 10 + attempt)
     return {'id': identifier, 'name': name, 'expired': False, 'size_in_bytes': len(raw),
+            'created_at': moment.isoformat().replace('+00:00', 'Z'),
             'digest': 'sha256:' + hashlib.sha256(raw).hexdigest(),
             'workflow_run': {'id': int(run), 'head_branch': 'main', 'head_sha': SHA,
                              'repository_id': 10, 'head_repository_id': 10}}

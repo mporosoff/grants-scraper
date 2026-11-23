@@ -1,5 +1,6 @@
 from pathlib import Path
 from copy import deepcopy
+from datetime import datetime, timedelta, timezone
 import json
 import os
 from tempfile import TemporaryDirectory
@@ -251,7 +252,9 @@ class RetainedWorkerPublicationTests(unittest.TestCase):
                      side_effect=lambda m, p: verify_pages(m, p, http=self.http, attempts=1)).start()
 
     def artifact(self, identifier, run, kind, attempt):
+        moment = datetime(2026, 11, 1, tzinfo=timezone.utc) + timedelta(seconds=run * 10 + attempt)
         return {'id': identifier, 'name': f'{kind}-{self.manifest["candidate_id"]}-{attempt}',
+                'created_at': moment.isoformat().replace('+00:00', 'Z'),
                 'expired': False, 'workflow_run': {'id': run}}
 
     def live_receipt(self):

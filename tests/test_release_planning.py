@@ -18,6 +18,7 @@ class ReleasePlanning(unittest.TestCase):
     def test_newest_failed_validation_is_not_hidden_by_an_older_pass(self):
         candidate = 'a' * 64
         rows = {'artifacts': [{'id': index, 'name': f'validation-{candidate}-1', 'expired': False,
+                              'created_at': f'2026-11-23T17:00:0{index}Z',
                               'workflow_run': {'id': index}} for index in (2, 1)]}
         def fetch(repository, run, name, target):
             target.mkdir(parents=True)
@@ -170,7 +171,8 @@ class ReleasePlanning(unittest.TestCase):
 
     def test_pages_checkpoint_is_bound_to_publication_artifact_attempt(self):
         candidate = 'a' * 64
-        artifact = {'id': 9, 'name': f'publication-{candidate}-2', 'expired': False, 'workflow_run': {'id': 123}}
+        artifact = {'id': 9, 'name': f'publication-{candidate}-2', 'expired': False,
+                    'created_at': '2026-11-23T17:00:02Z', 'workflow_run': {'id': 123}}
         def download(repository, run, name, target):
             target.mkdir(parents=True)
             for filename in ('publication.json', 'validation.json'):

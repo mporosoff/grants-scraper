@@ -4,6 +4,7 @@ import io
 import json
 import os
 from pathlib import Path
+import re
 import zipfile
 
 from tools.offline_ai_checkpoint import api
@@ -13,14 +14,46 @@ from tools.fetch_release_artifact import artifact_bytes, run_artifacts
 from tools.github_job_log_bytes import read_job_log
 
 
+def latest_checkpoint(artifacts, run, attempt):
+    """Native attempts order one allowance; artifact IDs carry no chronology."""
+    current = int(attempt)
+    if current < 1:
+        raise ValueError('Invalid generation spend attempt')
+    pattern = re.compile(r'generation-spend-(reservation|state)-' + re.escape(str(run)) + r'-([1-9][0-9]*)')
+    records = {'reservation': {}, 'state': {}}
+    for artifact in artifacts:
+        name = artifact.get('name', '')
+        if not name.startswith('generation-spend-'):
+            continue
+        match = pattern.fullmatch(name)
+        if match is None:
+            raise ValueError('Invalid generation spend checkpoint identity')
+        kind, number = match[1], int(match[2])
+        if number >= current or number in records[kind]:
+            raise ValueError('Conflicting/future generation spend checkpoint attempt; remaining allowance unavailable')
+        records[kind][number] = artifact
+    reservations, states = records['reservation'], records['state']
+    if not reservations:
+        if states:
+            raise ValueError('Generation spend state has no reservation; remaining allowance unavailable')
+        return None
+    latest = max(reservations)
+    if not states or max(states) != latest:
+        raise ValueError('Incomplete generation spend checkpoint; remaining allowance unavailable')
+    selected = states[latest]
+    if selected.get('expired') is not False:
+        raise ValueError('Incomplete/expired generation spend checkpoint; remaining allowance unavailable')
+    return reservations[latest], selected
+
+
 def prepare(repository, run, attempt, destination, reservation, mode, *, qualification_pilot=False):
     meta = json.loads(api(repository, f'actions/runs/{run}'))
     if meta['path'] != '.github/workflows/refresh-opportunities.yml' or meta['head_branch'] != 'main':
         raise ValueError('Untrusted generation spend origin')
     artifacts = run_artifacts(run, lambda path: api(repository, path), repository=repository)
-    reservations = [a for a in artifacts if a['name'].startswith(f'generation-spend-reservation-{run}-')]
+    checkpoint = latest_checkpoint(artifacts, run, attempt)
     initial_proof = None
-    if not reservations and int(attempt) > 1:
+    if checkpoint is None and int(attempt) > 1:
         from tools import generation_spend_recovery
         recovered = generation_spend_recovery.restore(repository, run, attempt, destination, mode, meta, artifacts,
             api=lambda path: api(repository, path), qualification_pilot=qualification_pilot,
@@ -31,13 +64,9 @@ def prepare(repository, run, attempt, destination, reservation, mode, *, qualifi
                 api=lambda path: api(repository, path))
             if str(meta['id']) != str(run):
                 raise ValueError('First-allocation history belongs to a different generation run')
-    if reservations:
-        prior = max(reservations, key=lambda a: a['id'])
-        name = prior['name'].replace('-reservation-', '-state-')
-        matches = [a for a in artifacts if a['name'] == name]
-        if len(matches) != 1 or matches[0].get('expired') is not False:
-            raise ValueError('Incomplete/expired generation spend checkpoint; remaining allowance unavailable')
-        with zipfile.ZipFile(io.BytesIO(artifact_bytes(repository, run, matches[0], lambda path: api(repository, path)))) as archive:
+    if checkpoint is not None:
+        _, selected = checkpoint
+        with zipfile.ZipFile(io.BytesIO(artifact_bytes(repository, run, selected, lambda path: api(repository, path)))) as archive:
             for item in archive.infolist():
                 if not item.is_dir():
                     target = checked_path(destination, item.filename)

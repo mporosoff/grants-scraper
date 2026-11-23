@@ -29,6 +29,7 @@ class ReleaseReadyPlan(unittest.TestCase):
                       'validation_receipt_sha256': planner.c.digest(planner.c.encoded(self.validation)),
                       'timestamp': '2026-09-28T20:00:00Z'}
         self.publication = {'id': 99, 'name': 'publication-' + self.candidate_id + '-2',
+                            'created_at': '2026-09-28T20:00:00Z',
                             'expired': False, 'workflow_run': {'id': int(self.run_id)}}
         api = patch('tools.offline_ai_checkpoint.api', side_effect=self.api)
         fetch = patch('tools.fetch_release_artifact.fetch', side_effect=self.fetch)

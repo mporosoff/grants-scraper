@@ -17,6 +17,7 @@ import subprocess
 import tempfile
 
 from tools import catalog_smoke_receipt as auth, release_candidate as candidate
+from tools import artifact_chronology as chronology
 from tools.offline_spend import atomic_json
 from tools.offline_spend import identity
 
@@ -48,7 +49,7 @@ MAX_SECONDS = 960
 PARENT_VECTOR_RECEIPT_SHA256 = '915c49a3da9e8c3a91421e9dac4d7011acc02ebd596a2f64c4391c95720ca660'
 DERIVED_KEYS = {'topic_areas', 'document_program_areas', 'document_search_text'}
 MODERN_VERSION = 'program-area-revalidation-modern-1'
-PROJECTION_KINDS = frozenset({'program_area', 'administrative_submission', 'document_facts', 'primary_document'})
+PROJECTION_KINDS = frozenset({'program_area', 'administrative_submission', 'document_facts', 'primary_document', 'topic_area'})
 MODERN_OPERATION_FILES = ('tools/program_area_revalidation.py', 'tools/program_area_release.py',
     'scripts/extract_document_evidence.py', 'scripts/build_feeds.py',
     'tools/build_search_release_package.mjs', 'tools/run_budgeted_vectors.mjs',
@@ -60,6 +61,7 @@ ADMINISTRATIVE_INPUTS = ('tools/administrative_submission_revalidation.py',
     'scripts/build_changes.py', 'tools/run_search_diagnosis.mjs', 'tools/release_dependencies.py',
     'tools/corpus_clock.mjs', 'tools/catalog_publication_evidence.py')
 ADMINISTRATIVE_OUTPUTS = ('feeds/changes.json', 'feeds/changes.xml')
+TOPIC_AREA_INPUTS = ('tools/topic_area_revalidation.py', 'scripts/build_catalog.py', 'scripts/build_changes.py')
 DOCUMENT_FACT_INPUTS = ('tools/document_fact_revalidation.py',
     'scripts/notice_semantics.py', 'scripts/notice_fact_guards.py')
 PRIMARY_DOCUMENT_INPUTS = ('tools/primary_document_revalidation.py',
@@ -70,7 +72,7 @@ PRIMARY_DOCUMENT_INPUTS = ('tools/primary_document_revalidation.py',
     'scripts/submission_schedule.py', 'scripts/build_changes.py', 'scripts/build_feeds.py',
     'tools/corpus_clock.mjs')
 PRIMARY_DOCUMENT_OUTPUTS = ('data/opportunity_enrichment.json', 'feeds/changes.json', 'feeds/changes.xml')
-PREFIX_GUARDED_KINDS = frozenset({'administrative_submission', 'document_facts', 'primary_document'})
+PREFIX_GUARDED_KINDS = frozenset({'administrative_submission', 'document_facts', 'primary_document', 'topic_area'})
 
 
 def require(ok, reason):
@@ -105,6 +107,9 @@ def modern_projection(parent_root, audit_at, identifier, kind, *, checkpoint_dir
     if kind == 'document_facts':
         from tools.document_fact_revalidation import projection as document_fact_projection
         return document_fact_projection(parent_root, audit_at, identifier)
+    if kind == 'topic_area':
+        from tools.topic_area_revalidation import projection as topic_projection
+        return topic_projection(parent_root, audit_at, identifier)
     return projection(parent_root, audit_at, identifier)
 
 
@@ -140,6 +145,8 @@ def require_administrative_budget(value, ledger):
                 'administrative_vector_only_append')
         require(sum(row['charged_microusd'] for row in rows) <= ledger['limit_microusd'],
             'administrative_original_allowance')
+        if projection_kind(value) == 'topic_area':
+            require(len(rows) == count, 'topic_area_zero_new_requests')
 
 
 def sha(raw):
@@ -161,7 +168,7 @@ def projection_names(receipt):
         'complete_projection_inventory')
     kind = projection_kind(receipt)
     allowed = PROJECTION + (PRIMARY_DOCUMENT_OUTPUTS if kind == 'primary_document' else
-        ADMINISTRATIVE_OUTPUTS if kind == 'administrative_submission' else ())
+        ADMINISTRATIVE_OUTPUTS if kind in ('administrative_submission', 'topic_area') else ())
     require(all(isinstance(name, str) and (name in allowed or FACET_FEED.fullmatch(name))
         and isinstance(value, str) and re.fullmatch('[a-f0-9]{64}', value) for name, value in values.items()),
         'projection_paths_and_hashes')
@@ -582,13 +589,15 @@ def modern_contract(root, kind='program_area'):
         names += DOCUMENT_FACT_INPUTS
     elif projection_kind(kind) == 'primary_document':
         names += PRIMARY_DOCUMENT_INPUTS
+    elif projection_kind(kind) == 'topic_area':
+        names += TOPIC_AREA_INPUTS
     return hashes(root, names)
 
 
 def modern_scope(root, original, kind='program_area'):
     from tools.release_dependencies import snapshot, changed_groups, generation_invocations
     changes = changed_groups(original['dependency_groups'], snapshot(root))
-    allowed = {'scripts/extract_document_evidence.py'}
+    allowed = {'scripts/build_catalog.py'} if projection_kind(kind) == 'topic_area' else {'scripts/extract_document_evidence.py'}
     administrative = projection_kind(kind) == 'administrative_submission'
     if administrative:
         allowed.update({'scripts/submission_schedule.py', 'scripts/notice_schedule.py',
@@ -810,10 +819,12 @@ def modern_history(parent, state, root, repository, run, identifier, api, kind='
     if not reservations:
         require(os.environ.get('GITHUB_RUN_ATTEMPT', '1') == '1', 'modern_missing_prior_attempt_state')
         return None
-    latest = max(reservations, key=lambda r: r['id'])
+    latest = chronology.latest(reservations)
     selected = [r for r in states if r['name'] == latest['name'].replace('-reservation-', '-state-')]
     require(len(selected) == 1, 'modern_newest_paired_checkpoint')
     selected = selected[0]; _, producer_run, attempt = latest['name'].rsplit('-', 2)
+    require(chronology.created(selected) >= chronology.created(latest), 'modern_checkpoint_creation_order')
+    ordered_states = chronology.ordered(states)
     producer = modern_run(producer_run, attempt, api)
     require(latest['workflow_run'] == selected['workflow_run'], 'modern_paired_producer')
     voucher = zip_files(modern_packet(repository, producer, latest, api))
@@ -872,7 +883,7 @@ def modern_history(parent, state, root, repository, run, identifier, api, kind='
     # A completed replay emits a later state without a second reservation.
     # It cannot change any private byte except this append-only transport
     # lineage, and its actual workflow trace must prove zero generation work.
-    newer = sorted((r for r in states if r['id'] > selected['id']), key=lambda r: r['id'])
+    newer = [r for r in ordered_states if chronology.created(r) > chronology.created(selected)]
     require(not newer or value.get('completed_candidate_id'), 'modern_state_only_requires_completed_child')
     unchanged = {n.relative_to(state).as_posix(): sha(n.read_bytes()) for n in Path(state).rglob('*')
         if n.is_file() and n.relative_to(state).as_posix() != 'consumed-checkpoints.json'}
@@ -1069,7 +1080,8 @@ def prepare_modern(parent_bundle, receipt_path, state, parent_run, parent_id, *,
                 # fingerprints alone cannot detect a corrected replay recipe.
                 recipe_inputs = (ADMINISTRATIVE_INPUTS if kind == 'administrative_submission' else
                     DOCUMENT_FACT_INPUTS if kind == 'document_facts' else
-                    PRIMARY_DOCUMENT_INPUTS if kind == 'primary_document' else ())
+                    PRIMARY_DOCUMENT_INPUTS if kind == 'primary_document' else
+                    TOPIC_AREA_INPUTS if kind == 'topic_area' else ())
                 require(not recipe_inputs or not any(
                     value['operation_contract'].get(name) != modern_contract(root, kind).get(name)
                     for name in recipe_inputs), 'modern_completed_document_projection_changed')
@@ -1082,6 +1094,8 @@ def prepare_modern(parent_bundle, receipt_path, state, parent_run, parent_id, *,
                     sources += DOCUMENT_FACT_INPUTS
                 elif kind == 'primary_document':
                     sources += PRIMARY_DOCUMENT_INPUTS
+                elif kind == 'topic_area':
+                    sources += TOPIC_AREA_INPUTS
                 require(any(value['operation_contract'].get(name) != modern_contract(root, kind).get(name)
                     for name in sources), 'modern_completed_use_named_runtime_resume')
                 receipt = child['program_area_revalidation']
@@ -1134,6 +1148,7 @@ def prepare_modern(parent_bundle, receipt_path, state, parent_run, parent_id, *,
         target = candidate.checked_path(root, name); target.parent.mkdir(parents=True, exist_ok=True); target.write_bytes(raw)
     packet = vector_packet(root)
     reused, accounting = modern_native_vectors(root, state, parent, original, value, packet)
+    require(kind != 'topic_area' or reused, 'topic_area_exact_native_vectors_required')
     atomic_json(state/'program-vector-inputs.json', {'packet': packet, 'vector_reused': reused, 'accounting': accounting})
     ledger = read(state/'ledger.json')
     receipt = _modern_receipt(value, original, outputs, changes, ledger, read(state/'consumed-checkpoints.json'))
@@ -1150,6 +1165,7 @@ def checkpoint_modern(receipt_path, state, *, root=ROOT, write=True):
     require(receipt['operation_sha256'] == value['operation_sha256']
         and value['operation_contract'] == modern_contract(root, kind), 'modern_checkpoint_operation')
     packet = vector_packet(root); inputs = read(state/'program-vector-inputs.json')
+    require(kind != 'topic_area' or inputs['vector_reused'], 'topic_area_exact_native_vectors_required')
     require(spend.vector_binding(packet) == spend.vector_binding(inputs['packet']) and packet['retained_asset_eligible'],
         'modern_complete_current_corpus')
     if inputs['vector_reused']:

@@ -77,6 +77,56 @@ class GenerationSpend(unittest.TestCase):
             with patch.object(checkpoint, 'api', side_effect=api), self.assertRaisesRegex(ValueError, 'remaining allowance unavailable'):
                 checkpoint.prepare('owner/repo', '123', '3', root / 'missing', root / 'reservation2.json', 'pilot')
 
+    def test_inverted_native_artifact_ids_restore_latest_attempt_usage_and_completed_cache(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            ledger = Ledger(root / 'old/ledger.json', 'offline-123', 2)
+            ledger.reserve('voyage', 'fixture-model', 'generation_vectors', 'earlier', 100000, 1)
+
+            def packed():
+                output = io.BytesIO()
+                with zipfile.ZipFile(output, 'w') as archive:
+                    archive.write(ledger.path, 'ledger.json')
+                    archive.writestr('vector-responses/completed.json', '{"exact":"completed stage"}')
+                return output.getvalue()
+
+            old = packed()
+            ledger.reserve('voyage', 'fixture-model', 'generation_vectors', 'uncertain-new', 1900000, 1)
+            newer = packed()
+            expected = ledger.read()
+            rows = [
+                {'id': 14847076039, 'name': 'generation-spend-reservation-123-2', 'expired': False},
+                {'id': 14846939717, 'name': 'generation-spend-reservation-123-3', 'expired': False},
+                {'id': 90, 'name': 'generation-spend-state-123-2', 'expired': False},
+                {'id': 80, 'name': 'generation-spend-state-123-3', 'expired': False},
+            ]
+            meta = {'path': '.github/workflows/refresh-opportunities.yml', 'head_branch': 'main'}
+            with patch.object(checkpoint, 'api', return_value=json.dumps(meta).encode()), \
+                    patch.object(checkpoint, 'run_artifacts', return_value=rows), \
+                    patch.object(checkpoint, 'artifact_bytes', side_effect=lambda repo, run, row, api:
+                                 newer if row['name'].endswith('-3') else old) as download:
+                checkpoint.prepare('owner/repo', '123', '4', root / 'offline-123', root / 'reservation.json', 'pilot')
+            self.assertEqual(download.call_args.args[2]['name'], 'generation-spend-state-123-3')
+            restored = Ledger(root / 'offline-123/ledger.json', 'offline-123', 2)
+            self.assertEqual(restored.read(), expected)
+            self.assertEqual(restored.summary()['charged_usd'], 2)
+            self.assertEqual(restored.read()['requests'][-1]['status'], 'reserved_unknown')
+            self.assertTrue((root / 'offline-123/vector-responses/completed.json').is_file())
+            with self.assertRaisesRegex(RuntimeError, 'budget_exhausted'):
+                restored.reserve('voyage', 'fixture-model', 'generation_vectors', 'replacement', 1, 1)
+
+    def test_unpaired_duplicate_foreign_or_future_attempt_cannot_fall_back(self):
+        def row(kind, attempt):
+            return {'id': 100 - attempt, 'name': f'generation-spend-{kind}-123-{attempt}', 'expired': False}
+        pair = [row('reservation', 2), row('state', 2)]
+        cases = [pair + [row('reservation', 3)], pair + [row('state', 3)],
+                 pair + [row('reservation', 2)], pair + [row('state', 4)],
+                 [row('state', 2)], pair + [dict(row('state', 3), name='generation-spend-state-999-3')],
+                 [row('reservation', 3), dict(row('state', 3), expired=True)]]
+        for rows in cases:
+            with self.subTest(rows=rows), self.assertRaises(ValueError):
+                checkpoint.latest_checkpoint(rows, '123', '4')
+
     def test_cov4_wraps_the_same_prompt_and_reuses_only_valid_complete_decisions(self):
         with tempfile.TemporaryDirectory() as directory, patch.dict('os.environ', ANTHROPIC_API_KEY='synthetic'):
             root = Path(directory)

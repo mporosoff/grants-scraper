@@ -34,6 +34,7 @@ class ReadyCheckpointResume(unittest.TestCase):
                       'validation_receipt_sha256': planner.c.digest(planner.c.encoded(self.validation)),
                       'timestamp': '2026-09-24T03:01:14.574352+00:00'}
         self.artifact = {'id': 10787857258, 'name': 'publication-' + self.candidate + '-1',
+                         'created_at': '2026-11-02T20:41:00Z',
                          'expired': False, 'workflow_run': {'id': int(self.candidate_run)}}
         self.pr = {'number': 295, 'user': {'login': 'github-actions[bot]'}, 'base': {'ref': 'main'},
                    'head': {'sha': self.head, 'ref': 'automation/release-' + self.candidate[:16] + '-35948724690-1',
