@@ -102,6 +102,39 @@ class ArchivedTaskCheckpointContracts(unittest.TestCase):
         self.assertNotIn('actions/artifacts/10/zip', self.calls)
         self.assertNotIn('actions/artifacts/23/zip', self.calls)
 
+    def test_inverted_ids_cannot_replace_newer_archived_task_usage_with_older_native_pair(self):
+        old_state = self.values.pop('actions/artifacts/10/zip')
+        self.old_rows[0]['id'] = 4009
+        self.old_rows[1]['id'] = 4010
+        self.values['actions/artifacts/4010/zip'] = old_state
+        destination = self.root / 'inverted-task'
+        self.restore(destination)
+        self.assertEqual((destination / 'ledger.json').read_bytes(), self.new_bytes)
+        ledger = Ledger(destination / 'ledger.json', task.TASK, 2, 30)
+        self.assertEqual(ledger.summary()['charged_usd'], 1.8)
+        self.assertEqual(len(ledger.read()['requests']), 2)
+        self.assertEqual(ledger.read()['requests'][-1]['status'], 'reserved_unknown')
+        self.assertTrue((destination / 'team-responses/completed.json').is_file())
+        self.assertNotIn('actions/artifacts/4010/zip', self.calls)
+
+    def test_newer_archived_unpaired_reservation_holds_even_with_lower_artifact_id(self):
+        self.old_rows[0]['id'] = 4009
+        self.old_rows[1]['id'] = 4010
+        self.values[f'actions/runs/{PILOT}/artifacts?per_page=100&page=1'] = {
+            'artifacts': self.new_rows[:1], 'total_count': 1}
+        self.values['actions/artifacts/22/zip'] = self.raw[22]
+        snapshot = self.root / 'inverted-reservation-only'
+        saved = archive.capture(REPOSITORY, PILOT, 2, snapshot, api=self.read)
+        raw = packed({path.relative_to(snapshot).as_posix(): path.read_bytes()
+                      for path in snapshot.rglob('*') if path.is_file()})
+        outer = artifact(1002, saved['artifact_name'], raw, BACKUP)
+        self.values.update({'actions/artifacts/1002': outer, 'actions/artifacts/1002/zip': raw,
+            'actions/artifacts?per_page=100&page=1': {'artifacts': self.old_rows + [outer], 'total_count': 3}})
+        destination = self.root / 'inverted-unpaired'
+        with self.assertRaisesRegex(ValueError, 'checkpoint_missing_or_expired'):
+            self.restore(destination)
+        self.assertFalse(destination.exists())
+
     def test_original_evaluation_workflow_native_state_still_restores_without_archives(self):
         self.values['actions/artifacts?per_page=100&page=1'] = {'artifacts': self.old_rows, 'total_count': 2}
         destination = self.root / 'native-task'

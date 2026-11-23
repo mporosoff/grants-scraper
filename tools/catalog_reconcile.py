@@ -17,12 +17,14 @@ from pathlib import Path
 import re
 import shutil
 import subprocess
+import tempfile
 
 from tools import release_candidate as c
 from tools.fetch_release_artifact import fetch, repository_artifacts, artifact_bytes, run_artifacts
 from tools.offline_ai_checkpoint import api
 from tools.offline_spend import atomic_json, identity
 from tools import release_checkpoint_archive as archive
+from tools import artifact_chronology as chronology
 
 VERSION = 'catalog-source-reconciliation-1'
 STAGE = 'catalog-reconcile'
@@ -184,6 +186,39 @@ def retain_vector_source(state, context, manifest, bundle):
         'outputs': {name: manifest['files'][name] for name in VECTOR_OUTPUTS}}
 
 
+def _completed_transports(root, repository, selected, states, reservations, state, context):
+    newer = [row for row in chronology.ordered(states)
+             if chronology.created(row) > chronology.created(selected)]
+    require(not newer or context.get('completed_candidate_id'), 'state_only_requires_completed_child')
+    if not newer:
+        return
+    from tools import release_attempt_history as history, scheduled_catalog as daily
+    lineage = c.read_json(state / 'consumed-checkpoints.json')
+    substantive = lambda directory: {
+        path.relative_to(directory).as_posix(): c.digest(path.read_bytes())
+        for path in directory.rglob('*') if path.is_file()
+        and path.relative_to(directory).as_posix() != 'consumed-checkpoints.json'}
+    expected = substantive(state)
+    for row in newer:
+        require(not any(item['name'] == row['name'].replace('-state-', '-reservation-')
+                        for item in reservations), 'state_only_has_new_reservation')
+        _, run, attempt = row['name'].rsplit('-', 2)
+        current = json.loads(api(repository, f'actions/runs/{run}'))
+        meta = history.authenticate_attempt(repository, current, int(attempt),
+            api=lambda path: api(repository, path))
+        require(meta['event'] == 'workflow_dispatch' and row.get('expired') is False
+                and str(row['workflow_run']['id']) == run, 'completed_transport_producer')
+        raw = artifact_bytes(repository, run, row, lambda path: api(repository, path))
+        require(c.digest(raw) == row['digest'].removeprefix('sha256:'), 'completed_transport_digest')
+        with tempfile.TemporaryDirectory(prefix='reconcile-transport-') as temporary:
+            restored = Path(temporary)
+            unpack(raw, restored)
+            require(substantive(restored) == expected
+                    and c.read_json(restored / 'consumed-checkpoints.json') == lineage,
+                    'completed_transport_bytes')
+        daily._require_completed_restore_jobs(root, repository, current, meta)
+
+
 def restore(root, parent, state, output):
     """Newest paired private checkpoint wins across all runs of this parent."""
     root, parent, state, output = map(Path, (root, parent, state, output))
@@ -202,13 +237,20 @@ def restore(root, parent, state, output):
             and producer['event'] in {'push', 'schedule', 'workflow_dispatch'}, 'parent_producer')
     family = prefix(manifest['candidate_id'])
     rows = repository_artifacts(repository, lambda path: api(repository, path), task_prefix=family)
-    reservations = [r for r in rows if r['name'].startswith(family + '-reservation-')]
+    checkpoints = [r for r in rows if r['name'].startswith(family + '-')]
+    reservations = [r for r in checkpoints if re.fullmatch(re.escape(family) + r'-reservation-[1-9][0-9]*-[1-9][0-9]*', r['name'])]
+    states = [r for r in checkpoints if re.fullmatch(re.escape(family) + r'-state-[1-9][0-9]*-[1-9][0-9]*', r['name'])]
+    require(len(checkpoints) == len(reservations) + len(states) and (reservations or not states),
+            'repair_checkpoint_inventory')
     if reservations:
-        latest = max(reservations, key=lambda r: r['id'])
+        latest = chronology.latest(reservations)
         expected = latest['name'].replace('-reservation-', '-state-')
-        matches = [r for r in rows if r['name'] == expected]
-        require(len(matches) == 1 and matches[0].get('expired') is False, 'newest_repair_state_unavailable')
+        matches = [r for r in states if r['name'] == expected]
+        require(latest.get('expired') is False and len(matches) == 1
+                and matches[0].get('expired') is False, 'newest_repair_state_unavailable')
         selected = matches[0]; producer = selected['workflow_run']['id']
+        require(chronology.created(selected) >= chronology.created(latest), 'repair_checkpoint_creation_order')
+        chronology.ordered(states)
         _, checkpoint_run, checkpoint_attempt = latest['name'].rsplit('-', 2)
         require(checkpoint_run == str(producer) and latest['workflow_run'] == selected['workflow_run'],
                 'paired_repair_producer')
@@ -241,6 +283,8 @@ def restore(root, parent, state, output):
         if link not in lineage:
             lineage.append(link)
         atomic_json(lineage_path, lineage)
+        if not context.get('completed_candidate_id'):
+            _completed_transports(root, repository, selected, states, reservations, state, context)
         if context.get('completed_candidate_id'):
             child = context['completed_candidate_id']
             existing = run_artifacts(str(producer), lambda path: api(repository, path), repository=repository)
@@ -265,6 +309,7 @@ def restore(root, parent, state, output):
                 atomic_json(lineage_path, lineage)
             else:
                 loaded = c.load(complete, child)
+            _completed_transports(root, repository, selected, states, reservations, state, context)
             require(loaded.get('derived_from_candidate') == manifest['candidate_id']
                     and loaded.get('source_reconciliation', {}).get('version') == VERSION, 'completed_child')
             try:

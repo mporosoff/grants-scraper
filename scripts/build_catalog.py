@@ -224,7 +224,7 @@ TOPIC_RULES = {
         r"social determinants of health)\w*"
     ),
     "Infectious disease": (
-        r"\b(?:infectious disease|virus|viral|bacteri|pathogen|pandemic)\w*"
+        r"\b(?:infectious disease|virus|viral|bacteri|pathogen|pandemic)\w*|\bHIV\b"
     ),
     "Manufacturing": (
         r"\b(?:manufactur|industrial process|supply chain|semiconductor)\w*"
@@ -237,7 +237,8 @@ TOPIC_RULES = {
         r"\b(?:neuroscien|neurolog|brain|cognitive|neurodegener)\w*"
     ),
     "Public health": (
-        r"\b(?:public health|population health|epidemiolog|health services)\w*"
+        r"\b(?:public health|population health|epidemiolog|health services)\w*|"
+        r"\bHIV/AIDS Clinical Trials Networks?\b"
     ),
     "Quantum science": r"\b(?:quantum|qubit|quantum computing)\w*",
     "Separations and membranes": (

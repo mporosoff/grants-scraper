@@ -302,8 +302,10 @@ class ReconcileContracts(unittest.TestCase):
         raw = b'authenticated-private-state'
         common = {'expired': False, 'workflow_run': {'id': 20}}
         reservation = common | {'id': 101, 'name': repair.prefix(self.manifest['candidate_id']) + '-reservation-20-1',
+                                'created_at': '2026-10-17T13:49:40Z',
                                 'digest': 'sha256:' + 'a' * 64}
         state = common | {'id': 102, 'name': reservation['name'].replace('-reservation-', '-state-'),
+                          'created_at': '2026-10-17T13:50:40Z',
                           'digest': 'sha256:' + c.digest(raw)}
         artifact = {'id': 103, 'name': 'candidate-' + child['candidate_id'], 'expired': False,
                     'digest': 'sha256:' + 'b' * 64}
@@ -323,7 +325,7 @@ class ReconcileContracts(unittest.TestCase):
                                completed_evidence if completed_evidence is not None else {'records': {}})
         def unpack(_raw, destination):
             repair.atomic_json(destination / 'reconciliation.json', context)
-            repair.atomic_json(destination / 'ledger.json', ledger)
+            repair.atomic_json(destination / 'ledger.json', ledger if _raw == raw else json.loads(_raw))
             repair.atomic_json(destination / 'consumed-checkpoints.json', [])
             write_child(destination / 'complete-candidates' / child['candidate_id'])
         def fetch(_repo, _run, _name, destination):
@@ -347,6 +349,7 @@ class ReconcileContracts(unittest.TestCase):
                                              side_effect=ValueError('changed source') if incompatible else None))
             imported = stack.enter_context(patch('tools.catalog_reconcile_spend.import_history'))
             yield {'context': context, 'ledger': ledger, 'child': child, 'imported': imported,
+                   'reservation': reservation, 'state': state, 'raw': raw, 'unpack': unpack,
                    'output': self.root / 'restored-candidate', 'current': current}
 
     def test_completed_checkpoint_reuses_exact_child_after_validator_only_change(self):
@@ -360,6 +363,70 @@ class ReconcileContracts(unittest.TestCase):
             self.assertEqual(consumed['candidate']['artifact']['id'], 103)
             self.assertEqual(consumed['producer']['run_id'], '20')
             self.assertEqual(consumed['request_identity_prefix_sha256'], repair.request_identity(fixture['ledger']['requests']))
+
+    def test_newer_lower_id_pair_restores_charged_ledger_instead_of_older_zero_state(self):
+        with self.completed_restore() as fixture:
+            old_raw = c.encoded(dict(fixture['ledger'], requests=[]))
+            old_reservation = dict(fixture['reservation'], id=900,
+                name=fixture['reservation']['name'].replace('-20-1', '-19-1'),
+                created_at='2026-10-16T13:49:40Z', workflow_run={'id': 19})
+            old_state = dict(fixture['state'], id=901,
+                name=old_reservation['name'].replace('-reservation-', '-state-'),
+                created_at='2026-10-16T13:50:40Z', workflow_run={'id': 19},
+                digest='sha256:' + c.digest(old_raw))
+            with patch.object(repair, 'repository_artifacts', return_value=[old_state, fixture['state'], old_reservation, fixture['reservation']]), \
+                    patch.object(repair, 'artifact_bytes', side_effect=lambda _r, _run, row, _api:
+                                 old_raw if row['id'] == 901 else fixture['raw']) as download:
+                self.assertTrue(repair.restore(self.root, self.parent, self.state, fixture['output']))
+            self.assertEqual(download.call_args.args[2]['id'], fixture['state']['id'])
+            self.assertEqual(c.read_json(self.state / 'ledger.json'), fixture['ledger'])
+
+    def test_newest_lower_id_unpaired_reservation_and_orphan_only_state_fail_closed(self):
+        with self.completed_restore() as fixture:
+            newer = dict(fixture['reservation'], id=1,
+                name=fixture['reservation']['name'].replace('-20-1', '-30-1'),
+                created_at='2026-10-18T13:49:40Z', workflow_run={'id': 30})
+            for rows, reason in (([fixture['reservation'], fixture['state'], newer], 'newest_repair_state_unavailable'),
+                                 ([fixture['state']], 'repair_checkpoint_inventory')):
+                with self.subTest(reason=reason), patch.object(repair, 'repository_artifacts', return_value=rows), \
+                        patch.object(repair, 'artifact_bytes') as download:
+                    with self.assertRaisesRegex(ValueError, reason):
+                        repair.restore(self.root, self.parent, self.state, fixture['output'])
+                    download.assert_not_called()
+
+    def test_lower_id_completed_state_only_transport_requires_exact_bytes_and_restore_proof(self):
+        from tools import scheduled_catalog as daily
+        (self.state / 'ledger.json').write_bytes(c.encoded({'requests': [{'charged_microusd': 10}]}))
+        (self.state / 'consumed-checkpoints.json').write_bytes(c.encoded([{'authenticated': 'prior'}]))
+        selected = {'id': 900, 'created_at': '2026-10-17T13:50:40Z'}
+        meta = {'id': 30, 'run_attempt': 1, 'head_sha': '1' * 40, 'head_branch': 'main',
+                'path': repair.archive.SOURCE_WORKFLOW, 'event': 'workflow_dispatch',
+                'status': 'completed', 'conclusion': 'success'}
+        for changed in (False, True):
+            files = {path.name: path.read_bytes() for path in self.state.iterdir() if path.is_file()}
+            if changed:
+                files['ledger.json'] = c.encoded({'requests': []})
+            stream = io.BytesIO()
+            with zipfile.ZipFile(stream, 'w') as packet:
+                for name, raw in files.items():
+                    packet.writestr(name, raw)
+            raw = stream.getvalue()
+            transport = {'id': 100, 'created_at': '2026-10-18T13:50:40Z', 'expired': False,
+                'name': repair.prefix(self.manifest['candidate_id']) + '-state-30-1',
+                'workflow_run': {'id': 30}, 'digest': 'sha256:' + c.digest(raw)}
+            with patch.object(repair, 'api', return_value=c.encoded(meta)), \
+                    patch.object(repair, 'artifact_bytes', return_value=raw), \
+                    patch.object(daily, '_require_completed_restore_jobs') as proof:
+                call = lambda: repair._completed_transports(self.root, 'owner/repo', selected,
+                    [selected, transport], [], self.state, {'completed_candidate_id': 'd' * 64})
+                if changed:
+                    with self.assertRaisesRegex(ValueError, 'completed_transport_bytes'):
+                        call()
+                    proof.assert_not_called()
+                else:
+                    call()
+                    proof.assert_called_once()
+            self.assertEqual(c.read_json(self.state / 'ledger.json')['requests'], [{'charged_microusd': 10}])
 
     def test_completed_child_with_departed_sam_cache_requires_migration_before_reuse(self):
         for key in ('records', 'subtopic_only'):

@@ -1,0 +1,50 @@
+{
+  "prior_publication_sha": "2e1daeb646ebc7e5d4f8b8af77a8257dfbc81574",
+  "candidate_id": "f6f896f6ebef0e0562b5c51e5536c26e39d1549e6b92e5c538cf5973d6cdc9a6",
+  "records": [
+    {
+      "id": "361815",
+      "forecast": {
+        "title": "HIV/AIDS Clinical Trials Network Leadership and Operations Centers",
+        "description": "The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance the National Institutes of Health (NIH) mission by supporting four Clinical Trials Networks (CTNs) each comprised of a Leadership and Operations Center (LOC), Statistical and Data Management Center, and Laboratory Center working with Clinical Trials Units to advance prevention, treatment, and implementation research designed to end the HIV epidemic. This NOFO will solicit applications for four LOCs to provide scientific leadership, research prioritization, and conduct studies in a CTN. A LOC develops the research agenda in one of these areas: 1) HIV therapeutics/cure, and prevention/treatment for HIV-associated comorbidities in adults; 2) HIV prevention/treatment in maternal/adolescent/pediatric populations; 3) biomedical HIV prevention strategies for adults/adolescents; and 4) immune-based prevention for HIV and HIV-associated diseases. CTNs will conduct HIV implementation research improving uptake of evidence-based prevention and treatment strategies across the lifespan. High impact LOC studies will produce crucial findings significantly benefiting Americans with or at-risk of HIV and HIV-associated diseases. Grant authorities that allow NIAID to forecast this opportunity are: Sections 301 and 405 of the Public Health Service Act as amended (42 USC 241 and 284) and under Federal Regulations 42 CFR Part 52 and 2 CFR Part 200."
+      },
+      "posted": {
+        "title": "HIV/AIDS Clinical Trials Network Leadership and Operations Centers (UM1 Clinical Trial Required)",
+        "description": "The purpose of this notice of funding opportunity (NOFO) is to support HIV/AIDS Clinical Trials Network Leadership and Operations Centers (LOCs). Each LOC will oversee research prioritization, planning, and conduct of studies in a HIV/AIDS Clinical Trials Network to advance research in the prevention and treatment of HIV and HIV-associated diseases."
+      }
+    },
+    {
+      "id": "361816",
+      "forecast": {
+        "title": "HIV/AIDS Clinical Trials Network Statistical and Data Management Centers",
+        "description": "The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance the National Institutes of Health (NIH) mission by supporting four Clinical Trials Networks (CTNs) each comprised of a Leadership and Operations Center, Statistical and Data Management Center (SDMC), and Laboratory Center (LC) working with Clinical Trials Units (CTUs), to advance prevention, treatment, and implementation research on HIV and HIV-associated diseases. This NOFO will solicit applications for up to four SDMCs to provide leadership for developing and implementing each CTN research agenda with the goal of ending the HIV epidemic. Each SDMC will coordinate study design and execution, including data collection, monitoring, and analyses. SDMCs manage clinical and laboratory data submitted by CTUs and the LC ensuring data quality, regulatory compliance, and continual reporting of protocol and site performance. SDMCs foster innovative trial design and statistical methods, statistical and data practices harmonization, and ensure validated systems for data capture and integration, according to NIH data sharing policies. Grant authorities that allow NIAID to forecast this opportunity are as follows: Sections 301 and 405 of the Public Health Service Act as amended (42 USC 241 and 284) and under Federal Regulations 42 CFR Part 52 and 2 CFR Part 200."
+      },
+      "posted": {
+        "title": "HIV/AIDS Clinical Trials Network Statistical and Data Management Centers (UM1 Clinical Trial Required)",
+        "description": "The purpose of this notice of funding opportunity (NOFO) is to support HIV/AIDS Clinical Trials Network Statistical and Data Management Centers (SDMCs). The SDMCs will be responsible for the statistical and data management leadership and coordination critical to the HIV/AIDS Clinical Trials Networks."
+      }
+    },
+    {
+      "id": "361820",
+      "forecast": {
+        "title": "HIV/AIDS Clinical Trials Network Laboratory Centers",
+        "description": "The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting four Clinical Trials Networks (CTNs) each comprised of a Leadership and Operations Center, Statistical and Data Management Center, and Laboratory Center (LC) working with Clinical Trials Units, to test prevention and treatment strategies and conduct implementation research designed to end the HIV epidemic. This NOFO will solicit applications for up to four LCs that will provide laboratory structure and technologies to one or more CTNs and conduct laboratory testing for Network trials, according to regulatory standards. The LC oversees site-affiliated clinical and specialized laboratories and ensures protocol-specified laboratory testing. The LC will: 1) support sample integrity from collection to final testing/storage; 2) use appropriate laboratory data capturing management and tracking systems; 3) select, determine readiness, and approve laboratories; and 4) promote state-of-the-art laboratory assays. The LC will increase testing capacity to meet advances in prevention and treatment of HIV and HIV-related diseases. Grant authorities that allow NIAID to forecast this opportunity are as follows: Sections 301 and 405 of the Public Health Service Act as amended (42 USC 241 and 284) and under Federal Regulations 42 CFR Part 52 and 2 CFR Part 200."
+      },
+      "posted": {
+        "title": "HIV/AIDS Clinical Trials Network Laboratory Centers (UM1 Clinical Trial Required)",
+        "description": "The purpose of the notice of funding opportunity (NOFO) is to support HIV/AIDS Clinical Trials Network Laboratory Centers (LCs). The LCs will provide a framework for laboratory leadership, structure and activities that contribute to the HIV/AIDS Clinical Trials Networks research agendas and execute the laboratory component of Network trials, in compliance with applicable regulatory standards."
+      }
+    },
+    {
+      "id": "361821",
+      "forecast": {
+        "title": "HIV/AIDS Clinical Trials Network Clinical Trials Units",
+        "description": "The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance the National Institutes of Health (NIH) mission by supporting four Clinical Trials Networks (CTNs) each comprised of a Leadership and Operations Center, Statistical and Data Management Center, and Laboratory Center working with Clinical Trials Units (CTUs), to advance prevention and treatment research on HIV and HIV-associated diseases. CTNs will conduct randomized controlled clinical studies at CTUs testing innovative strategies and conduct implementation research targeted to end the HIV epidemic. This NOFO will solicit applications for CTUs providing scientific expertise to conduct these clinical trials and implementation research studies. Each CTU will include an administrative hub and domestic and/or international Clinical Research Sites to promote efficient utilization of resources and infrastructure. CTUs conduct multiple clinical studies, from more than one CTN, and can access, recruit, and retain relevant study participants. International studies produce crucial findings significantly benefiting Americans with or at-risk of HIV or HIV-related diseases. Grant authorities that allow NIAID to forecast this opportunity are as follows: Sections 301 and 405 of the Public Health Service Act as amended (42 USC 241 and 284) and under Federal Regulations 42 CFR Part 52 and 2 CFR Part 200."
+      },
+      "posted": {
+        "title": "HIV/AIDS Clinical Trials Network Clinical Trials Units (UM1 Clinical Trial Required)",
+        "description": "The purpose of this notice of funding opportunity (NOFO) is to support HIV/AIDS Clinical Trials Network Clinical Trials Units (CTUs). CTUs will provide the infrastructure, as well as the scientific and administrative expertise to conduct clinical studies developed by NIH HIV/AIDS Clinical Trials Networks to advance research in the prevention and treatment of HIV and HIV-associated diseases. CTUs will participate in multiple clinical research studies, accessing relevant populations most heavily impacted by the HIV/AIDS epidemic and studies of highest priority to NIH."
+      }
+    }
+  ]
+}

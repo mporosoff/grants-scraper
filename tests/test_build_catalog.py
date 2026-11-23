@@ -39,6 +39,42 @@ FIXTURE = (
 
 
 class CatalogExtractTests(unittest.TestCase):
+    def test_official_hiv_network_topics_survive_forecast_to_posted_summaries(self):
+        fixture = json.loads((FIXTURE.parent / "hiv_topic_transition.json").read_text(encoding="utf-8"))
+        for row in fixture["records"]:
+            for phase, tag in (("forecast", "OpportunityForecastDetail_1_0"),
+                               ("posted", "OpportunitySynopsisDetail_1_0")):
+                with self.subTest(identifier=row["id"], phase=phase):
+                    root = Element("Grants")
+                    item = SubElement(root, tag)
+                    values = {"OpportunityID": row["id"], "OpportunityNumber": "HIV-NETWORK-" + row["id"],
+                              "OpportunityTitle": row[phase]["title"], "Description": row[phase]["description"],
+                              "CategoryOfFundingActivity": "HL", "LastUpdatedDate": "11202026",
+                              "EstimatedSynopsisPostDate": "08252026", "EstimatedSynopsisCloseDate": "01082027",
+                              "PostDate": "11202026", "CloseDate": "01082027"}
+                    for name, value in values.items():
+                        SubElement(item, name).text = value
+                    records = list(iter_catalog_records(BytesIO(tostring(root)), date(2026, 11, 23)))
+                    self.assertEqual(len(records), 1)
+                    self.assertEqual(records[0]["status"], "forecasted" if phase == "forecast" else "posted")
+                    self.assertTrue({"Infectious disease", "Public health"}.issubset(records[0]["topic_areas"]))
+                    self.assertEqual(records[0]["description"], row[phase]["description"])
+
+    def test_hiv_acronym_is_bounded_and_does_not_assign_all_hiv_biology_to_public_health(self):
+        for text in ("HIV molecular mechanisms", "hiv molecular mechanisms", "HIV-1 entry studies",
+                     "Research on HIV-associated diseases"):
+            with self.subTest(text=text):
+                self.assertEqual(topic_areas(text, "", []), ["Infectious disease"])
+        for text in ("decision aids", "Visual Aids for Sunscreen Application",
+                     "hive studies", "hivernation", "preHIVsuffix", "HIV/AIDS Clinical Trials Networking"):
+            with self.subTest(text=text):
+                topics = topic_areas(text, "", [])
+                if "HIV/AIDS" not in text:
+                    self.assertNotIn("Infectious disease", topics)
+                self.assertNotIn("Public health", topics)
+        self.assertEqual(topic_areas("hiv/aids clinical trials networks", "", []),
+                         ["Infectious disease", "Public health"])
+
     def test_catalog_asset_version_preserves_same_second_precision(self):
         first = {"generated_at": "2026-08-26T12:00:00.123455Z"}
         second = {"generated_at": "2026-08-26T12:00:00.123456Z"}

@@ -201,6 +201,7 @@ class CandidateLifecycleTests(unittest.TestCase):
         first = final_integration(self.root, self.bundle, self.reports, execute=self.browser_result([]))
         candidate_id = first['identity']['candidate_id']
         rows = [{'id': n, 'workflow_run': {'id': n}, 'name': f'validation-{candidate_id}-1',
+                 'created_at': f'2026-11-23T17:00:0{n}Z',
                  'expired': False} for n in (3, 2, 1)]
         for interrupted in (False, True):
             fetched = []

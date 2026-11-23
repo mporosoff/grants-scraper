@@ -65,6 +65,40 @@ Collection must run again when no complete safe source output survives; its new
 source clock and generation SHA must remain truthful. Never infer retained
 catalog bytes from a successful step, a source summary, or document cache alone.
 
+Artifact IDs are opaque identities. Within an original generation run, choose
+the greatest authenticated prior attempt and require its exact reservation/state
+pair. Across task owners and release receipts, use the original authenticated
+creation timestamp; the backup upload time does not order the original work.
+Missing, conflicting or ambiguous newest evidence cannot revive an older ledger
+or passing receipt. The November 23 native artifacts demonstrate why: attempt 3's
+reservation ID was lower than attempt 2's even though it was created later.
+
+## Retained source-topic correction
+
+The protected manual `topic-area-revalidation` stage takes one exact native
+`candidate_run` and `candidate_id`. It uses the existing modern continuation
+framework and the parent's original logical allowance. It compares the original
+protected source classifier with the repaired classifier against retained title,
+description and funding-category inputs, and adds only newly supported topics.
+All scientific facts, source/evidence clocks, document caches, team decisions and
+original generation identity remain retained. Existing inline source-topic
+baselines are updated only to match those same topic additions.
+
+Facets, lexical indexes, complete managed feeds and the affected current change
+snapshots are rebuilt; historical and closure events remain retained. This
+projection requires the existing exact corpus and native vector bytes and allows
+no appended provider requests. A corpus mismatch stops before provider dispatch.
+The derived child is persisted before ordinary gates, exact-head review and
+protected publication. Failed later stages resume that exact child.
+
+November 23 publication review stopped candidate
+`f6f896f6ebef0e0562b5c51e5536c26e39d1549e6b92e5c538cf5973d6cdc9a6`
+before serving changes. Four HIV clinical-network notices lost their topics when
+shorter posted summaries replaced their forecasts. Whole-word HIV classification
+also repairs the same missing infectious-disease label on related retained
+records, while generic uses of "aids" remain unrelated. This is a deterministic
+projection repair; it does not claim another source collection.
+
 ## Independent public freshness check
 
 The Alerts Worker observes the public Pages marker, publication receipt, and exact catalog metadata once per hour on its existing Cloudflare retry schedule. Its read-only `/catalog-health` endpoint reports public publication availability, source freshness, and the age of the observation independently of Alerts delivery health. The source clock must fall in the current day's 10:17 UTC window by 6 p.m. Eastern. Before 6 p.m. the previous daily window is acceptable.
