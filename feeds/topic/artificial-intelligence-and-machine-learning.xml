@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml</id>
-  <updated>2026-11-18T18:58:27Z</updated>
+  <updated>2026-11-23T18:07:22Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Single Source: Scalable and Systematic Neurobiology of Psychiatric and Neurodevelopmental Disorder Risk Genes: Data Resource and Administrative Coordination Center (U24 Clinical Trial Not Allowed)</title>
@@ -109,6 +109,36 @@
     <category term="Biology and biotechnology"/>
     <category term="Environmental science"/>
     <summary>National Institutes of Health | Estimated Application 2027-02-10 | Type 1 diabetes (T1D) is a complex disease involving interactions among many different cell types, tissues, organs and biological processes. Genetics, the environment, and lifestyle all play a role in disease development and progression. Over the past two decades, the National Institute of Diabetes and Digestive and Kidney Diseases (NIDDK) has supported major T1D research consortia covering basic,…</summary>
+  </entry>
+  <entry>
+    <title>FY 2027 Build to Scale Notice of Funding Opportunity</title>
+    <link href="https://www.grants.gov/search-results-detail/364206"/>
+    <id>urn:funding-finder:grants-gov:364206</id>
+    <updated>2026-11-20T00:00:00Z</updated>
+    <author><name>Economic Development Administration</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Community development"/>
+    <category term="Education and workforce"/>
+    <category term="Technology development"/>
+    <category term="Materials science"/>
+    <category term="Quantum science"/>
+    <category term="Data science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <summary>Economic Development Administration | Application 2027-02-26 | The Build to Scale (B2S) program strengthens America’s economic and technological leadership and increases the success of innovation-driven industry by turning U.S. breakthroughs into U.S.-built companies that attract private capital, create jobs, and keep the industries of the future anchored on American soil. Build to Scale aims to support technology- and innovation-based economic development in…</summary>
+  </entry>
+  <entry>
+    <title>Foundational Research in Robotics (FRR)</title>
+    <link href="https://www.grants.gov/search-results-detail/364294"/>
+    <id>urn:funding-finder:grants-gov:364294</id>
+    <updated>2026-11-19T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <category term="Transportation"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Materials science"/>
+    <summary>U.S. National Science Foundation | Posted | Advances in robotics directly contribute to the nation's long-term reindustrialization, competitiveness and security, as robotics is increasingly a major driver of productivity across a range of economic sectors such as manufacturing, logistics, transportation, defense, and healthcare. These general-purpose autonomous systems are capable of dexterous manipulation, mobility, and reliable operation …</summary>
   </entry>
   <entry>
     <title>WATER RESOURCES RESEARCH ACT PROGRAM ANNUAL BASE GRANTS</title>
@@ -225,7 +255,7 @@
     <category term="Materials science"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
-    <summary>National Energy Technology Laboratory | Concept Paper 2026-11-20 | Grid Supply Chain Alternatives to Lead Energy Dominance (SCALED) This initiative will deploy a multi-faceted approach to bolster domestic capabilities to withstand supply chain shocks, ensure a reliable energy infrastructure, and position the U.S. as a global leader in foundational grid technologies. Modification 000001: Issued to update NOFO, Part 1 Section II.A. Eligibility - Participant Limitat…</summary>
+    <summary>National Energy Technology Laboratory | Application 2027-02-08 | prerequisite closed | Grid Supply Chain Alternatives to Lead Energy Dominance (SCALED) This initiative will deploy a multi-faceted approach to bolster domestic capabilities to withstand supply chain shocks, ensure a reliable energy infrastructure, and position the U.S. as a global leader in foundational grid technologies. Modification 000001: Issued to update NOFO, Part 1 Section II.A. Eligibility - Participant Limitat…</summary>
   </entry>
   <entry>
     <title>Unifying​ Imaging with​ Quantum​ Entanglement (UNIQUE)</title>
@@ -437,7 +467,7 @@
     <category term="Quantum science"/>
     <category term="Data science"/>
     <category term="Artificial intelligence and machine learning"/>
-    <summary>U.S. National Science Foundation | Concept Paper 2026-11-19 | The Emerging Frontiers in Research and Innovation (EFRI) program serves a critical role in helping the NSF Directorate for Engineering focus on important emerging areas in a timely way. The EFRI program invests in potentially transformative ideas that offer the opportunity for significant shifts in foundational engineering knowledge. EFRI-funded research must have strong potential for long-term im…</summary>
+    <summary>U.S. National Science Foundation | Application 2027-02-11 | invitation required | The Emerging Frontiers in Research and Innovation (EFRI) program serves a critical role in helping the NSF Directorate for Engineering focus on important emerging areas in a timely way. The EFRI program invests in potentially transformative ideas that offer the opportunity for significant shifts in foundational engineering knowledge. EFRI-funded research must have strong potential for long-term im…</summary>
   </entry>
   <entry>
     <title>Core Research in Biological Sciences (BIO Core)</title>
@@ -619,29 +649,6 @@
     <summary>NASA Headquarters | Application 2026-12-02 | PLEASE NOTE: this program has MANDATORY Notices of Intent, which are due via NSPIRES by 8/20/2026. See the full posting on NSPIRES for details. NOTICE: September 18, 2026. Section 3.1 on participation of NASA ISFM scientists has been improved. Details on the redacted and anonymized budget requirements have been added to Table A.14-1 to be consistent with Section 4.3.2. The instructions regarding B…</summary>
   </entry>
   <entry>
-    <title>DoW Rare Cancers Idea Development Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362849"/>
-    <id>urn:funding-finder:grants-gov:362849</id>
-    <updated>2026-06-17T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Cancer"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA | Application 2026-11-18 | invitation required | Summary: The fiscal year 2026 (FY26) Rare Cancers Research Program (RCRP) Idea Development Award (IDA) promotes ideas that are ready for further development and have the potential to yield high-impact findings and new avenues of investigation. Distinctive Features: The RCRP encourages applicants to include an exploratory aim or sub-aim to support any necessary discovery-driven research. Preliminar…</summary>
-  </entry>
-  <entry>
-    <title>DoW Rare Cancers Resource and Community Development Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362850"/>
-    <id>urn:funding-finder:grants-gov:362850</id>
-    <updated>2026-06-17T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Cancer"/>
-    <category term="Community development"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA | Application 2026-11-18 | invitation required | Summary: The fiscal year 2026 (FY26) Rare Cancers Research Program (RCRP) Resource and Community Development Award (RCDA) supports the development of research resources and clinical or preclinical datasets that will advance the field of rare cancers research and ultimately improve outcomes for individuals with rare cancers. Research supporting this funding opportunity should fill one of the follow…</summary>
-  </entry>
-  <entry>
     <title>WaterSMART Cooperative Watershed Management Program</title>
     <link href="https://www.grants.gov/search-results-detail/362755"/>
     <id>urn:funding-finder:grants-gov:362755</id>
@@ -668,18 +675,6 @@
     <category term="Data science"/>
     <category term="Artificial intelligence and machine learning"/>
     <summary>Air Force Office of Scientific Research | Posted | AFOSR plans, coordinates, and executes the Air Force Research Laboratory’s (AFRL) basic research program in response to technical guidance from AFRL and requirements of the Air Force. Additionally, the office fosters, supports, and conducts research within Air Force, university, and industry laboratories; and ensures transition of research results to support U.S. Air Force needs. The focus of AFOS…</summary>
-  </entry>
-  <entry>
-    <title>Native American Affairs: Fiscal Year 2025 Colorado River Basin Tribal Drought Resiliency Program</title>
-    <link href="https://www.grants.gov/search-results-detail/362644"/>
-    <id>urn:funding-finder:grants-gov:362644</id>
-    <updated>2026-06-02T00:00:00Z</updated>
-    <author><name>Bureau of Reclamation</name></author>
-    <category term="Energy"/>
-    <category term="Water"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Bureau of Reclamation | Application 2026-11-20 | The objectives of this NAA/TAP funding opportunity are to provide funding for drought relief actions/projects that mitigate drought impacts for designated federally recognized tribes within the Colorado River Basin (see Eligibility section for list of tribes), and which advance Presidential and Department of the Interior Priorities within the Basin. Proposals should meet one or more of the followi…</summary>
   </entry>
   <entry>
     <title>DLA Emergent IV Research and Development Program</title>
@@ -755,5 +750,21 @@
     <category term="Materials science"/>
     <category term="Quantum science"/>
     <summary>U.S. National Science Foundation | Posted | Society relies on chemical processes to turn raw materials into useful products. The Chemical Process Systems (CPS) program invests in fundamental research on chemical and biochemical processes to make them more efficient, sustainable, and resilient. New CPS technologies for manufacturing, biotechnology, critical minerals, energy, food, and other national priorities will help make the U.S. more co…</summary>
+  </entry>
+  <entry>
+    <title>Transport Phenomena (TP)</title>
+    <link href="https://www.grants.gov/search-results-detail/362063"/>
+    <id>urn:funding-finder:grants-gov:362063</id>
+    <updated>2026-04-24T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Quantum science"/>
+    <category term="Separations and membranes"/>
+    <category term="Technology development"/>
+    <category term="Transportation"/>
+    <summary>U.S. National Science Foundation | Posted | The Transport Phenomena (TP) program supports fundamental research to understand, model, and control the transport of mass, momentum, energy, and species across multiple scales. Innovative TP research supports advances in artificial intelligence; manufacturing; biotechnology; microelectronics; energy generation, extraction, and utilization; nuclear energy; quantum science and engineering; and othe…</summary>
   </entry>
 </feed>

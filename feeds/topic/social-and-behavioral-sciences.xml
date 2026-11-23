@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/social-and-behavioral-sciences.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/social-and-behavioral-sciences.xml</id>
-  <updated>2026-11-18T18:58:27Z</updated>
+  <updated>2026-11-23T18:07:22Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -119,6 +119,7 @@
     <category term="Data science"/>
     <category term="Social and behavioral sciences"/>
     <category term="Technology development"/>
+    <category term="Infectious disease"/>
     <summary>National Institutes of Health | Estimated Application 2027-05-25 | The National Institute of Mental Health (NIMH) seeks research applications to support the NIMH HIV/AIDS Research Centers (ARC) program, including Developmental Centers (D-ARCs) and full AIDS Research Centers (ARCs). These Research Centers aim to capitalize on the coordinated infrastructure to advance high-impact, interdisciplinary HIV/AIDS research. The ARC program supports innovative research acr…</summary>
   </entry>
   <entry>
@@ -309,6 +310,17 @@
     <summary>National Institutes of Health | Estimated Application 2027-02-23 | The National Institutes of Health intends to publish a Notice of Funding Opportunity (NOFO), Pragmatic and Implementation Trials Conducted in Health Care SettingsThis funding opportunity will support large-scale pragmatic trials that test intervention effectiveness in routine clinical care and/or implementation trials that evaluate strategies for delivering interventions within health care setting…</summary>
   </entry>
   <entry>
+    <title>Facilitating Behavior Change Training for Trainers</title>
+    <link href="https://www.grants.gov/search-results-detail/364298"/>
+    <id>urn:funding-finder:grants-gov:364298</id>
+    <updated>2026-11-20T00:00:00Z</updated>
+    <author><name>National Institute of Corrections</name></author>
+    <category term="Education and workforce"/>
+    <category term="Neuroscience"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>National Institute of Corrections | Application 2027-01-19 | Community supervision professionals have utilized both risk management and behavioral change strategies to manage their probation and parole populations. However, recent correctional research favors the use of core correctional interventions as they consistently show reductions in recidivism when applied correctly. Based on social learning theory, Core Correctional Practices (CCPs) are behavioral …</summary>
+  </entry>
+  <entry>
     <title>Evidence-Informed Practices in the Management of Women’s Prisons</title>
     <link href="https://www.grants.gov/search-results-detail/364276"/>
     <id>urn:funding-finder:grants-gov:364276</id>
@@ -414,15 +426,6 @@
     <category term="Social and behavioral sciences"/>
     <category term="Transportation"/>
     <summary>National Institutes of Health | Application 2029-07-12 | The National Institutes of Health (NIH) will award Institutional Mentored Career Development grants to eligible domestic institutions to support career development programs designed to prepare later stage postdoctoral fellows and junior faculty scholars who have made a commitment to an independent research career for their career advancement and transition to independence. Supported scholars will …</summary>
-  </entry>
-  <entry>
-    <title>DoW Orthopaedic, Applied Research Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362520"/>
-    <id>urn:funding-finder:grants-gov:362520</id>
-    <updated>2026-06-17T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Social and behavioral sciences"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA | Application 2026-11-18 | invitation required | Summary: The Orthopaedic Research Program (ORP) Applied Research Award (ARA) seeks applied research applications focused on advancing optimal treatment and restoration of function for individuals with orthopaedic injuries sustained during combat or service-related activities. Distinctive Features: • Applied research is defined as work that refines concepts and ideas into potential solutions with a…</summary>
   </entry>
   <entry>
     <title>NIH Research Education Program - Research Experiences (Parent R25 - Clinical Trial Not Allowed)</title>
@@ -542,6 +545,7 @@
     <category term="Education and workforce"/>
     <category term="Public health"/>
     <category term="Social and behavioral sciences"/>
+    <category term="Infectious disease"/>
     <summary>Office of the Assistant Secretary for Health | Application 2027-01-11 | The Office of Population Affairs (OPA) announces the anticipated availability of funds for Fiscal Year (FY) 2027 grants under the authority of Title X of the Public Health Service Act, Section 1001 (42 U.S.C. §300).This notice solicits applications for projects to provide Title X services throughout the 50 United States, District of Columbia, Guam, the Commonwealth of Puerto Rico, the Northern Mar…</summary>
   </entry>
   <entry>
@@ -581,6 +585,7 @@
     <updated>2026-03-06T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <category term="Social and behavioral sciences"/>
+    <category term="Infectious disease"/>
     <summary>National Institutes of Health | Application 2028-01-25 | This Notice of Funding Opportunity (NOFO) solicits applications to develop shared-use research facilities or research-supporting facilities that enable collaborative research and benefit broad research communities at large. The NOFO supports two existing construction programs: the Biomedical Research Facilities (BRF) program and the HIV/AIDS Research Facilities (HRF) program. The BRF program suppo…</summary>
   </entry>
   <entry>

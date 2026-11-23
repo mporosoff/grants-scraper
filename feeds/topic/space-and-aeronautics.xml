@@ -4,16 +4,26 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/space-and-aeronautics.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/space-and-aeronautics.xml</id>
-  <updated>2026-11-18T18:58:27Z</updated>
+  <updated>2026-11-23T18:07:22Z</updated>
   <generator>Funding Finder</generator>
   <entry>
-    <title>ROSES25: D.11 U.S. Contributions to Ariel Preparatory Science</title>
-    <link href="https://solicitation.nasaprs.com/NNH25ZDA001N-USCAPS"/>
-    <id>urn:funding-finder:nasa-roses:nasa-roses%3A25-D.11-1872bf67cd</id>
-    <updated>2026-11-17T00:00:00Z</updated>
+    <title>ROSES 2025: D.11 U.S. Contributions to Ariel Preparatory Science</title>
+    <link href="https://www.grants.gov/search-results-detail/364280"/>
+    <id>urn:funding-finder:grants-gov:364280</id>
+    <updated>2026-11-18T00:00:00Z</updated>
+    <author><name>NASA Headquarters</name></author>
+    <category term="Energy"/>
+    <category term="Space and aeronautics"/>
+    <summary>NASA Headquarters | Application 2027-02-18 | Please note that this program requests optional Notices of Intent, which are due via NSPIRES by January 4th 2027. See the full posting on NSPIRES for details. ﻿NOTICE: Amended November 18, 2026. This amendment presents a new program element in ROSES-2025. Mandatory NOIs (see Section 3.1) are due by January 4, 2027, and full proposals are due by February 18, 2027. A videoconference for prospective …</summary>
+  </entry>
+  <entry>
+    <title>ROSES25: B.9 Heliophysics Flight Opportunities in Research and Technology</title>
+    <link href="https://nspires.nasaprs.com/external/solicitations/summary.do?solNum=NNH25ZDA001N-HFORT"/>
+    <id>urn:funding-finder:nasa-roses:nasa-roses%3A25-B.9-b72c625ed1</id>
+    <updated>2026-11-18T00:00:00Z</updated>
     <author><name>NASA Headquarters</name></author>
     <category term="Space and aeronautics"/>
-    <summary>NASA Headquarters | Application 2027-02-18 | NASA ROSES-2025 program element D.11, appendix division D. Published status: dated; due dates as printed: 12/18/2026 (Mandatory NOI) | 02/18/2027. Source: ROSES Table 3 (SOLICITED RESEARCH PROGRAMS).</summary>
+    <summary>NASA Headquarters | Application 2027-06-25 | NASA ROSES-2025 program element B.9, appendix division B. Published status: dated; due dates as printed: 01/21/2027 (Step-1) | 06/25/2027 (Step-2). Source: ROSES Table 3 (SOLICITED RESEARCH PROGRAMS).</summary>
   </entry>
   <entry>
     <title>NASA SPACE TECHNOLOGY GRADUATE RESEARCH OPPORTUNITIES - FALL 2027 (NSTGRO27)</title>

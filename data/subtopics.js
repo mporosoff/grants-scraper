@@ -12,7 +12,7 @@ globalThis.SUBTOPIC_CATALOG={
   "top_level_fetch_failure_count": 51
  },
  "parent_count": 29,
- "record_count": 469,
+ "record_count": 467,
  "records": {
   "103313": {
    "segmentation_method": null,
@@ -15046,13 +15046,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "357256": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "357259": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -15145,13 +15138,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "357342": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "357343": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -15733,20 +15719,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "358118": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "358176": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "358181": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -26538,13 +26510,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "361604": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "361606": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -26733,13 +26698,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "362276": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "362277": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -26754,28 +26712,7 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "362302": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "362303": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "362304": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "362305": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -26873,20 +26810,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "362520": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "362524": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "362551": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -26951,13 +26874,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "362639": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "362644": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -27056,20 +26972,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "362827": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "362849": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "362850": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -27181,13 +27083,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "362961": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "362977": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -27259,13 +27154,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "363039": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363047": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -29225,20 +29113,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "363670": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363671": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "363677": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -29336,13 +29210,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "363699": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363712": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -29485,13 +29352,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "363758": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "363759": {
    "segmentation_method": "nasa_roses_table",
    "subtopic_count": 1,
@@ -29556,13 +29416,6 @@ globalThis.SUBTOPIC_CATALOG={
    ]
   },
   "363777": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363779": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -29868,13 +29721,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "363847": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "363848": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -29904,13 +29750,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "363855": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363856": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -33619,13 +33458,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "363913": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "363915": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -33639,277 +33471,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
-  },
-  "363920": {
-   "segmentation_method": "numbered",
-   "subtopic_count": 3,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopics": [
-    {
-     "child_type": "subject",
-     "confidence": "low",
-     "cov4_approval_contract": "679e4bbcd8185ff7b966f027b7b12e255982b9310b0ed9cee8c5771fe9cf0a35",
-     "cov4_fundability": "accept",
-     "cov4_ownership": "owned",
-     "cov4_ownership_basis": "grants_gov_attachment_binding",
-     "cov4_prompt_version": "cov4-subject-context-1",
-     "evidence_anchor": "p9",
-     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-     "first_seen": "2026-09-27",
-     "last_verified": "2026-10-20",
-     "opportunity_id": "363920:c-1",
-     "ordinal_label": "1",
-     "own_deadline": null,
-     "own_deadline_is_advisory": true,
-     "page_end": 10,
-     "page_start": 9,
-     "parent_id": "363920",
-     "parent_opportunity_number": "USDA-NHQ-ACEP-26-NOFO0001456",
-     "pattern_family": "component",
-     "program_area_labels": [],
-     "publication_reason": "tier_low",
-     "publication_state": "review",
-     "record_type": "subtopic",
-     "segmentation_method": "numbered",
-     "source_document_hash": "80f4829d687ef8e9a65950f0155f04377c638f2f01c1c113ede64511b22b4b52",
-     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355082",
-     "source_role": "authoritative_announcement",
-     "status": "posted",
-     "subtopic_code": "Component 1",
-     "subtopic_code_norm": "c-1",
-     "subtopic_id": "363920:c-1",
-     "subtopic_ordinal": 1,
-     "subtopic_source": "inferred",
-     "summary": "The awardee may be responsible for developing complete, or engineering components of, new easement restoration designs or designs to repair failed or degraded engineering practices on existing easements. These activities may require the following: a. Onsite topographic survey and gathering of onsite and offsite data of the planned restoration area and any upland or downstream impacted areas as necessary. b.",
-     "term_display": {
-      "326": "326",
-      "356": "356",
-      "395": "395",
-      "460": "460",
-      "466": "466",
-      "468": "468",
-      "500": "500",
-      "570": "570",
-      "580": "580",
-      "587": "587",
-      "606": "606",
-      "620": "620",
-      "646": "646",
-      "649": "649",
-      "656": "656",
-      "657": "657",
-      "658": "658",
-      "659": "659",
-      "activity": "activities",
-      "area": "area",
-      "awardee": "awardee",
-      "bid": "bid",
-      "bidder": "bidders",
-      "but": "but",
-      "calculation": "calculations",
-      "clear": "Clearing",
-      "complete": "complete",
-      "component": "Component",
-      "conservation": "conservation",
-      "construction": "construction",
-      "control": "Control",
-      "design": "Design",
-      "easement": "easements",
-      "engineer": "engineering",
-      "exist": "existing",
-      "improvement": "Improvement",
-      "includ": "including",
-      "land": "Land",
-      "management": "Management",
-      "necessary": "necessary",
-      "onsite": "Onsite",
-      "outlet": "Outlet",
-      "plann": "planned",
-      "practice": "practices",
-      "preparation": "preparation",
-      "repair": "repair",
-      "require": "require",
-      "restoration": "restoration",
-      "structure": "Structure",
-      "water": "Water",
-      "wetland": "Wetland"
-     },
-     "title": "Planning and Design of Engineering Practices and Improvements",
-     "title_fingerprint": "2c47827c",
-     "topic_areas": []
-    },
-    {
-     "child_type": "subject",
-     "confidence": "low",
-     "cov4_approval_contract": "cbe81612ff5673eef202799c3fc428d32fa6e3df761f9de04822892aaecd6683",
-     "cov4_fundability": "accept",
-     "cov4_ownership": "owned",
-     "cov4_ownership_basis": "grants_gov_attachment_binding",
-     "cov4_prompt_version": "cov4-subject-context-1",
-     "evidence_anchor": "p10",
-     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-     "first_seen": "2026-09-27",
-     "last_verified": "2026-10-20",
-     "opportunity_id": "363920:c-2",
-     "ordinal_label": "2",
-     "own_deadline": null,
-     "own_deadline_is_advisory": true,
-     "page_end": 11,
-     "page_start": 10,
-     "parent_id": "363920",
-     "parent_opportunity_number": "USDA-NHQ-ACEP-26-NOFO0001456",
-     "pattern_family": "component",
-     "program_area_labels": [],
-     "publication_reason": "tier_low",
-     "publication_state": "review",
-     "record_type": "subtopic",
-     "segmentation_method": "numbered",
-     "source_document_hash": "80f4829d687ef8e9a65950f0155f04377c638f2f01c1c113ede64511b22b4b52",
-     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355082",
-     "source_role": "authoritative_announcement",
-     "status": "posted",
-     "subtopic_code": "Component 2",
-     "subtopic_code_norm": "c-2",
-     "subtopic_id": "363920:c-2",
-     "subtopic_ordinal": 2,
-     "subtopic_source": "inferred",
-     "summary": "Practices, Including Vegetative Maintenance or Re -Establishment The awardee may be responsible for developing vegetative restoration plans, or vegetative maintenance/re-establishment/management plans for existing easements with failed practices or degraded conditions. Sub-component activities may include: a. Development of planting plans in the easement business tools for new enrollments. This may require a site assessments or wetland delineations, as needed, to promote wetland plant communities using compatible/native. b.",
-     "term_display": {
-      "314": "314",
-      "315": "315",
-      "327": "327",
-      "338": "338",
-      "342": "342",
-      "380": "380",
-      "394": "394",
-      "420": "420",
-      "422": "422",
-      "484": "484",
-      "490": "490",
-      "612": "612",
-      "643": "643",
-      "business": "business",
-      "community": "communities",
-      "compatible": "compatible",
-      "condition": "conditions",
-      "conservation": "Conservation",
-      "degrad": "degraded",
-      "design": "Design",
-      "develop": "Developing",
-      "development": "Development",
-      "easement": "easement",
-      "establishment": "Establishment",
-      "fail": "failed",
-      "habitat": "Habitat",
-      "include": "include",
-      "maintenance": "maintenance",
-      "management": "Management",
-      "plan": "plans",
-      "plant": "plant",
-      "practice": "practices",
-      "re-establishment": "re-establishment",
-      "restoration": "Restoration",
-      "shrub": "Shrub",
-      "site": "Site",
-      "tool": "tools",
-      "tree": "Tree",
-      "vegetative": "Vegetative",
-      "wetland": "wetland",
-      "wildlife": "Wildlife"
-     },
-     "title": "Easement Restoration and Stewardship: Planning and Design of Vegetative",
-     "title_fingerprint": "0ef37cc1",
-     "topic_areas": []
-    },
-    {
-     "child_type": "subject",
-     "confidence": "low",
-     "cov4_approval_contract": "bd3286b820b34155e488c35254e9fb90a0480c6f1cff546d5352199d9d20e732",
-     "cov4_fundability": "accept",
-     "cov4_ownership": "owned",
-     "cov4_ownership_basis": "grants_gov_attachment_binding",
-     "cov4_prompt_version": "cov4-subject-context-1",
-     "evidence_anchor": "p11",
-     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-     "first_seen": "2026-09-27",
-     "last_verified": "2026-10-20",
-     "opportunity_id": "363920:c-3",
-     "ordinal_label": "3",
-     "own_deadline": null,
-     "own_deadline_is_advisory": true,
-     "page_end": 12,
-     "page_start": 11,
-     "parent_id": "363920",
-     "parent_opportunity_number": "USDA-NHQ-ACEP-26-NOFO0001456",
-     "pattern_family": "component",
-     "program_area_labels": [],
-     "publication_reason": "tier_low",
-     "publication_state": "review",
-     "record_type": "subtopic",
-     "segmentation_method": "numbered",
-     "source_document_hash": "80f4829d687ef8e9a65950f0155f04377c638f2f01c1c113ede64511b22b4b52",
-     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355082",
-     "source_role": "authoritative_announcement",
-     "status": "posted",
-     "subtopic_code": "Component 3",
-     "subtopic_code_norm": "c-3",
-     "subtopic_id": "363920:c-3",
-     "subtopic_ordinal": 3,
-     "subtopic_source": "inferred",
-     "summary": "The awardee may be responsible for onsite and offsite monitoring of existing ACEP-WRE, EWPP-FPE, and WRP easements in multiple states, which includes the following: Assess the ecological condition of restored easements and their compliance with NRCS deed terms and policies as outlined in the Conservation Program Manual (CPM) under Easement Common Provisions Monitoring (440 CPM 527, Subpart P).",
-     "term_display": {
-      "440": "440",
-      "527": "527",
-      "activity": "activities",
-      "annual": "Annual",
-      "assess": "Assess",
-      "available": "available",
-      "awardee": "awardee",
-      "common": "Common",
-      "compatible": "compatible",
-      "compliance": "compliance",
-      "condition": "conditions",
-      "conservation": "Conservation",
-      "cpm": "CPM",
-      "deed": "deed",
-      "design": "designed",
-      "each": "each",
-      "easement": "easement",
-      "ecological": "ecological",
-      "effectiveness": "effectiveness",
-      "encroachment": "encroachments",
-      "etc": "etc",
-      "exist": "existing",
-      "follow": "follow",
-      "identifi": "identified",
-      "if": "If",
-      "imagery": "Imagery",
-      "include": "include",
-      "management": "management",
-      "manual": "Manual",
-      "monitor": "Monitoring",
-      "need": "needed",
-      "nrcs": "NRCS",
-      "onsite": "onsite",
-      "package": "package",
-      "part": "Part",
-      "plan": "plans",
-      "policy": "policies",
-      "policy-compliant": "policy-compliant",
-      "potential": "potential",
-      "practice": "practices",
-      "provide": "provide",
-      "provision": "Provisions",
-      "restoration": "restoration",
-      "subpart": "Subpart",
-      "verify": "verifying",
-      "violation": "violation"
-     },
-     "title": "Monitoring of Closed and Restored Easements",
-     "title_fingerprint": "6d8b248f",
-     "topic_areas": []
-    }
-   ]
   },
   "363926": {
    "segmentation_method": null,
@@ -39777,13 +39338,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "364037": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "364039": {
    "segmentation_method": "nasa_roses_table",
    "subtopic_count": 1,
@@ -39850,20 +39404,6 @@ globalThis.SUBTOPIC_CATALOG={
      "topic_areas": []
     }
    ]
-  },
-  "364043": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "364047": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
   },
   "364048": {
    "segmentation_method": null,
@@ -40082,13 +39622,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "364132": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "364133": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -40097,20 +39630,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "364134": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "364135": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "364136": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -40509,6 +40028,13 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
+  "364206": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
   "364212": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -40877,6 +40403,136 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
+  "364279": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "364280": {
+   "segmentation_method": "nasa_roses_table",
+   "subtopic_count": 1,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopics": [
+    {
+     "amended": true,
+     "child_source_url": "https://solicitation.nasaprs.com/NNH25ZDA001N-USCAPS",
+     "child_type": "subject",
+     "confidence": "high",
+     "division": "D",
+     "evidence_anchor": null,
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-11-23",
+     "last_verified": "2026-11-23",
+     "native_deadline_text": "12/18/2026 (Mandatory NOI) | 02/18/2027",
+     "native_status": "dated",
+     "opportunity_id": "364280:d-11",
+     "ordinal_label": "D.11",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": null,
+     "page_start": null,
+     "parent_id": "364280",
+     "parent_opportunity_number": "NNH25ZDA001N-USCAPS",
+     "pattern_family": null,
+     "program_area_labels": [],
+     "publication_reason": "high_confidence",
+     "publication_state": "publishable",
+     "record_type": "subtopic",
+     "segmentation_method": null,
+     "source_document_hash": "a7c052e89b4ea5a7741873211ef3dedf5fd268c61b08248cd034ba85c25cecee",
+     "source_document_url": "https://nspires.nasaprs.com/external/viewrepositorydocument/cmdocumentid=1041498/solicitationId=%7B2A1D139B-B9C7-CE8C-2E81-223FD08460F9%7D/viewSolicitationDocument=1/Table 3 ROSES-2025_Amend 83.html",
+     "source_role": "authoritative_announcement",
+     "source_version": {
+      "amendment": 83,
+      "year": 2025
+     },
+     "status": "posted",
+     "subtopic_code": "D.11",
+     "subtopic_code_norm": "d-11",
+     "subtopic_id": "364280:d-11",
+     "subtopic_ordinal": 56,
+     "subtopic_source": "native",
+     "summary": "NASA ROSES program element D.11: U.S. Contributions to Ariel Preparatory Science.",
+     "term_display": {
+      "02": "02",
+      "12": "12",
+      "18": "18",
+      "2026": "2026",
+      "2027": "2027",
+      "ariel": "Ariel",
+      "contribution": "Contributions",
+      "division": "division",
+      "mandatory": "Mandatory",
+      "noi": "NOI",
+      "preparatory": "Preparatory",
+      "rose": "ROSES",
+      "science": "Science",
+      "u.s": "U.S"
+     },
+     "title": "U.S. Contributions to Ariel Preparatory Science",
+     "title_fingerprint": "32baad27",
+     "topic_areas": []
+    }
+   ]
+  },
+  "364288": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "364290": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "364291": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "364293": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "364294": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "364297": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "364298": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "364299": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
   "39841": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -40954,13 +40610,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "arpa-h:tigar": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "arpa-h:unique": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -40975,69 +40624,67 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "nasa-roses:25-D.11-1872bf67cd": {
+  "nasa-roses:25-B.9-b72c625ed1": {
    "segmentation_method": "nasa_roses_table",
    "subtopic_count": 1,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
    "subtopics": [
     {
      "amended": true,
-     "child_source_url": "https://solicitation.nasaprs.com/NNH25ZDA001N-USCAPS",
+     "child_source_url": "https://nspires.nasaprs.com/external/solicitations/summary.do?solNum=NNH25ZDA001N-HFORT",
      "child_type": "subject",
      "confidence": "high",
-     "division": "D",
+     "division": "B",
      "evidence_anchor": null,
      "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-     "first_seen": "2026-11-18",
-     "last_verified": "2026-11-18",
-     "native_deadline_text": "12/18/2026 (Mandatory NOI) | 02/18/2027",
+     "first_seen": "2026-11-23",
+     "last_verified": "2026-11-23",
+     "native_deadline_text": "01/21/2027 (Step-1) | 06/25/2027 (Step-2)",
      "native_status": "dated",
-     "opportunity_id": "nasa-roses:25-D.11-1872bf67cd:d-11",
-     "ordinal_label": "D.11",
+     "opportunity_id": "nasa-roses:25-B.9-b72c625ed1:b-9",
+     "ordinal_label": "B.9",
      "own_deadline": null,
      "own_deadline_is_advisory": true,
      "page_end": null,
      "page_start": null,
-     "parent_id": "nasa-roses:25-D.11-1872bf67cd",
-     "parent_opportunity_number": "NNH25ZDA001N-USCAPS",
+     "parent_id": "nasa-roses:25-B.9-b72c625ed1",
+     "parent_opportunity_number": "NNH25ZDA001N-HFORT",
      "pattern_family": null,
      "program_area_labels": [],
      "publication_reason": "high_confidence",
      "publication_state": "publishable",
      "record_type": "subtopic",
      "segmentation_method": null,
-     "source_document_hash": "a66edbf860b54dbb83a4c4fcbc757656fbb51d91f1d1c8d282ddbd14b2e20639",
-     "source_document_url": "https://nspires.nasaprs.com/external/viewrepositorydocument/cmdocumentid=1041498/solicitationId=%7B2A1D139B-B9C7-CE8C-2E81-223FD08460F9%7D/viewSolicitationDocument=1/Table 3 ROSES-2025_Amend 82.html",
+     "source_document_hash": "a7c052e89b4ea5a7741873211ef3dedf5fd268c61b08248cd034ba85c25cecee",
+     "source_document_url": "https://nspires.nasaprs.com/external/viewrepositorydocument/cmdocumentid=1041498/solicitationId=%7B2A1D139B-B9C7-CE8C-2E81-223FD08460F9%7D/viewSolicitationDocument=1/Table 3 ROSES-2025_Amend 83.html",
      "source_role": "authoritative_announcement",
      "source_version": {
-      "amendment": 82,
+      "amendment": 83,
       "year": 2025
      },
      "status": "posted",
-     "subtopic_code": "D.11",
-     "subtopic_code_norm": "d-11",
-     "subtopic_id": "nasa-roses:25-D.11-1872bf67cd:d-11",
-     "subtopic_ordinal": 55,
+     "subtopic_code": "B.9",
+     "subtopic_code_norm": "b-9",
+     "subtopic_id": "nasa-roses:25-B.9-b72c625ed1:b-9",
+     "subtopic_ordinal": 26,
      "subtopic_source": "native",
-     "summary": "NASA ROSES program element D.11: U.S. Contributions to Ariel Preparatory Science.",
+     "summary": "NASA ROSES program element B.9: Heliophysics Flight Opportunities in Research and Technology.",
      "term_display": {
-      "02": "02",
-      "12": "12",
-      "18": "18",
-      "2026": "2026",
+      "01": "01",
+      "06": "06",
       "2027": "2027",
-      "ariel": "Ariel",
-      "contribution": "Contributions",
+      "21": "21",
+      "25": "25",
       "division": "division",
-      "mandatory": "Mandatory",
-      "noi": "NOI",
-      "preparatory": "Preparatory",
+      "flight": "Flight",
+      "heliophysic": "Heliophysics",
       "rose": "ROSES",
-      "science": "Science",
-      "u.s": "U.S"
+      "step-1": "Step-1",
+      "step-2": "Step-2",
+      "technology": "Technology"
      },
-     "title": "U.S. Contributions to Ariel Preparatory Science",
-     "title_fingerprint": "32baad27",
+     "title": "Heliophysics Flight Opportunities in Research and Technology",
+     "title_fingerprint": "8865da26",
      "topic_areas": []
     }
    ]
@@ -41421,13 +41068,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "sam-gov:54e1bd529fd84e7db45fe5a236374ca0": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "sam-gov:5abc1a0ed8ab4c5e8f6aa62aa745d210": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -42604,8 +42244,8 @@ globalThis.SUBTOPIC_CATALOG={
  },
  "schema_version": 1,
  "search_index": {
-  "average_document_length": 141.54666666666665,
-  "document_count": 225,
+  "average_document_length": 140.97787610619469,
+  "document_count": 226,
   "document_lengths": [
    836,
    401,
@@ -42831,7 +42471,8 @@ globalThis.SUBTOPIC_CATALOG={
    14,
    14,
    7,
-   15
+   15,
+   13
   ],
   "postings": {
    "0.001-10": [
@@ -42844,6 +42485,8 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "01": [
     220,
+    1,
+    225,
     1
    ],
    "02": [
@@ -42870,6 +42513,10 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "05": [
     222,
+    1
+   ],
+   "06": [
+    225,
     1
    ],
    "08": [
@@ -43640,11 +43287,15 @@ globalThis.SUBTOPIC_CATALOG={
     223,
     1,
     224,
-    1
+    1,
+    225,
+    2
    ],
    "21": [
     7,
-    2
+    2,
+    225,
+    1
    ],
    "22": [
     7,
@@ -43674,7 +43325,9 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "25": [
     10,
-    2
+    2,
+    225,
+    1
    ],
    "26": [
     11,
@@ -57646,6 +57299,8 @@ globalThis.SUBTOPIC_CATALOG={
     223,
     1,
     224,
+    1,
+    225,
     1
    ],
    "dmitry": [
@@ -61978,7 +61633,9 @@ globalThis.SUBTOPIC_CATALOG={
     45,
     2,
     86,
-    3
+    3,
+    225,
+    1
    ],
    "floating-point": [
     24,
@@ -64316,6 +63973,8 @@ globalThis.SUBTOPIC_CATALOG={
     221,
     1,
     222,
+    1,
+    225,
     1
    ],
    "help": [
@@ -80812,6 +80471,8 @@ globalThis.SUBTOPIC_CATALOG={
     223,
     1,
     224,
+    1,
+    225,
     1
    ],
    "rotary-w": [
@@ -83728,6 +83389,8 @@ globalThis.SUBTOPIC_CATALOG={
     221,
     1,
     222,
+    1,
+    225,
     1
    ],
    "step-2": [
@@ -83736,6 +83399,8 @@ globalThis.SUBTOPIC_CATALOG={
     221,
     1,
     222,
+    1,
+    225,
     1
    ],
    "stephanie": [
@@ -85748,6 +85413,8 @@ globalThis.SUBTOPIC_CATALOG={
     214,
     1,
     215,
+    1,
+    225,
     1
    ],
    "technology-enhanc": [
@@ -90458,8 +90125,9 @@ globalThis.SUBTOPIC_CATALOG={
    "364032:b-7",
    "364039:b-8",
    "364221:d-10",
-   "nasa-roses:25-D.11-1872bf67cd:d-11"
+   "364280:d-11",
+   "nasa-roses:25-B.9-b72c625ed1:b-9"
   ]
  },
- "searchable_record_count": 225
+ "searchable_record_count": 226
 };

@@ -4,8 +4,24 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml</id>
-  <updated>2026-11-18T18:58:27Z</updated>
+  <updated>2026-11-23T18:07:22Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>FY 2027 Build to Scale Notice of Funding Opportunity</title>
+    <link href="https://www.grants.gov/search-results-detail/364206"/>
+    <id>urn:funding-finder:grants-gov:364206</id>
+    <updated>2026-11-20T00:00:00Z</updated>
+    <author><name>Economic Development Administration</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Community development"/>
+    <category term="Education and workforce"/>
+    <category term="Technology development"/>
+    <category term="Materials science"/>
+    <category term="Quantum science"/>
+    <category term="Data science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <summary>Economic Development Administration | Application 2027-02-26 | The Build to Scale (B2S) program strengthens America’s economic and technological leadership and increases the success of innovation-driven industry by turning U.S. breakthroughs into U.S.-built companies that attract private capital, create jobs, and keep the industries of the future anchored on American soil. Build to Scale aims to support technology- and innovation-based economic development in…</summary>
+  </entry>
   <entry>
     <title>Fiscal Years 2025 and 2026 Congestion Relief Program</title>
     <link href="https://www.grants.gov/search-results-detail/364277"/>
@@ -25,16 +41,6 @@
     <category term="Public health"/>
     <category term="Cybersecurity"/>
     <summary>Health Resources and Services Administration | Application 2027-01-08 | The purpose of Women's Initiative for Screening and Health (WISH) is to improve women’s health across the lifespan by increasing access to and availability of preventive health services. Through a multidisciplinary coalition of healthcare providers, academic institutions, and patient-centered organizations, WISH drives a comprehensive strategy to: (1) review and recommend evidence-based updates to…</summary>
-  </entry>
-  <entry>
-    <title>FY 2027 Crash Causal Factors Program</title>
-    <link href="https://www.grants.gov/search-results-detail/364171"/>
-    <id>urn:funding-finder:grants-gov:364171</id>
-    <updated>2026-10-29T00:00:00Z</updated>
-    <author><name>DOT-Federal Motor Carrier Safety Administration</name></author>
-    <category term="Transportation"/>
-    <category term="Cybersecurity"/>
-    <summary>DOT-Federal Motor Carrier Safety Administration | Application 2026-12-28 | The CCFP Cooperative Agreement Program will provide supplemental funding to eligible State and local law enforcement agencies to support the collection of advanced crash data to inform the Heavy-Duty Truck Study. FMCSA anticipates Congress, State and local law enforcement, industry stakeholders, and advocacy groups to support this action, as the results of the Heavy-Duty Truck Study will provide a…</summary>
   </entry>
   <entry>
     <title>Fiscal Year 2026 Flood Mitigation Assistance</title>

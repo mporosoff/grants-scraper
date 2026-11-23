@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/community-development.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/community-development.xml</id>
-  <updated>2026-11-18T18:58:27Z</updated>
+  <updated>2026-11-23T18:07:22Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Undiagnosed Diseases Network (UDN) Clinical and Data Coordinating Center</title>
@@ -106,6 +106,22 @@
     <summary>National Institutes of Health | Estimated Application 2027-01-29 | The National Institute of Environmental Health Sciences (NIEHS) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications that propose translational research hubs with multiple highly integrated components focused on research, capacity building, and community/public health translation for regionally relevant topics related to the health impacts of extreme weather and cumula…</summary>
   </entry>
   <entry>
+    <title>FY 2027 Build to Scale Notice of Funding Opportunity</title>
+    <link href="https://www.grants.gov/search-results-detail/364206"/>
+    <id>urn:funding-finder:grants-gov:364206</id>
+    <updated>2026-11-20T00:00:00Z</updated>
+    <author><name>Economic Development Administration</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Community development"/>
+    <category term="Education and workforce"/>
+    <category term="Technology development"/>
+    <category term="Materials science"/>
+    <category term="Quantum science"/>
+    <category term="Data science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <summary>Economic Development Administration | Application 2027-02-26 | The Build to Scale (B2S) program strengthens America’s economic and technological leadership and increases the success of innovation-driven industry by turning U.S. breakthroughs into U.S.-built companies that attract private capital, create jobs, and keep the industries of the future anchored on American soil. Build to Scale aims to support technology- and innovation-based economic development in…</summary>
+  </entry>
+  <entry>
     <title>The State Component of the National Cooperative Geologic Mapping Program</title>
     <link href="https://www.grants.gov/search-results-detail/364265"/>
     <id>urn:funding-finder:grants-gov:364265</id>
@@ -156,17 +172,6 @@
     <category term="Community development"/>
     <category term="Education and workforce"/>
     <summary>National Institutes of Health | Application 2027-01-08 | This Notice of Funding Opportunity Announcement (NOFO) solicits applications for the development of the Gabriella Miller Kids First Pediatric Research Program (Kids First) Training and Outreach Core (TOC). The Kids First TOC will collaborate with the Kids First Data Resource Center (DRC), which is charged with facilitating data collection, harmonization, and sharing and serves as a point of contac…</summary>
-  </entry>
-  <entry>
-    <title>Affordable Rural Cooperative (ARC) Energy Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363779"/>
-    <id>urn:funding-finder:grants-gov:363779</id>
-    <updated>2026-10-19T00:00:00Z</updated>
-    <author><name>Rural Utilities Service</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Community development"/>
-    <category term="Energy"/>
-    <summary>Rural Utilities Service | Application 2026-11-20 | The Rural Utilities Service (RUS or the Agency), a Rural Development (RD) agency of the United States Department of Agriculture (USDA), is soliciting Letters of Interest (LOI) for applications under the Affordable Rural Cooperative (ARC) Program. In addition, the Agency is announcing the eligibility requirements, application process and deadlines, and the criteria that will be used by RUS to asses…</summary>
   </entry>
   <entry>
     <title>Solid Waste Management Grant Program</title>
@@ -299,18 +304,6 @@
     <category term="Community development"/>
     <category term="Education and workforce"/>
     <summary>Department of Housing and Urban Development | Application 2027-01-01 | NOTE: HUD is extending the deadline of this NOFO for an additional 60 days. This extension of the NOFO application deadline allows a meaningful opportunity for a wide-range of applicants to apply. Congress amended the Fair Housing Act in 1988 to establish the Fair Housing Initiatives Program (FHIP) to provide funding to entities to work alongside HUD to "prevent or eliminate discriminatory housing…</summary>
-  </entry>
-  <entry>
-    <title>DoW Rare Cancers Resource and Community Development Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362850"/>
-    <id>urn:funding-finder:grants-gov:362850</id>
-    <updated>2026-06-17T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Cancer"/>
-    <category term="Community development"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA | Application 2026-11-18 | invitation required | Summary: The fiscal year 2026 (FY26) Rare Cancers Research Program (RCRP) Resource and Community Development Award (RCDA) supports the development of research resources and clinical or preclinical datasets that will advance the field of rare cancers research and ultimately improve outcomes for individuals with rare cancers. Research supporting this funding opportunity should fill one of the follow…</summary>
   </entry>
   <entry>
     <title>Authority to Accept Unsolicited Proposals for Research Partnerships Notice of Intent (NOI)</title>

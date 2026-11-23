@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/transportation.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/transportation.xml</id>
-  <updated>2026-11-18T18:58:27Z</updated>
+  <updated>2026-11-23T18:07:22Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Prevention and Treatment through a Comprehensive Care Continuum for HIV-affected Adolescents in Resource-Constrained Settings--Implementation Science Network (PATC3H-IN)</title>
@@ -135,6 +135,31 @@
     <category term="Education and workforce"/>
     <category term="Transportation"/>
     <summary>Centers for Disease Control and Prevention - ERA | Estimated Application 2027-01-29 | The National Institute for Occupational Safety and Health (NIOSH) K01 grant provides "protected time" for a supervised career development experience in occupational health and safety research. NIOSH supports the mentoring of junior investigators during the critical transition from postdoctoral training to securing independent R01 funding. We hope to foster investigators' careers, who are vital for…</summary>
+  </entry>
+  <entry>
+    <title>Foundational Research in Robotics (FRR)</title>
+    <link href="https://www.grants.gov/search-results-detail/364294"/>
+    <id>urn:funding-finder:grants-gov:364294</id>
+    <updated>2026-11-19T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <category term="Transportation"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Materials science"/>
+    <summary>U.S. National Science Foundation | Posted | Advances in robotics directly contribute to the nation's long-term reindustrialization, competitiveness and security, as robotics is increasingly a major driver of productivity across a range of economic sectors such as manufacturing, logistics, transportation, defense, and healthcare. These general-purpose autonomous systems are capable of dexterous manipulation, mobility, and reliable operation …</summary>
+  </entry>
+  <entry>
+    <title>Cooperative Agreement for affiliated Partner with Californian Cooperative Ecosystem Studies Unit</title>
+    <link href="https://www.grants.gov/search-results-detail/364288"/>
+    <id>urn:funding-finder:grants-gov:364288</id>
+    <updated>2026-11-18T00:00:00Z</updated>
+    <author><name>Geological Survey</name></author>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Transportation"/>
+    <summary>Geological Survey | Application 2026-12-18 | The Western Ecological Research Center of the U.S. Geological Survey (USGS) is offering a funding opportunity to a CESU partner to assess and monitor ecological integrity in southern California across habitats, species and their drivers. In collaboration with the recipient, USGS scientists are investigating multiple endangered and threatened species and how their habitat conditions affect the dist…</summary>
   </entry>
   <entry>
     <title>Fiscal Years 2025 and 2026 Congestion Relief Program</title>
@@ -276,7 +301,6 @@
     <updated>2026-10-29T00:00:00Z</updated>
     <author><name>DOT-Federal Motor Carrier Safety Administration</name></author>
     <category term="Transportation"/>
-    <category term="Cybersecurity"/>
     <summary>DOT-Federal Motor Carrier Safety Administration | Application 2026-12-28 | The CCFP Cooperative Agreement Program will provide supplemental funding to eligible State and local law enforcement agencies to support the collection of advanced crash data to inform the Heavy-Duty Truck Study. FMCSA anticipates Congress, State and local law enforcement, industry stakeholders, and advocacy groups to support this action, as the results of the Heavy-Duty Truck Study will provide a…</summary>
   </entry>
   <entry>
@@ -307,7 +331,7 @@
     <author><name>Bureau of Human Resources</name></author>
     <category term="Education and workforce"/>
     <category term="Transportation"/>
-    <summary>Bureau of Human Resources | Application 2026-11-23 | Funding Opportunity Description: The U.S. Department of State, Bureau of Human Resources, Office of Outreach, Fellowships, and Internships (HR/OFI) announces an open competition for a qualified organization to manage the candidate screening, panel review, and selection process for the 2027 Donald M. Payne International Development Graduate Fellowship Program under a Cooperative Agreement. This spe…</summary>
+    <summary>Bureau of Human Resources | Application 2026-11-25 | Funding Opportunity Description: The U.S. Department of State, Bureau of Human Resources, Office of Outreach, Fellowships, and Internships (HR/OFI) announces an open competition for a qualified organization to manage the candidate screening, panel review, and selection process for the 2027 Donald M. Payne International Development Graduate Fellowship Program under a Cooperative Agreement. This spe…</summary>
   </entry>
   <entry>
     <title>Climate Program Office FY 2027 - Super Intelligence/Machine Learning Innovation to Advance NOAA's Earth System Science and Support Hazard Resilience</title>
@@ -414,7 +438,7 @@
     <category term="Education and workforce"/>
     <category term="Manufacturing"/>
     <category term="Transportation"/>
-    <summary>Dept of the Army -- Materiel Command | Application 2026-12-03 | The Department of War (DoW) seeks innovative applications to cooperatively partner with eligible entities in the implementation and execution of the SMART Scholarship-for-Service Program. The Department intends to award ONE (1) CA award, with a maximum award of up to $1,300M over a ten-year period of performance. The National Defense Education Program (NDEP) supports the Department's priorities to…</summary>
+    <summary>Dept of the Army -- Materiel Command | Application 2026-12-17 | The Department of War (DoW) seeks innovative applications to cooperatively partner with eligible entities in the implementation and execution of the SMART Scholarship-for-Service Program. The Department intends to award ONE (1) CA award, with a maximum award of up to $1,300M over a ten-year period of performance. The National Defense Education Program (NDEP) supports the Department's priorities to…</summary>
   </entry>
   <entry>
     <title>2026 Diesel Emissions Reduction Act (DERA) National Program</title>
@@ -586,6 +610,7 @@
     <updated>2026-06-09T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <category term="Transportation"/>
+    <category term="Infectious disease"/>
     <summary>National Institutes of Health | Application 2029-03-16 | The purpose of this notice of funding opportunity (NOFO) is to facilitate the entry of investigators into multiple high-priority areas of substance use research, including comorbidity with HIV. The Science Track Award for Research Transition (START) Program aims to provide investigators with the opportunity to gather preliminary data that will assist them in securing future research grants and adv…</summary>
   </entry>
   <entry>
@@ -622,24 +647,5 @@
     <category term="Space and aeronautics"/>
     <category term="Transportation"/>
     <summary>NASA Headquarters | Posted | The National Aeronautics and Space Administration (NASA) Headquarters anticipates release of a solicitation, titled “NASA Innovative Advanced Concepts (NIAC), Phase II,” as an Appendix to the Space Technology Mission Directorate (STMD) NASA Research Announcement (NRA), titled “Space Technology Research, Development, Demonstration, and Infusion - 2026 (SpaceTech-REDDI-2026),” on or about May 11, 20…</summary>
-  </entry>
-  <entry>
-    <title>INCLUDE Project: Clinical Trials Phased Awards for Down syndrome Research (R61/R33 Clinical Trial Required)</title>
-    <link href="https://www.grants.gov/search-results-detail/360655"/>
-    <id>urn:funding-finder:grants-gov:360655</id>
-    <updated>2026-05-13T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Technology development"/>
-    <category term="Transportation"/>
-    <summary>National Institutes of Health | Application 2028-06-15 | The NIH INvestigation of Co-occurring conditions across the Lifespan to Understand Down syndromE (INCLUDE) Project seeks to improve health and quality-of-life for individuals with Down syndrome. The purpose of this Notice of Funding Opportunity (NOFO) encourages Exploratory/Developmental Phased Innovation (R61/R33) grant applications to support development of clinical trials to treat critical and …</summary>
-  </entry>
-  <entry>
-    <title>Limited Competition: Small Grant Program for NHLBI K01/K08/K23/K25 Recipients (R03 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/359675"/>
-    <id>urn:funding-finder:grants-gov:359675</id>
-    <updated>2026-05-12T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Transportation"/>
-    <summary>National Institutes of Health | Application 2028-11-07 | This is a Notice of Funding Opportunity (NOFO) for a Limited Competition that invites applications from eligible organizations to apply. Please see Section III. Eligibility for additional information. In accordance with NIH standard peer-review processes, the applications will be peer-reviewed, and only meritorious applications will be considered. The purpose of this NOFO is to solicit current or …</summary>
   </entry>
 </feed>
