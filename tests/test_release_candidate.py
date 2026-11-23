@@ -759,6 +759,7 @@ class CandidateLifecycleTests(unittest.TestCase):
                 self.assertFalse(any(call[:3] == ('gh', 'pr', 'merge') for call in calls))
                 self.assertEqual(c.git(self.root, 'rev-parse', 'HEAD'), self.source_sha)
                 artifacts = [{'id': number, 'name': f'publication-{manifest["candidate_id"]}-{number}',
+                              'created_at': f'2026-11-23T17:00:0{number}Z',
                               'expired': False, 'workflow_run': {'id': 456}} for number in (1, 2)]
                 def fetch(repository, run, name, target):
                     self.assertEqual((repository, run, name), ('owner/repo', '456', artifacts[-1]['name']))
