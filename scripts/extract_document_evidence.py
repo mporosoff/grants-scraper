@@ -1892,7 +1892,7 @@ def download_document(
     }
     for _ in range(6):
         validate_public_url(current_url)
-        if document_acquisition.acquisition_identity(current_url) == document_acquisition.NASA_POLICY:
+        if document_acquisition.requires_session_profile(current_url):
             document_acquisition.configure_session(session)
         remaining = deadline - time.monotonic()
         if remaining <= 0:

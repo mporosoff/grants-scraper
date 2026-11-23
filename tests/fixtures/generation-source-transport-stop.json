@@ -1,0 +1,706 @@
+{
+  "origin": {
+    "run_id": 44593967977,
+    "attempt": 1,
+    "job_id": 135808973833,
+    "observed_at": "2026-11-19T19:05:25Z"
+  },
+  "jobs": [
+    {
+      "id": 135807161586,
+      "run_id": 44593967977,
+      "run_attempt": 1,
+      "head_sha": "2e1daeb646ebc7e5d4f8b8af77a8257dfbc81574",
+      "head_branch": "main",
+      "name": "plan",
+      "status": "completed",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-11-19T19:01:37Z",
+          "completed_at": "2026-11-19T19:01:38Z"
+        },
+        {
+          "name": "Run actions/checkout@v6",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-11-19T19:01:38Z",
+          "completed_at": "2026-11-19T19:02:00Z"
+        },
+        {
+          "name": "Run actions/setup-python@v6",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-11-19T19:02:00Z",
+          "completed_at": "2026-11-19T19:02:00Z"
+        },
+        {
+          "name": "Run python -m pip install -r requirements.txt",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-11-19T19:02:00Z",
+          "completed_at": "2026-11-19T19:02:04Z"
+        },
+        {
+          "name": "Resolve explicit lifecycle checkpoint",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-11-19T19:02:04Z",
+          "completed_at": "2026-11-19T19:03:53Z"
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-11-19T19:03:53Z",
+          "completed_at": "2026-11-19T19:03:54Z"
+        },
+        {
+          "name": "Post Run actions/setup-python@v6",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11,
+          "started_at": "2026-11-19T19:03:54Z",
+          "completed_at": "2026-11-19T19:03:54Z"
+        },
+        {
+          "name": "Post Run actions/checkout@v6",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12,
+          "started_at": "2026-11-19T19:03:54Z",
+          "completed_at": "2026-11-19T19:03:54Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 13,
+          "started_at": "2026-11-19T19:03:54Z",
+          "completed_at": "2026-11-19T19:03:54Z"
+        }
+      ]
+    },
+    {
+      "id": 135808632492,
+      "run_id": 44593967977,
+      "run_attempt": 1,
+      "head_sha": "2e1daeb646ebc7e5d4f8b8af77a8257dfbc81574",
+      "head_branch": "main",
+      "name": "sam-preflight",
+      "status": "completed",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-11-19T19:03:59Z",
+          "completed_at": "2026-11-19T19:04:00Z"
+        },
+        {
+          "name": "Run actions/checkout@v6",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-11-19T19:04:00Z",
+          "completed_at": "2026-11-19T19:04:07Z"
+        },
+        {
+          "name": "Run actions/setup-python@v6",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-11-19T19:04:07Z",
+          "completed_at": "2026-11-19T19:04:08Z"
+        },
+        {
+          "name": "Run python -m pip install -r requirements.txt",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-11-19T19:04:08Z",
+          "completed_at": "2026-11-19T19:04:20Z"
+        },
+        {
+          "name": "Run echo \"producer_attempt=$GITHUB_RUN_ATTEMPT\" >> \"$GITHUB_OUTPUT\"",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-11-19T19:04:20Z",
+          "completed_at": "2026-11-19T19:04:24Z"
+        },
+        {
+          "name": "Retain verified public source inputs before reserving any allowance",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-11-19T19:04:24Z",
+          "completed_at": "2026-11-19T19:04:26Z"
+        },
+        {
+          "name": "Post Run actions/setup-python@v6",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11,
+          "started_at": "2026-11-19T19:04:26Z",
+          "completed_at": "2026-11-19T19:04:26Z"
+        },
+        {
+          "name": "Post Run actions/checkout@v6",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12,
+          "started_at": "2026-11-19T19:04:26Z",
+          "completed_at": "2026-11-19T19:04:26Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 13,
+          "started_at": "2026-11-19T19:04:26Z",
+          "completed_at": "2026-11-19T19:04:26Z"
+        }
+      ]
+    },
+    {
+      "id": 135808634642,
+      "run_id": 44593967977,
+      "run_attempt": 1,
+      "head_sha": "2e1daeb646ebc7e5d4f8b8af77a8257dfbc81574",
+      "head_branch": "main",
+      "name": "catalog-correction",
+      "status": "completed",
+      "conclusion": "skipped",
+      "steps": []
+    },
+    {
+      "id": 135808634645,
+      "run_id": 44593967977,
+      "run_attempt": 1,
+      "head_sha": "2e1daeb646ebc7e5d4f8b8af77a8257dfbc81574",
+      "head_branch": "main",
+      "name": "program-area-revalidation",
+      "status": "completed",
+      "conclusion": "skipped",
+      "steps": []
+    },
+    {
+      "id": 135808634881,
+      "run_id": 44593967977,
+      "run_attempt": 1,
+      "head_sha": "2e1daeb646ebc7e5d4f8b8af77a8257dfbc81574",
+      "head_branch": "main",
+      "name": "catalog-identity-correction",
+      "status": "completed",
+      "conclusion": "skipped",
+      "steps": []
+    },
+    {
+      "id": 135808634885,
+      "run_id": 44593967977,
+      "run_attempt": 1,
+      "head_sha": "2e1daeb646ebc7e5d4f8b8af77a8257dfbc81574",
+      "head_branch": "main",
+      "name": "catalog-access-correction",
+      "status": "completed",
+      "conclusion": "skipped",
+      "steps": []
+    },
+    {
+      "id": 135808635010,
+      "run_id": 44593967977,
+      "run_attempt": 1,
+      "head_sha": "2e1daeb646ebc7e5d4f8b8af77a8257dfbc81574",
+      "head_branch": "main",
+      "name": "catalog-url-correction",
+      "status": "completed",
+      "conclusion": "skipped",
+      "steps": []
+    },
+    {
+      "id": 135808635917,
+      "run_id": 44593967977,
+      "run_attempt": 1,
+      "head_sha": "2e1daeb646ebc7e5d4f8b8af77a8257dfbc81574",
+      "head_branch": "main",
+      "name": "catalog-reconcile",
+      "status": "completed",
+      "conclusion": "skipped",
+      "steps": []
+    },
+    {
+      "id": 135808635959,
+      "run_id": 44593967977,
+      "run_attempt": 1,
+      "head_sha": "2e1daeb646ebc7e5d4f8b8af77a8257dfbc81574",
+      "head_branch": "main",
+      "name": "assemble",
+      "status": "completed",
+      "conclusion": "skipped",
+      "steps": []
+    },
+    {
+      "id": 135808636799,
+      "run_id": 44593967977,
+      "run_attempt": 1,
+      "head_sha": "2e1daeb646ebc7e5d4f8b8af77a8257dfbc81574",
+      "head_branch": "main",
+      "name": "catalog-source-recovery",
+      "status": "completed",
+      "conclusion": "skipped",
+      "steps": []
+    },
+    {
+      "id": 135808973833,
+      "run_id": 44593967977,
+      "run_attempt": 1,
+      "head_sha": "2e1daeb646ebc7e5d4f8b8af77a8257dfbc81574",
+      "head_branch": "main",
+      "name": "generate",
+      "status": "completed",
+      "conclusion": "failure",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-11-19T19:04:32Z",
+          "completed_at": "2026-11-19T19:04:34Z"
+        },
+        {
+          "name": "Run actions/checkout@v6",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-11-19T19:04:34Z",
+          "completed_at": "2026-11-19T19:04:54Z"
+        },
+        {
+          "name": "Run ./.github/actions/release-setup",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-11-19T19:04:54Z",
+          "completed_at": "2026-11-19T19:05:09Z"
+        },
+        {
+          "name": "Restore an already persisted generation on workflow rerun",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-11-19T19:05:09Z",
+          "completed_at": "2026-11-19T19:05:14Z"
+        },
+        {
+          "name": "Reuse the exact verified public SAM snapshots from this run",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-11-19T19:05:14Z",
+          "completed_at": "2026-11-19T19:05:15Z"
+        },
+        {
+          "name": "Refresh inherited public SAM preflight on generation retry",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 6,
+          "started_at": "2026-11-19T19:05:15Z",
+          "completed_at": "2026-11-19T19:05:15Z"
+        },
+        {
+          "name": "Retain refreshed public SAM inputs after generation retry",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 7,
+          "started_at": "2026-11-19T19:05:15Z",
+          "completed_at": "2026-11-19T19:05:15Z"
+        },
+        {
+          "name": "Verify current public SAM receipt before any allowance",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8,
+          "started_at": "2026-11-19T19:05:15Z",
+          "completed_at": "2026-11-19T19:05:15Z"
+        },
+        {
+          "name": "Restore the logical spend checkpoint",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9,
+          "started_at": "2026-11-19T19:05:15Z",
+          "completed_at": "2026-11-19T19:05:22Z"
+        },
+        {
+          "name": "Reserve the complete logical allowance before provider dispatch",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10,
+          "started_at": "2026-11-19T19:05:22Z",
+          "completed_at": "2026-11-19T19:05:23Z"
+        },
+        {
+          "name": "Reserve the linked qualification task before provider dispatch",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 11,
+          "started_at": "2026-11-19T19:05:23Z",
+          "completed_at": "2026-11-19T19:05:23Z"
+        },
+        {
+          "name": "Pin the prior accepted scope snapshot before changes",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12,
+          "started_at": "2026-11-19T19:05:23Z",
+          "completed_at": "2026-11-19T19:05:24Z"
+        },
+        {
+          "name": "Preserve the prior catalog for change detection",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 13,
+          "started_at": "2026-11-19T19:05:24Z",
+          "completed_at": "2026-11-19T19:05:24Z"
+        },
+        {
+          "name": "Build and validate complete public opportunity catalog",
+          "status": "completed",
+          "conclusion": "failure",
+          "number": 14,
+          "started_at": "2026-11-19T19:05:24Z",
+          "completed_at": "2026-11-19T19:05:25Z"
+        },
+        {
+          "name": "Enrich new or changed records with official detail evidence",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 15,
+          "started_at": "2026-11-19T19:05:25Z",
+          "completed_at": "2026-11-19T19:05:25Z"
+        },
+        {
+          "name": "Merge additional (non-Grants.gov) sources",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 16,
+          "started_at": "2026-11-19T19:05:25Z",
+          "completed_at": "2026-11-19T19:05:25Z"
+        },
+        {
+          "name": "Require complete SAM notice accounting before generation continues",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 17,
+          "started_at": "2026-11-19T19:05:25Z",
+          "completed_at": "2026-11-19T19:05:25Z"
+        },
+        {
+          "name": "Preserve source refresh diagnostics after any outcome",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 18,
+          "started_at": "2026-11-19T19:05:25Z",
+          "completed_at": "2026-11-19T19:05:25Z"
+        },
+        {
+          "name": "Restore private normalized notice structure",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 19,
+          "started_at": "2026-11-19T19:05:25Z",
+          "completed_at": "2026-11-19T19:05:25Z"
+        },
+        {
+          "name": "Extract citation-backed facts from official notices",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 20,
+          "started_at": "2026-11-19T19:05:25Z",
+          "completed_at": "2026-11-19T19:05:25Z"
+        },
+        {
+          "name": "Save private normalized notice structure",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 21,
+          "started_at": "2026-11-19T19:05:25Z",
+          "completed_at": "2026-11-19T19:05:25Z"
+        },
+        {
+          "name": "Rebuild faculty metadata and live team-matcher configuration",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 22,
+          "started_at": "2026-11-19T19:05:25Z",
+          "completed_at": "2026-11-19T19:05:25Z"
+        },
+        {
+          "name": "Invalidate proposed teams whose public scope or researcher evidence changed",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 23,
+          "started_at": "2026-11-19T19:05:25Z",
+          "completed_at": "2026-11-19T19:05:25Z"
+        },
+        {
+          "name": "Restore public-evidence team-generation cache",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 24,
+          "started_at": "2026-11-19T19:05:25Z",
+          "completed_at": "2026-11-19T19:05:25Z"
+        },
+        {
+          "name": "Generate bounded new and changed proposed teams",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 25,
+          "started_at": "2026-11-19T19:05:25Z",
+          "completed_at": "2026-11-19T19:05:25Z"
+        },
+        {
+          "name": "Report automatic team coverage and remaining work",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 26,
+          "started_at": "2026-11-19T19:05:25Z",
+          "completed_at": "2026-11-19T19:05:25Z"
+        },
+        {
+          "name": "Build deadline, amendment, closing-soon, and closure events",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 27,
+          "started_at": "2026-11-19T19:05:25Z",
+          "completed_at": "2026-11-19T19:05:25Z"
+        },
+        {
+          "name": "Rotate through official links and record health and redirects",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 28,
+          "started_at": "2026-11-19T19:05:25Z",
+          "completed_at": "2026-11-19T19:05:25Z"
+        },
+        {
+          "name": "Generate static RSS/Atom feeds from the final catalog",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 29,
+          "started_at": "2026-11-19T19:05:25Z",
+          "completed_at": "2026-11-19T19:05:25Z"
+        },
+        {
+          "name": "Regenerate catalog statistics in project documentation",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 30,
+          "started_at": "2026-11-19T19:05:25Z",
+          "completed_at": "2026-11-19T19:05:25Z"
+        },
+        {
+          "name": "Record current developer coverage and deltas",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 31,
+          "started_at": "2026-11-19T19:05:25Z",
+          "completed_at": "2026-11-19T19:05:25Z"
+        },
+        {
+          "name": "Build compatible production document vectors",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 32,
+          "started_at": "2026-11-19T19:05:25Z",
+          "completed_at": "2026-11-19T19:05:25Z"
+        },
+        {
+          "name": "Build the current/previous Worker compatibility package",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 33,
+          "started_at": "2026-11-19T19:05:25Z",
+          "completed_at": "2026-11-19T19:05:25Z"
+        },
+        {
+          "name": "Record the generation heartbeat before persistence",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 34,
+          "started_at": "2026-11-19T19:05:25Z",
+          "completed_at": "2026-11-19T19:05:25Z"
+        },
+        {
+          "name": "Persist the complete immutable candidate before downstream validation",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 35,
+          "started_at": "2026-11-19T19:05:25Z",
+          "completed_at": "2026-11-19T19:05:25Z"
+        },
+        {
+          "name": "Retain authoritative candidate even if later stages fail",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 36,
+          "started_at": "2026-11-19T19:05:25Z",
+          "completed_at": "2026-11-19T19:05:25Z"
+        },
+        {
+          "name": "Retain linked task accounting and exact completed responses",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 37,
+          "started_at": "2026-11-19T19:05:25Z",
+          "completed_at": "2026-11-19T19:05:25Z"
+        },
+        {
+          "name": "Retain spend and completed safe stages after any outcome",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 38,
+          "started_at": "2026-11-19T19:05:25Z",
+          "completed_at": "2026-11-19T19:05:26Z"
+        },
+        {
+          "name": "Alert the project owner about a degraded external source",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 39,
+          "started_at": "2026-11-19T19:05:26Z",
+          "completed_at": "2026-11-19T19:05:26Z"
+        },
+        {
+          "name": "Post Run ./.github/actions/release-setup",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 77,
+          "started_at": "2026-11-19T19:05:26Z",
+          "completed_at": "2026-11-19T19:05:27Z"
+        },
+        {
+          "name": "Post Run actions/checkout@v6",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 78,
+          "started_at": "2026-11-19T19:05:27Z",
+          "completed_at": "2026-11-19T19:05:27Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 79,
+          "started_at": "2026-11-19T19:05:27Z",
+          "completed_at": "2026-11-19T19:05:27Z"
+        }
+      ]
+    },
+    {
+      "id": 135809633634,
+      "run_id": 44593967977,
+      "run_attempt": 1,
+      "head_sha": "2e1daeb646ebc7e5d4f8b8af77a8257dfbc81574",
+      "head_branch": "main",
+      "name": "candidate",
+      "status": "completed",
+      "conclusion": "skipped",
+      "steps": []
+    },
+    {
+      "id": 135809634254,
+      "run_id": 44593967977,
+      "run_attempt": 1,
+      "head_sha": "2e1daeb646ebc7e5d4f8b8af77a8257dfbc81574",
+      "head_branch": "main",
+      "name": "validate",
+      "status": "completed",
+      "conclusion": "skipped",
+      "steps": []
+    },
+    {
+      "id": 135809634963,
+      "run_id": 44593967977,
+      "run_attempt": 1,
+      "head_sha": "2e1daeb646ebc7e5d4f8b8af77a8257dfbc81574",
+      "head_branch": "main",
+      "name": "publish",
+      "status": "completed",
+      "conclusion": "skipped",
+      "steps": []
+    },
+    {
+      "id": 135809635338,
+      "run_id": 44593967977,
+      "run_attempt": 1,
+      "head_sha": "2e1daeb646ebc7e5d4f8b8af77a8257dfbc81574",
+      "head_branch": "main",
+      "name": "closeout",
+      "status": "completed",
+      "conclusion": "failure",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-11-19T19:05:34Z",
+          "completed_at": "2026-11-19T19:05:34Z"
+        },
+        {
+          "name": "Report the exact lifecycle checkpoint and allowed retry",
+          "status": "completed",
+          "conclusion": "failure",
+          "number": 2,
+          "started_at": "2026-11-19T19:05:34Z",
+          "completed_at": "2026-11-19T19:05:35Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-11-19T19:05:35Z",
+          "completed_at": "2026-11-19T19:05:36Z"
+        }
+      ]
+    },
+    {
+      "id": 135809637714,
+      "run_id": 44593967977,
+      "run_attempt": 1,
+      "head_sha": "2e1daeb646ebc7e5d4f8b8af77a8257dfbc81574",
+      "head_branch": "main",
+      "name": "pages",
+      "status": "completed",
+      "conclusion": "skipped",
+      "steps": []
+    },
+    {
+      "id": 135809638132,
+      "run_id": 44593967977,
+      "run_attempt": 1,
+      "head_sha": "2e1daeb646ebc7e5d4f8b8af77a8257dfbc81574",
+      "head_branch": "main",
+      "name": "verify-live",
+      "status": "completed",
+      "conclusion": "skipped",
+      "steps": []
+    }
+  ],
+  "log": "##[group]Run python -m scripts.build_catalog --output data/opportunities.js --retained-catalog \"$RUNNER_TEMP/opportunities.previous.js\" --min-records 1000 --max-record-count 5000\n2026-11-19T19:05:24.5413651Z \u001b[36;1mpython -m scripts.build_catalog --output data/opportunities.js --retained-catalog \"$RUNNER_TEMP/opportunities.previous.js\" --min-records 1000 --max-record-count 5000\u001b[0m\n2026-11-19T19:05:24.5457925Z shell: /usr/bin/bash -e {0}\n2026-11-19T19:05:24.5458190Z env:\n2026-11-19T19:05:24.5458409Z   QUALIFICATION_PILOT: false\n2026-11-19T19:05:24.5458722Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.18/x64\n2026-11-19T19:05:24.5459130Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.18/x64/lib/pkgconfig\n2026-11-19T19:05:24.5459517Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.18/x64\n2026-11-19T19:05:24.5459870Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.18/x64\n2026-11-19T19:05:24.5460218Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.18/x64\n2026-11-19T19:05:24.5460622Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.18/x64/lib\n2026-11-19T19:05:24.5460980Z   PNPM_HOME: /home/runner/setup-pnpm/node_modules/.bin\n2026-11-19T19:05:24.5461270Z ##[endgroup]\n2026-11-19T19:05:25.2606719Z Traceback (most recent call last):\n2026-11-19T19:05:25.2617130Z   File \"/opt/hostedtoolcache/Python/3.13.18/x64/lib/python3.13/site-packages/urllib3/connectionpool.py\", line 470, in _make_request\n2026-11-19T19:05:25.2617967Z     self._validate_conn(conn)\n2026-11-19T19:05:25.2618344Z     ~~~~~~~~~~~~~~~~~~~^^^^^^\n2026-11-19T19:05:25.2619223Z   File \"/opt/hostedtoolcache/Python/3.13.18/x64/lib/python3.13/site-packages/urllib3/connectionpool.py\", line 1125, in _validate_conn\n2026-11-19T19:05:25.2620014Z     conn.connect()\n2026-11-19T19:05:25.2620333Z     ~~~~~~~~~~~~^^\n2026-11-19T19:05:25.2621097Z   File \"/opt/hostedtoolcache/Python/3.13.18/x64/lib/python3.13/site-packages/urllib3/connection.py\", line 878, in connect\n2026-11-19T19:05:25.2622148Z     wrapped_socket, is_verified = _ssl_wrap_socket_and_match_hostname(\n2026-11-19T19:05:25.2622759Z                                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^\n2026-11-19T19:05:25.2623126Z         sock=sock,\n2026-11-19T19:05:25.2623484Z         ^^^^^^^^^^\n2026-11-19T19:05:25.2623818Z     ...<14 lines>...\n2026-11-19T19:05:25.2624232Z         assert_fingerprint=self.assert_fingerprint,\n2026-11-19T19:05:25.2624717Z         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n2026-11-19T19:05:25.2625100Z     )\n2026-11-19T19:05:25.2625371Z     ^\n2026-11-19T19:05:25.2626310Z   File \"/opt/hostedtoolcache/Python/3.13.18/x64/lib/python3.13/site-packages/urllib3/connection.py\", line 1080, in _ssl_wrap_socket_and_match_hostname\n2026-11-19T19:05:25.2626962Z     ssl_sock = ssl_wrap_socket(\n2026-11-19T19:05:25.2627220Z         sock=sock,\n2026-11-19T19:05:25.2627439Z     ...<8 lines>...\n2026-11-19T19:05:25.2627685Z         tls_in_tls=tls_in_tls,\n2026-11-19T19:05:25.2628057Z     )\n2026-11-19T19:05:25.2628856Z   File \"/opt/hostedtoolcache/Python/3.13.18/x64/lib/python3.13/site-packages/urllib3/util/ssl_.py\", line 437, in ssl_wrap_socket\n2026-11-19T19:05:25.2629812Z     ssl_sock = _ssl_wrap_socket_impl(sock, context, tls_in_tls, server_hostname)\n2026-11-19T19:05:25.2631181Z   File \"/opt/hostedtoolcache/Python/3.13.18/x64/lib/python3.13/site-packages/urllib3/util/ssl_.py\", line 481, in _ssl_wrap_socket_impl\n2026-11-19T19:05:25.2631965Z     return ssl_context.wrap_socket(sock, server_hostname=server_hostname)\n2026-11-19T19:05:25.2632390Z            ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n2026-11-19T19:05:25.2632891Z   File \"/opt/hostedtoolcache/Python/3.13.18/x64/lib/python3.13/ssl.py\", line 469, in wrap_socket\n2026-11-19T19:05:25.2633341Z     return self.sslsocket_class._create(\n2026-11-19T19:05:25.2633631Z            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^\n2026-11-19T19:05:25.2633884Z         sock=sock,\n2026-11-19T19:05:25.2634101Z         ^^^^^^^^^^\n2026-11-19T19:05:25.2634319Z     ...<5 lines>...\n2026-11-19T19:05:25.2634886Z         session=session\n2026-11-19T19:05:25.2635120Z         ^^^^^^^^^^^^^^^\n2026-11-19T19:05:25.2635338Z     )\n2026-11-19T19:05:25.2635532Z     ^\n2026-11-19T19:05:25.2635911Z   File \"/opt/hostedtoolcache/Python/3.13.18/x64/lib/python3.13/ssl.py\", line 1087, in _create\n2026-11-19T19:05:25.2636312Z     self.do_handshake()\n2026-11-19T19:05:25.2636545Z     ~~~~~~~~~~~~~~~~~^^\n2026-11-19T19:05:25.2636950Z   File \"/opt/hostedtoolcache/Python/3.13.18/x64/lib/python3.13/ssl.py\", line 1383, in do_handshake\n2026-11-19T19:05:25.2637361Z     self._sslobj.do_handshake()\n2026-11-19T19:05:25.2637631Z     ~~~~~~~~~~~~~~~~~~~~~~~~~^^\n2026-11-19T19:05:25.2638274Z ssl.SSLCertVerificationError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1035)\n2026-11-19T19:05:25.2638702Z \n2026-11-19T19:05:25.2638938Z During handling of the above exception, another exception occurred:\n2026-11-19T19:05:25.2639185Z \n2026-11-19T19:05:25.2639331Z Traceback (most recent call last):\n2026-11-19T19:05:25.2639883Z   File \"/opt/hostedtoolcache/Python/3.13.18/x64/lib/python3.13/site-packages/urllib3/connectionpool.py\", line 793, in urlopen\n2026-11-19T19:05:25.2640401Z     response = self._make_request(\n2026-11-19T19:05:25.2640663Z         conn,\n2026-11-19T19:05:25.2640877Z     ...<10 lines>...\n2026-11-19T19:05:25.2641112Z         **response_kw,\n2026-11-19T19:05:25.2641339Z     )\n2026-11-19T19:05:25.2641999Z   File \"/opt/hostedtoolcache/Python/3.13.18/x64/lib/python3.13/site-packages/urllib3/connectionpool.py\", line 494, in _make_request\n2026-11-19T19:05:25.2642515Z     raise new_e\n2026-11-19T19:05:25.2643115Z urllib3.exceptions.SSLError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1035)\n2026-11-19T19:05:25.2643539Z \n2026-11-19T19:05:25.2643773Z The above exception was the direct cause of the following exception:\n2026-11-19T19:05:25.2644017Z \n2026-11-19T19:05:25.2644163Z Traceback (most recent call last):\n2026-11-19T19:05:25.2644689Z   File \"/opt/hostedtoolcache/Python/3.13.18/x64/lib/python3.13/site-packages/requests/adapters.py\", line 696, in send\n2026-11-19T19:05:25.2645146Z     resp = conn.urlopen(\n2026-11-19T19:05:25.2645410Z         method=request.method,\n2026-11-19T19:05:25.2645664Z     ...<9 lines>...\n2026-11-19T19:05:25.2645887Z         chunked=chunked,\n2026-11-19T19:05:25.2646115Z     )\n2026-11-19T19:05:25.2646598Z   File \"/opt/hostedtoolcache/Python/3.13.18/x64/lib/python3.13/site-packages/urllib3/connectionpool.py\", line 847, in urlopen\n2026-11-19T19:05:25.2647246Z     retries = retries.increment(\n2026-11-19T19:05:25.2647647Z         method, url, error=new_e, _pool=self, _stacktrace=sys.exc_info()[2]\n2026-11-19T19:05:25.2647974Z     )\n2026-11-19T19:05:25.2648435Z   File \"/opt/hostedtoolcache/Python/3.13.18/x64/lib/python3.13/site-packages/urllib3/util/retry.py\", line 555, in increment\n2026-11-19T19:05:25.2649049Z     raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]\n2026-11-19T19:05:25.2649453Z     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n2026-11-19T19:05:25.2650615Z urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='www.grants.gov', port=443): Max retries exceeded with url: /xml-extract (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1035)')))\n2026-11-19T19:05:25.2651593Z \n2026-11-19T19:05:25.2652023Z During handling of the above exception, another exception occurred:\n2026-11-19T19:05:25.2652276Z \n2026-11-19T19:05:25.2652418Z Traceback (most recent call last):\n2026-11-19T19:05:25.2652778Z   File \"<frozen runpy>\", line 203, in _run_module_as_main\n2026-11-19T19:05:25.2653141Z   File \"<frozen runpy>\", line 88, in _run_code\n2026-11-19T19:05:25.2653664Z   File \"/home/runner/work/grants-scraper/grants-scraper/scripts/build_catalog.py\", line 1333, in <module>\n2026-11-19T19:05:25.2654087Z     main()\n2026-11-19T19:05:25.2654288Z     ~~~~^^\n2026-11-19T19:05:25.2654831Z   File \"/home/runner/work/grants-scraper/grants-scraper/scripts/build_catalog.py\", line 1312, in main\n2026-11-19T19:05:25.2655638Z     extract_url = download_latest_extract(archive_path)\n2026-11-19T19:05:25.2656441Z   File \"/home/runner/work/grants-scraper/grants-scraper/scripts/build_catalog.py\", line 1207, in download_latest_extract\n2026-11-19T19:05:25.2657155Z     page_response = requests.get(\n2026-11-19T19:05:25.2657579Z         EXTRACT_PAGE, headers=headers, timeout=60\n2026-11-19T19:05:25.2657954Z     )\n2026-11-19T19:05:25.2658549Z   File \"/opt/hostedtoolcache/Python/3.13.18/x64/lib/python3.13/site-packages/requests/api.py\", line 87, in get\n2026-11-19T19:05:25.2659120Z     return request(\"get\", url, params=params, **kwargs)\n2026-11-19T19:05:25.2659659Z   File \"/opt/hostedtoolcache/Python/3.13.18/x64/lib/python3.13/site-packages/requests/api.py\", line 71, in request\n2026-11-19T19:05:25.2660173Z     return session.request(method=method, url=url, **kwargs)\n2026-11-19T19:05:25.2660536Z            ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n2026-11-19T19:05:25.2661064Z   File \"/opt/hostedtoolcache/Python/3.13.18/x64/lib/python3.13/site-packages/requests/sessions.py\", line 651, in request\n2026-11-19T19:05:25.2661553Z     resp = self.send(prep, **send_kwargs)\n2026-11-19T19:05:25.2662268Z   File \"/opt/hostedtoolcache/Python/3.13.18/x64/lib/python3.13/site-packages/requests/sessions.py\", line 784, in send\n2026-11-19T19:05:25.2662752Z     r = adapter.send(request, **kwargs)\n2026-11-19T19:05:25.2663252Z   File \"/opt/hostedtoolcache/Python/3.13.18/x64/lib/python3.13/site-packages/requests/adapters.py\", line 727, in send\n2026-11-19T19:05:25.2663732Z     raise SSLError(e, request=request)\n2026-11-19T19:05:25.2664865Z requests.exceptions.SSLError: HTTPSConnectionPool(host='www.grants.gov', port=443): Max retries exceeded with url: /xml-extract (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1035)')))\n2026-11-19T19:05:25.2866729Z ##[error]Process completed with exit code 1.\n2026-11-19T19:05:25.2935860Z "
+}

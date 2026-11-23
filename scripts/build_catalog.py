@@ -25,10 +25,12 @@ from urllib.parse import urljoin, urlparse, urlunparse
 from xml.etree.ElementTree import iterparse
 from zipfile import ZipFile
 
-import requests
 from scripts.notice_semantics import institutional_limit_signal
 from scripts.notice_schedule import preliminary_requirement
 from scripts.source_documents import is_verified_grants_closure
+from scripts.source_http import (
+    archive_origin, download_extract_archive, fetch_extract_index, grants_session,
+)
 
 
 EXTRACT_PAGE = "https://www.grants.gov/xml-extract"
@@ -1204,19 +1206,10 @@ def discover_latest_extract(html, base_url=EXTRACT_PAGE):
 
 def download_latest_extract(target_path):
     headers = {"User-Agent": USER_AGENT}
-    page_response = requests.get(
-        EXTRACT_PAGE, headers=headers, timeout=60
-    )
-    page_response.raise_for_status()
-    extract_url = discover_latest_extract(page_response.text)
-    with requests.get(
-        extract_url, headers=headers, timeout=(30, 600), stream=True
-    ) as response:
-        response.raise_for_status()
-        with target_path.open("wb") as output:
-            for chunk in response.iter_content(chunk_size=1024 * 1024):
-                if chunk:
-                    output.write(chunk)
+    with grants_session() as session:
+        extract_url = discover_latest_extract(fetch_extract_index(session, EXTRACT_PAGE, headers))
+        archive_origin(extract_url)
+        download_extract_archive(session, extract_url, target_path, headers)
     return extract_url
 
 

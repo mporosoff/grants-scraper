@@ -28,6 +28,11 @@ class IncompleteHistory(Hold):
     pass
 
 
+class PreCandidateSourceHold(Hold):
+    """One original allowance owner, with no complete candidate to reuse."""
+    pass
+
+
 def utc_timestamp(value):
     if not isinstance(value, str) or not value:
         raise ValueError('Missing catalog timestamp')
@@ -866,7 +871,7 @@ def prior_generation(root, environment, manifest):
                     raise Hold('Unpublished candidate evidence is expired or invalid', identifier)
                 owners.append((str(identifier), candidate_id))
             elif reservations:
-                raise Hold('Generation reserved its allowance but no complete candidate is retained; recover this original run', identifier)
+                raise PreCandidateSourceHold('Generation reserved its allowance but no complete candidate is retained; recover this original run', identifier)
             elif run.get('status') == 'completed':
                 if (run.get('conclusion') == 'cancelled' and type(run.get('run_attempt')) is int
                         and run['run_attempt'] == 1 and not artifacts):
@@ -1024,6 +1029,12 @@ def resolve(root, environment, result, destination, *, live=None, publication=No
         return result | fields | {'daily_status': 'due'}
     except (ValueError, KeyError, TypeError, OSError, subprocess.SubprocessError) as error:
         fields['recovery_run'] = getattr(error, 'run', '') or fields['recovery_run']
+        if isinstance(error, PreCandidateSourceHold) and environment.get('GITHUB_EVENT_NAME') == 'schedule':
+            from tools.generation_source_retry import queue
+            try:
+                return result | fields | queue(root, environment, error.run)
+            except (ValueError, KeyError, TypeError, OSError, subprocess.SubprocessError) as retry_error:
+                error = retry_error
         detail = str(error).replace('\r', ' ').replace('\n', ' ')[:300]
         owner = f" Original run: {fields['recovery_run']}." if fields['recovery_run'] else ''
         return result | fields | {'stage': 'noop', 'daily_status': 'held',

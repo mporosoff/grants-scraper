@@ -364,7 +364,7 @@ def main(*, automatic_paid_hold=False):
         from tools.scheduled_catalog import hold_competing_generation
         result = hold_competing_generation(c.ROOT, environment, result)
     from tools.team_provider import provider_names
-    providers = () if result['stage'] == 'noop' or automatic_paid_hold and result['stage'] not in paid_stages else provider_names()
+    providers = () if result['stage'] in ('noop', 'queued-recovery') or automatic_paid_hold and result['stage'] not in paid_stages else provider_names()
     result['openai'] = str('openai' in providers).lower()
     result['anthropic'] = str('anthropic' in providers).lower()
     c.write_json(Path(os.environ['RUNNER_TEMP']) / 'release-plan.json', result)
