@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml</id>
-  <updated>2026-11-23T18:07:22Z</updated>
+  <updated>2026-11-24T20:48:13Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Technology Development Program</title>
@@ -88,8 +88,8 @@
     <id>urn:funding-finder:grants-gov:364013</id>
     <updated>2027-07-07T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
-    <category term="Technology development"/>
     <category term="Infectious disease"/>
+    <category term="Technology development"/>
     <summary>National Institutes of Health | Estimated Application 2027-09-07 | This Notice of Funding Opportunity (NOFO) uses a R61/R33 Phased Innovation Award to support milestone-driven research that advances innovative HIV prevention interventions from development and feasibility testing to larger-scale efficacy, effectiveness, implementation, and dissemination studies. The R61 phase will support the development, refinement, adaptation, and pilot testing of novel or enhan…</summary>
   </entry>
   <entry>
@@ -151,9 +151,9 @@
     <updated>2027-02-25T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <category term="Data science"/>
+    <category term="Infectious disease"/>
     <category term="Social and behavioral sciences"/>
     <category term="Technology development"/>
-    <category term="Infectious disease"/>
     <summary>National Institutes of Health | Estimated Application 2027-05-25 | The National Institute of Mental Health (NIMH) seeks research applications to support the NIMH HIV/AIDS Research Centers (ARC) program, including Developmental Centers (D-ARCs) and full AIDS Research Centers (ARCs). These Research Centers aim to capitalize on the coordinated infrastructure to advance high-impact, interdisciplinary HIV/AIDS research. The ARC program supports innovative research acr…</summary>
   </entry>
   <entry>
@@ -180,8 +180,8 @@
     <id>urn:funding-finder:grants-gov:363166</id>
     <updated>2027-01-15T00:00:00Z</updated>
     <author><name>Health Resources and Services Administration</name></author>
-    <category term="Technology development"/>
     <category term="Infectious disease"/>
+    <category term="Technology development"/>
     <summary>Health Resources and Services Administration | Estimated Application 2027-03-16 | The purpose of the program is to strengthen the capacity of community-based organizations to improve health outcomes and reduce HIV transmission, especially for people not yet in regular HIV care. The activities fall under two categories: HIV Care Innovation and Infrastructure Development.</summary>
   </entry>
   <entry>
@@ -257,8 +257,8 @@
     <id>urn:funding-finder:grants-gov:363415</id>
     <updated>2026-12-04T00:00:00Z</updated>
     <author><name>Health Resources and Services Administration</name></author>
-    <category term="Technology development"/>
     <category term="Infectious disease"/>
+    <category term="Technology development"/>
     <summary>Health Resources and Services Administration | Estimated Application 2027-02-02 | The purpose of this supplemental funding is to strengthen organizational infrastructure and increase capacity to develop, enhance, or expand access to high quality family-centered HIV care services. The activities fall under two categories: HIV Care Innovation and Infrastructure Development.</summary>
   </entry>
   <entry>

@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml</id>
-  <updated>2026-11-23T18:07:22Z</updated>
+  <updated>2026-11-24T20:48:13Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Single Source: Scalable and Systematic Neurobiology of Psychiatric and Neurodevelopmental Disorder Risk Genes: Data Resource and Administrative Coordination Center (U24 Clinical Trial Not Allowed)</title>
@@ -677,19 +677,6 @@
     <summary>Air Force Office of Scientific Research | Posted | AFOSR plans, coordinates, and executes the Air Force Research Laboratory’s (AFRL) basic research program in response to technical guidance from AFRL and requirements of the Air Force. Additionally, the office fosters, supports, and conducts research within Air Force, university, and industry laboratories; and ensures transition of research results to support U.S. Air Force needs. The focus of AFOS…</summary>
   </entry>
   <entry>
-    <title>DLA Emergent IV Research and Development Program</title>
-    <link href="https://sam.gov/opp/f727147c651f4d63b6ebb629d3feb37a/view"/>
-    <id>urn:funding-finder:sam-gov:sam-gov%3Af727147c651f4d63b6ebb629d3feb37a</id>
-    <updated>2026-06-02T00:00:00Z</updated>
-    <author><name>Defense Logistics Agency (DLA)</name></author>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Manufacturing"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Defense Logistics Agency (DLA) | White Paper 2027-06-12 | Emergent logistics research; current Amendment 40includes advanced/additive manufacturing, materials, energy and logistics technology. Open non-IDIQ white paper entry; technical/cost proposals follow a government request. Educational organizations may be prime offerors, subject to financial, accounting and other FAR responsibility standards. No small-business set-aside. Use only the current BAA ar…</summary>
-  </entry>
-  <entry>
     <title>Title XVI Water Reclamation and Reuse Projects</title>
     <link href="https://www.grants.gov/search-results-detail/362396"/>
     <id>urn:funding-finder:grants-gov:362396</id>
@@ -766,5 +753,17 @@
     <category term="Technology development"/>
     <category term="Transportation"/>
     <summary>U.S. National Science Foundation | Posted | The Transport Phenomena (TP) program supports fundamental research to understand, model, and control the transport of mass, momentum, energy, and species across multiple scales. Innovative TP research supports advances in artificial intelligence; manufacturing; biotechnology; microelectronics; energy generation, extraction, and utilization; nuclear energy; quantum science and engineering; and othe…</summary>
+  </entry>
+  <entry>
+    <title>Tribal Colleges Research Grants Program</title>
+    <link href="https://www.grants.gov/search-results-detail/362029"/>
+    <id>urn:funding-finder:grants-gov:362029</id>
+    <updated>2026-04-22T00:00:00Z</updated>
+    <author><name>National Institute of Food and Agriculture</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Education and workforce"/>
+    <summary>National Institute of Food and Agriculture | Application 2026-12-31 | TCRGP focuses on development of research capacity at Tribal colleges, specifically in agriculture, natural resources, and human sciences. The program aims to teach leadership skills, knowledge, and qualities that are necessary to prepare students to be competitive with other students for agricultural and related careers in the private sector, government, and academia. Of interest are the projects …</summary>
   </entry>
 </feed>

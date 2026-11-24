@@ -15690,13 +15690,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "358090": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "358100": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -16097,20 +16090,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "359161": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "359168": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "359169": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -26539,13 +26518,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "361816": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "361817": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -39405,21 +39377,7 @@ globalThis.SUBTOPIC_CATALOG={
     }
    ]
   },
-  "364048": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "364055": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "364062": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -39721,13 +39679,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "364153": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "364154": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -40533,6 +40484,78 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
+  "364301": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "364302": {
+   "segmentation_method": "nasa_roses_table",
+   "subtopic_count": 1,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopics": [
+    {
+     "amended": true,
+     "child_source_url": "https://nspires.nasaprs.com/external/solicitations/summary.do?solNum=NNH25ZDA001N-HFORT",
+     "child_type": "subject",
+     "confidence": "high",
+     "division": "B",
+     "evidence_anchor": null,
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-11-24",
+     "last_verified": "2026-11-24",
+     "native_deadline_text": "01/21/2027 (Step-1) | 06/25/2027 (Step-2)",
+     "native_status": "dated",
+     "opportunity_id": "364302:b-9",
+     "ordinal_label": "B.9",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": null,
+     "page_start": null,
+     "parent_id": "364302",
+     "parent_opportunity_number": "NNH25ZDA001N-HFORT",
+     "pattern_family": null,
+     "program_area_labels": [],
+     "publication_reason": "high_confidence",
+     "publication_state": "publishable",
+     "record_type": "subtopic",
+     "segmentation_method": null,
+     "source_document_hash": "bf5077627a7bb61d21ff68590584ba13edc4a6c0a3810b853bd10b2220f94bbf",
+     "source_document_url": "https://nspires.nasaprs.com/external/viewrepositorydocument/cmdocumentid=1041498/solicitationId=%7B2A1D139B-B9C7-CE8C-2E81-223FD08460F9%7D/viewSolicitationDocument=1/Table 3 ROSES-2025_Amend 84.html",
+     "source_role": "authoritative_announcement",
+     "source_version": {
+      "amendment": 84,
+      "year": 2025
+     },
+     "status": "posted",
+     "subtopic_code": "B.9",
+     "subtopic_code_norm": "b-9",
+     "subtopic_id": "364302:b-9",
+     "subtopic_ordinal": 26,
+     "subtopic_source": "native",
+     "summary": "NASA ROSES program element B.9: Heliophysics Flight Opportunities in Research and Technology.",
+     "term_display": {
+      "01": "01",
+      "06": "06",
+      "2027": "2027",
+      "21": "21",
+      "25": "25",
+      "division": "division",
+      "flight": "Flight",
+      "heliophysic": "Heliophysics",
+      "rose": "ROSES",
+      "step-1": "Step-1",
+      "step-2": "Step-2",
+      "technology": "Technology"
+     },
+     "title": "Heliophysics Flight Opportunities in Research and Technology",
+     "title_fingerprint": "8865da26",
+     "topic_areas": []
+    }
+   ]
+  },
   "39841": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -40624,72 +40647,14 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "nasa-roses:25-B.9-b72c625ed1": {
-   "segmentation_method": "nasa_roses_table",
-   "subtopic_count": 1,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopics": [
-    {
-     "amended": true,
-     "child_source_url": "https://nspires.nasaprs.com/external/solicitations/summary.do?solNum=NNH25ZDA001N-HFORT",
-     "child_type": "subject",
-     "confidence": "high",
-     "division": "B",
-     "evidence_anchor": null,
-     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-     "first_seen": "2026-11-23",
-     "last_verified": "2026-11-23",
-     "native_deadline_text": "01/21/2027 (Step-1) | 06/25/2027 (Step-2)",
-     "native_status": "dated",
-     "opportunity_id": "nasa-roses:25-B.9-b72c625ed1:b-9",
-     "ordinal_label": "B.9",
-     "own_deadline": null,
-     "own_deadline_is_advisory": true,
-     "page_end": null,
-     "page_start": null,
-     "parent_id": "nasa-roses:25-B.9-b72c625ed1",
-     "parent_opportunity_number": "NNH25ZDA001N-HFORT",
-     "pattern_family": null,
-     "program_area_labels": [],
-     "publication_reason": "high_confidence",
-     "publication_state": "publishable",
-     "record_type": "subtopic",
-     "segmentation_method": null,
-     "source_document_hash": "a7c052e89b4ea5a7741873211ef3dedf5fd268c61b08248cd034ba85c25cecee",
-     "source_document_url": "https://nspires.nasaprs.com/external/viewrepositorydocument/cmdocumentid=1041498/solicitationId=%7B2A1D139B-B9C7-CE8C-2E81-223FD08460F9%7D/viewSolicitationDocument=1/Table 3 ROSES-2025_Amend 83.html",
-     "source_role": "authoritative_announcement",
-     "source_version": {
-      "amendment": 83,
-      "year": 2025
-     },
-     "status": "posted",
-     "subtopic_code": "B.9",
-     "subtopic_code_norm": "b-9",
-     "subtopic_id": "nasa-roses:25-B.9-b72c625ed1:b-9",
-     "subtopic_ordinal": 26,
-     "subtopic_source": "native",
-     "summary": "NASA ROSES program element B.9: Heliophysics Flight Opportunities in Research and Technology.",
-     "term_display": {
-      "01": "01",
-      "06": "06",
-      "2027": "2027",
-      "21": "21",
-      "25": "25",
-      "division": "division",
-      "flight": "Flight",
-      "heliophysic": "Heliophysics",
-      "rose": "ROSES",
-      "step-1": "Step-1",
-      "step-2": "Step-2",
-      "technology": "Technology"
-     },
-     "title": "Heliophysics Flight Opportunities in Research and Technology",
-     "title_fingerprint": "8865da26",
-     "topic_areas": []
-    }
-   ]
-  },
   "nasa-roses:25-D.3F-a0947606d9": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "nasa-roses:25-E.3-cba8eb9e1d": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -42142,13 +42107,6 @@ globalThis.SUBTOPIC_CATALOG={
      "topic_areas": []
     }
    ]
-  },
-  "sam-gov:f727147c651f4d63b6ebb629d3feb37a": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
   },
   "sam-gov:fac0dcbe5eff43ab92e3dadb319daed1": {
    "segmentation_method": null,
@@ -90126,7 +90084,7 @@ globalThis.SUBTOPIC_CATALOG={
    "364039:b-8",
    "364221:d-10",
    "364280:d-11",
-   "nasa-roses:25-B.9-b72c625ed1:b-9"
+   "364302:b-9"
   ]
  },
  "searchable_record_count": 226

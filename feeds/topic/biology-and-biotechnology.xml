@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/biology-and-biotechnology.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/biology-and-biotechnology.xml</id>
-  <updated>2026-11-23T18:07:22Z</updated>
+  <updated>2026-11-24T20:48:13Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Development of Models, New Approach Methodologies, and Biological Materials for Studying Human Health and Diseases (R21 Clinical Trial Not Allowed)</title>
@@ -332,8 +332,8 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Arts and culture"/>
     <category term="Biology and biotechnology"/>
-    <category term="Neuroscience"/>
     <category term="Infectious disease"/>
+    <category term="Neuroscience"/>
     <summary>National Institutes of Health | Estimated Application 2027-06-08 | NIDA seeks to further advance its mission in the area of single cell biology. Since 2020, the NIDA-funded Single Cell Opioid Responses in the Context of HIV (SCORCH) consortium has generated single-nucleus datasets from human and animal postmortem brain tissue under conditions of HIV infection, antiretroviral therapy (ART), and/or substance exposure (e.g. opioids, cocaine, methamphetamine, and can…</summary>
   </entry>
   <entry>
@@ -452,6 +452,16 @@
     <category term="Education and workforce"/>
     <category term="Infectious disease"/>
     <summary>National Institutes of Health | Estimated Application 2027-01-25 | This Notice of Funding Opportunity (NOFO) encourages applications to provide continuing support for a National Swine Resource and Research Center (NSRRC). The NSRRC aims to enable gold-standard science in biomedical research by serving as a centralized national resource for the creation, breeding, cryopreservation, and distribution of genetically modified models. By consolidating these essential f…</summary>
+  </entry>
+  <entry>
+    <title>ROSES25: E.3 Space Biology: Research Studies</title>
+    <link href="https://nspires.nasaprs.com/external/solicitations/summary.do?solId={68D1D33B-89DC-AA9F-6561-52F1DB70E80B}&amp;path=&amp;method=init"/>
+    <id>urn:funding-finder:nasa-roses:nasa-roses%3A25-E.3-cba8eb9e1d</id>
+    <updated>2026-11-23T00:00:00Z</updated>
+    <author><name>NASA Headquarters</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Space and aeronautics"/>
+    <summary>NASA Headquarters | Application 2027-03-19 | NASA ROSES-2025 program element E.3, appendix division E. Published status: dated; due dates as printed: 01/08/2027 (Step-1) | 03/19/2027 (Step-2). Source: ROSES Table 3 (SOLICITED RESEARCH PROGRAMS).</summary>
   </entry>
   <entry>
     <title>Blueprint Neurotherapeutics Network (BPN): Small Molecule Drug Discovery and Development</title>
@@ -623,32 +633,22 @@
     <summary>National Institutes of Health | Application 2029-10-11 | This Notice of Funding Opportunity (NOFO) invites applications that investigate the etiology of sporadic non-hereditary early-onset cancers (EOCs: ages 18 to 49 years) and the underlying biological mechanisms that play a role in these cancers to inform prevention and control strategies. The proposed research is expected to advance the understanding of the unexplained rise of cancers in young adult…</summary>
   </entry>
   <entry>
-    <title>Cellular Senescence Network (SenNet): Discovery, Validation Centers (UM1 Clinical Trials Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/359169"/>
-    <id>urn:funding-finder:grants-gov:359169</id>
+    <title>Computational Modeling and Analysis of the Impact of Genomic Variation on Function (UM1, Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/359170"/>
+    <id>urn:funding-finder:grants-gov:359170</id>
     <updated>2026-10-09T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <category term="Biology and biotechnology"/>
-    <summary>National Institutes of Health | Application 2026-11-23 | The purpose of this Notice of Funding Opportunity (NOFO) is to support SenNet Discovery and Validation Centers (SenNet DVCs) as a core component of Stage 2 of the NIH Common Fund Cellular Senescence Network (SenNet). Building on Stage 1 resources, DVCs will define, refine, and validate tissue- and disease-relevant cellular senescence signatures (“senotypes”) and associated biomarkers, and will inv…</summary>
+    <summary>National Institutes of Health | Application 2026-12-14 | The purpose of this Notice of Funding Opportunity (NOFO) is to solicit applications to develop, apply, and test predictive models and perform integrative analyses to determine the impact of genomic variation on genome function. Centers funded through this initiative will become a part of the Impact of Genomic Variation on Function (IGVF) Consortium. As consortium members, centers will work togethe…</summary>
   </entry>
   <entry>
-    <title>Cellular Senescence Network (SenNet): SenNet Data Coordination and Integration Center (SenNet DCIC) (UM1 Clinical Trials Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/361817"/>
-    <id>urn:funding-finder:grants-gov:361817</id>
-    <updated>2026-10-09T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <summary>National Institutes of Health | Application 2026-11-23 | The purpose of this Notice of Funding Opportunity (NOFO) is to support the SenNet Data Coordination and Integration Center (SenNet DCIC) as a core component of Stage 2 of the NIH Common Fund Cellular Senescence Network (SenNet). The DCIC will enable timely, high-quality submission, harmonization, integration, and broad dissemination of SenNet-generated data and associated resources by developing a…</summary>
-  </entry>
-  <entry>
-    <title>Cellular Senescence Network (SenNet): SenNet Technology Projects (SenTecs) (UG3/UH3 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/359168"/>
-    <id>urn:funding-finder:grants-gov:359168</id>
+    <title>Genomic Variant Interactions With Other Variants Or The Environment (UM1 Clinical Trials Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/359277"/>
+    <id>urn:funding-finder:grants-gov:359277</id>
     <updated>2026-10-09T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <category term="Biology and biotechnology"/>
     <category term="Environmental science"/>
-    <category term="Transportation"/>
-    <summary>National Institutes of Health | Application 2026-11-23 | The purpose of this Notice of Funding Opportunity (NOFO) is to solicit the development of innovative senescence technologies (SenTecs), or the adaptation of existing technologies focused on identification, characterization and understanding the biological consequences of senescent cell (SnC) heterogeneity in the context of the tissue environments and secretomes to facilitate novel strategies for m…</summary>
+    <summary>National Institutes of Health | Application 2026-12-14 | The purpose of this Notice of Funding Opportunity (NOFO) is to solicit applications to study the effects of genetic or environmental interactions on genomic variant impact. To accomplish this, interaction centers will first propose a research framework to investigate whether interactions with effects beyond additive are important modifiers of the impact of variants. Centers will apply their framew…</summary>
   </entry>
 </feed>

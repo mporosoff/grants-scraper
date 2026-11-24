@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/infectious-disease.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/infectious-disease.xml</id>
-  <updated>2026-11-23T18:07:22Z</updated>
+  <updated>2026-11-24T20:48:13Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Prevention and Treatment through a Comprehensive Care Continuum for HIV-affected Adolescents in Resource-Constrained Settings--Implementation Science Network (PATC3H-IN)</title>
@@ -59,8 +59,8 @@
     <id>urn:funding-finder:grants-gov:364013</id>
     <updated>2027-07-07T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
-    <category term="Technology development"/>
     <category term="Infectious disease"/>
+    <category term="Technology development"/>
     <summary>National Institutes of Health | Estimated Application 2027-09-07 | This Notice of Funding Opportunity (NOFO) uses a R61/R33 Phased Innovation Award to support milestone-driven research that advances innovative HIV prevention interventions from development and feasibility testing to larger-scale efficacy, effectiveness, implementation, and dissemination studies. The R61 phase will support the development, refinement, adaptation, and pilot testing of novel or enhan…</summary>
   </entry>
   <entry>
@@ -165,9 +165,9 @@
     <updated>2027-02-25T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <category term="Data science"/>
+    <category term="Infectious disease"/>
     <category term="Social and behavioral sciences"/>
     <category term="Technology development"/>
-    <category term="Infectious disease"/>
     <summary>National Institutes of Health | Estimated Application 2027-05-25 | The National Institute of Mental Health (NIMH) seeks research applications to support the NIMH HIV/AIDS Research Centers (ARC) program, including Developmental Centers (D-ARCs) and full AIDS Research Centers (ARCs). These Research Centers aim to capitalize on the coordinated infrastructure to advance high-impact, interdisciplinary HIV/AIDS research. The ARC program supports innovative research acr…</summary>
   </entry>
   <entry>
@@ -201,8 +201,8 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Arts and culture"/>
     <category term="Biology and biotechnology"/>
-    <category term="Neuroscience"/>
     <category term="Infectious disease"/>
+    <category term="Neuroscience"/>
     <summary>National Institutes of Health | Estimated Application 2027-06-08 | NIDA seeks to further advance its mission in the area of single cell biology. Since 2020, the NIDA-funded Single Cell Opioid Responses in the Context of HIV (SCORCH) consortium has generated single-nucleus datasets from human and animal postmortem brain tissue under conditions of HIV infection, antiretroviral therapy (ART), and/or substance exposure (e.g. opioids, cocaine, methamphetamine, and can…</summary>
   </entry>
   <entry>
@@ -221,8 +221,8 @@
     <id>urn:funding-finder:grants-gov:363166</id>
     <updated>2027-01-15T00:00:00Z</updated>
     <author><name>Health Resources and Services Administration</name></author>
-    <category term="Technology development"/>
     <category term="Infectious disease"/>
+    <category term="Technology development"/>
     <summary>Health Resources and Services Administration | Estimated Application 2027-03-16 | The purpose of the program is to strengthen the capacity of community-based organizations to improve health outcomes and reduce HIV transmission, especially for people not yet in regular HIV care. The activities fall under two categories: HIV Care Innovation and Infrastructure Development.</summary>
   </entry>
   <entry>
@@ -275,8 +275,8 @@
     <id>urn:funding-finder:grants-gov:363415</id>
     <updated>2026-12-04T00:00:00Z</updated>
     <author><name>Health Resources and Services Administration</name></author>
-    <category term="Technology development"/>
     <category term="Infectious disease"/>
+    <category term="Technology development"/>
     <summary>Health Resources and Services Administration | Estimated Application 2027-02-02 | The purpose of this supplemental funding is to strengthen organizational infrastructure and increase capacity to develop, enhance, or expand access to high quality family-centered HIV care services. The activities fall under two categories: HIV Care Innovation and Infrastructure Development.</summary>
   </entry>
   <entry>
@@ -495,8 +495,8 @@
     <id>urn:funding-finder:grants-gov:360873</id>
     <updated>2026-10-06T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
-    <category term="Public health"/>
     <category term="Infectious disease"/>
+    <category term="Public health"/>
     <summary>National Institutes of Health | Application 2029-06-20 | The purpose of this notice of funding opportunity (NOFO) is to support implementation research on strategies to improve the uptake, implementation, sustainment, scale and/or spread of evidence-based prevention, treatment, and care interventions in communities in the U.S. significantly impacted by HIV. Projects should be large in scale with high potential for research and public health impact. Spec…</summary>
   </entry>
   <entry>
@@ -560,8 +560,8 @@ we will not consider for support include Covid-19 relat…</summary>
     <id>urn:funding-finder:grants-gov:360553</id>
     <updated>2026-06-09T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
-    <category term="Transportation"/>
     <category term="Infectious disease"/>
+    <category term="Transportation"/>
     <summary>National Institutes of Health | Application 2029-03-16 | The purpose of this notice of funding opportunity (NOFO) is to facilitate the entry of investigators into multiple high-priority areas of substance use research, including comorbidity with HIV. The Science Track Award for Research Transition (START) Program aims to provide investigators with the opportunity to gather preliminary data that will assist them in securing future research grants and adv…</summary>
   </entry>
   <entry>
@@ -617,9 +617,9 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <updated>2026-04-03T00:00:00Z</updated>
     <author><name>Office of the Assistant Secretary for Health</name></author>
     <category term="Education and workforce"/>
+    <category term="Infectious disease"/>
     <category term="Public health"/>
     <category term="Social and behavioral sciences"/>
-    <category term="Infectious disease"/>
     <summary>Office of the Assistant Secretary for Health | Application 2027-01-11 | The Office of Population Affairs (OPA) announces the anticipated availability of funds for Fiscal Year (FY) 2027 grants under the authority of Title X of the Public Health Service Act, Section 1001 (42 U.S.C. §300).This notice solicits applications for projects to provide Title X services throughout the 50 United States, District of Columbia, Guam, the Commonwealth of Puerto Rico, the Northern Mar…</summary>
   </entry>
   <entry>
@@ -638,8 +638,8 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <id>urn:funding-finder:grants-gov:359701</id>
     <updated>2026-03-06T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
-    <category term="Social and behavioral sciences"/>
     <category term="Infectious disease"/>
+    <category term="Social and behavioral sciences"/>
     <summary>National Institutes of Health | Application 2028-01-25 | This Notice of Funding Opportunity (NOFO) solicits applications to develop shared-use research facilities or research-supporting facilities that enable collaborative research and benefit broad research communities at large. The NOFO supports two existing construction programs: the Biomedical Research Facilities (BRF) program and the HIV/AIDS Research Facilities (HRF) program. The BRF program suppo…</summary>
   </entry>
 </feed>
