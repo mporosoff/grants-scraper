@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/source-type/federal.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/source-type/federal.xml</id>
-  <updated>2026-11-23T18:07:22Z</updated>
+  <updated>2026-11-24T20:48:13Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -303,8 +303,8 @@
     <id>urn:funding-finder:grants-gov:364013</id>
     <updated>2027-07-07T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
-    <category term="Technology development"/>
     <category term="Infectious disease"/>
+    <category term="Technology development"/>
     <summary>National Institutes of Health | Estimated Application 2027-09-07 | This Notice of Funding Opportunity (NOFO) uses a R61/R33 Phased Innovation Award to support milestone-driven research that advances innovative HIV prevention interventions from development and feasibility testing to larger-scale efficacy, effectiveness, implementation, and dissemination studies. The R61 phase will support the development, refinement, adaptation, and pilot testing of novel or enhan…</summary>
   </entry>
   <entry>

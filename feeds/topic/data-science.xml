@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml</id>
-  <updated>2026-11-23T18:07:22Z</updated>
+  <updated>2026-11-24T20:48:13Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>ancient DNA for Modern Genomics (aDMG) Research Projects (U01 Clinical Trials Not Allowed)</title>
@@ -70,9 +70,9 @@
     <updated>2027-02-25T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <category term="Data science"/>
+    <category term="Infectious disease"/>
     <category term="Social and behavioral sciences"/>
     <category term="Technology development"/>
-    <category term="Infectious disease"/>
     <summary>National Institutes of Health | Estimated Application 2027-05-25 | The National Institute of Mental Health (NIMH) seeks research applications to support the NIMH HIV/AIDS Research Centers (ARC) program, including Developmental Centers (D-ARCs) and full AIDS Research Centers (ARCs). These Research Centers aim to capitalize on the coordinated infrastructure to advance high-impact, interdisciplinary HIV/AIDS research. The ARC program supports innovative research acr…</summary>
   </entry>
   <entry>
@@ -726,19 +726,6 @@
     <summary>Air Force Office of Scientific Research | Posted | AFOSR plans, coordinates, and executes the Air Force Research Laboratory’s (AFRL) basic research program in response to technical guidance from AFRL and requirements of the Air Force. Additionally, the office fosters, supports, and conducts research within Air Force, university, and industry laboratories; and ensures transition of research results to support U.S. Air Force needs. The focus of AFOS…</summary>
   </entry>
   <entry>
-    <title>DLA Emergent IV Research and Development Program</title>
-    <link href="https://sam.gov/opp/f727147c651f4d63b6ebb629d3feb37a/view"/>
-    <id>urn:funding-finder:sam-gov:sam-gov%3Af727147c651f4d63b6ebb629d3feb37a</id>
-    <updated>2026-06-02T00:00:00Z</updated>
-    <author><name>Defense Logistics Agency (DLA)</name></author>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Manufacturing"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Defense Logistics Agency (DLA) | White Paper 2027-06-12 | Emergent logistics research; current Amendment 40includes advanced/additive manufacturing, materials, energy and logistics technology. Open non-IDIQ white paper entry; technical/cost proposals follow a government request. Educational organizations may be prime offerors, subject to financial, accounting and other FAR responsibility standards. No small-business set-aside. Use only the current BAA ar…</summary>
-  </entry>
-  <entry>
     <title>Early-Stage Development of Informatics Technologies for Cancer Research and Management (U01 Clinical Trial Optional)</title>
     <link href="https://www.grants.gov/search-results-detail/359892"/>
     <id>urn:funding-finder:grants-gov:359892</id>
@@ -762,5 +749,17 @@
     <category term="Data science"/>
     <category term="Water"/>
     <summary>Bureau of Reclamation | Application 2027-08-26 | Through WaterSMART, the Bureau of Reclamation (Reclamation) leverages Federal and non- Federal funding to work cooperatively with States, Tribes, and other entities as they plan for and implement actions to increase water supply and hydropower reliability. The WaterSMART Program demonstrably advances Trump administration priorities, such as those identified in Presidential Executive Order 14154 (J…</summary>
+  </entry>
+  <entry>
+    <title>WaterSMART: Desalination Construction Projects</title>
+    <link href="https://www.grants.gov/search-results-detail/362395"/>
+    <id>urn:funding-finder:grants-gov:362395</id>
+    <updated>2026-05-14T00:00:00Z</updated>
+    <author><name>Bureau of Reclamation</name></author>
+    <category term="Energy"/>
+    <category term="Water"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Bureau of Reclamation | Application 2027-08-26 | Through WaterSMART, the Bureau of Reclamation (Reclamation) leverages Federal and non-Federal funding to work cooperatively with States, Tribes, and other entities as they plan for and implement actions to increase water supply and hydropower reliability. The WaterSMART Program demonstrably advances Trump administration priorities, such as those identified in Presidential Executive Order 14154 (Ja…</summary>
   </entry>
 </feed>

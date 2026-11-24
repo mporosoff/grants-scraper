@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/transportation.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/transportation.xml</id>
-  <updated>2026-11-23T18:07:22Z</updated>
+  <updated>2026-11-24T20:48:13Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Prevention and Treatment through a Comprehensive Care Continuum for HIV-affected Adolescents in Resource-Constrained Settings--Implementation Science Network (PATC3H-IN)</title>
@@ -374,17 +374,6 @@
     <summary>Bureau of Justice Assistance | Application 2026-12-02 | This is a notice of funding opportunity (NOFO) for the BJA FY 2026 Missing and Unidentified Human Remains (MUHR) Program. This opportunity supports efforts to improve reporting, transportation, forensic processing, and identification of missing persons (MP) and unidentified human remains (UHR) cases, including those involving migrants as authorized by Public Law 116-277. This program increases pub…</summary>
   </entry>
   <entry>
-    <title>Cellular Senescence Network (SenNet): SenNet Technology Projects (SenTecs) (UG3/UH3 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/359168"/>
-    <id>urn:funding-finder:grants-gov:359168</id>
-    <updated>2026-10-09T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Environmental science"/>
-    <category term="Transportation"/>
-    <summary>National Institutes of Health | Application 2026-11-23 | The purpose of this Notice of Funding Opportunity (NOFO) is to solicit the development of innovative senescence technologies (SenTecs), or the adaptation of existing technologies focused on identification, characterization and understanding the biological consequences of senescent cell (SnC) heterogeneity in the context of the tissue environments and secretomes to facilitate novel strategies for m…</summary>
-  </entry>
-  <entry>
     <title>Limited Competition: Stimulating Access to Research in Residency Transition Scholar (StARRTS) (K38 Clinical Trial Not Allowed)</title>
     <link href="https://www.grants.gov/search-results-detail/359676"/>
     <id>urn:funding-finder:grants-gov:359676</id>
@@ -609,8 +598,8 @@
     <id>urn:funding-finder:grants-gov:360553</id>
     <updated>2026-06-09T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
-    <category term="Transportation"/>
     <category term="Infectious disease"/>
+    <category term="Transportation"/>
     <summary>National Institutes of Health | Application 2029-03-16 | The purpose of this notice of funding opportunity (NOFO) is to facilitate the entry of investigators into multiple high-priority areas of substance use research, including comorbidity with HIV. The Science Track Award for Research Transition (START) Program aims to provide investigators with the opportunity to gather preliminary data that will assist them in securing future research grants and adv…</summary>
   </entry>
   <entry>
@@ -647,5 +636,15 @@
     <category term="Space and aeronautics"/>
     <category term="Transportation"/>
     <summary>NASA Headquarters | Posted | The National Aeronautics and Space Administration (NASA) Headquarters anticipates release of a solicitation, titled “NASA Innovative Advanced Concepts (NIAC), Phase II,” as an Appendix to the Space Technology Mission Directorate (STMD) NASA Research Announcement (NRA), titled “Space Technology Research, Development, Demonstration, and Infusion - 2026 (SpaceTech-REDDI-2026),” on or about May 11, 20…</summary>
+  </entry>
+  <entry>
+    <title>INCLUDE Project: Clinical Trials Phased Awards for Down syndrome Research (R61/R33 Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/360655"/>
+    <id>urn:funding-finder:grants-gov:360655</id>
+    <updated>2026-05-13T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Technology development"/>
+    <category term="Transportation"/>
+    <summary>National Institutes of Health | Application 2028-06-15 | The NIH INvestigation of Co-occurring conditions across the Lifespan to Understand Down syndromE (INCLUDE) Project seeks to improve health and quality-of-life for individuals with Down syndrome. The purpose of this Notice of Funding Opportunity (NOFO) encourages Exploratory/Developmental Phased Innovation (R61/R33) grant applications to support development of clinical trials to treat critical and …</summary>
   </entry>
 </feed>

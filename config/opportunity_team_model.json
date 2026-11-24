@@ -668,7 +668,7 @@
       "356018": "2d314775ae97d141f1bcf0ed143db7fc4c90e845fc7f6bdd30753b8cdd9839ff",
       "356055": "0a71079ecafab21fc0817a57f0ad8c5702b06d98b75f249e09f2b3387a75c5ba",
       "356129": "c5d27fb48c578cab1169576f6ec12cdc48f5e3cd1cf8dda4a44924bfb2f7c08a",
-      "356163": "53f4b1aa4e3f580672eb1576694e1fea7455dde6a4e1af8082345c3ddd4324c3",
+      "356163": "ade91b6dbcb97115845ca04460a6fa89f5a9b7eb03b603a471b2ce5957289daf",
       "356197": "3bb30d1bf66c9c3b46ce3d14bb759034a1f55de8a9ee3e9321f984517cf74622",
       "356205": "1f0b3b25f5dd023ed01f29c9a02911118ef76facf7f057266b68702cf50a70a8",
       "356236": "7b86f68f145d8225ee032bb5e5958951c6d51c16762dc4d4acb9a51aa52b7b34",
@@ -840,7 +840,6 @@
       "358036": "c655150f19b4bad00d5e5fe5b4aee49357b168601fd4f8e43a96867e407e8c33",
       "358082": "1316994f2b71c849e9a1def9be015f912dda0d4dd0f0f383069c35b118f6da45",
       "358086": "69da22b097627bda6b028f957f7b82b197681e91e5e61d0a5bd14b6c9f06a00b",
-      "358090": "b38bcaebf7ff835efdd5c0361b559658a93045c8341b9bd2250a2971c8184e5c",
       "358100": "5b69d3379342e720e4060c902581cc46c8e5d3b30151f5287427f8393c2b16ba",
       "358114": "e23f53be2521481fef9225199dfbde6f6346cf371a21927f1381eefe8eaf9825",
       "358116": "1b870609bbd36068c60a1919fff6bd974d9197738863151f13fb83c1e8cb18aa",
@@ -899,8 +898,6 @@
       "359155": "78d59ed883638b3c9bd9d7fba98dbe544de09db6bc2661acc86e45ec6a88388f",
       "359157": "db3268c6f67ca9d7b72ade6505f24c3126fb3ea7b2dca55f34484070db751e89",
       "359161": "58a80f5019bdc2a35f70904d95f3e119dcf4defefabb761192a0f6c549b08b9e",
-      "359168": "bf3a53d8f6681f57a577ca6ca86df127c15500c269f5142751254d29e7111c04",
-      "359169": "ad3a2335fde4a8bfef01d71dca6e873175e69dc6cf2ed2200442a08a7a58ecf3",
       "359170": "ecb08b0a004a7edb817d1bd07de0df7441859a4dfe2c478267e1d6d5b0af68bf",
       "359225": "df37eb3dd8fe04e7671c9adfd71c4ed60981b6b082e3fd26778b00e50206d953",
       "359236": "e13d7029370de0edaaa115dedcf08426d1d2c8e21da1cff4b5b0dff35e953ab9",
@@ -1164,7 +1161,6 @@
       "361769": "c029d5c66dc620101458ea1f38b4f3e2d4aa613c68894327277df2d9ba0f6a91",
       "361815": "c5540cf37719d1d4a03b5b171b179d0908b3b7761f0d8ac38ca6531379299348",
       "361816": "1d262beb03f2899fa9902dff06343c08129662aa237d1da8d74c72695fd3b6b1",
-      "361817": "48d6c01ff9d51b03785593c8e08b31ad9378ff3e224f7448c1adc69769249c89",
       "361820": "d7736b507ebec4dc889270e4af243415b1cb862d25cd745e505c6a8b6cb4932d",
       "361821": "1067531680e2cf3e8401c43645d6c26f0d313abc37dacd267542b4ce5ad8c849",
       "361822": "8e7aa7a27ff5b10454e76bc95497f688ead7d40d342e5a6fea2730f789d9d4a9",
@@ -1543,9 +1539,7 @@
       "364032:b-7": "938d6482727dbef9396c1a0cd6248316968b1b60f5e0d2c72accf3a7883ad81f",
       "364033": "fef173e8d7333dd4be55cb1bd183f31b47ac18319a0206f8db2953e718a40b01",
       "364039:b-8": "b0ce5a5d9a4763b9e03db63a2c8b001849251890e57c78bb104731a37c70b9fb",
-      "364048": "52edcb194ac11b98254d5d5a71106390d0103ed958769ffa68af1e96a8118266",
       "364055": "5b8b8cbd05bd3ec6b796b948f04d70b0ab7b8a46bdf812efd095e25072908493",
-      "364062": "df15c72ee462b93159581466cc37d4bad56c428f50d783909080500670ceaeba",
       "364063": "e8ac2cef2b035f88c431bb631e159a9a71fe73876ba04ab7933df1cdca17dbbc",
       "364065": "569f5fcddc7b1651547036e1fb76f93657df8ba1844d2f88f4febdf7c95bb28a",
       "364066": "2a2c58f0ce8b17b5218a0a5b24a45b59bdc6abe5ce6bb57c82cdf80ca368e18d",
@@ -1584,7 +1578,6 @@
       "364151": "508b4bc70be1689386813d0c9b685d9726be104029a7087858b643b9b145cf14",
       "364152": "829c4c4970b040115a942ab7ce0978fd50768e84ae02d8d2a1d1c7cae4af7bb0",
       "364153": "dd09c088b84e1a7dcb80dc3032623748d64ed8c1bc43af7e56d6834f84d6bc48",
-      "364154": "38dc6a95b746b5cde0a9f81204233d34be831cd9c667f0d60571d38a293029d2",
       "364155": "97101eb5f5c9608ea1d14949e13da7885d810a76faa330a8ab8cfab5fc672c29",
       "364156": "d9eb411db2752b61e499706d0ec15fb0da7395f6ef90c2d1455a819115439d92",
       "364158": "dec24c08c866384e09ad91d049e20ce90aa269478361d3138518e4a906fb0c2d",
@@ -1682,6 +1675,8 @@
       "364297": "148bf30cc754811edb9f0386efdffce12b669f14837eeac3b331f9d86aec4987",
       "364298": "cd2fdc59ab334c0b007f0165671f6c9004514c00fbb1e5d1fd2f989133220237",
       "364299": "8d1807a5cc36d2234d57a64c52924a256bae29d9608db815e28a1ce91b08b79c",
+      "364301": "12a1d8fa0959679c12a7ee113b640409fec733d1ad4f087d311b2cad5e59a8bc",
+      "364302:b-9": "bf302aac35d1b0b2d24a14b61a1ad8dd03c3d2161cda83bf0d8fbb09e76c593d",
       "39841": "742fee0c1a96d809c8bb680b5f2c9847387b7ae9e04ed3f763224ffe8e13ac40",
       "45810": "02f02a0d3439c0e9df998500ff1905264f8bb2cda37de843187a5d0847b1bab0",
       "45812": "95977ecd9e44c97037f99cf1313a98bd72b9db464f43e2adb5d3461546ad669e",
@@ -1695,8 +1690,8 @@
       "arpa-h:surpass": "e7831b344c930c589ae760de39e40894ae2a945107e39fc2f4f90ac4a6f850a1",
       "arpa-h:unique": "01ebce426deff4d432b012c1123f9c707d5c2265bec8581e9f6e4639371c4218",
       "darpa-iarpa:darpa-darpapa260201": "23e6bc029f152591348b4bb353bcf4838abed186f20779eea75dd227ed0d89a5",
-      "nasa-roses:25-B.9-b72c625ed1:b-9": "1bad0b388b8547cfd848bdd6a86c477071fdd6a590079d9dcea4ed6c1718db7d",
       "nasa-roses:25-D.3F-a0947606d9": "9dc826b25a459fba9db62c93fada8156bc092223a9a7c41240b8294e6501a045",
+      "nasa-roses:25-E.3-cba8eb9e1d": "ecb27e5bacaca05e938f18862d2ac0014d376a628d1116ca82164274838df68e",
       "nsf-cbet:PD-26-370Y": "13081d76b933b884690b54863ad0971e94f2d541fa9df09f9bcca9ca8c2b98a8",
       "nyserda:IEDRRFI26": "6c87c55d8baed6bafabedd9502b0c04bda86b5e1ed1a171a9136205aafe40257",
       "nyserda:ISCRFP26-1": "924b4e64ca5131681e1afeed389347e9ae9d144e795cc9243c89cf0dd76c9d18",
@@ -14668,7 +14663,7 @@
       "key": "da6da9e2be24c2a8482566daaed53c3ad65bf83ba4226169cbb47af1b0faddf5",
       "maintenance_pending": {
         "next_action": "retry_maintenance",
-        "reason": "source_changed"
+        "reason": "retryable_maintenance_failure"
       },
       "response_contract": "team-response-1",
       "retry_after": 1788748439.5646272,
@@ -15062,7 +15057,7 @@
       "key": "42c699a1f5e7b91ca90018883b9b56fdecec3286c306a109ab760c09de4991af",
       "maintenance_pending": {
         "next_action": "retry_maintenance",
-        "reason": "source_changed"
+        "reason": "retryable_maintenance_failure"
       },
       "mode": "maintenance",
       "next_action": "retry_maintenance",
@@ -17930,7 +17925,7 @@
       "key": "4d7718fd7556fa78a1524064c88f2d017cf894d35480e29109694d8c25645514",
       "maintenance_pending": {
         "next_action": "retry_maintenance",
-        "reason": "retryable_maintenance_failure"
+        "reason": "source_changed"
       },
       "mode": "maintenance",
       "next_action": "retry_maintenance",
@@ -20438,7 +20433,7 @@
       "key": "6c480358054f8c6fa07d63188e41d87cd3ff99fe75d1f1fa6053cec74614a289",
       "maintenance_pending": {
         "next_action": "retry_maintenance",
-        "reason": "source_changed"
+        "reason": "retryable_maintenance_failure"
       },
       "mode": "maintenance",
       "next_action": "retry_maintenance",
@@ -24353,7 +24348,7 @@
       "key": "b089da14e356d730113c35c94921613145d614cbb7c71cbf22d9e0970a6f5e60",
       "maintenance_pending": {
         "next_action": "retry_maintenance",
-        "reason": "source_changed"
+        "reason": "retryable_maintenance_failure"
       },
       "mode": "maintenance",
       "next_action": "retry_maintenance",
@@ -24367,7 +24362,7 @@
       "key": "a1dfbd23f80110d70a1a3b9b16cf172378e9c5e061bd7573a9c41d2cfb6d2756",
       "maintenance_pending": {
         "next_action": "retry_maintenance",
-        "reason": "source_changed"
+        "reason": "retryable_maintenance_failure"
       },
       "mode": "maintenance",
       "next_action": "retry_maintenance",
@@ -24395,7 +24390,7 @@
       "key": "6182e837ea8360ae68ee312ba61df6a2b98accfdd3f67ffa9082bcf0d2fe736c",
       "maintenance_pending": {
         "next_action": "retry_maintenance",
-        "reason": "source_changed"
+        "reason": "retryable_maintenance_failure"
       },
       "mode": "maintenance",
       "next_action": "retry_maintenance",
@@ -24409,7 +24404,7 @@
       "key": "2d46aff211fe53928024d27ce69ee1407eab863fd8a9d0da376ea88e4df2cb4d",
       "maintenance_pending": {
         "next_action": "retry_maintenance",
-        "reason": "source_changed"
+        "reason": "retryable_maintenance_failure"
       },
       "mode": "maintenance",
       "next_action": "retry_maintenance",
@@ -26991,7 +26986,7 @@
       "key": "94f66cdb1e3968597c0486802013185a5873042095d1b465fe7be8d9ca1c25d2",
       "maintenance_pending": {
         "next_action": "retry_maintenance",
-        "reason": "source_changed"
+        "reason": "retryable_maintenance_failure"
       },
       "mode": "maintenance",
       "next_action": "retry_maintenance",
@@ -31811,7 +31806,7 @@
       "key": "96ff89530a43d394c38a6b5251f9672db71df568d22e45b21d7af1d3ebdc1589",
       "maintenance_pending": {
         "next_action": "retry_maintenance",
-        "reason": "source_changed"
+        "reason": "retryable_maintenance_failure"
       },
       "mode": "maintenance",
       "next_action": "retry_maintenance",
@@ -32245,7 +32240,7 @@
       "key": "343d8bdc08d12a0da5e080c0b03907d0eec6f82f92dbc7da2d5e2ef948c40852",
       "maintenance_pending": {
         "next_action": "retry_maintenance",
-        "reason": "new_since_accepted_snapshot"
+        "reason": "retryable_maintenance_failure"
       },
       "mode": "maintenance",
       "next_action": "retry_maintenance",
@@ -32889,7 +32884,7 @@
       "key": "b305ae06c6461e22b181a98b204d2a6cb7973760c966c6a87b6af29e5604cbe7",
       "maintenance_pending": {
         "next_action": "retry_maintenance",
-        "reason": "new_since_accepted_snapshot"
+        "reason": "retryable_maintenance_failure"
       },
       "mode": "maintenance",
       "next_action": "retry_maintenance",
@@ -32903,7 +32898,7 @@
       "key": "77c9b2b282625ad7e9e1577ebfdc686f1c0ef31a138c7043429c62483a94c390",
       "maintenance_pending": {
         "next_action": "retry_maintenance",
-        "reason": "new_since_accepted_snapshot"
+        "reason": "retryable_maintenance_failure"
       },
       "mode": "maintenance",
       "next_action": "retry_maintenance",
@@ -32917,7 +32912,7 @@
       "key": "dbb8da30748522053951f442f377e88bf8a10584221be6649a7298f4a70db884",
       "maintenance_pending": {
         "next_action": "retry_maintenance",
-        "reason": "new_since_accepted_snapshot"
+        "reason": "retryable_maintenance_failure"
       },
       "mode": "maintenance",
       "next_action": "retry_maintenance",
@@ -32931,7 +32926,7 @@
       "key": "399a645303cb29fe6a5c0de6486c7526c9b8eae624ae8fc91fb1e991df3b603f",
       "maintenance_pending": {
         "next_action": "retry_maintenance",
-        "reason": "new_since_accepted_snapshot"
+        "reason": "retryable_maintenance_failure"
       },
       "mode": "maintenance",
       "next_action": "retry_maintenance",
@@ -32945,7 +32940,7 @@
       "key": "12ddfe624b70f11c4481a85a7430d1dc741a8365c72be8110a86c42fc60ad962",
       "maintenance_pending": {
         "next_action": "retry_maintenance",
-        "reason": "new_since_accepted_snapshot"
+        "reason": "retryable_maintenance_failure"
       },
       "mode": "maintenance",
       "next_action": "retry_maintenance",
@@ -32959,7 +32954,7 @@
       "key": "0c1c595273a943222a5f861f3df191c6b16dcd77095095de7bbb5e623e53d8cb",
       "maintenance_pending": {
         "next_action": "retry_maintenance",
-        "reason": "new_since_accepted_snapshot"
+        "reason": "retryable_maintenance_failure"
       },
       "mode": "maintenance",
       "next_action": "retry_maintenance",
@@ -32973,7 +32968,7 @@
       "key": "28cbcca450a886a4da1e69ffb5d951b4b87b88b8a057788db8637ddaa1c7fcd1",
       "maintenance_pending": {
         "next_action": "retry_maintenance",
-        "reason": "new_since_accepted_snapshot"
+        "reason": "retryable_maintenance_failure"
       },
       "mode": "maintenance",
       "next_action": "retry_maintenance",
@@ -32987,7 +32982,7 @@
       "key": "74bf3302f47b151d0db5b0079b6ab3ca63e10e463c230140ef0e48c8f9d60440",
       "maintenance_pending": {
         "next_action": "retry_maintenance",
-        "reason": "new_since_accepted_snapshot"
+        "reason": "retryable_maintenance_failure"
       },
       "mode": "maintenance",
       "next_action": "retry_maintenance",
@@ -33001,7 +32996,7 @@
       "key": "6e62cbffd6c0f9a60cb91f5f747648d79f03fbcec07fe074c0973f8f34675a82",
       "maintenance_pending": {
         "next_action": "retry_maintenance",
-        "reason": "new_since_accepted_snapshot"
+        "reason": "retryable_maintenance_failure"
       },
       "mode": "maintenance",
       "next_action": "retry_maintenance",
@@ -33013,6 +33008,34 @@
     "364299": {
       "decision_contract": "78eb465a79b1c2311282da41e7d879977b66153c31c7217911650cd3a7b0d503",
       "key": "49266af48bdb977a50a2699971958e4d464d903749bcc973b3ab281811b00d68",
+      "maintenance_pending": {
+        "next_action": "retry_maintenance",
+        "reason": "retryable_maintenance_failure"
+      },
+      "mode": "maintenance",
+      "next_action": "retry_maintenance",
+      "reason": "new_since_accepted_snapshot",
+      "retry_after": 0,
+      "stage": "queue",
+      "state": "deferred"
+    },
+    "364301": {
+      "decision_contract": "78eb465a79b1c2311282da41e7d879977b66153c31c7217911650cd3a7b0d503",
+      "key": "faa84fba091556ffa32b5b5b4abbf774fdfd0a68fa48c1e1c084ff1c47938df8",
+      "maintenance_pending": {
+        "next_action": "retry_maintenance",
+        "reason": "new_since_accepted_snapshot"
+      },
+      "mode": "maintenance",
+      "next_action": "retry_maintenance",
+      "reason": "new_since_accepted_snapshot",
+      "retry_after": 0,
+      "stage": "queue",
+      "state": "deferred"
+    },
+    "364302:b-9": {
+      "decision_contract": "78eb465a79b1c2311282da41e7d879977b66153c31c7217911650cd3a7b0d503",
+      "key": "a83c6ffd6604e7d9ed570d25bdc54d2ee3b647cf3c45a9dd9b8083576aa6de95",
       "maintenance_pending": {
         "next_action": "retry_maintenance",
         "reason": "new_since_accepted_snapshot"
@@ -33386,6 +33409,20 @@
       "maintenance_pending": {
         "next_action": "retry_maintenance",
         "reason": "retryable_maintenance_failure"
+      },
+      "mode": "maintenance",
+      "next_action": "retry_maintenance",
+      "reason": "new_since_accepted_snapshot",
+      "retry_after": 0,
+      "stage": "queue",
+      "state": "deferred"
+    },
+    "nasa-roses:25-E.3-cba8eb9e1d": {
+      "decision_contract": "78eb465a79b1c2311282da41e7d879977b66153c31c7217911650cd3a7b0d503",
+      "key": "b7d6d529e376168bd947d59ad885769cb3470ed3fd9f68c6ac95048108d607da",
+      "maintenance_pending": {
+        "next_action": "retry_maintenance",
+        "reason": "new_since_accepted_snapshot"
       },
       "mode": "maintenance",
       "next_action": "retry_maintenance",
@@ -34585,7 +34622,7 @@
       "state": "deferred"
     }
   },
-  "generation_id": "edeab67b9905d66eabd6921b1b75bdd98a7c2843252c1ac75be6da80538dcab0",
+  "generation_id": "07edcb805e82554f6f2dd4c422b45a27cddf699cfcf630abf1c400292de0f7fb",
   "limitations": [
     "The directory may omit relevant researchers and does not imply availability or eligibility.",
     "Only bounded opportunity scopes receive proposals; broad parents require a specific child topic.",
